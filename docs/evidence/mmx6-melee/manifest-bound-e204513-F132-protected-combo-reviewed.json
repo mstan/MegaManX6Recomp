@@ -1,0 +1,1187 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F132"
+  ],
+  "frozen_row_sha256": {
+    "F132": "1b7c5966bed638581ec021c3e74cfdd70dc39578e736ae24db67385dcb9c1a77"
+  },
+  "result": "passed",
+  "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\qualification.json",
+        "bytes": 15759712,
+        "sha256": "c859ca6b35788d69488fb0b6715cdcbb1a9f98a7b6a5c3c36244cc70edaefd96"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\ammo-hud\\intro-admission\\F132\\observations.json",
+        "bytes": 3776102,
+        "sha256": "fa79a65aefbad432cbec027dddfc5119a2aba11296b56d6a826650c2dd51c8b2"
+      },
+      "raw_component_status": "failed_partial",
+      "raw_component_error": "Actual HP event missed original immunity response; retain partial",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "type": 24,
+          "before": 58,
+          "admitted": 60
+        },
+        {
+          "stage": 1,
+          "type": 25,
+          "before": 63,
+          "admitted": 65
+        },
+        {
+          "stage": 2,
+          "type": 26,
+          "before": 70,
+          "admitted": 72
+        }
+      ],
+      "chain_start": 58,
+      "chain_end": 121,
+      "qualified_hp_events": [
+        {
+          "peer": 0,
+          "before": 60,
+          "after": 61,
+          "hp_delta": 2,
+          "before_hp": 32,
+          "after_hp": 30,
+          "native_delta": 3,
+          "matching_types": [
+            24
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x80074bfc",
+          "cooldown_before": 0,
+          "cooldown_after": 0,
+          "p2_counter_before": 8,
+          "p2_counter_after": 10,
+          "type": 24,
+          "source_response_ticks": 2,
+          "response": "source-installed2 then expired between polls; positive timer NOT directly sampled",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 0,
+          "before": 67,
+          "after": 68,
+          "hp_delta": 2,
+          "before_hp": 26,
+          "after_hp": 24,
+          "native_delta": 1,
+          "matching_types": [
+            25
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x8007433c",
+          "cooldown_before": 0,
+          "cooldown_after": 1,
+          "p2_counter_before": 13,
+          "p2_counter_after": 14,
+          "type": 25,
+          "source_response_ticks": 2,
+          "response": "actual sampled native immunity timer/table",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 0,
+          "before": 88,
+          "after": 89,
+          "hp_delta": 5,
+          "before_hp": 19,
+          "after_hp": 14,
+          "native_delta": 1,
+          "matching_types": [
+            26
+          ],
+          "qualified": true,
+          "before_table": "0x8007433c",
+          "after_table": "0x8007433c",
+          "cooldown_before": 1,
+          "cooldown_after": 27,
+          "p2_counter_before": 19,
+          "p2_counter_after": 20,
+          "type": 26,
+          "source_response_ticks": 30,
+          "response": "actual sampled native immunity timer/table",
+          "readiness": "source-bracketed expiry between polls",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        }
+      ],
+      "unattributed_hp_events": [
+        {
+          "peer": 0,
+          "before": 61,
+          "after": 62,
+          "hp_delta": 2,
+          "before_hp": 30,
+          "after_hp": 28,
+          "native_delta": 1,
+          "matching_types": [
+            24
+          ],
+          "qualified": false,
+          "before_table": "0x80074bfc",
+          "after_table": "0x80074bfc",
+          "cooldown_before": 0,
+          "cooldown_after": 0,
+          "p2_counter_before": 10,
+          "p2_counter_after": 11,
+          "type": 24,
+          "reason": "Response not sampled or source-bracketed; retain this HP bracket unqualified"
+        },
+        {
+          "peer": 0,
+          "before": 65,
+          "after": 66,
+          "hp_delta": 2,
+          "before_hp": 28,
+          "after_hp": 26,
+          "native_delta": 2,
+          "matching_types": [],
+          "qualified": false,
+          "before_table": "0x80074bfc",
+          "after_table": "0x8007433c",
+          "cooldown_before": 0,
+          "cooldown_after": 1,
+          "p2_counter_before": 11,
+          "p2_counter_after": 11,
+          "reason": "No unique sampled owned geometry; separate-RPC skew is not a manufactured overlap"
+        },
+        {
+          "peer": 0,
+          "before": 71,
+          "after": 72,
+          "hp_delta": 5,
+          "before_hp": 24,
+          "after_hp": 19,
+          "native_delta": 2,
+          "matching_types": [],
+          "qualified": false,
+          "before_table": "0x80074bfc",
+          "after_table": "0x8007433c",
+          "cooldown_before": 0,
+          "cooldown_after": 29,
+          "p2_counter_before": 14,
+          "p2_counter_after": 15,
+          "reason": "No unique sampled owned geometry; separate-RPC skew is not a manufactured overlap"
+        }
+      ],
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "0x80074bfc",
+          "bytes": 160,
+          "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+        },
+        {
+          "peer": 0,
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6"
+        },
+        {
+          "peer": 0,
+          "address": "0x80031474",
+          "bytes": 1400,
+          "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+        }
+      ],
+      "observer_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F118_secondary_target_v83_root_v1.py": "04b0195bb3b869777714aea1c2b7bf67c3643efda47c23e6d7c0f243dfc268dc",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F132_ground_combo_v83_root_v1.py": "a22024ecd60a2dfa23e11310594ba978229601566ce88564c4c16727f129eed8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_finalhit_v83_root_v1.py": "1741f9c010e0f4176dfa6e99e48f7b11d1b755994f67defc20e0254d58929f88",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "a4f832f54e3e42d212336a9934b4f33c671f057c5bd2e0b7c50a088fef67f590",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_native_reentry_pair.py": "883c388ed512915b482533f625ddffde91111a7b436dbf63a538db0b9fda7b8b",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_hud_inventory.py": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_private_effects.py": "8aa7290af8316bf827024684668410b080ea5e56fbcbf7653236ad46f6bbffba",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-exact-build-guard-root-v1.py": "c6a329b08fb7828205634e53fe2ad5dfec91706add6f31c7d38b681452106893",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-final-binding-root-v1.json": "a60ace7a0443b9d30954720c3c350c241c2e29c6883ebded3e9a016775c98e5b",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-protected-combat-v83-root-v1.py": "39f71f34b4556629a3aa88ed675d9ab4172c83ab1a4ff957911ad3a9c4eae825"
+      },
+      "checks": {
+        "actual_single_consecutive24_25_26": true,
+        "actual_each_stage_damage_geometry_native_immunity": true,
+        "original_retirement_and_recovery": true,
+        "source_profile_CRC_cards_cleanup_taint": true
+      },
+      "owned_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "retained_component_review": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-local-retained-review-v83-root-v1.json",
+        "bytes": 7026,
+        "sha256": "2a249af32c98bee01cf99f0a8b1a75ae33f62704c190895d409047092b7d2815"
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\qualification.json",
+        "bytes": 13749453,
+        "sha256": "454bbb8e419a671967108218490b08790d299ae1d721bd8fc23f9795beafd053"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\intro-admission\\F132-native-combo\\observations.json",
+        "bytes": 6315246,
+        "sha256": "cc59331a3a22c6f778bde3ba5e83a3e59ec3ec411cc564cfb0c5ec58737fb587"
+      },
+      "raw_component_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "raw_component_error": null,
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "stages": [
+        {
+          "stage": 0,
+          "type": 24,
+          "before": 48,
+          "admitted": 52
+        },
+        {
+          "stage": 1,
+          "type": 25,
+          "before": 55,
+          "admitted": 58
+        },
+        {
+          "stage": 2,
+          "type": 26,
+          "before": 65,
+          "admitted": 67
+        }
+      ],
+      "chain_start": 48,
+      "chain_end": 103,
+      "qualified_hp_events": [
+        {
+          "peer": 0,
+          "before": 51,
+          "after": 52,
+          "hp_delta": 2,
+          "before_hp": 32,
+          "after_hp": 30,
+          "native_delta": 2,
+          "matching_types": [
+            24
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x80074bfc",
+          "cooldown_before": 0,
+          "cooldown_after": 0,
+          "p2_counter_before": 1,
+          "p2_counter_after": 5,
+          "type": 24,
+          "source_response_ticks": 2,
+          "response": "source-installed2 then expired between polls; positive timer NOT directly sampled",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 0,
+          "before": 52,
+          "after": 53,
+          "hp_delta": 2,
+          "before_hp": 30,
+          "after_hp": 28,
+          "native_delta": 3,
+          "matching_types": [
+            24
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x80074bfc",
+          "cooldown_before": 0,
+          "cooldown_after": 0,
+          "p2_counter_before": 5,
+          "p2_counter_after": 8,
+          "type": 24,
+          "source_response_ticks": 2,
+          "response": "source-installed2 then expired between polls; positive timer NOT directly sampled",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 0,
+          "before": 58,
+          "after": 59,
+          "hp_delta": 2,
+          "before_hp": 28,
+          "after_hp": 26,
+          "native_delta": 3,
+          "matching_types": [
+            25
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x80074bfc",
+          "cooldown_before": 0,
+          "cooldown_after": 0,
+          "p2_counter_before": 8,
+          "p2_counter_after": 9,
+          "type": 25,
+          "source_response_ticks": 2,
+          "response": "source-installed2 then expired between polls; positive timer NOT directly sampled",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 0,
+          "before": 59,
+          "after": 60,
+          "hp_delta": 2,
+          "before_hp": 26,
+          "after_hp": 24,
+          "native_delta": 1,
+          "matching_types": [
+            25
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x8007433c",
+          "cooldown_before": 0,
+          "cooldown_after": 1,
+          "p2_counter_before": 9,
+          "p2_counter_after": 11,
+          "type": 25,
+          "source_response_ticks": 2,
+          "response": "actual sampled native immunity timer/table",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 0,
+          "before": 77,
+          "after": 78,
+          "hp_delta": 5,
+          "before_hp": 19,
+          "after_hp": 14,
+          "native_delta": 3,
+          "matching_types": [
+            26
+          ],
+          "qualified": true,
+          "before_table": "0x8007433c",
+          "after_table": "0x8007433c",
+          "cooldown_before": 1,
+          "cooldown_after": 29,
+          "p2_counter_before": 16,
+          "p2_counter_after": 17,
+          "type": 26,
+          "source_response_ticks": 30,
+          "response": "actual sampled native immunity timer/table",
+          "readiness": "source-bracketed expiry between polls",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 1,
+          "before": 51,
+          "after": 52,
+          "hp_delta": 2,
+          "before_hp": 32,
+          "after_hp": 30,
+          "native_delta": 2,
+          "matching_types": [
+            24
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x80074bfc",
+          "cooldown_before": 0,
+          "cooldown_after": 0,
+          "p2_counter_before": 1,
+          "p2_counter_after": 5,
+          "type": 24,
+          "source_response_ticks": 2,
+          "response": "source-installed2 then expired between polls; positive timer NOT directly sampled",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 1,
+          "before": 52,
+          "after": 53,
+          "hp_delta": 2,
+          "before_hp": 30,
+          "after_hp": 28,
+          "native_delta": 3,
+          "matching_types": [
+            24
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x80074bfc",
+          "cooldown_before": 0,
+          "cooldown_after": 0,
+          "p2_counter_before": 5,
+          "p2_counter_after": 8,
+          "type": 24,
+          "source_response_ticks": 2,
+          "response": "source-installed2 then expired between polls; positive timer NOT directly sampled",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 1,
+          "before": 58,
+          "after": 59,
+          "hp_delta": 2,
+          "before_hp": 28,
+          "after_hp": 26,
+          "native_delta": 3,
+          "matching_types": [
+            25
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x8007433c",
+          "cooldown_before": 0,
+          "cooldown_after": 1,
+          "p2_counter_before": 8,
+          "p2_counter_after": 9,
+          "type": 25,
+          "source_response_ticks": 2,
+          "response": "actual sampled native immunity timer/table",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 1,
+          "before": 60,
+          "after": 61,
+          "hp_delta": 2,
+          "before_hp": 26,
+          "after_hp": 24,
+          "native_delta": 1,
+          "matching_types": [
+            25
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x8007433c",
+          "cooldown_before": 0,
+          "cooldown_after": 1,
+          "p2_counter_before": 10,
+          "p2_counter_after": 11,
+          "type": 25,
+          "source_response_ticks": 2,
+          "response": "actual sampled native immunity timer/table",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 1,
+          "before": 66,
+          "after": 67,
+          "hp_delta": 5,
+          "before_hp": 24,
+          "after_hp": 19,
+          "native_delta": 6,
+          "matching_types": [
+            26
+          ],
+          "qualified": true,
+          "before_table": "0x80074bfc",
+          "after_table": "0x8007433c",
+          "cooldown_before": 0,
+          "cooldown_after": 28,
+          "p2_counter_before": 11,
+          "p2_counter_after": 12,
+          "type": 26,
+          "source_response_ticks": 30,
+          "response": "actual sampled native immunity timer/table",
+          "readiness": "sampled0/table",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        },
+        {
+          "peer": 1,
+          "before": 77,
+          "after": 78,
+          "hp_delta": 5,
+          "before_hp": 19,
+          "after_hp": 14,
+          "native_delta": 3,
+          "matching_types": [
+            26
+          ],
+          "qualified": true,
+          "before_table": "0x8007433c",
+          "after_table": "0x8007433c",
+          "cooldown_before": 2,
+          "cooldown_after": 29,
+          "p2_counter_before": 16,
+          "p2_counter_after": 16,
+          "type": 26,
+          "source_response_ticks": 30,
+          "response": "actual sampled native immunity timer/table",
+          "readiness": "source-bracketed expiry between polls",
+          "timing_limit": "Diagnostic publication and main RAM are separate RPCs; no exact hit instruction timestamp."
+        }
+      ],
+      "unattributed_hp_events": [
+        {
+          "peer": 0,
+          "before": 66,
+          "after": 67,
+          "hp_delta": 5,
+          "before_hp": 24,
+          "after_hp": 19,
+          "native_delta": 4,
+          "matching_types": [],
+          "qualified": false,
+          "before_table": "0x80074bfc",
+          "after_table": "0x8007433c",
+          "cooldown_before": 0,
+          "cooldown_after": 28,
+          "p2_counter_before": 11,
+          "p2_counter_after": 11,
+          "reason": "No unique sampled owned geometry; separate-RPC skew is not a manufactured overlap"
+        }
+      ],
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "0x80074bfc",
+          "bytes": 160,
+          "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+        },
+        {
+          "peer": 1,
+          "address": "0x80074bfc",
+          "bytes": 160,
+          "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+        },
+        {
+          "peer": 0,
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6"
+        },
+        {
+          "peer": 1,
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6"
+        },
+        {
+          "peer": 0,
+          "address": "0x80031474",
+          "bytes": 1400,
+          "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+        },
+        {
+          "peer": 1,
+          "address": "0x80031474",
+          "bytes": 1400,
+          "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+        }
+      ],
+      "observer_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F132_ground_combo_v83_worker_v2.py": "63f1904eb136428bc255ea4934c0a91638947929d40cd5c2f7cc3b343044dcaa",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "a4f832f54e3e42d212336a9934b4f33c671f057c5bd2e0b7c50a088fef67f590",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_native_reentry_pair.py": "883c388ed512915b482533f625ddffde91111a7b436dbf63a538db0b9fda7b8b",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_hud_inventory.py": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_native_reentry.py": "c0fdd5fe7bf511bef710bf229754affa0c1b7431b96d13e04c5f71afda1b3960",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-exact-build-guard-root-v1.py": "c6a329b08fb7828205634e53fe2ad5dfec91706add6f31c7d38b681452106893",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-final-binding-root-v1.json": "a60ace7a0443b9d30954720c3c350c241c2e29c6883ebded3e9a016775c98e5b",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F132-protected-v83-root-v1.py": "34e1c7ae8cff620bf2a66d58fd7cdc1abf354238a70845aea7c82dadce95b7b0"
+      },
+      "checks": {
+        "actual_single_consecutive24_25_26": true,
+        "actual_each_stage_damage_geometry_native_immunity": true,
+        "original_retirement_and_recovery": true,
+        "source_profile_CRC_cards_cleanup_taint": true
+      },
+      "host_profile_startup": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 15,
+        "selected_sha256": "dd2f66bdb9700d890b40c1e348b367be4afaceb8f9ccf92b4dbf2c23660e87f1",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 15,
+              "selected_sha256": "dd2f66bdb9700d890b40c1e348b367be4afaceb8f9ccf92b4dbf2c23660e87f1",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 15,
+              "selected_sha256": "dd2f66bdb9700d890b40c1e348b367be4afaceb8f9ccf92b4dbf2c23660e87f1",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2912,
+              "core": "a14be230",
+              "mod": "9c933629"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "5c4f94ab",
+              "mod": "2fc83fe7"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "0af33b77",
+              "mod": "16573917"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "1ac38bd5",
+              "mod": "f29ef639"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "3965f62f",
+              "mod": "429e9b81"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "ec9ab16e",
+              "mod": "86bdda3f"
+            }
+          ],
+          "resolved_through": [
+            3101,
+            3101
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3136,
+              "core": "7b813c48",
+              "mod": "d4af2c1d"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "a6d3a9cb",
+              "mod": "15052bcb"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "ccd74df5",
+              "mod": "d0f8ca01"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "2ada8bfe",
+              "mod": "bca57fe1"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "15a240a3",
+              "mod": "75367ff3"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "c284f5ea",
+              "mod": "e2bdf693"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "2eb2960f",
+              "mod": "2929b679"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "2f5ca2a0",
+              "mod": "8b24184d"
+            }
+          ],
+          "resolved_through": [
+            3372,
+            3372
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3456,
+              "core": "4c752e50",
+              "mod": "18e42271"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "48f7c57b",
+              "mod": "847bdb41"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "b43557b8",
+              "mod": "80e44c43"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "cf80b653",
+              "mod": "2058baeb"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "6098c01f",
+              "mod": "cecbbdc9"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "fd97f7d0",
+              "mod": "d4af2c1d"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "0e281da1",
+              "mod": "15052bcb"
+            }
+          ],
+          "resolved_through": [
+            3673,
+            3673
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 7904,
+              "core": "a78cc0bf",
+              "mod": "671b3c58"
+            },
+            {
+              "simulation_tick": 7936,
+              "core": "959c0453",
+              "mod": "9c22a18e"
+            },
+            {
+              "simulation_tick": 7968,
+              "core": "e9de5c2d",
+              "mod": "35c3dbe4"
+            },
+            {
+              "simulation_tick": 8000,
+              "core": "e8b4bd4b",
+              "mod": "b726f284"
+            },
+            {
+              "simulation_tick": 8032,
+              "core": "71402425",
+              "mod": "21702886"
+            },
+            {
+              "simulation_tick": 8064,
+              "core": "a58af9ed",
+              "mod": "75ef4992"
+            }
+          ],
+          "resolved_through": [
+            8065,
+            8065
+          ]
+        }
+      ],
+      "recording_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-0\\saves\\input-recordings\\session-1793129957813392-1-0\\inputs.jsonl",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+            "manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 15,
+              "selected_sha256": "dd2f66bdb9700d890b40c1e348b367be4afaceb8f9ccf92b4dbf2c23660e87f1"
+            },
+            "settings_sha256": "8cd8dc3085bedefbfd25cd5576d11928126fdc62111e13dfbb6113cbc984959b",
+            "simulation_contract_sha256": "5abb7e2204894dda6e505cd5688b6075769713181ba553f5c8a086b5d13ed203"
+          },
+          "terminal_failure": "unilateral debug or fixture input contaminated capture",
+          "native_status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "unilateral debug or fixture input contaminated capture",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "failed"
+          },
+          "events": 6635,
+          "natives": 3127,
+          "p2_reads": 3508,
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-0-recording-refusal\\settings.json",
+              "bytes": 26875,
+              "sha256": "8cd8dc3085bedefbfd25cd5576d11928126fdc62111e13dfbb6113cbc984959b"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-0-recording-refusal\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-0-recording-refusal\\simulation-contract.json",
+              "bytes": 351,
+              "sha256": "5abb7e2204894dda6e505cd5688b6075769713181ba553f5c8a086b5d13ed203"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-0-recording-refusal\\inputs.jsonl",
+              "bytes": 854826,
+              "sha256": "454a1a18adfa788c3b504709d1e789159b7c1d1aa77d29a3a8d9ac9028ea5322"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-0-recording-refusal\\status.json",
+              "bytes": 211,
+              "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-0-recording-refusal\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-0-recording-refusal\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false,
+          "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+        },
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-1\\saves\\input-recordings\\session-1793129957813436-1-0\\inputs.jsonl",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+            "manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 15,
+              "selected_sha256": "dd2f66bdb9700d890b40c1e348b367be4afaceb8f9ccf92b4dbf2c23660e87f1"
+            },
+            "settings_sha256": "40ad43e4047bf75b1250036f16b3f58600c35138e50132c3b0e2b3b33fca1949",
+            "simulation_contract_sha256": "5abb7e2204894dda6e505cd5688b6075769713181ba553f5c8a086b5d13ed203"
+          },
+          "terminal_failure": "unilateral debug or fixture input contaminated capture",
+          "native_status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "unilateral debug or fixture input contaminated capture",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "failed"
+          },
+          "events": 6635,
+          "natives": 3127,
+          "p2_reads": 3508,
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-1-recording-refusal\\settings.json",
+              "bytes": 26875,
+              "sha256": "40ad43e4047bf75b1250036f16b3f58600c35138e50132c3b0e2b3b33fca1949"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-1-recording-refusal\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-1-recording-refusal\\simulation-contract.json",
+              "bytes": 351,
+              "sha256": "5abb7e2204894dda6e505cd5688b6075769713181ba553f5c8a086b5d13ed203"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-1-recording-refusal\\inputs.jsonl",
+              "bytes": 854826,
+              "sha256": "4115ef2fb6e3e9058a97d3dd1449df9afca428bfec0e6dda9bd01a29e45c717b"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-1-recording-refusal\\status.json",
+              "bytes": 211,
+              "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-1-recording-refusal\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\peer-1-recording-refusal\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false,
+          "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "seat": 0,
+          "pid": 28300,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "seat": 1,
+          "pid": 72028,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ]
+    }
+  },
+  "composed_images": [
+    {
+      "peer": 0,
+      "label": "native-third-combo-stage",
+      "row": 72,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\ammo-hud\\intro-admission\\F132\\peer-0-native-third-combo-stage.png",
+      "sha256": "e4680c569d62a5a46a2a3fc5cfb1334c23179ff7b0071e0ad066da086ec4f3b9",
+      "before": {
+        "id": 6510,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 6511,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\ammo-hud\\intro-admission\\F132\\peer-0-native-third-combo-stage.png",
+        "staged": true,
+        "seq": 6
+      },
+      "completion": {
+        "id": 6513,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      },
+      "root_reviewed": true
+    },
+    {
+      "peer": 0,
+      "label": "native-third-combo-stage",
+      "row": 67,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\intro-admission\\F132-native-combo\\peer-0-native-third-combo-stage.png",
+      "sha256": "81f079a8f8fda02e1bde0d7a3d54ce5b8e1876dc6a18094c5af8d43ef170c5cc",
+      "before": {
+        "id": 5751,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5752,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\intro-admission\\F132-native-combo\\peer-0-native-third-combo-stage.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 5753,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "root_reviewed": true
+    },
+    {
+      "peer": 1,
+      "label": "native-third-combo-stage",
+      "row": 67,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\intro-admission\\F132-native-combo\\peer-1-native-third-combo-stage.png",
+      "sha256": "9460d85a991d4a9f2d442b0150eb0d62bd9af2d29e3de73d6197e3f835426891",
+      "before": {
+        "id": 5681,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5682,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-protected-netplay-v83-root-v1\\intro-admission\\F132-native-combo\\peer-1-native-third-combo-stage.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 5684,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "root_reviewed": true
+    }
+  ],
+  "limits": [
+    "F132 only: one actual consecutive Zero ground24->25->26 chain against original living Yammark, accepted hits/immunity and original attack retirement/recovery. No elective per-seat balance, aerial/final-boss, weakness, all-target or defeat credit.",
+    "Original agreed AmazonCP2 initializer bypasses preceding route. Negotiated LAB contact protection suppresses hostile damage/knockback only; no HP/position/pose/timer/contact/result writes or changes to player attacks, enemy HP/AI/immunity, terrain or falls. No contact-damage pass.",
+    "Raw LOCAL remains failed_partial: old post-chain reduction wrongly required a positive immunity timer in every later snapshot. Original EFC2C installs2 for attacks24/25, EFC98 decrements in the SAME update, and EFCC8 restores74BFC at0. Source-supported expiry is explicitly inferred where no positive timer was directly sampled.",
+    "Private publication and ordinary main/camera are separate RPCs. Diagnostic timer deltas are polling brackets, not exact instruction timestamps. Every HP interval is retained, including intervals without uniquely sampled geometry/response. At least one unambiguous actual damage/geometry/immunity witness for each ordered native stage is required; unknown intervals gain no invented timer or rectangle.",
+    "Actual repeated HP changes and native modifiers remain intact; no fixed2/2/5-only accounting. P2 native hit counter is supporting and is not a target-specific collision serial.",
+    "Root reviewed all three composed third-stage images: one LOCAL and both NET peers. Corrupt scenery/HUD, bright contact flash and overlap are explicit; no general rendering/palette/HUD/audio pass.",
+    "Earlier V82 prechain failures, failed protected NET grouped setup and raw LOCAL reduction miss remain preserved. Source/helper tests alone supply no runtime credit. Other comparison rows remain separate."
+  ],
+  "source_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-retained-immunity-source-review-v83-worker-v1.txt",
+    "bytes": 4962,
+    "sha256": "e6b3f39164966077b88603cbacb76882b118c972bf27b52ce41e8099dc4f4629"
+  },
+  "classifier": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F132_ground_combo_v83_worker_v2.py",
+    "bytes": 18074,
+    "sha256": "63f1904eb136428bc255ea4934c0a91638947929d40cd5c2f7cc3b343044dcaa"
+  },
+  "executed_review_script": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F132-protected-v83-root-v1.py",
+    "bytes": 10715,
+    "sha256": "612b7e1a017526de9971879fcdea956c441b57da0cb3d7c965f41184e6db17a3"
+  },
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-final-binding-root-v1.json",
+    "binding_sha256": "a60ace7a0443b9d30954720c3c350c241c2e29c6883ebded3e9a016775c98e5b",
+    "image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+    "manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+    "provenance_sha256": "9debbad5780b8966e8ce447f0359e0b6327ac488f116e3abe296e41f029c3bdb",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v83-lab-contact-protection-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v32",
+    "host_revision": 15
+  }
+}

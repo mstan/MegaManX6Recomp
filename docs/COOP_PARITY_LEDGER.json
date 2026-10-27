@@ -14924,14 +14924,14 @@
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -14969,9 +14969,85 @@
               "lab_checkpoint": "amazon_cp2",
               "scope": "two failed prechainLOCAL setups; no combo/NET verdict"
             }
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+            "build_identity": {
+              "executable_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "compiled_manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "lab_checkpoint": "amazon_cp2",
+              "lab_contact_protection": "on",
+              "audio": "muted dummy",
+              "cameras": "split"
+            },
+            "action": "One actual consecutive native Zero ground24/25/26 chain against living original Yammark.",
+            "outcome": "All three ordered stages have actual accepted damage/geometry and source-qualified immunity; original attack retirement and idle/recovery complete.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-melee/manifest-bound-e204513-F132-protected-combo-reviewed.json",
+                "sha256": "3b3f75e8a780c6f526c5e99a1bae37583fada5b53ebb6b4bc203ea3c52932c1b"
+              }
+            ],
+            "limits": [
+              "F132 only: one actual consecutive Zero ground24->25->26 chain against original living Yammark, accepted hits/immunity and original attack retirement/recovery. No elective per-seat balance, aerial/final-boss, weakness, all-target or defeat credit.",
+              "Original agreed AmazonCP2 initializer bypasses preceding route. Negotiated LAB contact protection suppresses hostile damage/knockback only; no HP/position/pose/timer/contact/result writes or changes to player attacks, enemy HP/AI/immunity, terrain or falls. No contact-damage pass.",
+              "Raw LOCAL remains failed_partial: old post-chain reduction wrongly required a positive immunity timer in every later snapshot. Original EFC2C installs2 for attacks24/25, EFC98 decrements in the SAME update, and EFCC8 restores74BFC at0. Source-supported expiry is explicitly inferred where no positive timer was directly sampled.",
+              "Private publication and ordinary main/camera are separate RPCs. Diagnostic timer deltas are polling brackets, not exact instruction timestamps. Every HP interval is retained, including intervals without uniquely sampled geometry/response. At least one unambiguous actual damage/geometry/immunity witness for each ordered native stage is required; unknown intervals gain no invented timer or rectangle.",
+              "Actual repeated HP changes and native modifiers remain intact; no fixed2/2/5-only accounting. P2 native hit counter is supporting and is not a target-specific collision serial.",
+              "Root reviewed all three composed third-stage images: one LOCAL and both NET peers. Corrupt scenery/HUD, bright contact flash and overlap are explicit; no general rendering/palette/HUD/audio pass.",
+              "Earlier V82 prechain failures, failed protected NET grouped setup and raw LOCAL reduction miss remain preserved. Source/helper tests alone supply no runtime credit. Other comparison rows remain separate."
+            ],
+            "bypasses": [
+              "Original agreed AmazonCP2 initializer bypasses preceding route. Negotiated LAB contact protection suppresses hostile damage/knockback only; no HP/position/pose/timer/contact/result writes or changes to player attacks, enemy HP/AI/immunity, terrain or falls. No contact-damage pass."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+            "build_identity": {
+              "executable_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "compiled_manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "lab_checkpoint": "amazon_cp2",
+              "lab_contact_protection": "on",
+              "audio": "muted dummy",
+              "cameras": "split"
+            },
+            "action": "One actual consecutive native Zero ground24/25/26 chain against living original Yammark.",
+            "outcome": "All three ordered stages have actual accepted damage/geometry and source-qualified immunity; original attack retirement and idle/recovery complete.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-melee/manifest-bound-e204513-F132-protected-combo-reviewed.json",
+                "sha256": "3b3f75e8a780c6f526c5e99a1bae37583fada5b53ebb6b4bc203ea3c52932c1b"
+              }
+            ],
+            "limits": [
+              "F132 only: one actual consecutive Zero ground24->25->26 chain against original living Yammark, accepted hits/immunity and original attack retirement/recovery. No elective per-seat balance, aerial/final-boss, weakness, all-target or defeat credit.",
+              "Original agreed AmazonCP2 initializer bypasses preceding route. Negotiated LAB contact protection suppresses hostile damage/knockback only; no HP/position/pose/timer/contact/result writes or changes to player attacks, enemy HP/AI/immunity, terrain or falls. No contact-damage pass.",
+              "Raw LOCAL remains failed_partial: old post-chain reduction wrongly required a positive immunity timer in every later snapshot. Original EFC2C installs2 for attacks24/25, EFC98 decrements in the SAME update, and EFCC8 restores74BFC at0. Source-supported expiry is explicitly inferred where no positive timer was directly sampled.",
+              "Private publication and ordinary main/camera are separate RPCs. Diagnostic timer deltas are polling brackets, not exact instruction timestamps. Every HP interval is retained, including intervals without uniquely sampled geometry/response. At least one unambiguous actual damage/geometry/immunity witness for each ordered native stage is required; unknown intervals gain no invented timer or rectangle.",
+              "Actual repeated HP changes and native modifiers remain intact; no fixed2/2/5-only accounting. P2 native hit counter is supporting and is not a target-specific collision serial.",
+              "Root reviewed all three composed third-stage images: one LOCAL and both NET peers. Corrupt scenery/HUD, bright contact flash and overlap are explicit; no general rendering/palette/HUD/audio pass.",
+              "Earlier V82 prechain failures, failed protected NET grouped setup and raw LOCAL reduction miss remain preserved. Source/helper tests alone supply no runtime credit. Other comparison rows remain separate."
+            ],
+            "bypasses": [
+              "Original agreed AmazonCP2 initializer bypasses preceding route. Negotiated LAB contact protection suppresses hostile damage/knockback only; no HP/position/pose/timer/contact/result writes or changes to player attacks, enemy HP/AI/immunity, terrain or falls. No contact-damage pass."
+            ]
           }
         ],
-        "limitations": "Two exactdcc1002 LOCAL prechain setups stopped before Square: ordinaryhurt then native neutral/fullstance/lowboss window unearned. No combo/damage/immunity or NET verdict; preserved and deferred after two attempts."
+        "limitations": "F132 only: one actual consecutive Zero ground24->25->26 chain against original living Yammark, accepted hits/immunity and original attack retirement/recovery. No elective per-seat balance, aerial/final-boss, weakness, all-target or defeat credit. Original agreed AmazonCP2 initializer bypasses preceding route. Negotiated LAB contact protection suppresses hostile damage/knockback only; no HP/position/pose/timer/contact/result writes or changes to player attacks, enemy HP/AI/immunity, terrain or falls. No contact-damage pass. Raw LOCAL remains failed_partial: old post-chain reduction wrongly required a positive immunity timer in every later snapshot. Original EFC2C installs2 for attacks24/25, EFC98 decrements in the SAME update, and EFCC8 restores74BFC at0. Source-supported expiry is explicitly inferred where no positive timer was directly sampled. Private publication and ordinary main/camera are separate RPCs. Diagnostic timer deltas are polling brackets, not exact instruction timestamps. Every HP interval is retained, including intervals without uniquely sampled geometry/response. At least one unambiguous actual damage/geometry/immunity witness for each ordered native stage is required; unknown intervals gain no invented timer or rectangle. Actual repeated HP changes and native modifiers remain intact; no fixed2/2/5-only accounting. P2 native hit counter is supporting and is not a target-specific collision serial. Root reviewed all three composed third-stage images: one LOCAL and both NET peers. Corrupt scenery/HUD, bright contact flash and overlap are explicit; no general rendering/palette/HUD/audio pass. Earlier V82 prechain failures, failed protected NET grouped setup and raw LOCAL reduction miss remain preserved. Source/helper tests alone supply no runtime credit. Other comparison rows remain separate."
       }
     },
     {
