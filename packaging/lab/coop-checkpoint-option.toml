@@ -19,3 +19,7 @@ label = "Intro checkpoint 2 prerequisite"
 [[option.choice]]
 value = "amazon_cp0"
 label = "Amazon checkpoint 0 moving-support prerequisite"
+
+[[option.choice]]
+value = "amazon_cp2"
+label = "Amazon checkpoint 2 Investigator prerequisite"
