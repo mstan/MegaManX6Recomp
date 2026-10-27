@@ -1482,7 +1482,7 @@ enum { TEST_DOOR=0x800CD400u,TEST_DOOR_BOX=0x80074000u,TEST_X_BOX=0x80074004u,TE
 static void door_setup(CPUState *cpu,unsigned both,int x,int zero) {
     setup(cpu);both_doors=both;door_native_probe=1;
     life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
-    const unsigned fields[]={0xA4,0x7A,0xD0,0xD4};
+    const unsigned fields[]={0xA4,0x7A,0xD0,0xD4,0xE0};
     for(unsigned i=0;i<sizeof fields/sizeof fields[0];++i)psx_mod_write_byte(PLAYER+fields[i],0);
     psx_mod_write_word(PLAYER+8,(uint32_t)x<<16);put32(p2.body+8,(uint32_t)zero<<16);
     psx_mod_write_word(PLAYER+0x68,TEST_X_BOX);put32(p2.body+0x68,TEST_ZERO_BOX);
