@@ -17100,14 +17100,14 @@
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -17183,9 +17183,85 @@
             "bypasses": [
               "Pre-agreed original mode8/9 Amazon1/0/CP0 initializer; no traversal/retry/progression credit."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "4277e774fd032e88ac03344a530b57a597773584",
+            "build_identity": {
+              "executable_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+              "compiled_manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "local split8:3",
+              "renderer": "ordinaryOpenGL",
+              "audio": "muted dummy",
+              "prerequisite": "agreed originalAmazonC0"
+            },
+            "action": "After actual agreed nativeAmazonarrival/stairs/jump/carry, observe passive moving stretch with real native world/SDK counter/time brackets, own presentation and resources.",
+            "outcome": "Nativeworld78 LOCAL/92 and91 NET stays insideSDK74..79/88..96 and87..96. Original support travel38.5/24.5/23.5px, real carried start/native terrain continuation, full final profile/CRC/cards/exit0/taintrefusals retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-4277e77-F204-local-netplay-reviewed.json",
+                "sha256": "41d51d5175bcd43dbc396ccd86de80af901b1ca39e6227b0d4559c35842c476c"
+              }
+            ],
+            "limits": [
+              "Frozen F204 alone closes on exact4277e77 LOCAL+NET, SDK10b9021/UI34b5277. New LOCAL evidence replaces any need to transfer older72b898f credit; both required modes bind identical image/manifest/provenance/source heads/title23/hostrev6.",
+              "Actual original Amazon moving support, native stairs/jump/short neutral carry and both healthy heroes precede the passive moving-stretch measurement. World78 versusSDK74..79 LOCAL, world92/91 versusSDK88..96/87..96 NET; source/native neutral/resources/nohitpause/real motion and normal selected private presentation retained.",
+              "Actual support horizontal travel38.5px LOCAL and24.5/23.5px NET (net displacement3.5px across turn). Native world stays inside real independent SDK/VBlank brackets. Wallclock intervals/rates remain reported, including LOCAL52..57.35Hz; no universal60FPS/solo baseline/exact performance/long-session claim.",
+              "A genuine carried start is required; normal native unload onto original terrain is permitted during the measured moving stretch. V2 continuous-top failure is preserved, not relabelled; frozen F204 does not require perpetual carry. All resource/neutral/nohitpause/source/platform motion/world/SDK/card/profile gates remain.",
+              "Fifteen actual composed images reviewed across3processes. Both native actors and the original platform remain rendered in their own view/panes. Collision/native tick/counter/image reads are separately bracketed asynchronous observations; no exact screenshot-to-instruction identity.",
+              "Pre-agreed Amazon1/0/CP0 source-bound initializer is a reachability bypass, not ordinary route/retry/progression/newstage success. Actual native160/184 arrivals, selected record80072174/nonce4C434130/generation1/state3/authority1/latch2/initializeronce precede mechanics. No HP/ammo/position/contact/clock/success writes.",
+              "20focusedCTest and6Python checks pass; main source commitsafe7d17/814d289 match the immutable tested candidate. Whole parent exact profile/resolved full core/modCRC/native cards/owned exits0/strict fixture-taint capture+replay refusals pass. No content audit, old-state compatibility, F49hit, fullF51repeat or other platform/roster/host claim.",
+              "F64 NET raw remains separately incomplete under its stricter contact/internal-state phase predicates; F204 timing does not grant F64 animation qualification. Raw phase mismatches and all failed attempts remain retained for independent source review."
+            ],
+            "bypasses": [
+              "Pre-agreed source-bound original Amazon1/0/CP0 reachability only; original native route/contact/cadence mechanics occur afterward."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "4277e774fd032e88ac03344a530b57a597773584",
+            "build_identity": {
+              "executable_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+              "compiled_manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "independent own4:3 windows",
+              "renderer": "ordinaryOpenGL",
+              "audio": "muted dummy",
+              "prerequisite": "agreed originalAmazonC0"
+            },
+            "action": "After actual agreed nativeAmazonarrival/stairs/jump/carry, observe passive moving stretch with real native world/SDK counter/time brackets, own presentation and resources.",
+            "outcome": "Nativeworld78 LOCAL/92 and91 NET stays insideSDK74..79/88..96 and87..96. Original support travel38.5/24.5/23.5px, real carried start/native terrain continuation, full final profile/CRC/cards/exit0/taintrefusals retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-4277e77-F204-local-netplay-reviewed.json",
+                "sha256": "41d51d5175bcd43dbc396ccd86de80af901b1ca39e6227b0d4559c35842c476c"
+              }
+            ],
+            "limits": [
+              "Frozen F204 alone closes on exact4277e77 LOCAL+NET, SDK10b9021/UI34b5277. New LOCAL evidence replaces any need to transfer older72b898f credit; both required modes bind identical image/manifest/provenance/source heads/title23/hostrev6.",
+              "Actual original Amazon moving support, native stairs/jump/short neutral carry and both healthy heroes precede the passive moving-stretch measurement. World78 versusSDK74..79 LOCAL, world92/91 versusSDK88..96/87..96 NET; source/native neutral/resources/nohitpause/real motion and normal selected private presentation retained.",
+              "Actual support horizontal travel38.5px LOCAL and24.5/23.5px NET (net displacement3.5px across turn). Native world stays inside real independent SDK/VBlank brackets. Wallclock intervals/rates remain reported, including LOCAL52..57.35Hz; no universal60FPS/solo baseline/exact performance/long-session claim.",
+              "A genuine carried start is required; normal native unload onto original terrain is permitted during the measured moving stretch. V2 continuous-top failure is preserved, not relabelled; frozen F204 does not require perpetual carry. All resource/neutral/nohitpause/source/platform motion/world/SDK/card/profile gates remain.",
+              "Fifteen actual composed images reviewed across3processes. Both native actors and the original platform remain rendered in their own view/panes. Collision/native tick/counter/image reads are separately bracketed asynchronous observations; no exact screenshot-to-instruction identity.",
+              "Pre-agreed Amazon1/0/CP0 source-bound initializer is a reachability bypass, not ordinary route/retry/progression/newstage success. Actual native160/184 arrivals, selected record80072174/nonce4C434130/generation1/state3/authority1/latch2/initializeronce precede mechanics. No HP/ammo/position/contact/clock/success writes.",
+              "20focusedCTest and6Python checks pass; main source commitsafe7d17/814d289 match the immutable tested candidate. Whole parent exact profile/resolved full core/modCRC/native cards/owned exits0/strict fixture-taint capture+replay refusals pass. No content audit, old-state compatibility, F49hit, fullF51repeat or other platform/roster/host claim.",
+              "F64 NET raw remains separately incomplete under its stricter contact/internal-state phase predicates; F204 timing does not grant F64 animation qualification. Raw phase mismatches and all failed attempts remain retained for independent source review."
+            ],
+            "bypasses": [
+              "Pre-agreed source-bound original Amazon1/0/CP0 reachability only; original native route/contact/cadence mechanics occur afterward."
+            ]
           }
         ],
-        "limitations": "LOCAL exact4277e77 reviewed F204cadence world78 insideSDK74..79/platform38.5px andF64private2pane/nativephase0/1/2/art,5images. AgreedAmazonprerequisite bypass andstricttrace refusal/correctnativeentry/cards/ownedexit0 explicit. NETsamecandidate/aggregate pending; noF49hit/generalcontent/route/fullF51 inheritance."
+        "limitations": "Exact4277e77 LOCAL+NET F204 passes native moving-stretch world/VBlank brackets78/92/91 within74..79/88..96/87..96 and actual support motion with bothhealthy/native neutral/nohitpause/resources;15images reviewed. AgreedAmazon prerequisite and natural terrain unload disclosed; allprofile/CRC/cards/ownedexit0/taintrefusal pass. No F64phase/F49hit/wholeF51/60FPS/generalcontent inheritance."
       }
     },
     {

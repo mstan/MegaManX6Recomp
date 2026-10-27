@@ -1,0 +1,572 @@
+{
+  "schema": 1,
+  "comparison": "F204",
+  "frozen_row_sha256": "faa9cb1930ba3dd6871fad27526380fda92a3a91109c7361e333d291e0a39ee1",
+  "result": "passed",
+  "candidate": "4277e774fd032e88ac03344a530b57a597773584",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-v69-final-binding-root-v1.json",
+    "binding_sha256": "b28375890937da72df2055d1c2c05c806d491f16be975ab4a202da1dcaa3d2f5",
+    "image_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+    "manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+    "provenance_sha256": "0c69b8357652fca4c7a7bc5b88aa0232f3e9b568503358b109ad685f7d77835e",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v69-amazon-support-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "4277e774fd032e88ac03344a530b57a597773584",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v23",
+    "host_revision": 6
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\qualification.json",
+        "bytes": 1729463,
+        "sha256": "a064a0fcd2ad93c43e630b986cf51393dadb4dcd83e613205a4ab8b3f0f82155"
+      },
+      "prerequisite": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\Amazon-prerequisite\\observations.json",
+        "bytes": 570947,
+        "sha256": "0e0b9ea0e519902dead79cba668f9da5cd5f10dd654df32658cb79c262c42277"
+      },
+      "raw_measurements": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\F204-observations.json",
+        "bytes": 27914,
+        "sha256": "8dab2e0b9e0c9265c78d6079d9288b36a171d06d0337cf67a6588cb29623fe2f"
+      },
+      "metrics": [
+        {
+          "peer": 0,
+          "native_world_delta": 78,
+          "vblank_delta_bracket": [
+            74,
+            79
+          ],
+          "elapsed_seconds_bracket": [
+            1.3599999999860302,
+            1.5
+          ],
+          "world_ticks_per_second_bracket": [
+            52.0,
+            57.35294117705971
+          ],
+          "vblanks_per_second_bracket": [
+            49.333333333333336,
+            58.08823529471432
+          ],
+          "world_per_vblank_bracket": [
+            0.9873417721518988,
+            1.054054054054054
+          ],
+          "native_world_delta_inside_vblank_delta_bracket": true,
+          "actor_dx": -38.5,
+          "sampled_actor_horizontal_travel": 38.5
+        }
+      ],
+      "source_clock_guards": [
+        {
+          "peer": 0,
+          "first": "0x80034f28",
+          "end": "0x80034f64",
+          "sha256": "df1f4cb551a40173eaa3cf9b063b0e493c553eba32de2fed3392dabe4d5577fd"
+        },
+        {
+          "peer": 0,
+          "first": "0x80073a6c",
+          "end": "0x80073aac",
+          "sha256": "5ac8fd7adbfec4be116af28375036223f672eb9f0a6910985462b3b330c3cb4e"
+        }
+      ],
+      "actual_contact_history": [
+        {
+          "native_sample": 73,
+          "support_or_terrain": [
+            "moving_support"
+          ]
+        },
+        {
+          "native_sample": 74,
+          "support_or_terrain": [
+            "moving_support"
+          ]
+        },
+        {
+          "native_sample": 75,
+          "support_or_terrain": [
+            "moving_support"
+          ]
+        },
+        {
+          "native_sample": 76,
+          "support_or_terrain": [
+            "moving_support"
+          ]
+        },
+        {
+          "native_sample": 77,
+          "support_or_terrain": [
+            "moving_support"
+          ]
+        }
+      ],
+      "reviewed_images": [
+        {
+          "peer": 0,
+          "label": "actual-native-AmazonC0-arrival",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\Amazon-prerequisite\\peer-0-actual-native-AmazonC0-arrival.png",
+            "bytes": 2074543,
+            "sha256": "1cd19ce62ccef1a366a182124b20875253531a753ef620dc340911a5173950c1"
+          },
+          "root_review": "Actual original Amazon arrival shows both native healthy bodies in the selected own view/panes; prerequisite only."
+        },
+        {
+          "peer": 0,
+          "label": "initialized-native-moving-support",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-initialized-native-moving-support.png",
+            "bytes": 2074543,
+            "sha256": "3301b5d51985eafe8e1cb5359ab73d2ed5ce4d6c1b2f346057320759a3120887"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "guest-neutral-native-carry",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-guest-neutral-native-carry.png",
+            "bytes": 2074543,
+            "sha256": "8b587f3f4b307a7529297b7e3413b7175c671f77bb2a80c9b7d390d6d4645f0a"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "f6fba23dbbb2740dfed4db7ee86b9606bd82a72c5ad49f84b6f097de779aee5b"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "909e09f80340c8ae4ff99a2d82938c193feb1dfa94f48b46b33b35924df24c8e"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        }
+      ],
+      "resolved_crc": null,
+      "recording_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+            "manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "a757bf7091a2558227fc6c8a2b1c4a27d6ec180f1d108a04078e7d9581034e93",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\qualification.json",
+        "bytes": 3818020,
+        "sha256": "daf80090df6c002361f1e5d323d67ca78c85a26f6c9ecd9af4234daaa7c6cdf4"
+      },
+      "prerequisite": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\Amazon-prerequisite\\observations.json",
+        "bytes": 622078,
+        "sha256": "9ac538dee5fa663746184676085a741cf88a26669b51ac640f167a2d209beb6b"
+      },
+      "raw_measurements": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\F204-observations.json",
+        "bytes": 52853,
+        "sha256": "6022865e353ab888e196c4e306d0386592f018fbc1eb51e7b32a801e08208a68"
+      },
+      "metrics": [
+        {
+          "peer": 0,
+          "native_world_delta": 92,
+          "vblank_delta_bracket": [
+            88,
+            96
+          ],
+          "elapsed_seconds_bracket": [
+            1.452999999979511,
+            1.625
+          ],
+          "world_ticks_per_second_bracket": [
+            56.61538461538461,
+            63.31727460515989
+          ],
+          "vblanks_per_second_bracket": [
+            54.15384615384615,
+            66.07019958799292
+          ],
+          "world_per_vblank_bracket": [
+            0.9583333333333334,
+            1.0454545454545454
+          ],
+          "native_world_delta_inside_vblank_delta_bracket": true,
+          "actor_dx": 3.5,
+          "sampled_actor_horizontal_travel": 24.5
+        },
+        {
+          "peer": 1,
+          "native_world_delta": 91,
+          "vblank_delta_bracket": [
+            87,
+            96
+          ],
+          "elapsed_seconds_bracket": [
+            1.452999999979511,
+            1.625
+          ],
+          "world_ticks_per_second_bracket": [
+            56.0,
+            62.62904335945163
+          ],
+          "vblanks_per_second_bracket": [
+            53.53846153846154,
+            66.07019958799292
+          ],
+          "world_per_vblank_bracket": [
+            0.9479166666666666,
+            1.0459770114942528
+          ],
+          "native_world_delta_inside_vblank_delta_bracket": true,
+          "actor_dx": 3.5,
+          "sampled_actor_horizontal_travel": 23.5
+        }
+      ],
+      "source_clock_guards": [
+        {
+          "peer": 0,
+          "first": "0x80034f28",
+          "end": "0x80034f64",
+          "sha256": "df1f4cb551a40173eaa3cf9b063b0e493c553eba32de2fed3392dabe4d5577fd"
+        },
+        {
+          "peer": 0,
+          "first": "0x80073a6c",
+          "end": "0x80073aac",
+          "sha256": "5ac8fd7adbfec4be116af28375036223f672eb9f0a6910985462b3b330c3cb4e"
+        },
+        {
+          "peer": 1,
+          "first": "0x80034f28",
+          "end": "0x80034f64",
+          "sha256": "df1f4cb551a40173eaa3cf9b063b0e493c553eba32de2fed3392dabe4d5577fd"
+        },
+        {
+          "peer": 1,
+          "first": "0x80073a6c",
+          "end": "0x80073aac",
+          "sha256": "5ac8fd7adbfec4be116af28375036223f672eb9f0a6910985462b3b330c3cb4e"
+        }
+      ],
+      "actual_contact_history": [
+        {
+          "native_sample": 60,
+          "support_or_terrain": [
+            "moving_support",
+            "moving_support"
+          ]
+        },
+        {
+          "native_sample": 61,
+          "support_or_terrain": [
+            "original_terrain",
+            "original_terrain"
+          ]
+        },
+        {
+          "native_sample": 62,
+          "support_or_terrain": [
+            "original_terrain",
+            "original_terrain"
+          ]
+        },
+        {
+          "native_sample": 63,
+          "support_or_terrain": [
+            "original_terrain",
+            "original_terrain"
+          ]
+        },
+        {
+          "native_sample": 64,
+          "support_or_terrain": [
+            "original_terrain",
+            "original_terrain"
+          ]
+        }
+      ],
+      "reviewed_images": [
+        {
+          "peer": 0,
+          "label": "actual-native-AmazonC0-arrival",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\Amazon-prerequisite\\peer-0-actual-native-AmazonC0-arrival.png",
+            "bytes": 2074543,
+            "sha256": "d2d3b3352bc928d3d2af75f148841d60172f272e14f7de0e33ea6007c63d2347"
+          },
+          "root_review": "Actual original Amazon arrival shows both native healthy bodies in the selected own view/panes; prerequisite only."
+        },
+        {
+          "peer": 1,
+          "label": "actual-native-AmazonC0-arrival",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\Amazon-prerequisite\\peer-1-actual-native-AmazonC0-arrival.png",
+            "bytes": 2074543,
+            "sha256": "2843acdae3b4c51d34f817fc3192272c2022c2cc225d9a883edcb46f1790ff4e"
+          },
+          "root_review": "Actual original Amazon arrival shows both native healthy bodies in the selected own view/panes; prerequisite only."
+        },
+        {
+          "peer": 0,
+          "label": "initialized-native-moving-support",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-initialized-native-moving-support.png",
+            "bytes": 2074543,
+            "sha256": "91be68b58fbae2adfe4453939b6c3ca86fbd12021b429ed3190a0bb43af7467f"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 1,
+          "label": "initialized-native-moving-support",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-initialized-native-moving-support.png",
+            "bytes": 2074543,
+            "sha256": "c6b53f3b4060ad41c4376c82b31a27455ff602642fc454a01581d3eda098dd51"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "guest-neutral-native-carry",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-guest-neutral-native-carry.png",
+            "bytes": 2074543,
+            "sha256": "05dc121494b1bbfd516bd5061e8365438042fc59ec803053fc97795b6c3ddf6c"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 1,
+          "label": "guest-neutral-native-carry",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-guest-neutral-native-carry.png",
+            "bytes": 2074543,
+            "sha256": "ca33a369a1dda478e04e7567528416b305e9357bdb8455c91b7afac674d5d2ea"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "f719f6f4ab06172913f8afb357e180536a43413dfe55013122cf2022780e8965"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 1,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "fe159889416294525f8c01ea9f05fd5ad215b9307ccbab2bff1895c7a5b15aaa"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "36fbc873badde773feca19d5513bd70605ca5b6fa893b938cb04e66b55cc2b22"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 1,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "10abfa751ae8cffc5db75dc7efec788e16d436ef5dded611eae9ca412f9b704b"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        }
+      ],
+      "resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": 7,
+          "last_tick": 3136,
+          "resolved_through": [
+            3156,
+            3156
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 8,
+          "last_tick": 3424,
+          "resolved_through": [
+            3429,
+            3429
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 7,
+          "last_tick": 3712,
+          "resolved_through": [
+            3732,
+            3731
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 8,
+          "last_tick": 4896,
+          "resolved_through": [
+            4901,
+            4901
+          ]
+        }
+      ],
+      "recording_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+            "manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 6,
+              "selected_sha256": "841d1e10cd6df0cf44d9f05d9f6a78df0c604eac21d47f634f165f5d712e300b"
+            },
+            "settings_sha256": "41a8fda13fb9a1acb42037695a81d27be8a820bc2f8abbdb86f0d91d3514f140",
+            "simulation_contract_sha256": "273203d650c3c615051c0a773c6cdbb79051a5d8c4f74058322daf2061139d68"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        },
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+            "manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 6,
+              "selected_sha256": "841d1e10cd6df0cf44d9f05d9f6a78df0c604eac21d47f634f165f5d712e300b"
+            },
+            "settings_sha256": "3e38af108437359c94e6587bec7fbc1bf3443148ed99ed6a9ddb68865470f08c",
+            "simulation_contract_sha256": "273203d650c3c615051c0a773c6cdbb79051a5d8c4f74058322daf2061139d68"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "reviewed_images": 15,
+  "limits": [
+    "Frozen F204 alone closes on exact4277e77 LOCAL+NET, SDK10b9021/UI34b5277. New LOCAL evidence replaces any need to transfer older72b898f credit; both required modes bind identical image/manifest/provenance/source heads/title23/hostrev6.",
+    "Actual original Amazon moving support, native stairs/jump/short neutral carry and both healthy heroes precede the passive moving-stretch measurement. World78 versusSDK74..79 LOCAL, world92/91 versusSDK88..96/87..96 NET; source/native neutral/resources/nohitpause/real motion and normal selected private presentation retained.",
+    "Actual support horizontal travel38.5px LOCAL and24.5/23.5px NET (net displacement3.5px across turn). Native world stays inside real independent SDK/VBlank brackets. Wallclock intervals/rates remain reported, including LOCAL52..57.35Hz; no universal60FPS/solo baseline/exact performance/long-session claim.",
+    "A genuine carried start is required; normal native unload onto original terrain is permitted during the measured moving stretch. V2 continuous-top failure is preserved, not relabelled; frozen F204 does not require perpetual carry. All resource/neutral/nohitpause/source/platform motion/world/SDK/card/profile gates remain.",
+    "Fifteen actual composed images reviewed across3processes. Both native actors and the original platform remain rendered in their own view/panes. Collision/native tick/counter/image reads are separately bracketed asynchronous observations; no exact screenshot-to-instruction identity.",
+    "Pre-agreed Amazon1/0/CP0 source-bound initializer is a reachability bypass, not ordinary route/retry/progression/newstage success. Actual native160/184 arrivals, selected record80072174/nonce4C434130/generation1/state3/authority1/latch2/initializeronce precede mechanics. No HP/ammo/position/contact/clock/success writes.",
+    "20focusedCTest and6Python checks pass; main source commitsafe7d17/814d289 match the immutable tested candidate. Whole parent exact profile/resolved full core/modCRC/native cards/owned exits0/strict fixture-taint capture+replay refusals pass. No content audit, old-state compatibility, F49hit, fullF51repeat or other platform/roster/host claim.",
+    "F64 NET raw remains separately incomplete under its stricter contact/internal-state phase predicates; F204 timing does not grant F64 animation qualification. Raw phase mismatches and all failed attempts remain retained for independent source review."
+  ],
+  "bypasses": [
+    "Pre-agreed source-bound original Amazon1/0/CP0 reachability only; original native route/contact/cadence mechanics occur afterward."
+  ]
+}

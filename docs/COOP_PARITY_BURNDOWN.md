@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 56 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 5 failed, 173 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 57 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F204, F205, F208), 5 failed, 172 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,14 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+**F204 is closed:57 passed /5 failed /172 unverified (24.4%).**
+The [same-candidate moving-support bundle](evidence/mmx6-solid/manifest-bound-4277e77-F204-local-netplay-reviewed.json) passes native world/VBlank cadence in LOCAL and NET, with15 reviewed images.
+World78/92/91 stays insideSDK74..79/88..96/87..96; actual native
+support motion, neutral resources and normal private presentation remain.
+The qualified agreed Amazon prerequisite is integrated locally; no
+ordinary route or broad content audit is claimed. F64 NET phase review
+remains separate. This adds two since55: F53 and F204.
 
 The [new V69 LOCAL moving-support bundle](evidence/mmx6-solid/manifest-bound-4277e77-F204-F64-local-reviewed.json) passes F204 cadence and F64 private-pane animation on one exact candidate. World78 lies insideSDK74..79; original platform travel38.5px and native frames0/1/2 are retained with five reviewed images. The agreed Amazon prerequisite is disclosed. NET is running separately; aggregate stays56/5/173.
 
