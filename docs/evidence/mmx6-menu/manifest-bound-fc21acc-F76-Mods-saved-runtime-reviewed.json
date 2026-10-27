@@ -1,0 +1,420 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F76"
+  ],
+  "result": "passed",
+  "frozen_row_sha256": {
+    "F76": "668a6ed700c8e9a8a9b0c88e9727720b446ef82b9545d028ef554283f6eb028e"
+  },
+  "candidate": "fc21accc04786525b83cc72d642d338abe5074ee",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\recycle-loaded-cp2-v86-final-binding-root-v1.json",
+    "binding_sha256": "31915915cb91fc114a0ec4b2243846351939d67fedad0819d4150d1fcb657a96",
+    "image_sha256": "d66adb34f6d2dd1e11ccf7f7d7334b1610c989d62aa2d20893cdd7a56c823111",
+    "manifest_sha256": "95b68d000272ce72d38a2b100d8e92b3cfe125becc225e1b699883b65739a92d",
+    "provenance_sha256": "cc84c9f577ba9617b00644e644b242b9d1cd48236dc1abc63fb04faa00b67790",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v86-recycle-loaded-cp2-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "fc21accc04786525b83cc72d642d338abe5074ee",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v35",
+    "host_revision": 18
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\qualification.json",
+        "bytes": 889225,
+        "sha256": "1ffca355569efb33ed5cd82677dc8753c845b790fcf0f42f60884d798b56074c"
+      },
+      "raw_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\qualification-parent-original.json",
+        "bytes": 863985,
+        "sha256": "5261a61d6ca9e1103495ab07ea6db2364759b31230bea8775aa19d63c55f2964"
+      },
+      "raw_parent_status": "native_hud_presentation_captured_review_pending",
+      "checks": {
+        "both_healthy_native_heroes": true,
+        "saved_Split_actually_published": true,
+        "private_pairs_and_commits_advance": true,
+        "no_private_state_leak": true,
+        "actual8by3_presents_each_process": true,
+        "original_native_world_advances": true
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_case_finalized_recording_cleanup_and_cards": true
+      },
+      "actual_UI_cases": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\F76-real-UI-cases.json",
+        "bytes": 22544,
+        "sha256": "2f4f021c3ccfab9d33df5b73a44e256c78d8de4068895604a36861836bbdc716"
+      },
+      "settings_normalization": [
+        {
+          "original_explicit_settings_preserved": true,
+          "before_sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+          "after_sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345",
+          "reference": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v2\\candidate\\settings.toml",
+            "sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345"
+          },
+          "actual_post_UI_originals": {
+            "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+            "disc": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).cue",
+            "loader": "default OpenBIOS/HLE with authentic1x disc",
+            "settings_sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345"
+          },
+          "limits": "Launcher expands omitted defaults on Quit. Parent pre-UI settings hashes describe the earlier minimal file; finalized native recording supplies actual startup settings."
+        }
+      ],
+      "ordinary_recordings": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\candidate\\saves\\input-recordings\\session-1793140125507360-1-0\\inputs.jsonl",
+          "sha256": "e99e486a1d581d506eb879e4a18b8f073f09d9e148154523bcbca3eb2027b1f4",
+          "events": 5931,
+          "natives": 4154,
+          "p2_reads": 1777,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "d66adb34f6d2dd1e11ccf7f7d7334b1610c989d62aa2d20893cdd7a56c823111",
+            "manifest_sha256": "95b68d000272ce72d38a2b100d8e92b3cfe125becc225e1b699883b65739a92d",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "aa3877b4f61f08385d9c06906f71785c321e4654dff7baff2431c19de8096fbe",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          }
+        }
+      ],
+      "resolved_CRC_windows": [],
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\F76-executing-source-pins.json",
+        "bytes": 3179,
+        "sha256": "77c5d2990b3dae177d8c0dba89db7ee9c1069e02cded40729bf8ba2086a2bcf8"
+      },
+      "reviewed_images": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\candidate\\logs\\F76-edit-camera-popup.png",
+          "bytes": 134642,
+          "sha256": "66c872a9baa30328f25a7580e315e14bd224923bda0fb17ac60690b8cb6fec67",
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\candidate\\logs\\F76-edit-selected-camera.png",
+          "bytes": 144100,
+          "sha256": "e8afc36e2f36a4d410fd3f553793ae2a5c20c932aa2dc246239e9167ca4cf50d",
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\candidate\\logs\\F76-reopen-selected-camera.png",
+          "bytes": 133279,
+          "sha256": "374374b4d5ee582ee90708c81972a2be37786e18e1a043df8a1423295fa12ff6",
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v4\\hud\\peer-0-real-saved-Split.png",
+          "bytes": 1843888,
+          "sha256": "1bcfd8387764337c77adc7e1512359ab524d95d9544766de345f5c34cf7ea69b",
+          "root_reviewed": true
+        }
+      ],
+      "actual_native_progress": [
+        {
+          "peer": 0,
+          "stereo_pairs": [
+            151,
+            158
+          ],
+          "native_timer": [
+            150,
+            156
+          ]
+        }
+      ]
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\qualification.json",
+        "bytes": 3076394,
+        "sha256": "718ce0137ac291200e455e05042cc8e8d52c444d79314964061f2d7f36f31f04"
+      },
+      "raw_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\qualification-parent-original.json",
+        "bytes": 3020581,
+        "sha256": "56cfa23bb2cfc5aae59756a4e94d3dba77c28ad945869c0501c323507be6e19e"
+      },
+      "raw_parent_status": "failed",
+      "checks": {
+        "both_healthy_native_heroes": true,
+        "saved_Split_actually_published": true,
+        "private_pairs_and_commits_advance": true,
+        "no_private_state_leak": true,
+        "actual8by3_presents_each_process": true,
+        "original_native_world_advances": true
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "hud_presentation_both_peers_completed": false,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "F76_actual_UI_choice_effective_on_both_peers": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true,
+        "F76_both_ordinary_recordings_finalized": true
+      },
+      "actual_UI_cases": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\F76-real-UI-cases.json",
+        "bytes": 47603,
+        "sha256": "57c4a23cf94241331b98d17c04a9aa0d5796e73de94f09b1ae10dd4f293999cd"
+      },
+      "settings_normalization": [
+        {
+          "original_explicit_settings_preserved": true,
+          "before_sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+          "after_sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345",
+          "reference": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v2\\candidate\\settings.toml",
+            "sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345"
+          },
+          "actual_post_UI_originals": {
+            "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+            "disc": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).cue",
+            "loader": "default OpenBIOS/HLE with authentic1x disc",
+            "settings_sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345"
+          },
+          "limits": "Launcher expands omitted defaults on Quit. Parent pre-UI settings hashes describe the earlier minimal file; finalized native recording supplies actual startup settings."
+        },
+        {
+          "original_explicit_settings_preserved": true,
+          "before_sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+          "after_sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345",
+          "reference": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-local-v86-root-v2\\candidate\\settings.toml",
+            "sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345"
+          },
+          "actual_post_UI_originals": {
+            "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+            "disc": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).cue",
+            "loader": "default OpenBIOS/HLE with authentic1x disc",
+            "settings_sha256": "8b85f895aea507ea9c1b48c38b52adc2ccf1c2c18933c83a7df1e99b4f205345"
+          },
+          "limits": "Launcher expands omitted defaults on Quit. Parent pre-UI settings hashes describe the earlier minimal file; finalized native recording supplies actual startup settings."
+        }
+      ],
+      "ordinary_recordings": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\peer-0\\saves\\input-recordings\\session-1793140276952633-1-0\\inputs.jsonl",
+          "sha256": "1f77f6041fcd4840561d0d3c1872f6d281cff3584304c5bb6b3649bb8e18af30",
+          "events": 7504,
+          "natives": 3407,
+          "p2_reads": 4097,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "d66adb34f6d2dd1e11ccf7f7d7334b1610c989d62aa2d20893cdd7a56c823111",
+            "manifest_sha256": "95b68d000272ce72d38a2b100d8e92b3cfe125becc225e1b699883b65739a92d",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 18,
+              "selected_sha256": "043d7a4e4ea975f5e58183e7ffdabe3d2a090bfc33fce3f8eb102addf9e21061"
+            },
+            "settings_sha256": "697672b8518039ef51089365caecb17628f88538475aa2186aae62bc007b98ed",
+            "simulation_contract_sha256": "7cb1a21df3359f8f549cc96ef89e2d0430bd0f380361bba51a84275b0af873e1"
+          },
+          "status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "finalized"
+          }
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\peer-1\\saves\\input-recordings\\session-1793140276953184-1-0\\inputs.jsonl",
+          "sha256": "716a51cdc29f976f0de82b549d07451b21484b3a3adec3a5e16a61f6fc139ac6",
+          "events": 7513,
+          "natives": 3410,
+          "p2_reads": 4103,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "d66adb34f6d2dd1e11ccf7f7d7334b1610c989d62aa2d20893cdd7a56c823111",
+            "manifest_sha256": "95b68d000272ce72d38a2b100d8e92b3cfe125becc225e1b699883b65739a92d",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 18,
+              "selected_sha256": "043d7a4e4ea975f5e58183e7ffdabe3d2a090bfc33fce3f8eb102addf9e21061"
+            },
+            "settings_sha256": "086254780dcbdf33f16dba390c7416cce9f174844dbe8f4f6d5e82c8340e619f",
+            "simulation_contract_sha256": "7cb1a21df3359f8f549cc96ef89e2d0430bd0f380361bba51a84275b0af873e1"
+          },
+          "status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "finalized"
+          }
+        }
+      ],
+      "resolved_CRC_windows": [
+        {
+          "label": "initial idle",
+          "samples": 7
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 7
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 7
+        },
+        {
+          "label": "F76 realUI saved Split effective ordinary gameplay on both peers",
+          "samples": 7
+        }
+      ],
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\F76-executing-source-pins.json",
+        "bytes": 3179,
+        "sha256": "c3e7822014b0a54937c813dc43ab83fe43bf980afd08d98f840643dbd0556f80"
+      },
+      "reviewed_images": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\peer-0\\logs\\F76-edit-camera-popup.png",
+          "bytes": 138188,
+          "sha256": "2c09d13ac0086e29798003e2cf885dec6fc953eec4ed3c27f4b2b9629cf7ff9e",
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\peer-0\\logs\\F76-reopen-selected-camera.png",
+          "bytes": 132562,
+          "sha256": "8f73d8021342f9fe45609e7688e488eb47d8762816fc188d4843f3b40ac4aa15",
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\peer-1\\logs\\F76-edit-selected-camera.png",
+          "bytes": 146373,
+          "sha256": "1e0381e4546d76a795f00365eb3a75211114f1f9ad2088406e733f5029436a89",
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\peer-1\\logs\\F76-reopen-selected-camera.png",
+          "bytes": 132562,
+          "sha256": "8f73d8021342f9fe45609e7688e488eb47d8762816fc188d4843f3b40ac4aa15",
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\F76-native-Split\\peer-0-real-saved-Split.png",
+          "bytes": 1843888,
+          "sha256": "01361ec9d370e6efde14310ba429019eae634901107aac573611d44ccc1120e8",
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F76-Mods-runtime-netplay-v86-root-v5\\F76-native-Split\\peer-1-real-saved-Split.png",
+          "bytes": 1843888,
+          "sha256": "01361ec9d370e6efde14310ba429019eae634901107aac573611d44ccc1120e8",
+          "root_reviewed": true
+        }
+      ],
+      "actual_native_progress": [
+        {
+          "peer": 0,
+          "stereo_pairs": [
+            981,
+            993
+          ],
+          "native_timer": [
+            980,
+            992
+          ]
+        },
+        {
+          "peer": 1,
+          "stereo_pairs": [
+            984,
+            996
+          ],
+          "native_timer": [
+            981,
+            994
+          ]
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Frozen F76 catalog grouping and persisted choices only: Gameplay Door activation and Display HUD layout/Local cameras/Netplay cameras are discoverable in the actual Co-op detail pane. Local Separate views and netplay Side by side are the representative changed choices tested; unrelated original typed choices remain unchanged. Future elective forms/balance features are not claimed implemented by this result.",
+    "Actual Dashboard Mods button, search and feature name clicks; real dropdown key events, owned Quit, distinct fresh same-profile launcher reopen, then ordinary fresh native gameplay launch from those saved files. No programmatic mod-state choice injection, UI Play-button press or same-PID rematch claim.",
+    "No actual NET lobby Host/Join/START or F40 serialization credit. CLI pair retains actual common host profile18 and resolved core/mod CRC checks.",
+    "No new RAM/outcome/scene/checkpoint/HP/inventory writes or campaign prerequisites. Original native intro, default X/P1 plus Zero/P2, isolated blank native cards, hidden/muted QA and owned native1280x480 window. No F173/F177/all-scenes or full HUD-menu/layout/damage contract credit.",
+    "Actual launcher writes a full settings file on Quit. Every original explicit typed preference remains unchanged; the exact observed T86 default expansion is pinned and retained, originals revalidated after UI, and each finalized native recording binds actual startup settings. Parent pre-UI settings hashes describe the earlier minimal file. Fresh staged game.toml is canonicalized CRLF to LF before validation, with unchanged text/typed values and exact preparation receipt; no posthoc source hash substitution or settings reset.",
+    "NET raw parent status remains failed solely because hud_presentation_both_peers_completed stayed false: the F76 replacement callback does not run the broader HUD menu/damage/aspect suite that normally sets this field. Its exact executed source confirms initialization to false and normal callback ownership. All15 other parent checks and all6 specific F76 native checks pass, with four matched resolved CRC phases, both owned exits0, unchanged cards, complete ordinary recordings and no runtime error. This review qualifies the frozen F76 action independently and does not relabel the raw parent or qualify the broader HUD suite.",
+    "Root reviewed actual grouped labels, changed/reopened choices and all3 composed native Split captures. The ordinary intro artwork and overlapping local hero positions are context only; no claim of unrelated rendering repairs or distant independent-follow behavior.",
+    "Earlier LOCALv1/v2/v3 prelaunch wrapper failures and NETv4 argparse failure remain retained. No failed prefix receives gameplay credit."
+  ],
+  "compiled_gates": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v86-recycle-loaded-cp2-focused-root-v1.log",
+      "bytes": 5880,
+      "sha256": "807146519ebea96154fdc3235fe47c0a688d6e6c726fa2a36797a1c67278b21e"
+    }
+  ],
+  "executed_review_script": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F76-Mods-runtime-v86-root-v1.py",
+    "bytes": 12848,
+    "sha256": "1d1860480dad59040034da40c125cb7b48d77457cf68ea8ec9b93118dcc8f10d"
+  }
+}

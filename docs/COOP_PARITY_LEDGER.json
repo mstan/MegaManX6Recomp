@@ -11448,24 +11448,103 @@
       "frozen_row_sha256": "668a6ed700c8e9a8a9b0c88e9727720b446ef82b9545d028ef554283f6eb028e",
       "x6": {
         "workstream": "menu",
-        "mapping_state": "candidate_native_scenario",
-        "analogue": "Discoverable co-op options in recomp-ui",
-        "bounded_check": "Expose elective door/balance/forms options under clear X6 co-op labels; verify real frontend controls and effective values after launcher start.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Actual grouped X6 Co-op Mods controls, saved local/netplay camera choice and native effect",
+        "bounded_check": "Use actual Mods button/search/Co-op feature name, change Local cameras or Netplay cameras through its real dropdown, quit and reopen the same profile in a distinct process, then verify the saved split choice in ordinary native gameplay on each required mode.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "fc21accc04786525b83cc72d642d338abe5074ee",
+            "build_identity": {
+              "executable_sha256": "d66adb34f6d2dd1e11ccf7f7d7334b1610c989d62aa2d20893cdd7a56c823111",
+              "compiled_manifest_sha256": "95b68d000272ce72d38a2b100d8e92b3cfe125becc225e1b699883b65739a92d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "local_cameras": "split",
+              "cameras": "unified",
+              "hud_layout": "stacked",
+              "lab": "off",
+              "audio": "muted dummy"
+            },
+            "action": "Real grouped Mods widgets -> persisted camera choice -> owned Quit -> distinct fresh reopen -> ordinary current native Split renderer.",
+            "outcome": "Specific F76 UI/persistence/native contract complete. Raw broader NET HUD completion flag remains unset and explicitly excluded from this distinct comparison.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-menu/manifest-bound-fc21acc-F76-Mods-saved-runtime-reviewed.json",
+                "sha256": "70cc873e86a818a45ff0bda617f8ebcc359468994ef0671f369f85b7f352d35c"
+              }
+            ],
+            "limits": [
+              "Frozen F76 catalog grouping and persisted choices only: Gameplay Door activation and Display HUD layout/Local cameras/Netplay cameras are discoverable in the actual Co-op detail pane. Local Separate views and netplay Side by side are the representative changed choices tested; unrelated original typed choices remain unchanged. Future elective forms/balance features are not claimed implemented by this result.",
+              "Actual Dashboard Mods button, search and feature name clicks; real dropdown key events, owned Quit, distinct fresh same-profile launcher reopen, then ordinary fresh native gameplay launch from those saved files. No programmatic mod-state choice injection, UI Play-button press or same-PID rematch claim.",
+              "No actual NET lobby Host/Join/START or F40 serialization credit. CLI pair retains actual common host profile18 and resolved core/mod CRC checks.",
+              "No new RAM/outcome/scene/checkpoint/HP/inventory writes or campaign prerequisites. Original native intro, default X/P1 plus Zero/P2, isolated blank native cards, hidden/muted QA and owned native1280x480 window. No F173/F177/all-scenes or full HUD-menu/layout/damage contract credit.",
+              "Actual launcher writes a full settings file on Quit. Every original explicit typed preference remains unchanged; the exact observed T86 default expansion is pinned and retained, originals revalidated after UI, and each finalized native recording binds actual startup settings. Parent pre-UI settings hashes describe the earlier minimal file. Fresh staged game.toml is canonicalized CRLF to LF before validation, with unchanged text/typed values and exact preparation receipt; no posthoc source hash substitution or settings reset.",
+              "NET raw parent status remains failed solely because hud_presentation_both_peers_completed stayed false: the F76 replacement callback does not run the broader HUD menu/damage/aspect suite that normally sets this field. Its exact executed source confirms initialization to false and normal callback ownership. All15 other parent checks and all6 specific F76 native checks pass, with four matched resolved CRC phases, both owned exits0, unchanged cards, complete ordinary recordings and no runtime error. This review qualifies the frozen F76 action independently and does not relabel the raw parent or qualify the broader HUD suite.",
+              "Root reviewed actual grouped labels, changed/reopened choices and all3 composed native Split captures. The ordinary intro artwork and overlapping local hero positions are context only; no claim of unrelated rendering repairs or distant independent-follow behavior.",
+              "Earlier LOCALv1/v2/v3 prelaunch wrapper failures and NETv4 argparse failure remain retained. No failed prefix receives gameplay credit."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "fc21accc04786525b83cc72d642d338abe5074ee",
+            "build_identity": {
+              "executable_sha256": "d66adb34f6d2dd1e11ccf7f7d7334b1610c989d62aa2d20893cdd7a56c823111",
+              "compiled_manifest_sha256": "95b68d000272ce72d38a2b100d8e92b3cfe125becc225e1b699883b65739a92d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "local_cameras": "unified",
+              "cameras": "split",
+              "hud_layout": "stacked",
+              "lab": "off",
+              "audio": "muted dummy"
+            },
+            "action": "Real grouped Mods widgets -> persisted camera choice -> owned Quit -> distinct fresh reopen -> ordinary current native Split renderer.",
+            "outcome": "Specific F76 UI/persistence/native contract complete. Raw broader NET HUD completion flag remains unset and explicitly excluded from this distinct comparison.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-menu/manifest-bound-fc21acc-F76-Mods-saved-runtime-reviewed.json",
+                "sha256": "70cc873e86a818a45ff0bda617f8ebcc359468994ef0671f369f85b7f352d35c"
+              }
+            ],
+            "limits": [
+              "Frozen F76 catalog grouping and persisted choices only: Gameplay Door activation and Display HUD layout/Local cameras/Netplay cameras are discoverable in the actual Co-op detail pane. Local Separate views and netplay Side by side are the representative changed choices tested; unrelated original typed choices remain unchanged. Future elective forms/balance features are not claimed implemented by this result.",
+              "Actual Dashboard Mods button, search and feature name clicks; real dropdown key events, owned Quit, distinct fresh same-profile launcher reopen, then ordinary fresh native gameplay launch from those saved files. No programmatic mod-state choice injection, UI Play-button press or same-PID rematch claim.",
+              "No actual NET lobby Host/Join/START or F40 serialization credit. CLI pair retains actual common host profile18 and resolved core/mod CRC checks.",
+              "No new RAM/outcome/scene/checkpoint/HP/inventory writes or campaign prerequisites. Original native intro, default X/P1 plus Zero/P2, isolated blank native cards, hidden/muted QA and owned native1280x480 window. No F173/F177/all-scenes or full HUD-menu/layout/damage contract credit.",
+              "Actual launcher writes a full settings file on Quit. Every original explicit typed preference remains unchanged; the exact observed T86 default expansion is pinned and retained, originals revalidated after UI, and each finalized native recording binds actual startup settings. Parent pre-UI settings hashes describe the earlier minimal file. Fresh staged game.toml is canonicalized CRLF to LF before validation, with unchanged text/typed values and exact preparation receipt; no posthoc source hash substitution or settings reset.",
+              "NET raw parent status remains failed solely because hud_presentation_both_peers_completed stayed false: the F76 replacement callback does not run the broader HUD menu/damage/aspect suite that normally sets this field. Its exact executed source confirms initialization to false and normal callback ownership. All15 other parent checks and all6 specific F76 native checks pass, with four matched resolved CRC phases, both owned exits0, unchanged cards, complete ordinary recordings and no runtime error. This review qualifies the frozen F76 action independently and does not relabel the raw parent or qualify the broader HUD suite.",
+              "Root reviewed actual grouped labels, changed/reopened choices and all3 composed native Split captures. The ordinary intro artwork and overlapping local hero positions are context only; no claim of unrelated rendering repairs or distant independent-follow behavior.",
+              "Earlier LOCALv1/v2/v3 prelaunch wrapper failures and NETv4 argparse failure remain retained. No failed prefix receives gameplay credit."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Frozen F76 catalog grouping and persisted choices only: Gameplay Door activation and Display HUD layout/Local cameras/Netplay cameras are discoverable in the actual Co-op detail pane. Local Separate views and netplay Side by side are the representative changed choices tested; unrelated original typed choices remain unchanged. Future elective forms/balance features are not claimed implemented by this result. Actual Dashboard Mods button, search and feature name clicks; real dropdown key events, owned Quit, distinct fresh same-profile launcher reopen, then ordinary fresh native gameplay launch from those saved files. No programmatic mod-state choice injection, UI Play-button press or same-PID rematch claim. No actual NET lobby Host/Join/START or F40 serialization credit. CLI pair retains actual common host profile18 and resolved core/mod CRC checks. No new RAM/outcome/scene/checkpoint/HP/inventory writes or campaign prerequisites. Original native intro, default X/P1 plus Zero/P2, isolated blank native cards, hidden/muted QA and owned native1280x480 window. No F173/F177/all-scenes or full HUD-menu/layout/damage contract credit. Actual launcher writes a full settings file on Quit. Every original explicit typed preference remains unchanged; the exact observed T86 default expansion is pinned and retained, originals revalidated after UI, and each finalized native recording binds actual startup settings. Parent pre-UI settings hashes describe the earlier minimal file. Fresh staged game.toml is canonicalized CRLF to LF before validation, with unchanged text/typed values and exact preparation receipt; no posthoc source hash substitution or settings reset. NET raw parent status remains failed solely because hud_presentation_both_peers_completed stayed false: the F76 replacement callback does not run the broader HUD menu/damage/aspect suite that normally sets this field. Its exact executed source confirms initialization to false and normal callback ownership. All15 other parent checks and all6 specific F76 native checks pass, with four matched resolved CRC phases, both owned exits0, unchanged cards, complete ordinary recordings and no runtime error. This review qualifies the frozen F76 action independently and does not relabel the raw parent or qualify the broader HUD suite. Root reviewed actual grouped labels, changed/reopened choices and all3 composed native Split captures. The ordinary intro artwork and overlapping local hero positions are context only; no claim of unrelated rendering repairs or distant independent-follow behavior. Earlier LOCALv1/v2/v3 prelaunch wrapper failures and NETv4 argparse failure remain retained. No failed prefix receives gameplay credit."
       }
     },
     {
