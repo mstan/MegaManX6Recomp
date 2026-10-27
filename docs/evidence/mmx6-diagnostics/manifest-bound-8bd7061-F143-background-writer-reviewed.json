@@ -1,0 +1,488 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F143"
+  ],
+  "result": "passed",
+  "frozen_row_sha256": {
+    "F143": "e1e77b629b5140825f4900da2b190ce1a617fa07a886992be39a1f71b643d34c"
+  },
+  "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-arrival-input-flush-v88-final-binding-root-v1.json",
+    "binding_sha256": "7f1de8fe9b83759188d183011ea754b4ff2c56928d88785adf743a28c1d3f61a",
+    "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+    "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+    "provenance_sha256": "a25f01d21769967ed9a1dd92d7bd4bcfcbb8efe60081bd8a75e5844450dd232b",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v36",
+    "host_revision": 19
+  },
+  "integrated_fix": "bf039698a6b6b0a9b2493c7716526bbac9342cff",
+  "identical_F143_source": [
+    {
+      "relative": "src/mods/mmx6_diagnostics.cpp",
+      "sha256": "ff61f96f04719905628ab2ab1c11b0bb0c948f5ca1ae6283d1479a637e9908bf"
+    },
+    {
+      "relative": "tests/test_mmx6_input_capture.cpp",
+      "sha256": "1b674ead8f72abc1b62d27ad5b07639ebe5140bc28c72c24525d763a1f413b07"
+    },
+    {
+      "relative": "tools/test_mmx6_input_capture.py",
+      "sha256": "d381b8d0398d6cb6f1218bf9d8767e9afca700a6994166a49a1d4cc317ec181a"
+    }
+  ],
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\qualification.json",
+        "bytes": 2220460,
+        "sha256": "c8da71a4fdf888d2032161e1c3f6a9f80b1c65e6bf2fb41ea148d5367667cc0f"
+      },
+      "raw_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\qualification-parent-original.json",
+        "bytes": 2214451,
+        "sha256": "d07605f658c0bd5b55fc87fd1d663710632a3dce00ba85fcab0a673a66ee6a3e"
+      },
+      "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "writer_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\F143-writer-prefix\\final-writer-observations.json",
+        "bytes": 3631,
+        "sha256": "90d5c12921eedb7eb24b7ca54547a3e882aeebca314772c31b117cea07166117"
+      },
+      "writer": {
+        "kind": "F143_actual_background_native_prefix_before_fixture",
+        "status": "F143_native_writer_component_complete_review_pending",
+        "peers": [
+          {
+            "peer": 0,
+            "directory": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\candidate",
+            "stream": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\candidate\\saves\\input-recordings\\session-1793142409641958-1-0\\inputs.jsonl",
+            "before_bytes": 722675,
+            "before_sha256": "45eaf4543ae733ca36a082103eec332321eb2f2bbf45162f3737b3bdc490efc3",
+            "wall_start_ns": 609427078000000,
+            "native_frame_before": 1902,
+            "snapshot": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\F143-writer-prefix\\peer-0-visible-open-prefix.jsonl",
+            "snapshot_sha256": "0ad5309b5f519fbeaa7005c13a6b2590a7fdce9d4d0eadbeda13789e2ccfd47f",
+            "snapshot_bytes": 725747,
+            "visible_complete_events": 5533,
+            "elapsed_ms": 109.0,
+            "native_frame_after": 1907,
+            "identity": {
+              "baseline": null,
+              "cards": [
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                },
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                }
+              ],
+              "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+              "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+              "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "mode": "offline",
+              "profile": null,
+              "settings_sha256": "1393b2b01420ed4d1cf833726a03712b65d850966bed49ea0b3f241b5436b4f7",
+              "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+            },
+            "still_open": true,
+            "final_sha256": "51aef8b931788ede591e7591ad027c19f9e02af80860729f3f10a73f0010ea60",
+            "final_bytes": 732997,
+            "events": 5588,
+            "natives": 3868,
+            "p2_reads": 1720,
+            "explicit_failure": "unilateral debug or fixture input contaminated capture",
+            "status": {
+              "contract": "mmx6.native-consumption.v1",
+              "epoch": 1,
+              "failure": "unilateral debug or fixture input contaminated capture",
+              "schema": 1,
+              "scope": "native-consumption diagnostics; replay unimplemented",
+              "status": "failed"
+            },
+            "strict_complete_refused": true,
+            "strict_terminal_correct": true,
+            "ordered_prefix_unchanged": true
+          }
+        ],
+        "checks": {
+          "actual_ordinary_native_pair_consumers": true,
+          "current_build_mode_identity": true,
+          "live_background_prefix_visible": true,
+          "native_execution_continues": true,
+          "final_ordered_accepted_prefix_retained": true,
+          "explicit_terminal_status_visible": true,
+          "strict_terminal_correct": true
+        },
+        "limits": [
+          "This observes ordinary accepted native input before the independent F20 checkpoint fixture. The later fixture intentionally ends capture with an explicit tainted failed prefix; no clean fixture-route recording or replay claim.",
+          "Actual worker sparse-input/deadline/full-queue/I/O cases are separately compiled from the exact production TU. This live growth sample is not a built-game speed or producer-stall benchmark. Startup settings/cards export remains a separate synchronous setup cost."
+        ]
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\F20-executing-source-pins.json",
+        "bytes": 2429,
+        "sha256": "df1b67bb7c10b710a0a9bc8a95a7626e66dd123ca15698aad23186a675995101"
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\qualification.json",
+        "bytes": 2945757,
+        "sha256": "d7b5a1fd15c08ed49f1210a6514b2981fec4f43aac2417dfd5b67dc292eae653"
+      },
+      "raw_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\qualification-parent-original.json",
+        "bytes": 2935077,
+        "sha256": "bd5e4268b1e0d4411f16410b35450e5ca6d0508d2c3683e47a4fb569e4899e18"
+      },
+      "raw_parent_status": "failed",
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": false,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "writer_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\F143-writer-prefix\\final-writer-observations.json",
+        "bytes": 6608,
+        "sha256": "21aef77aa3c6825d8c2df82e8e53950b943583ecbae439e44dfaf894a06d2dcb"
+      },
+      "writer": {
+        "kind": "F143_actual_background_native_prefix_before_fixture",
+        "status": "F143_native_writer_component_complete_review_pending",
+        "peers": [
+          {
+            "peer": 0,
+            "directory": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\peer-0",
+            "stream": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\peer-0\\saves\\input-recordings\\session-1793142676078540-1-0\\inputs.jsonl",
+            "before_bytes": 849875,
+            "before_sha256": "97146d4f40364fa939cbfe9b25d9c3b92815154e4799f6eb89432e85a6c7efd4",
+            "wall_start_ns": 609703656000000,
+            "native_frame_before": 3071,
+            "snapshot": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\F143-writer-prefix\\peer-0-visible-open-prefix.jsonl",
+            "snapshot_sha256": "9be5e27df91bfec821dbafdb4a42ed2c226f59b3ca427806158bc74a6b4526c7",
+            "snapshot_bytes": 852143,
+            "visible_complete_events": 6614,
+            "elapsed_ms": 94.0,
+            "native_frame_after": 3073,
+            "identity": {
+              "baseline": null,
+              "cards": [
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                },
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                }
+              ],
+              "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+              "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+              "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "mode": "netplay",
+              "profile": {
+                "id": "mmx6.win64-clang22.loopback",
+                "revision": 19,
+                "selected_sha256": "914ad961dc4afefc8e4b3ce1351f9062a1345975dfd79790972739204081cf62"
+              },
+              "settings_sha256": "c15f36c7da939cfa313b27082e89bf30f2a96971ad5d126d69d7ac452f7bac53",
+              "simulation_contract_sha256": "395b584cd939a80e2daf1e99eb8f5255c7d87e936d6e6fd2b530dabb672e0eb1"
+            },
+            "still_open": true,
+            "final_sha256": "6ea9490f359648770c774dcb5db24332eba57901c4232ee91686cc70a94a7d2d",
+            "final_bytes": 870369,
+            "events": 6757,
+            "natives": 3160,
+            "p2_reads": 3597,
+            "explicit_failure": "unilateral debug or fixture input contaminated capture",
+            "status": {
+              "contract": "mmx6.native-consumption.v1",
+              "epoch": 1,
+              "failure": "unilateral debug or fixture input contaminated capture",
+              "schema": 1,
+              "scope": "native-consumption diagnostics; replay unimplemented",
+              "status": "failed"
+            },
+            "strict_complete_refused": true,
+            "strict_terminal_correct": true,
+            "ordered_prefix_unchanged": true
+          },
+          {
+            "peer": 1,
+            "directory": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\peer-1",
+            "stream": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\peer-1\\saves\\input-recordings\\session-1793142676078763-1-0\\inputs.jsonl",
+            "before_bytes": 852143,
+            "before_sha256": "efa64b9c7ff10ee79f7fed49785b2ec7cbdbc7beabd09441d1b658699edcd667",
+            "wall_start_ns": 609703750000000,
+            "native_frame_before": 3076,
+            "snapshot": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\F143-writer-prefix\\peer-1-visible-open-prefix.jsonl",
+            "snapshot_sha256": "bfdbd7398590e949959ae93878794e7ecaddea0114b49a9a1d24f26bf8bbd926",
+            "snapshot_bytes": 854411,
+            "visible_complete_events": 6632,
+            "elapsed_ms": 62.0,
+            "native_frame_after": 3079,
+            "identity": {
+              "baseline": null,
+              "cards": [
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                },
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                }
+              ],
+              "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+              "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+              "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "mode": "netplay",
+              "profile": {
+                "id": "mmx6.win64-clang22.loopback",
+                "revision": 19,
+                "selected_sha256": "914ad961dc4afefc8e4b3ce1351f9062a1345975dfd79790972739204081cf62"
+              },
+              "settings_sha256": "2d16617f7956a085404cb8e292e3cfbb4b4e278a4376217cfe330f611b149846",
+              "simulation_contract_sha256": "395b584cd939a80e2daf1e99eb8f5255c7d87e936d6e6fd2b530dabb672e0eb1"
+            },
+            "still_open": true,
+            "final_sha256": "336355b4407d3f800718ac56d9206e0a8efb989cab134571a3c113e9e569fbbb",
+            "final_bytes": 870369,
+            "events": 6757,
+            "natives": 3160,
+            "p2_reads": 3597,
+            "explicit_failure": "unilateral debug or fixture input contaminated capture",
+            "status": {
+              "contract": "mmx6.native-consumption.v1",
+              "epoch": 1,
+              "failure": "unilateral debug or fixture input contaminated capture",
+              "schema": 1,
+              "scope": "native-consumption diagnostics; replay unimplemented",
+              "status": "failed"
+            },
+            "strict_complete_refused": true,
+            "strict_terminal_correct": true,
+            "ordered_prefix_unchanged": true
+          }
+        ],
+        "checks": {
+          "actual_ordinary_native_pair_consumers": true,
+          "current_build_mode_identity": true,
+          "live_background_prefix_visible": true,
+          "native_execution_continues": true,
+          "final_ordered_accepted_prefix_retained": true,
+          "explicit_terminal_status_visible": true,
+          "strict_terminal_correct": true
+        },
+        "limits": [
+          "This observes ordinary accepted native input before the independent F20 checkpoint fixture. The later fixture intentionally ends capture with an explicit tainted failed prefix; no clean fixture-route recording or replay claim.",
+          "Actual worker sparse-input/deadline/full-queue/I/O cases are separately compiled from the exact production TU. This live growth sample is not a built-game speed or producer-stall benchmark. Startup settings/cards export remains a separate synchronous setup cost."
+        ]
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v3\\F20-executing-source-pins.json",
+        "bytes": 2429,
+        "sha256": "96e01d11900518e688baf9e750114381896b6d22005600a521db51400c664a84"
+      }
+    }
+  },
+  "worker_before_after": [
+    {
+      "variant": "debug",
+      "fixed": false,
+      "root": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\input-capture-fixtures\\debug\\capture-test-1793141084341740500\\ordinary",
+      "idle": [
+        {
+          "elapsed_ms": 2015,
+          "epoch": 9,
+          "netplay": 0,
+          "scope": "sparse actual worker N/C prefix, no further producer events or stop until observation",
+          "still_open": 1,
+          "visible_before_close": 0
+        }
+      ],
+      "full": []
+    },
+    {
+      "variant": "debug",
+      "fixed": true,
+      "root": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\input-capture-fixtures\\debug\\capture-test-1793141146437812600\\ordinary",
+      "idle": [
+        {
+          "elapsed_ms": 123,
+          "epoch": 10,
+          "netplay": 1,
+          "scope": "sparse actual worker N/C prefix, no further producer events or stop until observation",
+          "still_open": 1,
+          "visible_before_close": 1
+        },
+        {
+          "elapsed_ms": 112,
+          "epoch": 9,
+          "netplay": 0,
+          "scope": "sparse actual worker N/C prefix, no further producer events or stop until observation",
+          "still_open": 1,
+          "visible_before_close": 1
+        }
+      ],
+      "full": [
+        {
+          "epoch": 11,
+          "status": "failed",
+          "failure": "bounded native-consumption queue full",
+          "accepted_events": 8192,
+          "natives": 1,
+          "p2_reads": 8191,
+          "stream": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\input-capture-fixtures\\debug\\capture-test-1793141146437812600\\ordinary\\input-recordings\\session-1793141146774076-11-0\\inputs.jsonl",
+          "sha256": "692ea52efb6a8eda50ac2beda5dce13bf32dd2acd9d6f9ada09a7d861578d8a2"
+        },
+        {
+          "epoch": 12,
+          "status": "failed",
+          "failure": "bounded native-consumption queue full",
+          "accepted_events": 8192,
+          "natives": 1,
+          "p2_reads": 8191,
+          "stream": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\input-capture-fixtures\\debug\\capture-test-1793141146437812600\\ordinary\\input-recordings\\session-1793141146786269-12-0\\inputs.jsonl",
+          "sha256": "faf240f1669ba86bd8407e50d97f97dcd6b1e7bf54cd9c5a77f54b0dfff3d718"
+        }
+      ]
+    },
+    {
+      "variant": "production",
+      "fixed": false,
+      "root": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\input-capture-fixtures\\production\\capture-test-1793141086463333900\\ordinary",
+      "idle": [
+        {
+          "elapsed_ms": 2006,
+          "epoch": 9,
+          "netplay": 0,
+          "scope": "sparse actual worker N/C prefix, no further producer events or stop until observation",
+          "still_open": 1,
+          "visible_before_close": 0
+        }
+      ],
+      "full": []
+    },
+    {
+      "variant": "production",
+      "fixed": true,
+      "root": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\input-capture-fixtures\\production\\capture-test-1793141147174147100\\ordinary",
+      "idle": [
+        {
+          "elapsed_ms": 105,
+          "epoch": 10,
+          "netplay": 1,
+          "scope": "sparse actual worker N/C prefix, no further producer events or stop until observation",
+          "still_open": 1,
+          "visible_before_close": 1
+        },
+        {
+          "elapsed_ms": 102,
+          "epoch": 9,
+          "netplay": 0,
+          "scope": "sparse actual worker N/C prefix, no further producer events or stop until observation",
+          "still_open": 1,
+          "visible_before_close": 1
+        }
+      ],
+      "full": [
+        {
+          "epoch": 11,
+          "status": "failed",
+          "failure": "bounded native-consumption queue full",
+          "accepted_events": 8192,
+          "natives": 1,
+          "p2_reads": 8191,
+          "stream": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\input-capture-fixtures\\production\\capture-test-1793141147174147100\\ordinary\\input-recordings\\session-1793141147423423-11-0\\inputs.jsonl",
+          "sha256": "692ea52efb6a8eda50ac2beda5dce13bf32dd2acd9d6f9ada09a7d861578d8a2"
+        },
+        {
+          "epoch": 12,
+          "status": "failed",
+          "failure": "bounded native-consumption queue full",
+          "accepted_events": 8192,
+          "natives": 1,
+          "p2_reads": 8191,
+          "stream": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\input-capture-fixtures\\production\\capture-test-1793141147174147100\\ordinary\\input-recordings\\session-1793141147435224-12-0\\inputs.jsonl",
+          "sha256": "faf240f1669ba86bd8407e50d97f97dcd6b1e7bf54cd9c5a77f54b0dfff3d718"
+        }
+      ]
+    }
+  ],
+  "worker_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F143-before-wall-flush-ctest-v88-root-v1.log",
+      "bytes": 12830,
+      "sha256": "00035d9be35efcef606dc5f3d6838186b7629d040c33d672000e63ea163f4116"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F143-before-wall-flush-source-v88-root-v1.json",
+      "bytes": 533,
+      "sha256": "3db9a0db200945b17a4c33089a1957fda6c17606229725e3baa18bc46d4f7b2f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F143-after-wall-flush-ctest-v88-root-v1.log",
+      "bytes": 820,
+      "sha256": "860479f8e30f23f87c8a1d324497d157ada402777d22d6c5e03c0cb3258fd35c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F143-wall-flush-before-after-v88-root-v1.json",
+      "bytes": 4721,
+      "sha256": "6467d61551de15c6aecef55e925eaaec8a514f489edf8d2ed8c05d9ade6beb18"
+    }
+  ],
+  "compiled_gates": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v88-paired-arrival-input-flush-focused-root-v3.log",
+      "bytes": 6446,
+      "sha256": "12f3f56477afe3fc1d7931855ce5b965dc407a036f2674d50cbd396e87c93be6"
+    }
+  ],
+  "limits": [
+    "Frozen F143 is the bounded background writer contract: accepted-prefix order, explicit queue/I/O failures and wall-time flush. No game speed, per-input stall benchmark, successful gameplay replay or elimination of synchronous session-setup I/O is claimed.",
+    "The existing bounded POD producer/queue remains unchanged. The worker alone checks its steady-clock deadline and calls stdio. Startup settings export and native-card copies remain separate synchronous setup costs.",
+    "Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102\u2013123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim.",
+    "Actual worker saturation retains8192 ordered accepted events before explicit QueueFull in offline and netplay fixtures. Real owned OS-handle invalidation makes FileSink::flush throw. Strict complete parsing refuses failed prefixes; no silent successful truncation is admitted.",
+    "Native local and both netplay peers show the current-image ordinary N/C prefix growing while execution and capture remain live, before the independent F20 fixture. The later agreed checkpoint setup deliberately taints each recording; final order/hash/count/status and strict complete refusal are verified. These are truthful failed terminal recordings, not clean fixture-route replay evidence.",
+    "The preserved NET parent run failed the separate F20 observer progress assertion. Its broader callback-completed flag remains false. All13 other parent checks and all7 F143 checks pass, both owned peers exit0, cards stay unchanged and baseline resolved CRC windows match. Only F143 is admitted here; no F20 or full parent gameplay pass is claimed.",
+    "The tested candidate includes independent F20 changes. F143 source/test files are byte-identical to the integrated standalone fix bf039698a6b6b0a9b2493c7716526bbac9342cff. Runtime credit names the actual tested8bd7061 candidate, not an unbuilt integration head."
+  ],
+  "executed_review_script": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F143-background-writer-v88-root-v1.py",
+    "bytes": 11756,
+    "sha256": "8c2c1d05c918c3325f1682af344c516822dfeefe071bc947afe3bbdda184bd63"
+  }
+}

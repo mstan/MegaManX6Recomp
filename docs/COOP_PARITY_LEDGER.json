@@ -15905,23 +15905,99 @@
       "x6": {
         "workstream": "diagnostics",
         "mapping_state": "identified_subsystem",
-        "analogue": "Recording cost and stream completeness",
-        "bounded_check": "Measure recorder overhead with both accepted pads during a real session; finalize and replay all rows without hidden drops or synchronous per-input stalls.",
+        "analogue": "X6 bounded native-consumption background writer and explicit failed accepted prefix",
+        "bounded_check": "Verify actual worker sparse-input wall-time visibility, ordered accepted prefix, explicit queue-full and I/O failure; observe ordinary current-build local/netplay N/C growth before close and validate final order and terminal status. Keep synchronous startup settings/card export separate.",
         "baseline_anchors": [
-          "src/mods/mmx6_coop_plugin.c:diagnostics",
-          "src/mods/mmx6_coop_plugin.c:diagnostic_setup"
+          "src/mods/mmx6_diagnostics.cpp:Capture::write",
+          "src/mods/mmx6_input_recording.cpp:Encoder",
+          "tests/test_mmx6_input_capture.cpp"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+            "build_identity": {
+              "executable_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "compiled_manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "recording": "native-consumption enabled",
+              "audio": "muted dummy",
+              "host_profile_revision": null
+            },
+            "action": "Actual worker sparse/full/error fixtures and live ordinary native N/C prefix growth before the independent checkpoint fixture.",
+            "outcome": "Bounded background flush, ordered accepted prefix and explicit failure/strict refusal verified. Later fixture-tainted terminal recordings are preserved honestly.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-diagnostics/manifest-bound-8bd7061-F143-background-writer-reviewed.json",
+                "sha256": "6bef74862bedbd18581a1dc8cdac391eec38e4c07a35e117217f05584ce03c80"
+              }
+            ],
+            "limits": [
+              "Frozen F143 is the bounded background writer contract: accepted-prefix order, explicit queue/I/O failures and wall-time flush. No game speed, per-input stall benchmark, successful gameplay replay or elimination of synchronous session-setup I/O is claimed.",
+              "The existing bounded POD producer/queue remains unchanged. The worker alone checks its steady-clock deadline and calls stdio. Startup settings export and native-card copies remain separate synchronous setup costs.",
+              "Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102\u2013123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim.",
+              "Actual worker saturation retains8192 ordered accepted events before explicit QueueFull in offline and netplay fixtures. Real owned OS-handle invalidation makes FileSink::flush throw. Strict complete parsing refuses failed prefixes; no silent successful truncation is admitted.",
+              "Native local and both netplay peers show the current-image ordinary N/C prefix growing while execution and capture remain live, before the independent F20 fixture. The later agreed checkpoint setup deliberately taints each recording; final order/hash/count/status and strict complete refusal are verified. These are truthful failed terminal recordings, not clean fixture-route replay evidence.",
+              "The preserved NET parent run failed the separate F20 observer progress assertion. Its broader callback-completed flag remains false. All13 other parent checks and all7 F143 checks pass, both owned peers exit0, cards stay unchanged and baseline resolved CRC windows match. Only F143 is admitted here; no F20 or full parent gameplay pass is claimed.",
+              "The tested candidate includes independent F20 changes. F143 source/test files are byte-identical to the integrated standalone fix bf039698a6b6b0a9b2493c7716526bbac9342cff. Runtime credit names the actual tested8bd7061 candidate, not an unbuilt integration head."
+            ],
+            "bypasses": [
+              "Independent later F20 agreed checkpoint taints final stream; no clean replay or F20 result is admitted."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+            "build_identity": {
+              "executable_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "compiled_manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "recording": "native-consumption enabled",
+              "audio": "muted dummy",
+              "host_profile_revision": 19
+            },
+            "action": "Actual worker sparse/full/error fixtures and live ordinary native N/C prefix growth before the independent checkpoint fixture.",
+            "outcome": "Bounded background flush, ordered accepted prefix and explicit failure/strict refusal verified. Later fixture-tainted terminal recordings are preserved honestly.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-diagnostics/manifest-bound-8bd7061-F143-background-writer-reviewed.json",
+                "sha256": "6bef74862bedbd18581a1dc8cdac391eec38e4c07a35e117217f05584ce03c80"
+              }
+            ],
+            "limits": [
+              "Frozen F143 is the bounded background writer contract: accepted-prefix order, explicit queue/I/O failures and wall-time flush. No game speed, per-input stall benchmark, successful gameplay replay or elimination of synchronous session-setup I/O is claimed.",
+              "The existing bounded POD producer/queue remains unchanged. The worker alone checks its steady-clock deadline and calls stdio. Startup settings export and native-card copies remain separate synchronous setup costs.",
+              "Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102\u2013123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim.",
+              "Actual worker saturation retains8192 ordered accepted events before explicit QueueFull in offline and netplay fixtures. Real owned OS-handle invalidation makes FileSink::flush throw. Strict complete parsing refuses failed prefixes; no silent successful truncation is admitted.",
+              "Native local and both netplay peers show the current-image ordinary N/C prefix growing while execution and capture remain live, before the independent F20 fixture. The later agreed checkpoint setup deliberately taints each recording; final order/hash/count/status and strict complete refusal are verified. These are truthful failed terminal recordings, not clean fixture-route replay evidence.",
+              "The preserved NET parent run failed the separate F20 observer progress assertion. Its broader callback-completed flag remains false. All13 other parent checks and all7 F143 checks pass, both owned peers exit0, cards stay unchanged and baseline resolved CRC windows match. Only F143 is admitted here; no F20 or full parent gameplay pass is claimed.",
+              "The tested candidate includes independent F20 changes. F143 source/test files are byte-identical to the integrated standalone fix bf039698a6b6b0a9b2493c7716526bbac9342cff. Runtime credit names the actual tested8bd7061 candidate, not an unbuilt integration head."
+            ],
+            "bypasses": [
+              "Independent later F20 agreed checkpoint taints final stream; no clean replay or F20 result is admitted."
+            ]
+          }
+        ],
+        "limitations": "Frozen F143 is the bounded background writer contract: accepted-prefix order, explicit queue/I/O failures and wall-time flush. No game speed, per-input stall benchmark, successful gameplay replay or elimination of synchronous session-setup I/O is claimed. The existing bounded POD producer/queue remains unchanged. The worker alone checks its steady-clock deadline and calls stdio. Startup settings export and native-card copies remain separate synchronous setup costs. Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102\u2013123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim. Actual worker saturation retains8192 ordered accepted events before explicit QueueFull in offline and netplay fixtures. Real owned OS-handle invalidation makes FileSink::flush throw. Strict complete parsing refuses failed prefixes; no silent successful truncation is admitted. Native local and both netplay peers show the current-image ordinary N/C prefix growing while execution and capture remain live, before the independent F20 fixture. The later agreed checkpoint setup deliberately taints each recording; final order/hash/count/status and strict complete refusal are verified. These are truthful failed terminal recordings, not clean fixture-route replay evidence. The preserved NET parent run failed the separate F20 observer progress assertion. Its broader callback-completed flag remains false. All13 other parent checks and all7 F143 checks pass, both owned peers exit0, cards stay unchanged and baseline resolved CRC windows match. Only F143 is admitted here; no F20 or full parent gameplay pass is claimed. The tested candidate includes independent F20 changes. F143 source/test files are byte-identical to the integrated standalone fix bf039698a6b6b0a9b2493c7716526bbac9342cff. Runtime credit names the actual tested8bd7061 candidate, not an unbuilt integration head."
       }
     },
     {

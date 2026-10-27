@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 85 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F118, F119, F121, F128, F132, F133, F137, F144, F157, F163, F164, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 145 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 86 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F118, F119, F121, F128, F132, F133, F137, F143, F144, F157, F163, F164, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 144 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F143 is closed: 86 passed / 4 failed / 144 unverified (36.8%), one more since85.** The [reviewed background writer evidence](evidence/mmx6-diagnostics/manifest-bound-8bd7061-F143-background-writer-reviewed.json) verifies the actual worker100ms flush deadline, sparse-input visibility, ordered8192-event queue-full prefix and visible I/O failure. Ordinary native local and both NET streams grow while open on the same exact V88 image; final ordered prefixes and explicit later fixture-taint refusal remain intact. The standalone recording fix is integrated locally and all22 focused compiled checks pass. NET raw parent failure belongs to the independent F20 observer and remains preserved. No gameplay speed, clean replay or elimination of synchronous setup I/O is claimed.
 
 **F76 is closed: 85 passed / 4 failed / 145 unverified (36.3%), one more since84.** The [actual Mods/save/reopen/native review](evidence/mmx6-menu/manifest-bound-fc21acc-F76-Mods-saved-runtime-reviewed.json) verifies grouped Gameplay/Display controls, actual Local Separate views and Netplay Side by side selections, fresh-process persistence and resulting ordinary native Split on the same exact T86 candidate. All three native recordings finalize; native world/private stereo work advances, both NET peers retain matching resolved core/mod CRCs, cards stay unchanged and every owned UI/native process exits0. Ten actual UI/gameplay images were reviewed. The broader NET HUD runner flag remains unset in the preserved raw report because its full menu/damage/aspect callback was replaced; that broader contract receives no credit. No lobby START/F40, future forms/balance, all-scenes or native-content audit credit.
 
