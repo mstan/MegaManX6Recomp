@@ -43,6 +43,22 @@ states; old-state migration is never required.
 ## Current qualification status, October 26
 
 
+F42 now has a reviewed LOCAL pass on V62 `a878af4`, with NETPLAY pending.
+The [initial visual failure](evidence/mmx6-camera/manifest-bound-afdaaca-F42-local-camera-reset-failure-reviewed.json)
+showed Zero's camera resetting toward the primary scene after either native
+owner menu. The isolated fix retains guest camera position history only across
+an authenticated same-room menu; lifecycle, scene, room/checkpoint and state
+load boundaries still invalidate it. All16 focused checks pass. The
+[LOCAL review](evidence/mmx6-camera/manifest-bound-a878af4-F42-local-reviewed.json)
+confirms both native owner menus, effective shared fallback, resumed own
+cameras/terrain/HUDs and correct Zero centering in all five composed images.
+The comparison remains unverified until the same V62 passes NETPLAY.
+A separate [resize-transition observation](evidence/mmx6-camera/manifest-bound-a878af4-F177-resize-transition-unverified.json)
+records one old full-window viewport during960x720-to640x900 resize; F177
+remains unverified. Stable-window F42 evidence supplies no resize credit.
+
+
+
 F65 is fully closed on the same exact V61 `afdaaca` candidate in
 [LOCAL](evidence/mmx6-camera/manifest-bound-afdaaca-F65-local-reviewed.json) and
 [NETPLAY](evidence/mmx6-camera/manifest-bound-afdaaca-F65-netplay-reviewed.json).

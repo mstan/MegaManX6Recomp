@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "comparison": "F177",
+  "frozen_row_sha256": "599eba1b265b540c21b819082730dd581c2f6773b44022749dcbbec5362f3be3",
+  "mode": "local",
+  "result": "unverified",
+  "candidate": "a878af43a632753163885b134b1adb9663947229",
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v2\\qualification.json",
+    "sha256": "fe77a8d6313bc2ac0574a6a9f97330249d0f141ac30dfb041f8cf9f7c31c9ad6"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v2\\hud\\F42-observations.json",
+    "sha256": "fd273d39a8c90a778d6bdc42c4b51b59b4c10e4b5385aaaff02caee1f10b74b9"
+  },
+  "captured_transition_events": [
+    {
+      "capture": "owner0-native-shared-menu-tall",
+      "event": [
+        2313,
+        2892,
+        "vram",
+        47263,
+        [
+          0,
+          0,
+          320,
+          240
+        ],
+        [
+          0,
+          0,
+          960,
+          720
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        0,
+        [
+          0,
+          0,
+          0,
+          0
+        ]
+      ]
+    }
+  ],
+  "finding": "During owned960x720->640x900 resize in original X menu, one GL present ring event reports old [0,0,960,720] viewport. Stable pre/post menus retain selected mode2 and correct8:3 rectangles. The run stops at this resize guard before gameplay resume. No completed F177 qualification or actual pixel-level transient judgment is claimed.",
+  "limits": [
+    "Source local_pair_present_shared returns before duplication when copied old viewport exceeds new drawable bounds; precise cause of this actual transition is not yet proved. Preserve for separate resize follow-up.",
+    "F42 stable960x720 rerun does not grant F177 or resize credit. Full raw and owned graceful exit0/cards unchanged retained."
+  ]
+}

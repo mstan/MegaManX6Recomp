@@ -1,0 +1,201 @@
+{
+  "schema": 1,
+  "comparison": "F42",
+  "frozen_row_sha256": "2370b3f891056d4103a694a71f5d45e9299979ca48a9a22744fb1a10125abad8",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "a878af43a632753163885b134b1adb9663947229",
+  "build_identity": {
+    "executable_sha256": "eda4808597410413499baa9bbfe48d3adcdaccd24a02503ef335984883543736",
+    "compiled_manifest_sha256": "ddd06bfbc6ed01382c6ff750161856214c8d3ee98ad63dd22cd4f92a8dd670c3",
+    "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v3\\qualification.json",
+    "sha256": "f1354e0aa6cbb51a1fbf54548df93e4bc2b3f59c40fec76076d02ebfb44e649f"
+  },
+  "observation": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v3\\hud\\F42-observations.json",
+    "sha256": "fe16ca6fa455e1e673f47356d3851cb8d8f724c23fea98e2ed73d0afa3e76d73"
+  },
+  "explicit_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-v62-final-binding-root-v1.json",
+    "binding_sha256": "8883b1a5a13801e680a56812906383976ca37bb06fee85650dd2f9b2559fb0b2",
+    "image_sha256": "eda4808597410413499baa9bbfe48d3adcdaccd24a02503ef335984883543736",
+    "manifest_sha256": "ddd06bfbc6ed01382c6ff750161856214c8d3ee98ad63dd22cd4f92a8dd670c3",
+    "provenance_sha256": "732d55c8c38d2e4ec5a02e148453515e8c5df0df2c34ecabb1934512d84b1824",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v62-private-menu-camera-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "a878af43a632753163885b134b1adb9663947229",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v20",
+    "host_revision": 4
+  },
+  "source_guards": [
+    {
+      "first": "0x80034830",
+      "bytes": 68,
+      "sha256": "85e16602de339369b10a376bcb4af4ec4bdffcded913421499c2e19147fda4fc",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x800346ec",
+      "bytes": 284,
+      "sha256": "2a918262c728c1759faac953c0998cc241b0c8a51a87fab6d7df748c24adf15b",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80073970",
+      "bytes": 320,
+      "sha256": "798fc11a2bfd757820b6b751013e8753da18d678c707f6e7d1489a97ee47d299",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80034ff8",
+      "bytes": 24,
+      "sha256": "0811a345ec78521ad504572c4af7782180fadd2bc414ba8e4da9bc39ce1371d1",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80039c40",
+      "bytes": 92,
+      "sha256": "1f78e95d06052e22c1fb6bdf3b26bb5a36e5e92fab184de00b9cd426569c7992",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x8003af1c",
+      "bytes": 216,
+      "sha256": "edb4af58ccfefaaa5df5282090250667a6580816d570c26e96126bcd0782feeb",
+      "peers_matched": [
+        true
+      ]
+    }
+  ],
+  "menu_intervals": [
+    {
+      "owner": 0,
+      "peer": 0,
+      "native_timer": 426,
+      "publication_delta": 26,
+      "sdk_frame_delta": 30,
+      "effective": "duplicated-shared-native-owner-menu",
+      "shared_presents": 31,
+      "private_before": 427,
+      "private_paused": 427,
+      "private_restored": 456
+    },
+    {
+      "owner": 1,
+      "peer": 0,
+      "native_timer": 463,
+      "publication_delta": 28,
+      "sdk_frame_delta": 26,
+      "effective": "duplicated-shared-native-owner-menu",
+      "shared_presents": 27,
+      "private_before": 463,
+      "private_paused": 463,
+      "private_restored": 487
+    }
+  ],
+  "root_composed_review": [
+    {
+      "peer": 0,
+      "label": "separated-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v3\\hud\\peer-0-separated-private-owner-views.png",
+      "sha256": "c9fc4e78de1a84a442eddf03dcbd79219c06246a17d5f76ee2b2a97b140eeb80",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v3\\hud\\peer-0-owner0-native-shared-menu.png",
+      "sha256": "29591d85ce09f0daab95cfc919250a10bcd58e38e7817094f67dbc4aa5a4c5d2",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v3\\hud\\peer-0-owner0-restored-private-owner-views.png",
+      "sha256": "1444dee74d14aa50f8ee8f32831c8c8f2394730ecfde193ec07adcfab3601116",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v3\\hud\\peer-0-owner1-native-shared-menu.png",
+      "sha256": "2e66e1f7d9ee93813be64c16bf2dce4ebe6fc3af8b93f93eee3cb115343d9d5e",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v3\\hud\\peer-0-owner1-restored-private-owner-views.png",
+      "sha256": "856f6a74374c35ab9e4dc129a2d8da8962de55ba288a1fa6de3342928a62f50d",
+      "surface": "composed_renderer_output"
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v62-root-v3\\candidate\\saves\\input-recordings\\session-1793062361676455-1-0\\inputs.jsonl",
+      "sha256": "aefb7712b7dd6d9e7fd045b323cba0bb3b3029415f0364722471d590e08fe04e",
+      "events": 8021,
+      "natives": 5330,
+      "p2_reads": 2691,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "eda4808597410413499baa9bbfe48d3adcdaccd24a02503ef335984883543736",
+        "manifest_sha256": "ddd06bfbc6ed01382c6ff750161856214c8d3ee98ad63dd22cd4f92a8dd670c3",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "8e9fd7a7a87441ee690edcf4f0edf1259118f959397411aa2d4c32ffce53c221",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    }
+  ],
+  "source_pins": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-v62-root-prelaunch-source-pins-v2.json",
+    "sha256": "d57518a09e1ad26dd987578f86ef404482eee6e5ed863e4e82036c1533016132"
+  },
+  "limits": [
+    "Bounded F42 naturally shared original personal-menu boundary, both native X/Zero owners and364px separated private views, stable960x720 Windows OpenGL only. No artificial backend/load refusal, resize-transition, every-scene, alternate roster, physical-controller, Linux, remote-peer or F177 qualification.",
+    "Root reviewed all composed images. Original blue X menu and red Zero menu are correctly owned; LOCAL duplicates the actual owner menu into retained8:3 canvas, NET shows the same owner menu on both peers. After each menu, each private view restores its own terrain/camera and X/Zero HUD; Zero remains in its established pane instead of resetting toward X.",
+    "Ordered diagnostic publications and SDK frames advance while native world clock and private commits stop; actual non-stereo GL present events identify effective shared mode. Private pairs/local views and leak-free commits resume afterward. Mode/valid alone is not treated as current presentation proof.",
+    "Earlier V61 actual camera-reset failure and V62 first-run resize-transient failure remain preserved. The latter stops before camera restoration; one transient old full-window viewport was recorded during640x900 resize. Resize/F177 remains unverified, not hidden by the stable-window result.",
+    "Ordinary original input and source guards only, no actor/resource/menu/position/checkpoint/success writes. Full ordinary finalized native-consumption recordings, unchanged cards and owned graceful exits0; paired fixed profile4/resolved core+mod CRC windows separately retained. No replay-equivalence claim."
+  ],
+  "bypasses": [],
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  }
+}

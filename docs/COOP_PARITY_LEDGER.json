@@ -7690,13 +7690,13 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -7727,9 +7727,42 @@
               "Runtime scalar checks passed; root visual review overrides preliminary review-pending status. No NET run on V61: fix demonstrated camera reseed first. F177 LOCAL not promoted from this run. All raw retained."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "a878af43a632753163885b134b1adb9663947229",
+            "build_identity": {
+              "executable_sha256": "eda4808597410413499baa9bbfe48d3adcdaccd24a02503ef335984883543736",
+              "compiled_manifest_sha256": "ddd06bfbc6ed01382c6ff750161856214c8d3ee98ad63dd22cd4f92a8dd670c3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "local split8:3",
+              "renderer": "stable960x720 OpenGL",
+              "entry": "ordinary original intro",
+              "audio": "dummy muted"
+            },
+            "action": "Separate X and Zero by ordinary controls; open/close both original native owner menus, observe effective shared fallback and restored owner views/HUDs.",
+            "outcome": "Root composed review confirms correct X/Zero native menu ownership, stable chosen canvas and restored own cameras/terrain/HUDs. Frozen native clock/private commits during advancing menu frames, actual shared presentation paths, returned private commits, resources, full ordinary recordings/cards/owned exits0 passed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-a878af4-F42-local-reviewed.json",
+                "sha256": "496b5821b099362e40400b8d9f6465f2b390555981ade08acf128e6c1bfe38b9"
+              }
+            ],
+            "limits": [
+              "Bounded F42 naturally shared original personal-menu boundary, both native X/Zero owners and364px separated private views, stable960x720 Windows OpenGL only. No artificial backend/load refusal, resize-transition, every-scene, alternate roster, physical-controller, Linux, remote-peer or F177 qualification.",
+              "Root reviewed all composed images. Original blue X menu and red Zero menu are correctly owned; LOCAL duplicates the actual owner menu into retained8:3 canvas, NET shows the same owner menu on both peers. After each menu, each private view restores its own terrain/camera and X/Zero HUD; Zero remains in its established pane instead of resetting toward X.",
+              "Ordered diagnostic publications and SDK frames advance while native world clock and private commits stop; actual non-stereo GL present events identify effective shared mode. Private pairs/local views and leak-free commits resume afterward. Mode/valid alone is not treated as current presentation proof.",
+              "Earlier V61 actual camera-reset failure and V62 first-run resize-transient failure remain preserved. The latter stops before camera restoration; one transient old full-window viewport was recorded during640x900 resize. Resize/F177 remains unverified, not hidden by the stable-window result.",
+              "Ordinary original input and source guards only, no actor/resource/menu/position/checkpoint/success writes. Full ordinary finalized native-consumption recordings, unchanged cards and owned graceful exits0; paired fixed profile4/resolved core+mod CRC windows separately retained. No replay-equivalence claim."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Both original native owner menus and8:3 shared duplicate canvas/resize pass, followed by resumed private commits/HUDs. However Zero private camera resets from its established view to the primary scene after either menu: initial Zero centered in its own terrain, after resume Zero at left edge and primary-scene terrain shifted into its pane. Distinct actor/world coordinates and unchanged selected mode do not establish correct owner follow. This fails F42 restoration; no aggregate pass."
+        "limitations": "ExactV62 native both-owner shared-menu fallback restores correct independent owner cameras/HUDs at stable960x720; current local reviewed passed. Earlier actual camera-reset failure retained. Resize transient/F177 remain unverified. No broad forced-load refusal claim."
       }
     },
     {
@@ -14932,8 +14965,37 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "a878af43a632753163885b134b1adb9663947229",
+            "build_identity": {
+              "executable_sha256": "eda4808597410413499baa9bbfe48d3adcdaccd24a02503ef335984883543736",
+              "compiled_manifest_sha256": "ddd06bfbc6ed01382c6ff750161856214c8d3ee98ad63dd22cd4f92a8dd670c3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "local split8:3",
+              "renderer": "OpenGL960x720->640x900 native menu resize"
+            },
+            "action": "Actual F42 companion owned-window resize in original X personal menu.",
+            "outcome": "During owned960x720->640x900 resize in original X menu, one GL present ring event reports old [0,0,960,720] viewport. Stable pre/post menus retain selected mode2 and correct8:3 rectangles. The run stops at this resize guard before gameplay resume. No completed F177 qualification or actual pixel-level transient judgment is claimed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-a878af4-F177-resize-transition-unverified.json",
+                "sha256": "826adfedc8369323b15e7289d568ce3eeab06677e5ebcbdc90917993862c3145"
+              }
+            ],
+            "limits": [
+              "Source local_pair_present_shared returns before duplication when copied old viewport exceeds new drawable bounds; precise cause of this actual transition is not yet proved. Preserve for separate resize follow-up.",
+              "F42 stable960x720 rerun does not grant F177 or resize credit. Full raw and owned graceful exit0/cards unchanged retained."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "LOCAL resize transition remains unverified: actual V62 F42 setup records one old full-window viewport during960x720->640x900 native owner-menu resize, though stable8:3 frames recover. Evidence retained separately; stable-window F42 pass does not grant F177. NET8:3 implementation remains deferred."
       }
     },
     {
