@@ -5375,11 +5375,49 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "9b93b455e017ed4c75a16c674595f8847f80c9a4",
+            "build_identity": {
+              "executable_sha256": "2d6cc19752ace972569582eb1277df13c207cc06c8cdcb78f05f8588afc3c0a4",
+              "compiled_manifest_sha256": "e4aaf4e8d9fc83c627cd1ddbf8088a27b4055b8468e96c8941657ff85fa587e1",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "view": "shared native4:3 OpenGL",
+              "input": "published digital own inputs",
+              "entry": "audited offline original introCP2 prerequisite",
+              "audio": "muted dummy"
+            },
+            "action": "Complete actual guest-owned native door and original boss release, then execute fresh Zero dash while X remains visible; retain native trails, both body packets and natural retirement.",
+            "outcome": "Zero native dash/positive marker and3 owned original trails, actual motion and finite native retirement, stationary visible X and visible Zero art passed. Root reviewed all3images; actual GP0 packets, nativeworld66 insideSDK64..67, exact build/source/card/taint refusal/ownedexit0 retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-9b93b45-F14-postdoor-dash-local-reviewed.json",
+                "sha256": "54fdd3f10e200de5d5d56df659e8652316025f33cf33c6911556732d0b24c743"
+              }
+            ],
+            "limits": [
+              "Only F14 LOCAL complete on exact native V63. NETPLAY and aggregate remain unverified; no F23, F9 or new aggregate closure.",
+              "Containing parent fails AFTER completed Zero dash/retirement, while a new P1-specific observer incorrectly uses the P2 native-effect parser. This does not undo the separately retained complete F14 action. No game failure inferred from the parser error.",
+              "Audited original intro CP2 reachability bypass. Subsequent guest-led door, original boss fullHP/native release/passenger landing, fresh Circle dash, travel and natural native trail retirement use original inputs/execution; no HP, positions, scene/effect/success writes.",
+              "All three final composed images reviewed. Initial bodies overlap at native arrival, separate during actual dash, then remain visible after retirement. Actual native X CLUT7800 packet and private texture-bank triangles are retained in the complete GP0 dump; no every-packet color/fidelity claim.",
+              "The CP2 fixture visibly corrupts background scenery, as in earlier admission evidence. This passes only the named body/effect/door behavior and grants no scenery, map restoration or general rendering result.",
+              "Default trace remains fixture-tainted with strict ordinary capture/replay refusals, startup artifacts retained, cards unchanged and owned exit0. Separate RAM/GPU/PNG/clock reads are not atomic full-machine observations."
+            ],
+            "bypasses": [
+              "Original audited offline checkpointCP2 reachability only; no tested outcome writes."
+            ]
+          }
+        ],
+        "limitations": "LOCAL exactV63 9b93b45 completed genuine guest-owned intro door/native boss release, fresh Zero dash, original private trail ownership/travel/natural retirement with X visible and stationary, actual packet dump and all3 images reviewed. Checkpoint scenery corruption/fixture taint and later unrelated P1 observer failure disclosed; NETPLAY/aggregate remain unverified."
       }
     },
     {

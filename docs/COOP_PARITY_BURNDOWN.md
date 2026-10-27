@@ -42,6 +42,20 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 26
 
+F14 now passes LOCAL on exact V63 `9b93b45`: genuine guest-owned intro door,
+original boss initialization and passenger landing, fresh Zero dash with X
+visible, original owned trails, actual travel and natural retirement. Root
+reviewed all three composed images and retained both original-X and private
+body packets; nativeworld66 falls inside actual SDK VBlank64..67. The
+[completed LOCAL component](evidence/mmx6-camera/manifest-bound-9b93b45-F14-postdoor-dash-local-reviewed.json)
+precedes a later P1 observer parser failure. Checkpoint scenery corruption,
+fixture recording taint/refusals, unchanged cards and owned exit0 remain
+explicit. A second attempt stopped on real boss damage moving X, violating
+an extra observer guard. Neither attempt establishes a game failure; F23
+remains unverified and F14 NETPLAY is still missing. Aggregate remains
+**49 passed /3 failed /182 unverified**.
+
+
 
 The current total is **49 passed / 3 failed / 182 unverified**. No additional
 comparison closed in the weather block. The
