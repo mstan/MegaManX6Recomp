@@ -14842,14 +14842,14 @@
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -14939,9 +14939,48 @@
             "bypasses": [
               "Pre-agreed original introCP2 reachability prerequisite; original door/boss/attacks remain native."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "transport": "two owned loopback peers",
+              "audio": "muted dummy",
+              "input": "ordinary own-peer local-port1",
+              "prerequisite": "agreed original introCP2"
+            },
+            "action": "After genuine guest-owned door/boss release, fully retire one accepted Zero airslash, separate37.5px through native Left, recover and offer a distinct fresh attack.",
+            "outcome": "One initial zero-damage miss followed by two accepted full type27/clip91 lifetimes: boss32->28->24 via four2HP events. Neutral grounding, native table/cooldown recovery, ownership and all final parent gates pass. No game-code/protection/state writes.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-50cc26e-F157-local-netplay-reviewed.json",
+                "sha256": "fa6dfc97170039624a9b8f81a4af60896a58775e2f62dcd25e01827e9eb593ac"
+              }
+            ],
+            "limits": [
+              "Frozen F157 closes only on identical50cc26e LOCAL and NET. Existing independently reviewed LOCAL has two retired type27 lifetimes/boss32->28->24; new actual NET repeats both distinct accepted attacks with the same image/manifest/provenance/SDK/UI/profile revision. No transfer to a newer game build.",
+              "NET uses three actual offers: first ordinary miss/damage-cancelled offer does zero boss damage, then two complete native Zero Jump/Square type27/clip91 lifetimes cause32->28->24 through four independently observed2HP events. A miss gives no stale-token verdict. Player hurt is retained, including Zero22HP at the separation.",
+              "Between accepted lifetimes the old melee fully retires; actual native neutral grounding and37.5px held-Left separation precede fresh emission. Boss cooldown0/main80074B5C table returns. Tokens29 then30/32 are native observations; token equality is neither required nor manufactured.",
+              "One-tick Jump/Square edges can be missed by polling. Actual rising action6, consumed Square, pose49/clip91, private type27, native HP/recovery/temporary table and complete retirement are retained. Two later2HP events use explicitly labelled source-inferred cooldown recovery between polls; target/private RPCs are separate observations.",
+              "V3 recognizes native hurt17 before Square as a neutralized interrupted setup and permits up to six bounded offers. That new pre-Square branch did not fire in this successful run; do not attribute success to exercising it or claim a game-code fix. Existing source/lifetime/damage/ownership/retirement gates remain. No LOAD, protection/command10, HP/action/token/cooldown/outcome writes.",
+              "Pre-agreed original introCP2 is a disclosed reachability bypass. The actual guest-led native door, original boss fill/release and passenger landing precede combat. Ordinary campaign traversal, D1000 victory, all rosters/poses/bosses, optional scaling or general scenery/content are not qualified.",
+              "Seven new composed images reviewed plus the five previously reviewed LOCAL images. Corrupt background, overlap, native hurt/flash and partial left-HUD occlusion are explicit. Images alone do not establish accepted damage or exact collision-instruction timestamps.",
+              "All15 parent checks, four resolved full core/modCRC windows (8/7/8/5samples), matching negotiated profile, final private cards and both graceful owned exits0 pass. Fixture-tainted ordinary capture/replay remain strictly refused on both peers. Earlier failed NETv1/v2 and their receipts remain unchanged."
+            ],
+            "bypasses": [
+              "Pre-agreed source-bound original introCP2 reachability only; original door/boss/combat earned afterward."
+            ]
           }
         ],
-        "limitations": "Current50cc26e LOCAL bounded native boss follow-up passes: two retired/separated27 lifetimes, boss32->28->24/four2HP events, fresh token29 reuse and actual pre-follow-up cooldown0/main table. No command10/protection/LOAD. NETtwo setups interrupted by ordinary boss hurt/recoil; preserved/deferred, no stale-token verdict, aggregate unverified. No all-pose/all-boss/scaling/art/rendering/content breadth."
+        "limitations": "Exact50cc26e LOCAL+NET two fully retired/separated native Zero27/clip91 lifetimes boss32->28->24/four2HP events. NET first zero-damage miss retained, then37.5px native separation/recovery/fresh tokens; source/instruction-edge polling limits explicit. No LOAD/protection/HP/action/token/outcome writes. AgreedCP2 bypass, corrupt scenery/overlap and strict fixture capture/replay refusals retained. Profiles/resolvedCRC/cards/both ownedexit0 pass. No all-roster/boss/pose/scaling/victory/general-rendering credit."
       }
     },
     {
