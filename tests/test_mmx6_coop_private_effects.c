@@ -308,7 +308,8 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     }
     if(door_native_probe) {
         if(address==0x8003CCBCu) {
-            psx_mod_write_word(PLAYER+0x68,psx_mod_read_byte(PLAYER+2)?0x80073D54u:0x80073D50u);
+            CHECK(cpu->gpr[4]==PLAYER);
+            psx_mod_write_word(cpu->gpr[4]+0x68,psx_mod_read_byte(cpu->gpr[4]+2)?0x80073D54u:0x80073D50u);
             return;
         }
         if(address==0x80050DFCu) {
@@ -323,7 +324,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
             } else if(phase==3) {
                 psx_mod_write_word(PLAYER+8,psx_mod_read_word(PLAYER+8)+psx_mod_read_word(actor+0x84));
                 if(psx_mod_read_half(0x80097202u)==psx_mod_read_half(0x8009721Eu)) {
-                    psx_mod_write_byte(PLAYER+0xD4,0);guest(cpu,0x8003CCBCu,0,0);
+                    psx_mod_write_byte(PLAYER+0xD4,0);guest(cpu,0x8003CCBCu,PLAYER,0);
                     psx_mod_write_byte(actor+5,4);
                     psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x12,0);
                     psx_mod_write_word(PLAY+0x90,psx_mod_read_word(PLAY+0x90)+1);

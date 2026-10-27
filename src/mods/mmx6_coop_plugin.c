@@ -1102,7 +1102,7 @@ static int door_update(CPUState *cpu,uint32_t address) {
                 uint8_t resident[sizeof p2.body];capture(PLAYER,resident,sizeof resident);
                 STATE_BYTES(restore_door_body,59,resident,sizeof resident);
                 project(PLAYER,other,sizeof resident);
-                guest(cpu,0x8003CCBCu,0,0); /* Other character's original standing box. */
+                guest(cpu,0x8003CCBCu,PLAYER,0); /* Other character's original standing box. */
                 capture(PLAYER,other,sizeof resident);project(PLAYER,resident,sizeof resident);
                 STATE_POP(restore_door_body);
             }
