@@ -1,0 +1,486 @@
+{
+  "schema": 1,
+  "comparison": "F157",
+  "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+  "frozen_row_sha256": "48dcec335e5576e2371d2b1da72c5dec54d39429b082f51f126bb74d447e4da7",
+  "local_result": "passed",
+  "netplay_result": "unverified",
+  "aggregate": "unverified",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-v67-final-binding-root-v1.json",
+    "binding_sha256": "2beab5c7cb4850cbff49e547d56bbeacb31a56e65911c36e12a369a7739b2317",
+    "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+    "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+    "provenance_sha256": "ebed9f24406a7e44224ac0f7ee605048ee6f614faed59a3b11a203fb0b14e88a",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v67-agreed-checkpoint-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v22",
+    "host_revision": 5
+  },
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\qualification.json",
+    "bytes": 24299833,
+    "sha256": "db2d5cd211886990b0b20e52583c8ec941731c855d9cd7825910e71cc14cf49f"
+  },
+  "native_observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\observations.json",
+    "bytes": 6194743,
+    "sha256": "5d926fc9d844a77688f0f588268e61200e85f12a13ffb7eed1aefc0cba3ef1bb"
+  },
+  "source_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F157_followups_v67_root_v1.py",
+    "sha256": "4a455abb402a4e51b34ccd59a3ad3e1145d2ad78d22e50038ac25b59c2519346"
+  },
+  "actual_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\actual-lifetime-observer-executed-source.py",
+    "bytes": 22419,
+    "sha256": "11b2fc8e2ade80876633a4893042cab6270abb5c0b564e49d45646380c268907"
+  },
+  "original_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\original-lifetime-observer-source.py",
+    "bytes": 52034,
+    "sha256": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781"
+  },
+  "attacks": [
+    {
+      "before": {
+        "x": 6204.546875,
+        "action": 2,
+        "clip": 5,
+        "native_held": [
+          0,
+          0,
+          0
+        ],
+        "shots": []
+      },
+      "retired": {
+        "x": 6174.796875,
+        "action": 2,
+        "clip": 5,
+        "native_held": [
+          0,
+          0,
+          0
+        ],
+        "shots": []
+      },
+      "before_hp": 32,
+      "after_hp": 28,
+      "collision_events": [
+        {
+          "before_index": 6,
+          "after_index": 7,
+          "before_native_timer": 600,
+          "after_native_timer": 604,
+          "before_hp": 32,
+          "after_hp": 30,
+          "hp_delta": 2,
+          "target_address": "0x8008ef48",
+          "cooldown_before": 0,
+          "cooldown_after": 29,
+          "readiness": "actual_sampled_native_cooldown0_main_table",
+          "actual_private_shot27_slots": [
+            0
+          ],
+          "private_tokens": [
+            29
+          ],
+          "p2_selected_clip17": 91,
+          "p2_sprite_frame47": 174,
+          "p2_CC": 5,
+          "p2_CD": 0,
+          "limit": "Separate ordinary-target/private-publication RPCs; no exact collision-instruction timestamp"
+        },
+        {
+          "before_index": 14,
+          "after_index": 15,
+          "before_native_timer": 628,
+          "after_native_timer": 635,
+          "before_hp": 30,
+          "after_hp": 28,
+          "hp_delta": 2,
+          "target_address": "0x8008ef48",
+          "cooldown_before": 4,
+          "cooldown_after": 27,
+          "readiness": "source_inferred_between_polls_from_remaining84_progress_and_reset",
+          "actual_private_shot27_slots": [
+            0
+          ],
+          "private_tokens": [
+            29
+          ],
+          "p2_selected_clip17": 91,
+          "p2_sprite_frame47": 178,
+          "p2_CC": 3,
+          "p2_CD": 0,
+          "limit": "Separate ordinary-target/private-publication RPCs; no exact collision-instruction timestamp"
+        }
+      ],
+      "observer_limits": [
+        "jump edge80 not sampled"
+      ]
+    },
+    {
+      "before": {
+        "x": 6227.296875,
+        "action": 2,
+        "clip": 5,
+        "native_held": [
+          0,
+          0,
+          0
+        ],
+        "shots": []
+      },
+      "retired": {
+        "x": 6227.296875,
+        "action": 2,
+        "clip": 5,
+        "native_held": [
+          0,
+          0,
+          0
+        ],
+        "shots": []
+      },
+      "before_hp": 28,
+      "after_hp": 24,
+      "collision_events": [
+        {
+          "before_index": 4,
+          "after_index": 5,
+          "before_native_timer": 855,
+          "after_native_timer": 859,
+          "before_hp": 28,
+          "after_hp": 26,
+          "hp_delta": 2,
+          "target_address": "0x8008ef48",
+          "cooldown_before": 0,
+          "cooldown_after": 28,
+          "readiness": "actual_sampled_native_cooldown0_main_table",
+          "actual_private_shot27_slots": [
+            0
+          ],
+          "private_tokens": [
+            29
+          ],
+          "p2_selected_clip17": 91,
+          "p2_sprite_frame47": 172,
+          "p2_CC": 5,
+          "p2_CD": 0,
+          "limit": "Separate ordinary-target/private-publication RPCs; no exact collision-instruction timestamp"
+        },
+        {
+          "before_index": 14,
+          "after_index": 15,
+          "before_native_timer": 886,
+          "after_native_timer": 889,
+          "before_hp": 26,
+          "after_hp": 24,
+          "hp_delta": 2,
+          "target_address": "0x8008ef48",
+          "cooldown_before": 1,
+          "cooldown_after": 28,
+          "readiness": "source_inferred_between_polls_from_remaining84_progress_and_reset",
+          "actual_private_shot27_slots": [
+            0
+          ],
+          "private_tokens": [
+            31
+          ],
+          "p2_selected_clip17": 91,
+          "p2_sprite_frame47": 176,
+          "p2_CC": 4,
+          "p2_CD": 0,
+          "limit": "Separate ordinary-target/private-publication RPCs; no exact collision-instruction timestamp"
+        }
+      ],
+      "observer_limits": [
+        "jump edge80 not sampled",
+        "Square edge10 not sampled"
+      ]
+    }
+  ],
+  "fresh_separation": {
+    "previous_retired": {
+      "x": 6174.796875,
+      "action": 2,
+      "clip": 5,
+      "native_held": [
+        0,
+        0,
+        0
+      ],
+      "shots": []
+    },
+    "separated": {
+      "x": 6153.296875,
+      "action": 2,
+      "clip": 5,
+      "native_held": [
+        0,
+        0,
+        0
+      ],
+      "shots": []
+    }
+  },
+  "source_guards": [
+    {
+      "address": "0x80034dcc",
+      "end_exclusive": "0x80034e1c",
+      "sha256": "72b05d1756e20abfe30e541468a15b2a3345d20891abc4f05a7369145a43a884"
+    },
+    {
+      "address": "0x8002012c",
+      "end_exclusive": "0x80020250",
+      "sha256": "b10872ba1cbd59471a15b19b14e223f4cc8b64b2ce32fccff11e4ba0304b43c1"
+    },
+    {
+      "address": "0x80017a04",
+      "end_exclusive": "0x80017a48",
+      "sha256": "e947d51c1b65d627545acd99d25668520421497fc1f9865d22ef3b78267b6a43"
+    },
+    {
+      "address": "0x80031474",
+      "end_exclusive": "0x800315cc",
+      "sha256": "5e62220bb56dca05907d00d6cb48749adf22a51f7da96f9b97bdc0871597746e"
+    },
+    {
+      "address": "0x800315cc",
+      "end_exclusive": "0x800319ec",
+      "sha256": "1143eee5aa48ea8ec8e617a1a6065f68770fed95e6d52a04cedf188b35f35ad4"
+    },
+    {
+      "address": "0x8002d868",
+      "end_exclusive": "0x8002dd00",
+      "sha256": "35a66d607013c88b60afb6508f1613c465688a19e392c6fd5b3ca7e2b0aca492"
+    },
+    {
+      "address": "0x80074b5c",
+      "end_exclusive": "0x80074bfc",
+      "sha256": "83d8fef5d6655f8863efc4d97ad154ae0099b2532ea5b499363a0e5677e7814c"
+    },
+    {
+      "address": "0x8007433c",
+      "end_exclusive": "0x800743dc",
+      "sha256": "7e39cff5c958c0ac0bfb0e9d79d7bf5902f08d980813915e77302d9a60eee3d2"
+    },
+    {
+      "address": "0x80073acc",
+      "end_exclusive": "0x80073bcc",
+      "sha256": "2707f5c2fdb73994963042d3e0fd73d853a1727643144be58107cfdfd7b67511"
+    },
+    {
+      "address": "0x80035620",
+      "end_exclusive": "0x800357a8",
+      "sha256": "5e33c2074cf18f2a89e46aaf02148cd7856ad52e581be8095d68fd0b9a7c633e"
+    },
+    {
+      "address": "0x800edd60",
+      "end_exclusive": "0x800edec8",
+      "sha256": "1fe99b537c9359065a318773bd8dc244dcdb1bae093e9738b9a386976b127441"
+    }
+  ],
+  "composed_review": [
+    {
+      "peer": 0,
+      "label": "safe-native-CP2",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+        "bytes": 2074543,
+        "sha256": "5dd29197d8122625324d106ba99ff2523ddad1b647f018fefda5551d1929ea29"
+      },
+      "review": "Actual authored CP2 arrival or genuine guest scene/X native passenger beam; corrupt scenery explicit."
+    },
+    {
+      "peer": 0,
+      "label": "original-door-scene-begin",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+        "bytes": 2074543,
+        "sha256": "569c4c780b030ca8bc87b8e3da31b5c2cad386e5f933d41060078d0a17d58127"
+      },
+      "review": "Actual authored CP2 arrival or genuine guest scene/X native passenger beam; corrupt scenery explicit."
+    },
+    {
+      "peer": 0,
+      "label": "native-F157-mainboss-battle-ready",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\native-F157-mainboss-battle-ready.png",
+        "bytes": 2074543,
+        "sha256": "c2712a03e97b5fa45ed135ddca4ba1da25a5cc589aa6cea8c2149a6d8a7129f8"
+      },
+      "review": "Reviewed boss-ready/retired-slash scene; actor/boss overlap and native damage flash are retained. No active-slash artwork/general-rendering claim."
+    },
+    {
+      "peer": 0,
+      "label": "native-fresh-airslash-1-HP-28",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\native-fresh-airslash-1-HP-28.png",
+        "bytes": 2074543,
+        "sha256": "c0dde9866ce04f3f185d8067fb77c60902239b5aed299d95a243f2e89f17fba3"
+      },
+      "review": "Reviewed boss-ready/retired-slash scene; actor/boss overlap and native damage flash are retained. No active-slash artwork/general-rendering claim."
+    },
+    {
+      "peer": 0,
+      "label": "native-fresh-airslash-2-HP-24",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\native-fresh-airslash-2-HP-24.png",
+        "bytes": 2074543,
+        "sha256": "a42a0dfc0857e0232104b453e62cf9eb8131f7ab5db3b32a722525780d5bce67"
+      },
+      "review": "Reviewed boss-ready/retired-slash scene; actor/boss overlap and native damage flash are retained. No active-slash artwork/general-rendering claim."
+    }
+  ],
+  "netplay_failed_setups": [
+    {
+      "attempt": 1,
+      "result": "setup_interrupted_not_feature_failure",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v1\\qualification.json",
+        "bytes": 15171371,
+        "sha256": "fbe886780448ba1f533c1551b233e26ffba054ff861967f7ac57bce9ca1b42aa"
+      },
+      "raw": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v1\\intro-admission\\F157\\observations.json",
+        "bytes": 9936913,
+        "sha256": "9b48a6338babeaa543cd8f59573d3a050569305dbb477c17f702aa697760c1e1"
+      },
+      "error": "Actual separation was less than20 pixels",
+      "accepted_lifetimes": 1,
+      "last_native_timer": 1156,
+      "last_players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 14,
+          "x_raw": 399244288,
+          "y_raw": 25886720,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 8,
+          "x_raw": 408062976,
+          "y_raw": 25821184,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "interpretation": "Actual native heldLeft covered31px, then ordinary boss hurt/recoil reduced final neutral separation to11px. The original observer rejected final position; no second attack was tested."
+    },
+    {
+      "attempt": 2,
+      "result": "setup_interrupted_not_feature_failure",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v2\\qualification.json",
+        "bytes": 6998542,
+        "sha256": "8904b369bb7ad1c1c492cd825b27cfbec1f58824cc241557186c2b7d06723d59"
+      },
+      "raw": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v2\\intro-admission\\F157\\observations.json",
+        "bytes": 2334132,
+        "sha256": "931ef88f6f791fceb066898d45a394b38bfb07fd0affdf9969f4dbd35a10ff69"
+      },
+      "error": "Unexpected action before native airslash admission",
+      "accepted_lifetimes": 0,
+      "last_native_timer": 649,
+      "last_players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 30,
+          "x_raw": 401546240,
+          "y_raw": 25886720,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 17,
+          "hp": 22,
+          "x_raw": 406936576,
+          "y_raw": 22592000,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "interpretation": "Actual action6 rise changed to original hurt17 and ZeroHP28->22 before slash admission. No fresh follow-up result; ordinary interruption gets no stale-token verdict."
+    }
+  ],
+  "strict_recording_refusals": {
+    "ordinary_capture": {
+      "type": "InvalidRecording",
+      "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+    },
+    "offline_replay": {
+      "type": "InvalidRecording",
+      "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+    }
+  },
+  "limits": [
+    "LOCAL-only exact50cc26e: two fully retired native Zero27/clip91 attacks, actual same mainboss32->28->24 via four2HP events. Current NET and aggregate remain unverified.",
+    "Actual neutral/complete old-shot retirement,43px original Left separation, sampled pre-follow-up main cooldown0/80074B5C table and fresh native emission/token29 reuse are retained. Intermediate within-lifetime cooldown readiness is source-inferred where labelled.",
+    "One-tick Jump/Square edges are not always sampled. Actual action6/rise, consumed heldSquare, native49/clip91/private27, main HP and cooldown response are observed; RPC target/publications are separate reads.",
+    "Pre-agreed LAB CP2 is an explicit reachability bypass; native door, boss fill and passenger landing are earned. No LOAD, command8/10/protection, HP/action/token/cooldown/outcome writes. Strict tainted ordinary capture/replay refuse; cards/ownedexit0 pass.",
+    "Both failed NET attempts retained and deferred after two interruptions. v1 observed a legitimate hit then recoil invalidated final-position separation; v2 ordinary hurt17 interrupted attack admission. Neither establishes stale-token suppression. No long retry loop.",
+    "Five LOCAL images reviewed; corrupt background, overlap and ordinary hurt/flash are explicit. No all-pose/all-boss/scaling-option/NET/rendering/content qualification."
+  ]
+}

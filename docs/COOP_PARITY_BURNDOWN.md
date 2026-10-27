@@ -42,6 +42,15 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 26
 
+**F157 gains a current LOCAL pass; aggregate remains53/5/176.**
+The [native boss follow-up receipt and both paired setup interruptions](evidence/mmx6-combat/manifest-bound-50cc26e-F157-local-reviewed-net-setups-deferred.json)
+retain two retired/separated Zero attacks, actual boss32->28->24 and
+natural cooldown/main-table recovery, without protection or state LOAD.
+NETv1 reached one accepted attack before ordinary recoil invalidated a
+final-position guard; NETv2 ordinary hurt interrupted slash admission.
+Both attempts/cards/owned exits are preserved. Defer after two setups;
+no stale-token failure or aggregate pass is inferred. F23 is running next.
+
 **F14 is closed: 53 passed /5 failed /176 unverified (22.6%).**
 This block closes4 comparisons: R11, F2, F5 and F14. The [actual post-door dash evidence](evidence/mmx6-camera/manifest-bound-50cc26e-F14-native-postdoor-local-netplay-reviewed.json)
 uses the same V67 `50cc26e` for LOCAL and NET. All12 images are reviewed:
