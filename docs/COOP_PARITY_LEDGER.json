@@ -17804,7 +17804,7 @@
       "frozen_row_sha256": "498d86d6b0449e0c8dd7604b545ffa56686edae40964f4003c0d9f930592f06a",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Guest-only native midboss initialization",
         "bounded_check": "Map a real X6 midboss placement/admission, approach only with guest and require complete playable initialization plus a real native interaction.",
         "baseline_anchors": [
@@ -17812,17 +17812,94 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "leader": "Zero/P2 only",
+              "input": "ordinary published host pads",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original introCP2"
+            },
+            "action": "Keep P1 outside the native door, advance only Zero into original midboss admission, observe native HP0->32/control release, then earn actual native Zero27 damage.",
+            "outcome": "Original type48/originFA3D4 initializes and fills HP naturally after guest-only approach; both living actors return to native idle and actual guest attacks damage the same boss32->28->24.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-50cc26e-F191-guest-midboss-local-netplay-reviewed.json",
+                "sha256": "2fdf7c16a23356f6c65295b3803e5941709a97487cc549cf93f7150d3ee5918f"
+              }
+            ],
+            "limits": [
+              "Independent F191 contract review of completed same50cc26e LOCAL+NET X6 executions; no inherited X4/X5 pass and no new runtime/source-game change.",
+              "D1000/type48 is an original intermediate combat encounter before story16 and High Max/type55/intro exit40. Defeat/finale/selector completion is outside F191 and was not required or observed here.",
+              "Living default X/P1+Zero/P2 only, guest-only ordinary Right into original subtype1 entrance. Ordinary Either passenger beam/landing for the distant primary is expected; no Both/no-rewarp/F97 claim from these executions.",
+              "Original agreed introCP2 is a reachability bypass. Native door, boss initialization, warning/HP fill, passenger landing and actual Zero combat are earned. No LOAD/protection, online command8, HP/action/token/cooldown/outcome writes.",
+              "Four retained composed images independently inspected. Corrupt checkpoint scenery, body overlap, native flashes and partial left-HUD occlusion remain; no rendering/palette/initial-camera/F184 qualification.",
+              "Detailed interaction is sampled on NETpeer0; both physical peers have actual native intro/release observations and completed matching profile/resolved core-mod CRC/cards/owned-exit gates. Separate RAM/publication reads and one-tick input polling limits remain.",
+              "Fixture-tainted ordinary capture and replay remain strictly refused. Existing earlier failed observations are preserved; no all-boss/roster/weapon/ordinary campaign/platform or service claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 reachability prerequisite only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "leader": "Zero/P2 only",
+              "input": "ordinary published host pads",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original introCP2"
+            },
+            "action": "Keep P1 outside the native door, advance only Zero into original midboss admission, observe native HP0->32/control release, then earn actual native Zero27 damage.",
+            "outcome": "Original type48/originFA3D4 initializes and fills HP naturally after guest-only approach; both living actors return to native idle and actual guest attacks damage the same boss32->28->24.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-50cc26e-F191-guest-midboss-local-netplay-reviewed.json",
+                "sha256": "2fdf7c16a23356f6c65295b3803e5941709a97487cc549cf93f7150d3ee5918f"
+              }
+            ],
+            "limits": [
+              "Independent F191 contract review of completed same50cc26e LOCAL+NET X6 executions; no inherited X4/X5 pass and no new runtime/source-game change.",
+              "D1000/type48 is an original intermediate combat encounter before story16 and High Max/type55/intro exit40. Defeat/finale/selector completion is outside F191 and was not required or observed here.",
+              "Living default X/P1+Zero/P2 only, guest-only ordinary Right into original subtype1 entrance. Ordinary Either passenger beam/landing for the distant primary is expected; no Both/no-rewarp/F97 claim from these executions.",
+              "Original agreed introCP2 is a reachability bypass. Native door, boss initialization, warning/HP fill, passenger landing and actual Zero combat are earned. No LOAD/protection, online command8, HP/action/token/cooldown/outcome writes.",
+              "Four retained composed images independently inspected. Corrupt checkpoint scenery, body overlap, native flashes and partial left-HUD occlusion remain; no rendering/palette/initial-camera/F184 qualification.",
+              "Detailed interaction is sampled on NETpeer0; both physical peers have actual native intro/release observations and completed matching profile/resolved core-mod CRC/cards/owned-exit gates. Separate RAM/publication reads and one-tick input polling limits remain.",
+              "Fixture-tainted ordinary capture and replay remain strictly refused. Existing earlier failed observations are preserved; no all-boss/roster/weapon/ordinary campaign/platform or service claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 reachability prerequisite only."
+            ]
+          }
+        ],
+        "limitations": "Exact50cc26e LOCAL+NET guest-only original D1000 midboss admission: P1X5904 remains outside while Zero reaches6037.5, actual type48/originFA3D4 HP0->32/playable release then native Zero27 boss32->28->24. Source intermediate classification and4 images independently reviewed. CP2 bypass, normal passenger beam, corrupt scenery, peer0 detailed interaction and strict fixture recording refusal retained; no defeat/selector/F184/all-boss claim."
       }
     },
     {

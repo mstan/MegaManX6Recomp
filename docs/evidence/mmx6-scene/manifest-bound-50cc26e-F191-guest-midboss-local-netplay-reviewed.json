@@ -1,0 +1,2488 @@
+{
+  "schema": 1,
+  "comparison": "F191",
+  "frozen_row_sha256": "498d86d6b0449e0c8dd7604b545ffa56686edae40964f4003c0d9f930592f06a",
+  "bounded_check": "Map a real X6 midboss placement/admission, approach only with guest and require complete playable initialization plus a real native interaction.",
+  "result": "passed",
+  "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-v67-final-binding-root-v1.json",
+    "binding_sha256": "2beab5c7cb4850cbff49e547d56bbeacb31a56e65911c36e12a369a7739b2317",
+    "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+    "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+    "provenance_sha256": "ebed9f24406a7e44224ac0f7ee605048ee6f614faed59a3b11a203fb0b14e88a",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v67-agreed-checkpoint-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v22",
+    "host_revision": 5
+  },
+  "reused_reviewed_packets": [
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-combat\\manifest-bound-50cc26e-F157-local-netplay-reviewed.json",
+      "bytes": 20430,
+      "sha256": "fa6dfc97170039624a9b8f81a4af60896a58775e2f62dcd25e01827e9eb593ac"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-combat\\manifest-bound-50cc26e-F157-local-reviewed-net-setups-deferred.json",
+      "bytes": 16891,
+      "sha256": "a91dcee1d604bb33d7bf2388f7ed8df833650ec5e056c351e353739b7333c427"
+    }
+  ],
+  "source_classification": {
+    "original_notes": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-boss-finale-source-notes.txt",
+      "bytes": 12599,
+      "sha256": "15b8000e8d4206fe7c7e9863969bdc38782c0a3acb88bc8eeaa00252530791f2"
+    },
+    "original_bin2_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607",
+    "verified_original_spans": [
+      {
+        "first": "0x800f104c",
+        "end": "0x800f117c",
+        "sha256": "0878cc78ad13188e4a43b5f3a8aa137c0e80464ff844c1c7d05d6ad34fa3c16c",
+        "source_contract": "Actual type48 death produces native story16; it is not intro exit40."
+      },
+      {
+        "first": "0x800f9a54",
+        "end": "0x800f9b70",
+        "sha256": "d46d132059432283f536b1075dce7a94062629a21ed8bf3336174024ee73bea1",
+        "source_contract": "Following story16 produces native type55 High Max finale."
+      },
+      {
+        "first": "0x800f64c0",
+        "end": "0x800f65dc",
+        "sha256": "6d13b787b3536bb6894542875409507009c4d717d67c320e27359f52557fcfe8",
+        "source_contract": "Only later type55 F65A4 writes intro exit40."
+      },
+      {
+        "first": "0x800fa3d4",
+        "end": "0x800fa3dc",
+        "sha256": "d1ee544900aa69907d63f85ff3bb5c1e72dfa1ee77cbe39f2f902550d02176fa",
+        "source_contract": "Authored category0/type48/sub0 encounter at6162/346."
+      },
+      {
+        "first": "0x800eff4c",
+        "end": "0x800f0058",
+        "sha256": "4323e11047525a405459e6357a8697e2289ead11d63931076837c38450e01413",
+        "source_contract": "Native type48 init sets original PLAY boss pointer, HP0 and maximum32, script20 and intro action2."
+      },
+      {
+        "first": "0x800f0294",
+        "end": "0x800f0380",
+        "sha256": "4c9fcb60f92e8a77aca898273a693a8194809ce8e5c1eec46875e54373a7793b",
+        "source_contract": "Original warning/HP fill reaches native maximum then releases script and enters live action4."
+      }
+    ],
+    "native_entrance": {
+      "placement": "0x800FA2AC",
+      "category": 4,
+      "type": 8,
+      "subtype": 1,
+      "x": 6064,
+      "y": 384,
+      "box": [
+        0,
+        0,
+        16,
+        32
+      ],
+      "predicate": "Original80050250 contact and80050C88 eligibility; P1X5904 lies160px left, outside27px combined horizontal extent."
+    }
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\qualification.json",
+        "bytes": 24299833,
+        "sha256": "db2d5cd211886990b0b20e52583c8ec941731c855d9cd7825910e71cc14cf49f"
+      },
+      "intro_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 8196762,
+        "sha256": "096000e2d4b128ef5108f80378789ae354d20547659ddbeced9614ad55e66e85"
+      },
+      "combat_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\observations.json",
+        "bytes": 6194743,
+        "sha256": "5d926fc9d844a77688f0f588268e61200e85f12a13ffb7eed1aefc0cba3ef1bb"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_door_source_guards": [
+        {
+          "address": "0x80050250",
+          "bytes": 804,
+          "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+        },
+        {
+          "address": "0x80050c88",
+          "bytes": 372,
+          "sha256": "f028293571f755b02fc603931f8c96383534855e2632007875333ec51cd3239b"
+        }
+      ],
+      "guest_only_inputs": [
+        {
+          "seat": 0,
+          "pressed": 0,
+          "label": "native local initial idle; no separate pre-fixture walk/jump claim"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "native local initial idle; no separate pre-fixture walk/jump claim"
+        },
+        {
+          "seat": 1,
+          "pressed": 6,
+          "label": "accepted P2 L3+R3 arms pre-agreed one-shot checkpoint"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "release accepted arming chord"
+        },
+        {
+          "seat": 1,
+          "pressed": 32,
+          "label": "native leader Right into authored intro door"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "original door owns traversal"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "release native approach"
+        },
+        {
+          "seat": 0,
+          "pressed": 0,
+          "label": "final native neutral"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "final native neutral"
+        }
+      ],
+      "witnesses": [
+        {
+          "peer": 0,
+          "initial_sample": 101,
+          "guest_scene_sample": 116,
+          "primary_x": 5904,
+          "guest_x": 6037.5,
+          "primary_horizontal_gap_from_door": 160,
+          "scene_owner": 2,
+          "first_native_midboss_sample": 135,
+          "native_HP_fill_samples": [
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              0
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              162,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              166,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              174,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              182,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ],
+            [
+              209,
+              0
+            ],
+            [
+              210,
+              0
+            ],
+            [
+              211,
+              0
+            ],
+            [
+              212,
+              0
+            ],
+            [
+              213,
+              0
+            ],
+            [
+              214,
+              0
+            ],
+            [
+              215,
+              0
+            ],
+            [
+              216,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              218,
+              0
+            ],
+            [
+              219,
+              0
+            ],
+            [
+              220,
+              0
+            ],
+            [
+              221,
+              0
+            ],
+            [
+              222,
+              0
+            ],
+            [
+              223,
+              0
+            ],
+            [
+              224,
+              0
+            ],
+            [
+              225,
+              0
+            ],
+            [
+              226,
+              0
+            ],
+            [
+              227,
+              0
+            ],
+            [
+              228,
+              0
+            ],
+            [
+              229,
+              0
+            ],
+            [
+              230,
+              0
+            ],
+            [
+              231,
+              0
+            ],
+            [
+              232,
+              0
+            ],
+            [
+              233,
+              0
+            ],
+            [
+              234,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              236,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ],
+            [
+              239,
+              0
+            ],
+            [
+              240,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              0
+            ],
+            [
+              243,
+              0
+            ],
+            [
+              244,
+              0
+            ],
+            [
+              245,
+              0
+            ],
+            [
+              246,
+              0
+            ],
+            [
+              247,
+              0
+            ],
+            [
+              248,
+              0
+            ],
+            [
+              249,
+              0
+            ],
+            [
+              250,
+              0
+            ],
+            [
+              251,
+              0
+            ],
+            [
+              252,
+              0
+            ],
+            [
+              253,
+              0
+            ],
+            [
+              254,
+              0
+            ],
+            [
+              255,
+              0
+            ],
+            [
+              256,
+              0
+            ],
+            [
+              257,
+              0
+            ],
+            [
+              258,
+              0
+            ],
+            [
+              259,
+              0
+            ],
+            [
+              260,
+              0
+            ],
+            [
+              261,
+              0
+            ],
+            [
+              262,
+              0
+            ],
+            [
+              263,
+              0
+            ],
+            [
+              264,
+              0
+            ],
+            [
+              265,
+              0
+            ],
+            [
+              266,
+              0
+            ],
+            [
+              267,
+              0
+            ],
+            [
+              268,
+              0
+            ],
+            [
+              269,
+              0
+            ],
+            [
+              270,
+              0
+            ],
+            [
+              271,
+              0
+            ],
+            [
+              272,
+              0
+            ],
+            [
+              273,
+              0
+            ],
+            [
+              274,
+              0
+            ],
+            [
+              275,
+              0
+            ],
+            [
+              276,
+              0
+            ],
+            [
+              277,
+              0
+            ],
+            [
+              278,
+              0
+            ],
+            [
+              279,
+              0
+            ],
+            [
+              280,
+              0
+            ],
+            [
+              281,
+              0
+            ],
+            [
+              282,
+              0
+            ],
+            [
+              283,
+              0
+            ],
+            [
+              284,
+              0
+            ],
+            [
+              285,
+              0
+            ],
+            [
+              286,
+              0
+            ],
+            [
+              287,
+              0
+            ],
+            [
+              288,
+              0
+            ],
+            [
+              289,
+              0
+            ],
+            [
+              290,
+              0
+            ],
+            [
+              291,
+              0
+            ],
+            [
+              292,
+              0
+            ],
+            [
+              293,
+              0
+            ],
+            [
+              294,
+              0
+            ],
+            [
+              295,
+              0
+            ],
+            [
+              296,
+              0
+            ],
+            [
+              297,
+              0
+            ],
+            [
+              298,
+              0
+            ],
+            [
+              299,
+              0
+            ],
+            [
+              300,
+              0
+            ],
+            [
+              301,
+              0
+            ],
+            [
+              302,
+              0
+            ],
+            [
+              303,
+              0
+            ],
+            [
+              304,
+              0
+            ],
+            [
+              305,
+              0
+            ],
+            [
+              306,
+              0
+            ],
+            [
+              307,
+              0
+            ],
+            [
+              308,
+              0
+            ],
+            [
+              309,
+              0
+            ],
+            [
+              310,
+              0
+            ],
+            [
+              311,
+              0
+            ],
+            [
+              312,
+              0
+            ],
+            [
+              313,
+              0
+            ],
+            [
+              314,
+              0
+            ],
+            [
+              315,
+              0
+            ],
+            [
+              316,
+              0
+            ],
+            [
+              317,
+              0
+            ],
+            [
+              318,
+              0
+            ],
+            [
+              319,
+              0
+            ],
+            [
+              320,
+              0
+            ],
+            [
+              321,
+              0
+            ],
+            [
+              322,
+              0
+            ],
+            [
+              323,
+              0
+            ],
+            [
+              324,
+              0
+            ],
+            [
+              325,
+              2
+            ],
+            [
+              326,
+              8
+            ],
+            [
+              327,
+              12
+            ],
+            [
+              328,
+              16
+            ],
+            [
+              329,
+              22
+            ],
+            [
+              330,
+              29
+            ]
+          ],
+          "first_fullHP_combat_sample": 331,
+          "battle_ready": 354,
+          "boss_origin": "0x800FA3D4",
+          "both_native_idle_alive": true
+        }
+      ],
+      "interaction": {
+        "observed_process": 0,
+        "native_attack": 27,
+        "pose": 49,
+        "clip": 91,
+        "accepted_HP_changes": [
+          [
+            32,
+            28
+          ],
+          [
+            28,
+            24
+          ]
+        ],
+        "actual_first_offer_missed": false,
+        "final_mainboss_HP": 24,
+        "scope": "Detailed collision/attack stream on peer0; both NET peers retain actual native initialization/release and resolved whole-state CRC in the reviewed exact-candidate parent."
+      },
+      "worker_reviewed_images": [
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "569c4c780b030ca8bc87b8e3da31b5c2cad386e5f933d41060078d0a17d58127"
+          },
+          "worker_review": "Personally inspected: guest entrance/native passenger context or active original D1000 with live heroes. Corrupt tiles, overlapping bodies, flashes and HUD occlusion remain explicit; images alone do not prove damage."
+        },
+        {
+          "peer": 0,
+          "label": "native-F157-mainboss-battle-ready",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\native-F157-mainboss-battle-ready.png",
+            "bytes": 2074543,
+            "sha256": "c2712a03e97b5fa45ed135ddca4ba1da25a5cc589aa6cea8c2149a6d8a7129f8"
+          },
+          "worker_review": "Personally inspected: guest entrance/native passenger context or active original D1000 with live heroes. Corrupt tiles, overlapping bodies, flashes and HUD occlusion remain explicit; images alone do not prove damage."
+        }
+      ],
+      "strict_recording_refusals": [
+        {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        }
+      ]
+    },
+    "netplay": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\qualification.json",
+        "bytes": 37692654,
+        "sha256": "7de15d0a0c0258908df6d45d8417b7e722dc77eff7430b959cdd05035ff72fa6"
+      },
+      "intro_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\observations.json",
+        "bytes": 18659060,
+        "sha256": "cf66de62704d9e6afc71918f8ffa9d7bcf29101744b1658e4d96b6e2084a4216"
+      },
+      "combat_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\F157\\observations.json",
+        "bytes": 15502879,
+        "sha256": "3d3133d8481df84da6f86797cf90b93f3d4991632e95649c71a1b3d9f3f7d4e5"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_door_source_guards": [
+        {
+          "address": "0x80050250",
+          "bytes": 804,
+          "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+        },
+        {
+          "address": "0x80050c88",
+          "bytes": 372,
+          "sha256": "f028293571f755b02fc603931f8c96383534855e2632007875333ec51cd3239b"
+        }
+      ],
+      "guest_only_inputs": [
+        {
+          "seat": 0,
+          "pressed": 0,
+          "label": "ordinary paired P2 walk/P1 jump before fixture"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "ordinary paired P2 walk/P1 jump before fixture"
+        },
+        {
+          "seat": 1,
+          "pressed": 6,
+          "label": "accepted P2 L3+R3 arms pre-agreed one-shot checkpoint"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "release accepted arming chord"
+        },
+        {
+          "seat": 1,
+          "pressed": 32,
+          "label": "native leader Right into authored intro door"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "original door owns traversal"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "release native approach"
+        },
+        {
+          "seat": 0,
+          "pressed": 0,
+          "label": "final native neutral"
+        },
+        {
+          "seat": 1,
+          "pressed": 0,
+          "label": "final native neutral"
+        }
+      ],
+      "witnesses": [
+        {
+          "peer": 0,
+          "initial_sample": 63,
+          "guest_scene_sample": 77,
+          "primary_x": 5904,
+          "guest_x": 6037.5,
+          "primary_horizontal_gap_from_door": 160,
+          "scene_owner": 2,
+          "first_native_midboss_sample": 92,
+          "native_HP_fill_samples": [
+            [
+              92,
+              0
+            ],
+            [
+              93,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              98,
+              0
+            ],
+            [
+              99,
+              0
+            ],
+            [
+              100,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              103,
+              0
+            ],
+            [
+              104,
+              0
+            ],
+            [
+              105,
+              0
+            ],
+            [
+              106,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              108,
+              0
+            ],
+            [
+              109,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ],
+            [
+              113,
+              0
+            ],
+            [
+              114,
+              0
+            ],
+            [
+              115,
+              0
+            ],
+            [
+              116,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              119,
+              0
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              121,
+              0
+            ],
+            [
+              122,
+              0
+            ],
+            [
+              123,
+              0
+            ],
+            [
+              124,
+              0
+            ],
+            [
+              125,
+              0
+            ],
+            [
+              126,
+              0
+            ],
+            [
+              127,
+              0
+            ],
+            [
+              128,
+              0
+            ],
+            [
+              129,
+              0
+            ],
+            [
+              130,
+              0
+            ],
+            [
+              131,
+              0
+            ],
+            [
+              132,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              134,
+              0
+            ],
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              0
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              162,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              166,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              174,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              182,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ],
+            [
+              209,
+              0
+            ],
+            [
+              210,
+              0
+            ],
+            [
+              211,
+              0
+            ],
+            [
+              212,
+              0
+            ],
+            [
+              213,
+              0
+            ],
+            [
+              214,
+              0
+            ],
+            [
+              215,
+              0
+            ],
+            [
+              216,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              218,
+              0
+            ],
+            [
+              219,
+              0
+            ],
+            [
+              220,
+              0
+            ],
+            [
+              221,
+              0
+            ],
+            [
+              222,
+              0
+            ],
+            [
+              223,
+              0
+            ],
+            [
+              224,
+              0
+            ],
+            [
+              225,
+              0
+            ],
+            [
+              226,
+              0
+            ],
+            [
+              227,
+              0
+            ],
+            [
+              228,
+              0
+            ],
+            [
+              229,
+              0
+            ],
+            [
+              230,
+              0
+            ],
+            [
+              231,
+              0
+            ],
+            [
+              232,
+              0
+            ],
+            [
+              233,
+              0
+            ],
+            [
+              234,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              236,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ],
+            [
+              239,
+              0
+            ],
+            [
+              240,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              1
+            ],
+            [
+              243,
+              7
+            ],
+            [
+              244,
+              11
+            ],
+            [
+              245,
+              22
+            ],
+            [
+              246,
+              27
+            ]
+          ],
+          "first_fullHP_combat_sample": 247,
+          "battle_ready": 264,
+          "boss_origin": "0x800FA3D4",
+          "both_native_idle_alive": true
+        },
+        {
+          "peer": 1,
+          "initial_sample": 63,
+          "guest_scene_sample": 75,
+          "primary_x": 5904,
+          "guest_x": 6037.5,
+          "primary_horizontal_gap_from_door": 160,
+          "scene_owner": 2,
+          "first_native_midboss_sample": 91,
+          "native_HP_fill_samples": [
+            [
+              91,
+              0
+            ],
+            [
+              92,
+              0
+            ],
+            [
+              93,
+              0
+            ],
+            [
+              94,
+              0
+            ],
+            [
+              95,
+              0
+            ],
+            [
+              96,
+              0
+            ],
+            [
+              97,
+              0
+            ],
+            [
+              98,
+              0
+            ],
+            [
+              99,
+              0
+            ],
+            [
+              100,
+              0
+            ],
+            [
+              101,
+              0
+            ],
+            [
+              102,
+              0
+            ],
+            [
+              103,
+              0
+            ],
+            [
+              104,
+              0
+            ],
+            [
+              105,
+              0
+            ],
+            [
+              106,
+              0
+            ],
+            [
+              107,
+              0
+            ],
+            [
+              108,
+              0
+            ],
+            [
+              109,
+              0
+            ],
+            [
+              110,
+              0
+            ],
+            [
+              111,
+              0
+            ],
+            [
+              112,
+              0
+            ],
+            [
+              113,
+              0
+            ],
+            [
+              114,
+              0
+            ],
+            [
+              115,
+              0
+            ],
+            [
+              116,
+              0
+            ],
+            [
+              117,
+              0
+            ],
+            [
+              118,
+              0
+            ],
+            [
+              119,
+              0
+            ],
+            [
+              120,
+              0
+            ],
+            [
+              121,
+              0
+            ],
+            [
+              122,
+              0
+            ],
+            [
+              123,
+              0
+            ],
+            [
+              124,
+              0
+            ],
+            [
+              125,
+              0
+            ],
+            [
+              126,
+              0
+            ],
+            [
+              127,
+              0
+            ],
+            [
+              128,
+              0
+            ],
+            [
+              129,
+              0
+            ],
+            [
+              130,
+              0
+            ],
+            [
+              131,
+              0
+            ],
+            [
+              132,
+              0
+            ],
+            [
+              133,
+              0
+            ],
+            [
+              134,
+              0
+            ],
+            [
+              135,
+              0
+            ],
+            [
+              136,
+              0
+            ],
+            [
+              137,
+              0
+            ],
+            [
+              138,
+              0
+            ],
+            [
+              139,
+              0
+            ],
+            [
+              140,
+              0
+            ],
+            [
+              141,
+              0
+            ],
+            [
+              142,
+              0
+            ],
+            [
+              143,
+              0
+            ],
+            [
+              144,
+              0
+            ],
+            [
+              145,
+              0
+            ],
+            [
+              146,
+              0
+            ],
+            [
+              147,
+              0
+            ],
+            [
+              148,
+              0
+            ],
+            [
+              149,
+              0
+            ],
+            [
+              150,
+              0
+            ],
+            [
+              151,
+              0
+            ],
+            [
+              152,
+              0
+            ],
+            [
+              153,
+              0
+            ],
+            [
+              154,
+              0
+            ],
+            [
+              155,
+              0
+            ],
+            [
+              156,
+              0
+            ],
+            [
+              157,
+              0
+            ],
+            [
+              158,
+              0
+            ],
+            [
+              159,
+              0
+            ],
+            [
+              160,
+              0
+            ],
+            [
+              161,
+              0
+            ],
+            [
+              162,
+              0
+            ],
+            [
+              163,
+              0
+            ],
+            [
+              164,
+              0
+            ],
+            [
+              165,
+              0
+            ],
+            [
+              166,
+              0
+            ],
+            [
+              167,
+              0
+            ],
+            [
+              168,
+              0
+            ],
+            [
+              169,
+              0
+            ],
+            [
+              170,
+              0
+            ],
+            [
+              171,
+              0
+            ],
+            [
+              172,
+              0
+            ],
+            [
+              173,
+              0
+            ],
+            [
+              174,
+              0
+            ],
+            [
+              175,
+              0
+            ],
+            [
+              176,
+              0
+            ],
+            [
+              177,
+              0
+            ],
+            [
+              178,
+              0
+            ],
+            [
+              179,
+              0
+            ],
+            [
+              180,
+              0
+            ],
+            [
+              181,
+              0
+            ],
+            [
+              182,
+              0
+            ],
+            [
+              183,
+              0
+            ],
+            [
+              184,
+              0
+            ],
+            [
+              185,
+              0
+            ],
+            [
+              186,
+              0
+            ],
+            [
+              187,
+              0
+            ],
+            [
+              188,
+              0
+            ],
+            [
+              189,
+              0
+            ],
+            [
+              190,
+              0
+            ],
+            [
+              191,
+              0
+            ],
+            [
+              192,
+              0
+            ],
+            [
+              193,
+              0
+            ],
+            [
+              194,
+              0
+            ],
+            [
+              195,
+              0
+            ],
+            [
+              196,
+              0
+            ],
+            [
+              197,
+              0
+            ],
+            [
+              198,
+              0
+            ],
+            [
+              199,
+              0
+            ],
+            [
+              200,
+              0
+            ],
+            [
+              201,
+              0
+            ],
+            [
+              202,
+              0
+            ],
+            [
+              203,
+              0
+            ],
+            [
+              204,
+              0
+            ],
+            [
+              205,
+              0
+            ],
+            [
+              206,
+              0
+            ],
+            [
+              207,
+              0
+            ],
+            [
+              208,
+              0
+            ],
+            [
+              209,
+              0
+            ],
+            [
+              210,
+              0
+            ],
+            [
+              211,
+              0
+            ],
+            [
+              212,
+              0
+            ],
+            [
+              213,
+              0
+            ],
+            [
+              214,
+              0
+            ],
+            [
+              215,
+              0
+            ],
+            [
+              216,
+              0
+            ],
+            [
+              217,
+              0
+            ],
+            [
+              218,
+              0
+            ],
+            [
+              219,
+              0
+            ],
+            [
+              220,
+              0
+            ],
+            [
+              221,
+              0
+            ],
+            [
+              222,
+              0
+            ],
+            [
+              223,
+              0
+            ],
+            [
+              224,
+              0
+            ],
+            [
+              225,
+              0
+            ],
+            [
+              226,
+              0
+            ],
+            [
+              227,
+              0
+            ],
+            [
+              228,
+              0
+            ],
+            [
+              229,
+              0
+            ],
+            [
+              230,
+              0
+            ],
+            [
+              231,
+              0
+            ],
+            [
+              232,
+              0
+            ],
+            [
+              233,
+              0
+            ],
+            [
+              234,
+              0
+            ],
+            [
+              235,
+              0
+            ],
+            [
+              236,
+              0
+            ],
+            [
+              237,
+              0
+            ],
+            [
+              238,
+              0
+            ],
+            [
+              239,
+              0
+            ],
+            [
+              240,
+              0
+            ],
+            [
+              241,
+              0
+            ],
+            [
+              242,
+              1
+            ],
+            [
+              243,
+              7
+            ],
+            [
+              244,
+              14
+            ],
+            [
+              245,
+              23
+            ],
+            [
+              246,
+              29
+            ]
+          ],
+          "first_fullHP_combat_sample": 247,
+          "battle_ready": 264,
+          "boss_origin": "0x800FA3D4",
+          "both_native_idle_alive": true
+        }
+      ],
+      "interaction": {
+        "observed_process": 0,
+        "native_attack": 27,
+        "pose": 49,
+        "clip": 91,
+        "accepted_HP_changes": [
+          [
+            32,
+            28
+          ],
+          [
+            28,
+            24
+          ]
+        ],
+        "actual_first_offer_missed": true,
+        "final_mainboss_HP": 24,
+        "scope": "Detailed collision/attack stream on peer0; both NET peers retain actual native initialization/release and resolved whole-state CRC in the reviewed exact-candidate parent."
+      },
+      "worker_reviewed_images": [
+        {
+          "peer": 1,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\peer-1-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "2325c2ca82e4b147ad9c8ef6758b8b1fd3218897c73283f2d579109b2f35c48e"
+          },
+          "worker_review": "Personally inspected: guest entrance/native passenger context or active original D1000 with live heroes. Corrupt tiles, overlapping bodies, flashes and HUD occlusion remain explicit; images alone do not prove damage."
+        },
+        {
+          "peer": 0,
+          "label": "native-fresh-airslash-1-HP-28",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\F157\\native-fresh-airslash-1-HP-28.png",
+            "bytes": 2074543,
+            "sha256": "bb361e0d3e75afbaabfd51a047e52438c7aa3771501269a23b102e85e5012b59"
+          },
+          "worker_review": "Personally inspected: guest entrance/native passenger context or active original D1000 with live heroes. Corrupt tiles, overlapping bodies, flashes and HUD occlusion remain explicit; images alone do not prove damage."
+        }
+      ],
+      "strict_recording_refusals": [
+        {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        },
+        {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        }
+      ]
+    }
+  },
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F191-guest-midboss-v67-worker-v1.py",
+    "bytes": 15515,
+    "sha256": "9fb5df6fccba2f2ba80a896d2ee02762cf616c1014663a178b2d65cf40519c9a"
+  },
+  "limits": [
+    "Independent F191 contract review of completed same50cc26e LOCAL+NET X6 executions; no inherited X4/X5 pass and no new runtime/source-game change.",
+    "D1000/type48 is an original intermediate combat encounter before story16 and High Max/type55/intro exit40. Defeat/finale/selector completion is outside F191 and was not required or observed here.",
+    "Living default X/P1+Zero/P2 only, guest-only ordinary Right into original subtype1 entrance. Ordinary Either passenger beam/landing for the distant primary is expected; no Both/no-rewarp/F97 claim from these executions.",
+    "Original agreed introCP2 is a reachability bypass. Native door, boss initialization, warning/HP fill, passenger landing and actual Zero combat are earned. No LOAD/protection, online command8, HP/action/token/cooldown/outcome writes.",
+    "Four retained composed images independently inspected. Corrupt checkpoint scenery, body overlap, native flashes and partial left-HUD occlusion remain; no rendering/palette/initial-camera/F184 qualification.",
+    "Detailed interaction is sampled on NETpeer0; both physical peers have actual native intro/release observations and completed matching profile/resolved core-mod CRC/cards/owned-exit gates. Separate RAM/publication reads and one-tick input polling limits remain.",
+    "Fixture-tainted ordinary capture and replay remain strictly refused. Existing earlier failed observations are preserved; no all-boss/roster/weapon/ordinary campaign/platform or service claim."
+  ],
+  "bypasses": [
+    "Pre-agreed original introCP2 reachability prerequisite only."
+  ]
+}
