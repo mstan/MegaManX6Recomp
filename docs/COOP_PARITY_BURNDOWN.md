@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 49 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 5 failed, 180 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 51 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, F1, F2, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 5 failed, 178 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,16 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+**R11 and F2 are now closed: 51 passed /5 failed /178 unverified.** Both
+required modes use exact V67 `50cc26e`. The [reviewed paired result](evidence/mmx6-lifecycle/manifest-bound-50cc26e-intro-guest-admission-netplay-reviewed.json)
+observes guest-led original door/boss activation, completed passenger landing
+and independent controls on both peers, plus matching resolved core/mod CRC,
+profile agreement, unchanged cards and owned exits0. All6 NET images were
+reviewed. The agreed checkpoint reachability bypass, strict trace/replay
+refusals, scenery corruption and body overlap remain explicit; no normal
+intro traversal or rendering result is claimed. F5 is next: repeat with
+the primary leading, LOCAL and NET, using the same candidate.
 
 V67 `50cc26e` now completes the guest-led LOCAL R11/F2 contract on the current
 candidate: Zero claims the original door with X133px behind, the original boss

@@ -2438,14 +2438,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -2521,9 +2521,49 @@
             "bypasses": [
               "Pre-agreed LAB intro CP2 initializer replaces unrelated intro traversal; native door contact, boss activation, passenger landing and controls are exercised afterward."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "location": "original safe intro CP2",
+              "view": "shared native4:3 OpenGL",
+              "input": "each owned peer publishes own LOCAL port1 to negotiated logical seat",
+              "profile": "mmx6.win64-clang22.loopback/revision5",
+              "prerequisite": "pre-agreed LAB intro_cp2 + accepted one-shot P2 chord",
+              "audio": "muted dummy"
+            },
+            "action": "On both actual peers lead with Zero through the original door, observe original full boss activation, passenger landing and fresh independent native walks; require matching postcase resolved core/mod CRC.",
+            "outcome": "Both peers select Zero sceneowner2 with X133px behind, initialize original boss32HP, land both healthy and accept each native walk with the other stationary. Matching one-shot receipts, profiles, resolved CRC, cards/owned exits and all6 reviewed images retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-50cc26e-intro-guest-admission-netplay-reviewed.json",
+                "sha256": "d47ec00478eab31c954bbdbb85bc79e881140dcb877165119495a83468254a94"
+              }
+            ],
+            "limits": [
+              "Both required modes pass on the SAME exact V67 50cc26e/image/manifest, SDK10b9021/UI34b5277; X/P1 and base Zero/P2, shared4:3 OpenGL, native published digital inputs and muted emulated audio.",
+              "Pre-agreed LAB intro_cp2 and accepted one-shot P2 L3+R3 bypass unrelated intro traversal. Matching completed authority1/latch2/nonce/record receipts, original source guards and exactly one initializer are retained. Online command8 stays forbidden; no tested HP/door/scene/camera/outcome writes.",
+              "Only bounded guest-led R11/F2 close. Primary-led F5, F14/F23, other stages/rosters/hosts, lobby/service/cross-OS, route traversal, clean replay, native content and general rendering remain unqualified.",
+              "All6 NET images reviewed plus3 LOCAL. Initial setup captures are during fade; checkpoint background is visibly corrupt and final bodies overlap. These limits do not replace actual boss/passenger/control observations and earn no rendering credit.",
+              "Native recordings intentionally fail with fixture taint. Strict capture and offline replay remain refused. Both peer profiles agree before execution, resolved core/mod CRC windows agree after the named case, private cards unchanged, both owned exits0.",
+              "Earlier NETv1 rejected genuine steady native X walk4 because its observer only accepted startup3. Source confirms original transition3->4; the pinned external observer correction and actual source are retained. That failed attempt remains unmodified and receives no fullmode pass.",
+              "Legacy parent fields/CRC label mention jump-audio, but the executed observer is native intro admission; no audio comparison is qualified. Separate RAM/publication/render reads are nearby, not instruction-atomic."
+            ],
+            "bypasses": [
+              "Pre-agreed LAB intro CP2 initializer replaces unrelated intro traversal; native door contact, boss activation, passenger landing and controls are exercised afterward."
+            ]
           }
         ],
-        "limitations": "Current-candidate V67 guest-led LOCAL admission passed with explicit agreed checkpoint reachability bypass and scenery corruption; NETPLAY and aggregate still unverified. Older V48 LOCAL evidence remains retained."
+        "limitations": "Bounded guest-led LOCAL+NET passed on exact V67 50cc26e with agreed checkpoint reachability bypass, refused strict recording/replay and corrupt-scenery/overlap limits explicit. No other comparison, normal traversal, content or general-rendering credit."
       }
     },
     {
@@ -4403,14 +4443,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4486,9 +4526,49 @@
             "bypasses": [
               "Pre-agreed LAB intro CP2 initializer replaces unrelated intro traversal; native door contact, boss activation, passenger landing and controls are exercised afterward."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "location": "original safe intro CP2",
+              "view": "shared native4:3 OpenGL",
+              "input": "each owned peer publishes own LOCAL port1 to negotiated logical seat",
+              "profile": "mmx6.win64-clang22.loopback/revision5",
+              "prerequisite": "pre-agreed LAB intro_cp2 + accepted one-shot P2 chord",
+              "audio": "muted dummy"
+            },
+            "action": "On both actual peers lead with Zero through the original door, observe original full boss activation, passenger landing and fresh independent native walks; require matching postcase resolved core/mod CRC.",
+            "outcome": "Both peers select Zero sceneowner2 with X133px behind, initialize original boss32HP, land both healthy and accept each native walk with the other stationary. Matching one-shot receipts, profiles, resolved CRC, cards/owned exits and all6 reviewed images retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-50cc26e-intro-guest-admission-netplay-reviewed.json",
+                "sha256": "d47ec00478eab31c954bbdbb85bc79e881140dcb877165119495a83468254a94"
+              }
+            ],
+            "limits": [
+              "Both required modes pass on the SAME exact V67 50cc26e/image/manifest, SDK10b9021/UI34b5277; X/P1 and base Zero/P2, shared4:3 OpenGL, native published digital inputs and muted emulated audio.",
+              "Pre-agreed LAB intro_cp2 and accepted one-shot P2 L3+R3 bypass unrelated intro traversal. Matching completed authority1/latch2/nonce/record receipts, original source guards and exactly one initializer are retained. Online command8 stays forbidden; no tested HP/door/scene/camera/outcome writes.",
+              "Only bounded guest-led R11/F2 close. Primary-led F5, F14/F23, other stages/rosters/hosts, lobby/service/cross-OS, route traversal, clean replay, native content and general rendering remain unqualified.",
+              "All6 NET images reviewed plus3 LOCAL. Initial setup captures are during fade; checkpoint background is visibly corrupt and final bodies overlap. These limits do not replace actual boss/passenger/control observations and earn no rendering credit.",
+              "Native recordings intentionally fail with fixture taint. Strict capture and offline replay remain refused. Both peer profiles agree before execution, resolved core/mod CRC windows agree after the named case, private cards unchanged, both owned exits0.",
+              "Earlier NETv1 rejected genuine steady native X walk4 because its observer only accepted startup3. Source confirms original transition3->4; the pinned external observer correction and actual source are retained. That failed attempt remains unmodified and receives no fullmode pass.",
+              "Legacy parent fields/CRC label mention jump-audio, but the executed observer is native intro admission; no audio comparison is qualified. Separate RAM/publication/render reads are nearby, not instruction-atomic."
+            ],
+            "bypasses": [
+              "Pre-agreed LAB intro CP2 initializer replaces unrelated intro traversal; native door contact, boss activation, passenger landing and controls are exercised afterward."
+            ]
           }
         ],
-        "limitations": "Current-candidate V67 guest-led LOCAL admission passed with explicit agreed checkpoint reachability bypass and scenery corruption; NETPLAY and aggregate still unverified. Older V48 LOCAL evidence remains retained."
+        "limitations": "Bounded guest-led LOCAL+NET passed on exact V67 50cc26e with agreed checkpoint reachability bypass, refused strict recording/replay and corrupt-scenery/overlap limits explicit. No other comparison, normal traversal, content or general-rendering credit."
       }
     },
     {
