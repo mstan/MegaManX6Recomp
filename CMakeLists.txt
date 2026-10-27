@@ -10,6 +10,16 @@ set(PSXRECOMP_V4_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/psxrecomp-v4" CACHE PATH
     "Path to psxrecomp-v4")
 
 include("${PSXRECOMP_V4_ROOT}/runtime/runtime.cmake")
+option(MMX6_NATIVE_IDLE_WAIT "Select the audited native PsyQ frame wait" ON)
+set(MMX6_NATIVE_IDLE_WAIT_SITES "")
+if(MMX6_NATIVE_IDLE_WAIT)
+    if(NOT COMMAND psxrecomp_native_idle_wait)
+        message(FATAL_ERROR "MMX6_NATIVE_IDLE_WAIT needs native wait-policy support")
+    endif()
+    # SLUS-01395 v1.1 v_wait at80060ADC: timeout word atsp+16,
+    # frame counter8007C8E4, no MMIO or other counter-dependent exit.
+    set(MMX6_NATIVE_IDLE_WAIT_SITES 0x80060B04 0x80060B4C)
+endif()
 
 # Generated-C directory. Defaults to "generated" (the vanilla recompile). A
 # variant build (e.g. a "MMX6 Tweaks" patched-input recompile) sets
@@ -76,6 +86,7 @@ set(PSX_BUILTIN_MOD_ALLOWLIST
     psx.enhancement.pgxp
     psx.presentation.bezel)
 psxrecomp_v4_add_runtime_target(psx-runtime
+    NATIVE_IDLE_WAIT_SITES ${MMX6_NATIVE_IDLE_WAIT_SITES}
     GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
     GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
     DEBUG_PORT 4490
@@ -137,6 +148,16 @@ endif()
 # A title that cannot be built against framework master cannot be checked
 # against it either.
 if(BUILD_TESTING)
+    find_package(Python3 QUIET COMPONENTS Interpreter)
+    if(Python3_FOUND)
+        add_test(NAME mmx6_vwait_contract
+            COMMAND "${Python3_EXECUTABLE}"
+                "${PSXRECOMP_V4_ROOT}/runtime/tests/native_wait_caller.py"
+                --framework "${PSXRECOMP_V4_ROOT}" --cc "${CMAKE_C_COMPILER}"
+                --generated "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}"
+                --contract "${CMAKE_CURRENT_SOURCE_DIR}/tests/vwait_contract.json")
+        set_tests_properties(mmx6_vwait_contract PROPERTIES SKIP_RETURN_CODE 77 RUN_SERIAL TRUE)
+    endif()
     add_executable(mmx6_frame_interpolation_test
         tests/test_mmx6_frame_interpolation.cpp
         "${PSXRECOMP_V4_ROOT}/runtime/src/render_pass_motion.c")
