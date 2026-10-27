@@ -73,8 +73,8 @@ class SessionContract(unittest.TestCase):
     def test_fixture_option_boundary_is_exact_and_exercises_current_default(self):
         test=(ROOT/'tests/test_mmx6_coop_session_resources.c').read_text(encoding='utf-8')
         option=function(test,'psx_mod_option_value')
-        for token in('"mmx6.local-coop"','"prototype"','"hud_layout"',
-                     'value[]="stacked"','capacity>=sizeof value','++option_reads'):
+        for token in('"mmx6.local-coop"','"prototype"','"hud_layout"','"doors"',
+                     '?"either"','?"stacked"','capacity>strlen(value)','++option_reads'):
             self.assertIn(token,option)
         self.assertIn('hud_offsets(&hud_x,&hud_y)',function(test,'allocated'))
         self.assertIn('option_reads==before+1&&hud_x==0&&hud_y==P2_HUD_Y',

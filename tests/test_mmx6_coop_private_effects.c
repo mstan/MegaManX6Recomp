@@ -25,6 +25,7 @@ static uint16_t menu_input[3];
 static unsigned native_budget;
 static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_calls;
 static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat;
+static unsigned door_native_probe,door_ticks,door_draws,door_subtype_allowed;
 static unsigned icon_packet_probe,dash_packet_probe;
 static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
@@ -201,6 +202,26 @@ static void native_draw(uint32_t actor){
     psx_mod_write_word(SCRATCH+0x100,at+40);psx_mod_write_word(SCRATCH+0x104,mode+8);
     psx_mod_write_word(SCRATCH+0x124,++native_budget);
 }
+static uint32_t original_door_predicate(uint32_t actor) {
+    /* External original80050C88..80050DFC contract, not the plugin's gate:
+     * signed authored centers, horizontal overlap and vertical containment.
+     * In particular, a merely overlapping vertical box is insufficient. */
+    if(psx_mod_read_byte(PLAYER+0xA4) || (psx_mod_read_byte(PLAYER+0x5C)&0x80) ||
+       psx_mod_read_byte(PLAYER+5)==3 || psx_mod_read_byte(PLAYER+
+           (psx_mod_read_byte(PLAYER+2)?0x8E:0x7A)))return 0;
+    int x=(int16_t)psx_mod_read_half(PLAYER+10),dx=(int16_t)psx_mod_read_half(actor+10);
+    if(x>dx)return 0;
+    uint32_t a=psx_mod_read_word(actor+0x68),p=psx_mod_read_word(PLAYER+0x68);
+    CHECK(a>=0x80010000u && a<=0x801FFFFCu && p>=0x80010000u && p<=0x801FFFFCu);
+    int ac=(int16_t)(dx+(int8_t)psx_mod_read_byte(a));
+    int pc=(int16_t)(x+(int8_t)psx_mod_read_byte(p));
+    int distance=(int16_t)(ac>pc?ac-pc:pc-ac);
+    if(distance>psx_mod_read_byte(a+2)+psx_mod_read_byte(p+2))return 0;
+    int ay=(int16_t)psx_mod_read_half(actor+14)+(int8_t)psx_mod_read_byte(a+1);
+    int py=(int16_t)psx_mod_read_half(PLAYER+14)+(int8_t)psx_mod_read_byte(p+1);
+    return (int16_t)(py-psx_mod_read_byte(p+3))>=(int16_t)(ay-psx_mod_read_byte(a+3)) &&
+        (int16_t)(py+psx_mod_read_byte(p+3))<=(int16_t)(ay+psx_mod_read_byte(a+3));
+}
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
     if(clear_probe) {
@@ -284,6 +305,47 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
             psx_mod_write_word(PLAYER+0x68,passenger?0x80073D54u:0x80073D50u);return;
         }
         CHECK(0);
+    }
+    if(door_native_probe) {
+        if(address==0x8003CCBCu) {
+            CHECK(cpu->gpr[4]==PLAYER);
+            psx_mod_write_word(cpu->gpr[4]+0x68,psx_mod_read_byte(cpu->gpr[4]+2)?0x80073D54u:0x80073D50u);
+            return;
+        }
+        if(address==0x80050DFCu) {
+            /* Bounded original outer/phase contracts: draw/shared state once,
+             * negative ACK admission, resident-only movement and release. */
+            uint32_t actor=cpu->gpr[4];++door_ticks;++door_draws;
+            unsigned phase=psx_mod_read_byte(actor+5);
+            if(phase==1 && (int8_t)psx_mod_read_byte(PLAYER+0xD4)<0) {
+                psx_mod_write_byte(PLAYER+0xD4,0xFE);psx_mod_write_word(PLAYER+0x68,0);
+                psx_mod_write_byte(PLAY+0x10,1);psx_mod_write_byte(PLAY+0x12,1);
+                psx_mod_write_byte(actor+5,2);
+            } else if(phase==3) {
+                psx_mod_write_word(PLAYER+8,psx_mod_read_word(PLAYER+8)+psx_mod_read_word(actor+0x84));
+                if(psx_mod_read_half(0x80097202u)==psx_mod_read_half(0x8009721Eu)) {
+                    psx_mod_write_byte(PLAYER+0xD4,0);guest(cpu,0x8003CCBCu,PLAYER,0);
+                    psx_mod_write_byte(actor+5,4);
+                    psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x12,0);
+                    psx_mod_write_word(PLAY+0x90,psx_mod_read_word(PLAY+0x90)+1);
+                }
+            } else if(phase==4 && !psx_mod_read_byte(PLAYER+0xD0) &&
+                      !psx_mod_read_byte(PLAYER+0xD4) && !psx_mod_read_byte(PLAYER+0xE0))
+                psx_mod_write_byte(PLAY+0x1C,0);
+            cpu->gpr[2]=0xD008;return;
+        }
+        if(address==0x80050C88u) {
+            if(!door_eligibility(cpu,address))cpu->gpr[2]=original_door_predicate(cpu->gpr[4]);
+            return;
+        }
+        CHECK(address==0x80050250u && cpu->gpr[6]==PLAYER);
+        ++door_ticks;++door_draws; /* Native collision/draw precede admission. */
+        if(door_subtype_allowed) {
+            uint32_t ra=cpu->gpr[31];cpu->gpr[31]=0x80050368u;
+            uint32_t hit=guest(cpu,0x80050C88u,cpu->gpr[4],0);cpu->gpr[31]=ra;
+            if(hit) { psx_mod_write_byte(PLAY+0x1C,1);psx_mod_write_byte(PLAYER+0xD4,1); }
+        }
+        cpu->gpr[2]=0xD007;return;
     }
     if(nova_probe)CHECK(psx_mod_read_byte(PLAY+0x1C)==1);
     if(ride_probe) {
@@ -432,6 +494,7 @@ static void setup(CPUState *cpu){
     shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=0;
+    door_native_probe=door_ticks=door_draws=both_doors=scene_call=0;both_door_reset();door_subtype_allowed=1;
     icon_packet_probe=dash_packet_probe=render_replacement_probe=0;
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=0;memset(death_effect,0,sizeof death_effect);
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
@@ -1416,6 +1479,166 @@ static void native_shared_clear_admission_and_departure(void) {
     CHECK(!clear_phase && !clear_members && !clear_started && !enrolled);
     clear_probe=0;
 }
+enum { TEST_DOOR=0x800C12C4u,TEST_DOOR_BOX=0x80074000u,TEST_X_BOX=0x80074004u,TEST_ZERO_BOX=0x80074008u };
+static void door_setup(CPUState *cpu,unsigned both,int x,int zero) {
+    setup(cpu);both_doors=both;door_native_probe=1;
+    life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    const unsigned fields[]={0xA4,0x7A,0xD0,0xD4,0xE0};
+    for(unsigned i=0;i<sizeof fields/sizeof fields[0];++i)psx_mod_write_byte(PLAYER+fields[i],0);
+    psx_mod_write_word(PLAYER+8,(uint32_t)x<<16);put32(p2.body+8,(uint32_t)zero<<16);
+    psx_mod_write_word(PLAYER+0x68,TEST_X_BOX);put32(p2.body+0x68,TEST_ZERO_BOX);
+    psx_mod_write_word(TEST_DOOR+8,500u<<16);psx_mod_write_word(TEST_DOOR+12,1000u<<16);
+    psx_mod_write_word(TEST_DOOR+0x68,TEST_DOOR_BOX);
+    psx_mod_write_byte(TEST_DOOR,0x49);psx_mod_write_byte(TEST_DOOR+1,8);
+    psx_mod_write_word(TEST_DOOR+0x10,0x800FA2ACu);
+    /* Different authored centers and heights exercise each actual box. */
+    psx_mod_write_word(TEST_DOOR_BOX,0x281000FCu); /* x=-4,y=0,w=16,h=40 */
+    psx_mod_write_word(TEST_X_BOX,0x10080000u);
+    psx_mod_write_word(TEST_ZERO_BOX,0x14080002u); /* x=2,w=8,h=20 */
+    cpu->gpr[4]=TEST_DOOR;cpu->gpr[6]=PLAYER;cpu->gpr[31]=0x80020C60;
+}
+static void check_door_result(CPUState *cpu,unsigned owner,unsigned phase) {
+    uint32_t x=psx_mod_read_word(PLAYER+8),y=psx_mod_read_word(PLAYER+12);
+    uint32_t zx=le32(p2.body+8),zy=le32(p2.body+12);
+    uint8_t hp=p2.body[0x5C],xhp=psx_mod_read_byte(PLAYER+0x5C);
+    CHECK(door_begin(cpu,0x80050250u) && cpu->gpr[2]==0xD007);
+    CHECK(door_ticks==1 && door_draws==1 && occurrences(0x80050250u)==1);
+    CHECK(scene_owner==owner && scene_phase==phase);
+    CHECK(psx_mod_read_word(PLAYER+8)==x && psx_mod_read_word(PLAYER+12)==y &&
+        le32(p2.body+8)==zx && le32(p2.body+12)==zy && p2.body[0x5C]==hp &&
+        psx_mod_read_byte(PLAYER+0x5C)==xhp);
+    CHECK(!inside && !zero_projected && !scene_call && !state_track.count && !state_track.error && !failed);
+    CHECK(psx_mod_read_word(OVERLAY)==0x11223344 &&
+        psx_mod_read_word(SCRATCH+0x1C)==0x80030100u);
+}
+static void native_either_both_door_admission(void) {
+    CPUState cpu;
+    /* Actual native menu preview: inside/Zero projection bypasses the outer
+     * door callback. No tag35 frame exists, but native AI/drawing still runs.
+     * The read-only preview must not set PLAYER+D4 or shared PLAY+1C. */
+    for(unsigned both=0;both<2;++both) {
+        door_setup(&cpu,both,400,480);pause_owner=1;inside=zero_world=1;
+        enter_zero();CHECK(!door_begin(&cpu,0x80050250u));
+        CHECK(guest(&cpu,0x80050250u,TEST_DOOR,0)==0xD007);
+        CHECK(!psx_mod_read_byte(PLAYER+0xD4) && !psx_mod_read_byte(PLAY+0x1C));
+        zero_world=0;leave_zero_context(1);inside=0;
+        CHECK(!p2.body[0xD4] && !scene_owner && !scene_phase &&
+            door_ticks==1 && door_draws==1 && !state_track.count);
+        pause_owner=-1;door_ticks=door_draws=call_count=0;
+        /* Closing the menu restores original active-world admission. */
+        if(both)check_door_result(&cpu,0,0);
+        else check_door_result(&cpu,2,1);
+    }
+    /* Default Either admits either real native overlap, with transport. */
+    door_setup(&cpu,0,480,400);check_door_result(&cpu,1,1);
+    CHECK(psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4] && occurrences(0x80050C88u)==2);
+    door_setup(&cpu,0,400,480);check_door_result(&cpu,2,1);
+    CHECK(!psx_mod_read_byte(PLAYER+0xD4) && p2.body[0xD4] && occurrences(0x80050C88u)==3);
+    /* Both must veto the native admission for either distant living actor,
+     * while still updating/drawing the door exactly once. */
+    door_setup(&cpu,1,480,400);check_door_result(&cpu,0,0);
+    CHECK(!psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4] && !psx_mod_read_byte(PLAY+0x1C));
+    door_setup(&cpu,1,400,480);check_door_result(&cpu,0,0);
+    CHECK(!psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4]);
+    door_setup(&cpu,1,480,480);check_door_result(&cpu,1,0);
+    CHECK(psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 &&
+        both_door_traversal_active());
+    /* Permissions come from the real native admission. Other scenes/menu
+     * phases cannot opt the private player into world-scene execution. */
+    pause_owner=1;CHECK(!both_door_traversal_active());pause_owner=-1;
+    scene_phase=1;CHECK(!both_door_traversal_active());scene_phase=0;
+    unsigned before=call_count;scene_tick(&cpu);
+    CHECK(scene_owner==1 && !scene_phase && call_count==before && !scene_passenger(1));
+    psx_mod_write_byte(PLAYER+0xD4,0);psx_mod_write_byte(PLAY+0x1C,0);scene_tick(&cpu);
+    CHECK(scene_owner==1); /* The other admitted native request still owns the barrier. */
+    p2.body[0xD4]=0;scene_tick(&cpu);
+    CHECK(!scene_owner && !scene_phase && call_count==before);
+    script_begin(&cpu,0x8003D308u);CHECK(scene_owner==1 && scene_phase==1); /* Door-only exception. */
+    /* Every non-ALIVE seat is excluded, never revived or teleported. */
+    for(unsigned status=MMX6_COOP_LEAVING;status<=MMX6_COOP_FALLEN;++status) {
+        door_setup(&cpu,1,480,400);life.status[1]=(Mmx6CoopStatus)status;
+        check_door_result(&cpu,1,0);CHECK(life.status[1]==status && !p2.body[0xD4]);
+        door_setup(&cpu,1,400,480);life.status[0]=(Mmx6CoopStatus)status;
+        check_door_result(&cpu,2,0);CHECK(life.status[0]==status && !psx_mod_read_byte(PLAYER+0xD4));
+    }
+    door_setup(&cpu,1,480,480);life.status[0]=life.status[1]=MMX6_COOP_FALLEN;
+    check_door_result(&cpu,0,0);CHECK(!psx_mod_read_byte(PLAYER+0xD4));
+    /* Native prerequisites remain authoritative even when both overlap. */
+    for(unsigned gate=0;gate<10;++gate) {
+        door_setup(&cpu,1,480,480);
+        switch(gate) {
+        case 0:p2.body[0xA4]=1;break;
+        case 1:p2.body[0x5C]=0x80;break;
+        case 2:p2.body[5]=3;break;
+        case 3:p2.body[0x8E]=1;break;
+        case 4:psx_mod_write_byte(PLAYER+0x7A,1);break;
+        case 5:put32(p2.body+8,501u<<16);break;
+        case 6:put32(p2.body+12,1021u<<16);break; /* Overlap, not containment. */
+        case 7:put32(p2.body+0x68,0);break;
+        case 8:put32(p2.body+8,469u<<16);break; /* Signed offset makes separation25 > widths24. */
+        case 9:p2.body[0]=0;break;
+        }
+        check_door_result(&cpu,0,0);CHECK(!psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4]);
+    }
+    door_setup(&cpu,1,480,470);put32(p2.body+12,1020u<<16);check_door_result(&cpu,1,0);
+    door_setup(&cpu,1,480,480);door_subtype_allowed=0;check_door_result(&cpu,0,0);
+    CHECK(occurrences(0x80050C88u)==2); /* Preprobes cannot bypass native subtype refusal. */
+    /* A predicate elsewhere has no policy gate or fabricated native result. */
+    door_setup(&cpu,1,480,400);cpu.gpr[31]=0x80050368u;
+    CHECK(!door_eligibility(&cpu,0x80050C88u));
+    uint32_t context[6]={0x80050250u,TEST_DOOR,0,0,1,1};
+    STATE_WORDS(frame,35,context,6);scene_call=1;
+    cpu.gpr[31]=0x8005036Cu;CHECK(!door_eligibility(&cpu,0x80050C88u));
+    cpu.gpr[31]=0x80050368u;cpu.gpr[4]=TEST_DOOR+0x70;CHECK(!door_eligibility(&cpu,0x80050C88u));
+    cpu.gpr[4]=TEST_DOOR;CHECK(door_eligibility(&cpu,0x80050C88u) && !cpu.gpr[2]);
+    context[3]=1;STATE_UPDATE(frame,context);CHECK(!door_eligibility(&cpu,0x80050C88u));
+    STATE_POP(frame);scene_call=door_native_probe=0;
+}
+static void native_both_door_ack_motion_and_release(void) {
+    CPUState cpu;
+    for(unsigned trailing=0;trailing<2;++trailing) {
+        door_setup(&cpu,1,480,480);check_door_result(&cpu,1,0);
+        CHECK(both_door_actor==TEST_DOOR && both_door_members==3);
+        psx_mod_write_byte(TEST_DOOR+5,1);
+        psx_mod_write_byte(PLAYER+0xD4,0xFF); /* Only primary earned its native acknowledgement. */
+        CHECK(door_update(&cpu,0x80050DFCu));
+        CHECK(psx_mod_read_byte(TEST_DOOR+5)==1 && p2.body[0xD4]==1 &&
+              psx_mod_read_byte(PLAYER+0xD4)==0xFF && !psx_mod_read_byte(PLAY+0x10));
+        p2.body[0xD4]=0xFF; /* Original second controller now acknowledges independently. */
+        CHECK(door_update(&cpu,0x80050DFCu));
+        CHECK(psx_mod_read_byte(TEST_DOOR+5)==2 && psx_mod_read_byte(PLAYER+0xD4)==0xFE &&
+              p2.body[0xD4]==0xFE && !psx_mod_read_word(PLAYER+0x68) && !le32(p2.body+0x68));
+        psx_mod_write_byte(TEST_DOOR+5,3);psx_mod_write_word(TEST_DOOR+0x84,0x18000u);
+        psx_mod_write_word(PLAYER+8,(trailing?490u:480u)<<16);
+        put32(p2.body+8,(trailing?480u:490u)<<16);
+        psx_mod_write_half(0x80097202u,100);psx_mod_write_half(0x8009721Eu,200);
+        uint32_t x=psx_mod_read_word(PLAYER+8),z=le32(p2.body+8),draws=door_draws;
+        CHECK(door_update(&cpu,0x80050DFCu));
+        CHECK(psx_mod_read_word(PLAYER+8)==x+0x18000u && le32(p2.body+8)==z+0x18000u &&
+              door_draws==draws+1 && psx_mod_read_byte(TEST_DOOR+5)==3);
+        CHECK(psx_mod_read_byte(PLAY+0x10)==1 && psx_mod_read_byte(PLAY+0x12)==1);
+        psx_mod_write_half(0x80097202u,200);
+        CHECK(door_update(&cpu,0x80050DFCu));
+        CHECK(!psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4] &&
+              psx_mod_read_word(PLAYER+0x68)==0x80073D50u && le32(p2.body+0x68)==0x80073D54u &&
+              psx_mod_read_byte(TEST_DOOR+5)==4 && psx_mod_read_word(PLAY+0x90)==1);
+        CHECK(door_update(&cpu,0x80050DFCu));scene_tick(&cpu);
+        CHECK(!scene_owner && !both_door_actor && !both_door_members &&
+              !inside && !zero_projected && !scene_call && !state_track.count && !state_track.error);
+    }
+    /* A generic phase-zero scene or another door has no authenticated authority. */
+    door_setup(&cpu,1,480,480);scene_owner=1;
+    CHECK(!both_door_traversal_active() && !door_update(&cpu,0x80050DFCu));
+    for(unsigned invalid=0;invalid<3;++invalid) {
+        door_setup(&cpu,1,480,480);check_door_result(&cpu,1,0);
+        if(invalid==0)psx_mod_write_byte(TEST_DOOR,0);
+        if(invalid==1)psx_mod_write_byte(TEST_DOOR+1,9);
+        if(invalid==2)psx_mod_write_word(TEST_DOOR+0x10,0x800FA2B0u);
+        CHECK(!both_door_traversal_active());scene_tick(&cpu);
+        CHECK(failed && !both_door_actor && !both_door_origin && !both_door_members &&
+              psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 && !scene_phase);
+    }
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
@@ -1432,4 +1655,6 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     yammar_native_upload_coordinates();
     native_shared_ride_ownership();
     native_shared_clear_admission_and_departure();
+    native_either_both_door_admission();
+    native_both_door_ack_motion_and_release();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

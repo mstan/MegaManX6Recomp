@@ -21,6 +21,23 @@ default_enabled = false
 
 [[option]]
 feature = "prototype"
+id = "doors"
+label = "Door activation"
+description = "Either player can open native doors and bring their partner along, or require every living player to reach the door before opening without a partner teleport. Absent and fallen players do not block the door. Both players must use the same setting."
+group = "Gameplay"
+type = "choice"
+default = "either"
+
+[[option.choice]]
+value = "either"
+label = "Either player"
+
+[[option.choice]]
+value = "both"
+label = "Both players"
+
+[[option]]
+feature = "prototype"
 id = "hud_layout"
 label = "HUD layout"
 description = "Stack the original X and Zero meters in one left column, or place Zero's meters beside X's. Shared lives remain displayed once."
