@@ -1569,6 +1569,13 @@ static int paired_arrival(CPUState *cpu) {
         psx_mod_read_byte(PLAYER+0xD4) || psx_mod_read_byte(PLAYER+0xD5) ||
         psx_mod_read_byte(PLAYER+0xE0)) return arrival_pair!=0;
     if (!arrival_pair) {
+        /* Intro CP0 has automatic HELP0 at native144/976. Original 52F64
+         * admits its volume before action2, queues script20 at5318C, then
+         * publishes seen bit PLAY9E. Do not arm on the earlier beam frame
+         * before D0 exists: the ensuing dialogue still needs native input.
+         * The original post-idle enrollment remains responsible for it. */
+        if (!psx_mod_read_byte(PLAY+12) && !psx_mod_read_byte(PLAY+13) &&
+            !psx_mod_read_byte(PLAY+0x1D) && !(psx_mod_read_half(PLAY+0x9E)&1u)) return 0;
         if (enrolled || psx_mod_read_byte(PLAYER+2) || psx_mod_read_byte(PLAYER+4)!=1 ||
             !psx_mod_read_byte(PLAYER+0x5C) || psx_mod_read_byte(PLAYER+0x5C)>=128 ||
             psx_mod_read_byte(PLAYER+5) || psx_mod_read_byte(PLAYER+6) ||

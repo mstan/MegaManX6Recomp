@@ -1723,6 +1723,7 @@ static void native_both_door_ack_motion_and_release(void) {
 }
 static void arrival_setup(CPUState *cpu) {
     setup(cpu);enrolled=0;paired_arrival_fixture_probe=1;
+    psx_mod_write_byte(PLAY+0x1D,2); /* Ordinary original CP2; no opening HELP. */
     psx_mod_write_byte(PLAY+0x5E,1);psx_mod_write_byte(PLAY+0x1C,1);
     for(unsigned i=0x0F;i<=0x1B;++i)psx_mod_write_byte(PLAY+i,0);
     psx_mod_write_byte(PLAYER+5,0);psx_mod_write_byte(PLAYER+6,0);
@@ -1790,6 +1791,18 @@ static void native_paired_arrival_barrier(void) {
         life.status[1]==MMX6_COOP_ALIVE && p2.body[5]==0);
     arrival_setup(&cpu);CHECK(paired_arrival(&cpu));p2.body[4]=2;p2.body[0x5C]=0;
     CHECK(!paired_arrival(&cpu) && !arrival_pair && life.status[1]==MMX6_COOP_DYING);
+    /* Source-authored New Game HELP can request script20 while X still
+     * beams in. A future request is not yet visible in D0 at admission. */
+    arrival_setup(&cpu);psx_mod_write_byte(PLAY+0x1D,0);psx_mod_write_half(PLAY+0x9E,0);
+    CHECK(!paired_arrival(&cpu) && !arrival_pair && !enrolled && !arrival_births);
+    psx_mod_write_half(PLAY+0x9E,1);psx_mod_write_byte(PLAYER+0xD0,1);
+    CHECK(!paired_arrival(&cpu) && !arrival_pair && !enrolled);
+    psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+5,20);
+    CHECK(!paired_arrival(&cpu) && !arrival_pair && !enrolled);
+    /* A true later CP0 native arrival after that authored conversation is
+     * consumed has no pending automatic HELP and can use the native pair. */
+    psx_mod_write_byte(PLAYER+5,0);
+    CHECK(paired_arrival(&cpu) && arrival_pair && enrolled && arrival_births==1);
 }
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
