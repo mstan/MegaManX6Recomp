@@ -45,6 +45,28 @@ def validate_completion(receipts):
     return wanted
 
 
+def independent_walk(before, after, seat):
+    if len(before['peers']) != len(after['peers']) or len(before['peers']) not in (1, 2):
+        return None
+    witnesses = []
+    for old, current in zip(before['peers'], after['peers']):
+        prior = old['observation']['players']; now = current['observation']['players']
+        actor, other = now[seat], now[1-seat]
+        if (not all(0 < p['hp'] <= 127 and p['state'] == 1 for p in now)
+                or actor['character'] != seat or actor['action'] != (3 if seat == 0 else 4)
+                or actor['x_raw'] >= prior[seat]['x_raw']-2*65536):
+            return None
+        stationary = other['x_raw'] == prior[1-seat]['x_raw']
+        damaged = other['hp'] < prior[1-seat]['hp']
+        native_hurt = other['action'] == 17 or prior[1-seat]['action'] == 17
+        if not stationary and not (damaged or native_hurt):
+            return None
+        witnesses.append(dict(peer=current['peer'], controlled_native_action=actor['action'],
+            other_stationary=stationary, other_HP_drop=damaged, other_native_hurt=native_hurt,
+            interpretation='stationary' if stationary else 'independent native damage response'))
+    return witnesses
+
+
 def exercise(ctx, *, output, original_exe, leader, success):
     if type(leader) is not int or leader not in (0, 1):
         raise ValueError('Require an explicit native door leader')
@@ -54,6 +76,8 @@ def exercise(ctx, *, output, original_exe, leader, success):
         mode='netplay' if len(clients) == 2 else 'offline', option=OPTION, samples=[], inputs=[],
         captures=[], checks={}, network_windows=[], ordinary_route_qualified=False,
         finalized_capture_admitted=False, replay_admitted=False,
+        baseline_scope=('ordinary paired P2 walk/P1 jump before fixture' if len(clients) == 2
+                        else 'native local initial idle; no separate pre-fixture walk/jump claim'),
         bypasses=['Pre-agreed LAB intro CP2 initializer replaces unrelated intro traversal; '
                   'native door contact, boss activation, passenger landing and controls are exercised afterward.'])
     report['intro_admission'] = e
@@ -107,14 +131,14 @@ def exercise(ctx, *, output, original_exe, leader, success):
 
     try:
         exe = Path(original_exe).read_bytes(); guards = []
-        for address, size in ((0x80050250, 0x324), (0x80050C88, 0x138)):
+        for address, size in ((0x80050250, 0x324), (0x80050C88, 0x174)):
             expected = exe[address-0x80010000+2048:address-0x80010000+2048+size]
             need(len(expected) == size and all(c.read(address, size) == expected for c in clients),
                 'Original native door source differs')
             guards.append(dict(address=hex(address), bytes=size, sha256=hashlib.sha256(expected).hexdigest()))
         e['original_door_source'] = guards
         for seat in (0, 1):
-            inputs(seat, 0, 'after ordinary initial movement/jump baseline')
+            inputs(seat, 0, e['baseline_scope'])
         end = time.monotonic()+15
         while True:
             row = sample('safe native CP0 before agreed prerequisite')
@@ -192,20 +216,22 @@ def exercise(ctx, *, output, original_exe, leader, success):
             try:
                 while True:
                     row = sample(f'seat{seat} accepted native Left')
-                    if all(p['observation']['players'][seat]['x_raw'] <
-                            old['observation']['players'][seat]['x_raw'] - 2*65536
-                            and p['observation']['players'][1-seat]['x_raw'] ==
-                            old['observation']['players'][1-seat]['x_raw']
-                            for p, old in zip(row['peers'], before['peers'])):
+                    witness = independent_walk(before, row, seat)
+                    if witness:
                         break
                     need(time.monotonic() < end, 'Post-door independent control was not observed on both peers')
                     time.sleep(.02)
             finally:
                 inputs(seat, 0, 'release independent native Left')
-            e.setdefault('controls', []).append(dict(seat=seat, before=before['index'], accepted=row['index']))
-            end = time.monotonic()+5
-            while not idle(sample('post-control native neutral'), 2):
-                need(time.monotonic() < end, 'Post-door controls did not settle')
+            e.setdefault('controls', []).append(dict(seat=seat, before=before['index'], accepted=row['index'],
+                native_walk_and_nonparticipant=witness))
+            start = sample('native neutral release start'); end = time.monotonic()+12
+            while True:
+                settled = sample('eight original updates after accepted neutral')
+                if all((p['observation']['native_timer']-old['observation']['native_timer']) & 0xFFFFFFFF >= 8
+                        for p, old in zip(settled['peers'], start['peers'])):
+                    break
+                need(time.monotonic() < end, 'Native world did not advance after neutral release')
                 time.sleep(.02)
         capture('native-boss-both-controls-restored')
         validate_completion([p['fixture'] for p in e['samples'][-1]['peers']])

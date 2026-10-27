@@ -28,5 +28,30 @@ class NegotiatedReceiptTests(unittest.TestCase):
                 intro.validate_completion(values)
 
 
+class NativeControlWitnessTests(unittest.TestCase):
+    def row(self):
+        players = [dict(character=seat, state=1, hp=32, action=2, x_raw=100*65536) for seat in (0, 1)]
+        return dict(peers=[dict(peer=0, observation=dict(players=players))])
+
+    def test_controlled_native_walk_and_genuine_other_actor_damage_are_separate(self):
+        before = self.row(); after = copy.deepcopy(before)
+        after['peers'][0]['observation']['players'][0].update(action=3, x_raw=97*65536)
+        self.assertTrue(intro.independent_walk(before, after, 0)[0]['other_stationary'])
+        other = after['peers'][0]['observation']['players'][1]
+        other.update(x_raw=101*65536)
+        self.assertIsNone(intro.independent_walk(before, after, 0))
+        other.update(hp=30, action=17)
+        witness = intro.independent_walk(before, after, 0)[0]
+        self.assertFalse(witness['other_stationary']); self.assertTrue(witness['other_HP_drop'])
+        after['peers'][0]['observation']['players'][0]['action'] = 17
+        self.assertIsNone(intro.independent_walk(before, after, 0))
+
+    def test_dead_nonparticipant_cannot_supply_restored_controls(self):
+        before = self.row(); after = copy.deepcopy(before)
+        after['peers'][0]['observation']['players'][1].update(action=4, x_raw=97*65536)
+        after['peers'][0]['observation']['players'][0]['hp'] = 0
+        self.assertIsNone(intro.independent_walk(before, after, 1))
+
+
 if __name__ == '__main__':
     unittest.main()
