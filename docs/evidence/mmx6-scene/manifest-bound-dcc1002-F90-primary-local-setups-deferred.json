@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F90"
+  ],
+  "frozen_row_sha256": "e145b0cbf26d11f59e912bf85dc29c7e1c8203d5b8d5df58230593e7e9cb300c",
+  "result": "deferred_primary_finisher_setups_no_new_feature_verdict",
+  "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+  "ledger_status_unchanged": "failed",
+  "attempts": [
+    {
+      "session_id": 71985,
+      "version": 1,
+      "parent_status": "failed_setup",
+      "parent_error": "Two source-owned basic offers missed/intercepted; retain and defer",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "observer_status": "failed_partial",
+      "observer_error": "Two source-owned basic offers missed/intercepted; retain and defer",
+      "samples": 49,
+      "offers": [
+        {
+          "before": 41,
+          "after": 43,
+          "before_hp": [
+            32
+          ],
+          "after_hp": [
+            32
+          ],
+          "births": [
+            {
+              "peer": 0,
+              "row": 42,
+              "shots": [
+                {
+                  "slot": 0,
+                  "owner": 1,
+                  "address": "0x800950a0",
+                  "allocation": 33,
+                  "active": 33,
+                  "type": 0,
+                  "subtype": 0,
+                  "visible": 0,
+                  "state": 3,
+                  "action": 0,
+                  "phase": 0,
+                  "phase2": 0,
+                  "x": 5362,
+                  "y": 2066,
+                  "x_raw": 351404032,
+                  "y_raw": 135397376,
+                  "layer": 0,
+                  "facing": 64,
+                  "selected_clip": 21,
+                  "sprite_frame": 5,
+                  "animation_cursor": "0x80076d88",
+                  "command": [
+                    2,
+                    0,
+                    1,
+                    5
+                  ],
+                  "attack": "0x0",
+                  "hurt": "0x0",
+                  "table": "0x0",
+                  "hp": 0,
+                  "iframe": 0,
+                  "disposition": 0,
+                  "token": 0,
+                  "remembered_token": 0,
+                  "recovery": 0,
+                  "feedback": 1,
+                  "hex": "21000000030000000000f214000012080000000000400115000000000000000000c006000000000000000000000000009c780780886d0780000000001c9b14800000027802000105ff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a0700980f6140d0800000000000000000000000000000000000000000100000000000000",
+                  "parent": "0x800970a0"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "before": 45,
+          "after": 48,
+          "before_hp": [
+            32
+          ],
+          "after_hp": [
+            32
+          ],
+          "births": [
+            {
+              "peer": 0,
+              "row": 46,
+              "shots": [
+                {
+                  "slot": 0,
+                  "owner": 1,
+                  "address": "0x800950a0",
+                  "allocation": 33,
+                  "active": 33,
+                  "type": 0,
+                  "subtype": 0,
+                  "visible": 1,
+                  "state": 1,
+                  "action": 0,
+                  "phase": 0,
+                  "phase2": 0,
+                  "x": 5362,
+                  "y": 2066,
+                  "x_raw": 351404032,
+                  "y_raw": 135397376,
+                  "layer": 0,
+                  "facing": 64,
+                  "selected_clip": 21,
+                  "sprite_frame": 4,
+                  "animation_cursor": "0x80076d84",
+                  "command": [
+                    1,
+                    1,
+                    1,
+                    4
+                  ],
+                  "attack": "0x801f3790",
+                  "hurt": "0x0",
+                  "table": "0x0",
+                  "hp": 0,
+                  "iframe": 0,
+                  "disposition": 0,
+                  "token": 0,
+                  "remembered_token": 0,
+                  "recovery": 0,
+                  "feedback": 1,
+                  "hex": "21000001010000000000f214000012080000000000400115000000000000000000c006000000000000000000000000009c780780846d0780000000001c9b14800000027801010104ff0000000000000090371f800000000000000000000000000000000000000000b0371f8000000000000000000000000000000000a0700980ec14150800000000000000000000000000000000000000000100000000000000",
+                  "parent": "0x800970a0",
+                  "source_box": [
+                    246,
+                    250,
+                    18,
+                    11
+                  ],
+                  "attack_rect": [
+                    5354,
+                    2060,
+                    5372,
+                    2071
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F90-primary-local-v82-root-v1\\qualification.json",
+          "bytes": 5792251,
+          "sha256": "6d6045cd404ea24a3a639a55569a8d52b2926d61e3bec11d3c2195a80e43503d"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F90-primary-local-v82-root-v1\\ammo-hud\\intro-admission\\F90-primary-finisher\\observations.json",
+          "bytes": 1809807,
+          "sha256": "4135ed6d0b65d2be3ab7e905fcf456ea59074db69b74ec942b029835fa6d0595"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F90-primary-local-v82-root-v1\\ammo-hud\\intro-admission\\F90-Investigator-entry\\observations.json",
+          "bytes": 3321183,
+          "sha256": "6f31858fdc7187d7eccdfa6aa4c7ce07129391e25bb10da1e8ebc5a1f81bae10"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F90-primary-local-v82-root-v1\\worker-executed-source.py",
+          "bytes": 7048,
+          "sha256": "f3e8e3b168ef039e0eb617de254ad81e70e9f9c808bf8f94029ece2161a46183"
+        }
+      ]
+    },
+    {
+      "session_id": 84109,
+      "version": 2,
+      "parent_status": "failed_setup",
+      "parent_error": "actual lower boss intersects source basic muzzle lane: native source predicate not earned",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "observer_status": "failed_partial",
+      "observer_error": "actual lower boss intersects source basic muzzle lane: native source predicate not earned",
+      "samples": 190,
+      "offers": [],
+      "artifacts": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F90-primary-local-v82-root-v2\\qualification.json",
+          "bytes": 12144416,
+          "sha256": "c4ce0f3e77eebfef93ab0931abf22671488b020738bb43b67934225fb631f1a4"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F90-primary-local-v82-root-v2\\ammo-hud\\intro-admission\\F90-primary-finisher\\observations.json",
+          "bytes": 7711079,
+          "sha256": "4bf65e2e18885f2972bda77544b7eeb70dbcf9ee5382857243dcf0484a189264"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F90-primary-local-v82-root-v2\\ammo-hud\\intro-admission\\F90-Investigator-entry\\observations.json",
+          "bytes": 3495139,
+          "sha256": "dfbc02096ac16684d46a821869cc45873cd1b20cb058b5b618b4846f99442fe7"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F90-primary-local-v82-root-v2\\worker-executed-source.py",
+          "bytes": 7046,
+          "sha256": "5305bba17c5bc26a1cdd05a5f8ae7420a040686e9bef08a0727bf5899843ecf5"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "F90 still needs actual P1 finalhit plus both native victory/departure in LOCAL and NET. Completed F128 is only the guest-finisher half on this same candidate.",
+    "No finalhit occurred here, no NET run, no F90 pass or new product failure inferred. Parent only completed its initial exact-image/source gate before the callback failed; later parent gates were not earned.",
+    "Ordinary inputs and agreed native AmazonCP2 only, actual fullHP32 boss entry; no HP/protection/position/pose/outcome writes. Native cards unchanged and owned process exits0.",
+    "Stop after two bounded setups and switch to F118; no further F90 timing variant this block.",
+    "First basic0 births retired at5362/2066 outside main hurt5400..5424. Actual child or terrain collision cause is unproven because first world read retained only main/pools and hash. Second observer retains actual children; do not transfer those later observations backward."
+  ]
+}
