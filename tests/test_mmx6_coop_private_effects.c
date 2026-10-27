@@ -1484,6 +1484,22 @@ static void check_door_result(CPUState *cpu,unsigned owner,unsigned phase) {
 }
 static void native_either_both_door_admission(void) {
     CPUState cpu;
+    /* Actual native menu preview: inside/Zero projection bypasses the outer
+     * door callback. No tag35 frame exists, but native AI/drawing still runs.
+     * The read-only preview must not set PLAYER+D4 or shared PLAY+1C. */
+    for(unsigned both=0;both<2;++both) {
+        door_setup(&cpu,both,400,480);pause_owner=1;inside=zero_world=1;
+        enter_zero();CHECK(!door_begin(&cpu,0x80050250u));
+        CHECK(guest(&cpu,0x80050250u,TEST_DOOR,0)==0xD007);
+        CHECK(!psx_mod_read_byte(PLAYER+0xD4) && !psx_mod_read_byte(PLAY+0x1C));
+        zero_world=0;leave_zero_context(1);inside=0;
+        CHECK(!p2.body[0xD4] && !scene_owner && !scene_phase &&
+            door_ticks==1 && door_draws==1 && !state_track.count);
+        pause_owner=-1;door_ticks=door_draws=call_count=0;
+        /* Closing the menu restores original active-world admission. */
+        if(both)check_door_result(&cpu,0,0);
+        else check_door_result(&cpu,2,1);
+    }
     /* Default Either admits either real native overlap, with transport. */
     door_setup(&cpu,0,480,400);check_door_result(&cpu,1,1);
     CHECK(psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4] && occurrences(0x80050C88u)==2);

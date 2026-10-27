@@ -1010,7 +1010,14 @@ static int door_eligibility(CPUState *cpu, uint32_t address) {
      * The callback frame already owns/digests these future-restored words,
      * including across guest yields. No untracked gate or host pointer. */
     if (address!=0x80050C88u || cpu->gpr[31]!=0x80050368u ||
-        !scene_call || failed || !enrolled) return 0;
+        failed || !enrolled) return 0;
+    /* Zero's original menu preview draws a native world while already
+     * projected. Its door AI bypasses door_begin's outer callback guard.
+     * Drawing a personal menu must never claim a touching actor or set the
+     * original stage lock, under Either or Both. The pure predicate remains
+     * authoritative again after the owning menu actually releases. */
+    if (pause_owner>=0) { cpu->gpr[2]=0;return 1; }
+    if (!scene_call) return 0;
     for (unsigned i=state_track.count;i;--i) {
         const Mmx6StateFrame *f=&state_track.frame[i-1];
         if (f->tag!=35 || !f->words || f->bytes!=6*4u) continue;
