@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "comparison": "F42",
+  "frozen_row_sha256": "2370b3f891056d4103a694a71f5d45e9299979ca48a9a22744fb1a10125abad8",
+  "mode": "local",
+  "result": "failed",
+  "candidate": "afdaacad47c569438e82190ad88808aa8ffffdcd",
+  "explicit_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-v61-final-binding-root-v1.json",
+    "binding_sha256": "827c18c92db87451e74a14302cd9b5edd71549a6ed7672c9c40c37c752467814",
+    "image_sha256": "7232bb6e166158346707c6bac652b89b41c28f4eccfc5e8cfa006d27f8ed317a",
+    "manifest_sha256": "ca133bf78d34b2bcfeb390b92cabe49814a2fa44fad4dc149dd772c0349c7930",
+    "provenance_sha256": "5ee9c99ee90294a8d3e457a79440f210400103c573f93b8e016d71856c9919fe",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v61-native-nova-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "afdaacad47c569438e82190ad88808aa8ffffdcd",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v20",
+    "host_revision": 4
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v61-root-v1\\qualification.json",
+    "sha256": "a282b2007a9cb51ea180c63ee71769d8121c7ab7050bb45ad33239b4b393cb06"
+  },
+  "root_composed_review": [
+    {
+      "peer": 0,
+      "label": "separated-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v61-root-v1\\hud\\peer-0-separated-private-owner-views.png",
+      "sha256": "f512b33d3e6ab79a8946689729187f60d478ce1a197d2bd374792db4bd5f553e",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v61-root-v1\\hud\\peer-0-owner0-native-shared-menu.png",
+      "sha256": "9637ad2a051947d5e7b29263b22b0e44cb46ecf6b300300b17bad9e4e8d0ffe6",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-native-shared-menu-tall",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v61-root-v1\\hud\\peer-0-owner0-native-shared-menu-tall.png",
+      "sha256": "1e4dca85cd7a5c302c9b87318dc2d24d7d3c130e1d57db7cdd2bef4f08361b4b",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v61-root-v1\\hud\\peer-0-owner0-restored-private-owner-views.png",
+      "sha256": "b819eeb86f369f4236f7a14c055ed6049345b11968cfb03823a8093af1d6257b",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v61-root-v1\\hud\\peer-0-owner1-native-shared-menu.png",
+      "sha256": "3274a2a06ba3ab3793f460c882b402b24007d86a757a984d5c7d1c3ea5ee6470",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-native-shared-menu-tall",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v61-root-v1\\hud\\peer-0-owner1-native-shared-menu-tall.png",
+      "sha256": "22e0f0a064ed4f8a13ead4e367e6e1dc5a6b46d2259a78be806ec38a99fdf961",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-native-camera-local-v61-root-v1\\hud\\peer-0-owner1-restored-private-owner-views.png",
+      "sha256": "52404a194b262936c403bc0dcafbe081c470dc2ccff7ba9ef594d02a40ec4d04",
+      "surface": "composed_renderer_output"
+    }
+  ],
+  "finding": "Both original native owner menus and8:3 shared duplicate canvas/resize pass, followed by resumed private commits/HUDs. However Zero private camera resets from its established view to the primary scene after either menu: initial Zero centered in its own terrain, after resume Zero at left edge and primary-scene terrain shifted into its pane. Distinct actor/world coordinates and unchanged selected mode do not establish correct owner follow. This fails F42 restoration; no aggregate pass.",
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "limits": [
+    "Runtime scalar checks passed; root visual review overrides preliminary review-pending status. No NET run on V61: fix demonstrated camera reseed first. F177 LOCAL not promoted from this run. All raw retained."
+  ]
+}

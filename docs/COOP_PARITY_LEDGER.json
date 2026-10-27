@@ -7690,17 +7690,46 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "afdaacad47c569438e82190ad88808aa8ffffdcd",
+            "build_identity": {
+              "executable_sha256": "7232bb6e166158346707c6bac652b89b41c28f4eccfc5e8cfa006d27f8ed317a",
+              "compiled_manifest_sha256": "ca133bf78d34b2bcfeb390b92cabe49814a2fa44fad4dc149dd772c0349c7930",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "local split8:3",
+              "renderer": "960x720 and640x900 OpenGL",
+              "entry": "ordinary original intro"
+            },
+            "action": "Ordinary X movement separates owners364px; both native owner menus, shared canvas resize and resume.",
+            "outcome": "Both original native owner menus and8:3 shared duplicate canvas/resize pass, followed by resumed private commits/HUDs. However Zero private camera resets from its established view to the primary scene after either menu: initial Zero centered in its own terrain, after resume Zero at left edge and primary-scene terrain shifted into its pane. Distinct actor/world coordinates and unchanged selected mode do not establish correct owner follow. This fails F42 restoration; no aggregate pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-afdaaca-F42-local-camera-reset-failure-reviewed.json",
+                "sha256": "4c18d1f9b6d6b7e0db876a3008bcfa94d63346581b1f51430ac39da8cd29f644"
+              }
+            ],
+            "limits": [
+              "Runtime scalar checks passed; root visual review overrides preliminary review-pending status. No NET run on V61: fix demonstrated camera reseed first. F177 LOCAL not promoted from this run. All raw retained."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Both original native owner menus and8:3 shared duplicate canvas/resize pass, followed by resumed private commits/HUDs. However Zero private camera resets from its established view to the primary scene after either menu: initial Zero centered in its own terrain, after resume Zero at left edge and primary-scene terrain shifted into its pane. Distinct actor/world coordinates and unchanged selected mode do not establish correct owner follow. This fails F42 restoration; no aggregate pass."
       }
     },
     {
