@@ -1,0 +1,4236 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "R25"
+  ],
+  "frozen_row_sha256": {
+    "R25": "738647fb6fc6462d6b90ebe5eb46fe08966d75d7225fed5d9b73cdd49ce5d9c7"
+  },
+  "result": "passed",
+  "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-final-binding-root-v1.json",
+    "binding_sha256": "a60ace7a0443b9d30954720c3c350c241c2e29c6883ebded3e9a016775c98e5b",
+    "image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+    "manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+    "provenance_sha256": "9debbad5780b8966e8ce447f0359e0b6327ac488f116e3abe296e41f029c3bdb",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v83-lab-contact-protection-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v32",
+    "host_revision": 15
+  },
+  "integrated_source_commit": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+  "integrated_code_equals_tested_candidate": true,
+  "source_change": "Default-off negotiated LAB hostile-contact prerequisite; normal catalogs omit it; native arrival/terrain/resources/player attacks unchanged.",
+  "focused_compiled_checks": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v83-contact-protection-root-v1.log",
+    "bytes": 5888,
+    "sha256": "8fa5b91008fad8372047c14776dba5800f091f08b5e4f848696695ff60eefb08"
+  },
+  "modes": {
+    "local": {
+      "status": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-local-v83-root-v1\\qualification.json",
+        "bytes": 4190272,
+        "sha256": "a21b661d73a7068cabb01880a32d48b9336a60a09d6b884da39c1134521fcaec"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-local-v83-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 1889647,
+        "sha256": "5225e03d7ce56a24459640e35c20121b3e55fb915a25ed28ae1420254a7f2907"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "actual_authored_edge": true,
+        "original_full_standing_boxes_and_used_live_support": true,
+        "actual_Select90_departure_absence_fresh_native_arrival": true,
+        "retained_personal_resources": true,
+        "no_checkpoint_or_fixture_reload_during_return": true,
+        "actual_guest_jump_and_landing": true
+      },
+      "milestones": [
+        {
+          "label": "start",
+          "row": 184,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 201,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313491456,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "leaving",
+          "row": 225,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 295,
+              "lifecycle": [
+                0,
+                1
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313491456,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 1,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "absent",
+          "row": 258,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 406,
+              "lifecycle": [
+                0,
+                2
+              ],
+              "protection": 7,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313491456,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 3,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 41549824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000000010201073146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "neutral",
+          "row": 260,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 411,
+              "lifecycle": [
+                0,
+                2
+              ],
+              "protection": 7,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313491456,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 3,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 41549824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000000010201073146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "joining",
+          "row": 262,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 418,
+              "lifecycle": [
+                0,
+                3
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313491456,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 313491456,
+                  "y_raw": 44564480,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "alive",
+          "row": 310,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 535,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313491456,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313491456,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        }
+      ],
+      "actual_support_assets": [
+        {
+          "peer": 0,
+          "label": "before actual native edge return",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "f76d664dea0524292844eda11c5f5001817cf8d9d6cf693b96656e5ac03c1c41",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25712,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25712,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25744,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25744,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25776,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25776,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25808,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25808,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25714,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25714,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25746,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25746,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25778,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25778,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25810,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25810,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4783,
+              "y": 843,
+              "left": 4772,
+              "right_exclusive": 4794,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4760,
+              "y": 842,
+              "left": 4749,
+              "right_exclusive": 4771,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -16896,
+              "y_fraction": 0
+            }
+          ]
+        },
+        {
+          "peer": 0,
+          "label": "after full native edge return",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "62b20ee183331caa06c79cf6676c0c10742c59a5fb75e96b66519385d1d90f57",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4783,
+              "y": 843,
+              "left": 4772,
+              "right_exclusive": 4794,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4783,
+              "y": 842,
+              "left": 4772,
+              "right_exclusive": 4794,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -16896,
+              "y_fraction": 0
+            }
+          ]
+        },
+        {
+          "peer": 0,
+          "label": "after independently controlled native relanding",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "62b20ee183331caa06c79cf6676c0c10742c59a5fb75e96b66519385d1d90f57",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4783,
+              "y": 843,
+              "left": 4772,
+              "right_exclusive": 4794,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4783,
+              "y": 842,
+              "left": 4772,
+              "right_exclusive": 4794,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -304128,
+              "y_fraction": 0
+            }
+          ]
+        }
+      ],
+      "cleanup": [
+        {
+          "owned_pid": 82768,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "native_cards_unchanged": true,
+      "typed_preferences_unchanged": true,
+      "fixture_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        }
+      ],
+      "resolved_state_crc": [],
+      "host_profile": null,
+      "profile_startup": null,
+      "executing_source_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-R25-right-edge-v83-root-v1.py": "83e8a1265387d340b20ede122e3de01fec698c104db4533e20f8494720b27e82",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R25_right_edge_v83_root_v1.py": "8b97d5d9f8349cc26cab7cce85a1b8ac9cfd686a4bba2d078fe067668798b343",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "a4f832f54e3e42d212336a9934b4f33c671f057c5bd2e0b7c50a088fef67f590",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-exact-build-guard-root-v1.py": "c6a329b08fb7828205634e53fe2ad5dfec91706add6f31c7d38b681452106893",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-final-binding-root-v1.json": "a60ace7a0443b9d30954720c3c350c241c2e29c6883ebded3e9a016775c98e5b",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R25_native_edge_v68_worker_v2.py": "4c219ed02512d7ba897960a3d1ae40feab1eb8976106593f34341bf865f15244",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-intro-upper-edge-source-worker-v1.json": "1343b9ce31a2d79167d9b7c9ad0bbc785a9b967e237480b9072b741528e9aae8"
+      }
+    },
+    "netplay": {
+      "status": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-netplay-v83-root-v1\\qualification.json",
+        "bytes": 5224417,
+        "sha256": "f3d93a927fc43588860a83fa8a49976510a09bcfe113119da21dfce71556153f"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-netplay-v83-root-v1\\intro-admission\\observations.json",
+        "bytes": 2834723,
+        "sha256": "cebf5dae1b7d23c0f483b48689d7130943bebb6d8f6168b2ef7f77ef466cea91"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "actual_authored_edge": true,
+        "original_full_standing_boxes_and_used_live_support": true,
+        "actual_Select90_departure_absence_fresh_native_arrival": true,
+        "retained_personal_resources": true,
+        "no_checkpoint_or_fixture_reload_during_return": true,
+        "actual_guest_jump_and_landing": true
+      },
+      "milestones": [
+        {
+          "label": "start",
+          "row": 124,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 219,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            },
+            {
+              "peer": 1,
+              "native_timer": 220,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "leaving",
+          "row": 155,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 320,
+              "lifecycle": [
+                0,
+                1
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 1,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            },
+            {
+              "peer": 1,
+              "native_timer": 323,
+              "lifecycle": [
+                0,
+                1
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 1,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "absent",
+          "row": 184,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 430,
+              "lifecycle": [
+                0,
+                2
+              ],
+              "protection": 7,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 3,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 41549824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000000010201073146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            },
+            {
+              "peer": 1,
+              "native_timer": 435,
+              "lifecycle": [
+                0,
+                2
+              ],
+              "protection": 7,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 3,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 41549824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000000010201073146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "neutral",
+          "row": 186,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 437,
+              "lifecycle": [
+                0,
+                2
+              ],
+              "protection": 7,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 3,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 41549824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000000010201073146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            },
+            {
+              "peer": 1,
+              "native_timer": 440,
+              "lifecycle": [
+                0,
+                2
+              ],
+              "protection": 7,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 3,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 311951360,
+                  "y_raw": 41549824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000000010201073146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "joining",
+          "row": 188,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 448,
+              "lifecycle": [
+                0,
+                3
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 44040192,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            },
+            {
+              "peer": 1,
+              "native_timer": 453,
+              "lifecycle": [
+                0,
+                3
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 0,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 46661632,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        },
+        {
+          "label": "alive",
+          "row": 220,
+          "peers": [
+            {
+              "peer": 0,
+              "native_timer": 566,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            },
+            {
+              "peer": 1,
+              "native_timer": 567,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "protection": 15,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55246848,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 313884672,
+                  "y_raw": 55181312,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 0,
+                "section": 0,
+                "checkpoint": 1,
+                "nonce": 1279608369,
+                "initializer_entries": 1,
+                "record": "8007212C",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b503101000000030000000102010f3146454c010000002c21078001010201",
+                "pose": 2,
+                "placement_calls": 1
+              }
+            }
+          ]
+        }
+      ],
+      "actual_support_assets": [
+        {
+          "peer": 0,
+          "label": "before actual native edge return",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "f76d664dea0524292844eda11c5f5001817cf8d9d6cf693b96656e5ac03c1c41",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25712,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25712,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25744,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25744,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25776,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25776,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25808,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25808,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25714,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25714,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25746,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25746,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25778,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25778,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25810,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25810,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4789,
+              "y": 843,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4760,
+              "y": 842,
+              "left": 4749,
+              "right_exclusive": 4771,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -16896,
+              "y_fraction": 0
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "label": "before actual native edge return",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "f76d664dea0524292844eda11c5f5001817cf8d9d6cf693b96656e5ac03c1c41",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25712,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25712,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25744,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25744,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25776,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25776,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25808,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25808,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25714,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25714,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25746,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25746,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25778,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25778,
+                "meta_hex": "4b07",
+                "desc_at": 7468,
+                "desc_hex": "00198f0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25810,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25810,
+                "meta_hex": "5107",
+                "desc_at": 7492,
+                "desc_hex": "38198a0b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4789,
+              "y": 843,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4760,
+              "y": 842,
+              "left": 4749,
+              "right_exclusive": 4771,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -16896,
+              "y_fraction": 0
+            }
+          ]
+        },
+        {
+          "peer": 0,
+          "label": "after full native edge return",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "62b20ee183331caa06c79cf6676c0c10742c59a5fb75e96b66519385d1d90f57",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4789,
+              "y": 843,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4789,
+              "y": 842,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -16896,
+              "y_fraction": 0
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "label": "after full native edge return",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "62b20ee183331caa06c79cf6676c0c10742c59a5fb75e96b66519385d1d90f57",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4789,
+              "y": 843,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4789,
+              "y": 842,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -16896,
+              "y_fraction": 0
+            }
+          ]
+        },
+        {
+          "peer": 0,
+          "label": "after independently controlled native relanding",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "62b20ee183331caa06c79cf6676c0c10742c59a5fb75e96b66519385d1d90f57",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4789,
+              "y": 843,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4789,
+              "y": 842,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -321024,
+              "y_fraction": 0
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "label": "after independently controlled native relanding",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "hashes": [
+            "44ee8d8bac07871db8780cf1dcbbbfd75d32b8fe56c7052e70e6506cf34124d2",
+            "62b20ee183331caa06c79cf6676c0c10742c59a5fb75e96b66519385d1d90f57",
+            "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+          ],
+          "used_exact_source_live": [
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25716,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25748,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25780,
+                "meta_hex": "4c07",
+                "desc_at": 7472,
+                "desc_hex": "00198e0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25812,
+                "meta_hex": "5207",
+                "desc_at": 7496,
+                "desc_hex": "3819890b"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25718,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25750,
+                "meta_hex": "0000",
+                "desc_at": 0,
+                "desc_hex": "00000000"
+              }
+            },
+            {
+              "original": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              },
+              "live": {
+                "code": 0,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25782,
+                "meta_hex": "4d07",
+                "desc_at": 7476,
+                "desc_hex": "00198d0b"
+              }
+            },
+            {
+              "original": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              },
+              "live": {
+                "code": 56,
+                "cell_at": 96,
+                "cell": 50,
+                "meta_at": 25814,
+                "meta_hex": "5307",
+                "desc_at": 7500,
+                "desc_hex": "3819880b"
+              }
+            }
+          ],
+          "feet": [
+            {
+              "x": 4789,
+              "y": 843,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d50",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            {
+              "x": 4789,
+              "y": 842,
+              "left": 4778,
+              "right_exclusive": 4800,
+              "top": 826,
+              "feet": 864,
+              "shape_pointer": "0x80073d54",
+              "ground": true,
+              "action": 2,
+              "air": 0,
+              "vertical_velocity": -321024,
+              "y_fraction": 0
+            }
+          ]
+        }
+      ],
+      "cleanup": [
+        {
+          "owned_pid": 42352,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "owned_pid": 90364,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "native_cards_unchanged": true,
+      "typed_preferences_unchanged": true,
+      "fixture_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        },
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        }
+      ],
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 3008,
+              "core": "cf9e3a3b",
+              "mod": "bf66fd6e"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "fcecca62",
+              "mod": "ec856f90"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "e37e53e1",
+              "mod": "b8c96554"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "2659966d",
+              "mod": "b9c13b06"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "aebc909f",
+              "mod": "05cffb88"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "062d522b",
+              "mod": "0fcb0968"
+            }
+          ],
+          "resolved_through": [
+            3178,
+            3178
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3232,
+              "core": "42901acb",
+              "mod": "5931467f"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "5247a696",
+              "mod": "804b4a72"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "b635d202",
+              "mod": "3317bf14"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "a3252940",
+              "mod": "0bf89eaa"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "89827fd5",
+              "mod": "f659494a"
+            }
+          ],
+          "resolved_through": [
+            3390,
+            3389
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3456,
+              "core": "43dee4b5",
+              "mod": "63800e40"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "1c53b7c6",
+              "mod": "76afc042"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "85fb22b8",
+              "mod": "fe6e6004"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "20dbd433",
+              "mod": "c7eece64"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "5b1389be",
+              "mod": "7117e53a"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "18ea922e",
+              "mod": "04be275a"
+            }
+          ],
+          "resolved_through": [
+            3628,
+            3629
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4608,
+              "core": "e5c922a9",
+              "mod": "b21d8776"
+            },
+            {
+              "simulation_tick": 4640,
+              "core": "7bbb30c3",
+              "mod": "9a6773ee"
+            },
+            {
+              "simulation_tick": 4672,
+              "core": "d4d1b9e6",
+              "mod": "a827fa7c"
+            },
+            {
+              "simulation_tick": 4704,
+              "core": "afa66434",
+              "mod": "cb7faa66"
+            },
+            {
+              "simulation_tick": 4736,
+              "core": "7e1ec9f8",
+              "mod": "7164c606"
+            },
+            {
+              "simulation_tick": 4768,
+              "core": "2054d75c",
+              "mod": "5936b664"
+            }
+          ],
+          "resolved_through": [
+            4771,
+            4771
+          ]
+        }
+      ],
+      "host_profile": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 15,
+        "selected_sha256": "d673236daadb7b898d4cc94dcb459cba899c7f5437612d3141c12248952a6bc9",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 15,
+              "selected_sha256": "d673236daadb7b898d4cc94dcb459cba899c7f5437612d3141c12248952a6bc9",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 15,
+              "selected_sha256": "d673236daadb7b898d4cc94dcb459cba899c7f5437612d3141c12248952a6bc9",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "profile_startup": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 15,
+        "selected_sha256": "d673236daadb7b898d4cc94dcb459cba899c7f5437612d3141c12248952a6bc9",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 15,
+              "selected_sha256": "d673236daadb7b898d4cc94dcb459cba899c7f5437612d3141c12248952a6bc9",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 15,
+              "selected_sha256": "d673236daadb7b898d4cc94dcb459cba899c7f5437612d3141c12248952a6bc9",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "executing_source_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-R25-right-edge-v83-root-v1.py": "83e8a1265387d340b20ede122e3de01fec698c104db4533e20f8494720b27e82",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R25_right_edge_v83_root_v1.py": "8b97d5d9f8349cc26cab7cce85a1b8ac9cfd686a4bba2d078fe067668798b343",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "a4f832f54e3e42d212336a9934b4f33c671f057c5bd2e0b7c50a088fef67f590",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-exact-build-guard-root-v1.py": "c6a329b08fb7828205634e53fe2ad5dfec91706add6f31c7d38b681452106893",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-final-binding-root-v1.json": "a60ace7a0443b9d30954720c3c350c241c2e29c6883ebded3e9a016775c98e5b",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R25_native_edge_v68_worker_v2.py": "4c219ed02512d7ba897960a3d1ae40feab1eb8976106593f34341bf865f15244",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-intro-upper-edge-source-worker-v1.json": "1343b9ce31a2d79167d9b7c9ad0bbc785a9b967e237480b9072b741528e9aae8"
+      }
+    }
+  },
+  "composed_images": [
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "actual-primary-right-edge-before-native-return",
+      "row": 183,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-local-v83-root-v1\\ammo-hud\\intro-admission\\peer-0-actual-primary-right-edge-before-native-return.png",
+        "bytes": 2074543,
+        "sha256": "efd29b5afd78646d8d44a2aad7ff47e3be046844a2cc70d4f35dc6dbd562a5c6"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "both-native-edge-arrival-feet",
+      "row": 310,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-local-v83-root-v1\\ammo-hud\\intro-admission\\peer-0-both-native-edge-arrival-feet.png",
+        "bytes": 2074543,
+        "sha256": "87d6e33b34681b0f7d1320812a9e678a4f8264aeaa1befdc5ff56df63ca26515"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "both-native-edge-after-independent-guest-jump",
+      "row": 331,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-local-v83-root-v1\\ammo-hud\\intro-admission\\peer-0-both-native-edge-after-independent-guest-jump.png",
+        "bytes": 2074543,
+        "sha256": "b96c7ca01b2dfffd072ce79b2dfce164e3f571fd285f51462b8bff7a89f6544b"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "actual-primary-right-edge-before-native-return",
+      "row": 123,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-netplay-v83-root-v1\\intro-admission\\peer-0-actual-primary-right-edge-before-native-return.png",
+        "bytes": 2074543,
+        "sha256": "7abe1916b9feeffecd21e98b4b04f151e0dc3c9f99af76550bbdb6ebbf3475d3"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "actual-primary-right-edge-before-native-return",
+      "row": 123,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-netplay-v83-root-v1\\intro-admission\\peer-1-actual-primary-right-edge-before-native-return.png",
+        "bytes": 2074543,
+        "sha256": "6ef9b403a9d57e5c47a8722eaa225b361ac05e28672c9ba392ed83d60696692c"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "both-native-edge-arrival-feet",
+      "row": 220,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-netplay-v83-root-v1\\intro-admission\\peer-0-both-native-edge-arrival-feet.png",
+        "bytes": 2074543,
+        "sha256": "706e9afa7f247cd84ff940276e348c33cab7ddbb72b2d61ec61ab1a0fc42d50f"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "both-native-edge-arrival-feet",
+      "row": 220,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-netplay-v83-root-v1\\intro-admission\\peer-1-both-native-edge-arrival-feet.png",
+        "bytes": 2074543,
+        "sha256": "4b28c6903848cf8ebfeea2df593a3732c8a7481fad8892b3ea02caf18ac4bd77"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "both-native-edge-after-independent-guest-jump",
+      "row": 236,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-netplay-v83-root-v1\\intro-admission\\peer-0-both-native-edge-after-independent-guest-jump.png",
+        "bytes": 2074543,
+        "sha256": "39d1418fd092b3df9a0e75d61b61ba322cc3d2f2552c90529c06ff1aac0d673a"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "both-native-edge-after-independent-guest-jump",
+      "row": 236,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-right-edge-netplay-v83-root-v1\\intro-admission\\peer-1-both-native-edge-after-independent-guest-jump.png",
+        "bytes": 2074543,
+        "sha256": "b129d05df9c8f37594db25df2eb24de9d0df9cb30e6cb0e40343f60beee513a8"
+      },
+      "personally_reviewed": true,
+      "review": "Actual visible source bodies and safe collision feet; heroes overlap after coincident native return. Corrupt scenery/HUD retained; no general art qualification."
+    }
+  ],
+  "limits": [
+    "R25 only: original edge4800/floor864, actual full standing boxes, Select90 withdrawal/absence/fresh native return, retained resources/checkpoint and independently accepted guest Jump/landing in LOCAL+NET.",
+    "Agreed intro_before_explosion bypasses preceding route and supplies CP1 position prerequisite. Negotiated lab_contact_protection=on suppresses only original80030ECC hostile damage/knockback after authenticated tainted completion. It never writes HP/position/pose/success or changes terrain/falls/player attacks/enemy HP/AI/rejoin/victory. Protected runs cannot qualify hostile contact damage.",
+    "AF0F both protected seats becomes07 while Zero is absent, then0F. Every raw receipt is retained. Only derived AF bits1..3 are normalized for immutable fixture comparison; selection and all nonce/generation/record/authority/initializer bytes remain exact.",
+    "Original/live USED layout/metatile/descriptor corridor and full foot/body geometry match. Original explosions may edit remote terrain; no blanket whole-map equality or general terrain-rendering claim.",
+    "All4 LOCAL/15 NET parent gates pass: strict fixture capture/replay refusals, hostrev15 settled at0cycles/tick0 before guest entry, four standard resolved core+nonzero-mod CRC phases, cards unchanged and graceful owned exits0. Same exacte204513/title32/snapshot12.",
+    "Root reviewed all9 composed images. Both source body visibility bytes are1 after arrival; heroes overlap at common native returnX. Corrupt scenery/HUD remain explicit. Native box/support/control observations establish R25; no general art/palette/HUD/private-camera/audio-fidelity pass.",
+    "Historical coldintro and V82 CP1 native-hurt failures stay preserved. These protected results do not turn those setups into passes. F90/F118/F132 still require their own outcomes, with no cross-candidate transfer."
+  ]
+}

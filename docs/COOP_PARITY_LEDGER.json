@@ -4332,14 +4332,14 @@
           "src/mods/mmx6_coop_lifecycle.c:mmx6_coop_fatal",
           "src/mods/mmx6_coop_plugin.c:begin_join"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4369,9 +4369,85 @@
               "All ordinary recordings, native cards, logs, failed/completedraw and executing source remain in owned scratch; original dirtyHUD/V47 preserved. No push, PR, remote sync, delivery or native source change."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+            "build_identity": {
+              "executable_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "compiled_manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "lab_checkpoint": "intro_before_explosion",
+              "lab_contact_protection": "on",
+              "audio": "muted dummy",
+              "cameras": "split"
+            },
+            "action": "Walk primary beside authored edge4800; actual Select90 withdrawal and fresh native guest return; guest Jump/landing.",
+            "outcome": "Full original feet supported at864, resources/checkpoint retained; real native beam and independent guest control on same LOCAL/NET candidate.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-e204513-R25-protected-native-edge-reviewed.json",
+                "sha256": "1fc3f309dfdc3e4260a34451bb79c51d70ee9d98621aa539a74e1d214dde6ad5"
+              }
+            ],
+            "limits": [
+              "R25 only: original edge4800/floor864, actual full standing boxes, Select90 withdrawal/absence/fresh native return, retained resources/checkpoint and independently accepted guest Jump/landing in LOCAL+NET.",
+              "Agreed intro_before_explosion bypasses preceding route and supplies CP1 position prerequisite. Negotiated lab_contact_protection=on suppresses only original80030ECC hostile damage/knockback after authenticated tainted completion. It never writes HP/position/pose/success or changes terrain/falls/player attacks/enemy HP/AI/rejoin/victory. Protected runs cannot qualify hostile contact damage.",
+              "AF0F both protected seats becomes07 while Zero is absent, then0F. Every raw receipt is retained. Only derived AF bits1..3 are normalized for immutable fixture comparison; selection and all nonce/generation/record/authority/initializer bytes remain exact.",
+              "Original/live USED layout/metatile/descriptor corridor and full foot/body geometry match. Original explosions may edit remote terrain; no blanket whole-map equality or general terrain-rendering claim.",
+              "All4 LOCAL/15 NET parent gates pass: strict fixture capture/replay refusals, hostrev15 settled at0cycles/tick0 before guest entry, four standard resolved core+nonzero-mod CRC phases, cards unchanged and graceful owned exits0. Same exacte204513/title32/snapshot12.",
+              "Root reviewed all9 composed images. Both source body visibility bytes are1 after arrival; heroes overlap at common native returnX. Corrupt scenery/HUD remain explicit. Native box/support/control observations establish R25; no general art/palette/HUD/private-camera/audio-fidelity pass.",
+              "Historical coldintro and V82 CP1 native-hurt failures stay preserved. These protected results do not turn those setups into passes. F90/F118/F132 still require their own outcomes, with no cross-candidate transfer."
+            ],
+            "bypasses": [
+              "Agreed intro_before_explosion bypasses preceding route and supplies CP1 position prerequisite. Negotiated lab_contact_protection=on suppresses only original80030ECC hostile damage/knockback after authenticated tainted completion. It never writes HP/position/pose/success or changes terrain/falls/player attacks/enemy HP/AI/rejoin/victory. Protected runs cannot qualify hostile contact damage."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+            "build_identity": {
+              "executable_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "compiled_manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "lab_checkpoint": "intro_before_explosion",
+              "lab_contact_protection": "on",
+              "audio": "muted dummy",
+              "cameras": "split"
+            },
+            "action": "Walk primary beside authored edge4800; actual Select90 withdrawal and fresh native guest return; guest Jump/landing.",
+            "outcome": "Full original feet supported at864, resources/checkpoint retained; real native beam and independent guest control on same LOCAL/NET candidate.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-e204513-R25-protected-native-edge-reviewed.json",
+                "sha256": "1fc3f309dfdc3e4260a34451bb79c51d70ee9d98621aa539a74e1d214dde6ad5"
+              }
+            ],
+            "limits": [
+              "R25 only: original edge4800/floor864, actual full standing boxes, Select90 withdrawal/absence/fresh native return, retained resources/checkpoint and independently accepted guest Jump/landing in LOCAL+NET.",
+              "Agreed intro_before_explosion bypasses preceding route and supplies CP1 position prerequisite. Negotiated lab_contact_protection=on suppresses only original80030ECC hostile damage/knockback after authenticated tainted completion. It never writes HP/position/pose/success or changes terrain/falls/player attacks/enemy HP/AI/rejoin/victory. Protected runs cannot qualify hostile contact damage.",
+              "AF0F both protected seats becomes07 while Zero is absent, then0F. Every raw receipt is retained. Only derived AF bits1..3 are normalized for immutable fixture comparison; selection and all nonce/generation/record/authority/initializer bytes remain exact.",
+              "Original/live USED layout/metatile/descriptor corridor and full foot/body geometry match. Original explosions may edit remote terrain; no blanket whole-map equality or general terrain-rendering claim.",
+              "All4 LOCAL/15 NET parent gates pass: strict fixture capture/replay refusals, hostrev15 settled at0cycles/tick0 before guest entry, four standard resolved core+nonzero-mod CRC phases, cards unchanged and graceful owned exits0. Same exacte204513/title32/snapshot12.",
+              "Root reviewed all9 composed images. Both source body visibility bytes are1 after arrival; heroes overlap at common native returnX. Corrupt scenery/HUD remain explicit. Native box/support/control observations establish R25; no general art/palette/HUD/private-camera/audio-fidelity pass.",
+              "Historical coldintro and V82 CP1 native-hurt failures stay preserved. These protected results do not turn those setups into passes. F90/F118/F132 still require their own outcomes, with no cross-candidate transfer."
+            ],
+            "bypasses": [
+              "Agreed intro_before_explosion bypasses preceding route and supplies CP1 position prerequisite. Negotiated lab_contact_protection=on suppresses only original80030ECC hostile damage/knockback after authenticated tainted completion. It never writes HP/position/pose/success or changes terrain/falls/player attacks/enemy HP/AI/rejoin/victory. Protected runs cannot qualify hostile contact damage."
+            ]
           }
         ],
-        "limitations": "LOCAL exactf7b7383 two current setup attempts retained/deferred: nativeidle stored24 falseguard fixed in observer; second reaches actual upperedge/Select90/absence/freshJOIN, then originalenemyhurt/knockback invalidates prepared stationaryedge before return. Later500samplecap/ownedtermination1. No nativearrival verdict, no NET or aggregatecredit; futureclear actual threat throughnativegameplay and fail promptlyonhurt."
+        "limitations": "Exacte204513 LOCAL+NET edge4800 native arrival, safe full feet864, retained resources/checkpoint and guest Jump/landing passed. Agreed CP1 and negotiated hostile-contact protection are disclosed prerequisites. Heroes overlap at returnX; scenery/HUD corruption remains. No contact-damage/general-art claim. Prior failed setups retained."
       }
     },
     {
