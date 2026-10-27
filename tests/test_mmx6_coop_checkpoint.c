@@ -1,6 +1,9 @@
 /* Actual plugin setup boundary against isolated RAM plus pinned original code.
  * No native game routine is emulated and no gameplay/progression pass follows. */
 #include "cpu_state.h"
+#include <stdarg.h>
+static void checkpoint_test_refusal_log(const char *format,...);
+#define MMX6_CHECKPOINT_REFUSAL_LOG(...) checkpoint_test_refusal_log(__VA_ARGS__)
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret);
 #define MMX6_TEST_GUEST_DISPATCH checkpoint_native_model
 #define main diagnostic_tests
@@ -9,6 +12,13 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret);
 static uint8_t original_ram[0x200000],before_ram[0x200000];
 static uint16_t checkpoint_vram[1024*512];
 static unsigned before_doors_probe;
+static unsigned refusal_logs;
+static char refusal_log[512];
+static void checkpoint_test_refusal_log(const char *format,...) {
+    va_list args;va_start(args,format);
+    CHECK(vsnprintf(refusal_log,sizeof refusal_log,format,args)>0);
+    va_end(args);++refusal_logs;
+}
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
     (void)ret;
     if(!before_doors_probe)return 0;
@@ -49,6 +59,7 @@ int psx_netplay_host_profile_selection(PSXHostSelection *out){*out=test_lab_prof
 #endif
 
 static void setup_checkpoint(CPUState *cpu,unsigned stage,unsigned section,unsigned cp) {
+    refusal_logs=0;refusal_log[0]=0;
     memcpy(test_ram,original_ram,sizeof test_ram);memset(test_diagnostic,0,sizeof test_diagnostic);
     memset(cpu,0,sizeof *cpu);memset(&p2,0x32,sizeof p2);diagnostic=0x9F080000u;
     inside=stage_call=player_call=zero_world=zero_projected=scene_owner=scene_phase=failed=0;
@@ -407,10 +418,43 @@ static void agreed_before_explosion_boundary(CPUState *cpu) {
         setup_position_prerequisite(cpu,online,1);psx_mod_write_byte(before_explosion_code[0].first,0);
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
             psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+        CHECK(refusal_logs==1 && strstr(refusal_log,"explosion-code-hash[0]") &&
+            strstr(refusal_log,"phase=2 index=1 address=0x80029F38") && strstr(refusal_log,"expected=0x72A44816"));
+        CHECK(!checkpoint_stage_boundary(cpu) && refusal_logs==1); /* Cleared pending request cannot log again. */
         setup_position_prerequisite(cpu,online,1);psx_mod_write_byte(0x800FA384u,2);
+        memcpy(before_ram,test_ram,sizeof test_ram);saved=p2;
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
             psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+        CHECK(refusal_logs==1 && strstr(refusal_log,"explosion-placement-word0-mask-FFFFFFFE[0]") &&
+            strstr(refusal_log,"address=0x800FA384 actual=0x00010002 expected=0x00010000"));
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof p2));
+        /* First original checkpoint mismatch wins over a later explosion
+         * mismatch. Logging adds no guest or participant mutation. */
+        setup_position_prerequisite(cpu,online,1);psx_mod_write_word(0x8007114Cu,0);
+        psx_mod_write_byte(before_explosion_code[0].first,0);
+        memcpy(before_ram,test_ram,sizeof test_ram);saved=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+        CHECK(refusal_logs==1 && strstr(refusal_log,"checkpoint-pointer[0]") &&
+            strstr(refusal_log,"address=0x8007114C actual=0x00000000 expected=0x8001E914"));
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof p2));
+        /* Post-ready collision publication failure has its own refusal,
+         * distinct from immutable native source and allocation guards. */
         setup_position_prerequisite(cpu,online,1);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        psx_mod_write_word(PLAY+0x90,102);
+        psx_mod_write_byte(actor+4,1);psx_mod_write_byte(actor+5,2);psx_mod_write_byte(actor+6,1);
+        psx_mod_write_word(actor+0x30,0x800FAA34u);psx_mod_write_word(actor+0x68,0x800FA99Cu);
+        psx_mod_write_half(actor+0x7C,88);psx_mod_write_half(actor+0x80,736);psx_mod_write_byte(actor+0x82,1);
+        CHECK(checkpoint_before_explosion_ready() && !refusal_logs);
+        psx_mod_write_word(0x1F800008u,0);memcpy(before_ram,test_ram,sizeof test_ram);saved=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && guest_calls==1 &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+        CHECK(refusal_logs==1 && strstr(refusal_log,"post-ready-meta-lower-bound[0]") &&
+            strstr(refusal_log,"phase=3 index=1 address=0x1F800008 actual=0x00000000 expected=0x80010000"));
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof p2));
+        CHECK(!checkpoint_stage_boundary(cpu) && refusal_logs==1);
+        setup_position_prerequisite(cpu,online,1);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        CHECK(!refusal_logs); /* Normal placement/waiting never emits a refusal. */
         checkpoint_reset();CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(diagnostic+0xAD));
     }
     setup_position_prerequisite(cpu,1,1);test_lab_ready=0;
