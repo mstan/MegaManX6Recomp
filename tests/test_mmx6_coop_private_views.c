@@ -366,6 +366,7 @@ static void native_menu_camera_history(int online,int split) {
 static void native_quake_inputs(int online,int split) {
     for(unsigned retiring=0;retiring<2;++retiring) {
         CPUState cpu;prepare_view(&cpu,online,split);
+        mmx6_view_sdk.local_port=1; /* The one-view NET case exercises Zero. */
         frame_count=71;view_frame=70;memset(quake_before,0,sizeof quake_before);
         quake_before[0x34]=0x91;quake_before[0x36]=9;quake_before[0x37]=retiring?1:8;
         quake_before[0x3A]=1;quake_before[0x3B]=0;quake_before[0x3C]=2;quake_before[0x3D]=2;
