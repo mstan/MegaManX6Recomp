@@ -31,6 +31,7 @@ enum { CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE=0x4C454631u }; /* Intro CP1 nearby 
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint32_t placed_world; } Mmx6CheckpointPending;
 static Mmx6CheckpointPending checkpoint_pending;
 static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previous;
+static unsigned checkpoint_contact_protection_option;
 
 static unsigned checkpoint_lab_index(void) {
     return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
@@ -70,7 +71,14 @@ static uint32_t checkpoint_hash(uint32_t first,uint32_t end) {
     for(uint32_t at=first;at<end;++at)hash=(hash^psx_mod_read_byte(at))*16777619u;
     return hash;
 }
+static int checkpoint_contact_source(void) {
+    /* Original30ECC's no-contact path returns0 at30EEC/30EF0 and30FB4/30FB8
+     * through312C4, before damage/recoil. The replacement never writes a
+     * player timer, HP or pose. Authenticate that exact original function. */
+    return checkpoint_hash(0x80030ECCu,0x800312DCu)==0xE1B1A427u;
+}
 static int checkpoint_source(const Mmx6Checkpoint *entry) {
+    if(checkpoint_contact_protection_option && !checkpoint_contact_source())return 0;
     if(psx_mod_read_word(0x8007114C)!=0x8001E914u ||
        psx_mod_read_word(0x80071150)!=0x8001E1BCu ||
        psx_mod_read_word(0x80073300u+(entry->stage*2u+entry->section)*4u)!=entry->table ||
@@ -91,6 +99,7 @@ static void checkpoint_cancel(unsigned reason) {
 static void checkpoint_reset(void) {
     memset(&checkpoint_pending,0,sizeof checkpoint_pending);
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
+    checkpoint_contact_protection_option=0;
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     char option[24];
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_checkpoint",option,sizeof option)) {
@@ -101,12 +110,52 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"intro_before_explosion"))checkpoint_lab_option=5;
         else if(strcmp(option,"off"))failed=1;
     }
+    if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {
+        if(!strcmp(option,"on"))checkpoint_contact_protection_option=1;
+        else if(strcmp(option,"off"))failed=1;
+    }
 #endif
     if(diagnostic) {
         if(psx_mod_read_byte(diagnostic+0x50)==8)psx_mod_write_byte(diagnostic+0x50,0);
         for(unsigned i=0xA0;i<0xC0;++i)psx_mod_write_byte(diagnostic+i,0);
         psx_mod_write_word(diagnostic+0xA0,CHECKPOINT_CAPABILITY);
     }
+}
+/* Derived authorization only: no new latch, guest body write or live setting
+ * switch. Keep P1 covered when P2 voluntarily leaves/joins; a real fall still
+ * uses the untouched native terrain/death paths. Rendering is never authority. */
+static unsigned checkpoint_contact_protection_mask(void) {
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+    if(!checkpoint_contact_protection_option || checkpoint_pending.phase ||
+       checkpoint_lab_state!=CHECKPOINT_LAB_CONSUMED || !checkpoint_lab_authorized() ||
+       !ready || !enrolled || failed || private_draw || view_call || !diagnostic ||
+       scene_owner || scene_phase || clear_phase || pause_owner>=0 || zero_menu_loaded ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C))return 0;
+    const Mmx6Checkpoint *entry=&checkpoint_inventory[checkpoint_lab_index()];
+    if(psx_mod_read_byte(PLAY+12)!=entry->stage || psx_mod_read_byte(PLAY+13)!=entry->section ||
+       psx_mod_read_byte(PLAY+0x1D)!=entry->checkpoint ||
+       psx_mod_read_word(diagnostic+0xA0)!=CHECKPOINT_CAPABILITY || psx_mod_read_word(diagnostic+0xA4)!=1 ||
+       psx_mod_read_byte(diagnostic+0xA8)!=CHECKPOINT_COMPLETE || psx_mod_read_byte(diagnostic+0xA9) ||
+       psx_mod_read_byte(diagnostic+0xAA)!=entry->stage || psx_mod_read_byte(diagnostic+0xAB)!=entry->section ||
+       psx_mod_read_byte(diagnostic+0xAC)!=entry->checkpoint ||
+       psx_mod_read_word(diagnostic+0xB0)!=checkpoint_lab_nonce() || psx_mod_read_word(diagnostic+0xB4)!=1 ||
+       psx_mod_read_word(diagnostic+0xB8)!=entry->record || psx_mod_read_byte(diagnostic+0xBC)!=1 ||
+       psx_mod_read_byte(diagnostic+0xBD)!=CHECKPOINT_AGREED ||
+       psx_mod_read_byte(diagnostic+0xBE)!=CHECKPOINT_LAB_CONSUMED)return 0;
+    unsigned mask=0;
+    for(unsigned seat=0;seat<2;++seat)
+        if(life.status[seat]==MMX6_COOP_ALIVE || life.status[seat]==MMX6_COOP_LEAVING ||
+           life.status[seat]==MMX6_COOP_JOINING)mask|=1u<<seat;
+    return mask;
+#else
+    return 0;
+#endif
+}
+static unsigned checkpoint_contact_protection_status(void) {
+    unsigned mask=checkpoint_contact_protection_mask();
+    /* AF: bit0 selected; bit1 active; bits2/3 protected P1/P2. */
+    return (checkpoint_contact_protection_option?1u:0u) | (mask?2u:0u) | (mask<<2);
 }
 static int checkpoint_safe_boundary(void) {
     return ready && enrolled && !failed && !inside && !stage_call && !player_call && !ride_call && !view_call && !private_draw && !zero_world &&
@@ -278,6 +327,10 @@ static void checkpoint_refusal_value(const char *guard,unsigned index,uint32_t a
 }
 static void checkpoint_source_refusal(const Mmx6Checkpoint *entry) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
+    if(checkpoint_contact_protection_option && !checkpoint_contact_source()) {
+        checkpoint_refusal_value("contact-no-damage-source-hash",0,0x80030ECCu,
+            checkpoint_hash(0x80030ECCu,0x800312DCu),0xE1B1A427u);return;
+    }
     const uint32_t addresses[]={0x8007114Cu,0x80071150u,
         0x80073300u+(entry->stage*2u+entry->section)*4u,entry->table+entry->checkpoint*4u};
     const uint32_t expected[]={0x8001E914u,0x8001E1BCu,entry->table,entry->record};

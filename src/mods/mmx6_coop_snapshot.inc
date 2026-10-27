@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 11 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 12 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -202,7 +202,8 @@ static uint32_t state_digest(void) {
     StateIO io={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_fixed(&io,0x53483658u);state_core(&io,&core);
     const uint32_t resources[]={assets,assembly,palette_source,active_palette,packets,diagnostic,
         menu_memory,menu_assembly,hud_packets,(uint32_t)compressed_size,(unsigned)snapshot_asset_valid,
-        jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded,independent_views,checkpoint_lab_option,both_doors};
+        jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded,independent_views,checkpoint_lab_option,
+        checkpoint_contact_protection_option,both_doors};
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
@@ -246,7 +247,8 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,11);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);state_fixed(s,both_doors);
+    state_fixed(s,0x53503658u);state_fixed(s,12);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,both_doors);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);

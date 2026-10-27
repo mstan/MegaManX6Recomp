@@ -50,11 +50,14 @@ void gpu_write_gp0(uint32_t value){(void)value;}
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
 static uint8_t before_doors_ram[0x200000];
 static const char *test_lab_option="off";
+static const char *test_lab_contact_option="off";
 static unsigned test_lab_ready=1,test_lab_failed,test_lab_selected=1;
 static PSXHostSelection test_lab_profile;
 int psx_mod_option_value(const char *package,const char *feature,const char *option,char *out,uint32_t size) {
-    CHECK(!strcmp(package,"mmx6.local-coop") && !strcmp(feature,"prototype") && !strcmp(option,"lab_checkpoint"));
-    CHECK(size>strlen(test_lab_option));strcpy(out,test_lab_option);return 1;
+    CHECK(!strcmp(package,"mmx6.local-coop") && !strcmp(feature,"prototype"));
+    CHECK(!strcmp(option,"lab_checkpoint") || !strcmp(option,"lab_contact_protection"));
+    const char *value=!strcmp(option,"lab_checkpoint")?test_lab_option:test_lab_contact_option;
+    CHECK(size>strlen(value));strcpy(out,value);return 1;
 }
 int psx_netplay_host_profile_ready(void){return (int)test_lab_ready;}
 int psx_netplay_host_profile_failed(void){return (int)test_lab_failed;}
@@ -109,6 +112,108 @@ static void setup_agreed(CPUState *cpu,int online) {
     psx_mod_write_byte(PLAYER,1);
     p2.body[0x67]=0;p2.body[0x70]=8;
     CHECK(checkpoint_lab_option==1 && !checkpoint_lab_state && !checkpoint_lab_previous);
+}
+static void apply_protected_checkpoint(CPUState *cpu,int online) {
+    test_lab_contact_option="on";setup_agreed(cpu,online);
+    CHECK(checkpoint_contact_protection_option==1 && !checkpoint_contact_protection_mask());
+    CHECK(checkpoint_contact_protection_status()==1); /* Selected != applied. */
+    CHECK(checkpoint_lab_boundary(6) && !checkpoint_contact_protection_mask());
+    mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(!checkpoint_contact_protection_mask());
+    psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
+    CHECK(checkpoint_contact_protection_mask()==3 && checkpoint_contact_protection_status()==15);
+}
+static void protected_contact_unchanged(CPUState *cpu,unsigned resident) {
+    psx_mod_write_byte(PLAYER+2,(uint8_t)resident);
+    memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+    uint8_t published[sizeof test_diagnostic];memcpy(published,test_diagnostic,sizeof published);
+    CPUState expected=*cpu;expected.gpr[2]=0;unsigned calls=guest_calls;
+    CHECK(player_contact(cpu,0x80030ECCu)==1 && !memcmp(cpu,&expected,sizeof expected));
+    CHECK(guest_calls==calls && !memcmp(before_ram,test_ram,sizeof test_ram) &&
+        !memcmp(&partner,&p2,sizeof partner) && !memcmp(published,test_diagnostic,sizeof published));
+}
+static void agreed_contact_protection(CPUState *cpu) {
+    test_lab_contact_option="off";setup_agreed(cpu,1);
+    CHECK(!checkpoint_contact_protection_option && !checkpoint_contact_protection_status());
+    inside=1;cpu->gpr[2]=77;CHECK(!player_contact(cpu,0x80030ECCu) && cpu->gpr[2]==77);inside=0;
+    CHECK(checkpoint_lab_boundary(6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
+    CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && !checkpoint_contact_protection_mask());
+    test_lab_contact_option="invalid";setup_agreed(cpu,1);
+    CHECK(failed && !checkpoint_contact_protection_option && !checkpoint_contact_protection_mask());
+    for(int online=0;online<=1;++online) {
+        apply_protected_checkpoint(cpu,online);protected_contact_unchanged(cpu,0);
+        /* P1 protection does not disappear with the guest's native transport
+         * body or voluntary absence. No lifecycle transition is fabricated. */
+        for(unsigned status=MMX6_COOP_ALIVE;status<=MMX6_COOP_FALLEN;++status) {
+            life.status[1]=(Mmx6CoopStatus)status;
+            unsigned present=status==MMX6_COOP_ALIVE || status==MMX6_COOP_LEAVING || status==MMX6_COOP_JOINING;
+            CHECK(checkpoint_contact_protection_mask()==(present?3u:1u));
+            protected_contact_unchanged(cpu,0);
+            if(present) {
+                inside=player_call=stage_call=zero_projected=1;
+                protected_contact_unchanged(cpu,1);
+                inside=player_call=stage_call=zero_projected=0;
+            }
+        }
+        life.status[1]=MMX6_COOP_ALIVE;
+        life.status[0]=MMX6_COOP_FALLEN;CHECK(checkpoint_contact_protection_mask()==2);
+        zero_world=zero_projected=1;protected_contact_unchanged(cpu,1);zero_world=zero_projected=0;
+        life.status[0]=MMX6_COOP_ALIVE;
+        /* The contact-only branch must not intercept enemy damage or terrain,
+         * nor accept an address different from the registered30ECC contract. */
+        inside=1;cpu->gpr[2]=77;
+        CHECK(!enemy_hit(cpu,0x80031474u) && !solid_player_collision(cpu,0x80031DA8u));
+        CHECK(!player_contact(cpu,0x80031474u) && cpu->gpr[2]==77);inside=0;
+        for(unsigned bad=0;bad<18;++bad) {
+            apply_protected_checkpoint(cpu,online);
+            if(bad==0)checkpoint_contact_protection_option=0;
+            if(bad==1)checkpoint_lab_state=CHECKPOINT_LAB_ARMED;
+            if(bad==2)checkpoint_pending.phase=1;
+            if(bad==3)psx_mod_write_byte(diagnostic+0xA8,CHECKPOINT_FAILED);
+            if(bad==4)psx_mod_write_byte(diagnostic+0xBD,CHECKPOINT_OFFLINE);
+            if(bad==5)psx_mod_write_byte(diagnostic+0xBC,0);
+            if(bad==6)psx_mod_write_word(diagnostic+0xB0,1);
+            if(bad==7)psx_mod_write_word(diagnostic+0xB4,2);
+            if(bad==8)psx_mod_write_byte(PLAY+0x1D,0);
+            if(bad==9)psx_mod_write_byte(PLAY+12,1);
+            if(bad==10)scene_owner=1;
+            if(bad==11)clear_phase=1;
+            if(bad==12)pause_owner=0;
+            if(bad==13)private_draw=1;
+            if(bad==14)view_call=1;
+            if(bad==15)psx_mod_write_byte(PLAY,12);
+            if(bad==16)enrolled=0;
+            if(bad==17)failed=1;
+            CHECK(!checkpoint_contact_protection_mask());
+            /* Reset synthetic test-only guards before the next initializer. */
+            checkpoint_pending.phase=0;scene_owner=clear_phase=private_draw=view_call=0;pause_owner=-1;
+        }
+        apply_protected_checkpoint(cpu,online);
+        diagnostics(0);CHECK(psx_mod_read_byte(diagnostic+0xAF)==15);
+        life.status[1]=MMX6_COOP_ABSENT;diagnostics(0);CHECK(psx_mod_read_byte(diagnostic+0xAF)==7);
+        if(online) {
+            test_lab_profile.qualification[0]^=1;CHECK(!checkpoint_contact_protection_mask());
+            inside=1;cpu->gpr[2]=77;CHECK(!player_contact(cpu,0x80030ECCu) && cpu->gpr[2]==77);inside=0;
+        }
+    }
+    test_lab_contact_option="on";setup_agreed(cpu,1);
+    psx_mod_write_byte(0x80030ECCu,psx_mod_read_byte(0x80030ECCu)^1);
+    CHECK(!checkpoint_lab_boundary(6) && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+    CHECK(!checkpoint_contact_protection_mask());
+    setup_agreed(cpu,1);CHECK(checkpoint_lab_boundary(6));mode9(cpu);
+    psx_mod_write_byte(0x80030FB4u,psx_mod_read_byte(0x80030FB4u)^1);
+    checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(!checkpoint_pending.phase && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+        !checkpoint_contact_protection_mask());
+    /* An ordinary offline mailbox initializer is not negotiated authority,
+     * even if the protection option was selected before launch. */
+    setup_agreed(cpu,0);psx_mod_write_byte(diagnostic+0x50,8);
+    CHECK(checkpoint_stage_boundary(cpu));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
+    CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && !checkpoint_contact_protection_mask());
+    test_lab_contact_option="off";setup_agreed(cpu,1);checkpoint_reset();
+    CHECK(!checkpoint_contact_protection_option && !checkpoint_contact_protection_status());
 }
 static void agreed_checkpoint_boundary(CPUState *cpu) {
     /* Configured destination alone must never race the parent's normal intro
@@ -506,6 +611,8 @@ int main(int argc,char **argv) {
     CHECK(!fseek(file,0x800,SEEK_SET));CHECK(fread(original_ram+0x10000,1,0x7F000,file)==0x7F000);
     CHECK(fgetc(file)==EOF);fclose(file);
     CHECK(!diagnostic_tests());CPUState cpu;
+    CHECK(!checkpoint_contact_protection_option && !checkpoint_contact_protection_mask() &&
+        !checkpoint_contact_protection_status()); /* Normal/production compile paths included. */
     unsigned campaign=0;for(unsigned i=0;i<115;++i)campaign+=checkpoint_inventory[i].campaign;
     CHECK(campaign==94);
     setup_checkpoint(&cpu,0,0,1);test_online=1;rejected_checkpoint(&cpu,CHECKPOINT_FORBIDDEN);
@@ -593,6 +700,7 @@ int main(int argc,char **argv) {
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
+    agreed_contact_protection(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }

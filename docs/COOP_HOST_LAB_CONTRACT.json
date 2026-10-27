@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 14,
+  "revision": 15,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v31",
+    "title_compatibility": "mmx6-x-zero-delay-v32",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -259,5 +259,16 @@
     "camera": "Retain the V30 concrete native per-view camera quake correction and its explicitly emitted original2927C entry hook unchanged. Fresh exact LOCAL and NET quiet/shake/quiet, original world event/effects and composed views are still required.",
     "snapshot_schema": 11,
     "qualification": "Fresh V82 source/image/profile/CRC/native-card/owned-exit/fixture-taint gates apply; no transfer of V80/V81 failed setups or old candidate passes. F197 shared-world damage behavior remains a separate observation requirement."
+  },
+  "title_changes_v32": {
+    "scope": "Explicit protected prerequisite for frozen F90/F118/R25/F132, not player contact-damage qualification or a public cheat. Source/unit checks alone grant no comparison pass.",
+    "catalog": "Only the development MMX6_ENABLE_LOOPBACK_HOST_LAB catalog declares prototype lab_contact_protection=off|on, defaultoff. Normal and production catalogs omit it. The existing SDK agrees the actual typed feature settings before frame0; title32 and hostrev15 bind these semantics.",
+    "authority": "Protection requires selectedon, exact settled agreed lab profile online (same lab candidate offline), consumed one-shot lab_checkpoint, completed source-qualified initializer receipt/generation1/nonce/record/authority/taint, no pending request, and the same native mode10 stage/section/checkpoint. Unapplied/rejected fixtures, menus/scenes/clear, private draws and context departure do not authorize it. Online mailbox commands8/10 remain forbidden.",
+    "native_semantics": "Authenticate original EXE80030ECC..800312DC FNV1a E1B1A427 at fixture admission and native initializer. The contact replacement returns the original no-contact v0=0 result before damage/recoil/knockback side effects, matching original30EEC/30EF0 and30FB4/30FB8 through312C4. Never writes health, invulnerability timer, position, pose, contact flags or success. Native enemy_hit31474, enemy AI/HP, terrain/solid/fall and scene/victory/rejoin handling are unchanged.",
+    "lifecycle": "Apply per actual resident native character, including projected Zero callbacks and canonical P1 while guest LEAVING/ABSENT/JOINING. No global bothALIVE requirement; DYING/FALLEN/ABSENT actors themselves are excluded. A living survivor remains eligible only in the declared fixture context.",
+    "receipt": "Existing diagnostic spare byte AF within the normal publication sequence: bit0 selected; bit1 active scope; bits2/3 protected P1/P2. Both living selected/active is0F; P2absent with P1protected is07. This receipt describes a bypass, never a native gameplay outcome.",
+    "state": "Protection selection is immutable digest and fixed snapshot identity. Active status is derived from existing serialized checkpoint/lifecycle authority and current guest context, with no new mutable latch. Pending checkpoint snapshot refusal and invalid-state rejection remain. Build-specific snapshot schema12; no old-state migration.",
+    "recording": "Existing sticky GAME_MAILBOX fixture taint and strict ordinary recording/replay refusals remain mandatory; disclose protected setup in every named comparison receipt and never use it to qualify enemy-to-player contact damage.",
+    "qualification": "Fresh exact-candidate LOCAL+NET must validate active protection/taint receipts, ordinary player attacks and relevant named mechanics with image/profile/resolvedCRC/cards/ownedcleanup gates. No transfer of failed unprotected setup attempts or prior candidate passes."
   }
 }

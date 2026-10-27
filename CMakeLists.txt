@@ -54,7 +54,7 @@ list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_pl
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$")
 
 set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINITIONS
-    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v31\"")
+    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v32\"")
 
 # The game-owned mod catalog (the two presentation enhancements plus the
 # acediez Tweaks set). Every feature stays disabled until selected on the
@@ -73,7 +73,7 @@ set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINI
 # Bead beads-eio.3.101.
 set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
 if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
-    # These named checkpoint/position prerequisites exist only in the explicit
+    # These named checkpoint/position/contact prerequisites exist only in the explicit
     # lab catalog. The normal catalog never gains a teleport control.
     # Normal source/release catalogs never acquire it. The framework still
     # owns final staging and catalog validation of this generated input tree.

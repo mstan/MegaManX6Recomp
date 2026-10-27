@@ -31,3 +31,20 @@ label = "Intro before both doors (position prerequisite)"
 [[option.choice]]
 value = "intro_before_explosion"
 label = "Intro nearby explosion (position prerequisite)"
+
+[[option]]
+feature = "prototype"
+id = "lab_contact_protection"
+label = "Lab enemy-contact protection"
+description = "Protected comparison prerequisite only. After the agreed checkpoint fixture completes, bypass native enemy/projectile contact damage and knockback in that checkpoint context. Terrain, falls and player attacks stay native. This tainted bypass cannot qualify player contact damage. Both peers must agree before launch."
+group = "Lab validation"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off"
+
+[[option.choice]]
+value = "on"
+label = "Protected prerequisite"

@@ -202,6 +202,7 @@ static void digest_and_readiness(void){
     PERTURB(zero_giga_backup[7]);
     PERTURB(shared_effect_owners[7]);
     PERTURB(checkpoint_lab_option);PERTURB(checkpoint_lab_state);PERTURB(checkpoint_lab_previous);
+    PERTURB(checkpoint_contact_protection_option);
     PERTURB(checkpoint_pending.authority);
     PERTURB(checkpoint_pending.placed_world);
     PERTURB(both_doors);
@@ -404,12 +405,15 @@ static void roundtrip_and_malformed(void){
     free(wire);free(bad);
 }
 static void agreed_latch_snapshot(void) {
-    for(unsigned option=1;option<=3;++option) {
+    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=3;++option) {
         checkpoint_lab_option=option;
+        checkpoint_contact_protection_option=protection;
         for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
             checkpoint_lab_state=state;checkpoint_lab_previous=1;
             uint32_t length=snapshot_bytes(),digest=state_digest();uint8_t *wire=malloc(length);CHECK(wire);
             CHECK(snapshot_write(wire,length));
+            checkpoint_contact_protection_option^=1;CHECK(!snapshot_validate(wire,length));
+            checkpoint_contact_protection_option=protection;
             checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));
             checkpoint_lab_option=option%3+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
             checkpoint_lab_state=checkpoint_lab_previous=0;
@@ -418,7 +422,7 @@ static void agreed_latch_snapshot(void) {
             free(wire);
         }
     }
-    checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
+    checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=checkpoint_contact_protection_option=0;
 }
 static void shared_clear_snapshot(void) {
     HostState prior;state_capture(&prior);

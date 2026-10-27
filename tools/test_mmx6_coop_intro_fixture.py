@@ -13,7 +13,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
         normal = tomllib.loads((source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-        self.assertFalse(any(o.get('id') == 'lab_checkpoint' for o in normal.get('option', [])))
+        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection') for o in normal.get('option', [])))
         catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
@@ -39,9 +39,33 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='intro_before_explosion')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
-            manifest.write_text(catalog+'\n[[option.choice]]\nvalue = "arbitrary_position"\nlabel = "Unknown"\n', encoding='utf-8')
+            manifest.write_text(catalog.replace('value = "intro_before_doors"', 'value = "arbitrary_position"'), encoding='utf-8')
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='intro_before_doors')
+            self.assertEqual(state.read_text(encoding='utf-8'), initial)
+
+    def test_protection_requires_explicit_typed_prelaunch_choice(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source = Path(__file__).resolve().parents[1]
+        catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            manifest = directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True); manifest.write_text(catalog, encoding='utf-8')
+            state = directory/'mods/state.toml'; initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
+            for selected in ('off', 'on'):
+                state.write_text(initial, encoding='utf-8')
+                receipt = pair.select_checkpoint(directory, enabled=True, contact_protection=selected)
+                self.assertEqual(receipt['contact_protection'], selected)
+                parsed = tomllib.loads(state.read_text(encoding='utf-8'))
+                self.assertEqual(parsed['feature'][0]['values']['lab_contact_protection'], selected)
+            state.write_text(initial, encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, contact_protection='arbitrary')
+            self.assertEqual(state.read_text(encoding='utf-8'), initial)
+            manifest.write_text(catalog.replace('id = "lab_contact_protection"', 'id = "unrelated"'), encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, contact_protection='on')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
 
 

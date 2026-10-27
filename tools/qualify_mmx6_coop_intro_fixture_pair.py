@@ -20,7 +20,7 @@ import qualify_mmx6_coop_pair as parent
 SUCCESS = 'agreed_fixture_native_intro_observations_complete_review_pending'
 
 
-def select_checkpoint(directory, *, enabled, option=intro.OPTION):
+def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protection='off'):
     """Fresh prelaunch preferences only; the SDK negotiates this typed option."""
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
@@ -29,12 +29,19 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION):
             or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion'}
             or option not in (intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion')):
         raise ValueError('Staged image lacks the private typed LAB checkpoint catalog')
+    protection = [o for o in catalog.get('option', []) if o.get('id') == 'lab_contact_protection']
+    if (len(protection) != 1 or protection[0].get('default') != 'off'
+            or protection[0].get('feature') != 'prototype' or protection[0].get('type') != 'choice'
+            or {c['value'] for c in protection[0].get('choice', [])} != {'off', 'on'}
+            or contact_protection not in ('off', 'on')):
+        raise ValueError('Staged image lacks the private typed LAB contact-protection catalog')
     path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8')
     anchor = 'id = "prototype"\nenabled = '+str(enabled).lower()+'\n'
-    if text.count(anchor) != 1 or 'lab_checkpoint' in text:
+    if text.count(anchor) != 1 or 'lab_checkpoint' in text or 'lab_contact_protection' in text:
         raise ValueError('Unexpected fresh co-op feature preferences')
-    path.write_bytes(text.replace(anchor, anchor+'[feature.values]\nlab_checkpoint = "'+option+'"\n').encode('utf-8'))
-    return dict(option=option, state_sha256=preparation.sha256(path),
+    values = '[feature.values]\nlab_checkpoint = "'+option+'"\nlab_contact_protection = "'+contact_protection+'"\n'
+    path.write_bytes(text.replace(anchor, anchor+values).encode('utf-8'))
+    return dict(option=option, contact_protection=contact_protection, state_sha256=preparation.sha256(path),
         catalog_sha256=preparation.sha256(directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'))
 
 

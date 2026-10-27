@@ -836,6 +836,7 @@ static void diagnostic_p2_boxes(void) {
     }
     project(diagnostic+MMX6_BOX_DIAG_HEADER,wire,sizeof wire);
 }
+static unsigned checkpoint_contact_protection_status(void);
 static void diagnostics(uint16_t input) {
     ++frame_count;
     /* Odd sequence denotes publication in progress; finish with an even one.
@@ -870,6 +871,7 @@ static void diagnostics(uint16_t input) {
     psx_mod_write_byte(diagnostic+0x8E,(uint8_t)failed);
     psx_mod_write_byte(diagnostic+0x90,psx_mod_read_byte(PLAY));
     psx_mod_write_byte(diagnostic+0x91,psx_mod_read_byte(PLAY+1));
+    psx_mod_write_byte(diagnostic+0xAF,(uint8_t)checkpoint_contact_protection_status());
     psx_mod_write_word(diagnostic+0x94,diagnostic_host_digest());
     psx_mod_write_word(diagnostic+0x98,1); /* bounded host FNV-1a, not core CRC */
 #ifdef MMX6_COOP_MODERN_STATE
@@ -2330,6 +2332,14 @@ static int enemy_hit(CPUState *cpu, uint32_t address) {
     return 1;
 }
 static int player_contact(CPUState *cpu, uint32_t address) {
+    /* A negotiated, tainted prerequisite may bypass enemy contact only.
+     * Run before the ordinary co-op retry guard: P1 still needs protection
+     * while P2 is absent, and a real projected P2 callback may be nested. */
+    unsigned protected=checkpoint_contact_protection_mask();
+    unsigned resident=psx_mod_read_byte(PLAYER+2);
+    if(address==0x80030ECCu && resident<2 && (protected&(1u<<resident))) {
+        cpu->gpr[2]=0;return 1; /* Exact native no-contact result; no body write. */
+    }
     if (inside || !enrolled || failed || scene_owner || life.status[1]!=MMX6_COOP_ALIVE ||
         psx_mod_read_byte(PLAY)!=0x0A) return 0;
     inside=1;
@@ -2690,7 +2700,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v31",
+        .compatibility_id = "mmx6-x-zero-delay-v32",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,
