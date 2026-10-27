@@ -37,6 +37,8 @@ class NativeControlWitnessTests(unittest.TestCase):
         before = self.row(); after = copy.deepcopy(before)
         after['peers'][0]['observation']['players'][0].update(action=3, x_raw=97*65536)
         self.assertTrue(intro.independent_walk(before, after, 0)[0]['other_stationary'])
+        after['peers'][0]['observation']['players'][0]['action'] = 4
+        self.assertTrue(intro.independent_walk(before, after, 0))
         other = after['peers'][0]['observation']['players'][1]
         other.update(x_raw=101*65536)
         self.assertIsNone(intro.independent_walk(before, after, 0))
@@ -51,6 +53,26 @@ class NativeControlWitnessTests(unittest.TestCase):
         after['peers'][0]['observation']['players'][1].update(action=4, x_raw=97*65536)
         after['peers'][0]['observation']['players'][0]['hp'] = 0
         self.assertIsNone(intro.independent_walk(before, after, 1))
+
+
+class NativeTransportBoundaryTests(unittest.TestCase):
+    def test_zero_HP_passenger_requires_actual_transport_phase_and_alive_lifecycle(self):
+        value = dict(scene_owner=1, scene_phase=2, lifecycle=[0, 0], players=[dict(hp=32), dict(hp=0)])
+        self.assertTrue(intro.native_admission_health(value, 0))
+        for change in (dict(scene_owner=0), dict(scene_owner=2), dict(scene_phase=0),
+                       dict(scene_phase=1), dict(scene_phase=4), dict(scene_phase=5),
+                       dict(lifecycle=[0, 3]), dict(lifecycle=[0, 4]), dict(lifecycle=[0, 5])):
+            with self.subTest(change=change):
+                self.assertFalse(intro.native_admission_health(dict(value, **change), 0))
+        value['players'][0]['hp'] = 0
+        self.assertFalse(intro.native_admission_health(value, 0))
+
+    def test_CP2_metadata_with_old_CP0_bodies_does_not_establish_arrival(self):
+        def peers(xs):
+            return [dict(checkpoint=2, observation=dict(players=[dict(x_raw=x*65536) for x in xs]))]
+        self.assertFalse(intro.authored_checkpoint_arrivals(peers((144, 168))))
+        self.assertTrue(intro.authored_checkpoint_arrivals(peers((5904, 5928))))
+        self.assertFalse(intro.authored_checkpoint_arrivals([]))
 
 
 if __name__ == '__main__':

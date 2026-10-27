@@ -53,7 +53,7 @@ def independent_walk(before, after, seat):
         prior = old['observation']['players']; now = current['observation']['players']
         actor, other = now[seat], now[1-seat]
         if (not all(0 < p['hp'] <= 127 and p['state'] == 1 for p in now)
-                or actor['character'] != seat or actor['action'] != (3 if seat == 0 else 4)
+                or actor['character'] != seat or actor['action'] not in (3, 4)
                 or actor['x_raw'] >= prior[seat]['x_raw']-2*65536):
             return None
         stationary = other['x_raw'] == prior[1-seat]['x_raw']
@@ -65,6 +65,24 @@ def independent_walk(before, after, seat):
             other_stationary=stationary, other_HP_drop=damaged, other_native_hurt=native_hurt,
             interpretation='stationary' if stationary else 'independent native damage response'))
     return witnesses
+
+
+
+def native_admission_health(observation, leader):
+    actor = observation['players'][leader]; passenger = observation['players'][1-leader]
+    if not 0 < actor['hp'] <= 127 or observation['lifecycle'][leader] != 0:
+        return False
+    native_transport = (observation['scene_owner'] == leader+1
+        and observation['scene_phase'] in (2, 3) and observation['lifecycle'][1-leader] == 0)
+    return observation['lifecycle'][1-leader] in (0, 3) and (
+        0 < passenger['hp'] <= 127 or native_transport)
+
+
+def authored_checkpoint_arrivals(peers):
+    # CP metadata can publish before the old player's body is reinitialized.
+    return len(peers) in (1, 2) and all(len(p['observation']['players']) == 2 and
+        all(abs(a['x_raw']-x*65536) < 65536 for a, x in
+            zip(p['observation']['players'], (5904, 5928))) for p in peers)
 
 
 def exercise(ctx, *, output, original_exe, leader, success):
@@ -162,7 +180,8 @@ def exercise(ctx, *, output, original_exe, leader, success):
         end = time.monotonic()+60
         while True:
             row = sample('original checkpoint initializer and native arrival')
-            if idle(row, 2) and all(p['fixture']['state'] == 3 for p in row['peers']):
+            if (idle(row, 2) and authored_checkpoint_arrivals(row['peers'])
+                    and all(p['fixture']['state'] == 3 for p in row['peers'])):
                 break
             need(all(p['fixture']['state'] not in (4, 5) for p in row['peers']),
                 'Original checkpoint pipeline rejected the agreed prerequisite')
@@ -181,7 +200,7 @@ def exercise(ctx, *, output, original_exe, leader, success):
                 row = sample('native door contact and scene admission')
                 for peer, p in enumerate(row['peers']):
                     o = p['observation']; owner = o['scene_owner']
-                    need(all(0 < a['hp'] <= 127 for a in o['players']), 'Actor died before door admission')
+                    need(native_admission_health(o, leader), 'Actor lacks health outside its actual native transport context')
                     if owner:
                         need(owner == leader+1, 'Original door selected a different scene owner')
                         if not scene[peer]:
