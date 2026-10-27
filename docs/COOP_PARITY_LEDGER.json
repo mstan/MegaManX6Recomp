@@ -16778,14 +16778,14 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -16843,9 +16843,73 @@
               "Real LOCAL native owner-menu resize contradiction. Settled observer checks pass but cannot qualify every present through the transition. NET component not admitted; SDK fix in freshV78 pending."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "9622eb7336e1362b2b0b82d091dfcdb4f0de63c3",
+            "build_identity": {
+              "executable_sha256": "c5f635adb2b2c700d0716d889c11de70840a8afe12694daf3ef64d3e8a3c26e6",
+              "compiled_manifest_sha256": "27f59c0f80a0fcf8d2724239b9cf681f519301723d16b3f61732713806f76dd3",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "split",
+              "renderer": "OpenGL",
+              "window": "1280x480 to640x900 andback in each native menu",
+              "audio": "dummy muted"
+            },
+            "action": "Open both actual native owner menus and resize owned windows while preserving chosen canvas; inspect every actual presented frame, frozen world/resources, effective shared mode and fresh private resume.",
+            "outcome": "All complete resize present sequences retain8:3 with zero4:3 transient/GLerror. Original owner menus duplicated correctly, frozen resources/private draws, restored own pairs/cameras/HUD, finalized recordings/cards/owned exits0 passed. Earlier failure evidence retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-9622eb7-SDKf381d12-F177-local-reviewed.json",
+                "sha256": "3ef06bc6a5ba8513f4ec0d2ab57f35b65ff62071ef0ea670d2b8c4b1342b6206"
+              }
+            ],
+            "limits": [
+              "F177 selected local-pair8:3 canvas on each physical process, both original native X/Zero owner menus, actual1280x480 to640x900 andback resizes. Full contiguous present sequences include transient frames; settled images alone are not admission. Root reviewed13LOCAL+26NET composed captures. No every-scene, otherOS/remotehost, physicaldevice, forced-load or long-performance claim.",
+              "Fresh exactV78 LOCAL+NET same image/manifest/title9622eb7/SDKf381d12/UI34b5277. V77 three actual single4:3 resize frames and earlierV62 failure evidence remain preserved; neither was transferred as a pass. SDK rejects incomplete freshcanonical composition before capture/record/swap and requests next fresh native present; no staleprivate-frame substitution.",
+              "Original native menus are correctly owned and duplicated into the selected8:3 canvas. Shared mode is proved by actual non-stereo present paths; native world/resources and private commits remain frozen while SDK frames and resize presents progress. Both resumed private pairs grow and restore their own X/Zero terrain/camera/HUD without hoststate leak.",
+              "Original source guards, ordinary published controls and owned window resize only; no actor/position/HP/checkpoint/success writes. Three ordinary finalized native-consumption recordings, defaultresidentloader/profile10/five pairedCRC windows, unchanged cards and allthreeowned gracefulexit0 passed. No replay/audio equivalence claim."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "9622eb7336e1362b2b0b82d091dfcdb4f0de63c3",
+            "build_identity": {
+              "executable_sha256": "c5f635adb2b2c700d0716d889c11de70840a8afe12694daf3ef64d3e8a3c26e6",
+              "compiled_manifest_sha256": "27f59c0f80a0fcf8d2724239b9cf681f519301723d16b3f61732713806f76dd3",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "split",
+              "renderer": "OpenGL",
+              "window": "1280x480 to640x900 andback in each native menu",
+              "audio": "dummy muted"
+            },
+            "action": "Open both actual native owner menus and resize owned windows while preserving chosen canvas; inspect every actual presented frame, frozen world/resources, effective shared mode and fresh private resume.",
+            "outcome": "All complete resize present sequences retain8:3 with zero4:3 transient/GLerror. Original owner menus duplicated correctly, frozen resources/private draws, restored own pairs/cameras/HUD, finalized recordings/cards/owned exits0 passed. Earlier failure evidence retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-9622eb7-SDKf381d12-F177-netplay-reviewed.json",
+                "sha256": "aba1344369bb02acc4c77cbd43cdb8d4cf3f5d9ea8fc60ad82c6644c20fb73c1"
+              }
+            ],
+            "limits": [
+              "F177 selected local-pair8:3 canvas on each physical process, both original native X/Zero owner menus, actual1280x480 to640x900 andback resizes. Full contiguous present sequences include transient frames; settled images alone are not admission. Root reviewed13LOCAL+26NET composed captures. No every-scene, otherOS/remotehost, physicaldevice, forced-load or long-performance claim.",
+              "Fresh exactV78 LOCAL+NET same image/manifest/title9622eb7/SDKf381d12/UI34b5277. V77 three actual single4:3 resize frames and earlierV62 failure evidence remain preserved; neither was transferred as a pass. SDK rejects incomplete freshcanonical composition before capture/record/swap and requests next fresh native present; no staleprivate-frame substitution.",
+              "Original native menus are correctly owned and duplicated into the selected8:3 canvas. Shared mode is proved by actual non-stereo present paths; native world/resources and private commits remain frozen while SDK frames and resize presents progress. Both resumed private pairs grow and restore their own X/Zero terrain/camera/HUD without hoststate leak.",
+              "Original source guards, ordinary published controls and owned window resize only; no actor/position/HP/checkpoint/success writes. Three ordinary finalized native-consumption recordings, defaultresidentloader/profile10/five pairedCRC windows, unchanged cards and allthreeowned gracefulexit0 passed. No replay/audio equivalence claim."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Selected8:3 native-menu fallback briefly presents a single4:3 viewport during actual resize, before settled duplicated8:3 output resumes. FreshSDKV78 fix/qualification pending; all raw V77 and prior V62 evidence retained."
+        "limitations": "Fresh exactV78 title9622eb7/SDKf381d12 samecandidate LOCAL+NET full native shared-menu fallback/resize/resume passed, including every recorded transition present on all3physicalprocesses. Root39 composed captures reviewed. V77 actual transient failure and earlierV62 evidence preserved; no every-scene/cross-host claim."
       }
     },
     {

@@ -1,0 +1,265 @@
+{
+  "schema": 1,
+  "comparison": "F177",
+  "frozen_row_sha256": "599eba1b265b540c21b819082730dd581c2f6773b44022749dcbbec5362f3be3",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "9622eb7336e1362b2b0b82d091dfcdb4f0de63c3",
+  "build_identity": {
+    "executable_sha256": "c5f635adb2b2c700d0716d889c11de70840a8afe12694daf3ef64d3e8a3c26e6",
+    "compiled_manifest_sha256": "27f59c0f80a0fcf8d2724239b9cf681f519301723d16b3f61732713806f76dd3",
+    "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\qualification.json",
+    "sha256": "c4b7c12c413f4b655a99139369059087901f095235612c706be356efceddde60"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\split-views-observations.json",
+    "sha256": "cb18739435bd1cc1ee1b9944c90742dea09b3250221230d21cfd7fcdac376e79"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_split_views_v78_root_v1.py",
+    "sha256": "e11cd4fa42c5bc48654f8e1ff92b424e8b777bf316c6f19807078694cb71b9cf"
+  },
+  "explicit_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-v78-final-binding-root-v1.json",
+    "binding_sha256": "c6ceb98e556a52cdb90da8d065ec777665cdd6d27aa1fd6a06beed44dcc7e63e",
+    "image_sha256": "c5f635adb2b2c700d0716d889c11de70840a8afe12694daf3ef64d3e8a3c26e6",
+    "manifest_sha256": "27f59c0f80a0fcf8d2724239b9cf681f519301723d16b3f61732713806f76dd3",
+    "provenance_sha256": "52b7525d6eac1b2a686695c89967f48ada798d1d6eb7554e1766bdd3a67a4bf4",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v78-pair-resize-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "9622eb7336e1362b2b0b82d091dfcdb4f0de63c3",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v27",
+    "host_revision": 10
+  },
+  "complete_resize_intervals": [
+    {
+      "owner": 0,
+      "peer": 0,
+      "presents": 78,
+      "sequence": [
+        2431,
+        2509
+      ],
+      "bad": [],
+      "native_timer": 515,
+      "private_before": 516,
+      "private_restored": 542
+    },
+    {
+      "owner": 1,
+      "peer": 0,
+      "presents": 84,
+      "sequence": [
+        2639,
+        2723
+      ],
+      "bad": [],
+      "native_timer": 548,
+      "private_before": 548,
+      "private_restored": 573
+    }
+  ],
+  "root_composed_review": [
+    {
+      "peer": 0,
+      "label": "initial-8by3-two-panes",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-initial-8by3-two-panes.png",
+      "sha256": "19adf0cfeb7df48ea1fc072903b9f09f556f3f01c70b43ea3195358b18a634e9",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "separated-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-separated-private-owner-views.png",
+      "sha256": "4dab9bdf2f2fd313b007e040f57208017939d608c0c5d1d8fe1a22360a68534e",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-private-resize-640x900.png",
+      "sha256": "a599c74613f7bc5c448ef9c2c820cf8a8c877abd9d4311ac5251cd8b87a919c3",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-960x720",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-private-resize-960x720.png",
+      "sha256": "49d058d677a0e96eed4c0dfcc622aef13016784096872bed137767184f9b3fdd",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-private-resize-1280x480.png",
+      "sha256": "97ac792f032d708c7d93ec5d17508f74b1a76afa77a71a8f744f8280df95b6e9",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-owner0-native-shared-menu.png",
+      "sha256": "c7c527c056125a1e4f1d5a7357df857defce5fa5ab49714f2451b956712eca66",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-shared-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-owner0-shared-resize-640x900.png",
+      "sha256": "3fbb15c2cbb5853b2bec591a3793283703cdab50946457562811c290795ceb8e",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-shared-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-owner0-shared-resize-1280x480.png",
+      "sha256": "c7c527c056125a1e4f1d5a7357df857defce5fa5ab49714f2451b956712eca66",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-owner0-restored-private-owner-views.png",
+      "sha256": "66dee55a4dcbcdeee857ba4311087b07859477757c7b41172e8d372462d137e8",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-owner1-native-shared-menu.png",
+      "sha256": "344869cbb02733bbce1a8395272ac549a3f83855b59e603e5b13b7b1cd911c38",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-shared-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-owner1-shared-resize-640x900.png",
+      "sha256": "e3127a2722e2660726f44d7bc243b3b7cd16ba0aadd547871f9e2e3f472dc134",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-shared-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-owner1-shared-resize-1280x480.png",
+      "sha256": "9820c4e001603b311faf67b27a94d7246c59fd9d764eee84ec86045345adbc36",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\hud\\peer-0-owner1-restored-private-owner-views.png",
+      "sha256": "61df1ab95a6e76fe9f97c115bc1b0199eb43550811e9a0b464dc1376c7bf0fc4",
+      "surface": "composed_renderer_output"
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v78-root-v1\\candidate\\saves\\input-recordings\\session-1793107007389078-1-0\\inputs.jsonl",
+      "sha256": "c751eeb1dbb38c9fd9263fb634412ce7dc27e630000962c63c56abd9f6b8e091",
+      "events": 8744,
+      "natives": 5744,
+      "p2_reads": 3000,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "c5f635adb2b2c700d0716d889c11de70840a8afe12694daf3ef64d3e8a3c26e6",
+        "manifest_sha256": "27f59c0f80a0fcf8d2724239b9cf681f519301723d16b3f61732713806f76dd3",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "c941bd1524383d1b5129286ae7bf66a2e992a4e583d024cd87396d03fb66d1b1",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0,
+        1
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    }
+  ],
+  "source_guards": [
+    {
+      "first": "0x80034830",
+      "bytes": 68,
+      "sha256": "85e16602de339369b10a376bcb4af4ec4bdffcded913421499c2e19147fda4fc",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x800346ec",
+      "bytes": 284,
+      "sha256": "2a918262c728c1759faac953c0998cc241b0c8a51a87fab6d7df748c24adf15b",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80073970",
+      "bytes": 320,
+      "sha256": "798fc11a2bfd757820b6b751013e8753da18d678c707f6e7d1489a97ee47d299",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80034ff8",
+      "bytes": 24,
+      "sha256": "0811a345ec78521ad504572c4af7782180fadd2bc414ba8e4da9bc39ce1371d1",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80039c40",
+      "bytes": 92,
+      "sha256": "1f78e95d06052e22c1fb6bdf3b26bb5a36e5e92fab184de00b9cd426569c7992",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x8003af1c",
+      "bytes": 216,
+      "sha256": "edb4af58ccfefaaa5df5282090250667a6580816d570c26e96126bcd0782feeb",
+      "peers_matched": [
+        true
+      ]
+    }
+  ],
+  "focused_test_logs": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sdk-v78-ctest-root-v1.log",
+      "sha256": "7f0a75a8091c02ae1819e52d3b878243efd8bb88ba1d634267c1c9ed3c25482b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v78-pair-resize-focused-root-v1.log",
+      "sha256": "3c880673ec0c43122c98172e2bf1493ae9f3f24a90275ddb5eb6cd6668a84e5e"
+    }
+  ],
+  "limits": [
+    "F177 selected local-pair8:3 canvas on each physical process, both original native X/Zero owner menus, actual1280x480 to640x900 andback resizes. Full contiguous present sequences include transient frames; settled images alone are not admission. Root reviewed13LOCAL+26NET composed captures. No every-scene, otherOS/remotehost, physicaldevice, forced-load or long-performance claim.",
+    "Fresh exactV78 LOCAL+NET same image/manifest/title9622eb7/SDKf381d12/UI34b5277. V77 three actual single4:3 resize frames and earlierV62 failure evidence remain preserved; neither was transferred as a pass. SDK rejects incomplete freshcanonical composition before capture/record/swap and requests next fresh native present; no staleprivate-frame substitution.",
+    "Original native menus are correctly owned and duplicated into the selected8:3 canvas. Shared mode is proved by actual non-stereo present paths; native world/resources and private commits remain frozen while SDK frames and resize presents progress. Both resumed private pairs grow and restore their own X/Zero terrain/camera/HUD without hoststate leak.",
+    "Original source guards, ordinary published controls and owned window resize only; no actor/position/HP/checkpoint/success writes. Three ordinary finalized native-consumption recordings, defaultresidentloader/profile10/five pairedCRC windows, unchanged cards and allthreeowned gracefulexit0 passed. No replay/audio equivalence claim."
+  ],
+  "bypasses": []
+}
