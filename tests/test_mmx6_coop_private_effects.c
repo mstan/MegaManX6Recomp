@@ -31,7 +31,7 @@ static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
 static unsigned scene_transport_probe;
-static unsigned arrival_probe,arrival_landed,arrival_ticks[2],arrival_births;
+static unsigned paired_arrival_fixture_probe,arrival_landed,arrival_ticks[2],arrival_births;
 static unsigned clear_probe,clear_worlds,clear_zero_worlds,clear_fades;
 static unsigned clear_constructors[2],clear_body_ticks[2],clear_poses[2],clear_outgoing[2],clear_pose_limit[2];
 static unsigned clear_air_ticks,clear_air_limit,clear_air_seat;
@@ -225,7 +225,7 @@ static uint32_t original_door_predicate(uint32_t actor) {
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
-    if(arrival_probe) {
+    if(paired_arrival_fixture_probe) {
         unsigned seat=psx_mod_read_byte(PLAYER+2);
         if(address==0x8001E9ECu) {
             CHECK(stage_call && arrival_pair);
@@ -538,7 +538,7 @@ static void setup(CPUState *cpu){
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=0;memset(death_effect,0,sizeof death_effect);
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=arrival_pair=0;previous_input=p2_edges=0;p2_start_previous=0;
-    arrival_probe=arrival_landed=arrival_births=0;memset(arrival_ticks,0,sizeof arrival_ticks);
+    paired_arrival_fixture_probe=arrival_landed=arrival_births=0;memset(arrival_ticks,0,sizeof arrival_ticks);
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
     pad_buttons=0xFFFF;
     menu_probe=0;memset(menu_input,0,sizeof menu_input);
@@ -1722,7 +1722,7 @@ static void native_both_door_ack_motion_and_release(void) {
     }
 }
 static void arrival_setup(CPUState *cpu) {
-    setup(cpu);enrolled=0;arrival_probe=1;
+    setup(cpu);enrolled=0;paired_arrival_fixture_probe=1;
     psx_mod_write_byte(PLAY+0x5E,1);psx_mod_write_byte(PLAY+0x1C,1);
     for(unsigned i=0x0F;i<=0x1B;++i)psx_mod_write_byte(PLAY+i,0);
     psx_mod_write_byte(PLAYER+5,0);psx_mod_write_byte(PLAYER+6,0);
