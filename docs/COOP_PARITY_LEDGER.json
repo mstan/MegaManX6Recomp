@@ -3903,25 +3903,106 @@
       "frozen_row_sha256": "960847f716f6d874a3e7009fb0ddc229887f10f83d86affa2fa2b63d04a78d54",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Vehicle-to-boss arena handoff analogue unidentified",
-        "bounded_check": "Identify an X6 vehicle/boss transition or document a content-specific absence; ordinary boss entry cannot close this vehicle handoff comparison.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Recycle mission final door initializes original Metal Shark in its authored arena",
+        "bounded_check": "Use the original Recycle4/1 boss-door approach; observe actual native guest-led admission, authored type56 allocation and intro/HP fill, correct room/camera, living companion landing and both independent controls.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "edd68449e3ee1050d5ebf4f048caf28b35bb164e",
+            "build_identity": {
+              "executable_sha256": "c67aaacfc3dbfa65072386cbb4441317df7d65514b9479054237c4c8c64aef9c",
+              "compiled_manifest_sha256": "4d26341f0f6ccb21061e622e20b7412bfae566c6a94085206cc4eb37895e7b77",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "lab_checkpoint": "recycle_cp2",
+              "lab_contact_protection": "on",
+              "cameras": "unified",
+              "local_cameras": "unified",
+              "audio": "muted dummy"
+            },
+            "action": "Original4/1CP2 native landing, guest-led subtype22 final door, real type56 authored allocation/intro/fullHP/release, then separate owned native jumps and landings.",
+            "outcome": "Actual boss6231/350/HP0 -> native48 in source-correct arena/camera; both living bodies regain independent controls on every physical peer.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-edd6844-R17-Recycle-native-door-reviewed.json",
+                "sha256": "08b75e34c13ba5a1c54e9fbb8d4f212971ac427206811d96cb6a967352169b3f"
+              }
+            ],
+            "limits": [
+              "R17 maps the frozen on-foot Chaser-stage boss-door precedent to Recycle4/1 Metal Shark. The same native Recycle mission has original Ride Armor4/0; frozen X4/X5 fields are unchanged. No road-to-boss section handoff, mounted opening/READY, mounted boss or Both-policy qualification.",
+              "Agreed defaultoff LAB recycle_cp2 invokes the original4/1CP2 record800724D4/native initializer once. Original5920/326 and companion5944 land naturally on source/live416 floor; no custom position/ground/HP/inventory/door/boss/outcome writes. Unrelated traversal is bypassed, strict fixture taint/ordinary recording/replay refusal retained.",
+              "Optional agreed contact protection is enabled for bounded living gameplay and naturally inactive during scene transport/intro. Original nonfatal intro contact may reduce guest health; both positive-health bodies and accepted independent controls are observed after release. No unchanged-health or enemy-contact-damage qualification.",
+              "Exact original member7/checkpoint/native callback/constructor/intro/layout source is guarded. Placement records are mutable: only native allocatorbit0 and exact original boss lifetime0-or10 are normalized before original SHA comparison; every actual byte/hash remains in raw evidence. Initial naive immutable-placement guard stopped LOCALv1 before the door; its clean exit/cards/raw remain retained.",
+              "Every physical process observes earliest native type56/sub0/originF7E48 at6231/350/state1/action2/HP0/defense7555C, then its original intro motion, real text progression, actual fullHP48=PLAY8C and release. Original committed current/target camera MIN6064/MAX6096/Y224 and both native controls are retained.",
+              "Root reviewed all4 captures per physical process: native predoor, original boss introduction, fullHP/release and both independent controls. Hero overlap and corrupt background/HUD remain explicit; no general rendering/audio/private-camera or all-boss claim. F127 weakness and F134 kill/victory remain separate unresolved actions."
+            ],
+            "bypasses": [
+              "Agreed defaultoff LAB recycle_cp2 invokes the original4/1CP2 record800724D4/native initializer once. Original5920/326 and companion5944 land naturally on source/live416 floor; no custom position/ground/HP/inventory/door/boss/outcome writes. Unrelated traversal is bypassed, strict fixture taint/ordinary recording/replay refusal retained.",
+              "Optional agreed contact protection is enabled for bounded living gameplay and naturally inactive during scene transport/intro. Original nonfatal intro contact may reduce guest health; both positive-health bodies and accepted independent controls are observed after release. No unchanged-health or enemy-contact-damage qualification."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "edd68449e3ee1050d5ebf4f048caf28b35bb164e",
+            "build_identity": {
+              "executable_sha256": "c67aaacfc3dbfa65072386cbb4441317df7d65514b9479054237c4c8c64aef9c",
+              "compiled_manifest_sha256": "4d26341f0f6ccb21061e622e20b7412bfae566c6a94085206cc4eb37895e7b77",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "lab_checkpoint": "recycle_cp2",
+              "lab_contact_protection": "on",
+              "cameras": "unified",
+              "local_cameras": "unified",
+              "audio": "muted dummy"
+            },
+            "action": "Original4/1CP2 native landing, guest-led subtype22 final door, real type56 authored allocation/intro/fullHP/release, then separate owned native jumps and landings.",
+            "outcome": "Actual boss6231/350/HP0 -> native48 in source-correct arena/camera; both living bodies regain independent controls on every physical peer.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-edd6844-R17-Recycle-native-door-reviewed.json",
+                "sha256": "08b75e34c13ba5a1c54e9fbb8d4f212971ac427206811d96cb6a967352169b3f"
+              }
+            ],
+            "limits": [
+              "R17 maps the frozen on-foot Chaser-stage boss-door precedent to Recycle4/1 Metal Shark. The same native Recycle mission has original Ride Armor4/0; frozen X4/X5 fields are unchanged. No road-to-boss section handoff, mounted opening/READY, mounted boss or Both-policy qualification.",
+              "Agreed defaultoff LAB recycle_cp2 invokes the original4/1CP2 record800724D4/native initializer once. Original5920/326 and companion5944 land naturally on source/live416 floor; no custom position/ground/HP/inventory/door/boss/outcome writes. Unrelated traversal is bypassed, strict fixture taint/ordinary recording/replay refusal retained.",
+              "Optional agreed contact protection is enabled for bounded living gameplay and naturally inactive during scene transport/intro. Original nonfatal intro contact may reduce guest health; both positive-health bodies and accepted independent controls are observed after release. No unchanged-health or enemy-contact-damage qualification.",
+              "Exact original member7/checkpoint/native callback/constructor/intro/layout source is guarded. Placement records are mutable: only native allocatorbit0 and exact original boss lifetime0-or10 are normalized before original SHA comparison; every actual byte/hash remains in raw evidence. Initial naive immutable-placement guard stopped LOCALv1 before the door; its clean exit/cards/raw remain retained.",
+              "Every physical process observes earliest native type56/sub0/originF7E48 at6231/350/state1/action2/HP0/defense7555C, then its original intro motion, real text progression, actual fullHP48=PLAY8C and release. Original committed current/target camera MIN6064/MAX6096/Y224 and both native controls are retained.",
+              "Root reviewed all4 captures per physical process: native predoor, original boss introduction, fullHP/release and both independent controls. Hero overlap and corrupt background/HUD remain explicit; no general rendering/audio/private-camera or all-boss claim. F127 weakness and F134 kill/victory remain separate unresolved actions."
+            ],
+            "bypasses": [
+              "Agreed defaultoff LAB recycle_cp2 invokes the original4/1CP2 record800724D4/native initializer once. Original5920/326 and companion5944 land naturally on source/live416 floor; no custom position/ground/HP/inventory/door/boss/outcome writes. Unrelated traversal is bypassed, strict fixture taint/ordinary recording/replay refusal retained.",
+              "Optional agreed contact protection is enabled for bounded living gameplay and naturally inactive during scene transport/intro. Original nonfatal intro contact may reduce guest health; both positive-health bodies and accepted independent controls are observed after release. No unchanged-health or enemy-contact-damage qualification."
+            ]
+          }
+        ],
+        "limitations": "R17 maps the frozen on-foot Chaser-stage boss-door precedent to Recycle4/1 Metal Shark. The same native Recycle mission has original Ride Armor4/0; frozen X4/X5 fields are unchanged. No road-to-boss section handoff, mounted opening/READY, mounted boss or Both-policy qualification. Agreed defaultoff LAB recycle_cp2 invokes the original4/1CP2 record800724D4/native initializer once. Original5920/326 and companion5944 land naturally on source/live416 floor; no custom position/ground/HP/inventory/door/boss/outcome writes. Unrelated traversal is bypassed, strict fixture taint/ordinary recording/replay refusal retained. Optional agreed contact protection is enabled for bounded living gameplay and naturally inactive during scene transport/intro. Original nonfatal intro contact may reduce guest health; both positive-health bodies and accepted independent controls are observed after release. No unchanged-health or enemy-contact-damage qualification. Exact original member7/checkpoint/native callback/constructor/intro/layout source is guarded. Placement records are mutable: only native allocatorbit0 and exact original boss lifetime0-or10 are normalized before original SHA comparison; every actual byte/hash remains in raw evidence. Initial naive immutable-placement guard stopped LOCALv1 before the door; its clean exit/cards/raw remain retained. Every physical process observes earliest native type56/sub0/originF7E48 at6231/350/state1/action2/HP0/defense7555C, then its original intro motion, real text progression, actual fullHP48=PLAY8C and release. Original committed current/target camera MIN6064/MAX6096/Y224 and both native controls are retained. Root reviewed all4 captures per physical process: native predoor, original boss introduction, fullHP/release and both independent controls. Hero overlap and corrupt background/HUD remain explicit; no general rendering/audio/private-camera or all-boss claim. F127 weakness and F134 kill/victory remain separate unresolved actions."
       }
     },
     {
