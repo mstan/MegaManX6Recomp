@@ -12513,7 +12513,7 @@
       "frozen_row_sha256": "08b6483f3bb89b0493300c181dd3470c3e8c0db4a8ddc6766b9e465e08853328",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Both-player midboss handoff",
         "bounded_check": "Cross a native midboss entrance together under Both policy; after actual clearance its scene handoff must not rewarp either actor.",
         "baseline_anchors": [
@@ -12521,17 +12521,88 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+            "build_identity": {
+              "executable_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+              "compiled_manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "cameras": "unified",
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original introCP2"
+            },
+            "action": "Complete original Both-door full-body crossing into actual native type48 intermediate-boss HP fill/release, retain no passenger/beam phase and test each own control afterward.",
+            "outcome": "Both living original bodies remain ALIVE through native intro, full boxes clear6080, native HP fills0->32/action4, and each actor separately travels>24px while the other stays still on every physical process. Original source identifies the encounter as intermediate before the later type55 finale.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-723affc-F97-native-midboss-handoff-reviewed.json",
+                "sha256": "d54546ec2d180534a35fa809a61e11a1ce5f96bbe0232a992241ae3cecf00e60"
+              }
+            ],
+            "limits": [
+              "Reused completed same723affc X6 LOCAL+NET executions, not inherited X4/X5 or a new runtime claim. Native type48 is structurally an intermediate combat encounter before story16/type55/intro exit40; F97 does not require defeating it.",
+              "Both living X/P1+Zero/P2, Unified camera, original subtype1 Both midboss entrance only. Actual no-rewarp/lifecycle/control observations cover every physical peer; detailed boss struct is sampled on NET peer0.",
+              "Root re-reviewed9 relevant composed images. Original prerequisite scenery corruption and HUD overlap/clipping remain explicit; no art, victory/finale, private-view, other-midboss, absent/fallen/F61 or consecutive-boss-door/F164 credit.",
+              "Existing private cards, owned exits, source/image/profile/CRC and strict tainted recording/replay refusals remain required in the retained original reviewed packet. No ordinary launch/campaign/recording/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 initializer bypasses approach traversal only. No native boss HP/state/door/scene/control/outcome flags assigned after setup."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+            "build_identity": {
+              "executable_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+              "compiled_manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "cameras": "unified",
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original introCP2"
+            },
+            "action": "Complete original Both-door full-body crossing into actual native type48 intermediate-boss HP fill/release, retain no passenger/beam phase and test each own control afterward.",
+            "outcome": "Both living original bodies remain ALIVE through native intro, full boxes clear6080, native HP fills0->32/action4, and each actor separately travels>24px while the other stays still on every physical process. Original source identifies the encounter as intermediate before the later type55 finale.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-723affc-F97-native-midboss-handoff-reviewed.json",
+                "sha256": "d54546ec2d180534a35fa809a61e11a1ce5f96bbe0232a992241ae3cecf00e60"
+              }
+            ],
+            "limits": [
+              "Reused completed same723affc X6 LOCAL+NET executions, not inherited X4/X5 or a new runtime claim. Native type48 is structurally an intermediate combat encounter before story16/type55/intro exit40; F97 does not require defeating it.",
+              "Both living X/P1+Zero/P2, Unified camera, original subtype1 Both midboss entrance only. Actual no-rewarp/lifecycle/control observations cover every physical peer; detailed boss struct is sampled on NET peer0.",
+              "Root re-reviewed9 relevant composed images. Original prerequisite scenery corruption and HUD overlap/clipping remain explicit; no art, victory/finale, private-view, other-midboss, absent/fallen/F61 or consecutive-boss-door/F164 credit.",
+              "Existing private cards, owned exits, source/image/profile/CRC and strict tainted recording/replay refusals remain required in the retained original reviewed packet. No ordinary launch/campaign/recording/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 initializer bypasses approach traversal only. No native boss HP/state/door/scene/control/outcome flags assigned after setup."
+            ]
+          }
+        ],
+        "limitations": "Completed exact723affc LOCAL/NET native intermediate-boss entrance passes no-rewarp/control contract, independently re-reviewed from retained original X6 observations and sourceclassification. Unified living-pair only; detailed boss struct on NETpeer0, all peers actual lifecycle/control. CP2 bypass/scenery limits retained; no defeat/finale/F164 claim."
       }
     },
     {

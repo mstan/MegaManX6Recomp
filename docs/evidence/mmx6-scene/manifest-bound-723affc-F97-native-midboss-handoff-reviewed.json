@@ -1,0 +1,310 @@
+{
+  "schema": 1,
+  "comparison": "F97",
+  "frozen_row_sha256": "08b6483f3bb89b0493300c181dd3470c3e8c0db4a8ddc6766b9e465e08853328",
+  "result": "passed",
+  "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-v76-final-binding-root-v1.json",
+    "binding_sha256": "af669fefb97ecad1bfcd38f279312b75412011a43ba826c5ad4eee11d6b55bf5",
+    "image_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+    "manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+    "provenance_sha256": "3d196e4666588f7fb2b68618ff4eb80217b5db150570cec5d608fd56c973d139",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v76-both-door-release-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v26",
+    "host_revision": 9
+  },
+  "reused_reviewed_packet": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-723affc-Both-door-local-netplay-reviewed.json",
+    "bytes": 35368,
+    "sha256": "87d0a3740a476e9495678e354c0f475c9bc72d270721596d733b3335aeca5e98"
+  },
+  "source_classification": {
+    "original_notes": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-boss-finale-source-notes.txt",
+      "bytes": 12599,
+      "sha256": "15b8000e8d4206fe7c7e9863969bdc38782c0a3acb88bc8eeaa00252530791f2"
+    },
+    "original_bin2_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607",
+    "verified_original_spans": [
+      {
+        "first": "0x800f104c",
+        "end": "0x800f117c",
+        "sha256": "0878cc78ad13188e4a43b5f3a8aa137c0e80464ff844c1c7d05d6ad34fa3c16c",
+        "source_contract": "Actual type48 death produces native story16; it is not intro exit40."
+      },
+      {
+        "first": "0x800f9a54",
+        "end": "0x800f9b70",
+        "sha256": "d46d132059432283f536b1075dce7a94062629a21ed8bf3336174024ee73bea1",
+        "source_contract": "Following story16 produces native type55 High Max finale."
+      },
+      {
+        "first": "0x800f64c0",
+        "end": "0x800f65dc",
+        "sha256": "6d13b787b3536bb6894542875409507009c4d717d67c320e27359f52557fcfe8",
+        "source_contract": "Only later type55 F65A4 writes intro exit40."
+      }
+    ]
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\qualification.json",
+        "bytes": 14439865,
+        "sha256": "1b17bdfffee5773046b73ebf046c58e67f722f9c52bfda3ce3cd58abd8b19779"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\observations.json",
+        "bytes": 12357065,
+        "sha256": "03adb9dd1e5bd5faba5d3c4b6f27d2ad72feee9f6674535c855514eda7940647"
+      },
+      "first_native_midboss_sample": 86,
+      "native_intro_hp_values": [
+        0,
+        1,
+        6,
+        13,
+        21,
+        25,
+        30
+      ],
+      "battle_ready": 253,
+      "witnesses": [
+        {
+          "peer": 0,
+          "observations": 272,
+          "no_lifecycle_transport_or_beam": true,
+          "full_native_feet": [
+            {
+              "seat": 0,
+              "left": 6134,
+              "feet_y": 416,
+              "box": "00020b13"
+            },
+            {
+              "seat": 1,
+              "left": 6095,
+              "feet_y": 416,
+              "box": "00030b13"
+            }
+          ],
+          "fresh_post_intro_controls": [
+            {
+              "seat": 0,
+              "travel_pixels": 27.5,
+              "other_delta": 0
+            },
+            {
+              "seat": 1,
+              "travel_pixels": 27.5,
+              "other_delta": 0
+            }
+          ]
+        }
+      ],
+      "root_reviewed_captures": [
+        {
+          "peer": 0,
+          "label": "actual-Both-native-door-without-withdrawal",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\actual-Both-native-door-without-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "779f12983cf908fdb5816c92d67759def63da73e87d3d62d3a97f2f551c6adf7"
+        },
+        {
+          "peer": 0,
+          "label": "Both-original-heroes-no-beam-native-release",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\Both-original-heroes-no-beam-native-release.png",
+          "bytes": 2074543,
+          "sha256": "317425959b009fc8e9f25e06f689ef9e81447176a54cda855de978944f00d82a"
+        },
+        {
+          "peer": 0,
+          "label": "both-controls-after-real-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\both-controls-after-real-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "3984017e02f01868eef6904d187aa03bd001ccafe10b86cdfe8d6fedea496ae8"
+        }
+      ],
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "limit": "Detailed boss struct is sampled on NET peer0; all physical peers retain actual body/lifecycle/ground/control history and resolved parent gates."
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\qualification.json",
+        "bytes": 17206143,
+        "sha256": "f9ef5772aab447f984cac1b898737da53a5b5e30ddbe057ef65da859e1a3f21c"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\observations.json",
+        "bytes": 13749636,
+        "sha256": "06d0fc23efe42e4e6f3223bea2746334cba6c4332544e7fa151e6d38ba4401cd"
+      },
+      "first_native_midboss_sample": 69,
+      "native_intro_hp_values": [
+        0,
+        1,
+        10,
+        18,
+        25
+      ],
+      "battle_ready": 182,
+      "witnesses": [
+        {
+          "peer": 0,
+          "observations": 201,
+          "no_lifecycle_transport_or_beam": true,
+          "full_native_feet": [
+            {
+              "seat": 0,
+              "left": 6134,
+              "feet_y": 416,
+              "box": "00020b13"
+            },
+            {
+              "seat": 1,
+              "left": 6095,
+              "feet_y": 416,
+              "box": "00030b13"
+            }
+          ],
+          "fresh_post_intro_controls": [
+            {
+              "seat": 0,
+              "travel_pixels": 35.5,
+              "other_delta": 0
+            },
+            {
+              "seat": 1,
+              "travel_pixels": 37.5,
+              "other_delta": 0
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "observations": 201,
+          "no_lifecycle_transport_or_beam": true,
+          "full_native_feet": [
+            {
+              "seat": 0,
+              "left": 6134,
+              "feet_y": 416,
+              "box": "00020b13"
+            },
+            {
+              "seat": 1,
+              "left": 6095,
+              "feet_y": 416,
+              "box": "00030b13"
+            }
+          ],
+          "fresh_post_intro_controls": [
+            {
+              "seat": 0,
+              "travel_pixels": 45.5,
+              "other_delta": 0
+            },
+            {
+              "seat": 1,
+              "travel_pixels": 47.5,
+              "other_delta": 0
+            }
+          ]
+        }
+      ],
+      "root_reviewed_captures": [
+        {
+          "peer": 0,
+          "label": "actual-Both-native-door-without-withdrawal",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\actual-Both-native-door-without-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "49efabf797bbe897b2cab2ddf755dc296b3d5aeea57e49c208534841849403e0"
+        },
+        {
+          "peer": 1,
+          "label": "actual-Both-native-door-without-withdrawal",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-actual-Both-native-door-without-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "92ed9f0063c1e77ab48e1c541a2f6f64f097d50467bc2e162c7ee405954718d6"
+        },
+        {
+          "peer": 0,
+          "label": "Both-original-heroes-no-beam-native-release",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\Both-original-heroes-no-beam-native-release.png",
+          "bytes": 2074543,
+          "sha256": "fc88221f6fe672103014ec3cfaaf37c083d2d843873c1fe2622e88af0b52f651"
+        },
+        {
+          "peer": 1,
+          "label": "Both-original-heroes-no-beam-native-release",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-Both-original-heroes-no-beam-native-release.png",
+          "bytes": 2074543,
+          "sha256": "e22598988954feefa98c72c1c36e985c5eda77aeff672f87ec87b31cc4585cfb"
+        },
+        {
+          "peer": 0,
+          "label": "both-controls-after-real-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\both-controls-after-real-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "f8ac2309d3f1ac2bd432bc80d340778456883ae5c6439c67e1c9ce024d5d7a8f"
+        },
+        {
+          "peer": 1,
+          "label": "both-controls-after-real-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-both-controls-after-real-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "f6ffa901133ff494a82b7efdd5e3e182776e4f6c5bb335a17f9b0283cc009dbd"
+        }
+      ],
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "limit": "Detailed boss struct is sampled on NET peer0; all physical peers retain actual body/lifecycle/ground/control history and resolved parent gates."
+    }
+  },
+  "limits": [
+    "Reused completed same723affc X6 LOCAL+NET executions, not inherited X4/X5 or a new runtime claim. Native type48 is structurally an intermediate combat encounter before story16/type55/intro exit40; F97 does not require defeating it.",
+    "Both living X/P1+Zero/P2, Unified camera, original subtype1 Both midboss entrance only. Actual no-rewarp/lifecycle/control observations cover every physical peer; detailed boss struct is sampled on NET peer0.",
+    "Root re-reviewed9 relevant composed images. Original prerequisite scenery corruption and HUD overlap/clipping remain explicit; no art, victory/finale, private-view, other-midboss, absent/fallen/F61 or consecutive-boss-door/F164 credit.",
+    "Existing private cards, owned exits, source/image/profile/CRC and strict tainted recording/replay refusals remain required in the retained original reviewed packet. No ordinary launch/campaign/recording/replay claim."
+  ],
+  "bypasses": [
+    "Pre-agreed original introCP2 initializer bypasses approach traversal only. No native boss HP/state/door/scene/control/outcome flags assigned after setup."
+  ]
+}
