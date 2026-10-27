@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 64 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 6 failed, 164 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 67 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F92, F95, F98, F102, F107, F110, F114, F119, F121, F133, F137, F144, F157, F163, F170, F178, F204, F205, F208), 4 failed, 163 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
