@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 12 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 13 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -73,7 +73,7 @@ typedef struct {
     PlayerContext player;
     Mmx6CoopLifecycle lifecycle;
     uint8_t returning[0x158],scene[0x158],portrait[0x200];
-    uint32_t join,join_y,owner,scene_phase,scene_y,input,edges,start,menu_loaded;
+    uint32_t join,arrival,join_y,owner,scene_phase,scene_y,input,edges,start,menu_loaded;
     uint32_t enrolled,failed,frame_count,hud_fade,world_packets,hud_seat;
     int pause;
     PickupOwner pickups[128];
@@ -91,7 +91,7 @@ static void state_capture(HostState *s) {
     memcpy(s->returning,returning_body,sizeof returning_body);
     memcpy(s->scene,scene_body,sizeof scene_body);
     memcpy(s->portrait,saved_portrait_colors,sizeof saved_portrait_colors);
-    s->join=join_phase;s->join_y=(uint32_t)join_y;s->owner=scene_owner;s->scene_phase=scene_phase;s->scene_y=(uint32_t)scene_y;
+    s->join=join_phase;s->arrival=arrival_pair;s->join_y=(uint32_t)join_y;s->owner=scene_owner;s->scene_phase=scene_phase;s->scene_y=(uint32_t)scene_y;
     s->input=previous_input;s->edges=p2_edges;s->start=p2_start_previous;s->menu_loaded=zero_menu_loaded;s->pause=pause_owner;
     s->enrolled=enrolled;s->failed=failed;s->frame_count=frame_count;s->hud_fade=p2_hud_fade;s->world_packets=world_packets;s->hud_seat=hud_seat;
     memcpy(s->pickups,pickup_owners,sizeof pickup_owners);
@@ -121,7 +121,7 @@ static void state_core(StateIO *io,HostState *s) {
     FIELD(lifecycle.status[0],1,MMX6_COOP_FALLEN);FIELD(lifecycle.status[1],1,MMX6_COOP_FALLEN);
     FIELD(lifecycle.select_frames,4,90);FIELD(lifecycle.select_armed,1,1);FIELD(lifecycle.select_previous,1,1);
     FIELD(lifecycle.wipe,1,2);FIELD(lifecycle.rejoin_pending,1,1);
-    FIELD(join,1,2);FIELD(join_y,4,UINT32_MAX);FIELD(input,2,65535);FIELD(edges,2,65535);
+    FIELD(join,1,2);FIELD(arrival,1,1);FIELD(join_y,4,UINT32_MAX);FIELD(input,2,65535);FIELD(edges,2,65535);
     FIELD(owner,1,2);FIELD(scene_phase,1,5);FIELD(scene_y,4,UINT32_MAX);
     state_bytes(io,s->returning,sizeof s->returning);state_bytes(io,s->scene,sizeof s->scene);
     uint32_t menu=state_integer(io,(uint32_t)(s->pause+1),1,2);s->pause=(int)menu-1;
@@ -149,6 +149,9 @@ static void state_core(StateIO *io,HostState *s) {
         if(valid && (!o->owner || !state_assembly(o->assembly)))io->ok=0;
     }
     if(!s->owner && s->scene_phase)io->ok=0;
+    if(s->arrival && (!s->enrolled || s->join || s->owner || s->pause>=0 || s->menu_loaded ||
+        s->lifecycle.status[0]!=MMX6_COOP_ALIVE ||
+        s->lifecycle.status[1]!=MMX6_COOP_JOINING))io->ok=0;
     FIELD(door_actor,4,UINT32_MAX);FIELD(door_origin,4,UINT32_MAX);FIELD(door_members,1,3);
     if(!s->door_actor) {
         if(s->door_members || s->door_origin)io->ok=0;
@@ -157,7 +160,7 @@ static void state_core(StateIO *io,HostState *s) {
               !both_doors || !s->door_members || !s->owner ||
               s->scene_phase || !s->enrolled)io->ok=0;
     FIELD(clear_phase,1,CLEAR_VICTORY);FIELD(clear_members,1,3);FIELD(clear_started,1,3);
-    if(s->door_actor && s->clear_phase)io->ok=0;
+    if((s->door_actor && s->clear_phase) || (s->arrival && (s->door_actor || s->clear_phase)))io->ok=0;
     if(s->clear_phase==CLEAR_ADMITTED && io->mode!=STATE_HASH)io->ok=0;
     if(!s->clear_phase) {
         if(s->clear_members || s->clear_started)io->ok=0;
@@ -181,7 +184,7 @@ static void state_commit(const HostState *s) {
     p2=s->player;life=s->lifecycle;
     memcpy(returning_body,s->returning,sizeof returning_body);memcpy(scene_body,s->scene,sizeof scene_body);
     memcpy(saved_portrait_colors,s->portrait,sizeof saved_portrait_colors);
-    join_phase=s->join;join_y=(int32_t)s->join_y;scene_owner=s->owner;scene_phase=s->scene_phase;scene_y=(int32_t)s->scene_y;
+    join_phase=s->join;arrival_pair=s->arrival;join_y=(int32_t)s->join_y;scene_owner=s->owner;scene_phase=s->scene_phase;scene_y=(int32_t)s->scene_y;
     previous_input=(uint16_t)s->input;p2_edges=(uint16_t)s->edges;p2_start_previous=s->start;
     zero_menu_loaded=s->menu_loaded;pause_owner=s->pause;enrolled=s->enrolled;failed=s->failed;
     frame_count=s->frame_count;p2_hud_fade=s->hud_fade;world_packets=s->world_packets;hud_seat=s->hud_seat;
@@ -247,7 +250,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,12);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,13);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,both_doors);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};

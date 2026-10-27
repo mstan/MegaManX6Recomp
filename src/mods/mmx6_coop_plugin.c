@@ -86,6 +86,8 @@ static int inside, ready, enrolled, failed;
 static Mmx6CoopLifecycle life;
 static uint8_t returning_body[0x158];
 static unsigned join_phase;
+/* Fresh native arrival only; voluntary Select returns retain join_phase. */
+static unsigned arrival_pair;
 static int32_t join_y;
 static int player_call, stage_call, zero_world, world_render;
 static int pause_owner = -1, p2_start_previous;
@@ -553,12 +555,15 @@ static int nightmare_soul(CPUState *cpu, uint32_t address) {
     return 1;
 }
 static void begin_join(CPUState *cpu, uint32_t x, uint32_t y);
-static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster) {
+static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster,int arrival) {
     if (mmx6_coop_resources_fixed_runtime_admit(roster)!=MMX6_COOP_RESOURCES_OK) { failed=1;return; }
     /* Native fresh-stage/checkpoint birth reapplies its own body rows next. */
     if (working_palette_assets_ready && !working_palette_seed(0)) { failed=1;return; }
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
-    uint32_t origin[2]={x,y};STATE_WORDS(restore_origin,33,origin,2);
+    unsigned arrival_delay=psx_mod_read_byte(PLAYER+0xCE);
+    uint32_t arrival_box=psx_mod_read_word(PLAYER+0x68);
+    uint32_t origin[5]={x,y,arrival_delay,arrival_box,(unsigned)arrival};
+    STATE_WORDS(restore_origin,33,origin,5);
     memset(&p2,0,sizeof p2);
     enter_zero();
     psx_mod_write_byte(PLAY+0x1E,0);
@@ -575,10 +580,25 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster) {
     leave_zero();
     enrolled=1; previous_input=0;
     mmx6_coop_lifecycle_respawn(&life);
-    /* Initialize resources offscreen, then use the same native arrival as a
-     * voluntary return. This also covers new stages and checkpoint retries. */
+    /* Reuse the original incoming beam for an actual simultaneous arrival;
+     * other handoffs retain the existing offscreen voluntary-return path. */
     p2_hud_fade=0;
-    begin_join(cpu,x+(24u<<16),y);
+    if (arrival) {
+        /* Original action0 (80035144) owns descent, terrain contact and the
+         * resolving pose. Do not interpolate to X's still-airborne Y or mark
+         * a successful landing. The ordinary 24px enrollment offset remains. */
+        enter_zero();
+        /* 35168..35194 counts CE down before enabling standing contact.
+         * Share the native arrival's remaining delay, not a fabricated floor
+         * or completed pose; each character resolves its own standing box. */
+        psx_mod_write_byte(PLAYER+0xCE,(uint8_t)arrival_delay);
+        if (arrival_box) guest(cpu,0x8003CCBC,PLAYER,0);
+        guest(cpu,0x8003D850,PLAYER,0);
+        leave_zero();
+        life.status[1]=MMX6_COOP_JOINING;
+        join_phase=0;
+        arrival_pair=1;
+    } else begin_join(cpu,x+(24u<<16),y);
     STATE_POP(restore_origin);
     fprintf(stdout,"mmx6 co-op: Zero enrolled at (%u,%u)\n",x>>16,y>>16);
     fflush(stdout);
@@ -787,7 +807,7 @@ static uint32_t diagnostic_host_digest(void) {
     const uint32_t fields[]={
         (uint32_t)life.status[0],(uint32_t)life.status[1],life.select_frames,
         life.select_armed,life.select_previous,life.wipe,life.rejoin_pending,
-        previous_input,p2_edges,join_phase,(uint32_t)join_y,
+        previous_input,p2_edges,join_phase,arrival_pair,(uint32_t)join_y,
         (uint32_t)pause_owner,(uint32_t)p2_start_previous,
         scene_owner,scene_phase,(uint32_t)scene_y,both_door_actor,both_door_origin,both_door_members,
         (uint32_t)ready,(uint32_t)enrolled,(uint32_t)failed
@@ -1515,8 +1535,92 @@ static void menu_vram(CPUState *cpu, int zero) {
     zero_menu_loaded=zero;
     STATE_POP(restore_owner);
 }
+static int arrival_source(void) {
+    return psx_mod_read_word(0x80073ACCu)==0x80035144u &&
+        psx_mod_read_word(0x8003D850u)==0x27BDFFE8u &&
+        psx_mod_read_word(0x8003D860u)==0x0C00EE81u &&
+        psx_mod_read_word(0x8003D880u)==0xAE020024u &&
+        psx_mod_read_word(0x8003D730u)==0x90C4005Eu &&
+        psx_mod_read_word(0x8003D73Cu)==0xA0A400E7u &&
+        psx_mod_read_word(0x800351B4u)==0x0C00EE81u &&
+        psx_mod_read_word(0x8003525Cu)==0x0C00EB46u;
+}
+static int arrival_grounded(const uint8_t *body) {
+    return (body[0]&1) && body[3] && body[4]==1 && body[5]==2 &&
+        body[0x5C] && body[0x5C]<128 &&
+        !body[0x67] && (body[0x70]&8) && !(le32(body+12)&65535u) &&
+        body[2]<=1 && le32(body+0x68)==(body[2]?0x80073D54u:0x80073D50u);
+}
+static int arrival_spaced(const uint8_t *a,const uint8_t *b) {
+    uint32_t ab=le32(a+0x68),bb=le32(b+0x68);
+    int ac=(int16_t)(le32(a+8)>>16)+(int8_t)psx_mod_read_byte(ab);
+    int bc=(int16_t)(le32(b+8)>>16)+(int8_t)psx_mod_read_byte(bb);
+    int distance=ac>bc?ac-bc:bc-ac;
+    return distance>=(int)(psx_mod_read_byte(ab+2)+psx_mod_read_byte(bb+2));
+}
+static int paired_arrival(CPUState *cpu) {
+    /* Action0 is the original incoming beam, not a door/script/voluntary
+     * return. Native 3D718 assigns body E7 from PLAY5E only at landing;
+     * while that field is uninitialized, resolve this exact native campaign
+     * selection without pretending the completed-body guard has run. */
+    if (psx_mod_read_byte(PLAY+1) || scene_owner || clear_phase || pause_owner>=0 || zero_menu_loaded ||
+        psx_mod_read_byte(PLAY+0x0F) || psx_mod_read_byte(PLAY+0x10) ||
+        psx_mod_read_byte(0x8008EAFCu) || psx_mod_read_byte(PLAYER+0xD0) ||
+        psx_mod_read_byte(PLAYER+0xD4) || psx_mod_read_byte(PLAYER+0xD5) ||
+        psx_mod_read_byte(PLAYER+0xE0)) return arrival_pair!=0;
+    if (!arrival_pair) {
+        if (enrolled || psx_mod_read_byte(PLAYER+2) || psx_mod_read_byte(PLAYER+4)!=1 ||
+            !psx_mod_read_byte(PLAYER+0x5C) || psx_mod_read_byte(PLAYER+0x5C)>=128 ||
+            psx_mod_read_byte(PLAYER+5) || psx_mod_read_byte(PLAYER+6) ||
+            psx_mod_read_byte(PLAYER+0x67)!=255 ||
+            psx_mod_read_word(PLAYER+0x24)!=0xFFF80000u || !arrival_source()) return 0;
+        Mmx6CoopRoster roster;
+        Mmx6CoopRosterNative native={psx_mod_read_byte(PLAYER+2),psx_mod_read_byte(PLAY+0x5E),
+            psx_mod_read_byte(PLAY+0x38),psx_mod_read_byte(PLAY+0x5E),psx_mod_read_byte(PLAY+0x5F)};
+        if (mmx6_coop_roster_resolve(&native,&roster)!=MMX6_COOP_ROSTER_OK ||
+            mmx6_coop_resources_fixed_runtime_admit(&roster)!=MMX6_COOP_RESOURCES_OK) return 0;
+        inside=1;
+        if (!ready) ready=load_assets(&roster);
+        if (!ready) failed=1;
+        if (!failed) enroll(cpu,&roster,1);
+        inside=0;
+        if (failed) return 1;
+    }
+    if (psx_mod_read_byte(PLAYER+4)!=1 || p2.body[4]!=1) {
+        arrival_pair=0;
+        if (p2.body[4]==1) mmx6_coop_teleport_done(&life);
+        else if (p2.body[4]==2) mmx6_coop_fatal(&life,1);
+        return 0; /* Native body action0 still owns a living survivor's beam. */
+    }
+    inside=1;
+    /* Only this owned actor runs again. enter/leave restores X, all world
+     * flags/clocks and the canonical camera, including native PLAY1C clears. */
+    enter_zero();
+    for (unsigned i=0;i<8;i+=2) psx_mod_write_half(PLAYER+0x7C+i,0);
+    guest(cpu,0x80034DCC,0,0);
+    guest(cpu,0x8002012C,0,0);
+    guest(cpu,0x8002F288,PLAYER,0);
+    guest(cpu,0x80020D74,0,0);
+    guest(cpu,0x80020DC8,0,0);
+    leave_zero();
+    uint8_t primary[0x158];capture(PLAYER,primary,sizeof primary);
+    if (arrival_grounded(primary) && arrival_grounded(p2.body) &&
+        arrival_spaced(primary,p2.body)) {
+        arrival_pair=0;
+        mmx6_coop_teleport_done(&life);
+    }
+    if (p2.body[4]==2) { arrival_pair=0;mmx6_coop_fatal(&life,1); }
+    if (!stage_call) diagnostics(0);
+    inside=0;
+    return 1;
+}
 static int player_tick(CPUState *cpu, uint32_t address) {
     if (inside || player_call || !enrolled || failed) return 0;
+    /* 8003CD44 has decoded this frame's pad before this native update.
+     * Withhold its held/edge words until BOTH original arrivals finish. The
+     * native body/terrain/animation pass still runs, including fatal paths. */
+    if (arrival_pair) for (unsigned i=0;i<8;i+=2)
+        psx_mod_write_half(PLAYER+0x7C+i,0);
     uint8_t freeze[11];
     capture(PLAY+0x12,freeze,sizeof freeze);
     STATE_BYTES(restore_freeze,10,freeze,sizeof freeze);
@@ -1584,7 +1688,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         pause_owner=-1;
         /* Match the native pause gate. Simultaneous requests go to P1; an
          * absent/dead/departing actor cannot become the menu's owner. */
-        if (!scene_owner && !clear_phase && !psx_mod_read_byte(PLAY+0x1C) && !psx_mod_read_byte(PLAY+0x10) &&
+        if (!arrival_pair && !scene_owner && !clear_phase && !psx_mod_read_byte(PLAY+0x1C) && !psx_mod_read_byte(PLAY+0x10) &&
             !psx_mod_read_byte(PLAY+0x0F) && !psx_mod_read_byte(0x80097424)) {
             if (life.status[0]==MMX6_COOP_ALIVE && (psx_mod_read_half(0x800C4570)&0x0800))
                 pause_owner=0;
@@ -1600,13 +1704,26 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);
     stage_context[3]=(uint32_t)survivor;STATE_UPDATE(restore_stage,stage_context);
     if (!survivor && pause_owner!=1 && scene_owner!=2 && !shared_clear_zero_world()) {
+        uint8_t arrival_input[6];unsigned restore_arrival_input=UINT32_MAX;
+        if (arrival_pair) {
+            capture(0x800C456C,arrival_input,sizeof arrival_input);
+            restore_arrival_input=mmx6_state_push(53,arrival_input,sizeof arrival_input,0);
+            /* Pause/interaction also read native pads outside the decoder.
+             * Neutralize this guest pass, retaining accepted SDK input and
+             * restoring the original pad publication after the world pass. */
+            for (unsigned i=0;i<6;i+=2) psx_mod_write_half(0x800C456C+i,0);
+        }
         stage_call=1;
         uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+        if (restore_arrival_input!=UINT32_MAX) {
+            project(0x800C456C,arrival_input,sizeof arrival_input);
+            mmx6_state_pop(restore_arrival_input);
+        }
         stage_context[2]=result;STATE_UPDATE(restore_stage,stage_context);
         if (!psx_mod_read_byte(PLAY+1)) scene_tick(cpu);
         shared_clear_tick(cpu,0);
         diagnostics((uint16_t)((raw<<8)|(raw>>8)));
-        if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
+        if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=arrival_pair=0;
         cpu->gpr[2]=result;
         stage_call=0;
         STATE_POP(restore_stage);
@@ -1657,7 +1774,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     shared_clear_tick(cpu,1);
     diagnostics(raw);
     if (zero_menu_loaded && psx_mod_read_byte(PLAY+1)!=2) menu_vram(cpu,0);
-    if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
+    if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=arrival_pair=0;
     cpu->gpr[2]=result;
     stage_call=inside=0;
     STATE_POP(restore_stage);
@@ -1700,8 +1817,9 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
     if (inside) return;
     (void)retire_quit_stage(cpu,address);
     /* This is the native fresh-stage/checkpoint-respawn initialization, never
-     * an ordinary door. The host body is enrolled after the new X body lands. */
+     * an ordinary door. An ordinary native beam may enroll both arrivals. */
     enrolled=0;
+    arrival_pair=0;
     scene_owner=scene_phase=0;
     both_door_reset();
     shared_clear_reset();
@@ -1723,8 +1841,9 @@ static void controller(CPUState *cpu, uint32_t address) {
     }
     if (psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_read_byte(PLAYER)) {
         (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_INACTIVE)&1,0,0);
-        enrolled=0; return;
+        enrolled=0; arrival_pair=0; return;
     }
+    if (paired_arrival(cpu)) return;
     if (psx_mod_read_byte(PLAY+1) || (psx_mod_read_byte(PLAYER+4)!=2 &&
          (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)<2)) ||
         (psx_mod_read_byte(PLAY+0x10) && !both_door_traversal_active()) ||
@@ -1745,7 +1864,7 @@ static void controller(CPUState *cpu, uint32_t address) {
             ready=load_assets(&roster);
             if (!ready) { failed=1; fprintf(stderr,"mmx6 co-op: resource validation failed\n"); }
         }
-        if (ready && !enrolled) enroll(cpu,&roster);
+        if (ready && !enrolled) enroll(cpu,&roster,0);
     }
     if (ready && enrolled) {
         constrain_player(0);
@@ -2626,7 +2745,7 @@ static void activate(void) {
     memset(native_working_palettes,0,sizeof native_working_palettes);
     memset(working_palette_lengths,0,sizeof working_palette_lengths);
     frame_count=0; previous_input=p2_edges=0;
-    mmx6_coop_lifecycle_init(&life); join_phase=0;join_y=scene_y=0;
+    mmx6_coop_lifecycle_init(&life); join_phase=arrival_pair=0;join_y=scene_y=0;
     player_call=stage_call=zero_world=world_render=0;
     pause_owner=-1; p2_start_previous=0;
     render_x_death=effect_call=shared_fx_call=shared_fx_allocate_call=0; memset(death_effect,0,sizeof death_effect);
@@ -2700,7 +2819,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v35",
+        .compatibility_id = "mmx6-x-zero-delay-v36",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

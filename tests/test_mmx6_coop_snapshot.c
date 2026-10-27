@@ -476,6 +476,28 @@ static void both_door_snapshot(void) {
     state_core(&check,&active);CHECK(!check.ok);
     both_doors=option;state_commit(&prior);free(wire);
 }
+static void paired_arrival_snapshot(void) {
+    HostState prior;state_capture(&prior);
+    pause_owner=-1;zero_menu_loaded=0;scene_owner=scene_phase=join_phase=0;shared_clear_reset();both_door_reset();
+    arrival_pair=enrolled=1;life.status[0]=MMX6_COOP_ALIVE;life.status[1]=MMX6_COOP_JOINING;
+    uint32_t length=snapshot_bytes();CHECK(length);
+    uint8_t *wire=malloc(length);CHECK(wire && snapshot_write(wire,length));
+    uint32_t digest=state_digest();arrival_pair=0;CHECK(state_digest()!=digest);
+    CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+    CHECK(arrival_pair==1 && life.status[1]==MMX6_COOP_JOINING && state_digest()==digest);
+    for(unsigned invalid=0;invalid<7;++invalid) {
+        HostState bad;state_capture(&bad);
+        if(invalid==0)bad.arrival=2;
+        if(invalid==1)bad.enrolled=0;
+        if(invalid==2)bad.join=1;
+        if(invalid==3)bad.owner=1;
+        if(invalid==4)bad.lifecycle.status[1]=MMX6_COOP_ALIVE;
+        if(invalid==5)bad.lifecycle.status[0]=MMX6_COOP_FALLEN;
+        if(invalid==6)bad.pause=1;
+        StateIO check={STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&check,&bad);CHECK(!check.ok);
+    }
+    state_commit(&prior);free(wire);
+}
 static void abandoned_guest(void){
     /* Exercise the SDK's actual supported landing, including MinGW GNU's
      * large-frame case. The target function has not returned when dispatched
@@ -488,7 +510,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();shared_clear_snapshot();both_door_snapshot();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

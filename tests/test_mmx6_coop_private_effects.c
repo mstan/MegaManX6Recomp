@@ -31,6 +31,7 @@ static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
 static unsigned scene_transport_probe;
+static unsigned arrival_probe,arrival_landed,arrival_ticks[2],arrival_births;
 static unsigned clear_probe,clear_worlds,clear_zero_worlds,clear_fades;
 static unsigned clear_constructors[2],clear_body_ticks[2],clear_poses[2],clear_outgoing[2],clear_pose_limit[2];
 static unsigned clear_air_ticks,clear_air_limit,clear_air_seat;
@@ -224,6 +225,44 @@ static uint32_t original_door_predicate(uint32_t actor) {
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
+    if(arrival_probe) {
+        unsigned seat=psx_mod_read_byte(PLAYER+2);
+        if(address==0x8001E9ECu) {
+            CHECK(stage_call && arrival_pair);
+            for(unsigned i=0;i<6;i+=2)CHECK(!(psx_mod_read_half(0x800C456C+i)&0x0800));
+            return;
+        }
+        if(address==0x8003BD24u) {
+            psx_mod_write_byte(PLAYER,1);psx_mod_write_byte(PLAYER+2,psx_mod_read_byte(PLAY+0x38));
+            psx_mod_write_byte(PLAYER+0x5C,32);++arrival_births;return;
+        }
+        CHECK(cpu->gpr[4]==PLAYER || address==0x80034DCCu ||
+              address==0x8002012Cu || address==0x80020D74u || address==0x80020DC8u);
+        if(address==0x8003D718u) {psx_mod_write_byte(PLAYER+0xE7,5);return;}
+        if(address==0x8003D630u)return;
+        if(address==0x8003AD18u){psx_mod_write_byte(PLAYER+5,2);return;}
+        if(address==0x8003CCBCu){psx_mod_write_word(PLAYER+0x68,0x80073D54u);return;}
+        if(address==0x8003D850u){
+            CHECK(seat==1 && zero_projected);
+            psx_mod_write_byte(PLAYER+5,0);psx_mod_write_byte(PLAYER+6,0);
+            psx_mod_write_byte(PLAYER+0x67,255);psx_mod_write_word(PLAYER+0x24,0xFFF80000u);return;
+        }
+        if(address==0x80034DCCu) {
+            for(unsigned i=0;i<8;i+=2)CHECK(!psx_mod_read_half(PLAYER+0x7C+i));
+            ++arrival_ticks[seat];
+            if(arrival_landed&(1u<<seat)) {
+                psx_mod_write_byte(PLAYER+5,2);psx_mod_write_byte(PLAYER+0x67,0);
+                psx_mod_write_byte(PLAYER+0x70,8);
+            }
+            /* Native Zero arrival clears hold/camera flags internally; none
+             * may escape its private projection into X's shared world. */
+            if(seat){psx_mod_write_byte(PLAY+0x1C,0);psx_mod_write_word(0x80097202u,999);}
+            return;
+        }
+        CHECK(address==0x8002012Cu || address==0x8002F288u ||
+              address==0x80020D74u || address==0x80020DC8u);
+        return;
+    }
     if(clear_probe) {
         /* Independent bounded native contracts: 1EA28 tests resident state3,
          * 3B870 starts native25 only for actual clear10; native25 eventually
@@ -498,7 +537,8 @@ static void setup(CPUState *cpu){
     icon_packet_probe=dash_packet_probe=render_replacement_probe=0;
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=0;memset(death_effect,0,sizeof death_effect);
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
-    ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;p2_start_previous=0;
+    ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=arrival_pair=0;previous_input=p2_edges=0;p2_start_previous=0;
+    arrival_probe=arrival_landed=arrival_births=0;memset(arrival_ticks,0,sizeof arrival_ticks);
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
     pad_buttons=0xFFFF;
     menu_probe=0;memset(menu_input,0,sizeof menu_input);
@@ -1681,6 +1721,76 @@ static void native_both_door_ack_motion_and_release(void) {
               psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 && !scene_phase);
     }
 }
+static void arrival_setup(CPUState *cpu) {
+    setup(cpu);enrolled=0;arrival_probe=1;
+    psx_mod_write_byte(PLAY+0x5E,1);psx_mod_write_byte(PLAY+0x1C,1);
+    for(unsigned i=0x0F;i<=0x1B;++i)psx_mod_write_byte(PLAY+i,0);
+    psx_mod_write_byte(PLAYER+5,0);psx_mod_write_byte(PLAYER+6,0);
+    psx_mod_write_byte(PLAYER+0xE7,0); /* Original parts have not landed. */
+    psx_mod_write_byte(PLAYER+0xCE,3);
+    psx_mod_write_byte(PLAYER+0x67,255);psx_mod_write_word(PLAYER+0x24,0xFFF80000u);
+    const unsigned fields[]={0xD0,0xD4,0xD5,0xE0};
+    for(unsigned i=0;i<4;++i)psx_mod_write_byte(PLAYER+fields[i],0);
+    psx_mod_write_word(PLAYER+0x68,0x80073D50u);
+    for(unsigned box=0;box<2;++box){psx_mod_write_byte(0x80073D50u+box*4,0);psx_mod_write_byte(0x80073D52u+box*4,10);}
+    psx_mod_write_word(0x80073ACCu,0x80035144u);
+    psx_mod_write_word(0x8003D850u,0x27BDFFE8u);psx_mod_write_word(0x8003D860u,0x0C00EE81u);
+    psx_mod_write_word(0x8003D880u,0xAE020024u);psx_mod_write_word(0x800351B4u,0x0C00EE81u);
+    psx_mod_write_word(0x8003D730u,0x90C4005Eu);psx_mod_write_word(0x8003D73Cu,0xA0A400E7u);
+    psx_mod_write_word(0x8003525Cu,0x0C00EB46u);
+}
+static void native_paired_arrival_barrier(void) {
+    CPUState cpu;
+    for(unsigned first=0;first<2;++first) {
+        arrival_setup(&cpu);
+        uint32_t x=psx_mod_read_word(PLAYER+8),y=psx_mod_read_word(PLAYER+12);
+        uint32_t camera=psx_mod_read_word(0x80097202u),clock=psx_mod_read_word(PLAY+0x90);
+        CHECK(paired_arrival(&cpu) && arrival_pair && enrolled && arrival_births==1);
+        CHECK(life.status[1]==MMX6_COOP_JOINING && !join_phase && p2.body[5]==0 && p2.body[0xCE]==3);
+        CHECK(psx_mod_read_word(PLAYER+8)==x && psx_mod_read_word(PLAYER+12)==y &&
+              le32(p2.body+8)==x+(24u<<16) && le32(p2.body+12)==y);
+        CHECK(psx_mod_read_byte(PLAY+0x1C)==1 && psx_mod_read_word(0x80097202u)==camera &&
+              psx_mod_read_word(PLAY+0x90)==clock && !inside && !zero_projected && !state_track.count);
+        for(unsigned i=0;i<6;i+=2)psx_mod_write_half(0x800C456C+i,0x0800);
+        stage_call=0;CHECK(stage_tick(&cpu,0x8001E9ECu));stage_call=1;
+        for(unsigned i=0;i<6;i+=2)CHECK(psx_mod_read_half(0x800C456C+i)==0x0800);
+        CHECK(pause_owner<0 && !state_track.count && !state_track.error);
+        arrival_landed=1u<<first;
+        for(unsigned i=0;i<8;i+=2)psx_mod_write_half(PLAYER+0x7C+i,0xFFFF);
+        CHECK(player_tick(&cpu,0x80034DCCu));
+        CHECK(paired_arrival(&cpu) && arrival_pair && life.status[1]==MMX6_COOP_JOINING);
+        CHECK(arrival_ticks[0]==1 && arrival_ticks[1]==2);
+        arrival_landed=3;
+        CHECK(player_tick(&cpu,0x80034DCCu));
+        /* Both idle alone do not release overlapping or fractional feet. */
+        put32(p2.body+8,x+(10u<<16));
+        CHECK(paired_arrival(&cpu) && arrival_pair);
+        put32(p2.body+8,x+(24u<<16));put32(p2.body+12,y+1);
+        CHECK(paired_arrival(&cpu) && arrival_pair);
+        put32(p2.body+12,y);
+        CHECK(paired_arrival(&cpu) && !arrival_pair && life.status[1]==MMX6_COOP_ALIVE);
+        CHECK(arrival_births==1 && !paired_arrival(&cpu));
+        arrival_pair=1;native_player_init(&cpu,0x8003BD24u);CHECK(!arrival_pair && !enrolled);
+    }
+    for(unsigned invalid=0;invalid<7;++invalid) {
+        arrival_setup(&cpu);
+        if(invalid==0)psx_mod_write_word(0x800351B4u,0);
+        if(invalid==1)psx_mod_write_byte(PLAY+1,2);
+        if(invalid==2)psx_mod_write_byte(PLAYER+5,19);
+        if(invalid==3)psx_mod_write_byte(PLAYER+0xD0,1);
+        if(invalid==4)psx_mod_write_byte(PLAYER+0x67,0);
+        if(invalid==5)psx_mod_write_byte(PLAY+0x5E,5);
+        if(invalid==6)psx_mod_write_byte(PLAY+0x10,1);
+        CHECK(!paired_arrival(&cpu) && !arrival_pair && !enrolled && !arrival_births && !failed);
+    }
+    arrival_setup(&cpu);CHECK(paired_arrival(&cpu));
+    psx_mod_write_byte(PLAYER+4,2);psx_mod_write_byte(PLAYER+0x5C,0);
+    CHECK(player_tick(&cpu,0x80034DCCu));CHECK(!paired_arrival(&cpu));
+    CHECK(!arrival_pair && life.status[0]==MMX6_COOP_DYING &&
+        life.status[1]==MMX6_COOP_ALIVE && p2.body[5]==0);
+    arrival_setup(&cpu);CHECK(paired_arrival(&cpu));p2.body[4]=2;p2.body[0x5C]=0;
+    CHECK(!paired_arrival(&cpu) && !arrival_pair && life.status[1]==MMX6_COOP_DYING);
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
@@ -1699,4 +1809,5 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_shared_clear_admission_and_departure();
     native_either_both_door_admission();
     native_both_door_ack_motion_and_release();
+    native_paired_arrival_barrier();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}
