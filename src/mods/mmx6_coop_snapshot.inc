@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 10 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 11 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -84,6 +84,7 @@ typedef struct {
     uint8_t shared_owners[96];
     uint32_t lab_state,lab_previous;
     uint32_t clear_phase,clear_members,clear_started;
+    uint32_t door_actor,door_members;
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
@@ -101,6 +102,7 @@ static void state_capture(HostState *s) {
     memcpy(s->shared_owners,shared_effect_owners,sizeof shared_effect_owners);
     s->lab_state=checkpoint_lab_state;s->lab_previous=checkpoint_lab_previous;
     s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
+    s->door_actor=both_door_actor;s->door_members=both_door_members;
 }
 static int state_actor(uint32_t address) {
     return !address || (address>=0x80010000u && address<=0x801FFF00u && !(address&3));
@@ -147,7 +149,14 @@ static void state_core(StateIO *io,HostState *s) {
         if(valid && (!o->owner || !state_assembly(o->assembly)))io->ok=0;
     }
     if(!s->owner && s->scene_phase)io->ok=0;
+    FIELD(door_actor,4,UINT32_MAX);FIELD(door_members,1,3);
+    if(!s->door_actor) {
+        if(s->door_members)io->ok=0;
+    } else if(!state_actor(s->door_actor) || (s->door_actor&3) ||
+              !both_doors || !s->door_members || !s->owner ||
+              s->scene_phase || !s->enrolled)io->ok=0;
     FIELD(clear_phase,1,CLEAR_VICTORY);FIELD(clear_members,1,3);FIELD(clear_started,1,3);
+    if(s->door_actor && s->clear_phase)io->ok=0;
     if(s->clear_phase==CLEAR_ADMITTED && io->mode!=STATE_HASH)io->ok=0;
     if(!s->clear_phase) {
         if(s->clear_members || s->clear_started)io->ok=0;
@@ -182,6 +191,7 @@ static void state_commit(const HostState *s) {
     memcpy(shared_effect_owners,s->shared_owners,sizeof shared_effect_owners);
     checkpoint_lab_state=s->lab_state;checkpoint_lab_previous=s->lab_previous;
     clear_phase=s->clear_phase;clear_members=s->clear_members;clear_started=s->clear_started;
+    both_door_actor=s->door_actor;both_door_members=s->door_members;
     /* These backups are meaningful only under rejected live projections. */
     memset(&p1,0,sizeof p1);memset(saved_overlay,0,sizeof saved_overlay);memset(saved_play,0,sizeof saved_play);
     memset(saved_camera,0,sizeof saved_camera);memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
@@ -235,7 +245,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,10);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);state_fixed(s,both_doors);
+    state_fixed(s,0x53503658u);state_fixed(s,11);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);state_fixed(s,both_doors);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);

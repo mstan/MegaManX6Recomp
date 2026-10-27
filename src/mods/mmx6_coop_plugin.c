@@ -125,6 +125,10 @@ static int scene_call, zero_projected;
 static unsigned clear_phase,clear_members,clear_started;
 /* Immutable committed gameplay choice; Either retains the original policy. */
 static unsigned both_doors;
+/* The actual door and living roster authenticated by its native overlap.
+ * A generic scene with phase zero is not permission for dual traversal. */
+static uint32_t both_door_actor;
+static unsigned both_door_members;
 static int unit_choices_call;
 static int intro_target_call;
 /* Elective independent presentation. The canonical world still runs once. */
@@ -143,9 +147,10 @@ static int scene_passenger(unsigned seat) { return scene_phase && scene_owner!=s
 /* Both ALIVE actors produce phase0 together only after authenticated Both
  * door admission. Other native scenes use the existing passenger phases. */
 static int both_door_traversal_active(void) {
-    return both_doors && scene_owner && !scene_phase && pause_owner<0 &&
-        life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE;
+    return both_doors && both_door_actor && both_door_members &&
+        scene_owner && !scene_phase && pause_owner<0;
 }
+static void both_door_reset(void) { both_door_actor=both_door_members=0; }
 
 static void put32(uint8_t *p, uint32_t v) {
     for (unsigned i=0;i<4;++i) p[i]=(uint8_t)(v>>(8*i));
@@ -773,7 +778,7 @@ static uint32_t diagnostic_host_digest(void) {
         life.select_armed,life.select_previous,life.wipe,life.rejoin_pending,
         previous_input,p2_edges,join_phase,(uint32_t)join_y,
         (uint32_t)pause_owner,(uint32_t)p2_start_previous,
-        scene_owner,scene_phase,(uint32_t)scene_y,
+        scene_owner,scene_phase,(uint32_t)scene_y,both_door_actor,both_door_members,
         (uint32_t)ready,(uint32_t)enrolled,(uint32_t)failed
     };
     for (size_t i=0;i<sizeof fields/sizeof fields[0];++i) {
@@ -1046,6 +1051,67 @@ static uint32_t door_probe(CPUState *cpu,uint32_t actor,unsigned both) {
     }
     return guest(cpu,0x80050C88u,actor,0);
 }
+static uint8_t door_body_byte(unsigned seat,unsigned offset) {
+    return seat?p2.body[offset]:psx_mod_read_byte(PLAYER+offset);
+}
+static uint32_t door_body_x(unsigned seat) {
+    return seat?le32(p2.body+8):psx_mod_read_word(PLAYER+8);
+}
+static int door_update(CPUState *cpu,uint32_t address) {
+    uint32_t actor=cpu->gpr[4];
+    if(address!=0x80050DFCu || inside || scene_call || zero_projected || failed ||
+       !enrolled || !both_door_traversal_active() || actor!=both_door_actor) return 0;
+    unsigned members=both_door_members;
+    for(unsigned seat=0;seat<2;++seat)
+        if(life.status[seat]!=MMX6_COOP_ALIVE)members&=~(1u<<seat);
+    if(!members)return 0;
+    unsigned phase=psx_mod_read_byte(actor+5),seat=(members&1)?0:1;
+    uint32_t velocity=psx_mod_read_word(actor+0x84);
+    if(members==3) {
+        if(phase==1) {
+            /* Each original player must acknowledge request1 itself. Native
+             * 50540 waits for negative D4; project an unready actor rather
+             * than copying the other body's FF acknowledgement. */
+            if((int8_t)door_body_byte(1,0xD4)>=0)seat=1;
+        } else if(phase==3) {
+            /* 50EA0 moves its resident and commits the shared camera once.
+             * Use the trailing actor for that original camera/close test. */
+            int32_t x0=(int32_t)door_body_x(0),x1=(int32_t)door_body_x(1);
+            if((int32_t)velocity<0?x1>x0:x1<x0)seat=1;
+        } else if(phase==4 && (door_body_byte(1,0xD0) ||
+                  door_body_byte(1,0xD4) || door_body_byte(1,0xE0)))seat=1;
+    }
+    uint32_t context[6]={address,actor,seat,phase,members,velocity};
+    STATE_WORDS(restore_door_update,58,context,6);
+    scene_call=1;
+    if(seat) {inside=1;enter_zero();}
+    uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
+    if(members==3) {
+        uint8_t *other=seat?p1.body:p2.body;
+        if(phase==1 && psx_mod_read_byte(PLAYER+0xD4)==0xFE &&
+           (int8_t)other[0xD4]<0) {
+            /* Literal body-local commands of 50574/50580. Door animation,
+             * sound, PLAY and camera commands already executed once. */
+            other[0xD4]=0xFE;put32(other+0x68,0);
+        } else if(phase==3) {
+            /* Literal native 50EB4..50ECC per-body 16.16 addition. The
+             * waiting action19 does not move a body on its own. */
+            put32(other+8,le32(other+8)+velocity);
+            if(!psx_mod_read_byte(PLAYER+0xD4)) {
+                other[0xD4]=0;
+                uint8_t resident[sizeof p2.body];capture(PLAYER,resident,sizeof resident);
+                STATE_BYTES(restore_door_body,59,resident,sizeof resident);
+                project(PLAYER,other,sizeof resident);
+                guest(cpu,0x8003CCBCu,0,0); /* Other character's original standing box. */
+                capture(PLAYER,other,sizeof resident);project(PLAYER,resident,sizeof resident);
+                STATE_POP(restore_door_body);
+            }
+        }
+    }
+    if(seat) {leave_zero_context(1);inside=0;}
+    scene_call=0;STATE_POP(restore_door_update);cpu->gpr[2]=result;
+    return 1;
+}
 static int door_begin(CPUState *cpu, uint32_t address) {
     if (scene_call || inside || !enrolled || failed || scene_owner) return 0;
     uint32_t actor=cpu->gpr[4];
@@ -1078,11 +1144,13 @@ static int door_begin(CPUState *cpu, uint32_t address) {
          * Other doors, portals and scripted scenes retain their own policy. */
         if (both_doors) {
             scene_phase=0;
+            both_door_actor=actor;
+            both_door_members=(life.status[0]==MMX6_COOP_ALIVE?1u:0u)|
+                (life.status[1]==MMX6_COOP_ALIVE?2u:0u);
             /* Native AI admitted every living original body box, but sets
-             * D4 only on its resident player. Give the other admitted body
-             * that same native traversal request. Its own original player
-             * controller performs the walk; never copy a position/pose or
-             * run the shared door AI, effects or camera a second time. */
+         * D4 only on its resident player. Give the other admitted body
+         * that same request1. Each original player earns its own FF ack;
+         * door_update handles later body commands and native movement. */
             if (life.status[seat^1]==MMX6_COOP_ALIVE) {
                 uint8_t request=psx_mod_read_byte(PLAYER+0xD4);
                 if (seat) p1.body[0xD4]=request;
@@ -1172,7 +1240,14 @@ static void scene_tick(CPUState *cpu) {
             if (p2.body[4]==3) mmx6_coop_teleport_done(&life);
             STATE_POP(restore_short_scene);
         }
-        if (!locked) scene_owner=0;
+        if (both_door_actor) {
+            if((both_door_members&2) && life.status[1]==MMX6_COOP_ALIVE &&
+               scene_locked(p2.body))locked=1;
+            if((both_door_members&1) && life.status[0]==MMX6_COOP_ALIVE &&
+               (psx_mod_read_byte(PLAYER+0xD0) || psx_mod_read_byte(PLAYER+0xD4) ||
+                psx_mod_read_byte(PLAYER+0x7A)))locked=1;
+        }
+        if (!locked) { scene_owner=0;both_door_reset(); }
         return;
     }
     if (locked && scene_phase>=4) scene_phase=1;
@@ -1605,6 +1680,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
      * an ordinary door. The host body is enrolled after the new X body lands. */
     enrolled=0;
     scene_owner=scene_phase=0;
+    both_door_reset();
     shared_clear_reset();
     memset(pickup_owners,0,sizeof pickup_owners);
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
@@ -1628,7 +1704,8 @@ static void controller(CPUState *cpu, uint32_t address) {
     }
     if (psx_mod_read_byte(PLAY+1) || (psx_mod_read_byte(PLAYER+4)!=2 &&
          (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)<2)) ||
-        psx_mod_read_byte(PLAY+0x10) || (coop_world_hold() && !both_door_traversal_active())) {
+        (psx_mod_read_byte(PLAY+0x10) && !both_door_traversal_active()) ||
+        (coop_world_hold() && !both_door_traversal_active())) {
         (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_BLOCKED)&1,0,0);
         return;
     }
@@ -2529,6 +2606,7 @@ static void activate(void) {
     solid_call=solid_allocate_call=ride_call=0;
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
+    both_door_reset();
     shared_clear_reset();
     char doors[16];
     both_doors=psx_mod_option_value("mmx6.local-coop","prototype","doors",doors,sizeof doors) &&
@@ -2573,6 +2651,7 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x8004EC30,pickup_tick)) failed=1;
     if (!psx_mod_set_function_replacement(0x80040800,nightmare_soul)) failed=1;
     if (!psx_mod_set_function_replacement(0x80050250,door_begin) ||
+        !psx_mod_set_function_replacement(0x80050DFC,door_update) ||
         !psx_mod_set_function_replacement(0x80050C88,door_eligibility)) failed=1;
     if (!psx_mod_set_function_replacement(0x80051924,interaction_begin) ||
         !psx_mod_set_function_replacement(0x80052F64,interaction_begin)) failed=1;
@@ -2590,7 +2669,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v25",
+        .compatibility_id = "mmx6-x-zero-delay-v26",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

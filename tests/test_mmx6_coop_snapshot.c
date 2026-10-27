@@ -453,6 +453,24 @@ static void shared_clear_snapshot(void) {
     CHECK(!snapshot_ready() && !snapshot_bytes());
     state_commit(&prior);free(prelude);free(victory);free(bad);
 }
+static void both_door_snapshot(void) {
+    HostState prior;state_capture(&prior);unsigned option=both_doors;
+    both_doors=1;scene_owner=1;scene_phase=0;pause_owner=-1;enrolled=1;
+    both_door_actor=0x800C12C4u;both_door_members=3;
+    uint32_t len=snapshot_bytes();CHECK(len);
+    uint8_t *wire=malloc(len);CHECK(wire && snapshot_write(wire,len));
+    uint32_t digest=state_digest();both_door_reset();
+    CHECK(state_digest()!=digest && snapshot_validate(wire,len));snapshot_read(wire,len);
+    CHECK(both_door_actor==0x800C12C4u && both_door_members==3 && state_digest()==digest);
+    HostState active;state_capture(&active);
+    StateIO check={STATE_COUNT,1,NULL,NULL,0,0,0};
+    active.door_actor=1;state_core(&check,&active);CHECK(!check.ok);
+    state_capture(&active);active.door_members=0;check=(StateIO){STATE_COUNT,1,NULL,NULL,0,0,0};
+    state_core(&check,&active);CHECK(!check.ok);
+    state_capture(&active);active.scene_phase=1;check=(StateIO){STATE_COUNT,1,NULL,NULL,0,0,0};
+    state_core(&check,&active);CHECK(!check.ok);
+    both_doors=option;state_commit(&prior);free(wire);
+}
 static void abandoned_guest(void){
     /* Exercise the SDK's actual supported landing, including MinGW GNU's
      * large-frame case. The target function has not returned when dispatched
@@ -465,7 +483,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();shared_clear_snapshot();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();shared_clear_snapshot();both_door_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly
