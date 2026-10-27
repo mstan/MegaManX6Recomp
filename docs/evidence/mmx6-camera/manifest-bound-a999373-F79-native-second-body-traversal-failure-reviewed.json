@@ -1,0 +1,248 @@
+{
+  "schema": 1,
+  "comparison": "F79",
+  "frozen_row_sha256": "77a5c1006f9f1736a9c2e1fb0087e67d94384966ed50cb6c2e229edc95694183",
+  "mode": "local",
+  "result": "failed",
+  "candidate": "a999373fa72ab8bcd7c32e2cd4926d0e49288b35",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-v65-final-binding-root-v1.json",
+    "binding_sha256": "ed28062bd31aa974dae903b849b9eadb36b985042e247e187bbd456877271806",
+    "image_sha256": "868f109f7f06e6a9acb789902d59085e57015aaf62c164a5df899c8c024f34eb",
+    "manifest_sha256": "01d47a9cd9d33b6b29240b72773a25a6fba095d86ab661479ab3f40f5cad3545",
+    "provenance_sha256": "5d500921869b973a9cae30ff458c1f61a7c87c5f1f6fb078e43c0e41cfe04be1",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v65-both-door-menu-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "a999373fa72ab8bcd7c32e2cd4926d0e49288b35",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v21",
+    "host_revision": 4
+  },
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\qualification.json",
+    "sha256": "94906f1be085ab0ae147af5c5dc9c4969e8f5b2166dcdef189eb858f9737124c",
+    "bytes": 13487934
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\observations.json",
+    "sha256": "3af3cdeea4eaa9500b89cb95a06c5b3b354d110f4450d68830a46a98ac956105",
+    "bytes": 5944201
+  },
+  "source_pins": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\source-pins.json",
+    "sha256": "bc72a729054a7e6f3174da3435115a7ec85729bbaa1afd1a178ca49a3813b3a8",
+    "bytes": 447
+  },
+  "source_guards": [
+    {
+      "address": "0x80050250",
+      "bytes": 804,
+      "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+    },
+    {
+      "address": "0x80050c88",
+      "bytes": 312,
+      "sha256": "c5febbed0d549831f1f8ff9704d9bf84d7b489b7ae17488a43d95299b0b54216"
+    }
+  ],
+  "raw_scalar_status": "native_ammo_hud_captured_artwork_and_ledger_pending",
+  "raw_scalar_checks_rejected_as_complete": {
+    "one_living_actor_refused": true,
+    "left_right_native_waiting_door_not_trapped": true,
+    "owner_menu_at_waiting_door_wrong_seat_refused": true,
+    "both_living_native_admission": true,
+    "no_outgoing_absence_rejoin_transport": true,
+    "original_boss_fullHP_release_both_controls": true
+  },
+  "menu_component_fixed": {
+    "opened": 42,
+    "frozen": 45,
+    "wrong_seat_retained": 46,
+    "resumed": 52,
+    "closing_settled": 54
+  },
+  "native_final_traversal_failure": {
+    "sample": 250,
+    "original_door_center_x": 6064,
+    "X_x": 6145.046875,
+    "Zero_x": 6037.5,
+    "both_living": true,
+    "native_boss_fullHP": 32,
+    "scene_owner": 0
+  },
+  "root_all_nine_composed_review": [
+    {
+      "label": "original-CP2-Both-policy",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\original-CP2-Both-policy.png",
+        "sha256": "55b318ef285c930c97d0f31a418d60f6b86b29928620b30f79103b19d7c0a1e5",
+        "bytes": 2074543
+      }
+    },
+    {
+      "label": "only-Zero-at-waiting-Both-door",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\only-Zero-at-waiting-Both-door.png",
+        "sha256": "9ed624dd65c46eaaab8e44a7b954485e164b159e53e2fd9936ac7a5e4d510ff3",
+        "bytes": 2074543
+      }
+    },
+    {
+      "label": "Zero-left-right-no-trap",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\Zero-left-right-no-trap.png",
+        "sha256": "f330a2a59cbc3f63a36e0c1da04f01febe35f02577abadc9d40887ca1c7c29c7",
+        "bytes": 2074543
+      }
+    },
+    {
+      "label": "Zero-own-menu-at-waiting-door",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\Zero-own-menu-at-waiting-door.png",
+        "sha256": "61b48e7abf43ab2d8a8ec40ee306907ad0694572d33ffc75c2aa671881046d91",
+        "bytes": 2074543
+      }
+    },
+    {
+      "label": "Zero-menu-resumed-still-waiting",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\Zero-menu-resumed-still-waiting.png",
+        "sha256": "2e151065c9b21ffcd80635ba1866b48ac810737453941f0aec40e6e2c4a11ae7",
+        "bytes": 2074543
+      }
+    },
+    {
+      "label": "actual-Both-native-door-without-withdrawal",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\actual-Both-native-door-without-withdrawal.png",
+        "sha256": "fc34800fed9d7a98e847ce66dadb983fc38d93c17f4192c255c7c9031a8d40c1",
+        "bytes": 2074543
+      }
+    },
+    {
+      "label": "Both-door-original-boss-allocated",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\Both-door-original-boss-allocated.png",
+        "sha256": "5162a612c398c6c3aa31adad7ea1f962c6f3cf2ea97246bf1e76918a6a8b47e9",
+        "bytes": 2074543
+      }
+    },
+    {
+      "label": "Both-original-heroes-no-beam-native-release",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\Both-original-heroes-no-beam-native-release.png",
+        "sha256": "0bc831c26930153aa5f33c5896f257afdab9ccf9495847d2d9ecb325f3f6077f",
+        "bytes": 2074543
+      }
+    },
+    {
+      "label": "both-controls-after-real-Both-door",
+      "png": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\ammo-hud\\Both-door\\both-controls-after-real-Both-door.png",
+        "sha256": "4d4415f1ea5a8e0f4a48a9d999c20bb05bad2cf2c4ae56a079c25d54722b21df",
+        "bytes": 2074543
+      }
+    }
+  ],
+  "recording": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\candidate\\saves\\input-recordings\\session-1793068031408116-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "868f109f7f06e6a9acb789902d59085e57015aaf62c164a5df899c8c024f34eb",
+      "manifest_sha256": "01d47a9cd9d33b6b29240b72773a25a6fba095d86ab661479ab3f40f5cad3545",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "6f185b504cfe749ad44a8f6492ca12d086d7ac163d36758f285558790eba0826",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 5987,
+    "natives": 4206,
+    "p2_reads": 1781,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\recording-rejection\\settings.json",
+        "bytes": 10343,
+        "sha256": "6f185b504cfe749ad44a8f6492ca12d086d7ac163d36758f285558790eba0826"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\recording-rejection\\inputs.jsonl",
+        "bytes": 786414,
+        "sha256": "5a0f7d2365ea13c8653272cd7ed1f6d0737066d7fd1a85a02c1ce245be2221f6"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v65-root-v1\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "cards_unchanged": true,
+  "limits": [
+    "Root rejects full Both-door qualification despite all original scalar observer checks passing. It checked no transport and Left controls, but had omitted required full-body clearance across the real door.",
+    "Actual boss/fullHP/ownerrelease and independentLeft controls occur, but Zero stays6037.5 outside originaldoor6064 whileX reaches6145.046875; aftercontrol Zero6028 remains outside the arena and is absent from final composed images. No claim that a subsequent fresh Right was attempted or that it could never traverse.",
+    "V65 menu fix is genuinely component-verified: original owner menu/wrongseat refusal/closing settle complete with Zero+D4/PLAY+1C zero; no premature native lock. F137 full subsequent crossing still unqualified, so its recorded failed mode is not promoted.",
+    "All nine composed images reviewed. Checkpoint scenery corruption and fixturetaint/ordinarycapture+replayrefusal remainexplicit; native cards unchanged andownedexit0. No NET or aggregate credit.",
+    "Exactsource rootcause: scene_owner blocks the entire private Zero controller while phase0 suppresses its passenger animation, and native door AI sets traversalD4 only on residentX. IsolatedV66 39e1706 now propagates only actual authenticated nativeD4 permission and runs each admitted body controller, without copying positions/poses or repeating shared door/world. New native verification pending."
+  ]
+}

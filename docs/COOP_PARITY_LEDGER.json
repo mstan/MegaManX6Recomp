@@ -10302,17 +10302,53 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "a999373fa72ab8bcd7c32e2cd4926d0e49288b35",
+            "build_identity": {
+              "executable_sha256": "868f109f7f06e6a9acb789902d59085e57015aaf62c164a5df899c8c024f34eb",
+              "compiled_manifest_sha256": "01d47a9cd9d33b6b29240b72773a25a6fba095d86ab661479ab3f40f5cad3545",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "view": "shared native4:3 OpenGL",
+              "entry": "audited original introCP2 prerequisite",
+              "audio": "muted dummy"
+            },
+            "action": "Wait with guest alone, walkLeft/Right, open/resume its menu, then approach with both and holdRight through actual door admission and original boss initialization.",
+            "outcome": "Menu lock repair passed, but actual native controller moves onlyX through door whileZero staysoutside; no passengerbeam occurs. FullBothclearance/visiblepartner requirement fails despite scalar checks. Rootall9images andnativepositions retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-a999373-F79-native-second-body-traversal-failure-reviewed.json",
+                "sha256": "0b6803a19b87ab03e2212ad43a46029caaa2592a805c62c5a21accd0eff45781"
+              }
+            ],
+            "limits": [
+              "Root rejects full Both-door qualification despite all original scalar observer checks passing. It checked no transport and Left controls, but had omitted required full-body clearance across the real door.",
+              "Actual boss/fullHP/ownerrelease and independentLeft controls occur, but Zero stays6037.5 outside originaldoor6064 whileX reaches6145.046875; aftercontrol Zero6028 remains outside the arena and is absent from final composed images. No claim that a subsequent fresh Right was attempted or that it could never traverse.",
+              "V65 menu fix is genuinely component-verified: original owner menu/wrongseat refusal/closing settle complete with Zero+D4/PLAY+1C zero; no premature native lock. F137 full subsequent crossing still unqualified, so its recorded failed mode is not promoted.",
+              "All nine composed images reviewed. Checkpoint scenery corruption and fixturetaint/ordinarycapture+replayrefusal remainexplicit; native cards unchanged andownedexit0. No NET or aggregate credit.",
+              "Exactsource rootcause: scene_owner blocks the entire private Zero controller while phase0 suppresses its passenger animation, and native door AI sets traversalD4 only on residentX. IsolatedV66 39e1706 now propagates only actual authenticated nativeD4 permission and runs each admitted body controller, without copying positions/poses or repeating shared door/world. New native verification pending."
+            ],
+            "bypasses": [
+              "Original offline introCP2 reachability only; no tested outcome writes."
+            ]
+          }
+        ],
+        "limitations": "LOCAL exactV65 a999373 genuinely fixes owner menu premature door lock, but Both traversal still leaves Zero6037.5 outside door6064 whileX reaches6145.046875/nativeboss32HP. Rootall9images reject scalarpass; fullbodyclearance was missing from observer. Fix39e1706 isolatedV66 building; NET/fullrequalification missing."
       }
     },
     {
