@@ -8912,7 +8912,7 @@
             },
             "settings": {
               "renderer": "native4:3 OpenGL; hidden muted actual UI loopback",
-              "profile": "mmx6.win64-clang22.loopback revision21 NOT used; actual V90 revision20"
+              "profile": "mmx6.win64-clang22.loopback revision20"
             },
             "action": "Run three actual same-PID native Host/Join/Play activations with Escape/BYE/lobby rematch Play, both owned menus/controls, passive allocation windows and resolved CRC.",
             "outcome": "Three healthy activations and all parent gates complete; raw final allocation gate fails because bank totals219/220/219 differ by one128KiB bank. Other persistent totals equal. Normal owned exits0 and private cards unchanged.",
