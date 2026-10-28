@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 19,
+  "revision": 20,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v36",
+    "title_compatibility": "mmx6-x-zero-delay-v37",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -317,5 +317,58 @@
     "state": "One persistent arrival bit participates in both digest paths and build-specific snapshot13, with typed ownership/lifecycle/phase validation, roundtrip and reset coverage. Existing callback/pending/online/profile guards remain; no old-state migration.",
     "identity": "Title36/hostrev19; snapshot13. No new hook or generator output: existing34DCC replacement and2012C controller boundary are reused; 3D850 and3CCBC are present in generated-source-v81 dispatch.",
     "qualification": "Source/model tests do not qualify F20. Fresh exact-candidate LOCAL+NET must retain actual overlapping native arrival animations, native floor/feet and safe spacing before separate accepted controls, plus profile/resolvedCRC/recording/cards/ownedcleanup gates. No all-roster or all-spawn/portal/content-audit claim."
+  },
+  "title_changes_v37": {
+    "purpose": "One negotiated original Recycle section0 CP2 plus source-qualified alternate-portal approach prerequisite for R14/F44/F47/F165.",
+    "destination": {
+      "option": "recycle_portal_cp2",
+      "index": 23,
+      "stage": 4,
+      "section": 0,
+      "checkpoint": 2,
+      "record": "80072444",
+      "nonce": "4C525032"
+    },
+    "authority": "Defaultoff, development-only existing exact-profile/image/pre-frame0 typed agreement and one-shot accepted P2 chord. Original CP2 initializer and living grounded arrivals finish before disclosed one-shot position/previous-position setup. No native portal, contact, HP, actor, transition or success writes.",
+    "state": "Existing option identity, pending phase/index/nonce/placed-world digest and snapshot refusal; no new persistent fields. Build-specific snapshot schema13 unchanged.",
+    "qualification": "No runtime or comparison pass is granted by this source change.",
+    "original_arrival": {
+      "x": [
+        480,
+        504
+      ],
+      "native_y": [
+        1595,
+        1594
+      ],
+      "require": "Both alive, idle, original ground and entry locks released; no old-runtime claim for Zero idle."
+    },
+    "position_bypass": {
+      "x": [
+        1506,
+        1506
+      ],
+      "y": [
+        1593,
+        1593
+      ],
+      "only_writes": "Each native position and previous-position pair exactly once. No camera or scanner call.",
+      "native_ready_y": [
+        1595,
+        1594
+      ],
+      "original_camera": "Native current/target bounds320..1264/Y1424, currentX naturally1264 before ready.",
+      "required_after_two_native_updates": "Both grounded idle, complete22px foot/body clearance plus original portal/capsule/059 idle; no native trigger is set."
+    },
+    "source": {
+      "EXE_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+      "BIN6_sha256": "c7b195e3e3968ebbd6c177cf023e47b35a9a816382c9b54ca157a80b393468f5",
+      "DAT98_sha256": "f8798efe535ac46ca7ab2a7e4dfd99705c5624ae5c301627543c3d91d3bf6515",
+      "layout_sha256": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+      "metatiles_sha256": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+      "descriptors_sha256": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+      "guard": "Existing exact17window portal closure plus pinned capsule/059 original code/data and full current live terrain assets."
+    },
+    "limits": "F165 outbound alone does not qualify R14 native return, F47 real return near a platform or F44 distant-primary transition; the named approach deliberately places both heroes at1506."
   }
 }

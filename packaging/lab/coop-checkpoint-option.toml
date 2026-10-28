@@ -3,7 +3,7 @@
 feature = "prototype"
 id = "lab_checkpoint"
 label = "Lab checkpoint prerequisite"
-description = "Lab comparison setup only. After the ordinary intro baseline, Player 2 presses L3 + R3 to enter the selected original checkpoint once. The before-doors and before-explosion choices also position both heroes on their source-qualified approach ledges. This bypasses reachability and refuses ordinary input recording qualification. Both peers must agree before launch."
+description = "Lab comparison setup only. After the ordinary intro baseline, Player 2 presses L3 + R3 to enter the selected original checkpoint once. The before-doors and before-explosion and alternate-portal choices also position both heroes on their source-qualified approach ledges. This bypasses reachability and refuses ordinary input recording qualification. Both peers must agree before launch."
 group = "Lab validation"
 type = "choice"
 default = "off"
@@ -35,6 +35,10 @@ label = "Intro nearby explosion (position prerequisite)"
 [[option.choice]]
 value = "recycle_cp2"
 label = "Recycle section 1 checkpoint 2 prerequisite"
+
+[[option.choice]]
+value = "recycle_portal_cp2"
+label = "Recycle alternate portal (position prerequisite)"
 
 [[option]]
 feature = "prototype"
