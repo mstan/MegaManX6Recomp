@@ -1,0 +1,77 @@
+{
+  "schema": 1,
+  "kind": "opposite_roster_native_partial_results_and_deferred_blocker",
+  "candidate": "c56de3f4467ad9af39d496be88f656f1dd9c1356",
+  "comparisons": [
+    "R9",
+    "F179"
+  ],
+  "comparison_admissions": 0,
+  "aggregate_counts": {
+    "passed": 109,
+    "failed": 3,
+    "unverified": 122
+  },
+  "integrated": false,
+  "source_worktree": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-opposite-roster-v96",
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\opposite-roster-v96-final-binding-root-v3.json",
+    "sha256": "bc3cf204e9f2dda48d967656fa26168edbf79c63f064e3e51910ab6024cf10dd"
+  },
+  "native_runs": [
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\opposite-roster-local-v96-root-v4\\qualification.json",
+      "sha256": "ecf1ab75d9136ba6c9ba5c998db201976c83a0a4be2fef02195d3ae52b835e8c",
+      "status": "failed",
+      "error": "X/P2 charge attachment failed to retire",
+      "exit_code": 0,
+      "shutdown": "graceful_owned_debug"
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\opposite-roster-local-v96-root-v5\\qualification.json",
+      "sha256": "e81dbe5e55ad4e65b5479458f27b362169a9b892191a542ed4cc9c1d04fbaa05",
+      "status": "failed",
+      "error": "Original native menu input timed out during held_response",
+      "exit_code": 0,
+      "shutdown": "graceful_owned_debug"
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\opposite-roster-local-v96-root-v6\\qualification.json",
+      "sha256": "1927650592a626b2e793f80d09d69c94a8beaa7d8a101c20f731c6b58b5634f5",
+      "status": "failed",
+      "error": "port 29621, read_ram: timed out",
+      "exit_code": 0,
+      "shutdown": "graceful_owned_debug"
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\opposite-roster-local-v96-root-v7\\qualification.json",
+      "sha256": "ad5ea70338481f96602eee1399ac0db4ef686b222b9b52b2343f213b83304372",
+      "status": "failed",
+      "error": "Owned runtime does not own the debug listener",
+      "exit_code": 2,
+      "shutdown": "already_exited"
+    }
+  ],
+  "positive_LOCALv4": [
+    "Actual original unit5 selection and living native Zero/P1 + base-X/P2 enrollment.",
+    "All four character/seat menus display correct native portraits/weapon labels, reject other-seat Start and preserve frozen world/resources.",
+    "Native X/P2 independently moves, charges, allocates original attached glows and releases them."
+  ],
+  "retirement_correction": {
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v96-original-attached-lifetime-root-v1.txt",
+    "sha256": "5442b7616c75a724639ec05b887214451697b6f33af875c93f04243b48b4725c",
+    "native_contract": "Original 80020BF8..80020C20 clears attached bytes3/4 when native charge levels9B/9C are zero. Fixed allocation21 persists. LOCALv4 reducer incorrectly required deallocation; raw failure preserved."
+  },
+  "remaining": [
+    "LOCALv4 later composed charge/release images are entirely black. No artwork or full comparison pass.",
+    "LOCALv5 stopped while original selector was opening. LOCALv6 stopped on a loading read timeout. LOCALv7 watchdog exit2 followed actual inverse enrollment, before composed captures. No unique game/SDK root cause established.",
+    "No inverse NET run, full charge/projectile/dash/menu-return contract, selected special-ability contact or current-build opposite-roster snapshot qualification.",
+    "The original default roster menus return visibly in v5/v6 on the same candidate; this is component evidence only."
+  ],
+  "prerequisites": [
+    "LOCAL native_zero_reference explicitly bypasses availability/screen-loader prerequisites through four owned offline PLAY bytes. It does not grant acquisition/campaign or ordinary-recording credit.",
+    "Fresh private prelaunch QA card e97637e8 has now been prepared, but never loaded/launched. Only source slot3B availability bit10 and native checksum change (two bytes total). Source private card7801 remains unchanged; no native Save/acquisition claim.",
+    "Next inverse validation should reuse genuine original Quit/Load/unit5 selection, avoiding another direct live PLAY screen2 transition; retain current runtime/render watchdogs."
+  ],
+  "cleanup": "Preserve V96 isolated sources/generated derivatives/build, all native raw captures/private profiles, failed dumps and authored prerequisite for ongoing work. No disposable data removed."
+}
