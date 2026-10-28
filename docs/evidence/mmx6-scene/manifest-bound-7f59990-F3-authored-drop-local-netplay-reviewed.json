@@ -1,0 +1,930 @@
+{
+  "comparison": "F3",
+  "frozen_row_sha256": "5783a671388aec753f81cc962d33b1f8e4473389b4091c56ed22492193059333",
+  "result": "passed",
+  "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-v70-final-binding-root-v1.json",
+    "binding_sha256": "a15740bac352664b3cfcd7f4655f70055604919a0589e0a6db936c41fb730c3a",
+    "image_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+    "manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+    "provenance_sha256": "27cb2080aaa6fed2e47d3f19fcdff92eb536fdca84d89020d737c9cb1b217400",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v70-investigator-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "7f59990e052422aa845837b26470117f57de3c72",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v24",
+    "host_revision": 7
+  },
+  "scope": "Actual guest-owned Commander Yammark 48-pixel entrance drop in LOCAL and NET on the same exact V70 candidate. Independently reviewed retained evidence; no new native run.",
+  "worker_packet": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F3-retained-Yammark-drop-v70-worker-v1.json",
+    "bytes": 101990,
+    "sha256": "d59392ac0ecf2d134de195af96fc363846fb136753e6b873eb7af03e5474be19"
+  },
+  "prior_exact_candidate_parent_review": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-camera\\manifest-bound-7f59990-F8-F89-local-netplay-reviewed.json",
+    "bytes": 116010,
+    "sha256": "e961e801effc4f5768f362dcb145de1a6b9e0b8602fbcde2cb35eb463fa2d01e"
+  },
+  "original_geometry": {
+    "stage": 1,
+    "section": 0,
+    "checkpoint_prerequisite": 2,
+    "door_origin": "800F6488",
+    "door_authored_xy": [
+      5104,
+      2016
+    ],
+    "boss_type": 49,
+    "boss_origin": "800F66C0",
+    "approach_floor": 2048,
+    "inside_floor": 2096,
+    "authored_drop_pixels": 48,
+    "flat_approach_ledge_x": [
+      5072,
+      5087
+    ],
+    "initial_guest_landing_full_foot_x": [
+      5134,
+      5155
+    ],
+    "approach_limit": "Admission action19 temporarily has box68=0; no full-foot solid38 claim at the mixed slope/ledge approach. Full current foot boxes are observed during fall and landing.",
+    "original_full_foot_floor_code": 56,
+    "standing_shapes": {
+      "X": {
+        "pointer": "80073D50",
+        "shape": [
+          0,
+          2,
+          11,
+          19
+        ]
+      },
+      "Zero": {
+        "pointer": "80073D54",
+        "shape": [
+          0,
+          3,
+          11,
+          19
+        ]
+      }
+    },
+    "terrain_metadata": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F89-original-Amazon-terrain-v70-root-v1.json",
+      "bytes": 8300,
+      "sha256": "7b77d4a46fbddce7e86f195a51a393fba0ca1f07e4a95c94fb2b9f9805616605"
+    },
+    "terrain_source_helper": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_arena_width_v70_root_v1.py",
+      "bytes": 12221,
+      "sha256": "4bb08058013a218e86d66aaff6f4f3c567c85cb13d74a949e3b895f361fa9eb0"
+    },
+    "source_terrain": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F89-original-Amazon-terrain-v70-root-v1.json",
+      "bytes": 8300,
+      "sha256": "7b77d4a46fbddce7e86f195a51a393fba0ca1f07e4a95c94fb2b9f9805616605"
+    }
+  },
+  "native_fall_source": {
+    "original_exe": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\SLUS_013.95",
+      "bytes": 522240,
+      "sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046"
+    },
+    "address_mapping": "file offset = address - 80010000 + 2048",
+    "spans": [
+      {
+        "address": "800350D4",
+        "end_exclusive": "800350F8",
+        "bytes": 36,
+        "sha256": "8c515406084ead20010e18a2aa63c64583ae5c58adf58f0942f681f4f0d6db98"
+      },
+      {
+        "address": "80073AE8",
+        "end_exclusive": "80073AEC",
+        "bytes": 4,
+        "sha256": "ee22e09e27cfe5f3f12e6d17be478c84324b704ba27011d9a6cba357ce2c8f2e"
+      },
+      {
+        "address": "800368FC",
+        "end_exclusive": "80036A04",
+        "bytes": 264,
+        "sha256": "5b17368c763808ed29817ecc2e097336208ab62c2af532cb9095ef62eeb07291"
+      },
+      {
+        "address": "8003D18C",
+        "end_exclusive": "8003D26C",
+        "bytes": 224,
+        "sha256": "1f1834579e0bacfbc0c4062d225f0f79118b3186d2809cbb4f6cd3301cd7ed13"
+      },
+      {
+        "address": "8002CFB0",
+        "end_exclusive": "8002D0D8",
+        "bytes": 296,
+        "sha256": "a96414dc0d3703294c84b7a1cf3c2bfc579be4e622b5aedcb1ebf6224a0a9c08"
+      },
+      {
+        "address": "8003D394",
+        "end_exclusive": "8003D3F8",
+        "bytes": 100,
+        "sha256": "8a082b9c95679fb36323a6c40d936a44185a465a4f599c1769f413adff55403c"
+      },
+      {
+        "address": "80050EA0",
+        "end_exclusive": "80050F58",
+        "bytes": 184,
+        "sha256": "de5b9de08688c6d92c49cd0a787f5f11090dcb756b68e43f1afcaad39d2ab400"
+      }
+    ],
+    "chain": [
+      "350D4 indexes action byte+5 in table73ACC; action7 table73AE8 ->368FC",
+      "369D8 ->3D18C ->2CFB0 integrates actual actor Y; 2D078 subtracts velocity24 from Y",
+      "369E0 ->3D394 ->2FF70 resolves native terrain with actor current box68"
+    ],
+    "velocity_convention": "Negative native velocity24 increases screen Y: observed downward gravity, not positive-Y velocity or platform carry.",
+    "runtime_instruction_trace_claimed": false,
+    "co_op_plugin": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-investigator-v70\\src\\mods\\mmx6_coop_plugin.c",
+      "bytes": 125442,
+      "sha256": "3700751c1e94b29606142d9e76c032c50d9f5676e2f30848a37738ae1888c1a1"
+    },
+    "passenger_distinction": "V70 scene_tick selects seat=scene_owner-1, passenger=seat^1. With owner2, Zero is original resident owner and X alone uses passenger outgoing/incoming beam. The recorded Zero action7/airFF/negative velocity/gravity fall is not passenger beam motion."
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "artifacts": {
+        "parent": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\qualification.json",
+          "bytes": 6516399,
+          "sha256": "6579fb60b9685bcdd8233ab36a850b1f63d4f008685fe615d7691ad5531c4aac"
+        },
+        "entry": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\observations.json",
+          "bytes": 3505522,
+          "sha256": "717617a4461b108022181e594071f3feaa19f05769faaa9999ea86c8fee3ff1d"
+        },
+        "arena": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\F89-arena\\observations.json",
+          "bytes": 1121815,
+          "sha256": "47fec85f4d7b49ce606aa350742e8a18bcd41f533a882d8fbf49367f5a27c346"
+        }
+      },
+      "parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "prerequisite": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 1,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1279476018,
+        "initializer_entries": 1,
+        "record": "800721BC",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2
+      },
+      "physical_peers": [
+        {
+          "peer": 0,
+          "admission": 88,
+          "downward_interval": [
+            {
+              "row": 119,
+              "y": 2026.0,
+              "action": 19,
+              "box": "0x0",
+              "velocity24": 0.0,
+              "ground": 0,
+              "air": 0,
+              "hp": 32
+            },
+            {
+              "row": 120,
+              "y": 2026.7734375,
+              "action": 7,
+              "box": "0x80073d54",
+              "velocity24": -0.7734375,
+              "ground": 0,
+              "air": 255,
+              "hp": 32
+            },
+            {
+              "row": 121,
+              "y": 2031.4140625,
+              "action": 7,
+              "box": "0x80073d54",
+              "velocity24": -1.8046875,
+              "ground": 0,
+              "air": 255,
+              "hp": 32
+            },
+            {
+              "row": 122,
+              "y": 2046.109375,
+              "action": 7,
+              "box": "0x80073d54",
+              "velocity24": -3.3515625,
+              "ground": 0,
+              "air": 255,
+              "hp": 32
+            },
+            {
+              "row": 123,
+              "y": 2074.0,
+              "action": 20,
+              "box": "0x80073d54",
+              "velocity24": -5.15625,
+              "ground": 8,
+              "air": 0,
+              "hp": 32
+            }
+          ],
+          "first_both_native_ground": 642,
+          "all_sampled_eligible_survivor_HP32": true,
+          "raw_health_sampling_rows": [
+            88,
+            654
+          ],
+          "later_live_fullfeet": {
+            "arena_row": 0,
+            "observation": {
+              "schema": 1,
+              "tick": 3575,
+              "sequence": 7150,
+              "native_timer": 576,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 2568081955,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 340813824,
+                  "y_raw": 135987200,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 340256768,
+                  "y_raw": 135921664,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 0
+            },
+            "feet": [
+              {
+                "box": [
+                  5189,
+                  2058,
+                  5211,
+                  2096
+                ],
+                "center_x": 5200.40625,
+                "center_y": 2075,
+                "action": 2,
+                "ground70": 8,
+                "air67": 0,
+                "held7C": 0,
+                "hp": 32,
+                "stored_vertical_velocity24": 0,
+                "source_and_live_full_foot_and_body_clear": true
+              },
+              {
+                "box": [
+                  5180,
+                  2058,
+                  5202,
+                  2096
+                ],
+                "center_x": 5191.90625,
+                "center_y": 2074,
+                "action": 2,
+                "ground70": 8,
+                "air67": 0,
+                "held7C": 0,
+                "hp": 32,
+                "stored_vertical_velocity24": 0,
+                "source_and_live_full_foot_and_body_clear": true
+              }
+            ],
+            "live_layout_sha256": "92ad1d8abf9d97a41e03d18cd6f03e2ea571acc0b370d2967879eefbee3fb25f",
+            "live_assets": {
+              "peer": 0,
+              "pointers": "38740980b0b71980b0691b80",
+              "metatiles_sha256": "b78b161e9984fb96a0d05196e565e2decb5350acdbb313702276e564829c2300",
+              "descriptors_sha256": "bc2763f3b9281d965fe9ca5e2c39acd86acb979f410237089e9874f59213c1f7"
+            }
+          }
+        }
+      ],
+      "controls": [
+        {
+          "seat": 0,
+          "before": 641,
+          "accepted": 643,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "native_walk_action": 4,
+              "controlled_travel": 8.0,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 648,
+          "accepted": 650,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "native_walk_action": 3,
+              "controlled_travel": 2.5,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "row_index": 89,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\peer-0-original-door-scene-begin.png",
+          "bytes": 2074543,
+          "sha256": "0dc133d2764a860fd33429ec32b77ca2c873284ccb923d0a25c6c28358251668"
+        },
+        {
+          "peer": 0,
+          "label": "actual-native-Yammark-conversation-before-confirm",
+          "row_index": 285,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\peer-0-actual-native-Yammark-conversation-before-confirm.png",
+          "bytes": 2074543,
+          "sha256": "f185995f76470c89450e8b4b25adbb861bffb524674b2bebdfb01051e2d517f0"
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 654,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\peer-0-native-boss-both-controls-restored.png",
+          "bytes": 2074543,
+          "sha256": "ce2f1d10de95715d8f191025fc595bdd7a77f824df88a813a49c8f06c5dc1a91"
+        }
+      ]
+    },
+    "netplay": {
+      "result": "passed",
+      "artifacts": {
+        "parent": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\qualification.json",
+          "bytes": 7631058,
+          "sha256": "4839664bed638443097a6315505ae2328fab705f7ba8f2c0819d406a89977509"
+        },
+        "entry": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\observations.json",
+          "bytes": 3799158,
+          "sha256": "0079804c9e417535cd4792b7115b54793eca15e5310e4c1cc9f19cd8b0b053eb"
+        },
+        "arena": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\observations.json",
+          "bytes": 1248332,
+          "sha256": "e3b18f3c00b7ea41dfe87bb0f382cc308d8199697ba419eb27af9cdb697213b5"
+        }
+      },
+      "parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "prerequisite": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 1,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1279476018,
+        "initializer_entries": 1,
+        "record": "800721BC",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2
+      },
+      "physical_peers": [
+        {
+          "peer": 0,
+          "admission": 49,
+          "downward_interval": [
+            {
+              "row": 65,
+              "y": 2026.0,
+              "action": 19,
+              "box": "0x80073d54",
+              "velocity24": 0.0,
+              "ground": 0,
+              "air": 0,
+              "hp": 32
+            },
+            {
+              "row": 66,
+              "y": 2043.015625,
+              "action": 7,
+              "box": "0x80073d54",
+              "velocity24": -3.09375,
+              "ground": 0,
+              "air": 255,
+              "hp": 32
+            },
+            {
+              "row": 67,
+              "y": 2074.0,
+              "action": 29,
+              "box": "0x80073d54",
+              "velocity24": 0.0,
+              "ground": 8,
+              "air": 0,
+              "hp": 32
+            }
+          ],
+          "first_both_native_ground": 347,
+          "all_sampled_eligible_survivor_HP32": true,
+          "raw_health_sampling_rows": [
+            49,
+            359
+          ],
+          "later_live_fullfeet": {
+            "arena_row": 0,
+            "observation": {
+              "schema": 1,
+              "tick": 4781,
+              "sequence": 9562,
+              "native_timer": 703,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 902246064,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 341043200,
+                  "y_raw": 135987200,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 341829632,
+                  "y_raw": 135921664,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "feet": [
+              {
+                "box": [
+                  5192,
+                  2058,
+                  5214,
+                  2096
+                ],
+                "center_x": 5203.90625,
+                "center_y": 2075,
+                "action": 2,
+                "ground70": 8,
+                "air67": 0,
+                "held7C": 0,
+                "hp": 32,
+                "stored_vertical_velocity24": 0,
+                "source_and_live_full_foot_and_body_clear": true
+              },
+              {
+                "box": [
+                  5204,
+                  2058,
+                  5226,
+                  2096
+                ],
+                "center_x": 5215.90625,
+                "center_y": 2074,
+                "action": 2,
+                "ground70": 8,
+                "air67": 0,
+                "held7C": 0,
+                "hp": 32,
+                "stored_vertical_velocity24": 0,
+                "source_and_live_full_foot_and_body_clear": true
+              }
+            ],
+            "live_layout_sha256": "92ad1d8abf9d97a41e03d18cd6f03e2ea571acc0b370d2967879eefbee3fb25f",
+            "live_assets": {
+              "peer": 0,
+              "pointers": "38740980b0b71980b0691b80",
+              "metatiles_sha256": "b78b161e9984fb96a0d05196e565e2decb5350acdbb313702276e564829c2300",
+              "descriptors_sha256": "bc2763f3b9281d965fe9ca5e2c39acd86acb979f410237089e9874f59213c1f7"
+            }
+          }
+        },
+        {
+          "peer": 1,
+          "admission": 49,
+          "downward_interval": [
+            {
+              "row": 64,
+              "y": 2026.0,
+              "action": 19,
+              "box": "0x0",
+              "velocity24": 0.0,
+              "ground": 0,
+              "air": 0,
+              "hp": 32
+            },
+            {
+              "row": 65,
+              "y": 2026.2578125,
+              "action": 7,
+              "box": "0x80073d54",
+              "velocity24": -0.515625,
+              "ground": 0,
+              "air": 255,
+              "hp": 32
+            },
+            {
+              "row": 66,
+              "y": 2065.4453125,
+              "action": 7,
+              "box": "0x80073d54",
+              "velocity24": -4.640625,
+              "ground": 0,
+              "air": 255,
+              "hp": 32
+            },
+            {
+              "row": 67,
+              "y": 2074.0,
+              "action": 29,
+              "box": "0x80073d54",
+              "velocity24": 0.0,
+              "ground": 8,
+              "air": 0,
+              "hp": 32
+            }
+          ],
+          "first_both_native_ground": 347,
+          "all_sampled_eligible_survivor_HP32": true,
+          "raw_health_sampling_rows": [
+            49,
+            359
+          ],
+          "later_live_fullfeet": {
+            "arena_row": 0,
+            "observation": {
+              "schema": 1,
+              "tick": 4784,
+              "sequence": 9568,
+              "native_timer": 706,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 2869220511,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 341043200,
+                  "y_raw": 135987200,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 341829632,
+                  "y_raw": 135921664,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "feet": [
+              {
+                "box": [
+                  5192,
+                  2058,
+                  5214,
+                  2096
+                ],
+                "center_x": 5203.90625,
+                "center_y": 2075,
+                "action": 2,
+                "ground70": 8,
+                "air67": 0,
+                "held7C": 0,
+                "hp": 32,
+                "stored_vertical_velocity24": 0,
+                "source_and_live_full_foot_and_body_clear": true
+              },
+              {
+                "box": [
+                  5204,
+                  2058,
+                  5226,
+                  2096
+                ],
+                "center_x": 5215.90625,
+                "center_y": 2074,
+                "action": 2,
+                "ground70": 8,
+                "air67": 0,
+                "held7C": 0,
+                "hp": 32,
+                "stored_vertical_velocity24": 0,
+                "source_and_live_full_foot_and_body_clear": true
+              }
+            ],
+            "live_layout_sha256": "92ad1d8abf9d97a41e03d18cd6f03e2ea571acc0b370d2967879eefbee3fb25f",
+            "live_assets": {
+              "peer": 1,
+              "pointers": "38740980b0b71980b0691b80",
+              "metatiles_sha256": "b78b161e9984fb96a0d05196e565e2decb5350acdbb313702276e564829c2300",
+              "descriptors_sha256": "bc2763f3b9281d965fe9ca5e2c39acd86acb979f410237089e9874f59213c1f7"
+            }
+          }
+        }
+      ],
+      "controls": [
+        {
+          "seat": 0,
+          "before": 349,
+          "accepted": 351,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "native_walk_action": 3,
+              "controlled_travel": 2.0,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            },
+            {
+              "peer": 1,
+              "native_walk_action": 3,
+              "controlled_travel": 2.5,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 354,
+          "accepted": 356,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "native_walk_action": 4,
+              "controlled_travel": 3.5,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            },
+            {
+              "peer": 1,
+              "native_walk_action": 4,
+              "controlled_travel": 9.5,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            }
+          ]
+        }
+      ],
+      "images": [
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "row_index": 50,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-0-original-door-scene-begin.png",
+          "bytes": 2074543,
+          "sha256": "e4b044833d2be6ceec8900f1ac999c382a381fa5f1337204e1421e24ff9740cb"
+        },
+        {
+          "peer": 1,
+          "label": "original-door-scene-begin",
+          "row_index": 50,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-1-original-door-scene-begin.png",
+          "bytes": 2074543,
+          "sha256": "05101c5b6a8b55b8cc841713fd072adae522c037d1167ebe18a505123daa9ab7"
+        },
+        {
+          "peer": 0,
+          "label": "actual-native-Yammark-conversation-before-confirm",
+          "row_index": 161,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-0-actual-native-Yammark-conversation-before-confirm.png",
+          "bytes": 2074543,
+          "sha256": "6c29f24dbfbb888d926d71c3794e3d274b7b41b4f002d6c27583f21280bc14db"
+        },
+        {
+          "peer": 1,
+          "label": "actual-native-Yammark-conversation-before-confirm",
+          "row_index": 161,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-1-actual-native-Yammark-conversation-before-confirm.png",
+          "bytes": 2074543,
+          "sha256": "307f35880398e7b24b1fd57dca85d07c646cd7ad1e64c0534667bdba8d08793c"
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 359,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-0-native-boss-both-controls-restored.png",
+          "bytes": 2074543,
+          "sha256": "398feec0d492921c58cbdc5e9323993ea5db0565c617e583c52b52959e8364cd"
+        },
+        {
+          "peer": 1,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 359,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-1-native-boss-both-controls-restored.png",
+          "bytes": 2074543,
+          "sha256": "b9049d2213979e567637036d0b3b2b1f9a50076ea08e25526af06ec55d2dc0ab"
+        }
+      ]
+    }
+  },
+  "root_review": {
+    "artifact_references_verified": 21,
+    "raw_native_downward_airborne_and_landing_verified": true,
+    "actual_current_foot_boxes_and_eligible_survivor_HP_verified": true,
+    "independent_controls_verified": true,
+    "all_nine_composed_images_reviewed": true,
+    "image_limits": "Admission/conversation/released-body captures bracket the mechanic. No airborne image; images do not prove gravity. Existing scenery/portrait corruption remains outside F3.",
+    "source_action7_handler_and_pinned_original_spans_verified": true
+  },
+  "limitations": [
+    "One authored 48-pixel Commander Yammark entrance drop, default X/P1 plus Zero/P2, guest-owned LOCAL and NET; no other roster, drop family, or current V89 transfer.",
+    "P1 is the co-op passenger and legitimately hides/rejoins; only P2 Zero is proved to take the original gravity drop.",
+    "LOCAL first scene-release publication has X Y2074/ground0/foot2095. X later resolves naturally to2075/fullfoot2096 at row642 while the first ordinary P1 control starts. No instantaneous both-grounded-before-any-control claim.",
+    "Source terrain authenticates the actual falling lane/landing; later original-and-live arena observations verify each full22-pixel foot/body. No live full-foot query during the airborne instruction is claimed.",
+    "Bodies, diagnostics, source reads and composed images are separate asynchronous observations; peer reads are not asserted to be the same emulated frame.",
+    "NET peer0 retains one sampled original airborne action7 frame between Y2026 and groundedY2074; peer1 retains two and LOCAL three. No continuous frame capture or two-airborne-samples-per-peer claim.",
+    "Composed captures bracket admission/dialogue/released bodies; no airborne screenshot exists and no image alone proves falling physics. Known scenery/portrait corruption remains outside F3.",
+    "The original predeclared AmazonCP2 initializer bypasses earlier traversal once. No contact protection, HP/position/contact/pose/outcome writes during the checked admission/fall.",
+    "Existing fixture-tainted recordings remain failed and replay-refused. Parent raw status and LOCAL false early F8-readiness flag remain unchanged; no ordinary clean capture/replay claim."
+  ]
+}

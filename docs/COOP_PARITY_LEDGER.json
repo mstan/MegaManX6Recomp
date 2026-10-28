@@ -4970,25 +4970,106 @@
       "frozen_row_sha256": "5783a671388aec753f81cc962d33b1f8e4473389b4091c56ed22492193059333",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Scripted falling boss entrance analogue unidentified",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Guest-owned authored Commander Yammark boss entrance drop",
         "bounded_check": "Locate an authored X6 drop admission; let the guest lead and compare native descent, full foot boxes and both health values.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+            "build_identity": {
+              "executable_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+              "compiled_manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "transport": "one owned LOCAL process",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2",
+              "cameras": "split"
+            },
+            "action": "Earn actual guest-owned falling boss entrance, observe native Zero descent/current foot box/landing, both survivor health, later full feet and separate controls.",
+            "outcome": "Full frozen F3 counterpart passed by independent raw/source/image review on exact same candidate in both required modes.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-7f59990-F3-authored-drop-local-netplay-reviewed.json",
+                "sha256": "a56a42c82c3e677e45a54d7f1c704004a98b26529a0887d7c93195c974c69ce0"
+              }
+            ],
+            "limits": [
+              "One authored 48-pixel Commander Yammark entrance drop, default X/P1 plus Zero/P2, guest-owned LOCAL and NET; no other roster, drop family, or current V89 transfer.",
+              "P1 is the co-op passenger and legitimately hides/rejoins; only P2 Zero is proved to take the original gravity drop.",
+              "LOCAL first scene-release publication has X Y2074/ground0/foot2095. X later resolves naturally to2075/fullfoot2096 at row642 while the first ordinary P1 control starts. No instantaneous both-grounded-before-any-control claim.",
+              "Source terrain authenticates the actual falling lane/landing; later original-and-live arena observations verify each full22-pixel foot/body. No live full-foot query during the airborne instruction is claimed.",
+              "Bodies, diagnostics, source reads and composed images are separate asynchronous observations; peer reads are not asserted to be the same emulated frame.",
+              "NET peer0 retains one sampled original airborne action7 frame between Y2026 and groundedY2074; peer1 retains two and LOCAL three. No continuous frame capture or two-airborne-samples-per-peer claim.",
+              "Composed captures bracket admission/dialogue/released bodies; no airborne screenshot exists and no image alone proves falling physics. Known scenery/portrait corruption remains outside F3.",
+              "The original predeclared AmazonCP2 initializer bypasses earlier traversal once. No contact protection, HP/position/contact/pose/outcome writes during the checked admission/fall.",
+              "Existing fixture-tainted recordings remain failed and replay-refused. Parent raw status and LOCAL false early F8-readiness flag remain unchanged; no ordinary clean capture/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original AmazonCP2 reachability only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+            "build_identity": {
+              "executable_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+              "compiled_manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "transport": "two owned loopback peers",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2",
+              "cameras": "independent"
+            },
+            "action": "Earn actual guest-owned falling boss entrance, observe native Zero descent/current foot box/landing, both survivor health, later full feet and separate controls.",
+            "outcome": "Full frozen F3 counterpart passed by independent raw/source/image review on exact same candidate in both required modes.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-7f59990-F3-authored-drop-local-netplay-reviewed.json",
+                "sha256": "a56a42c82c3e677e45a54d7f1c704004a98b26529a0887d7c93195c974c69ce0"
+              }
+            ],
+            "limits": [
+              "One authored 48-pixel Commander Yammark entrance drop, default X/P1 plus Zero/P2, guest-owned LOCAL and NET; no other roster, drop family, or current V89 transfer.",
+              "P1 is the co-op passenger and legitimately hides/rejoins; only P2 Zero is proved to take the original gravity drop.",
+              "LOCAL first scene-release publication has X Y2074/ground0/foot2095. X later resolves naturally to2075/fullfoot2096 at row642 while the first ordinary P1 control starts. No instantaneous both-grounded-before-any-control claim.",
+              "Source terrain authenticates the actual falling lane/landing; later original-and-live arena observations verify each full22-pixel foot/body. No live full-foot query during the airborne instruction is claimed.",
+              "Bodies, diagnostics, source reads and composed images are separate asynchronous observations; peer reads are not asserted to be the same emulated frame.",
+              "NET peer0 retains one sampled original airborne action7 frame between Y2026 and groundedY2074; peer1 retains two and LOCAL three. No continuous frame capture or two-airborne-samples-per-peer claim.",
+              "Composed captures bracket admission/dialogue/released bodies; no airborne screenshot exists and no image alone proves falling physics. Known scenery/portrait corruption remains outside F3.",
+              "The original predeclared AmazonCP2 initializer bypasses earlier traversal once. No contact protection, HP/position/contact/pose/outcome writes during the checked admission/fall.",
+              "Existing fixture-tainted recordings remain failed and replay-refused. Parent raw status and LOCAL false early F8-readiness flag remain unchanged; no ordinary clean capture/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original AmazonCP2 reachability only."
+            ]
+          }
+        ],
+        "limitations": "Exact7f59990 LOCAL+NET authored48px guest-owned Zero gravity drop only. Actual current box/air-to-ground and both survivor HP32; P1 is native co-op passenger, not a second freefall. First LOCAL release X ground0/foot2095 preserved; later natural2075/fullfoot2096. NET peer0 one sampled airborne frame, peer1two/LOCALthree. AgreedCP2 reachability bypass, asynchronous observations and scenery/portrait corruption retained; no rendering, other-drop or V89 transfer."
       }
     },
     {
