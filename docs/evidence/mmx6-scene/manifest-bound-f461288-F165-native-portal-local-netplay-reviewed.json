@@ -1,0 +1,3796 @@
+{
+  "comparison": "F165",
+  "frozen_row_sha256": "c3572dbe5ad70b1550b6547dfb170697af75361f6faf201d9ddfd9981af00792",
+  "result": "passed",
+  "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\recycle-portal-v89-final-binding-root-v1.json",
+    "binding_sha256": "b96fbae151f92d14def98dc50019e83207ce3d77b4e323b4ef9824706b0efb30",
+    "image_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+    "manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+    "provenance_sha256": "464805d0560873494d07d758382a8b4398af47a7d16984e81ddf9c9eb272a838",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v89-recycle-portal-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v37",
+    "host_revision": 20
+  },
+  "implementation": {
+    "native_commits": [
+      "0531198",
+      "f461288"
+    ],
+    "integrated_commits": [
+      "4279dda",
+      "5f45270"
+    ],
+    "focused_gates": "15 checkpoint/host/contract/portal/snapshot CTests passed",
+    "scope": "Default-off development prerequisite; actual portal/loader/arrivals/controls are earned afterward."
+  },
+  "executed_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F165_Recycle_portal_v89_root_v5.py",
+    "bytes": 23583,
+    "sha256": "cb3171c54988ac1b8c4364af84674be475960f26ceea437bcaff83d32b14d214"
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F165-recycle-portal-v89-root-v1.py",
+    "bytes": 6929,
+    "sha256": "336e45666b6a2259311dd92a28c0b7087a739f6d9382dfc9dd4bd831f2d70236"
+  },
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F165-native-portal-v89-root-v1.py",
+    "bytes": 13861,
+    "sha256": "3720940b41abc871618837fcb57822dc9a12d0de7368ec8798cd157443b8b075"
+  },
+  "external_source_pins": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Recycle-portal-prerequisite-v89-worker-v1.json",
+      "bytes": 9357,
+      "sha256": "7636a0f974a2140bffe9e943076a528faa8ff165e06b1b3a016f68abee660f4d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-original-destination-source-v89-worker-v1.json",
+      "bytes": 775,
+      "sha256": "f556d3abca53829c30f5f9a0c6d9a4db1b32ee3fcdd17ded1eecefda6df0bee7"
+    }
+  ],
+  "guard_checks": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-collision-projection-guard-checks-v89-root-v1.json",
+    "bytes": 586,
+    "sha256": "6b9d5074b0e53451b6a3153308f9995735db812716f87889e0655f289db3d2ba"
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\qualification.json",
+        "bytes": 12515307,
+        "sha256": "23bea17f6d95b1fb13c1ea55a9d58106252778c71e985ad82402f5a9489d567b"
+      },
+      "original_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\qualification-parent-original.json",
+        "bytes": 12512918,
+        "sha256": "afb1a95831adcf0382714f90091981cd616f6c5f4d3a9226d26fc003f08a9f68"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 5878954,
+        "sha256": "5043dae96c957b8c87db2dff8f8f64ff17234981eae80c7a432015245966aca9"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\F165-executing-source-pins.json",
+        "bytes": 2590,
+        "sha256": "3c8c1c04fac1bafccfacc0b6678a8ba85772ea76b9c081ce946f4133c384d7ed"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "mechanic_checks": {
+        "agreed_native_CP2_and_one_declared_pose": true,
+        "source_P1_geometric_miss": true,
+        "actual_P2_native_portal_admission_every_peer": true,
+        "native_major8_9_destination_every_peer": true,
+        "finite_both_living_native_arrivals": true,
+        "source_full_feet_after_ordinary_guest_Left": true,
+        "actual_separate_destination_controls": true,
+        "actual_captures_retained": true
+      },
+      "samples": 209,
+      "key_native_observations": [
+        {
+          "row": 92,
+          "label": "native CP2, declared pose, both original landings and portal idle",
+          "peers": [
+            {
+              "peer": 0,
+              "native_tuple": [
+                10,
+                0,
+                4,
+                0,
+                2
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104529920,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104464384,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": [
+                {
+                  "seat": 0,
+                  "foot_y": 1616,
+                  "x_inclusive": [
+                    1495,
+                    1516
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 1616,
+                  "x_inclusive": [
+                    1495,
+                    1516
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 96,
+          "label": "actual guest original portal admission",
+          "peers": [
+            {
+              "peer": 0,
+              "native_tuple": [
+                10,
+                0,
+                4,
+                0,
+                2
+              ],
+              "scene": [
+                2,
+                2
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 1,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104529920,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 100302848,
+                  "y_raw": 104464384,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": null
+            }
+          ]
+        },
+        {
+          "row": 191,
+          "label": "finite original loader and both native alternate-room arrivals",
+          "peers": [
+            {
+              "peer": 0,
+              "native_tuple": [
+                10,
+                0,
+                20,
+                1,
+                0
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 5177344,
+                  "y_raw": 23789568,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 6750208,
+                  "y_raw": 23724032,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    68,
+                    89
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    92,
+                    113
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "native_ground": true,
+                  "full_support": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 208,
+          "label": "final native scene-free both supported controls",
+          "peers": [
+            {
+              "peer": 0,
+              "native_tuple": [
+                10,
+                0,
+                20,
+                1,
+                0
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 4423680,
+                  "y_raw": 23789568,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 4554752,
+                  "y_raw": 23724032,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": null
+            }
+          ]
+        }
+      ],
+      "transition_progress": [
+        {
+          "majors": [
+            10,
+            8
+          ],
+          "owner2_rows": [
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146,
+            147,
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168
+          ],
+          "portal_rows": [
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117
+          ],
+          "source_departed": true
+        }
+      ],
+      "loader_native_entries": [
+        {
+          "peer": 0,
+          "trace": {
+            "id": 2415,
+            "ok": true,
+            "total": 5,
+            "oldest": 0,
+            "seq_lo": 0,
+            "seq_hi": 5,
+            "entries": [
+              {
+                "seq": 0,
+                "func": "0x8001E32C",
+                "ra": "0x8001EBA0",
+                "a0": "0x800CCED0",
+                "a1": "0x8001EB48",
+                "a2": "0x800C4708",
+                "a3": "0x8008EC08",
+                "t1": "0x00000010",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 433,
+                "frame": 3326,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 1,
+                "func": "0x8001E914",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x800C4708",
+                "a3": "0x8008EC08",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 438,
+                "frame": 3329,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 2,
+                "func": "0x8001E1BC",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x00000002",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 534,
+                "frame": 3356,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 3,
+                "func": "0x8001E730",
+                "ra": "0x8001E2D4",
+                "a0": "0x800A47F4",
+                "a1": "0x80162138",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 528,
+                "frame": 3357,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 4,
+                "func": "0x8001E78C",
+                "ra": "0x8001E2F4",
+                "a0": "0x8009B840",
+                "a1": "0xFFFFFFFF",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 528,
+                "frame": 3357,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              }
+            ],
+            "emitted": 5
+          }
+        }
+      ],
+      "controls": [
+        {
+          "seat": 1,
+          "before": 192,
+          "movement": 198,
+          "settled": 202,
+          "physical_peers": [
+            {
+              "peer": 0,
+              "travel_at_acceptance": -23.5,
+              "travel_after_neutral": -33.5,
+              "other_stationary_at_acceptance": true,
+              "settled_fullfeet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    68,
+                    89
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    58,
+                    79
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "seat": 0,
+          "before": 203,
+          "movement": 205,
+          "settled": 207,
+          "physical_peers": [
+            {
+              "peer": 0,
+              "travel_at_acceptance": -3.5,
+              "travel_after_neutral": -11.5,
+              "other_stationary_at_acceptance": true,
+              "settled_fullfeet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    56,
+                    77
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    58,
+                    79
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "source_guards": [
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-0 source before portal",
+          "attempts": [
+            {
+              "before": "38740980b0a41980b0f81a80",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 528,
+                  "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x8019a4b0",
+                  "bytes": 87040,
+                  "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin"
+                },
+                {
+                  "address": "0x801af8b0",
+                  "bytes": 8000,
+                  "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin"
+                }
+              ],
+              "after": "38740980b0a41980b0f81a80"
+            }
+          ]
+        },
+        {
+          "peer": 0,
+          "address": "0x800ebd80",
+          "bytes": 3100,
+          "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+          "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+        },
+        {
+          "peer": 0,
+          "address": "0x800f38b8",
+          "bytes": 124,
+          "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+          "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+        },
+        {
+          "peer": 0,
+          "address": "0x800e9864",
+          "bytes": 20,
+          "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+          "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-0 actual alternate destination",
+          "attempts": [
+            {
+              "before": "387409809c1f16809c971680",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 270,
+                  "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x80161f9c",
+                  "bytes": 30720,
+                  "actual": "02a17ebe71f8a037d971ba4bc50739c46e3a195146d55896310f66e5870d0de6",
+                  "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin"
+                },
+                {
+                  "address": "0x8016979c",
+                  "bytes": 4512,
+                  "actual": "6079ccab2716d738d45f7a5690af86bedd043c9c3221a7503443ff7b44204c4c",
+                  "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin"
+                }
+              ],
+              "after": "387409809c1f16809c971680",
+              "collision_equivalence": {
+                "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "all_descriptor_low16_match": true,
+                "all_metatile_collision_shape_flip_match": true,
+                "original_full_asset_sha256_match": false,
+                "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+              }
+            }
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "label": "source-before-guest-portal",
+          "row": 92,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-guest-portal.png",
+          "sha256": "38f22d579d98e97b1cce0055e59744caecf8b74319730e8ce00a3c6d54e4dcfd",
+          "before": {
+            "id": 1909,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 1910,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-guest-portal.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 1912,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "original-destination-native-arrivals",
+          "row": 191,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+          "sha256": "4064de241e6658762ce30ae0facb1d83a769a84b2e804b2dc3ecd1950b9f5e5c",
+          "before": {
+            "id": 2421,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 2422,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+            "staged": true,
+            "seq": 1
+          },
+          "completion": {
+            "id": 2424,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "destination-independent-controls",
+          "row": 208,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-destination-independent-controls.png",
+          "sha256": "fa4821399d8354b4104555a07c094eddc6f18696f74cdb054f913b14d0b1a733",
+          "before": {
+            "id": 2518,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 2519,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-destination-independent-controls.png",
+            "staged": true,
+            "seq": 2
+          },
+          "completion": {
+            "id": 2521,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          }
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "resolved_state_crc": [],
+      "recordings": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+            "manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "541e260308e1b7cf893295d6fe07b70e3bc7a7072b13bf66c4662c991735dff9",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "events": 6216,
+          "natives": 4354,
+          "p2_reads": 1862,
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        }
+      ]
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\qualification.json",
+        "bytes": 9333169,
+        "sha256": "d8a74fb6b4e1739b3e47f4e28fd990d2191aeadbe09f6aed76a936bf751681b1"
+      },
+      "original_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\qualification-parent-original.json",
+        "bytes": 9327813,
+        "sha256": "f123dad4535428cfdd53cc9213e2e50acf08b9fa81c68c4da05ffb846f4ea182"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\observations.json",
+        "bytes": 6845348,
+        "sha256": "ee37803561ec6c1835f9e96661170efe57cbecc320d698a5cdf1b334ba2a6ebb"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\F165-executing-source-pins.json",
+        "bytes": 2590,
+        "sha256": "3c8c1c04fac1bafccfacc0b6678a8ba85772ea76b9c081ce946f4133c384d7ed"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "mechanic_checks": {
+        "agreed_native_CP2_and_one_declared_pose": true,
+        "source_P1_geometric_miss": true,
+        "actual_P2_native_portal_admission_every_peer": true,
+        "native_major8_9_destination_every_peer": true,
+        "finite_both_living_native_arrivals": true,
+        "source_full_feet_after_ordinary_guest_Left": true,
+        "actual_separate_destination_controls": true,
+        "actual_captures_retained": true
+      },
+      "samples": 122,
+      "key_native_observations": [
+        {
+          "row": 56,
+          "label": "native CP2, declared pose, both original landings and portal idle",
+          "peers": [
+            {
+              "peer": 0,
+              "native_tuple": [
+                10,
+                0,
+                4,
+                0,
+                2
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104529920,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104464384,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": [
+                {
+                  "seat": 0,
+                  "foot_y": 1616,
+                  "x_inclusive": [
+                    1495,
+                    1516
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 1616,
+                  "x_inclusive": [
+                    1495,
+                    1516
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            },
+            {
+              "peer": 1,
+              "native_tuple": [
+                10,
+                0,
+                4,
+                0,
+                2
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104529920,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104464384,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": [
+                {
+                  "seat": 0,
+                  "foot_y": 1616,
+                  "x_inclusive": [
+                    1495,
+                    1516
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 1616,
+                  "x_inclusive": [
+                    1495,
+                    1516
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 60,
+          "label": "actual guest original portal admission",
+          "peers": [
+            {
+              "peer": 0,
+              "native_tuple": [
+                10,
+                0,
+                4,
+                0,
+                2
+              ],
+              "scene": [
+                2,
+                2
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 1,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104529920,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 100302848,
+                  "y_raw": 104464384,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": null
+            },
+            {
+              "peer": 1,
+              "native_tuple": [
+                10,
+                0,
+                4,
+                0,
+                2
+              ],
+              "scene": [
+                2,
+                2
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 1,
+                  "hp": 32,
+                  "x_raw": 98697216,
+                  "y_raw": 104529920,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 100696064,
+                  "y_raw": 104464384,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": null
+            }
+          ]
+        },
+        {
+          "row": 107,
+          "label": "finite original loader and both native alternate-room arrivals",
+          "peers": [
+            {
+              "peer": 0,
+              "native_tuple": [
+                10,
+                0,
+                20,
+                1,
+                0
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 5177344,
+                  "y_raw": 23789568,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 6750208,
+                  "y_raw": 23724032,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    68,
+                    89
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    92,
+                    113
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "native_ground": true,
+                  "full_support": false
+                }
+              ]
+            },
+            {
+              "peer": 1,
+              "native_tuple": [
+                10,
+                0,
+                20,
+                1,
+                0
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 5177344,
+                  "y_raw": 23789568,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 6750208,
+                  "y_raw": 23724032,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    68,
+                    89
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    92,
+                    113
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                  ],
+                  "native_ground": true,
+                  "full_support": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "row": 121,
+          "label": "final native scene-free both supported controls",
+          "peers": [
+            {
+              "peer": 0,
+              "native_tuple": [
+                10,
+                0,
+                20,
+                1,
+                0
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 3899392,
+                  "y_raw": 23789568,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 3506176,
+                  "y_raw": 23724032,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": null
+            },
+            {
+              "peer": 1,
+              "native_tuple": [
+                10,
+                0,
+                20,
+                1,
+                0
+              ],
+              "scene": [
+                0,
+                0
+              ],
+              "lifecycle": [
+                0,
+                0
+              ],
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 3899392,
+                  "y_raw": 23789568,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 3506176,
+                  "y_raw": 23724032,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "fixture": {
+                "generation": 1,
+                "state": 3,
+                "reason": 0,
+                "stage": 4,
+                "section": 0,
+                "checkpoint": 2,
+                "nonce": 1280462898,
+                "initializer_entries": 1,
+                "record": "80072444",
+                "tainted": 1,
+                "authority": 1,
+                "latch": 2,
+                "prior_chord": 1,
+                "raw_hex": "434b50310100000003000400020200003250524c010000004424078001010201"
+              },
+              "feet": null
+            }
+          ]
+        }
+      ],
+      "transition_progress": [
+        {
+          "majors": [
+            10,
+            8
+          ],
+          "owner2_rows": [
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93
+          ],
+          "portal_rows": [
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ],
+          "source_departed": true
+        },
+        {
+          "majors": [
+            10,
+            8
+          ],
+          "owner2_rows": [
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92
+          ],
+          "portal_rows": [
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70
+          ],
+          "source_departed": true
+        }
+      ],
+      "loader_native_entries": [
+        {
+          "peer": 0,
+          "trace": {
+            "id": 2511,
+            "ok": true,
+            "total": 5,
+            "oldest": 0,
+            "seq_lo": 0,
+            "seq_hi": 5,
+            "entries": [
+              {
+                "seq": 0,
+                "func": "0x8001E32C",
+                "ra": "0x8001EBA0",
+                "a0": "0x800CCED0",
+                "a1": "0x8001EB48",
+                "a2": "0x800C4708",
+                "a3": "0x8008EC08",
+                "t1": "0x00000010",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 438,
+                "frame": 4330,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 1,
+                "func": "0x8001E914",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x800C4708",
+                "a3": "0x8008EC08",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 452,
+                "frame": 4333,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 2,
+                "func": "0x8001E1BC",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x00000002",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 543,
+                "frame": 4360,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 3,
+                "func": "0x8001E730",
+                "ra": "0x8001E2D4",
+                "a0": "0x800A47F4",
+                "a1": "0x80162138",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 546,
+                "frame": 4361,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 4,
+                "func": "0x8001E78C",
+                "ra": "0x8001E2F4",
+                "a0": "0x8009B840",
+                "a1": "0xFFFFFFFF",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 546,
+                "frame": 4361,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              }
+            ],
+            "emitted": 5
+          }
+        },
+        {
+          "peer": 1,
+          "trace": {
+            "id": 2335,
+            "ok": true,
+            "total": 5,
+            "oldest": 0,
+            "seq_lo": 0,
+            "seq_hi": 5,
+            "entries": [
+              {
+                "seq": 0,
+                "func": "0x8001E32C",
+                "ra": "0x8001EBA0",
+                "a0": "0x800CCED0",
+                "a1": "0x8001EB48",
+                "a2": "0x800C4708",
+                "a3": "0x8008EC08",
+                "t1": "0x00000010",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 439,
+                "frame": 4330,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 1,
+                "func": "0x8001E914",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x800C4708",
+                "a3": "0x8008EC08",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 444,
+                "frame": 4333,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 2,
+                "func": "0x8001E1BC",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x00000002",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 540,
+                "frame": 4360,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 3,
+                "func": "0x8001E730",
+                "ra": "0x8001E2D4",
+                "a0": "0x800A47F4",
+                "a1": "0x80162138",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 534,
+                "frame": 4361,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 4,
+                "func": "0x8001E78C",
+                "ra": "0x8001E2F4",
+                "a0": "0x8009B840",
+                "a1": "0xFFFFFFFF",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 534,
+                "frame": 4361,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              }
+            ],
+            "emitted": 5
+          }
+        }
+      ],
+      "controls": [
+        {
+          "seat": 1,
+          "before": 108,
+          "movement": 112,
+          "settled": 115,
+          "physical_peers": [
+            {
+              "peer": 0,
+              "travel_at_acceptance": -31.5,
+              "travel_after_neutral": -49.5,
+              "other_stationary_at_acceptance": true,
+              "settled_fullfeet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    68,
+                    89
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    42,
+                    63
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            },
+            {
+              "peer": 1,
+              "travel_at_acceptance": -37.5,
+              "travel_after_neutral": -49.5,
+              "other_stationary_at_acceptance": true,
+              "settled_fullfeet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    68,
+                    89
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    42,
+                    63
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "seat": 0,
+          "before": 116,
+          "movement": 118,
+          "settled": 120,
+          "physical_peers": [
+            {
+              "peer": 0,
+              "travel_at_acceptance": -3.5,
+              "travel_after_neutral": -19.5,
+              "other_stationary_at_acceptance": true,
+              "settled_fullfeet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    48,
+                    69
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    42,
+                    63
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            },
+            {
+              "peer": 1,
+              "travel_at_acceptance": -7.5,
+              "travel_after_neutral": -19.5,
+              "other_stationary_at_acceptance": true,
+              "settled_fullfeet": [
+                {
+                  "seat": 0,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    48,
+                    69
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                },
+                {
+                  "seat": 1,
+                  "foot_y": 384,
+                  "x_inclusive": [
+                    42,
+                    63
+                  ],
+                  "codes": [
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56,
+                    56
+                  ],
+                  "native_ground": true,
+                  "full_support": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "source_guards": [
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-0 source before portal",
+          "attempts": [
+            {
+              "before": "38740980b0a41980b0f81a80",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 528,
+                  "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x8019a4b0",
+                  "bytes": 87040,
+                  "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin"
+                },
+                {
+                  "address": "0x801af8b0",
+                  "bytes": 8000,
+                  "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin"
+                }
+              ],
+              "after": "38740980b0a41980b0f81a80"
+            }
+          ]
+        },
+        {
+          "peer": 0,
+          "address": "0x800ebd80",
+          "bytes": 3100,
+          "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+          "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+        },
+        {
+          "peer": 0,
+          "address": "0x800f38b8",
+          "bytes": 124,
+          "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+          "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+        },
+        {
+          "peer": 0,
+          "address": "0x800e9864",
+          "bytes": 20,
+          "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+          "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-1 source before portal",
+          "attempts": [
+            {
+              "before": "38740980b0a41980b0f81a80",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 528,
+                  "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-portal-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x8019a4b0",
+                  "bytes": 87040,
+                  "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-portal-0x8019a4b0-actual.bin"
+                },
+                {
+                  "address": "0x801af8b0",
+                  "bytes": 8000,
+                  "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-portal-0x801af8b0-actual.bin"
+                }
+              ],
+              "after": "38740980b0a41980b0f81a80"
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "address": "0x800ebd80",
+          "bytes": 3100,
+          "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+          "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+        },
+        {
+          "peer": 1,
+          "address": "0x800f38b8",
+          "bytes": 124,
+          "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+          "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+        },
+        {
+          "peer": 1,
+          "address": "0x800e9864",
+          "bytes": 20,
+          "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+          "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-0 actual alternate destination",
+          "attempts": [
+            {
+              "before": "387409809c1f16809c971680",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 270,
+                  "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x80161f9c",
+                  "bytes": 30720,
+                  "actual": "922e18411ba7101db203e3dd33edd668bf1d47c30fd6aad926c4490776d7711c",
+                  "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin"
+                },
+                {
+                  "address": "0x8016979c",
+                  "bytes": 4512,
+                  "actual": "a4b9f6ee91c8b2d15527a66b3e4f6a0c46c87fa8c14f4c99987d42dda0ec111c",
+                  "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin"
+                }
+              ],
+              "after": "387409809c1f16809c971680",
+              "collision_equivalence": {
+                "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "all_descriptor_low16_match": true,
+                "all_metatile_collision_shape_flip_match": true,
+                "original_full_asset_sha256_match": false,
+                "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+              }
+            }
+          ]
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-1 actual alternate destination",
+          "attempts": [
+            {
+              "before": "387409809c1f16809c971680",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 270,
+                  "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-actual-alternate-destination-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x80161f9c",
+                  "bytes": 30720,
+                  "actual": "1fad4a80ab8a402d48ce9acadb89955b8dd7ffda0ace47337522781af295f8c6",
+                  "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-actual-alternate-destination-0x80161f9c-actual.bin"
+                },
+                {
+                  "address": "0x8016979c",
+                  "bytes": 4512,
+                  "actual": "a4b9f6ee91c8b2d15527a66b3e4f6a0c46c87fa8c14f4c99987d42dda0ec111c",
+                  "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-actual-alternate-destination-0x8016979c-actual.bin"
+                }
+              ],
+              "after": "387409809c1f16809c971680",
+              "collision_equivalence": {
+                "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "all_descriptor_low16_match": true,
+                "all_metatile_collision_shape_flip_match": true,
+                "original_full_asset_sha256_match": false,
+                "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+              }
+            }
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "label": "source-before-guest-portal",
+          "row": 56,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-guest-portal.png",
+          "sha256": "735b8752de2ff533c319cc6f20048bb0f1e5bbd38748d181d8876238d878f46f",
+          "before": {
+            "id": 2245,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 2246,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-guest-portal.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 2247,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "source-before-guest-portal",
+          "row": 56,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-guest-portal.png",
+          "sha256": "1b0c2a15b7d8ceedca622f6f8ad6223ebdf2d1d2732dda0088e04e1e2dac1962",
+          "before": {
+            "id": 2065,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 2066,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-guest-portal.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 2067,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "original-destination-native-arrivals",
+          "row": 107,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+          "sha256": "f94504ece680dd9fd941d1caba5bcc2aa494eea52d70f9aaa42c2af3000d4efa",
+          "before": {
+            "id": 2517,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 2518,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+            "staged": true,
+            "seq": 1
+          },
+          "completion": {
+            "id": 2519,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "original-destination-native-arrivals",
+          "row": 107,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-original-destination-native-arrivals.png",
+          "sha256": "d8b797c18013f0dac5e671bba4170d3d7e0bc087342bde1ca30899f7d930d55b",
+          "before": {
+            "id": 2341,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 2342,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-original-destination-native-arrivals.png",
+            "staged": true,
+            "seq": 1
+          },
+          "completion": {
+            "id": 2344,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "destination-independent-controls",
+          "row": 121,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-destination-independent-controls.png",
+          "sha256": "4789253c4d60187ab6125c72675568106b5b0718b5cfa543448d272df740cfc5",
+          "before": {
+            "id": 2595,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 2596,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-destination-independent-controls.png",
+            "staged": true,
+            "seq": 2
+          },
+          "completion": {
+            "id": 2598,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "destination-independent-controls",
+          "row": 121,
+          "surface": "composed_renderer_output",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-destination-independent-controls.png",
+          "sha256": "4a7c49759525a255eed20e2a296c99c3d8fd5b857a4c2a94dae38cebfdf88f1f",
+          "before": {
+            "id": 2420,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 2421,
+            "ok": true,
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-destination-independent-controls.png",
+            "staged": true,
+            "seq": 2
+          },
+          "completion": {
+            "id": 2423,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          }
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2912,
+              "core": "b0e1a391",
+              "mod": "c37e8b7d"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "27ed2a55",
+              "mod": "a2b4bd65"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "62707943",
+              "mod": "1252d943"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "87dad7d1",
+              "mod": "c9b6e6fb"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "70b9e72e",
+              "mod": "a1acf945"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "5e4a7bbb",
+              "mod": "3266b5f1"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "a8c1bd31",
+              "mod": "475ee9e2"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "e602730f",
+              "mod": "82379723"
+            }
+          ],
+          "resolved_through": [
+            3140,
+            3139
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3200,
+              "core": "03566062",
+              "mod": "ae7ae81b"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "1ceef83c",
+              "mod": "cb4cc498"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "c8319fe8",
+              "mod": "8266244a"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "719f547a",
+              "mod": "9649c9d8"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "a487a46e",
+              "mod": "8d328a38"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "a4f1e1c7",
+              "mod": "393c28b2"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "4beb8045",
+              "mod": "23cca492"
+            }
+          ],
+          "resolved_through": [
+            3407,
+            3407
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3488,
+              "core": "63db2edc",
+              "mod": "3996193a"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "7fe66314",
+              "mod": "16fb9c82"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "9ed6991b",
+              "mod": "b6d27348"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "1cd7a9f3",
+              "mod": "50abe410"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "550c1e7e",
+              "mod": "4c2f4c62"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "1307f4ba",
+              "mod": "e18221ee"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "f22ff6fa",
+              "mod": "ae7ae81b"
+            }
+          ],
+          "resolved_through": [
+            3708,
+            3708
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4832,
+              "core": "ce44c623",
+              "mod": "0ddba3a6"
+            },
+            {
+              "simulation_tick": 4864,
+              "core": "43b77767",
+              "mod": "80f9f7e4"
+            },
+            {
+              "simulation_tick": 4896,
+              "core": "95099152",
+              "mod": "6627bcc4"
+            },
+            {
+              "simulation_tick": 4928,
+              "core": "94f75133",
+              "mod": "059eea1e"
+            },
+            {
+              "simulation_tick": 4960,
+              "core": "e2d59e4c",
+              "mod": "c58a6dba"
+            },
+            {
+              "simulation_tick": 4992,
+              "core": "ccd69160",
+              "mod": "bc96ad99"
+            },
+            {
+              "simulation_tick": 5024,
+              "core": "4e37a827",
+              "mod": "2d1bfe2c"
+            }
+          ],
+          "resolved_through": [
+            5042,
+            5042
+          ]
+        }
+      ],
+      "recordings": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+            "manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 20,
+              "selected_sha256": "77c0b671a6ad7c6a76bcae77312b202a6da78c8234ca50145325f2d72e6f067f"
+            },
+            "settings_sha256": "b206e0650a479b3678906e1cffe576cbbf956b4e57f8634f993a1930088ef253",
+            "simulation_contract_sha256": "faf7fc5a620011a4b534b52003f1be82466888d1f1fd4940203910e4b148d4ff"
+          },
+          "events": 6777,
+          "natives": 3157,
+          "p2_reads": 3620,
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        },
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+            "manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 20,
+              "selected_sha256": "77c0b671a6ad7c6a76bcae77312b202a6da78c8234ca50145325f2d72e6f067f"
+            },
+            "settings_sha256": "e2a455e3dd598f4155d807878e90f3c23ff67965ca72e875a6628e284c890d92",
+            "simulation_contract_sha256": "faf7fc5a620011a4b534b52003f1be82466888d1f1fd4940203910e4b148d4ff"
+          },
+          "events": 6777,
+          "natives": 3157,
+          "p2_reads": 3620,
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        }
+      ]
+    }
+  },
+  "retained_incomplete_setups": [
+    {
+      "attempt": 1,
+      "result": "unverified",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v1\\qualification.json",
+        "bytes": 8572366,
+        "sha256": "644d72cb6b1cd762d246c3257ec206dd01e45cdd17d8ba9f934df1af4f9745ca"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 7807022,
+        "sha256": "3a0e5d6345442c381de792f41097146c7dc072e00e0400f9cc0c9880bc2b12e7"
+      },
+      "raw_status": "failed_setup",
+      "error": "Actual original major8/9 loader sequence not sampled on every peer",
+      "controls_not_observed": true
+    },
+    {
+      "attempt": 2,
+      "result": "unverified",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v2\\qualification.json",
+        "bytes": 5623754,
+        "sha256": "3e3468675338439a609cd61708af172b5380028e3b840d71dd4f18980a2cf1d3"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v2\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 5195988,
+        "sha256": "3dfa851f33e7d4aea9de587fca205a337bf8f74ed0d566b800dfd12ff683648d"
+      },
+      "raw_status": "failed_setup",
+      "error": "Stable native collision resources differ from original",
+      "controls_not_observed": true
+    },
+    {
+      "attempt": 3,
+      "result": "unverified",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v3\\qualification.json",
+        "bytes": 5537877,
+        "sha256": "a8b88d7e89336114672e5fe7d6f6db84a195e470e7414915d343b0b35e2947a9"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v3\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 5114031,
+        "sha256": "6d98cd468c52faf325e9aaea27d085f786488846d555684ca6c87aeb961863d3"
+      },
+      "raw_status": "failed_setup",
+      "error": "Stable native collision resources differ from original",
+      "controls_not_observed": true
+    }
+  ],
+  "root_review": {
+    "all9_composed_images_reviewed": true,
+    "raw_collision_equivalence_independently_verified": true,
+    "actual_ordered_loader_entries_and_living_release_verified": true,
+    "native_box_fullfeet_and_separate_controls_verified": true,
+    "all_parent_source_profile_crc_save_cleanup_gates_verified": true
+  },
+  "limitations": [
+    "Only frozenF165 original Recycle4/0->20/1 guest-owned portal, finite native loader/arrival and separate controls on exactf461288 LOCAL+NET. No R14/F47 return, F44 distant-primary, optional boss or campaign claim.",
+    "Predeclared lab-only native originalCP2 initializer runs once, followed by one position+previous-position-only bypass to both1506/1593 before native landings. Earlier traversal is bypassed. Portal/contact/HP/eligibility/outcome, loader/destination/camera/scanner are not written or forced; contact protection OFF.",
+    "P1 starts1506/1595 outside original portal/capsule regions; P2 starts1506/1594 and earns original admission with ordinaryRight. This satisfies separated admission, not F44 distance.",
+    "Polling misses briefmajor9. Complete bounded native-entry trace armed after prerequisite retains actual1E914 then1E1BC on each process. No invented mode9 RAM sample, changed polling cadence or loader timing.",
+    "Guest native destination103/362 initially has partial original ledge support. Ordinary guestLeft earns all22 feet; separate primaryLeft then earns current native motion/full support. Initial full-guest-foot arrival is not claimed.",
+    "Native graphic IDs differ from original full bytes. Exact layout, all descriptor collision low16 and every resolved metatile collision/shape/flip match original independently; raw differences retained. This is collision equivalence, not full visual-asset SHA or general-rendering qualification.",
+    "RAM, private publications, physical peers, input acceptance, source reads and composed images are asynchronous; no same-instruction/frame or identical-image claim. Overlapping bodies remain visible in captures.",
+    "Fixture-tainted recordings remain failed and strict ordinary capture/offline replay refuse them. Legacy parent jump/audio labels are reused harness gates; no audio comparison or clean replay credit.",
+    "Three incomplete LOCAL setups remain unchanged. Only LOCALv4 and NETv1 qualify this row; no other candidate receives transferred credit."
+  ]
+}
