@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 20,
+  "revision": 21,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v37",
+    "title_compatibility": "mmx6-x-zero-delay-v38",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -370,5 +370,39 @@
       "guard": "Existing exact17window portal closure plus pinned capsule/059 original code/data and full current live terrain assets."
     },
     "limits": "F165 outbound alone does not qualify R14 native return, F47 real return near a platform or F44 distant-primary transition; the named approach deliberately places both heroes at1506."
+  },
+  "title_changes_v38": {
+    "scope": "Default-off lab-only one-shot per-seat damaged starting-HP prerequisite for named F21/F113/F106 setup; no comparison result or runtime qualification.",
+    "catalog": "Only private LAB catalog adds lab_starting_hp_p1/p2=off|1..32. Actual typed settings are committed before frame0 through the existing negotiated profile; no new service/mailbox.",
+    "native_source": "Original8003BE14..3BEFC: full initialization reads PLAY5B+character, while alternate saved-current path readsPLAY5A;5D/5E are health copies, not assumed static max. Seed actual5C only after both healthy native grounded idle bodies match their >=32 native per-character full capacity and converged copies; capacity/copies untouched.",
+    "ordering": "READY withheld while configured seed waits. Exactly once per activation after original checkpoint initialization/enrollment, including named positional prerequisites. No repeated application after hits, scenes, native boundaries, revival or guest return.",
+    "authority": "Only agreed checkpoint authority, exact option/index/nonce/generation1/nativeinitializer1/taint/profile/source/safe-boundary and consumed latch. Offline mutation commands stay refused online. Off performs no HP write.",
+    "diagnostic": "C0=off0/selectedpending1/applied2,C1/C2=HPrequest0off,C3=appliedseatmask. C4..FF unclaimed.",
+    "snapshot": "Schema14; immutable pair in resource identity and host digest, consumed application latch serialized/validated/hashed. Pending setup snapshots refused, no backward migration.",
+    "bypass": "Seeds prerequisite damaged health only; HP1 remains alive, never death/FALLEN/scene/heal/result flags. Subsequent native injury/death/heal/route behavior must be observed separately.",
+    "turtloid_checkpoint": {
+      "option": "turtloid_rain_cp1",
+      "value": 8,
+      "index": 32,
+      "tuple": [
+        6,
+        0,
+        1
+      ],
+      "campaign": 1,
+      "table": "800731B0",
+      "record": "80072588",
+      "record_fnv1a": "45112B45",
+      "nonce": "4C545231",
+      "native_authored_player": [
+        1120,
+        464
+      ],
+      "native_authored_camera": [
+        1056,
+        464
+      ],
+      "scope": "Original checkpoint initialization only; no pose/camera/scanner/rain/damage/death/outcome writes. Reuses exact existing mode8/mode9 authority/source/chord/taint. Actual route movement and rain injury/expiry/survivor still require native qualification."
+    }
   }
 }

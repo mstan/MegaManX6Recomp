@@ -857,6 +857,9 @@ static void diagnostic_p2_boxes(void) {
     project(diagnostic+MMX6_BOX_DIAG_HEADER,wire,sizeof wire);
 }
 static unsigned checkpoint_contact_protection_status(void);
+static unsigned checkpoint_starting_hp[2],checkpoint_starting_hp_applied;
+static unsigned checkpoint_starting_hp_status(void);
+static unsigned checkpoint_starting_hp_mask(void);
 static void diagnostics(uint16_t input) {
     ++frame_count;
     /* Odd sequence denotes publication in progress; finish with an even one.
@@ -892,6 +895,12 @@ static void diagnostics(uint16_t input) {
     psx_mod_write_byte(diagnostic+0x90,psx_mod_read_byte(PLAY));
     psx_mod_write_byte(diagnostic+0x91,psx_mod_read_byte(PLAY+1));
     psx_mod_write_byte(diagnostic+0xAF,(uint8_t)checkpoint_contact_protection_status());
+    /* C0:0off/1selected-pending/2applied; C1/C2:requested actualHP (0off);
+     * C3:once-applied seat mask. No death/heal/result bit is authored. */
+    psx_mod_write_byte(diagnostic+0xC0,(uint8_t)checkpoint_starting_hp_status());
+    psx_mod_write_byte(diagnostic+0xC1,(uint8_t)checkpoint_starting_hp[0]);
+    psx_mod_write_byte(diagnostic+0xC2,(uint8_t)checkpoint_starting_hp[1]);
+    psx_mod_write_byte(diagnostic+0xC3,(uint8_t)(checkpoint_starting_hp_applied?checkpoint_starting_hp_mask():0));
     psx_mod_write_word(diagnostic+0x94,diagnostic_host_digest());
     psx_mod_write_word(diagnostic+0x98,1); /* bounded host FNV-1a, not core CRC */
 #ifdef MMX6_COOP_MODERN_STATE
@@ -2826,7 +2835,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v37",
+        .compatibility_id = "mmx6-x-zero-delay-v38",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

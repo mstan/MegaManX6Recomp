@@ -40,6 +40,10 @@ label = "Recycle section 1 checkpoint 2 prerequisite"
 value = "recycle_portal_cp2"
 label = "Recycle alternate portal (position prerequisite)"
 
+[[option.choice]]
+value = "turtloid_rain_cp1"
+label = "Turtloid original checkpoint 1 rain approach"
+
 [[option]]
 feature = "prototype"
 id = "lab_contact_protection"
@@ -56,3 +60,285 @@ label = "Off"
 [[option.choice]]
 value = "on"
 label = "Protected prerequisite"
+
+[[option]]
+feature = "prototype"
+id = "lab_starting_hp_p1"
+label = "Lab Player 1 starting HP"
+description = "Damaged-health comparison prerequisite only. After authenticated native healthy checkpoint enrollment, seed actual HP once; never repeat after damage, revival or a boundary. Off preserves native health. This tainted bypass does not qualify damage, healing or death outcomes. Both peers agree before launch."
+group = "Lab validation"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off (native healthy HP)"
+
+[[option.choice]]
+value = "1"
+label = "1 HP prerequisite"
+
+[[option.choice]]
+value = "2"
+label = "2 HP prerequisite"
+
+[[option.choice]]
+value = "3"
+label = "3 HP prerequisite"
+
+[[option.choice]]
+value = "4"
+label = "4 HP prerequisite"
+
+[[option.choice]]
+value = "5"
+label = "5 HP prerequisite"
+
+[[option.choice]]
+value = "6"
+label = "6 HP prerequisite"
+
+[[option.choice]]
+value = "7"
+label = "7 HP prerequisite"
+
+[[option.choice]]
+value = "8"
+label = "8 HP prerequisite"
+
+[[option.choice]]
+value = "9"
+label = "9 HP prerequisite"
+
+[[option.choice]]
+value = "10"
+label = "10 HP prerequisite"
+
+[[option.choice]]
+value = "11"
+label = "11 HP prerequisite"
+
+[[option.choice]]
+value = "12"
+label = "12 HP prerequisite"
+
+[[option.choice]]
+value = "13"
+label = "13 HP prerequisite"
+
+[[option.choice]]
+value = "14"
+label = "14 HP prerequisite"
+
+[[option.choice]]
+value = "15"
+label = "15 HP prerequisite"
+
+[[option.choice]]
+value = "16"
+label = "16 HP prerequisite"
+
+[[option.choice]]
+value = "17"
+label = "17 HP prerequisite"
+
+[[option.choice]]
+value = "18"
+label = "18 HP prerequisite"
+
+[[option.choice]]
+value = "19"
+label = "19 HP prerequisite"
+
+[[option.choice]]
+value = "20"
+label = "20 HP prerequisite"
+
+[[option.choice]]
+value = "21"
+label = "21 HP prerequisite"
+
+[[option.choice]]
+value = "22"
+label = "22 HP prerequisite"
+
+[[option.choice]]
+value = "23"
+label = "23 HP prerequisite"
+
+[[option.choice]]
+value = "24"
+label = "24 HP prerequisite"
+
+[[option.choice]]
+value = "25"
+label = "25 HP prerequisite"
+
+[[option.choice]]
+value = "26"
+label = "26 HP prerequisite"
+
+[[option.choice]]
+value = "27"
+label = "27 HP prerequisite"
+
+[[option.choice]]
+value = "28"
+label = "28 HP prerequisite"
+
+[[option.choice]]
+value = "29"
+label = "29 HP prerequisite"
+
+[[option.choice]]
+value = "30"
+label = "30 HP prerequisite"
+
+[[option.choice]]
+value = "31"
+label = "31 HP prerequisite"
+
+[[option.choice]]
+value = "32"
+label = "32 HP prerequisite"
+
+[[option]]
+feature = "prototype"
+id = "lab_starting_hp_p2"
+label = "Lab Player 2 starting HP"
+description = "Damaged-health comparison prerequisite only. After authenticated native healthy checkpoint enrollment, seed actual HP once; never repeat after damage, revival or a boundary. Off preserves native health. This tainted bypass does not qualify damage, healing or death outcomes. Both peers agree before launch."
+group = "Lab validation"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off (native healthy HP)"
+
+[[option.choice]]
+value = "1"
+label = "1 HP prerequisite"
+
+[[option.choice]]
+value = "2"
+label = "2 HP prerequisite"
+
+[[option.choice]]
+value = "3"
+label = "3 HP prerequisite"
+
+[[option.choice]]
+value = "4"
+label = "4 HP prerequisite"
+
+[[option.choice]]
+value = "5"
+label = "5 HP prerequisite"
+
+[[option.choice]]
+value = "6"
+label = "6 HP prerequisite"
+
+[[option.choice]]
+value = "7"
+label = "7 HP prerequisite"
+
+[[option.choice]]
+value = "8"
+label = "8 HP prerequisite"
+
+[[option.choice]]
+value = "9"
+label = "9 HP prerequisite"
+
+[[option.choice]]
+value = "10"
+label = "10 HP prerequisite"
+
+[[option.choice]]
+value = "11"
+label = "11 HP prerequisite"
+
+[[option.choice]]
+value = "12"
+label = "12 HP prerequisite"
+
+[[option.choice]]
+value = "13"
+label = "13 HP prerequisite"
+
+[[option.choice]]
+value = "14"
+label = "14 HP prerequisite"
+
+[[option.choice]]
+value = "15"
+label = "15 HP prerequisite"
+
+[[option.choice]]
+value = "16"
+label = "16 HP prerequisite"
+
+[[option.choice]]
+value = "17"
+label = "17 HP prerequisite"
+
+[[option.choice]]
+value = "18"
+label = "18 HP prerequisite"
+
+[[option.choice]]
+value = "19"
+label = "19 HP prerequisite"
+
+[[option.choice]]
+value = "20"
+label = "20 HP prerequisite"
+
+[[option.choice]]
+value = "21"
+label = "21 HP prerequisite"
+
+[[option.choice]]
+value = "22"
+label = "22 HP prerequisite"
+
+[[option.choice]]
+value = "23"
+label = "23 HP prerequisite"
+
+[[option.choice]]
+value = "24"
+label = "24 HP prerequisite"
+
+[[option.choice]]
+value = "25"
+label = "25 HP prerequisite"
+
+[[option.choice]]
+value = "26"
+label = "26 HP prerequisite"
+
+[[option.choice]]
+value = "27"
+label = "27 HP prerequisite"
+
+[[option.choice]]
+value = "28"
+label = "28 HP prerequisite"
+
+[[option.choice]]
+value = "29"
+label = "29 HP prerequisite"
+
+[[option.choice]]
+value = "30"
+label = "30 HP prerequisite"
+
+[[option.choice]]
+value = "31"
+label = "31 HP prerequisite"
+
+[[option.choice]]
+value = "32"
+label = "32 HP prerequisite"

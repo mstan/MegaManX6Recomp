@@ -57,8 +57,8 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],20)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v37')
+        self.assertEqual(record['revision'],21)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v38')
 
     def test_recycle_lab_destination_is_existing_original_campaign_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
@@ -68,6 +68,15 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(target['record'], '800724D4')
         self.assertEqual(target['player'], dict(x=5920, y=326))
         self.assertEqual(target['camera'], dict(x=5760, y=224, min_x=5760, max_x=5760, min_y=224, max_y=224))
+
+    def test_turtloid_rain_cp1_is_only_original_campaign_reachability(self):
+        _, rows, sections = checkpoint.inventory(INVENTORY)
+        target = checkpoint.select(rows, sections, 6, 0, 1)
+        self.assertEqual(rows.index(target), 32)
+        self.assertEqual(target['table'], '800731B0')
+        self.assertEqual(target['record'], '80072588')
+        self.assertEqual(target['player'], dict(x=1120, y=464))
+        self.assertEqual(target['camera'], dict(x=1056, y=464, min_x=1056, max_x=1296, min_y=464, max_y=464))
 
     def test_all115_retained_only94_campaign_tuples_permitted(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
