@@ -12687,7 +12687,7 @@
       "frozen_row_sha256": "298f130875d492556399fd98795c864ef8b0c34599dfff52a53e2ff064c5ce6a",
       "x6": {
         "workstream": "combat",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Zero techniques versus route-specific bosses",
         "bounded_check": "Against actual Nightmare Zero/High Max/Dynamo where native rules permit, prove Zero's attacks retain native damage/reaction admission and prerequisites.",
         "baseline_anchors": [
@@ -12700,11 +12700,92 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+            "build_identity": {
+              "executable_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+              "compiled_manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+              "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "dummy muted",
+              "doors": "either",
+              "cameras": "unified",
+              "prerequisite": "pre-agreed original20/1CP1; contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual original alternate door/script/HP0-to48/AI, own NPC source directory and assembly, native CLUT, Zero grounded hit and finite recovery; separate airborne check retained.",
+            "outcome": "Native F84/F85 counterpart passed full same-candidate required modes; F82 LOCAL ground+air positive but NET aerial accepted damage missing.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-1479d1a-F84-F85-native-route-opponent-reviewed.json",
+                "sha256": "0fdcbd8c2b6b8bbe4eb5ff6f539da9429b2f43a7e69e96fbe52043ab1a65ac3f"
+              }
+            ],
+            "limits": [
+              "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified.",
+              "The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed.",
+              "Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact.",
+              "All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks.",
+              "F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion.",
+              "F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass.",
+              "Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten.",
+              "Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
+            ],
+            "bypasses": [
+              "Pre-agreed original20/1CP1 travel and hostile-contact protection only. No availability/combat/success flags authored."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+            "build_identity": {
+              "executable_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+              "compiled_manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+              "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "dummy muted",
+              "doors": "either",
+              "cameras": "unified",
+              "prerequisite": "pre-agreed original20/1CP1; contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual original alternate door/script/HP0-to48/AI, own NPC source directory and assembly, native CLUT, Zero grounded hit and finite recovery; separate airborne check retained.",
+            "outcome": "Native F84/F85 counterpart passed full same-candidate required modes; F82 LOCAL ground+air positive but NET aerial accepted damage missing.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-1479d1a-F84-F85-native-route-opponent-reviewed.json",
+                "sha256": "0fdcbd8c2b6b8bbe4eb5ff6f539da9429b2f43a7e69e96fbe52043ab1a65ac3f"
+              }
+            ],
+            "limits": [
+              "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified.",
+              "The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed.",
+              "Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact.",
+              "All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks.",
+              "F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion.",
+              "F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass.",
+              "Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten.",
+              "Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
+            ],
+            "bypasses": [
+              "Pre-agreed original20/1CP1 travel and hostile-contact protection only. No availability/combat/success flags authored."
+            ]
+          }
+        ],
+        "limitations": "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified. The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed. Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact. All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks. F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion. F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass. Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten. Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
       }
     },
     {
@@ -12843,25 +12924,106 @@
       "frozen_row_sha256": "e89a0b8726840786edb25c2c07fa2500de183cb36bcbf98dd8944ed03c6e3710",
       "x6": {
         "workstream": "assets",
-        "mapping_state": "candidate_native_scenario",
-        "analogue": "Route-specific boss native asset identity",
-        "bounded_check": "Admit Nightmare Zero/High Max/Dynamo under each supported roster; compare their original actor resources, not campaign-character art.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original route-opponent resources under the supported X-primary roster",
+        "bounded_check": "Observe the original native route opponent under X/P1-Zero/P2; verify its own source sprite directory, assembly family and native CLUT through introduction and live combat, keeping inverse-roster checks separate.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:enter_zero",
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+            "build_identity": {
+              "executable_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+              "compiled_manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+              "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "dummy muted",
+              "doors": "either",
+              "cameras": "unified",
+              "prerequisite": "pre-agreed original20/1CP1; contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual original alternate door/script/HP0-to48/AI, own NPC source directory and assembly, native CLUT, Zero grounded hit and finite recovery; separate airborne check retained.",
+            "outcome": "Native F84/F85 counterpart passed full same-candidate required modes; F82 LOCAL ground+air positive but NET aerial accepted damage missing.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-1479d1a-F84-F85-native-route-opponent-reviewed.json",
+                "sha256": "0fdcbd8c2b6b8bbe4eb5ff6f539da9429b2f43a7e69e96fbe52043ab1a65ac3f"
+              }
+            ],
+            "limits": [
+              "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified.",
+              "The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed.",
+              "Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact.",
+              "All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks.",
+              "F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion.",
+              "F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass.",
+              "Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten.",
+              "Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
+            ],
+            "bypasses": [
+              "Pre-agreed original20/1CP1 travel and hostile-contact protection only. No availability/combat/success flags authored."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+            "build_identity": {
+              "executable_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+              "compiled_manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+              "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "dummy muted",
+              "doors": "either",
+              "cameras": "unified",
+              "prerequisite": "pre-agreed original20/1CP1; contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual original alternate door/script/HP0-to48/AI, own NPC source directory and assembly, native CLUT, Zero grounded hit and finite recovery; separate airborne check retained.",
+            "outcome": "Native F84/F85 counterpart passed full same-candidate required modes; F82 LOCAL ground+air positive but NET aerial accepted damage missing.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-1479d1a-F84-F85-native-route-opponent-reviewed.json",
+                "sha256": "0fdcbd8c2b6b8bbe4eb5ff6f539da9429b2f43a7e69e96fbe52043ab1a65ac3f"
+              }
+            ],
+            "limits": [
+              "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified.",
+              "The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed.",
+              "Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact.",
+              "All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks.",
+              "F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion.",
+              "F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass.",
+              "Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten.",
+              "Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
+            ],
+            "bypasses": [
+              "Pre-agreed original20/1CP1 travel and hostile-contact protection only. No availability/combat/success flags authored."
+            ]
+          }
+        ],
+        "limitations": "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified. The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed. Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact. All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks. F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion. F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass. Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten. Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
       }
     },
     {
@@ -12881,7 +13043,7 @@
       "frozen_row_sha256": "8c5b89cf473d02501dce9b0cf6f2ba05349fc83a49671b47ffa1b155012cadd2",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Complete alternate-route boss initialization",
         "bounded_check": "Trigger the native route boss after real prerequisites; require original state/HP/art/dialogue and a playable fight rather than allocation alone.",
         "baseline_anchors": [
@@ -12889,17 +13051,98 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+            "build_identity": {
+              "executable_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+              "compiled_manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+              "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "dummy muted",
+              "doors": "either",
+              "cameras": "unified",
+              "prerequisite": "pre-agreed original20/1CP1; contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual original alternate door/script/HP0-to48/AI, own NPC source directory and assembly, native CLUT, Zero grounded hit and finite recovery; separate airborne check retained.",
+            "outcome": "Native F84/F85 counterpart passed full same-candidate required modes; F82 LOCAL ground+air positive but NET aerial accepted damage missing.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-1479d1a-F84-F85-native-route-opponent-reviewed.json",
+                "sha256": "0fdcbd8c2b6b8bbe4eb5ff6f539da9429b2f43a7e69e96fbe52043ab1a65ac3f"
+              }
+            ],
+            "limits": [
+              "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified.",
+              "The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed.",
+              "Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact.",
+              "All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks.",
+              "F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion.",
+              "F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass.",
+              "Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten.",
+              "Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
+            ],
+            "bypasses": [
+              "Pre-agreed original20/1CP1 travel and hostile-contact protection only. No availability/combat/success flags authored."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+            "build_identity": {
+              "executable_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+              "compiled_manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+              "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "dummy muted",
+              "doors": "either",
+              "cameras": "unified",
+              "prerequisite": "pre-agreed original20/1CP1; contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual original alternate door/script/HP0-to48/AI, own NPC source directory and assembly, native CLUT, Zero grounded hit and finite recovery; separate airborne check retained.",
+            "outcome": "Native F84/F85 counterpart passed full same-candidate required modes; F82 LOCAL ground+air positive but NET aerial accepted damage missing.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-1479d1a-F84-F85-native-route-opponent-reviewed.json",
+                "sha256": "0fdcbd8c2b6b8bbe4eb5ff6f539da9429b2f43a7e69e96fbe52043ab1a65ac3f"
+              }
+            ],
+            "limits": [
+              "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified.",
+              "The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed.",
+              "Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact.",
+              "All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks.",
+              "F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion.",
+              "F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass.",
+              "Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten.",
+              "Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
+            ],
+            "bypasses": [
+              "Pre-agreed original20/1CP1 travel and hostile-contact protection only. No availability/combat/success flags authored."
+            ]
+          }
+        ],
+        "limitations": "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified. The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed. Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact. All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks. F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion. F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass. Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten. Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
       }
     },
     {

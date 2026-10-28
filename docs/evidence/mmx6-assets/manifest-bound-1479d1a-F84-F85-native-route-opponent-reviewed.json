@@ -1,0 +1,844 @@
+{
+  "comparisons": [
+    "F84",
+    "F85"
+  ],
+  "result": "passed",
+  "frozen_row_sha256": {
+    "F84": "e89a0b8726840786edb25c2c07fa2500de183cb36bcbf98dd8944ed03c6e3710",
+    "F85": "8c5b89cf473d02501dce9b0cf6f2ba05349fc83a49671b47ffa1b155012cadd2"
+  },
+  "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\alternate-boss-v95-final-binding-root-v2.json",
+    "bytes": 269,
+    "sha256": "49387986476d53a60b62902af95546b52a88d72be247a7f379b119e3b155e1c9",
+    "image_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+    "manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+    "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+    "title": "mmx6-x-zero-delay-v41",
+    "host_revision": 24
+  },
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F84-F85-native-route-opponent-v95-root-v1.py",
+    "bytes": 14458,
+    "sha256": "df877b4f4428fbfae5b0a656df1bc8077ce556339391d627540d61ee0fb2b5fb"
+  },
+  "integration_commit": "bcd619ecc4433dd3d715405f0e7ba8ce05e0f205",
+  "modes": {
+    "local": {
+      "result": "passed_F84_F85",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\qualification.json",
+        "bytes": 54607484,
+        "sha256": "bd49d0449634511243a0344d83ab00517ad69de460015207cab976a345853779"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\ammo-hud\\intro-admission\\F82_F84_F85\\observations.json",
+        "bytes": 26553246,
+        "sha256": "0ea5d20e23c1703eb31c1aa0b6aa5239e430305052154365b3e51b714ae1add7"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\F82_F84_F85-executing-source-pins.json",
+        "bytes": 3746,
+        "sha256": "a8848c6e1e1128d8a2c82554bc2bdcd967de85eca4391ac61bf922175265d35a"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "actual_native": [
+        {
+          "peer": 0,
+          "first_HP": 0,
+          "full_HP": 48,
+          "native_type": 53,
+          "assembly": "0x80159558",
+          "native_CLUTs": [
+            "0x7948",
+            "0xf948"
+          ],
+          "AI_states": [
+            [
+              1,
+              2,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              2,
+              2
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              4,
+              0
+            ],
+            [
+              1,
+              5,
+              0
+            ],
+            [
+              1,
+              5,
+              1
+            ],
+            [
+              1,
+              5,
+              2
+            ],
+            [
+              1,
+              5,
+              3
+            ],
+            [
+              1,
+              10,
+              1
+            ]
+          ],
+          "grounded_HP": [
+            48,
+            44
+          ],
+          "battle_ready_row": 382,
+          "ground_before_row": 386,
+          "ground_hit_row": 387,
+          "recovered_row": 407
+        }
+      ],
+      "art_review": [
+        {
+          "peer": 0,
+          "label": "original-alternate-CP1-before-door",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\ammo-hud\\intro-admission\\F82_F84_F85\\peer-0-original-alternate-CP1-before-door.png",
+            "bytes": 2074543,
+            "sha256": "ab74a13c6e9856913aa1672f58178d94ec79c72b41bfa61e03eb8b633149355c"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "original-alternate-native-admission",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\ammo-hud\\intro-admission\\F82_F84_F85\\peer-0-original-alternate-native-admission.png",
+            "bytes": 2074543,
+            "sha256": "44472e00ee53843e6a81ff83d921799830a193831777aab5921d11ea6cfb009a"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "actual-original-branch-boss-ready",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\ammo-hud\\intro-admission\\F82_F84_F85\\peer-0-actual-original-branch-boss-ready.png",
+            "bytes": 2074543,
+            "sha256": "733c78228b22eca346466cd070193f4f6ca599369dc2ffbbba82fdef4d917c6c"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "actual-native-Zero-ground-hit",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\ammo-hud\\intro-admission\\F82_F84_F85\\peer-0-actual-native-Zero-ground-hit.png",
+            "bytes": 2074543,
+            "sha256": "f14ecdbff2470199d4b3fd25cd2be9663f997050d88fdb06bfc500967aa6fd8f"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "actual-native-Zero-air-hit",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\ammo-hud\\intro-admission\\F82_F84_F85\\peer-0-actual-native-Zero-air-hit.png",
+            "bytes": 2074543,
+            "sha256": "b6859e86efab2b29efba901dec63f615796ec07d3797baf2cf0a9d22861231be"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "actual-original-boss-and-roster-recovered",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-local-v95-root-v3\\ammo-hud\\intro-admission\\F82_F84_F85\\peer-0-actual-original-boss-and-roster-recovered.png",
+            "bytes": 2074543,
+            "sha256": "7cb14a56190f64a790c97f1099ce1ebb25206a6ae11cae498b1cdafd1a6fcb83"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        }
+      ],
+      "F82": {
+        "checks": {
+          "F82_ground_accepted": true,
+          "F82_air_accepted": true,
+          "F84_original_source_art_review_pending": true,
+          "F85_ground_interaction": true
+        },
+        "ground": {
+          "before": 386,
+          "after": 387,
+          "hp_before": [
+            48
+          ],
+          "hp_after": [
+            44
+          ]
+        },
+        "air": {
+          "before": 394,
+          "air": 395,
+          "after": 397,
+          "hp_before": [
+            30
+          ],
+          "hp_after": [
+            28
+          ]
+        },
+        "airborne_result": "observed_accepted_native_damage",
+        "airborne_error": null
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    },
+    "netplay": {
+      "result": "passed_F84_F85",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\qualification.json",
+        "bytes": 49140524,
+        "sha256": "34ada65a0f38b1ddf08bffb9051deab106e837c954ea4d6cf75886f5db639710"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\observations.json",
+        "bytes": 45978712,
+        "sha256": "155e2e3b94b37132778d1c0d273eae67d6696b1e3d5a707417ff8e830ac58f2c"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\F82_F84_F85-executing-source-pins.json",
+        "bytes": 3746,
+        "sha256": "9c311212697eea5cda6778e9c5b825c672e02f354fe0f65ae54a24395929ce92"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "actual_native": [
+        {
+          "peer": 0,
+          "first_HP": 0,
+          "full_HP": 48,
+          "native_type": 53,
+          "assembly": "0x80159558",
+          "native_CLUTs": [
+            "0x7948"
+          ],
+          "AI_states": [
+            [
+              1,
+              2,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              2,
+              2
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              5,
+              1
+            ],
+            [
+              1,
+              5,
+              2
+            ],
+            [
+              1,
+              5,
+              3
+            ],
+            [
+              1,
+              6,
+              1
+            ],
+            [
+              1,
+              7,
+              0
+            ],
+            [
+              1,
+              7,
+              1
+            ],
+            [
+              1,
+              7,
+              2
+            ],
+            [
+              1,
+              7,
+              3
+            ],
+            [
+              1,
+              10,
+              0
+            ],
+            [
+              1,
+              10,
+              1
+            ]
+          ],
+          "grounded_HP": [
+            48,
+            46
+          ],
+          "battle_ready_row": 227,
+          "ground_before_row": 249,
+          "ground_hit_row": 251,
+          "recovered_row": 415
+        },
+        {
+          "peer": 1,
+          "first_HP": 0,
+          "full_HP": 48,
+          "native_type": 53,
+          "assembly": "0x80159558",
+          "native_CLUTs": [
+            "0x7948"
+          ],
+          "AI_states": [
+            [
+              1,
+              2,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              2,
+              2
+            ],
+            [
+              1,
+              2,
+              3
+            ],
+            [
+              1,
+              2,
+              4
+            ],
+            [
+              1,
+              4,
+              0
+            ],
+            [
+              1,
+              5,
+              0
+            ],
+            [
+              1,
+              5,
+              1
+            ],
+            [
+              1,
+              5,
+              2
+            ],
+            [
+              1,
+              5,
+              3
+            ],
+            [
+              1,
+              6,
+              1
+            ],
+            [
+              1,
+              7,
+              0
+            ],
+            [
+              1,
+              7,
+              1
+            ],
+            [
+              1,
+              7,
+              2
+            ],
+            [
+              1,
+              7,
+              3
+            ],
+            [
+              1,
+              10,
+              1
+            ]
+          ],
+          "grounded_HP": [
+            48,
+            46
+          ],
+          "battle_ready_row": 227,
+          "ground_before_row": 249,
+          "ground_hit_row": 251,
+          "recovered_row": 415
+        }
+      ],
+      "art_review": [
+        {
+          "peer": 0,
+          "label": "actual-original-branch-boss-ready",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-0-actual-original-branch-boss-ready.png",
+            "bytes": 2074543,
+            "sha256": "e72147c6fbb957e4b704719158a09dcfaadeca850df178bf74eede2186ba24f2"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 1,
+          "label": "actual-original-branch-boss-ready",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-1-actual-original-branch-boss-ready.png",
+            "bytes": 2074543,
+            "sha256": "92ea51e27b1a36a79f034ad851008c7d9bdc8859b787510e95bb9017285bc369"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "actual-native-Zero-ground-hit",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-0-actual-native-Zero-ground-hit.png",
+            "bytes": 2074543,
+            "sha256": "7034c3ee706d1d019a59ac547153e806b7019ade5863eeb518243cc1492dffed"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 1,
+          "label": "actual-native-Zero-ground-hit",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-1-actual-native-Zero-ground-hit.png",
+            "bytes": 2074543,
+            "sha256": "8c8c9fa97c20b19e249ff4b73e9d447d87d1fda628922bb9bbdb1011d4a69537"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "actual-original-boss-and-roster-recovered",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-0-actual-original-boss-and-roster-recovered.png",
+            "bytes": 2074543,
+            "sha256": "3283d42efbf3303b2c495e17aa77c439e2f5acfdabb659b73e5ea8ce8dd07bb2"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        },
+        {
+          "peer": 1,
+          "label": "actual-original-boss-and-roster-recovered",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-1-actual-original-boss-and-roster-recovered.png",
+            "bytes": 2074543,
+            "sha256": "eebf1a1628f53e55e16e26aab1c73115d471f75cb3eb0853efed6d9f6dbca618"
+          },
+          "reviewed": true,
+          "observed": "Native blue/gold route opponent retains its own body/pose/colours; red Zero and X/HUD remain visible. Normal boss hit flashing, overlap and peer timing differences disclosed."
+        }
+      ],
+      "F82": {
+        "checks": {
+          "F82_ground_accepted": true,
+          "F82_air_accepted": false,
+          "F84_original_source_art_review_pending": true,
+          "F85_ground_interaction": true
+        },
+        "ground": {
+          "before": 249,
+          "after": 251,
+          "hp_before": [
+            48,
+            48
+          ],
+          "hp_after": [
+            46,
+            46
+          ]
+        },
+        "air": null,
+        "airborne_result": "unverified",
+        "airborne_error": "actual Zero airborne accepted HP drop timed out"
+      },
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2912,
+              "core": "229c8b5e",
+              "mod": "11aa5960"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "1322c499",
+              "mod": "da6eb350"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "4d9c9b3b",
+              "mod": "aa1675b6"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "91e00263",
+              "mod": "112d22ce"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "8ec182c6",
+              "mod": "12846ec8"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "fb508512",
+              "mod": "0c0c5dd4"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "582b6ddf",
+              "mod": "836d408e"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "32129871",
+              "mod": "61857150"
+            }
+          ],
+          "resolved_through": [
+            3138,
+            3138
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3168,
+              "core": "d510c2cc",
+              "mod": "a8eee9e0"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "9240b43a",
+              "mod": "0e972fea"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "370b8f7f",
+              "mod": "b26cd93c"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "9802180a",
+              "mod": "c7976d1c"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "31c97cd8",
+              "mod": "b74efdf2"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "e25d920e",
+              "mod": "f4146812"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "33e94cf3",
+              "mod": "fdd591f4"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "2264fe21",
+              "mod": "606aa454"
+            }
+          ],
+          "resolved_through": [
+            3399,
+            3400
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3488,
+              "core": "538fc438",
+              "mod": "c004e34c"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "6ff8b8e5",
+              "mod": "05c0abe4"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "19b80a03",
+              "mod": "d3fe3f82"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "4d9e5423",
+              "mod": "62358a8a"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "9e00cfcf",
+              "mod": "8e3515a4"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "6edfc97c",
+              "mod": "a8eee9e0"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "28adbea1",
+              "mod": "0e972fea"
+            }
+          ],
+          "resolved_through": [
+            3701,
+            3701
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 7584,
+              "core": "434e3284",
+              "mod": "6cafa85c"
+            },
+            {
+              "simulation_tick": 7616,
+              "core": "9abbf5f9",
+              "mod": "befd7d96"
+            },
+            {
+              "simulation_tick": 7648,
+              "core": "8178db74",
+              "mod": "8df106ba"
+            },
+            {
+              "simulation_tick": 7680,
+              "core": "f4209774",
+              "mod": "b6fd829c"
+            },
+            {
+              "simulation_tick": 7712,
+              "core": "091c4977",
+              "mod": "4bb9e17e"
+            },
+            {
+              "simulation_tick": 7744,
+              "core": "4406192c",
+              "mod": "8c871d9e"
+            },
+            {
+              "simulation_tick": 7776,
+              "core": "dcf25c3f",
+              "mod": "20119cb4"
+            }
+          ],
+          "resolved_through": [
+            7784,
+            7784
+          ]
+        }
+      ],
+      "owned_exits": [
+        0,
+        0
+      ]
+    }
+  },
+  "limitations": [
+    "The native counterpart is the original alternate20/1 type53 route opponent (Nightmare Zero), dynamically admitted by its authored door/script with canonical X/P1 and private Zero/P2. This is the currently supported roster; reversed Zero/P1-X/P2 F87 and X/P2 F117 are not qualified.",
+    "The explicit pre-agreed original20/1CP1 checkpoint bypasses travel. Contact protection is disclosed, earned-weapons/starting-HP options remain off. No availability, boss type, HP, phase, hit, victory, chapter or success flag is written. Actual original door/intro/dialogue/HP0-to48/control release, AI/emissions, owned native attacks and recovery are observed.",
+    "Art qualification verifies the original native sprite-directory identity, entire source assembly family and native selected CLUT identity through introduction and combat, together with composed visual review. It does not claim pixel-exact whole-atlas/GPU-RGB equality or every palette variant. NPC7948 is distinct from playable Zero palettes; LOCAL F948 is the original hurt-high-bit variant and returns to7948. NPC remains blue/gold while playable Zero is red and X remains intact.",
+    "All6 LOCAL captures and6 NET boss-ready/hit/recovery captures were individually reviewed. The4 paired predoor/admission images remain raw evidence, without an additional manual-art claim. Actor overlap and asynchronous peer capture timing are disclosed; separate images do not establish identical peer render ticks.",
+    "F85 includes an actual owned grounded hit: LOCAL first observed48to44, NET48to46. Additional native combo damage occurs during LOCAL recovery44to30; this is not a single4HP-hit/count claim. Neutral P1 has an empty canonical attack pool. Private diagnostic and canonical world observations are separate, with no instruction-atomic result-register assertion.",
+    "F82 remains unverified overall. LOCAL has actual grounded48to44 and airborne30to28/native private27/airborne body50. NET emits an airborne attack but does not establish accepted aerial damage; that bounded miss and its error remain explicit. The successful common NET parent does not turn the separate false aerial check into a pass.",
+    "Initial LOCAL premature stale-body readiness and missing-dialogue-field observer errors, initial NET Right-only approach failure, strict fixture-taint refusals, all raw source snapshots and cards are preserved. Corrected NET uses ordinary signed Left/Right approach and a native facing step, with no position/pose/timer/outcome writes. Failed raw statuses are not rewritten.",
+    "Same exact V95 image/source/profile24/title41, full4 LOCAL/15 NET parent gates, final resolved core/mod CRC, unchanged private cards and three owned exits0 are retained. No production/WAN/cross-host, victory/reward/progress, clean replay, native3330 or unsupported-roster credit."
+  ],
+  "F82_result": "unverified_NET_aerial_contact",
+  "original_art_identity": {
+    "original_DAT_record": 118,
+    "original_DAT_sha256": "791ea8758ab8e936d3dd44d3b4d1ac8a7123bfed6f2d334f4b818a46091debfc",
+    "original_member": 28,
+    "original_member_sha256": "7f49ac29077a76c6dc0aaafc474ad4d4eece65402282549de2f1ff2b5d748aef",
+    "native_type_lookup_function": "0x8002A47C",
+    "native_type_table": "0x800f2374",
+    "actor_type": 53,
+    "source_slot": 12,
+    "assembly_asset": 2,
+    "assembly_asset_kind": 10,
+    "assembly_asset_sha256": "9b1d1399060350d730866c765a8648ff2948a3f6b86def55471a77ae06af7724",
+    "original_graphics_directory_asset": 1,
+    "original_graphics_directory_sha256": "f0a427eb0c8a2684605b2c26430152ab33ebbba9f5947dec1bffb3c13f2894ca",
+    "native_assembly_root": "0x80154DFC",
+    "source_family": [
+      "0x475c",
+      "0x5ce8"
+    ],
+    "native_NPC_assembly": "0x80159558",
+    "native_CLUT_identity": "0x7948; original hurt high-bit F948 in LOCAL",
+    "source_reads": [
+      {
+        "peer": 0,
+        "scratch": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-0-native-NPC-source-1f800000.bin",
+          "bytes": 256,
+          "sha256": "11e3c0e5d6d29dd60554c2488a3dec14e82576d9f80418258c8aa77c97d975e0"
+        },
+        "native_RAM": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-0-native-NPC-source-80150000.bin",
+          "bytes": 65536,
+          "sha256": "321555a82c183efb4986cde6ea51e68418001bbadaf8818bf89d2c22835b4eca"
+        },
+        "graphics_global": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-0-native-NPC-source-80095080.bin",
+          "bytes": 32,
+          "sha256": "40b86620e7e25d4e795b926ebefa554d04b26915e5ee7faf1df16b2eb0afa516"
+        },
+        "original_sprite_directory_bytes": 36,
+        "exact_assembly_prefix_bytes": 45572,
+        "complete_NPC_family_bytes": 5516,
+        "NPC_family_sha256": "16ae4f7f6aa6e5555e2710567d5fac3de9b44480ff1d88bd6d788e1379dcde45"
+      },
+      {
+        "peer": 1,
+        "scratch": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-1-native-NPC-source-1f800000.bin",
+          "bytes": 256,
+          "sha256": "4c9c884f753313733c1cb69d598245a184849180cfb8c8fb15f14068cb0d416e"
+        },
+        "native_RAM": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-1-native-NPC-source-80150000.bin",
+          "bytes": 65536,
+          "sha256": "321555a82c183efb4986cde6ea51e68418001bbadaf8818bf89d2c22835b4eca"
+        },
+        "graphics_global": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-alternate-boss-netplay-v95-root-v2\\intro-admission\\F82_F84_F85\\peer-1-native-NPC-source-80095080.bin",
+          "bytes": 32,
+          "sha256": "40b86620e7e25d4e795b926ebefa554d04b26915e5ee7faf1df16b2eb0afa516"
+        },
+        "original_sprite_directory_bytes": 36,
+        "exact_assembly_prefix_bytes": 45572,
+        "complete_NPC_family_bytes": 5516,
+        "NPC_family_sha256": "16ae4f7f6aa6e5555e2710567d5fac3de9b44480ff1d88bd6d788e1379dcde45"
+      }
+    ],
+    "palette_review": "Native selected CLUT identity retained from HP0 introduction to live AI/hit/recovery; blue/gold composed art distinct from red private Zero. No exact GPU-RGB equality claim."
+  },
+  "focused_validation": {
+    "compiled_CTests": 13,
+    "Python_catalog_tests": 11,
+    "compiled_log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v95-alternate-boss-root-v2.log",
+      "bytes": 3838,
+      "sha256": "a3fcd9f333e95f1da3650941edb7935e0b0de0487d97fca4a9c9c9b5547dd1ea"
+    },
+    "source_prerequisite": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F82-F84-F85-original-alternate-boss-CP1-v95-root-v1.json",
+      "bytes": 15798,
+      "sha256": "b658afee2f24c5479595e9e23ef6db41726ec86a085df75dae75e01d46ddb082"
+    }
+  }
+}
