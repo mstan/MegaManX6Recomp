@@ -1,0 +1,1135 @@
+{
+  "comparison": "F96",
+  "frozen_row_sha256": "b90ecc86d67c3c274109ef5a796027dd09a6ddd23f703310740e3788cbcadd16",
+  "result": "passed",
+  "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\recycle-portal-v89-final-binding-root-v1.json",
+    "binding_sha256": "b96fbae151f92d14def98dc50019e83207ce3d77b4e323b4ef9824706b0efb30",
+    "image_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+    "manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+    "provenance_sha256": "464805d0560873494d07d758382a8b4398af47a7d16984e81ddf9c9eb272a838",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v89-recycle-portal-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v37",
+    "host_revision": 20
+  },
+  "unchanged_frozen_contract": {
+    "x4": {
+      "source_report": "COOP_PLAYTEST_FEEDBACK_20261010.md:135 #96",
+      "state": "checked",
+      "original_symptom": "Cyber Peacock flip switch kills the nearby partner",
+      "failure_class": "A shared switch changes terrain while the partner is inside its collision region"
+    },
+    "x5": {
+      "counterpart_check": "Use the same original X5 shared corridor transform with a nearby partner outside the activation box; verify native relocation/foot alignment, visibility, no false crush and continued control.",
+      "burndown": "P17, P24, P25",
+      "status": "passed",
+      "evidence_limits": "Passed bounded96AA8916 closest native shared-transform analogue: original raw2/1 lower corridor arrow2024, P1 actualLeft from2059.5,874 admits once while nearby living P2 stays1984,875 outside its trigger box. Native inverse camera/fade/destination completes; passenger returns foot-aligned2024,Y394/395 with both lifeALIVE, native original control release and actualLeft-19.5/-21.5. Composed both-returned image inspected. No arrow/transfer/collision/control-success flags seeded; fixtureHP/contact protection disabled before approach, normal native arrival grace preserved. qa-corridor-arrow-20261021/qualification.json. Prior inverse camera1131 was rejected before mutation because native minX1584; corrected next authored arrow fits actual bounds. No literal terrain-flip/allarrows/actual arrow-online pass."
+    }
+  },
+  "native_mapping": "Original native Recycle alternate-portal shared room transfer is the closest bounded X6 shared-corridor-transform counterpart explicitly permitted by the frozen X5 action. The activating P2 and nearby nonactivating P1 exchange roles relative to the historical X5 example. No literal terrain-toggle/switch or partner-inside-changing-geometry test is claimed.",
+  "previous_inventory_proposal": "Map a native geometry-toggle region; keep partner inside it while primary activates and require native safe collision or deferred transition.",
+  "source_chain": [
+    "Original member6 type28/sub1 at1552/1584 origin800F2B0C; exact code+geometry guards and original PLAYER contact test.",
+    "Native800EC780/RA800EC70C action1 contact accepts P2 only after actual pure source geometry misses P1; source-qualified scene_begin owner2 then original deferred portal state/locks.",
+    "Original mode8 entry8001E914 then mode9 initializer8001E1BC load20/1/CP0; source original member28/DAT118 terrain and actual native actor arrivals.",
+    "Native current standing boxes80073D50(X) and80073D54(Zero); bodyfoot offsets21/22 resolve source1616 and destination384. Source/live descriptor collision low16 and metatile shape/flip equivalence retained."
+  ],
+  "root_native_review": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-f461288-F165-native-portal-local-netplay-reviewed.json",
+    "bytes": 117622,
+    "sha256": "4f6c2d7442b5920bc9666a7358ca4a69cbd29e487f2587a6c0d7b2d382a8c54e"
+  },
+  "independent_worker_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F96-shared-transfer-V89-independent-worker-v1.json",
+    "bytes": 42536,
+    "sha256": "b9ebefa81af812de021d4b8d0bc23db97f923576976f9300470776158416586a"
+  },
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F96-shared-transfer-v89-root-v1.py",
+    "bytes": 7239,
+    "sha256": "217592669d8bc8d8186afc0407a720e105163007925d7e9d7b65a67a08518bc7"
+  },
+  "source_pins": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recycle-portal-v89\\src\\mods\\mmx6_coop_recycle_portal.inc",
+      "sha256": "8062c5c628072061b8ec859aa052c9d3462ea22c3debc4a28adab0d343429504"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recycle-portal-v89\\tools\\mmx6_coop_recycle_portal.py",
+      "sha256": "4c9809b4c29f5771b8c873081f58d1526225fc110b7b81338af5aec2bf0e7bd6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F165_Recycle_portal_v89_root_v5.py",
+      "sha256": "cb3171c54988ac1b8c4364af84674be475960f26ceea437bcaff83d32b14d214"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-original-destination-source-v89-worker-v1.json",
+      "sha256": "f556d3abca53829c30f5f9a0c6d9a4db1b32ee3fcdd17ded1eecefda6df0bee7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Recycle-portal-prerequisite-v89-worker-v1.json",
+      "sha256": "7636a0f974a2140bffe9e943076a528faa8ff165e06b1b3a016f68abee660f4d"
+    }
+  ],
+  "modes": {
+    "local": {
+      "status": "complete_bounded_transfer_safety_for_review",
+      "raw": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 5878954,
+        "sha256": "5043dae96c957b8c87db2dff8f8f64ff17234981eae80c7a432015245966aca9"
+      },
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\qualification.json",
+        "bytes": 12515307,
+        "sha256": "23bea17f6d95b1fb13c1ea55a9d58106252778c71e985ad82402f5a9489d567b"
+      },
+      "original_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\qualification-parent-original.json",
+        "bytes": 12512918,
+        "sha256": "afb1a95831adcf0382714f90091981cd616f6c5f4d3a9226d26fc003f08a9f68"
+      },
+      "rows": {
+        "source": 92,
+        "admission": 96,
+        "native_arrivals": 191,
+        "final": 208
+      },
+      "peers": [
+        {
+          "peer": 0,
+          "source": {
+            "tuple": [
+              10,
+              0,
+              4,
+              0,
+              2
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  1506.0,
+                  1595.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 1616.0
+              },
+              {
+                "xy": [
+                  1506.0,
+                  1594.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 1616.0
+              }
+            ]
+          },
+          "admission": {
+            "tuple": [
+              10,
+              0,
+              4,
+              0,
+              2
+            ],
+            "scene": [
+              2,
+              2
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  1506.0,
+                  1595.0
+                ],
+                "native_header": "0100000101010000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x0",
+                "native_ground": true,
+                "foot_y": 1616.0
+              },
+              {
+                "xy": [
+                  1530.5,
+                  1594.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x0",
+                "native_ground": false,
+                "foot_y": 1616.0
+              }
+            ]
+          },
+          "arrival": {
+            "tuple": [
+              10,
+              0,
+              20,
+              1,
+              0
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  79.0,
+                  363.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 384.0
+              },
+              {
+                "xy": [
+                  103.0,
+                  362.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 384.0
+              }
+            ]
+          },
+          "final": {
+            "tuple": [
+              10,
+              0,
+              20,
+              1,
+              0
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  67.5,
+                  363.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 384.0
+              },
+              {
+                "xy": [
+                  69.5,
+                  362.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 384.0
+              }
+            ]
+          },
+          "source_P1_outside_trigger": {
+            "status": "source_arithmetic_only",
+            "hit": false,
+            "horizontal": false,
+            "vertical": true,
+            "actor_reference": [
+              1534,
+              1556
+            ],
+            "player_reference": [
+              1516,
+              1578
+            ],
+            "width_bound": 0,
+            "height_bound": 40,
+            "comparisons": "strict_less_than",
+            "actor_box_sha256": "84073cbb559670b3f787f59c89ffcdae36722b632d3359fc82dddb5f455f940b",
+            "player_box_sha256": "d17a734a863cc23effeffba4748ff0dc99777571d42d71b48846d401d5f4a634"
+          },
+          "minimum_sampled_hp": [
+            32,
+            32
+          ],
+          "no_fallen_lifecycle": true,
+          "contact_protection_off": true,
+          "controls": [
+            {
+              "seat": 1,
+              "before_row": 192,
+              "accepted_row": 198,
+              "settled_row": 202,
+              "travel_at_acceptance": -23.5,
+              "travel_after_neutral": -33.5,
+              "other_stationary_at_acceptance": true,
+              "both22feet_grounded384_after_neutral": true
+            },
+            {
+              "seat": 0,
+              "before_row": 203,
+              "accepted_row": 205,
+              "settled_row": 207,
+              "travel_at_acceptance": -3.5,
+              "travel_after_neutral": -11.5,
+              "other_stationary_at_acceptance": true,
+              "both22feet_grounded384_after_neutral": true
+            }
+          ]
+        }
+      ],
+      "source_collision_assets": [
+        {
+          "label": "peer-0 source before portal",
+          "stable_pointer_bracket": true,
+          "collision_equivalence": null,
+          "assets": [
+            {
+              "address": "0x80097438",
+              "bytes": 528,
+              "sha256": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin"
+            },
+            {
+              "address": "0x8019a4b0",
+              "bytes": 87040,
+              "sha256": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin"
+            },
+            {
+              "address": "0x801af8b0",
+              "bytes": 8000,
+              "sha256": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin"
+            }
+          ]
+        },
+        {
+          "label": "peer-0 actual alternate destination",
+          "stable_pointer_bracket": true,
+          "collision_equivalence": {
+            "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+            "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+            "all_descriptor_low16_match": true,
+            "all_metatile_collision_shape_flip_match": true,
+            "original_full_asset_sha256_match": false,
+            "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+          },
+          "assets": [
+            {
+              "address": "0x80097438",
+              "bytes": 270,
+              "sha256": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin"
+            },
+            {
+              "address": "0x80161f9c",
+              "bytes": 30720,
+              "sha256": "02a17ebe71f8a037d971ba4bc50739c46e3a195146d55896310f66e5870d0de6",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin"
+            },
+            {
+              "address": "0x8016979c",
+              "bytes": 4512,
+              "sha256": "6079ccab2716d738d45f7a5690af86bedd043c9c3221a7503443ff7b44204c4c",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin"
+            }
+          ]
+        }
+      ],
+      "existing_mechanic_checks": {
+        "agreed_native_CP2_and_one_declared_pose": true,
+        "source_P1_geometric_miss": true,
+        "actual_P2_native_portal_admission_every_peer": true,
+        "native_major8_9_destination_every_peer": true,
+        "finite_both_living_native_arrivals": true,
+        "source_full_feet_after_ordinary_guest_Left": true,
+        "actual_separate_destination_controls": true,
+        "actual_captures_retained": true
+      },
+      "parent_check_count": 4,
+      "all_existing_parent_checks": true,
+      "owned_cleanup": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "strict_fixture_refusals": 1,
+      "resolved_crc_windows": [],
+      "images": [
+        {
+          "peer": 0,
+          "label": "source-before-guest-portal",
+          "row": 92,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-source-before-guest-portal.png",
+          "sha256": "38f22d579d98e97b1cce0055e59744caecf8b74319730e8ce00a3c6d54e4dcfd"
+        },
+        {
+          "peer": 0,
+          "label": "original-destination-native-arrivals",
+          "row": 191,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+          "sha256": "4064de241e6658762ce30ae0facb1d83a769a84b2e804b2dc3ecd1950b9f5e5c"
+        },
+        {
+          "peer": 0,
+          "label": "destination-independent-controls",
+          "row": 208,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-local-v89-root-v4\\ammo-hud\\intro-admission\\peer-0-destination-independent-controls.png",
+          "sha256": "fa4821399d8354b4104555a07c094eddc6f18696f74cdb054f913b14d0b1a733"
+        }
+      ]
+    },
+    "netplay": {
+      "status": "complete_bounded_transfer_safety_for_review",
+      "raw": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\observations.json",
+        "bytes": 6845348,
+        "sha256": "ee37803561ec6c1835f9e96661170efe57cbecc320d698a5cdf1b334ba2a6ebb"
+      },
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\qualification.json",
+        "bytes": 9333169,
+        "sha256": "d8a74fb6b4e1739b3e47f4e28fd990d2191aeadbe09f6aed76a936bf751681b1"
+      },
+      "original_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\qualification-parent-original.json",
+        "bytes": 9327813,
+        "sha256": "f123dad4535428cfdd53cc9213e2e50acf08b9fa81c68c4da05ffb846f4ea182"
+      },
+      "rows": {
+        "source": 56,
+        "admission": 60,
+        "native_arrivals": 107,
+        "final": 121
+      },
+      "peers": [
+        {
+          "peer": 0,
+          "source": {
+            "tuple": [
+              10,
+              0,
+              4,
+              0,
+              2
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  1506.0,
+                  1595.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 1616.0
+              },
+              {
+                "xy": [
+                  1506.0,
+                  1594.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 1616.0
+              }
+            ]
+          },
+          "admission": {
+            "tuple": [
+              10,
+              0,
+              4,
+              0,
+              2
+            ],
+            "scene": [
+              2,
+              2
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  1506.0,
+                  1595.0
+                ],
+                "native_header": "0100000101010000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x0",
+                "native_ground": true,
+                "foot_y": 1616.0
+              },
+              {
+                "xy": [
+                  1530.5,
+                  1594.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x0",
+                "native_ground": false,
+                "foot_y": 1616.0
+              }
+            ]
+          },
+          "arrival": {
+            "tuple": [
+              10,
+              0,
+              20,
+              1,
+              0
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  79.0,
+                  363.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 384.0
+              },
+              {
+                "xy": [
+                  103.0,
+                  362.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 384.0
+              }
+            ]
+          },
+          "final": {
+            "tuple": [
+              10,
+              0,
+              20,
+              1,
+              0
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  59.5,
+                  363.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 384.0
+              },
+              {
+                "xy": [
+                  53.5,
+                  362.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 384.0
+              }
+            ]
+          },
+          "source_P1_outside_trigger": {
+            "status": "source_arithmetic_only",
+            "hit": false,
+            "horizontal": false,
+            "vertical": true,
+            "actor_reference": [
+              1534,
+              1556
+            ],
+            "player_reference": [
+              1516,
+              1578
+            ],
+            "width_bound": 0,
+            "height_bound": 40,
+            "comparisons": "strict_less_than",
+            "actor_box_sha256": "84073cbb559670b3f787f59c89ffcdae36722b632d3359fc82dddb5f455f940b",
+            "player_box_sha256": "d17a734a863cc23effeffba4748ff0dc99777571d42d71b48846d401d5f4a634"
+          },
+          "minimum_sampled_hp": [
+            32,
+            32
+          ],
+          "no_fallen_lifecycle": true,
+          "contact_protection_off": true,
+          "controls": [
+            {
+              "seat": 1,
+              "before_row": 108,
+              "accepted_row": 112,
+              "settled_row": 115,
+              "travel_at_acceptance": -31.5,
+              "travel_after_neutral": -49.5,
+              "other_stationary_at_acceptance": true,
+              "both22feet_grounded384_after_neutral": true
+            },
+            {
+              "seat": 0,
+              "before_row": 116,
+              "accepted_row": 118,
+              "settled_row": 120,
+              "travel_at_acceptance": -3.5,
+              "travel_after_neutral": -19.5,
+              "other_stationary_at_acceptance": true,
+              "both22feet_grounded384_after_neutral": true
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "source": {
+            "tuple": [
+              10,
+              0,
+              4,
+              0,
+              2
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  1506.0,
+                  1595.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 1616.0
+              },
+              {
+                "xy": [
+                  1506.0,
+                  1594.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 1616.0
+              }
+            ]
+          },
+          "admission": {
+            "tuple": [
+              10,
+              0,
+              4,
+              0,
+              2
+            ],
+            "scene": [
+              2,
+              2
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  1506.0,
+                  1595.0
+                ],
+                "native_header": "0100000101010000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x0",
+                "native_ground": true,
+                "foot_y": 1616.0
+              },
+              {
+                "xy": [
+                  1536.5,
+                  1594.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x0",
+                "native_ground": false,
+                "foot_y": 1616.0
+              }
+            ]
+          },
+          "arrival": {
+            "tuple": [
+              10,
+              0,
+              20,
+              1,
+              0
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  79.0,
+                  363.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 384.0
+              },
+              {
+                "xy": [
+                  103.0,
+                  362.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 384.0
+              }
+            ]
+          },
+          "final": {
+            "tuple": [
+              10,
+              0,
+              20,
+              1,
+              0
+            ],
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "xy": [
+                  59.5,
+                  363.0
+                ],
+                "native_header": "0100000101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d50",
+                "native_ground": true,
+                "foot_y": 384.0
+              },
+              {
+                "xy": [
+                  53.5,
+                  362.0
+                ],
+                "native_header": "0100010101020000",
+                "hp": 32,
+                "visible": true,
+                "box": "0x80073d54",
+                "native_ground": true,
+                "foot_y": 384.0
+              }
+            ]
+          },
+          "source_P1_outside_trigger": {
+            "status": "source_arithmetic_only",
+            "hit": false,
+            "horizontal": false,
+            "vertical": true,
+            "actor_reference": [
+              1534,
+              1556
+            ],
+            "player_reference": [
+              1516,
+              1578
+            ],
+            "width_bound": 0,
+            "height_bound": 40,
+            "comparisons": "strict_less_than",
+            "actor_box_sha256": "84073cbb559670b3f787f59c89ffcdae36722b632d3359fc82dddb5f455f940b",
+            "player_box_sha256": "d17a734a863cc23effeffba4748ff0dc99777571d42d71b48846d401d5f4a634"
+          },
+          "minimum_sampled_hp": [
+            32,
+            32
+          ],
+          "no_fallen_lifecycle": true,
+          "contact_protection_off": true,
+          "controls": [
+            {
+              "seat": 1,
+              "before_row": 108,
+              "accepted_row": 112,
+              "settled_row": 115,
+              "travel_at_acceptance": -37.5,
+              "travel_after_neutral": -49.5,
+              "other_stationary_at_acceptance": true,
+              "both22feet_grounded384_after_neutral": true
+            },
+            {
+              "seat": 0,
+              "before_row": 116,
+              "accepted_row": 118,
+              "settled_row": 120,
+              "travel_at_acceptance": -7.5,
+              "travel_after_neutral": -19.5,
+              "other_stationary_at_acceptance": true,
+              "both22feet_grounded384_after_neutral": true
+            }
+          ]
+        }
+      ],
+      "source_collision_assets": [
+        {
+          "label": "peer-0 source before portal",
+          "stable_pointer_bracket": true,
+          "collision_equivalence": null,
+          "assets": [
+            {
+              "address": "0x80097438",
+              "bytes": 528,
+              "sha256": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin"
+            },
+            {
+              "address": "0x8019a4b0",
+              "bytes": 87040,
+              "sha256": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin"
+            },
+            {
+              "address": "0x801af8b0",
+              "bytes": 8000,
+              "sha256": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin"
+            }
+          ]
+        },
+        {
+          "label": "peer-1 source before portal",
+          "stable_pointer_bracket": true,
+          "collision_equivalence": null,
+          "assets": [
+            {
+              "address": "0x80097438",
+              "bytes": 528,
+              "sha256": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-portal-0x80097438-actual.bin"
+            },
+            {
+              "address": "0x8019a4b0",
+              "bytes": 87040,
+              "sha256": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-portal-0x8019a4b0-actual.bin"
+            },
+            {
+              "address": "0x801af8b0",
+              "bytes": 8000,
+              "sha256": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-portal-0x801af8b0-actual.bin"
+            }
+          ]
+        },
+        {
+          "label": "peer-0 actual alternate destination",
+          "stable_pointer_bracket": true,
+          "collision_equivalence": {
+            "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+            "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+            "all_descriptor_low16_match": true,
+            "all_metatile_collision_shape_flip_match": true,
+            "original_full_asset_sha256_match": false,
+            "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+          },
+          "assets": [
+            {
+              "address": "0x80097438",
+              "bytes": 270,
+              "sha256": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin"
+            },
+            {
+              "address": "0x80161f9c",
+              "bytes": 30720,
+              "sha256": "922e18411ba7101db203e3dd33edd668bf1d47c30fd6aad926c4490776d7711c",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin"
+            },
+            {
+              "address": "0x8016979c",
+              "bytes": 4512,
+              "sha256": "a4b9f6ee91c8b2d15527a66b3e4f6a0c46c87fa8c14f4c99987d42dda0ec111c",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin"
+            }
+          ]
+        },
+        {
+          "label": "peer-1 actual alternate destination",
+          "stable_pointer_bracket": true,
+          "collision_equivalence": {
+            "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+            "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+            "all_descriptor_low16_match": true,
+            "all_metatile_collision_shape_flip_match": true,
+            "original_full_asset_sha256_match": false,
+            "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+          },
+          "assets": [
+            {
+              "address": "0x80097438",
+              "bytes": 270,
+              "sha256": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-actual-alternate-destination-0x80097438-actual.bin"
+            },
+            {
+              "address": "0x80161f9c",
+              "bytes": 30720,
+              "sha256": "1fad4a80ab8a402d48ce9acadb89955b8dd7ffda0ace47337522781af295f8c6",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-actual-alternate-destination-0x80161f9c-actual.bin"
+            },
+            {
+              "address": "0x8016979c",
+              "bytes": 4512,
+              "sha256": "a4b9f6ee91c8b2d15527a66b3e4f6a0c46c87fa8c14f4c99987d42dda0ec111c",
+              "raw": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-actual-alternate-destination-0x8016979c-actual.bin"
+            }
+          ]
+        }
+      ],
+      "existing_mechanic_checks": {
+        "agreed_native_CP2_and_one_declared_pose": true,
+        "source_P1_geometric_miss": true,
+        "actual_P2_native_portal_admission_every_peer": true,
+        "native_major8_9_destination_every_peer": true,
+        "finite_both_living_native_arrivals": true,
+        "source_full_feet_after_ordinary_guest_Left": true,
+        "actual_separate_destination_controls": true,
+        "actual_captures_retained": true
+      },
+      "parent_check_count": 15,
+      "all_existing_parent_checks": true,
+      "owned_cleanup": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "strict_fixture_refusals": 2,
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": 8,
+          "first": 2912,
+          "last": 3136
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 7,
+          "first": 3200,
+          "last": 3392
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 7,
+          "first": 3488,
+          "last": 3680
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 7,
+          "first": 4832,
+          "last": 5024
+        }
+      ],
+      "images": [
+        {
+          "peer": 0,
+          "label": "source-before-guest-portal",
+          "row": 56,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-source-before-guest-portal.png",
+          "sha256": "735b8752de2ff533c319cc6f20048bb0f1e5bbd38748d181d8876238d878f46f"
+        },
+        {
+          "peer": 1,
+          "label": "source-before-guest-portal",
+          "row": 56,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-source-before-guest-portal.png",
+          "sha256": "1b0c2a15b7d8ceedca622f6f8ad6223ebdf2d1d2732dda0088e04e1e2dac1962"
+        },
+        {
+          "peer": 0,
+          "label": "original-destination-native-arrivals",
+          "row": 107,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+          "sha256": "f94504ece680dd9fd941d1caba5bcc2aa494eea52d70f9aaa42c2af3000d4efa"
+        },
+        {
+          "peer": 1,
+          "label": "original-destination-native-arrivals",
+          "row": 107,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-original-destination-native-arrivals.png",
+          "sha256": "d8b797c18013f0dac5e671bba4170d3d7e0bc087342bde1ca30899f7d930d55b"
+        },
+        {
+          "peer": 0,
+          "label": "destination-independent-controls",
+          "row": 121,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-0-destination-independent-controls.png",
+          "sha256": "4789253c4d60187ab6125c72675568106b5b0718b5cfa543448d272df740cfc5"
+        },
+        {
+          "peer": 1,
+          "label": "destination-independent-controls",
+          "row": 121,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-recycle-portal-netplay-v89-root-v1\\intro-admission\\peer-1-destination-independent-controls.png",
+          "sha256": "4a7c49759525a255eed20e2a296c99c3d8fd5b857a4c2a94dae38cebfdf88f1f"
+        }
+      ]
+    }
+  },
+  "root_review": {
+    "frozen_shared_transfer_semantics_reviewed": true,
+    "actual_P1_nearby_miss_and_guest_admission_verified": true,
+    "actual_P1_native22feet384_before_control_verified": true,
+    "initial_guest4of22_support_preserved": true,
+    "no_falsecrush_or_protection_override": true,
+    "both_separate_controls_verified": true,
+    "prior_all9_composed_review_retained": true
+  },
+  "limitations": [
+    "Existing F165 observations independently reviewed; no new native execution or raw status rewrite.",
+    "Route to source CP2 and one declared pos/previous-pos-only placement to1506 bypassed. Actual native ground, portal eligibility/contact, loader, destination, terrain and release were not authored.",
+    "Contact protection is OFF (derived AF byte0) on every sample from ready through final controls. Both sampled HP stay32; no FALLEN lifecycle. Native retirement/hidden-beam phases during transfer remain legitimate, not continuously visible bodies.",
+    "Nearby P1 source miss/standing position1506 is separated from guest at admission1530.5..1536.5, not a distant-primary check.",
+    "Initial guest destination103/362 has native groundedbit/action2 and foot384 but only4/22 floor samples. Nearby passenger P1 at79/363 has22/22 immediately. Guest ordinaryLeft later earns22/22; never claim initial full-guest-support or fullsupport-before-control release.",
+    "This is native shared-transfer safety/feet/control analogue, not literal terrain flip, all switches, reverse-seat roster, optional boss, actual return R14/F47, distant-primary F44 or no-corrective-step F124.",
+    "Native graphic upper16 resource differences remain; collision equivalence does not establish universal visual-asset identity. Images show body overlap/edge framing; no rendering fidelity claim.",
+    "Ordinary world/private publication/peer/capture RPCs are asynchronous, not one-instruction/frame proof.",
+    "All3 fixture-tainted input streams are retained failed diagnostics and strict ordinary capture/replay refusal, not clean recording/replay credit.",
+    "The initial inventory proposed a literal geometry toggle. Source-qualified mapping is now the native shared room transform permitted by the unchanged frozen X5 counterpart: nearby nonactivating partner outside the activation box, relocation/foot alignment/visibility/no falsecrush/continued controls. No literal X6 terrain-toggle absence or pass is asserted.",
+    "Roles are reversed relative to the historical X5 P1-led example: actual P2 admits the shared transfer and nearby P1 is the passenger being protected. Frozen counterpart is the same shared-controller safety action; this does not establish an unobserved P1-led inverse or F24 two-leader coverage."
+  ]
+}

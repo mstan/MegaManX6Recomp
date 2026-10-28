@@ -13374,24 +13374,107 @@
       "frozen_row_sha256": "b90ecc86d67c3c274109ef5a796027dd09a6ddd23f703310740e3788cbcadd16",
       "x6": {
         "workstream": "solid",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Shared terrain-switch partner safety unidentified",
-        "bounded_check": "Map a native geometry-toggle region; keep partner inside it while primary activates and require native safe collision or deferred transition.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original Recycle shared alternate-route transfer and nearby passenger safety",
+        "bounded_check": "Use the original X6 shared room transfer with a nearby partner outside the activation box; verify native relocation, foot alignment, visibility, no false crush and continued controls.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "contact_protection": "off",
+              "audio": "muted dummy",
+              "prerequisite": "original4/0CP2 then one position/previous-position-only approach"
+            },
+            "action": "Activate original shared portal with guest while nearby primary remains outside trigger; inspect native relocated passenger feet/collision/visibility/resources and independent controls.",
+            "outcome": "Full frozen shared-transfer safety counterpart passed on exactsamecandidate LOCAL+both physicalNET peers, with initial guest partial support and role reversal explicitly retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-f461288-F96-shared-transfer-safety-local-netplay-reviewed.json",
+                "sha256": "260b6020b6feeb933dfdef9a2b63d70935e520cd4c77925f86334d316f8469a0"
+              }
+            ],
+            "limits": [
+              "Existing F165 observations independently reviewed; no new native execution or raw status rewrite.",
+              "Route to source CP2 and one declared pos/previous-pos-only placement to1506 bypassed. Actual native ground, portal eligibility/contact, loader, destination, terrain and release were not authored.",
+              "Contact protection is OFF (derived AF byte0) on every sample from ready through final controls. Both sampled HP stay32; no FALLEN lifecycle. Native retirement/hidden-beam phases during transfer remain legitimate, not continuously visible bodies.",
+              "Nearby P1 source miss/standing position1506 is separated from guest at admission1530.5..1536.5, not a distant-primary check.",
+              "Initial guest destination103/362 has native groundedbit/action2 and foot384 but only4/22 floor samples. Nearby passenger P1 at79/363 has22/22 immediately. Guest ordinaryLeft later earns22/22; never claim initial full-guest-support or fullsupport-before-control release.",
+              "This is native shared-transfer safety/feet/control analogue, not literal terrain flip, all switches, reverse-seat roster, optional boss, actual return R14/F47, distant-primary F44 or no-corrective-step F124.",
+              "Native graphic upper16 resource differences remain; collision equivalence does not establish universal visual-asset identity. Images show body overlap/edge framing; no rendering fidelity claim.",
+              "Ordinary world/private publication/peer/capture RPCs are asynchronous, not one-instruction/frame proof.",
+              "All3 fixture-tainted input streams are retained failed diagnostics and strict ordinary capture/replay refusal, not clean recording/replay credit.",
+              "The initial inventory proposed a literal geometry toggle. Source-qualified mapping is now the native shared room transform permitted by the unchanged frozen X5 counterpart: nearby nonactivating partner outside the activation box, relocation/foot alignment/visibility/no falsecrush/continued controls. No literal X6 terrain-toggle absence or pass is asserted.",
+              "Roles are reversed relative to the historical X5 P1-led example: actual P2 admits the shared transfer and nearby P1 is the passenger being protected. Frozen counterpart is the same shared-controller safety action; this does not establish an unobserved P1-led inverse or F24 two-leader coverage."
+            ],
+            "bypasses": [
+              "Original sourceCP2 and one position/previous-position-only approach."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "contact_protection": "off",
+              "audio": "muted dummy",
+              "prerequisite": "original4/0CP2 then one position/previous-position-only approach"
+            },
+            "action": "Activate original shared portal with guest while nearby primary remains outside trigger; inspect native relocated passenger feet/collision/visibility/resources and independent controls.",
+            "outcome": "Full frozen shared-transfer safety counterpart passed on exactsamecandidate LOCAL+both physicalNET peers, with initial guest partial support and role reversal explicitly retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-f461288-F96-shared-transfer-safety-local-netplay-reviewed.json",
+                "sha256": "260b6020b6feeb933dfdef9a2b63d70935e520cd4c77925f86334d316f8469a0"
+              }
+            ],
+            "limits": [
+              "Existing F165 observations independently reviewed; no new native execution or raw status rewrite.",
+              "Route to source CP2 and one declared pos/previous-pos-only placement to1506 bypassed. Actual native ground, portal eligibility/contact, loader, destination, terrain and release were not authored.",
+              "Contact protection is OFF (derived AF byte0) on every sample from ready through final controls. Both sampled HP stay32; no FALLEN lifecycle. Native retirement/hidden-beam phases during transfer remain legitimate, not continuously visible bodies.",
+              "Nearby P1 source miss/standing position1506 is separated from guest at admission1530.5..1536.5, not a distant-primary check.",
+              "Initial guest destination103/362 has native groundedbit/action2 and foot384 but only4/22 floor samples. Nearby passenger P1 at79/363 has22/22 immediately. Guest ordinaryLeft later earns22/22; never claim initial full-guest-support or fullsupport-before-control release.",
+              "This is native shared-transfer safety/feet/control analogue, not literal terrain flip, all switches, reverse-seat roster, optional boss, actual return R14/F47, distant-primary F44 or no-corrective-step F124.",
+              "Native graphic upper16 resource differences remain; collision equivalence does not establish universal visual-asset identity. Images show body overlap/edge framing; no rendering fidelity claim.",
+              "Ordinary world/private publication/peer/capture RPCs are asynchronous, not one-instruction/frame proof.",
+              "All3 fixture-tainted input streams are retained failed diagnostics and strict ordinary capture/replay refusal, not clean recording/replay credit.",
+              "The initial inventory proposed a literal geometry toggle. Source-qualified mapping is now the native shared room transform permitted by the unchanged frozen X5 counterpart: nearby nonactivating partner outside the activation box, relocation/foot alignment/visibility/no falsecrush/continued controls. No literal X6 terrain-toggle absence or pass is asserted.",
+              "Roles are reversed relative to the historical X5 P1-led example: actual P2 admits the shared transfer and nearby P1 is the passenger being protected. Frozen counterpart is the same shared-controller safety action; this does not establish an unobserved P1-led inverse or F24 two-leader coverage."
+            ],
+            "bypasses": [
+              "Original sourceCP2 and one position/previous-position-only approach."
+            ]
+          }
+        ],
+        "limitations": "Exactf461288 LOCAL+NET native shared-transfer counterpart passed with contact protectionOFF. Guest triggers original4/0->20/1 while nearby primary misses activation; actual passenger79/363 has full22feet384 immediately, both visible/HP32/noFALLEN, both ownLeft controls. Guest initial103/362 partial4/22feet retained; ordinaryLeft earns22/22. Role reversal vs historicalX5 example disclosed; no literalterrain-toggle, P1inverse/F24, F44distance, R14/F47return or generalrendering claim."
       }
     },
     {
