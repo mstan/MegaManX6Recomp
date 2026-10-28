@@ -7157,23 +7157,108 @@
       "x6": {
         "workstream": "lifecycle",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "X6 forward-boundary healing policy",
+        "analogue": "Original Recycle forward route4/0 to20/1 initializes both damaged heroes by native character capacity",
         "bounded_check": "Derive the native heal rule per actual stage/route boundary; cross with distinct damaged actors and compare each without imposing X4's refill amount.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_lifecycle.c:mmx6_coop_fatal",
           "src/mods/mmx6_coop_plugin.c:begin_join"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+            "build_identity": {
+              "executable_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+              "compiled_manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+              "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "starting_hp": [
+                7,
+                19
+              ],
+              "contact_protection": "on",
+              "earned_weapons": "off",
+              "audio": "dummy muted"
+            },
+            "action": "Cross the original guest-led forward boundary with distinct damaged actors; derive native initialization from original loader/source and compare both destination HP/copies/capacities.",
+            "outcome": "Full frozen F21 native counterpart passed after independent same-candidate source/raw/HP/composed-image/late-gate review; failed unrelated LOCAL tail remains unchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-56a547b-F21-native-boundary-heal-local-netplay-reviewed.json",
+                "sha256": "d50e4e75632b971512a2969590a0c82fb4ba077ca2f1ac6eecf3154b20a1d18f"
+              }
+            ],
+            "limits": [
+              "Only frozen F21 native forward-boundary healing: actual damaged X7/Zero19 both initialize to their current original capacities32, with matching HP copies. No X4 refill amount is imposed.",
+              "Source-authenticated original mode8 entry1E914 clears PLAY1E before mode9 entry1E1BC/3BD24 fresh initialization reads PLAY5B+character. Later original READY writes PLAY1E=1, so the post-initialization byte is not falsely treated as the earlier branch input. Ordered actual native loader entries operate on original PLAY.",
+              "Negotiated original Recycle4/0CP2 plus one position approach, positive starting HP7/19 and hostile-contact protection bypass unrelated reachability/initial damage. Only subsequent original native initialization supplies measured healing; the consumed seed receipt remains unchanged.",
+              "LOCAL raw parent remains failed: later extra P1 Left stress overshot into wallgrab18; its original post1E==0 and all-resource equality checks were also incorrect for native policy. Positive source row84/destination165 precede that tail. Read-only independent current-build recording/card/source/cleanup review supplies the LOCAL late evidence without inventing a passing parent or LOCAL after-case CRC.",
+              "Native P1 emission selector96 changes FF to00 at initialization while weapon93 and all nine ammo values are retained; complete resource differences are recorded. F21 does not require every internal resource byte to remain equal.",
+              "NET v2 independently completes the exact named HP endpoint and all original parent source/profile/final matched-CRC/strict fixture-taint recording/card/owned-exit gates on the same V93 candidate.",
+              "Initial Zero arrival has partial horizontal support. No initial full-foot passenger landing, separate-control stress, distant-primary/F44, fallen/F106, return route, native save progression, HUD correctness or general artwork claim. All failed raw evidence remains unchanged."
+            ],
+            "bypasses": [
+              "Original CP2 and one position approach; typed startingHP7/19 and hostile-contact protection only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+            "build_identity": {
+              "executable_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+              "compiled_manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+              "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "starting_hp": [
+                7,
+                19
+              ],
+              "contact_protection": "on",
+              "earned_weapons": "off",
+              "audio": "dummy muted"
+            },
+            "action": "Cross the original guest-led forward boundary with distinct damaged actors; derive native initialization from original loader/source and compare both destination HP/copies/capacities.",
+            "outcome": "Full frozen F21 native counterpart passed after independent same-candidate source/raw/HP/composed-image/late-gate review; failed unrelated LOCAL tail remains unchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-56a547b-F21-native-boundary-heal-local-netplay-reviewed.json",
+                "sha256": "d50e4e75632b971512a2969590a0c82fb4ba077ca2f1ac6eecf3154b20a1d18f"
+              }
+            ],
+            "limits": [
+              "Only frozen F21 native forward-boundary healing: actual damaged X7/Zero19 both initialize to their current original capacities32, with matching HP copies. No X4 refill amount is imposed.",
+              "Source-authenticated original mode8 entry1E914 clears PLAY1E before mode9 entry1E1BC/3BD24 fresh initialization reads PLAY5B+character. Later original READY writes PLAY1E=1, so the post-initialization byte is not falsely treated as the earlier branch input. Ordered actual native loader entries operate on original PLAY.",
+              "Negotiated original Recycle4/0CP2 plus one position approach, positive starting HP7/19 and hostile-contact protection bypass unrelated reachability/initial damage. Only subsequent original native initialization supplies measured healing; the consumed seed receipt remains unchanged.",
+              "LOCAL raw parent remains failed: later extra P1 Left stress overshot into wallgrab18; its original post1E==0 and all-resource equality checks were also incorrect for native policy. Positive source row84/destination165 precede that tail. Read-only independent current-build recording/card/source/cleanup review supplies the LOCAL late evidence without inventing a passing parent or LOCAL after-case CRC.",
+              "Native P1 emission selector96 changes FF to00 at initialization while weapon93 and all nine ammo values are retained; complete resource differences are recorded. F21 does not require every internal resource byte to remain equal.",
+              "NET v2 independently completes the exact named HP endpoint and all original parent source/profile/final matched-CRC/strict fixture-taint recording/card/owned-exit gates on the same V93 candidate.",
+              "Initial Zero arrival has partial horizontal support. No initial full-foot passenger landing, separate-control stress, distant-primary/F44, fallen/F106, return route, native save progression, HUD correctness or general artwork claim. All failed raw evidence remains unchanged."
+            ],
+            "bypasses": [
+              "Original CP2 and one position approach; typed startingHP7/19 and hostile-contact protection only."
+            ]
+          }
+        ],
+        "limitations": "Passed exact V93 56a LOCAL+both NET peers: real7/19 pre-boundary HP becomes32/32 by original capacity-derived native loader policy. LOCAL failed later control tail and original reviewer mistakes are preserved; full named HP endpoint independently reviewed. NET final CRC/profile/source/cards/taint/exit gates pass. Explicit CP2/position/startingHP/contact bypass; no initial fullfoot, separatecontrol/HUD/generalrendering claim."
       }
     },
     {

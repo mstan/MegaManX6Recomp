@@ -1,0 +1,1475 @@
+{
+  "comparison": "F21",
+  "frozen_row_sha256": "715a4e669da7b60eafece3adc118d5e43f5c8bd1e9cacf25b127c99722cb5e72",
+  "result": "passed",
+  "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-equipment-campaign-v93-final-binding-worker-v1.json",
+    "bytes": 269,
+    "sha256": "326a9791626b3289b0670fb8b2d37044fdeeb5108c3a9405a0dc1c4721877249",
+    "image_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+    "manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+    "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced"
+  },
+  "postbuild_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-equipment-campaign-v93-postbuild-proof-worker-v1.json",
+    "bytes": 3703,
+    "sha256": "0fe0ee4658ff01cf3c9491deea99b3cfb1e85f339646447c93f843f3be4711ee"
+  },
+  "corrected_policy_reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F21_forward_boundary_hp_v93_worker_v2.py",
+    "bytes": 29993,
+    "sha256": "3d48089c04cd49e37255c4b3ac45c08f6ee89f9795513c6413c48971fa199712"
+  },
+  "independent_LOCAL_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-LOCAL-V93-independent-eligibility-worker-v1.json",
+    "bytes": 11082,
+    "sha256": "39cfdd2b62cca034d7b4f829b924e544017bdf98e315c71b26def89fafedc059"
+  },
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F21-boundary-heal-v93-root-v1.py",
+    "bytes": 9513,
+    "sha256": "09a76f787f42a50e59619ad88a4df7904b17a2fcff574ac100d9eba07de91875"
+  },
+  "modes": {
+    "local": {
+      "result": "passed_full_named_F21",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\qualification.json",
+        "bytes": 9423530,
+        "sha256": "e4c336018800a23b25f63c56597d80c9db16378e8c695f0820271939cb4d6677"
+      },
+      "raw_parent_status": "failed_setup",
+      "raw_parent_error": "original native idle after owned movement timed out",
+      "raw_parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "native_health_comparisons": [
+        {
+          "peer": 0,
+          "source_row": 84,
+          "destination_row": 165,
+          "native_loader_entries": [
+            {
+              "seq": 0,
+              "func": "0x8001E32C",
+              "ra": "0x8001EBA0",
+              "a0": "0x800CCED0",
+              "a1": "0x8001EB48",
+              "a2": "0x800C4618",
+              "a3": "0x8008EB88",
+              "t1": "0x00000010",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 438,
+              "frame": 3276,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 1,
+              "func": "0x8001E914",
+              "ra": "0x8001E720",
+              "a0": "0x800CCED0",
+              "a1": "0x00009088",
+              "a2": "0x800C4618",
+              "a3": "0x8008EB88",
+              "t1": "0x00000010",
+              "s0": "0x800D0000",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 452,
+              "frame": 3279,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 2,
+              "func": "0x8001E1BC",
+              "ra": "0x8001E720",
+              "a0": "0x800CCED0",
+              "a1": "0x00009088",
+              "a2": "0x00000002",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x00000010",
+              "s0": "0x800D0000",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 543,
+              "frame": 3306,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 3,
+              "func": "0x8001E730",
+              "ra": "0x8001E2D4",
+              "a0": "0x800A47F4",
+              "a1": "0x80162138",
+              "a2": "0x80161F9C",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x0000001E",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 546,
+              "frame": 3307,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 4,
+              "func": "0x8001E78C",
+              "ra": "0x8001E2F4",
+              "a0": "0x8009B840",
+              "a1": "0xFFFFFFFF",
+              "a2": "0x80161F9C",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x0000001E",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 546,
+              "frame": 3307,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "before": {
+            "play_hex": "0a00000000000000000005000400000000000000000000000000000000020101000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000020200001010030300000000000010000000000000000000000000000000000000000000000000000000000000000000000000707008b00000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000001800003501000000000000000000000000000000000000",
+            "native_branch_byte": 1,
+            "stored_current_hp_5A": 0,
+            "character_capacities_5B_5C": [
+              32,
+              32
+            ],
+            "actual_resident_character": 0,
+            "actors": [
+              {
+                "seat": 0,
+                "character": 0,
+                "hp": 7,
+                "hp_copies": [
+                  28,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000001010200000000e20500003b0600000000004002050000e20500003b060000000000b6feff0000000000420000d44a1f809c411f80cc3a1080687c14800005007809000100000300000000000000000000503f1f8000000000071c20000000000000000000503d0780020000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000e20500003b060000000000002001000000000000000000000000"
+              },
+              {
+                "seat": 1,
+                "character": 1,
+                "hp": 19,
+                "hp_copies": [
+                  28,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000101010200000000e20500003a0600000000000002050000e20500003a060000000000f8feff0000000000420000d0f61e801ceb1e801800009fa481039f0005007804000105ff03000000000000000000001cea1e8000000000131c20000000000000000000543d0780020000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000e20500003a060000000000002001000000000000000000000000"
+              }
+            ]
+          },
+          "after": {
+            "play_hex": "0a0000000000000000000500140100000000000000000000000000000000010100000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000002020000101003030000000000001000000000000000000000000000000000000000000000000000000000000000000000000070700e000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000001800008a01000000000000000000000000000000000000",
+            "native_branch_byte": 1,
+            "stored_current_hp_5A": 0,
+            "character_capacities_5B_5C": [
+              32,
+              32
+            ],
+            "actual_resident_character": 0,
+            "actors": [
+              {
+                "seat": 0,
+                "character": 0,
+                "hp": 32,
+                "hp_copies": [
+                  32,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "003200000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "010000010102000000004f0000006b01000000000040020500004f0000006b01000000000000f8ff0000000000000000d44a1f806c411f80cc3a1080687c1480000500780b000100000300000000000000000000503f1f8000000000202020000000000000000000503d07800f0000000800000000000000000000000000000000000000000000000008000000000000000000003200000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000004f0000006b010000000000002001000004000000000000000000"
+              },
+              {
+                "seat": 1,
+                "character": 1,
+                "hp": 32,
+                "hp_copies": [
+                  32,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000101010200000000670000006a0100000000000002050000670000006a01000000000000f8ff0000000000000000d0f61e8000eb1e801800009fa481039f0005007816000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780070000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000670000006a010000000000002001000000000000000000000000"
+              }
+            ]
+          },
+          "expected_hp": [
+            32,
+            32
+          ],
+          "source_rule": "Ordered mode8 entry1E914 clears1E at1E934, then mode9 entry1E1BC calls3BD24; fresh3BE64..94 copies PLAY5B+actual character into5C/5D/5E. Post1E is retained only; native READY may set1 after initialization.",
+          "checks": {
+            "actual_default_roster": true,
+            "source_distinct_damaged_hp": true,
+            "native_capacities_retained": true,
+            "actual_hp_matches_native_rule": true
+          },
+          "resource_differences": [
+            {
+              "seat": 0,
+              "differences": [
+                {
+                  "offset": "0x96",
+                  "before": 255,
+                  "after": 0
+                }
+              ],
+              "weapon_retained": true,
+              "ammo9_retained": true
+            },
+            {
+              "seat": 1,
+              "differences": [],
+              "weapon_retained": true,
+              "ammo9_retained": true
+            }
+          ],
+          "limit": "Exact guarded source and actual ordered loader entries plus native before/after bodies; no sampled HP-store instruction or entry-time1E read is invented. Resources retained for review, not an all-byte equality requirement."
+        }
+      ],
+      "executed_source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\F21-executing-source-pins.json",
+        "bytes": 4127,
+        "sha256": "e1a639f4bb4c34930e71c6c91beee8f27e8d91d6161b3c0d9bf712b6449e9e70"
+      },
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "0x8003bd24",
+          "bytes": 472,
+          "actual": "62ac6a5ab20b3390091a9d6107037ef81b9bf313113bb1919cfa9496da83d8a1",
+          "expected": "62ac6a5ab20b3390091a9d6107037ef81b9bf313113bb1919cfa9496da83d8a1"
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-0 source before portal",
+          "attempts": [
+            {
+              "before": "38740980b0a41980b0f81a80",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 528,
+                  "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x8019a4b0",
+                  "bytes": 87040,
+                  "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin"
+                },
+                {
+                  "address": "0x801af8b0",
+                  "bytes": 8000,
+                  "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin"
+                }
+              ],
+              "after": "38740980b0a41980b0f81a80"
+            }
+          ]
+        },
+        {
+          "peer": 0,
+          "address": "0x800ebd80",
+          "bytes": 3100,
+          "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+          "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+        },
+        {
+          "peer": 0,
+          "address": "0x800f38b8",
+          "bytes": 124,
+          "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+          "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+        },
+        {
+          "peer": 0,
+          "address": "0x800e9864",
+          "bytes": 20,
+          "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+          "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-0 actual alternate destination",
+          "attempts": [
+            {
+              "before": "387409809c1f16809c971680",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 270,
+                  "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x80161f9c",
+                  "bytes": 30720,
+                  "actual": "5f5e530c43be9fbe789ed464240a0a8c260f30c35a11503623dead4442349d27",
+                  "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin"
+                },
+                {
+                  "address": "0x8016979c",
+                  "bytes": 4512,
+                  "actual": "e32bb486222a8b415701db8b4c3a5bc6e116d9082fa35be9af3063c6b52ea33f",
+                  "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin"
+                }
+              ],
+              "after": "387409809c1f16809c971680",
+              "collision_equivalence": {
+                "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "all_descriptor_low16_match": true,
+                "all_metatile_collision_shape_flip_match": true,
+                "original_full_asset_sha256_match": false,
+                "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+              }
+            }
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "label": "source-before-guest-portal",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\ammo-hud\\intro-admission\\peer-0-source-before-guest-portal.png",
+          "bytes": 2074543,
+          "sha256": "757419281cbf4a5cd4f827e76bf65e1b4d4564b276106613b71b3acfe2718bd1"
+        },
+        {
+          "peer": 0,
+          "label": "original-destination-native-arrivals",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-local-v93-root-v1\\ammo-hud\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "fd904b4d98613952b75b40c7001e8e5554bbbe8c1e8f5f42bd16723372c2afd1"
+        }
+      ],
+      "root_art_review": "Both actual source and destination views inspected; bodies reach the original next section. Native body HP/copies/capacities establish healing; HUD-bar/art correctness is not inferred from these images."
+    },
+    "netplay": {
+      "result": "passed_full_named_F21",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\qualification.json",
+        "bytes": 9261130,
+        "sha256": "fc40cb04790c8921d84e21cfd2f46dc73b6cf560bfc6348fa85307e0f97183b7"
+      },
+      "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "raw_parent_error": null,
+      "raw_parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_health_comparisons": [
+        {
+          "peer": 0,
+          "source_row": 51,
+          "destination_row": 102,
+          "native_loader_entries": [
+            {
+              "seq": 0,
+              "func": "0x8001E32C",
+              "ra": "0x8001EBA0",
+              "a0": "0x800CCED0",
+              "a1": "0x8001EB48",
+              "a2": "0x800C4708",
+              "a3": "0x8008EC08",
+              "t1": "0x00000010",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 460,
+              "frame": 4254,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 1,
+              "func": "0x8001E914",
+              "ra": "0x8001E720",
+              "a0": "0x800CCED0",
+              "a1": "0x00009088",
+              "a2": "0x800C4708",
+              "a3": "0x8008EC08",
+              "t1": "0x00000010",
+              "s0": "0x800D0000",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 465,
+              "frame": 4257,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 2,
+              "func": "0x8001E1BC",
+              "ra": "0x8001E720",
+              "a0": "0x800CCED0",
+              "a1": "0x00009088",
+              "a2": "0x00000002",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x00000010",
+              "s0": "0x800D0000",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 561,
+              "frame": 4284,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 3,
+              "func": "0x8001E730",
+              "ra": "0x8001E2D4",
+              "a0": "0x800A47F4",
+              "a1": "0x80162138",
+              "a2": "0x80161F9C",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x0000001E",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 555,
+              "frame": 4285,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 4,
+              "func": "0x8001E78C",
+              "ra": "0x8001E2F4",
+              "a0": "0x8009B840",
+              "a1": "0xFFFFFFFF",
+              "a2": "0x80161F9C",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x0000001E",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 555,
+              "frame": 4285,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "before": {
+            "play_hex": "0a00000000000000000005000400000000000000000000000000000000020101000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000020200001010030300000000000010000000000000000000000000000000000000000000000000000000000000000000000000707009d00000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000001800004f04000000000000000000000000000000000000",
+            "native_branch_byte": 1,
+            "stored_current_hp_5A": 0,
+            "character_capacities_5B_5C": [
+              32,
+              32
+            ],
+            "actual_resident_character": 0,
+            "actors": [
+              {
+                "seat": 0,
+                "character": 0,
+                "hp": 7,
+                "hp_copies": [
+                  22,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000001010200000000e20500003b0600000000004002050000e20500003b060000000000b6feff0000000000420000d44a1f80a0411f80cc3a1080687c1480000500780200f377770300000000000000000000503f1f8000000000071620000000000000000000503d0780020000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000e20500003b060000000000002001000000000000000000000000"
+              },
+              {
+                "seat": 1,
+                "character": 1,
+                "hp": 19,
+                "hp_copies": [
+                  22,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000101010200000000e20500003a0600000000000002050000e20500003a060000000000f8feff0000000000420000d0f61e8020eb1e801800009fa481039f0005007826000100ff03000000000000000000001cea1e8000000000131620000000000000000000543d0780020000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000e20500003a060000000000002001000000000000000000000000"
+              }
+            ]
+          },
+          "after": {
+            "play_hex": "0a0000000000000000000500140100000000000000000000000000000000010100000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000002020000101003030000000000001000000000000000000000000000000000000000000000000000000000000000000000000070700fe0000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000180000b004000000000000000000000000000000000000",
+            "native_branch_byte": 1,
+            "stored_current_hp_5A": 0,
+            "character_capacities_5B_5C": [
+              32,
+              32
+            ],
+            "actual_resident_character": 0,
+            "actors": [
+              {
+                "seat": 0,
+                "character": 0,
+                "hp": 32,
+                "hp_copies": [
+                  32,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "010000010102000000004f0000006b01000000000040020500004f0000006b01000000000000f8ff0000000000000000d44a1f806c411f80cc3a1080687c14800005007808000100000300000000000000000000503f1f8000000000202020000000000000000000503d07800f0000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000004f0000006b010000000000002001000004000000000000000000"
+              },
+              {
+                "seat": 1,
+                "character": 1,
+                "hp": 32,
+                "hp_copies": [
+                  32,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000101010200000000670000006a0100000000000002050000670000006a01000000000000f8ff0000000000000000d0f61e8000eb1e801800009fa481039f0005007813000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780070000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000670000006a010000000000002001000000000000000000000000"
+              }
+            ]
+          },
+          "expected_hp": [
+            32,
+            32
+          ],
+          "source_rule": "Ordered mode8 entry1E914 clears1E at1E934, then mode9 entry1E1BC calls3BD24; fresh3BE64..94 copies PLAY5B+actual character into5C/5D/5E. Post1E is retained only; native READY may set1 after initialization.",
+          "checks": {
+            "actual_default_roster": true,
+            "source_distinct_damaged_hp": true,
+            "native_capacities_retained": true,
+            "actual_hp_matches_native_rule": true
+          },
+          "resource_differences": [
+            {
+              "seat": 0,
+              "differences": [],
+              "weapon_retained": true,
+              "ammo9_retained": true
+            },
+            {
+              "seat": 1,
+              "differences": [],
+              "weapon_retained": true,
+              "ammo9_retained": true
+            }
+          ],
+          "limit": "Exact guarded source and actual ordered loader entries plus native before/after bodies; no sampled HP-store instruction or entry-time1E read is invented. Resources retained for review, not an all-byte equality requirement."
+        },
+        {
+          "peer": 1,
+          "source_row": 51,
+          "destination_row": 102,
+          "native_loader_entries": [
+            {
+              "seq": 0,
+              "func": "0x8001E32C",
+              "ra": "0x8001EBA0",
+              "a0": "0x800CCED0",
+              "a1": "0x8001EB48",
+              "a2": "0x800C4708",
+              "a3": "0x8008EC08",
+              "t1": "0x00000010",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 461,
+              "frame": 4254,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 1,
+              "func": "0x8001E914",
+              "ra": "0x8001E720",
+              "a0": "0x800CCED0",
+              "a1": "0x00009088",
+              "a2": "0x800C4708",
+              "a3": "0x8008EC08",
+              "t1": "0x00000010",
+              "s0": "0x800D0000",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 466,
+              "frame": 4257,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 2,
+              "func": "0x8001E1BC",
+              "ra": "0x8001E720",
+              "a0": "0x800CCED0",
+              "a1": "0x00009088",
+              "a2": "0x00000002",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x00000010",
+              "s0": "0x800D0000",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 562,
+              "frame": 4284,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 3,
+              "func": "0x8001E730",
+              "ra": "0x8001E2D4",
+              "a0": "0x800A47F4",
+              "a1": "0x80162138",
+              "a2": "0x80161F9C",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x0000001E",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 556,
+              "frame": 4285,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 4,
+              "func": "0x8001E78C",
+              "ra": "0x8001E2F4",
+              "a0": "0x8009B840",
+              "a1": "0xFFFFFFFF",
+              "a2": "0x80161F9C",
+              "a3": "0xFFFFFFFF",
+              "t1": "0x0000001E",
+              "s0": "0x800CCED0",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 556,
+              "frame": 4285,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "before": {
+            "play_hex": "0a0000000000000000000500040000000000000000000000000000000002010100000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000002020000101003030000000000001000000000000000000000000000000000000000000000000000000000000000000000000070700a000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000001800005204000000000000000000000000000000000000",
+            "native_branch_byte": 1,
+            "stored_current_hp_5A": 0,
+            "character_capacities_5B_5C": [
+              32,
+              32
+            ],
+            "actual_resident_character": 0,
+            "actors": [
+              {
+                "seat": 0,
+                "character": 0,
+                "hp": 7,
+                "hp_copies": [
+                  22,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000001010200000000e20500003b0600000000004002050000e20500003b060000000000b6feff0000000000420000d44a1f80a0411f80cc3a1080687c1480000500780200f377770300000000000000000000503f1f8000000000071620000000000000000000503d0780020000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000e20500003b060000000000002001000000000000000000000000"
+              },
+              {
+                "seat": 1,
+                "character": 1,
+                "hp": 19,
+                "hp_copies": [
+                  22,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000101010200000000e20500003a0600000000000002050000e20500003a060000000000f8feff0000000000420000d0f61e8020eb1e801800009fa481039f0005007826000100ff03000000000000000000001cea1e8000000000131620000000000000000000543d0780020000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000e20500003a060000000000002001000000000000000000000000"
+              }
+            ]
+          },
+          "after": {
+            "play_hex": "0a0000000000000000000500140100000000000000000000000000000000010100000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000002020000101003030000000000001000000000000000000000000000000000000000000000000000000000000000000000000070700070100000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000180000b904000000000000000000000000000000000000",
+            "native_branch_byte": 1,
+            "stored_current_hp_5A": 0,
+            "character_capacities_5B_5C": [
+              32,
+              32
+            ],
+            "actual_resident_character": 0,
+            "actors": [
+              {
+                "seat": 0,
+                "character": 0,
+                "hp": 32,
+                "hp_copies": [
+                  32,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "010000010102000000004f0000006b01000000000040020500004f0000006b01000000000000f8ff0000000000000000d44a1f8070411f80cc3a1080687c1480000500780d000173730300000000000000000000503f1f8000000000202020000000000000000000503d07800f0000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000004f0000006b010000000000002001000004000000000000000000"
+              },
+              {
+                "seat": 1,
+                "character": 1,
+                "hp": 32,
+                "hp_copies": [
+                  32,
+                  32
+                ],
+                "native_capacity": 32,
+                "weapon": 0,
+                "ammo9": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ],
+                "resources_93_to_113_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff",
+                "body_hex": "01000101010200000000670000006a0100000000000002050000670000006a01000000000000f8ff0000000000000000d0f61e8000eb1e801800009fa481039f000500780b000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780070000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000670000006a010000000000002001000000000000000000000000"
+              }
+            ]
+          },
+          "expected_hp": [
+            32,
+            32
+          ],
+          "source_rule": "Ordered mode8 entry1E914 clears1E at1E934, then mode9 entry1E1BC calls3BD24; fresh3BE64..94 copies PLAY5B+actual character into5C/5D/5E. Post1E is retained only; native READY may set1 after initialization.",
+          "checks": {
+            "actual_default_roster": true,
+            "source_distinct_damaged_hp": true,
+            "native_capacities_retained": true,
+            "actual_hp_matches_native_rule": true
+          },
+          "resource_differences": [
+            {
+              "seat": 0,
+              "differences": [],
+              "weapon_retained": true,
+              "ammo9_retained": true
+            },
+            {
+              "seat": 1,
+              "differences": [],
+              "weapon_retained": true,
+              "ammo9_retained": true
+            }
+          ],
+          "limit": "Exact guarded source and actual ordered loader entries plus native before/after bodies; no sampled HP-store instruction or entry-time1E read is invented. Resources retained for review, not an all-byte equality requirement."
+        }
+      ],
+      "executed_source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\F21-executing-source-pins.json",
+        "bytes": 4285,
+        "sha256": "f3c6f8d25c59aa4f7ddbb227a670787eae0523966ae030137b5ea6ca89d1856f"
+      },
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "0x8001e730",
+          "bytes": 92,
+          "actual": "3f6b9ecfedcaabe8060716cdf172b92192d5c8c7be4295ebf332898a2031fa90",
+          "expected": "3f6b9ecfedcaabe8060716cdf172b92192d5c8c7be4295ebf332898a2031fa90"
+        },
+        {
+          "peer": 1,
+          "address": "0x8001e730",
+          "bytes": 92,
+          "actual": "3f6b9ecfedcaabe8060716cdf172b92192d5c8c7be4295ebf332898a2031fa90",
+          "expected": "3f6b9ecfedcaabe8060716cdf172b92192d5c8c7be4295ebf332898a2031fa90"
+        },
+        {
+          "peer": 0,
+          "address": "0x80048418",
+          "bytes": 128,
+          "actual": "6f8056095d5ebe0a0ff7c01e146ae1c153da21ad77cfee5d6212f1de247990c7",
+          "expected": "6f8056095d5ebe0a0ff7c01e146ae1c153da21ad77cfee5d6212f1de247990c7"
+        },
+        {
+          "peer": 1,
+          "address": "0x80048418",
+          "bytes": 128,
+          "actual": "6f8056095d5ebe0a0ff7c01e146ae1c153da21ad77cfee5d6212f1de247990c7",
+          "expected": "6f8056095d5ebe0a0ff7c01e146ae1c153da21ad77cfee5d6212f1de247990c7"
+        },
+        {
+          "peer": 0,
+          "address": "0x8003bd24",
+          "bytes": 472,
+          "actual": "62ac6a5ab20b3390091a9d6107037ef81b9bf313113bb1919cfa9496da83d8a1",
+          "expected": "62ac6a5ab20b3390091a9d6107037ef81b9bf313113bb1919cfa9496da83d8a1"
+        },
+        {
+          "peer": 1,
+          "address": "0x8003bd24",
+          "bytes": 472,
+          "actual": "62ac6a5ab20b3390091a9d6107037ef81b9bf313113bb1919cfa9496da83d8a1",
+          "expected": "62ac6a5ab20b3390091a9d6107037ef81b9bf313113bb1919cfa9496da83d8a1"
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-0 source before portal",
+          "attempts": [
+            {
+              "before": "38740980b0a41980b0f81a80",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 528,
+                  "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x8019a4b0",
+                  "bytes": 87040,
+                  "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin"
+                },
+                {
+                  "address": "0x801af8b0",
+                  "bytes": 8000,
+                  "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin"
+                }
+              ],
+              "after": "38740980b0a41980b0f81a80"
+            }
+          ]
+        },
+        {
+          "peer": 0,
+          "address": "0x800ebd80",
+          "bytes": 3100,
+          "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+          "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+        },
+        {
+          "peer": 0,
+          "address": "0x800f38b8",
+          "bytes": 124,
+          "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+          "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+        },
+        {
+          "peer": 0,
+          "address": "0x800e9864",
+          "bytes": 20,
+          "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+          "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-1 source before portal",
+          "attempts": [
+            {
+              "before": "38740980b0a41980b0f81a80",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 528,
+                  "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-1-source-before-portal-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x8019a4b0",
+                  "bytes": 87040,
+                  "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-1-source-before-portal-0x8019a4b0-actual.bin"
+                },
+                {
+                  "address": "0x801af8b0",
+                  "bytes": 8000,
+                  "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-1-source-before-portal-0x801af8b0-actual.bin"
+                }
+              ],
+              "after": "38740980b0a41980b0f81a80"
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "address": "0x800ebd80",
+          "bytes": 3100,
+          "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+          "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+        },
+        {
+          "peer": 1,
+          "address": "0x800f38b8",
+          "bytes": 124,
+          "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+          "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+        },
+        {
+          "peer": 1,
+          "address": "0x800e9864",
+          "bytes": 20,
+          "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+          "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-0 actual alternate destination",
+          "attempts": [
+            {
+              "before": "387409809c1f16809c971680",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 270,
+                  "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x80161f9c",
+                  "bytes": 30720,
+                  "actual": "5aeefa32127e50d5910e4876832d11e155f7d75ce38474c5ac707505610df891",
+                  "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin"
+                },
+                {
+                  "address": "0x8016979c",
+                  "bytes": 4512,
+                  "actual": "5dce1246dbfeeff6b0be523983625d7fe48fc640e7014e17746a0005b85baf3a",
+                  "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin"
+                }
+              ],
+              "after": "387409809c1f16809c971680",
+              "collision_equivalence": {
+                "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "all_descriptor_low16_match": true,
+                "all_metatile_collision_shape_flip_match": true,
+                "original_full_asset_sha256_match": false,
+                "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+              }
+            }
+          ]
+        },
+        {
+          "kind": "live_collision_resource_identity",
+          "label": "peer-1 actual alternate destination",
+          "attempts": [
+            {
+              "before": "387409809c1f16809c971680",
+              "assets": [
+                {
+                  "address": "0x80097438",
+                  "bytes": 270,
+                  "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-1-actual-alternate-destination-0x80097438-actual.bin"
+                },
+                {
+                  "address": "0x80161f9c",
+                  "bytes": 30720,
+                  "actual": "5aeefa32127e50d5910e4876832d11e155f7d75ce38474c5ac707505610df891",
+                  "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-1-actual-alternate-destination-0x80161f9c-actual.bin"
+                },
+                {
+                  "address": "0x8016979c",
+                  "bytes": 4512,
+                  "actual": "5dce1246dbfeeff6b0be523983625d7fe48fc640e7014e17746a0005b85baf3a",
+                  "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                  "raw_capture": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-1-actual-alternate-destination-0x8016979c-actual.bin"
+                }
+              ],
+              "after": "387409809c1f16809c971680",
+              "collision_equivalence": {
+                "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+                "all_descriptor_low16_match": true,
+                "all_metatile_collision_shape_flip_match": true,
+                "original_full_asset_sha256_match": false,
+                "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+              }
+            }
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "label": "source-before-guest-portal",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-0-source-before-guest-portal.png",
+          "bytes": 2074543,
+          "sha256": "bcbb50ea57dd7da3c46a5f9ace89ad6dbc045c8d5f5f1fca571182ce05202ded"
+        },
+        {
+          "peer": 1,
+          "label": "source-before-guest-portal",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-1-source-before-guest-portal.png",
+          "bytes": 2074543,
+          "sha256": "eba14c251ebc15a1705eca27c6afb61a2621badfb92776ef2be3187c16523430"
+        },
+        {
+          "peer": 0,
+          "label": "original-destination-native-arrivals",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "f60bf46bf20b1c93d1010f4b4d8a89bbe82416fbb8129ca7d2899e23659db35b"
+        },
+        {
+          "peer": 1,
+          "label": "original-destination-native-arrivals",
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F21-forward-boundary-hp-netplay-v93-root-v2\\intro-admission\\peer-1-original-destination-native-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "ba1b242315ea9c279ee115b9aef359f717d620ee21598552148c5a04646e9972"
+        }
+      ],
+      "root_art_review": "Both actual source and destination views inspected; bodies reach the original next section. Native body HP/copies/capacities establish healing; HUD-bar/art correctness is not inferred from these images."
+    }
+  },
+  "limitations": [
+    "Only frozen F21 native forward-boundary healing: actual damaged X7/Zero19 both initialize to their current original capacities32, with matching HP copies. No X4 refill amount is imposed.",
+    "Source-authenticated original mode8 entry1E914 clears PLAY1E before mode9 entry1E1BC/3BD24 fresh initialization reads PLAY5B+character. Later original READY writes PLAY1E=1, so the post-initialization byte is not falsely treated as the earlier branch input. Ordered actual native loader entries operate on original PLAY.",
+    "Negotiated original Recycle4/0CP2 plus one position approach, positive starting HP7/19 and hostile-contact protection bypass unrelated reachability/initial damage. Only subsequent original native initialization supplies measured healing; the consumed seed receipt remains unchanged.",
+    "LOCAL raw parent remains failed: later extra P1 Left stress overshot into wallgrab18; its original post1E==0 and all-resource equality checks were also incorrect for native policy. Positive source row84/destination165 precede that tail. Read-only independent current-build recording/card/source/cleanup review supplies the LOCAL late evidence without inventing a passing parent or LOCAL after-case CRC.",
+    "Native P1 emission selector96 changes FF to00 at initialization while weapon93 and all nine ammo values are retained; complete resource differences are recorded. F21 does not require every internal resource byte to remain equal.",
+    "NET v2 independently completes the exact named HP endpoint and all original parent source/profile/final matched-CRC/strict fixture-taint recording/card/owned-exit gates on the same V93 candidate.",
+    "Initial Zero arrival has partial horizontal support. No initial full-foot passenger landing, separate-control stress, distant-primary/F44, fallen/F106, return route, native save progression, HUD correctness or general artwork claim. All failed raw evidence remains unchanged."
+  ]
+}
