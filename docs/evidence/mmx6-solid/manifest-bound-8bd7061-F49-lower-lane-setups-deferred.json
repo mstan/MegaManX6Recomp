@@ -1,0 +1,185 @@
+{
+  "comparison": "F49",
+  "frozen_row_sha256": "d5430a399764368a36e586ed50c311efc7754e912ebaf3e52ddd72a9fdc967e3",
+  "result": "unverified",
+  "scope": "Two bounded LOCAL setup attempts on the exact V88 candidate; neither releases a charged shot from the proposed lower stance. No projectile/collision/retirement or required NET result.",
+  "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-arrival-input-flush-v88-final-binding-root-v1.json",
+    "binding_sha256": "7f1de8fe9b83759188d183011ea754b4ff2c56928d88785adf743a28c1d3f61a",
+    "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+    "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+    "provenance_sha256": "a25f01d21769967ed9a1dd92d7bd4bcfcbb8efe60081bd8a75e5844450dd232b",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v36",
+    "host_revision": 19
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "mode": "local",
+      "raw_status": "failed_setup",
+      "error": "100 native world updates and actual full9C charge timed out",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F49-moving-charge-local-v88-root-v1\\qualification.json",
+        "bytes": 2001506,
+        "sha256": "cffc46dfa061fb9d9b54194ee973c0d5004712e57c5f636dd62e4d01dcad182f"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F49-moving-charge-local-v88-root-v1\\ammo-hud\\intro-admission\\charged-terrain-contact\\observations.json",
+        "bytes": 1089977,
+        "sha256": "d4dbcd47db35ad43144773e36c55bff0b17e9bfdf3ef6358aa46eed80c1d1a15"
+      },
+      "samples": 36,
+      "checks": {
+        "source_bound_primary_native_carry_preparation": true
+      },
+      "first_last_native_timer": [
+        266,
+        343
+      ],
+      "full_charge_sample": null,
+      "full_charge_observed": false,
+      "snail_x_min_max": [
+        431.5,
+        470.0
+      ],
+      "recording": {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "events": 5872,
+        "natives": 4042,
+        "p2_reads": 1830,
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        }
+      },
+      "owned_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "private_cards_unchanged": true,
+      "artifacts": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F49-moving-charge-local-v88-root-v1\\caller-executed-source.py",
+          "bytes": 10037,
+          "sha256": "dbb2b8b29f20ed9518038f7aaa5d8a225cb06f66173eea4295d5be58ed3a7e64"
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "mode": "local",
+      "raw_status": "failed_setup",
+      "error": "native support and rider grounded in original lower firing lane timed out",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F49-moving-charge-local-v88-root-v2\\qualification.json",
+        "bytes": 10555374,
+        "sha256": "30478e39ddfa9515bad648aafd0910d7cac5d5322bbb239918fb7687b323b2ab"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F49-moving-charge-local-v88-root-v2\\ammo-hud\\intro-admission\\charged-terrain-contact\\observations.json",
+        "bytes": 8900274,
+        "sha256": "f73cdd2c308522519f2f22bc9d8f784f75fd1dcf8f16e1b99b048d135308c0ee"
+      },
+      "samples": 531,
+      "checks": {
+        "source_bound_primary_native_carry_preparation": true
+      },
+      "first_last_native_timer": [
+        273,
+        1431
+      ],
+      "full_charge_sample": 49,
+      "full_charge_observed": true,
+      "snail_x_min_max": [
+        430.0,
+        562.0
+      ],
+      "recording": {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "events": 8143,
+        "natives": 5224,
+        "p2_reads": 2919,
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        }
+      },
+      "owned_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "private_cards_unchanged": true,
+      "artifacts": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F49-moving-charge-local-v88-root-v2\\caller-executed-source.py",
+          "bytes": 10037,
+          "sha256": "dbb2b8b29f20ed9518038f7aaa5d8a225cb06f66173eea4295d5be58ed3a7e64"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Attempt1 reaches actual native moving-support top and neutral carry, but inherited5s charge observer stops after77 sampled native updates with9C1; this is an observer budget failure, not a charged-shot gameplay verdict.",
+    "Attempt2 changes only observer waits (charge5->15s, descent22->40s). Native full9C2 and actual right-side offset6..7.5 are observed. The original snail reaches x562/Y386 and reverses while its charged rider remains to its right; it repeats the bounded path instead of earning the hypothesized x580..608/Y418 lane.",
+    "The predicted ordinary lower-floor route is not runtime-supported. No Left release, charged projectile birth, terrain contact or expiry occurs in these attempts. No enemy HP/contact/result writes.",
+    "The earlier V56 offscreen retirement has70=98=0 and is not collision evidence. Original Falcon13 terrain-contact70 is a valid source path, but an attainable moving-support muzzle/endpoint remains missing."
+  ],
+  "root_artwork_review": {
+    "image": {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F49-moving-charge-local-v88-root-v1\\ammo-hud\\intro-admission\\charged-terrain-contact\\peer-0-before-native-carried-charge.png",
+      "bytes": 2074543,
+      "sha256": "04fae011325e372ddb0de7acad57bc21e64c7591fd3ecdf5ac9f058930b4ae74"
+    },
+    "observation": "Root reviewed actual composed split presentation: X visibly stands on original walking-snail support, Zero is visible on the adjacent plateau and authored terrain/background are intact. This establishes setup context only."
+  },
+  "source_helpers": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F49-moving-charge-v88-root-v1.py",
+      "bytes": 6783,
+      "sha256": "8aa89007f1051de5dcb6f347f290866922218120bcaf1455e3c672aed1ea24c1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F49_terrain_contact_v88_worker_v1.py",
+      "bytes": 13945,
+      "sha256": "54a12ad376b6951204c870c42b598c904b64a4678de34120caa26680769d9e44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F49_terrain_contact_v88_root_v2.py",
+      "bytes": 14054,
+      "sha256": "8d61e13aa6aa757a8a3eceb31f724c8d8eb35e0a192e5b4359fb58f27ee6ecf1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F49-terrain-contact-lower-lane-v88-worker-v1.txt",
+      "bytes": 3673,
+      "sha256": "1171b8405bf3076a9cdf8b560216bf0ace0ca8f3f708540a77022da578fb66d0"
+    }
+  ],
+  "bypasses": [
+    "Pre-agreed original Amazon1/0/CP0 initializer via accepted P2L3+R3; ordinary stair traversal, jumps, carry and charge afterward. No ordinary campaign traversal, retry or finalized replay credit."
+  ],
+  "next_action": "Park this geometry after the bounded runs. Return only with a different authenticated attainable moving-support/collision lane; do not repeat the same descent or count camera culling as collision.",
+  "limits": [
+    "Both required mode statuses remain unverified; no native F49 failure or pass established.",
+    "All raw parent reports, source hypotheses, recordings and native cards remain unchanged.",
+    "No compiled product source change, new build, push or remote tracker sync."
+  ]
+}
