@@ -13,7 +13,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
         normal = tomllib.loads((source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2') for o in normal.get('option', [])))
+        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons') for o in normal.get('option', [])))
         catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
@@ -105,6 +105,31 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             manifest.write_text(bad, encoding='utf-8');state.write_text(initial, encoding='utf-8')
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, starting_hp=('1', 'off'))
+            self.assertEqual(state.read_text(), initial)
+
+    def test_earned_weapons_commits_with_hp_and_refuses_unavailable_catalog(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source = Path(__file__).resolve().parents[1]
+        catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary); manifest = directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True); manifest.write_text(catalog, encoding='utf-8')
+            state = directory/'mods/state.toml'; initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
+            for selected in ('off', 'all'):
+                state.write_text(initial, encoding='utf-8')
+                receipt = pair.select_checkpoint(directory, enabled=True, option='recycle_cp2',
+                    starting_hp=('17', '23'), earned_weapons=selected)
+                values = tomllib.loads(state.read_text())['feature'][0]['values']
+                self.assertEqual(receipt['earned_weapons'], selected)
+                self.assertEqual(values['lab_earned_weapons'], selected)
+                self.assertEqual([values['lab_starting_hp_p1'], values['lab_starting_hp_p2']], ['17', '23'])
+            state.write_text(initial, encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, earned_weapons='invalid')
+            self.assertEqual(state.read_text(), initial)
+            manifest.write_text(catalog.replace('id = "lab_earned_weapons"', 'id = "unavailable"'), encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, earned_weapons='all')
             self.assertEqual(state.read_text(), initial)
 
     def test_hp_receipt_is_separate_from_checkpoint_authority(self):

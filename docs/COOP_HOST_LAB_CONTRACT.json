@@ -377,7 +377,7 @@
     "native_source": "Original8003BE14..3BEFC: full initialization reads PLAY5B+character, while alternate saved-current path readsPLAY5A;5D/5E are health copies, not assumed static max. Seed actual5C only after both healthy native grounded idle bodies match their >=32 native per-character full capacity and converged copies; capacity/copies untouched.",
     "ordering": "READY withheld while configured seed waits. Exactly once per activation after original checkpoint initialization/enrollment, including named positional prerequisites. No repeated application after hits, scenes, native boundaries, revival or guest return.",
     "authority": "Only agreed checkpoint authority, exact option/index/nonce/generation1/nativeinitializer1/taint/profile/source/safe-boundary and consumed latch. Offline mutation commands stay refused online. Off performs no HP write.",
-    "diagnostic": "C0=off0/selectedpending1/applied2,C1/C2=HPrequest0off,C3=appliedseatmask. C4..FF unclaimed.",
+    "diagnostic": "C0=off0/selectedpending1/applied2,C1/C2=HPrequest0off,C3=appliedseatmask. C4..C7 hold the independent earned-weapon prerequisite.",
     "snapshot": "Schema14; immutable pair in resource identity and host digest, consumed application latch serialized/validated/hashed. Pending setup snapshots refused, no backward migration.",
     "bypass": "Seeds prerequisite damaged health only; HP1 remains alive, never death/FALLEN/scene/heal/result flags. Subsequent native injury/death/heal/route behavior must be observed separately.",
     "turtloid_checkpoint": {
@@ -404,5 +404,19 @@
       ],
       "scope": "Original checkpoint initialization only; no pose/camera/scanner/rain/damage/death/outcome writes. Reuses exact existing mode8/mode9 authority/source/chord/taint. Actual route movement and rain injury/expiry/survivor still require native qualification."
     }
+  },
+  "title_changes_v38_lab_earned_weapons": {
+    "option": "LAB-only lab_earned_weapons=off|all; defaultoff; all requires a named agreed checkpoint.",
+    "authority": "Accepted own-seat L3+R3 at original introCP0, existing safe groundedidle/profile/source/one-shot checkpoint authority; original initializer runs exactly once before mode8 dispatch only after request accepted. Online diagnostic9 remains forbidden.",
+    "native_initializer": {
+      "address": "8003D718",
+      "end_exclusive": "8003D7AC",
+      "sha256": "d2cc0660040709245080d3e570746ce3247ec4b9064a251b0a08ce42112e0e8e",
+      "earned_mask_address": "800CCF30",
+      "mask": 255
+    },
+    "preserved": "No HP/ammo/selection/action/phase/boss/table/timer/result writes. Original native equipment/form and earned flags only; acquisition and strict ordinary input recording are bypassed, never qualified.",
+    "state": "Applied+reason latch reset per activation, included in current-build snapshot/digest; option bound in snapshot resources. Snapshot schema14; no old-state compatibility.",
+    "diagnostic": "C4 selected,C5 applied,C6 current both-native-FF mask,C7 refusalreason; C0..C3 reserved for independent startingHP option."
   }
 }

@@ -860,6 +860,7 @@ static unsigned checkpoint_contact_protection_status(void);
 static unsigned checkpoint_starting_hp[2],checkpoint_starting_hp_applied;
 static unsigned checkpoint_starting_hp_status(void);
 static unsigned checkpoint_starting_hp_mask(void);
+static void checkpoint_earned_weapons_diagnostics(void);
 static void diagnostics(uint16_t input) {
     ++frame_count;
     /* Odd sequence denotes publication in progress; finish with an even one.
@@ -901,6 +902,7 @@ static void diagnostics(uint16_t input) {
     psx_mod_write_byte(diagnostic+0xC1,(uint8_t)checkpoint_starting_hp[0]);
     psx_mod_write_byte(diagnostic+0xC2,(uint8_t)checkpoint_starting_hp[1]);
     psx_mod_write_byte(diagnostic+0xC3,(uint8_t)(checkpoint_starting_hp_applied?checkpoint_starting_hp_mask():0));
+    checkpoint_earned_weapons_diagnostics();
     psx_mod_write_word(diagnostic+0x94,diagnostic_host_digest());
     psx_mod_write_word(diagnostic+0x98,1); /* bounded host FNV-1a, not core CRC */
 #ifdef MMX6_COOP_MODERN_STATE
@@ -1667,7 +1669,7 @@ static void diagnostic_inventory_setup(CPUState *cpu) {
         psx_mod_read_byte(PLAYER+0xE7)!=1 || p2.body[0xE7]!=5 ||
         psx_mod_read_byte(PLAYER+4)!=1 || p2.body[4]!=1 ||
         psx_mod_read_byte(PLAYER+5)!=2 || p2.body[5]!=2 ||
-        checkpoint_hash(0x8003D718u,0x8003D7ACu)!=0xe818bdd7u) {
+        !checkpoint_equipment_source()) {
         psx_mod_write_byte(diagnostic+0x50,0);
         psx_mod_counter_add("mmx6.coop.debug-inventory-rejected",1);
         return;
@@ -1675,11 +1677,7 @@ static void diagnostic_inventory_setup(CPUState *cpu) {
 #ifdef MMX6_COOP_INPUT_TAINT_API
     psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
 #endif
-    psx_mod_write_byte(PLAY+0x60,(uint8_t)mask);
-    guest(cpu,0x8003D718,PLAYER,0);
-    enter_zero();
-    guest(cpu,0x8003D718,PLAYER,0);
-    leave_zero();
+    checkpoint_equipment_native(cpu,mask);
     psx_mod_write_byte(diagnostic+0x50,0);
     psx_mod_counter_add("mmx6.coop.debug-inventory-grant",1);
 }
@@ -1690,7 +1688,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     diagnostic_inventory_setup(cpu);
     diagnostic_setup(cpu);
     uint16_t raw=p2_input(MMX6_INPUT_STAGE);
-    if(checkpoint_lab_boundary(raw))return 1;
+    if(checkpoint_lab_boundary(cpu,raw))return 1;
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
     unsigned phase=psx_mod_read_byte(PLAY+1);
     p2_start_previous=start;

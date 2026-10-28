@@ -342,3 +342,20 @@ label = "31 HP prerequisite"
 [[option.choice]]
 value = "32"
 label = "32 HP prerequisite"
+
+[[option]]
+feature = "prototype"
+id = "lab_earned_weapons"
+label = "Lab earned-weapon prerequisite"
+description = "Acquisition bypass only. At the one agreed checkpoint request from the original intro, initialize both heroes' earned-weapon flags through the original game routine. HP, ammo, current selection and combat outcomes stay native. Both peers must agree before launch; ordinary recording qualification is refused."
+group = "Lab validation"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off"
+
+[[option.choice]]
+value = "all"
+label = "All earned weapons (prerequisite only)"

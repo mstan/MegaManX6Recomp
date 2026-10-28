@@ -11,7 +11,7 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret);
 #undef main
 static uint8_t original_ram[0x200000],before_ram[0x200000];
 static uint16_t checkpoint_vram[1024*512];
-static unsigned before_doors_probe;
+static unsigned before_doors_probe,equipment_probe,equipment_calls;
 static unsigned refusal_logs;
 static char refusal_log[512];
 static void checkpoint_test_refusal_log(const char *format,...) {
@@ -21,6 +21,16 @@ static void checkpoint_test_refusal_log(const char *format,...) {
 }
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
     (void)ret;
+    if(equipment_probe && target==0x8003D718u) {
+        /* Typed external native contract only: source3D718 copies these
+         * fields for admitted form1/5; this is not native gameplay execution. */
+        CHECK(cpu->gpr[4]==PLAYER && !cpu->gpr[5] && psx_mod_read_byte(PLAY+0x60)==255);
+        unsigned character=psx_mod_read_byte(PLAYER+2);CHECK(character<2);
+        psx_mod_write_byte(PLAYER+0xE7,psx_mod_read_byte(PLAY+0x5E));
+        psx_mod_write_word(PLAYER+0xEC,psx_mod_read_word(PLAY+0x74+character*4));
+        psx_mod_write_byte(PLAYER+0xC9,psx_mod_read_byte(PLAY+0x60));
+        ++equipment_calls;++guest_calls;return 1;
+    }
     if(!before_doors_probe)return 0;
     const int explosion=before_doors_probe==2;
     CHECK(target==0x80029F38u && cpu->gpr[4]==(explosion?4528:5376) && cpu->gpr[5]==(explosion?4944:5792) &&
@@ -53,14 +63,16 @@ static uint8_t portal_source_ram[0x200000];
 static const char *test_lab_option="off";
 static const char *test_lab_contact_option="off";
 static const char *test_lab_hp_option[2]={"off","off"};
+static const char *test_lab_earned_option="off";
 static unsigned test_lab_ready=1,test_lab_failed,test_lab_selected=1;
 static PSXHostSelection test_lab_profile;
 int psx_mod_option_value(const char *package,const char *feature,const char *option,char *out,uint32_t size) {
     CHECK(!strcmp(package,"mmx6.local-coop") && !strcmp(feature,"prototype"));
-    CHECK(!strcmp(option,"lab_checkpoint") || !strcmp(option,"lab_contact_protection") ||
+    CHECK(!strcmp(option,"lab_checkpoint") || !strcmp(option,"lab_contact_protection") || !strcmp(option,"lab_earned_weapons") ||
         !strcmp(option,"lab_starting_hp_p1") || !strcmp(option,"lab_starting_hp_p2"));
     const char *value=!strcmp(option,"lab_checkpoint")?test_lab_option:
         !strcmp(option,"lab_contact_protection")?test_lab_contact_option:
+        !strcmp(option,"lab_earned_weapons")?test_lab_earned_option:
         test_lab_hp_option[!strcmp(option,"lab_starting_hp_p2")];
     CHECK(size>strlen(value));strcpy(out,value);return 1;
 }
@@ -120,7 +132,7 @@ static void setup_agreed(CPUState *cpu,int online) {
 }
 static void starting_hp_pending(CPUState *cpu,int online) {
     setup_agreed(cpu,online);CHECK(!checkpoint_starting_hp_applied);
-    CHECK(checkpoint_lab_boundary(6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     psx_mod_write_byte(PLAY,10);
     /* Only external native healthy/grounded initialization is modeled. The
      * actual plugin completion, authority and allowed writes are exercised. */
@@ -190,7 +202,7 @@ static void agreed_turtloid_boundary(CPUState *cpu) {
     for(int online=0;online<=1;++online) {
         setup_agreed(cpu,online);test_lab_option="turtloid_rain_cp1";checkpoint_reset();
         CHECK(checkpoint_lab_option==8 && checkpoint_lab_index()==32 && checkpoint_lab_nonce()==0x4C545231u);
-        CHECK(checkpoint_lab_boundary(6));CHECK(checkpoint_pending.index==32 && checkpoint_pending.nonce==0x4C545231u);
+        CHECK(checkpoint_lab_boundary(cpu,6));CHECK(checkpoint_pending.index==32 && checkpoint_pending.nonce==0x4C545231u);
         mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
         CHECK(psx_mod_read_byte(PLAY+12)==6 && !psx_mod_read_byte(PLAY+13) && psx_mod_read_byte(PLAY+0x1D)==1);
         psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
@@ -198,11 +210,66 @@ static void agreed_turtloid_boundary(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();
 }
+static void setup_earned(CPUState *cpu,int online) {
+    test_lab_earned_option="all";setup_agreed(cpu,online);equipment_probe=1;equipment_calls=0;
+    cpu->gpr[29]=0x801FFF00u;
+    psx_mod_write_byte(PLAY+0x38,0);psx_mod_write_byte(PLAY+0x5E,1);psx_mod_write_byte(PLAY+0x60,0);
+    psx_mod_write_word(PLAY+0x74,0x00102030u);psx_mod_write_word(PLAY+0x78,0x00405060u);
+    psx_mod_write_byte(PLAYER+2,0);p2.body[2]=1;
+    psx_mod_write_byte(PLAYER+0xE7,1);p2.body[0xE7]=5;
+    psx_mod_write_word(PLAYER+0xEC,0x00102030u);put32(p2.body+0xEC,0x00405060u);
+    psx_mod_write_byte(PLAYER+0xC9,0);p2.body[0xC9]=0;
+}
+static void agreed_earned_weapons(CPUState *cpu) {
+    CHECK(!checkpoint_earned_weapons_option && !checkpoint_earned_weapons_applied);
+    for(int online=0;online<=1;++online) {
+        setup_earned(cpu,online);CHECK(checkpoint_equipment_source() && checkpoint_earned_weapons_option);
+        uint8_t primary[sizeof p2.body];capture(PLAYER,primary,sizeof primary);PlayerContext zero=p2;CPUState registers=*cpu;
+        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.phase==1 && psx_mod_read_byte(PLAY)==8);
+        CHECK(equipment_calls==2 && checkpoint_earned_weapons_applied && !checkpoint_earned_weapons_reason);
+        CHECK(psx_mod_read_byte(PLAY+0x60)==255 && psx_mod_read_byte(PLAYER+0xC9)==255 && p2.body[0xC9]==255);
+        primary[0xC9]=zero.body[0xC9]=255;
+        uint8_t after[sizeof primary];capture(PLAYER,after,sizeof after);
+        CHECK(!memcmp(primary,after,sizeof after) && !memcmp(&zero,&p2,sizeof zero) && !memcmp(&registers,cpu,sizeof registers));
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && equipment_calls==2);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);psx_mod_write_byte(PLAY,10);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_earned_weapons_applied && equipment_calls==2);
+
+#ifdef MMX6_COOP_MODERN_STATE
+        HostState saved;state_capture(&saved);CHECK(saved.earned_applied==1 && saved.earned_reason==0);
+        uint8_t encoded[65536];StateIO write={STATE_WRITE,1,encoded,NULL,sizeof encoded,0,0};state_core(&write,&saved);CHECK(write.ok);
+        HostState loaded={0};StateIO read={STATE_READ,1,NULL,encoded,write.pos,0,0};state_core(&read,&loaded);CHECK(read.ok && loaded.earned_applied==1);
+        checkpoint_earned_weapons_applied=0;state_commit(&loaded);CHECK(checkpoint_earned_weapons_applied==1);
+        loaded.earned_applied=2;write=(StateIO){STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&write,&loaded);CHECK(!write.ok);
+
+#endif
+        checkpoint_reset();CHECK(!checkpoint_earned_weapons_applied && !checkpoint_earned_weapons_reason);
+    }
+    for(unsigned bad=0;bad<7;++bad) {
+        setup_earned(cpu,1);
+        if(bad==0)test_lab_ready=0;
+        if(bad==1)psx_mod_write_byte(0x8003D718u,psx_mod_read_byte(0x8003D718u)^1);
+        if(bad==2)psx_mod_write_byte(PLAYER+0xE7,2);
+        if(bad==3)p2.body[0xE7]=1;
+        if(bad==4)psx_mod_write_byte(PLAY+0x5E,2);
+        if(bad==5)cpu->gpr[29]=0;
+        if(bad==6)cpu->gpr[29]|=1;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !equipment_calls && !checkpoint_earned_weapons_applied);
+        CHECK(!psx_mod_read_byte(PLAY+0x60) && !psx_mod_read_byte(PLAYER+0xC9) && !p2.body[0xC9] && !checkpoint_test_taint);
+    }
+    test_lab_earned_option="invalid";setup_agreed(cpu,1);CHECK(failed && !checkpoint_earned_weapons_option);
+    test_lab_option="off";test_lab_earned_option="all";checkpoint_reset();CHECK(failed && !checkpoint_lab_option);
+    setup_earned(cpu,1);psx_mod_write_byte(diagnostic+0x51,255);psx_mod_write_byte(diagnostic+0x50,9);
+    diagnostic_inventory_setup(cpu);CHECK(!equipment_calls && !checkpoint_earned_weapons_applied && !psx_mod_read_byte(PLAY+0x60));
+    equipment_probe=0;test_lab_earned_option="off";setup_agreed(cpu,1);
+    CHECK(!checkpoint_earned_weapons_option && !checkpoint_earned_weapons_applied);
+}
 static void apply_protected_checkpoint(CPUState *cpu,int online) {
     test_lab_contact_option="on";setup_agreed(cpu,online);
     CHECK(checkpoint_contact_protection_option==1 && !checkpoint_contact_protection_mask());
     CHECK(checkpoint_contact_protection_status()==1); /* Selected != applied. */
-    CHECK(checkpoint_lab_boundary(6) && !checkpoint_contact_protection_mask());
+    CHECK(checkpoint_lab_boundary(cpu,6) && !checkpoint_contact_protection_mask());
     mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(!checkpoint_contact_protection_mask());
     psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
@@ -221,7 +288,7 @@ static void agreed_contact_protection(CPUState *cpu) {
     test_lab_contact_option="off";setup_agreed(cpu,1);
     CHECK(!checkpoint_contact_protection_option && !checkpoint_contact_protection_status());
     inside=1;cpu->gpr[2]=77;CHECK(!player_contact(cpu,0x80030ECCu) && cpu->gpr[2]==77);inside=0;
-    CHECK(checkpoint_lab_boundary(6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
     CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && !checkpoint_contact_protection_mask());
     test_lab_contact_option="invalid";setup_agreed(cpu,1);
@@ -284,9 +351,9 @@ static void agreed_contact_protection(CPUState *cpu) {
     }
     test_lab_contact_option="on";setup_agreed(cpu,1);
     psx_mod_write_byte(0x80030ECCu,psx_mod_read_byte(0x80030ECCu)^1);
-    CHECK(!checkpoint_lab_boundary(6) && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+    CHECK(!checkpoint_lab_boundary(cpu,6) && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
     CHECK(!checkpoint_contact_protection_mask());
-    setup_agreed(cpu,1);CHECK(checkpoint_lab_boundary(6));mode9(cpu);
+    setup_agreed(cpu,1);CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);
     psx_mod_write_byte(0x80030FB4u,psx_mod_read_byte(0x80030FB4u)^1);
     checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(!checkpoint_pending.phase && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
@@ -303,19 +370,19 @@ static void agreed_contact_protection(CPUState *cpu) {
 static void agreed_checkpoint_boundary(CPUState *cpu) {
     /* Configured destination alone must never race the parent's normal intro
      * P2-walk/P1-jump baseline. Only a fresh accepted native chord arms it. */
-    setup_agreed(cpu,1);CHECK(!checkpoint_lab_boundary(0) && !checkpoint_pending.phase && !checkpoint_lab_state);
-    CHECK(!checkpoint_lab_boundary(2) && !checkpoint_lab_boundary(4) && !checkpoint_lab_boundary(7) && !checkpoint_lab_state);
+    setup_agreed(cpu,1);CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase && !checkpoint_lab_state);
+    CHECK(!checkpoint_lab_boundary(cpu,2) && !checkpoint_lab_boundary(cpu,4) && !checkpoint_lab_boundary(cpu,7) && !checkpoint_lab_state);
     checkpoint_lab_option=0;memcpy(before_ram,test_ram,sizeof test_ram);
-    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_lab_state && !memcmp(before_ram,test_ram,sizeof test_ram));
+    CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_lab_state && !memcmp(before_ram,test_ram,sizeof test_ram));
     for(int online=0;online<=1;++online) {
         setup_agreed(cpu,online);PlayerContext body=p2;memcpy(before_ram,test_ram,sizeof test_ram);
-        pause_owner=1;CHECK(!checkpoint_lab_boundary(6));
+        pause_owner=1;CHECK(!checkpoint_lab_boundary(cpu,6));
         CHECK(checkpoint_lab_state==CHECKPOINT_LAB_ARMED && !checkpoint_pending.phase && !guest_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram));
         CHECK(psx_mod_read_byte(diagnostic+0xBE)==1);
-        CHECK(!checkpoint_lab_boundary(0) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED);
-        pause_owner=-1;p2.body[5]=7;CHECK(!checkpoint_lab_boundary(0) && !checkpoint_pending.phase);
-        p2.body[5]=2;CHECK(checkpoint_lab_boundary(0));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED);
+        pause_owner=-1;p2.body[5]=7;CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase);
+        p2.body[5]=2;CHECK(checkpoint_lab_boundary(cpu,0));
         before_ram[PLAY&0x1FFFFF]=8;
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof p2) && !guest_calls);
         CHECK(checkpoint_pending.phase==1 && checkpoint_pending.index==2 && checkpoint_pending.authority==CHECKPOINT_AGREED &&
@@ -328,7 +395,7 @@ static void agreed_checkpoint_boundary(CPUState *cpu) {
         psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase);
         CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE);
         psx_mod_write_byte(PLAY+0x1D,0); /* Test a later native retry, not a game write. */
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
         CHECK(psx_mod_read_word(diagnostic+0xA4)==1 && checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED);
     }
     /* Identical selected profile is a prerequisite, never inferred from
@@ -339,14 +406,14 @@ static void agreed_checkpoint_boundary(CPUState *cpu) {
         if(wrong==2)test_lab_selected=0;if(wrong==3)test_lab_profile.profile[0]^=1;
         if(wrong==4)++test_lab_profile.revision;if(wrong==5)test_lab_profile.flags=0;
         if(wrong==6)test_lab_profile.qualification[0]^=1;
-        CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !guest_calls &&
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !guest_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !checkpoint_test_taint);
         CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_REJECTED && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
     }
     setup_agreed(cpu,1);psx_mod_write_byte(checkpoint_code[0].first,0);
-    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint);
+    CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint);
     CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
-    setup_agreed(cpu,1);CHECK(checkpoint_lab_boundary(6));mode9(cpu);test_lab_ready=0;
+    setup_agreed(cpu,1);CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);test_lab_ready=0;
     checkpoint_native_entry(cpu,0x8001E1BCu);CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(PLAY+0x1D));
     CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
     setup_agreed(cpu,1);psx_mod_write_byte(diagnostic+0x50,8);
@@ -371,8 +438,8 @@ static void agreed_amazon_boundary(CPUState *cpu) {
         CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNKNOWN && !checkpoint_pending.phase &&
             !checkpoint_test_taint && !memcmp(before_ram,test_ram,sizeof test_ram));
         checkpoint_reset();memcpy(before_ram,test_ram,sizeof test_ram);
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_pending.phase);
-        CHECK(checkpoint_lab_boundary(6));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase);
+        CHECK(checkpoint_lab_boundary(cpu,6));
         before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=1;
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof p2) && !guest_calls);
         CHECK(checkpoint_pending.phase==1 && checkpoint_pending.index==3 &&
@@ -385,7 +452,7 @@ static void agreed_amazon_boundary(CPUState *cpu) {
             psx_mod_read_word(diagnostic+0xB4)==1 && !guest_calls);
         psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase);
         CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE);
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
         CHECK(psx_mod_read_word(diagnostic+0xA4)==1);
         if(online) {
             setup_agreed(cpu,1);test_lab_option="amazon_cp0";checkpoint_reset();
@@ -394,7 +461,7 @@ static void agreed_amazon_boundary(CPUState *cpu) {
     }
     setup_agreed(cpu,1);test_lab_option="amazon_cp0";checkpoint_reset();test_lab_ready=0;
     memcpy(before_ram,test_ram,sizeof test_ram);
-    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+    CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
         !memcmp(before_ram,test_ram,sizeof test_ram));
     CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
     test_lab_option="off";checkpoint_reset();
@@ -421,8 +488,8 @@ static void agreed_investigator_boundary(CPUState *cpu) {
         CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNKNOWN && !checkpoint_pending.phase &&
             !checkpoint_test_taint && !memcmp(before_ram,test_ram,sizeof test_ram));
         checkpoint_reset();memcpy(before_ram,test_ram,sizeof test_ram);
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_pending.phase);
-        CHECK(checkpoint_lab_boundary(6));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase);
+        CHECK(checkpoint_lab_boundary(cpu,6));
         before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=1;
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof p2) && !guest_calls);
         CHECK(checkpoint_pending.phase==1 && checkpoint_pending.index==5 &&
@@ -435,7 +502,7 @@ static void agreed_investigator_boundary(CPUState *cpu) {
             psx_mod_read_word(diagnostic+0xB4)==1 && !guest_calls);
         psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase);
         CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE);
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
         CHECK(psx_mod_read_word(diagnostic+0xA4)==1);
         if(online) {
             setup_agreed(cpu,1);test_lab_option="amazon_cp2";checkpoint_reset();
@@ -444,7 +511,7 @@ static void agreed_investigator_boundary(CPUState *cpu) {
     }
     setup_agreed(cpu,1);test_lab_option="amazon_cp2";checkpoint_reset();test_lab_ready=0;
     memcpy(before_ram,test_ram,sizeof test_ram);
-    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+    CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
         !memcmp(before_ram,test_ram,sizeof test_ram));
     CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
     test_lab_option="off";checkpoint_reset();
@@ -468,10 +535,10 @@ static void agreed_recycle_boundary(CPUState *cpu) {
         CHECK(!checkpoint_pending.phase && !checkpoint_test_taint && !guest_calls &&
             psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNKNOWN);
         checkpoint_reset();memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
-        CHECK(!checkpoint_lab_boundary(0));
-        pause_owner=0;CHECK(!checkpoint_lab_boundary(6) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED);
+        CHECK(!checkpoint_lab_boundary(cpu,0));
+        pause_owner=0;CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED);
         CHECK(!checkpoint_pending.phase && !guest_calls && !memcmp(before_ram,test_ram,sizeof test_ram));
-        pause_owner=-1;CHECK(checkpoint_lab_boundary(0));
+        pause_owner=-1;CHECK(checkpoint_lab_boundary(cpu,0));
         before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=4;before_ram[(PLAY+13)&0x1FFFFF]=1;
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body) && !guest_calls);
         CHECK(checkpoint_pending.phase==1 && checkpoint_pending.index==27 &&
@@ -493,7 +560,7 @@ static void agreed_recycle_boundary(CPUState *cpu) {
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body) && !guest_calls);
         CHECK(checkpoint_contact_protection_status()==(protection?15u:0u));
         psx_mod_write_byte(PLAY+0x1D,0); /* Model a later ordinary native retry. */
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6) &&
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) &&
             psx_mod_read_word(diagnostic+0xA4)==1 && psx_mod_read_word(diagnostic+0xB4)==1);
     }
     test_lab_contact_option="off";
@@ -505,18 +572,18 @@ static void agreed_recycle_boundary(CPUState *cpu) {
         psx_mod_write_byte(PLAY+12,loaded?4:0);
         psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^1);
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
-        CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
             psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE && !guest_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
     }
     setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();
-    CHECK(checkpoint_lab_boundary(6));mode9(cpu);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);
     psx_mod_write_byte(0x800724D4u,psx_mod_read_byte(0x800724D4u)^1);
     checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(PLAY+0x1D) &&
         psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE && !guest_calls);
     setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();++test_lab_profile.revision;
-    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+    CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
         psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
     setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();
     psx_mod_write_byte(diagnostic+0x50,8);rejected_checkpoint(cpu,CHECKPOINT_FORBIDDEN);
@@ -532,7 +599,7 @@ static void portal_test_body(unsigned seat,unsigned x,unsigned y) {
 static void setup_portal_prerequisite(CPUState *cpu,int online) {
     setup_agreed(cpu,online);test_lab_option="recycle_portal_cp2";checkpoint_reset();
     CHECK(checkpoint_lab_option==7 && checkpoint_lab_index()==23 && checkpoint_lab_nonce()==0x4C525032u);
-    CHECK(checkpoint_lab_boundary(6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB8)==0x80072444u);
     memcpy(test_ram,portal_source_ram,sizeof test_ram);
     psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAY+13,0);
@@ -584,7 +651,7 @@ static void agreed_portal_prerequisite(CPUState *cpu) {
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
             psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_byte(diagnostic+0xAD)==2 &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6) && psx_mod_read_word(diagnostic+0xA4)==1);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && psx_mod_read_word(diagnostic+0xA4)==1);
         const uint32_t corrupt[]={0x80097438u,0x80100000u,0x80120000u,0x800F2B0Cu,0x80051924u};
         for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
             setup_portal_prerequisite(cpu,online);psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^0x40);
@@ -606,11 +673,11 @@ static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
         psx_mod_write_byte(PLAY+12,origins[i][0]);psx_mod_write_byte(PLAY+13,origins[i][1]);
         psx_mod_write_byte(PLAY+0x1D,origins[i][2]);
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
-        CHECK(!checkpoint_lab_boundary(6) && checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED &&
+        CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED &&
             !checkpoint_pending.phase && !checkpoint_test_taint && !guest_calls &&
             psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_ORDER &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
     }
     /* Loaded origin retains transient safety waits, then consumes the same
      * chord once only when native bodies and callback context settle. */
@@ -620,22 +687,22 @@ static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
         if(unsafe==3)psx_mod_write_byte(PLAYER+5,7);if(unsafe==4)p2.body[0x67]=1;
         if(unsafe==5)state_track.count=1;if(unsafe==6)scene_owner=1;
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
-        CHECK(!checkpoint_lab_boundary(6) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED &&
+        CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED &&
             !checkpoint_pending.phase && !checkpoint_test_taint && !guest_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
         pause_owner=-1;private_draw=zero_projected=scene_owner=0;state_track.count=0;
         psx_mod_write_byte(PLAYER+5,2);p2.body[0x67]=0;
-        CHECK(checkpoint_lab_boundary(0) && checkpoint_pending.index==27 &&
+        CHECK(checkpoint_lab_boundary(cpu,0) && checkpoint_pending.index==27 &&
             checkpoint_pending.nonce==CHECKPOINT_LAB_RECYCLE_NONCE);
-        CHECK(!checkpoint_lab_boundary(6)); /* Pending and consumed cannot rearm. */
+        CHECK(!checkpoint_lab_boundary(cpu,6)); /* Pending and consumed cannot rearm. */
     }
     /* Current profile remains required at both admission and mode9. */
     setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();psx_mod_write_byte(PLAY+12,4);
     ++test_lab_profile.revision;
-    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+    CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
         psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
     setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();psx_mod_write_byte(PLAY+12,4);
-    CHECK(checkpoint_lab_boundary(6));mode9(cpu);test_lab_ready=0;
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);test_lab_ready=0;
     checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(PLAY+0x1D) && !guest_calls &&
         psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
@@ -658,7 +725,7 @@ static void setup_position_prerequisite(CPUState *cpu,int online,int explosion) 
     psx_mod_write_word(cpu->gpr[29]+0x10,0xAABBCCDDu);
     CHECK(checkpoint_lab_option==(explosion?5:4) && checkpoint_lab_index()==1 &&
         checkpoint_lab_nonce()==(explosion?CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE:CHECKPOINT_LAB_BEFORE_DOORS_NONCE));
-    CHECK(checkpoint_lab_boundary(6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+0x1D)==1);
     psx_mod_write_byte(PLAY,10);
     psx_mod_write_word(PLAYER+8,2112u<<16);psx_mod_write_word(PLAYER+12,1115u<<16);
@@ -719,7 +786,7 @@ static void agreed_before_doors_boundary(CPUState *cpu) {
         CHECK(checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED && checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
         /* Ordinary retry/another accepted chord cannot place again. */
         psx_mod_write_word(PLAYER+8,2112u<<16);put32(p2.body+8,2136u<<16);
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6) && !checkpoint_stage_boundary(cpu));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && !checkpoint_stage_boundary(cpu));
         CHECK(psx_mod_read_word(PLAYER+8)==2112u<<16 && le32(p2.body+8)==2136u<<16 && guest_calls==1);
         setup_before_doors(cpu,online);psx_mod_write_byte(before_doors_code[0].first,0);
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
@@ -800,7 +867,7 @@ static void agreed_before_explosion_boundary(CPUState *cpu) {
         CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_byte(diagnostic+0xAD)==2 &&
             checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED && checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
         psx_mod_write_word(PLAYER+8,2112u<<16);put32(p2.body+8,2136u<<16);
-        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6) && !checkpoint_stage_boundary(cpu));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && !checkpoint_stage_boundary(cpu));
         CHECK(psx_mod_read_word(PLAYER+8)==2112u<<16 && le32(p2.body+8)==2136u<<16 && guest_calls==1);
         /* Exact source, actor placement and current profile remain required. */
         setup_position_prerequisite(cpu,online,1);psx_mod_write_byte(before_explosion_code[0].first,0);
@@ -878,7 +945,7 @@ static void agreed_before_explosion_boundary(CPUState *cpu) {
     checkpoint_reset();psx_mod_write_byte(diagnostic+0x50,8);psx_mod_write_byte(diagnostic+0x53,1);
     rejected_checkpoint(cpu,CHECKPOINT_FORBIDDEN);
     test_lab_option="off";checkpoint_reset();
-    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_lab_option);
+    CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_lab_option);
 }
 #endif
 int main(int argc,char **argv) {
@@ -985,6 +1052,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_turtloid_boundary(&cpu);
+    agreed_earned_weapons(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }
