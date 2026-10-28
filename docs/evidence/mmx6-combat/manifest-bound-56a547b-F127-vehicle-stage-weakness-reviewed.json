@@ -1,0 +1,721 @@
+{
+  "comparison": "F127",
+  "frozen_row_sha256": "bade9a262055daf45871b4dbc27505e1c04702061c7a2a12ee305708a15b0c23",
+  "result": "passed",
+  "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-equipment-campaign-v93-final-binding-worker-v1.json",
+    "bytes": 269,
+    "sha256": "326a9791626b3289b0670fb8b2d37044fdeeb5108c3a9405a0dc1c4721877249",
+    "image_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+    "manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+    "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced"
+  },
+  "native_vehicle_mission_mapping": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-edd6844-R17-Recycle-native-door-reviewed.json",
+    "bytes": 67618,
+    "sha256": "08b75e34c13ba5a1c54e9fbb8d4f212971ac427206811d96cb6a967352169b3f"
+  },
+  "original_named_source_mapping": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\vehicle-original-Recycle-source-v83-worker-v1.json",
+    "bytes": 2669,
+    "sha256": "8b679583a3f0873d01dfa3e6594a66dd3182fe050666943ebbf75d2fe9907ae5"
+  },
+  "completed_same_candidate_weakness_evidence": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-combat\\manifest-bound-56a547b-F26-F125-native-weakness-local-netplay-reviewed.json",
+    "bytes": 208773,
+    "sha256": "f816a909d74a5ccdef6bdb56847fb41057500186e92877b40d279ffc90ada03a"
+  },
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F127-native-vehicle-boss-weakness-v93-root-v1.py",
+    "bytes": 7256,
+    "sha256": "c0c3e3b75a69efb1761eeadabc596fe6b91e775e0103cd0895dae0613845bc02"
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-local-v93-root-v4\\qualification.json",
+        "bytes": 19031400,
+        "sha256": "9b932a33e281069a96611a50f840984ef0b3e270fd5be56cee9e7f5c7e00d5f2"
+      },
+      "executed_source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-local-v93-root-v4\\F207-executing-source-pins.json",
+        "bytes": 3976,
+        "sha256": "883c53780de9a2a7d90b1f3a8e0d914cf55ec26bd4e93fb30c68e8ade63507bc"
+      },
+      "all_parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_weakness_checks": {
+        "actual_declared_native_C9FF_on_both_bodies": true,
+        "source_original_weakness42_producer": true,
+        "actual_guest_Zero58_owned_type42": true,
+        "actual_same_main_positive_damage": true,
+        "authored_native_weakness_reaction": true,
+        "P1_neutral_empty_original_attack_pool": true,
+        "actual_canonical_P1_weapon_context_unchanged": true,
+        "both_living_released_guest_attack_retired": true,
+        "finite_original_reaction_recovery": true,
+        "normal_defense_restored_and_actual_motion": true
+      },
+      "actual_accepted_native_reaction": [
+        {
+          "peer": 0,
+          "row": 74,
+          "before_hp": 48,
+          "after_hp": 42,
+          "original_main_type": 56,
+          "native_reaction_action": 3,
+          "native_immune_table": "8007433C",
+          "actual_owned_guest_weakness42": [
+            {
+              "slot": 0,
+              "owner": 2,
+              "address": "0x800950a0",
+              "allocation": 1,
+              "active": 1,
+              "type": 42,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 0,
+              "phase": 0,
+              "phase2": 0,
+              "x": 6141,
+              "y": 394,
+              "x_raw": 402520064,
+              "y_raw": 25821184,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 121,
+              "sprite_frame": 74,
+              "animation_cursor": "0x801ef574",
+              "command": [
+                1,
+                83,
+                1,
+                74
+              ],
+              "attack": "0x801ee560",
+              "hurt": "0x0",
+              "table": "0x0",
+              "hp": 0,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 83,
+              "remembered_token": 0,
+              "recovery": 103,
+              "feedback": 0,
+              "hex": "012a00010100000000f8fd1700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e8074f51e800000000050e0039f000501780153014aff0000000000000060e51e800000000000000000000000000000000053000000000000000000000000000000000000000000000000000000f517700167000000000000000000000000000000000000000000000000000000",
+              "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+              "native_parent_animation": 103,
+              "source_box_hex": "ccc84438",
+              "attack_rect": [
+                6089,
+                338,
+                6157,
+                394
+              ]
+            }
+          ],
+          "callback_count_is_not_hit_count": true
+        }
+      ],
+      "natural_recovery": [
+        {
+          "row": 121,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 5,
+            "phase": 3,
+            "phase2": 0,
+            "x": 6120,
+            "y": 296,
+            "x_raw": 401080320,
+            "y_raw": 19437570,
+            "layer": 0,
+            "facing": 64,
+            "selected_clip": 8,
+            "sprite_frame": 10,
+            "animation_cursor": "0x800f913c",
+            "command": [
+              1,
+              0,
+              1,
+              10
+            ],
+            "attack": "0x800f90b0",
+            "hurt": "0x800f90b4",
+            "table": "0x8007555c",
+            "hp": 42,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 0,
+            "recovery": 0,
+            "feedback": 0,
+            "hex": "41380001010503000000e81702982801487e0f80004005080000e81702982801000000000000000000000000564f00002c950f803c910f800000000040791580400148790100010aff00000000000000b0900f80b4900f805c5507802a2a0000040000ff000000007c900f800800010000000000000000000000000000000300e0b70980000000000000000202000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              272,
+              6136,
+              328
+            ]
+          },
+          "world": 1172
+        }
+      ],
+      "resumed_motion": [
+        {
+          "row": 134,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 5,
+            "phase": 4,
+            "phase2": 0,
+            "x": 6120,
+            "y": 298,
+            "x_raw": 401080320,
+            "y_raw": 19559430,
+            "layer": 0,
+            "facing": 64,
+            "selected_clip": 6,
+            "sprite_frame": 8,
+            "animation_cursor": "0x800f9128",
+            "command": [
+              2,
+              0,
+              1,
+              8
+            ],
+            "attack": "0x800f9088",
+            "hurt": "0x800f908c",
+            "table": "0x8007555c",
+            "hp": 42,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 0,
+            "recovery": 0,
+            "feedback": 0,
+            "hex": "41380001010504000000e81706742a01487e0f80004005060000e8170486290100000000a8c2feff00000000564f00002c950f8028910f8000000000407915804001487902000108ff0000000000000088900f808c900f805c5507802a2a0000040000ff000000007c900f800800030000000000000000000000000000000300e0b70980000000000000000202000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              274,
+              6136,
+              330
+            ]
+          },
+          "world": 1204
+        }
+      ],
+      "composed_images": [
+        {
+          "peer": 0,
+          "label": "native-declared-weakness-before",
+          "row": 0,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-local-v93-root-v4\\ammo-hud\\intro-admission\\F207\\peer-0-native-declared-weakness-before.png",
+          "bytes": 2074543,
+          "sha256": "e7f48fd24425a1fbf84648cf78325a1c0114898213276f8f2fe5347f00ec9cc1"
+        },
+        {
+          "peer": 0,
+          "label": "native-guest42-accepted-weakness",
+          "row": 74,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-local-v93-root-v4\\ammo-hud\\intro-admission\\F207\\peer-0-native-guest42-accepted-weakness.png",
+          "bytes": 2074543,
+          "sha256": "bde489087e726b86ba9c98c5550b898b540ab80238ee95d0a5cdd4d8cc81d280"
+        },
+        {
+          "peer": 0,
+          "label": "native-weakness-finite-recovery-and-motion",
+          "row": 134,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-local-v93-root-v4\\ammo-hud\\intro-admission\\F207\\peer-0-native-weakness-finite-recovery-and-motion.png",
+          "bytes": 2074543,
+          "sha256": "4ee2410eb833972ec9a7e90f7d4da4e065e88ccedc6e80b665fddaac5846a698"
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-control-return",
+          "row": 135,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-local-v93-root-v4\\ammo-hud\\intro-admission\\F207\\peer-0-native-guest-control-return.png",
+          "bytes": 2074543,
+          "sha256": "369f05b9ec57fb34cd289927d0d5a93695ebc789b552ca22be16ca42600eb050"
+        }
+      ],
+      "root_art_review": "All composed before, accepted weakness, recovered moving boss and native control-return captures reviewed; native guest effect and healthy finite boss continuation visible. No general FX/artwork pass."
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\qualification.json",
+        "bytes": 19485889,
+        "sha256": "67fd1562e47caa8c94ae7445b990b44a6d9fbec39cdc513d07b7fe6c1a7b2908"
+      },
+      "executed_source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\F207-executing-source-pins.json",
+        "bytes": 3976,
+        "sha256": "883c53780de9a2a7d90b1f3a8e0d914cf55ec26bd4e93fb30c68e8ade63507bc"
+      },
+      "all_parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_weakness_checks": {
+        "actual_declared_native_C9FF_on_both_bodies": true,
+        "source_original_weakness42_producer": true,
+        "actual_guest_Zero58_owned_type42": true,
+        "actual_same_main_positive_damage": true,
+        "authored_native_weakness_reaction": true,
+        "P1_neutral_empty_original_attack_pool": true,
+        "actual_canonical_P1_weapon_context_unchanged": true,
+        "both_living_released_guest_attack_retired": true,
+        "finite_original_reaction_recovery": true,
+        "normal_defense_restored_and_actual_motion": true
+      },
+      "actual_accepted_native_reaction": [
+        {
+          "peer": 0,
+          "row": 20,
+          "before_hp": 48,
+          "after_hp": 42,
+          "original_main_type": 56,
+          "native_reaction_action": 3,
+          "native_immune_table": "8007433C",
+          "actual_owned_guest_weakness42": [
+            {
+              "slot": 0,
+              "owner": 2,
+              "address": "0x800950a0",
+              "allocation": 1,
+              "active": 1,
+              "type": 42,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 0,
+              "phase": 0,
+              "phase2": 0,
+              "x": 6131,
+              "y": 394,
+              "x_raw": 401864704,
+              "y_raw": 25821184,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 121,
+              "sprite_frame": 80,
+              "animation_cursor": "0x801ef580",
+              "command": [
+                1,
+                86,
+                1,
+                80
+              ],
+              "attack": "0x801ee56c",
+              "hurt": "0x0",
+              "table": "0x0",
+              "hp": 0,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 85,
+              "remembered_token": 0,
+              "recovery": 103,
+              "feedback": 0,
+              "hex": "012a00010100000000f8f31700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e8080f51e800000000050e0039f0005017801560150ff000000000000006ce51e800000000000000000000000000000000055000000000000000000000000000000000000000000000000000000f517910167000000000000000000000000000000000000000000000000000000",
+              "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+              "native_parent_animation": 103,
+              "source_box_hex": "d4014827",
+              "attack_rect": [
+                6087,
+                395,
+                6159,
+                434
+              ]
+            }
+          ],
+          "callback_count_is_not_hit_count": true
+        },
+        {
+          "peer": 1,
+          "row": 20,
+          "before_hp": 48,
+          "after_hp": 42,
+          "original_main_type": 56,
+          "native_reaction_action": 3,
+          "native_immune_table": "8007433C",
+          "actual_owned_guest_weakness42": [
+            {
+              "slot": 0,
+              "owner": 2,
+              "address": "0x800950a0",
+              "allocation": 1,
+              "active": 1,
+              "type": 42,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 0,
+              "phase": 0,
+              "phase2": 0,
+              "x": 6131,
+              "y": 394,
+              "x_raw": 401864704,
+              "y_raw": 25821184,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 121,
+              "sprite_frame": 78,
+              "animation_cursor": "0x801ef57c",
+              "command": [
+                1,
+                85,
+                1,
+                78
+              ],
+              "attack": "0x801ee568",
+              "hurt": "0x0",
+              "table": "0x0",
+              "hp": 0,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 85,
+              "remembered_token": 0,
+              "recovery": 103,
+              "feedback": 0,
+              "hex": "012a00010100000000f8f31700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e807cf51e800000000050e0039f000501780155014eff0000000000000068e51e800000000000000000000000000000000055000000000000000000000000000000000000000000000000000000eb17750167000000000000000000000000000000000000000000000000000000",
+              "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+              "native_parent_animation": 103,
+              "source_box_hex": "c8e43e40",
+              "attack_rect": [
+                6075,
+                366,
+                6137,
+                430
+              ]
+            }
+          ],
+          "callback_count_is_not_hit_count": true
+        }
+      ],
+      "natural_recovery": [
+        {
+          "row": 108,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 4,
+            "phase": 2,
+            "phase2": 0,
+            "x": 6120,
+            "y": 356,
+            "x_raw": 401080320,
+            "y_raw": 23381772,
+            "layer": 0,
+            "facing": 64,
+            "selected_clip": 14,
+            "sprite_frame": 16,
+            "animation_cursor": "0x800f91e4",
+            "command": [
+              4,
+              0,
+              0,
+              16
+            ],
+            "attack": "0x800f90b0",
+            "hurt": "0x800f90b4",
+            "table": "0x8007555c",
+            "hp": 36,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 0,
+            "recovery": 0,
+            "feedback": 0,
+            "hex": "41380001010402000000e8170cc76401487e0f800040050e0000e81728485f01000000001037faff000000000c4a00002c950f80e4910f8000000000407915804001487904000010ff00000000000000b0900f80b4900f805c55078024240000040000ff000000007c900f8008000d0000000000000000000000000000000300e0b70980000000000000000201000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              332,
+              6136,
+              388
+            ]
+          },
+          "world": 2089
+        },
+        {
+          "row": 107,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 4,
+            "phase": 2,
+            "phase2": 0,
+            "x": 6120,
+            "y": 341,
+            "x_raw": 401080320,
+            "y_raw": 22358148,
+            "layer": 0,
+            "facing": 64,
+            "selected_clip": 14,
+            "sprite_frame": 16,
+            "animation_cursor": "0x800f91e4",
+            "command": [
+              3,
+              0,
+              0,
+              16
+            ],
+            "attack": "0x800f90b0",
+            "hurt": "0x800f90b4",
+            "table": "0x8007555c",
+            "hp": 36,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 0,
+            "recovery": 0,
+            "feedback": 0,
+            "hex": "41380001010402000000e81784285501487e0f800040050e0000e817c4875001000000003415fbff000000000c4a00002c950f80e4910f8000000000407915804001487903000010ff00000000000000b0900f80b4900f805c55078024240000040000ff000000007c900f8008000e0000000000000000000000000000000300e0b70980000000000000000201000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              317,
+              6136,
+              373
+            ]
+          },
+          "world": 2086
+        }
+      ],
+      "resumed_motion": [
+        {
+          "row": 109,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 4,
+            "phase": 3,
+            "phase2": 0,
+            "x": 6120,
+            "y": 375,
+            "x_raw": 401080320,
+            "y_raw": 24576000,
+            "layer": 0,
+            "facing": 64,
+            "selected_clip": 38,
+            "sprite_frame": 19,
+            "animation_cursor": "0x800f91e8",
+            "command": [
+              3,
+              0,
+              1,
+              19
+            ],
+            "attack": "0x800f90b0",
+            "hurt": "0x800f90b4",
+            "table": "0x8007555c",
+            "hp": 36,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 0,
+            "recovery": 0,
+            "feedback": 0,
+            "hex": "41380001010403000000e81700007701487e0f80004005260000e81700007701000000000080f9ff000000000c4a00002c950f80e8910f8000000000407915804001487903000113ff00000000000000b0900f80b4900f805c55078024240000040000ff000000007c900f800800000008000000000000000000000000000300e0b70980000000000000000201000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              351,
+              6136,
+              407
+            ]
+          },
+          "world": 2096
+        },
+        {
+          "row": 109,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 4,
+            "phase": 3,
+            "phase2": 0,
+            "x": 6120,
+            "y": 375,
+            "x_raw": 401080320,
+            "y_raw": 24576000,
+            "layer": 0,
+            "facing": 64,
+            "selected_clip": 38,
+            "sprite_frame": 19,
+            "animation_cursor": "0x800f91e8",
+            "command": [
+              1,
+              0,
+              1,
+              19
+            ],
+            "attack": "0x800f90b0",
+            "hurt": "0x800f90b4",
+            "table": "0x8007555c",
+            "hp": 36,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 0,
+            "recovery": 0,
+            "feedback": 0,
+            "hex": "41380001010403000000e81700007701487e0f80004005260000e81700007701000000000080f9ff000000000c4a00002c950f80e8910f8000000000407915804001487901000113ff00000000000000b0900f80b4900f805c55078024240000040000ff000000007c900f800800000008000000000000000000000000000300e0b70980000000000000000201000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              351,
+              6136,
+              407
+            ]
+          },
+          "world": 2098
+        }
+      ],
+      "composed_images": [
+        {
+          "peer": 0,
+          "label": "native-declared-weakness-before",
+          "row": 0,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\intro-admission\\F207\\peer-0-native-declared-weakness-before.png",
+          "bytes": 2074543,
+          "sha256": "c9b4c6e6f3becb098155de9c2f348d9fa8060928bfcf2595f72c7fc7395fae50"
+        },
+        {
+          "peer": 1,
+          "label": "native-declared-weakness-before",
+          "row": 0,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\intro-admission\\F207\\peer-1-native-declared-weakness-before.png",
+          "bytes": 2074543,
+          "sha256": "80aea135a829959a71163e2231b11e0c2c1de0317fd1492b8a0ab364a14f652d"
+        },
+        {
+          "peer": 0,
+          "label": "native-guest42-accepted-weakness",
+          "row": 20,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\intro-admission\\F207\\peer-0-native-guest42-accepted-weakness.png",
+          "bytes": 2074543,
+          "sha256": "34297343d2cbd48faf5f6ef8d888c73db641800ffd22b3d70d4396310a697953"
+        },
+        {
+          "peer": 1,
+          "label": "native-guest42-accepted-weakness",
+          "row": 20,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\intro-admission\\F207\\peer-1-native-guest42-accepted-weakness.png",
+          "bytes": 2074543,
+          "sha256": "d3dddbc9c8544fc4526001a32b42b81b89c10b18fe57880ad9add9da9d7e9ff4"
+        },
+        {
+          "peer": 0,
+          "label": "native-weakness-finite-recovery-and-motion",
+          "row": 109,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\intro-admission\\F207\\peer-0-native-weakness-finite-recovery-and-motion.png",
+          "bytes": 2074543,
+          "sha256": "6ecba6081b9616309c1fb8ce759f146d5faf34a630e702d5a62faafa4891dd06"
+        },
+        {
+          "peer": 1,
+          "label": "native-weakness-finite-recovery-and-motion",
+          "row": 109,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\intro-admission\\F207\\peer-1-native-weakness-finite-recovery-and-motion.png",
+          "bytes": 2074543,
+          "sha256": "b83726ebed629b9836da602145110fd0789ac4bcdde597e3a6e60078d7e5be5c"
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-control-return",
+          "row": 110,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\intro-admission\\F207\\peer-0-native-guest-control-return.png",
+          "bytes": 2074543,
+          "sha256": "aabf306da52a70b9f00e16067a4a871e268ef2314317d3b9eea49fdc8274e7fb"
+        },
+        {
+          "peer": 1,
+          "label": "native-guest-control-return",
+          "row": 110,
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\intro-admission\\F207\\peer-1-native-guest-control-return.png",
+          "bytes": 2074543,
+          "sha256": "aabf306da52a70b9f00e16067a4a871e268ef2314317d3b9eea49fdc8274e7fb"
+        }
+      ],
+      "root_art_review": "All composed before, accepted weakness, recovered moving boss and native control-return captures reviewed; native guest effect and healthy finite boss continuation visible. No general FX/artwork pass."
+    }
+  },
+  "limitations": [
+    "F127 maps X4 Jet Stingray/X5 Chaser-associated boss weakness to X6 Recycle Metal Shark, using the already established R17 native mission mapping: original Ride Armor4/0 and boss4/1. X6 Ride Armor is the native vehicle analogue; no literal Ride Chaser or jet-bike content is invented.",
+    "The frozen requirement explicitly separates weakness from vehicle traversal. This packet qualifies the actual native boss56 encounter, guest-owned original weakness42, accepted48to42 and authored reaction3/immune7433C on V93 in both modes. Mounted movement, vehicle-to-boss handoff, vehicle opening/READY and vehicle fight remain separate unverified actions.",
+    "Existing full V93 raw observations/independent reviews and all12 previously reviewed composed images are reused unchanged. Earlier R17 candidate establishes original content mapping only; none of its gameplay pass credit is transferred to V93.",
+    "Native CP2/contact protection and one-shot original earned-equipment setup are disclosed prerequisites. Actual door/intro/fullHP48/release, owned DownTriangle1040/Zero58/42 contact, HP drop and reaction/recovery remain original native behavior; no reward, hit, HP, reaction or success flag is set by this reviewer.",
+    "P1 remains neutral with empty original attack pool and retained weapon context. Callback deltas are not damaging-hit counts. Native private/world polls and peers are asynchronous; no instruction-atomic accepted-return register is claimed.",
+    "Exact V93 source/image/manifest/provenance, settled profile22, resolved final core/mod CRC, unchanged native cards, strict fixture recording/replay refusal and owned exits0 are retained from the full same-candidate qualification. No scaling variant, distant-primary, native save progression or general artwork pass.",
+    "Earlier failed F127 weapon-input/acquisition attempts and all raw statuses remain unchanged. Current success follows actual fixed native acquisition and correct original input; no old candidate receives credit."
+  ]
+}

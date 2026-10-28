@@ -17,7 +17,7 @@ sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 104 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F3, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F21, F22, F23, F24, F25, F26, F31, F32, F33, F34, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F90, F91, F92, F94, F95, F96, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F125, F128, F129, F132, F133, F134, F137, F143, F144, F157, F163, F164, F165, F170, F173, F177, F178, F184, F191, F197, F198, F199, F204, F205, F207, F208), 3 failed, 127 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 105 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F3, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F21, F22, F23, F24, F25, F26, F31, F32, F33, F34, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F90, F91, F92, F94, F95, F96, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F125, F127, F128, F129, F132, F133, F134, F137, F143, F144, F157, F163, F164, F165, F170, F173, F177, F178, F184, F191, F197, F198, F199, F204, F205, F207, F208), 3 failed, 126 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F127 is closed: 105 passed / 3 failed / 126 unverified (44.9%), one more since104.** The [vehicle-associated boss weakness review](evidence/mmx6-combat/manifest-bound-56a547b-F127-vehicle-stage-weakness-reviewed.json) uses the established original Recycle Ride Armor4/0-to-Metal Shark4/1 mission mapping and completed exact V93 LOCAL/NET evidence. Actual guest Zero58/type42 causes48to42 and original weakness reaction3/immune7433C, then recovery. The frozen check separates boss weakness from vehicle traversal; mounted motion/opening/handoff remains unverified. All source/profile/finalCRC/cards/taint/owned-exit gates and earlier failed attempts are preserved. No additional game run or literal Ride Chaser content is claimed.
 
 **F24/F34 are closed: 104 passed / 3 failed / 127 unverified (44.4%), two more since102.** The [same-candidate native warp review](evidence/mmx6-scene/manifest-bound-f461288-F24-F34-both-leader-warp-reviewed.json) combines the completed guest-led transfer with a new nearby P1-led inverse on exact V89. Both leaders activate the original4/0 to20/1 loader; both heroes return visibly and the passenger then earns actual movement/full floor support in LOCAL and both NET peers. The new NET parent stays failed after the completed named outcome because additional P1 control stress reaches partial support or wallgrab. Those raw tails remain unchanged; source/profile/cards/owned-exit checks and142 equal resolved CRC samples are retained, without inventing an exact after-endpoint CRC anchor. Seven new images were reviewed. CP2/position approach and inverse contact protection are disclosed; no literal gravity flip, moving lift, distant-primary, return-route or general artwork credit. Root is working solo.
 
