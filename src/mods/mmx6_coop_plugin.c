@@ -2084,6 +2084,21 @@ static int zero_icon_effect(uint32_t actor) {
     return owned && psx_mod_read_byte(actor) && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
+static int zero_native_weapon_effect(uint32_t actor) {
+    /* Original DAT85 assembly words34h/38h select native ceiling ice33 and
+     * rising flame34. They have no compressed frame table: their original
+     * page/UVs address Zero's uploaded atlas, which shares VRAM with X.
+     * Admit only an actual private native shot and its exact source assembly. */
+    if(render_x_death || !assembly || actor<0x800950A0u || actor>=0x800964A0u ||
+       (actor-0x800950A0u)%0xA0u || psx_mod_read_byte(PLAYER+2)!=1 ||
+       !(psx_mod_read_byte(actor)&1) || psx_mod_read_word(actor+0x38))return 0;
+    unsigned kind=psx_mod_read_byte(actor+1);
+    unsigned header=kind==33?0x34u:kind==34?0x38u:0;
+    if(!header)return 0;
+    uint32_t offset=psx_mod_read_word(assembly+header);
+    return offset && offset<ASSET_SPACE &&
+        psx_mod_read_word(actor+0x3C)==assembly+offset;
+}
 static int zero_dash_effect(uint32_t actor) {
     int slot=shared_effect_slot(actor);
     /* Original80049100 resolves assembly word4. Its Zero shapes and C3
@@ -2106,7 +2121,7 @@ static int zero_death_effect(uint32_t actor) {
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
 static uint16_t zero_atlas_effect_bank(uint16_t page,uint16_t clut,uint16_t tile,int menu) {
-    /* Original type1 dash, type17 UI and type26/44 icons share VRAM with X's
+    /* Original type1 dash, type17 UI, type26/44 icons and native33/34 weapons share VRAM with X's
      * different PL00 art. Decode the original private atlas and the native
      * menu/player palette, retaining actual page, UVs, tint and blending.
      * The virtual source key is outside the compressed player archive. */
@@ -2248,7 +2263,7 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     }
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
-    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
+    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
     if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
         giga_packet_trace("native-only",actor);return;
     }
@@ -2341,7 +2356,7 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
-    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
+    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
     if (!zero_world && !retained) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
@@ -2833,7 +2848,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v39",
+        .compatibility_id = "mmx6-x-zero-delay-v40",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

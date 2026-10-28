@@ -1075,6 +1075,52 @@ static void deferred_dash_effect_retains_zero_atlas(void) {
     psx_mod_write_word(actor+0x3C,assembly+0xCC);psx_mod_write_byte(actor+1,3);
     CHECK(!render_survivor(&cpu,0x800232D4u));
 }
+static void private_native_weapon_atlas_retains_zero_source(void){
+    for(unsigned kind=33;kind<=34;++kind){
+        CPUState cpu;setup(&cpu);const uint32_t actor=0x800950A0u;
+        PlayerContext resident,after;capture_player(&resident);
+        /* Original DAT85 assembly headers34h/38h select these uncompressed
+         * ceiling-ice/rising-flame frames. The native packet has no compressed
+         * table; its page0 must retain Zero's pixels instead of X's VRAM. */
+        unsigned header=kind==33?0x34u:0x38u;
+        uint16_t clut=kind==33?0x7843u:0x7804u;
+        unsigned palette_at=kind==33?0x260u:0x80u;
+        uint16_t expected=kind==33?0x4321u:0x1234u;
+        unsigned index=kind==33?1u:2u;
+        psx_mod_write_word(assembly+header,0xCC);
+        memset(p2.shots,0,sizeof p2.shots);
+        p2.shots[0]=0x21;p2.shots[1]=(uint8_t)kind;p2.shots[3]=1;
+        put32(p2.shots+0x3C,assembly+0xCC);
+        p2.shots[0x42]=(uint8_t)clut;p2.shots[0x43]=(uint8_t)(clut>>8);
+        memset(test_vram,0xBB,sizeof test_vram);
+        for(unsigned y=0;y<16;++y)for(unsigned x=0;x<4;++x)
+            test_zero_ui[y*1024+x]=(uint16_t)(index*0x1111u);
+        psx_mod_write_half(active_palette+palette_at+index*2,expected);
+        render_replacement_probe=1;
+        render(&cpu,0x800232D4u);
+        CHECK(!failed && draw_count==2 && drawn[1]==actor && bank_count==2);
+        CHECK(bank_first[1]==expected);
+        uint16_t pixels[256*256];
+        CHECK(mmx6_pixels_decode(banks[1].pixels,banks[1].pixel_bytes,256*256,pixels));
+        for(unsigned y=0;y<16;++y)for(unsigned x=0;x<16;++x)
+            CHECK(pixels[y*256+x]==expected);
+        CHECK(psx_mod_read_word(packets+40)==((packets+PLAYER_PACKET_BYTES+80)&0xFFFFFFu));
+        capture_player(&after);CHECK(!memcmp(&resident,&after,sizeof resident));
+        CHECK(!state_track.count && !world_render);
+        project_player(&p2);CHECK(zero_native_weapon_effect(actor));
+        CHECK(!zero_native_weapon_effect(actor+1) && !zero_native_weapon_effect(0x800964A0u));
+        psx_mod_write_byte(actor,0);CHECK(!zero_native_weapon_effect(actor));
+        psx_mod_write_byte(actor,0x21);psx_mod_write_byte(actor+1,42);
+        CHECK(!zero_native_weapon_effect(actor));psx_mod_write_byte(actor+1,(uint8_t)kind);
+        psx_mod_write_word(actor+0x3C,assembly);CHECK(!zero_native_weapon_effect(actor));
+        psx_mod_write_word(actor+0x3C,assembly+0xCC);psx_mod_write_word(actor+0x38,assets);
+        CHECK(!zero_native_weapon_effect(actor));psx_mod_write_word(actor+0x38,0);
+        render_x_death=1;CHECK(!zero_native_weapon_effect(actor));render_x_death=0;
+        psx_mod_write_byte(PLAYER+2,0);CHECK(!zero_native_weapon_effect(actor));
+        project_player(&resident);
+        render_replacement_probe=0;clear_banks();
+    }
+}
 static void private_giga_shots_retain_zero_source(void){
     for(unsigned primitive=1;primitive<=2;++primitive){
         CPUState cpu;setup(&cpu);const uint32_t actor=0x800950A0u;
@@ -1813,6 +1859,7 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     deferred_icon_effect_retains_zero_source();clear_banks();
     deferred_dash_effect_retains_zero_atlas();clear_banks();
     private_giga_shots_retain_zero_source();
+    private_native_weapon_atlas_retains_zero_source();
     deferred_death_effect_retains_zero_source();clear_banks();
     native_shared_dialogue_palette();
     native_working_palette_class_and_load_events();
