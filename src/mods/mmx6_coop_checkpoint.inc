@@ -102,13 +102,23 @@ static int checkpoint_equipment_context(CPUState *cpu) {
     return cpu && !(cpu->gpr[29]&3u) && cpu->gpr[29]>=0x80010000u && cpu->gpr[29]<=0x801FFFECu &&
         !checkpoint_earned_weapons_applied && !scene_owner && !zero_projected &&
         psx_mod_read_byte(PLAY)==10 && !psx_mod_read_byte(PLAY+1) &&
-        !psx_mod_read_byte(PLAY+12) && !psx_mod_read_byte(PLAY+13) && !psx_mod_read_byte(PLAY+0x1D) &&
         !psx_mod_read_byte(PLAY+0x38) && psx_mod_read_byte(PLAY+0x5E)==1 &&
         life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
         !psx_mod_read_byte(PLAYER+2) && p2.body[2]==1 &&
-        psx_mod_read_byte(PLAYER+0xE7)==1 && p2.body[0xE7]==5 &&
-        psx_mod_read_byte(PLAYER+4)==1 && p2.body[4]==1 &&
-        psx_mod_read_byte(PLAYER+5)==2 && p2.body[5]==2;
+        psx_mod_read_byte(PLAYER+0xE7)==1 && p2.body[0xE7]==5;
+}
+static int checkpoint_equipment_lab(CPUState *cpu) {
+    /* PLAY60 is also native campaign-clear state. Never persist the LAB
+     * acquisition mask there or let it alter a later intro/report branch. */
+    uint32_t campaign=psx_mod_read_byte(PLAY+0x60);
+    STATE_WORDS(restore_campaign,67,&campaign,1);
+    if(restore_campaign==UINT32_MAX)return 0;
+    checkpoint_equipment_native(cpu,0xFFu);
+    /* leave_zero has restored its FF projection before this canonical write.
+     * The next enter_zero always captures this restored campaign value. */
+    psx_mod_write_byte(PLAY+0x60,(uint8_t)campaign);
+    STATE_POP(restore_campaign);
+    return !state_track.error;
 }
 static int checkpoint_contact_source(void) {
     /* Original30ECC's no-contact path returns0 at30EEC/30EF0 and30FB4/30FB8
@@ -262,36 +272,50 @@ static unsigned checkpoint_starting_hp_mask(void) {
 static unsigned checkpoint_starting_hp_status(void) {
     return checkpoint_starting_hp_mask()?(checkpoint_starting_hp_applied?2u:1u):0u;
 }
-static void checkpoint_complete(void) {
+static void checkpoint_complete(CPUState *cpu) {
     unsigned mask=checkpoint_starting_hp_mask();
-    if(mask && !checkpoint_starting_hp_applied) {
+    unsigned hp_pending=mask && !checkpoint_starting_hp_applied;
+    unsigned equipment_pending=checkpoint_earned_weapons_option && !checkpoint_earned_weapons_applied;
+    if(hp_pending || equipment_pending) {
         if(checkpoint_pending.authority!=CHECKPOINT_AGREED ||
            checkpoint_pending.index!=checkpoint_lab_index() || checkpoint_pending.nonce!=checkpoint_lab_nonce() ||
            checkpoint_lab_state!=CHECKPOINT_LAB_CONSUMED || !checkpoint_lab_authorized() ||
            psx_mod_read_word(diagnostic+0xA4)!=1 || psx_mod_read_word(diagnostic+0xB4)!=1 ||
            psx_mod_read_byte(diagnostic+0xBC)!=1 || psx_mod_read_byte(diagnostic+0xBD)!=CHECKPOINT_AGREED) {
+            if(equipment_pending)checkpoint_earned_weapons_reason=CHECKPOINT_FORBIDDEN;
             checkpoint_cancel(CHECKPOINT_FORBIDDEN);return;
         }
-        if(!checkpoint_starting_hp_source()) {checkpoint_cancel(CHECKPOINT_SOURCE);return;}
-        if(!checkpoint_safe_boundary() || !checkpoint_before_doors_idle(0) || !checkpoint_before_doors_idle(1))return;
-        /* Existing idle guard safely refuses reversed/unsupported rosters.
-         * Still use the actual native character for the capacity lookup. */
+        if(!checkpoint_starting_hp_source() || (equipment_pending && !checkpoint_equipment_source())) {
+            if(equipment_pending)checkpoint_earned_weapons_reason=CHECKPOINT_SOURCE;
+            checkpoint_cancel(CHECKPOINT_SOURCE);return;
+        }
+        if(!checkpoint_safe_boundary() || !checkpoint_before_doors_idle(0) || !checkpoint_before_doors_idle(1) ||
+           (equipment_pending && !checkpoint_equipment_context(cpu)))return;
         uint8_t primary[sizeof p2.body];capture(PLAYER,primary,sizeof primary);
         for(unsigned seat=0;seat<2;++seat) {
             const uint8_t *b=seat?p2.body:primary;
-            /* Both must still be genuinely healthy. Never top up, repair a
-             * prior hit or turn a dead/incoming actor into a ready body. */
+            /* Original boot/enrollment must finish healthy before either
+             * prerequisite. Never repair prior damage or a dead/incoming body. */
             unsigned full=psx_mod_read_byte(PLAY+0x5Bu+b[2]);
             if(full<32 || full>=128 || b[0x5C]!=full || b[0x5D]!=full || b[0x5E]!=full ||
                checkpoint_starting_hp[seat]>full)return;
         }
-        /* Source-authorized setup only. Leave native full-health capacity/copies, pose,
-         * immunity, contact, roster, resources and lifecycle unchanged. */
-        for(unsigned seat=0;seat<2;++seat)if(checkpoint_starting_hp[seat]) {
-            if(seat)p2.body[0x5C]=(uint8_t)checkpoint_starting_hp[seat];
-            else psx_mod_write_byte(PLAYER+0x5C,(uint8_t)checkpoint_starting_hp[seat]);
+        /* Original checkpoint initialization has finished; it cannot clobber
+         * these native per-body flags. Acquire before the optional HP seed. */
+        if(equipment_pending) {
+            if(!checkpoint_equipment_lab(cpu)) {
+                checkpoint_earned_weapons_reason=CHECKPOINT_PLUGIN_FAILED;
+                checkpoint_cancel(CHECKPOINT_PLUGIN_FAILED);return;
+            }
+            checkpoint_earned_weapons_applied=1;
         }
-        checkpoint_starting_hp_applied=1;
+        if(hp_pending) {
+            for(unsigned seat=0;seat<2;++seat)if(checkpoint_starting_hp[seat]) {
+                if(seat)p2.body[0x5C]=(uint8_t)checkpoint_starting_hp[seat];
+                else psx_mod_write_byte(PLAYER+0x5C,(uint8_t)checkpoint_starting_hp[seat]);
+            }
+            checkpoint_starting_hp_applied=1;
+        }
 #ifdef MMX6_COOP_CHECKPOINT_TAINT_API
         psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
 #endif
@@ -581,7 +605,7 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
                 } else if(checkpoint_pending.phase==2) {
                     if(checkpoint_portal_original_arrival())checkpoint_portal_place();
                 } else if(checkpoint_portal_ready()) {
-                    psx_mod_write_byte(diagnostic+0xAD,2);checkpoint_complete();
+                    psx_mod_write_byte(diagnostic+0xAD,2);checkpoint_complete(cpu);
                 }
             } else if(checkpoint_pending.authority==CHECKPOINT_AGREED &&
                (checkpoint_lab_option==4 || checkpoint_lab_option==5)) {
@@ -604,10 +628,10 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
                     else if(!(explosion?checkpoint_before_explosion_ground(meta,desc):checkpoint_before_doors_ground(meta,desc))) {
                         checkpoint_ground_refusal(meta,desc,explosion);checkpoint_cancel(CHECKPOINT_SOURCE);
                     }
-                    else {psx_mod_write_byte(diagnostic+0xAD,2);checkpoint_complete();}
+                    else {psx_mod_write_byte(diagnostic+0xAD,2);checkpoint_complete(cpu);}
                 }
             } else {
-                checkpoint_complete();
+                checkpoint_complete(cpu);
             }
         } else checkpoint_cancel(CHECKPOINT_ORDER);
     }
@@ -644,22 +668,9 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
     unsigned index=checkpoint_lab_index();
     if(index>=115) {checkpoint_status(CHECKPOINT_REJECTED,CHECKPOINT_UNKNOWN);return 0;}
     const Mmx6Checkpoint *entry=&checkpoint_inventory[index];
-    if(checkpoint_earned_weapons_option) {
-        unsigned reason=!checkpoint_lab_authorized()?CHECKPOINT_FORBIDDEN:
-            !checkpoint_source(entry)?CHECKPOINT_SOURCE:
-            !checkpoint_equipment_context(cpu)?CHECKPOINT_CONTEXT:CHECKPOINT_OK;
-        if(reason) {checkpoint_earned_weapons_reason=reason;checkpoint_status(CHECKPOINT_REJECTED,reason);return 0;}
-    }
-    int accepted=checkpoint_request(entry->stage,entry->section,entry->checkpoint,
+    (void)cpu;
+    return checkpoint_request(entry->stage,entry->section,entry->checkpoint,
         checkpoint_lab_nonce(),CHECKPOINT_AGREED);
-    if(accepted && checkpoint_earned_weapons_option) {
-        /* The request already earned source/profile/context/one-shot/taint
-         * authority. No original mode8/9 instruction has run yet. 3D718 never
-         * reads mode, nor writes HP/ammo/selection/attack/result/phase. */
-        checkpoint_equipment_native(cpu,0xFFu);
-        checkpoint_earned_weapons_applied=1;
-    }
-    return accepted;
 #else
     (void)cpu;(void)raw;return 0;
 #endif

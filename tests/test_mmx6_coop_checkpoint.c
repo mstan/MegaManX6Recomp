@@ -25,6 +25,7 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
         /* Typed external native contract only: source3D718 copies these
          * fields for admitted form1/5; this is not native gameplay execution. */
         CHECK(cpu->gpr[4]==PLAYER && !cpu->gpr[5] && psx_mod_read_byte(PLAY+0x60)==255);
+        CHECK(checkpoint_pending.phase>=2 && psx_mod_read_byte(PLAY)==10);
         unsigned character=psx_mod_read_byte(PLAYER+2);CHECK(character<2);
         psx_mod_write_byte(PLAYER+0xE7,psx_mod_read_byte(PLAY+0x5E));
         psx_mod_write_word(PLAYER+0xEC,psx_mod_read_word(PLAY+0x74+character*4));
@@ -178,8 +179,8 @@ static void agreed_starting_hp(CPUState *cpu) {
          * never restore the setup HP. No per-frame damage compensation. */
         psx_mod_write_byte(PLAYER+0x5C,5);p2.body[0x5C]=6;
         CHECK(!checkpoint_stage_boundary(cpu) && psx_mod_read_byte(PLAYER+0x5C)==5 && p2.body[0x5C]==6);
-        psx_mod_write_byte(PLAY+12,20);life.status[0]=MMX6_COOP_FALLEN;checkpoint_complete();
-        life.status[0]=MMX6_COOP_ALIVE;checkpoint_complete();
+        psx_mod_write_byte(PLAY+12,20);life.status[0]=MMX6_COOP_FALLEN;checkpoint_complete(cpu);
+        life.status[0]=MMX6_COOP_ALIVE;checkpoint_complete(cpu);
         CHECK(psx_mod_read_byte(PLAYER+0x5C)==5 && p2.body[0x5C]==6 && checkpoint_starting_hp_applied==1);
         starting_hp_pending(cpu,online);psx_mod_write_byte(0x8003BE74u,0);CHECK(!checkpoint_stage_boundary(cpu));
         CHECK(!checkpoint_starting_hp_applied && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
@@ -214,51 +215,75 @@ static void agreed_turtloid_boundary(CPUState *cpu) {
 static void setup_earned(CPUState *cpu,int online) {
     test_lab_earned_option="all";setup_agreed(cpu,online);equipment_probe=1;equipment_calls=0;
     cpu->gpr[29]=0x801FFF00u;
+    memset(p2.body,0,sizeof p2.body);
+    for(unsigned i=0;i<sizeof p2.body;++i)psx_mod_write_byte(PLAYER+i,0);
+    for(unsigned seat=0;seat<2;++seat) {
+        uint8_t body[sizeof p2.body]={0};
+        body[0]=body[3]=body[4]=1;body[2]=(uint8_t)seat;body[5]=2;
+        body[0x5C]=body[0x5D]=body[0x5E]=32;body[0x70]=8;body[0xE7]=(uint8_t)(seat?5:1);
+        put32(body+0x68,0x80073D50u+seat*4u);put32(body+0xEC,seat?0x00405060u:0x00102030u);
+        if(seat)memcpy(p2.body,body,sizeof body);else project(PLAYER,body,sizeof body);
+    }
     psx_mod_write_byte(PLAY+0x38,0);psx_mod_write_byte(PLAY+0x5E,1);psx_mod_write_byte(PLAY+0x60,0);
+    psx_mod_write_byte(PLAY+0x5B,32);psx_mod_write_byte(PLAY+0x5C,32);
     psx_mod_write_word(PLAY+0x74,0x00102030u);psx_mod_write_word(PLAY+0x78,0x00405060u);
-    psx_mod_write_byte(PLAYER+2,0);p2.body[2]=1;
-    psx_mod_write_byte(PLAYER+0xE7,1);p2.body[0xE7]=5;
-    psx_mod_write_word(PLAYER+0xEC,0x00102030u);put32(p2.body+0xEC,0x00405060u);
-    psx_mod_write_byte(PLAYER+0xC9,0);p2.body[0xC9]=0;
+}
+static void earned_pending(CPUState *cpu,int online,unsigned campaign) {
+    setup_earned(cpu,online);psx_mod_write_byte(PLAY+0x60,(uint8_t)campaign);
+    CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.phase==1 && psx_mod_read_byte(PLAY)==8);
+    CHECK(!equipment_calls && !checkpoint_earned_weapons_applied && psx_mod_read_byte(PLAY+0x60)==campaign);
+    mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);psx_mod_write_byte(PLAY,10);
+    CHECK(checkpoint_pending.phase==2 && !equipment_calls && !psx_mod_read_byte(PLAYER+0xC9) && !p2.body[0xC9]);
 }
 static void agreed_earned_weapons(CPUState *cpu) {
     CHECK(!checkpoint_earned_weapons_option && !checkpoint_earned_weapons_applied);
-    for(int online=0;online<=1;++online) {
-        setup_earned(cpu,online);CHECK(checkpoint_equipment_source() && checkpoint_earned_weapons_option);
+    for(int online=0;online<=1;++online)for(unsigned variant=0;variant<2;++variant) {
+        unsigned campaign=variant?0x40u:0u;earned_pending(cpu,online,campaign);
         uint8_t primary[sizeof p2.body];capture(PLAYER,primary,sizeof primary);PlayerContext zero=p2;CPUState registers=*cpu;
-        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.phase==1 && psx_mod_read_byte(PLAY)==8);
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE);
         CHECK(equipment_calls==2 && checkpoint_earned_weapons_applied && !checkpoint_earned_weapons_reason);
-        CHECK(psx_mod_read_byte(PLAY+0x60)==255 && psx_mod_read_byte(PLAYER+0xC9)==255 && p2.body[0xC9]==255);
+        CHECK(psx_mod_read_byte(PLAY+0x60)==campaign && psx_mod_read_byte(PLAYER+0xC9)==255 && p2.body[0xC9]==255);
         primary[0xC9]=zero.body[0xC9]=255;
         uint8_t after[sizeof primary];capture(PLAYER,after,sizeof after);
         CHECK(!memcmp(primary,after,sizeof after) && !memcmp(&zero,&p2,sizeof zero) && !memcmp(&registers,cpu,sizeof registers));
         CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        /* A subsequent real projection must capture restored campaign state,
+         * not consume the previous native grant's stale saved_play backup. */
+        enter_zero();CHECK(psx_mod_read_byte(PLAY+0x60)==campaign);leave_zero();
+        CHECK(psx_mod_read_byte(PLAY+0x60)==campaign && p2.body[0xC9]==255);
+        diagnostics(0);CHECK(psx_mod_read_word(diagnostic+0xC4)==0x00030101u);
         CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && equipment_calls==2);
-        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);psx_mod_write_byte(PLAY,10);
-        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_earned_weapons_applied && equipment_calls==2);
-
 #ifdef MMX6_COOP_MODERN_STATE
         HostState saved;state_capture(&saved);CHECK(saved.earned_applied==1 && saved.earned_reason==0);
         uint8_t encoded[65536];StateIO write={STATE_WRITE,1,encoded,NULL,sizeof encoded,0,0};state_core(&write,&saved);CHECK(write.ok);
         HostState loaded={0};StateIO read={STATE_READ,1,NULL,encoded,write.pos,0,0};state_core(&read,&loaded);CHECK(read.ok && loaded.earned_applied==1);
         checkpoint_earned_weapons_applied=0;state_commit(&loaded);CHECK(checkpoint_earned_weapons_applied==1);
         loaded.earned_applied=2;write=(StateIO){STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&write,&loaded);CHECK(!write.ok);
-
 #endif
+        p2.body[0xC9]=0;checkpoint_complete(cpu);CHECK(!p2.body[0xC9] && equipment_calls==2);
         checkpoint_reset();CHECK(!checkpoint_earned_weapons_applied && !checkpoint_earned_weapons_reason);
     }
-    for(unsigned bad=0;bad<7;++bad) {
-        setup_earned(cpu,1);
+    for(unsigned bad=0;bad<11;++bad) {
+        earned_pending(cpu,1,0x40u);
         if(bad==0)test_lab_ready=0;
         if(bad==1)psx_mod_write_byte(0x8003D718u,psx_mod_read_byte(0x8003D718u)^1);
         if(bad==2)psx_mod_write_byte(PLAYER+0xE7,2);
         if(bad==3)p2.body[0xE7]=1;
         if(bad==4)psx_mod_write_byte(PLAY+0x5E,2);
-        if(bad==5)cpu->gpr[29]=0;
-        if(bad==6)cpu->gpr[29]|=1;
-        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !equipment_calls && !checkpoint_earned_weapons_applied);
-        CHECK(!psx_mod_read_byte(PLAY+0x60) && !psx_mod_read_byte(PLAYER+0xC9) && !p2.body[0xC9] && !checkpoint_test_taint);
+        if(bad==5)cpu->gpr[29]=0;if(bad==6)cpu->gpr[29]|=1;
+        if(bad==7)p2.body[0x70]=0;if(bad==8)enrolled=0;
+        if(bad==9)p2.body[0x5D]=31;if(bad==10)p2.body[5]=0;
+        CHECK(!checkpoint_stage_boundary(cpu) && !equipment_calls && !checkpoint_earned_weapons_applied);
+        CHECK(psx_mod_read_byte(PLAY+0x60)==0x40u && !psx_mod_read_byte(PLAYER+0xC9) && !p2.body[0xC9]);
     }
+    /* Grant before HP seed: native technique/resources/capacities survive,
+     * and the independent explicitly selected starting HP is applied once. */
+    test_lab_hp_option[0]="17";test_lab_hp_option[1]="23";earned_pending(cpu,1,0x40u);
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_earned_weapons_applied && checkpoint_starting_hp_applied && equipment_calls==2);
+    CHECK(psx_mod_read_byte(PLAYER+0x5C)==17 && p2.body[0x5C]==23 &&
+          psx_mod_read_byte(PLAYER+0x5D)==32 && p2.body[0x5D]==32 &&
+          psx_mod_read_byte(PLAY+0x60)==0x40u && psx_mod_read_byte(PLAYER+0xC9)==255 && p2.body[0xC9]==255);
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";
     test_lab_earned_option="invalid";setup_agreed(cpu,1);CHECK(failed && !checkpoint_earned_weapons_option);
     test_lab_option="off";test_lab_earned_option="all";checkpoint_reset();CHECK(failed && !checkpoint_lab_option);
     setup_earned(cpu,1);psx_mod_write_byte(diagnostic+0x51,255);psx_mod_write_byte(diagnostic+0x50,9);

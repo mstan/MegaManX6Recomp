@@ -47,14 +47,22 @@ class EarnedWeapons(unittest.TestCase):
         actual=actual.replace('    checkpoint_equipment_native(cpu,mask);','    psx_mod_write_byte(PLAY+0x60,(uint8_t)mask);\n    guest(cpu,0x8003D718,PLAYER,0);\n    enter_zero();\n    guest(cpu,0x8003D718,PLAYER,0);\n    leave_zero();')
         self.assertEqual(actual,function(before,'diagnostic_inventory_setup'))
 
-    def test_grant_follows_successful_agreed_request_only(self):
-        body=function(CHECKPOINT,'checkpoint_lab_boundary')
-        self.assertLess(body.index('checkpoint_lab_authorized()'),body.index('int accepted=checkpoint_request'))
-        self.assertLess(body.index('checkpoint_source(entry)'),body.index('int accepted=checkpoint_request'))
-        self.assertIn('if(accepted && checkpoint_earned_weapons_option)',body)
-        self.assertLess(body.index('int accepted=checkpoint_request'),body.index('checkpoint_equipment_native(cpu,0xFFu)'))
-        self.assertLess(body.index('checkpoint_equipment_native(cpu,0xFFu)'),body.index('checkpoint_earned_weapons_applied=1'))
-        self.assertIn('checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED',body)
+    def test_grant_follows_original_healthy_completion_only(self):
+        arm=function(CHECKPOINT,'checkpoint_lab_boundary');body=function(CHECKPOINT,'checkpoint_complete')
+        self.assertNotIn('checkpoint_equipment_native',arm);self.assertNotIn('checkpoint_equipment_lab',arm)
+        self.assertIn('checkpoint_request(',arm)
+        for guard in('checkpoint_lab_authorized()','checkpoint_equipment_source()','checkpoint_before_doors_idle(0)','b[0x5C]!=full','b[0x5D]!=full','b[0x5E]!=full'):
+            self.assertLess(body.index(guard),body.index('checkpoint_equipment_lab(cpu)'))
+        self.assertLess(body.index('checkpoint_equipment_lab(cpu)'),body.index('checkpoint_earned_weapons_applied=1'))
+        self.assertLess(body.index('checkpoint_earned_weapons_applied=1'),body.index('if(hp_pending)'))
+        self.assertLess(body.index('checkpoint_earned_weapons_applied=1'),body.index('CHECKPOINT_COMPLETE'))
+
+    def test_lab_restores_campaign_after_both_projection_calls(self):
+        body=function(CHECKPOINT,'checkpoint_equipment_lab')
+        self.assertIn('campaign=psx_mod_read_byte(PLAY+0x60)',body)
+        self.assertIn('STATE_WORDS(restore_campaign,67,&campaign,1)',body)
+        self.assertLess(body.index('checkpoint_equipment_native(cpu,0xFFu)'),body.index('psx_mod_write_byte(PLAY+0x60,(uint8_t)campaign)'))
+        self.assertLess(body.index('psx_mod_write_byte(PLAY+0x60,(uint8_t)campaign)'),body.index('STATE_POP(restore_campaign)'))
 
     def test_native_primitive_has_no_body_or_outcome_writes(self):
         body=function(CHECKPOINT,'checkpoint_equipment_native')
@@ -76,11 +84,11 @@ class EarnedWeapons(unittest.TestCase):
 
     def test_current_profile_and_old_title_refusal(self):
         contract=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text())
-        self.assertEqual(contract['revision'],21)
-        self.assertEqual(contract['session']['title_compatibility'],'mmx6-x-zero-delay-v38')
+        self.assertEqual(contract['revision'],22)
+        self.assertEqual(contract['session']['title_compatibility'],'mmx6-x-zero-delay-v39')
         self.assertEqual((ROOT/'src/mods/mmx6_coop_host_lab_contract.h').read_text(),mmx6_host_lab_contract.generated_header())
         test=(ROOT/'tests/test_mmx6_coop_host_lab.c').read_text()
         self.assertIn('title.compatibility_id="mmx6-x-zero-delay-v37";CHECK(!lab_title_eligible(&title))',test)
-        self.assertIn('MMX6_STARTUP_BUILD_ID=\\"mmx6-x-zero-delay-v38\\"',(ROOT/'CMakeLists.txt').read_text(encoding='utf-8'))
+        self.assertIn('MMX6_STARTUP_BUILD_ID=\\"mmx6-x-zero-delay-v39\\"',(ROOT/'CMakeLists.txt').read_text(encoding='utf-8'))
 
 if __name__=='__main__':unittest.main()

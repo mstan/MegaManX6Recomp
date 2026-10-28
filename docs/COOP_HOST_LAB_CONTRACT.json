@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 21,
+  "revision": 22,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v38",
+    "title_compatibility": "mmx6-x-zero-delay-v39",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -418,5 +418,13 @@
     "preserved": "No HP/ammo/selection/action/phase/boss/table/timer/result writes. Original native equipment/form and earned flags only; acquisition and strict ordinary input recording are bypassed, never qualified.",
     "state": "Applied+reason latch reset per activation, included in current-build snapshot/digest; option bound in snapshot resources. Snapshot schema14; no old-state compatibility.",
     "diagnostic": "C4 selected,C5 applied,C6 current both-native-FF mask,C7 refusalreason; C0..C3 reserved for independent startingHP option."
+  },
+  "title_changes_v39_lab_equipment_campaign_preservation": {
+    "supersedes": "v38 LAB earned-weapon arm timing/canonical-mask mutation, actualV92 premature native report retained as failed setup.",
+    "boundary": "Only after original checkpoint initialization, enrollment, both healthy grounded default native bodies and existing agreed source/profile/one-shot authority; before COMPLETE and optional startingHP.",
+    "operation": "TemporarilyFF PLAY60 around the two exact original8003D718 calls; leave_zero finishes then restore original canonical campaign PLAY60 immediately. Native per-body C9FF remains, without HP/ammo/current-selection/phase/result writes.",
+    "legacy": "Existing offline command9 remains unchanged and online forbidden.",
+    "state": "Existing applied/refusal latch and selected option; snapshot14 wire unchanged; temporary campaign local included in callback state tracking.",
+    "validation": "Fresh exactcandidate native LOCAL/NET boss intro and actual equipped weakness still required; no source-only credit."
   }
 }
