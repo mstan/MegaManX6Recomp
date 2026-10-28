@@ -9,8 +9,9 @@ not execute, curate, expand or require that audit for completion. Historical
 handoffs, tracker text and the paused goal's older "plus native X6 content"
 wording are superseded by this owner correction. A native X6 location/mechanic
 may be exercised only to resolve a named comparison or its necessary setup.
-For this continuation, the owner's latest October 26 instruction permits one
-subagent alongside the primary agent. Do not use additional workers. This
+For this continuation, the owner's latest October 27 instruction temporarily
+permits up to three subagents alongside the primary agent. Use bounded,
+independent assignments and keep native game runs and builds serial. This
 task-specific permission does not change the global solo default.
 The 234-only scope continues to override older goal and handoff wording.
 
@@ -58,7 +59,7 @@ finished. These rules supplement the owner's global instructions.
   fixes and remaining blockers. If a work block closes no rows, say so and
   change the next block's approach. Report the 234-comparison counts only;
   setup or unrelated native-content coverage does not advance this burndown.
-- Use at most the one currently authorized worker; keep native games and builds
+- Use at most the three currently authorized workers; keep native games and builds
   serial. Local worktrees and commits only; no pushes, PRs, publication
   or remote tracker sync. One native game/pair OR one build, at most two compiler
   jobs. Defer human-dependent checks until autonomous work is exhausted.
