@@ -1,0 +1,730 @@
+{
+  "schema": 1,
+  "comparison": "F27",
+  "result": "passed",
+  "candidate": "38823f814f5e182e80e47b57ce02b3bf5a82edb3",
+  "frozen_definition": {
+    "x4": {
+      "source_report": "COOP_PLAYTEST_FEEDBACK_20261010.md:62 #27",
+      "state": "checked",
+      "original_symptom": "Zero fire and ice techniques corrupt graphics",
+      "failure_class": "Technique child effects inherit the wrong character context"
+    },
+    "x5_snapshot": {
+      "counterpart_check": "Use Zero's original X5 elemental techniques with X idle; inspect child allocation, assembly, palette and expiry, then an actual target interaction.",
+      "burndown": "P07",
+      "status": "passed",
+      "evidence_limits": "Passed bounded32568930 earned Zero/P2 rising39/private24 and native falling07->descending38/private23->landing3F, original expiry/control. Reproduced9FFB landing3F using canonical X graphics/assembly; fix captures true allocator owner/directories and retains own decoded drawing/palette. Exact Zero graphics9F09A864/assembly9F0A9F34 and original CLUT7804 in both retained caches; composed effect replaces white garbage in both panes, bodies/HUD remain. qa-zero-elemental-{20261021/falling-correction,fixed-20261021/native-elemental} and fixed/impact-palette-qualified.json. Native spark child families/all techniques and active elemental network path remain unverified. Initial rising-state fire miss and ambiguous static banks post-analysis are retained; corrected falling input and read-only cache qualification require no forced poses/grants or repeated gameplay. Current-build schema4 rejects old states;19/19 CTests pass3.33s."
+    }
+  },
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-atlas-v94-final-binding-root-v1.json",
+    "bytes": 269,
+    "sha256": "13423d3e7ecac6d12a2ddb895b9f6cd0993f6b2f1e2e2a96a7375851d4af9dcd",
+    "image_sha256": "8607d4fb4561117b4d0fe2389226e3b4b9b31bac9948ff773269efed75438e63",
+    "manifest_sha256": "0a6ff510418906e934d0c9429a3a529ca982e5a76475c24cdca156f098616bd9",
+    "provenance_sha256": "cc874dbe80c6d85518c54d9af0241df6f8d84627ed554bcc279b94b1dc2b1970"
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-flame-local-v94-root-v4\\qualification.json",
+        "bytes": 9458499,
+        "sha256": "7d3201afa997946efd6fbb493f33598b9d2fac8e0e30388613076d5ee519ed6c"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-flame-local-v94-root-v4\\F27-executing-source-pins.json",
+        "bytes": 4411,
+        "sha256": "dddbc47e7a8ca9ec5db590d73d775a74a5aa19aad34dac5209d82ea72633eebe"
+      },
+      "ice": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-flame-local-v94-root-v4\\ammo-hud\\intro-admission\\F27-ice-predoor\\observations.json",
+        "bytes": 2233241,
+        "sha256": "90b88be0a2f11ed7db11bcc48731ff396197dd16deb504536938c59740018ee7"
+      },
+      "flame": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\observations.json",
+        "bytes": 836264,
+        "sha256": "adb196bb0416c786c7fd1294f81a08e3c47777ccac1988d65c031115af28b757"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_witnesses": [
+        {
+          "peer": 0,
+          "ice": {
+            "birth": 20,
+            "expiry": 27,
+            "landing": 97,
+            "energy": [
+              288,
+              276
+            ],
+            "landing_action": 8
+          },
+          "flame": {
+            "birth": 7,
+            "retirement": 22,
+            "boss_hp": [
+              48,
+              46
+            ]
+          }
+        }
+      ],
+      "composed_review": [
+        {
+          "peer": 0,
+          "label": "original-ceiling-ice33-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-flame-local-v94-root-v4\\ammo-hud\\intro-admission\\F27-ice-predoor\\peer-0-original-ceiling-ice33-active.png",
+            "bytes": 2074543,
+            "sha256": "835f3617c4b45cad84b726bec4fc0cb231d38a580fec8e628f2973c32664501b"
+          },
+          "reviewed": true,
+          "review_basis": "New current ice capture reviewed individually; fire review reused from complete same-image F50 packet",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 0,
+          "label": "original-ceiling-ice33-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-flame-local-v94-root-v4\\ammo-hud\\intro-admission\\F27-ice-predoor\\peer-0-original-ceiling-ice33-retired.png",
+            "bytes": 2074543,
+            "sha256": "e43313edbf9ff8fdebbc3626cccf541b13ffda7356f199ea2c8aed4b0bdddea9"
+          },
+          "reviewed": true,
+          "review_basis": "New current ice capture reviewed individually; fire review reused from complete same-image F50 packet",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 0,
+          "label": "native-source-action55-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\peer-0-native-source-action55-active.png",
+            "bytes": 2074543,
+            "sha256": "44e5bb6c030227764235be504496065b2eaab8994cb04165e6f01834ceead2da"
+          },
+          "reviewed": true,
+          "review_basis": "Individually reviewed complete same-image F50 fire capture; current file hash rechecked",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 0,
+          "label": "native-source-action55-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\peer-0-native-source-action55-retired.png",
+            "bytes": 2074543,
+            "sha256": "63e59fb2e7afb7e4bbf2df012fdd11bad667e6cb55a2e5084187d1982911c626"
+          },
+          "reviewed": true,
+          "review_basis": "Individually reviewed complete same-image F50 fire capture; current file hash rechecked",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        }
+      ],
+      "independent_fire_qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\qualification.json",
+        "bytes": 6295975,
+        "sha256": "a90f94f7f25a0317fd76824344d9404aecc29ba2b112f07062740a769181e2ba"
+      },
+      "independent_fire_parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "independent_fire_resolved_state_crc": null,
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-only-netplay-v94-root-v6\\qualification.json",
+        "bytes": 4033302,
+        "sha256": "aa92dc2a541372e2e0a32b386bd835887c4dbed5d7bbe5a3535c4031de07d99c"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-only-netplay-v94-root-v6\\F27-executing-source-pins.json",
+        "bytes": 4410,
+        "sha256": "819168d6ed80b3a66e83f02da93f1e58fba9314e10a295a9dde5573f2b37dec9"
+      },
+      "ice": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-only-netplay-v94-root-v6\\intro-admission\\F27-ice-predoor\\observations.json",
+        "bytes": 1664275,
+        "sha256": "ad6a967b5b073f5e9abc455f6f546b02393030b9e5b27986135f293c0adec36c"
+      },
+      "flame": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\observations.json",
+        "bytes": 1346816,
+        "sha256": "0057e421e5ee40b8401801e0c0ea047a9a8c48d910aba5a90004e692537b1bef"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_witnesses": [
+        {
+          "peer": 0,
+          "ice": {
+            "birth": 12,
+            "expiry": 13,
+            "landing": 36,
+            "energy": [
+              288,
+              276
+            ],
+            "landing_action": 8
+          },
+          "flame": {
+            "birth": 7,
+            "retirement": 21,
+            "boss_hp": [
+              48,
+              46
+            ]
+          }
+        },
+        {
+          "peer": 1,
+          "ice": {
+            "birth": 12,
+            "expiry": 13,
+            "landing": 36,
+            "energy": [
+              288,
+              276
+            ],
+            "landing_action": 8
+          },
+          "flame": {
+            "birth": 7,
+            "retirement": 21,
+            "boss_hp": [
+              48,
+              46
+            ]
+          }
+        }
+      ],
+      "composed_review": [
+        {
+          "peer": 0,
+          "label": "original-ceiling-ice33-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-only-netplay-v94-root-v6\\intro-admission\\F27-ice-predoor\\peer-0-original-ceiling-ice33-active.png",
+            "bytes": 2074543,
+            "sha256": "ad54035d88460f6d74a1953018c5c28de6304755681a7d78578fb0f242354393"
+          },
+          "reviewed": true,
+          "review_basis": "New current ice capture reviewed individually; fire review reused from complete same-image F50 packet",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 1,
+          "label": "original-ceiling-ice33-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-only-netplay-v94-root-v6\\intro-admission\\F27-ice-predoor\\peer-1-original-ceiling-ice33-active.png",
+            "bytes": 2074543,
+            "sha256": "6813187053bd23e42352446deb17b255f4202a1546893b99e71dba83671e7709"
+          },
+          "reviewed": true,
+          "review_basis": "New current ice capture reviewed individually; fire review reused from complete same-image F50 packet",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 0,
+          "label": "original-ceiling-ice33-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-only-netplay-v94-root-v6\\intro-admission\\F27-ice-predoor\\peer-0-original-ceiling-ice33-retired.png",
+            "bytes": 2074543,
+            "sha256": "54d782be77a03639a5d728e9bbd4bb37919de2987942c00eb8eda4b91f7f2b41"
+          },
+          "reviewed": true,
+          "review_basis": "New current ice capture reviewed individually; fire review reused from complete same-image F50 packet",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 1,
+          "label": "original-ceiling-ice33-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-ice-only-netplay-v94-root-v6\\intro-admission\\F27-ice-predoor\\peer-1-original-ceiling-ice33-retired.png",
+            "bytes": 2074543,
+            "sha256": "9d7f6b8502ef83404e09d3c2039ff2de23b955601dc622649c79d79dcb64e63f"
+          },
+          "reviewed": true,
+          "review_basis": "New current ice capture reviewed individually; fire review reused from complete same-image F50 packet",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 0,
+          "label": "native-source-action55-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\peer-0-native-source-action55-active.png",
+            "bytes": 2074543,
+            "sha256": "5a9430b6adabbe0cea71fb98c4f0d69240fa8730def02fc2f52eb4d9f82c4a35"
+          },
+          "reviewed": true,
+          "review_basis": "Individually reviewed complete same-image F50 fire capture; current file hash rechecked",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 1,
+          "label": "native-source-action55-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\peer-1-native-source-action55-active.png",
+            "bytes": 2074543,
+            "sha256": "06eedd692ade923b2a95955918fc639b56a8f69486c7feb20f053501ec28ff32"
+          },
+          "reviewed": true,
+          "review_basis": "Individually reviewed complete same-image F50 fire capture; current file hash rechecked",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 0,
+          "label": "native-source-action55-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\peer-0-native-source-action55-retired.png",
+            "bytes": 2074543,
+            "sha256": "ead4024c749d7aac749e79448871646f349c359e2a96fb05b02deee0925c3d38"
+          },
+          "reviewed": true,
+          "review_basis": "Individually reviewed complete same-image F50 fire capture; current file hash rechecked",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        },
+        {
+          "peer": 1,
+          "label": "native-source-action55-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\peer-1-native-source-action55-retired.png",
+            "bytes": 2074543,
+            "sha256": "c2dc0c05f04f20b5fa871ceba35f60aa311a7bf892999afca208f75aed92d0a9"
+          },
+          "reviewed": true,
+          "review_basis": "Individually reviewed complete same-image F50 fire capture; current file hash rechecked",
+          "limit": "Current source-native ice or flame and retirement; overlap/boss flash/pre-existing scenery defects; no whole-frame/exact-pixel claim"
+        }
+      ],
+      "independent_fire_qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\qualification.json",
+        "bytes": 9519579,
+        "sha256": "5273360bc640f50fb892d8948a27f04980a4d348a0deb684b9c60410e442b6a3"
+      },
+      "independent_fire_parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "independent_fire_resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2944,
+              "core": "2072237c",
+              "mod": "7b697a22"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "f462f052",
+              "mod": "d608f49c"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "6bdd6507",
+              "mod": "28f78c3c"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "25764192",
+              "mod": "b62f11ba"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "8a3d0600",
+              "mod": "bc53d1da"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "1d8fd25e",
+              "mod": "490a869e"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "e69dd797",
+              "mod": "be498204"
+            }
+          ],
+          "resolved_through": [
+            3159,
+            3160
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3200,
+              "core": "69f6867b",
+              "mod": "284a3f21"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "e87af1f1",
+              "mod": "441439df"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "8046efd4",
+              "mod": "427e715d"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "88609bfd",
+              "mod": "b1f6dbbd"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "41f1917d",
+              "mod": "7cb46967"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "180376c8",
+              "mod": "a4b10e07"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "ff58a222",
+              "mod": "ca98b115"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "803aec63",
+              "mod": "2e6fcc89"
+            }
+          ],
+          "resolved_through": [
+            3433,
+            3433
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3520,
+              "core": "87048302",
+              "mod": "7f25f90d"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "2d79e198",
+              "mod": "1712d497"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "1c99527c",
+              "mod": "15663437"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "be0dbbaf",
+              "mod": "2e130dc5"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "cdb265e5",
+              "mod": "6c13b9e5"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "d01e31bb",
+              "mod": "284a3f21"
+            },
+            {
+              "simulation_tick": 3712,
+              "core": "7add83ed",
+              "mod": "441439df"
+            }
+          ],
+          "resolved_through": [
+            3733,
+            3733
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 7520,
+              "core": "ccc838b3",
+              "mod": "88d78179"
+            },
+            {
+              "simulation_tick": 7552,
+              "core": "2677eb8a",
+              "mod": "a345a29f"
+            },
+            {
+              "simulation_tick": 7584,
+              "core": "07fca785",
+              "mod": "0f38658d"
+            },
+            {
+              "simulation_tick": 7616,
+              "core": "a88be7d9",
+              "mod": "c670a73d"
+            },
+            {
+              "simulation_tick": 7648,
+              "core": "30549f70",
+              "mod": "c8060cd7"
+            },
+            {
+              "simulation_tick": 7680,
+              "core": "7d2ca661",
+              "mod": "7b4b38c7"
+            },
+            {
+              "simulation_tick": 7712,
+              "core": "4e37ff3e",
+              "mod": "d9355cb5"
+            }
+          ],
+          "resolved_through": [
+            7723,
+            7723
+          ]
+        }
+      ],
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2880,
+              "core": "b54cd1b6",
+              "mod": "7dc356c4"
+            },
+            {
+              "simulation_tick": 2912,
+              "core": "997e95e0",
+              "mod": "bac4066a"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "9ad2efef",
+              "mod": "2356bc4a"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "a4d3b2f8",
+              "mod": "969f88f4"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "c21e8734",
+              "mod": "cf8d6694"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "94f28a7e",
+              "mod": "76e8d5e2"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "bc643b7e",
+              "mod": "637dec02"
+            }
+          ],
+          "resolved_through": [
+            3099,
+            3098
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3136,
+              "core": "8d7c5624",
+              "mod": "98334cac"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "8674f426",
+              "mod": "e329e37a"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "371abbfd",
+              "mod": "fd51d9a0"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "a77d236c",
+              "mod": "1e7b3a00"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "a52cefc0",
+              "mod": "00bbf0f2"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "aa3610c9",
+              "mod": "19ce87d2"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "c0ec1374",
+              "mod": "197e6648"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "069430bd",
+              "mod": "34545a14"
+            }
+          ],
+          "resolved_through": [
+            3368,
+            3368
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3456,
+              "core": "26105c9c",
+              "mod": "e89eabb0"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "0039820c",
+              "mod": "75827eb8"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "276b3c64",
+              "mod": "af6d1a82"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "778e690c",
+              "mod": "64e1e482"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "8027abd2",
+              "mod": "787c64f8"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "2ea8d7b5",
+              "mod": "98334cac"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "66ec8570",
+              "mod": "e329e37a"
+            }
+          ],
+          "resolved_through": [
+            3671,
+            3671
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4320,
+              "core": "a4655ce4",
+              "mod": "e23c3394"
+            },
+            {
+              "simulation_tick": 4352,
+              "core": "1dd46b1d",
+              "mod": "381292a2"
+            }
+          ],
+          "resolved_through": [
+            4354,
+            4354
+          ]
+        }
+      ],
+      "owned_exits": [
+        0,
+        0
+      ]
+    }
+  },
+  "limitations": [
+    "Frozen F27 covers original Zero fire/ice technique children, resources, palette and expiry, followed by actual target interaction. The imported mutable demand for one target per family was broader than its frozen X5 definition; the frozen definition is preserved. The current ice ceiling/terrain/expiry and distinct flame boss-contact paths qualify that bounded contract, without an all-technique or all-target matrix.",
+    "Ice: native UpCross ceiling31, Square63/type33, own energy288->276, real native expiry, original Down release and grounded2/8 at original position/HP. Flame: native UpSquare55 and original types26/34 earn Metal48->46, retire to an empty pool and grounded idle2. P1 stays neutral during the attacks. Callback deltas are not damaging-hit counts.",
+    "Original DAT85 atlas mappings for native33/34 and the already integrated V94 retained-atlas fix are source-qualified in the linked same-candidate F50 review. Current composed ice/flame active/retired captures are individually reviewed. Actor overlap, ordinary boss hurt flash, existing corrupt scenery and unrelated HUD defects remain explicit. No exact GPU pixel equality or whole-frame art claim.",
+    "New ice LOCAL uses default internal-resolution settings; new ice NET uses native resolution/dynamic resolution off after a retained default-resolution boot watchdog failure. The independently completed fire LOCAL/NET cases use their original default presentation settings. All are the exact same V94 game/SDK/UI, native4:3/default resident loader/unified camera/original assets/muted audio. No performance, exact-peer-pixel or cross-host comparison is inferred.",
+    "Agreed native RecycleCP2, contact protection and earned-equipment prerequisites bypass traversal/acquisition only. Door/intro/fullHP/release, input, technique birth, energy use, hit, timers, collision and recovery stay native. No online RAM, result, phase, HP, projectile or success writes. Strict fixture recording/replay refusal, common profile23, resolved CRC, private cards and owned cleanup remain required.",
+    "Earlier LOCAL landing-observer and NET phase-deadline failures are preserved. Corrected waits retain the same endpoints, service paired transport each sample, and bound native progress as well as wall time. The nested ice setup has its own hard deadline and does not consume the original independent door-entry observer budget.",
+    "The combined NETv5 tail remains failed because the later fire strike missed after complete ice recovery; that strike is never admitted as contact. The previously completed same-image F50 fire cases supply actual boss contact/art/expiry. The new ice-only NET case ends before unrelated door/boss/combat work and retains its intentional stopped R17 driver prefix without a new R17 claim. This is independent same-build evidence reuse, not a cross-build transfer.",
+    "Composed captures are asynchronous. In the new NET peer1 active-request image, the finite ice33 chunks have already retired; its native ice/Saber pose remains visible. Peer0 captures the original cyan/white falling chunks, LOCAL captures the original icy technique, and both peers retain source-bound native33 birth/energy/expiry/landing plus equal final resolved core/mod CRC. No claim that every image depicts the same tick or that all chunks were pixel-checked on each peer.",
+    "No ice-boss-weakness, all-target, palette-switch matrix, inverse roster, campaign acquisition, native Save, state-load, rollback, native3330, WAN, other-host or additional comparison credit."
+  ],
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F27-native-ice-flame-v94-root-v1.py",
+    "bytes": 12384,
+    "sha256": "b5ab71930af3457b735680533666f7b157a7a6ee9f43d499443cc4b30a2b2de3"
+  },
+  "source_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-original-Zero-atlas-native33-34-root-v2.json",
+      "bytes": 1019,
+      "sha256": "67fba26af10d351d4e79265ae9c903cd4062e65493d9e06035c2ef30941813ec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-native-input-source-correction-root-v1.json",
+      "bytes": 742,
+      "sha256": "d59a7f54639d6d81897de73179e5d7f8fb3237b16554116a740a8e7412790c22"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-assets\\manifest-bound-38823f8-F50-native-flame-Yammar-reviewed.json",
+      "bytes": 23095,
+      "sha256": "f1e27efddac6a793c8b5e70a70707593cff60803b7eaba425bb6d30a15b5f246"
+    }
+  ]
+}

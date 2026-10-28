@@ -48,6 +48,17 @@ finished. These rules supplement the owner's global instructions.
   change, and an expected observation that distinguishes success from failure.
   Run meaningful required checks once; repeat only after relevant changes or
   unresolved failures. Passing source tests is not runtime qualification.
+- Reuse completed components from the exact same candidate before adding a
+  combined runtime tail. Give a new named check its own endpoint and final
+  synchronization gate; an unrelated repeated combat miss must not force
+  another run of an already qualified effect family. Preserve failed tails.
+- Derive input masks from the actual field being read: X6's mapped body input
+  differs from raw pad and decoded-pad input. Check existing native samples or
+  original source before freezing an observer. Never edit a running observer.
+- Bound waits by native progress and a hard wall deadline. A delay3 input needs
+  three simulation updates, which a short wall timeout may not provide during
+  paired debug reads. Retain exact outcome predicates and owned RPC validation;
+  use the demonstrated LOCAL loading deadline for paired observation too.
 - Finish the loop: implement, validate the full named contract, curate evidence,
   update the ledger and make a local commit. Required local/netplay results
   must identify the same exact candidate before aggregate admission. Do not
