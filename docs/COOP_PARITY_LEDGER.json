@@ -7494,25 +7494,102 @@
       "frozen_row_sha256": "353e1df0765fca9c6be89a64dd859f675aacb9b3815a47a413596d854e06182b",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
-        "analogue": "Leading partner at genuine forward section exit",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Guest-led original Recycle forward alternate-route boundary4/0 to20/1",
         "bounded_check": "Enumerate an authored stage/route boundary, let the guest cross while primary trails and require original loader continuation with retained roster.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "contact_protection": "off",
+              "prerequisite": "agreed original4/0CP2 and one position-only approach",
+              "transport": "one owned process"
+            },
+            "action": "Guest ordinaryRight crosses original forward alternate-route portal while primary stays outside; follow actual native next-section loader, finite living arrivals, unchanged observed personal resources and separate controls.",
+            "outcome": "Full frozenF25 counterpart independently passed using actual samecandidate LOCAL+NET observations and ordered original loader entries.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F25-native-forward-route-local-netplay-reviewed.json",
+                "sha256": "4aebd1cc82b22b1b089148302cb4b3fff3201d6332494d6f263622ee2c894f9e"
+              }
+            ],
+            "limits": [
+              "F25 is a guest-led original forward route boundary: Recycle4/0 authored subtype1 portal to original alternate-route20/1. Frozen X4 StormOwl and X5 stage2 content is mapped to this X6 route; a same-room checkpoint/door or mere destination allocation would not qualify.",
+              "P1 remains1506 outside the original activation region while guest ordinaryRight advances to1530.5 (NETpeer1 samples1536.5), earns owner2 and native major8/major9 entry functions. This establishes leading/trailing eligibility, not the distant-primary F44 contract.",
+              "Original4/0CP2 initialization and one position/previous-position-only approach bypass the earlier route. Contact protection is OFF. Actual portal admission, native next-section loader and finite destination arrivals/controls follow ordinary input; no HP/phase/portal/progress/outcome writes or stateLoad.",
+              "The actual terminal bodies retain X/P1+Zero/P2, HP32 each and exact observed93..113 resource bytes including native9ammo entries. Initial resources are equal/full, so no damaged-actor healing/F21 or independent energy policy is inferred.",
+              "Polling misses the briefmajor9 RAM interval; complete ordered native1E914 then1E1BC entry traces supply actual loader proof on every physical process. No unseen RAM sample or simultaneous-frame proof is invented.",
+              "Guest initial destination support is partial at103/362. OrdinaryLeft later earns full22foot support at384 and each hero accepts its separate movement. No initial full-foot landing, return route/R14/F47, route-boss, Save/selector or general rendering qualification.",
+              "Same completed LOCALv4 and NETv1 exactf461288 cases supply this independent full F25 check. All nine previously reviewed captures remain pinned, including overlapping bodies and known graphics limitations. Failed earlier F165 setups and fixture-tainted recordings remain unchanged."
+            ],
+            "bypasses": [
+              "Original native4/0CP2 initialization and one position/previous-position-only approach."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "contact_protection": "off",
+              "prerequisite": "agreed original4/0CP2 and one position-only approach",
+              "transport": "two owned loopback peers"
+            },
+            "action": "Guest ordinaryRight crosses original forward alternate-route portal while primary stays outside; follow actual native next-section loader, finite living arrivals, unchanged observed personal resources and separate controls.",
+            "outcome": "Full frozenF25 counterpart independently passed using actual samecandidate LOCAL+NET observations and ordered original loader entries.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F25-native-forward-route-local-netplay-reviewed.json",
+                "sha256": "4aebd1cc82b22b1b089148302cb4b3fff3201d6332494d6f263622ee2c894f9e"
+              }
+            ],
+            "limits": [
+              "F25 is a guest-led original forward route boundary: Recycle4/0 authored subtype1 portal to original alternate-route20/1. Frozen X4 StormOwl and X5 stage2 content is mapped to this X6 route; a same-room checkpoint/door or mere destination allocation would not qualify.",
+              "P1 remains1506 outside the original activation region while guest ordinaryRight advances to1530.5 (NETpeer1 samples1536.5), earns owner2 and native major8/major9 entry functions. This establishes leading/trailing eligibility, not the distant-primary F44 contract.",
+              "Original4/0CP2 initialization and one position/previous-position-only approach bypass the earlier route. Contact protection is OFF. Actual portal admission, native next-section loader and finite destination arrivals/controls follow ordinary input; no HP/phase/portal/progress/outcome writes or stateLoad.",
+              "The actual terminal bodies retain X/P1+Zero/P2, HP32 each and exact observed93..113 resource bytes including native9ammo entries. Initial resources are equal/full, so no damaged-actor healing/F21 or independent energy policy is inferred.",
+              "Polling misses the briefmajor9 RAM interval; complete ordered native1E914 then1E1BC entry traces supply actual loader proof on every physical process. No unseen RAM sample or simultaneous-frame proof is invented.",
+              "Guest initial destination support is partial at103/362. OrdinaryLeft later earns full22foot support at384 and each hero accepts its separate movement. No initial full-foot landing, return route/R14/F47, route-boss, Save/selector or general rendering qualification.",
+              "Same completed LOCALv4 and NETv1 exactf461288 cases supply this independent full F25 check. All nine previously reviewed captures remain pinned, including overlapping bodies and known graphics limitations. Failed earlier F165 setups and fixture-tainted recordings remain unchanged."
+            ],
+            "bypasses": [
+              "Original native4/0CP2 initialization and one position/previous-position-only approach."
+            ]
+          }
+        ],
+        "limitations": "Passed exactf461288 LOCAL+both physicalNET peers: guest ordinaryRight earns native owner2 while P1 trails/misses original portal, original next-section loader1E914->1E1BC reaches20/1, living roster/full observed resources retained and separate controls recover. NativeCP2/position-only approach bypass and fixture taint disclosed. No F21healing, F44distance, R14/F47return, initialfullguestfeet, Save or generalrendering claim."
       }
     },
     {
