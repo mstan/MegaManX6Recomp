@@ -8899,9 +8899,45 @@
             "bypasses": [
               "Navigation-only view shortcut for initial LAN page; actual UI events perform session and rematch start."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+              "compiled_manifest_sha256": "72f44aea918220bef0dff013707658e33d978bfc8121f629c646df4f74b2e65a",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "renderer": "native4:3 OpenGL; hidden muted actual UI loopback",
+              "profile": "mmx6.win64-clang22.loopback revision21 NOT used; actual V90 revision20"
+            },
+            "action": "Run three actual same-PID native Host/Join/Play activations with Escape/BYE/lobby rematch Play, both owned menus/controls, passive allocation windows and resolved CRC.",
+            "outcome": "Three healthy activations and all parent gates complete; raw final allocation gate fails because bank totals219/220/219 differ by one128KiB bank. Other persistent totals equal. Normal owned exits0 and private cards unchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-launcher/manifest-bound-f461288-sdk57055-F39-three-rematches-allocation-pending-reviewed.json",
+                "sha256": "505beb08031f3e1e5be53ad52767f72b51114f0f995d278b3c3c35d00ec8a443"
+              }
+            ],
+            "limits": [
+              "Raw failed status and exact bank-total failure remain unchanged. No F39 mode/aggregate pass.",
+              "Bank totals219/220/219 and bytes1809408/1940480/1809408 are stable within each window but differ between matches; this is not proof of either a leak or harmless variation.",
+              "All measured guest/DMA extents, snapshot/layout, packet arena registrations and replacement counts match across these three activations; replacement_depth remains raw transient call nesting only.",
+              "SDK source clears prior texture IDs/packet arenas before activation and game caches reset, but no actual per-bank identity/generation attribution is claimed.",
+              "SDK57055 GL readback repair survives the old crash point across three actual activations; exact original NVIDIA fault causality is not proven by this unmatched historical comparison.",
+              "Selected SHA is intentionally session-nonce-bound; full ordered capabilities/profile/revision stay fixed, and both peers agree before guest entry independently in every match. Raw nonces are not retained for independent digest reconstruction.",
+              "LOCAL repeated activation has no current supported return-to-launcher path; remains unverified. Original V54 crash and V90V2 observer failure remain retained.",
+              "No native3330, universal-driver, actual host cache count, precise retired-handle ownership or full comparison credit."
+            ],
+            "bypasses": [
+              "Navigation-only initial LAN page shortcut; real UI actions start both matches and rematches; no native outcome/HP/position/fixture writes."
+            ]
           }
         ],
-        "limitations": "Actual V54 same-PID NET rematch starts after genuine Escape/BYE/lobby Play, then both peers crash in nvoglv64.dll+0xB80C13 at restarted BIOS frame30. No exact cause/fix established; parked. LOCAL unverified. First-start success does not pass F39."
+        "limitations": "SDK57055 actual V90 repairs stale GL readback state; three real same-PID NET activations now reach healthy menus/controls/CRC and normal exits. Full F39 remains open: exact bank totals differ219/220/219 (source cause/ownership unqualified), and LOCAL repeat lacks a supported return-to-launcher path. Historical failures and new raw allocation failure preserved. No mode or aggregate promotion."
       }
     },
     {

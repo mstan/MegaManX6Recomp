@@ -1,0 +1,673 @@
+{
+  "schema": 1,
+  "comparison": "F39",
+  "result": "components_reviewed_full_mode_unverified",
+  "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+  "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+  "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+  "image_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+  "declared_manifest_sha256": "72f44aea918220bef0dff013707658e33d978bfc8121f629c646df4f74b2e65a",
+  "provenance_sha256": "ff55e1499c068754bfefd080232e259645adf7ce43e811f6d428c36dc9c98cf1",
+  "actual_build_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-v90-postbuild-proof-root-v2.json",
+    "bytes": 4882,
+    "sha256": "5fd7be595a7b25f19e705949efe20f16a9b5f8a9454f965f522398d1485985fc"
+  },
+  "raw": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v90-root-v3\\qualification.json",
+    "bytes": 13055506,
+    "sha256": "991e1fa9e0af8c9443a43e8e5a20dd87939b3baad677038daa02ef49d693bfcb"
+  },
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run_F39_lifecycle_v90_v3.py",
+    "bytes": 13392,
+    "sha256": "03a0baf9982f450ea6fee2b9dd5d2e411180fed7a453669c8008b7e68430a7c3"
+  },
+  "source_package": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-v90-lifecycle-runner-v3-index.json",
+    "bytes": 26980,
+    "sha256": "e55a11b066306b576f1d885f566fc132ce48d79c2761cabd95605a81dc23d76e"
+  },
+  "actual_original_PIDs": [
+    2152,
+    66340
+  ],
+  "actual_activations": [
+    {
+      "ordinal": 1,
+      "PIDs": [
+        2152,
+        66340
+      ],
+      "status": "actual_match_components_complete",
+      "profile": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 20,
+        "selected_sha256": "9222c00694ef39e089216a7607bb12e2b94911c0df2646e70b3a398d029af6be",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 20,
+              "selected_sha256": "9222c00694ef39e089216a7607bb12e2b94911c0df2646e70b3a398d029af6be",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 20,
+              "selected_sha256": "9222c00694ef39e089216a7607bb12e2b94911c0df2646e70b3a398d029af6be",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "ordinal": 2,
+      "PIDs": [
+        2152,
+        66340
+      ],
+      "status": "actual_match_components_complete",
+      "profile": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 20,
+        "selected_sha256": "52f504b124cc58decff72816bedd0a43551f32c9627b88069dfbe80b2f1a8c50",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 20,
+              "selected_sha256": "52f504b124cc58decff72816bedd0a43551f32c9627b88069dfbe80b2f1a8c50",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 20,
+              "selected_sha256": "52f504b124cc58decff72816bedd0a43551f32c9627b88069dfbe80b2f1a8c50",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "ordinal": 3,
+      "PIDs": [
+        2152,
+        66340
+      ],
+      "status": "actual_match_components_complete",
+      "profile": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 20,
+        "selected_sha256": "50eec11100ca0f0ee5045b2575b4727eef410943751b23ea36bb042d5383f7ea",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 20,
+              "selected_sha256": "50eec11100ca0f0ee5045b2575b4727eef410943751b23ea36bb042d5383f7ea",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 20,
+              "selected_sha256": "50eec11100ca0f0ee5045b2575b4727eef410943751b23ea36bb042d5383f7ea",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "actual_parent_checks": {
+    "jump_audio_original_source_bound": true,
+    "F39_runtime_both_peer_windows_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "F39_resolved_crc_after_case": true,
+    "F39_final_private_cards_unchanged": true,
+    "F39_owned_pair_cleanup": true
+  },
+  "actual_same_PID_boundaries": [
+    {
+      "from_match": 1,
+      "original_PIDs": [
+        2152,
+        66340
+      ],
+      "keyboard": {
+        "keyboard_window": {
+          "hwnd": 16974958,
+          "class_name": "SDL_app",
+          "title": "MegaManX6Recomp",
+          "pid": 2152
+        },
+        "keyboard_events": [
+          {
+            "key": "Escape",
+            "up": false,
+            "pid": 2152,
+            "hwnd": 16974958,
+            "message": 256,
+            "vk": 27,
+            "scan": 1,
+            "lparam": 65537,
+            "posted": true
+          },
+          {
+            "key": "Escape",
+            "up": true,
+            "pid": 2152,
+            "hwnd": 16974958,
+            "message": 257,
+            "vk": 27,
+            "scan": 1,
+            "lparam": 3221291009,
+            "posted": true
+          }
+        ],
+        "keyboard_scope": "WM_KEYDOWN/WM_KEYUP to owned SDL HWND; no foreground/global injection or physical-hardware claim",
+        "scope": "Owned SDL HWND Escape down/up, no global input/focus; actual BYE/lobby return required separately"
+      },
+      "status": "actual_same_PID_Escape_BYE_return_to_lobby",
+      "stdout_suffixes": [
+        "psxrecomp: netplay ended (netplay_escape) \u2014 returning to lobby\r\n",
+        "psxrecomp: netplay ended (netplay_peer_disconnect) \u2014 returning to lobby\r\n"
+      ]
+    },
+    {
+      "from_match": 2,
+      "original_PIDs": [
+        2152,
+        66340
+      ],
+      "keyboard": {
+        "keyboard_window": {
+          "hwnd": 17237102,
+          "class_name": "SDL_app",
+          "title": "MegaManX6Recomp",
+          "pid": 2152
+        },
+        "keyboard_events": [
+          {
+            "key": "Escape",
+            "up": false,
+            "pid": 2152,
+            "hwnd": 17237102,
+            "message": 256,
+            "vk": 27,
+            "scan": 1,
+            "lparam": 65537,
+            "posted": true
+          },
+          {
+            "key": "Escape",
+            "up": true,
+            "pid": 2152,
+            "hwnd": 17237102,
+            "message": 257,
+            "vk": 27,
+            "scan": 1,
+            "lparam": 3221291009,
+            "posted": true
+          }
+        ],
+        "keyboard_scope": "WM_KEYDOWN/WM_KEYUP to owned SDL HWND; no foreground/global injection or physical-hardware claim",
+        "scope": "Owned SDL HWND Escape down/up, no global input/focus; actual BYE/lobby return required separately"
+      },
+      "status": "actual_same_PID_Escape_BYE_return_to_lobby",
+      "stdout_suffixes": [
+        "psxrecomp: netplay ended (netplay_escape) \u2014 returning to lobby\r\n",
+        "psxrecomp: netplay ended (netplay_peer_disconnect) \u2014 returning to lobby\r\n"
+      ]
+    }
+  ],
+  "resolved_CRC_windows": [
+    {
+      "label": "initial idle",
+      "resolved_through": [
+        3129,
+        3129
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "resolved_through": [
+        3373,
+        3372
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "resolved_through": [
+        3674,
+        3674
+      ]
+    },
+    {
+      "label": "F39 match1 actual ready/profile before controls",
+      "resolved_through": [
+        3875,
+        3874
+      ]
+    },
+    {
+      "label": "F39 P1 actual menu/resume/Right completed",
+      "resolved_through": [
+        4263,
+        4263
+      ]
+    },
+    {
+      "label": "F39 P2 actual menu/resume/Right completed",
+      "resolved_through": [
+        4671,
+        4671
+      ]
+    },
+    {
+      "label": "F39 match1 actual menus/art/independent controls completed",
+      "resolved_through": [
+        4917,
+        4917
+      ]
+    },
+    {
+      "label": "F39 match2 actual ready/profile before controls",
+      "resolved_through": [
+        3151,
+        3151
+      ]
+    },
+    {
+      "label": "F39 P1 actual menu/resume/Right completed",
+      "resolved_through": [
+        3566,
+        3567
+      ]
+    },
+    {
+      "label": "F39 P2 actual menu/resume/Right completed",
+      "resolved_through": [
+        3996,
+        3996
+      ]
+    },
+    {
+      "label": "F39 match2 actual menus/art/independent controls completed",
+      "resolved_through": [
+        4246,
+        4246
+      ]
+    },
+    {
+      "label": "F39 match3 actual ready/profile before controls",
+      "resolved_through": [
+        3111,
+        3111
+      ]
+    },
+    {
+      "label": "F39 P1 actual menu/resume/Right completed",
+      "resolved_through": [
+        3513,
+        3513
+      ]
+    },
+    {
+      "label": "F39 P2 actual menu/resume/Right completed",
+      "resolved_through": [
+        3931,
+        3931
+      ]
+    },
+    {
+      "label": "F39 match3 actual menus/art/independent controls completed",
+      "resolved_through": [
+        4178,
+        4178
+      ]
+    },
+    {
+      "label": "F39 paired actual menus/resumes/independent controls then settle",
+      "resolved_through": [
+        4579,
+        4579
+      ]
+    }
+  ],
+  "actual_resource_windows": [
+    {
+      "ordinal": 1,
+      "samples_per_peer": 3,
+      "stable": [
+        true,
+        true
+      ],
+      "final_totals": [
+        {
+          "guest.physical_base": 520093696,
+          "guest.capacity": 1048576,
+          "guest.used": 548864,
+          "dma.physical_base": 8388608,
+          "dma.capacity": 8388608,
+          "dma.used": 513024,
+          "snapshot_bytes": 1061904,
+          "layout_cookie": 1080537090,
+          "packet_arena_count": 2,
+          "packet_arena_bytes": 327680,
+          "bank_count": 219,
+          "bank_bytes": 1809408,
+          "replacement_count": 38
+        },
+        {
+          "guest.physical_base": 520093696,
+          "guest.capacity": 1048576,
+          "guest.used": 548864,
+          "dma.physical_base": 8388608,
+          "dma.capacity": 8388608,
+          "dma.used": 513024,
+          "snapshot_bytes": 1061904,
+          "layout_cookie": 1080537090,
+          "packet_arena_count": 2,
+          "packet_arena_bytes": 327680,
+          "bank_count": 219,
+          "bank_bytes": 1809408,
+          "replacement_count": 38
+        }
+      ]
+    },
+    {
+      "ordinal": 2,
+      "samples_per_peer": 3,
+      "stable": [
+        true,
+        true
+      ],
+      "final_totals": [
+        {
+          "guest.physical_base": 520093696,
+          "guest.capacity": 1048576,
+          "guest.used": 548864,
+          "dma.physical_base": 8388608,
+          "dma.capacity": 8388608,
+          "dma.used": 513024,
+          "snapshot_bytes": 1061904,
+          "layout_cookie": 1080537090,
+          "packet_arena_count": 2,
+          "packet_arena_bytes": 327680,
+          "bank_count": 220,
+          "bank_bytes": 1940480,
+          "replacement_count": 38
+        },
+        {
+          "guest.physical_base": 520093696,
+          "guest.capacity": 1048576,
+          "guest.used": 548864,
+          "dma.physical_base": 8388608,
+          "dma.capacity": 8388608,
+          "dma.used": 513024,
+          "snapshot_bytes": 1061904,
+          "layout_cookie": 1080537090,
+          "packet_arena_count": 2,
+          "packet_arena_bytes": 327680,
+          "bank_count": 220,
+          "bank_bytes": 1940480,
+          "replacement_count": 38
+        }
+      ]
+    },
+    {
+      "ordinal": 3,
+      "samples_per_peer": 3,
+      "stable": [
+        true,
+        true
+      ],
+      "final_totals": [
+        {
+          "guest.physical_base": 520093696,
+          "guest.capacity": 1048576,
+          "guest.used": 548864,
+          "dma.physical_base": 8388608,
+          "dma.capacity": 8388608,
+          "dma.used": 513024,
+          "snapshot_bytes": 1061904,
+          "layout_cookie": 1080537090,
+          "packet_arena_count": 2,
+          "packet_arena_bytes": 327680,
+          "bank_count": 219,
+          "bank_bytes": 1809408,
+          "replacement_count": 38
+        },
+        {
+          "guest.physical_base": 520093696,
+          "guest.capacity": 1048576,
+          "guest.used": 548864,
+          "dma.physical_base": 8388608,
+          "dma.capacity": 8388608,
+          "dma.used": 513024,
+          "snapshot_bytes": 1061904,
+          "layout_cookie": 1080537090,
+          "packet_arena_count": 2,
+          "packet_arena_bytes": 327680,
+          "bank_count": 219,
+          "bank_bytes": 1809408,
+          "replacement_count": 38
+        }
+      ]
+    }
+  ],
+  "failed_resource_comparison": {
+    "F39_LOCAL": "unverified_runner_has_no_offline_activation",
+    "F39": "unverified",
+    "host_cache_count": "unavailable_RPC_has_no_game_cache_count",
+    "peers": [
+      {
+        "seat": 0,
+        "same_stage_section_checkpoint": true,
+        "stable_within_each_post_warmup_window": true,
+        "deltas_from_first_activation": [
+          {
+            "guest.physical_base": 0,
+            "guest.capacity": 0,
+            "guest.used": 0,
+            "dma.physical_base": 0,
+            "dma.capacity": 0,
+            "dma.used": 0,
+            "snapshot_bytes": 0,
+            "layout_cookie": 0,
+            "packet_arena_count": 0,
+            "packet_arena_bytes": 0,
+            "bank_count": 1,
+            "bank_bytes": 131072,
+            "replacement_count": 0
+          },
+          {
+            "guest.physical_base": 0,
+            "guest.capacity": 0,
+            "guest.used": 0,
+            "dma.physical_base": 0,
+            "dma.capacity": 0,
+            "dma.used": 0,
+            "snapshot_bytes": 0,
+            "layout_cookie": 0,
+            "packet_arena_count": 0,
+            "packet_arena_bytes": 0,
+            "bank_count": 0,
+            "bank_bytes": 0,
+            "replacement_count": 0
+          }
+        ],
+        "observed_totals_equal": false
+      },
+      {
+        "seat": 1,
+        "same_stage_section_checkpoint": true,
+        "stable_within_each_post_warmup_window": true,
+        "deltas_from_first_activation": [
+          {
+            "guest.physical_base": 0,
+            "guest.capacity": 0,
+            "guest.used": 0,
+            "dma.physical_base": 0,
+            "dma.capacity": 0,
+            "dma.used": 0,
+            "snapshot_bytes": 0,
+            "layout_cookie": 0,
+            "packet_arena_count": 0,
+            "packet_arena_bytes": 0,
+            "bank_count": 1,
+            "bank_bytes": 131072,
+            "replacement_count": 0
+          },
+          {
+            "guest.physical_base": 0,
+            "guest.capacity": 0,
+            "guest.used": 0,
+            "dma.physical_base": 0,
+            "dma.capacity": 0,
+            "dma.used": 0,
+            "snapshot_bytes": 0,
+            "layout_cookie": 0,
+            "packet_arena_count": 0,
+            "packet_arena_bytes": 0,
+            "bank_count": 0,
+            "bank_bytes": 0,
+            "replacement_count": 0
+          }
+        ],
+        "observed_totals_equal": false
+      }
+    ],
+    "status": "changed_or_unsettled_totals_review_required",
+    "limit": "Totals and real retained PID boundaries do not prove exact retired-handle ownership or game cache counts"
+  },
+  "actual_root_reviewed_composed_images": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v90-root-v3\\F39-lifecycle\\match-02\\peer-0-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "386919bd7c1445603f003a4cde7a144ffc7527b3a5e22bfca66231fe9349aea2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v90-root-v3\\F39-lifecycle\\match-02\\peer-1-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "5decb49613e0d63e3e9df65c3bb9633f5c06300d1900b44ac4ef61723bf78729"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v90-root-v3\\F39-lifecycle\\match-03\\peer-0-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "843f26d971d293f94df82a2cb8942f8b1010cff4cac69e2e523c3d4e500c2f3a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v90-root-v3\\F39-lifecycle\\match-03\\peer-1-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "843f26d971d293f94df82a2cb8942f8b1010cff4cac69e2e523c3d4e500c2f3a"
+    }
+  ],
+  "root_art_observation": "Both X and Zero bodies and own HUDs render after both rematches on both peers; four resumed images independently inspected.",
+  "cleanup": [
+    {
+      "pid": 2152,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    {
+      "pid": 66340,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    }
+  ],
+  "limits": [
+    "Raw failed status and exact bank-total failure remain unchanged. No F39 mode/aggregate pass.",
+    "Bank totals219/220/219 and bytes1809408/1940480/1809408 are stable within each window but differ between matches; this is not proof of either a leak or harmless variation.",
+    "All measured guest/DMA extents, snapshot/layout, packet arena registrations and replacement counts match across these three activations; replacement_depth remains raw transient call nesting only.",
+    "SDK source clears prior texture IDs/packet arenas before activation and game caches reset, but no actual per-bank identity/generation attribution is claimed.",
+    "SDK57055 GL readback repair survives the old crash point across three actual activations; exact original NVIDIA fault causality is not proven by this unmatched historical comparison.",
+    "Selected SHA is intentionally session-nonce-bound; full ordered capabilities/profile/revision stay fixed, and both peers agree before guest entry independently in every match. Raw nonces are not retained for independent digest reconstruction.",
+    "LOCAL repeated activation has no current supported return-to-launcher path; remains unverified. Original V54 crash and V90V2 observer failure remain retained.",
+    "No native3330, universal-driver, actual host cache count, precise retired-handle ownership or full comparison credit."
+  ]
+}
