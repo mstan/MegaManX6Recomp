@@ -212,6 +212,19 @@ static void agreed_turtloid_boundary(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();
 }
+static void agreed_alternate_boundary(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);test_lab_option="alternate_boss_cp1";checkpoint_reset();
+        CHECK(checkpoint_lab_option==9 && checkpoint_lab_index()==106 && checkpoint_lab_nonce()==0x4C414231u);
+        CHECK(checkpoint_lab_boundary(cpu,6));CHECK(checkpoint_pending.index==106 && checkpoint_pending.nonce==0x4C414231u);
+        /* The ordinary loader owns mode8/9; no door, boss, hit or availability flag is authored. */
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(psx_mod_read_byte(PLAY+12)==20 && psx_mod_read_byte(PLAY+13)==1 && psx_mod_read_byte(PLAY+0x1D)==1);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
+        CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_word(diagnostic+0xB8)==0x80072FF0u);
+    }
+    test_lab_option="off";checkpoint_reset();
+}
 static void setup_earned(CPUState *cpu,int online) {
     test_lab_earned_option="all";setup_agreed(cpu,online);equipment_probe=1;equipment_calls=0;
     cpu->gpr[29]=0x801FFF00u;
@@ -1077,7 +1090,7 @@ int main(int argc,char **argv) {
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
-    agreed_starting_hp(&cpu);agreed_turtloid_boundary(&cpu);
+    agreed_starting_hp(&cpu);agreed_turtloid_boundary(&cpu);agreed_alternate_boundary(&cpu);
     agreed_earned_weapons(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;

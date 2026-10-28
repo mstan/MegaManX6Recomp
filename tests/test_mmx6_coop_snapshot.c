@@ -405,7 +405,7 @@ static void roundtrip_and_malformed(void){
     free(wire);free(bad);
 }
 static void agreed_latch_snapshot(void) {
-    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=8;++option) {
+    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=9;++option) {
         checkpoint_lab_option=option;
         checkpoint_contact_protection_option=protection;
         for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
@@ -415,7 +415,7 @@ static void agreed_latch_snapshot(void) {
             checkpoint_contact_protection_option^=1;CHECK(!snapshot_validate(wire,length));
             checkpoint_contact_protection_option=protection;
             checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));
-            checkpoint_lab_option=option%8+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
+            checkpoint_lab_option=option%9+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
             checkpoint_lab_state=checkpoint_lab_previous=0;
             CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
             CHECK(checkpoint_lab_state==state && checkpoint_lab_previous==1 && state_digest()==digest);
