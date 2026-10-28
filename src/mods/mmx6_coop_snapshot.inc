@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 13 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 14 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -82,7 +82,7 @@ typedef struct {
     uint8_t audio_priorities[24];
     uint8_t giga_backup[ZERO_GIGA_BACKUP_BYTES];
     uint8_t shared_owners[96];
-    uint32_t lab_state,lab_previous;
+    uint32_t lab_state,lab_previous,starting_hp_applied,earned_applied,earned_reason;
     uint32_t clear_phase,clear_members,clear_started;
     uint32_t door_actor,door_origin,door_members;
 } HostState;
@@ -100,7 +100,8 @@ static void state_capture(HostState *s) {
     memcpy(s->audio_priorities,jump_audio_priorities,sizeof jump_audio_priorities);
     memcpy(s->giga_backup,zero_giga_backup,sizeof zero_giga_backup);
     memcpy(s->shared_owners,shared_effect_owners,sizeof shared_effect_owners);
-    s->lab_state=checkpoint_lab_state;s->lab_previous=checkpoint_lab_previous;
+    s->lab_state=checkpoint_lab_state;s->lab_previous=checkpoint_lab_previous;s->starting_hp_applied=checkpoint_starting_hp_applied;
+    s->earned_applied=checkpoint_earned_weapons_applied;s->earned_reason=checkpoint_earned_weapons_reason;
     s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
     s->door_actor=both_door_actor;s->door_origin=both_door_origin;s->door_members=both_door_members;
 }
@@ -170,8 +171,12 @@ static void state_core(StateIO *io,HostState *s) {
     if(s->lifecycle.rejoin_pending &&
         ((s->lifecycle.status[1]!=MMX6_COOP_ABSENT && s->lifecycle.status[1]!=MMX6_COOP_LEAVING) ||
          !mmx6_coop_living(&s->lifecycle,0) || s->lifecycle.wipe))io->ok=0;
-    FIELD(lab_state,1,CHECKPOINT_LAB_CONSUMED);FIELD(lab_previous,1,1);
+    FIELD(lab_state,1,CHECKPOINT_LAB_CONSUMED);FIELD(lab_previous,1,1);FIELD(starting_hp_applied,1,1);
+    if(s->starting_hp_applied && (!checkpoint_starting_hp_mask() || s->lab_state!=CHECKPOINT_LAB_CONSUMED))io->ok=0;
     if(!checkpoint_lab_option && (s->lab_state || s->lab_previous))io->ok=0;
+    FIELD(earned_applied,1,1);FIELD(earned_reason,1,CHECKPOINT_PLUGIN_FAILED);
+    if((!checkpoint_earned_weapons_option && (s->earned_applied || s->earned_reason)) ||
+       (s->earned_applied && (s->lab_state!=CHECKPOINT_LAB_CONSUMED || s->earned_reason)))io->ok=0;
     state_bytes(io,s->giga_backup,sizeof s->giga_backup);
     for(unsigned i=0;i<96;++i)s->shared_owners[i]=(uint8_t)state_integer(io,s->shared_owners[i],1,2);
     if(io->mode!=STATE_HASH) {
@@ -193,7 +198,8 @@ static void state_commit(const HostState *s) {
     memcpy(jump_audio_priorities,s->audio_priorities,sizeof jump_audio_priorities);
     memcpy(zero_giga_backup,s->giga_backup,sizeof zero_giga_backup);
     memcpy(shared_effect_owners,s->shared_owners,sizeof shared_effect_owners);
-    checkpoint_lab_state=s->lab_state;checkpoint_lab_previous=s->lab_previous;
+    checkpoint_lab_state=s->lab_state;checkpoint_lab_previous=s->lab_previous;checkpoint_starting_hp_applied=s->starting_hp_applied;
+    checkpoint_earned_weapons_applied=s->earned_applied;checkpoint_earned_weapons_reason=s->earned_reason;
     clear_phase=s->clear_phase;clear_members=s->clear_members;clear_started=s->clear_started;
     both_door_actor=s->door_actor;both_door_origin=s->door_origin;both_door_members=s->door_members;
     /* These backups are meaningful only under rejected live projections. */
@@ -206,7 +212,7 @@ static uint32_t state_digest(void) {
     const uint32_t resources[]={assets,assembly,palette_source,active_palette,packets,diagnostic,
         menu_memory,menu_assembly,hud_packets,(uint32_t)compressed_size,(unsigned)snapshot_asset_valid,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded,independent_views,checkpoint_lab_option,
-        checkpoint_contact_protection_option,both_doors};
+        checkpoint_contact_protection_option,checkpoint_starting_hp[0],checkpoint_starting_hp[1],checkpoint_earned_weapons_option,both_doors};
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
@@ -250,8 +256,8 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,13);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
-    state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,both_doors);
+    state_fixed(s,0x53503658u);state_fixed(s,14);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);

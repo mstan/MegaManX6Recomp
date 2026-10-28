@@ -20,14 +20,14 @@ import qualify_mmx6_coop_pair as parent
 SUCCESS = 'agreed_fixture_native_intro_observations_complete_review_pending'
 
 
-def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protection='off'):
+def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protection='off', starting_hp=('off', 'off'), earned_weapons='off'):
     """Fresh prelaunch preferences only; the SDK negotiates this typed option."""
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
     options = [o for o in catalog.get('option', []) if o.get('id') == 'lab_checkpoint']
     if (len(options) != 1 or options[0].get('default') != 'off' or options[0].get('feature') != 'prototype'
-            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2'}
-            or option not in (intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2')):
+            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'turtloid_rain_cp1'}
+            or option not in (intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'turtloid_rain_cp1')):
         raise ValueError('Staged image lacks the private typed LAB checkpoint catalog')
     protection = [o for o in catalog.get('option', []) if o.get('id') == 'lab_contact_protection']
     if (len(protection) != 1 or protection[0].get('default') != 'off'
@@ -35,13 +35,30 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protec
             or {c['value'] for c in protection[0].get('choice', [])} != {'off', 'on'}
             or contact_protection not in ('off', 'on')):
         raise ValueError('Staged image lacks the private typed LAB contact-protection catalog')
+    if (not isinstance(starting_hp, (tuple, list)) or len(starting_hp) != 2
+            or any(type(v) is not str or v not in {'off', *(str(hp) for hp in range(1, 33))} for v in starting_hp)):
+        raise ValueError('Require two explicit starting-HP choices off or1..32')
+    for seat in (0, 1):
+        hp_option = [o for o in catalog.get('option', []) if o.get('id') == f'lab_starting_hp_p{seat+1}']
+        if (len(hp_option) != 1 or hp_option[0].get('default') != 'off'
+                or hp_option[0].get('feature') != 'prototype' or hp_option[0].get('type') != 'choice'
+                or [c['value'] for c in hp_option[0].get('choice', [])] != ['off', *(str(hp) for hp in range(1, 33))]):
+            raise ValueError('Staged image lacks exact private starting-HP catalog')
+    earned = [o for o in catalog.get('option', []) if o.get('id') == 'lab_earned_weapons']
+    if (len(earned) != 1 or earned[0].get('default') != 'off'
+            or earned[0].get('feature') != 'prototype' or earned[0].get('type') != 'choice'
+            or {c['value'] for c in earned[0].get('choice', [])} != {'off', 'all'}
+            or earned_weapons not in ('off', 'all')):
+        raise ValueError('Staged image lacks exact private earned-weapon catalog')
     path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8')
     anchor = 'id = "prototype"\nenabled = '+str(enabled).lower()+'\n'
-    if text.count(anchor) != 1 or 'lab_checkpoint' in text or 'lab_contact_protection' in text:
+    if text.count(anchor) != 1 or any(k in text for k in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons')):
         raise ValueError('Unexpected fresh co-op feature preferences')
     values = '[feature.values]\nlab_checkpoint = "'+option+'"\nlab_contact_protection = "'+contact_protection+'"\n'
+    values += 'lab_starting_hp_p1 = "'+starting_hp[0]+'"\nlab_starting_hp_p2 = "'+starting_hp[1]+'"\n'
+    values += 'lab_earned_weapons = "'+earned_weapons+'"\n'
     path.write_bytes(text.replace(anchor, anchor+values).encode('utf-8'))
-    return dict(option=option, contact_protection=contact_protection, state_sha256=preparation.sha256(path),
+    return dict(option=option, contact_protection=contact_protection, starting_hp=list(starting_hp), earned_weapons=earned_weapons, state_sha256=preparation.sha256(path),
         catalog_sha256=preparation.sha256(directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'))
 
 

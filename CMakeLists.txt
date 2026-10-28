@@ -54,7 +54,7 @@ list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_pl
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$")
 
 set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINITIONS
-    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v36\"")
+    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v40\"")
 
 # The game-owned mod catalog (the two presentation enhancements plus the
 # acediez Tweaks set). Every feature stays disabled until selected on the
@@ -224,7 +224,7 @@ if(BUILD_TESTING)
                 test_mmx6_coop_personal_menu_runner test_mmx6_coop_contact
                 test_mmx6_input_recording test_mmx6_content_coverage
                 test_mmx6_coop_contact_runner test_mmx6_coop_owned_cleanup
-                test_mmx6_coop_checkpoint test_mmx6_coop_intro_fixture test_mmx6_coop_private_effects
+                test_mmx6_coop_checkpoint test_mmx6_lab_earned_weapons test_mmx6_coop_intro_fixture test_mmx6_coop_private_effects
                 test_mmx6_coop_private_pause test_mmx6_coop_published_input
                 test_mmx6_native_zero_reference
                 test_prepare_mmx6_input_replay test_qualify_mmx6_input_replay

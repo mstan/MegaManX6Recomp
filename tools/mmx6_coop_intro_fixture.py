@@ -34,6 +34,13 @@ def receipt(client):
         authority=data[29], latch=data[30], prior_chord=data[31], raw_hex=data.hex())
 
 
+def starting_hp_receipt(client):
+    data = client.read(debug.DIAGNOSTIC_ADDRESS + 0xC0, 4)
+    if len(data) != 4 or data[0] > 2 or data[1] > 32 or data[2] > 32 or data[3] > 3:
+        raise ValueError('Invalid native starting-HP setup publication')
+    return dict(status=data[0], requested=list(data[1:3]), applied_mask=data[3], raw_hex=data.hex())
+
+
 def validate_completion(receipts):
     """Ordinary fixture taint alone never establishes negotiated admission."""
     if not 1 <= len(receipts) <= 2:

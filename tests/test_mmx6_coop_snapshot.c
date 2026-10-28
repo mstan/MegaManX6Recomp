@@ -202,7 +202,7 @@ static void digest_and_readiness(void){
     PERTURB(zero_giga_backup[7]);
     PERTURB(shared_effect_owners[7]);
     PERTURB(checkpoint_lab_option);PERTURB(checkpoint_lab_state);PERTURB(checkpoint_lab_previous);
-    PERTURB(checkpoint_contact_protection_option);
+    PERTURB(checkpoint_contact_protection_option);PERTURB(checkpoint_starting_hp[0]);PERTURB(checkpoint_starting_hp[1]);PERTURB(checkpoint_starting_hp_applied);
     PERTURB(checkpoint_pending.authority);
     PERTURB(checkpoint_pending.placed_world);
     PERTURB(both_doors);
@@ -405,7 +405,7 @@ static void roundtrip_and_malformed(void){
     free(wire);free(bad);
 }
 static void agreed_latch_snapshot(void) {
-    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=6;++option) {
+    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=8;++option) {
         checkpoint_lab_option=option;
         checkpoint_contact_protection_option=protection;
         for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
@@ -415,7 +415,7 @@ static void agreed_latch_snapshot(void) {
             checkpoint_contact_protection_option^=1;CHECK(!snapshot_validate(wire,length));
             checkpoint_contact_protection_option=protection;
             checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));
-            checkpoint_lab_option=option%6+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
+            checkpoint_lab_option=option%8+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
             checkpoint_lab_state=checkpoint_lab_previous=0;
             CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
             CHECK(checkpoint_lab_state==state && checkpoint_lab_previous==1 && state_digest()==digest);
@@ -423,6 +423,23 @@ static void agreed_latch_snapshot(void) {
         }
     }
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=checkpoint_contact_protection_option=0;
+}
+static void starting_hp_snapshot(void) {
+    HostState prior;state_capture(&prior);
+    checkpoint_lab_option=8;checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;checkpoint_lab_previous=0;
+    checkpoint_starting_hp[0]=1;checkpoint_starting_hp[1]=17;checkpoint_starting_hp_applied=1;
+    uint32_t length=snapshot_bytes();uint8_t *wire=malloc(length);CHECK(wire && snapshot_write(wire,length));
+    uint32_t digest=state_digest();
+    checkpoint_starting_hp[0]=2;CHECK(!snapshot_validate(wire,length) && state_digest()!=digest);checkpoint_starting_hp[0]=1;
+    checkpoint_starting_hp[1]=18;CHECK(!snapshot_validate(wire,length));checkpoint_starting_hp[1]=17;
+    checkpoint_starting_hp_applied=0;CHECK(state_digest()!=digest && snapshot_validate(wire,length));
+    snapshot_read(wire,length);CHECK(checkpoint_starting_hp_applied==1 && state_digest()==digest);
+    for(unsigned bad=0;bad<2;++bad) {
+        HostState invalid;state_capture(&invalid);
+        if(bad==0)invalid.starting_hp_applied=2;else invalid.lab_state=CHECKPOINT_LAB_ARMED;
+        StateIO check={STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&check,&invalid);CHECK(!check.ok);
+    }
+    checkpoint_starting_hp[0]=checkpoint_starting_hp[1]=0;state_commit(&prior);checkpoint_lab_option=0;free(wire);
 }
 static void shared_clear_snapshot(void) {
     HostState prior;state_capture(&prior);
@@ -510,7 +527,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

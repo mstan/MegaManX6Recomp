@@ -13,7 +13,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
         normal = tomllib.loads((source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection') for o in normal.get('option', [])))
+        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons') for o in normal.get('option', [])))
         catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
@@ -23,7 +23,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            for option in ('intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2'):
+            for option in ('intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'turtloid_rain_cp1'):
                 state.write_text(initial, encoding='utf-8')
                 receipt = pair.select_checkpoint(directory, enabled=True, option=option)
                 self.assertEqual(receipt['option'], option)
@@ -79,6 +79,66 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, contact_protection='on')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
+
+    def test_starting_hp_pair_is_exact_typed_prelaunch_only(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source = Path(__file__).resolve().parents[1]
+        catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary); manifest = directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True); manifest.write_text(catalog, encoding='utf-8')
+            state = directory/'mods/state.toml'; initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
+            for hp in (('off', 'off'), ('1', '32'), ('17', '23')):
+                state.write_text(initial, encoding='utf-8')
+                receipt = pair.select_checkpoint(directory, enabled=True, option='turtloid_rain_cp1', starting_hp=hp)
+                values = tomllib.loads(state.read_text())['feature'][0]['values']
+                self.assertEqual(receipt['starting_hp'], list(hp))
+                self.assertEqual([values['lab_starting_hp_p1'], values['lab_starting_hp_p2']], list(hp))
+                for key in ('lab_checkpoint', 'lab_starting_hp_p1', 'lab_starting_hp_p2'):
+                    self.assertEqual(state.read_text().count(key+' ='), 1)
+            for hp in ((1, 'off'), ('0', 'off'), ('33', 'off'), ('01', 'off'), ('1',), '1'):
+                state.write_text(initial, encoding='utf-8')
+                with self.subTest(hp=hp), self.assertRaises(ValueError):
+                    pair.select_checkpoint(directory, enabled=True, starting_hp=hp)
+                self.assertEqual(state.read_text(), initial)
+            bad = catalog.replace('value = "32"', 'value = "33"')
+            manifest.write_text(bad, encoding='utf-8');state.write_text(initial, encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, starting_hp=('1', 'off'))
+            self.assertEqual(state.read_text(), initial)
+
+    def test_earned_weapons_commits_with_hp_and_refuses_unavailable_catalog(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source = Path(__file__).resolve().parents[1]
+        catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary); manifest = directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True); manifest.write_text(catalog, encoding='utf-8')
+            state = directory/'mods/state.toml'; initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
+            for selected in ('off', 'all'):
+                state.write_text(initial, encoding='utf-8')
+                receipt = pair.select_checkpoint(directory, enabled=True, option='recycle_cp2',
+                    starting_hp=('17', '23'), earned_weapons=selected)
+                values = tomllib.loads(state.read_text())['feature'][0]['values']
+                self.assertEqual(receipt['earned_weapons'], selected)
+                self.assertEqual(values['lab_earned_weapons'], selected)
+                self.assertEqual([values['lab_starting_hp_p1'], values['lab_starting_hp_p2']], ['17', '23'])
+            state.write_text(initial, encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, earned_weapons='invalid')
+            self.assertEqual(state.read_text(), initial)
+            manifest.write_text(catalog.replace('id = "lab_earned_weapons"', 'id = "unavailable"'), encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, earned_weapons='all')
+            self.assertEqual(state.read_text(), initial)
+
+    def test_hp_receipt_is_separate_from_checkpoint_authority(self):
+        class Client:
+            def read(self, address, size):
+                self.requested = (address, size); return bytes((2, 1, 0, 1))
+        client = Client(); actual = intro.starting_hp_receipt(client)
+        self.assertEqual(actual, dict(status=2, requested=[1, 0], applied_mask=1, raw_hex='02010001'))
+        self.assertEqual(client.requested, (intro.debug.DIAGNOSTIC_ADDRESS+0xC0, 4))
 
 
 class NegotiatedReceiptTests(unittest.TestCase):
