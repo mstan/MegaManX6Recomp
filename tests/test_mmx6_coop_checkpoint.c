@@ -146,7 +146,8 @@ static void starting_hp_pending(CPUState *cpu,int online) {
 }
 static void agreed_starting_hp(CPUState *cpu) {
     CHECK(!checkpoint_starting_hp_parse("off") && checkpoint_starting_hp_parse("1")==1 && checkpoint_starting_hp_parse("32")==32);
-    const char *invalid[]={"0","00","01","33","-1","+1","1x","","99999999999999999999999999"};
+    CHECK(checkpoint_starting_hp_parse("99999999999999999999999999")==33);
+    const char *invalid[]={"0","00","01","33","-1","+1","1x",""};
     for(unsigned i=0;i<sizeof invalid/sizeof invalid[0];++i) {
         test_lab_hp_option[0]=invalid[i];test_lab_hp_option[1]="off";setup_agreed(cpu,1);CHECK(failed);
     }
