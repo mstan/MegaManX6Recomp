@@ -15997,23 +15997,102 @@
       "x6": {
         "workstream": "combat",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "Repeated native weakness contacts",
-        "bounded_check": "Use a native X6 weakness with repeated contact opportunities; record accepted/rejected hit IDs, damage and natural reaction recovery separately.",
+        "analogue": "Original guest-owned Zero weakness42 against Metal Shark main56, separate accepted/nondamaging observations and finite continued native reaction",
+        "bounded_check": "Retain source-qualified guest weakness overlap, accepted result and actual HP/reaction; distinguish observed nondamaging or missed offers without inventing result IDs.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+            "build_identity": {
+              "executable_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+              "compiled_manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+              "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "dummy muted",
+              "native_difficulty": 1,
+              "earned_weapons": "all acquisition prerequisite only",
+              "contact_protection": "on for unrelated hazards"
+            },
+            "action": "Observe original guest-owned weakness overlap, accepted HP/reaction and separate nondamaging offers; continue eight genuine native offers through finite original reaction and resumed boss movement.",
+            "outcome": "Full unchanged frozen F129 counterpart passed after exact requirement/source/raw review; accepted43 is source-derived, exact127 remains unobserved and strict raw observer result unchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-56a547b-F129-F207-frozen-weakness-contracts-reviewed.json",
+                "sha256": "7236ae9d07b00adb86f133e663dc0886e1372d70f7c4af3a74573f3be65e8ccd"
+              }
+            ],
+            "limits": [
+              "The immutable X4/X5 frozen definitions remain unchanged. F207 requires continued native weakness hits, accepted damage and eventual recovery/movement; observing result127 is an additional observer condition, not a frozen requirement. F129 requires overlap, accepted-hit result and HP/reaction so nondamaging offers are not mislabeled lost damage; it does not require every possible rejection outcome.",
+              "Source-derived accepted43 is explicitly not a sampled native result register. Exact rejected127/duplicate126 were not observed or inferred. Actual nondamaging sampled overlaps during original immunity and an initial LOCAL sampled geometric miss remain separate from the accepted six damage.",
+              "Eight genuine native action58/owned42 continuation offers were observed per physical process through progressing original reaction phases. LOCAL naturally restores normal AI/defense/recovery and movement; NET additionally records accepted42to36 on both peers during the continuing sequence, then finite second recovery/movement. This is a finite bounded sequence, not perpetual-fire/all-future-cycle coverage.",
+              "P2 callback deltas are not damaging-hit counts or unique main-contact counts. Private publication/world/counter/capture observations are asynchronous; no atomic shot/world token match or instruction-level HP-store trace is manufactured.",
+              "Difficulty PLAY68=1. The actual qualified prototype exposes no co-op damage-scaling option, so the frozen scaling clause applies only if implemented; no nonexistent scaling variant is required or claimed.",
+              "All existing source/provenance/owner identity/P1 neutral empty pool/weapon context/campaign C9 receipts/profile/final CRC/fixture-taint recording/card/owned-exit gates are retained from the independently passed same-candidate F26/F125 batch. Disclosed CP2/contact protection and native earned-equipment acquisition setup remain bypasses, not earned progression.",
+              "The original strict helper F207 status remains unverified in raw evidence because its supplemental freshFF/result127 witness is missing. Full frozen-contract review admits the actual requested behavior without rewriting that raw status or crediting unobserved result127. No second weakness family/F131 or simultaneous-owner/F155 claim."
+            ],
+            "bypasses": [
+              "Agreed original CP2, hostile-contact protection and native one-shot earned-equipment acquisition setup."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+            "build_identity": {
+              "executable_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+              "compiled_manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+              "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "dummy muted",
+              "native_difficulty": 1,
+              "earned_weapons": "all acquisition prerequisite only",
+              "contact_protection": "on for unrelated hazards"
+            },
+            "action": "Observe original guest-owned weakness overlap, accepted HP/reaction and separate nondamaging offers; continue eight genuine native offers through finite original reaction and resumed boss movement.",
+            "outcome": "Full unchanged frozen F129 counterpart passed after exact requirement/source/raw review; accepted43 is source-derived, exact127 remains unobserved and strict raw observer result unchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-56a547b-F129-F207-frozen-weakness-contracts-reviewed.json",
+                "sha256": "7236ae9d07b00adb86f133e663dc0886e1372d70f7c4af3a74573f3be65e8ccd"
+              }
+            ],
+            "limits": [
+              "The immutable X4/X5 frozen definitions remain unchanged. F207 requires continued native weakness hits, accepted damage and eventual recovery/movement; observing result127 is an additional observer condition, not a frozen requirement. F129 requires overlap, accepted-hit result and HP/reaction so nondamaging offers are not mislabeled lost damage; it does not require every possible rejection outcome.",
+              "Source-derived accepted43 is explicitly not a sampled native result register. Exact rejected127/duplicate126 were not observed or inferred. Actual nondamaging sampled overlaps during original immunity and an initial LOCAL sampled geometric miss remain separate from the accepted six damage.",
+              "Eight genuine native action58/owned42 continuation offers were observed per physical process through progressing original reaction phases. LOCAL naturally restores normal AI/defense/recovery and movement; NET additionally records accepted42to36 on both peers during the continuing sequence, then finite second recovery/movement. This is a finite bounded sequence, not perpetual-fire/all-future-cycle coverage.",
+              "P2 callback deltas are not damaging-hit counts or unique main-contact counts. Private publication/world/counter/capture observations are asynchronous; no atomic shot/world token match or instruction-level HP-store trace is manufactured.",
+              "Difficulty PLAY68=1. The actual qualified prototype exposes no co-op damage-scaling option, so the frozen scaling clause applies only if implemented; no nonexistent scaling variant is required or claimed.",
+              "All existing source/provenance/owner identity/P1 neutral empty pool/weapon context/campaign C9 receipts/profile/final CRC/fixture-taint recording/card/owned-exit gates are retained from the independently passed same-candidate F26/F125 batch. Disclosed CP2/contact protection and native earned-equipment acquisition setup remain bypasses, not earned progression.",
+              "The original strict helper F207 status remains unverified in raw evidence because its supplemental freshFF/result127 witness is missing. Full frozen-contract review admits the actual requested behavior without rewriting that raw status or crediting unobserved result127. No second weakness family/F131 or simultaneous-owner/F155 claim."
+            ],
+            "bypasses": [
+              "Agreed original CP2, hostile-contact protection and native one-shot earned-equipment acquisition setup."
+            ]
+          }
+        ],
+        "limitations": "Passed frozen contract on exact V93 56a LOCAL+both NET peers using actual owned weakness42, source-derived accepted43/HP6, separate nondamaging observations, eight continuation offers, native reaction progression and finite recovery/motion. Exact127 is unobserved; original stricter helper status preserved. All source/profile/CRC/cards/taint/exit and acquisition/contact setup limits retained."
       }
     },
     {
@@ -21080,23 +21159,102 @@
       "x6": {
         "workstream": "combat",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "Native weakness reaction must eventually recover",
-        "bounded_check": "During a real X6 weakness encounter keep firing through its reaction; record accepted/rejected damage, finite native stun and resumed boss motion.",
+        "analogue": "Original guest-owned Zero weakness42 against Metal Shark main56, separate accepted/nondamaging observations and finite continued native reaction",
+        "bounded_check": "Continue genuine native guest weakness offers through the original reaction; verify accepted damage and eventual original recovery/movement, applying scaling variants only if implemented.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+            "build_identity": {
+              "executable_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+              "compiled_manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+              "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "dummy muted",
+              "native_difficulty": 1,
+              "earned_weapons": "all acquisition prerequisite only",
+              "contact_protection": "on for unrelated hazards"
+            },
+            "action": "Observe original guest-owned weakness overlap, accepted HP/reaction and separate nondamaging offers; continue eight genuine native offers through finite original reaction and resumed boss movement.",
+            "outcome": "Full unchanged frozen F207 counterpart passed after exact requirement/source/raw review; accepted43 is source-derived, exact127 remains unobserved and strict raw observer result unchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-56a547b-F129-F207-frozen-weakness-contracts-reviewed.json",
+                "sha256": "7236ae9d07b00adb86f133e663dc0886e1372d70f7c4af3a74573f3be65e8ccd"
+              }
+            ],
+            "limits": [
+              "The immutable X4/X5 frozen definitions remain unchanged. F207 requires continued native weakness hits, accepted damage and eventual recovery/movement; observing result127 is an additional observer condition, not a frozen requirement. F129 requires overlap, accepted-hit result and HP/reaction so nondamaging offers are not mislabeled lost damage; it does not require every possible rejection outcome.",
+              "Source-derived accepted43 is explicitly not a sampled native result register. Exact rejected127/duplicate126 were not observed or inferred. Actual nondamaging sampled overlaps during original immunity and an initial LOCAL sampled geometric miss remain separate from the accepted six damage.",
+              "Eight genuine native action58/owned42 continuation offers were observed per physical process through progressing original reaction phases. LOCAL naturally restores normal AI/defense/recovery and movement; NET additionally records accepted42to36 on both peers during the continuing sequence, then finite second recovery/movement. This is a finite bounded sequence, not perpetual-fire/all-future-cycle coverage.",
+              "P2 callback deltas are not damaging-hit counts or unique main-contact counts. Private publication/world/counter/capture observations are asynchronous; no atomic shot/world token match or instruction-level HP-store trace is manufactured.",
+              "Difficulty PLAY68=1. The actual qualified prototype exposes no co-op damage-scaling option, so the frozen scaling clause applies only if implemented; no nonexistent scaling variant is required or claimed.",
+              "All existing source/provenance/owner identity/P1 neutral empty pool/weapon context/campaign C9 receipts/profile/final CRC/fixture-taint recording/card/owned-exit gates are retained from the independently passed same-candidate F26/F125 batch. Disclosed CP2/contact protection and native earned-equipment acquisition setup remain bypasses, not earned progression.",
+              "The original strict helper F207 status remains unverified in raw evidence because its supplemental freshFF/result127 witness is missing. Full frozen-contract review admits the actual requested behavior without rewriting that raw status or crediting unobserved result127. No second weakness family/F131 or simultaneous-owner/F155 claim."
+            ],
+            "bypasses": [
+              "Agreed original CP2, hostile-contact protection and native one-shot earned-equipment acquisition setup."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+            "build_identity": {
+              "executable_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+              "compiled_manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+              "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "dummy muted",
+              "native_difficulty": 1,
+              "earned_weapons": "all acquisition prerequisite only",
+              "contact_protection": "on for unrelated hazards"
+            },
+            "action": "Observe original guest-owned weakness overlap, accepted HP/reaction and separate nondamaging offers; continue eight genuine native offers through finite original reaction and resumed boss movement.",
+            "outcome": "Full unchanged frozen F207 counterpart passed after exact requirement/source/raw review; accepted43 is source-derived, exact127 remains unobserved and strict raw observer result unchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-56a547b-F129-F207-frozen-weakness-contracts-reviewed.json",
+                "sha256": "7236ae9d07b00adb86f133e663dc0886e1372d70f7c4af3a74573f3be65e8ccd"
+              }
+            ],
+            "limits": [
+              "The immutable X4/X5 frozen definitions remain unchanged. F207 requires continued native weakness hits, accepted damage and eventual recovery/movement; observing result127 is an additional observer condition, not a frozen requirement. F129 requires overlap, accepted-hit result and HP/reaction so nondamaging offers are not mislabeled lost damage; it does not require every possible rejection outcome.",
+              "Source-derived accepted43 is explicitly not a sampled native result register. Exact rejected127/duplicate126 were not observed or inferred. Actual nondamaging sampled overlaps during original immunity and an initial LOCAL sampled geometric miss remain separate from the accepted six damage.",
+              "Eight genuine native action58/owned42 continuation offers were observed per physical process through progressing original reaction phases. LOCAL naturally restores normal AI/defense/recovery and movement; NET additionally records accepted42to36 on both peers during the continuing sequence, then finite second recovery/movement. This is a finite bounded sequence, not perpetual-fire/all-future-cycle coverage.",
+              "P2 callback deltas are not damaging-hit counts or unique main-contact counts. Private publication/world/counter/capture observations are asynchronous; no atomic shot/world token match or instruction-level HP-store trace is manufactured.",
+              "Difficulty PLAY68=1. The actual qualified prototype exposes no co-op damage-scaling option, so the frozen scaling clause applies only if implemented; no nonexistent scaling variant is required or claimed.",
+              "All existing source/provenance/owner identity/P1 neutral empty pool/weapon context/campaign C9 receipts/profile/final CRC/fixture-taint recording/card/owned-exit gates are retained from the independently passed same-candidate F26/F125 batch. Disclosed CP2/contact protection and native earned-equipment acquisition setup remain bypasses, not earned progression.",
+              "The original strict helper F207 status remains unverified in raw evidence because its supplemental freshFF/result127 witness is missing. Full frozen-contract review admits the actual requested behavior without rewriting that raw status or crediting unobserved result127. No second weakness family/F131 or simultaneous-owner/F155 claim."
+            ],
+            "bypasses": [
+              "Agreed original CP2, hostile-contact protection and native one-shot earned-equipment acquisition setup."
+            ]
+          }
+        ],
+        "limitations": "Passed frozen contract on exact V93 56a LOCAL+both NET peers using actual owned weakness42, source-derived accepted43/HP6, separate nondamaging observations, eight continuation offers, native reaction progression and finite recovery/motion. Exact127 is unobserved; original stricter helper status preserved. All source/profile/CRC/cards/taint/exit and acquisition/contact setup limits retained."
       }
     },
     {

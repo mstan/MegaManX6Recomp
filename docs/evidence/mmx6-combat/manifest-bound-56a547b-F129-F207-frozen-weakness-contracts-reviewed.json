@@ -1,0 +1,2831 @@
+{
+  "comparisons": {
+    "F129": "99ec0f9bcdc962a093ef34a16b7fa8425c83761e5d4cbe747572cdf4aa411797",
+    "F207": "765d00cd1fb8d1bcac6f4021a0433087b0c6c295de2df3ba5cceaac1d3c44173"
+  },
+  "unchanged_frozen_definitions": {
+    "F129": {
+      "x4": {
+        "source_report": "COOP_PLAYTEST_FEEDBACK_20261010.md:169 #129",
+        "state": "checked",
+        "original_symptom": "P2 weakness may not affect Slash Beast",
+        "failure_class": "Repeated weakness contacts are mistaken for accepted native hits"
+      },
+      "x5_snapshot": {
+        "counterpart_check": "During an X5 weakness encounter, retain overlap, accepted-hit result and boss HP/reaction so rejected or missed shots are not reported as lost damage.",
+        "burndown": "P09, P23",
+        "status": "passed",
+        "evidence_limits": "Passed bounded9FFB6E38 same F-Laser encounter distinguishes miss, accepted damage and actual rejection. Accepted62->57 and57->52 have native32188 HP stores/result7. During original recovery native3225C sets shot98, result7F and three nonzero contact results occur while HP57 stays57; no accepted HP store. Original recovery/table restore and fresh acceptance observed. Counter p2-hits counts contact results, not damage; last-result can be stale after a miss. qa-weakness-bundle-20261021/safe-normal6-contact/report.json. No boss reaction/recovery/phase fields seeded."
+      },
+      "sha256": "99ec0f9bcdc962a093ef34a16b7fa8425c83761e5d4cbe747572cdf4aa411797"
+    },
+    "F207": {
+      "x4": {
+        "source_report": "COOP_PLAYTEST_FEEDBACK_20261010.md:247 #207",
+        "state": "checked",
+        "original_symptom": "Slash Beast can be repeatedly stunned by his weakness",
+        "failure_class": "Accepted weakness hits restart a boss stun indefinitely"
+      },
+      "x5_snapshot": {
+        "counterpart_check": "During an actual X5 weakness encounter, continue native hits through the reaction; verify accepted damage and eventual recovery/movement. Repeat scaling only when implemented.",
+        "burndown": "P09, P23, P29",
+        "status": "passed",
+        "evidence_limits": "Passed bounded in the same E61EFF70 native class34 Wing Spiral encounter: after accepted5damage, continued native fire spends another12ammo while original reaction0B progresses substates1->2->3->4 across world8814..9027, retaining HP66. Native phase7 exits, actual recovery56->0 restores damage table80075FC0, and original AI moves again. No phase/timer/reaction writes or indefinite restart. qa-weakness-airborne-20261021/{qualification.json,normal8-contact-safe-floor/recovery-continuation.json}. Default scaling off; new scaling policy and other bosses remain unqualified."
+      },
+      "sha256": "765d00cd1fb8d1bcac6f4021a0433087b0c6c295de2df3ba5cceaac1d3c44173"
+    }
+  },
+  "result": "passed",
+  "candidate": "56a547bfcd016a04ce86a7e993c31f64fe9ed563",
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-equipment-campaign-v93-final-binding-worker-v1.json",
+    "bytes": 269,
+    "sha256": "326a9791626b3289b0670fb8b2d37044fdeeb5108c3a9405a0dc1c4721877249",
+    "image_sha256": "11f36adb693e37f53a07052149768538271c08e5dae87c4ba677d1f4707c88a7",
+    "manifest_sha256": "c80c6e81665a44c9142c8c80fc1d1f2117ecf7fc8529f6c45974bbf9ef5507df",
+    "provenance_sha256": "79fcab1e6586a21ee8f17e35793601e37592499430246d3e2587508f65240ced"
+  },
+  "prior_full_native_source_and_parent_review": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-combat\\manifest-bound-56a547b-F26-F125-native-weakness-local-netplay-reviewed.json",
+    "bytes": 208773,
+    "sha256": "f816a909d74a5ccdef6bdb56847fb41057500186e92877b40d279ffc90ada03a"
+  },
+  "independent_LOCAL_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F26-F125-v93-local-independent-review-worker-v1.json",
+    "bytes": 20089,
+    "sha256": "bf5b420f64ed974e669ef3b4246b966ed2336d4b8a3a8e4b8b84668796d533b6"
+  },
+  "independent_NET_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F26-F125-v93-netplay-independent-review-worker-v1.json",
+    "bytes": 19664,
+    "sha256": "88306f7b544e9312e9601fdc2fd81e29b9a372436ac2ca5c5d0e30d0a838a0a7"
+  },
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F129-F207-frozen-scope-v93-root-v1.py",
+    "bytes": 11584,
+    "sha256": "efecd205a855d8a4541bc3c235decf3ed7805808e3d9b2d61bda09a40063ff6c"
+  },
+  "modes": {
+    "local": {
+      "result": "passed_frozen_F129_and_F207",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-local-v93-root-v4\\qualification.json",
+        "bytes": 19031400,
+        "sha256": "9b932a33e281069a96611a50f840984ef0b3e270fd5be56cee9e7f5c7e00d5f2"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "accepted_weakness": [
+        {
+          "peer": 0,
+          "row": 74,
+          "before_hp": 48,
+          "after_hp": 42,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 3,
+            "phase": 1,
+            "phase2": 0,
+            "x": 6120,
+            "y": 375,
+            "x_raw": 401080320,
+            "y_raw": 24576000,
+            "layer": 0,
+            "facing": 0,
+            "selected_clip": 37,
+            "sprite_frame": 9,
+            "animation_cursor": "0x800f951c",
+            "command": [
+              2,
+              0,
+              1,
+              9
+            ],
+            "attack": "0x800f9088",
+            "hurt": "0x800f908c",
+            "table": "0x8007433c",
+            "hp": 42,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 83,
+            "recovery": 9997,
+            "feedback": 0,
+            "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f801c950f8000000000589e158040054cf902000109ff0000000000000088900f808c900f803c4307802a2f0000040000ff005300007c900f800800000008000000000000000000000059000300e0b70980000000000d27000201000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              351,
+              6136,
+              407
+            ]
+          },
+          "birth": {
+            "row": 74,
+            "shots": [
+              {
+                "slot": 0,
+                "owner": 2,
+                "address": "0x800950a0",
+                "allocation": 1,
+                "active": 1,
+                "type": 42,
+                "subtype": 0,
+                "visible": 1,
+                "state": 1,
+                "action": 0,
+                "phase": 0,
+                "phase2": 0,
+                "x": 6141,
+                "y": 394,
+                "x_raw": 402520064,
+                "y_raw": 25821184,
+                "layer": 0,
+                "facing": 0,
+                "selected_clip": 121,
+                "sprite_frame": 74,
+                "animation_cursor": "0x801ef574",
+                "command": [
+                  1,
+                  83,
+                  1,
+                  74
+                ],
+                "attack": "0x801ee560",
+                "hurt": "0x0",
+                "table": "0x0",
+                "hp": 0,
+                "iframe": 0,
+                "disposition": 0,
+                "token": 83,
+                "remembered_token": 0,
+                "recovery": 103,
+                "feedback": 0,
+                "hex": "012a00010100000000f8fd1700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e8074f51e800000000050e0039f000501780153014aff0000000000000060e51e800000000000000000000000000000000053000000000000000000000000000000000000000000000000000000f517700167000000000000000000000000000000000000000000000000000000",
+                "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+                "native_parent_animation": 103,
+                "source_box_hex": "ccc84438",
+                "attack_rect": [
+                  6089,
+                  338,
+                  6157,
+                  394
+                ]
+              }
+            ],
+            "body_hex": "01000101013a010000f8fd1700008a01000000000000026700f8fd1700008a010000feff000000000000000000000000d0f61e8050f51e806c9b029f50e0039f0005007801800149ff030000000000000000000008ea1e80000000001c1c20000000000100000000543d07800d0000000800000000000000000001002800000028000000000008000008000300000100000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100ff0000000000000014400000000000000000000001000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000f8fd1700008a010000000000002001000000000000000000000000"
+          },
+          "valid_overlap_rows": [
+            74
+          ],
+          "accepted_result": {
+            "value": 43,
+            "kind": "source-derived, not a sampled result register",
+            "basis": "Only P2 owned42 and valid source-box overlap; original normal defense7555C[42]=0006, nonlethal damage path31908 then319D0 returns attackID+1; exact original main authored reaction3 consumes this weakness result."
+          }
+        }
+      ],
+      "nondamaging_overlap": [
+        {
+          "row": 76,
+          "peer": 0,
+          "world": 1004,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 3,
+            "phase": 1,
+            "phase2": 0,
+            "x": 6120,
+            "y": 375,
+            "x_raw": 401080320,
+            "y_raw": 24576000,
+            "layer": 0,
+            "facing": 0,
+            "selected_clip": 37,
+            "sprite_frame": 9,
+            "animation_cursor": "0x800f951c",
+            "command": [
+              3,
+              0,
+              1,
+              9
+            ],
+            "attack": "0x800f9088",
+            "hurt": "0x800f908c",
+            "table": "0x8007433c",
+            "hp": 42,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 83,
+            "recovery": 9986,
+            "feedback": 0,
+            "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f801c950f8000000000589e158040054cf903000109ff0000000000000088900f808c900f803c4307802a2c0000040000ff005300007c900f80080000000800000000000000000000004e000300e0b70980000000000227000201000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              351,
+              6136,
+              407
+            ]
+          },
+          "shots": [
+            {
+              "slot": 0,
+              "owner": 2,
+              "address": "0x800950a0",
+              "allocation": 1,
+              "active": 1,
+              "type": 42,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 0,
+              "phase": 0,
+              "phase2": 0,
+              "x": 6141,
+              "y": 394,
+              "x_raw": 402520064,
+              "y_raw": 25821184,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 121,
+              "sprite_frame": 74,
+              "animation_cursor": "0x801ef574",
+              "command": [
+                1,
+                83,
+                1,
+                74
+              ],
+              "attack": "0x801ee560",
+              "hurt": "0x0",
+              "table": "0x0",
+              "hp": 0,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 83,
+              "remembered_token": 0,
+              "recovery": 103,
+              "feedback": 0,
+              "hex": "012a00010100000000f8fd1700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e8074f51e800000000050e0039f000501780153014aff0000000000000060e51e800000000000000000000000000000000053000000000000000000000000000000000000000000000000000000ed17540167000000000000000000000000000000000000000000000000000000",
+              "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+              "native_parent_animation": 103,
+              "source_box_hex": "ccc84438",
+              "attack_rect": [
+                6089,
+                338,
+                6157,
+                394
+              ]
+            }
+          ],
+          "P2_callback_count": 18,
+          "P1_empty_native_attack_pool": true,
+          "primary_weapon_context": {
+            "selected_weapon93": 0,
+            "release_selector95": 0,
+            "charge_level9C": 0,
+            "charge_counter9E": 0,
+            "equipment_flagsEC": 0,
+            "native_input_hex": "000000000000",
+            "raw93_9F_hex": "003200ff000000000000000000",
+            "normal_selector94": 50,
+            "emission_selector96": 255,
+            "palette_flash_timer9F": 0
+          },
+          "previous_HP": 42,
+          "previous_callback_count": 15,
+          "result": "nondamaging sampled overlap during original immunity; exact rejected/duplicate result unobserved",
+          "limit": "Callback count is not damage or a sampled result ID; publication/world reads are asynchronous."
+        }
+      ],
+      "sampled_miss": {
+        "row": 18,
+        "peer": 0,
+        "world": 818,
+        "main": {
+          "slot": null,
+          "owner": null,
+          "address": "0x8008ef48",
+          "allocation": 65,
+          "active": 65,
+          "type": 56,
+          "subtype": 0,
+          "visible": 1,
+          "state": 1,
+          "action": 5,
+          "phase": 4,
+          "phase2": 0,
+          "x": 6124,
+          "y": 305,
+          "x_raw": 401342464,
+          "y_raw": 20018400,
+          "layer": 0,
+          "facing": 0,
+          "selected_clip": 6,
+          "sprite_frame": 8,
+          "animation_cursor": "0x800f9128",
+          "command": [
+            2,
+            0,
+            1,
+            8
+          ],
+          "attack": "0x800f9088",
+          "hurt": "0x800f908c",
+          "table": "0x8007555c",
+          "hp": 48,
+          "iframe": 0,
+          "disposition": 0,
+          "token": 0,
+          "remembered_token": 0,
+          "recovery": 0,
+          "feedback": 0,
+          "hex": "41380001010504000000ec17e0743101487e0f80000005060000ec1710af30010000000040f8feff00000000f04100002c950f8028910f8000000000407915804001487902000108ff0000000000000088900f808c900f805c5507803030000004000000000000007c900f800c000a0000000000000000000000000000000300e0b70980000000000000000401000000000000000000000000000000",
+          "source_hurt_box_hex": "f0e82038",
+          "hurt_rect": [
+            6108,
+            281,
+            6140,
+            337
+          ]
+        },
+        "shots": [
+          {
+            "slot": 0,
+            "owner": 2,
+            "address": "0x800950a0",
+            "allocation": 1,
+            "active": 1,
+            "type": 42,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 0,
+            "phase": 0,
+            "phase2": 0,
+            "x": 6141,
+            "y": 394,
+            "x_raw": 402520064,
+            "y_raw": 25821184,
+            "layer": 0,
+            "facing": 0,
+            "selected_clip": 121,
+            "sprite_frame": 88,
+            "animation_cursor": "0x801ef590",
+            "command": [
+              1,
+              90,
+              1,
+              88
+            ],
+            "attack": "0x801ee57c",
+            "hurt": "0x0",
+            "table": "0x0",
+            "hp": 0,
+            "iframe": 0,
+            "disposition": 0,
+            "token": 88,
+            "remembered_token": 0,
+            "recovery": 103,
+            "feedback": 0,
+            "hex": "012a00010100000000f8fd1700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e8090f51e800000000050e0039f00050178015a0158ff000000000000007ce51e800000000000000000000000000000000058000000000000000000000000000000000000000000000000000000e2175d0167000000000000000000000000000000000000000000000000000000",
+            "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+            "native_parent_animation": 103,
+            "source_box_hex": "e0c84a27",
+            "attack_rect": [
+              6109,
+              338,
+              6183,
+              377
+            ]
+          }
+        ],
+        "P2_callback_count": 1,
+        "P1_empty_native_attack_pool": true,
+        "primary_weapon_context": {
+          "selected_weapon93": 0,
+          "release_selector95": 0,
+          "charge_level9C": 0,
+          "charge_counter9E": 0,
+          "equipment_flagsEC": 0,
+          "native_input_hex": "000000000000",
+          "raw93_9F_hex": "003200ff000000000000000000",
+          "normal_selector94": 50,
+          "emission_selector96": 255,
+          "palette_flash_timer9F": 0
+        },
+        "result": "sampled nonoverlap/unchanged HP, not an accepted hit",
+        "limit": "One actual sample, not proof of every instant in the entire offer."
+      },
+      "continued_offers": [
+        {
+          "before": 75,
+          "world": [
+            1001
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 12,
+              "animation_cursor": "0x800f9528",
+              "command": [
+                3,
+                0,
+                253,
+                12
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9989,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8028950f8000000000589e158040054cf90300fd0cff00000000000000b0900f80b4900f803c4307802a2d0000040000ff000000007c900f800800000008000000000000000000000051000300e0b70980000000000527000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true
+          ],
+          "native42": [
+            true
+          ]
+        },
+        {
+          "before": 79,
+          "world": [
+            1015
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 9,
+              "animation_cursor": "0x800f951c",
+              "command": [
+                2,
+                0,
+                1,
+                9
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9973,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f801c950f8000000000589e158040054cf902000109ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000041000300e0b7098000000000f526000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true
+          ],
+          "native42": [
+            true
+          ]
+        },
+        {
+          "before": 83,
+          "world": [
+            1030
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 9,
+              "animation_cursor": "0x800f951c",
+              "command": [
+                1,
+                0,
+                1,
+                9
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9960,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f801c950f8000000000589e158040054c7901000109ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000034000300e0b7098000000000e826000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true
+          ],
+          "native42": [
+            true
+          ]
+        },
+        {
+          "before": 86,
+          "world": [
+            1042
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 10,
+              "animation_cursor": "0x800f9520",
+              "command": [
+                3,
+                0,
+                1,
+                10
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9947,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8020950f8000000000589e158040054c790300010aff00000000000000b0900f80b4900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000027000300e0b7098000000000db26000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true
+          ],
+          "native42": [
+            true
+          ]
+        },
+        {
+          "before": 90,
+          "world": [
+            1056
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 10,
+              "animation_cursor": "0x800f9520",
+              "command": [
+                2,
+                0,
+                1,
+                10
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9934,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8020950f8000000000589e158040054cf90200010aff00000000000000b0900f80b4900f803c4307802a2a0000040000ff000000007c900f80080000000800000000000000000000001a000300e0b7098000000000ce26000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true
+          ],
+          "native42": [
+            true
+          ]
+        },
+        {
+          "before": 93,
+          "world": [
+            1068
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 10,
+              "animation_cursor": "0x800f9520",
+              "command": [
+                1,
+                0,
+                1,
+                10
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9921,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8020950f8000000000589e158040054cf90100010aff00000000000000b0900f80b4900f803c4307802a2a0000040000ff000000007c900f80080000000800000000000000000000000d000300e0b7098000000000c126000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true
+          ],
+          "native42": [
+            true
+          ]
+        },
+        {
+          "before": 97,
+          "world": [
+            1082
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 2,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 11,
+              "animation_cursor": "0x800f9524",
+              "command": [
+                3,
+                0,
+                1,
+                11
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9908,
+              "feedback": 0,
+              "hex": "41380001010302000000e81700007701487e0f80000005250000e81700007701000000000000000000000000004000002c950f8024950f8000000000589e158040054c790300010bff00000000000000b0900f80b4900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000000000300e0b7098000000000b426000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true
+          ],
+          "native42": [
+            true
+          ]
+        },
+        {
+          "before": 100,
+          "world": [
+            1095
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 3,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 2,
+              "sprite_frame": 1,
+              "animation_cursor": "0x800f9100",
+              "command": [
+                12,
+                1,
+                1,
+                1
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9895,
+              "feedback": 0,
+              "hex": "41380001010303000000e81700007701487e0f80000005020000e81700007701000000000000000000000000004000002c950f8000910f800000000040791580400148790c010101ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000026000300e0b7098000000000a726000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true
+          ],
+          "native42": [
+            true
+          ]
+        }
+      ],
+      "separate_damage_events": [],
+      "original_phase_progression": [
+        {
+          "peer": 0,
+          "sequence": [
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              5,
+              4
+            ]
+          ],
+          "recovered": {
+            "row": 121,
+            "main": {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 3,
+              "phase2": 0,
+              "x": 6120,
+              "y": 296,
+              "x_raw": 401080320,
+              "y_raw": 19437570,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 8,
+              "sprite_frame": 10,
+              "animation_cursor": "0x800f913c",
+              "command": [
+                1,
+                0,
+                1,
+                10
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007555c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "41380001010503000000e81702982801487e0f80004005080000e81702982801000000000000000000000000564f00002c950f803c910f800000000040791580400148790100010aff00000000000000b0900f80b4900f805c5507802a2a0000040000ff000000007c900f800800010000000000000000000000000000000300e0b70980000000000000000202000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                272,
+                6136,
+                328
+              ]
+            },
+            "world": 1172
+          },
+          "motion": {
+            "row": 134,
+            "main": {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 4,
+              "phase2": 0,
+              "x": 6120,
+              "y": 298,
+              "x_raw": 401080320,
+              "y_raw": 19559430,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 6,
+              "sprite_frame": 8,
+              "animation_cursor": "0x800f9128",
+              "command": [
+                2,
+                0,
+                1,
+                8
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007555c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "41380001010504000000e81706742a01487e0f80004005060000e8170486290100000000a8c2feff00000000564f00002c950f8028910f8000000000407915804001487902000108ff0000000000000088900f808c900f805c5507802a2a0000040000ff000000007c900f800800030000000000000000000000000000000300e0b70980000000000000000202000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                274,
+                6136,
+                330
+              ]
+            },
+            "world": 1204
+          }
+        }
+      ],
+      "native_control_return": {
+        "row": 135,
+        "remaining_immunity": [
+          0
+        ]
+      },
+      "original_strict_observer_F207": {
+        "status": "unverified",
+        "frozen_row_sha256": "765d00cd1fb8d1bcac6f4021a0433087b0c6c295de2df3ba5cceaac1d3c44173",
+        "checks": {
+          "two_actual_native_continuation_lifetimes_every_peer": true,
+          "source_exclusive_native_rejected_contact_every_peer": false,
+          "finite_original_reaction_recovery": true,
+          "normal_defense_restored_and_actual_motion": true
+        },
+        "missing": [
+          "source_exclusive_native_rejected_contact_every_peer"
+        ]
+      },
+      "extra_result127_observer_gate_satisfied": false
+    },
+    "netplay": {
+      "result": "passed_frozen_F129_and_F207",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F207-native-weakness-netplay-v93-root-v4\\qualification.json",
+        "bytes": 19485889,
+        "sha256": "67fd1562e47caa8c94ae7445b990b44a6d9fbec39cdc513d07b7fe6c1a7b2908"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "accepted_weakness": [
+        {
+          "peer": 0,
+          "row": 20,
+          "before_hp": 48,
+          "after_hp": 42,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 3,
+            "phase": 1,
+            "phase2": 0,
+            "x": 6120,
+            "y": 375,
+            "x_raw": 401080320,
+            "y_raw": 24576000,
+            "layer": 0,
+            "facing": 0,
+            "selected_clip": 37,
+            "sprite_frame": 10,
+            "animation_cursor": "0x800f9520",
+            "command": [
+              2,
+              0,
+              1,
+              10
+            ],
+            "attack": "0x800f90b0",
+            "hurt": "0x800f90b4",
+            "table": "0x8007433c",
+            "hp": 42,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 0,
+            "recovery": 9994,
+            "feedback": 0,
+            "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8020950f8000000000589e158040054cf90200010aff00000000000000b0900f80b4900f803c4307802a2f0000040000ff000000007c900f800800000008000000000000000000000056000300e0b70980000000000a27000101000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              351,
+              6136,
+              407
+            ]
+          },
+          "birth": {
+            "row": 20,
+            "shots": [
+              {
+                "slot": 0,
+                "owner": 2,
+                "address": "0x800950a0",
+                "allocation": 1,
+                "active": 1,
+                "type": 42,
+                "subtype": 0,
+                "visible": 1,
+                "state": 1,
+                "action": 0,
+                "phase": 0,
+                "phase2": 0,
+                "x": 6131,
+                "y": 394,
+                "x_raw": 401864704,
+                "y_raw": 25821184,
+                "layer": 0,
+                "facing": 0,
+                "selected_clip": 121,
+                "sprite_frame": 80,
+                "animation_cursor": "0x801ef580",
+                "command": [
+                  1,
+                  86,
+                  1,
+                  80
+                ],
+                "attack": "0x801ee56c",
+                "hurt": "0x0",
+                "table": "0x0",
+                "hp": 0,
+                "iframe": 0,
+                "disposition": 0,
+                "token": 85,
+                "remembered_token": 0,
+                "recovery": 103,
+                "feedback": 0,
+                "hex": "012a00010100000000f8f31700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e8080f51e800000000050e0039f0005017801560150ff000000000000006ce51e800000000000000000000000000000000055000000000000000000000000000000000000000000000000000000f517910167000000000000000000000000000000000000000000000000000000",
+                "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+                "native_parent_animation": 103,
+                "source_box_hex": "d4014827",
+                "attack_rect": [
+                  6087,
+                  395,
+                  6159,
+                  434
+                ]
+              }
+            ],
+            "body_hex": "01000101013a010000f8f31700008a01000000000000026700f8f31700008a010000feff000000000000000000000000d0f61e805cf51e806c9b029f50e0039f000500780100014fff030000000000000000000008ea1e80000000001c1c20000000000100000000543d0780030000000800000000000000000001002800280000000000000008000008000000000100000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100ff0000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000f8f31700008a010000000000002001000000000000000000000000"
+          },
+          "valid_overlap_rows": [
+            20
+          ],
+          "accepted_result": {
+            "value": 43,
+            "kind": "source-derived, not a sampled result register",
+            "basis": "Only P2 owned42 and valid source-box overlap; original normal defense7555C[42]=0006, nonlethal damage path31908 then319D0 returns attackID+1; exact original main authored reaction3 consumes this weakness result."
+          }
+        },
+        {
+          "peer": 1,
+          "row": 20,
+          "before_hp": 48,
+          "after_hp": 42,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 3,
+            "phase": 1,
+            "phase2": 0,
+            "x": 6120,
+            "y": 375,
+            "x_raw": 401080320,
+            "y_raw": 24576000,
+            "layer": 0,
+            "facing": 0,
+            "selected_clip": 37,
+            "sprite_frame": 11,
+            "animation_cursor": "0x800f9524",
+            "command": [
+              3,
+              0,
+              1,
+              11
+            ],
+            "attack": "0x800f90b0",
+            "hurt": "0x800f90b4",
+            "table": "0x8007433c",
+            "hp": 42,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 89,
+            "recovery": 9992,
+            "feedback": 0,
+            "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8024950f8000000000589e158040054c790300010bff00000000000000b0900f80b4900f803c4307802a2e0000040000ff005900007c900f800800000008000000000000000000000054000300e0b70980000000000827000101000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              351,
+              6136,
+              407
+            ]
+          },
+          "birth": {
+            "row": 19,
+            "shots": [
+              {
+                "slot": 0,
+                "owner": 2,
+                "address": "0x800950a0",
+                "allocation": 1,
+                "active": 1,
+                "type": 42,
+                "subtype": 0,
+                "visible": 1,
+                "state": 1,
+                "action": 0,
+                "phase": 0,
+                "phase2": 0,
+                "x": 6131,
+                "y": 394,
+                "x_raw": 401864704,
+                "y_raw": 25821184,
+                "layer": 0,
+                "facing": 0,
+                "selected_clip": 121,
+                "sprite_frame": 78,
+                "animation_cursor": "0x801ef57c",
+                "command": [
+                  1,
+                  85,
+                  1,
+                  78
+                ],
+                "attack": "0x801ee568",
+                "hurt": "0x0",
+                "table": "0x0",
+                "hp": 0,
+                "iframe": 0,
+                "disposition": 0,
+                "token": 85,
+                "remembered_token": 0,
+                "recovery": 103,
+                "feedback": 0,
+                "hex": "012a00010100000000f8f31700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e807cf51e800000000050e0039f000501780155014eff0000000000000068e51e800000000000000000000000000000000055000000000000000000000000000000000000000000000000000000eb17750167000000000000000000000000000000000000000000000000000000",
+                "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+                "native_parent_animation": 103,
+                "source_box_hex": "c8e43e40",
+                "attack_rect": [
+                  6075,
+                  366,
+                  6137,
+                  430
+                ]
+              }
+            ],
+            "body_hex": "01000101013a010000f8f31700008a01000000000000026700f8f31700008a010000feff000000000000000000000000d0f61e8058f51e806c9b029f50e0039f000500780100014dff030000000000000000000008ea1e80000000001c1c20000000000100000000543d0780030000000800000000000000000001002800280000000000000008000008000000000100000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100ff0000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000f8f31700008a010000000000002001000000000000000000000000"
+          },
+          "valid_overlap_rows": [
+            19,
+            20
+          ],
+          "accepted_result": {
+            "value": 43,
+            "kind": "source-derived, not a sampled result register",
+            "basis": "Only P2 owned42 and valid source-box overlap; original normal defense7555C[42]=0006, nonlethal damage path31908 then319D0 returns attackID+1; exact original main authored reaction3 consumes this weakness result."
+          }
+        }
+      ],
+      "nondamaging_overlap": [
+        {
+          "row": 31,
+          "peer": 0,
+          "world": 1759,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 3,
+            "phase": 1,
+            "phase2": 0,
+            "x": 6120,
+            "y": 375,
+            "x_raw": 401080320,
+            "y_raw": 24576000,
+            "layer": 0,
+            "facing": 0,
+            "selected_clip": 37,
+            "sprite_frame": 9,
+            "animation_cursor": "0x800f951c",
+            "command": [
+              3,
+              0,
+              1,
+              9
+            ],
+            "attack": "0x800f9088",
+            "hurt": "0x800f908c",
+            "table": "0x8007433c",
+            "hp": 42,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 84,
+            "recovery": 9938,
+            "feedback": 0,
+            "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f801c950f8000000000589e158040054cf903000109ff0000000000000088900f808c900f803c4307802a2a0000040000ff005400007c900f80080000000800000000000000000000001e000300e0b7098000000000d226000101000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              351,
+              6136,
+              407
+            ]
+          },
+          "shots": [
+            {
+              "slot": 0,
+              "owner": 2,
+              "address": "0x800950a0",
+              "allocation": 1,
+              "active": 1,
+              "type": 42,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 0,
+              "phase": 0,
+              "phase2": 0,
+              "x": 6131,
+              "y": 394,
+              "x_raw": 401864704,
+              "y_raw": 25821184,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 121,
+              "sprite_frame": 76,
+              "animation_cursor": "0x801ef578",
+              "command": [
+                1,
+                84,
+                1,
+                76
+              ],
+              "attack": "0x801ee564",
+              "hurt": "0x0",
+              "table": "0x0",
+              "hp": 0,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 84,
+              "remembered_token": 0,
+              "recovery": 103,
+              "feedback": 0,
+              "hex": "012a00010100000000f8f31700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e8078f51e800000000050e0039f000501780154014cff0000000000000064e51e800000000000000000000000000000000054000000000000000000000000000000000000000000000000000000d317610167000000000000000000000000000000000000000000000000000000",
+              "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+              "native_parent_animation": 103,
+              "source_box_hex": "c8d03042",
+              "attack_rect": [
+                6075,
+                346,
+                6123,
+                412
+              ]
+            }
+          ],
+          "P2_callback_count": 29,
+          "P1_empty_native_attack_pool": true,
+          "primary_weapon_context": {
+            "selected_weapon93": 0,
+            "release_selector95": 0,
+            "charge_level9C": 0,
+            "charge_counter9E": 0,
+            "equipment_flagsEC": 0,
+            "native_input_hex": "000000000000",
+            "raw93_9F_hex": "003200ff000000000000000000",
+            "normal_selector94": 50,
+            "emission_selector96": 255,
+            "palette_flash_timer9F": 0
+          },
+          "previous_HP": 42,
+          "previous_callback_count": 22,
+          "result": "nondamaging sampled overlap during original immunity; exact rejected/duplicate result unobserved",
+          "limit": "Callback count is not damage or a sampled result ID; publication/world reads are asynchronous."
+        },
+        {
+          "row": 38,
+          "peer": 1,
+          "world": 1788,
+          "main": {
+            "slot": null,
+            "owner": null,
+            "address": "0x8008ef48",
+            "allocation": 65,
+            "active": 65,
+            "type": 56,
+            "subtype": 0,
+            "visible": 1,
+            "state": 1,
+            "action": 3,
+            "phase": 1,
+            "phase2": 0,
+            "x": 6120,
+            "y": 375,
+            "x_raw": 401080320,
+            "y_raw": 24576000,
+            "layer": 0,
+            "facing": 0,
+            "selected_clip": 37,
+            "sprite_frame": 10,
+            "animation_cursor": "0x800f9520",
+            "command": [
+              3,
+              0,
+              1,
+              10
+            ],
+            "attack": "0x800f90b0",
+            "hurt": "0x800f90b4",
+            "table": "0x8007433c",
+            "hp": 42,
+            "iframe": 0,
+            "disposition": 255,
+            "token": 0,
+            "remembered_token": 85,
+            "recovery": 9911,
+            "feedback": 0,
+            "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8020950f8000000000589e158040054c790300010aff00000000000000b0900f80b4900f803c4307802a2a0000040000ff005500007c900f800800000008000000000000000000000003000300e0b7098000000000b726000101000000000000000000000000000000",
+            "source_hurt_box_hex": "f0e82038",
+            "hurt_rect": [
+              6104,
+              351,
+              6136,
+              407
+            ]
+          },
+          "shots": [
+            {
+              "slot": 0,
+              "owner": 2,
+              "address": "0x800950a0",
+              "allocation": 1,
+              "active": 1,
+              "type": 42,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 0,
+              "phase": 0,
+              "phase2": 0,
+              "x": 6131,
+              "y": 394,
+              "x_raw": 401864704,
+              "y_raw": 25821184,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 121,
+              "sprite_frame": 80,
+              "animation_cursor": "0x801ef580",
+              "command": [
+                1,
+                86,
+                1,
+                80
+              ],
+              "attack": "0x801ee56c",
+              "hurt": "0x0",
+              "table": "0x0",
+              "hp": 0,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 85,
+              "remembered_token": 0,
+              "recovery": 103,
+              "feedback": 0,
+              "hex": "012a00010100000000f8f31700008a010000000000000279000000000000000000000000000000000000000000000000d0f61e8080f51e800000000050e0039f0005017801560150ff000000000000006ce51e800000000000000000000000000000000055000000000000000000000000000000000000000000000000000000eb17910167000000000000000000000000000000000000000000000000000000",
+              "ownership_basis": "typed private P2 pool + original native emission ABI player800970A0",
+              "native_parent_animation": 103,
+              "source_box_hex": "d4014827",
+              "attack_rect": [
+                6087,
+                395,
+                6159,
+                434
+              ]
+            }
+          ],
+          "P2_callback_count": 38,
+          "P1_empty_native_attack_pool": true,
+          "primary_weapon_context": {
+            "selected_weapon93": 0,
+            "release_selector95": 0,
+            "charge_level9C": 0,
+            "charge_counter9E": 0,
+            "equipment_flagsEC": 0,
+            "native_input_hex": "000000000000",
+            "raw93_9F_hex": "003200ff000000000000000000",
+            "normal_selector94": 50,
+            "emission_selector96": 255,
+            "palette_flash_timer9F": 0
+          },
+          "previous_HP": 42,
+          "previous_callback_count": 36,
+          "result": "nondamaging sampled overlap during original immunity; exact rejected/duplicate result unobserved",
+          "limit": "Callback count is not damage or a sampled result ID; publication/world reads are asynchronous."
+        }
+      ],
+      "sampled_miss": null,
+      "continued_offers": [
+        {
+          "before": 23,
+          "world": [
+            1723,
+            1725
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 12,
+              "animation_cursor": "0x800f9528",
+              "command": [
+                2,
+                0,
+                253,
+                12
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9976,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8028950f8000000000589e158040054c790200fd0cff00000000000000b0900f80b4900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000044000300e0b7098000000000f826000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            },
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 9,
+              "animation_cursor": "0x800f951c",
+              "command": [
+                3,
+                0,
+                1,
+                9
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9974,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f801c950f8000000000589e158040054cf903000109ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000042000300e0b7098000000000f626000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true,
+            true
+          ],
+          "native42": [
+            true,
+            true
+          ]
+        },
+        {
+          "before": 29,
+          "world": [
+            1750,
+            1752
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 9,
+              "animation_cursor": "0x800f951c",
+              "command": [
+                2,
+                0,
+                1,
+                9
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9949,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f801c950f8000000000589e158040054cf902000109ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000029000300e0b7098000000000dd26000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            },
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 10,
+              "animation_cursor": "0x800f9520",
+              "command": [
+                3,
+                0,
+                1,
+                10
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9947,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8020950f8000000000589e158040054c790300010aff00000000000000b0900f80b4900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000027000300e0b7098000000000db26000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true,
+            true
+          ],
+          "native42": [
+            true,
+            true
+          ]
+        },
+        {
+          "before": 35,
+          "world": [
+            1778,
+            1779
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 10,
+              "animation_cursor": "0x800f9520",
+              "command": [
+                1,
+                0,
+                1,
+                10
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9921,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8020950f8000000000589e158040054cf90100010aff00000000000000b0900f80b4900f803c4307802a2a0000040000ff000000007c900f80080000000800000000000000000000000d000300e0b7098000000000c126000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            },
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 37,
+              "sprite_frame": 11,
+              "animation_cursor": "0x800f9524",
+              "command": [
+                3,
+                0,
+                1,
+                11
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9920,
+              "feedback": 0,
+              "hex": "41380001010301000000e81700007701487e0f80000005250000e81700007701000000000000000000000000000000002c950f8024950f8000000000589e158040054c790300010bff00000000000000b0900f80b4900f803c4307802a2a0000040000ff000000007c900f80080000000800000000000000000000000c000300e0b7098000000000c026000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true,
+            true
+          ],
+          "native42": [
+            true,
+            true
+          ]
+        },
+        {
+          "before": 41,
+          "world": [
+            1797,
+            1799
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 3,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 2,
+              "sprite_frame": 0,
+              "animation_cursor": "0x800f90fc",
+              "command": [
+                7,
+                0,
+                1,
+                0
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9902,
+              "feedback": 0,
+              "hex": "41380001010303000000e81700007701487e0f80000005020000e81700007701000000000000000000000000004000002c950f80fc900f800000000040791580400148f907000100ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f80080000000800000000000000000000002d000300e0b7098000000000ae26000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            },
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 3,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 2,
+              "sprite_frame": 0,
+              "animation_cursor": "0x800f90fc",
+              "command": [
+                5,
+                0,
+                1,
+                0
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9900,
+              "feedback": 0,
+              "hex": "41380001010303000000e81700007701487e0f80000005020000e81700007701000000000000000000000000004000002c950f80fc900f8000000000407915804001487905000100ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f80080000000800000000000000000000002b000300e0b7098000000000ac26000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true,
+            true
+          ],
+          "native42": [
+            true,
+            true
+          ]
+        },
+        {
+          "before": 48,
+          "world": [
+            1827,
+            1829
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 3,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 2,
+              "sprite_frame": 3,
+              "animation_cursor": "0x800f9108",
+              "command": [
+                8,
+                0,
+                1,
+                3
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9872,
+              "feedback": 0,
+              "hex": "41380001010303000000e81700007701487e0f80000005020000e81700007701000000000000000000000000004000002c950f8008910f8000000000407915804001487908000103ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f80080000000800000000000000000000000f000300e0b70980000000009026000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            },
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 3,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 2,
+              "sprite_frame": 3,
+              "animation_cursor": "0x800f9108",
+              "command": [
+                6,
+                0,
+                1,
+                3
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9870,
+              "feedback": 0,
+              "hex": "41380001010303000000e81700007701487e0f80000005020000e81700007701000000000000000000000000004000002c950f8008910f800000000040791580400148f906000103ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f80080000000800000000000000000000000d000300e0b70980000000008e26000101000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true,
+            true
+          ],
+          "native42": [
+            true,
+            true
+          ]
+        },
+        {
+          "before": 52,
+          "world": [
+            1847,
+            1849
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 3,
+              "sprite_frame": 7,
+              "animation_cursor": "0x800f9118",
+              "command": [
+                9,
+                0,
+                1,
+                7
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 34,
+              "feedback": 0,
+              "hex": "41380001010501000000e81700007701487e0f80004005030000e81700007701000000000000000000000000004000002c950f8018910f800000000040791580400148f909000107ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000000000300e0b70980000000002200000102000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            },
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 3,
+              "sprite_frame": 7,
+              "animation_cursor": "0x800f9118",
+              "command": [
+                7,
+                0,
+                1,
+                7
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 32,
+              "feedback": 0,
+              "hex": "41380001010501000000e81700007701487e0f80004005030000e81700007701000000000000000000000000004000002c950f8018910f8000000000407915804001487907000107ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f800800000008000000000000000000000000000300e0b70980000000002000000102000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            }
+          ],
+          "pose58": [
+            true,
+            true
+          ],
+          "native42": [
+            true,
+            true
+          ]
+        },
+        {
+          "before": 57,
+          "world": [
+            1868,
+            1870
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 2,
+              "phase2": 0,
+              "x": 6120,
+              "y": 322,
+              "x_raw": 401080320,
+              "y_raw": 21155160,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 4,
+              "sprite_frame": 8,
+              "animation_cursor": "0x800f9120",
+              "command": [
+                1,
+                0,
+                0,
+                8
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 13,
+              "feedback": 0,
+              "hex": "41380001010502000000e81758cd4201487e0f80004005040000e81784804501000000006066020000000000cc4c00002c950f8020910f800000000040791580400148f901000008ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f800800030000000000000000000000000000000300e0b70980000000000d00000102000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                298,
+                6136,
+                354
+              ]
+            },
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 2,
+              "phase2": 0,
+              "x": 6120,
+              "y": 316,
+              "x_raw": 401080320,
+              "y_raw": 20742300,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 4,
+              "sprite_frame": 8,
+              "animation_cursor": "0x800f9120",
+              "command": [
+                1,
+                0,
+                0,
+                8
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 42,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 10,
+              "feedback": 0,
+              "hex": "41380001010502000000e8179c803c01487e0f80004005040000e817644d3e0100000000fc7f010000000000cc4c00002c950f8020910f800000000040791580400148f901000008ff0000000000000088900f808c900f803c4307802a2a0000040000ff000000007c900f8007000d0000000000000000000000000000000300e0b70980000000000a00000102000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                292,
+                6136,
+                348
+              ]
+            }
+          ],
+          "pose58": [
+            true,
+            true
+          ],
+          "native42": [
+            true,
+            true
+          ]
+        },
+        {
+          "before": 63,
+          "world": [
+            1895,
+            1899
+          ],
+          "main": [
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 312,
+              "x_raw": 401080320,
+              "y_raw": 20447400,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 37,
+              "sprite_frame": 9,
+              "animation_cursor": "0x800f951c",
+              "command": [
+                2,
+                0,
+                1,
+                9
+              ],
+              "attack": "0x800f9088",
+              "hurt": "0x800f908c",
+              "table": "0x8007433c",
+              "hp": 36,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9985,
+              "feedback": 0,
+              "hex": "41380001010301000000e817a8003801487e0f80004005250000e817a8003801000000000000000000000000cc4c00002c950f801c950f8000000000589e158040054cf902000109ff0000000000000088900f808c900f803c43078024260000040000ff000000007c900f80080001000000000000000000000000004d000300e0b70980000000000127000102000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                288,
+                6136,
+                344
+              ]
+            },
+            {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "phase2": 0,
+              "x": 6120,
+              "y": 312,
+              "x_raw": 401080320,
+              "y_raw": 20447400,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 37,
+              "sprite_frame": 10,
+              "animation_cursor": "0x800f9520",
+              "command": [
+                2,
+                0,
+                1,
+                10
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007433c",
+              "hp": 36,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 9982,
+              "feedback": 0,
+              "hex": "41380001010301000000e817a8003801487e0f80004005250000e817a8003801000000000000000000000000cc4c00002c950f8020950f8000000000589e158040054cf90200010aff00000000000000b0900f80b4900f803c43078024250000040000ff000000007c900f80080001000000000000000000000000004a000300e0b7098000000000fe26000102000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                288,
+                6136,
+                344
+              ]
+            }
+          ],
+          "pose58": [
+            true,
+            true
+          ],
+          "native42": [
+            true,
+            true
+          ]
+        }
+      ],
+      "separate_damage_events": [
+        {
+          "peer": 1,
+          "row": 60,
+          "before": 42,
+          "after": 36
+        },
+        {
+          "peer": 0,
+          "row": 61,
+          "before": 42,
+          "after": 36
+        }
+      ],
+      "original_phase_progression": [
+        {
+          "peer": 0,
+          "sequence": [
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              0
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "recovered": {
+            "row": 108,
+            "main": {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 4,
+              "phase": 2,
+              "phase2": 0,
+              "x": 6120,
+              "y": 356,
+              "x_raw": 401080320,
+              "y_raw": 23381772,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 14,
+              "sprite_frame": 16,
+              "animation_cursor": "0x800f91e4",
+              "command": [
+                4,
+                0,
+                0,
+                16
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007555c",
+              "hp": 36,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "41380001010402000000e8170cc76401487e0f800040050e0000e81728485f01000000001037faff000000000c4a00002c950f80e4910f8000000000407915804001487904000010ff00000000000000b0900f80b4900f805c55078024240000040000ff000000007c900f8008000d0000000000000000000000000000000300e0b70980000000000000000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                332,
+                6136,
+                388
+              ]
+            },
+            "world": 2089
+          },
+          "motion": {
+            "row": 109,
+            "main": {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 4,
+              "phase": 3,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 38,
+              "sprite_frame": 19,
+              "animation_cursor": "0x800f91e8",
+              "command": [
+                3,
+                0,
+                1,
+                19
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007555c",
+              "hp": 36,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "41380001010403000000e81700007701487e0f80004005260000e81700007701000000000080f9ff000000000c4a00002c950f80e8910f8000000000407915804001487903000113ff00000000000000b0900f80b4900f805c55078024240000040000ff000000007c900f800800000008000000000000000000000000000300e0b70980000000000000000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            },
+            "world": 2096
+          }
+        },
+        {
+          "peer": 1,
+          "sequence": [
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              5,
+              1
+            ],
+            [
+              5,
+              2
+            ],
+            [
+              5,
+              3
+            ],
+            [
+              4,
+              1
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              5
+            ]
+          ],
+          "recovered": {
+            "row": 107,
+            "main": {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 4,
+              "phase": 2,
+              "phase2": 0,
+              "x": 6120,
+              "y": 341,
+              "x_raw": 401080320,
+              "y_raw": 22358148,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 14,
+              "sprite_frame": 16,
+              "animation_cursor": "0x800f91e4",
+              "command": [
+                3,
+                0,
+                0,
+                16
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007555c",
+              "hp": 36,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "41380001010402000000e81784285501487e0f800040050e0000e817c4875001000000003415fbff000000000c4a00002c950f80e4910f8000000000407915804001487903000010ff00000000000000b0900f80b4900f805c55078024240000040000ff000000007c900f8008000e0000000000000000000000000000000300e0b70980000000000000000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                317,
+                6136,
+                373
+              ]
+            },
+            "world": 2086
+          },
+          "motion": {
+            "row": 109,
+            "main": {
+              "slot": null,
+              "owner": null,
+              "address": "0x8008ef48",
+              "allocation": 65,
+              "active": 65,
+              "type": 56,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 4,
+              "phase": 3,
+              "phase2": 0,
+              "x": 6120,
+              "y": 375,
+              "x_raw": 401080320,
+              "y_raw": 24576000,
+              "layer": 0,
+              "facing": 64,
+              "selected_clip": 38,
+              "sprite_frame": 19,
+              "animation_cursor": "0x800f91e8",
+              "command": [
+                1,
+                0,
+                1,
+                19
+              ],
+              "attack": "0x800f90b0",
+              "hurt": "0x800f90b4",
+              "table": "0x8007555c",
+              "hp": 36,
+              "iframe": 0,
+              "disposition": 255,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "41380001010403000000e81700007701487e0f80004005260000e81700007701000000000080f9ff000000000c4a00002c950f80e8910f8000000000407915804001487901000113ff00000000000000b0900f80b4900f805c55078024240000040000ff000000007c900f800800000008000000000000000000000000000300e0b70980000000000000000201000000000000000000000000000000",
+              "source_hurt_box_hex": "f0e82038",
+              "hurt_rect": [
+                6104,
+                351,
+                6136,
+                407
+              ]
+            },
+            "world": 2098
+          }
+        }
+      ],
+      "native_control_return": {
+        "row": 110,
+        "remaining_immunity": [
+          0,
+          0
+        ]
+      },
+      "original_strict_observer_F207": {
+        "status": "unverified",
+        "frozen_row_sha256": "765d00cd1fb8d1bcac6f4021a0433087b0c6c295de2df3ba5cceaac1d3c44173",
+        "checks": {
+          "two_actual_native_continuation_lifetimes_every_peer": true,
+          "source_exclusive_native_rejected_contact_every_peer": false,
+          "finite_original_reaction_recovery": true,
+          "normal_defense_restored_and_actual_motion": true
+        },
+        "missing": [
+          "source_exclusive_native_rejected_contact_every_peer"
+        ]
+      },
+      "extra_result127_observer_gate_satisfied": false
+    }
+  },
+  "limitations": [
+    "The immutable X4/X5 frozen definitions remain unchanged. F207 requires continued native weakness hits, accepted damage and eventual recovery/movement; observing result127 is an additional observer condition, not a frozen requirement. F129 requires overlap, accepted-hit result and HP/reaction so nondamaging offers are not mislabeled lost damage; it does not require every possible rejection outcome.",
+    "Source-derived accepted43 is explicitly not a sampled native result register. Exact rejected127/duplicate126 were not observed or inferred. Actual nondamaging sampled overlaps during original immunity and an initial LOCAL sampled geometric miss remain separate from the accepted six damage.",
+    "Eight genuine native action58/owned42 continuation offers were observed per physical process through progressing original reaction phases. LOCAL naturally restores normal AI/defense/recovery and movement; NET additionally records accepted42to36 on both peers during the continuing sequence, then finite second recovery/movement. This is a finite bounded sequence, not perpetual-fire/all-future-cycle coverage.",
+    "P2 callback deltas are not damaging-hit counts or unique main-contact counts. Private publication/world/counter/capture observations are asynchronous; no atomic shot/world token match or instruction-level HP-store trace is manufactured.",
+    "Difficulty PLAY68=1. The actual qualified prototype exposes no co-op damage-scaling option, so the frozen scaling clause applies only if implemented; no nonexistent scaling variant is required or claimed.",
+    "All existing source/provenance/owner identity/P1 neutral empty pool/weapon context/campaign C9 receipts/profile/final CRC/fixture-taint recording/card/owned-exit gates are retained from the independently passed same-candidate F26/F125 batch. Disclosed CP2/contact protection and native earned-equipment acquisition setup remain bypasses, not earned progression.",
+    "The original strict helper F207 status remains unverified in raw evidence because its supplemental freshFF/result127 witness is missing. Full frozen-contract review admits the actual requested behavior without rewriting that raw status or crediting unobserved result127. No second weakness family/F131 or simultaneous-owner/F155 claim."
+  ]
+}
