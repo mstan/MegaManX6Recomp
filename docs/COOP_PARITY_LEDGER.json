@@ -12883,24 +12883,98 @@
       "frozen_row_sha256": "a291c3a17c6fe97e58056cb517fc1dcef021845e8f9b6a660aad2162e1063949",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "candidate_native_scenario",
-        "analogue": "Independent network background restoration",
-        "bounded_check": "After private views exist, separate peers in a native animated arena and compare shared layer/atlas state before and after each render.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original layered intro background with independently moving native private views and restored canonical layers",
+        "bounded_check": "On the original authored three-layer intro road, use actual owned input to advance X beyond one pane while Zero stays still; inspect LOCAL separated panes and same-build NET own views, retain post-draw canonical layer records/parallax and verify actual draw-state restoration.",
         "baseline_anchors": [
-          "src/mods/mmx6_coop_plugin.c:shared_camera",
-          "src/mods/mmx6_coop_plugin.c:camera_target"
+          "src/mods/mmx6_coop_views.inc:independent_world_begin",
+          "src/mods/mmx6_coop_views.inc:private_draw_image",
+          "src/mods/mmx6_coop_views.inc:independent_present"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+            "build_identity": {
+              "executable_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "compiled_manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "local_cameras": "split",
+              "render_pass_verify": 1,
+              "audio": "muted dummy"
+            },
+            "action": "Ordinary real P1Right/Jump/Square separation with Zero stationary; changing native authored private backgrounds, actual3x84 canonical layer records and per-draw sandbox verification.",
+            "outcome": "Intact distinct actual backgrounds in9 reviewed captures, source-correct parallax, actual new owned movement and all verified restoration checks pass. Strict finalized recordings and actual startup/final card equality independently verified; raw NET missing-before-map flag remains failed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-views/manifest-bound-8bd7061-F94-layered-background-reviewed.json",
+                "sha256": "102776c7d86b2fbdfdb68f035317be7da805929b52a7c37e01447a742defbb90"
+              }
+            ],
+            "limits": [
+              "Frozen F94 authored layered-background/private restoration counterpart: ordinary original X6 intro road, wrecked ship, foreground scrap and distant scenery. LOCAL uses two separated native panes; NET uses the same-build peer-local independent4:3 view on each Windows peer. No literal Storm Owl, NET side-by-side setting, another OS, every scene or every atlas claim.",
+              "Actual acknowledged P1Right/freshJump/Square moves at least244px LOCAL and270/274px NET while Zero remains stationary, producing beyond360px separation and changing own background. Nine composed captures were reviewed; distant Zero scenery remains stable while X advances through the authored layers. Actual native enemy damage/flash is retained, not suppressed or claimed absent.",
+              "Each retained canonical camera is the original252-byte record at800971F8: three84-byte layers, enabled1/modes1,1,3. Original primary/half/quarter camera routines and per-layer offsets0/560/640 explain actual changed coordinates. Native source25FB0 calls26D44 to draw all three records. Actual post-draw snapshots satisfy these formulas.",
+              "Actual process-only PSX_RENDER_PASS_VERIFY=1 compares full live guest RAM (including all252 canonical layer bytes), CPU/GTE/cache/scratchpad, devices/GPU state and GL VRAM before/after each completed private draw. LOCAL918 and eachNET1047 checks have zero mismatch/VRAM leaks/watchdog/abort. Mutable title host state also retains zero private-state-leak counts.",
+              "SDK restoration covers canonical guest state. Host view_cameras intentionally retains independent presentation history and is not part of that SDK RAM hash; its entire contents were not exposed/read. Asynchronous layer RPCs and screenshots are not atomic across peers. No whole-world image equality, autonomous animation/atlas wrap, palette story or unrelated HUD-menu proof is claimed.",
+              "The NET raw parent stays failed solely because the F94 replacement observer omitted jump_audio_private_cards_before, making the generic finalizer compare actual final cards against None. An independent strict check validates every actual finalized current-image recording/startup card, its initial128KiB export and the final card file, all identical blank7706 hashes. All13 other parent gates, four resolved CRC windows, actual agreed profile19 and both owned exits0 pass. No raw rewrite or full broader HUD-suite qualification is claimed.",
+              "LOCALv1/v2 fixed-window-allowlist setup failures remain preserved. LOCALv3 verifies restoration/art but began already separated and its unconditional real-owned-motion flag is unsupported. Its identical images are not used to qualify movement. V4 strengthens actual motion and removes unnecessary resizing; NETv5 only commits camera choices after the original parent rewrites fresh settings. The tested product/build is unchanged throughout.",
+              "Ordinary native intro, private fresh formatted cards and normal accepted host input only; no checkpoint/pose/HP/ground/enemy/result writes, imported owner saves or fixture taint. Finalized complete N/C recordings and actual startup settings/cards are verified in both modes. No new production optimization/performance win, release/delivery or native3330 audit claim."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+            "build_identity": {
+              "executable_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "compiled_manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "cameras": "independent",
+              "render_pass_verify": 1,
+              "audio": "muted dummy"
+            },
+            "action": "Ordinary real P1Right/Jump/Square separation with Zero stationary; changing native authored private backgrounds, actual3x84 canonical layer records and per-draw sandbox verification.",
+            "outcome": "Intact distinct actual backgrounds in9 reviewed captures, source-correct parallax, actual new owned movement and all verified restoration checks pass. Strict finalized recordings and actual startup/final card equality independently verified; raw NET missing-before-map flag remains failed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-views/manifest-bound-8bd7061-F94-layered-background-reviewed.json",
+                "sha256": "102776c7d86b2fbdfdb68f035317be7da805929b52a7c37e01447a742defbb90"
+              }
+            ],
+            "limits": [
+              "Frozen F94 authored layered-background/private restoration counterpart: ordinary original X6 intro road, wrecked ship, foreground scrap and distant scenery. LOCAL uses two separated native panes; NET uses the same-build peer-local independent4:3 view on each Windows peer. No literal Storm Owl, NET side-by-side setting, another OS, every scene or every atlas claim.",
+              "Actual acknowledged P1Right/freshJump/Square moves at least244px LOCAL and270/274px NET while Zero remains stationary, producing beyond360px separation and changing own background. Nine composed captures were reviewed; distant Zero scenery remains stable while X advances through the authored layers. Actual native enemy damage/flash is retained, not suppressed or claimed absent.",
+              "Each retained canonical camera is the original252-byte record at800971F8: three84-byte layers, enabled1/modes1,1,3. Original primary/half/quarter camera routines and per-layer offsets0/560/640 explain actual changed coordinates. Native source25FB0 calls26D44 to draw all three records. Actual post-draw snapshots satisfy these formulas.",
+              "Actual process-only PSX_RENDER_PASS_VERIFY=1 compares full live guest RAM (including all252 canonical layer bytes), CPU/GTE/cache/scratchpad, devices/GPU state and GL VRAM before/after each completed private draw. LOCAL918 and eachNET1047 checks have zero mismatch/VRAM leaks/watchdog/abort. Mutable title host state also retains zero private-state-leak counts.",
+              "SDK restoration covers canonical guest state. Host view_cameras intentionally retains independent presentation history and is not part of that SDK RAM hash; its entire contents were not exposed/read. Asynchronous layer RPCs and screenshots are not atomic across peers. No whole-world image equality, autonomous animation/atlas wrap, palette story or unrelated HUD-menu proof is claimed.",
+              "The NET raw parent stays failed solely because the F94 replacement observer omitted jump_audio_private_cards_before, making the generic finalizer compare actual final cards against None. An independent strict check validates every actual finalized current-image recording/startup card, its initial128KiB export and the final card file, all identical blank7706 hashes. All13 other parent gates, four resolved CRC windows, actual agreed profile19 and both owned exits0 pass. No raw rewrite or full broader HUD-suite qualification is claimed.",
+              "LOCALv1/v2 fixed-window-allowlist setup failures remain preserved. LOCALv3 verifies restoration/art but began already separated and its unconditional real-owned-motion flag is unsupported. Its identical images are not used to qualify movement. V4 strengthens actual motion and removes unnecessary resizing; NETv5 only commits camera choices after the original parent rewrites fresh settings. The tested product/build is unchanged throughout.",
+              "Ordinary native intro, private fresh formatted cards and normal accepted host input only; no checkpoint/pose/HP/ground/enemy/result writes, imported owner saves or fixture taint. Finalized complete N/C recordings and actual startup settings/cards are verified in both modes. No new production optimization/performance win, release/delivery or native3330 audit claim."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Frozen F94 authored layered-background/private restoration counterpart: ordinary original X6 intro road, wrecked ship, foreground scrap and distant scenery. LOCAL uses two separated native panes; NET uses the same-build peer-local independent4:3 view on each Windows peer. No literal Storm Owl, NET side-by-side setting, another OS, every scene or every atlas claim. Actual acknowledged P1Right/freshJump/Square moves at least244px LOCAL and270/274px NET while Zero remains stationary, producing beyond360px separation and changing own background. Nine composed captures were reviewed; distant Zero scenery remains stable while X advances through the authored layers. Actual native enemy damage/flash is retained, not suppressed or claimed absent. Each retained canonical camera is the original252-byte record at800971F8: three84-byte layers, enabled1/modes1,1,3. Original primary/half/quarter camera routines and per-layer offsets0/560/640 explain actual changed coordinates. Native source25FB0 calls26D44 to draw all three records. Actual post-draw snapshots satisfy these formulas. Actual process-only PSX_RENDER_PASS_VERIFY=1 compares full live guest RAM (including all252 canonical layer bytes), CPU/GTE/cache/scratchpad, devices/GPU state and GL VRAM before/after each completed private draw. LOCAL918 and eachNET1047 checks have zero mismatch/VRAM leaks/watchdog/abort. Mutable title host state also retains zero private-state-leak counts. SDK restoration covers canonical guest state. Host view_cameras intentionally retains independent presentation history and is not part of that SDK RAM hash; its entire contents were not exposed/read. Asynchronous layer RPCs and screenshots are not atomic across peers. No whole-world image equality, autonomous animation/atlas wrap, palette story or unrelated HUD-menu proof is claimed. The NET raw parent stays failed solely because the F94 replacement observer omitted jump_audio_private_cards_before, making the generic finalizer compare actual final cards against None. An independent strict check validates every actual finalized current-image recording/startup card, its initial128KiB export and the final card file, all identical blank7706 hashes. All13 other parent gates, four resolved CRC windows, actual agreed profile19 and both owned exits0 pass. No raw rewrite or full broader HUD-suite qualification is claimed. LOCALv1/v2 fixed-window-allowlist setup failures remain preserved. LOCALv3 verifies restoration/art but began already separated and its unconditional real-owned-motion flag is unsupported. Its identical images are not used to qualify movement. V4 strengthens actual motion and removes unnecessary resizing; NETv5 only commits camera choices after the original parent rewrites fresh settings. The tested product/build is unchanged throughout. Ordinary native intro, private fresh formatted cards and normal accepted host input only; no checkpoint/pose/HP/ground/enemy/result writes, imported owner saves or fixture taint. Finalized complete N/C recordings and actual startup settings/cards are verified in both modes. No new production optimization/performance win, release/delivery or native3330 audit claim."
       }
     },
     {

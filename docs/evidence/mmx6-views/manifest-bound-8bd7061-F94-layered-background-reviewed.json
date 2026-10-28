@@ -1,0 +1,1180 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F94"
+  ],
+  "result": "passed",
+  "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+  "frozen_row_sha256": {
+    "F94": "a291c3a17c6fe97e58056cb517fc1dcef021845e8f9b6a660aad2162e1063949"
+  },
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-arrival-input-flush-v88-final-binding-root-v1.json",
+    "binding_sha256": "7f1de8fe9b83759188d183011ea754b4ff2c56928d88785adf743a28c1d3f61a",
+    "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+    "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+    "provenance_sha256": "a25f01d21769967ed9a1dd92d7bd4bcfcbb8efe60081bd8a75e5844450dd232b",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v36",
+    "host_revision": 19
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-local-v88-root-v4\\qualification.json",
+        "sha256": "fdebaf7811bb757c3ddaf403d0a563869047ff8ec91bfef420d78281085a873b",
+        "bytes": 1515431
+      },
+      "raw_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-local-v88-root-v4\\qualification-parent-original.json",
+        "sha256": "2ede472785dc979cec726acdc37e86db76ece2e23c3fee3582cbb715f6945499",
+        "bytes": 1513836
+      },
+      "raw_parent_status": "native_hud_presentation_captured_review_pending",
+      "checks": {
+        "ordinary_authored_layered_intro": true,
+        "real_owned_input_separation": true,
+        "both_living_native_heroes": true,
+        "all_three_layer_records_retained": true,
+        "verified_guest_CPU_RAM_devices_VRAM_restored": true,
+        "mutable_host_state_restored": true,
+        "real_private_view_path_advances": true,
+        "composed_background_captures_retained": true
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_case_finalized_recording_cleanup_and_cards": true
+      },
+      "observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-local-v88-root-v4\\hud\\observations.json",
+        "sha256": "74e8823e751bb03b90545c5079fd1ef694c62da2d4aa3b3d6a605b5d966b785f",
+        "bytes": 509236
+      },
+      "executed_observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F94-layered-background-v88-root-v4.py",
+        "sha256": "735ae86d9d11f0ec33be433fce71579cec2e8746d0f914200675965d5a3a581f",
+        "bytes": 13425
+      },
+      "actual_owned_movement_px": [
+        244.0625
+      ],
+      "authored_postdraw_layers": [
+        {
+          "label": "initial-layered-road",
+          "peer": 0,
+          "canonical_camera_sha256": "95ebbbf43079636d772525b02e5ba442f4897c623de7499722d091ab3802fb0f",
+          "layers": [
+            {
+              "x": 124,
+              "y": 944,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 62,
+              "y": 1032,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 31,
+              "y": 876,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        },
+        {
+          "label": "separated-layered-road",
+          "peer": 0,
+          "canonical_camera_sha256": "a4231484fd71bd86e0940b047fdf9c09bc6cc8c1dd0147ca07686747b5d0544a",
+          "layers": [
+            {
+              "x": 372,
+              "y": 918,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 186,
+              "y": 1019,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 93,
+              "y": 869,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        },
+        {
+          "label": "later-layered-road",
+          "peer": 0,
+          "canonical_camera_sha256": "62ea78e423228d831cb31b2f83cc38e9314f4d5431607018f6fcfeadaa6e4e87",
+          "layers": [
+            {
+              "x": 365,
+              "y": 918,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 182,
+              "y": 1019,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 91,
+              "y": 869,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        }
+      ],
+      "actual_restore_stats": [
+        {
+          "peer": 0,
+          "render": {
+            "id": 2387,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 918,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 918,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 8.369,
+            "avg_pass_ms": 18.129,
+            "avg_begin_ms": 11.07,
+            "avg_guest_ms": 2.928,
+            "avg_end_ms": 2.237,
+            "avg_restore_ms": 0.245,
+            "guest_cycles_last": 164775,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 458,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 1,
+            "backups_reused": 459,
+            "pass_attempts": 918,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 0,
+            "local_attempts": 0,
+            "local_status": 4,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 2388,
+            "ok": true,
+            "attempts": 459,
+            "pairs": 459,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 0,
+            "last_pair_id": 459,
+            "last_guest_cycle": 1704781493,
+            "eye_cycles": [
+              1704781493,
+              1704781493
+            ],
+            "eye_hashes": [
+              "fef6c54f72002322",
+              "fef6c54f72002322"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": 1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 15.519,
+            "avg_pair_ms": 34.584,
+            "published": {
+              "valid": 1,
+              "pair_id": 459,
+              "guest_cycle": 1704781493,
+              "width": 320,
+              "height": 240,
+              "staged_mask": 3,
+              "mode": 2,
+              "presents": 458
+            },
+            "captures": []
+          },
+          "counters": {
+            "id": 2389,
+            "ok": true,
+            "frame": 3020,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 11,
+                "last_frame": 1031
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2112,
+                "last_frame": 1052
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 11,
+                "last_frame": 1052
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 459,
+                "last_frame": 3020
+              }
+            ],
+            "overflow": 0
+          }
+        }
+      ],
+      "ordinary_finalized_recordings": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-local-v88-root-v4\\candidate\\saves\\input-recordings\\session-1793145313679591-1-0\\inputs.jsonl",
+          "sha256": "2fda2152e5ad80411441be5ee1e3fc01dc9ab724b31bef00037b40f7311e8e28",
+          "bytes": 963203,
+          "events": 7348,
+          "natives": 4910,
+          "p2_reads": 2438,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+            "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "39e8a37f5091a9cc8b2cf4a951a85c13e6e88e5c320d8a9c8f009a90a28f58f4",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "initial_and_final_cards_equal": true
+        }
+      ],
+      "reviewed_images": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-local-v88-root-v4\\hud\\peer-0-initial-layered-road.png",
+          "sha256": "ec578fadef0cb56a9beb0c7844bebc5ac2a443e45f0ab5102a2646834a57913a",
+          "bytes": 2074543,
+          "label": "initial-layered-road",
+          "peer": 0,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-local-v88-root-v4\\hud\\peer-0-separated-layered-road.png",
+          "sha256": "700e550503c679777b3675db3514cb9118eabcbd888532280443303369118686",
+          "bytes": 2074543,
+          "label": "separated-layered-road",
+          "peer": 0,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-local-v88-root-v4\\hud\\peer-0-later-layered-road.png",
+          "sha256": "f248ced0402fa5906bebf9a975a8e53606cbdca10a2896f343f0dd37daf22786",
+          "bytes": 2074543,
+          "label": "later-layered-road",
+          "peer": 0,
+          "root_reviewed": true
+        }
+      ],
+      "resolved_CRC_windows": []
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\qualification.json",
+        "sha256": "7aa69467e7bc6d0073b52eca13fc12e716a931c47e8f797bb3ab1b376363bf44",
+        "bytes": 2594872
+      },
+      "raw_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\qualification-parent-original.json",
+        "sha256": "289e5e6d4faac8f4dfb64e7d15f1fd078cd782fbb6d9fc9ca48bdf8e0d9829e5",
+        "bytes": 2591103
+      },
+      "raw_parent_status": "failed",
+      "checks": {
+        "ordinary_authored_layered_intro": true,
+        "real_owned_input_separation": true,
+        "both_living_native_heroes": true,
+        "all_three_layer_records_retained": true,
+        "verified_guest_CPU_RAM_devices_VRAM_restored": true,
+        "mutable_host_state_restored": true,
+        "real_private_view_path_advances": true,
+        "composed_background_captures_retained": true
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "hud_presentation_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_final_private_cards_unchanged": false,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\F94-layers\\observations.json",
+        "sha256": "a5d501c94c54fd41f698321f45933f44e64832f68b8bcebd31a742a444d74480",
+        "bytes": 388463
+      },
+      "executed_observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F94-layered-background-v88-root-v5.py",
+        "sha256": "05bb6152cb86964c8add288676c08ba3ce641f2c7c75b1f3e9230afabd8dadd3",
+        "bytes": 14445
+      },
+      "actual_owned_movement_px": [
+        270.0625,
+        274.0625
+      ],
+      "authored_postdraw_layers": [
+        {
+          "label": "initial-layered-road",
+          "peer": 0,
+          "canonical_camera_sha256": "95ebbbf43079636d772525b02e5ba442f4897c623de7499722d091ab3802fb0f",
+          "layers": [
+            {
+              "x": 124,
+              "y": 944,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 62,
+              "y": 1032,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 31,
+              "y": 876,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        },
+        {
+          "label": "initial-layered-road",
+          "peer": 1,
+          "canonical_camera_sha256": "95ebbbf43079636d772525b02e5ba442f4897c623de7499722d091ab3802fb0f",
+          "layers": [
+            {
+              "x": 124,
+              "y": 944,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 62,
+              "y": 1032,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 31,
+              "y": 876,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        },
+        {
+          "label": "separated-layered-road",
+          "peer": 0,
+          "canonical_camera_sha256": "d9474c485c24d1ee00826b8b938cecaa4c909a61aa5ec32cfe54aee07d6de50c",
+          "layers": [
+            {
+              "x": 412,
+              "y": 918,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 206,
+              "y": 1019,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 103,
+              "y": 869,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        },
+        {
+          "label": "separated-layered-road",
+          "peer": 1,
+          "canonical_camera_sha256": "d9474c485c24d1ee00826b8b938cecaa4c909a61aa5ec32cfe54aee07d6de50c",
+          "layers": [
+            {
+              "x": 412,
+              "y": 918,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 206,
+              "y": 1019,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 103,
+              "y": 869,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        },
+        {
+          "label": "later-layered-road",
+          "peer": 0,
+          "canonical_camera_sha256": "d9474c485c24d1ee00826b8b938cecaa4c909a61aa5ec32cfe54aee07d6de50c",
+          "layers": [
+            {
+              "x": 412,
+              "y": 918,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 206,
+              "y": 1019,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 103,
+              "y": 869,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        },
+        {
+          "label": "later-layered-road",
+          "peer": 1,
+          "canonical_camera_sha256": "d9474c485c24d1ee00826b8b938cecaa4c909a61aa5ec32cfe54aee07d6de50c",
+          "layers": [
+            {
+              "x": 412,
+              "y": 918,
+              "offset_x": 0,
+              "offset_y": 0,
+              "enabled": 1
+            },
+            {
+              "x": 206,
+              "y": 1019,
+              "offset_x": 0,
+              "offset_y": 560,
+              "enabled": 1
+            },
+            {
+              "x": 103,
+              "y": 869,
+              "offset_x": 0,
+              "offset_y": 640,
+              "enabled": 1
+            }
+          ]
+        }
+      ],
+      "actual_restore_stats": [
+        {
+          "peer": 0,
+          "render": {
+            "id": 2202,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 0,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 1047,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 5.269,
+            "avg_pass_ms": 4.844,
+            "avg_begin_ms": 2.147,
+            "avg_guest_ms": 1.41,
+            "avg_end_ms": 0.045,
+            "avg_restore_ms": 0.137,
+            "guest_cycles_last": 161165,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 523,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 4,
+            "backups_reused": 0,
+            "pass_attempts": 1047,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 1047,
+            "local_attempts": 1047,
+            "local_status": 0,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 2203,
+            "ok": true,
+            "attempts": 0,
+            "pairs": 0,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 4,
+            "last_pair_id": 0,
+            "last_guest_cycle": 0,
+            "eye_cycles": [
+              0,
+              0
+            ],
+            "eye_hashes": [
+              "0000000000000000",
+              "0000000000000000"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": -1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 0.0,
+            "avg_pair_ms": 0.0,
+            "published": {
+              "valid": 0,
+              "pair_id": 0,
+              "guest_cycle": 0,
+              "width": 0,
+              "height": 0,
+              "staged_mask": 0,
+              "mode": 0,
+              "presents": 0
+            },
+            "captures": []
+          },
+          "counters": {
+            "id": 2204,
+            "ok": true,
+            "frame": 3611,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 11,
+                "last_frame": 1067
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2112,
+                "last_frame": 1088
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 11,
+                "last_frame": 1088
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 1047,
+                "last_frame": 3610
+              }
+            ],
+            "overflow": 0
+          }
+        },
+        {
+          "peer": 1,
+          "render": {
+            "id": 1970,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 0,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 1047,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 4.897,
+            "avg_pass_ms": 5.16,
+            "avg_begin_ms": 2.26,
+            "avg_guest_ms": 1.61,
+            "avg_end_ms": 0.046,
+            "avg_restore_ms": 0.135,
+            "guest_cycles_last": 161335,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 523,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 4,
+            "backups_reused": 0,
+            "pass_attempts": 1047,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 1047,
+            "local_attempts": 1047,
+            "local_status": 0,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 1971,
+            "ok": true,
+            "attempts": 0,
+            "pairs": 0,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 4,
+            "last_pair_id": 0,
+            "last_guest_cycle": 0,
+            "eye_cycles": [
+              0,
+              0
+            ],
+            "eye_hashes": [
+              "0000000000000000",
+              "0000000000000000"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": -1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 0.0,
+            "avg_pair_ms": 0.0,
+            "published": {
+              "valid": 0,
+              "pair_id": 0,
+              "guest_cycle": 0,
+              "width": 0,
+              "height": 0,
+              "staged_mask": 0,
+              "mode": 0,
+              "presents": 0
+            },
+            "captures": []
+          },
+          "counters": {
+            "id": 1972,
+            "ok": true,
+            "frame": 3611,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 11,
+                "last_frame": 1067
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2112,
+                "last_frame": 1088
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 11,
+                "last_frame": 1088
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 1047,
+                "last_frame": 3610
+              }
+            ],
+            "overflow": 0
+          }
+        }
+      ],
+      "ordinary_finalized_recordings": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\peer-0\\saves\\input-recordings\\session-1793145516438620-1-0\\inputs.jsonl",
+          "sha256": "1a00c823506a816dbd21db70b6e3ac6da05988d338615a080eecf50fa2671137",
+          "bytes": 921357,
+          "events": 7168,
+          "natives": 3240,
+          "p2_reads": 3928,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+            "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 19,
+              "selected_sha256": "350e5757497f4d5bfb8178f89ba835e5409207cd9c763de971e7baef7fe400ac"
+            },
+            "settings_sha256": "52a04b646e60cb36bb085ff8ab43da6764ae430876111ee633fe8d28c371d2d6",
+            "simulation_contract_sha256": "1df4709d76b4ebbc33903e73513e5fa18038977458743c1e4132c0312461dc58"
+          },
+          "initial_and_final_cards_equal": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\peer-1\\saves\\input-recordings\\session-1793145516438202-1-0\\inputs.jsonl",
+          "sha256": "8967440985788a8c40c7f0ab33bc7f97a076490285c483375e22de2db2a54d3c",
+          "bytes": 922113,
+          "events": 7174,
+          "natives": 3242,
+          "p2_reads": 3932,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+            "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 19,
+              "selected_sha256": "350e5757497f4d5bfb8178f89ba835e5409207cd9c763de971e7baef7fe400ac"
+            },
+            "settings_sha256": "bc800bb6070d765209b99ddc2d79ff0f9c2121c5940de9ba0cffe2b73c9b494e",
+            "simulation_contract_sha256": "1df4709d76b4ebbc33903e73513e5fa18038977458743c1e4132c0312461dc58"
+          },
+          "initial_and_final_cards_equal": true
+        }
+      ],
+      "reviewed_images": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\F94-layers\\peer-0-initial-layered-road.png",
+          "sha256": "3f975d02a485c8a76338bdddb6a946aea650cce063f72de594db00524a866656",
+          "bytes": 2074543,
+          "label": "initial-layered-road",
+          "peer": 0,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\F94-layers\\peer-1-initial-layered-road.png",
+          "sha256": "6cd6433c16aca1b61d643a1bb58a9cbd3a0ce3da6afe95487ad76ad29766d610",
+          "bytes": 2074543,
+          "label": "initial-layered-road",
+          "peer": 1,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\F94-layers\\peer-0-separated-layered-road.png",
+          "sha256": "2503b21d5091b38e83b7f2f572459a9725b2fd69e5e820eb98206285084dbe7d",
+          "bytes": 2074543,
+          "label": "separated-layered-road",
+          "peer": 0,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\F94-layers\\peer-1-separated-layered-road.png",
+          "sha256": "e04dae665237c51bd75bbd039609955b7a1b6459f148326b9c6bbc3bba15aba7",
+          "bytes": 2074543,
+          "label": "separated-layered-road",
+          "peer": 1,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\F94-layers\\peer-0-later-layered-road.png",
+          "sha256": "2f696b206381d0e53da78c92bcfcfbb9d723b056476d8846c70747faa7938da5",
+          "bytes": 2074543,
+          "label": "later-layered-road",
+          "peer": 0,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F94-layered-background-netplay-v88-root-v5\\F94-layers\\peer-1-later-layered-road.png",
+          "sha256": "e04dae665237c51bd75bbd039609955b7a1b6459f148326b9c6bbc3bba15aba7",
+          "bytes": 2074543,
+          "label": "later-layered-road",
+          "peer": 1,
+          "root_reviewed": true
+        }
+      ],
+      "resolved_CRC_windows": [
+        {
+          "label": "initial idle",
+          "samples": 4
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 4
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 5
+        },
+        {
+          "label": "F94 ordinary separated authored layered background and verified restored private draws",
+          "samples": 6
+        }
+      ]
+    }
+  },
+  "source_native_layer_windows": [
+    {
+      "first": "0x80026d44",
+      "end": "0x80026e40",
+      "sha256": "29a352d5b72c8ac34fb0144e2da8c5df8ac0452af63c8466400f1c6204424fd2"
+    },
+    {
+      "first": "0x800297d8",
+      "end": "0x80029834",
+      "sha256": "e9ab96a2c2de027dff5197a17e36c05329477ecb65d23ec125248350e6c9252b"
+    }
+  ],
+  "source_restoration": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-input-flush-v88\\src\\mods\\mmx6_coop_views.inc",
+      "sha256": "973eb4dc94e391834fd852049a80b5661ec29943af7e0d2462599322271a630b",
+      "bytes": 16506
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-online-pair-resize-v78\\runtime\\src\\render_pass.c",
+      "sha256": "d9c8cf1e22a608f8613e6731d59e805e94706a0756d3f5e22c86a98a914d3c0c",
+      "bytes": 42284
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-input-flush-v88\\tools\\mmx6_coop_jump_audio_pair.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "bytes": 29983
+    }
+  ],
+  "compiled_gates": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v88-paired-arrival-input-flush-focused-root-v3.log",
+      "sha256": "12f3f56477afe3fc1d7931855ce5b965dc407a036f2674d50cbd396e87c93be6",
+      "bytes": 6446
+    }
+  ],
+  "limits": [
+    "Frozen F94 authored layered-background/private restoration counterpart: ordinary original X6 intro road, wrecked ship, foreground scrap and distant scenery. LOCAL uses two separated native panes; NET uses the same-build peer-local independent4:3 view on each Windows peer. No literal Storm Owl, NET side-by-side setting, another OS, every scene or every atlas claim.",
+    "Actual acknowledged P1Right/freshJump/Square moves at least244px LOCAL and270/274px NET while Zero remains stationary, producing beyond360px separation and changing own background. Nine composed captures were reviewed; distant Zero scenery remains stable while X advances through the authored layers. Actual native enemy damage/flash is retained, not suppressed or claimed absent.",
+    "Each retained canonical camera is the original252-byte record at800971F8: three84-byte layers, enabled1/modes1,1,3. Original primary/half/quarter camera routines and per-layer offsets0/560/640 explain actual changed coordinates. Native source25FB0 calls26D44 to draw all three records. Actual post-draw snapshots satisfy these formulas.",
+    "Actual process-only PSX_RENDER_PASS_VERIFY=1 compares full live guest RAM (including all252 canonical layer bytes), CPU/GTE/cache/scratchpad, devices/GPU state and GL VRAM before/after each completed private draw. LOCAL918 and eachNET1047 checks have zero mismatch/VRAM leaks/watchdog/abort. Mutable title host state also retains zero private-state-leak counts.",
+    "SDK restoration covers canonical guest state. Host view_cameras intentionally retains independent presentation history and is not part of that SDK RAM hash; its entire contents were not exposed/read. Asynchronous layer RPCs and screenshots are not atomic across peers. No whole-world image equality, autonomous animation/atlas wrap, palette story or unrelated HUD-menu proof is claimed.",
+    "The NET raw parent stays failed solely because the F94 replacement observer omitted jump_audio_private_cards_before, making the generic finalizer compare actual final cards against None. An independent strict check validates every actual finalized current-image recording/startup card, its initial128KiB export and the final card file, all identical blank7706 hashes. All13 other parent gates, four resolved CRC windows, actual agreed profile19 and both owned exits0 pass. No raw rewrite or full broader HUD-suite qualification is claimed.",
+    "LOCALv1/v2 fixed-window-allowlist setup failures remain preserved. LOCALv3 verifies restoration/art but began already separated and its unconditional real-owned-motion flag is unsupported. Its identical images are not used to qualify movement. V4 strengthens actual motion and removes unnecessary resizing; NETv5 only commits camera choices after the original parent rewrites fresh settings. The tested product/build is unchanged throughout.",
+    "Ordinary native intro, private fresh formatted cards and normal accepted host input only; no checkpoint/pose/HP/ground/enemy/result writes, imported owner saves or fixture taint. Finalized complete N/C recordings and actual startup settings/cards are verified in both modes. No new production optimization/performance win, release/delivery or native3330 audit claim."
+  ],
+  "executed_review_script": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F94-layered-background-v88-root-v1.py",
+    "sha256": "30ebbfc954654ccead2d826933bdb4ff7c1bfc52cbd38d1e6fe94d7609f21fd6",
+    "bytes": 16285
+  }
+}
