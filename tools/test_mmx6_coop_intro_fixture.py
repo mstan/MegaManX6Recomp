@@ -23,7 +23,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            for option in ('intro_before_doors', 'intro_before_explosion', 'recycle_cp2'):
+            for option in ('intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2'):
                 state.write_text(initial, encoding='utf-8')
                 receipt = pair.select_checkpoint(directory, enabled=True, option=option)
                 self.assertEqual(receipt['option'], option)

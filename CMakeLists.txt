@@ -446,7 +446,8 @@ if(BUILD_TESTING)
     foreach(_mmx6_checkpoint_variant debug production agreed_lab)
         set(_mmx6_checkpoint_target mmx6_coop_checkpoint_${_mmx6_checkpoint_variant}_test)
         add_executable(${_mmx6_checkpoint_target} tests/test_mmx6_coop_checkpoint.c
-            src/mods/mmx6_coop_lifecycle.c src/mods/mmx6_coop_assets.c)
+            src/mods/mmx6_coop_lifecycle.c src/mods/mmx6_coop_assets.c
+            "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
         target_include_directories(${_mmx6_checkpoint_target} PRIVATE src/mods
             "${PSXRECOMP_V4_ROOT}/runtime/include")
         if(_mmx6_checkpoint_variant STREQUAL "production")
@@ -454,7 +455,8 @@ if(BUILD_TESTING)
         endif()
         if(_mmx6_checkpoint_variant STREQUAL "agreed_lab")
             # Source-backed pre-door coverage additionally reads the external
-            # MMX6_BEFORE_DOORS_RAM fixture; no original disc data is bundled.
+            # MMX6_BEFORE_DOORS_RAM and MMX6_PORTAL_SETUP_RAM fixtures;
+            # no original disc data is bundled.
             target_compile_definitions(${_mmx6_checkpoint_target} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=1)
         endif()
         if(MSVC)

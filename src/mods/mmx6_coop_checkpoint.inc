@@ -29,6 +29,7 @@ enum { CHECKPOINT_LAB_INVESTIGATOR_NONCE=0x4C434132u }; /* Immutable Amazon CP2 
 enum { CHECKPOINT_LAB_BEFORE_DOORS_NONCE=0x4C434431u }; /* Intro CP1 plus declared position bypass. */
 enum { CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE=0x4C454631u }; /* Intro CP1 nearby native explosion setup. */
 enum { CHECKPOINT_LAB_RECYCLE_NONCE=0x4C435232u }; /* Original Recycle section1 CP2, no pose bypass. */
+enum { CHECKPOINT_LAB_PORTAL_NONCE=0x4C525032u }; /* Original Recycle section0 CP2 plus declared approach. */
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint32_t placed_world; } Mmx6CheckpointPending;
 static Mmx6CheckpointPending checkpoint_pending;
 static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previous;
@@ -37,7 +38,7 @@ static unsigned checkpoint_contact_protection_option;
 static unsigned checkpoint_lab_index(void) {
     return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
-        checkpoint_lab_option==6?27:115;
+        checkpoint_lab_option==6?27:checkpoint_lab_option==7?23:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -45,7 +46,8 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==3?CHECKPOINT_LAB_INVESTIGATOR_NONCE:
         checkpoint_lab_option==4?CHECKPOINT_LAB_BEFORE_DOORS_NONCE:
         checkpoint_lab_option==5?CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE:
-        checkpoint_lab_option==6?CHECKPOINT_LAB_RECYCLE_NONCE:0;
+        checkpoint_lab_option==6?CHECKPOINT_LAB_RECYCLE_NONCE:
+        checkpoint_lab_option==7?CHECKPOINT_LAB_PORTAL_NONCE:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -112,6 +114,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"intro_before_doors"))checkpoint_lab_option=4;
         else if(!strcmp(option,"intro_before_explosion"))checkpoint_lab_option=5;
         else if(!strcmp(option,"recycle_cp2"))checkpoint_lab_option=6;
+        else if(!strcmp(option,"recycle_portal_cp2"))checkpoint_lab_option=7;
         else if(strcmp(option,"off"))failed=1;
     }
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {
@@ -407,6 +410,7 @@ static void checkpoint_ground_refusal(uint32_t meta,uint32_t desc,int explosion)
     (void)meta;(void)desc;(void)explosion;
 #endif
 }
+#include "mmx6_coop_before_portal.inc"
 static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32_t nonce,unsigned authority) {
     unsigned reason=CHECKPOINT_OK,index=115;
     for(unsigned i=0;i<115;++i)if(checkpoint_inventory[i].stage==stage &&
@@ -455,7 +459,19 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
         else if((checkpoint_pending.phase==2 || checkpoint_pending.phase==3) && psx_mod_read_byte(PLAY)==10 &&
                 psx_mod_read_byte(PLAY+12)==entry->stage && psx_mod_read_byte(PLAY+13)==entry->section &&
                 psx_mod_read_byte(PLAY+0x1D)==entry->checkpoint) {
-            if(checkpoint_pending.authority==CHECKPOINT_AGREED &&
+            if(checkpoint_pending.authority==CHECKPOINT_AGREED && checkpoint_lab_option==7) {
+                uint32_t meta,desc;
+                if(!checkpoint_source(entry) || !checkpoint_portal_source() ||
+                   !checkpoint_portal_assets(&meta,&desc) || !checkpoint_portal_ground(meta,desc)) {
+                    checkpoint_refusal_value("portal-setup-source-assets-ground",0,entry->record,0,1);
+                    checkpoint_cancel(CHECKPOINT_SOURCE);
+                } else if(checkpoint_pending.phase==2) {
+                    if(checkpoint_portal_original_arrival())checkpoint_portal_place();
+                } else if(checkpoint_portal_ready()) {
+                    psx_mod_write_byte(diagnostic+0xAD,2);memset(&checkpoint_pending,0,sizeof checkpoint_pending);
+                    checkpoint_status(CHECKPOINT_COMPLETE,CHECKPOINT_OK);
+                }
+            } else if(checkpoint_pending.authority==CHECKPOINT_AGREED &&
                (checkpoint_lab_option==4 || checkpoint_lab_option==5)) {
                 const int explosion=checkpoint_lab_option==5;
                 uint32_t meta,desc;
