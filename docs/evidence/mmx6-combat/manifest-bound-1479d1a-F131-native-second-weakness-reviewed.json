@@ -1,0 +1,520 @@
+{
+  "comparison": "F131",
+  "result": "passed",
+  "frozen_row_sha256": "3aa3c6401e27500053261abe870115d08943d817883959e62ca4ffb50fad038d",
+  "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\alternate-boss-v95-final-binding-root-v2.json",
+    "bytes": 269,
+    "sha256": "49387986476d53a60b62902af95546b52a88d72be247a7f379b119e3b155e1c9"
+  },
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F131-native-second-weakness-v95-root-v1.py",
+    "bytes": 10853,
+    "sha256": "bf4d9496b3b87f00838eb0aa897daf59fd894c18aaf14bc487626b1ef5d285f5"
+  },
+  "integration_commit": "1a13db08f18acf469c6a25b22dfecf1f608f683d",
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-local-v95-root-v1\\qualification.json",
+        "bytes": 16744732,
+        "sha256": "e2a88ef438db2e161d5746ef0f47fea28874c45dc1bdf3fd91d5b03254060c3f"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-local-v95-root-v1\\ammo-hud\\intro-admission\\F131\\observations.json",
+        "bytes": 6276610,
+        "sha256": "867e47c70303042de19c6df2d5d51d79c219104e96778c475502cb062c8f64ec"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-local-v95-root-v1\\F131-executing-source-pins.json",
+        "bytes": 4030,
+        "sha256": "a2be13a6a6e24db6ffa25f2b728bcb746a2c3f0269a28d2f6bddfb64aecfc792"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "actual_native": [
+        {
+          "peer": 0,
+          "HP": [
+            32,
+            24
+          ],
+          "Zero_ammo5": [
+            288,
+            216
+          ],
+          "other_Zero_eight_lanes_unchanged": true,
+          "primary_all_nine_lanes_unchanged": true,
+          "primary_weapon_context_unchanged": true,
+          "before_row": 0,
+          "cast_row": 1,
+          "recovered_row": 59,
+          "witness_rows": {
+            "pose": 31,
+            "birth": 31,
+            "hit": 31,
+            "reaction": 31,
+            "immune": 31
+          },
+          "reaction_action": 10,
+          "reaction_global": 1,
+          "native_protection": {
+            "immune_defense": "0x8007433c",
+            "sampled_byte84": 28,
+            "restored_defense": "0x80074bfc",
+            "restored_byte84": 0
+          },
+          "main_identity": {
+            "address": "0x8008ef48",
+            "type": 49,
+            "subtype": 0
+          },
+          "native_counters": [
+            0,
+            10
+          ]
+        }
+      ],
+      "reviewed_images": [
+        {
+          "peer": 0,
+          "label": "before-native-Giga-weakness",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-local-v95-root-v1\\ammo-hud\\intro-admission\\F131\\peer-0-before-native-Giga-weakness.png",
+            "bytes": 2074543,
+            "sha256": "e969da8da759c3b3cc3885673e7948d4abcd9dc72138f41ed4e4d187af401249"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        },
+        {
+          "peer": 0,
+          "label": "native-Giga-distinct-Yammark-reaction",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-local-v95-root-v1\\ammo-hud\\intro-admission\\F131\\peer-0-native-Giga-distinct-Yammark-reaction.png",
+            "bytes": 2074543,
+            "sha256": "a0d9192dadb87933111238ee4bd01ecf73fb5882fdf225ca8c3b90505b20d9a4"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        },
+        {
+          "peer": 0,
+          "label": "native-Yammark-and-Zero-recovered",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-local-v95-root-v1\\ammo-hud\\intro-admission\\F131\\peer-0-native-Yammark-and-Zero-recovered.png",
+            "bytes": 2074543,
+            "sha256": "348b6ad6be970051c863e6173dec033ca8d5a3538d5a20f9f151f79d07d20485"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        }
+      ],
+      "owned_exit": 0
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\qualification.json",
+        "bytes": 16995466,
+        "sha256": "3b5099dc9b29150e041c5cddb241030d54df4922eb7f1473748a4f8cd1d13835"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\intro-admission\\F131\\observations.json",
+        "bytes": 9519126,
+        "sha256": "ae49bc6f03c07f8179d20d275a2371dcf8aff51cb099cd7725486d1fd821ef28"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\F131-executing-source-pins.json",
+        "bytes": 4030,
+        "sha256": "a2be13a6a6e24db6ffa25f2b728bcb746a2c3f0269a28d2f6bddfb64aecfc792"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "actual_native": [
+        {
+          "peer": 0,
+          "HP": [
+            32,
+            24
+          ],
+          "Zero_ammo5": [
+            288,
+            216
+          ],
+          "other_Zero_eight_lanes_unchanged": true,
+          "primary_all_nine_lanes_unchanged": true,
+          "primary_weapon_context_unchanged": true,
+          "before_row": 0,
+          "cast_row": 2,
+          "recovered_row": 39,
+          "witness_rows": {
+            "pose": 20,
+            "birth": 20,
+            "hit": 20,
+            "reaction": 20,
+            "immune": 20
+          },
+          "reaction_action": 10,
+          "reaction_global": 1,
+          "native_protection": {
+            "immune_defense": "0x8007433c",
+            "sampled_byte84": 26,
+            "restored_defense": "0x80074bfc",
+            "restored_byte84": 0
+          },
+          "main_identity": {
+            "address": "0x8008ef48",
+            "type": 49,
+            "subtype": 0
+          },
+          "native_counters": [
+            0,
+            10
+          ]
+        },
+        {
+          "peer": 1,
+          "HP": [
+            32,
+            24
+          ],
+          "Zero_ammo5": [
+            288,
+            216
+          ],
+          "other_Zero_eight_lanes_unchanged": true,
+          "primary_all_nine_lanes_unchanged": true,
+          "primary_weapon_context_unchanged": true,
+          "before_row": 0,
+          "cast_row": 2,
+          "recovered_row": 39,
+          "witness_rows": {
+            "pose": 20,
+            "birth": 20,
+            "hit": 20,
+            "reaction": 20,
+            "immune": 20
+          },
+          "reaction_action": 10,
+          "reaction_global": 1,
+          "native_protection": {
+            "immune_defense": "0x8007433c",
+            "sampled_byte84": 23,
+            "restored_defense": "0x80074bfc",
+            "restored_byte84": 0
+          },
+          "main_identity": {
+            "address": "0x8008ef48",
+            "type": 49,
+            "subtype": 0
+          },
+          "native_counters": [
+            0,
+            10
+          ]
+        }
+      ],
+      "reviewed_images": [
+        {
+          "peer": 0,
+          "label": "before-native-Giga-weakness",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\intro-admission\\F131\\peer-0-before-native-Giga-weakness.png",
+            "bytes": 2074543,
+            "sha256": "0a258f9dd1ecead8c5b1ed1a6968a8ced4541ac504a19d996891962803649573"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        },
+        {
+          "peer": 1,
+          "label": "before-native-Giga-weakness",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\intro-admission\\F131\\peer-1-before-native-Giga-weakness.png",
+            "bytes": 2074543,
+            "sha256": "2ce4e8a5982c4fedcaf9d4ee7e9bf789f210f3bb6383e86c3c56d03d426a316b"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        },
+        {
+          "peer": 0,
+          "label": "native-Giga-distinct-Yammark-reaction",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\intro-admission\\F131\\peer-0-native-Giga-distinct-Yammark-reaction.png",
+            "bytes": 2074543,
+            "sha256": "bab3ef26b4da669ad1a33aedfbaf82ee0a7c4311bf6eca75b2b3939550298d85"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        },
+        {
+          "peer": 1,
+          "label": "native-Giga-distinct-Yammark-reaction",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\intro-admission\\F131\\peer-1-native-Giga-distinct-Yammark-reaction.png",
+            "bytes": 2074543,
+            "sha256": "bab3ef26b4da669ad1a33aedfbaf82ee0a7c4311bf6eca75b2b3939550298d85"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        },
+        {
+          "peer": 0,
+          "label": "native-Yammark-and-Zero-recovered",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\intro-admission\\F131\\peer-0-native-Yammark-and-Zero-recovered.png",
+            "bytes": 2074543,
+            "sha256": "646526d2d13e695a73e11c702357a2e6e5329a57d72a621b7432f6d4d4dedcce"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        },
+        {
+          "peer": 1,
+          "label": "native-Yammark-and-Zero-recovered",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-Yammark-Giga-netplay-v95-root-v1\\intro-admission\\F131\\peer-1-native-Yammark-and-Zero-recovered.png",
+            "bytes": 2074543,
+            "sha256": "589de555be60a0f1e024b530d526fd75ec9c16deba8afcc485ecf9e3a7e3e464"
+          },
+          "reviewed": true,
+          "observation": "Original Giga coloured pillars/native boss flash, both heroes/HUD and natural ordinary recovery; separate asynchronous capture ticks. Background is not a new scenery qualification."
+        }
+      ],
+      "owned_exits": [
+        0,
+        0
+      ],
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2816,
+              "core": "2995a808",
+              "mod": "e494d47e"
+            },
+            {
+              "simulation_tick": 2848,
+              "core": "0b6b96fe",
+              "mod": "afb56997"
+            },
+            {
+              "simulation_tick": 2880,
+              "core": "31f132f7",
+              "mod": "f63cc985"
+            },
+            {
+              "simulation_tick": 2912,
+              "core": "b80791dd",
+              "mod": "b4c71a8f"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "9e90ffa1",
+              "mod": "f63c63af"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "89fdb33b",
+              "mod": "eb8f03cf"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "dd518ba7",
+              "mod": "00b9961d"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "01a13218",
+              "mod": "0fc95f69"
+            }
+          ],
+          "resolved_through": [
+            3051,
+            3050
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3104,
+              "core": "b4bb73ff",
+              "mod": "a8b55a8f"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "3ca16f97",
+              "mod": "3b84d036"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "19f83c56",
+              "mod": "e1cab38c"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "6cfc3aed",
+              "mod": "5b0c1406"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "38e40e7e",
+              "mod": "1016ca26"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "cfcc0612",
+              "mod": "1fd959d4"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "7c4ebc9a",
+              "mod": "560e36b4"
+            }
+          ],
+          "resolved_through": [
+            3318,
+            3317
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3392,
+              "core": "e48345e5",
+              "mod": "d8d98bfc"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "33a139ce",
+              "mod": "9af1255c"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "d4d6e18e",
+              "mod": "b4d554d6"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "af85bbe4",
+              "mod": "2b1f09f6"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "6ef2cced",
+              "mod": "eae0efc4"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "3f39a0e7",
+              "mod": "7c83bef0"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "444711a6",
+              "mod": "a8b55a8f"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "9c9eb636",
+              "mod": "3b84d036"
+            }
+          ],
+          "resolved_through": [
+            3622,
+            3622
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 7744,
+              "core": "d13a1264",
+              "mod": "deacbf6a"
+            },
+            {
+              "simulation_tick": 7776,
+              "core": "6e12c48e",
+              "mod": "65e71f0c"
+            },
+            {
+              "simulation_tick": 7808,
+              "core": "4b01dc45",
+              "mod": "846136f0"
+            },
+            {
+              "simulation_tick": 7840,
+              "core": "bf65ac97",
+              "mod": "cae1a7f2"
+            },
+            {
+              "simulation_tick": 7872,
+              "core": "a28a0e34",
+              "mod": "f8ad6d92"
+            },
+            {
+              "simulation_tick": 7904,
+              "core": "b2e6d222",
+              "mod": "790997c4"
+            }
+          ],
+          "resolved_through": [
+            7919,
+            7918
+          ]
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "F131 frozen distinct-native-family contract only. Actual native Commander Yammark49 result45/kind44 enters action10/globalF7DE8, with byte84 protection30 and original defense7433C->74BFC. This differs from already qualified Metal Shark56 reaction3 and halfword88 protection. No all-boss/weapon matrix, F155 simultaneous owners, inverse-roster or native3330 credit.",
+    "Agreed original Amazon1/0CP2 bypasses travel; earned-all bypasses equipment acquisition once after original native checkpoint initialization and restores canonical campaign PLAY60. Hostile-contact protection is disclosed. Actual authored door/dialogue/fullHP32/control release and native ordinary R2 must still occur. No HP/ammo/position/pose/timer/reaction/result/progress writes, native calls or state loading.",
+    "Actual Zero59 and own ammo5 288->216, source-owned private44 birth and same-main HP32->24, authored action10/global1, finite native protection and effect expiry are retained separately on every process. Neutral primary canonical attack pools remain empty; all nine primary energy lanes and weapon/charge/equipment context remain unchanged, all other eight Zero energy lanes unchanged. Native counters are retained but not presented as a count of HP-changing hits.",
+    "Canonical RAM, typed private publication, globals and post-world counters are separate observations; no atomic instruction/result-register claim. Result45 is derived from original kind44+1 and the source branch. Actual resident overlay gathers authenticate originalX where residentcharacter0; private Zero qualification uses pinned original member1/compiled loader projection and actual59/44 behaviour, not an unseen host-memory read.",
+    "All nine current composed captures individually reviewed: ordinary heroes/HUD, original coloured Giga pillars/native boss flash and natural return. Hero overlap and peer capture tick differences are disclosed. This focused reaction check does not clear pre-existing scenery/atlas issues F113/F175 or claim whole-atlas pixel equality.",
+    "Same exact V95 candidate/image/profile24/title41, full four LOCAL and15NET parent gates, four resolved core/mod CRC windows, unchanged isolated native cards, fixture recording/replay refusals and three owned exits0. No production/WAN/cross-host or clean replay claim."
+  ],
+  "native_source_semantics": {
+    "weakness_kind": 44,
+    "result": 45,
+    "damage_entry_hex": "0008",
+    "update": "800EFB9C..800EFD38",
+    "reaction_action": 10,
+    "reaction_latch": "800F7DE8",
+    "eligibility_latch": "800F7E30",
+    "native_recovery": "actor84 byte30 ->0; defense7433C ->74BFC",
+    "input": "original R2 0200 -> fresh native40; C9bit80; body59; own ammo5; original emission44"
+  },
+  "source_notes": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F131-original-Yammark-update-v95-root-v1.txt",
+    "bytes": 2743,
+    "sha256": "97ef9fe6ec3ccf9c6b09e53ca878025b5204da9631e3d5ed3fd0f595f0de4153"
+  }
+}

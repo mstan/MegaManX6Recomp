@@ -17,7 +17,9 @@ sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 108 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F3, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F21, F22, F23, F24, F25, F26, F31, F32, F33, F34, F38, F42, F43, F45, F48, F50, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F84, F85, F89, F90, F91, F92, F94, F95, F96, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F125, F127, F128, F129, F132, F133, F134, F137, F143, F144, F157, F163, F164, F165, F170, F173, F177, F178, F184, F191, F197, F198, F199, F204, F205, F207, F208), 3 failed, 123 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 109 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F3, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F21, F22, F23, F24, F25, F26, F31, F32, F33, F34, F38, F42, F43, F45, F48, F50, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F84, F85, F89, F90, F91, F92, F94, F95, F96, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F125, F127, F128, F129, F131, F132, F133, F134, F137, F143, F144, F157, F163, F164, F165, F170, F173, F177, F178, F184, F191, F197, F198, F199, F204, F205, F207, F208), 3 failed, 122 unverified; no inherited X4/X5 passes |
+
+F131 now passes on exact V95 `1479d1a` in LOCAL and NET: original Yammark action10/globalF7DE8 from actual owned Zero Giga44, own energy288->216, boss32->24 and finite native recovery, with primary resources unchanged. Full parent/CRC/cards/owned-exit gates and nine reviewed images are retained in `evidence/mmx6-combat/manifest-bound-1479d1a-F131-native-second-weakness-reviewed.json`. F155 remains unverified.
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
