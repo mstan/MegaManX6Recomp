@@ -12637,14 +12637,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -12682,9 +12682,87 @@
             "bypasses": [
               "Pre-agreed original AmazonCP2 reachability only."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "lab_checkpoint": "recycle_cp2",
+              "lab_contact_protection": "on",
+              "cameras": "unified",
+              "local_cameras": "unified",
+              "audio": "muted dummy"
+            },
+            "action": "Land native final hit with P1 basic0 and separately guest Zero24; both living heroes celebrate/depart exactly once before native report.",
+            "outcome": "Full frozen F90 both-finisher matrix independently passed on one exact candidate, with source-proven fresh cleared payload covering missed NETpeer1allocated lifetime; raw NET parents remain failed/no aftercaseCRC credit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F90-both-native-finishers-local-netplay-reviewed.json",
+                "sha256": "c7aca1a64eba7633b7cc77614a5982aeb09d78cfb4fbb6b6ddc8f4dfa70fe3da"
+              }
+            ],
+            "limits": [
+              "Full frozen F90 requires BOTH finishers in BOTH modes. All four currentf461288 cases now have actual source-owned native positiveHP->0, both living native25 celebrations once, one departure each before native retirement/report. No transfer from oldV70 failed guest case or oldV85 LOCAL-only evidence.",
+              "Negotiated original Recycle4/1CP2/contact protection are explicit prior road/vehicle/contact prerequisites. Actual original Either door, native intro/full48HP, release and control are earned afterward. No observer HP/pose/position/phase/timer/outcome writes, guest prewear or forged victory.",
+              "P1 uses original owned basic0 with guest neutral/empty private attacks. LOCAL final shot was sampled already retired; fresh empty-to-allocated owned packet plus actual same-offer main1->0 establishes attribution without claiming an unseen live rectangle or HP-store instruction. Each NET peer earns its own packet independently; witness method is retained per peer.",
+              "Both NET raw parents remain FAILED. Guest completed callback then later generic matched() lacked changing post-retirement publications. Primary strict case attribution refused because peer1 allocated/live shot was missed; all other11casechecks pass. Additional original-free/source and raw packet-tail proof establish primary ownership/replication: host actual fresh owned retiredbasic0, both main1->0, each fresh peer1 cleared tail exactly matches the actual owned host packet after source8002C9B0 zeros only offsets0..7. No allocated/live header or rectangle is invented on peer1; rawfalse gate is preserved. Primary has13trueparentchecks/onecallbackfalse, guest14true; no full15 parent/post-caseCRC/clean recording/replay claim.",
+              "Source RAM, private publications, physical peers, accepted inputs and images are asynchronous. Composed native victories retain both hero art/native visibility; NET guest is partially clipped at left edge in unified view. Scenery/HUD corruption, overlap, white sword artifact and full-body viewport framing remain outside rendering credit. No mounted-boss, Save, selector, R19 or F13 claim.",
+              "Primary LOCALv1 failed observer attribution when an overlong Square admitted a real native type9 partially charged shot. Current helper releases at own actual acknowledgement and retains strict charged-shot refusal. PrimaryNETv1 reached the1600combat observation cap with actual main1HP on both peers; NETv2 changes only that finite cap to2400. LOCAL uses1600, NET2400, both separate600clear; native64offers/180scombat/260stotal/65sclear/input/geometry/ownership predicates unchanged. Both incomplete raw setups remain preserved."
+            ],
+            "bypasses": [
+              "Predeclared original Recycle4/1CP2 reachability and negotiated hostile-contact protection."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "lab_checkpoint": "recycle_cp2",
+              "lab_contact_protection": "on",
+              "cameras": "unified",
+              "local_cameras": "unified",
+              "audio": "muted dummy"
+            },
+            "action": "Land native final hit with P1 basic0 and separately guest Zero24; both living heroes celebrate/depart exactly once before native report.",
+            "outcome": "Full frozen F90 both-finisher matrix independently passed on one exact candidate, with source-proven fresh cleared payload covering missed NETpeer1allocated lifetime; raw NET parents remain failed/no aftercaseCRC credit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F90-both-native-finishers-local-netplay-reviewed.json",
+                "sha256": "c7aca1a64eba7633b7cc77614a5982aeb09d78cfb4fbb6b6ddc8f4dfa70fe3da"
+              }
+            ],
+            "limits": [
+              "Full frozen F90 requires BOTH finishers in BOTH modes. All four currentf461288 cases now have actual source-owned native positiveHP->0, both living native25 celebrations once, one departure each before native retirement/report. No transfer from oldV70 failed guest case or oldV85 LOCAL-only evidence.",
+              "Negotiated original Recycle4/1CP2/contact protection are explicit prior road/vehicle/contact prerequisites. Actual original Either door, native intro/full48HP, release and control are earned afterward. No observer HP/pose/position/phase/timer/outcome writes, guest prewear or forged victory.",
+              "P1 uses original owned basic0 with guest neutral/empty private attacks. LOCAL final shot was sampled already retired; fresh empty-to-allocated owned packet plus actual same-offer main1->0 establishes attribution without claiming an unseen live rectangle or HP-store instruction. Each NET peer earns its own packet independently; witness method is retained per peer.",
+              "Both NET raw parents remain FAILED. Guest completed callback then later generic matched() lacked changing post-retirement publications. Primary strict case attribution refused because peer1 allocated/live shot was missed; all other11casechecks pass. Additional original-free/source and raw packet-tail proof establish primary ownership/replication: host actual fresh owned retiredbasic0, both main1->0, each fresh peer1 cleared tail exactly matches the actual owned host packet after source8002C9B0 zeros only offsets0..7. No allocated/live header or rectangle is invented on peer1; rawfalse gate is preserved. Primary has13trueparentchecks/onecallbackfalse, guest14true; no full15 parent/post-caseCRC/clean recording/replay claim.",
+              "Source RAM, private publications, physical peers, accepted inputs and images are asynchronous. Composed native victories retain both hero art/native visibility; NET guest is partially clipped at left edge in unified view. Scenery/HUD corruption, overlap, white sword artifact and full-body viewport framing remain outside rendering credit. No mounted-boss, Save, selector, R19 or F13 claim.",
+              "Primary LOCALv1 failed observer attribution when an overlong Square admitted a real native type9 partially charged shot. Current helper releases at own actual acknowledgement and retains strict charged-shot refusal. PrimaryNETv1 reached the1600combat observation cap with actual main1HP on both peers; NETv2 changes only that finite cap to2400. LOCAL uses1600, NET2400, both separate600clear; native64offers/180scombat/260stotal/65sclear/input/geometry/ownership predicates unchanged. Both incomplete raw setups remain preserved."
+            ],
+            "bypasses": [
+              "Predeclared original Recycle4/1CP2 reachability and negotiated hostile-contact protection."
+            ]
           }
         ],
-        "limitations": "Exact7f59990 actual LOCAL guest kill confirms early companion withdrawal: Zero never enters25 while X alone celebrates. Native both-hero victory fix required. NET/P1finisher/actualselector remain unverified; all source/cards/ownedexit0/taintrefusal gates pass. No F128 early-primary-withdrawal claim."
+        "limitations": "Exactf461288 bothP1/P2nativefinisher cases in BOTH modes complete: original48HP consumed by actual owned attacks, both living native25/out1/retirements once/report12stage15. NativeCP2/contactprotection disclosed. NETrawparents FAILED: guest late generic retired-publication check; primary strict peer1allocated-shot observation absent. Actual hostownedretiredshot/bothmain1->0/freshpeer1source-clearedidenticalpayload independently support namedprimaryfinisher, no inventedpeer1activeheader/livebox. No full15/aftercaseCRC/replay/fullbodyviewport/rendering/selector/Save/R19/F13 credit; oldrawfailures retained."
       }
     },
     {
