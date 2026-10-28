@@ -15850,20 +15850,20 @@
         "workstream": "scene",
         "mapping_state": "identified_subsystem",
         "analogue": "Recycle vehicle-associated mission: on-foot Metal Shark guest final hit and shared native victory/return",
-        "bounded_check": "Actual guest native finalhit; both visible25 victories/outgoing1 once, no premature passenger/reappearance, actual original report boundary; LOCAL complete, same-candidate NET required.",
+        "bounded_check": "Actual guest native finalhit; both visible25 victories/outgoing1 once, no premature passenger/reappearance, actual original report boundary in LOCAL and same-candidate NET.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -15909,9 +15909,89 @@
               "Native Recycle4/1CP2 road/vehicle reachability bypass inherited; actual guest Either door/fullHP/release/controls must already be earned by pinned R17 helper.",
               "Negotiated hostile-contact protection is a disclosed prerequisite bypass, not contact-damage qualification; it ends naturally during original intro/clear/exit."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "lab_checkpoint": "recycle_cp2",
+              "lab_contact_protection": "on",
+              "cameras": "unified",
+              "local_cameras": "unified",
+              "audio": "muted dummy"
+            },
+            "action": "Actual guest basic24 finalhit after original Recycle intro/full48HP; both25/out1/native retirement once, noearlypassenger/reappearance, original report boundary.",
+            "outcome": "Full frozen named F134 mechanic independently passed on exactsame candidate in both modes; NET late generic parent remains failed with no aftercaseCRC credit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F134-native-guest-clear-local-netplay-reviewed.json",
+                "sha256": "7b13920714b40f98c35a9ea96e6cfa2dd4790c9dc15530ac741fc7a75843be3b"
+              }
+            ],
+            "limits": [
+              "Only frozen F134 guest finalhit/native both25/out1/retirement/noearlypassenger/noreappearance and original report boundary on exactf461288 in LOCAL and both NET peers. F90 primary-finisher, road/vehicle handoff, mounted boss, weakness, Save/selector and general rendering remain separate.",
+              "Predeclared original Recycle4/1CP2 reachability and negotiated hostile-contact protection bypass prior road/vehicle/contact prerequisites. Actual Either door, native introduction/full48HP/release and independent controls are earned afterward. No observer HP/pose/position/timer/phase/outcome writes.",
+              "NET raw parent remains FAILED: its later generic matched() expects changing gameplay diagnostic publications after both heroes retired and stage_tick cleared enrollment on leaving PLAY major0A. Source stage_tick early !enrolled return prevents further gameplay publications. Named callback and independent PLAY report observations had already completed. No full15 parent pass or after-case CRC pass is claimed; initial3windows23 matched samples and terminal resolved9352/desync0 retain their actual scope.",
+              "NET offers48->30->12->12->0 include a genuine no-overlap miss. Some nonlethal reads catch projectedZero, where canonical P1 inspection is unavailable; every lethal-offer row is canonical/empty on both peers and P1 input is always neutral. Source24 overlap/Zero48 is sampled across each lethal OFFER WINDOW, not necessarily the endpoint on both peers. No literal packet-parent, exact HP-store timestamp or fixed per-hit damage claim.",
+              "Physical peers, ordinary RAM, private publications, inputs and images are asynchronous. Both native25 poses and departures are visible in composed captures; scenery/HUD corruption and overlap remain. LOCAL report image is transition-black; NET report captures differ across transition. Actual native mode12/stage15 establishes boundary, not Save or selector.",
+              "Actual captures are7LOCAL+22NET. Independent NET packet narrative14 is a preserved typo; its images[] lists all22 and all22 hashes/completion were checked. Root reviewed victory/departure/report artwork separately.",
+              "Fixture-tainted recordings remain failed and strict ordinary capture/replay refuse them. OldV85LOCAL and incomplete NET setups, currentV89NETv1 preinitializer observer failure, and all failed raw parents remain unchanged; no other candidate receives transferred credit."
+            ],
+            "bypasses": [
+              "Predeclared original4/1CP2 reachability and negotiated hostile-contact protection."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "lab_checkpoint": "recycle_cp2",
+              "lab_contact_protection": "on",
+              "cameras": "unified",
+              "local_cameras": "unified",
+              "audio": "muted dummy"
+            },
+            "action": "Actual guest basic24 finalhit after original Recycle intro/full48HP; both25/out1/native retirement once, noearlypassenger/reappearance, original report boundary.",
+            "outcome": "Full frozen named F134 mechanic independently passed on exactsame candidate in both modes; NET late generic parent remains failed with no aftercaseCRC credit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F134-native-guest-clear-local-netplay-reviewed.json",
+                "sha256": "7b13920714b40f98c35a9ea96e6cfa2dd4790c9dc15530ac741fc7a75843be3b"
+              }
+            ],
+            "limits": [
+              "Only frozen F134 guest finalhit/native both25/out1/retirement/noearlypassenger/noreappearance and original report boundary on exactf461288 in LOCAL and both NET peers. F90 primary-finisher, road/vehicle handoff, mounted boss, weakness, Save/selector and general rendering remain separate.",
+              "Predeclared original Recycle4/1CP2 reachability and negotiated hostile-contact protection bypass prior road/vehicle/contact prerequisites. Actual Either door, native introduction/full48HP/release and independent controls are earned afterward. No observer HP/pose/position/timer/phase/outcome writes.",
+              "NET raw parent remains FAILED: its later generic matched() expects changing gameplay diagnostic publications after both heroes retired and stage_tick cleared enrollment on leaving PLAY major0A. Source stage_tick early !enrolled return prevents further gameplay publications. Named callback and independent PLAY report observations had already completed. No full15 parent pass or after-case CRC pass is claimed; initial3windows23 matched samples and terminal resolved9352/desync0 retain their actual scope.",
+              "NET offers48->30->12->12->0 include a genuine no-overlap miss. Some nonlethal reads catch projectedZero, where canonical P1 inspection is unavailable; every lethal-offer row is canonical/empty on both peers and P1 input is always neutral. Source24 overlap/Zero48 is sampled across each lethal OFFER WINDOW, not necessarily the endpoint on both peers. No literal packet-parent, exact HP-store timestamp or fixed per-hit damage claim.",
+              "Physical peers, ordinary RAM, private publications, inputs and images are asynchronous. Both native25 poses and departures are visible in composed captures; scenery/HUD corruption and overlap remain. LOCAL report image is transition-black; NET report captures differ across transition. Actual native mode12/stage15 establishes boundary, not Save or selector.",
+              "Actual captures are7LOCAL+22NET. Independent NET packet narrative14 is a preserved typo; its images[] lists all22 and all22 hashes/completion were checked. Root reviewed victory/departure/report artwork separately.",
+              "Fixture-tainted recordings remain failed and strict ordinary capture/replay refuse them. OldV85LOCAL and incomplete NET setups, currentV89NETv1 preinitializer observer failure, and all failed raw parents remain unchanged; no other candidate receives transferred credit."
+            ],
+            "bypasses": [
+              "Predeclared original4/1CP2 reachability and negotiated hostile-contact protection."
+            ]
           }
         ],
-        "limitations": "Native Recycle4/1CP2 road/vehicle reachability bypass inherited; actual guest Either door/fullHP/release/controls must already be earned by pinned R17 helper. Negotiated hostile-contact protection is a disclosed prerequisite bypass, not contact-damage qualification; it ends naturally during original intro/clear/exit. Actual guest input/body48/private owned attack24, original emission ABI parent800970A0, live source geometry and actual HP changes establish sampled ownership. No invented literal parent field: attack+50 is geometry and+84 is parent animation. Ordinary main/camera RAM is coherent within one read; private publication, input receipts and images are separate observations. Fresh post-world 4-byte accepted-P2-hitcounter reads bracket the earlier diagnostic count; they are not same-instant snapshots. A missed lethal24 lifetime may use every-peer accepted-P2-native-hitcounter advance plus actual Zero48/fresh source-clean Square, empty P1 attack pools and bound-main positiveHP->0. Such a result does not claim sampled lethal overlap, literal parent or HP-store tracing. No HP/inventory/position/pose/phase/timer/outcome writes, clean recording, mounted-boss, weakness, Save or selector claim. Incomplete story/report stays partial. LOCAL only; aggregate F134 remains unverified until same-candidate NET completes. Frozen X5 on-foot Chaser-stage boss precedent maps actual Recycle vehicle-associated mission (RideArmor4/0, boss4/1), not a mounted boss or road handoff. Root reviewed7LOCALcaptures. Both native25 celebrations visible; background/HUDcorruption/overlap remain. Reportcapture is transition-black; actual RAMmode12/stage15 establishes original boundary, not reporttext/Save/selector. Native source F6F60(16/17) allocates falling energy actor type0F/sub10/11; original4289C waits fall and appliesenergy. No postkill Cross/text16/17 claim. NETv2 reached last of10 genuine introtextresponses but70s observerlimit expired before fullHP/release. NETv3 changed only limit110s; both peers exit2 atsim2080 starvationwatchdog~4.8s duringboot beforefixture/attack, so requiredfailedfixture terminal also correctlyrefused. Both failures retained; do not infer F134productfailure or NETpass. Park after2setups."
+        "limitations": "Exactf461288 both modes: actual Zero24 lethal, both living native25/out1/retirements once/noearlypassenger/noreappearance and report12/stage15. NativeCP2/contact-protection prerequisites disclosed; no F90primary/vehicle-route/Save/selector/rendering credit. NET raw parent FAILED later generic retired-gameplay publication-count check; all named mechanics complete on both peers,14otherparentchecks/cards/ownedexit0/refusals retained. Only3precaseCRCwindows23samples, terminaldesync0/resolved9352; no full15 or aftercaseCRCpass. Failedsetup history retained."
       }
     },
     {
