@@ -1,0 +1,107 @@
+{
+  "comparison": "F155",
+  "result": "unverified",
+  "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+  "frozen_row_sha256": "0a5dc6a5b290f51878a94186ee318fc9c56aeac6f750757e13365fec930cf57f",
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\alternate-boss-v95-final-binding-root-v2.json",
+    "bytes": 269,
+    "sha256": "49387986476d53a60b62902af95546b52a88d72be247a7f379b119e3b155e1c9"
+  },
+  "attempts": [
+    {
+      "version": 1,
+      "result": "unverified",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F155-Yammark-dual-weakness-local-v95-root-v1\\qualification.json",
+        "bytes": 29943648,
+        "sha256": "6acf05eaab0e4f8f06c8897ada1e1844d454ec20e697d34d4256ecc1c669eeb8"
+      },
+      "observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F155-Yammark-dual-weakness-local-v95-root-v1\\ammo-hud\\intro-admission\\F155\\observations.json",
+        "bytes": 24662371,
+        "sha256": "850ed373b2e3a5a2b3ddf03222d94068fef233267dc57758b53331553b1b30bd"
+      },
+      "executing_sources": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F155-Yammark-dual-weakness-local-v95-root-v1\\F155-executing-source-pins.json",
+        "bytes": 4048,
+        "sha256": "22d5324006f042fb6d1129ea873394d630bafd634c8db77479d7a44d6f6b6290"
+      },
+      "raw_parent_status": "failed_setup",
+      "error": "Bounded native F131 observation exhausted",
+      "owned_exit": 0,
+      "private_cards_unchanged": true,
+      "actual_overlap_rows": [
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51
+      ],
+      "primary_selection": 8,
+      "primary_ammo8": [
+        288,
+        276
+      ],
+      "native_X8_parent": "800970A0",
+      "native_X8_child_parent": "800950A0",
+      "original_guest_Giga44": true,
+      "accepted_guest_HP": [
+        32,
+        24
+      ],
+      "primary_accepted_damage": false,
+      "geometry": {
+        "primary_initial_arrowY": 2066,
+        "boss_initialY": 2000
+      },
+      "limit": "Actual separate pool observations show overlapping native lifetimes, not an atomic simultaneous-hit claim. Arrow misses above/below geometry; only Zero accepted weakness. Sample400 bound aborts parent after actual effects already retired; raw status unchanged."
+    },
+    {
+      "version": 2,
+      "result": "unverified",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F155-Yammark-dual-weakness-local-v95-root-v2\\qualification.json",
+        "bytes": 3384722,
+        "sha256": "051be1515b7425da4417eeb49facfd7f34e3728bf129cfe5f9dc2f7043d6a0e9"
+      },
+      "observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F155-Yammark-dual-weakness-local-v95-root-v2\\ammo-hud\\intro-admission\\F155\\observations.json",
+        "bytes": 2091,
+        "sha256": "81fa4adf780bbc613931c4dd3b1af982fad430a66a52c115620ea8c7cdb476d6"
+      },
+      "executing_sources": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F155-Yammark-dual-weakness-local-v95-root-v2\\F155-executing-source-pins.json",
+        "bytes": 4048,
+        "sha256": "c0b7663184db710a7a9c2f54829bd35565bb81714986207a7549fdaa51c1f02f"
+      },
+      "raw_parent_status": "failed_setup",
+      "error": "Native boss initialization/passenger landing did not release both controls",
+      "owned_exit": 0,
+      "private_cards_unchanged": true,
+      "entry_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F155-Yammark-dual-weakness-local-v95-root-v2\\ammo-hud\\intro-admission\\F155\\original-Amazon-entry\\observations.json",
+        "bytes": 2883742,
+        "sha256": "d3b1d69dd44970184c755e85ff65f362f9555e5a11d7f39c598e1845d54f8364"
+      },
+      "native_dialogue_offers": 10,
+      "last_completed_page": 10,
+      "last_dialogue_hex": "121e1c80351c2a002d00010001020a01",
+      "boss_HP": 0,
+      "boss_action_phase": [
+        2,
+        4
+      ],
+      "combat_attempted": false,
+      "limit": "Low-target/facing correction never reached. Native dialogue still progressed through page10 when existing65-second original-entry guard expired; no game deadlock or weakness failure inferred. No blind third attempt."
+    }
+  ],
+  "limitations": [
+    "Two bounded LOCAL attempts remain unverified. V1 earns genuine native X8/child8 plus Zero44 overlapping lifetimes and actual parent fields, but X misses the airborne target; only Zero earns native weakness damage. V2 never reaches combat because a still-progressing original multi-page introduction exceeds the65-second entry guard. Raw failed setup statuses, isolated cards and owned exits0 retained.",
+    "No aggregate, paired, two accepted owners, atomic simultaneous-hit, native crash or new gameplay failure claim. Park after these attempts; next useful F155 work needs a suitably bounded original dialogue setup and the recorded ordinary low-target/facing correction, without result writes. F131 remains independently passed on the same candidate."
+  ]
+}

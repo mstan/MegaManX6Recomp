@@ -18241,7 +18241,7 @@
       "frozen_row_sha256": "0a5dc6a5b290f51878a94186ee318fc9c56aeac6f750757e13365fec930cf57f",
       "x6": {
         "workstream": "combat",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Simultaneous elemental weakness children",
         "bounded_check": "Have both eligible heroes attack during a source-qualified weakness window; retain child ownership, accepted hits and stable native control flow through recovery.",
         "baseline_anchors": [
@@ -18257,8 +18257,41 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+            "build_identity": {
+              "executable_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+              "compiled_manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+              "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "dummy muted",
+              "prerequisite": "Original AmazonCP2; earned-all; hostile-contact protection"
+            },
+            "action": "Actual X native R1 selection8/Triangle and owned ZeroR2; inspect overlapping native effects, real child parents and accepted damage.",
+            "outcome": "X8/child8 and Zero44 lifetimes overlap, but only guest damage accepted; one source-grounded geometry correction stops in advancing native intro before combat. Deferred unverified.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-1479d1a-F155-two-owner-attempts-deferred.json",
+                "sha256": "c7233b9376099358ba47023e6d537d0ed89fd0428ca8b9791d1e6244dff80331"
+              }
+            ],
+            "limits": [
+              "Two bounded LOCAL attempts remain unverified. V1 earns genuine native X8/child8 plus Zero44 overlapping lifetimes and actual parent fields, but X misses the airborne target; only Zero earns native weakness damage. V2 never reaches combat because a still-progressing original multi-page introduction exceeds the65-second entry guard. Raw failed setup statuses, isolated cards and owned exits0 retained.",
+              "No aggregate, paired, two accepted owners, atomic simultaneous-hit, native crash or new gameplay failure claim. Park after these attempts; next useful F155 work needs a suitably bounded original dialogue setup and the recorded ordinary low-target/facing correction, without result writes. F131 remains independently passed on the same candidate."
+            ],
+            "bypasses": [
+              "Original checkpoint travel, equipment and hostile-contact protection only; no combat or result writes."
+            ]
+          }
+        ],
+        "limitations": "Two bounded LOCAL attempts remain unverified. V1 earns genuine native X8/child8 plus Zero44 overlapping lifetimes and actual parent fields, but X misses the airborne target; only Zero earns native weakness damage. V2 never reaches combat because a still-progressing original multi-page introduction exceeds the65-second entry guard. Raw failed setup statuses, isolated cards and owned exits0 retained. No aggregate, paired, two accepted owners, atomic simultaneous-hit, native crash or new gameplay failure claim. Park after these attempts; next useful F155 work needs a suitably bounded original dialogue setup and the recorded ordinary low-target/facing correction, without result writes. F131 remains independently passed on the same candidate."
       }
     },
     {
