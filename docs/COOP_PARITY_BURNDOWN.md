@@ -17,7 +17,7 @@ sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 105 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F3, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F21, F22, F23, F24, F25, F26, F31, F32, F33, F34, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F90, F91, F92, F94, F95, F96, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F125, F127, F128, F129, F132, F133, F134, F137, F143, F144, F157, F163, F164, F165, F170, F173, F177, F178, F184, F191, F197, F198, F199, F204, F205, F207, F208), 3 failed, 126 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 106 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F3, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F21, F22, F23, F24, F25, F26, F31, F32, F33, F34, F38, F42, F43, F45, F48, F50, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F90, F91, F92, F94, F95, F96, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F125, F127, F128, F129, F132, F133, F134, F137, F143, F144, F157, F163, F164, F165, F170, F173, F177, F178, F184, F191, F197, F198, F199, F204, F205, F207, F208), 3 failed, 125 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,7 +40,9 @@ hashed evidence for each required mode. Do not set the completion flags under
 test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
-## Current qualification status, October 27
+## Current qualification status, October 28
+
+**F50 is closed: 106 passed / 3 failed / 125 unverified (45.3%), one more since105.** The [current native flame and Yammar review](evidence/mmx6-assets/manifest-bound-38823f8-F50-native-flame-Yammar-reviewed.json) qualifies two distinct original effect paths on exact V94 in LOCAL and NET. The rendering fix retains Zero's uncompressed ice/flame atlas instead of shared X pixels; native flame55/34 earns Metal48to46 and retires naturally, while original compressed Yammar activates, spends its own energy, fires and returns to idle with X's resources retained. All12 composed images, full4/15 parent gates, four resolved CRC windows and owned exits0/private cards pass. Tested source and native lab prerequisites are integrated locally at `ab9a2d5`; six focused CTests pass and the actual-packet regression fails on the old renderer. The frozen F50 asks for representative distinct effect families; the imported mutable all-acquired-family wording was broader and is corrected. No all-weapons or inherited old-build credit. F27 remains unverified: current local ice birth/art/expiry and supported landing are positive, but the two stricter idle tails fail and NET ice is missing; both failures are preserved.
 
 **F127 is closed: 105 passed / 3 failed / 126 unverified (44.9%), one more since104.** The [vehicle-associated boss weakness review](evidence/mmx6-combat/manifest-bound-56a547b-F127-vehicle-stage-weakness-reviewed.json) uses the established original Recycle Ride Armor4/0-to-Metal Shark4/1 mission mapping and completed exact V93 LOCAL/NET evidence. Actual guest Zero58/type42 causes48to42 and original weakness reaction3/immune7433C, then recovery. The frozen check separates boss weakness from vehicle traversal; mounted motion/opening/handoff remains unverified. All source/profile/finalCRC/cards/taint/owned-exit gates and earlier failed attempts are preserved. No additional game run or literal Ride Chaser content is claimed.
 

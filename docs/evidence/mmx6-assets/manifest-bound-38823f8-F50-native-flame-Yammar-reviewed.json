@@ -1,0 +1,532 @@
+{
+  "comparison": "F50",
+  "frozen_row_sha256": "a6a4fe04d846dfe1171711b7f339ba3e78792d4b688509318857cd9757fde0fd",
+  "result": "passed",
+  "candidate": "38823f814f5e182e80e47b57ce02b3bf5a82edb3",
+  "binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-atlas-v94-final-binding-root-v1.json",
+    "bytes": 269,
+    "sha256": "13423d3e7ecac6d12a2ddb895b9f6cd0993f6b2f1e2e2a96a7375851d4af9dcd",
+    "image_sha256": "8607d4fb4561117b4d0fe2389226e3b4b9b31bac9948ff773269efed75438e63",
+    "manifest_sha256": "0a6ff510418906e934d0c9429a3a529ca982e5a76475c24cdca156f098616bd9",
+    "provenance_sha256": "cc874dbe80c6d85518c54d9af0241df6f8d84627ed554bcc279b94b1dc2b1970",
+    "title": "mmx6-x-zero-delay-v40",
+    "host_revision": 23
+  },
+  "source_fix_commit": "38823f814f5e182e80e47b57ce02b3bf5a82edb3",
+  "integration_commit": "ab9a2d5a4e93f97f70f8707f49163199bc1e5f08",
+  "reviewer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F50-native-flame-Yammar-v94-root-v1.py",
+    "bytes": 10817,
+    "sha256": "27c2b268deb24579198ec3020c624c6f9638c9bddd8887b0f8a20fff9366678d"
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\qualification.json",
+        "bytes": 6295975,
+        "sha256": "a90f94f7f25a0317fd76824344d9404aecc29ba2b112f07062740a769181e2ba"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\F27-executing-source-pins.json",
+        "bytes": 4262,
+        "sha256": "db4840c369094df7f32c98f74e6afef8618d75273661319971e107f4471c8411"
+      },
+      "native_flame": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\observations.json",
+        "bytes": 836264,
+        "sha256": "adb196bb0416c786c7fd1294f81a08e3c47777ccac1988d65c031115af28b757"
+      },
+      "native_Yammar": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\Yammar\\observations.json",
+        "bytes": 1047355,
+        "sha256": "3657627cf19d443ab597a5dd8cae17d7c3f6e9be3d8ace74788fa79fb390711a"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "actual_native": [
+        {
+          "peer": 0,
+          "flame": {
+            "body_action": 55,
+            "type": 34,
+            "table": 0,
+            "assembly": "0x9f03f6bc",
+            "clut": "0x7804",
+            "hp_before": 48,
+            "hp_after": 46,
+            "retired_row": 22
+          },
+          "Yammar": {
+            "table": "0x9f0373f4",
+            "assembly": "0x9f03f194",
+            "clut": "0x7849",
+            "ammo_before": 288,
+            "ammo_after": 252,
+            "returned_idle_row": 37
+          }
+        }
+      ],
+      "composed_art_review": [
+        {
+          "peer": 0,
+          "label": "native-source-action55-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\peer-0-native-source-action55-active.png",
+            "bytes": 2074543,
+            "sha256": "44e5bb6c030227764235be504496065b2eaab8994cb04165e6f01834ceead2da"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "native-source-action55-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\peer-0-native-source-action55-retired.png",
+            "bytes": 2074543,
+            "sha256": "63e59fb2e7afb7e4bbf2df012fdd11bad667e6cb55a2e5084187d1982911c626"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "native-Yammar-original-CLUT7849",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\Yammar\\peer-0-native-Yammar-original-CLUT7849.png",
+            "bytes": 2074543,
+            "sha256": "c77face3216e7ce0dbdf6c43e1a210dbe4a58c21b83bcee53f2dfc463d7557de"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "native-Yammar-option-after-Square",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-local-v94-root-v1\\ammo-hud\\intro-admission\\F27\\Yammar\\peer-0-native-Yammar-option-after-Square.png",
+            "bytes": 2074543,
+            "sha256": "db9c664eb9c37d1da83aa23c3ded248351f62d40fe2c8996d8296d0c9dfcd009"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        }
+      ],
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\qualification.json",
+        "bytes": 9519579,
+        "sha256": "5273360bc640f50fb892d8948a27f04980a4d348a0deb684b9c60410e442b6a3"
+      },
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\F27-executing-source-pins.json",
+        "bytes": 4262,
+        "sha256": "db4840c369094df7f32c98f74e6afef8618d75273661319971e107f4471c8411"
+      },
+      "native_flame": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\observations.json",
+        "bytes": 1346816,
+        "sha256": "0057e421e5ee40b8401801e0c0ea047a9a8c48d910aba5a90004e692537b1bef"
+      },
+      "native_Yammar": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\Yammar\\observations.json",
+        "bytes": 1402052,
+        "sha256": "39502e308e21a70f0a54fa27a753bfee4a4c3c3990722e37a9e424a51caf5401"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "actual_native": [
+        {
+          "peer": 0,
+          "flame": {
+            "body_action": 55,
+            "type": 34,
+            "table": 0,
+            "assembly": "0x9f03f6bc",
+            "clut": "0x7804",
+            "hp_before": 48,
+            "hp_after": 46,
+            "retired_row": 21
+          },
+          "Yammar": {
+            "table": "0x9f0373f4",
+            "assembly": "0x9f03f194",
+            "clut": "0x7849",
+            "ammo_before": 288,
+            "ammo_after": 252,
+            "returned_idle_row": 25
+          }
+        },
+        {
+          "peer": 1,
+          "flame": {
+            "body_action": 55,
+            "type": 34,
+            "table": 0,
+            "assembly": "0x9f03f6bc",
+            "clut": "0x7804",
+            "hp_before": 48,
+            "hp_after": 46,
+            "retired_row": 21
+          },
+          "Yammar": {
+            "table": "0x9f0373f4",
+            "assembly": "0x9f03f194",
+            "clut": "0x7849",
+            "ammo_before": 288,
+            "ammo_after": 252,
+            "returned_idle_row": 25
+          }
+        }
+      ],
+      "composed_art_review": [
+        {
+          "peer": 0,
+          "label": "native-source-action55-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\peer-0-native-source-action55-active.png",
+            "bytes": 2074543,
+            "sha256": "5a9430b6adabbe0cea71fb98c4f0d69240fa8730def02fc2f52eb4d9f82c4a35"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 1,
+          "label": "native-source-action55-active",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\peer-1-native-source-action55-active.png",
+            "bytes": 2074543,
+            "sha256": "06eedd692ade923b2a95955918fc639b56a8f69486c7feb20f053501ec28ff32"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "native-source-action55-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\peer-0-native-source-action55-retired.png",
+            "bytes": 2074543,
+            "sha256": "ead4024c749d7aac749e79448871646f349c359e2a96fb05b02deee0925c3d38"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 1,
+          "label": "native-source-action55-retired",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\peer-1-native-source-action55-retired.png",
+            "bytes": 2074543,
+            "sha256": "c2dc0c05f04f20b5fa871ceba35f60aa311a7bf892999afca208f75aed92d0a9"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "native-Yammar-original-CLUT7849",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\Yammar\\peer-0-native-Yammar-original-CLUT7849.png",
+            "bytes": 2074543,
+            "sha256": "3f4d8899e3184a8a38a446660422e668f68e1a224f1aff9d7a7bdb5c4ab09988"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 1,
+          "label": "native-Yammar-original-CLUT7849",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\Yammar\\peer-1-native-Yammar-original-CLUT7849.png",
+            "bytes": 2074543,
+            "sha256": "95cf9b50a6900d9a78a88cd73bd9ebd75e32a3f3a70463aa49ce16061d9de702"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 0,
+          "label": "native-Yammar-option-after-Square",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\Yammar\\peer-0-native-Yammar-option-after-Square.png",
+            "bytes": 2074543,
+            "sha256": "e442821221d2f83913658b196704d82d65d6d7170ea015f492ac374f7631fa9c"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        },
+        {
+          "peer": 1,
+          "label": "native-Yammar-option-after-Square",
+          "artifact": {
+            "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-flame-Yammar-netplay-v94-root-v1\\intro-admission\\F27\\Yammar\\peer-1-native-Yammar-option-after-Square.png",
+            "bytes": 2074543,
+            "sha256": "0ae6e4c5ffbbd6b4368172abb2e97b682e4f0e0e130fd6cda9fdd00e8f364d3a"
+          },
+          "reviewed": true,
+          "observed": "Original orange/yellow flame or gold/green Yammar; native red Zero, X and HUDs retained. Active/retired flame and active/after-Square option inspected; overlap and normal boss hurt flashing disclosed."
+        }
+      ],
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2944,
+              "core": "2072237c",
+              "mod": "7b697a22"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "f462f052",
+              "mod": "d608f49c"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "6bdd6507",
+              "mod": "28f78c3c"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "25764192",
+              "mod": "b62f11ba"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "8a3d0600",
+              "mod": "bc53d1da"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "1d8fd25e",
+              "mod": "490a869e"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "e69dd797",
+              "mod": "be498204"
+            }
+          ],
+          "resolved_through": [
+            3159,
+            3160
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3200,
+              "core": "69f6867b",
+              "mod": "284a3f21"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "e87af1f1",
+              "mod": "441439df"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "8046efd4",
+              "mod": "427e715d"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "88609bfd",
+              "mod": "b1f6dbbd"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "41f1917d",
+              "mod": "7cb46967"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "180376c8",
+              "mod": "a4b10e07"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "ff58a222",
+              "mod": "ca98b115"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "803aec63",
+              "mod": "2e6fcc89"
+            }
+          ],
+          "resolved_through": [
+            3433,
+            3433
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3520,
+              "core": "87048302",
+              "mod": "7f25f90d"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "2d79e198",
+              "mod": "1712d497"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "1c99527c",
+              "mod": "15663437"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "be0dbbaf",
+              "mod": "2e130dc5"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "cdb265e5",
+              "mod": "6c13b9e5"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "d01e31bb",
+              "mod": "284a3f21"
+            },
+            {
+              "simulation_tick": 3712,
+              "core": "7add83ed",
+              "mod": "441439df"
+            }
+          ],
+          "resolved_through": [
+            3733,
+            3733
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 7520,
+              "core": "ccc838b3",
+              "mod": "88d78179"
+            },
+            {
+              "simulation_tick": 7552,
+              "core": "2677eb8a",
+              "mod": "a345a29f"
+            },
+            {
+              "simulation_tick": 7584,
+              "core": "07fca785",
+              "mod": "0f38658d"
+            },
+            {
+              "simulation_tick": 7616,
+              "core": "a88be7d9",
+              "mod": "c670a73d"
+            },
+            {
+              "simulation_tick": 7648,
+              "core": "30549f70",
+              "mod": "c8060cd7"
+            },
+            {
+              "simulation_tick": 7680,
+              "core": "7d2ca661",
+              "mod": "7b4b38c7"
+            },
+            {
+              "simulation_tick": 7712,
+              "core": "4e37ff3e",
+              "mod": "d9355cb5"
+            }
+          ],
+          "resolved_through": [
+            7723,
+            7723
+          ]
+        }
+      ],
+      "owned_exits": [
+        0,
+        0
+      ]
+    }
+  },
+  "limitations": [
+    "The frozen X5 F50 contract asks for representative distinct native special-effect families and real contact, expanding only distinct deferred emitters. The mutable imported every-acquired-family wording was broader; it is corrected to that frozen scope. No every-weapon, charged/armor or general artwork claim.",
+    "Current V94 exercises two different original paths: native flame34 has no compressed frame table and uses the original Zero atlas/CLUT7804; native Yammar uses compressed table9F0373F4/assembly9F03F194/CLUT7849. All12 current composed captures were individually reviewed: orange/yellow flame, gold/green Yammar, readable native heroes and HUD. Actors overlap and native boss hurt flashing occurs; these asynchronous images do not establish identical peer render ticks.",
+    "The flame55 technique includes original Saber26 and flame34. Its neutral-primary owned emissions earn actual Metal48to46; callback deltas are NOT damaging-hit counts. Yammar firing overlaps Saber48..50 and does not establish separately attributed option damage. The independent flame55 case supplies the frozen actual-target interaction.",
+    "Native flame34 and the technique retire to empty private shots/grounded idle2. Yammar is an original persistent option/controller, so its legitimate continued parent is not falsely required to disappear; its actual activation, own energy spend, fresh Square, and original return to idle are observed.",
+    "The original DAT85/source palette mapping and meaningful original-packet regression explain the fix. The older V74 exact1792-pixel Yammar review establishes the source defect only; no gameplay pass or exact-pixel equality from that candidate is transferred to V94. Current images and current native packets qualify current representative graphics.",
+    "Agreed native RecycleCP2/contact-protection/earned-equipment setup bypasses reachability/acquisition. Door, original intro/fullHP48/release, owned attacks, accepted damage and finite recovery stay native; no hit/HP/reaction/phase/timer/success writes or source-card copies. Strict fixture recording/replay refusals, actual profile23/title40, final resolved CRC and unchanged private cards remain required.",
+    "F27 remains unverified. Its actual current LOCAL ice33 graphics/expiry are positive but two later landing-observer timeouts are preserved and NET ice is missing. No frozen fire/ice comparison credit, native3330 coverage, WAN/cross-host, production, campaign progress, state-load or rollback claim."
+  ],
+  "source_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-original-Zero-atlas-native33-34-root-v2.json",
+      "bytes": 1019,
+      "sha256": "67fba26af10d351d4e79265ae9c903cd4062e65493d9e06035c2ef30941813ec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F27-native-input-source-correction-root-v1.json",
+      "bytes": 742,
+      "sha256": "d59a7f54639d6d81897de73179e5d7f8fb3237b16554116a740a8e7412790c22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-Yammar-CLUT-source-v73-worker-v1.json",
+      "bytes": 926,
+      "sha256": "fbec528d08a5c9491baa8b4664b6a257d505667ddcd7c62210400a30692e787c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v94-private-effects-baseline-red.log",
+      "bytes": 1036,
+      "sha256": "c979dba9a417a6c78825bd2728d4c80e4bf83db95e60b89e689c8e1b30442247"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v94-private-effects-fixed-green.log",
+      "bytes": 636,
+      "sha256": "36d4ac3104161c86088004655942f309f8ed5cac53a2d13e20a1a60a44618061"
+    }
+  ],
+  "focused_tests": {
+    "result": "six passed",
+    "artifact": {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v94-zero-technique-atlas-debug\\Testing\\Temporary\\LastTest.log",
+      "bytes": 5932,
+      "sha256": "8cab89e6d84437475facdad972c925d43c46af9b570af47c0a2e661a9e234b72"
+    }
+  }
+}
