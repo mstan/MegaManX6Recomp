@@ -7541,25 +7541,106 @@
       "frozen_row_sha256": "a8c4f6fc4212fe07d611e9f636de4feec7361ccf7e9db8180f213ac81b1edd48",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Shared terrain-toggle controller analogue unidentified",
-        "bounded_check": "Map an authored X6 switch that changes shared geometry; activate with each leader and observe one native transition plus safe visible partner return.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original Recycle alternate-route warp, both-leader transfer and safe visible passenger release",
+        "bounded_check": "Earn original portal transfer with each leader; require native loader/release, visible safe passenger return and actual subsequent control.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "provenance_sha256": "464805d0560873494d07d758382a8b4398af47a7d16984e81ddf9c9eb272a838",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "dummy muted",
+              "contact_protection": "guest off; primary inverse on",
+              "prerequisite": "agreed original4/0CP2 and one position-only approach"
+            },
+            "action": "Ordinary P2 and nearby inverse P1 lead through original warp; inspect native loader, both visible released bodies and subsequent safe passenger movement.",
+            "outcome": "Full frozen F24 native counterpart passed; later extra NET control failures remain preserved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F24-F34-both-leader-warp-reviewed.json",
+                "sha256": "96a36c32a13a3410d7c7c130e33f7444885a2856e5630d2803bb542c293730b7"
+              }
+            ],
+            "limits": [
+              "Only the unchanged frozen F24 shared-controller corridor-transfer analogue and F34 native warp transition plus next controlled step. Recycle original record800F2B0C/type28/sub1 transports4/0CP2 to20/1CP0. No literal gravity flip, moving lift, every portal, return route or distant-primary qualification.",
+              "Both leaders use the same exact V89 image/source/manifest/provenance. Completed guest LOCALv4/NETv1 is reused; fresh primary LOCALv1/NETv1 supplies the nearby inverse. The original X4/X5 fields and frozen hashes are unchanged.",
+              "Original CP2 initialization and one position/previous-position-only approach bypass earlier reachability. Primary inverse has negotiated hostile-contact protection ON for unrelated enemies; guest half has it OFF. No portal admission, loader, success flag, destination, HP, terrain or resulting release is written by the observer.",
+              "Original primary admission records canonical integer X via halfword load PLAYER+0A atEC7D4/store portal+84 atEC7E0. The raw observer reads a32-bit zero-extended region; source-qualified review uses the actual16-bit value. Actual sceneowner0 at first admission is retained, not synthesized to1; later scene handling owns the passenger.",
+              "Native initial guest103 has partial horizontal support. Ordinary guestLeft earns full22 original feet on both actors at the reviewed safe endpoint, with both visible, native idle, HP32 and scene-free. Arrival screenshots establish visibility; raw bodies/terrain establish floor support.",
+              "NET raw parent remains failed after this completed endpoint: an extra P1Right test later settles96.5 with partial support. NETv2 changes direction but later walks into wallgrab18 at32. Both raw failures remain unchanged; no full NET-parent/two-final-control stress success is claimed. The frozen F24 inverse needs transfer/release and safe visible passenger return; those precede the extra tail.",
+              "Read-only standard core/mod log verification finds142 equal resolved samples through simulation4640 under watermark4669 on NETv1. This spans the native session; no exact post-safe-endpoint CRC anchor is manufactured. Profile20 stays fixed, cards match and all owned processes exit0; fixture-tainted captures/replays remain strictly refused.",
+              "Root reviewed all7 new LOCAL/NETv1 composed images; the guest nine-image review is reused unchanged. Overlapping heroes, art/HUD limits and actual destination graphics-index differences remain explicit. Collision layout/low16/shape/flip equivalence is independent of general rendering correctness."
+            ],
+            "bypasses": [
+              "Original CP2 initialization and one position/previous-position-only approach.",
+              "Primary inverse hostile-contact protection for unrelated enemies."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "provenance_sha256": "464805d0560873494d07d758382a8b4398af47a7d16984e81ddf9c9eb272a838",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "dummy muted",
+              "contact_protection": "guest off; primary inverse on",
+              "prerequisite": "agreed original4/0CP2 and one position-only approach"
+            },
+            "action": "Ordinary P2 and nearby inverse P1 lead through original warp; inspect native loader, both visible released bodies and subsequent safe passenger movement.",
+            "outcome": "Full frozen F24 native counterpart passed; later extra NET control failures remain preserved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F24-F34-both-leader-warp-reviewed.json",
+                "sha256": "96a36c32a13a3410d7c7c130e33f7444885a2856e5630d2803bb542c293730b7"
+              }
+            ],
+            "limits": [
+              "Only the unchanged frozen F24 shared-controller corridor-transfer analogue and F34 native warp transition plus next controlled step. Recycle original record800F2B0C/type28/sub1 transports4/0CP2 to20/1CP0. No literal gravity flip, moving lift, every portal, return route or distant-primary qualification.",
+              "Both leaders use the same exact V89 image/source/manifest/provenance. Completed guest LOCALv4/NETv1 is reused; fresh primary LOCALv1/NETv1 supplies the nearby inverse. The original X4/X5 fields and frozen hashes are unchanged.",
+              "Original CP2 initialization and one position/previous-position-only approach bypass earlier reachability. Primary inverse has negotiated hostile-contact protection ON for unrelated enemies; guest half has it OFF. No portal admission, loader, success flag, destination, HP, terrain or resulting release is written by the observer.",
+              "Original primary admission records canonical integer X via halfword load PLAYER+0A atEC7D4/store portal+84 atEC7E0. The raw observer reads a32-bit zero-extended region; source-qualified review uses the actual16-bit value. Actual sceneowner0 at first admission is retained, not synthesized to1; later scene handling owns the passenger.",
+              "Native initial guest103 has partial horizontal support. Ordinary guestLeft earns full22 original feet on both actors at the reviewed safe endpoint, with both visible, native idle, HP32 and scene-free. Arrival screenshots establish visibility; raw bodies/terrain establish floor support.",
+              "NET raw parent remains failed after this completed endpoint: an extra P1Right test later settles96.5 with partial support. NETv2 changes direction but later walks into wallgrab18 at32. Both raw failures remain unchanged; no full NET-parent/two-final-control stress success is claimed. The frozen F24 inverse needs transfer/release and safe visible passenger return; those precede the extra tail.",
+              "Read-only standard core/mod log verification finds142 equal resolved samples through simulation4640 under watermark4669 on NETv1. This spans the native session; no exact post-safe-endpoint CRC anchor is manufactured. Profile20 stays fixed, cards match and all owned processes exit0; fixture-tainted captures/replays remain strictly refused.",
+              "Root reviewed all7 new LOCAL/NETv1 composed images; the guest nine-image review is reused unchanged. Overlapping heroes, art/HUD limits and actual destination graphics-index differences remain explicit. Collision layout/low16/shape/flip equivalence is independent of general rendering correctness."
+            ],
+            "bypasses": [
+              "Original CP2 initialization and one position/previous-position-only approach.",
+              "Primary inverse hostile-contact protection for unrelated enemies."
+            ]
+          }
+        ],
+        "limitations": "Passed full frozen contract on exact V89 using completed guest transfer plus nearby primary inverse in LOCAL/both NET peers. Actual original loader, visible scene-free living return and passenger next movement/full support precede preserved NET extra-control failures. CP2/one position setup, inverse contact protection and tainted recordings disclosed. No literal gravityflip, distant-primary, return route, general art or full failed NET-parent claim."
       }
     },
     {
@@ -8759,25 +8840,106 @@
       "frozen_row_sha256": "b2314271d66de00a26bcbb31c48272a8704ab90ed43e2394c092a4040f24f5af",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Moving-surface transfer analogue unidentified",
-        "bounded_check": "Find a native transfer whose destination is a moving surface; inspect transient body/camera/solid histories instead of testing an ordinary fixed door.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original Recycle warp4/0 to20/1, full native transition and next controlled step",
+        "bounded_check": "Cross an original warp boundary, observe full native loader/visible release and actual subsequent independently controlled movement.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "provenance_sha256": "464805d0560873494d07d758382a8b4398af47a7d16984e81ddf9c9eb272a838",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "dummy muted",
+              "contact_protection": "guest off; primary inverse on",
+              "prerequisite": "agreed original4/0CP2 and one position-only approach"
+            },
+            "action": "Ordinary P2 and nearby inverse P1 lead through original warp; inspect native loader, both visible released bodies and subsequent safe passenger movement.",
+            "outcome": "Full frozen F34 native counterpart passed; later extra NET control failures remain preserved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F24-F34-both-leader-warp-reviewed.json",
+                "sha256": "96a36c32a13a3410d7c7c130e33f7444885a2856e5630d2803bb542c293730b7"
+              }
+            ],
+            "limits": [
+              "Only the unchanged frozen F24 shared-controller corridor-transfer analogue and F34 native warp transition plus next controlled step. Recycle original record800F2B0C/type28/sub1 transports4/0CP2 to20/1CP0. No literal gravity flip, moving lift, every portal, return route or distant-primary qualification.",
+              "Both leaders use the same exact V89 image/source/manifest/provenance. Completed guest LOCALv4/NETv1 is reused; fresh primary LOCALv1/NETv1 supplies the nearby inverse. The original X4/X5 fields and frozen hashes are unchanged.",
+              "Original CP2 initialization and one position/previous-position-only approach bypass earlier reachability. Primary inverse has negotiated hostile-contact protection ON for unrelated enemies; guest half has it OFF. No portal admission, loader, success flag, destination, HP, terrain or resulting release is written by the observer.",
+              "Original primary admission records canonical integer X via halfword load PLAYER+0A atEC7D4/store portal+84 atEC7E0. The raw observer reads a32-bit zero-extended region; source-qualified review uses the actual16-bit value. Actual sceneowner0 at first admission is retained, not synthesized to1; later scene handling owns the passenger.",
+              "Native initial guest103 has partial horizontal support. Ordinary guestLeft earns full22 original feet on both actors at the reviewed safe endpoint, with both visible, native idle, HP32 and scene-free. Arrival screenshots establish visibility; raw bodies/terrain establish floor support.",
+              "NET raw parent remains failed after this completed endpoint: an extra P1Right test later settles96.5 with partial support. NETv2 changes direction but later walks into wallgrab18 at32. Both raw failures remain unchanged; no full NET-parent/two-final-control stress success is claimed. The frozen F24 inverse needs transfer/release and safe visible passenger return; those precede the extra tail.",
+              "Read-only standard core/mod log verification finds142 equal resolved samples through simulation4640 under watermark4669 on NETv1. This spans the native session; no exact post-safe-endpoint CRC anchor is manufactured. Profile20 stays fixed, cards match and all owned processes exit0; fixture-tainted captures/replays remain strictly refused.",
+              "Root reviewed all7 new LOCAL/NETv1 composed images; the guest nine-image review is reused unchanged. Overlapping heroes, art/HUD limits and actual destination graphics-index differences remain explicit. Collision layout/low16/shape/flip equivalence is independent of general rendering correctness."
+            ],
+            "bypasses": [
+              "Original CP2 initialization and one position/previous-position-only approach.",
+              "Primary inverse hostile-contact protection for unrelated enemies."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "7ce59fc3063e3fe94a627eca1a10eaed52902aad3f55a20b22f7e2e8cb617d1c",
+              "compiled_manifest_sha256": "08cd00b112a8d5b74f407c9188a0ba261dc56f188ca35d27a0c28f2b02949f62",
+              "provenance_sha256": "464805d0560873494d07d758382a8b4398af47a7d16984e81ddf9c9eb272a838",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "dummy muted",
+              "contact_protection": "guest off; primary inverse on",
+              "prerequisite": "agreed original4/0CP2 and one position-only approach"
+            },
+            "action": "Ordinary P2 and nearby inverse P1 lead through original warp; inspect native loader, both visible released bodies and subsequent safe passenger movement.",
+            "outcome": "Full frozen F34 native counterpart passed; later extra NET control failures remain preserved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-f461288-F24-F34-both-leader-warp-reviewed.json",
+                "sha256": "96a36c32a13a3410d7c7c130e33f7444885a2856e5630d2803bb542c293730b7"
+              }
+            ],
+            "limits": [
+              "Only the unchanged frozen F24 shared-controller corridor-transfer analogue and F34 native warp transition plus next controlled step. Recycle original record800F2B0C/type28/sub1 transports4/0CP2 to20/1CP0. No literal gravity flip, moving lift, every portal, return route or distant-primary qualification.",
+              "Both leaders use the same exact V89 image/source/manifest/provenance. Completed guest LOCALv4/NETv1 is reused; fresh primary LOCALv1/NETv1 supplies the nearby inverse. The original X4/X5 fields and frozen hashes are unchanged.",
+              "Original CP2 initialization and one position/previous-position-only approach bypass earlier reachability. Primary inverse has negotiated hostile-contact protection ON for unrelated enemies; guest half has it OFF. No portal admission, loader, success flag, destination, HP, terrain or resulting release is written by the observer.",
+              "Original primary admission records canonical integer X via halfword load PLAYER+0A atEC7D4/store portal+84 atEC7E0. The raw observer reads a32-bit zero-extended region; source-qualified review uses the actual16-bit value. Actual sceneowner0 at first admission is retained, not synthesized to1; later scene handling owns the passenger.",
+              "Native initial guest103 has partial horizontal support. Ordinary guestLeft earns full22 original feet on both actors at the reviewed safe endpoint, with both visible, native idle, HP32 and scene-free. Arrival screenshots establish visibility; raw bodies/terrain establish floor support.",
+              "NET raw parent remains failed after this completed endpoint: an extra P1Right test later settles96.5 with partial support. NETv2 changes direction but later walks into wallgrab18 at32. Both raw failures remain unchanged; no full NET-parent/two-final-control stress success is claimed. The frozen F24 inverse needs transfer/release and safe visible passenger return; those precede the extra tail.",
+              "Read-only standard core/mod log verification finds142 equal resolved samples through simulation4640 under watermark4669 on NETv1. This spans the native session; no exact post-safe-endpoint CRC anchor is manufactured. Profile20 stays fixed, cards match and all owned processes exit0; fixture-tainted captures/replays remain strictly refused.",
+              "Root reviewed all7 new LOCAL/NETv1 composed images; the guest nine-image review is reused unchanged. Overlapping heroes, art/HUD limits and actual destination graphics-index differences remain explicit. Collision layout/low16/shape/flip equivalence is independent of general rendering correctness."
+            ],
+            "bypasses": [
+              "Original CP2 initialization and one position/previous-position-only approach.",
+              "Primary inverse hostile-contact protection for unrelated enemies."
+            ]
+          }
+        ],
+        "limitations": "Passed full frozen contract on exact V89 using completed guest transfer plus nearby primary inverse in LOCAL/both NET peers. Actual original loader, visible scene-free living return and passenger next movement/full support precede preserved NET extra-control failures. CP2/one position setup, inverse contact protection and tainted recordings disclosed. No literal gravityflip, distant-primary, return route, general art or full failed NET-parent claim."
       }
     },
     {

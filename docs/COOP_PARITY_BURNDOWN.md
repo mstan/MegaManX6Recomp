@@ -12,12 +12,12 @@ Owner scope correction, October 25: this task consists exclusively of the 234
 frozen X4/X5 comparisons and validation of their native X6 counterparts.
 The separate native-content audit is outside the requested scope and is not
 a completion gate. Existing native inventory, ledgers and evidence are retained
-as historical reference. The owner currently permits one worker alongside the primary agent on the 234
-comparisons. Native game sessions and builds remain serial.
+as historical reference. The owner currently requires solo work on the 234 comparisons. Native game
+sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 90 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F91, F92, F94, F95, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F128, F132, F133, F137, F143, F144, F157, F163, F164, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 140 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 104 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F3, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F21, F22, F23, F24, F25, F26, F31, F32, F33, F34, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F90, F91, F92, F94, F95, F96, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F125, F128, F129, F132, F133, F134, F137, F143, F144, F157, F163, F164, F165, F170, F173, F177, F178, F184, F191, F197, F198, F199, F204, F205, F207, F208), 3 failed, 127 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F24/F34 are closed: 104 passed / 3 failed / 127 unverified (44.4%), two more since102.** The [same-candidate native warp review](evidence/mmx6-scene/manifest-bound-f461288-F24-F34-both-leader-warp-reviewed.json) combines the completed guest-led transfer with a new nearby P1-led inverse on exact V89. Both leaders activate the original4/0 to20/1 loader; both heroes return visibly and the passenger then earns actual movement/full floor support in LOCAL and both NET peers. The new NET parent stays failed after the completed named outcome because additional P1 control stress reaches partial support or wallgrab. Those raw tails remain unchanged; source/profile/cards/owned-exit checks and142 equal resolved CRC samples are retained, without inventing an exact after-endpoint CRC anchor. Seven new images were reviewed. CP2/position approach and inverse contact protection are disclosed; no literal gravity flip, moving lift, distant-primary, return-route or general artwork credit. Root is working solo.
 
 **F49 remains unverified; counts stay 90 passed / 4 failed / 140 unverified.** Two [exact-V88 local setups](evidence/mmx6-solid/manifest-bound-8bd7061-F49-lower-lane-setups-deferred.json) earn genuine moving-support carry. The first stops at an inherited short charge deadline; the corrected second reaches full native charge but the support reverses before the proposed lower firing lane. Neither releases a charged shot or establishes collision/expiry. Both owned processes exit0, native cards remain unchanged, and strict fixture recording/replay refusals are retained. This geometry is parked; no NET run or comparison credit.
 
