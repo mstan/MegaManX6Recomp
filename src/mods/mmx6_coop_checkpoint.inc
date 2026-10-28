@@ -29,6 +29,7 @@ enum { CHECKPOINT_LAB_INVESTIGATOR_NONCE=0x4C434132u }; /* Immutable Amazon CP2 
 enum { CHECKPOINT_LAB_BEFORE_DOORS_NONCE=0x4C434431u }; /* Intro CP1 plus declared position bypass. */
 enum { CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE=0x4C454631u }; /* Intro CP1 nearby native explosion setup. */
 enum { CHECKPOINT_LAB_RECYCLE_NONCE=0x4C435232u }; /* Original Recycle section1 CP2, no pose bypass. */
+enum { CHECKPOINT_LAB_ALTERNATE_NONCE=0x4C414231u }; /* Original alternate20/1 CP1; encounter prerequisites stay native. */
 enum { CHECKPOINT_LAB_TURTLOID_NONCE=0x4C545231u }; /* Original Turtloid6/0 CP1; native rain remains unmodified. */
 enum { CHECKPOINT_LAB_PORTAL_NONCE=0x4C525032u }; /* Original Recycle section0 CP2 plus declared approach. */
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint32_t placed_world; } Mmx6CheckpointPending;
@@ -48,7 +49,7 @@ static void checkpoint_earned_weapons_diagnostics(void) {
 static unsigned checkpoint_lab_index(void) {
     return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
-        checkpoint_lab_option==6?27:checkpoint_lab_option==7?23:checkpoint_lab_option==8?32:115;
+        checkpoint_lab_option==6?27:checkpoint_lab_option==7?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -58,7 +59,8 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==5?CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE:
         checkpoint_lab_option==6?CHECKPOINT_LAB_RECYCLE_NONCE:
         checkpoint_lab_option==7?CHECKPOINT_LAB_PORTAL_NONCE:
-        checkpoint_lab_option==8?CHECKPOINT_LAB_TURTLOID_NONCE:0;
+        checkpoint_lab_option==8?CHECKPOINT_LAB_TURTLOID_NONCE:
+        checkpoint_lab_option==9?CHECKPOINT_LAB_ALTERNATE_NONCE:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -180,6 +182,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"recycle_cp2"))checkpoint_lab_option=6;
         else if(!strcmp(option,"recycle_portal_cp2"))checkpoint_lab_option=7;
         else if(!strcmp(option,"turtloid_rain_cp1"))checkpoint_lab_option=8;
+        else if(!strcmp(option,"alternate_boss_cp1"))checkpoint_lab_option=9;
         else if(strcmp(option,"off"))failed=1;
     }
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_earned_weapons",option,sizeof option)) {

@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 23,
+  "revision": 24,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v40",
+    "title_compatibility": "mmx6-x-zero-delay-v41",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -431,5 +431,23 @@
     "scope": "Original Zero native ice33/flame34 use private uploaded atlas and working palette for deferred draw.",
     "source": "Original DAT85 assembly words0x34/0x38; observed private native packets have no compressed table.",
     "qualification": "Fresh same-image LOCAL/NET native effects, original pixel/palette identity, lifetime/contact, profile/CRC/cards/cleanup required. No previous candidate pass is transferred."
+  },
+  "agreed_alternate_checkpoint_v1": {
+    "scope": "F82/F84/F85 only: original alternate20/1 checkpoint1 approach; encounter identity, availability, authored door/intro, original art/AI and accepted attacks remain native unqualified outcomes. No content audit or reversed-roster claim.",
+    "catalog_option": "alternate_boss_cp1",
+    "lab_option": 9,
+    "native_checkpoint_index": 106,
+    "native_tuple": [
+      20,
+      1,
+      1
+    ],
+    "record": "0x80072FF0",
+    "record_fnv32": "0x6996FA0A",
+    "nonce": "0x4C414231",
+    "prerequisite": "After mandatory native default intro baseline, one pre-agreed P2L3+R3 enters original loader8/9. No custom positions, door/script availability, boss HP/state, attack results or completion flags.",
+    "source_note": "CP record3024/224, authored floor416 at3024 and next door3152/sub38. Original member28 SHA7f49ac29077a76c6dc0aaafc474ad4d4eece65402282549de2f1ff2b5d748aef. Bounded original DAT118 source proof is retained externally.",
+    "default": "off; development catalog only, normal/release catalog unchanged",
+    "authority": "Existing exact-image/profile24/title41 agreement, source guards, once-only native initializer and explicit capture taint; offline mailbox prohibited online."
   }
 }
