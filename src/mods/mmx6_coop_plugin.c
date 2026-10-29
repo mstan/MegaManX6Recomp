@@ -7,6 +7,7 @@
 #include "mod_plugins.h"
 #include "mod_netplay.h"
 #include "mmx6_coop_host_lab.h"
+#include "mmx6_coop_host_lab_contract.h"
 #include "mmx6_diagnostics.h"
 #if defined(__has_include)
 #if __has_include("session_input_taint.h")
@@ -2853,7 +2854,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v45",
+        .compatibility_id = MMX6_HOST_LAB_TITLE_COMPATIBILITY,
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,
