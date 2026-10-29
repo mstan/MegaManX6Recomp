@@ -599,7 +599,13 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster,int arrival) {
         life.status[1]=MMX6_COOP_JOINING;
         join_phase=0;
         arrival_pair=1;
-    } else begin_join(cpu,x+(24u<<16),y);
+    } else {
+        /* This fresh nonpaired birth uses begin_join too, before any Select
+         * departure can have saved returning_body. Retain the actual native
+         * init/parts/idle result for an immediately following shared scene. */
+        memcpy(returning_body,p2.body,sizeof returning_body);
+        begin_join(cpu,x+(24u<<16),y);
+    }
     STATE_POP(restore_origin);
     fprintf(stdout,"mmx6 co-op: Zero enrolled at (%u,%u)\n",x>>16,y>>16);
     fflush(stdout);
