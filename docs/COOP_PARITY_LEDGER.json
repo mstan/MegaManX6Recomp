@@ -4247,7 +4247,7 @@
       "frozen_row_sha256": "1b0a37d72b71f881d338f4bab83b33db0a7abe1aa8556ea6404d03b616de7865",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Investigator completion and stage-selector portrait",
         "bounded_check": "Defeat an Investigator, perform native save/selector return, re-enter and cold-load; compare clear bits, portrait and persisted progress.",
         "baseline_anchors": [
@@ -4261,11 +4261,87 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "local_cameras": "split",
+              "lab_checkpoint": "amazon_cp2",
+              "audio": "muted dummy",
+              "native_report_choice": 0,
+              "native_Save": true
+            },
+            "action": "Actual guest Investigator final hit; P1 original rewards/Save/selector and fresh native unit0 entry.",
+            "outcome": "LOCAL F69 component passed: native writer/card payload/mask1 and fresh default roster/progress. Initial earned grey Yammark portrait observed. NET Save and another-stage return/cold Load remain unverified.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-progression/manifest-bound-dcc1002-earned-Investigator-Save-LOCAL-reviewed.json",
+                "sha256": "7a71c348766fe08ee650133792ed15fce63aef72921289384a795c2f5bc1bdc7"
+              }
+            ],
+            "bypasses": [
+              "Declared agreed AmazonCP2 bypasses the preceding route; actual original door/dialogue/fullHP boss, guest attack/kill, rewards/native Save/story/selector and fresh entry are retained. No execution-state LOAD or tested outcome assignments."
+            ],
+            "limits": [
+              "The raw parent remains failed; none of its skipped checks are relabeled passed.",
+              "Body byte1 was an observer error; the exact executed coop_debug.Player.parse uses byte2. Retained bytes independently establish the requested default roster.",
+              "RAM/input/composed frames are separate asynchronous samples: the early slot capture still displays checking; later original writer return displays Save completed.",
+              "The named native Save contract was installed before launch. Actual old unchanged-target expectation is false; the entire exact target write and all non-target cards are checked instead.",
+              "Fresh gameplay shows both native bodies with retained progress. HUD/art completeness and general private renderer quality are separate comparisons.",
+              "No cold Load, stage-leaving revisit, opposite roster, other Investigator, replay or whole-row NET claim."
+            ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "cold_process": "original native card Load",
+              "lab_checkpoint": "off"
+            },
+            "action": "Use actual earned native Investigator Save; re-enter, then fresh-process original native card Load, Map/portrait/unit confirmation and fresh roster/guest controls.",
+            "outcome": "LOCAL R20 passed: exact earned mask1/card import and all native campaign CURRENT fields; visible grey Yammark plus21original cleared tiles, fresh X/Zero entry and guest-owned menu/attack. All5original parent gates; ordinary capture finalized and source/private cards unchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-progression/manifest-bound-dcc1002-earned-Investigator-cold-Load-LOCAL-reviewed.json",
+                "sha256": "b5fbc9458c63883b80b3a65911b260541f682ae3d46baede624641742fc10892"
+              }
+            ],
+            "bypasses": [
+              "Earned Save prerequisite starts from declared AmazonCP2 prior-route bypass; the actual fullHP original Investigator/guest kill/rewards/Save is retained. This fresh cold Load process uses no fixture or execution-state LOAD. Exact earned private card is copied before launch, preserving the source."
+            ],
+            "limits": [
+              "Only actual Commander Yammark clear/earned mask1 and the exact V82 candidate; no other boss/roster or broad native-content audit.",
+              "Prior local Save raw observer failure is preserved and independently reviewed; this fresh cold Load raw parent passes all five original late gates.",
+              "The exact original SDK card copier is reused with explicit source/card/report pins and reviewed validation; copy happens before native launch/recording and the source card stays read-only.",
+              "No fixture/outcome/game-memory assignment or execution-state LOAD in this fresh process. Original native title card Load, story/Map/unit confirmation, fresh bodies and guest-owned menu/attack are observed.",
+              "Initial Quit-page images precede later cursor inputs. RAM, canonical diagnostic publications and composed images are separate asynchronous samples.",
+              "Grey Yammark artwork is visible at actual post-Load Map and all21 copied tile IDs match the original cleared variant. No general HUD/art/palette/private-render completeness claim.",
+              "No different-stage leave/return or NET completion follows from this LOCAL component."
+            ]
+          }
+        ],
+        "limitations": "Exact V82 LOCAL actual Yammark clear/native Save/fresh entry and fresh-process native card Load/grey portrait/retained campaign/default roster/guest controls passed. NET earned Save and cold Load still required. No different-stage return or other boss/roster claim."
       }
     },
     {
@@ -6776,7 +6852,7 @@
       "frozen_row_sha256": "e6f809dff637844600dcdb2bc4d90b8a20a966dbd371563f0eb384f1d474665c",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Defeated Investigator portraits after another stage",
         "bounded_check": "Earn a real clear, return through native save, enter and leave another stage; retain portrait and campaign-clear consistency.",
         "baseline_anchors": [
@@ -6793,8 +6869,47 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "local_cameras": "split",
+              "lab_checkpoint": "amazon_cp2",
+              "audio": "muted dummy",
+              "native_report_choice": 0,
+              "native_Save": true
+            },
+            "action": "Actual guest Investigator final hit; P1 original rewards/Save/selector and fresh native unit0 entry.",
+            "outcome": "LOCAL F69 component passed: native writer/card payload/mask1 and fresh default roster/progress. Initial earned grey Yammark portrait observed. NET Save and another-stage return/cold Load remain unverified.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-progression/manifest-bound-dcc1002-earned-Investigator-Save-LOCAL-reviewed.json",
+                "sha256": "7a71c348766fe08ee650133792ed15fce63aef72921289384a795c2f5bc1bdc7"
+              }
+            ],
+            "bypasses": [
+              "Declared agreed AmazonCP2 bypasses the preceding route; actual original door/dialogue/fullHP boss, guest attack/kill, rewards/native Save/story/selector and fresh entry are retained. No execution-state LOAD or tested outcome assignments."
+            ],
+            "limits": [
+              "The raw parent remains failed; none of its skipped checks are relabeled passed.",
+              "Body byte1 was an observer error; the exact executed coop_debug.Player.parse uses byte2. Retained bytes independently establish the requested default roster.",
+              "RAM/input/composed frames are separate asynchronous samples: the early slot capture still displays checking; later original writer return displays Save completed.",
+              "The named native Save contract was installed before launch. Actual old unchanged-target expectation is false; the entire exact target write and all non-target cards are checked instead.",
+              "Fresh gameplay shows both native bodies with retained progress. HUD/art completeness and general private renderer quality are separate comparisons.",
+              "No cold Load, stage-leaving revisit, opposite roster, other Investigator, replay or whole-row NET claim."
+            ]
+          }
+        ],
+        "limitations": "Exact V82 LOCAL actual earned native Save/card/selector/fresh default roster and initial grey portrait reviewed; raw observer byte1 failure preserved and independently reduced using executed Player.parse byte2. NET Save is pending. R20 cold Load and F17 another-stage portrait return remain unverified."
       }
     },
     {
@@ -12101,7 +12216,7 @@
       "frozen_row_sha256": "2dbec107bc3bc7324cfb089674790787f71358be14c43bdb029178b0be01ff58",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Guest final hit and native frontend owner",
         "bounded_check": "Let guest defeat an Investigator and continue through original rewards/save/selector; primary retains frontend authority without losing native progression.",
         "baseline_anchors": [
@@ -12115,11 +12230,50 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "local_cameras": "split",
+              "lab_checkpoint": "amazon_cp2",
+              "audio": "muted dummy",
+              "native_report_choice": 0,
+              "native_Save": true
+            },
+            "action": "Actual guest Investigator final hit; P1 original rewards/Save/selector and fresh native unit0 entry.",
+            "outcome": "LOCAL F69 component passed: native writer/card payload/mask1 and fresh default roster/progress. Initial earned grey Yammark portrait observed. NET Save and another-stage return/cold Load remain unverified.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-progression/manifest-bound-dcc1002-earned-Investigator-Save-LOCAL-reviewed.json",
+                "sha256": "7a71c348766fe08ee650133792ed15fce63aef72921289384a795c2f5bc1bdc7"
+              }
+            ],
+            "bypasses": [
+              "Declared agreed AmazonCP2 bypasses the preceding route; actual original door/dialogue/fullHP boss, guest attack/kill, rewards/native Save/story/selector and fresh entry are retained. No execution-state LOAD or tested outcome assignments."
+            ],
+            "limits": [
+              "The raw parent remains failed; none of its skipped checks are relabeled passed.",
+              "Body byte1 was an observer error; the exact executed coop_debug.Player.parse uses byte2. Retained bytes independently establish the requested default roster.",
+              "RAM/input/composed frames are separate asynchronous samples: the early slot capture still displays checking; later original writer return displays Save completed.",
+              "The named native Save contract was installed before launch. Actual old unchanged-target expectation is false; the entire exact target write and all non-target cards are checked instead.",
+              "Fresh gameplay shows both native bodies with retained progress. HUD/art completeness and general private renderer quality are separate comparisons.",
+              "No cold Load, stage-leaving revisit, opposite roster, other Investigator, replay or whole-row NET claim."
+            ]
+          }
+        ],
+        "limitations": "Exact V82 LOCAL actual earned native Save/card/selector/fresh default roster and initial grey portrait reviewed; raw observer byte1 failure preserved and independently reduced using executed Player.parse byte2. NET Save is pending. R20 cold Load and F17 another-stage portrait return remain unverified."
       }
     },
     {

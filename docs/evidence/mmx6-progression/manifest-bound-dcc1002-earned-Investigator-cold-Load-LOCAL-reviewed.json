@@ -1,0 +1,276 @@
+{
+  "kind": "R20_LOCAL_earned_native_Save_fresh_entry_and_actual_cold_card_Load_portrait_review",
+  "mode": "local",
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-R19-F13-v82-staging-helper-v1\\nearby-explosion-v82-final-binding-root-v1.json",
+    "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+    "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+    "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+    "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-R19-F13-v82-staging-helper-v1\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v31",
+    "host_revision": 14
+  },
+  "raw_parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\qualification.json",
+    "sha256": "93c20b74ad11169f419f5c5b58669d9f295ce6c939f6aeaebc725c0c93c0e4ec",
+    "status": "actual_native_earned_QA_card_cold_Load_selection_fresh_roster_and_guest_menu_local_observed",
+    "checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_observer_bounded_checks_complete": true,
+      "ordinary_default_recording_and_seeded_startup_admitted": true,
+      "reviewed_QA_source_and_seeded_existing_card_preserved": true,
+      "owned_cleanup_private_cards": true
+    }
+  },
+  "earned_Save_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-LOCAL-reviewed-root-v1.json",
+    "sha256": "7a71c348766fe08ee650133792ed15fce63aef72921289384a795c2f5bc1bdc7"
+  },
+  "checks": {
+    "actual_earned_original_Save_and_fresh_entry_prerequisite": true,
+    "actual_new_process_with_prelaunch_whole_earned_card_copy": true,
+    "empty_CURRENT_then_original_native_card_UI_Load": true,
+    "all_original_campaign_fields_and_CURRENT_export_verified": true,
+    "original_map_retains_clear1_and_actual_grey_Yammark_art": true,
+    "actual_primary_unit_confirmation_and_fresh_X_Zero_bodies": true,
+    "guest_menu_native_resources_input_resume_and_attack": true,
+    "complete_actual_card_inventory_unchanged_after_exit": true,
+    "ordinary_default_input_recording_finalized_and_startup_bundle_verified": true,
+    "owned_input_cleanup_and_graceful_exit_zero": true
+  },
+  "native_Load_checks": {
+    "original_source_and_empty_CURRENT_title": true,
+    "earned_8192Bfile_and_slot_exact": true,
+    "actual_native_slot_confirmation_inputs": true,
+    "all_source_campaign_fields_in_native_CURRENT": true,
+    "every_peer_same_CURRENT": true,
+    "whole_startup_cards_unchanged_in_process": true
+  },
+  "source_campaign_reductions": [
+    {
+      "checks": {
+        "empty_CURRENT_before_native_Load": true,
+        "native_CURRENT_export_eligible": true,
+        "all_source_campaign_export_fields_match_selected_slot": true,
+        "native_reserved_CURRENT_bytes_unmodified": true
+      },
+      "campaign_differences": [],
+      "reserved_differences": [],
+      "limits": [
+        "Native header0 becomes CURRENT1; source byte3 comes from800CC869, not saved slot3.",
+        "CURRENT has every source-imported campaign field, including the absolute8006D600 array, but does not prove every intermediate PLAY store was observed atomically.",
+        "No roster/selector/body-resource/fresh mission/guest-menu check is admitted here."
+      ]
+    }
+  ],
+  "portrait_checks": {
+    "actual_original_clear_appearance": true,
+    "actual_completed_tile_copy": true,
+    "completed_variant_distinguished_from_uncleared": true,
+    "source_and_map_capture_brackets": true
+  },
+  "root_reviewed_composed_captures": [
+    {
+      "peer": 0,
+      "label": "native-first-quit-page",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-first-quit-page.png",
+      "sha256": "91aba325a2bfb4eff47a5773878355f47bdaf84ba5b14da6898699f22851f6a4",
+      "before": {
+        "id": 1551,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 1552,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-first-quit-page.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 1554,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "native-second-quit-page",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-second-quit-page.png",
+      "sha256": "8109f0740538110cacef04e6cd5a9ab5c5691d63771d4ca1f0b12ced1e3a2f67",
+      "before": {
+        "id": 1571,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1572,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-second-quit-page.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 1574,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "native-title-after-final-quit",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-title-after-final-quit.png",
+      "sha256": "8e69cbdfd1775090fa629d17fc68be2fefab1aa7ca7df05c58df11e279af9927",
+      "before": {
+        "id": 1630,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1631,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-title-after-final-quit.png",
+        "staged": true,
+        "seq": 2
+      },
+      "completion": {
+        "id": 1633,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "native-reentered-gameplay",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-reentered-gameplay.png",
+      "sha256": "6870b25c540d1dd523a3b6ec57358fd47ade83f94f80a4ff45467a0c5c7dfe4d",
+      "before": {
+        "id": 5668,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5669,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-reentered-gameplay.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 5670,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      }
+    },
+    {
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\actual-cold-Load-cleared-portrait\\peer-0-completed-Yammark-map.png",
+      "sha256": "f9b8905a3624936e2a5f0b4489944abc5835e97c1552560b8a3e45d4b1b914b3",
+      "before": {
+        "id": 5371,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5372,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\actual-cold-Load-cleared-portrait\\peer-0-completed-Yammark-map.png",
+        "staged": true,
+        "seq": 3
+      },
+      "completion": {
+        "id": 5373,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "label": "cold-Load-retained-grey-Yammark",
+      "peer": 0
+    },
+    {
+      "peer": 0,
+      "label": "paused-present",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\personal-menu\\p2-peer-0-paused-present.png",
+      "sha256": "15fff4abb11ba2a2720599d32d2b1ec488a3713fe243630209f42814f21aa830",
+      "before": {
+        "id": 5958,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5959,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\personal-menu\\p2-peer-0-paused-present.png",
+        "staged": true,
+        "seq": 5
+      },
+      "completion": {
+        "id": 5960,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "resumed-present",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\personal-menu\\p2-peer-0-resumed-present.png",
+      "sha256": "660be8ac08bdbc21936e6c2f9f33e38a5c14f0914d94158c17b269307dc510e5",
+      "before": {
+        "id": 6044,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 6045,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-cold-Load-local-v82-root-v1\\ammo-hud\\native-final-quit-native-card\\personal-menu\\p2-peer-0-resumed-present.png",
+        "staged": true,
+        "seq": 6
+      },
+      "completion": {
+        "id": 6047,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      }
+    }
+  ],
+  "actual_source_card_sha256": "db32c968a97936e10694f9125a7709899c1fb34c2d49a414a042fd726a623a15",
+  "outcome": {
+    "R20": "LOCAL passed; NET same-candidate earned Save/cold Load missing",
+    "F17": "another-stage return still unverified"
+  },
+  "limits": [
+    "Only actual Commander Yammark clear/earned mask1 and the exact V82 candidate; no other boss/roster or broad native-content audit.",
+    "Prior local Save raw observer failure is preserved and independently reviewed; this fresh cold Load raw parent passes all five original late gates.",
+    "The exact original SDK card copier is reused with explicit source/card/report pins and reviewed validation; copy happens before native launch/recording and the source card stays read-only.",
+    "No fixture/outcome/game-memory assignment or execution-state LOAD in this fresh process. Original native title card Load, story/Map/unit confirmation, fresh bodies and guest-owned menu/attack are observed.",
+    "Initial Quit-page images precede later cursor inputs. RAM, canonical diagnostic publications and composed images are separate asynchronous samples.",
+    "Grey Yammark artwork is visible at actual post-Load Map and all21 copied tile IDs match the original cleared variant. No general HUD/art/palette/private-render completeness claim.",
+    "No different-stage leave/return or NET completion follows from this LOCAL component."
+  ]
+}
