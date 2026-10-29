@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 30,
+  "revision": 31,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v47",
+    "title_compatibility": "mmx6-x-zero-delay-v48",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -600,5 +600,38 @@
     "incompatible_prerequisites": "Starting HP and earned-weapons choices must remain off; original healthy32HP/copies are retained.",
     "corridor": "Full original air549..821 above floor144 except authored64px recess704..767 with floor176. Walking/drop/jump traversal and combat are unverified outcomes; the setup never writes scanner, camera, velocities, actor, HP, lifecycle or result.",
     "snapshot": "Existing pending phase and placed_world, schema14; no new serialized state."
+  },
+  "title_changes_v48_refight_portal_prerequisite": {
+    "issue": "beads-eio.1.114",
+    "comparisons": [
+      "F122",
+      "F124",
+      "F7"
+    ],
+    "option": "refight_portal_cp1",
+    "default": "off; development catalog only",
+    "lab_option": 15,
+    "nonce": "4C524650",
+    "original": {
+      "stage": 12,
+      "section": 0,
+      "checkpoint": 1,
+      "index": 60,
+      "record": "80072978"
+    },
+    "placement": {
+      "primary_x": 1852,
+      "primary_y": 1241,
+      "counterpart_x": 1852,
+      "counterpart_y": 1241,
+      "native_floor": 1264,
+      "settled_primary_y": 1243,
+      "settled_counterpart_y": 1242
+    },
+    "contract": "Original CP1 initialization and both original full-foot healthy idle arrivals first. Exactly once change current/previous body positions only. Require exact original code/resources/layout/full standing feet/48px air corridor and no nearby hostile/contact actors; preserve exact unused portal2 and its original draw-only child. At least two original updates and actual grounded native settling are required. No velocity, camera, scanner, actor, HP, lifecycle, checkpoint or outcome writes by placement.",
+    "incompatible_prerequisites": "Starting HP and earned-weapons remain off; retain original healthy32HP and the source-qualified standing VY[-0x80000,0] without changing velocity.",
+    "default_correctness_fix": "Default co-op guest admission of original member14 refight portal types2..9: original pure leaf EC430 keeps primary precedence; if guest alone qualifies, execute the original EC860 action once in guest context. Only actual native snap plus queued command20 and portal subphase1 establish owner; body action20 is earned by the next original update. Subsequent scene/progress/loader/boss controls remain native. No optional fix toggle.",
+    "snapshot": "Existing pending phase/placed_world and scene owner context only; schema14 unchanged; previous accepted scenery publication fix retained.",
+    "unqualified": "Source/C fixtures do not qualify native portal transport, destination support, boss intro/release or camera follow; same exact-image LOCAL/NET observations and root review remain required."
   }
 }

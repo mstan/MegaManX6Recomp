@@ -26,8 +26,8 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protec
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
     options = [o for o in catalog.get('option', []) if o.get('id') == 'lab_checkpoint']
     if (len(options) != 1 or options[0].get('default') != 'off' or options[0].get('feature') != 'prototype'
-            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1'}
-            or option not in (intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1')):
+            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1'}
+            or option not in (intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1')):
         raise ValueError('Staged image lacks the private typed LAB checkpoint catalog')
     protection = [o for o in catalog.get('option', []) if o.get('id') == 'lab_contact_protection']
     if (len(protection) != 1 or protection[0].get('default') != 'off'

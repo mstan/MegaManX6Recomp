@@ -57,6 +57,10 @@ value = "secretlab2b_enemy_cp0"
 label = "Gate lab enemy approach (original CP0)"
 
 [[option.choice]]
+value = "refight_portal_cp1"
+label = "Fortress original refight portal approach"
+
+[[option.choice]]
 value = "northpole_ice_cp3"
 label = "North Pole original ice shaft (position prerequisite)"
 
