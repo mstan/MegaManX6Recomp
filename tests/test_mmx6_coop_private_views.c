@@ -18,6 +18,8 @@ static int32_t arrival_target;
 static uint8_t arrival_body[0x158];
 static unsigned weather_probe,weather_world_updates,weather_draws;
 static uint32_t weather_x,weather_y;
+static unsigned scenery_probe,scenery_draws[2];
+static uint32_t scenery_y;
 static unsigned quake_probe,quake_camera_calls,quake_draws[2];
 static uint8_t quake_before[0x54],quake_after[0x54];
 static const uint8_t quake_fields[]={0x36,0x37,0x3A,0x3B,0x3C,0x3D,0x3E,0x3F,0x45,0x46};
@@ -74,6 +76,10 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
         return 1;
     }
     CHECK(address==0x80025FB0u && private_draw);
+    if(scenery_probe) {
+        CHECK(psx_mod_read_word(VIEW_CAMERA+0x54+12)==scenery_y);
+        ++scenery_draws[private_seat];
+    }
     if(quake_probe) {
         CHECK(psx_mod_read_word(VIEW_CAMERA+12)==le32(quake_after+12));
         CHECK(psx_mod_read_byte(VIEW_CAMERA+0x34)==quake_after[0x34]);
@@ -110,6 +116,7 @@ static void prepare_view(CPUState *cpu,int online,int split) {
     view_native_calls=view_gpu_words=view_callback_calls=view_refuse=view_abort=0;
     arrival_probe=arrival_camera_calls=0;
     weather_probe=weather_world_updates=weather_draws=0;
+    scenery_probe=scenery_draws[0]=scenery_draws[1]=0;
     quake_probe=quake_camera_calls=quake_draws[0]=quake_draws[1]=0;
     view_quake_valid=0;
     inside=player_call=stage_call=zero_world=world_render=hud_call=ride_call=pickup_call=solid_call=0;
@@ -445,6 +452,48 @@ static void native_shared_weather_frames(int online,int split) {
         independent_world_begin();CHECK(le32(view_cameras[1]+0x54+8)==99u*65536);
     }
 }
+static void native_shared_scenery_y(int online,int split) {
+    for(unsigned area=0;area<2;++area) {
+        CPUState cpu;prepare_view(&cpu,online,split);mmx6_view_sdk.local_port=1;
+        psx_mod_write_byte(PLAY+12,area?20:4);psx_mod_write_byte(PLAY+13,area?1:0);
+        psx_mod_write_byte(VIEW_CAMERA+0x54+4,9);
+        psx_mod_write_word(VIEW_CAMERA+12,224u<<16);
+        put32(view_cameras[1]+12,1200u<<16); /* independent foreground history */
+        put32(view_cameras[1]+0x54+8,99u<<16);
+        put32(view_cameras[1]+0x54+12,900u<<16); /* stale shared animation */
+        put32(view_cameras[1]+2*0x54+12,700u<<16);
+        view_frame=10;frame_count=11;
+        const unsigned ys[]={224,210,193}; /* retained original offset32/46/63 */
+        for(unsigned phase=0;phase<3;++phase) {
+            scenery_y=ys[phase]<<16;
+            unsigned previous=phase?ys[phase-1]:226;
+            psx_mod_write_word(VIEW_CAMERA+0x54+12,scenery_y);
+            psx_mod_write_word(VIEW_CAMERA+0x54+0x18,previous<<16);
+            uint8_t canonical[0xFC];capture(VIEW_CAMERA,canonical,sizeof canonical);
+            independent_world_begin();CHECK(view_pending && view_valid);
+            CHECK(le32(view_cameras[1]+12)==1200u<<16);
+            CHECK(le32(view_cameras[1]+0x54+8)==99u<<16);
+            CHECK(le32(view_cameras[1]+0x54+12)==scenery_y);
+            CHECK(le32(view_cameras[1]+0x54+0x18)==previous<<16);
+            CHECK(le32(view_cameras[1]+2*0x54+12)==700u<<16);
+            PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+            scenery_probe=1;CHECK(independent_present(&cpu,VIEW_DRAW_OT));scenery_probe=0;
+            context_equal(&before);uint8_t actual[0xFC];capture(VIEW_CAMERA,actual,sizeof actual);
+            CHECK(!memcmp(actual,canonical,sizeof actual));
+            CHECK(scenery_draws[1]==phase+1 && scenery_draws[0]==(split?phase+1:0));
+            CHECK(frame_count==11+phase);++frame_count;
+        }
+    }
+    for(unsigned other=0;other<3;++other) {
+        CPUState cpu;prepare_view(&cpu,online,split);view_frame=10;frame_count=11;
+        psx_mod_write_byte(PLAY+12,other==0?6:20);
+        psx_mod_write_byte(PLAY+13,other==1?0:1);
+        psx_mod_write_byte(VIEW_CAMERA+0x54+4,other==2?4:9);
+        put32(view_cameras[1]+0x54+12,900u<<16);
+        psx_mod_write_word(VIEW_CAMERA+0x54+12,193u<<16);
+        independent_world_begin();CHECK(le32(view_cameras[1]+0x54+12)==900u<<16);
+    }
+}
 int main(void) {
     defaults_and_scope();
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
@@ -455,6 +504,7 @@ int main(void) {
     native_nova_views(0,1);native_nova_views(1,0);
     native_menu_camera_history(0,1);native_menu_camera_history(1,0);
     native_shared_weather_frames(0,1);native_shared_weather_frames(1,0);
+    native_shared_scenery_y(0,1);native_shared_scenery_y(1,0);native_shared_scenery_y(1,1);
     native_quake_inputs(0,1);native_quake_inputs(1,0);native_quake_inputs(1,1);
     presentation_restore(0,1,0,0);presentation_restore(0,1,1,0);presentation_restore(0,1,0,1);
     presentation_restore(1,0,0,0);presentation_restore(1,0,1,0);presentation_restore(1,0,0,1);

@@ -181,6 +181,18 @@ static void independent_world_begin(void) {
         }
         uint8_t position[0x14];memcpy(position,view_cameras[1]+layer*0x54+8,sizeof position);
         capture(VIEW_CAMERA+layer*0x54,view_cameras[1]+layer*0x54,0x54);
+        /* Recycle's original 46F10 owns mode9's autonomous Y. Native
+         * 297BC updates only X for the viewing hero, so retaining the old
+         * guest Y freezes this shared controller in that pane. Publish its
+         * current/previous Y once; keep the hero's X and other layer history.
+         * These two authored sections use this producer, not weather atlases
+         * or a general replacement for native camera-derived positions. */
+        unsigned stage=psx_mod_read_byte(PLAY+12),section=psx_mod_read_byte(PLAY+13);
+        if(layer==1 && view_cameras[1][0x54+4]==9 &&
+           ((stage==4 && section==0) || (stage==20 && section==1))) {
+            memcpy(position+4,view_cameras[1]+0x54+12,4);
+            memcpy(position+0x10,view_cameras[1]+0x54+0x18,4);
+        }
         memcpy(view_cameras[1]+layer*0x54+8,position,sizeof position);
     }
     capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
