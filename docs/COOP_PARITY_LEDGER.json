@@ -9901,19 +9901,19 @@
       "x6": {
         "workstream": "netplay",
         "mapping_state": "identified_subsystem",
-        "analogue": "Full mod capability-plan serialization",
+        "analogue": "Preserve all nine current declared typed co-op choices through actual X6 launcher START",
         "bounded_check": "Populate the actual X6 mod/options plan beyond a small sample; require both peers retain every selected capability without truncated START payloads.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:netplay_profile",
           "tools/test_coop_netplay_runtime.py:main"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "passed"
         },
         "evidence": [
@@ -9959,9 +9959,52 @@
               "All15source/profile/ordinaryinput/CRC/cards/ownedexit gates pass;44matchingCRC across6windows,2nativegracefulexit0,2rootviewed composedcaptures. No general graphics/audio/performance/replay or LOCAL qualification."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "5c6609dfbc0079354a1a352294365850be48bac2",
+            "build_identity": {
+              "executable_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+              "compiled_manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "choices": {
+                "cameras": "independent",
+                "doors": "both",
+                "hud_layout": "side_by_side",
+                "lab_checkpoint": "off",
+                "lab_contact_protection": "off",
+                "lab_earned_weapons": "off",
+                "lab_starting_hp_p1": "off",
+                "lab_starting_hp_p2": "off",
+                "local_cameras": "split"
+              },
+              "transport": "ordinary offline two local published host slots",
+              "audio": "dummy muted"
+            },
+            "action": "Coldstart all9declared co-op choices, inspect actualcommitted settings/completeordinaryrecorder, exercise bothindependent controls andnative landing, thenpreserve allprivatecards and cleanexit.",
+            "outcome": "All9actual committedchoices retained, fullsource/image/settings/content/simulation identity bound, bothownedCross/ascent/isolation/landing pass, finalizedordinaryrecording/cards/nativeexit0/rootcapture pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lobby/manifest-bound-5c6609d-F40-nine-options-local-reviewed.json",
+                "sha256": "8a7976e50ff5a0ab8f3047d60aee7296420df0dcc9a842d8f3dc70b84662ec34"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F40, all9currentlydeclared co-op typed choices; no native3330 or arbitrary future/oversized/unsupported-package plan claim.",
+              "Same5c6609d/image622fe252 as actualNETHost/Join/Play result. LOCAL is a genuine ordinary offline cold boot, not a simulated NET START.",
+              "Fourpublic nondefault choices plus all5LABOFF. Actualcommitted ninevalues and completecommitted fingerprint are bound by strict native recorder settings/content/simulation artifacts. Offline profileNone/session_fingerprint empty are original native behavior, not a NET compatibility claim.",
+              "Both actual owned published host slots consumeCross and independently jump/ascent with otherbody stationary, then native landing. Fullcardinventory unchanged, nativegracefulexit0, completeordinaryrecording and one rootviewed composedcapture pass.",
+              "Three composedcaptures across LOCAL/NET are personally rootreviewed; no generalgraphics/audio/performance/ordinaryreplay or F39rematch qualification.",
+              "Current accepted plan has two trusted selected packages/settings+loader. Disabledcatalogrows are not received capabilitycoverage; NETreceipt independently proves ninehostvalues surviveactualSTART againstdifferent guestsaveddefaults."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "NET exact5c/image622fe252 realUIHost/Join/Play all9declaredchoices retainedbothpeers versus4differentguestdefaults; fullordinaryrecorders/identities/source/profile/44CRC/6windows/cards/2nativeexit0/root2captures pass. Current trustedsettings+loader plan only; disabledcatalogrows notwirecoverage. LOCAL remainsrequired/unverified, no aggregatepromotion."
+        "limitations": "Passed exact5c/image622fe252 bothmodes: all9currentdeclared typedchoices in actualcommitted ordinarystartup artifacts. NETrealUIHost/Join/Play retains host4nondefault values onbothpeers despite4different unchangedguestpreferences; equalcompletecommitted/session/execution IDs,profile29 beforeguest,15gates/44CRC/6windows/2ordinaryrecorders/cards/2native0. LOCALordinaryoffline committed9values+fingerprint, profileNone/originalemptysession, bothownedCross/ascent/isolation/landing,6gates/ordinaryrecorder/fullcardinventory/native0. Rootviewed3composedcaptures. Twoactualtrustedselectedpackages; disabled209catalogrows notwirecoverage; no malformed/oversized/futureplan or F39rematch claim."
       }
     },
     {

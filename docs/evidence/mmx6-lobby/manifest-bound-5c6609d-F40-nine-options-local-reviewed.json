@@ -1,0 +1,736 @@
+{
+  "kind": "F40_ordinary_LOCAL_all_nine_actual_choices_root_review",
+  "status": "passed",
+  "mode": "local",
+  "comparisons": [
+    "F40"
+  ],
+  "frozen_row_sha256": "5b38303ce345a7bad19c2d2add0bdd73c7f3e785957eb685c9e387b4f39f7790",
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fallen-forward-v101-final-binding-root-v4.json",
+    "binding_sha256": "437835711ba1b9b8dc0dbf4fdc08f7922b03c719d88cb5ab67a43a83a8e190c1",
+    "image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+    "manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+    "provenance_sha256": "41fda7cfdfdbfc716a36c5023441ed12ec0f5b5db9489a7333f7c9ccd5831dd8",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v101-fallen-forward-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "5c6609dfbc0079354a1a352294365850be48bac2",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v46",
+    "host_revision": 29
+  },
+  "parent_checks": {
+    "exact_image_manifest_and_declared_game_sources": true,
+    "original_default_loader_and_pristine_settings": true,
+    "actual_all_nine_committed_LOCAL_choices": true,
+    "actual_both_owned_controls_and_landing": true,
+    "ordinary_finalized_recording_and_cold_artifacts": true,
+    "original_owned_exit_and_all_private_cards_unchanged": true
+  },
+  "native_checks": {
+    "actual_all_nine_LOCAL_choices_retained": true,
+    "original_offline_transport": true,
+    "actual_both_owned_jump_ascent_and_other_seat_isolation": true,
+    "finite_native_landing": true
+  },
+  "actual_startup": {
+    "candidate": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate",
+    "recording": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\saves\\input-recordings\\session-1793300205930213-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+      "manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "ae29f4f448fe690aa29d8524e99dbd5485c81961726859d62596606246a1de95",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "values": {
+      "cameras": "independent",
+      "doors": "both",
+      "hud_layout": "side_by_side",
+      "lab_checkpoint": "off",
+      "lab_contact_protection": "off",
+      "lab_earned_weapons": "off",
+      "lab_starting_hp_p1": "off",
+      "lab_starting_hp_p2": "off",
+      "local_cameras": "split"
+    },
+    "committed_fingerprint": "1231fe27fb93df89867b74d79e0dea8b6f40f2156e2b5bf433d2098b3bde7bb8",
+    "session_fingerprint": "",
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\saves\\input-recordings\\session-1793300205930213-1-0\\settings.json",
+        "bytes": 10554,
+        "sha256": "ae29f4f448fe690aa29d8524e99dbd5485c81961726859d62596606246a1de95"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\saves\\input-recordings\\session-1793300205930213-1-0\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\saves\\input-recordings\\session-1793300205930213-1-0\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      }
+    ],
+    "ordinary_terminal_validated": true
+  },
+  "selection": {
+    "mode": "local",
+    "seat": 0,
+    "candidate": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate",
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\mods\\state.toml",
+    "before_sha256": "d4e99652ab49f60e834c814d7a6a533890333971126b1b65645e562521a0d457",
+    "after": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\mods\\state.toml",
+      "bytes": 394,
+      "sha256": "3687455ba2bdc59b3f0f3a669de562189873de7cab4c673c92f7b356b45ebf54"
+    },
+    "state": {
+      "format_version": 2,
+      "package": [
+        {
+          "id": "mmx6.local-coop",
+          "version": "0.0.1"
+        }
+      ],
+      "feature": [
+        {
+          "package_id": "mmx6.local-coop",
+          "id": "prototype",
+          "enabled": true,
+          "values": {
+            "doors": "both",
+            "hud_layout": "side_by_side",
+            "local_cameras": "split",
+            "cameras": "independent",
+            "lab_checkpoint": "off",
+            "lab_contact_protection": "off",
+            "lab_starting_hp_p1": "off",
+            "lab_starting_hp_p2": "off",
+            "lab_earned_weapons": "off"
+          }
+        }
+      ]
+    },
+    "choices": {
+      "doors": "both",
+      "hud_layout": "side_by_side",
+      "local_cameras": "split",
+      "cameras": "independent",
+      "lab_checkpoint": "off",
+      "lab_contact_protection": "off",
+      "lab_starting_hp_p1": "off",
+      "lab_starting_hp_p2": "off",
+      "lab_earned_weapons": "off"
+    },
+    "catalog": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\mods\\bundled\\mmx6.local-coop\\0.0.1\\manifest.toml",
+      "bytes": 11349,
+      "sha256": "21e4241327b374cb1f4f0d543b7608f4a1107a3aef722e37352ef5368c36686d"
+    },
+    "scope": "Real prelaunch declared preferences; no runtime/START/result claim"
+  },
+  "offline": {
+    "id": 1869,
+    "ok": true,
+    "active": 0,
+    "host": 0,
+    "rollback": 0,
+    "architecture": "off",
+    "max_players": 0,
+    "players": 0,
+    "tick": 0,
+    "resolved_through": 0,
+    "stall": "inactive",
+    "remote_lead": 0,
+    "desync": 0,
+    "desync_tick": 0,
+    "local_hash": 0,
+    "remote_hash": 0
+  },
+  "controls": [
+    {
+      "label": "F40-LOCAL-owned-jump-seat0",
+      "seat": 0,
+      "pressed": 16384,
+      "requested_native_ticks": 2,
+      "acknowledgment": {
+        "seat": 0,
+        "pressed": 16384,
+        "status": {
+          "id": 1873,
+          "ok": true,
+          "pad": "0xFFFF",
+          "slot0": {
+            "buttons": "0xFFFF",
+            "connected": true,
+            "analog": false,
+            "type": 0,
+            "sticks": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "negcon": [
+              0,
+              0,
+              0
+            ],
+            "mode_locked": false
+          },
+          "slot1": {
+            "buttons": "0xFFFF",
+            "connected": true,
+            "analog": false,
+            "type": 0,
+            "sticks": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "negcon": [
+              0,
+              0,
+              0
+            ],
+            "mode_locked": false
+          },
+          "override": -1,
+          "override_frames": 0,
+          "override_pad_type": -1,
+          "override_p2": -1,
+          "override_p2_frames": 0,
+          "override_axes": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "override_axes_valid": false,
+          "host_input_slots": 2,
+          "host_port": 1,
+          "host_layer": true,
+          "host_buttons": "0xBFFF",
+          "host_axes": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "host_lt": 0,
+          "host_rt": 0
+        }
+      },
+      "start": {
+        "schema": 1,
+        "tick": 141,
+        "sequence": 282,
+        "native_timer": 140,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 3365065602,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 73007104,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 0
+      },
+      "end": {
+        "schema": 1,
+        "tick": 143,
+        "sequence": 286,
+        "native_timer": 142,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 1542667082,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 6,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 72691712,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 73007104,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 0
+      },
+      "actual_native_ticks": 2,
+      "actual_publications": 2,
+      "held_jump_observed": true
+    },
+    {
+      "label": "F40-LOCAL-owned-jump-seat1",
+      "seat": 1,
+      "pressed": 16384,
+      "requested_native_ticks": 2,
+      "acknowledgment": {
+        "seat": 1,
+        "pressed": 16384,
+        "status": {
+          "id": 1895,
+          "ok": true,
+          "pad": "0xFFFF",
+          "slot0": {
+            "buttons": "0xFFFF",
+            "connected": true,
+            "analog": false,
+            "type": 0,
+            "sticks": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "negcon": [
+              0,
+              0,
+              0
+            ],
+            "mode_locked": false
+          },
+          "slot1": {
+            "buttons": "0xBFFF",
+            "connected": true,
+            "analog": false,
+            "type": 0,
+            "sticks": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "negcon": [
+              0,
+              0,
+              0
+            ],
+            "mode_locked": false
+          },
+          "override": -1,
+          "override_frames": 0,
+          "override_pad_type": -1,
+          "override_p2": -1,
+          "override_p2_frames": 0,
+          "override_axes": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "override_axes_valid": false,
+          "host_input_slots": 2,
+          "host_port": 2,
+          "host_layer": true,
+          "host_buttons": "0xBFFF",
+          "host_axes": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "host_lt": 0,
+          "host_rt": 0
+        }
+      },
+      "start": {
+        "schema": 1,
+        "tick": 164,
+        "sequence": 328,
+        "native_timer": 163,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 2011922268,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 73007104,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 0
+      },
+      "end": {
+        "schema": 1,
+        "tick": 166,
+        "sequence": 332,
+        "native_timer": 165,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 3041895919,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 6,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 72626176,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 0
+      },
+      "actual_native_ticks": 2,
+      "actual_publications": 2,
+      "held_jump_observed": true
+    }
+  ],
+  "final": {
+    "schema": 1,
+    "tick": 194,
+    "sequence": 388,
+    "native_timer": 193,
+    "lifecycle": [
+      0,
+      0
+    ],
+    "pause_owner": 0,
+    "scene_owner": 0,
+    "scene_phase": 0,
+    "mailbox": 0,
+    "ready": 1,
+    "enrolled": 1,
+    "failed": 0,
+    "native_mode": 10,
+    "native_phase": 0,
+    "host_digest": 305729588,
+    "host_digest_algorithm": 1,
+    "players": [
+      {
+        "active": 1,
+        "character": 0,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 9437184,
+        "y_raw": 73072640,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      {
+        "active": 1,
+        "character": 1,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 11010048,
+        "y_raw": 73007104,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      }
+    ],
+    "framework_digest_registered": 0
+  },
+  "strict_consumed_input_capture": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\saves\\input-recordings\\session-1793300205930213-1-0\\inputs.jsonl",
+    "sha256": "a73d85280826b40fdde0ee58d2da7741862f89e4a43bb8b623967ae620d4863e",
+    "events": 6217,
+    "natives": 4336,
+    "p2_reads": 1881,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+      "manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "ae29f4f448fe690aa29d8524e99dbd5485c81961726859d62596606246a1de95",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "requested_jump_seats": [
+      0,
+      1
+    ],
+    "consumed_cross_seen_anywhere": [
+      0,
+      1
+    ],
+    "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+  },
+  "native_cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "private_cards_unchanged": true,
+  "root_reviewed_capture": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\F40-local-final.png",
+    "bytes": 2074543,
+    "sha256": "ec4254910b64d5e75357f7fff764daaf7ea3a5bef2803011d4949745fab0bdd7",
+    "root_personally_viewed": true
+  },
+  "raw_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\qualification.json",
+      "bytes": 313918,
+      "sha256": "35c9a2f380b640e55d6afcf84e91912652167bbce2fd9bfb1c3a1ff01883717d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\F40-source-package.json",
+      "bytes": 4103,
+      "sha256": "395c13451710d2c4804cb13c4b556d98ce976563ddcfe172712bdf49b019889c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40l1\\candidate\\saves\\input-recordings\\session-1793300205930213-1-0\\inputs.jsonl",
+      "bytes": 816201,
+      "sha256": "a73d85280826b40fdde0ee58d2da7741862f89e4a43bb8b623967ae620d4863e"
+    }
+  ],
+  "accepted_NET_dependency": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-lobby\\manifest-bound-5c6609d-F40-nine-options-netplay-reviewed.json",
+    "bytes": 22487,
+    "sha256": "2b3683742850a09d4c8ddebea5fdf1fbfa181a44de8a9671ae37b1e2e067decd"
+  },
+  "limits": [
+    "Only frozen234 F40, all9currentlydeclared co-op typed choices; no native3330 or arbitrary future/oversized/unsupported-package plan claim.",
+    "Same5c6609d/image622fe252 as actualNETHost/Join/Play result. LOCAL is a genuine ordinary offline cold boot, not a simulated NET START.",
+    "Fourpublic nondefault choices plus all5LABOFF. Actualcommitted ninevalues and completecommitted fingerprint are bound by strict native recorder settings/content/simulation artifacts. Offline profileNone/session_fingerprint empty are original native behavior, not a NET compatibility claim.",
+    "Both actual owned published host slots consumeCross and independently jump/ascent with otherbody stationary, then native landing. Fullcardinventory unchanged, nativegracefulexit0, completeordinaryrecording and one rootviewed composedcapture pass.",
+    "Three composedcaptures across LOCAL/NET are personally rootreviewed; no generalgraphics/audio/performance/ordinaryreplay or F39rematch qualification.",
+    "Current accepted plan has two trusted selected packages/settings+loader. Disabledcatalogrows are not received capabilitycoverage; NETreceipt independently proves ninehostvalues surviveactualSTART againstdifferent guestsaveddefaults."
+  ]
+}
