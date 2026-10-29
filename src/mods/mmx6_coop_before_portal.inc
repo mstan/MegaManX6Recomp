@@ -113,6 +113,8 @@ static int checkpoint_fallen_portal_source(void) {
         checkpoint_hash(0x8002953Cu,0x80029598u)==0xA6AAD062u &&
         checkpoint_hash(0x80029658u,0x800296A8u)==0x1D9D0B4Bu &&
         checkpoint_hash(0x8002D2B0u,0x8002D2D4u)==0xEB31C56Au &&
+        checkpoint_hash(0x8003D850u,0x8003D8A8u)==0x26065317u &&
+        checkpoint_hash(0x8003AD18u,0x8003ADB4u)==0x24EE2986u &&
         (psx_mod_read_word(0x800F2E24u)&0xFFFFFFFEu)==0x04041A00u &&
         psx_mod_read_word(0x800F2E28u)==0x06380590u;
 }
@@ -138,11 +140,21 @@ static int checkpoint_fallen_portal_ground(uint32_t meta,uint32_t desc) {
     }
     return 1;
 }
+static int checkpoint_fallen_portal_standing_vy(uint32_t value) {
+    /* Original beam handoff 8003D850..8003D8A8 writes VY=-0x80000 at
+     * 3D87C/880 (FNV26065317, SHA256
+     * 75c2be1b842225635daeed3106a879e7d51c3ae197f95aa31187dd3f23b85068).
+     * Arrival35144 reaches idle3AD18..3ADB4 (FNV24EE2986), which sets
+     * action2 without clearing VY. Permit this retained standing envelope;
+     * it is not a universal gravity clamp, and placement never changes VY. */
+    int32_t vy=(int32_t)value;
+    return vy>=-0x80000 && vy<=0;
+}
 static int checkpoint_fallen_portal_original_arrival(void) {
     if(!checkpoint_portal_original_arrival() || !checkpoint_fallen_portal_live_portal())return 0;
-    /* Refuse residual motion instead of changing it during placement. */
-    return !psx_mod_read_word(PLAYER+0x20) && !psx_mod_read_word(PLAYER+0x24) &&
-        !le32(p2.body+0x20) && !le32(p2.body+0x24);
+    return !psx_mod_read_word(PLAYER+0x20) &&
+        checkpoint_fallen_portal_standing_vy(psx_mod_read_word(PLAYER+0x24)) &&
+        !le32(p2.body+0x20) && checkpoint_fallen_portal_standing_vy(le32(p2.body+0x24));
 }
 static void checkpoint_fallen_portal_place(void) {
     unsigned fallen=checkpoint_fallen_portal_seat();
@@ -192,5 +204,5 @@ static int checkpoint_fallen_portal_ready(void) {
         fall[0x67] && !(fall[0x70]&8u) && !le32(fall+0x20) &&
         (int32_t)le32(fall+0x24)<0 && y>(1593<<16) && y<(1688<<16) &&
         le32(standing+8)==(1506u<<16) && le32(standing+12)==((1595u-safe)<<16) &&
-        !le32(standing+0x20) && !le32(standing+0x24);
+        !le32(standing+0x20) && checkpoint_fallen_portal_standing_vy(le32(standing+0x24));
 }

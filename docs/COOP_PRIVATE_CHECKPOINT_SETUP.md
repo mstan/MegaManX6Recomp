@@ -208,11 +208,11 @@ The native closure is reproducible from those inputs:
 
 | Step | Original address and behavior |
 | --- | --- |
-| CP1 source | Stage0/section0 root `80073300` → table `80073134`, CP1 → record `8007212C`. Player spawn 2112/1072, camera1968/944, bounds minX1968/maxX5120/minY944/maxY944. |
+| CP1 source | Stage0/section0 root `80073300` â†’ table `80073134`, CP1 â†’ record `8007212C`. Player spawn 2112/1072, camera1968/944, bounds minX1968/maxX5120/minY944/maxY944. |
 | Initializer | `80029B8C..80029D18`: `80029C64` writes record+14 to camera+22, and `80029C70` to camera+2A. Both start at944. |
-| Region placement | Intro primary root `8007349C` → `800FA214`; index9 at `800FA25C` is category3/type0/subtype7, position2128/1088. |
-| Handler | Loader `80013EE0..80013F08` indexes root `8006DE94` and publishes the selected pointer at scratchpad`1F80008C`. Intro root → BIN2 table `800FA6E0`, whose type0 word is `80052258`. Phase dispatch reads `800791E8`: phase0=`80052294`, phase1=`8005211C`. |
-| Region bind | `80052294..80052300` selects `80079D70[(stage*2+section)]`, masks subtype with7F and multiplies by16, stores its pointer at instance+18, then calls `8005211C`. Intro root=`800791F0`; subtype7 → `80079260`. |
+| Region placement | Intro primary root `8007349C` â†’ `800FA214`; index9 at `800FA25C` is category3/type0/subtype7, position2128/1088. |
+| Handler | Loader `80013EE0..80013F08` indexes root `8006DE94` and publishes the selected pointer at scratchpad`1F80008C`. Intro root â†’ BIN2 table `800FA6E0`, whose type0 word is `80052258`. Phase dispatch reads `800791E8`: phase0=`80052294`, phase1=`8005211C`. |
+| Region bind | `80052294..80052300` selects `80079D70[(stage*2+section)]`, masks subtype with7F and multiplies by16, stores its pointer at instance+18, then calls `8005211C`. Intro root=`800791F0`; subtype7 â†’ `80079260`. |
 | Authored region | Eight unsigned halfwords at `80079260`: `[2112,2143,1040,1135,FFFF,FFFF,896,FFFF]`. They mean inclusive X/Y rectangle, followed by minX/maxX/minY/maxY targets. FFFF means retain that target. |
 | Target writer | `8005211C..80052258` rejects offscreen/retired context via `8002CAB4`, then tests resident P1 integer XY against that inclusive rectangle. Inside it sets camera+47=2. `800521F4` writes region+0C (=896) to camera+2A; the other targets remain unchanged. |
 | Camera update | `8002927C..8002935C` checks camera+44, player+CC, character/player+E0 gate, calls the native camera mode, then `80028EBC` at `80029340`. |
@@ -229,7 +229,7 @@ Root's retained first narrow writer trace
 `G:/Temp/Codex/psxrecomp/x6-parity/checkpoint-v12-e2e47e6-intro-cp1-camera-trace/qualification.json`
 has SHA256`be79a39bb6cef5821d838c841901d9ae39b1b78f01da69a8791b8a8a2960b179`. It
 contains the changed store at sequence35/frame2846: PC`8002917C`,
-RA`80029348`, width2, current minY`03B0→004B`, A0`800971F8`,
+RA`80029348`, width2, current minY`03B0â†’004B`, A0`800971F8`,
 A1`004B`, A2`0380`, T0`2`, T1`03B0`, V1`045B`, V0`004B0000`.
 The saved prefix contains only the oldest2048 of4629 available writes; it is
 not a complete trace. It identifies the current-bound writer and its native
@@ -291,8 +291,8 @@ Root's healthy target retry is retained at
 `G:/Temp/Codex/psxrecomp/x6-parity/checkpoint-v12-e2e47e6-intro-cp1-camera-target-trace-retry/qualification.json`,
 SHA256`e45f9c23009c6738cd5e44bb4c061247a64505b9067d593cdb732328cb3f6d97`.
 The whole narrow trace has total/available2009, with2006 address-filtered
-entries emitted and no ring loss. Target halfword`80097222` changes0→944
-at sequence13/native PC`80029C70`, then944→896 at sequence15/native
+entries emitted and no ring loss. Target halfword`80097222` changes0â†’944
+at sequence13/native PC`80029C70`, then944â†’896 at sequence15/native
 PC`800521F4`, frame2778, width2, A0=CAM, A1=PLAYER, A2=`80079D70`,
 RA=`80052130`. This corroborates the authored dynamic-region writer. The
 case still failed readiness and exited normally0; it produced no qualified
@@ -375,3 +375,5 @@ implied. Other nearby actors and altered Reploid state/geometry stay refused.
 `recycle_fallen_cp2` (option12, nonce`4C524631`) reuses original4/0CP2/index23/record`80072444`. Genuine native initialization and both healthy grounded arrivals precede one disclosed position/history-only approach: primary(1312,1593), guest(1506,1593). Exact original terrain supplies a clear primary fall tube and the guest floor1616. Native camera maxY1424 makes its original fatal branch eligible at primaryY1688; the setup guards that original code and never writes death/lifecycle/HP or any portal/loading result. At least two native updates must show actual primary falling before setup completion. Native fatal, primaryFALLEN, surviving guest control, original portal admission/loading and correct arrival/recovery remain separate runtime outcomes. Starting-HP and earned-weapons prerequisites are incompatible and must be off. This option is off by default and absent from release catalogs. No source/unit/build result qualifies F106.
 
 The mirrored `recycle_fallen_guest_cp2` (option13, nonce`4C524632`) swaps only the initial X positions: primary(1506,1593), guest(1312,1593). Its exact source/air/body checks, incompatible HP/equipment options and native-fall readiness mirror option12; native guest death and subsequent primary-led recovery are independently observed.
+
+Native standing arrivals retain downward velocity from the original beam handoff: `8003D850..8003D8A8` writes `body+24=FFF80000`, and original idle `8003AD18..8003ADB4` does not clear it. Both fallen approaches admit signed standing VY in `[-0x80000,0]` while retaining the exact idle, ground, zero-horizontal-motion, source and geometry guards. Placement preserves the actual velocity. This range describes this native handoff; it is not the general gravity clamp. The first LOCAL attempt remains retained as a setup failure caused by the earlier zero-VY guard.

@@ -556,6 +556,18 @@
         "primary_floor": 1616
       },
       "contract": "Same exact pit/standing-box and original source guards with roles reversed; require native guest downward falling and actual guest fatal/FALLEN, primary-led original boundary and correct both-body recovery. No setup outcome writes."
+    },
+    "standing_velocity_admission": {
+      "signed_vy_range": [
+        -524288,
+        0
+      ],
+      "require_vx": 0,
+      "source": "Original beam handoff8003D850..8003D8A8 writes body+24=FFF80000; original idle8003AD18..8003ADB4 retains it. This narrow standing-arrival envelope is not a universal gravity clamp. Exact healthy idle/ground/source/geometry guards remain mandatory, and placement preserves velocity.",
+      "source_fnv1a32": {
+        "8003D850..8003D8A8": "26065317",
+        "8003AD18..8003ADB4": "24EE2986"
+      }
     }
   }
 }

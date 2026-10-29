@@ -731,6 +731,10 @@ static void fallen_portal_native_fall(void) {
     }
     psx_mod_write_word(PLAY+0x90,12);
 }
+static void fallen_portal_test_vy(unsigned seat,int32_t vy) {
+    if(seat)put32(p2.body+0x24,(uint32_t)vy);
+    else psx_mod_write_word(PLAYER+0x24,(uint32_t)vy);
+}
 static void fallen_portal_block_pit(uint32_t meta,uint32_t desc) {
     unsigned tile=0;
     while(tile*4u+4u<=PORTAL_SETUP_DESC_BYTES && psx_mod_read_byte(desc+tile*4u)!=0x38)++tile;
@@ -743,7 +747,12 @@ static void fallen_portal_block_pit(uint32_t meta,uint32_t desc) {
 }
 static void agreed_fallen_portal_prerequisite(CPUState *cpu) {
     for(int online=0;online<=1;++online)for(int variant=2;variant<=3;++variant) {
+      /* Both original standing velocities, independently for each seat and
+       * both fallen-seat orders. Full snapshots below also bind their VY. */
+      for(unsigned velocities=0;velocities<4;++velocities) {
         setup_portal_prerequisite(cpu,online,variant);
+        int32_t vy[2]={velocities&1u?-0x80000:0,velocities&2u?-0x80000:0};
+        fallen_portal_test_vy(0,vy[0]);fallen_portal_test_vy(1,vy[1]);
         CHECK(!failed && checkpoint_fallen_portal_source());
         CHECK(variant!=3 || strlen(test_lab_option)==24); /* Full name and NUL fit the32-byte parser. */
         p2.body[5]=1;memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
@@ -773,6 +782,7 @@ static void agreed_fallen_portal_prerequisite(CPUState *cpu) {
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 &&
               !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2));
         fallen_portal_native_fall();psx_mod_write_word(PLAY+0x90,11);
+        fallen_portal_test_vy(checkpoint_fallen_portal_seat()^1u,vy[checkpoint_fallen_portal_seat()^1u]);
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3); /* Two updates required. */
         psx_mod_write_word(PLAY+0x90,12);memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
@@ -780,9 +790,29 @@ static void agreed_fallen_portal_prerequisite(CPUState *cpu) {
               !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) &&
               !memcmp(&lifecycle,&life,sizeof life)); /* Includes all HP, velocity, ground and lifecycle bytes. */
         CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+      }
+        /* The source envelope is inclusive; positive/upward and the first
+         * value below it must neither place actors nor complete setup. */
+        for(unsigned phase=2;phase<=3;++phase)for(unsigned seat=0;seat<2;++seat)
+          for(unsigned below=0;below<2;++below) {
+            if(phase==3 && seat==(unsigned)(variant==3))continue;
+            setup_portal_prerequisite(cpu,online,variant);
+            if(phase==3) {
+                CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+                fallen_portal_native_fall();
+            }
+            fallen_portal_test_vy(seat,below?-0x80001:1);
+            memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+            CPUState registers=*cpu;Mmx6CoopLifecycle lifecycle=life;
+            CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==phase && !guest_calls &&
+                  !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) &&
+                  !memcmp(&registers,cpu,sizeof registers) && !memcmp(&lifecycle,&life,sizeof life));
+        }
+        PlayerContext partner;Mmx6CoopLifecycle lifecycle;
 
         const uint32_t corrupt[]={0x800282F0u,0x80029580u,0x80029658u,0x8002D2B0u,
-            0x80073D50u,0x80073D54u,0x800F2E24u,0x80097438u,0x80100000u,0x80120000u};
+            0x8003D87Cu,0x8003AD3Cu,0x80073D50u,0x80073D54u,0x800F2E24u,
+            0x80097438u,0x80100000u,0x80120000u};
         for(unsigned phase=2;phase<=3;++phase)for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
             setup_portal_prerequisite(cpu,online,variant);
             if(phase==3)CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
