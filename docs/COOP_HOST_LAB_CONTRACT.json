@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 34,
+  "revision": 35,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v51",
+    "title_compatibility": "mmx6-x-zero-delay-v52",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -671,5 +671,17 @@
     "regression": "Fresh incoming guest with an empty voluntary return context retains original Zero identity, assets and HP throughout arrival and intro. Real voluntary returns retain saved HP/context; original source refusal and fatal bodies remain failures rather than fabricated living arrivals.",
     "qualification": "Exact-image LOCAL and NET guest-only original portal, native CP2 destination feet, mounted BIN33 full-HP active boss intro, released controls and separate native inputs remain mandatory. Prior guest identity loss is rejected retained evidence; source models confer no comparison credit.",
     "snapshot": "No new persistent fields. Existing arrival_pair, join_phase and player contexts; snapshot14 unchanged."
+  },
+  "title_changes_v52_fresh_enrollment_return_context": {
+    "issue": "beads-eio.1.114",
+    "comparisons": [
+      "F122",
+      "F124",
+      "F7"
+    ],
+    "default_correctness_fix": "Fresh nonpaired enrollment also starts the existing join beam. Capture its own already completed native initialization, character parts and idle body as returning_body before begin_join changes the projected body. This prevents an immediate original boss intro from using an empty or stale voluntary return context. The prior paired-native-arrival branch remains distinct; actual Select returns retain their own departure context.",
+    "regression": "Invoke actual enroll(arrival=0), starting with both an empty and a stale other body return context, then exercise the immediate original scene lifecycle. Preserve the freshly initialized native guest identity, HP/assets and owner/shared context through release; no fabricated health, character, feet or completion writes in the product.",
+    "qualification": "rf9l rejected title51: original portal and CP2 boss active, guest blank after intro. Its publications omit arrival_pair/join_phase, so the precise internal branch is a source-proven uncovered producer, not a published flag observation. Exact-image LOCAL+NET full native portal/destination/feet/BIN33/controls and parent gates still required.",
+    "snapshot": "Capture only existing returning_body; no new persistent fields or snapshot revision."
   }
 }
