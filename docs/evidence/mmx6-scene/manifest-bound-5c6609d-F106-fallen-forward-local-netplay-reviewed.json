@@ -1,0 +1,2030 @@
+{
+  "kind": "F106_native_fallen_forward_both_seats_LOCAL_NET_root_review",
+  "status": "passed",
+  "comparisons": [
+    "F106"
+  ],
+  "frozen_rows": {
+    "F106": "17345e57c50f97ae551902f9e56e2c59f372f1a4c5087ee43e949c6564fdcf3f"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "fallen_seat": 0,
+      "status": "passed",
+      "native_endpoints": [
+        {
+          "peer": 0,
+          "distinct_native_fall_timers": 10,
+          "first_fall": {
+            "row": 137,
+            "native_timer": 7,
+            "xy": [
+              1312,
+              1596
+            ]
+          },
+          "last_fall": {
+            "row": 146,
+            "native_timer": 28,
+            "xy": [
+              1312,
+              1683
+            ]
+          },
+          "first_dying": {
+            "row": 147,
+            "native_timer": 33,
+            "xy": [
+              1312,
+              1689
+            ],
+            "hp": 128,
+            "state": 2
+          },
+          "fallen_row": 172,
+          "survivor_admission": 195,
+          "native_landed": 340,
+          "final_tuple": [
+            10,
+            0,
+            20,
+            1,
+            0
+          ],
+          "final_lifecycle": [
+            0,
+            0
+          ],
+          "final_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            },
+            {
+              "seat": 1,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "resource_checks": {
+            "peer": 0,
+            "checks": {
+              "roster": true,
+              "fallen_revived_native_full_hp": true,
+              "survivor_hp_preserved": true,
+              "weapons_preserved": true,
+              "ammo9_preserved": true,
+              "resources_preserved": true,
+              "no_retry_consumed": true
+            },
+            "byte_changes": [
+              {
+                "seat": 0,
+                "changes": [
+                  {
+                    "offset": "0xcf",
+                    "before": 1,
+                    "after": 0
+                  },
+                  {
+                    "offset": "0xd6",
+                    "before": 3,
+                    "after": 0
+                  }
+                ]
+              },
+              {
+                "seat": 1,
+                "changes": []
+              }
+            ]
+          },
+          "retry_before_and_after": 2
+        }
+      ],
+      "controls": [
+        {
+          "seat": 1,
+          "pulses": [
+            {
+              "before": 341,
+              "movement": 344,
+              "settled": 349,
+              "full_support": [
+                false
+              ]
+            },
+            {
+              "before": 350,
+              "movement": 353,
+              "settled": 357,
+              "full_support": [
+                false
+              ]
+            },
+            {
+              "before": 358,
+              "movement": 361,
+              "settled": 367,
+              "full_support": [
+                false
+              ]
+            },
+            {
+              "before": 368,
+              "movement": 371,
+              "settled": 377,
+              "full_support": [
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "seat": 0,
+          "pulses": [
+            {
+              "before": 378,
+              "movement": 380,
+              "settled": 381,
+              "full_support": [
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "agreed_source_position_only_setup": true,
+        "genuine_native_fall_dying_fallen_every_peer": true,
+        "survivor_alive_and_only_admitting_seat": true,
+        "original_ordered_loader_destination": true,
+        "both_living_native_recovery": true,
+        "original_destination_camera_and_full_feet": true,
+        "independent_both_seat_controls": true,
+        "personal_resources_and_retry_policy": true
+      },
+      "native_terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_crc_windows": [],
+      "matching_crc_samples": 0,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pl4\\ammo-hud\\intro-admission\\peer-0-native-pit-death-survivor-alive.png",
+          "bytes": 2074543,
+          "sha256": "a750cce5b9919c1d88c017c20d5ac6cc51ad186d6e904a56c18878b594d9bdea",
+          "peer": 0,
+          "label": "native-pit-death-survivor-alive",
+          "row": 172,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pl4\\ammo-hud\\intro-admission\\peer-0-native-both-recovered-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "2483a5d18afba2168279afa44807f3683ec7b2feb3b9ec0f1c91a5a62356488f",
+          "peer": 0,
+          "label": "native-both-recovered-arrivals",
+          "row": 340,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pl4\\ammo-hud\\intro-admission\\peer-0-native-recovered-independent-controls.png",
+          "bytes": 2074543,
+          "sha256": "9212cc8b3e89bf8c70bed600565a1171d4a8bd22d4b0d001eaaa77e0768a79c4",
+          "peer": 0,
+          "label": "native-recovered-independent-controls",
+          "row": 382,
+          "root_personally_viewed": true
+        }
+      ],
+      "native_resource_reset_source": {
+        "fields": {
+          "CF": "Native one-update interrupt flag, unconditionally cleared at34FF0.",
+          "D6": "Native timed death-burst index0->3; original state2 dispatch, before FALLEN3DACC."
+        },
+        "fresh_stage_reset": "Original1E224 calls2B838;2B858..868 clears full154-byte PLAYER before1E264 calls3BD24. Guest native enrollment separately initializes its body.",
+        "allowance": "Only fallen CF in0..1 and D6=3 may change to0; all other93:114 bytes and survivor fullslice exact.",
+        "source_spans": [
+          {
+            "start": "0x80034fbc",
+            "end": "0x80035010",
+            "fnv1a32": "08BF4DC4",
+            "sha256": "7d982974f0a81c92692bc205f90a0a32fe644db3b32359b28955ba829a183010"
+          },
+          {
+            "start": "0x8002b838",
+            "end": "0x8002b86c",
+            "fnv1a32": "BA68D482",
+            "sha256": "7bb3932424573ad622e5363934fa8ef9eb67259c28fd27fafe8301adb58fcbba"
+          },
+          {
+            "start": "0x8003d954",
+            "end": "0x8003d9f8",
+            "fnv1a32": "249A6A3D",
+            "sha256": "e314984d2d68b54ad6418689bb5ff166082aa4879cb0d2069ca68e6ee876a815"
+          },
+          {
+            "start": "0x8003d9f8",
+            "end": "0x8003dacc",
+            "fnv1a32": "80D9B8BD",
+            "sha256": "e8517904f37704d0294857c010098fe4d2d6d9c658f8d9adf2d159d2eedb1ff9"
+          },
+          {
+            "start": "0x80073d20",
+            "end": "0x80073d30",
+            "fnv1a32": "E0036BB3",
+            "sha256": "d78328cda4e113d5564740451641bf9d6c641aba76643a46946daac54484da7c"
+          }
+        ]
+      },
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pl4\\qualification.json",
+          "bytes": 22071783,
+          "sha256": "b3c8cd62a8b7096d32cb7f0534f792810d5f7e70cba3b25d010176310c885331"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pl4\\ammo-hud\\intro-admission\\observations.json",
+          "bytes": 10275820,
+          "sha256": "45d4ca728dec7c1e584468b3a15f967cf1b9865b343569e760ad61c472476983"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pl4\\qualification-parent-original.json",
+          "bytes": 22068941,
+          "sha256": "fafdbc3a60081d1b32606d4e722110a90d4112bce2374a79ce1282550c471b4d"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pl4\\F106-executing-source-pins.json",
+          "bytes": 3779,
+          "sha256": "b349da4e84ccc59d5f34ea18d8cf4fd45902b4a8f55abdf98c3950977a10d108"
+        }
+      ]
+    },
+    {
+      "mode": "local",
+      "fallen_seat": 1,
+      "status": "passed",
+      "native_endpoints": [
+        {
+          "peer": 0,
+          "distinct_native_fall_timers": 10,
+          "first_fall": {
+            "row": 127,
+            "native_timer": 6,
+            "xy": [
+              1312,
+              1595
+            ]
+          },
+          "last_fall": {
+            "row": 136,
+            "native_timer": 29,
+            "xy": [
+              1312,
+              1689
+            ]
+          },
+          "first_dying": {
+            "row": 137,
+            "native_timer": 33,
+            "xy": [
+              1312,
+              1689
+            ],
+            "hp": 0,
+            "state": 2
+          },
+          "fallen_row": 162,
+          "survivor_admission": 171,
+          "native_landed": 328,
+          "final_tuple": [
+            10,
+            0,
+            20,
+            1,
+            0
+          ],
+          "final_lifecycle": [
+            0,
+            0
+          ],
+          "final_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            },
+            {
+              "seat": 1,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "resource_checks": {
+            "peer": 0,
+            "checks": {
+              "roster": true,
+              "fallen_revived_native_full_hp": true,
+              "survivor_hp_preserved": true,
+              "weapons_preserved": true,
+              "ammo9_preserved": true,
+              "resources_preserved": true,
+              "no_retry_consumed": true
+            },
+            "byte_changes": [
+              {
+                "seat": 0,
+                "changes": []
+              },
+              {
+                "seat": 1,
+                "changes": [
+                  {
+                    "offset": "0xcf",
+                    "before": 1,
+                    "after": 0
+                  },
+                  {
+                    "offset": "0xd6",
+                    "before": 3,
+                    "after": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "retry_before_and_after": 2
+        }
+      ],
+      "controls": [
+        {
+          "seat": 1,
+          "pulses": [
+            {
+              "before": 329,
+              "movement": 331,
+              "settled": 336,
+              "full_support": [
+                false
+              ]
+            },
+            {
+              "before": 337,
+              "movement": 340,
+              "settled": 345,
+              "full_support": [
+                false
+              ]
+            },
+            {
+              "before": 346,
+              "movement": 348,
+              "settled": 352,
+              "full_support": [
+                false
+              ]
+            },
+            {
+              "before": 353,
+              "movement": 356,
+              "settled": 361,
+              "full_support": [
+                false
+              ]
+            },
+            {
+              "before": 362,
+              "movement": 365,
+              "settled": 371,
+              "full_support": [
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "seat": 0,
+          "pulses": [
+            {
+              "before": 372,
+              "movement": 375,
+              "settled": 377,
+              "full_support": [
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "agreed_source_position_only_setup": true,
+        "genuine_native_fall_dying_fallen_every_peer": true,
+        "survivor_alive_and_only_admitting_seat": true,
+        "original_ordered_loader_destination": true,
+        "both_living_native_recovery": true,
+        "original_destination_camera_and_full_feet": true,
+        "independent_both_seat_controls": true,
+        "personal_resources_and_retry_policy": true
+      },
+      "native_terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_crc_windows": [],
+      "matching_crc_samples": 0,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gl4\\ammo-hud\\intro-admission\\peer-0-native-pit-death-survivor-alive.png",
+          "bytes": 2074543,
+          "sha256": "f991c1fadeb336a526a4a9bd23deb366ba2b5df37d6864b7b91b538a7a606bd2",
+          "peer": 0,
+          "label": "native-pit-death-survivor-alive",
+          "row": 162,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gl4\\ammo-hud\\intro-admission\\peer-0-native-both-recovered-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "fd904b4d98613952b75b40c7001e8e5554bbbe8c1e8f5f42bd16723372c2afd1",
+          "peer": 0,
+          "label": "native-both-recovered-arrivals",
+          "row": 328,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gl4\\ammo-hud\\intro-admission\\peer-0-native-recovered-independent-controls.png",
+          "bytes": 2074543,
+          "sha256": "e941c1d3d563f327de0fafd787e578c3ad3b62b996e4828c9a782b620e401394",
+          "peer": 0,
+          "label": "native-recovered-independent-controls",
+          "row": 378,
+          "root_personally_viewed": true
+        }
+      ],
+      "native_resource_reset_source": {
+        "fields": {
+          "CF": "Native one-update interrupt flag, unconditionally cleared at34FF0.",
+          "D6": "Native timed death-burst index0->3; original state2 dispatch, before FALLEN3DACC."
+        },
+        "fresh_stage_reset": "Original1E224 calls2B838;2B858..868 clears full154-byte PLAYER before1E264 calls3BD24. Guest native enrollment separately initializes its body.",
+        "allowance": "Only fallen CF in0..1 and D6=3 may change to0; all other93:114 bytes and survivor fullslice exact.",
+        "source_spans": [
+          {
+            "start": "0x80034fbc",
+            "end": "0x80035010",
+            "fnv1a32": "08BF4DC4",
+            "sha256": "7d982974f0a81c92692bc205f90a0a32fe644db3b32359b28955ba829a183010"
+          },
+          {
+            "start": "0x8002b838",
+            "end": "0x8002b86c",
+            "fnv1a32": "BA68D482",
+            "sha256": "7bb3932424573ad622e5363934fa8ef9eb67259c28fd27fafe8301adb58fcbba"
+          },
+          {
+            "start": "0x8003d954",
+            "end": "0x8003d9f8",
+            "fnv1a32": "249A6A3D",
+            "sha256": "e314984d2d68b54ad6418689bb5ff166082aa4879cb0d2069ca68e6ee876a815"
+          },
+          {
+            "start": "0x8003d9f8",
+            "end": "0x8003dacc",
+            "fnv1a32": "80D9B8BD",
+            "sha256": "e8517904f37704d0294857c010098fe4d2d6d9c658f8d9adf2d159d2eedb1ff9"
+          },
+          {
+            "start": "0x80073d20",
+            "end": "0x80073d30",
+            "fnv1a32": "E0036BB3",
+            "sha256": "d78328cda4e113d5564740451641bf9d6c641aba76643a46946daac54484da7c"
+          }
+        ]
+      },
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gl4\\qualification.json",
+          "bytes": 21867725,
+          "sha256": "5b0caf5a465daf62f9ff3731febe64acc2c9ce260445f78c4a05c8791ea31aad"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gl4\\ammo-hud\\intro-admission\\observations.json",
+          "bytes": 10177258,
+          "sha256": "80114ccb3466852842c6be7b461cb243d4369e5779476ee8e2095b3b269d074c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gl4\\qualification-parent-original.json",
+          "bytes": 21864877,
+          "sha256": "8e10b66a9988e3265611aed3c980266b18d40ff0cfd1e9414b0dea19090fd22f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gl4\\F106-executing-source-pins.json",
+          "bytes": 3779,
+          "sha256": "f76d4b27c6237248e532d03a3ad8c3bfc843884e33d55c87169f6daf71e0b743"
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "fallen_seat": 0,
+      "status": "passed",
+      "native_endpoints": [
+        {
+          "peer": 0,
+          "distinct_native_fall_timers": 6,
+          "first_fall": {
+            "row": 52,
+            "native_timer": 5,
+            "xy": [
+              1312,
+              1594
+            ]
+          },
+          "last_fall": {
+            "row": 57,
+            "native_timer": 27,
+            "xy": [
+              1312,
+              1676
+            ]
+          },
+          "first_dying": {
+            "row": 58,
+            "native_timer": 34,
+            "xy": [
+              1312,
+              1689
+            ],
+            "hp": 128,
+            "state": 2
+          },
+          "fallen_row": 69,
+          "survivor_admission": 80,
+          "native_landed": 130,
+          "final_tuple": [
+            10,
+            0,
+            20,
+            1,
+            0
+          ],
+          "final_lifecycle": [
+            0,
+            0
+          ],
+          "final_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            },
+            {
+              "seat": 1,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "resource_checks": {
+            "peer": 0,
+            "checks": {
+              "roster": true,
+              "fallen_revived_native_full_hp": true,
+              "survivor_hp_preserved": true,
+              "weapons_preserved": true,
+              "ammo9_preserved": true,
+              "resources_preserved": true,
+              "no_retry_consumed": true
+            },
+            "byte_changes": [
+              {
+                "seat": 0,
+                "changes": [
+                  {
+                    "offset": "0xcf",
+                    "before": 1,
+                    "after": 0
+                  },
+                  {
+                    "offset": "0xd6",
+                    "before": 3,
+                    "after": 0
+                  }
+                ]
+              },
+              {
+                "seat": 1,
+                "changes": []
+              }
+            ]
+          },
+          "retry_before_and_after": 2
+        },
+        {
+          "peer": 1,
+          "distinct_native_fall_timers": 5,
+          "first_fall": {
+            "row": 52,
+            "native_timer": 6,
+            "xy": [
+              1312,
+              1595
+            ]
+          },
+          "last_fall": {
+            "row": 56,
+            "native_timer": 25,
+            "xy": [
+              1312,
+              1664
+            ]
+          },
+          "first_dying": {
+            "row": 57,
+            "native_timer": 30,
+            "xy": [
+              1312,
+              1689
+            ],
+            "hp": 128,
+            "state": 2
+          },
+          "fallen_row": 69,
+          "survivor_admission": 80,
+          "native_landed": 130,
+          "final_tuple": [
+            10,
+            0,
+            20,
+            1,
+            0
+          ],
+          "final_lifecycle": [
+            0,
+            0
+          ],
+          "final_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            },
+            {
+              "seat": 1,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "resource_checks": {
+            "peer": 1,
+            "checks": {
+              "roster": true,
+              "fallen_revived_native_full_hp": true,
+              "survivor_hp_preserved": true,
+              "weapons_preserved": true,
+              "ammo9_preserved": true,
+              "resources_preserved": true,
+              "no_retry_consumed": true
+            },
+            "byte_changes": [
+              {
+                "seat": 0,
+                "changes": [
+                  {
+                    "offset": "0xcf",
+                    "before": 1,
+                    "after": 0
+                  },
+                  {
+                    "offset": "0xd6",
+                    "before": 3,
+                    "after": 0
+                  }
+                ]
+              },
+              {
+                "seat": 1,
+                "changes": []
+              }
+            ]
+          },
+          "retry_before_and_after": 2
+        }
+      ],
+      "controls": [
+        {
+          "seat": 1,
+          "pulses": [
+            {
+              "before": 131,
+              "movement": 133,
+              "settled": 136,
+              "full_support": [
+                false,
+                false
+              ]
+            },
+            {
+              "before": 137,
+              "movement": 139,
+              "settled": 143,
+              "full_support": [
+                true,
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "seat": 0,
+          "pulses": [
+            {
+              "before": 144,
+              "movement": 146,
+              "settled": 148,
+              "full_support": [
+                true,
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "agreed_source_position_only_setup": true,
+        "genuine_native_fall_dying_fallen_every_peer": true,
+        "survivor_alive_and_only_admitting_seat": true,
+        "original_ordered_loader_destination": true,
+        "both_living_native_recovery": true,
+        "original_destination_camera_and_full_feet": true,
+        "independent_both_seat_controls": true,
+        "personal_resources_and_retry_policy": true
+      },
+      "native_terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 3008,
+              "core": "6c7d6b37",
+              "mod": "72c57718"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "1f870bee",
+              "mod": "8e30af38"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "74fde9a4",
+              "mod": "8de5680a"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "f44075bf",
+              "mod": "e16012ae"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "6fba2244",
+              "mod": "02dfb108"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "61812349",
+              "mod": "b7dafcc8"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "431b4808",
+              "mod": "410d3032"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "90931110",
+              "mod": "0ea43328"
+            }
+          ],
+          "resolved_through": [
+            3240,
+            3240
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3296,
+              "core": "1ac0e49c",
+              "mod": "28caa554"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "021a0ff0",
+              "mod": "301a9925"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "4631a645",
+              "mod": "1d2763cf"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "1c4c5d1b",
+              "mod": "dc06d1ed"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "37ed9941",
+              "mod": "b05d2f0d"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "c253df9d",
+              "mod": "978d2067"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "de6b3412",
+              "mod": "4c9cf847"
+            }
+          ],
+          "resolved_through": [
+            3512,
+            3512
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3584,
+              "core": "8c991cbd",
+              "mod": "6bcffc3f"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "69977165",
+              "mod": "cde45c1f"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "db94fe32",
+              "mod": "09a81b3d"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "14769c7b",
+              "mod": "8f0ef45d"
+            },
+            {
+              "simulation_tick": 3712,
+              "core": "0a5a468f",
+              "mod": "75b16d17"
+            },
+            {
+              "simulation_tick": 3744,
+              "core": "a6b4f6fa",
+              "mod": "eee3cfe3"
+            },
+            {
+              "simulation_tick": 3776,
+              "core": "3ee73952",
+              "mod": "28caa554"
+            },
+            {
+              "simulation_tick": 3808,
+              "core": "eeba5e29",
+              "mod": "301a9925"
+            }
+          ],
+          "resolved_through": [
+            3817,
+            3817
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4864,
+              "core": "94bc9070",
+              "mod": "47ef4839"
+            },
+            {
+              "simulation_tick": 4896,
+              "core": "05fdb615",
+              "mod": "81a6a7e7"
+            },
+            {
+              "simulation_tick": 4928,
+              "core": "9619a05a",
+              "mod": "c75958e1"
+            },
+            {
+              "simulation_tick": 4960,
+              "core": "9ca98313",
+              "mod": "76918bc1"
+            },
+            {
+              "simulation_tick": 4992,
+              "core": "bfa71ba3",
+              "mod": "cfcd7901"
+            },
+            {
+              "simulation_tick": 5024,
+              "core": "c0cfcb52",
+              "mod": "bf233c8f"
+            },
+            {
+              "simulation_tick": 5056,
+              "core": "e4f6bebf",
+              "mod": "841176ab"
+            }
+          ],
+          "resolved_through": [
+            5062,
+            5062
+          ]
+        }
+      ],
+      "matching_crc_samples": 30,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\intro-admission\\peer-0-native-pit-death-survivor-alive.png",
+          "bytes": 2074543,
+          "sha256": "d21d8b2e8c0d860d42256fd8e0bf12aab1673b5ed15d09cdff2e2ee9a429f958",
+          "peer": 0,
+          "label": "native-pit-death-survivor-alive",
+          "row": 69,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\intro-admission\\peer-1-native-pit-death-survivor-alive.png",
+          "bytes": 2074543,
+          "sha256": "e45990e3570d0af032d3b3b488837806a18538b0a5f566fc1d1b567ce6796906",
+          "peer": 1,
+          "label": "native-pit-death-survivor-alive",
+          "row": 69,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\intro-admission\\peer-0-native-both-recovered-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "44d3e6ead5cc4fa0fe6b3f8fafbe42a4fbca0168b96bba968f2779faeef6edad",
+          "peer": 0,
+          "label": "native-both-recovered-arrivals",
+          "row": 130,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\intro-admission\\peer-1-native-both-recovered-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "9912f9dcb39c825e6e5064eb91e95803edfef1f3b21092b93c4810babc6f67d6",
+          "peer": 1,
+          "label": "native-both-recovered-arrivals",
+          "row": 130,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\intro-admission\\peer-0-native-recovered-independent-controls.png",
+          "bytes": 2074543,
+          "sha256": "f8a43ef94af35eb8d327bf330aa455891c5100458e6b2e507e2d1b5fb2ad0cff",
+          "peer": 0,
+          "label": "native-recovered-independent-controls",
+          "row": 149,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\intro-admission\\peer-1-native-recovered-independent-controls.png",
+          "bytes": 2074543,
+          "sha256": "a243a4609fbb306b1b0ec6f45659862355715d2089536cc19978aa8a8a45ccec",
+          "peer": 1,
+          "label": "native-recovered-independent-controls",
+          "row": 149,
+          "root_personally_viewed": true
+        }
+      ],
+      "native_resource_reset_source": {
+        "fields": {
+          "CF": "Native one-update interrupt flag, unconditionally cleared at34FF0.",
+          "D6": "Native timed death-burst index0->3; original state2 dispatch, before FALLEN3DACC."
+        },
+        "fresh_stage_reset": "Original1E224 calls2B838;2B858..868 clears full154-byte PLAYER before1E264 calls3BD24. Guest native enrollment separately initializes its body.",
+        "allowance": "Only fallen CF in0..1 and D6=3 may change to0; all other93:114 bytes and survivor fullslice exact.",
+        "source_spans": [
+          {
+            "start": "0x80034fbc",
+            "end": "0x80035010",
+            "fnv1a32": "08BF4DC4",
+            "sha256": "7d982974f0a81c92692bc205f90a0a32fe644db3b32359b28955ba829a183010"
+          },
+          {
+            "start": "0x8002b838",
+            "end": "0x8002b86c",
+            "fnv1a32": "BA68D482",
+            "sha256": "7bb3932424573ad622e5363934fa8ef9eb67259c28fd27fafe8301adb58fcbba"
+          },
+          {
+            "start": "0x8003d954",
+            "end": "0x8003d9f8",
+            "fnv1a32": "249A6A3D",
+            "sha256": "e314984d2d68b54ad6418689bb5ff166082aa4879cb0d2069ca68e6ee876a815"
+          },
+          {
+            "start": "0x8003d9f8",
+            "end": "0x8003dacc",
+            "fnv1a32": "80D9B8BD",
+            "sha256": "e8517904f37704d0294857c010098fe4d2d6d9c658f8d9adf2d159d2eedb1ff9"
+          },
+          {
+            "start": "0x80073d20",
+            "end": "0x80073d30",
+            "fnv1a32": "E0036BB3",
+            "sha256": "d78328cda4e113d5564740451641bf9d6c641aba76643a46946daac54484da7c"
+          }
+        ]
+      },
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\qualification.json",
+          "bytes": 10246908,
+          "sha256": "9a184ed8c7a830258cc4e7ba8a20f0c09aca5745c853a1292005d5f9212a88e0"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\intro-admission\\observations.json",
+          "bytes": 8039681,
+          "sha256": "523ab10c68ef45de9247e221014818061dbeb115659b393acf5b8254ac31ab3f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\qualification-parent-original.json",
+          "bytes": 10241023,
+          "sha256": "ee1b31545eed3d27de21fbf993f327010837acf7f7ff505dadd8192bb3ec8bc6"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106pn4\\F106-executing-source-pins.json",
+          "bytes": 3779,
+          "sha256": "2ab75a8b8806cfafeac5ee63c4a4a85c638cf87e8e84b7c657a9739394790b4d"
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "fallen_seat": 1,
+      "status": "passed",
+      "native_endpoints": [
+        {
+          "peer": 0,
+          "distinct_native_fall_timers": 5,
+          "first_fall": {
+            "row": 61,
+            "native_timer": 9,
+            "xy": [
+              1312,
+              1600
+            ]
+          },
+          "last_fall": {
+            "row": 65,
+            "native_timer": 26,
+            "xy": [
+              1312,
+              1670
+            ]
+          },
+          "first_dying": {
+            "row": 66,
+            "native_timer": 30,
+            "xy": [
+              1312,
+              1689
+            ],
+            "hp": 0,
+            "state": 2
+          },
+          "fallen_row": 80,
+          "survivor_admission": 86,
+          "native_landed": 165,
+          "final_tuple": [
+            10,
+            0,
+            20,
+            1,
+            0
+          ],
+          "final_lifecycle": [
+            0,
+            0
+          ],
+          "final_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            },
+            {
+              "seat": 1,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "resource_checks": {
+            "peer": 0,
+            "checks": {
+              "roster": true,
+              "fallen_revived_native_full_hp": true,
+              "survivor_hp_preserved": true,
+              "weapons_preserved": true,
+              "ammo9_preserved": true,
+              "resources_preserved": true,
+              "no_retry_consumed": true
+            },
+            "byte_changes": [
+              {
+                "seat": 0,
+                "changes": []
+              },
+              {
+                "seat": 1,
+                "changes": [
+                  {
+                    "offset": "0xcf",
+                    "before": 1,
+                    "after": 0
+                  },
+                  {
+                    "offset": "0xd6",
+                    "before": 3,
+                    "after": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "retry_before_and_after": 2
+        },
+        {
+          "peer": 1,
+          "distinct_native_fall_timers": 6,
+          "first_fall": {
+            "row": 60,
+            "native_timer": 6,
+            "xy": [
+              1312,
+              1595
+            ]
+          },
+          "last_fall": {
+            "row": 65,
+            "native_timer": 27,
+            "xy": [
+              1312,
+              1676
+            ]
+          },
+          "first_dying": {
+            "row": 66,
+            "native_timer": 30,
+            "xy": [
+              1312,
+              1689
+            ],
+            "hp": 0,
+            "state": 2
+          },
+          "fallen_row": 80,
+          "survivor_admission": 86,
+          "native_landed": 165,
+          "final_tuple": [
+            10,
+            0,
+            20,
+            1,
+            0
+          ],
+          "final_lifecycle": [
+            0,
+            0
+          ],
+          "final_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            },
+            {
+              "seat": 1,
+              "foot_y": 384,
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "resource_checks": {
+            "peer": 1,
+            "checks": {
+              "roster": true,
+              "fallen_revived_native_full_hp": true,
+              "survivor_hp_preserved": true,
+              "weapons_preserved": true,
+              "ammo9_preserved": true,
+              "resources_preserved": true,
+              "no_retry_consumed": true
+            },
+            "byte_changes": [
+              {
+                "seat": 0,
+                "changes": []
+              },
+              {
+                "seat": 1,
+                "changes": [
+                  {
+                    "offset": "0xcf",
+                    "before": 1,
+                    "after": 0
+                  },
+                  {
+                    "offset": "0xd6",
+                    "before": 3,
+                    "after": 0
+                  }
+                ]
+              }
+            ]
+          },
+          "retry_before_and_after": 2
+        }
+      ],
+      "controls": [
+        {
+          "seat": 1,
+          "pulses": [
+            {
+              "before": 166,
+              "movement": 168,
+              "settled": 173,
+              "full_support": [
+                false,
+                false
+              ]
+            },
+            {
+              "before": 174,
+              "movement": 176,
+              "settled": 180,
+              "full_support": [
+                false,
+                false
+              ]
+            },
+            {
+              "before": 181,
+              "movement": 184,
+              "settled": 188,
+              "full_support": [
+                true,
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "seat": 0,
+          "pulses": [
+            {
+              "before": 189,
+              "movement": 191,
+              "settled": 193,
+              "full_support": [
+                true,
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "agreed_source_position_only_setup": true,
+        "genuine_native_fall_dying_fallen_every_peer": true,
+        "survivor_alive_and_only_admitting_seat": true,
+        "original_ordered_loader_destination": true,
+        "both_living_native_recovery": true,
+        "original_destination_camera_and_full_feet": true,
+        "independent_both_seat_controls": true,
+        "personal_resources_and_retry_policy": true
+      },
+      "native_terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2784,
+              "core": "395c68e6",
+              "mod": "9f85ef33"
+            },
+            {
+              "simulation_tick": 2816,
+              "core": "1d443939",
+              "mod": "256c308d"
+            },
+            {
+              "simulation_tick": 2848,
+              "core": "efc93a60",
+              "mod": "0a381c17"
+            },
+            {
+              "simulation_tick": 2880,
+              "core": "b76c1ad6",
+              "mod": "644e2c6d"
+            },
+            {
+              "simulation_tick": 2912,
+              "core": "326d8e99",
+              "mod": "7f3fb88d"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "7d21b75e",
+              "mod": "6b65029f"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "3e7d55e3",
+              "mod": "ef9a14bf"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "78a72df2",
+              "mod": "adb3c423"
+            }
+          ],
+          "resolved_through": [
+            3011,
+            3011
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3072,
+              "core": "697c665e",
+              "mod": "ba000d0d"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "f6a35faa",
+              "mod": "c1e03bed"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "8530ad6f",
+              "mod": "39e895f7"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "5da5e76d",
+              "mod": "e4adc595"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "6ca169ff",
+              "mod": "6f2e9175"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "21d74a68",
+              "mod": "d942d4af"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "4cdae086",
+              "mod": "0388940f"
+            }
+          ],
+          "resolved_through": [
+            3284,
+            3284
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3360,
+              "core": "3a8e6ab3",
+              "mod": "d61dfd27"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "d83339fa",
+              "mod": "0755ed6f"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "dbdd9da7",
+              "mod": "8cc63e65"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "96c92a2e",
+              "mod": "3dfd9d45"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "d2753050",
+              "mod": "55a08f1f"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "49688381",
+              "mod": "3928339b"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "0939b6e3",
+              "mod": "ba000d0d"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "5833742e",
+              "mod": "c1e03bed"
+            }
+          ],
+          "resolved_through": [
+            3589,
+            3589
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4672,
+              "core": "30a0b925",
+              "mod": "a9ee233f"
+            },
+            {
+              "simulation_tick": 4704,
+              "core": "ab3add8c",
+              "mod": "9ecd3e1f"
+            },
+            {
+              "simulation_tick": 4736,
+              "core": "26406694",
+              "mod": "8e8af431"
+            },
+            {
+              "simulation_tick": 4768,
+              "core": "9cd3bc5b",
+              "mod": "cee4de11"
+            },
+            {
+              "simulation_tick": 4800,
+              "core": "02749a78",
+              "mod": "ce997837"
+            }
+          ],
+          "resolved_through": [
+            4801,
+            4801
+          ]
+        }
+      ],
+      "matching_crc_samples": 28,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\intro-admission\\peer-0-native-pit-death-survivor-alive.png",
+          "bytes": 2074543,
+          "sha256": "618533b800cda2bfdfd3a35e84d754e84450d16a60de8c38572c5e24337b0c59",
+          "peer": 0,
+          "label": "native-pit-death-survivor-alive",
+          "row": 80,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\intro-admission\\peer-1-native-pit-death-survivor-alive.png",
+          "bytes": 2074543,
+          "sha256": "5a865dce2ef1f323d80de1fe2943721adc11d4c7f3117ab5ed08d8641ef81ab3",
+          "peer": 1,
+          "label": "native-pit-death-survivor-alive",
+          "row": 80,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\intro-admission\\peer-0-native-both-recovered-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "6b2ccf8e793ecbf9ca5ea5e2c3b2708580f84ff6a3dedd2c34345dd337dbc7e0",
+          "peer": 0,
+          "label": "native-both-recovered-arrivals",
+          "row": 165,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\intro-admission\\peer-1-native-both-recovered-arrivals.png",
+          "bytes": 2074543,
+          "sha256": "fa3170173ef3d8855b208edad339b57ba3f5bb8a055d711a0dae462ab89b84bd",
+          "peer": 1,
+          "label": "native-both-recovered-arrivals",
+          "row": 165,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\intro-admission\\peer-0-native-recovered-independent-controls.png",
+          "bytes": 2074543,
+          "sha256": "32207921a5d25ef11574647820902435bcb3d935bd9a1974e2e4ad6c24b5278a",
+          "peer": 0,
+          "label": "native-recovered-independent-controls",
+          "row": 194,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\intro-admission\\peer-1-native-recovered-independent-controls.png",
+          "bytes": 2074543,
+          "sha256": "71ae81d15acd6db3807b8060905ad9e0b9eff36e7b10cdee2bad281398b93391",
+          "peer": 1,
+          "label": "native-recovered-independent-controls",
+          "row": 194,
+          "root_personally_viewed": true
+        }
+      ],
+      "native_resource_reset_source": {
+        "fields": {
+          "CF": "Native one-update interrupt flag, unconditionally cleared at34FF0.",
+          "D6": "Native timed death-burst index0->3; original state2 dispatch, before FALLEN3DACC."
+        },
+        "fresh_stage_reset": "Original1E224 calls2B838;2B858..868 clears full154-byte PLAYER before1E264 calls3BD24. Guest native enrollment separately initializes its body.",
+        "allowance": "Only fallen CF in0..1 and D6=3 may change to0; all other93:114 bytes and survivor fullslice exact.",
+        "source_spans": [
+          {
+            "start": "0x80034fbc",
+            "end": "0x80035010",
+            "fnv1a32": "08BF4DC4",
+            "sha256": "7d982974f0a81c92692bc205f90a0a32fe644db3b32359b28955ba829a183010"
+          },
+          {
+            "start": "0x8002b838",
+            "end": "0x8002b86c",
+            "fnv1a32": "BA68D482",
+            "sha256": "7bb3932424573ad622e5363934fa8ef9eb67259c28fd27fafe8301adb58fcbba"
+          },
+          {
+            "start": "0x8003d954",
+            "end": "0x8003d9f8",
+            "fnv1a32": "249A6A3D",
+            "sha256": "e314984d2d68b54ad6418689bb5ff166082aa4879cb0d2069ca68e6ee876a815"
+          },
+          {
+            "start": "0x8003d9f8",
+            "end": "0x8003dacc",
+            "fnv1a32": "80D9B8BD",
+            "sha256": "e8517904f37704d0294857c010098fe4d2d6d9c658f8d9adf2d159d2eedb1ff9"
+          },
+          {
+            "start": "0x80073d20",
+            "end": "0x80073d30",
+            "fnv1a32": "E0036BB3",
+            "sha256": "d78328cda4e113d5564740451641bf9d6c641aba76643a46946daac54484da7c"
+          }
+        ]
+      },
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\qualification.json",
+          "bytes": 12735846,
+          "sha256": "c0f8fa491a771f510ee30e1edacd0e35d0279fd18a6b90ca38906bc2eb84d8bc"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\intro-admission\\observations.json",
+          "bytes": 10433321,
+          "sha256": "c9124895a341efedbe191e8c9b93795969760b7bd9d68980ae41ff7cb89525b0"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\qualification-parent-original.json",
+          "bytes": 12729949,
+          "sha256": "e97e681bfa91605c5609d8c60f85b8e560b392f5171a13f3a4d66582c9baf02f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f106gn4\\F106-executing-source-pins.json",
+          "bytes": 3779,
+          "sha256": "74dd33fd955bf38d56ccb1827351cc1e761558fc191e86b17ddbcddefb979526"
+        }
+      ]
+    }
+  ],
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fallen-forward-v101-final-binding-root-v4.json",
+    "binding_sha256": "437835711ba1b9b8dc0dbf4fdc08f7922b03c719d88cb5ab67a43a83a8e190c1",
+    "image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+    "manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+    "provenance_sha256": "41fda7cfdfdbfc716a36c5023441ed12ec0f5b5db9489a7333f7c9ccd5831dd8",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v101-fallen-forward-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "5c6609dfbc0079354a1a352294365850be48bac2",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v46",
+    "host_revision": 29
+  },
+  "review_summary": {
+    "root_reviewed_captures": 18,
+    "native_graceful_exit0": 6,
+    "matching_resolved_crc_samples": 58,
+    "resolved_crc_windows": 8,
+    "private_cards_unchanged": true,
+    "same_candidate_all_four_cases": true,
+    "actual_gameplay_policy_change_needed": false,
+    "integrated_source_head": "9578316f49037e7d26044a4f28688695c133d121"
+  },
+  "limits": [
+    "Only frozen234 F106; native3330 remains outside scope.",
+    "Exact X/P1 and normal Zero/P2; both fallen-seat orders independently observed in LOCAL and one-host Win64 delay3 loopback NET.",
+    "Original Recycle4/0CP2 initialization and once position/history-only approach plus declared hostile-contact protection bypass traversal. No velocity/HP/ground/lifecycle/fatal/actor/portal/loader/outcome writes. Native pit fatal remains effective.",
+    "Actual original portal loads20/1CP0 via ordered1E914 then1E1BC; both heroes revive, stand on full original384 feet and accept independent controls. Retry2 stays2; roster0/1 and default weapon/ammo are preserved.",
+    "Only fallen CF native interrupt flag and D6 death-burst3 reset0 under authenticated original fresh-init source. Every other93:114 byte and survivor entire slice remain exact. Advanced acquired equipment is not qualified.",
+    "Source/destination original layout, descriptor low16 and metatile collision/shape/flip projection checked. Native graphic IDs may differ; no full graphic-bank equality claim.",
+    "Bodies, world/PLAY, traces and captures are asynchronous; no instruction-atomic or matched-frame screenshot claim. All18 accepted-case captures personally root viewed. General rendering/HUD/audio/performance obligations remain separate.",
+    "Agreed fixture taints default native recordings; strict ordinary recording/replay refusals are retained. No finalized ordinary recording/replay pass.",
+    "Preserve f106pl1 zeroVY setup failure, f106pl2 overbroad transient checker failure, f106pn3 preframe0 stale title refusal and capacity-denied receipts. Prior3f0 LOCAL passes are retained without cross-candidate promotion.",
+    "Default-off setup and generated-title registration fix integrated locally. Required native evidence uses exact5c6609d/image622fe252 throughout; no other comparison, old-state compatibility, remote platform, human playtest or release/delivery claim."
+  ]
+}
