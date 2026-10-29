@@ -215,7 +215,7 @@ static void digest_and_readiness(void){
     life.status[1]=MMX6_COOP_ABSENT;h=state_digest();life.rejoin_pending=1;CHECK(state_digest()!=h);life.rejoin_pending=0;life.status[1]=MMX6_COOP_ALIVE;
     zero_projected=1;h=state_digest();saved_play[3]^=1;CHECK(state_digest()!=h);saved_play[3]^=1;zero_projected=0;
     int *guards[]={&inside,&player_call,&stage_call,&zero_world,&world_render,&hud_call,&render_x_death,
-        &effect_call,&pickup_call,&solid_call,&solid_allocate_call,&scene_call,&zero_projected,&unit_choices_call,&intro_target_call,&shared_fx_call,&shared_fx_allocate_call};
+        &effect_call,&pickup_call,&solid_call,&solid_allocate_call,&scene_call,&zero_projected,&unit_choices_call,&target_projection_call,&shared_fx_call,&shared_fx_allocate_call};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i){h=state_digest();*guards[i]=1;CHECK(!snapshot_ready());CHECK(state_digest()!=h);*guards[i]=0;CHECK(snapshot_ready());CHECK(state_digest()==h);}
     local_scope=1;CHECK(!snapshot_ready());local_scope=0;
     texture_support=0;CHECK(!snapshot_ready());texture_support=1;
@@ -405,7 +405,7 @@ static void roundtrip_and_malformed(void){
     free(wire);free(bad);
 }
 static void agreed_latch_snapshot(void) {
-    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=9;++option) {
+    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=11;++option) {
         checkpoint_lab_option=option;
         checkpoint_contact_protection_option=protection;
         for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
@@ -415,7 +415,7 @@ static void agreed_latch_snapshot(void) {
             checkpoint_contact_protection_option^=1;CHECK(!snapshot_validate(wire,length));
             checkpoint_contact_protection_option=protection;
             checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));
-            checkpoint_lab_option=option%9+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
+            checkpoint_lab_option=option%11+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
             checkpoint_lab_state=checkpoint_lab_previous=0;
             CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
             CHECK(checkpoint_lab_state==state && checkpoint_lab_previous==1 && state_digest()==digest);

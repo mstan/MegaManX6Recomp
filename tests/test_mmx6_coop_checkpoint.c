@@ -60,7 +60,7 @@ void gpu_set_gp0_source(uint32_t source){(void)source;}
 void gpu_write_gp0(uint32_t value){(void)value;}
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
 static uint8_t before_doors_ram[0x200000];
-static uint8_t portal_source_ram[0x200000];
+static uint8_t portal_source_ram[0x200000],northpole_source_ram[0x200000];
 static const char *test_lab_option="off";
 static const char *test_lab_contact_option="off";
 static const char *test_lab_hp_option[2]={"off","off"};
@@ -708,6 +708,64 @@ static void agreed_portal_prerequisite(CPUState *cpu) {
         !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof saved));
     test_lab_option="off";checkpoint_reset();
 }
+static void setup_northpole_prerequisite(CPUState *cpu,int online) {
+    setup_agreed(cpu,online);test_lab_option="northpole_ice_cp3";checkpoint_reset();
+    CHECK(checkpoint_lab_option==11 && checkpoint_lab_index()==10 && checkpoint_lab_nonce()==0x4C4E4933u);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB8)==0x80072270u);
+    memcpy(test_ram,northpole_source_ram,sizeof test_ram);
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+12,2);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAY+0x1D,3);psx_mod_write_word(PLAY+0x90,10);
+    portal_test_body(0,4800,1300);portal_test_body(1,4824,1300);
+    psx_mod_write_word(0x800971F8u+8,4640u<<16);psx_mod_write_word(0x800971F8u+12,1264u<<16);
+    const uint16_t bounds[]={4976,4640,1456,1264,4976,4640,1456,1264};
+    for(unsigned i=0;i<8;++i)psx_mod_write_half(0x800971F8u+0x1C+i*2,bounds[i]);
+    uint32_t meta,desc;CHECK(checkpoint_northpole_source());
+    CHECK(checkpoint_northpole_assets(&meta,&desc) && checkpoint_northpole_ground(meta,desc));
+}
+static void agreed_northpole_prerequisite(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_northpole_prerequisite(cpu,online);p2.body[5]=1;
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 && !guest_calls);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        p2.body[5]=2;partner=p2;put32(partner.body+8,5120u<<16);put32(partner.body+0x18,5120u<<16);
+        put32(partner.body+12,1593u<<16);put32(partner.body+0x1C,1593u<<16);
+        const unsigned positions[]={8,0x18,12,0x1C};
+        for(unsigned i=0;i<4;++i) {uint32_t value=(i<2?5016u:1594u)<<16;
+            for(unsigned n=0;n<4;++n)before_ram[(PLAYER+positions[i]+n)&0x1FFFFF]=(uint8_t)(value>>(n*8));}
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !guest_calls);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) &&
+            !memcmp(&registers,cpu,sizeof registers)); /* Exactly position/previous-position, no native call. */
+        portal_test_body(0,5016,1595);portal_test_body(1,5120,1594);psx_mod_write_word(PLAY+0x90,12);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3); /* No fabricated producer. */
+        uint32_t a=0x800C1220u;psx_mod_write_byte(a,0x41);psx_mod_write_byte(a+1,7);
+        psx_mod_write_byte(a+4,1);psx_mod_write_byte(a+6,8);psx_mod_write_word(a+0x10,0x800F60D4u);
+        psx_mod_write_word(a+8,4992u<<16);psx_mod_write_word(a+12,1376u<<16);
+        psx_mod_write_word(PLAY+0x90,11);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        psx_mod_write_word(PLAY+0x90,12);memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+            psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_byte(diagnostic+0xAD)==2 &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        const uint32_t corrupt[]={0x80097438u,0x80100000u,0x80120000u,0x800ED150u,0x80073D50u};
+        for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
+            setup_northpole_prerequisite(cpu,online);psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^0x40);
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+            CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+                psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+                !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        }
+        const uint32_t hostile_pools[]={0x8008EF48u,0x80093C98u};
+        for(unsigned i=0;i<2;++i) {
+            setup_northpole_prerequisite(cpu,online);a=hostile_pools[i];
+            psx_mod_write_byte(a,1);psx_mod_write_half(a+10,5120);psx_mod_write_half(a+14,1590);
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+            CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 && !guest_calls &&
+                !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        }
+    }
+    test_lab_option="off";checkpoint_reset();
+}
 static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
     const char *options[]={"intro_cp2","amazon_cp0","amazon_cp2","intro_before_doors",
         "intro_before_explosion","recycle_cp2","recycle_portal_cp2","recycle_distant_cp2"};
@@ -1090,6 +1148,11 @@ int main(int argc,char **argv) {
     if(!fixture || !*fixture){puts("SKIP: MMX6_PORTAL_SETUP_RAM must name external original source materialization");return 77;}
     file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"RPS1",4));
     CHECK(fread(portal_source_ram,1,sizeof portal_source_ram,file)==sizeof portal_source_ram && fgetc(file)==EOF);fclose(file);
+    fixture=getenv("MMX6_NORTHPOLE_SETUP_RAM");
+    if(!fixture || !*fixture){puts("SKIP: MMX6_NORTHPOLE_SETUP_RAM must name external original source materialization");return 77;}
+    file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"NPI1",4));
+    CHECK(fread(northpole_source_ram,1,sizeof northpole_source_ram,file)==sizeof northpole_source_ram && fgetc(file)==EOF);fclose(file);
+    agreed_northpole_prerequisite(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_recycle_boundary(&cpu);agreed_recycle_loaded_origin_rejections(&cpu);
     agreed_portal_prerequisite(&cpu);

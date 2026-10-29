@@ -21,7 +21,7 @@ static int intro_target_eligible(unsigned seat) {
 static int intro_near_target(CPUState *cpu,uint32_t address) {
     /* Survivor Zero already occupies the native singleton. Never overlay that
      * world, a player/render projection, pause, vehicle or scene transport. */
-    if (intro_target_call || !ready || !enrolled || failed || inside || zero_world || zero_projected ||
+    if (target_projection_call || !ready || !enrolled || failed || inside || zero_world || zero_projected ||
         address!=0x800EB14Cu || scene_owner || scene_phase || psx_mod_read_byte(PLAY)!=0x0A ||
         psx_mod_read_byte(PLAY+1) || psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13) ||
         psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) return 0;
@@ -42,11 +42,11 @@ static int intro_near_target(CPUState *cpu,uint32_t address) {
     if(intro_target_eligible(0) && dx<=dz)return 0; /* Deterministic tie: P1. */
     uint32_t original_x=psx_mod_read_half(PLAYER+10);
     STATE_WORDS(restore_target_x,46,&original_x,1);
-    intro_target_call=1;
+    target_projection_call=1;
     psx_mod_write_half(PLAYER+10,(uint16_t)z);
     cpu->gpr[2]=guest(cpu,address,actor,cpu->gpr[5]);
     psx_mod_write_half(PLAYER+10,(uint16_t)original_x);
     STATE_POP(restore_target_x);
-    intro_target_call=0;
+    target_projection_call=0;
     return 1;
 }

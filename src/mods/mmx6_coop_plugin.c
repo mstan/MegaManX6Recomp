@@ -133,7 +133,7 @@ static uint32_t both_door_actor;
 static uint32_t both_door_origin;
 static unsigned both_door_members;
 static int unit_choices_call;
-static int intro_target_call;
+static int target_projection_call;
 /* Elective independent presentation. The canonical world still runs once. */
 static unsigned independent_views, local_split, private_draw, private_seat, view_call;
 static void independent_invalidate(void);
@@ -1808,7 +1808,7 @@ static uint32_t retired_host_word(const Mmx6StateFrame *frame,size_t index) {
 static int retire_quit_stage(CPUState *cpu,uint32_t address) {
     if (!cpu || address!=0x8003BD24u || inside || player_call || zero_world || zero_projected ||
         world_render || hud_call || render_x_death || effect_call || shared_fx_call || shared_fx_allocate_call || pickup_call || solid_call ||
-        solid_allocate_call || ride_call || view_call || private_draw || scene_call || unit_choices_call || intro_target_call ||
+        solid_allocate_call || ride_call || view_call || private_draw || scene_call || unit_choices_call || target_projection_call ||
         stage_call!=1 || state_track.count!=2 || state_track.error ||
         psx_mod_read_byte(PLAY)!=9 || psx_mod_read_byte(PLAY+1) ||
         cpu->gpr[31]!=0x8001E26Cu || cpu->gpr[16]!=PLAY) return 0;
@@ -2587,6 +2587,8 @@ static int solid_player_collision(CPUState *cpu, uint32_t address) {
     solid_call=0;
     return 1;
 }
+#include "mmx6_coop_northpole_ice.inc"
+
 /* Retain each original 16x16 HUD tile with its original palette. Tile-local
  * UVs also avoid the 8-bit UV wrap at the edge of a native texture page. */
 static uint16_t hud_tile_bank(uint16_t page, uint16_t clut, uint16_t uv) {
@@ -2790,7 +2792,7 @@ static void activate(void) {
     char doors[16];
     both_doors=psx_mod_option_value("mmx6.local-coop","prototype","doors",doors,sizeof doors) &&
         !strcmp(doors,"both");
-    unit_choices_call=intro_target_call=0;
+    unit_choices_call=target_projection_call=0;
     zero_menu_loaded=0;
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
     assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
@@ -2809,6 +2811,8 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EB14C,intro_near_target)) failed=1;
+    if (!psx_mod_set_function_replacement(0x800ED150,northpole_ice_admission) ||
+        !psx_mod_set_function_replacement(0x800EBF18,northpole_ice_live)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EC780,recycle_portal_contact)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
@@ -2819,6 +2823,7 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80014F70,working_palette_native_load)) failed=1;
     if (!psx_mod_set_function_replacement(0x80030ECC,player_contact)) failed=1;
     if (!psx_mod_set_function_replacement(0x80031DA8,solid_player_collision) ||
+        !psx_mod_set_function_replacement(0x8002BFD0,solid_allocate) ||
         !psx_mod_set_function_replacement(0x8002C4C4,solid_allocate) ||
         !psx_mod_set_function_replacement(0x8002C32C,solid_allocate)) failed=1;
     if (!psx_mod_set_function_replacement(0x8004E26C,pickup_collect) ||
@@ -2848,7 +2853,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v44",
+        .compatibility_id = "mmx6-x-zero-delay-v45",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

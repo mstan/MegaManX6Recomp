@@ -32,6 +32,7 @@ enum { CHECKPOINT_LAB_RECYCLE_NONCE=0x4C435232u }; /* Original Recycle section1 
 enum { CHECKPOINT_LAB_ALTERNATE_NONCE=0x4C414231u }; /* Original alternate20/1 CP1; encounter prerequisites stay native. */
 enum { CHECKPOINT_LAB_TURTLOID_NONCE=0x4C545231u }; /* Original Turtloid6/0 CP1; native rain remains unmodified. */
 enum { CHECKPOINT_LAB_PORTAL_NONCE=0x4C525032u }; /* Original Recycle section0 CP2 plus declared approach. */
+enum { CHECKPOINT_LAB_NORTHPOLE_NONCE=0x4C4E4933u }; /* Original NorthPole CP3 plus declared approach. */
 enum { CHECKPOINT_LAB_DISTANT_PORTAL_NONCE=0x4C525044u }; /* Same native entry, distinct far-primary setup. */
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint32_t placed_world; } Mmx6CheckpointPending;
 static Mmx6CheckpointPending checkpoint_pending;
@@ -50,7 +51,7 @@ static void checkpoint_earned_weapons_diagnostics(void) {
 static unsigned checkpoint_lab_index(void) {
     return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
-        checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:115;
+        checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -62,7 +63,8 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==7?CHECKPOINT_LAB_PORTAL_NONCE:
         checkpoint_lab_option==8?CHECKPOINT_LAB_TURTLOID_NONCE:
         checkpoint_lab_option==9?CHECKPOINT_LAB_ALTERNATE_NONCE:
-        checkpoint_lab_option==10?CHECKPOINT_LAB_DISTANT_PORTAL_NONCE:0;
+        checkpoint_lab_option==10?CHECKPOINT_LAB_DISTANT_PORTAL_NONCE:
+        checkpoint_lab_option==11?CHECKPOINT_LAB_NORTHPOLE_NONCE:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -184,6 +186,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"recycle_cp2"))checkpoint_lab_option=6;
         else if(!strcmp(option,"recycle_portal_cp2"))checkpoint_lab_option=7;
         else if(!strcmp(option,"recycle_distant_cp2"))checkpoint_lab_option=10;
+        else if(!strcmp(option,"northpole_ice_cp3"))checkpoint_lab_option=11;
         else if(!strcmp(option,"turtloid_rain_cp1"))checkpoint_lab_option=8;
         else if(!strcmp(option,"alternate_boss_cp1"))checkpoint_lab_option=9;
         else if(strcmp(option,"off"))failed=1;
@@ -554,6 +557,7 @@ static void checkpoint_ground_refusal(uint32_t meta,uint32_t desc,int explosion)
 #endif
 }
 #include "mmx6_coop_before_portal.inc"
+#include "mmx6_coop_before_northpole.inc"
 static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32_t nonce,unsigned authority) {
     unsigned reason=CHECKPOINT_OK,index=115;
     for(unsigned i=0;i<115;++i)if(checkpoint_inventory[i].stage==stage &&
@@ -602,7 +606,18 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
         else if((checkpoint_pending.phase==2 || checkpoint_pending.phase==3) && psx_mod_read_byte(PLAY)==10 &&
                 psx_mod_read_byte(PLAY+12)==entry->stage && psx_mod_read_byte(PLAY+13)==entry->section &&
                 psx_mod_read_byte(PLAY+0x1D)==entry->checkpoint) {
-            if(checkpoint_pending.authority==CHECKPOINT_AGREED && (checkpoint_lab_option==7 || checkpoint_lab_option==10)) {
+            if(checkpoint_pending.authority==CHECKPOINT_AGREED && checkpoint_lab_option==11) {
+                uint32_t meta,desc;
+                if(!checkpoint_source(entry) || !checkpoint_northpole_source() ||
+                   !checkpoint_northpole_assets(&meta,&desc) || !checkpoint_northpole_ground(meta,desc)) {
+                    checkpoint_refusal_value("northpole-setup-source-assets-ground",0,entry->record,0,1);
+                    checkpoint_cancel(CHECKPOINT_SOURCE);
+                } else if(checkpoint_pending.phase==2) {
+                    if(checkpoint_northpole_original_arrival())checkpoint_northpole_place();
+                } else if(checkpoint_northpole_ready()) {
+                    psx_mod_write_byte(diagnostic+0xAD,2);checkpoint_complete(cpu);
+                }
+            } else if(checkpoint_pending.authority==CHECKPOINT_AGREED && (checkpoint_lab_option==7 || checkpoint_lab_option==10)) {
                 uint32_t meta,desc;
                 if(checkpoint_lab_option==10 && !independent_views)checkpoint_cancel(CHECKPOINT_FORBIDDEN);
                 else if(!checkpoint_source(entry) || !checkpoint_portal_source() ||

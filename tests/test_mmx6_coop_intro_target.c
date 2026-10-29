@@ -24,7 +24,7 @@ static void native_leaf(CPUState *cpu){
     cpu->gpr[2]=0x12345678;
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
-    (void)ret;CHECK(address==0x800EB14C && intro_target_call && state_track.count==2);
+    (void)ret;CHECK(address==0x800EB14C && target_projection_call && state_track.count==2);
     CHECK(!psx_mod_try_function_replacement(cpu,address)); /* Re-entry executes original once. */
     CHECK(psx_mod_read_half(PLAYER+8)==0x1357 && psx_mod_read_word(PLAYER+12)==0x24681000);
     ++calls;native_leaf(cpu);
@@ -32,7 +32,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
 static void setup(CPUState *cpu){
     memset(ram,0,sizeof ram);memset(&p2,0,sizeof p2);memset(cpu,0,sizeof *cpu);
     mmx6_coop_lifecycle_init(&life);ready=enrolled=1;failed=inside=zero_world=zero_projected=0;
-    scene_owner=scene_phase=0;intro_target_call=0;state_track.count=state_track.error=0;calls=0;
+    scene_owner=scene_phase=0;target_projection_call=0;state_track.count=state_track.error=0;calls=0;
     psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAYER+3,1);psx_mod_write_byte(PLAYER+4,1);
     psx_mod_write_byte(PLAYER+5,2);psx_mod_write_byte(PLAYER+0x5C,32);
     psx_mod_write_word(PLAYER+8,(144u<<16)|0x1357);psx_mod_write_word(PLAYER+12,0x24681000);
@@ -49,7 +49,7 @@ static void setup(CPUState *cpu){
 }
 static void rejected(CPUState *cpu){
     memcpy(before,ram,sizeof ram);CHECK(!intro_near_target(cpu,0x800EB14C));
-    CHECK(!calls && !memcmp(before,ram,sizeof ram) && !state_track.count && !intro_target_call);
+    CHECK(!calls && !memcmp(before,ram,sizeof ram) && !state_track.count && !target_projection_call);
 }
 int main(void){
     CPUState cpu;setup(&cpu);native_leaf(&cpu);
@@ -59,7 +59,7 @@ int main(void){
     CHECK(cpu.pc==cpu.gpr[31]);
     CHECK(psx_mod_read_byte(enemy+5)==2);before[(enemy+5)&0x1FFFFF]=2;
     CHECK(!memcmp(before,ram,sizeof ram) && !memcmp(&saved,&p2,sizeof p2));
-    CHECK(!state_track.count && !intro_target_call);
+    CHECK(!state_track.count && !target_projection_call);
     setup(&cpu);put32(p2.body+8,688u<<16);rejected(&cpu); /* Equal distance: P1. */
     setup(&cpu);put32(p2.body+8,304u<<16);CHECK(intro_near_target(&cpu,0x800EB14C));
     CHECK(psx_mod_read_byte(enemy+5)==1); /* Exact112 remains outside native strict range. */
@@ -69,7 +69,7 @@ int main(void){
     for(unsigned i=0;i<sizeof status/sizeof status[0];++i){setup(&cpu);life.status[1]=status[i];rejected(&cpu);}
     const unsigned offsets[]={3,4,0x5C,0x7A,0xD0,0xD4};
     for(unsigned i=0;i<sizeof offsets/sizeof offsets[0];++i){setup(&cpu);p2.body[offsets[i]]=i<3?0:1;rejected(&cpu);}
-    int *guards[]={&inside,&zero_world,&zero_projected,&intro_target_call,&failed};
+    int *guards[]={&inside,&zero_world,&zero_projected,&target_projection_call,&failed};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i){setup(&cpu);*guards[i]=1;memcpy(before,ram,sizeof ram);CHECK(!intro_near_target(&cpu,0x800EB14C));CHECK(!calls && !memcmp(before,ram,sizeof ram));*guards[i]=0;}
     const unsigned play_offsets[]={1,12,13,0x10,0x1C};
     for(unsigned i=0;i<sizeof play_offsets/sizeof play_offsets[0];++i){setup(&cpu);psx_mod_write_byte(PLAY+play_offsets[i],1);rejected(&cpu);}

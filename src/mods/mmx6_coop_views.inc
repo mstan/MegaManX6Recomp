@@ -97,7 +97,7 @@ typedef struct {
     int inside,player_call,stage_call,zero_world,world_render,hud_call,
         render_x_death,effect_call,shared_fx_call,shared_fx_allocate_call,
         pickup_call,solid_call,solid_allocate_call,ride_call,
-        scene_call,zero_projected,unit_choices_call,intro_target_call;
+        scene_call,zero_projected,unit_choices_call,target_projection_call;
     unsigned track_count,track_error;
 } PrivateViewContext;
 
@@ -112,7 +112,7 @@ static void private_context_save(PrivateViewContext *s) {
     SAVE_VIEW_FLAG(render_x_death);SAVE_VIEW_FLAG(effect_call);SAVE_VIEW_FLAG(shared_fx_call);
     SAVE_VIEW_FLAG(shared_fx_allocate_call);SAVE_VIEW_FLAG(pickup_call);SAVE_VIEW_FLAG(solid_call);
     SAVE_VIEW_FLAG(solid_allocate_call);SAVE_VIEW_FLAG(ride_call);SAVE_VIEW_FLAG(scene_call);
-    SAVE_VIEW_FLAG(zero_projected);SAVE_VIEW_FLAG(unit_choices_call);SAVE_VIEW_FLAG(intro_target_call);
+    SAVE_VIEW_FLAG(zero_projected);SAVE_VIEW_FLAG(unit_choices_call);SAVE_VIEW_FLAG(target_projection_call);
 #undef SAVE_VIEW_FLAG
     s->track_count=state_track.count;s->track_error=state_track.error;
 }
@@ -127,7 +127,7 @@ static void private_context_restore(const PrivateViewContext *s) {
     RESTORE_VIEW_FLAG(render_x_death);RESTORE_VIEW_FLAG(effect_call);RESTORE_VIEW_FLAG(shared_fx_call);
     RESTORE_VIEW_FLAG(shared_fx_allocate_call);RESTORE_VIEW_FLAG(pickup_call);RESTORE_VIEW_FLAG(solid_call);
     RESTORE_VIEW_FLAG(solid_allocate_call);RESTORE_VIEW_FLAG(ride_call);RESTORE_VIEW_FLAG(scene_call);
-    RESTORE_VIEW_FLAG(zero_projected);RESTORE_VIEW_FLAG(unit_choices_call);RESTORE_VIEW_FLAG(intro_target_call);
+    RESTORE_VIEW_FLAG(zero_projected);RESTORE_VIEW_FLAG(unit_choices_call);RESTORE_VIEW_FLAG(target_projection_call);
 #undef RESTORE_VIEW_FLAG
     state_track.count=s->track_count;state_track.error=s->track_error;
 }

@@ -57,7 +57,7 @@ static int snapshot_ready(void) {
     if(diagnostic && psx_mod_read_byte(diagnostic+0x50)==8)return 0;
     const unsigned guards[]={inside,player_call,stage_call,zero_world,world_render,
         hud_call,render_x_death,effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,view_call,private_draw,
-        scene_call,zero_projected,unit_choices_call,intro_target_call,shared_fx_call,shared_fx_allocate_call,state_track.count,state_track.error,
+        scene_call,zero_projected,unit_choices_call,target_projection_call,shared_fx_call,shared_fx_allocate_call,state_track.count,state_track.error,
         checkpoint_pending.phase,checkpoint_pending.index,checkpoint_pending.nonce,checkpoint_pending.authority,checkpoint_pending.placed_world,
         jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,jump_audio_faulted,
         jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_stop_mask};
@@ -216,7 +216,7 @@ static uint32_t state_digest(void) {
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
-        effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,scene_call,zero_projected,unit_choices_call,intro_target_call,shared_fx_call,shared_fx_allocate_call,
+        effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,scene_call,zero_projected,unit_choices_call,target_projection_call,shared_fx_call,shared_fx_allocate_call,
         state_track.count,state_track.error,(unsigned)ready,checkpoint_pending.phase,
         checkpoint_pending.index,checkpoint_pending.nonce,checkpoint_pending.authority,checkpoint_pending.placed_world,jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,
         jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_faulted,jump_audio_stop_mask,

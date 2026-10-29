@@ -332,3 +332,23 @@ or forged hashes fail. The source audit and27 tests pass without a game.
 Current-build native readiness and final composition still require a fresh
 owned run; this source-derived guard correction does not convert the retained
 failed setup into a pass.
+
+
+## North Pole authored ice prerequisite
+
+Title45/profile28 adds default-off `northpole_ice_cp3` for F111/F112. Both peers
+agree before boot. Original stage2/0 checkpoint3 and both native grounded
+arrivals precede one position/previous-position-only placement to X5016/Y1594
+and X5120/Y1593. Original DAT96/layout, full22-pixel floors at1616 (code3C),
+48-pixel air envelopes, body boxes, camera bounds and nearby actor absence are
+guarded. Native camera/scanner and producer must reach their ordinary unarmed
+phase8; both heroes must settle before readiness. No actor, phase, spawn,
+camera, health or outcome is manufactured. This setup bypasses reachability
+and taints recording qualification. Source/fixture tests establish no gameplay pass.
+
+The product hooks extend original producer ED150's hero-position leaf to an
+eligible guest and add only the missed guest contact after canonical child12
+BF18 executes once. They retain native RNG, child allocation, attack ownership,
+AI and lifetime. Guest contact history resets on allocator2BFD0 reuse.
+Native early underside contact uses the original copied-body ground test and
+parent-count/free tail. Top contact alone cannot force retirement.

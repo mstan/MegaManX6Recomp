@@ -45,6 +45,10 @@ value = "recycle_distant_cp2"
 label = "Recycle: distant primary before original portal"
 
 [[option.choice]]
+value = "northpole_ice_cp3"
+label = "North Pole original ice shaft (position prerequisite)"
+
+[[option.choice]]
 value = "turtloid_rain_cp1"
 label = "Turtloid original checkpoint 1 rain approach"
 
