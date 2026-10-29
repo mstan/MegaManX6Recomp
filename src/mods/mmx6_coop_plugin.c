@@ -1042,6 +1042,18 @@ static void ride_sync_rider(void) {
     }
 }
 #include "mmx6_coop_victory.inc"
+static int arrival_source(void);
+static int arrival_grounded(const uint8_t *body);
+/* One projected incoming actor only. Callers own enter/leave_zero and retain
+ * the canonical world clocks, scene flags and camera around these calls. */
+static void arrival_body_tick(CPUState *cpu) {
+    for (unsigned i=0;i<8;i+=2) psx_mod_write_half(PLAYER+0x7C+i,0);
+    guest(cpu,0x80034DCC,0,0);
+    guest(cpu,0x8002012C,0,0);
+    guest(cpu,0x8002F288,PLAYER,0);
+    guest(cpu,0x80020D74,0,0);
+    guest(cpu,0x80020DC8,0,0);
+}
 static void scene_begin(unsigned seat, uint32_t source) {
     if (scene_owner || clear_phase || !enrolled || life.status[seat]!=MMX6_COOP_ALIVE) return;
     scene_owner=seat+1;
@@ -1323,8 +1335,29 @@ static void scene_tick(CPUState *cpu) {
     uint32_t scene_context[5]={seat,passenger,(uint32_t)locked,(uint32_t)landing,(uint32_t)prior_inside};
     STATE_WORDS(restore_context,28,scene_context,5);
     if (passenger) enter_zero();
-    if (scene_phase==1) {
-        if (passenger && life.status[1]==MMX6_COOP_JOINING) {
+    if (scene_phase==1 && passenger && arrival_pair && life.status[1]==MMX6_COOP_JOINING) {
+        /* A native boss can claim X immediately after his checkpoint beam,
+         * while Zero's original action0 is still incoming. returning_body
+         * belongs only to voluntary Select departure/return; it is neither
+         * initialized nor authoritative for this fresh native birth. Finish
+         * the existing body-only arrival pipeline before withdrawing it. */
+        if (!arrival_source()) failed=1;
+        else {
+            arrival_body_tick(cpu);
+            uint8_t incoming[sizeof scene_body];capture(PLAYER,incoming,sizeof incoming);
+            if (arrival_grounded(incoming)) {
+                arrival_pair=0;
+                mmx6_coop_teleport_done(&life);
+            } else if (incoming[4]==2) {
+                arrival_pair=0;
+                mmx6_coop_fatal(&life,1);
+                scene_phase=0; /* A native fatal body is no living passenger. */
+            }
+        }
+        /* Keep phase1 for this pass, even on genuine native completion.
+         * The next world pass captures that completed body as passenger. */
+    } else if (scene_phase==1) {
+        if (passenger && life.status[1]==MMX6_COOP_JOINING && join_phase) {
             uint32_t x=psx_mod_read_word(PLAYER+8);
             project(PLAYER,returning_body,sizeof returning_body);
             psx_mod_write_word(PLAYER+8,x);
@@ -1616,12 +1649,7 @@ static int paired_arrival(CPUState *cpu) {
     /* Only this owned actor runs again. enter/leave restores X, all world
      * flags/clocks and the canonical camera, including native PLAY1C clears. */
     enter_zero();
-    for (unsigned i=0;i<8;i+=2) psx_mod_write_half(PLAYER+0x7C+i,0);
-    guest(cpu,0x80034DCC,0,0);
-    guest(cpu,0x8002012C,0,0);
-    guest(cpu,0x8002F288,PLAYER,0);
-    guest(cpu,0x80020D74,0,0);
-    guest(cpu,0x80020DC8,0,0);
+    arrival_body_tick(cpu);
     leave_zero();
     uint8_t primary[0x158];capture(PLAYER,primary,sizeof primary);
     if (arrival_grounded(primary) && arrival_grounded(p2.body) &&
