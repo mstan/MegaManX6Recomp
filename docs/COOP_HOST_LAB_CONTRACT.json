@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 33,
+  "revision": 34,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v50",
+    "title_compatibility": "mmx6-x-zero-delay-v51",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -659,5 +659,17 @@
     "regression": "Original terrain approach stops at the native pedestal side x1853. Source-qualified ordinary Jump+Right gets onto the original top1248; a full callback can leave ZeroY1226 plus native fractional history and must still establish scene owner2 and allow the queued command to progress.",
     "qualification": "Current exact-image LOCAL and NET guest-led portal/load/native destination feet/BIN33 intro release and independent controls remain mandatory. Prior native queued20/owner0 stall is a retained rejected candidate; source/C models earn no comparison credit.",
     "snapshot": "Existing scene owner and player context only; snapshot14 unchanged."
+  },
+  "title_changes_v51_refight_incoming_scene_guest": {
+    "issue": "beads-eio.1.114",
+    "comparisons": [
+      "F122",
+      "F124",
+      "F7"
+    ],
+    "default_correctness_fix": "When a native boss intro claims the primary before its paired guest finishes arriving, continue the existing five body-only native arrival updates in the projected guest context. Capture the completed native guest before ordinary scene withdrawal. Only an actual voluntary Select return may restore returning_body. Preserve original owner, shared PLAY and camera context; do not run a second world update or seed HP, character, coordinates or completion.",
+    "regression": "Fresh incoming guest with an empty voluntary return context retains original Zero identity, assets and HP throughout arrival and intro. Real voluntary returns retain saved HP/context; original source refusal and fatal bodies remain failures rather than fabricated living arrivals.",
+    "qualification": "Exact-image LOCAL and NET guest-only original portal, native CP2 destination feet, mounted BIN33 full-HP active boss intro, released controls and separate native inputs remain mandatory. Prior guest identity loss is rejected retained evidence; source models confer no comparison credit.",
+    "snapshot": "No new persistent fields. Existing arrival_pair, join_phase and player contexts; snapshot14 unchanged."
   }
 }
