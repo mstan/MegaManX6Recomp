@@ -55,6 +55,12 @@ finished. These rules supplement the owner's global instructions.
 - Derive input masks from the actual field being read: X6's mapped body input
   differs from raw pad and decoded-pad input. Check existing native samples or
   original source before freezing an observer. Never edit a running observer.
+- Before launching a new or edited observer, run the installed undefined-name
+  linter on it and its launch adapter (Ruff F821/F822/F823 on this PC), then the
+  existing source/build preflight. Check requested capture dimensions against
+  the imported window helper's allowance. Checkpoint readiness and starting-HP
+  application are separate publications; wait for the actual typed HP receipt.
+  Syntax compilation alone missed these errors and wasted native launches.
 - Bound waits by native progress and a hard wall deadline. A delay3 input needs
   three simulation updates, which a short wall timeout may not provide during
   paired debug reads. Retain exact outcome predicates and owned RPC validation;

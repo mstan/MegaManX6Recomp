@@ -2370,9 +2370,43 @@
               "This case establishes neither once-world update counts nor a rollback/rewind guarantee."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "fd795bfd72395bd8fb3adfe73bd65978d4dcb898",
+            "build_identity": {
+              "exe_sha256": "f2c58721fa3118ce83b141dff84659d047cbc96ddd97a3ac4c841785b320834f",
+              "declared_manifest_sha256": "2b52658dda6d42a0dbe69a9c2d5e02f2b31a375114ac0f45fdd750217728e049",
+              "provenance_sha256": "72ef736bbbe0aab52e69fc0c03aabbdc04546aebca2b1522ee597c28bcfffd4d"
+            },
+            "settings": {
+              "roster": "native Zero-P1/base-X-P2",
+              "camera": "unified",
+              "resolution": "native1x",
+              "audio": "dummy",
+              "mode": "local"
+            },
+            "action": "Original owner0 menu, actual X-P2 fullcharge, display probes and ordinary release.",
+            "outcome": "Actual display loss is not confined to composed screenshot readback or held glow. No source-demonstrable rendering fix found; park unchanged inverse variants.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-fd795bfd-R9-native-black-deferred.json",
+                "sha256": "5c41e5c175c59baea357a0114629814b54d63d169666c552bda7265e01d1473a"
+              }
+            ],
+            "limits": [
+              "No complete R9 native charge/projectile/dash case or NET counterpart. Deferred type2 owner fix remains unqualified; no F179/F150/F174 admission.",
+              "GPU tiles, CPU mirrors and composed captures are asynchronous. CPU images cannot substitute for retained native art.",
+              "Authored availability/inventory and already-processed explanation card fields are setup only. Earlier stage11 story still executes; no runtime acceleration, native Save or earned progression claim.",
+              "Normal masks/clipping/fade and continuing draw traffic do not identify the missing OT, late cover or palette cause."
+            ],
+            "bypasses": [
+              "Authored prelaunch QA card prerequisites; actual original Quit/Load/unit5/arrival retained."
+            ]
           }
         ],
-        "limitations": "Zero/P2 native private-pool menu freeze and dash lifetime now pass bounded local/development-loopback checks on exact v12. X in either seat, X-owned charge/projectiles, complete retained-color/native-reference comparison and full R9 remain unverified."
+        "limitations": "Actual display loss is not confined to composed screenshot readback or held glow. No source-demonstrable rendering fix found; park unchanged inverse variants. Required full LOCAL/NET same-candidate qualification remains incomplete."
       }
     },
     {
@@ -10690,8 +10724,47 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+            "build_identity": {
+              "exe_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+              "declared_manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+              "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8"
+            },
+            "settings": {
+              "checkpoint": "intro_before_doors",
+              "starting_hp": [
+                "1",
+                "off"
+              ],
+              "protection": "off",
+              "door": "both",
+              "camera_variants": [
+                "split",
+                "unified"
+              ],
+              "mode": "local"
+            },
+            "action": "Actual predoor HP1 and source enemy; ordinary Left approaches and live authored blocker observation.",
+            "outcome": "No genuine death or gate outcome. Source/live32HP solid explains approach stop; concrete native attack-clearance correction is frozen but not run.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-1479d1a-F57-predoor-progress.json",
+                "sha256": "7a8aa59b282b1b9419c9c16041924b856b976a61b9576dd2b09b61bd705e850c"
+              }
+            ],
+            "limits": [
+              "No comparison pass or NET result; setup/harness failures retained."
+            ],
+            "bypasses": [
+              "Agreed native CP1 initializer, declared position/placement bypass and prelaunch startingHP1; no fatal/lifecycle/door-result write."
+            ]
+          }
+        ],
+        "limitations": "No genuine death or gate outcome. Source/live32HP solid explains approach stop; concrete native attack-clearance correction is frozen but not run. Required full LOCAL/NET same-candidate qualification remains incomplete."
       }
     },
     {

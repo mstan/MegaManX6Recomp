@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "comparison": "R9",
+  "frozen_row_sha256": "843068735bf5c4036d54e5bdcd22c700fa884c573de66723229009d92af4962f",
+  "result": "unverified",
+  "candidate": "fd795bfd72395bd8fb3adfe73bd65978d4dcb898",
+  "binding": {
+    "image_sha256": "f2c58721fa3118ce83b141dff84659d047cbc96ddd97a3ac4c841785b320834f",
+    "manifest_sha256": "2b52658dda6d42a0dbe69a9c2d5e02f2b31a375114ac0f45fdd750217728e049",
+    "provenance_sha256": "72ef736bbbe0aab52e69fc0c03aabbdc04546aebca2b1522ee597c28bcfffd4d"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-surface-diagnostic-local-v98-root-v4\\qualification.json",
+    "bytes": 267900579,
+    "sha256": "3e44fbd42543fcb059f96d3dc5993e71f437e626e144142668c6c346ddc68b4f"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-surface-diagnostic-local-v98-root-v4\\ammo-hud\\intro-admission\\native-Zero-X-charge-dash\\observations.json",
+    "bytes": 2015124,
+    "sha256": "ce18a310cad0756ce9d6a6512539a277751db14aa731057078ebbe446bf6e1fb"
+  },
+  "executing_sources": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-surface-diagnostic-local-v98-root-v4\\V96-executing-source-pins.json",
+    "bytes": 6297,
+    "sha256": "7ae79c6f8cad3d890c902da7689886469e6ef4d80a8cd7abbf1121a90b5a0d0b"
+  },
+  "source_audit": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\inverse-menu-black-focused-audit-v98.json",
+    "bytes": 5548,
+    "sha256": "0bee896901af3632c76cbad5fd6b30a6f0fe2d40d830b04d05b65d5ac5c0bdcd"
+  },
+  "observed": [
+    "Actual original card Load/unit5 selection and fresh native Zero-P1/base-X-P2 arrival.",
+    "First owner0 native menu is visible. Actual base-X-P2 full charge90/native attached effects reached.",
+    "Original composed charge capture black; six displayed GPU FBO tiles each have zero nonblack15bit pixels; CPU canonical image also black.",
+    "After ordinary input release and60world updates, GPU/CPU/quiet composed images remain black.",
+    "Owned native exit0 and existing private cards unchanged."
+  ],
+  "conclusion": "Actual display loss is not confined to composed screenshot readback or held glow. No source-demonstrable rendering fix found; park unchanged inverse variants.",
+  "limits": [
+    "No complete R9 native charge/projectile/dash case or NET counterpart. Deferred type2 owner fix remains unqualified; no F179/F150/F174 admission.",
+    "GPU tiles, CPU mirrors and composed captures are asynchronous. CPU images cannot substitute for retained native art.",
+    "Authored availability/inventory and already-processed explanation card fields are setup only. Earlier stage11 story still executes; no runtime acceleration, native Save or earned progression claim.",
+    "Normal masks/clipping/fade and continuing draw traffic do not identify the missing OT, late cover or palette cause."
+  ]
+}
