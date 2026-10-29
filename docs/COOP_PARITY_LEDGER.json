@@ -6940,14 +6940,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -7099,9 +7099,50 @@
               "Actual failed raw parent and capture error are retained. No failed/skipped F17 gate is relabeled passed.",
               "The deeply nested requested PNG exceeds the Windows legacy path limit; native renderer uses fopen. The next attempt shortens only the output path and retains candidate, native inputs/predicates, capture gate and deadlines."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "lab_checkpoint": "off",
+              "startup_card": "exact actually earned native Yammark card",
+              "native_other_stage": 2,
+              "host_profile_revision": 14,
+              "input_delay": 3,
+              "owned_process_affinity_mask": 5
+            },
+            "action": "Original native cold card Load, actual Map Left0to3, fresh North Pole2/0 X-Zero entry, original P1 Quit/current-data Map return, both returned completed portraits.",
+            "outcome": "Both physical peers retain native clear1/full campaign and visible grey Yammark with21original completed tiles after another-stage return. All6F17 and18parent/late gates pass;56resolved core/nonzero-mod samples, both ordinary ONLINE finalizations, immutable cards and two owned exits0.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-progression/manifest-bound-dcc1002-F17-other-stage-return-local-netplay-reviewed.json",
+                "sha256": "b953987ce7829a8669c138abd7757d5324ef49b5154ad4e495c2127806f5e3dd"
+              }
+            ],
+            "bypasses": [
+              "Prelaunch copy of independently reviewed actually earned native Yammark card; original producer discloses the AmazonCP2 preceding-route bypass. No fixture, tested outcome assignment, native-card write or execution-state LOAD in this fresh process."
+            ],
+            "limits": [
+              "Only frozen F17 default X/P1-Zero/P2 and actual earned Yammark mask1 on exact V82. Necessary North Pole2/0 setup is not a campaign/native3330 audit.",
+              "Accepted actual native clear/Save and full cold Load components are reused on the same candidate. Fresh native current process obtains its Map through original title-card Load; no fixture, outcome/card write or execution-state LOAD.",
+              "Original arrow selects different stage2, native unit confirmation/fresh both-player arrival precede actual P1 final Quit/current-data Map return. Both actual campaign imports and visible grey portrait with all21 cleared tiles retain original native Nightmare history.",
+              "Prior NET parent61345 remains failed; its independent R20 endpoint was already qualified. The follow-up changes only --out to keep composed capture paths at most229chars, below legacy Windows fopen path limits. All native inputs/predicates/capture gates/deadlines/source/image/profile remain unchanged.",
+              "Root personally viewed both native North Pole arrival images and both returned completed portrait images. RAM/diagnostic/render samples are asynchronous, with no whole-HUD/art/private-view fidelity or identical render tick claim.",
+              "All original paired and supplemental gates, actual final resolved core/nonzero-mod CRC, two strict finalized ordinary ONLINE recordings, immutable complete cards and two owned exits0 pass. Real network traces correctly refuse offline replay.",
+              "Owned host QA scheduling inherits enforced affinity mask5, with pool1.25CPU/30GPU/6GiB/4GiB reservation. No performance or cross-host/WAN claim."
+            ]
           }
         ],
-        "limitations": "LOCAL passed: real earned native card Load, different North Pole2/0 entry/fresh both heroes, original P1 Quit/current-data return and retained clear1/visible grey Yammark. Native incoming beam completed at112; prior600sample cap stopped106 and stayspreserved. Actual3971samples/all5parentgates/ordinarycapture/cards/exit0 pass. NET required. NET61345 preserved actual other-stage/current-data clear1 return but composed capture failed without a written artifact before full two-peer portrait/final CRC. Retest requires shorter output path; no game clear-loss defect established."
+        "limitations": "Both required modes passed on exact V82: earned native Save/cold Load, different North Pole2/0 fresh X-Zero entry, original primary Quit/current-data Map return, retained native clear1/full campaign and visible grey Yammark/all21original tiles. NET18late gates/56resolved CRC samples, finalized ordinary ONLINE recordings, immutable cards and two owned exits0. Prior NET272char capture failure and LOCAL600sample-cap failure are retained; short-path229char NET follow-up changes no native predicates, source, profile or deadlines."
       }
     },
     {
