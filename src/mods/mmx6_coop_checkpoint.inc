@@ -634,6 +634,7 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
                     checkpoint_cancel(CHECKPOINT_FORBIDDEN);
                 else if(!checkpoint_source(entry) || !checkpoint_refight_source() ||
                         !checkpoint_refight_assets(&meta,&desc) || !checkpoint_refight_ground(meta,desc)) {
+                    checkpoint_refight_refusal(entry);
                     checkpoint_refusal_value("refight-source-assets-corridor",0,entry->record,0,1);
                     checkpoint_cancel(CHECKPOINT_SOURCE);
                 } else if(checkpoint_pending.phase==2) {

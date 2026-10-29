@@ -72,6 +72,45 @@ static int checkpoint_refight_ground(uint32_t meta,uint32_t desc) {
     }
     return 1;
 }
+/* Refusal-only LAB reads at the failing world boundary. An asynchronous TCP
+ * snapshot can observe resources after the original world changes them. */
+static void checkpoint_refight_refusal(const Mmx6Checkpoint *entry) {
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+    uint32_t meta=0,desc=0;
+    unsigned common=checkpoint_source(entry),source=checkpoint_refight_source();
+    unsigned assets=checkpoint_refight_assets(&meta,&desc);
+    unsigned ground=assets && checkpoint_refight_ground(meta,desc);
+    checkpoint_source_refusal(entry);
+    checkpoint_refusal_value("refight-atomic-common-source-assets-ground",0,entry->record,
+        common|(source<<1)|(assets<<2)|(ground<<3),15);
+    const uint32_t addresses[]={0x80073D50u,0x80073D54u,0x8006DA2Cu,0x800763C8u,
+        0x80076340u,0x8006DFACu,SCRATCH+0x94,0x800ED480u,0x800ED088u,0x800ED08Cu,
+        0x800ED040u,0x800ED044u,SCRATCH+4,0x800CD338u,0x8008EC10u};
+    const uint32_t expected[]={0x130B0200u,0x130B0300u,104u,0x0E0Cu,
+        0x800ECD90u,0x800ED424u,0x800ED424u,0x800EC860u,0x03000100u,0x04380208u,
+        0x04021700u,0x04E80760u,0x80097438u,0x0E0Cu,168u};
+    for(unsigned i=0;i<sizeof addresses/sizeof addresses[0];++i)
+        checkpoint_refusal_value("refight-atomic-word",i,addresses[i],psx_mod_read_word(addresses[i]),expected[i]);
+    checkpoint_refusal_value("refight-atomic-layout-hash",0,0x80097438u,
+        checkpoint_hash(0x80097438u,0x80097438u+504u),0x2B74F1CDu);
+    checkpoint_refusal_value("refight-atomic-meta-pointer",0,SCRATCH+8,meta,0);
+    checkpoint_refusal_value("refight-atomic-desc-pointer",0,SCRATCH+12,desc,0);
+    if(meta>=0x80010000u && meta<=0x80200000u-82944u)
+        checkpoint_refusal_value("refight-atomic-meta-hash",0,meta,
+            checkpoint_hash(meta,meta+82944u),0xAF40A509u);
+    if(desc>=0x80010000u && desc<=0x80200000u-4036u)
+        checkpoint_refusal_value("refight-atomic-desc-hash",0,desc,
+            checkpoint_hash(desc,desc+4036u),0xE5AD1AB2u);
+    if(assets && !ground)for(unsigned x=1841;x<=1904;++x)for(unsigned y=1216;y<=1264;++y) {
+        int actual=checkpoint_refight_tile(meta,desc,x,y),wanted=y==1264?0x38:0;
+        if(actual!=wanted) {
+            checkpoint_refusal_value("refight-atomic-tile-XY",0,(y<<16)|x,(uint32_t)actual,(uint32_t)wanted);return;
+        }
+    }
+#else
+    (void)entry;
+#endif
+}
 static int checkpoint_refight_camera(void) {
     const uint32_t cam=0x800971F8u;
     /* CP1 original current and target bounds: maxX,minX,maxY,minY. */
