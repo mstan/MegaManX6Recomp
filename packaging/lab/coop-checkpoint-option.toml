@@ -45,6 +45,14 @@ value = "recycle_distant_cp2"
 label = "Recycle: distant primary before original portal"
 
 [[option.choice]]
+value = "recycle_fallen_cp2"
+label = "Recycle: primary pit before original portal"
+
+[[option.choice]]
+value = "recycle_fallen_guest_cp2"
+label = "Recycle: guest pit before original portal"
+
+[[option.choice]]
 value = "northpole_ice_cp3"
 label = "North Pole original ice shaft (position prerequisite)"
 

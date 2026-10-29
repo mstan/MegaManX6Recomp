@@ -368,3 +368,10 @@ Its actual contact uses horizontal radius8 plus standing-player11. Both
 current bodies must miss the strict19-pixel overlap; setup distances80/24
 miss. GuestRight increases separation. No future Left/contact/rescue claim is
 implied. Other nearby actors and altered Reploid state/geometry stay refused.
+
+
+## Recycle fallen-primary approach (development only)
+
+`recycle_fallen_cp2` (option12, nonce`4C524631`) reuses original4/0CP2/index23/record`80072444`. Genuine native initialization and both healthy grounded arrivals precede one disclosed position/history-only approach: primary(1312,1593), guest(1506,1593). Exact original terrain supplies a clear primary fall tube and the guest floor1616. Native camera maxY1424 makes its original fatal branch eligible at primaryY1688; the setup guards that original code and never writes death/lifecycle/HP or any portal/loading result. At least two native updates must show actual primary falling before setup completion. Native fatal, primaryFALLEN, surviving guest control, original portal admission/loading and correct arrival/recovery remain separate runtime outcomes. Starting-HP and earned-weapons prerequisites are incompatible and must be off. This option is off by default and absent from release catalogs. No source/unit/build result qualifies F106.
+
+The mirrored `recycle_fallen_guest_cp2` (option13, nonce`4C524632`) swaps only the initial X positions: primary(1506,1593), guest(1312,1593). Its exact source/air/body checks, incompatible HP/equipment options and native-fall readiness mirror option12; native guest death and subsequent primary-led recovery are independently observed.

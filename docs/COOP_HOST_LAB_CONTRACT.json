@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 28,
+  "revision": 29,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v45",
+    "title_compatibility": "mmx6-x-zero-delay-v46",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -517,5 +517,45 @@
       "allowance": "After declared position only, full original bank FNV142A1278 or full exact native variant65F367C2; no partial/other modifications, unchanged layout/descriptors and source ground/air. Writer and table guarded. Before placement only full original bank."
     },
     "nearby_reploid_exclusion": "Allow only source-bound original idle type4/sub22 at5096/1600/originF608C, variant1 box7891C=00000810, ground8 and zero motion; source init/idle/contact/geometry guarded. Both actual standing bodies must miss original horizontal contact strictabs(dx)<19. At approach dx80/24; guestRight moves away. No future Left/contact/rescue qualification."
+  },
+  "title_changes_v46_fallen_portal_prerequisite": {
+    "issue": "beads-eio.1.110",
+    "comparisons": [
+      "F106"
+    ],
+    "option": "recycle_fallen_cp2",
+    "default": "off; development catalog only",
+    "lab_option": 12,
+    "nonce": "4C524631",
+    "original": {
+      "stage": 4,
+      "section": 0,
+      "checkpoint": 2,
+      "index": 23,
+      "record": "80072444"
+    },
+    "placement": {
+      "primary_x": 1312,
+      "primary_y": 1593,
+      "counterpart_x": 1506,
+      "counterpart_y": 1593,
+      "counterpart_floor": 1616
+    },
+    "contract": "After genuine original checkpoint initialization and healthy grounded idle arrivals, once change only body positions/previous positions. Exact original resources, guest full floor/air and primary clear fall tube plus native fatal camera source are guarded. Require actual native fall after at least two native updates; fixture never writes HP/lifecycle/actor/camera/scanner/portal/loader/fatal/scene/outcome state. Original native gravity/fatal/FALLEN and subsequent guest-led forward recovery are independent unverified outcomes.",
+    "incompatible_prerequisites": "Starting HP and earned-weapons choices must remain off; this setup intentionally completes with primary falling, not a healthy grounded body.",
+    "snapshot": "Existing pending and negotiated source identity only; no new serialized fields/backward state compatibility.",
+    "mirrored_option": {
+      "option": "recycle_fallen_guest_cp2",
+      "lab_option": 13,
+      "nonce": "4C524632",
+      "placement": {
+        "primary_x": 1506,
+        "primary_y": 1593,
+        "counterpart_x": 1312,
+        "counterpart_y": 1593,
+        "primary_floor": 1616
+      },
+      "contract": "Same exact pit/standing-box and original source guards with roles reversed; require native guest downward falling and actual guest fatal/FALLEN, primary-led original boundary and correct both-body recovery. No setup outcome writes."
+    }
   }
 }

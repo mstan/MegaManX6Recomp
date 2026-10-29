@@ -635,10 +635,14 @@ static void portal_test_body(unsigned seat,unsigned x,unsigned y) {
     if(seat)memcpy(p2.body,body,sizeof body);
     else for(unsigned i=0;i<sizeof body;++i)psx_mod_write_byte(PLAYER+i,body[i]);
 }
-static void setup_portal_prerequisite(CPUState *cpu,int online,int distant) {
-    setup_agreed(cpu,online);test_lab_option=distant?"recycle_distant_cp2":"recycle_portal_cp2";checkpoint_reset();
-    independent_views=(unsigned)distant;
-    CHECK(checkpoint_lab_option==(distant?10u:7u) && checkpoint_lab_index()==23 && checkpoint_lab_nonce()==(distant?0x4C525044u:0x4C525032u));
+static void setup_portal_prerequisite(CPUState *cpu,int online,int variant) {
+    const char *options[]={"recycle_portal_cp2","recycle_distant_cp2","recycle_fallen_cp2","recycle_fallen_guest_cp2"};
+    const unsigned option_numbers[]={7,10,12,13};
+    const uint32_t nonces[]={0x4C525032u,0x4C525044u,0x4C524631u,0x4C524632u};
+    CHECK(variant>=0 && variant<4);
+    setup_agreed(cpu,online);test_lab_option=options[variant];checkpoint_reset();
+    independent_views=variant==1;
+    CHECK(checkpoint_lab_option==option_numbers[variant] && checkpoint_lab_index()==23 && checkpoint_lab_nonce()==nonces[variant]);
     CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB8)==0x80072444u);
     memcpy(test_ram,portal_source_ram,sizeof test_ram);
@@ -649,7 +653,8 @@ static void setup_portal_prerequisite(CPUState *cpu,int online,int distant) {
     const uint16_t bounds[]={1264,320,1424,1424,1264,320,1424,1424};
     for(unsigned i=0;i<8;++i)psx_mod_write_half(0x800971F8u+0x1C+i*2,bounds[i]);
     CHECK(checkpoint_portal_source());uint32_t meta,desc;
-    CHECK(checkpoint_portal_assets(&meta,&desc) && checkpoint_portal_ground(meta,desc));
+    CHECK(checkpoint_portal_assets(&meta,&desc));
+    CHECK(variant>=2?checkpoint_fallen_portal_ground(meta,desc):checkpoint_portal_ground(meta,desc));
 }
 static void portal_test_native_ready(void) {
     portal_test_body(0,checkpoint_portal_x(0),checkpoint_portal_floor(0)-21u);portal_test_body(1,1506,1594);
@@ -706,6 +711,125 @@ static void agreed_portal_prerequisite(CPUState *cpu) {
     CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
         psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN &&
         !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof saved));
+    test_lab_option="off";checkpoint_reset();
+}
+static void fallen_portal_native_fall(void) {
+    /* External observations only, not an emulation of native physics/death.
+     * The production prerequisite must observe these; it never writes them. */
+    unsigned fallen=checkpoint_fallen_portal_seat();
+    for(unsigned seat=0;seat<2;++seat) {
+        portal_test_body(seat,seat==fallen?1312:1506,seat==fallen?1594:1595-seat);
+        if(seat==fallen) {
+            if(seat) {
+                p2.body[5]=6;p2.body[0x67]=1;p2.body[0x70]=0;
+                put32(p2.body+0x1C,1593u<<16);put32(p2.body+0x24,(uint32_t)-65536);
+            } else {
+                psx_mod_write_byte(PLAYER+5,6);psx_mod_write_byte(PLAYER+0x67,1);psx_mod_write_byte(PLAYER+0x70,0);
+                psx_mod_write_word(PLAYER+0x1C,1593u<<16);psx_mod_write_word(PLAYER+0x24,(uint32_t)-65536);
+            }
+        }
+    }
+    psx_mod_write_word(PLAY+0x90,12);
+}
+static void fallen_portal_block_pit(uint32_t meta,uint32_t desc) {
+    unsigned tile=0;
+    while(tile*4u+4u<=PORTAL_SETUP_DESC_BYTES && psx_mod_read_byte(desc+tile*4u)!=0x38)++tile;
+    CHECK(tile*4u+4u<=PORTAL_SETUP_DESC_BYTES);
+    unsigned x=1312,y=1600;
+    uint32_t cell=PORTAL_SETUP_LAYOUT+(y>>8)*PORTAL_SETUP_WIDTH+(x>>8);
+    psx_mod_write_byte(cell,1);
+    unsigned at=512u+((y>>4)&15u)*32u+((x>>4)&15u)*2u;
+    psx_mod_write_half(meta+at,(uint16_t)tile);
+}
+static void agreed_fallen_portal_prerequisite(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(int variant=2;variant<=3;++variant) {
+        setup_portal_prerequisite(cpu,online,variant);
+        CHECK(!failed && checkpoint_fallen_portal_source());
+        CHECK(variant!=3 || strlen(test_lab_option)==24); /* Full name and NUL fit the32-byte parser. */
+        p2.body[5]=1;memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 &&
+              !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2));
+        p2.body[5]=2;partner=p2;CPUState registers=*cpu;Mmx6CoopLifecycle lifecycle=life;
+        memcpy(before_ram,test_ram,sizeof test_ram);
+        for(unsigned seat=0;seat<2;++seat) {
+            uint32_t x=(seat==checkpoint_fallen_portal_seat()?1312u:1506u)<<16,y=1593u<<16;
+            if(seat) {
+                put32(partner.body+8,x);put32(partner.body+0x18,x);
+                put32(partner.body+12,y);put32(partner.body+0x1C,y);
+            } else {
+                const unsigned positions[]={8,0x18,12,0x1C};
+                for(unsigned i=0;i<4;++i) {
+                    uint32_t value=i<2?x:y;
+                    for(unsigned n=0;n<4;++n)before_ram[(PLAYER+positions[i]+n)&0x1FFFFF]=(uint8_t)(value>>(n*8));
+                }
+            }
+        }
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !guest_calls &&
+              !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) &&
+              !memcmp(&registers,cpu,sizeof registers) && !memcmp(&lifecycle,&life,sizeof life));
+        CHECK(psx_mod_read_byte(diagnostic+0xAD)==1 && !psx_mod_read_byte(diagnostic+0xAE));
+        /* Advancing a clock without actual native fall cannot complete. */
+        psx_mod_write_word(PLAY+0x90,12);memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 &&
+              !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2));
+        fallen_portal_native_fall();psx_mod_write_word(PLAY+0x90,11);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3); /* Two updates required. */
+        psx_mod_write_word(PLAY+0x90,12);memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+              psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_byte(diagnostic+0xAD)==2 &&
+              !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) &&
+              !memcmp(&lifecycle,&life,sizeof life)); /* Includes all HP, velocity, ground and lifecycle bytes. */
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+
+        const uint32_t corrupt[]={0x800282F0u,0x80029580u,0x80029658u,0x8002D2B0u,
+            0x80073D50u,0x80073D54u,0x800F2E24u,0x80097438u,0x80100000u,0x80120000u};
+        for(unsigned phase=2;phase<=3;++phase)for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
+            setup_portal_prerequisite(cpu,online,variant);
+            if(phase==3)CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+            psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^0x40);
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;lifecycle=life;
+            CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+                  psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+                  !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) &&
+                  !memcmp(&lifecycle,&life,sizeof life));
+        }
+        setup_portal_prerequisite(cpu,online,variant);uint32_t meta,desc;
+        CHECK(checkpoint_portal_assets(&meta,&desc));fallen_portal_block_pit(meta,desc);
+        CHECK(!checkpoint_fallen_portal_ground(meta,desc));
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase &&
+              psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+
+        for(unsigned bad=0;bad<16;++bad) {
+            setup_portal_prerequisite(cpu,online,variant);
+            CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);fallen_portal_native_fall();
+            unsigned seat=checkpoint_fallen_portal_seat();uint8_t b[sizeof p2.body];
+            if(seat)memcpy(b,p2.body,sizeof b);else capture(PLAYER,b,sizeof b);
+            if(bad==0)b[0x67]=0;if(bad==1)b[0x70]=8;
+            if(bad==2)put32(b+12,1593u<<16);if(bad==3)put32(b+0x24,0);
+            if(bad==4)put32(b+0x24,65536);if(bad==5)put32(b+8,1313u<<16);
+            if(bad==6)put32(b+12,1688u<<16);if(bad==7)b[0x5C]=0x80;
+            if(bad==13)b[0]=0;if(bad==14)b[4]=2;if(bad==15)b[0x5C]=0;
+            if(seat)memcpy(p2.body,b,sizeof b);else project(PLAYER,b,sizeof b);
+            /* Native fatal/dying may precede the lifecycle publication. */
+            if(bad==7 || bad==14)CHECK(life.status[seat]==MMX6_COOP_ALIVE);
+            if(bad==8)life.status[seat]=MMX6_COOP_FALLEN;
+            if(bad==9) {if(seat)psx_mod_write_byte(PLAYER+0x70,0);else p2.body[0x70]=0;}
+            if(bad==10)psx_mod_write_half(0x800971F8u+14,1423);
+            if(bad==11) {portal_test_native_ready();fallen_portal_native_fall();psx_mod_write_byte(0x8008EF48u+5,2);}
+            if(bad==12) {if(seat)psx_mod_write_word(PLAYER+8,1507u<<16);else put32(p2.body+8,1507u<<16);}
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;lifecycle=life;
+            CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !guest_calls &&
+                  psx_mod_read_byte(diagnostic+0xAD)==1 && !memcmp(before_ram,test_ram,sizeof test_ram) &&
+                  !memcmp(&partner,&p2,sizeof p2) && !memcmp(&lifecycle,&life,sizeof life));
+        }
+    }
+    for(unsigned variant=0;variant<2;++variant)for(unsigned bad=0;bad<3;++bad) {
+        test_lab_hp_option[0]=bad==0?"1":"off";test_lab_hp_option[1]=bad==1?"1":"off";
+        test_lab_earned_option=bad==2?"all":"off";setup_agreed(cpu,1);
+        test_lab_option=variant?"recycle_fallen_guest_cp2":"recycle_fallen_cp2";checkpoint_reset();
+        CHECK(failed && !checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase);
+    }
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";test_lab_earned_option="off";
     test_lab_option="off";checkpoint_reset();
 }
 static void setup_northpole_prerequisite(CPUState *cpu,int online) {
@@ -785,7 +909,8 @@ static void agreed_northpole_prerequisite(CPUState *cpu) {
 }
 static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
     const char *options[]={"intro_cp2","amazon_cp0","amazon_cp2","intro_before_doors",
-        "intro_before_explosion","recycle_cp2","recycle_portal_cp2","recycle_distant_cp2"};
+        "intro_before_explosion","recycle_cp2","recycle_portal_cp2","recycle_distant_cp2",
+        "recycle_fallen_cp2","recycle_fallen_guest_cp2"};
     const uint8_t origins[][3]={{4,0,0},{4,0,1},{4,1,0},{4,1,2},{4,2,0},{3,0,0},{0,1,0},{0,0,1}};
     for(unsigned option=0;option<sizeof options/sizeof options[0];++option)for(unsigned i=0;i<sizeof origins/sizeof origins[0];++i) {
         if(option==5 && i==0)continue; /* The one new accepted origin. */
@@ -1173,6 +1298,7 @@ int main(int argc,char **argv) {
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_recycle_boundary(&cpu);agreed_recycle_loaded_origin_rejections(&cpu);
     agreed_portal_prerequisite(&cpu);
+    agreed_fallen_portal_prerequisite(&cpu);
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
