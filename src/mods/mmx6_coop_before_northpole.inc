@@ -7,16 +7,28 @@ static int checkpoint_northpole_source(void) {
         psx_mod_read_word(0x800F6570u)==0x800ECDE8u &&
         psx_mod_read_word(0x800F6BF8u)==0x800ED150u &&
         checkpoint_hash(0x800ED150u,0x800ED1ECu)==0x4B3B5134u &&
-        checkpoint_hash(0x800EBF18u,0x800EC1DCu)==0x3BC9F4C6u;
+        checkpoint_hash(0x800EBF18u,0x800EC1DCu)==0x3BC9F4C6u &&
+        psx_mod_read_word(0x800F64D0u)==0x800F049Cu &&
+        checkpoint_hash(0x800F049Cu,0x800F050Cu)==0x18CFB99Du &&
+        checkpoint_hash(0x80027BA0u,0x80027C98u)==0xD5E21EAAu &&
+        checkpoint_hash(0x800F6DF4u,0x800F6DFCu)==0xCB9E2AB8u;
 }
 static int checkpoint_northpole_assets(uint32_t *meta,uint32_t *desc) {
     *meta=psx_mod_read_word(SCRATCH+8);*desc=psx_mod_read_word(SCRATCH+12);
+    uint32_t hash=0;
+    if(*meta>=0x80010000u && *meta<=0x80200000u-103424u)hash=checkpoint_hash(*meta,*meta+103424u);
+    /* Original F04B0..F04FC closes three tiles behind the CP3 approach when
+     * canonical X>=4833,Y>=1217. The full bank must be exactly original or
+     * exactly that source-table copy; partial/other collision edits fail. */
+    unsigned native_closure=checkpoint_pending.phase==3 &&
+        (int16_t)psx_mod_read_half(PLAYER+10)>=4833 &&
+        (int16_t)psx_mod_read_half(PLAYER+14)>=1217 && hash==0x65F367C2u;
     return psx_mod_read_word(SCRATCH+4)==0x80097438u &&
         psx_mod_read_half(0x800CD338u)==0x071Bu && psx_mod_read_half(0x8008EC10u)==189 &&
         *meta>=0x80010000u && *meta<=0x80200000u-103424u &&
         *desc>=0x80010000u && *desc<=0x80200000u-13412u &&
         checkpoint_hash(0x80097438u,0x80097438u+567u)==0x63300EA4u &&
-        checkpoint_hash(*meta,*meta+103424u)==0x142A1278u &&
+        (hash==0x142A1278u || native_closure) &&
         checkpoint_hash(*desc,*desc+13412u)==0x9A9D6BF9u;
 }
 static int checkpoint_northpole_tile(uint32_t meta,uint32_t desc,unsigned x,unsigned y) {

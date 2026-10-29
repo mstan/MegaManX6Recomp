@@ -743,11 +743,21 @@ static void agreed_northpole_prerequisite(CPUState *cpu) {
         psx_mod_write_byte(a+4,1);psx_mod_write_byte(a+6,8);psx_mod_write_word(a+0x10,0x800F60D4u);
         psx_mod_write_word(a+8,4992u<<16);psx_mod_write_word(a+12,1376u<<16);
         psx_mod_write_word(PLAY+0x90,11);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
-        psx_mod_write_word(PLAY+0x90,12);memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+        psx_mod_write_word(PLAY+0x90,12);
+        uint32_t meta,desc;CHECK(checkpoint_northpole_assets(&meta,&desc));
+        psx_mod_write_half(meta+37960,0x09C3);CHECK(!checkpoint_northpole_assets(&meta,&desc));
+        psx_mod_write_half(meta+37962,0x09C4);CHECK(!checkpoint_northpole_assets(&meta,&desc));
+        psx_mod_write_half(meta+37964,0x092E);CHECK(checkpoint_northpole_assets(&meta,&desc));
+        checkpoint_pending.phase=2;CHECK(!checkpoint_northpole_assets(&meta,&desc));checkpoint_pending.phase=3;
+        psx_mod_write_half(PLAYER+10,4832);CHECK(!checkpoint_northpole_assets(&meta,&desc));psx_mod_write_half(PLAYER+10,5016);
+        uint16_t preserved=psx_mod_read_half(meta+37966);
+        psx_mod_write_half(meta+37966,preserved^1u);CHECK(!checkpoint_northpole_assets(&meta,&desc));psx_mod_write_half(meta+37966,preserved);
+        CHECK(checkpoint_northpole_assets(&meta,&desc) && checkpoint_northpole_ground(meta,desc));
+        memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
             psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_byte(diagnostic+0xAD)==2 &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
-        const uint32_t corrupt[]={0x80097438u,0x80100000u,0x80120000u,0x800ED150u,0x80073D50u};
+        const uint32_t corrupt[]={0x80097438u,0x80100000u,0x80120000u,0x800ED150u,0x80073D50u,0x800F04B0u,0x800F6DF4u};
         for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
             setup_northpole_prerequisite(cpu,online);psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^0x40);
             memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;

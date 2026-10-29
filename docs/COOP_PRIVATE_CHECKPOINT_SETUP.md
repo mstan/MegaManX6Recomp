@@ -352,3 +352,12 @@ BF18 executes once. They retain native RNG, child allocation, attack ownership,
 AI and lifetime. Guest contact history resets on allocator2BFD0 reuse.
 Native early underside contact uses the original copied-body ground test and
 parent-count/free tail. Top contact alone cannot force retirement.
+
+Original North Pole actor F04B0 closes three tiles behind the approach when
+canonical X>=4833/Y>=1217. After placement only, accept the original full
+metatile bank or the exact full bank with source-table halfwords09C3/09C4/092E
+copied to9448/944A/944C (world4672/4688/4704,Y1056). Guard original writer
+and table as well. Partial copies, other collision changes, and the changed
+bank before placement are refused; layout/descriptors and setup ground/air
+remain exact. Two strict failed V100 setup runs retained this native change;
+accepting arbitrary graphic/collision differences would be incorrect.
