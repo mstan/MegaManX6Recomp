@@ -23756,11 +23756,56 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+            "build_identity": {
+              "executable_sha256": "acb27f170c2d49e59e830df4c608046b5121f0fa3cdcd9798d3715b4cfe6fe43",
+              "compiled_manifest_sha256": "e4f614a3336b7672b3966e53fc6dbfa2cb94c19077486c7312a2c640267729df",
+              "provenance_sha256": "72c7e9505d6f8b3f72ae9022f6ad7e37b4dd72b4086a2d9015ad83ee60924095"
+            },
+            "action": "After actual original CP2 refight/intro release, move each hero Right independently and observe original current/target bounds and actual per-seat camera follow.",
+            "outcome": "Both private origins follow from2048 to2071 within authored2048..2080/Y256; actual canonical follow, healthy grounded heroes, neutral inputs,3 personally viewed captures,4 parent gates, cards unchanged and owned exit0.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F206-native-refight-camera-local-reviewed.json",
+                "sha256": "e20ca76dd4056501a3b69dabc87a21eed79e3afd08446f21d8ea7826bdae6345"
+              }
+            ],
+            "limits": [
+              "Only F206 is named for new credit; eight base checks remain prerequisites.",
+              "Option15 originalCP1 plus disclosed once position/history bypass; original input remains tainted.",
+              "Publications, PLAY/actors and composed captures are asynchronous; pre/post capture rows retained.",
+              "All direction is neutral after admission until actual native HP48/active4 and released fullfeet.",
+              "First typed bodies are retained, including unresolved contact. F7 qualification requires final original full22feet, native ground, living bodies and independent movement; initial transient motion is not a failed landing.",
+              "Collision equivalence permits native graphical remaps, never claims original full graphical identity.",
+              "Parent exact image/profile/source, recording/card/cleanup and final CRC gates remain mandatory.",
+              "F206 retains direct post-input quiet interior follow witnesses for each seat. Later legitimate clamping or native boss knockback need not leave both origins interior simultaneously. Other mapped input must stay neutral; actual native other-body motion is retained. PCV6 quake entries are preserved and distinguished from quiet follow, never adjusted or presented as authored static-bound coordinates.",
+              "Actual canonical current/target bounds and both private camera origins are observed. Private bounds inheritance is established by the exact compiled views.inc; the trace does not publish private bounds.",
+              "Only LOCAL is admitted here; NET remains unverified until its independently completed endpoint, final CRC and cleanup review.",
+              "Prior F122/F124/F7 are setup prerequisites only and gain no additional credit. Same-machine profile35, contact protection, once original CP1 positioning and tainted input limits remain explicit."
+            ],
+            "bypasses": [
+              "Agreed once original CP1 positioning and hostile-contact protection; no tested camera/body/result writes."
+            ],
+            "settings": {
+              "roster": "X/P1+normalZero/P2",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "fixture": "refight_portal_cp1",
+              "contact_protection": "on",
+              "renderer": "OpenGL native4:3",
+              "host_profile": "mmx6.win64-clang22.loopback revision35",
+              "audio": "dummy muted"
+            }
+          }
+        ],
+        "limitations": "LOCAL passed exact92e1ce2/acb27/profile35: actual post-release follow for both cameras within original CP2 bounds.3 reviewed captures/4 parent gates/cards unchanged/exit0. NET remains unverified; compiled private-bounds inheritance is distinguished from directly observed origins."
       }
     },
     {
