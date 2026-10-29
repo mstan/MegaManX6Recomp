@@ -1,0 +1,688 @@
+{
+  "kind": "F168_independent_full_contract_review_original_guest_falling_object",
+  "status": "passed",
+  "comparisons": [
+    "F168"
+  ],
+  "frozen_rows": {
+    "F168": "b54f2b46a36a14f0542e88b240e6c7529e45eb9bbccce6d536258ac30e9b4ca5"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json",
+    "binding_sha256": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+    "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+    "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+    "provenance_sha256": "8f6458844f7503152c54e137dbb4d8605b8f6817c143dd49e34acef31c2dab1a",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v100-northpole-ice-focused-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v45",
+    "host_revision": 28
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "LOCAL": {
+    "status": "passed",
+    "checks": {
+      "authored_original_guest_only_threshold": true,
+      "primary_behind_and_ineligible": true,
+      "actual_original_allocation_after_admission": true,
+      "same_child_native_phase6_fall": true,
+      "actual_guest_native_collision": true,
+      "same_child_finite_native_retirement": true,
+      "independent_control_after_retirement": true,
+      "full_parent_final_gate": true
+    },
+    "native_endpoints": [
+      {
+        "peer": 0,
+        "authored_parent_address": 2148274720,
+        "original_parent_phase_before": 8,
+        "original_parent_phase_after": 9,
+        "source_ready_row": 134,
+        "guest_only_admission_row": 141,
+        "original_child_allocation_row": 142,
+        "source_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 328728576,
+            "y_raw": 104529920,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 335544320,
+            "y_raw": 104464384,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "admitted_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 328728576,
+            "y_raw": 104529920,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 4,
+            "hp": 32,
+            "x_raw": 336691200,
+            "y_raw": 104464384,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "first_observed_fall": {
+          "row": 142,
+          "native_timer": 59,
+          "x": 5112,
+          "y": 1262,
+          "phase": 6
+        },
+        "last_observed_fall": {
+          "row": 190,
+          "native_timer": 204,
+          "x": 5112,
+          "y": 1552,
+          "phase": 6
+        },
+        "fall_samples": 49,
+        "actual_native_collision_break": {
+          "seq": 0,
+          "func": "0x800477E4",
+          "ra": "0x800ECE38",
+          "a0": "0x00000003",
+          "a1": "0x800F6B8C",
+          "a2": "0x800C1368",
+          "a3": "0x800C12C4",
+          "t1": "0x800E41B0",
+          "s0": "0x1F800060",
+          "s1": "0x800C4560",
+          "s2": "0x800CCED0",
+          "s3": "0x80090000",
+          "depth": 592,
+          "frame": 3224,
+          "exit_seq": 0,
+          "entry_kind": 1,
+          "context": {
+            "schema": 0,
+            "available": 0,
+            "provider": 0,
+            "epoch": 0,
+            "flags": 0,
+            "state0": 0,
+            "state1": 0,
+            "state2": 0,
+            "publication": {
+              "valid": 0,
+              "provider": 0,
+              "epoch": 0,
+              "sequence": 0,
+              "site": 0
+            }
+          }
+        },
+        "actual_native_free": [
+          {
+            "row": 191,
+            "native_timer": 207,
+            "slot_hex": "00000000000000000000f8130000120600000000000006000000f81300001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+          },
+          {
+            "row": 192,
+            "native_timer": 210,
+            "slot_hex": "00000000000000000000f8130000120600000000000006000000f81300001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+          }
+        ],
+        "postretirement_control": {
+          "before": 192,
+          "after": 200
+        }
+      }
+    ],
+    "raw_observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 10742304,
+      "sha256": "f07ecbb894f155a21390a137efd215a52cf48263d1beff3f8a74f79594b8516d"
+    },
+    "full_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\qualification.json",
+      "bytes": 22391166,
+      "sha256": "b5249453c38c893a0ea008c0b3ea839a5ba9b8a73ab6f879588135d5fbee72ab"
+    },
+    "original_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\qualification-parent-original.json",
+      "bytes": 22388371,
+      "sha256": "d06cb6c179e6a17543503ed18fb68cdb5539425d36c335f34a5dc2391073b93f"
+    },
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "post_endpoint_resolved_CRC": [],
+    "owned_cleanup": [
+      {
+        "owned_pid": 88384,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    ],
+    "private_cards_unchanged": true
+  },
+  "NET": {
+    "status": "passed",
+    "checks": {
+      "authored_original_guest_only_threshold": true,
+      "primary_behind_and_ineligible": true,
+      "actual_original_allocation_after_admission": true,
+      "same_child_native_phase6_fall": true,
+      "actual_guest_native_collision": true,
+      "same_child_finite_native_retirement": true,
+      "independent_control_after_retirement": true,
+      "full_parent_final_gate": true
+    },
+    "native_endpoints": [
+      {
+        "peer": 0,
+        "authored_parent_address": 2148274720,
+        "original_parent_phase_before": 8,
+        "original_parent_phase_after": 9,
+        "source_ready_row": 63,
+        "guest_only_admission_row": 68,
+        "original_child_allocation_row": 69,
+        "source_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 328728576,
+            "y_raw": 104529920,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 335544320,
+            "y_raw": 104464384,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "admitted_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 328728576,
+            "y_raw": 104529920,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 4,
+            "hp": 32,
+            "x_raw": 336691200,
+            "y_raw": 104464384,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "first_observed_fall": {
+          "row": 69,
+          "native_timer": 84,
+          "x": 5160,
+          "y": 1274,
+          "phase": 6
+        },
+        "last_observed_fall": {
+          "row": 95,
+          "native_timer": 221,
+          "x": 5160,
+          "y": 1548,
+          "phase": 6
+        },
+        "fall_samples": 27,
+        "actual_native_collision_break": {
+          "seq": 0,
+          "func": "0x800477E4",
+          "ra": "0x800ECE38",
+          "a0": "0x00000003",
+          "a1": "0x800F6B8C",
+          "a2": "0x800C1368",
+          "a3": "0x800C12C4",
+          "t1": "0x00001428",
+          "s0": "0x1F800060",
+          "s1": "0x800C4560",
+          "s2": "0x800CCED0",
+          "s3": "0x80090000",
+          "depth": 641,
+          "frame": 4138,
+          "exit_seq": 0,
+          "entry_kind": 1,
+          "context": {
+            "schema": 0,
+            "available": 0,
+            "provider": 0,
+            "epoch": 0,
+            "flags": 0,
+            "state0": 0,
+            "state1": 0,
+            "state2": 0,
+            "publication": {
+              "valid": 0,
+              "provider": 0,
+              "epoch": 0,
+              "sequence": 0,
+              "site": 0
+            }
+          }
+        },
+        "actual_native_free": [
+          {
+            "row": 96,
+            "native_timer": 229,
+            "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+          },
+          {
+            "row": 97,
+            "native_timer": 235,
+            "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+          }
+        ],
+        "postretirement_control": {
+          "before": 97,
+          "after": 101
+        }
+      },
+      {
+        "peer": 1,
+        "authored_parent_address": 2148274720,
+        "original_parent_phase_before": 8,
+        "original_parent_phase_after": 9,
+        "source_ready_row": 63,
+        "guest_only_admission_row": 68,
+        "original_child_allocation_row": 69,
+        "source_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 328728576,
+            "y_raw": 104529920,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 335544320,
+            "y_raw": 104464384,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "admitted_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 328728576,
+            "y_raw": 104529920,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 4,
+            "hp": 32,
+            "x_raw": 337084416,
+            "y_raw": 104464384,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "first_observed_fall": {
+          "row": 69,
+          "native_timer": 85,
+          "x": 5160,
+          "y": 1276,
+          "phase": 6
+        },
+        "last_observed_fall": {
+          "row": 94,
+          "native_timer": 218,
+          "x": 5160,
+          "y": 1544,
+          "phase": 6
+        },
+        "fall_samples": 26,
+        "actual_native_collision_break": {
+          "seq": 0,
+          "func": "0x800477E4",
+          "ra": "0x800ECE38",
+          "a0": "0x00000003",
+          "a1": "0x800F6B8C",
+          "a2": "0x800C1368",
+          "a3": "0x800C12C4",
+          "t1": "0x00001428",
+          "s0": "0x1F800060",
+          "s1": "0x800C4560",
+          "s2": "0x800CCED0",
+          "s3": "0x80090000",
+          "depth": 605,
+          "frame": 4138,
+          "exit_seq": 0,
+          "entry_kind": 1,
+          "context": {
+            "schema": 0,
+            "available": 0,
+            "provider": 0,
+            "epoch": 0,
+            "flags": 0,
+            "state0": 0,
+            "state1": 0,
+            "state2": 0,
+            "publication": {
+              "valid": 0,
+              "provider": 0,
+              "epoch": 0,
+              "sequence": 0,
+              "site": 0
+            }
+          }
+        },
+        "actual_native_free": [
+          {
+            "row": 95,
+            "native_timer": 225,
+            "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+          },
+          {
+            "row": 96,
+            "native_timer": 234,
+            "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+          },
+          {
+            "row": 97,
+            "native_timer": 235,
+            "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+          }
+        ],
+        "postretirement_control": {
+          "before": 97,
+          "after": 101
+        }
+      }
+    ],
+    "raw_observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\observations.json",
+      "bytes": 10891269,
+      "sha256": "d53fbe042772b123022257d1398953ecc16da28bcab6e4da69de363f43610ede"
+    },
+    "full_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\qualification.json",
+      "bytes": 12494336,
+      "sha256": "b145b7cbd6ccafd7645fba0ed02b48aeae460b508a78f4559c23cb61cc12c693"
+    },
+    "original_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\qualification-parent-original.json",
+      "bytes": 12488509,
+      "sha256": "400489b2fc434b1b01e728841dc5df834eb5efb7f4bc3f7595c8b2e7e232ceee"
+    },
+    "parent_checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": true,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_resolved_crc_after_case": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "post_endpoint_resolved_CRC": {
+      "label": "paired ground-jump audio then settle",
+      "samples": [
+        {
+          "simulation_tick": 4224,
+          "core": "98edd491",
+          "mod": "d93d4ac6"
+        },
+        {
+          "simulation_tick": 4256,
+          "core": "c9bc938d",
+          "mod": "35fba96c"
+        },
+        {
+          "simulation_tick": 4288,
+          "core": "619a5a46",
+          "mod": "c94a72cc"
+        },
+        {
+          "simulation_tick": 4320,
+          "core": "eafadd8c",
+          "mod": "d8fccef2"
+        },
+        {
+          "simulation_tick": 4352,
+          "core": "2181629f",
+          "mod": "8d3ad392"
+        }
+      ],
+      "resolved_through": [
+        4383,
+        4382
+      ]
+    },
+    "owned_cleanup": [
+      {
+        "seat": 0,
+        "owned_pid": 105580,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "input_release_errors": null,
+        "private_card_error": null
+      },
+      {
+        "seat": 1,
+        "owned_pid": 111260,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "input_release_errors": null,
+        "private_card_error": null
+      }
+    ],
+    "private_cards_unchanged": true
+  },
+  "accepted_support_dependency": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-solid\\manifest-bound-b37cd69-F111-native-ice-local-netplay-reviewed.json",
+    "sha256": "bc9c62490c869ba0b661c4439e3af2abed44173cbe2e8cc04a73ca63673e71ec"
+  },
+  "accepted_collision_retirement_dependency": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-solid\\manifest-bound-b37cd69-F160-native-ice-local-netplay-reviewed.json",
+    "sha256": "3c8e6a69ec13dc9632d03fd6a4cdd9f4eb167c51fceeace9d1925a3326d7cf54"
+  },
+  "limits": [
+    "Only234 frozen comparisons. Named F168 counterpart is original NorthPole authored type7 producer guest-only threshold and its original falling child12, not the earlier automatic-countdown FA384 candidate.",
+    "This is an independent review of the complete retained native sequence on the exact accepted b37cd69 LOCAL/NET candidate. No additional game run and no status promotion solely from another row passing.",
+    "Actual guest Right with P1 behind/ineligible advances original8->9, then original RNG/allocator creates the observed child. Native phase6 vertical movement, actual guest underside collision, same-child native free across distinct updates and independent postretirement control are all retained.",
+    "Earliest chosen-child observations are Y1262 LOCAL/Y1274 and1276 NET; constructor Y1248 is source-only. Separate body/pool/trace reads are asynchronous.",
+    "Each mode links its own complete native endpoint and full parent gate. NET final resolved core/mod samples occur after the selected collision entry, with matching peer state, unchanged cards and native exits0.",
+    "Original CP3 and once position/history-only approach plus declared hostile-contact protection are bypasses. No actor/activation/fall/contact/timer/expiry/outcome flags are authored.",
+    "No original-stage identity, repeat-wipe/retry, all-subtype, primary-death expiry/F112, later-subtype/F159 or signed carry-release/F201 claim. Frozen X5 historical extra checks are preserved, not transferred.",
+    "Same-family usable support is independently established by F111. Existing background and paired FX-art discrepancies remain in the retained reviewed captures; no general rendering claim."
+  ]
+}

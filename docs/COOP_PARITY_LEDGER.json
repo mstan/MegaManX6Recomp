@@ -20282,24 +20282,113 @@
       "frozen_row_sha256": "b54f2b46a36a14f0542e88b240e6c7529e45eb9bbccce6d536258ac30e9b4ca5",
       "x6": {
         "workstream": "solid",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Native falling-object admission unidentified",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original NorthPole authored guest-threshold controller and finite falling child12",
         "bounded_check": "Map an authored X6 falling controller and its real trigger; guest crosses while primary stays out, observing native fall/collision and retirement.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
-          "src/mods/mmx6_coop_plugin.c:solid_as_zero"
+          "src/mods/mmx6_coop_plugin.c:solid_as_zero",
+          "src/mods/mmx6_coop_northpole_ice.inc:northpole_ice_admission",
+          "src/mods/mmx6_coop_northpole_ice.inc:northpole_ice_live"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+            "build_identity": {
+              "executable_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+              "compiled_manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original2/0CP3 plus one position/history-only approach",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "one owned process",
+              "local_cameras": "split",
+              "cameras": "unified",
+              "host_profile": "mmx6.win64-clang22.loopback revision28"
+            },
+            "action": "Original authored parent starts unarmed8; guest alone crosses5137 while P1behind5016, then original child12 allocates, falls under native phase6, collides with guest and retires; require independent guest control and complete postendpoint gate.",
+            "outcome": "Full F168 original guest-only falling-object admission/fall/collision/finite-retirement counterpart independently reviewed in retained same-candidate LOCAL/NET sequence. Explicit last resolved NET CRC samples occur after selected native contact entry; no repeat native run required.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-b37cd69-F168-native-falling-admission-local-netplay-reviewed.json",
+                "sha256": "138df251fecf6e3a9c2ae286dbc8b7e269fee348a220a28c887878512f8ecac0"
+              }
+            ],
+            "limits": [
+              "Only234 frozen comparisons. Named F168 counterpart is original NorthPole authored type7 producer guest-only threshold and its original falling child12, not the earlier automatic-countdown FA384 candidate.",
+              "This is an independent review of the complete retained native sequence on the exact accepted b37cd69 LOCAL/NET candidate. No additional game run and no status promotion solely from another row passing.",
+              "Actual guest Right with P1 behind/ineligible advances original8->9, then original RNG/allocator creates the observed child. Native phase6 vertical movement, actual guest underside collision, same-child native free across distinct updates and independent postretirement control are all retained.",
+              "Earliest chosen-child observations are Y1262 LOCAL/Y1274 and1276 NET; constructor Y1248 is source-only. Separate body/pool/trace reads are asynchronous.",
+              "Each mode links its own complete native endpoint and full parent gate. NET final resolved core/mod samples occur after the selected collision entry, with matching peer state, unchanged cards and native exits0.",
+              "Original CP3 and once position/history-only approach plus declared hostile-contact protection are bypasses. No actor/activation/fall/contact/timer/expiry/outcome flags are authored.",
+              "No original-stage identity, repeat-wipe/retry, all-subtype, primary-death expiry/F112, later-subtype/F159 or signed carry-release/F201 claim. Frozen X5 historical extra checks are preserved, not transferred.",
+              "Same-family usable support is independently established by F111. Existing background and paired FX-art discrepancies remain in the retained reviewed captures; no general rendering claim."
+            ],
+            "bypasses": [
+              "Original CP3 entry and once position/previous-position-only approach.",
+              "Disclosed predeclared hostile-contact protection; actual native ice damage/knockback retained, no contact/timer/outcome writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+            "build_identity": {
+              "executable_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+              "compiled_manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original2/0CP3 plus one position/history-only approach",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "two same-PC loopback peers",
+              "local_cameras": "split",
+              "cameras": "unified",
+              "host_profile": "mmx6.win64-clang22.loopback revision28"
+            },
+            "action": "Original authored parent starts unarmed8; guest alone crosses5137 while P1behind5016, then original child12 allocates, falls under native phase6, collides with guest and retires; require independent guest control and complete postendpoint gate.",
+            "outcome": "Full F168 original guest-only falling-object admission/fall/collision/finite-retirement counterpart independently reviewed in retained same-candidate LOCAL/NET sequence. Explicit last resolved NET CRC samples occur after selected native contact entry; no repeat native run required.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-b37cd69-F168-native-falling-admission-local-netplay-reviewed.json",
+                "sha256": "138df251fecf6e3a9c2ae286dbc8b7e269fee348a220a28c887878512f8ecac0"
+              }
+            ],
+            "limits": [
+              "Only234 frozen comparisons. Named F168 counterpart is original NorthPole authored type7 producer guest-only threshold and its original falling child12, not the earlier automatic-countdown FA384 candidate.",
+              "This is an independent review of the complete retained native sequence on the exact accepted b37cd69 LOCAL/NET candidate. No additional game run and no status promotion solely from another row passing.",
+              "Actual guest Right with P1 behind/ineligible advances original8->9, then original RNG/allocator creates the observed child. Native phase6 vertical movement, actual guest underside collision, same-child native free across distinct updates and independent postretirement control are all retained.",
+              "Earliest chosen-child observations are Y1262 LOCAL/Y1274 and1276 NET; constructor Y1248 is source-only. Separate body/pool/trace reads are asynchronous.",
+              "Each mode links its own complete native endpoint and full parent gate. NET final resolved core/mod samples occur after the selected collision entry, with matching peer state, unchanged cards and native exits0.",
+              "Original CP3 and once position/history-only approach plus declared hostile-contact protection are bypasses. No actor/activation/fall/contact/timer/expiry/outcome flags are authored.",
+              "No original-stage identity, repeat-wipe/retry, all-subtype, primary-death expiry/F112, later-subtype/F159 or signed carry-release/F201 claim. Frozen X5 historical extra checks are preserved, not transferred.",
+              "Same-family usable support is independently established by F111. Existing background and paired FX-art discrepancies remain in the retained reviewed captures; no general rendering claim."
+            ],
+            "bypasses": [
+              "Original CP3 entry and once position/previous-position-only approach.",
+              "Disclosed predeclared hostile-contact protection; actual native ice damage/knockback retained, no contact/timer/outcome writes."
+            ]
+          }
+        ],
+        "limitations": "Full F168 authored falling-object contract independently reviewed on accepted b37cd69 LOCAL/NET raw sequence: guest-only originalthreshold8->9, originalchild12allocation, actualnativephase6fall, guestcollision, samechildnativefree across distinctupdates, and living guestcontrol with postendpoint finalCRC/cards/nativeexitgates. Reuses exact accepted completedcomponents with row-specific full-contract review. OriginalCP3/position/contact-protectionbypasses and asynchronous/background/pairedFXart caveats retained. No automaticFA384countdown, allsubtypes/retry/death-expiry/signedcarryrelease claim."
       }
     },
     {
