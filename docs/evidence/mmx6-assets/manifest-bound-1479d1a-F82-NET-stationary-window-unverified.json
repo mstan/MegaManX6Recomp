@@ -1,0 +1,154 @@
+{
+  "comparison": "F82",
+  "mode": "netplay",
+  "result": "unverified",
+  "raw_parent_status": "failed",
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\alternate-boss-v95-final-binding-root-v2.json",
+    "binding_sha256": "49387986476d53a60b62902af95546b52a88d72be247a7f379b119e3b155e1c9",
+    "image_sha256": "e12b09914597609af98b06b4be518c8eaaca30a6d58b1b6e75a55d7dbbb03b2c",
+    "manifest_sha256": "6be89f0ae5b5abae6c3ed4848fccab073db3c7a739bf02d5bfc9735678bb1dff",
+    "provenance_sha256": "ddcb749bc5ff2897b8f8c1d739fee091d908e871ba53ef89b8f92726fa4bc9e8",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v95-alternate-boss-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "1479d1a8b0fecf8d167c18e24a1cf6bc7599eccc",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v41",
+    "host_revision": 24
+  },
+  "raw_parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f82n1\\qualification.json",
+    "sha256": "7de741cb3b162fe41f6535e03a2f9a188b26390403d67e1f736bc11ea1d483b2",
+    "checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": false,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "error": "F82 NET aerial requirement remains unverified"
+  },
+  "native_observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f82n1\\intro-admission\\F82_F84_F85\\observations.json",
+    "sha256": "97cb3de39bec1f61b2a2515bfcfd5feb9d353d3cc244e1ce676adc82bc75bd43",
+    "samples": 626
+  },
+  "actual_live_source_guards": [
+    {
+      "peer": 0,
+      "address": "0x800fa090",
+      "bytes": 336,
+      "sha256": "78110785f00c8539e7b35271bd7a63846727b2de8fa809c2e3ad568107f80f08",
+      "matches_original": true
+    },
+    {
+      "peer": 1,
+      "address": "0x800fa090",
+      "bytes": 336,
+      "sha256": "78110785f00c8539e7b35271bd7a63846727b2de8fa809c2e3ad568107f80f08",
+      "matches_original": true
+    },
+    {
+      "peer": 0,
+      "address": "0x800fa4dc",
+      "bytes": 60,
+      "sha256": "16a863d21a919b598ccd1990475d0cf662d4274a2024b15900aa81814e1b89ef",
+      "matches_original": true
+    },
+    {
+      "peer": 1,
+      "address": "0x800fa4dc",
+      "bytes": 60,
+      "sha256": "16a863d21a919b598ccd1990475d0cf662d4274a2024b15900aa81814e1b89ef",
+      "matches_original": true
+    },
+    {
+      "peer": 0,
+      "address": "0x800fc508",
+      "bytes": 760,
+      "sha256": "23dbead4b0014778ce4f181590a0afe33665ecc7fd31b67a095dd4df0a70b60c",
+      "matches_original": true
+    },
+    {
+      "peer": 1,
+      "address": "0x800fc508",
+      "bytes": 760,
+      "sha256": "23dbead4b0014778ce4f181590a0afe33665ecc7fd31b67a095dd4df0a70b60c",
+      "matches_original": true
+    },
+    {
+      "peer": 0,
+      "address": "0x800fe140",
+      "bytes": 92,
+      "sha256": "c6d9c5b90565884abc189e59c859bdae691d2fe9e74bc0aad517f5c11cc380a3",
+      "matches_original": true
+    },
+    {
+      "peer": 1,
+      "address": "0x800fe140",
+      "bytes": 92,
+      "sha256": "c6d9c5b90565884abc189e59c859bdae691d2fe9e74bc0aad517f5c11cc380a3",
+      "matches_original": true
+    }
+  ],
+  "actual_ground_hit": {
+    "before": 368,
+    "after": 370,
+    "hp_before": [
+      48,
+      48
+    ],
+    "hp_after": [
+      46,
+      44
+    ]
+  },
+  "airborne_result": "unverified",
+  "airborne_error": "F82 source-bound close stationary air window not reached",
+  "airborne_attempts": [
+    {
+      "attempt": 0,
+      "status": "unverified",
+      "pursuit_samples": 239,
+      "first_row": 371,
+      "last_row": 624,
+      "actual_air_attack_rows": 0
+    }
+  ],
+  "owned_cleanup": [
+    {
+      "seat": 0,
+      "owned_pid": 33112,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "input_release_errors": null,
+      "private_card_error": null
+    },
+    {
+      "seat": 1,
+      "owned_pid": 6168,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "input_release_errors": null,
+      "private_card_error": null
+    }
+  ],
+  "limits": [
+    "No F82 NET pass or additional completed comparison. Existing LOCAL positive and earlier native NET misses remain unchanged.",
+    "The native NPC43 action5/phase3 code/table guards match on both peers; native ground damage occurs. The stricter procedure did not retain a close stationary window after facing, so no actual Jump/Square airborne offer is claimed.",
+    "Raw failed parent/false combined-observer flag and skipped final CRC are preserved. Complete source/image/profile24 binding, unchanged private cards and two native owned exits0 do not substitute for the missing airborne outcome.",
+    "No pose, position, velocity, timer, HP, AI, hit, result or availability writes. Enforced owned scheduler affinity5 changes only host scheduling, not native predicates.",
+    "Park further timing/aim variants. Resume only after an independent concrete readiness fix or a useful broader fix, not another identical run. No new art, ordinary replay, cross-host/WAN or native3330 claim."
+  ]
+}
