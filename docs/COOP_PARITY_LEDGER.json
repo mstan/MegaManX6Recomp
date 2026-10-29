@@ -4093,7 +4093,7 @@
       "frozen_row_sha256": "bc61483131ca6eee65995555543630cc8695aec29a0becf72b3b9b2e3dde842d",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Investigator defeat and departure cleanup",
         "bounded_check": "Land a native final hit with either actor; follow both victory/departure states through selector return without a second guest victory cycle.",
         "baseline_anchors": [
@@ -4101,14 +4101,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4147,9 +4147,87 @@
             "bypasses": [
               "OriginalAmazonCP2 priorroute bypass remains; actual native bossdoor/conversation/fullHP main and ordinary attacks/reward/report/story controls are retained. No HP/pose/position/phase/contact/clear/success writes or stateLOAD. Selected noSave choice1; privatecards unchanged and ownedprocessesexit0."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "cameras": "split",
+              "lab_checkpoint": "amazon_cp2",
+              "native_report_choice": 1,
+              "no_save": true,
+              "audio": "muted dummy"
+            },
+            "action": "Actual native guest Investigator finalhit, both once-only victories/departures through real selector return.",
+            "outcome": "Each living hero native25/out1 once; neither returns/repeats before actual native selector. Full source/profile/CRC/cards/cleanup/taint gates and reviewed images retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-dcc1002-R19-F13-native-selector-dash-local-netplay-reviewed.json",
+                "sha256": "9cd5e3606ea966081550627e839a14228d8f66b2095e7a8dfe3140b3ce5320e6"
+              }
+            ],
+            "limits": [
+              "Canonical X/P1 + base Zero/P2, Commander Yammark guest finalhit, report/noSave/real selector and fresh Amazon1/0CP0 native entry only. No other boss/finisher/roster, native Save/coldLoad or general progression credit.",
+              "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD.",
+              "LOCAL frontend completed1102samples/69.765sec, NET953/102.422sec. Prior900sample cap stopped native progress before selector. New6000sample/hard480sec bounds change observation only; original report/story input predicates remain.",
+              "Initial NET v3 raw failure preserved: exact required action49 already existed on owning peer1/sample48 while old pose reducer inspected peer0. v5 retains actual48/49 body witnesses across full per-peer snapshots; action50 alone does not satisfy49, and native child/HP checks remain. Extra fast sampler v4 never launched.",
+              "Root reviewed27 relevant composed images:9LOCAL/18NET. Boss prerequisite scenery corruption and HUD overlap remain visible. NET departure captures sometimes show later beam/retirement phases. RAM/publications/present images are asynchronous; no same-frame alignment, whole-art/HUD/scenery/palette or private-view correctness claim.",
+              "F13 active images show both heroes and fresh Zero dash art. Three distinct owned original trail allocations, resource/frame/facing and finite natural expiry come from retained source-bound body/GPU observations. No damage/hurt cancellation is labeled natural retirement.",
+              "Native world34LOCAL/47and43NET updates lie inside actual SDK brackets. All4LOCAL/15NET parent gates, same exact source/image/manifest/SDK/UI/revision14, four resolved matching core/nonzero-mod CRC windows including aftercase, unchanged privatecards, three graceful owned exits0 and strict fixture recording/replay refusals retained. No gate waiver/cross-candidate transfer."
+            ],
+            "bypasses": [
+              "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "cameras": "split",
+              "lab_checkpoint": "amazon_cp2",
+              "native_report_choice": 1,
+              "no_save": true,
+              "audio": "muted dummy"
+            },
+            "action": "Actual native guest Investigator finalhit, both once-only victories/departures through real selector return.",
+            "outcome": "Each living hero native25/out1 once; neither returns/repeats before actual native selector. Full source/profile/CRC/cards/cleanup/taint gates and reviewed images retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-dcc1002-R19-F13-native-selector-dash-local-netplay-reviewed.json",
+                "sha256": "9cd5e3606ea966081550627e839a14228d8f66b2095e7a8dfe3140b3ce5320e6"
+              }
+            ],
+            "limits": [
+              "Canonical X/P1 + base Zero/P2, Commander Yammark guest finalhit, report/noSave/real selector and fresh Amazon1/0CP0 native entry only. No other boss/finisher/roster, native Save/coldLoad or general progression credit.",
+              "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD.",
+              "LOCAL frontend completed1102samples/69.765sec, NET953/102.422sec. Prior900sample cap stopped native progress before selector. New6000sample/hard480sec bounds change observation only; original report/story input predicates remain.",
+              "Initial NET v3 raw failure preserved: exact required action49 already existed on owning peer1/sample48 while old pose reducer inspected peer0. v5 retains actual48/49 body witnesses across full per-peer snapshots; action50 alone does not satisfy49, and native child/HP checks remain. Extra fast sampler v4 never launched.",
+              "Root reviewed27 relevant composed images:9LOCAL/18NET. Boss prerequisite scenery corruption and HUD overlap remain visible. NET departure captures sometimes show later beam/retirement phases. RAM/publications/present images are asynchronous; no same-frame alignment, whole-art/HUD/scenery/palette or private-view correctness claim.",
+              "F13 active images show both heroes and fresh Zero dash art. Three distinct owned original trail allocations, resource/frame/facing and finite natural expiry come from retained source-bound body/GPU observations. No damage/hurt cancellation is labeled natural retirement.",
+              "Native world34LOCAL/47and43NET updates lie inside actual SDK brackets. All4LOCAL/15NET parent gates, same exact source/image/manifest/SDK/UI/revision14, four resolved matching core/nonzero-mod CRC windows including aftercase, unchanged privatecards, three graceful owned exits0 and strict fixture recording/replay refusals retained. No gate waiver/cross-candidate transfer."
+            ],
+            "bypasses": [
+              "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD."
+            ]
           }
         ],
-        "limitations": "Actual guestclear/bothnativevictories and originalreport/noSave/story progress retained, but requiredselector unobserved after two900sample story bounds. NETunverified; long timing continuation deferred."
+        "limitations": "Same exact V82 Commander Yammark guestclear/noSave/actualselector and freshAmazonCP0 only. No Save/coldLoad/otherboss/roster or generalart credit. All4LOCAL/15NET parent gates and31resolvedCRC samples pass;27composedimages reviewed with scenery/HUD/asynchronous limits."
       }
     },
     {
@@ -6244,7 +6322,7 @@
       "frozen_row_sha256": "d140e906f246683abcf46b832fefa540a738d4ad3676760ca7f33f68e933c672",
       "x6": {
         "workstream": "assets",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Dash resources following boss victory",
         "bounded_check": "Perform a native Investigator clear and selector return; dash the partner again and inspect fresh owned trail allocation and art.",
         "baseline_anchors": [
@@ -6252,14 +6330,14 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -6298,9 +6376,87 @@
             "bypasses": [
               "OriginalAmazonCP2 priorroute bypass remains; actual native bossdoor/conversation/fullHP main and ordinary attacks/reward/report/story controls are retained. No HP/pose/position/phase/contact/clear/success writes or stateLOAD. Selected noSave choice1; privatecards unchanged and ownedprocessesexit0."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "cameras": "split",
+              "lab_checkpoint": "amazon_cp2",
+              "native_report_choice": 1,
+              "no_save": true,
+              "audio": "muted dummy"
+            },
+            "action": "After actual clear/selector, confirm native unit0, enter freshAmazonCP0 and dash P2 with both heroes visible.",
+            "outcome": "Fresh native Zero/P2 dash/travel, three distinct owned original trails/art and natural finite retirement; primary remains visible. No damage cancellation.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-dcc1002-R19-F13-native-selector-dash-local-netplay-reviewed.json",
+                "sha256": "9cd5e3606ea966081550627e839a14228d8f66b2095e7a8dfe3140b3ce5320e6"
+              }
+            ],
+            "limits": [
+              "Canonical X/P1 + base Zero/P2, Commander Yammark guest finalhit, report/noSave/real selector and fresh Amazon1/0CP0 native entry only. No other boss/finisher/roster, native Save/coldLoad or general progression credit.",
+              "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD.",
+              "LOCAL frontend completed1102samples/69.765sec, NET953/102.422sec. Prior900sample cap stopped native progress before selector. New6000sample/hard480sec bounds change observation only; original report/story input predicates remain.",
+              "Initial NET v3 raw failure preserved: exact required action49 already existed on owning peer1/sample48 while old pose reducer inspected peer0. v5 retains actual48/49 body witnesses across full per-peer snapshots; action50 alone does not satisfy49, and native child/HP checks remain. Extra fast sampler v4 never launched.",
+              "Root reviewed27 relevant composed images:9LOCAL/18NET. Boss prerequisite scenery corruption and HUD overlap remain visible. NET departure captures sometimes show later beam/retirement phases. RAM/publications/present images are asynchronous; no same-frame alignment, whole-art/HUD/scenery/palette or private-view correctness claim.",
+              "F13 active images show both heroes and fresh Zero dash art. Three distinct owned original trail allocations, resource/frame/facing and finite natural expiry come from retained source-bound body/GPU observations. No damage/hurt cancellation is labeled natural retirement.",
+              "Native world34LOCAL/47and43NET updates lie inside actual SDK brackets. All4LOCAL/15NET parent gates, same exact source/image/manifest/SDK/UI/revision14, four resolved matching core/nonzero-mod CRC windows including aftercase, unchanged privatecards, three graceful owned exits0 and strict fixture recording/replay refusals retained. No gate waiver/cross-candidate transfer."
+            ],
+            "bypasses": [
+              "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "cameras": "split",
+              "lab_checkpoint": "amazon_cp2",
+              "native_report_choice": 1,
+              "no_save": true,
+              "audio": "muted dummy"
+            },
+            "action": "After actual clear/selector, confirm native unit0, enter freshAmazonCP0 and dash P2 with both heroes visible.",
+            "outcome": "Fresh native Zero/P2 dash/travel, three distinct owned original trails/art and natural finite retirement; primary remains visible. No damage cancellation.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-dcc1002-R19-F13-native-selector-dash-local-netplay-reviewed.json",
+                "sha256": "9cd5e3606ea966081550627e839a14228d8f66b2095e7a8dfe3140b3ce5320e6"
+              }
+            ],
+            "limits": [
+              "Canonical X/P1 + base Zero/P2, Commander Yammark guest finalhit, report/noSave/real selector and fresh Amazon1/0CP0 native entry only. No other boss/finisher/roster, native Save/coldLoad or general progression credit.",
+              "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD.",
+              "LOCAL frontend completed1102samples/69.765sec, NET953/102.422sec. Prior900sample cap stopped native progress before selector. New6000sample/hard480sec bounds change observation only; original report/story input predicates remain.",
+              "Initial NET v3 raw failure preserved: exact required action49 already existed on owning peer1/sample48 while old pose reducer inspected peer0. v5 retains actual48/49 body witnesses across full per-peer snapshots; action50 alone does not satisfy49, and native child/HP checks remain. Extra fast sampler v4 never launched.",
+              "Root reviewed27 relevant composed images:9LOCAL/18NET. Boss prerequisite scenery corruption and HUD overlap remain visible. NET departure captures sometimes show later beam/retirement phases. RAM/publications/present images are asynchronous; no same-frame alignment, whole-art/HUD/scenery/palette or private-view correctness claim.",
+              "F13 active images show both heroes and fresh Zero dash art. Three distinct owned original trail allocations, resource/frame/facing and finite natural expiry come from retained source-bound body/GPU observations. No damage/hurt cancellation is labeled natural retirement.",
+              "Native world34LOCAL/47and43NET updates lie inside actual SDK brackets. All4LOCAL/15NET parent gates, same exact source/image/manifest/SDK/UI/revision14, four resolved matching core/nonzero-mod CRC windows including aftercase, unchanged privatecards, three graceful owned exits0 and strict fixture recording/replay refusals retained. No gate waiver/cross-candidate transfer."
+            ],
+            "bypasses": [
+              "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD."
+            ]
           }
         ],
-        "limitations": "Postclear dash NEVERentered: actual earned selector prerequisite unobserved in two nativeR19 story continuations. No freshstage/dash/trail/art/NET verdict; sourcehelper preservedonly."
+        "limitations": "Same exact V82 Commander Yammark guestclear/noSave/actualselector and freshAmazonCP0 only. No Save/coldLoad/otherboss/roster or generalart credit. All4LOCAL/15NET parent gates and31resolvedCRC samples pass;27composedimages reviewed with scenery/HUD/asynchronous limits."
       }
     },
     {
@@ -10764,7 +10920,7 @@
             ]
           }
         ],
-        "limitations": "No genuine death or gate outcome. Source/live32HP solid explains approach stop; concrete native attack-clearance correction is frozen but not run. Required full LOCAL/NET same-candidate qualification remains incomplete."
+        "limitations": "No genuine death or gate outcome. Source/live32HP solid explains approach stop; corrected v7 three Square offers produced no HP drop or retirement. Projectile births not proven; route parked. Full LOCAL/NET contract unverified."
       }
     },
     {

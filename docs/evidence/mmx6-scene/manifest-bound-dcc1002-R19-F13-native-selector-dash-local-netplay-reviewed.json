@@ -1,0 +1,869 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "R19",
+    "F13"
+  ],
+  "frozen_row_sha256": {
+    "R19": "bc61483131ca6eee65995555543630cc8695aec29a0becf72b3b9b2e3dde842d",
+    "F13": "d140e906f246683abcf46b832fefa540a738d4ad3676760ca7f33f68e933c672"
+  },
+  "result": "passed_local_and_netplay",
+  "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+  "cases": [
+    {
+      "mode": "local",
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\qualification.json",
+        "bytes": 30045668,
+        "sha256": "9f2753fb699d2206f3a7491a1c5a388759c143cea6e0ecf944029bf502f49f7b"
+      },
+      "components": {
+        "R19-Yammark-finalhit": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\R19-Yammark-finalhit\\observations.json",
+          "bytes": 7913383,
+          "sha256": "a9a605ba73beba5a89c242e8c9dca088902db58740c4d8bdb9df05b3fe7f3ba7"
+        },
+        "R19-native-frontend": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\R19-native-frontend\\observations.json",
+          "bytes": 15467487,
+          "sha256": "96f3b7b8a6e2b0e23180bb857e8aefc19ce79db8df67460361dbf9259b40c307"
+        },
+        "F13-postclear-fresh-dash": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\F13-postclear-fresh-dash\\observations.json",
+          "bytes": 1492303,
+          "sha256": "83d89a7463eab54c23a481e6f6a6c84a235692661479e58e610cd960aa7f0cab"
+        },
+        "F13-postclear-fresh-dash/fresh-native-dash": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\F13-postclear-fresh-dash\\fresh-native-dash\\observations.json",
+          "bytes": 325872,
+          "sha256": "befd11cd042e0fe2c6dff8b0d58eaf11f688decd43b5bd91b07654a1ef312f05"
+        }
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_component_checks": {
+        "R19-Yammark-finalhit": {
+          "actual_guest_lethal": true,
+          "ordinary_inputs_only": true,
+          "actual_native_clear_followup_observed": true,
+          "both_visible_native_victory": true,
+          "each_native_victory_once": true,
+          "each_native_departure_once": true,
+          "no_early_living_passenger_withdrawal": true,
+          "both_still_living": true,
+          "both_native_state3_at_frontend": true
+        },
+        "R19-native-frontend": {
+          "earned_source_ready_report_seen": true,
+          "actual_native_selector_return": true,
+          "both_native_victory_bodies_visible_together": true,
+          "each_living_body_native_victory_once": true,
+          "each_living_body_native_departure_once": true,
+          "no_early_primary_withdrawal": true,
+          "no_second_guest_victory": true,
+          "no_game_state_or_card_writes": true
+        },
+        "F13-postclear-fresh-dash": {
+          "actual_earned_clear_selector": true,
+          "ordinary_native_unit_confirmation": true,
+          "fresh_both_native_arrivals_grounded": true,
+          "actual_fresh_owned_dash_and_retirement_each_peer": true
+        },
+        "F13-postclear-fresh-dash/fresh-native-dash": {
+          "actual_clear_selector_fresh_native_arrival_each_peer": true,
+          "original_published_Zero_input": true,
+          "fresh_native_marker_three_distinct_owned_trails_each_peer": true,
+          "native_Zero_travel_with_primary_visible_at_capture_request_each_peer": true,
+          "finite_original_native_trail_retirement_each_peer": true,
+          "native_world_inside_actual_SDK_bracket_each_peer": true,
+          "own_composed_body_trail_captures_and_GPU_frames_each_peer": true
+        }
+      },
+      "source_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_finalhit_v82_root_v3.py": "8b0a4ff28421259037a61688e7501e56dad54e190289f9b9c230efa21aa88ecd",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R19_frontend_v82_root_v2.py": "cc817771e6a4fe117453114f5f8d4eb9afe02b547e24b54bb99169837bcf1eb4",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "964ba7331d99054d6978cd0b382c229a168fc57bc56ce2b46856bba2fa9dfaa4",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F13_postclear_dash_v82_worker_v1.py": "89f5763ab3597d0363bcba56f3c8482ea655af41242534b44c1980356317c709",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F14_postdoor_v67_root_v1.py": "019bb5494a6f649b6aac7aaab2e05b59d1f8db5d82b5df0cbda5e15e304bb3f6"
+      },
+      "root_reviewed_composed_images": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\R19-Yammark-finalhit\\peer-0-actual-guest-Yammark-lethal.png",
+          "bytes": 2074543,
+          "sha256": "9c8c0d4a343df26eed2d0489f0e48712ec0c1761e5965a93ff6e4de0d0a7688e"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\R19-Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action25-visible1.png",
+          "bytes": 2074543,
+          "sha256": "75bfb619ff41c25ac92a556f07ef3c5feaf207e86eee1f28b9bd0c276396d695"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\R19-Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action25-visible1.png",
+          "bytes": 2074543,
+          "sha256": "db57f177a52bf881251873c9dc8ff8343b42ab3981a0bd031821c822582d7574"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\R19-Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action1-visible1.png",
+          "bytes": 2074543,
+          "sha256": "b5944a8a11d735502313fe44e26dac8969b4bf4de393899e975a4dd61f84f2c4"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\R19-Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action1-visible1.png",
+          "bytes": 2074543,
+          "sha256": "b18d5a5862c2a6cc54f390fad435030c324724aba6cb9972c3254557dd175cc5"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\R19-native-frontend\\peer-0-earned-native-unit-selector.png",
+          "bytes": 2074543,
+          "sha256": "24dc3a2178ca951b4d4f751b7a6a23702c970c42fb9b20c38be92fdf79052d14"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\F13-postclear-fresh-dash\\peer-0-actual-postclear-fresh-native-arrival.png",
+          "bytes": 2074543,
+          "sha256": "e20c3c695f61206f8b376af00532c19e33ed18a311cf47e997fe5d096f5b5a09"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\F13-postclear-fresh-dash\\fresh-native-dash\\peer-0-zero-native-dash-both-bodies.png",
+          "bytes": 2074543,
+          "sha256": "616e2548a472c4fb2773f1a93488353abf80577182f250ff91ffd03b2bc68253"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v3\\ammo-hud\\intro-admission\\F13-postclear-fresh-dash\\fresh-native-dash\\peer-0-zero-trails-retired-both-bodies.png",
+          "bytes": 2074543,
+          "sha256": "39ba20fb0ec2984dfeef7aef79590caf7451ba51850caa3f7090049923c7cca5"
+        }
+      ],
+      "frontend": {
+        "samples": 1102,
+        "elapsed_seconds": 69.765,
+        "selector_index": 1099,
+        "native_no_save_choice": {
+          "before": [
+            0
+          ],
+          "after": [
+            1
+          ]
+        },
+        "victory_histories": [
+          {
+            "peer": 0,
+            "seat": 0,
+            "sequence": [
+              [
+                1,
+                20,
+                true
+              ],
+              [
+                1,
+                25,
+                true
+              ],
+              [
+                1,
+                1,
+                true
+              ],
+              [
+                3,
+                0,
+                false
+              ]
+            ],
+            "pose_entries": 1,
+            "departure_entries": 1,
+            "early_outgoing_before_victory": false
+          },
+          {
+            "peer": 0,
+            "seat": 1,
+            "sequence": [
+              [
+                1,
+                48,
+                true
+              ],
+              [
+                1,
+                2,
+                true
+              ],
+              [
+                1,
+                25,
+                true
+              ],
+              [
+                1,
+                1,
+                true
+              ],
+              [
+                3,
+                0,
+                false
+              ]
+            ],
+            "pose_entries": 1,
+            "departure_entries": 1,
+            "early_outgoing_before_victory": false
+          }
+        ]
+      },
+      "actual_guest_lethal": {
+        "offer": 8,
+        "row": 257,
+        "main_hp": 0,
+        "native_type": 49
+      },
+      "dash_world_brackets": [
+        {
+          "peer": 0,
+          "native_world_updates": 34,
+          "sdk_bracket": [
+            33,
+            35
+          ],
+          "retirement": "original native neutral retirement",
+          "Zero_HP_drop": false,
+          "Zero_native_hurt": false
+        }
+      ],
+      "owned_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true
+    },
+    {
+      "mode": "netplay",
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\qualification.json",
+        "bytes": 48658719,
+        "sha256": "27f506d8cc13a82931a777892a1697238a8484d1a0e7902d42eb63f03ae47820"
+      },
+      "components": {
+        "R19-Yammark-finalhit": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\observations.json",
+          "bytes": 7958898,
+          "sha256": "23b96ed4b4e6863cd9eb088a37685a5dd8fa5a4b66d582aa445fc68440a600e2"
+        },
+        "R19-native-frontend": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-native-frontend\\observations.json",
+          "bytes": 29908452,
+          "sha256": "256d7da7ad53b691c434180e1e938c8889cb880d57526f86882e84674c7cf4e6"
+        },
+        "F13-postclear-fresh-dash": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\F13-postclear-fresh-dash\\observations.json",
+          "bytes": 2529749,
+          "sha256": "91739ea4b816e2141e4ed59f6852bd26d2083f9a92d8357e49b82745a8ad4637"
+        },
+        "F13-postclear-fresh-dash/fresh-native-dash": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\F13-postclear-fresh-dash\\fresh-native-dash\\observations.json",
+          "bytes": 724117,
+          "sha256": "09350480c0c43ba61bf62895c376297fe4be995eb6c6cdd9436f8d832195b73d"
+        }
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_component_checks": {
+        "R19-Yammark-finalhit": {
+          "actual_guest_lethal": true,
+          "ordinary_inputs_only": true,
+          "actual_native_clear_followup_observed": true,
+          "both_visible_native_victory": true,
+          "each_native_victory_once": true,
+          "each_native_departure_once": true,
+          "no_early_living_passenger_withdrawal": true,
+          "both_still_living": true,
+          "both_native_state3_at_frontend": true
+        },
+        "R19-native-frontend": {
+          "earned_source_ready_report_seen": true,
+          "actual_native_selector_return": true,
+          "both_native_victory_bodies_visible_together": true,
+          "each_living_body_native_victory_once": true,
+          "each_living_body_native_departure_once": true,
+          "no_early_primary_withdrawal": true,
+          "no_second_guest_victory": true,
+          "no_game_state_or_card_writes": true
+        },
+        "F13-postclear-fresh-dash": {
+          "actual_earned_clear_selector": true,
+          "ordinary_native_unit_confirmation": true,
+          "fresh_both_native_arrivals_grounded": true,
+          "actual_fresh_owned_dash_and_retirement_each_peer": true
+        },
+        "F13-postclear-fresh-dash/fresh-native-dash": {
+          "actual_clear_selector_fresh_native_arrival_each_peer": true,
+          "original_published_Zero_input": true,
+          "fresh_native_marker_three_distinct_owned_trails_each_peer": true,
+          "native_Zero_travel_with_primary_visible_at_capture_request_each_peer": true,
+          "finite_original_native_trail_retirement_each_peer": true,
+          "native_world_inside_actual_SDK_bracket_each_peer": true,
+          "own_composed_body_trail_captures_and_GPU_frames_each_peer": true
+        }
+      },
+      "source_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_finalhit_v82_root_v5.py": "a579f42241f0017ff8d432511683c71a4fd4dd6c452010daa5e6959138f3d897",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R19_frontend_v82_root_v2.py": "cc817771e6a4fe117453114f5f8d4eb9afe02b547e24b54bb99169837bcf1eb4",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "964ba7331d99054d6978cd0b382c229a168fc57bc56ce2b46856bba2fa9dfaa4",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F13_postclear_dash_v82_worker_v1.py": "89f5763ab3597d0363bcba56f3c8482ea655af41242534b44c1980356317c709",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F14_postdoor_v67_root_v1.py": "019bb5494a6f649b6aac7aaab2e05b59d1f8db5d82b5df0cbda5e15e304bb3f6"
+      },
+      "root_reviewed_composed_images": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-0-actual-guest-Yammark-lethal.png",
+          "bytes": 2074543,
+          "sha256": "5e0877708a45dd3d2592a9ca31ad510a0c382dbe20fa3a4ca0c5f5b39981ff6a"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action25-visible1.png",
+          "bytes": 2074543,
+          "sha256": "86bd662f1632641bc86c68c520a37e8d389d475c5685ba96ab9ea23d982c8618"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action25-visible1.png",
+          "bytes": 2074543,
+          "sha256": "387b18de5acc72596cfe70f3d4e9bc63898281df0d55eb380653d67dfdbc3eba"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action1-visible1.png",
+          "bytes": 2074543,
+          "sha256": "9470a40535204ea569329e7cc1ca40a26cc5576b6e6168c406ffc14536508542"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action1-visible1.png",
+          "bytes": 2074543,
+          "sha256": "87441d810efcc4283d7def96b5fb81a654f571ebc19545075a8a7b34976f9abf"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-native-frontend\\peer-0-earned-native-unit-selector.png",
+          "bytes": 2074543,
+          "sha256": "24dc3a2178ca951b4d4f751b7a6a23702c970c42fb9b20c38be92fdf79052d14"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\F13-postclear-fresh-dash\\peer-0-actual-postclear-fresh-native-arrival.png",
+          "bytes": 2074543,
+          "sha256": "13bfa86e87a22126de59e1f59e5c9a2d0a4555d2d5e89386ef3a96a1b3e3b00a"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\F13-postclear-fresh-dash\\fresh-native-dash\\peer-0-zero-native-dash-both-bodies.png",
+          "bytes": 2074543,
+          "sha256": "95bbf696ba8da2e23cc1429e8b5a8a7a0f6517f9a1233dfda9923e4ab4c95088"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\F13-postclear-fresh-dash\\fresh-native-dash\\peer-0-zero-trails-retired-both-bodies.png",
+          "bytes": 2074543,
+          "sha256": "6299fcc0ade781ea7693bb5fe21dffd7c1ae346e78a8bccd25c4192c539ebfa3"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-1-actual-guest-Yammark-lethal.png",
+          "bytes": 2074543,
+          "sha256": "5e0877708a45dd3d2592a9ca31ad510a0c382dbe20fa3a4ca0c5f5b39981ff6a"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-1-native-peer1-seat0-state1-action25-visible1.png",
+          "bytes": 2074543,
+          "sha256": "c52609f21e90fdefedffc5fb3fef06954424d2d04a62fd0cf22329f7a955bf01"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-1-native-peer1-seat1-state1-action25-visible1.png",
+          "bytes": 2074543,
+          "sha256": "c293ef94b5c0180e4fb71ec7cfabf9881202a96cdf8b4c85126be5bc64711850"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-1-native-peer1-seat0-state1-action1-visible1.png",
+          "bytes": 2074543,
+          "sha256": "f7af9f4bc4fafe67a8f580b73a4a12bbdb61c1919f0f48c44d2868f2162894c6"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-Yammark-finalhit\\peer-1-native-peer1-seat1-state1-action1-visible1.png",
+          "bytes": 2074543,
+          "sha256": "d04d948e3fb5b1de06ec87961a606f3bdfb89b10655a285835d19311fe29ceb0"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\R19-native-frontend\\peer-1-earned-native-unit-selector.png",
+          "bytes": 2074543,
+          "sha256": "24dc3a2178ca951b4d4f751b7a6a23702c970c42fb9b20c38be92fdf79052d14"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\F13-postclear-fresh-dash\\peer-1-actual-postclear-fresh-native-arrival.png",
+          "bytes": 2074543,
+          "sha256": "13bfa86e87a22126de59e1f59e5c9a2d0a4555d2d5e89386ef3a96a1b3e3b00a"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\F13-postclear-fresh-dash\\fresh-native-dash\\peer-1-zero-native-dash-both-bodies.png",
+          "bytes": 2074543,
+          "sha256": "c86b033f8e785ff6682230db320f0dbc74621e89c19f3c9b8c67e6e39188bee9"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v5\\intro-admission\\F13-postclear-fresh-dash\\fresh-native-dash\\peer-1-zero-trails-retired-both-bodies.png",
+          "bytes": 2074543,
+          "sha256": "23609276727355e759e4bb69ddf5e8adee8e8964c79e1e5b6afdfddfe717d8d7"
+        }
+      ],
+      "frontend": {
+        "samples": 953,
+        "elapsed_seconds": 102.422,
+        "selector_index": 950,
+        "native_no_save_choice": {
+          "before": [
+            0,
+            0
+          ],
+          "after": [
+            1,
+            1
+          ]
+        },
+        "victory_histories": [
+          {
+            "peer": 0,
+            "seat": 0,
+            "sequence": [
+              [
+                1,
+                2,
+                true
+              ],
+              [
+                1,
+                20,
+                true
+              ],
+              [
+                1,
+                25,
+                true
+              ],
+              [
+                1,
+                1,
+                true
+              ],
+              [
+                3,
+                0,
+                false
+              ]
+            ],
+            "pose_entries": 1,
+            "departure_entries": 1,
+            "early_outgoing_before_victory": false
+          },
+          {
+            "peer": 0,
+            "seat": 1,
+            "sequence": [
+              [
+                1,
+                48,
+                true
+              ],
+              [
+                1,
+                2,
+                true
+              ],
+              [
+                1,
+                25,
+                true
+              ],
+              [
+                1,
+                1,
+                true
+              ],
+              [
+                3,
+                0,
+                false
+              ]
+            ],
+            "pose_entries": 1,
+            "departure_entries": 1,
+            "early_outgoing_before_victory": false
+          },
+          {
+            "peer": 1,
+            "seat": 0,
+            "sequence": [
+              [
+                1,
+                20,
+                true
+              ],
+              [
+                1,
+                25,
+                true
+              ],
+              [
+                1,
+                1,
+                true
+              ],
+              [
+                3,
+                0,
+                false
+              ]
+            ],
+            "pose_entries": 1,
+            "departure_entries": 1,
+            "early_outgoing_before_victory": false
+          },
+          {
+            "peer": 1,
+            "seat": 1,
+            "sequence": [
+              [
+                1,
+                48,
+                true
+              ],
+              [
+                1,
+                2,
+                true
+              ],
+              [
+                1,
+                25,
+                true
+              ],
+              [
+                1,
+                1,
+                true
+              ],
+              [
+                3,
+                0,
+                false
+              ]
+            ],
+            "pose_entries": 1,
+            "departure_entries": 1,
+            "early_outgoing_before_victory": false
+          }
+        ]
+      },
+      "actual_guest_lethal": {
+        "offer": 3,
+        "row": 91,
+        "main_hp": 0,
+        "native_type": 49
+      },
+      "dash_world_brackets": [
+        {
+          "peer": 0,
+          "native_world_updates": 47,
+          "sdk_bracket": [
+            46,
+            49
+          ],
+          "retirement": "original native neutral retirement",
+          "Zero_HP_drop": false,
+          "Zero_native_hurt": false
+        },
+        {
+          "peer": 1,
+          "native_world_updates": 43,
+          "sdk_bracket": [
+            41,
+            45
+          ],
+          "retirement": "original native neutral retirement",
+          "Zero_HP_drop": false,
+          "Zero_native_hurt": false
+        }
+      ],
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2912,
+              "core": "eba58b15",
+              "mod": "5f9ebaf1"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "90ca1311",
+              "mod": "722f6811"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "494ae338",
+              "mod": "39c823d3"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "b979ebce",
+              "mod": "8fcda68b"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "5a75a2b9",
+              "mod": "7a43a5c9"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "81099a36",
+              "mod": "01ab4c6d"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "33fe4071",
+              "mod": "b78a67c4"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "a7d12103",
+              "mod": "c6155903"
+            }
+          ],
+          "resolved_through": [
+            3143,
+            3143
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3200,
+              "core": "e6b56b2c",
+              "mod": "186788f0"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "4bbcbc0b",
+              "mod": "da8f1d88"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "7c2cad4f",
+              "mod": "e5bdfdb6"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "c2e57438",
+              "mod": "2cd87848"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "2444f135",
+              "mod": "e4316fe8"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "87071471",
+              "mod": "e25104de"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "c909ba4e",
+              "mod": "228057be"
+            }
+          ],
+          "resolved_through": [
+            3414,
+            3414
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3488,
+              "core": "b19fa74e",
+              "mod": "5eb26e26"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "97ae0f89",
+              "mod": "0fdf2f06"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "f242810f",
+              "mod": "b3d43d98"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "32b40e2a",
+              "mod": "20f018b8"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "32078646",
+              "mod": "1563a58e"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "f06d60c0",
+              "mod": "082f385a"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "e198f9cb",
+              "mod": "186788f0"
+            },
+            {
+              "simulation_tick": 3712,
+              "core": "56eff463",
+              "mod": "da8f1d88"
+            }
+          ],
+          "resolved_through": [
+            3715,
+            3716
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 16928,
+              "core": "9b288551",
+              "mod": "59a3b4f0"
+            },
+            {
+              "simulation_tick": 16960,
+              "core": "c133c611",
+              "mod": "f19135d2"
+            },
+            {
+              "simulation_tick": 16992,
+              "core": "188f0f81",
+              "mod": "713a3772"
+            },
+            {
+              "simulation_tick": 17024,
+              "core": "97c47acc",
+              "mod": "8a811f28"
+            },
+            {
+              "simulation_tick": 17056,
+              "core": "b2a101b4",
+              "mod": "f652a088"
+            },
+            {
+              "simulation_tick": 17088,
+              "core": "fa4c212b",
+              "mod": "97a3939a"
+            },
+            {
+              "simulation_tick": 17120,
+              "core": "f17d4087",
+              "mod": "4e87523a"
+            },
+            {
+              "simulation_tick": 17152,
+              "core": "ad752321",
+              "mod": "eec6b92e"
+            }
+          ],
+          "resolved_through": [
+            17164,
+            17163
+          ]
+        }
+      ],
+      "resolved_crc_samples": 31,
+      "owned_cleanup": [
+        {
+          "seat": 0,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "seat": 1,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "cards_unchanged": true
+    }
+  ],
+  "limits": [
+    "Canonical X/P1 + base Zero/P2, Commander Yammark guest finalhit, report/noSave/real selector and fresh Amazon1/0CP0 native entry only. No other boss/finisher/roster, native Save/coldLoad or general progression credit.",
+    "Original agreed AmazonCP2 initializer bypasses the preceding route. Actual original door, dialogue, fullHP battle, native attacks/kill, report/story/selector and subsequent stage entry are retained. No tested death/pose/HP/position/collision/scene/outcome assignment or execution-state LOAD.",
+    "LOCAL frontend completed1102samples/69.765sec, NET953/102.422sec. Prior900sample cap stopped native progress before selector. New6000sample/hard480sec bounds change observation only; original report/story input predicates remain.",
+    "Initial NET v3 raw failure preserved: exact required action49 already existed on owning peer1/sample48 while old pose reducer inspected peer0. v5 retains actual48/49 body witnesses across full per-peer snapshots; action50 alone does not satisfy49, and native child/HP checks remain. Extra fast sampler v4 never launched.",
+    "Root reviewed27 relevant composed images:9LOCAL/18NET. Boss prerequisite scenery corruption and HUD overlap remain visible. NET departure captures sometimes show later beam/retirement phases. RAM/publications/present images are asynchronous; no same-frame alignment, whole-art/HUD/scenery/palette or private-view correctness claim.",
+    "F13 active images show both heroes and fresh Zero dash art. Three distinct owned original trail allocations, resource/frame/facing and finite natural expiry come from retained source-bound body/GPU observations. No damage/hurt cancellation is labeled natural retirement.",
+    "Native world34LOCAL/47and43NET updates lie inside actual SDK brackets. All4LOCAL/15NET parent gates, same exact source/image/manifest/SDK/UI/revision14, four resolved matching core/nonzero-mod CRC windows including aftercase, unchanged privatecards, three graceful owned exits0 and strict fixture recording/replay refusals retained. No gate waiver/cross-candidate transfer."
+  ],
+  "earlier_LOCAL_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-LOCAL-review-root-v1.json",
+    "bytes": 10520,
+    "sha256": "d9e7e32fd831a6fa5b555869c2509b82895388cc523752ad00878a2cfe87ca9b"
+  },
+  "observer_correction_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-v82-v5-owning-peer-pose-replay.json",
+    "bytes": 1285,
+    "sha256": "eb23a2a2814df2234722f861d032d64b07dee38c40d3410cc8b601e3d562f108"
+  },
+  "failed_NET_v3_parent_preserved": {
+    "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-netplay-v82-root-v3\\qualification.json",
+    "bytes": 8086975,
+    "sha256": "73e8ad0f48275d3ae9164951b92185318ce131def50a7ddb5dcc98e75cb3606b"
+  },
+  "source_declaration_preflight": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-v82-root-v3-full-source-gate.json",
+    "bytes": 277,
+    "sha256": "a7fba2eee94483484c20190f79a61e9b93c252b2c930761c2159fa82c15380d5"
+  },
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+    "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+    "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+    "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+    "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v31",
+    "host_revision": 14
+  },
+  "root_reviewed_image_count": 27
+}
