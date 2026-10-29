@@ -15,7 +15,15 @@ static int checkpoint_refight_source(void) {
         {0x8002F840u,0x8002FBECu,0xA2CFC9E6u},
         {0x8003D850u,0x8003D8A8u,0x26065317u},
         {0x8003AD18u,0x8003ADB4u,0x24EE2986u},
-        {0x8003D308u,0x8003D34Cu,0x8B958C0Au}
+        {0x8003D308u,0x8003D34Cu,0x8B958C0Au},
+        {0x800E9A34u,0x800E9B68u,0x289D0633u},
+        {0x800ED098u,0x800ED0B4u,0x328FB140u},
+        {0x800262ECu,0x8002649Cu,0x2C53650Fu},
+        {0x80027BA0u,0x80027C98u,0xD5E21EAAu},
+        {0x8002A3E8u,0x8002A5BCu,0x8985783Fu},
+        {0x8006DEF4u,0x8006DEF8u,0xB1924E8Au},
+        {0x800ED374u,0x800ED378u,0xABB67F19u},
+        {0x800735B4u,0x800735B8u,0x204776ABu}
     };
     for(unsigned i=0;i<sizeof code/sizeof code[0];++i)
         if(checkpoint_hash(code[i].first,code[i].end)!=code[i].hash)return 0;
@@ -28,6 +36,7 @@ static int checkpoint_refight_source(void) {
         psx_mod_read_word(0x800ED480u)==0x800EC860u &&
         /* 29E84..29E8C category4 takes29EFC before the category0..2
          * lifetime writes. Only allocator bit0 changes on this placement. */
+        (psx_mod_read_word(0x800ED088u)&0xFFFFFFFEu)==0x03000100u &&
         (psx_mod_read_word(0x800ED040u)&0xFFFFFFFEu)==0x04021700u &&
         psx_mod_read_word(0x800ED044u)==0x04E80760u;
 }
@@ -38,7 +47,9 @@ static int checkpoint_refight_assets(uint32_t *meta,uint32_t *desc) {
         *meta>=0x80010000u && *meta<=0x80200000u-82944u &&
         *desc>=0x80010000u && *desc<=0x80200000u-4036u &&
         checkpoint_hash(0x80097438u,0x80097438u+504u)==0x2B74F1CDu &&
-        checkpoint_hash(*meta,*meta+82944u)==0x7A32F2F3u &&
+        /* Original CP1 cat3/type1 E9A34 copies six references via27BA0;
+         * authenticate that complete loaded bank, not pristine DAT104. */
+        checkpoint_hash(*meta,*meta+82944u)==0xAF40A509u &&
         checkpoint_hash(*desc,*desc+4036u)==0xE5AD1AB2u;
 }
 static int checkpoint_refight_tile(uint32_t meta,uint32_t desc,unsigned x,unsigned y) {

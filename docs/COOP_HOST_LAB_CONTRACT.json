@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 31,
+  "revision": 32,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v48",
+    "title_compatibility": "mmx6-x-zero-delay-v49",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -633,5 +633,19 @@
     "default_correctness_fix": "Default co-op guest admission of original member14 refight portal types2..9: original pure leaf EC430 keeps primary precedence; if guest alone qualifies, execute the original EC860 action once in guest context. Only actual native snap plus queued command20 and portal subphase1 establish owner; body action20 is earned by the next original update. Subsequent scene/progress/loader/boss controls remain native. No optional fix toggle.",
     "snapshot": "Existing pending phase/placed_world and scene owner context only; schema14 unchanged; previous accepted scenery publication fix retained.",
     "unqualified": "Source/C fixtures do not qualify native portal transport, destination support, boss intro/release or camera follow; same exact-image LOCAL/NET observations and root review remain required."
+  },
+  "title_changes_v49_original_refight_CP1_mapcopy": {
+    "issue": "beads-eio.1.114",
+    "source": "Original member14 category3/type1 record800ED088 unconditionally copies six metatile references at CP1 via800E9A34/80027BA0/800262EC, before the guarded native body arrival.",
+    "exact_loaded_metatiles": {
+      "bytes": 82944,
+      "fnv1a32": "AF40A509",
+      "sha256": "dd8323c57032785abba6dffd811557a6324623ac8003e4e5d30985b783fc81b1"
+    },
+    "pristine_DAT104_fnv1a32": "7A32F2F3",
+    "source_replay_receipt_sha256": "faf712ee1d9fe9bb38472916f9c0d6c208f04d2b4a9b0f752033e7fd1fb030ab",
+    "guard": "Require the entire exact source-derived loaded bank and original mutator/copy/table source; retain full layout/descriptors and foot/air checks. No broad resource mask or change to game geometry.",
+    "CP2": "Native same-stage mode9 BIN33/DAT75 load retains collision banks. The CP2 camera256 is below the later copy threshold1024. Actual destination resources still require verification.",
+    "scope": "Correct the development prerequisite source guard and its external fixture. No result, actor, geometry, player, camera or success writes added. Snapshot14 unchanged; all native comparison acceptance remains pending."
   }
 }
