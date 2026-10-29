@@ -19659,24 +19659,113 @@
       "frozen_row_sha256": "f7f7f193b1b864df71d354d8255fbf465518541680c2e3318eb0babb600ecfd7",
       "x6": {
         "workstream": "solid",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Contact-driven temporary support collapse unidentified",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original NorthPole child12 guest underside-contact break and native retirement",
         "bounded_check": "Locate a native contact-triggered collapse and touch it with guest only; require its original collapse timing, not an invented lifetime timer.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
-          "src/mods/mmx6_coop_plugin.c:solid_as_zero"
+          "src/mods/mmx6_coop_plugin.c:solid_as_zero",
+          "src/mods/mmx6_coop_northpole_ice.inc:northpole_ice_live",
+          "src/mods/mmx6_coop_northpole_ice.inc:northpole_ice_private_tail"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+            "build_identity": {
+              "executable_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+              "compiled_manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original2/0CP3 plus one position/history-only approach",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "one owned process",
+              "local_cameras": "split",
+              "cameras": "unified",
+              "host_profile": "mmx6.win64-clang22.loopback revision28"
+            },
+            "action": "Guest ordinaryRight alone arms original ice producer; stay grounded/neutral beneath original falling child12, require unique native underside477E4(3,F6B8C,samechild), same-child free and living guest movement.",
+            "outcome": "F160 original guest-contact collapse and native retirement passed in LOCAL and every NET peer; accepted exact-candidate F111 proves this family is actually usable support. Unique chosen-slot break generation, source guards, two native free updates and ordinary postcollapse control retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-b37cd69-F160-native-ice-local-netplay-reviewed.json",
+                "sha256": "3c8e6a69ec13dc9632d03fd6a4cdd9f4eb167c51fceeace9d1925a3326d7cf54"
+              }
+            ],
+            "limits": [
+              "ONLY234 frozen comparisons. F160 original contact-collapse counterpart: same authored NorthPole type7/child12 support family independently proven usable by accepted exact-candidate F111 LOCAL/NET.",
+              "Agreed originalCP3 plus once position/previous-position approach and disclosed hostile-contact protection bypass traversal; no actor/phase/contact/timer/expiry/outcome writes.",
+              "P1 stationary/ineligible through guest-only original producer admission, later native damage/knockback retained. Selected falling child outside canonical contact gate while grounded guest alone is in range.",
+              "Original guarded underside tail uniquely calls477E4(3,F6B8C,samechild), then retires the same slot through original state4/free. Actual falling child, source guards, unique call and two distinct native free updates plus ordinary living guest control retained on every peer.",
+              "No top-contact trigger or invented expiry timer. No primary-death/support expiry/F112, later subtype/F159 or removal of already deposited terrain claim. Native burst allocation may be capacity-limited; three visible particles are not required.",
+              "F111 support qualification reused unchanged; this check has its own complete named endpoint/final synchronization gates. Original source and asynchronous bodies/pool/trace are distinct observations, not an atomic instruction snapshot.",
+              "Setup-tainted recordings remain rejected. Existing white/garbled backgrounds and FX visibility limits retained in individual image review; no general graphics qualification.",
+              "Same PC muted loopback and exact title45/profile28. No performance, physical-controller, audible, other-host or cross-build claim."
+            ],
+            "bypasses": [
+              "Original CP3 entry and once position/previous-position-only approach.",
+              "Disclosed predeclared hostile-contact protection; actual native ice damage/knockback retained, no contact/timer/outcome writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+            "build_identity": {
+              "executable_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+              "compiled_manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original2/0CP3 plus one position/history-only approach",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "two same-PC loopback peers",
+              "local_cameras": "split",
+              "cameras": "unified",
+              "host_profile": "mmx6.win64-clang22.loopback revision28"
+            },
+            "action": "Guest ordinaryRight alone arms original ice producer; stay grounded/neutral beneath original falling child12, require unique native underside477E4(3,F6B8C,samechild), same-child free and living guest movement.",
+            "outcome": "F160 original guest-contact collapse and native retirement passed in LOCAL and every NET peer; accepted exact-candidate F111 proves this family is actually usable support. Unique chosen-slot break generation, source guards, two native free updates and ordinary postcollapse control retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-b37cd69-F160-native-ice-local-netplay-reviewed.json",
+                "sha256": "3c8e6a69ec13dc9632d03fd6a4cdd9f4eb167c51fceeace9d1925a3326d7cf54"
+              }
+            ],
+            "limits": [
+              "ONLY234 frozen comparisons. F160 original contact-collapse counterpart: same authored NorthPole type7/child12 support family independently proven usable by accepted exact-candidate F111 LOCAL/NET.",
+              "Agreed originalCP3 plus once position/previous-position approach and disclosed hostile-contact protection bypass traversal; no actor/phase/contact/timer/expiry/outcome writes.",
+              "P1 stationary/ineligible through guest-only original producer admission, later native damage/knockback retained. Selected falling child outside canonical contact gate while grounded guest alone is in range.",
+              "Original guarded underside tail uniquely calls477E4(3,F6B8C,samechild), then retires the same slot through original state4/free. Actual falling child, source guards, unique call and two distinct native free updates plus ordinary living guest control retained on every peer.",
+              "No top-contact trigger or invented expiry timer. No primary-death/support expiry/F112, later subtype/F159 or removal of already deposited terrain claim. Native burst allocation may be capacity-limited; three visible particles are not required.",
+              "F111 support qualification reused unchanged; this check has its own complete named endpoint/final synchronization gates. Original source and asynchronous bodies/pool/trace are distinct observations, not an atomic instruction snapshot.",
+              "Setup-tainted recordings remain rejected. Existing white/garbled backgrounds and FX visibility limits retained in individual image review; no general graphics qualification.",
+              "Same PC muted loopback and exact title45/profile28. No performance, physical-controller, audible, other-host or cross-build claim."
+            ],
+            "bypasses": [
+              "Original CP3 entry and once position/previous-position-only approach.",
+              "Disclosed predeclared hostile-contact protection; actual native ice damage/knockback retained, no contact/timer/outcome writes."
+            ]
+          }
+        ],
+        "limitations": "Full native F160 underside-contact-collapse counterpart passes exactb37cd69 LOCAL/NET, original477E4 unique burst and samechild free across two native updates, then actual living guest movement. F111 independently proves samefamily usable support. No invented timer/top-contact/death-expiry/F112/later-subtype/F159 claim. Exact source/position prerequisites, setup-tainted recording rejection and visible background/paired FX-art discrepancy retained; no wholegraphics qualification."
       }
     },
     {

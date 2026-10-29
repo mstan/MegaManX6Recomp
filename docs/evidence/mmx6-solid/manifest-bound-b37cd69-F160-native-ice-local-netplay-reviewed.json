@@ -1,0 +1,1396 @@
+{
+  "kind": "F160_same_V100_original_NorthPole_guest_underside_contact_collapse",
+  "status": "passed",
+  "comparisons": [
+    "F160"
+  ],
+  "frozen_rows": {
+    "F160": "f7f7f193b1b864df71d354d8255fbf465518541680c2e3318eb0babb600ecfd7"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json",
+    "binding_sha256": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+    "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+    "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+    "provenance_sha256": "8f6458844f7503152c54e137dbb4d8605b8f6817c143dd49e34acef31c2dab1a",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v100-northpole-ice-focused-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v45",
+    "host_revision": 28
+  },
+  "LOCAL": {
+    "raw_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\qualification.json",
+      "bytes": 22391166,
+      "sha256": "b5249453c38c893a0ea008c0b3ea839a5ba9b8a73ab6f879588135d5fbee72ab"
+    },
+    "original_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\qualification-parent-original.json",
+      "bytes": 22388371,
+      "sha256": "d06cb6c179e6a17543503ed18fb68cdb5539425d36c335f34a5dc2391073b93f"
+    },
+    "observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 10742304,
+      "sha256": "f07ecbb894f155a21390a137efd215a52cf48263d1beff3f8a74f79594b8516d"
+    },
+    "candidate_binding": {
+      "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json",
+      "binding_sha256": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+      "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+      "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+      "provenance_sha256": "8f6458844f7503152c54e137dbb4d8605b8f6817c143dd49e34acef31c2dab1a",
+      "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v100-northpole-ice-focused-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+      "source_heads": {
+        "game": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+        "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+        "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+        "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+      },
+      "title": "mmx6-x-zero-delay-v45",
+      "host_revision": 28
+    },
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "endpoint_checks": {
+      "agreed_original_cp3_and_once_position_only_setup": true,
+      "exact_original_source_guards": true,
+      "same_candidate_support_family_previously_usable_both_modes": true,
+      "guest_only_original_producer_admission": true,
+      "original_falling_child12_observed": true,
+      "unique_original_underside_break_batch_every_peer": true,
+      "same_child_native_free_two_updates_every_peer": true,
+      "primary_contact_gate_misses": true,
+      "ordinary_living_guest_control_after_collapse": true,
+      "composed_captures_retained": true
+    },
+    "native_endpoints": [
+      {
+        "peer": 0,
+        "collapse": {
+          "native_break_entry": {
+            "seq": 0,
+            "func": "0x800477E4",
+            "ra": "0x800ECE38",
+            "a0": "0x00000003",
+            "a1": "0x800F6B8C",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 592,
+            "frame": 3224,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          "falling_before": {
+            "row": 190,
+            "native_timer": 204,
+            "child": {
+              "address": 2148275048,
+              "hex": "51070c01010206020000f8130000100600000000000006000000f81300000e06000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c800800080000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100",
+              "state": 1,
+              "phase": 6,
+              "subtype": 12,
+              "column": 2,
+              "x": 5112,
+              "y": 1552,
+              "parent": 2148274720
+            },
+            "guest_xy": [
+              5143,
+              1594
+            ],
+            "primary_xy": [
+              5016,
+              1595
+            ],
+            "guest_terrain_contact": 8,
+            "guest_actor_contact": 0
+          },
+          "detected_row": 190,
+          "free_rows": [
+            {
+              "row": 191,
+              "native_timer": 207,
+              "slot_hex": "00000000000000000000f8130000120600000000000006000000f81300001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+            },
+            {
+              "row": 192,
+              "native_timer": 210,
+              "slot_hex": "00000000000000000000f8130000120600000000000006000000f81300001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+            }
+          ]
+        },
+        "native_break_trace": {
+          "id": 2890,
+          "ok": true,
+          "total": 1,
+          "oldest": 0,
+          "seq_lo": 0,
+          "seq_hi": 1,
+          "entries": [
+            {
+              "seq": 0,
+              "func": "0x800477E4",
+              "ra": "0x800ECE38",
+              "a0": "0x00000003",
+              "a1": "0x800F6B8C",
+              "a2": "0x800C1368",
+              "a3": "0x800C12C4",
+              "t1": "0x800E41B0",
+              "s0": "0x1F800060",
+              "s1": "0x800C4560",
+              "s2": "0x800CCED0",
+              "s3": "0x80090000",
+              "depth": 592,
+              "frame": 3224,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "emitted": 1
+        },
+        "postcollapse_control": {
+          "before": [
+            5136,
+            1594
+          ],
+          "after": [
+            5139,
+            1594
+          ]
+        }
+      }
+    ],
+    "resources": [
+      {
+        "peer": 0,
+        "address": "0x80097438",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-source-80097438.bin",
+        "bytes": 567,
+        "actual": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "original": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      },
+      {
+        "peer": 0,
+        "address": "0x8019bd58",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-source-8019bd58.bin",
+        "bytes": 103424,
+        "actual": "0a342fa527c1f58fb61e8d1474e5fd85808b54e7b69076b8644ff076e3e63a8a",
+        "original": "5806b8cf8b5a946b08eab1fe651e531a4c23d2db3b129a40d5f10a56dda803ce",
+        "exact_original": false,
+        "exact_source_qualified_closure": true
+      },
+      {
+        "peer": 0,
+        "address": "0x801b5158",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-source-801b5158.bin",
+        "bytes": 13412,
+        "actual": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "original": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      }
+    ],
+    "captures": [
+      {
+        "peer": 0,
+        "label": "unarmed-native-producer",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-unarmed-native-producer.png",
+        "bytes": 2074543,
+        "sha256": "1e306548ffa7f0899182ee3ab8ef4ffcc836b404146c0317f76978cce0a8149b"
+      },
+      {
+        "peer": 0,
+        "label": "guest-admitted-native-ice",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-guest-admitted-native-ice.png",
+        "bytes": 2074543,
+        "sha256": "bb2e52bf13d060226188a928a09fd0464370553f3fd2e7fcfbd8e582be31847f"
+      },
+      {
+        "peer": 0,
+        "label": "original-temporary-child",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-original-temporary-child.png",
+        "bytes": 2074543,
+        "sha256": "f7fba98e1a64799af7292c155d3d96af590ffc8d849c1cd85086314fb7b27b8e"
+      },
+      {
+        "peer": 0,
+        "label": "guest-contact-native-ice-retired",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-guest-contact-native-ice-retired.png",
+        "bytes": 2074543,
+        "sha256": "098d60806ef623ab9df17e8ea6fec68c13270bda3bcf86c5b059a94e286bcba1"
+      },
+      {
+        "peer": 0,
+        "label": "guest-control-after-native-collapse",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-guest-control-after-native-collapse.png",
+        "bytes": 2074543,
+        "sha256": "4122c53e345d92524834b6ff5e37b7b924454cb6289b2c3e084a32a1a2f20c1f"
+      }
+    ],
+    "resolved_state_crc": [],
+    "resolved_CRC_samples": 0,
+    "owned_cleanup": [
+      {
+        "owned_pid": 88384,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    ],
+    "private_cards_unchanged": true,
+    "retained_fixture_recording_refusals": [
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\candidate\\saves\\input-recordings\\session-1793288323221860-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+          "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "199166564e20becdfa10e2ab01ec8e9e9f9a7e7fd5889b23e4bdf6ae83f2c9d4",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 6018,
+        "natives": 4240,
+        "p2_reads": 1778,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\recording-rejection\\settings.json",
+            "bytes": 10519,
+            "sha256": "199166564e20becdfa10e2ab01ec8e9e9f9a7e7fd5889b23e4bdf6ae83f2c9d4"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\recording-rejection\\content.json",
+            "bytes": 503,
+            "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\recording-rejection\\simulation-contract.json",
+            "bytes": 259,
+            "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\recording-rejection\\inputs.jsonl",
+            "bytes": 790774,
+            "sha256": "59f25f8a39af0b52d9e641ef4e2452d0b115343ade9382adec6c4e60279365d7"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\recording-rejection\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\recording-rejection\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\recording-rejection\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      }
+    ],
+    "executing_source_pins": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-F160-guest-underside-contact-plan-worker-v1.json": "7134df94a94e477ef4efad901a2f760b31217566bd4e74f565ba52626991f76a",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_intro_fixture.py": "b48eebf8535ec3a7a21718a36744761b7f7b677ebbf58600cc6d13bd0194282b",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F160_northpole_ice_v100_root_v1.py": "c0deec6fe7c67435c5a2d32634a335ee684ee47d5101eef076bae56897f360d5",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F160-northpole-ice-v100-root-v1.py": "d0026bc483138128806c99b7a947a6f19c397b61ca44dbb4cb1a50508ef81672",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\audit_mmx6_recycle_terrain.py": "e87e05bb947e9087c4f2f3cf1ac86e0b4bfe87f9ec28b41a39082e299c0d4975",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F111-b37cd69-accepted-support-dependency-root-v1.json": "bc9c62490c869ba0b661c4439e3af2abed44173cbe2e8cc04a73ca63673e71ec",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_hud_presentation.py": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_state.py": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "897a76d81c5a486774537e8f4d12824b3a1af2cacc7a2004b841497bd0e862a1",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-NPI1-source-fixture-final-review-worker-v2.json": "341f1edf035d514efb96604a35832f4d47bf74113058c99d77c1d56637f301ff",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-authored-map-mutation-source-worker-v1.json": "011de261202f2f379c07f71c7d6a3f17570fe8c3a83fdff798d2ce84691737da",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\northpole-original-source-ram-worker-v2-npi1.bin": "e945790898690d35f297c631ee8f26c20bad0eea62f0795c65e265e97b121f72",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-exact-build-guard-root-v1.py": "11850ab85e318a1bac43130f5f77ce5fa0f367b924a5e5997912fb0ee25fa992",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+    }
+  },
+  "NET": {
+    "raw_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\qualification.json",
+      "bytes": 12494336,
+      "sha256": "b145b7cbd6ccafd7645fba0ed02b48aeae460b508a78f4559c23cb61cc12c693"
+    },
+    "original_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\qualification-parent-original.json",
+      "bytes": 12488509,
+      "sha256": "400489b2fc434b1b01e728841dc5df834eb5efb7f4bc3f7595c8b2e7e232ceee"
+    },
+    "observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\observations.json",
+      "bytes": 10891269,
+      "sha256": "d53fbe042772b123022257d1398953ecc16da28bcab6e4da69de363f43610ede"
+    },
+    "candidate_binding": {
+      "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json",
+      "binding_sha256": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+      "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+      "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+      "provenance_sha256": "8f6458844f7503152c54e137dbb4d8605b8f6817c143dd49e34acef31c2dab1a",
+      "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v100-northpole-ice-focused-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+      "source_heads": {
+        "game": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+        "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+        "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+        "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+      },
+      "title": "mmx6-x-zero-delay-v45",
+      "host_revision": 28
+    },
+    "parent_checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": true,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_resolved_crc_after_case": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "endpoint_checks": {
+      "agreed_original_cp3_and_once_position_only_setup": true,
+      "exact_original_source_guards": true,
+      "same_candidate_support_family_previously_usable_both_modes": true,
+      "guest_only_original_producer_admission": true,
+      "original_falling_child12_observed": true,
+      "unique_original_underside_break_batch_every_peer": true,
+      "same_child_native_free_two_updates_every_peer": true,
+      "primary_contact_gate_misses": true,
+      "ordinary_living_guest_control_after_collapse": true,
+      "composed_captures_retained": true
+    },
+    "native_endpoints": [
+      {
+        "peer": 0,
+        "collapse": {
+          "native_break_entry": {
+            "seq": 0,
+            "func": "0x800477E4",
+            "ra": "0x800ECE38",
+            "a0": "0x00000003",
+            "a1": "0x800F6B8C",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001428",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 641,
+            "frame": 4138,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          "falling_before": {
+            "row": 95,
+            "native_timer": 221,
+            "child": {
+              "address": 2148275048,
+              "hex": "51070c01010206030000281400000c0600000000000006000000281400000a06000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c800800040000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100",
+              "state": 1,
+              "phase": 6,
+              "subtype": 12,
+              "column": 3,
+              "x": 5160,
+              "y": 1548,
+              "parent": 2148274720
+            },
+            "guest_xy": [
+              5155,
+              1594
+            ],
+            "primary_xy": [
+              5016,
+              1595
+            ],
+            "guest_terrain_contact": 8,
+            "guest_actor_contact": 0
+          },
+          "detected_row": 95,
+          "free_rows": [
+            {
+              "row": 96,
+              "native_timer": 229,
+              "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+            },
+            {
+              "row": 97,
+              "native_timer": 235,
+              "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+            }
+          ]
+        },
+        "native_break_trace": {
+          "id": 2145,
+          "ok": true,
+          "total": 2,
+          "oldest": 0,
+          "seq_lo": 0,
+          "seq_hi": 2,
+          "entries": [
+            {
+              "seq": 0,
+              "func": "0x800477E4",
+              "ra": "0x800ECE38",
+              "a0": "0x00000003",
+              "a1": "0x800F6B8C",
+              "a2": "0x800C1368",
+              "a3": "0x800C12C4",
+              "t1": "0x00001428",
+              "s0": "0x1F800060",
+              "s1": "0x800C4560",
+              "s2": "0x800CCED0",
+              "s3": "0x80090000",
+              "depth": 641,
+              "frame": 4138,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 1,
+              "func": "0x800477E4",
+              "ra": "0x800E9D58",
+              "a0": "0x00000005",
+              "a1": "0x800F69F8",
+              "a2": "0x8008EF48",
+              "a3": "0x00000000",
+              "t1": "0x800E41B0",
+              "s0": "0x8008EF48",
+              "s1": "0x00000003",
+              "s2": "0x800CCED0",
+              "s3": "0x80090000",
+              "depth": 641,
+              "frame": 4139,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "emitted": 2
+        },
+        "postcollapse_control": {
+          "before": [
+            5139,
+            1594
+          ],
+          "after": [
+            5143,
+            1594
+          ]
+        }
+      },
+      {
+        "peer": 1,
+        "collapse": {
+          "native_break_entry": {
+            "seq": 0,
+            "func": "0x800477E4",
+            "ra": "0x800ECE38",
+            "a0": "0x00000003",
+            "a1": "0x800F6B8C",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001428",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 605,
+            "frame": 4138,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          "falling_before": {
+            "row": 94,
+            "native_timer": 218,
+            "child": {
+              "address": 2148275048,
+              "hex": "51070c0101020603000028140000080600000000000006000000281400000606000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c800800000000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100",
+              "state": 1,
+              "phase": 6,
+              "subtype": 12,
+              "column": 3,
+              "x": 5160,
+              "y": 1544,
+              "parent": 2148274720
+            },
+            "guest_xy": [
+              5155,
+              1594
+            ],
+            "primary_xy": [
+              5016,
+              1595
+            ],
+            "guest_terrain_contact": 8,
+            "guest_actor_contact": 0
+          },
+          "detected_row": 95,
+          "free_rows": [
+            {
+              "row": 95,
+              "native_timer": 225,
+              "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+            },
+            {
+              "row": 96,
+              "native_timer": 234,
+              "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+            },
+            {
+              "row": 97,
+              "native_timer": 235,
+              "slot_hex": "0000000000000000000028140000120600000000000006000000281400001206000000000000feff00000000000000006c6b0f80f06a0f8000000000287715804003c07801000000ff0000000000000000000000946b0f809c5b0780200000000600000000000000e8130c8008000a0000000000000000000000000020120c80000018180000000000000000000000000000000000000000000000000000000000000100"
+            }
+          ]
+        },
+        "native_break_trace": {
+          "id": 1970,
+          "ok": true,
+          "total": 2,
+          "oldest": 0,
+          "seq_lo": 0,
+          "seq_hi": 2,
+          "entries": [
+            {
+              "seq": 0,
+              "func": "0x800477E4",
+              "ra": "0x800ECE38",
+              "a0": "0x00000003",
+              "a1": "0x800F6B8C",
+              "a2": "0x800C1368",
+              "a3": "0x800C12C4",
+              "t1": "0x00001428",
+              "s0": "0x1F800060",
+              "s1": "0x800C4560",
+              "s2": "0x800CCED0",
+              "s3": "0x80090000",
+              "depth": 605,
+              "frame": 4138,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            {
+              "seq": 1,
+              "func": "0x800477E4",
+              "ra": "0x800E9D58",
+              "a0": "0x00000005",
+              "a1": "0x800F69F8",
+              "a2": "0x8008EF48",
+              "a3": "0x00000000",
+              "t1": "0x800E41B0",
+              "s0": "0x8008EF48",
+              "s1": "0x00000003",
+              "s2": "0x800CCED0",
+              "s3": "0x80090000",
+              "depth": 614,
+              "frame": 4139,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "emitted": 2
+        },
+        "postcollapse_control": {
+          "before": [
+            5139,
+            1594
+          ],
+          "after": [
+            5149,
+            1594
+          ]
+        }
+      }
+    ],
+    "resources": [
+      {
+        "peer": 0,
+        "address": "0x80097438",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-source-80097438.bin",
+        "bytes": 567,
+        "actual": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "original": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      },
+      {
+        "peer": 0,
+        "address": "0x8019bd58",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-source-8019bd58.bin",
+        "bytes": 103424,
+        "actual": "0a342fa527c1f58fb61e8d1474e5fd85808b54e7b69076b8644ff076e3e63a8a",
+        "original": "5806b8cf8b5a946b08eab1fe651e531a4c23d2db3b129a40d5f10a56dda803ce",
+        "exact_original": false,
+        "exact_source_qualified_closure": true
+      },
+      {
+        "peer": 0,
+        "address": "0x801b5158",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-source-801b5158.bin",
+        "bytes": 13412,
+        "actual": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "original": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      },
+      {
+        "peer": 1,
+        "address": "0x80097438",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-source-80097438.bin",
+        "bytes": 567,
+        "actual": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "original": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      },
+      {
+        "peer": 1,
+        "address": "0x8019bd58",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-source-8019bd58.bin",
+        "bytes": 103424,
+        "actual": "0a342fa527c1f58fb61e8d1474e5fd85808b54e7b69076b8644ff076e3e63a8a",
+        "original": "5806b8cf8b5a946b08eab1fe651e531a4c23d2db3b129a40d5f10a56dda803ce",
+        "exact_original": false,
+        "exact_source_qualified_closure": true
+      },
+      {
+        "peer": 1,
+        "address": "0x801b5158",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-source-801b5158.bin",
+        "bytes": 13412,
+        "actual": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "original": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      }
+    ],
+    "captures": [
+      {
+        "peer": 0,
+        "label": "unarmed-native-producer",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-unarmed-native-producer.png",
+        "bytes": 2074543,
+        "sha256": "ed6c72c3712843c66d6f6d57cead77040abebe44d286890775dce87ae7120876"
+      },
+      {
+        "peer": 1,
+        "label": "unarmed-native-producer",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-unarmed-native-producer.png",
+        "bytes": 2074543,
+        "sha256": "ed6c72c3712843c66d6f6d57cead77040abebe44d286890775dce87ae7120876"
+      },
+      {
+        "peer": 0,
+        "label": "guest-admitted-native-ice",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-guest-admitted-native-ice.png",
+        "bytes": 2074543,
+        "sha256": "b60d6ce92d634babaf3b4d011b7723e7b27a68793c00e7a8cc0eb7a39602e653"
+      },
+      {
+        "peer": 1,
+        "label": "guest-admitted-native-ice",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-guest-admitted-native-ice.png",
+        "bytes": 2074543,
+        "sha256": "f99469c4fb3372c856aeb2ffa8f37c95e575be4f619ea2cf792944e453eb1faf"
+      },
+      {
+        "peer": 0,
+        "label": "original-temporary-child",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-original-temporary-child.png",
+        "bytes": 2074543,
+        "sha256": "3b0725bce5b2595998ada7fc836077cea01a53d0055192d97de9e0f036b1cc41"
+      },
+      {
+        "peer": 1,
+        "label": "original-temporary-child",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-original-temporary-child.png",
+        "bytes": 2074543,
+        "sha256": "2df2fed91d9bc04125549aef27eed1daba9e294bd418ebef78f8e7f2b5fd061b"
+      },
+      {
+        "peer": 0,
+        "label": "guest-contact-native-ice-retired",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-guest-contact-native-ice-retired.png",
+        "bytes": 2074543,
+        "sha256": "d340835c9d47467fd1389698b73d8e9816b34aa72079070af05406ca3c6fc739"
+      },
+      {
+        "peer": 1,
+        "label": "guest-contact-native-ice-retired",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-guest-contact-native-ice-retired.png",
+        "bytes": 2074543,
+        "sha256": "b88bc652226f2205c6b76c9ef69285d795e091755a7637fbf70ad708fb2b724e"
+      },
+      {
+        "peer": 0,
+        "label": "guest-control-after-native-collapse",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-guest-control-after-native-collapse.png",
+        "bytes": 2074543,
+        "sha256": "13c5fa4502a6dcef78b4fe5a668d9c97a07a2b7e7dfc8941ddd2d86cee57d290"
+      },
+      {
+        "peer": 1,
+        "label": "guest-control-after-native-collapse",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-guest-control-after-native-collapse.png",
+        "bytes": 2074543,
+        "sha256": "a95122ac976f04c5b7ba5e30b44ddf59c25fb4ef8d35fa057a0426e2fd22a4c8"
+      }
+    ],
+    "resolved_state_crc": [
+      {
+        "label": "initial idle",
+        "samples": [
+          {
+            "simulation_tick": 2880,
+            "core": "21110f94",
+            "mod": "dc4ca1e6"
+          },
+          {
+            "simulation_tick": 2912,
+            "core": "9f5cf4a6",
+            "mod": "824bd6f4"
+          },
+          {
+            "simulation_tick": 2944,
+            "core": "3af5bfcd",
+            "mod": "233c654c"
+          },
+          {
+            "simulation_tick": 2976,
+            "core": "fc7ada49",
+            "mod": "5d4d4bde"
+          },
+          {
+            "simulation_tick": 3008,
+            "core": "9b84f36a",
+            "mod": "9e351596"
+          },
+          {
+            "simulation_tick": 3040,
+            "core": "44906d0b",
+            "mod": "bc3714dc"
+          },
+          {
+            "simulation_tick": 3072,
+            "core": "72aa8518",
+            "mod": "bb13c9f8"
+          }
+        ],
+        "resolved_through": [
+          3078,
+          3078
+        ]
+      },
+      {
+        "label": "P2 right then release",
+        "samples": [
+          {
+            "simulation_tick": 3136,
+            "core": "f633153f",
+            "mod": "911ac7b8"
+          },
+          {
+            "simulation_tick": 3168,
+            "core": "944dc80a",
+            "mod": "f10268f8"
+          },
+          {
+            "simulation_tick": 3200,
+            "core": "89b497d6",
+            "mod": "590596a6"
+          },
+          {
+            "simulation_tick": 3232,
+            "core": "e988ecc4",
+            "mod": "853f8820"
+          },
+          {
+            "simulation_tick": 3264,
+            "core": "8beabaa0",
+            "mod": "79bf7940"
+          },
+          {
+            "simulation_tick": 3296,
+            "core": "7353e3e9",
+            "mod": "9e81d5de"
+          }
+        ],
+        "resolved_through": [
+          3311,
+          3311
+        ]
+      },
+      {
+        "label": "P1 jump then settle",
+        "samples": [
+          {
+            "simulation_tick": 3392,
+            "core": "b0b38c41",
+            "mod": "1a107168"
+          },
+          {
+            "simulation_tick": 3424,
+            "core": "a65293c2",
+            "mod": "78af5796"
+          },
+          {
+            "simulation_tick": 3456,
+            "core": "8d73b6a7",
+            "mod": "107082f6"
+          },
+          {
+            "simulation_tick": 3488,
+            "core": "8497052c",
+            "mod": "f2b0c2f0"
+          },
+          {
+            "simulation_tick": 3520,
+            "core": "6ee325f9",
+            "mod": "dd793590"
+          },
+          {
+            "simulation_tick": 3552,
+            "core": "87a353c8",
+            "mod": "525d2fce"
+          }
+        ],
+        "resolved_through": [
+          3583,
+          3583
+        ]
+      },
+      {
+        "label": "paired ground-jump audio then settle",
+        "samples": [
+          {
+            "simulation_tick": 4224,
+            "core": "98edd491",
+            "mod": "d93d4ac6"
+          },
+          {
+            "simulation_tick": 4256,
+            "core": "c9bc938d",
+            "mod": "35fba96c"
+          },
+          {
+            "simulation_tick": 4288,
+            "core": "619a5a46",
+            "mod": "c94a72cc"
+          },
+          {
+            "simulation_tick": 4320,
+            "core": "eafadd8c",
+            "mod": "d8fccef2"
+          },
+          {
+            "simulation_tick": 4352,
+            "core": "2181629f",
+            "mod": "8d3ad392"
+          }
+        ],
+        "resolved_through": [
+          4383,
+          4382
+        ]
+      }
+    ],
+    "resolved_CRC_samples": 24,
+    "owned_cleanup": [
+      {
+        "seat": 0,
+        "owned_pid": 105580,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "input_release_errors": null,
+        "private_card_error": null
+      },
+      {
+        "seat": 1,
+        "owned_pid": 111260,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "input_release_errors": null,
+        "private_card_error": null
+      }
+    ],
+    "private_cards_unchanged": true,
+    "retained_fixture_recording_refusals": [
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-0\\saves\\input-recordings\\session-1793288456212560-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+          "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+          "mode": "netplay",
+          "profile": {
+            "id": "mmx6.win64-clang22.loopback",
+            "revision": 28,
+            "selected_sha256": "12499e2064703af336751f2e2739a498990d42265522b2e90708626b4c834823"
+          },
+          "settings_sha256": "f33598c3eb66ef90431aee74b6c8c52f474ee01fb8dacf36841df2845f2e4c0d",
+          "simulation_contract_sha256": "e00e8d1a29fa652bbc1d3498b7c2610fbcd98e92c1797060a5275d21a3892609"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 6422,
+        "natives": 3037,
+        "p2_reads": 3385,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-0-recording-refusal\\settings.json",
+            "bytes": 26962,
+            "sha256": "f33598c3eb66ef90431aee74b6c8c52f474ee01fb8dacf36841df2845f2e4c0d"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-0-recording-refusal\\content.json",
+            "bytes": 567,
+            "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-0-recording-refusal\\simulation-contract.json",
+            "bytes": 351,
+            "sha256": "e00e8d1a29fa652bbc1d3498b7c2610fbcd98e92c1797060a5275d21a3892609"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-0-recording-refusal\\inputs.jsonl",
+            "bytes": 827622,
+            "sha256": "a8f072f4d7904b8dee071ea782567a1a879000875016c2c7412ce601035cf064"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-0-recording-refusal\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-0-recording-refusal\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-0-recording-refusal\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      },
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-1\\saves\\input-recordings\\session-1793288456211700-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+          "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+          "mode": "netplay",
+          "profile": {
+            "id": "mmx6.win64-clang22.loopback",
+            "revision": 28,
+            "selected_sha256": "12499e2064703af336751f2e2739a498990d42265522b2e90708626b4c834823"
+          },
+          "settings_sha256": "ba14152df4cb2fc46633a2bcfdf2274e3966ed0d0d55cf719ff46b27d266166f",
+          "simulation_contract_sha256": "e00e8d1a29fa652bbc1d3498b7c2610fbcd98e92c1797060a5275d21a3892609"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 6422,
+        "natives": 3037,
+        "p2_reads": 3385,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-1-recording-refusal\\settings.json",
+            "bytes": 26962,
+            "sha256": "ba14152df4cb2fc46633a2bcfdf2274e3966ed0d0d55cf719ff46b27d266166f"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-1-recording-refusal\\content.json",
+            "bytes": 567,
+            "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-1-recording-refusal\\simulation-contract.json",
+            "bytes": 351,
+            "sha256": "e00e8d1a29fa652bbc1d3498b7c2610fbcd98e92c1797060a5275d21a3892609"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-1-recording-refusal\\inputs.jsonl",
+            "bytes": 827622,
+            "sha256": "dffafcb626e094e21d51d19a255aa70ce15e362fdd129b65742b9573081bb6cd"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-1-recording-refusal\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-1-recording-refusal\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\peer-1-recording-refusal\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      }
+    ],
+    "executing_source_pins": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\audit_mmx6_recycle_terrain.py": "e87e05bb947e9087c4f2f3cf1ac86e0b4bfe87f9ec28b41a39082e299c0d4975",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F160-northpole-ice-v100-root-v1.py": "d0026bc483138128806c99b7a947a6f19c397b61ca44dbb4cb1a50508ef81672",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F111-b37cd69-accepted-support-dependency-root-v1.json": "bc9c62490c869ba0b661c4439e3af2abed44173cbe2e8cc04a73ca63673e71ec",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\northpole-original-source-ram-worker-v2-npi1.bin": "e945790898690d35f297c631ee8f26c20bad0eea62f0795c65e265e97b121f72",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F160_northpole_ice_v100_root_v1.py": "c0deec6fe7c67435c5a2d32634a335ee684ee47d5101eef076bae56897f360d5",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-authored-map-mutation-source-worker-v1.json": "011de261202f2f379c07f71c7d6a3f17570fe8c3a83fdff798d2ce84691737da",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_state.py": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "897a76d81c5a486774537e8f4d12824b3a1af2cacc7a2004b841497bd0e862a1",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_hud_presentation.py": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-NPI1-source-fixture-final-review-worker-v2.json": "341f1edf035d514efb96604a35832f4d47bf74113058c99d77c1d56637f301ff",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-exact-build-guard-root-v1.py": "11850ab85e318a1bac43130f5f77ce5fa0f367b924a5e5997912fb0ee25fa992",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_intro_fixture.py": "b48eebf8535ec3a7a21718a36744761b7f7b677ebbf58600cc6d13bd0194282b",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-F160-guest-underside-contact-plan-worker-v1.json": "7134df94a94e477ef4efad901a2f760b31217566bd4e74f565ba52626991f76a",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978"
+    }
+  },
+  "build": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-runtime-build-receipt-root-v3.json",
+    "bytes": 1654,
+    "sha256": "956ec4afb556a526d5cf670bf799afb2421887deaa8dd22713577d7b5b1874b0"
+  },
+  "source_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-F160-guest-underside-contact-plan-worker-v1.json",
+    "bytes": 8871,
+    "sha256": "7134df94a94e477ef4efad901a2f760b31217566bd4e74f565ba52626991f76a"
+  },
+  "image_review": {
+    "kind": "F160 composed personal root review",
+    "reviewed": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-unarmed-native-producer.png": "1e306548ffa7f0899182ee3ab8ef4ffcc836b404146c0317f76978cce0a8149b",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-guest-admitted-native-ice.png": "bb2e52bf13d060226188a928a09fd0464370553f3fd2e7fcfbd8e582be31847f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-original-temporary-child.png": "f7fba98e1a64799af7292c155d3d96af590ffc8d849c1cd85086314fb7b27b8e",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-guest-contact-native-ice-retired.png": "098d60806ef623ab9df17e8ea6fec68c13270bda3bcf86c5b059a94e286bcba1",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160l1\\ammo-hud\\intro-admission\\peer-0-guest-control-after-native-collapse.png": "4122c53e345d92524834b6ff5e37b7b924454cb6289b2c3e084a32a1a2f20c1f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-unarmed-native-producer.png": "ed6c72c3712843c66d6f6d57cead77040abebe44d286890775dce87ae7120876",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-unarmed-native-producer.png": "ed6c72c3712843c66d6f6d57cead77040abebe44d286890775dce87ae7120876",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-guest-admitted-native-ice.png": "b60d6ce92d634babaf3b4d011b7723e7b27a68793c00e7a8cc0eb7a39602e653",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-guest-admitted-native-ice.png": "f99469c4fb3372c856aeb2ffa8f37c95e575be4f619ea2cf792944e453eb1faf",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-original-temporary-child.png": "3b0725bce5b2595998ada7fc836077cea01a53d0055192d97de9e0f036b1cc41",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-original-temporary-child.png": "2df2fed91d9bc04125549aef27eed1daba9e294bd418ebef78f8e7f2b5fd061b",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-guest-contact-native-ice-retired.png": "d340835c9d47467fd1389698b73d8e9816b34aa72079070af05406ca3c6fc739",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-guest-contact-native-ice-retired.png": "b88bc652226f2205c6b76c9ef69285d795e091755a7637fbf70ad708fb2b724e",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-0-guest-control-after-native-collapse.png": "13c5fa4502a6dcef78b4fe5a668d9c97a07a2b7e7dfc8941ddd2d86cee57d290",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f160n1\\intro-admission\\peer-1-guest-control-after-native-collapse.png": "a95122ac976f04c5b7ba5e30b44ddf59c25fb4ef8d35fa057a0426e2fd22a4c8"
+    },
+    "notes": [
+      "LOCAL all5 composed captures personally viewed. Native ice break particles appear above grounded Zero at retirement, followed by an actual movement/dust image with both living heroes.",
+      "Existing white/garbled background patches retained. Ice particles/pose alone do not establish collapse; unique source-qualified native break entry and same-child free-slot observations supply the mechanic proof.",
+      "Reploid overlaps Zero in several asynchronous captures; no rescue/acquisition/whole-graphics claim.",
+      "NET all10 composed images personally viewed. Source/admission/child show original region and both heroes; peer0 retirement shows ice chunks above hurt-flashing Zero, then real run movement.",
+      "Peer1 retirement/control captures show explosion and enemy-like fragments rather than the peer0 ice art, with original native effect batch and matching simulation CRC retained. Presentation discrepancy is a caveat; F160 claims native contact-collapse/free/control, no paired effect-art or general graphics correctness.",
+      "All15 LOCAL+NET images personally reviewed; bodies, pool and trace remain asynchronous."
+    ]
+  },
+  "limits": [
+    "ONLY234 frozen comparisons. F160 original contact-collapse counterpart: same authored NorthPole type7/child12 support family independently proven usable by accepted exact-candidate F111 LOCAL/NET.",
+    "Agreed originalCP3 plus once position/previous-position approach and disclosed hostile-contact protection bypass traversal; no actor/phase/contact/timer/expiry/outcome writes.",
+    "P1 stationary/ineligible through guest-only original producer admission, later native damage/knockback retained. Selected falling child outside canonical contact gate while grounded guest alone is in range.",
+    "Original guarded underside tail uniquely calls477E4(3,F6B8C,samechild), then retires the same slot through original state4/free. Actual falling child, source guards, unique call and two distinct native free updates plus ordinary living guest control retained on every peer.",
+    "No top-contact trigger or invented expiry timer. No primary-death/support expiry/F112, later subtype/F159 or removal of already deposited terrain claim. Native burst allocation may be capacity-limited; three visible particles are not required.",
+    "F111 support qualification reused unchanged; this check has its own complete named endpoint/final synchronization gates. Original source and asynchronous bodies/pool/trace are distinct observations, not an atomic instruction snapshot.",
+    "Setup-tainted recordings remain rejected. Existing white/garbled backgrounds and FX visibility limits retained in individual image review; no general graphics qualification.",
+    "Same PC muted loopback and exact title45/profile28. No performance, physical-controller, audible, other-host or cross-build claim."
+  ]
+}
