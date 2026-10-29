@@ -13504,23 +13504,102 @@
       "x6": {
         "workstream": "camera",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "Scenery publication after guest-led route change",
+        "analogue": "Original Recycle scenery shared Y remains live in both views after guest-led alternate route",
         "bounded_check": "Enter a real alternate route with guest progressing; compare original scenery animation and renderer state before and after section loading.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "6dced55b9c96e5d65fbfe7a6e3ac73088975b8f7",
+            "build_identity": {
+              "executable_sha256": "b77bd84c1991564406a7eeee3c76a9205281433ae756f929fd34f5449d750846",
+              "compiled_manifest_sha256": "85fbc1d4d6e2174c6361b140d026d6e28f9e4062fb8e6698bf52492bf142e4a5",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "audio": "muted dummy",
+              "local_cameras": "split",
+              "cameras": "independent",
+              "host_profile": "mmx6.win64-clang22.loopback revision30",
+              "transport": "one owned process"
+            },
+            "action": "Guest alone takes original4/0 to20/1 portal; retain source-expected static CP2 state, then neutral living heroes while native authored layer offset advances twice in both eventual views.",
+            "outcome": "Root reviewed current scenery advancing in both views, original route/load/released controls/full parent/card/exit gates pass; finalNET27 matching resolvedCRC samples across4windows.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-6dced55-F78-native-shared-scenery-reviewed.json",
+                "sha256": "13b052b68aa2b687f2ef1d834565b97b56d8f83bbbf0c3745d171af8c53e8c16"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F78; no native3330, arena F28, weather/atlas F175 or whole campaign credit.",
+              "Existing agreed original4/0CP2 plus once position/history-only distant source prerequisite, default X/P1+Zero/P2 and declared hostile-contact protection retained; native checkpoint/approach prerequisites bypassed and strict taint/ordinary recording/replay refusals remain explicit. No scenery/controller/camera/result writes in the observer.",
+              "The original CP2 script intentionally retires; expected static-before is source-qualified, not an assertion that this source phase should animate. Destination20/1CP0 must genuinely advance its original controller after real guest-only portal/loading/initialization.",
+              "Same exact6dced55 image in LOCAL split and same-machine delay3 NET independent views; hostrevision30/title47 unchanged because this is presentation-only, actual compiled manifest/image identities remain strict. No cross-host, controller, human or release delivery claim.",
+              "All twelve candidate main composed images personally inspected by root. Native reads, completed GP0 frames and image captures are asynchronous; peers may show different sampled offsets and are not matched-frame equality evidence. Final resolved CRC gates establish synchronization.",
+              "Original typed resources and native cache/packet relations retained. GP0 dumps capped2048 commands; cap-hit frames are explicit prefixes, never full-frame claims. Static-source tile helper can refuse; destination actual packet relations are supplemental. Native graphical ID rewrites/original texture-pixel identity and general scenery artwork remain unqualified.",
+              "The former cf52455 local case passed automated checks but failed root visual review; its frozen guest pane and the two source-premise refusals/client-wrapper harness failure remain retained without ledger credit."
+            ],
+            "bypasses": [
+              "Original checkpoint/once source position-history fixture and declared hostile-contact protection; no animation or outcome flag writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "6dced55b9c96e5d65fbfe7a6e3ac73088975b8f7",
+            "build_identity": {
+              "executable_sha256": "b77bd84c1991564406a7eeee3c76a9205281433ae756f929fd34f5449d750846",
+              "compiled_manifest_sha256": "85fbc1d4d6e2174c6361b140d026d6e28f9e4062fb8e6698bf52492bf142e4a5",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "audio": "muted dummy",
+              "local_cameras": "split",
+              "cameras": "independent",
+              "host_profile": "mmx6.win64-clang22.loopback revision30",
+              "transport": "two same-machine delay3 owned peers"
+            },
+            "action": "Guest alone takes original4/0 to20/1 portal; retain source-expected static CP2 state, then neutral living heroes while native authored layer offset advances twice in both eventual views.",
+            "outcome": "Root reviewed current scenery advancing in both views, original route/load/released controls/full parent/card/exit gates pass; finalNET27 matching resolvedCRC samples across4windows.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-6dced55-F78-native-shared-scenery-reviewed.json",
+                "sha256": "13b052b68aa2b687f2ef1d834565b97b56d8f83bbbf0c3745d171af8c53e8c16"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F78; no native3330, arena F28, weather/atlas F175 or whole campaign credit.",
+              "Existing agreed original4/0CP2 plus once position/history-only distant source prerequisite, default X/P1+Zero/P2 and declared hostile-contact protection retained; native checkpoint/approach prerequisites bypassed and strict taint/ordinary recording/replay refusals remain explicit. No scenery/controller/camera/result writes in the observer.",
+              "The original CP2 script intentionally retires; expected static-before is source-qualified, not an assertion that this source phase should animate. Destination20/1CP0 must genuinely advance its original controller after real guest-only portal/loading/initialization.",
+              "Same exact6dced55 image in LOCAL split and same-machine delay3 NET independent views; hostrevision30/title47 unchanged because this is presentation-only, actual compiled manifest/image identities remain strict. No cross-host, controller, human or release delivery claim.",
+              "All twelve candidate main composed images personally inspected by root. Native reads, completed GP0 frames and image captures are asynchronous; peers may show different sampled offsets and are not matched-frame equality evidence. Final resolved CRC gates establish synchronization.",
+              "Original typed resources and native cache/packet relations retained. GP0 dumps capped2048 commands; cap-hit frames are explicit prefixes, never full-frame claims. Static-source tile helper can refuse; destination actual packet relations are supplemental. Native graphical ID rewrites/original texture-pixel identity and general scenery artwork remain unqualified.",
+              "The former cf52455 local case passed automated checks but failed root visual review; its frozen guest pane and the two source-premise refusals/client-wrapper harness failure remain retained without ledger credit."
+            ],
+            "bypasses": [
+              "Original checkpoint/once source position-history fixture and declared hostile-contact protection; no animation or outcome flag writes."
+            ]
+          }
+        ],
+        "limitations": "Exact6dced55 LOCAL/NET on sameimageb77bd84. Original4/0CP2 controller is intentionally retired/static; realguestportal loads20/1CP0 and source-bound offset advances with stationary living heroes. Fixed guestmode9Ypublication; root sees scenery move in both panes/peerwindows. Full4/15parentgates,27matchingCRC/4windows,3nativeexit0/unchangedprivatecards/12rootviewedcandidateimages. Explicit initial source-premise/harness failures and cf52455 frozenP2 baseline retained. Asynchronous GP0prefix/graphicsremapping limits explicit; no F28/F175/native3330 or other row credit."
       }
     },
     {

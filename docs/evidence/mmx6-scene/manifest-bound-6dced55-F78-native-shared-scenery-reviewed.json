@@ -1,0 +1,942 @@
+{
+  "kind": "F78_original_scenery_publication_after_genuine_guest_portal_root_review",
+  "status": "passed",
+  "comparison": "F78",
+  "frozen_row_sha256": "c21f0de5e9e9ba8f5d2cbf43401e128f29e3c9e1771fcc830da3dfecc9a002e4",
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "status": "passed",
+      "peers": [
+        {
+          "peer": 0,
+          "source_original_CP2_retired": true,
+          "source_origin": "800F300C",
+          "destination_origin": "800F2658",
+          "destination_offsets": [
+            32,
+            48,
+            86
+          ],
+          "observations": [
+            {
+              "row": 0,
+              "native_world_timer": 268,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 1,
+                "dwell": 170,
+                "motion_countdown": 0,
+                "velocity_raw": 65536,
+                "offset_raw": 2097152,
+                "integer_offset": 32,
+                "canonical_y": 224,
+                "layer1_y": 224,
+                "relative_y": 0,
+                "render_publication_qualified": false
+              }
+            },
+            {
+              "row": 44,
+              "native_world_timer": 451,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 2,
+                "dwell": 0,
+                "motion_countdown": 64,
+                "velocity_raw": 65536,
+                "offset_raw": 3145728,
+                "integer_offset": 48,
+                "canonical_y": 224,
+                "layer1_y": 208,
+                "relative_y": -16,
+                "render_publication_qualified": false
+              }
+            },
+            {
+              "row": 51,
+              "native_world_timer": 490,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 2,
+                "dwell": 0,
+                "motion_countdown": 26,
+                "velocity_raw": 65536,
+                "offset_raw": 5636096,
+                "integer_offset": 86,
+                "canonical_y": 224,
+                "layer1_y": 170,
+                "relative_y": -54,
+                "render_publication_qualified": false
+              }
+            }
+          ],
+          "root_composed_review": "Native moving machinery advances in every retained destination view while heroes/foreground remain fixed; original pre-load static scenery is retained."
+        }
+      ],
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "genuine_original_guest_route_and_loader_completed": true,
+        "original_retired_source_and_live_destination_origins_bound": true,
+        "original_controller_code_and_mode_tables_bound": true,
+        "neutral_heroes_during_destination_autonomous_motion": true,
+        "original_source_expected_static_before_load": true,
+        "two_distinct_source_bound_offset_changes_after_load": true,
+        "native_layer_camera_relation_matches_original": true,
+        "composed_views_retained_for_independent_review": true,
+        "postload_original_controls_and_parent_final_gate_retained": true
+      },
+      "genuine_route_checks": {
+        "agreed_native_CP2_and_one_declared_distant_pose": true,
+        "source_original_full_feet_and_air": true,
+        "source_native_geometric_misses_both": true,
+        "primary_stationary_genuinely_distant_through_admission": true,
+        "actual_P2_native_portal_admission_every_peer": true,
+        "original_ordered_major8_9_destination_every_peer": true,
+        "finite_both_living_native_arrivals": true,
+        "original_destination_current_and_target_camera": true,
+        "full_feet_earned_by_ordinary_guest_Left": true,
+        "actual_separate_destination_controls": true,
+        "personal_resources_retained": true,
+        "actual_captures_retained": true
+      },
+      "native_terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_crc_windows": [],
+      "matching_crc_samples": 0,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-before-native-route-load-original-static.png",
+          "bytes": 2074543,
+          "sha256": "8e43fa04ca80af1989d7e82460a14e8191e6afecc37fd14576d37142074b8cf2",
+          "peer": 0,
+          "label": "before-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-0.png",
+          "bytes": 2074543,
+          "sha256": "9b78430f4c6845ba1d84c868ffc9d70073245e9e40d6063b359f8974ea6de1e8",
+          "peer": 0,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-1.png",
+          "bytes": 2074543,
+          "sha256": "72ad4eef7f7591c753cc0444b60cd28c89bf89f13c6fd67511812437b712033c",
+          "peer": 0,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-2.png",
+          "bytes": 2074543,
+          "sha256": "0e98f84b29bf851374710fcf372b820db7cda34e71e50163c42d4ef35e093df9",
+          "peer": 0,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        }
+      ],
+      "render_supplement": [
+        {
+          "peer": 0,
+          "row": 0,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-0-native-gpu-frame.json",
+            "bytes": 597425,
+            "sha256": "a8d7dc7b6201c3380cf15d024bc2d4350d42848b12625da749314d4433f53bdf"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-0-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "e56fce3ce6af275854e4cc095f737d01a68ce796740a53f3851b33d86ab4b80d"
+          },
+          "complete_below_cap": true,
+          "native_packet_matches": 6,
+          "exact_XY_matches": 3,
+          "asynchronous": true
+        },
+        {
+          "peer": 0,
+          "row": 44,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-1-native-gpu-frame.json",
+            "bytes": 601378,
+            "sha256": "0077f033cb0a15f26002085fc37aa3efd1f8d163132c353376e9efc1b059e97a"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-1-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "0a1766ac377a66c642925c08730321251ef1f90361e10aa590f6ffd3be9d5bc0"
+          },
+          "complete_below_cap": false,
+          "native_packet_matches": 3,
+          "exact_XY_matches": 0,
+          "asynchronous": true
+        },
+        {
+          "peer": 0,
+          "row": 51,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-2-native-gpu-frame.json",
+            "bytes": 602758,
+            "sha256": "9f47a44abbf1eee4ba839a3b54e3c0d166f2f62fa627f26d4e960071f48dbd72"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-2-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "8fb5be3444c91b6f1ddb135447074d61ea95e9514552b6e745d1a5e0e943da02"
+          },
+          "complete_below_cap": false,
+          "native_packet_matches": 6,
+          "exact_XY_matches": 0,
+          "asynchronous": true
+        }
+      ],
+      "source_guard_count": 54,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\qualification.json",
+          "bytes": 15657758,
+          "sha256": "b3fc4dc564c208b91a4aa02394ba3bb71722b054c27a5b8411818a297b4b989f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\F78-observations.json",
+          "bytes": 2646247,
+          "sha256": "7cc8742f264446e5a16ace105044fb2de5d609809737467c3ad04b5c50c508f5"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\ammo-hud\\intro-admission\\genuine-native-route\\observations.json",
+          "bytes": 9398221,
+          "sha256": "a47e478d1a67b7c612c9cba866bc81ec6af43283d2a2d87a2259aed39ce934b6"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l5\\F78-executing-source-pins.json",
+          "bytes": 4278,
+          "sha256": "76b9f6146a9dde7c64897faf3dcbdb652ac0b3702e46c1c594de45c449962e35"
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "status": "passed",
+      "peers": [
+        {
+          "peer": 0,
+          "source_original_CP2_retired": true,
+          "source_origin": "800F300C",
+          "destination_origin": "800F2658",
+          "destination_offsets": [
+            32,
+            57,
+            102
+          ],
+          "observations": [
+            {
+              "row": 0,
+              "native_world_timer": 332,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 1,
+                "dwell": 142,
+                "motion_countdown": 0,
+                "velocity_raw": 65536,
+                "offset_raw": 2097152,
+                "integer_offset": 32,
+                "canonical_y": 224,
+                "layer1_y": 224,
+                "relative_y": 0,
+                "render_publication_qualified": false
+              }
+            },
+            {
+              "row": 21,
+              "native_world_timer": 499,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 2,
+                "dwell": 0,
+                "motion_countdown": 55,
+                "velocity_raw": 65536,
+                "offset_raw": 3735552,
+                "integer_offset": 57,
+                "canonical_y": 224,
+                "layer1_y": 199,
+                "relative_y": -25,
+                "render_publication_qualified": false
+              }
+            },
+            {
+              "row": 26,
+              "native_world_timer": 544,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 2,
+                "dwell": 0,
+                "motion_countdown": 10,
+                "velocity_raw": 65536,
+                "offset_raw": 6684672,
+                "integer_offset": 102,
+                "canonical_y": 224,
+                "layer1_y": 154,
+                "relative_y": -70,
+                "render_publication_qualified": false
+              }
+            }
+          ],
+          "root_composed_review": "Native moving machinery advances in every retained destination view while heroes/foreground remain fixed; original pre-load static scenery is retained."
+        },
+        {
+          "peer": 1,
+          "source_original_CP2_retired": true,
+          "source_origin": "800F300C",
+          "destination_origin": "800F2658",
+          "destination_offsets": [
+            32,
+            48,
+            65
+          ],
+          "observations": [
+            {
+              "row": 0,
+              "native_world_timer": 344,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 1,
+                "dwell": 130,
+                "motion_countdown": 0,
+                "velocity_raw": 65536,
+                "offset_raw": 2097152,
+                "integer_offset": 32,
+                "canonical_y": 224,
+                "layer1_y": 224,
+                "relative_y": 0,
+                "render_publication_qualified": false
+              }
+            },
+            {
+              "row": 20,
+              "native_world_timer": 491,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 2,
+                "dwell": 0,
+                "motion_countdown": 64,
+                "velocity_raw": 65536,
+                "offset_raw": 3145728,
+                "integer_offset": 48,
+                "canonical_y": 224,
+                "layer1_y": 208,
+                "relative_y": -16,
+                "render_publication_qualified": false
+              }
+            },
+            {
+              "row": 21,
+              "native_world_timer": 507,
+              "controller": {
+                "kind": "actual_source_bound_controller_camera_component",
+                "stage": 20,
+                "section": 1,
+                "controller_address": "800C4778",
+                "origin": "800F2658",
+                "phase": 1,
+                "subphase": 2,
+                "dwell": 0,
+                "motion_countdown": 47,
+                "velocity_raw": 65536,
+                "offset_raw": 4259840,
+                "integer_offset": 65,
+                "canonical_y": 224,
+                "layer1_y": 191,
+                "relative_y": -33,
+                "render_publication_qualified": false
+              }
+            }
+          ],
+          "root_composed_review": "Native moving machinery advances in every retained destination view while heroes/foreground remain fixed; original pre-load static scenery is retained."
+        }
+      ],
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "genuine_original_guest_route_and_loader_completed": true,
+        "original_retired_source_and_live_destination_origins_bound": true,
+        "original_controller_code_and_mode_tables_bound": true,
+        "neutral_heroes_during_destination_autonomous_motion": true,
+        "original_source_expected_static_before_load": true,
+        "two_distinct_source_bound_offset_changes_after_load": true,
+        "native_layer_camera_relation_matches_original": true,
+        "composed_views_retained_for_independent_review": true,
+        "postload_original_controls_and_parent_final_gate_retained": true
+      },
+      "genuine_route_checks": {
+        "agreed_native_CP2_and_one_declared_distant_pose": true,
+        "source_original_full_feet_and_air": true,
+        "source_native_geometric_misses_both": true,
+        "primary_stationary_genuinely_distant_through_admission": true,
+        "actual_P2_native_portal_admission_every_peer": true,
+        "original_ordered_major8_9_destination_every_peer": true,
+        "finite_both_living_native_arrivals": true,
+        "original_destination_current_and_target_camera": true,
+        "full_feet_earned_by_ordinary_guest_Left": true,
+        "actual_separate_destination_controls": true,
+        "personal_resources_retained": true,
+        "actual_captures_retained": true
+      },
+      "native_terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2848,
+              "core": "61dfd659",
+              "mod": "75af3430"
+            },
+            {
+              "simulation_tick": 2880,
+              "core": "85a18dba",
+              "mod": "1a8ec255"
+            },
+            {
+              "simulation_tick": 2912,
+              "core": "f1c23d61",
+              "mod": "6e6e36b5"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "0e3d9ab5",
+              "mod": "f7985257"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "a5a31855",
+              "mod": "c369c677"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "79e4e9ff",
+              "mod": "0bc1c35d"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "73138916",
+              "mod": "797eece1"
+            }
+          ],
+          "resolved_through": [
+            3070,
+            3069
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3104,
+              "core": "0272fc41",
+              "mod": "c2613162"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "1ad5ea1c",
+              "mod": "ea8c4980"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "a9248e00",
+              "mod": "09bf74be"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "e2aeb934",
+              "mod": "ed9d0f1e"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "6b9c231b",
+              "mod": "4014b148"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "7bd6c0e0",
+              "mod": "c310e868"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "99df6aac",
+              "mod": "18507096"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "84c7bae7",
+              "mod": "f958ef76"
+            }
+          ],
+          "resolved_through": [
+            3344,
+            3344
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3424,
+              "core": "babecbce",
+              "mod": "1bd61fce"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "610155ad",
+              "mod": "c2e1004e"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "aeadbc94",
+              "mod": "f6223dd8"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "448a425a",
+              "mod": "432195b8"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "1c64d6d4",
+              "mod": "98319a06"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "ee295ff4",
+              "mod": "c2613162"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "a704e29b",
+              "mod": "ea8c4980"
+            }
+          ],
+          "resolved_through": [
+            3649,
+            3648
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 5024,
+              "core": "9e2559a9",
+              "mod": "69c19491"
+            },
+            {
+              "simulation_tick": 5056,
+              "core": "0fe71f68",
+              "mod": "935aa48f"
+            },
+            {
+              "simulation_tick": 5088,
+              "core": "51ea7f44",
+              "mod": "f330dd17"
+            },
+            {
+              "simulation_tick": 5120,
+              "core": "13d285f0",
+              "mod": "87ff44e9"
+            },
+            {
+              "simulation_tick": 5152,
+              "core": "1e04dea7",
+              "mod": "05be7369"
+            }
+          ],
+          "resolved_through": [
+            5184,
+            5185
+          ]
+        }
+      ],
+      "matching_crc_samples": 27,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-before-native-route-load-original-static.png",
+          "bytes": 2074543,
+          "sha256": "0a0cc65dd4141b10b02df658716253eb7647e9bdd6d3ac3a2d1173b44d75f4b8",
+          "peer": 0,
+          "label": "before-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-before-native-route-load-original-static.png",
+          "bytes": 2074543,
+          "sha256": "b5516948bb4c71043b64d868bd5c6ae60283184ec1854e69cd47dd488147fd97",
+          "peer": 1,
+          "label": "before-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-0.png",
+          "bytes": 2074543,
+          "sha256": "3bdf832d787f2b9cf658533057b298a3f1334e48ea3dbd4db0bcb5d76d283411",
+          "peer": 0,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-0.png",
+          "bytes": 2074543,
+          "sha256": "9088fe35f4e667dd8da5cba27a032164d0a4bb1cdabc107f2d036c6adb5a40e0",
+          "peer": 1,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-1.png",
+          "bytes": 2074543,
+          "sha256": "58e8bb2a823dbf645dd2b5b20cedcf208146548b366074fc716b1d02eec8f83c",
+          "peer": 1,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-1.png",
+          "bytes": 2074543,
+          "sha256": "f31356f3b9d9dd6a47d9dbf8fb0696eff083bbe9a55ea80842558fe3fc64cb8b",
+          "peer": 0,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-2.png",
+          "bytes": 2074543,
+          "sha256": "120ade2c88ce4b86aacf1c8095abb1a0cff592ff12f13a9fabd43adba79a0aca",
+          "peer": 1,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-2.png",
+          "bytes": 2074543,
+          "sha256": "a82b288885085dd8fbc9ab41bdcda691f6617a226e1ec2b13cf3c0ad9bf37b14",
+          "peer": 0,
+          "label": "after-native-route-load",
+          "root_personally_viewed": true
+        }
+      ],
+      "render_supplement": [
+        {
+          "peer": 0,
+          "row": 0,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-0-native-gpu-frame.json",
+            "bytes": 401009,
+            "sha256": "9eb4f0046b368fad0c3d76b42e4d066448546794ff362b0cd269eaf6d99826b4"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-0-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "e56fce3ce6af275854e4cc095f737d01a68ce796740a53f3851b33d86ab4b80d"
+          },
+          "complete_below_cap": true,
+          "native_packet_matches": 4,
+          "exact_XY_matches": 2,
+          "asynchronous": true
+        },
+        {
+          "peer": 0,
+          "row": 21,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-1-native-gpu-frame.json",
+            "bytes": 425075,
+            "sha256": "0d56ea611fdcaec1e01b261eaee1a7e725aa2d32b19bc9136036a74877051d2c"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-1-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "0a1766ac377a66c642925c08730321251ef1f90361e10aa590f6ffd3be9d5bc0"
+          },
+          "complete_below_cap": true,
+          "native_packet_matches": 4,
+          "exact_XY_matches": 0,
+          "asynchronous": true
+        },
+        {
+          "peer": 0,
+          "row": 26,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-2-native-gpu-frame.json",
+            "bytes": 461993,
+            "sha256": "56b7c7e8c5067e484b1e035d541c345c22d9a7750156f33851b369efb4481057"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-0-after-native-route-load-motion-2-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "8576315e33c50c0bb72c68e9ec9bdf969e4fcbc362a69d9bef8aaa199d2194aa"
+          },
+          "complete_below_cap": true,
+          "native_packet_matches": 4,
+          "exact_XY_matches": 0,
+          "asynchronous": true
+        },
+        {
+          "peer": 1,
+          "row": 0,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-0-native-gpu-frame.json",
+            "bytes": 401470,
+            "sha256": "3e5b5b05feb683993dc24fe572419532e9b84f20df5d7ad115a84cab6bd015f9"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-0-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "e56fce3ce6af275854e4cc095f737d01a68ce796740a53f3851b33d86ab4b80d"
+          },
+          "complete_below_cap": true,
+          "native_packet_matches": 4,
+          "exact_XY_matches": 2,
+          "asynchronous": true
+        },
+        {
+          "peer": 1,
+          "row": 20,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-1-native-gpu-frame.json",
+            "bytes": 426082,
+            "sha256": "414a75f1bcaaf31b7a572d850607bfe599bd08cec148e67d09320f09069a3188"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-1-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "0a1766ac377a66c642925c08730321251ef1f90361e10aa590f6ffd3be9d5bc0"
+          },
+          "complete_below_cap": true,
+          "native_packet_matches": 2,
+          "exact_XY_matches": 0,
+          "asynchronous": true
+        },
+        {
+          "peer": 1,
+          "row": 21,
+          "dump": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-2-native-gpu-frame.json",
+            "bytes": 439744,
+            "sha256": "3e0f222e955fe095afabb474e02ab7cc23e47bab4f26c84ec13dbc8f30f607d0"
+          },
+          "cache": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\peer-1-after-native-route-load-motion-2-layer1-cache.bin",
+            "bytes": 4096,
+            "sha256": "9b077a21af1402dca70dcba4f213f36eba795a6f06c02267b4696f5a5f6e4c74"
+          },
+          "complete_below_cap": true,
+          "native_packet_matches": 4,
+          "exact_XY_matches": 0,
+          "asynchronous": true
+        }
+      ],
+      "source_guard_count": 108,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\qualification.json",
+          "bytes": 16144340,
+          "sha256": "4e138c1ea288d91360e385328620b7ae9384cf7353e69b030f8ed3f624c7baec"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\F78-observations.json",
+          "bytes": 2812316,
+          "sha256": "5beee8a8452af02ffef634f3ed2bbaf742e8734bd494fbd672d03e8aff8a01bb"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\intro-admission\\genuine-native-route\\observations.json",
+          "bytes": 11144245,
+          "sha256": "adfd269de15d51e96be02f4ab7c3aa512c3753cc44a9d89b69bec3b63aef511e"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78n5\\F78-executing-source-pins.json",
+          "bytes": 4278,
+          "sha256": "509dd092ddd5bfad99d7962b6b23d81a0d4e2c70695d545ac50b1863c8232d7a"
+        }
+      ]
+    }
+  ],
+  "rejected_baseline": {
+    "candidate": "cf524556c54b837c41bc9cf0e2cc3efc784126ec",
+    "image_sha256": "aebf1870c2fa70da9854f92e8f87a8e0c08236314d172500d63a18320b13f3d4",
+    "case": "f78l4",
+    "automated_checks_passed_but_root_review_failed": true,
+    "observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l4\\ammo-hud\\intro-admission\\F78-observations.json",
+      "bytes": 2992467,
+      "sha256": "02800a03f94552e267372ed3f8d3ce51cb84727177727d549f08928664eddc65"
+    },
+    "captures": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l4\\ammo-hud\\intro-admission\\peer-0-before-native-route-load-original-static.png",
+        "bytes": 2074543,
+        "sha256": "790ea65a932ec3ecab3eba888df157ce9a64f935d1f4f3cb92e8751440c85a27",
+        "label": "before-native-route-load",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l4\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-0.png",
+        "bytes": 2074543,
+        "sha256": "7c12115b981d4022ecc5b954df254452daf3cfc89e6845da2fa2fd63c49bb111",
+        "label": "after-native-route-load",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l4\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-1.png",
+        "bytes": 2074543,
+        "sha256": "35ecf10ae79e2ef8b07d4b1e5245bc348cc1432f101a7606e6b6b1f023030966",
+        "label": "after-native-route-load",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f78l4\\ammo-hud\\intro-admission\\peer-0-after-native-route-load-motion-2.png",
+        "bytes": 2074543,
+        "sha256": "be7d85aa776cbbf29bb021cc21acc7573295567d3c011dca99cffa6e41541a6e",
+        "label": "after-native-route-load",
+        "root_personally_viewed": true
+      }
+    ],
+    "finding": "Original controller advances32/46/63 and P1 machinery moves; P2 machinery remains frozen. No baseline F78 credit."
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scenery-v103-final-binding-root-v1.json",
+    "binding_sha256": "687681601038621b67dac456fa886677a675016dd62b01802f20f42967710cfd",
+    "image_sha256": "b77bd84c1991564406a7eeee3c76a9205281433ae756f929fd34f5449d750846",
+    "manifest_sha256": "85fbc1d4d6e2174c6361b140d026d6e28f9e4062fb8e6698bf52492bf142e4a5",
+    "provenance_sha256": "f557e5b7a0f8b5ec02b51fd00047a862267ad08d793a60c44513e21f41b86801",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v103-scenery-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "6dced55b9c96e5d65fbfe7a6e3ac73088975b8f7",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v47",
+    "host_revision": 30
+  },
+  "implementation": {
+    "candidate": "6dced55b9c96e5d65fbfe7a6e3ac73088975b8f7",
+    "files": [
+      "src/mods/mmx6_coop_views.inc",
+      "tests/test_mmx6_coop_private_views.c"
+    ],
+    "change": "Publish original Recycle4/0 and20/1 mode9 shared current/previous Y to guest saved view; preserve per-hero X and other layers, no second world/controller tick.",
+    "source_reason": "Original46F10 owns autonomous layer1Y; mode9 camera dispatcher297BC changes onlyX, so restoring the stale whole guest position freezesY.",
+    "source_retirement_correction": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F78-source-worker-v1\\F78-CP2-original-retirement-correction-worker-v2.json",
+      "bytes": 4976,
+      "sha256": "115f94b587fa196c152e1e9fafff4befc5fa17dc246cc82872c6eb2073b6c66f"
+    },
+    "focused_tests": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-scenery-v103-focused-root-v1.log",
+      "bytes": 820,
+      "sha256": "9ab6ac05e669978d5f051243b13ca152c859d7e639b7c7bcb56ed82d01566ce4"
+    },
+    "build_receipt": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scenery-v103-runtime-build-receipt-root-v1.json",
+      "bytes": 2174,
+      "sha256": "509f54a736ab855128d2c3143f9f01e70538d26748dd98f99906ad39cb769c85"
+    }
+  },
+  "review_summary": {
+    "root_personally_viewed_candidate_images": 12,
+    "root_personally_viewed_rejected_images": 4,
+    "native_graceful_exit0": 3,
+    "private_cards_unchanged": true,
+    "matching_crc_samples": 27,
+    "resolved_crc_windows": 4,
+    "actual_product_fix": true
+  },
+  "limits": [
+    "Only frozen234 F78; no native3330, arena F28, weather/atlas F175 or whole campaign credit.",
+    "Existing agreed original4/0CP2 plus once position/history-only distant source prerequisite, default X/P1+Zero/P2 and declared hostile-contact protection retained; native checkpoint/approach prerequisites bypassed and strict taint/ordinary recording/replay refusals remain explicit. No scenery/controller/camera/result writes in the observer.",
+    "The original CP2 script intentionally retires; expected static-before is source-qualified, not an assertion that this source phase should animate. Destination20/1CP0 must genuinely advance its original controller after real guest-only portal/loading/initialization.",
+    "Same exact6dced55 image in LOCAL split and same-machine delay3 NET independent views; hostrevision30/title47 unchanged because this is presentation-only, actual compiled manifest/image identities remain strict. No cross-host, controller, human or release delivery claim.",
+    "All twelve candidate main composed images personally inspected by root. Native reads, completed GP0 frames and image captures are asynchronous; peers may show different sampled offsets and are not matched-frame equality evidence. Final resolved CRC gates establish synchronization.",
+    "Original typed resources and native cache/packet relations retained. GP0 dumps capped2048 commands; cap-hit frames are explicit prefixes, never full-frame claims. Static-source tile helper can refuse; destination actual packet relations are supplemental. Native graphical ID rewrites/original texture-pixel identity and general scenery artwork remain unqualified.",
+    "The former cf52455 local case passed automated checks but failed root visual review; its frozen guest pane and the two source-premise refusals/client-wrapper harness failure remain retained without ledger credit."
+  ]
+}
