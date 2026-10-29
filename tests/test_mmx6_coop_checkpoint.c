@@ -12,6 +12,7 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret);
 static uint8_t original_ram[0x200000],before_ram[0x200000];
 static uint16_t checkpoint_vram[1024*512];
 static unsigned before_doors_probe,equipment_probe,equipment_calls;
+static unsigned refight_stub,refight_probe_calls,refight_action_calls,refight_refuse;
 static unsigned refusal_logs;
 static char refusal_log[512];
 static void checkpoint_test_refusal_log(const char *format,...) {
@@ -21,6 +22,25 @@ static void checkpoint_test_refusal_log(const char *format,...) {
 }
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
     (void)ret;
+    if(refight_stub && (target==0x800EC430u || target==0x800EC860u)) {
+        uint32_t actor=cpu->gpr[4];CHECK(scene_call && actor==0x800C1220u);
+        uint32_t box=psx_mod_read_word(PLAYER+0x68);
+        int x=(int16_t)psx_mod_read_half(PLAYER+10),y=(int16_t)psx_mod_read_half(PLAYER+14);
+        int oy=(int8_t)psx_mod_read_byte(box+1),radius=psx_mod_read_byte(box+2),height=psx_mod_read_byte(box+3);
+        unsigned action=psx_mod_read_byte(PLAYER+5);
+        int hit=box && (action==2 || action==4 || action==20 || action==3) &&
+            x-radius>=1872 && x+radius<=1904 && abs(1256-y-oy)<=8+height;
+        if(target==0x800EC430u){++refight_probe_calls;cpu->gpr[2]=(uint32_t)hit;return 1;}
+        CHECK(inside && zero_projected && psx_mod_read_byte(PLAYER+2)==1);++refight_action_calls;
+        if(hit && !refight_refuse) {
+            psx_mod_write_half(PLAYER+10,1888);psx_mod_write_half(PLAYER+14,(uint16_t)(1256-height));
+            psx_mod_write_byte(PLAYER+0xD0,1);psx_mod_write_byte(PLAYER+0xD1,20);
+            psx_mod_write_byte(PLAYER+0xD2,psx_mod_read_byte(PLAYER+0x15));
+            psx_mod_write_byte(PLAYER+0x7A,1);psx_mod_write_byte(PLAY+0x1C,1);
+            psx_mod_write_byte(actor+6,1);
+        }
+        psx_mod_write_byte(PLAY+0x66,0x5A);cpu->gpr[2]=0x12345678;return 1;
+    }
     if(equipment_probe && target==0x8003D718u) {
         /* Typed external native contract only: source3D718 copies these
          * fields for admitted form1/5; this is not native gameplay execution. */
@@ -61,7 +81,7 @@ void gpu_write_gp0(uint32_t value){(void)value;}
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
 static uint8_t before_doors_ram[0x200000];
 static uint8_t portal_source_ram[0x200000],northpole_source_ram[0x200000];
-static uint8_t gate_enemy_source_ram[0x200000];
+static uint8_t gate_enemy_source_ram[0x200000],refight_source_ram[0x200000];
 static const char *test_lab_option="off";
 static const char *test_lab_contact_option="off";
 static const char *test_lab_hp_option[2]={"off","off"};
@@ -805,6 +825,7 @@ static void agreed_gate_enemy_prerequisite(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option && !checkpoint_pending.phase);
 }
+#include "test_mmx6_coop_refight_fixture.inc"
 static void agreed_portal_prerequisite(CPUState *cpu) {
     for(int online=0;online<=1;++online)for(int distant=0;distant<=1;++distant) {
         setup_portal_prerequisite(cpu,online,distant);p2.body[5]=1; /* Native guest beam has not finished. */
@@ -1463,6 +1484,11 @@ int main(int argc,char **argv) {
     if(!fixture || !*fixture){puts("SKIP: MMX6_GATE_ENEMY_SETUP_RAM must name external original source materialization");return 77;}
     file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"RPS1",4));
     CHECK(fread(gate_enemy_source_ram,1,sizeof gate_enemy_source_ram,file)==sizeof gate_enemy_source_ram && fgetc(file)==EOF);fclose(file);
+    fixture=getenv("MMX6_REFIGHT_SETUP_RAM");
+    if(!fixture || !*fixture){puts("SKIP: MMX6_REFIGHT_SETUP_RAM must name external original refight source");return 77;}
+    file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"RPS1",4));
+    CHECK(fread(refight_source_ram,1,sizeof refight_source_ram,file)==sizeof refight_source_ram && fgetc(file)==EOF);fclose(file);
+    agreed_refight_prerequisite(&cpu);refight_owner_projection(&cpu);
     agreed_gate_enemy_prerequisite(&cpu);
     agreed_northpole_prerequisite(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
