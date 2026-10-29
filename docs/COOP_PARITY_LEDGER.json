@@ -16196,24 +16196,113 @@
       "frozen_row_sha256": "4d1139b09266f1f55783c9bbdc205857005f8980a9d7cb47630fd37e1a1d257c",
       "x6": {
         "workstream": "solid",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Temporary platform admission analogue unidentified",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original NorthPole guest-only type7 producer admission and native child12 ice support",
         "bounded_check": "Map a native temporary support's placement predicate, then make only guest eligible and require actual spawn/contact without seeding its state.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
-          "src/mods/mmx6_coop_plugin.c:solid_as_zero"
+          "src/mods/mmx6_coop_plugin.c:solid_as_zero",
+          "src/mods/mmx6_coop_northpole_ice.inc:northpole_ice_admission",
+          "src/mods/mmx6_coop_northpole_ice.inc:northpole_ice_live"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+            "build_identity": {
+              "executable_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+              "compiled_manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original2/0CP3 then one position/history-only approach P1(5016,1594)/P2(5120,1593)",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "one owned process",
+              "local_cameras": "split",
+              "cameras": "unified",
+              "host_profile": "mmx6.win64-clang22.loopback revision28"
+            },
+            "action": "Guest ordinary Right alone admits original producer8->9 while P1 stationary/ineligible; original RNG/allocator creates child12, then ordinary heldCross and lateral input earn real guest actor-top contact/support over original air.",
+            "outcome": "F111 original guest-only authored ice admission, allocation and usable native support passed at two native updates on every physical peer, with original31DA8 entries, source/body geometry and native response.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-b37cd69-F111-native-ice-local-netplay-reviewed.json",
+                "sha256": "bc9c62490c869ba0b661c4439e3af2abed44173cbe2e8cc04a73ca63673e71ec"
+              }
+            ],
+            "limits": [
+              "ONLY234 frozen comparisons. Original NorthPole2/0 authored type7/sub0 producer and native child12 are this F111 counterpart.",
+              "Agreed originalCP3 plus one position/previous-position-only approach bypass earlier traversal; declared hostile-contact protection is enabled. No actor/phase/camera/scanner/HP/timer/outcome writes.",
+              "P1 stationary and ineligible through guest-only native8->9 admission. Subsequent original damage/knockback is retained; primary remains alive/ineligible and outside selected-child canonical contact gate.",
+              "Actual original RNG/allocator child12, ordinary guest Right/Cross, native31DA8 contact, actual +71 actor-top contact/air0/landing-to-idle and matching geometry at two native updates on every peer. +70 terrain bit is a separate contract.",
+              "Original terrain at the supported footprint was air. Original child retirement may later deposit lasting terrain; no temporary-support expiry, primary-death lifetime, later subtype or F160 contact-collapse credit.",
+              "Failed l1..l6 reports and source corrections retained. Fixture-tainted recordings remain rejected; no ordinary recording/replay qualification.",
+              "Existing white/garbled background patches are retained in composed captures; no whole-stage graphics or general rendering qualification. See individual root image review notes.",
+              "Same PC muted loopback, exact title45/profile28 image. No performance, physical-controller, audible, other-host or cross-build claim."
+            ],
+            "bypasses": [
+              "Original CP3 entry and one position/previous-position-only approach.",
+              "Predeclared hostile-contact protection; native ice damage/knockback retained; no outcome writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+            "build_identity": {
+              "executable_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+              "compiled_manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original2/0CP3 then one position/history-only approach P1(5016,1594)/P2(5120,1593)",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "two same-PC loopback peers",
+              "local_cameras": "split",
+              "cameras": "unified",
+              "host_profile": "mmx6.win64-clang22.loopback revision28"
+            },
+            "action": "Guest ordinary Right alone admits original producer8->9 while P1 stationary/ineligible; original RNG/allocator creates child12, then ordinary heldCross and lateral input earn real guest actor-top contact/support over original air.",
+            "outcome": "F111 original guest-only authored ice admission, allocation and usable native support passed at two native updates on every physical peer, with original31DA8 entries, source/body geometry and native response.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-b37cd69-F111-native-ice-local-netplay-reviewed.json",
+                "sha256": "bc9c62490c869ba0b661c4439e3af2abed44173cbe2e8cc04a73ca63673e71ec"
+              }
+            ],
+            "limits": [
+              "ONLY234 frozen comparisons. Original NorthPole2/0 authored type7/sub0 producer and native child12 are this F111 counterpart.",
+              "Agreed originalCP3 plus one position/previous-position-only approach bypass earlier traversal; declared hostile-contact protection is enabled. No actor/phase/camera/scanner/HP/timer/outcome writes.",
+              "P1 stationary and ineligible through guest-only native8->9 admission. Subsequent original damage/knockback is retained; primary remains alive/ineligible and outside selected-child canonical contact gate.",
+              "Actual original RNG/allocator child12, ordinary guest Right/Cross, native31DA8 contact, actual +71 actor-top contact/air0/landing-to-idle and matching geometry at two native updates on every peer. +70 terrain bit is a separate contract.",
+              "Original terrain at the supported footprint was air. Original child retirement may later deposit lasting terrain; no temporary-support expiry, primary-death lifetime, later subtype or F160 contact-collapse credit.",
+              "Failed l1..l6 reports and source corrections retained. Fixture-tainted recordings remain rejected; no ordinary recording/replay qualification.",
+              "Existing white/garbled background patches are retained in composed captures; no whole-stage graphics or general rendering qualification. See individual root image review notes.",
+              "Same PC muted loopback, exact title45/profile28 image. No performance, physical-controller, audible, other-host or cross-build claim."
+            ],
+            "bypasses": [
+              "Original CP3 entry and one position/previous-position-only approach.",
+              "Predeclared hostile-contact protection; native ice damage/knockback retained; no outcome writes."
+            ]
+          }
+        ],
+        "limitations": "Full F111 native NorthPole counterpart passed on exact b37cd69 LOCAL/NET, original guest-only producer8->9/allocation and actual actor support through31DA8. Actor contact uses+71, terrain+70 separate. Original later terrain deposits mean no F112 expiry/F159 later subtype/F160 collapse credit. Source/position and hostile-contact prerequisites, failed attempts, setup-tainted recording refusal and visible background corruption remain explicit."
       }
     },
     {

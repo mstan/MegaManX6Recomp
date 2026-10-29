@@ -1,0 +1,6280 @@
+{
+  "kind": "F111_same_V100_original_NorthPole_guest_only_admission_and_usable_actor_support",
+  "status": "passed",
+  "comparisons": [
+    "F111"
+  ],
+  "frozen_rows": {
+    "F111": "4d1139b09266f1f55783c9bbdc205857005f8980a9d7cb47630fd37e1a1d257c"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json",
+    "binding_sha256": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+    "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+    "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+    "provenance_sha256": "8f6458844f7503152c54e137dbb4d8605b8f6817c143dd49e34acef31c2dab1a",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v100-northpole-ice-focused-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v45",
+    "host_revision": 28
+  },
+  "LOCAL": {
+    "raw_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\qualification.json",
+      "bytes": 22531635,
+      "sha256": "8cbc12672de317e53508fc6c45af3377fe6b8b2d038faf863c693916b4b54ce2"
+    },
+    "original_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\qualification-parent-original.json",
+      "bytes": 22528840,
+      "sha256": "b8a5e13216f55465a6d28e5d67aecc6f4b711fac4ee5ef8c83c1c25a117693a8"
+    },
+    "observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 10807642,
+      "sha256": "746ad1ada22c982efe818885b50838be20e1b86497a619470c8e1d11faf25648"
+    },
+    "candidate_binding": {
+      "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json",
+      "binding_sha256": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+      "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+      "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+      "provenance_sha256": "8f6458844f7503152c54e137dbb4d8605b8f6817c143dd49e34acef31c2dab1a",
+      "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v100-northpole-ice-focused-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+      "source_heads": {
+        "game": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+        "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+        "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+        "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+      },
+      "title": "mmx6-x-zero-delay-v45",
+      "host_revision": 28
+    },
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "endpoint_checks": {
+      "agreed_native_cp3_and_one_position_only_setup": true,
+      "live_original_terrain_full_feet": true,
+      "original_producer_unarmed_before_input": true,
+      "guest_only_original_admission": true,
+      "original_child12_allocation": true,
+      "guest_usable_support_two_native_updates_every_peer": true,
+      "actual_original_body_contact_entry_every_peer": true,
+      "primary_stationary_at_admission_and_ineligible_after": true,
+      "composed_captures_retained": true
+    },
+    "native_endpoints": [
+      {
+        "peer": 0,
+        "support": [
+          {
+            "row": 199,
+            "native_timer": 240,
+            "address": 2148275048,
+            "column": 2,
+            "guest_xy": [
+              5127,
+              1546
+            ],
+            "guest_foot": 1568,
+            "child_xy": [
+              5112,
+              1592
+            ],
+            "phase": 3,
+            "guest_actor_top_contact": 8,
+            "guest_terrain_contact": 0,
+            "guest_air": 0,
+            "guest_action": 5,
+            "original_terrain_air": true,
+            "primary_gate_misses": true
+          },
+          {
+            "row": 200,
+            "native_timer": 242,
+            "address": 2148275048,
+            "column": 2,
+            "guest_xy": [
+              5127,
+              1546
+            ],
+            "guest_foot": 1568,
+            "child_xy": [
+              5112,
+              1592
+            ],
+            "phase": 3,
+            "guest_actor_top_contact": 8,
+            "guest_terrain_contact": 0,
+            "guest_air": 0,
+            "guest_action": 5,
+            "original_terrain_air": true,
+            "primary_gate_misses": true
+          }
+        ],
+        "ascent": {
+          "row": 190,
+          "native_timer": 216,
+          "xy": [
+            5167,
+            1533
+          ],
+          "action": 6,
+          "foot": 1555,
+          "child_top": 1566
+        },
+        "native_contact_entries": [
+          {
+            "seq": 0,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 11,
+            "frame": 3199,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 1,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 10,
+            "frame": 3200,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 2,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 18,
+            "frame": 3201,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 3,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 17,
+            "frame": 3202,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 4,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 25,
+            "frame": 3203,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 5,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 24,
+            "frame": 3204,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 6,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 32,
+            "frame": 3205,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 7,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 31,
+            "frame": 3206,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 8,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 39,
+            "frame": 3207,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 9,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 38,
+            "frame": 3208,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 10,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 46,
+            "frame": 3209,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 11,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 45,
+            "frame": 3210,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 12,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 53,
+            "frame": 3211,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 13,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 52,
+            "frame": 3212,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 14,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 60,
+            "frame": 3213,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 15,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 59,
+            "frame": 3214,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 16,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 67,
+            "frame": 3215,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 17,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 66,
+            "frame": 3216,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 18,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 74,
+            "frame": 3217,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 19,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 73,
+            "frame": 3218,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 20,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 81,
+            "frame": 3219,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 21,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 80,
+            "frame": 3220,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 22,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 88,
+            "frame": 3221,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 23,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 87,
+            "frame": 3222,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 24,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 95,
+            "frame": 3223,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 25,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x800E41B0",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 94,
+            "frame": 3224,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 26,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 102,
+            "frame": 3225,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 27,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 101,
+            "frame": 3226,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 28,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 109,
+            "frame": 3227,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 29,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 108,
+            "frame": 3228,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 30,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 116,
+            "frame": 3229,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 31,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 115,
+            "frame": 3230,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 32,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 123,
+            "frame": 3231,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 33,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 122,
+            "frame": 3232,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 34,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 130,
+            "frame": 3233,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 35,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 129,
+            "frame": 3234,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 36,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 137,
+            "frame": 3235,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 37,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 136,
+            "frame": 3236,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 38,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 144,
+            "frame": 3237,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 39,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 143,
+            "frame": 3238,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 40,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 151,
+            "frame": 3239,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 41,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 150,
+            "frame": 3240,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 42,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 158,
+            "frame": 3241,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 43,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00001458",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 157,
+            "frame": 3242,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "resources": [
+      {
+        "peer": 0,
+        "address": "0x80097438",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-source-80097438.bin",
+        "bytes": 567,
+        "actual": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "original": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      },
+      {
+        "peer": 0,
+        "address": "0x8019bd58",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-source-8019bd58.bin",
+        "bytes": 103424,
+        "actual": "0a342fa527c1f58fb61e8d1474e5fd85808b54e7b69076b8644ff076e3e63a8a",
+        "original": "5806b8cf8b5a946b08eab1fe651e531a4c23d2db3b129a40d5f10a56dda803ce",
+        "exact_original": false,
+        "exact_source_qualified_closure": true
+      },
+      {
+        "peer": 0,
+        "address": "0x801b5158",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-source-801b5158.bin",
+        "bytes": 13412,
+        "actual": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "original": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      }
+    ],
+    "captures": [
+      {
+        "peer": 0,
+        "label": "unarmed-native-producer",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-unarmed-native-producer.png",
+        "bytes": 2074543,
+        "sha256": "d2cea9e8bc796311ece88313f4d9766be4f062802418639dc7b20bda2c244d01"
+      },
+      {
+        "peer": 0,
+        "label": "guest-admitted-native-ice",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-guest-admitted-native-ice.png",
+        "bytes": 2074543,
+        "sha256": "a15cf3d514b87e4c71b78d0ac97adb12385c2cb71fc83b65ac9de2ab2a0a7786"
+      },
+      {
+        "peer": 0,
+        "label": "original-temporary-child",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-original-temporary-child.png",
+        "bytes": 2074543,
+        "sha256": "74d3d73f387ef9ac4196da07fc7fdbe6a5799c0b29e499dfeb19d4218182fcf3"
+      },
+      {
+        "peer": 0,
+        "label": "actual-guest-temporary-support",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-actual-guest-temporary-support.png",
+        "bytes": 2074543,
+        "sha256": "aca42319e3b8c712573d26aa635f4bf6fbab21be2b0dd5a9dc5a2616eb29bb18"
+      }
+    ],
+    "resolved_state_crc": [],
+    "resolved_CRC_samples": 0,
+    "owned_cleanup": [
+      {
+        "owned_pid": 105312,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    ],
+    "private_cards_unchanged": true,
+    "retained_fixture_recording_refusals": [
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\candidate\\saves\\input-recordings\\session-1793287743285220-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+          "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "199166564e20becdfa10e2ab01ec8e9e9f9a7e7fd5889b23e4bdf6ae83f2c9d4",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 5985,
+        "natives": 4218,
+        "p2_reads": 1767,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\recording-rejection\\settings.json",
+            "bytes": 10519,
+            "sha256": "199166564e20becdfa10e2ab01ec8e9e9f9a7e7fd5889b23e4bdf6ae83f2c9d4"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\recording-rejection\\content.json",
+            "bytes": 503,
+            "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\recording-rejection\\simulation-contract.json",
+            "bytes": 259,
+            "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\recording-rejection\\inputs.jsonl",
+            "bytes": 786449,
+            "sha256": "db2469945ee6c2c0cb8c28cffc857bb641f2af674fc10f8af40b61152d27081c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\recording-rejection\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\recording-rejection\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\recording-rejection\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      }
+    ],
+    "executing_source_pins": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F111-northpole-ice-v100-root-v3.py": "c79a7d8a395037418e8918c9e16d661ddb39f25cc71def11211a92f3181ef450",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\audit_mmx6_recycle_terrain.py": "e87e05bb947e9087c4f2f3cf1ac86e0b4bfe87f9ec28b41a39082e299c0d4975",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_state.py": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_hud_presentation.py": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_intro_fixture.py": "b48eebf8535ec3a7a21718a36744761b7f7b677ebbf58600cc6d13bd0194282b",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-NPI1-source-fixture-final-review-worker-v2.json": "341f1edf035d514efb96604a35832f4d47bf74113058c99d77c1d56637f301ff",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\northpole-original-source-ram-worker-v2-npi1.bin": "e945790898690d35f297c631ee8f26c20bad0eea62f0795c65e265e97b121f72",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F111_northpole_ice_v100_root_v7.py": "8eaaaf68b0ac1f908aa24108001e9e12442baad8813d3847a49cf76debd9a85f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-exact-build-guard-root-v1.py": "11850ab85e318a1bac43130f5f77ce5fa0f367b924a5e5997912fb0ee25fa992",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-authored-map-mutation-source-worker-v1.json": "011de261202f2f379c07f71c7d6a3f17570fe8c3a83fdff798d2ce84691737da",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "897a76d81c5a486774537e8f4d12824b3a1af2cacc7a2004b841497bd0e862a1"
+    }
+  },
+  "NET": {
+    "raw_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\qualification.json",
+      "bytes": 41728778,
+      "sha256": "45338371279e5a16083fe5c75b636c368df6a58bfe5753b4012153fd55069b40"
+    },
+    "original_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\qualification-parent-original.json",
+      "bytes": 41722951,
+      "sha256": "a8737d50b0f431eaa0ea9e94d3b8384eab8dccaecc04b5d9ce3d8eded51dccda"
+    },
+    "observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\observations.json",
+      "bytes": 39156931,
+      "sha256": "2435eecc5dc553a03d6620621cc4d889d1074ee2ee5d6c51007bde641ad2a0ed"
+    },
+    "candidate_binding": {
+      "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json",
+      "binding_sha256": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+      "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+      "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+      "provenance_sha256": "8f6458844f7503152c54e137dbb4d8605b8f6817c143dd49e34acef31c2dab1a",
+      "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v100-northpole-ice-focused-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+      "source_heads": {
+        "game": "b37cd6935e5f7ec76a4ffbcc571d3af813f920bd",
+        "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+        "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+        "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+      },
+      "title": "mmx6-x-zero-delay-v45",
+      "host_revision": 28
+    },
+    "parent_checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": true,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_resolved_crc_after_case": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "endpoint_checks": {
+      "agreed_native_cp3_and_one_position_only_setup": true,
+      "live_original_terrain_full_feet": true,
+      "original_producer_unarmed_before_input": true,
+      "guest_only_original_admission": true,
+      "original_child12_allocation": true,
+      "guest_usable_support_two_native_updates_every_peer": true,
+      "actual_original_body_contact_entry_every_peer": true,
+      "primary_stationary_at_admission_and_ineligible_after": true,
+      "composed_captures_retained": true
+    },
+    "native_endpoints": [
+      {
+        "peer": 0,
+        "support": [
+          {
+            "row": 361,
+            "native_timer": 1541,
+            "address": 2148275048,
+            "column": 2,
+            "guest_xy": [
+              5125,
+              1546
+            ],
+            "guest_foot": 1568,
+            "child_xy": [
+              5112,
+              1592
+            ],
+            "phase": 3,
+            "guest_actor_top_contact": 8,
+            "guest_terrain_contact": 0,
+            "guest_air": 0,
+            "guest_action": 5,
+            "original_terrain_air": true,
+            "primary_gate_misses": true
+          },
+          {
+            "row": 362,
+            "native_timer": 1545,
+            "address": 2148275048,
+            "column": 2,
+            "guest_xy": [
+              5125,
+              1546
+            ],
+            "guest_foot": 1568,
+            "child_xy": [
+              5112,
+              1592
+            ],
+            "phase": 3,
+            "guest_actor_top_contact": 8,
+            "guest_terrain_contact": 0,
+            "guest_air": 0,
+            "guest_action": 5,
+            "original_terrain_air": true,
+            "primary_gate_misses": true
+          }
+        ],
+        "ascent": {
+          "row": 352,
+          "native_timer": 1512,
+          "xy": [
+            5173,
+            1538
+          ],
+          "action": 6,
+          "foot": 1560,
+          "child_top": 1568
+        },
+        "native_contact_entries": [
+          {
+            "seq": 0,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 98,
+            "frame": 5639,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 1,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 98,
+            "frame": 5639,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 2,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 106,
+            "frame": 5640,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 3,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 106,
+            "frame": 5640,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 4,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 105,
+            "frame": 5641,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 5,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 105,
+            "frame": 5641,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 6,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 113,
+            "frame": 5642,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 7,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 113,
+            "frame": 5642,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 8,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 112,
+            "frame": 5643,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 9,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 112,
+            "frame": 5643,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 10,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 120,
+            "frame": 5644,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 11,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 120,
+            "frame": 5644,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 12,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 119,
+            "frame": 5645,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 13,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 119,
+            "frame": 5645,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 14,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 127,
+            "frame": 5646,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 15,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 127,
+            "frame": 5646,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 16,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 126,
+            "frame": 5647,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 17,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 126,
+            "frame": 5647,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 18,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 134,
+            "frame": 5648,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 19,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 134,
+            "frame": 5648,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 20,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 133,
+            "frame": 5649,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 21,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 133,
+            "frame": 5649,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 22,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 141,
+            "frame": 5650,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 23,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 141,
+            "frame": 5650,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 24,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 140,
+            "frame": 5651,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 25,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 140,
+            "frame": 5651,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 26,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 148,
+            "frame": 5652,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 27,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 148,
+            "frame": 5652,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 28,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 147,
+            "frame": 5653,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 29,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 147,
+            "frame": 5653,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 30,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 155,
+            "frame": 5654,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 31,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 155,
+            "frame": 5654,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 32,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 154,
+            "frame": 5655,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 33,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 154,
+            "frame": 5655,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 34,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000005A8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 162,
+            "frame": 5656,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 35,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000005A8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 162,
+            "frame": 5656,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 36,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 161,
+            "frame": 5657,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 37,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 161,
+            "frame": 5657,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 38,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 169,
+            "frame": 5658,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 39,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 169,
+            "frame": 5658,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 40,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 168,
+            "frame": 5659,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 41,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 168,
+            "frame": 5659,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 42,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 176,
+            "frame": 5660,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 43,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 176,
+            "frame": 5660,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 44,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 175,
+            "frame": 5661,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 45,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 175,
+            "frame": 5661,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 46,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 183,
+            "frame": 5662,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 47,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 183,
+            "frame": 5662,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 48,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x0000059F",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 182,
+            "frame": 5663,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 49,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x0000059F",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 182,
+            "frame": 5663,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 50,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 190,
+            "frame": 5664,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 51,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 190,
+            "frame": 5664,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 52,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 189,
+            "frame": 5665,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 53,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 189,
+            "frame": 5665,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "peer": 1,
+        "support": [
+          {
+            "row": 361,
+            "native_timer": 1542,
+            "address": 2148275048,
+            "column": 2,
+            "guest_xy": [
+              5125,
+              1546
+            ],
+            "guest_foot": 1568,
+            "child_xy": [
+              5112,
+              1592
+            ],
+            "phase": 3,
+            "guest_actor_top_contact": 8,
+            "guest_terrain_contact": 0,
+            "guest_air": 0,
+            "guest_action": 5,
+            "original_terrain_air": true,
+            "primary_gate_misses": true
+          },
+          {
+            "row": 362,
+            "native_timer": 1545,
+            "address": 2148275048,
+            "column": 2,
+            "guest_xy": [
+              5125,
+              1546
+            ],
+            "guest_foot": 1568,
+            "child_xy": [
+              5112,
+              1592
+            ],
+            "phase": 3,
+            "guest_actor_top_contact": 8,
+            "guest_terrain_contact": 0,
+            "guest_air": 0,
+            "guest_action": 5,
+            "original_terrain_air": true,
+            "primary_gate_misses": true
+          }
+        ],
+        "ascent": {
+          "row": 352,
+          "native_timer": 1510,
+          "xy": [
+            5173,
+            1544
+          ],
+          "action": 6,
+          "foot": 1566,
+          "child_top": 1566
+        },
+        "native_contact_entries": [
+          {
+            "seq": 0,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 101,
+            "frame": 5639,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 1,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 101,
+            "frame": 5639,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 2,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 109,
+            "frame": 5640,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 3,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 109,
+            "frame": 5640,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 4,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 108,
+            "frame": 5641,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 5,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 108,
+            "frame": 5641,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 6,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 116,
+            "frame": 5642,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 7,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 116,
+            "frame": 5642,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 8,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 115,
+            "frame": 5643,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 9,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 115,
+            "frame": 5643,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 10,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 123,
+            "frame": 5644,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 11,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 123,
+            "frame": 5644,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 12,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 122,
+            "frame": 5645,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 13,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 122,
+            "frame": 5645,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 14,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 130,
+            "frame": 5646,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 15,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 130,
+            "frame": 5646,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 16,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 129,
+            "frame": 5647,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 17,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 129,
+            "frame": 5647,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 18,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 137,
+            "frame": 5648,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 19,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 137,
+            "frame": 5648,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 20,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 136,
+            "frame": 5649,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 21,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 136,
+            "frame": 5649,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 22,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 144,
+            "frame": 5650,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 23,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 144,
+            "frame": 5650,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 24,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 143,
+            "frame": 5651,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 25,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 143,
+            "frame": 5651,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 26,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 151,
+            "frame": 5652,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 27,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 151,
+            "frame": 5652,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 28,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 150,
+            "frame": 5653,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 29,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 150,
+            "frame": 5653,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 30,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 158,
+            "frame": 5654,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 31,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 158,
+            "frame": 5654,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 32,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 157,
+            "frame": 5655,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 33,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000013C8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 157,
+            "frame": 5655,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 34,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x000005A8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 165,
+            "frame": 5656,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 35,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x000005A8",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 165,
+            "frame": 5656,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 36,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 164,
+            "frame": 5657,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 37,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 164,
+            "frame": 5657,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 38,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 172,
+            "frame": 5658,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 39,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 172,
+            "frame": 5658,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 40,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 171,
+            "frame": 5659,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 41,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 171,
+            "frame": 5659,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 42,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 179,
+            "frame": 5660,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 43,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 179,
+            "frame": 5660,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 44,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 178,
+            "frame": 5661,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 45,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 178,
+            "frame": 5661,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 46,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 186,
+            "frame": 5662,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 47,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x00000000",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 186,
+            "frame": 5662,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 48,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C1368",
+            "a1": "0x800EBF18",
+            "a2": "0x800C1368",
+            "a3": "0x800C12C4",
+            "t1": "0x0000059F",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 185,
+            "frame": 5663,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 49,
+            "func": "0x80031DA8",
+            "ra": "0x800ECE38",
+            "a0": "0x800C140C",
+            "a1": "0x800EBF18",
+            "a2": "0x800C140C",
+            "a3": "0x800C12C4",
+            "t1": "0x0000059F",
+            "s0": "0x1F800060",
+            "s1": "0x800C4560",
+            "s2": "0x800CCED0",
+            "s3": "0x80090000",
+            "depth": 185,
+            "frame": 5663,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "resources": [
+      {
+        "peer": 0,
+        "address": "0x80097438",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-source-80097438.bin",
+        "bytes": 567,
+        "actual": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "original": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      },
+      {
+        "peer": 0,
+        "address": "0x8019bd58",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-source-8019bd58.bin",
+        "bytes": 103424,
+        "actual": "0a342fa527c1f58fb61e8d1474e5fd85808b54e7b69076b8644ff076e3e63a8a",
+        "original": "5806b8cf8b5a946b08eab1fe651e531a4c23d2db3b129a40d5f10a56dda803ce",
+        "exact_original": false,
+        "exact_source_qualified_closure": true
+      },
+      {
+        "peer": 0,
+        "address": "0x801b5158",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-source-801b5158.bin",
+        "bytes": 13412,
+        "actual": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "original": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      },
+      {
+        "peer": 1,
+        "address": "0x80097438",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-source-80097438.bin",
+        "bytes": 567,
+        "actual": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "original": "1dc9410ca65838454b4a58d773078e4b839a58d29b58e7f16deda1b8e7710945",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      },
+      {
+        "peer": 1,
+        "address": "0x8019bd58",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-source-8019bd58.bin",
+        "bytes": 103424,
+        "actual": "0a342fa527c1f58fb61e8d1474e5fd85808b54e7b69076b8644ff076e3e63a8a",
+        "original": "5806b8cf8b5a946b08eab1fe651e531a4c23d2db3b129a40d5f10a56dda803ce",
+        "exact_original": false,
+        "exact_source_qualified_closure": true
+      },
+      {
+        "peer": 1,
+        "address": "0x801b5158",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-source-801b5158.bin",
+        "bytes": 13412,
+        "actual": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "original": "75596a4922d60f744f29158b24b4315d389d78ff5078f440839edd7c33787fae",
+        "exact_original": true,
+        "exact_source_qualified_closure": false
+      }
+    ],
+    "captures": [
+      {
+        "peer": 0,
+        "label": "unarmed-native-producer",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-unarmed-native-producer.png",
+        "bytes": 2074543,
+        "sha256": "eb2ac81ce8da2751e544a9719e827fb9bca084cb92bc5a26d5f9af06676c96db"
+      },
+      {
+        "peer": 1,
+        "label": "unarmed-native-producer",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-unarmed-native-producer.png",
+        "bytes": 2074543,
+        "sha256": "5a4cde1746abdee4db3d728618c22c8db2b5b4f78a96185c3f4321be422415b3"
+      },
+      {
+        "peer": 0,
+        "label": "guest-admitted-native-ice",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-guest-admitted-native-ice.png",
+        "bytes": 2074543,
+        "sha256": "64a6f016dce0caa49054fd2edeef8e4c7343f0b380630501871793489fe5667c"
+      },
+      {
+        "peer": 1,
+        "label": "guest-admitted-native-ice",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-guest-admitted-native-ice.png",
+        "bytes": 2074543,
+        "sha256": "3584b43f2f7a8f400405080a9def1aae5fbf4050679274e8d7cdab978a83973a"
+      },
+      {
+        "peer": 0,
+        "label": "original-temporary-child",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-original-temporary-child.png",
+        "bytes": 2074543,
+        "sha256": "ca0d79d63bb1dad4cb38a1881e5b44572bc4b28ea5ceb91a171fe0ca49a973b2"
+      },
+      {
+        "peer": 1,
+        "label": "original-temporary-child",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-original-temporary-child.png",
+        "bytes": 2074543,
+        "sha256": "3045c5806035896082815e75165d3989e1ad492cba5f1cb8864371b933162957"
+      },
+      {
+        "peer": 0,
+        "label": "actual-guest-temporary-support",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-actual-guest-temporary-support.png",
+        "bytes": 2074543,
+        "sha256": "0db95f4a3a22d3e97612d4319e924a837d03d45323e8b3d6e0c1ab9767a61831"
+      },
+      {
+        "peer": 1,
+        "label": "actual-guest-temporary-support",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-actual-guest-temporary-support.png",
+        "bytes": 2074543,
+        "sha256": "0db95f4a3a22d3e97612d4319e924a837d03d45323e8b3d6e0c1ab9767a61831"
+      }
+    ],
+    "resolved_state_crc": [
+      {
+        "label": "initial idle",
+        "samples": [
+          {
+            "simulation_tick": 2976,
+            "core": "fa4ed7af",
+            "mod": "0b9d7a4f"
+          },
+          {
+            "simulation_tick": 3008,
+            "core": "ee9874ac",
+            "mod": "2301d079"
+          },
+          {
+            "simulation_tick": 3040,
+            "core": "604af62a",
+            "mod": "f262f419"
+          },
+          {
+            "simulation_tick": 3072,
+            "core": "2159d09e",
+            "mod": "f5bb0597"
+          },
+          {
+            "simulation_tick": 3104,
+            "core": "c74a38c4",
+            "mod": "346e7d37"
+          },
+          {
+            "simulation_tick": 3136,
+            "core": "cc3eb08a",
+            "mod": "9ae84ed3"
+          },
+          {
+            "simulation_tick": 3168,
+            "core": "dc42deb8",
+            "mod": "09a88111"
+          },
+          {
+            "simulation_tick": 3200,
+            "core": "8a00f9fd",
+            "mod": "ee4b54ff"
+          }
+        ],
+        "resolved_through": [
+          3204,
+          3204
+        ]
+      },
+      {
+        "label": "P2 right then release",
+        "samples": [
+          {
+            "simulation_tick": 3264,
+            "core": "1907bb49",
+            "mod": "f3bc33e6"
+          },
+          {
+            "simulation_tick": 3296,
+            "core": "49c82bc2",
+            "mod": "9b33afce"
+          },
+          {
+            "simulation_tick": 3328,
+            "core": "d0b3677d",
+            "mod": "bd6fc2a4"
+          },
+          {
+            "simulation_tick": 3360,
+            "core": "8b27a4fb",
+            "mod": "6e5bff4e"
+          },
+          {
+            "simulation_tick": 3392,
+            "core": "1127fa03",
+            "mod": "bada0dee"
+          },
+          {
+            "simulation_tick": 3424,
+            "core": "9d22921f",
+            "mod": "e55c515c"
+          },
+          {
+            "simulation_tick": 3456,
+            "core": "fb66e134",
+            "mod": "d61319bc"
+          }
+        ],
+        "resolved_through": [
+          3475,
+          3475
+        ]
+      },
+      {
+        "label": "P1 jump then settle",
+        "samples": [
+          {
+            "simulation_tick": 3552,
+            "core": "4b3b918f",
+            "mod": "38365754"
+          },
+          {
+            "simulation_tick": 3584,
+            "core": "26f4155b",
+            "mod": "e90c5904"
+          },
+          {
+            "simulation_tick": 3616,
+            "core": "06a2a176",
+            "mod": "c1c6425e"
+          },
+          {
+            "simulation_tick": 3648,
+            "core": "9da7f57f",
+            "mod": "2b1dbd7e"
+          },
+          {
+            "simulation_tick": 3680,
+            "core": "3b1ac638",
+            "mod": "6b5713cc"
+          },
+          {
+            "simulation_tick": 3712,
+            "core": "3e365789",
+            "mod": "e64a0a98"
+          },
+          {
+            "simulation_tick": 3744,
+            "core": "a8da154c",
+            "mod": "f3bc33e6"
+          },
+          {
+            "simulation_tick": 3776,
+            "core": "2f5b16ca",
+            "mod": "9b33afce"
+          }
+        ],
+        "resolved_through": [
+          3780,
+          3780
+        ]
+      },
+      {
+        "label": "paired ground-jump audio then settle",
+        "samples": [
+          {
+            "simulation_tick": 5728,
+            "core": "fdc600a0",
+            "mod": "524cf574"
+          },
+          {
+            "simulation_tick": 5760,
+            "core": "bbaedca8",
+            "mod": "c6b1255e"
+          },
+          {
+            "simulation_tick": 5792,
+            "core": "9b6554e8",
+            "mod": "c47507b9"
+          },
+          {
+            "simulation_tick": 5824,
+            "core": "1e6cbe0b",
+            "mod": "64f2ddef"
+          },
+          {
+            "simulation_tick": 5856,
+            "core": "1255d08a",
+            "mod": "bafbf0d4"
+          },
+          {
+            "simulation_tick": 5888,
+            "core": "575e6b82",
+            "mod": "8aac2f99"
+          },
+          {
+            "simulation_tick": 5920,
+            "core": "af922db3",
+            "mod": "4af15323"
+          }
+        ],
+        "resolved_through": [
+          5947,
+          5946
+        ]
+      }
+    ],
+    "resolved_CRC_samples": 30,
+    "owned_cleanup": [
+      {
+        "seat": 0,
+        "owned_pid": 113412,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "input_release_errors": null,
+        "private_card_error": null
+      },
+      {
+        "seat": 1,
+        "owned_pid": 108296,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "input_release_errors": null,
+        "private_card_error": null
+      }
+    ],
+    "private_cards_unchanged": true,
+    "retained_fixture_recording_refusals": [
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-0\\saves\\input-recordings\\session-1793287838380859-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+          "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+          "mode": "netplay",
+          "profile": {
+            "id": "mmx6.win64-clang22.loopback",
+            "revision": 28,
+            "selected_sha256": "6d203b5118c4b41b8ad7e653e8d2966f2fdd219b9f7bc4dba4c1b22a64f05153"
+          },
+          "settings_sha256": "f33598c3eb66ef90431aee74b6c8c52f474ee01fb8dacf36841df2845f2e4c0d",
+          "simulation_contract_sha256": "2ea8da748d317941445b1868e13e423c4b05820e4fcc268a5b8ceb8eb78c343c"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 6883,
+        "natives": 3214,
+        "p2_reads": 3669,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-0-recording-refusal\\settings.json",
+            "bytes": 26962,
+            "sha256": "f33598c3eb66ef90431aee74b6c8c52f474ee01fb8dacf36841df2845f2e4c0d"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-0-recording-refusal\\content.json",
+            "bytes": 567,
+            "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-0-recording-refusal\\simulation-contract.json",
+            "bytes": 351,
+            "sha256": "2ea8da748d317941445b1868e13e423c4b05820e4fcc268a5b8ceb8eb78c343c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-0-recording-refusal\\inputs.jsonl",
+            "bytes": 886530,
+            "sha256": "2825551fc89360e95962b24cff97ec35a78130b54ad6e87e5503acb01d2ce807"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-0-recording-refusal\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-0-recording-refusal\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-0-recording-refusal\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      },
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-1\\saves\\input-recordings\\session-1793287838399709-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "d13004490fe1d00435c76c93f63bd57602cd90de8347efbec3d12892aabe385f",
+          "manifest_sha256": "c49aafd88a3df64e265796ce73664dac82f6f932f6b1aa34d97b2cde88ec51b4",
+          "mode": "netplay",
+          "profile": {
+            "id": "mmx6.win64-clang22.loopback",
+            "revision": 28,
+            "selected_sha256": "6d203b5118c4b41b8ad7e653e8d2966f2fdd219b9f7bc4dba4c1b22a64f05153"
+          },
+          "settings_sha256": "ba14152df4cb2fc46633a2bcfdf2274e3966ed0d0d55cf719ff46b27d266166f",
+          "simulation_contract_sha256": "2ea8da748d317941445b1868e13e423c4b05820e4fcc268a5b8ceb8eb78c343c"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 6883,
+        "natives": 3214,
+        "p2_reads": 3669,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-1-recording-refusal\\settings.json",
+            "bytes": 26962,
+            "sha256": "ba14152df4cb2fc46633a2bcfdf2274e3966ed0d0d55cf719ff46b27d266166f"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-1-recording-refusal\\content.json",
+            "bytes": 567,
+            "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-1-recording-refusal\\simulation-contract.json",
+            "bytes": 351,
+            "sha256": "2ea8da748d317941445b1868e13e423c4b05820e4fcc268a5b8ceb8eb78c343c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-1-recording-refusal\\inputs.jsonl",
+            "bytes": 886530,
+            "sha256": "3575cae15e9de5abd827c7b967359af0b4b2337ac8aa2e6297c9d8b0d2354860"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-1-recording-refusal\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-1-recording-refusal\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\peer-1-recording-refusal\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      }
+    ],
+    "executing_source_pins": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "897a76d81c5a486774537e8f4d12824b3a1af2cacc7a2004b841497bd0e862a1",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-final-binding-root-v3.json": "7c520e3bb820e10599b5b8aba2626252bbf1290c6b2f58429870449efc6d8400",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-exact-build-guard-root-v1.py": "11850ab85e318a1bac43130f5f77ce5fa0f367b924a5e5997912fb0ee25fa992",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\northpole-original-source-ram-worker-v2-npi1.bin": "e945790898690d35f297c631ee8f26c20bad0eea62f0795c65e265e97b121f72",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F111_northpole_ice_v100_root_v7.py": "8eaaaf68b0ac1f908aa24108001e9e12442baad8813d3847a49cf76debd9a85f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_intro_fixture.py": "b48eebf8535ec3a7a21718a36744761b7f7b677ebbf58600cc6d13bd0194282b",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-NPI1-source-fixture-final-review-worker-v2.json": "341f1edf035d514efb96604a35832f4d47bf74113058c99d77c1d56637f301ff",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_hud_presentation.py": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_state.py": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F111-northpole-ice-v100-root-v3.py": "c79a7d8a395037418e8918c9e16d661ddb39f25cc71def11211a92f3181ef450",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\audit_mmx6_recycle_terrain.py": "e87e05bb947e9087c4f2f3cf1ac86e0b4bfe87f9ec28b41a39082e299c0d4975",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-authored-map-mutation-source-worker-v1.json": "011de261202f2f379c07f71c7d6a3f17570fe8c3a83fdff798d2ce84691737da",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-northpole-ice-support-v100\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8"
+    }
+  },
+  "build": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\northpole-ice-v100-runtime-build-receipt-root-v3.json",
+    "bytes": 1654,
+    "sha256": "956ec4afb556a526d5cf670bf799afb2421887deaa8dd22713577d7b5b1874b0"
+  },
+  "source_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worker-r9-preparation-v97\\F111-F112-NorthPole-source-worker-v1\\NorthPole-F111-actor-support-source-review-worker-v1.json",
+    "bytes": 17933,
+    "sha256": "4a716a4570aa3e2abd826b18e9e197b39872ed25c281eb19720e19ce0fdb06d4"
+  },
+  "image_review": {
+    "kind": "F111 composed personal root review",
+    "reviewed": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-unarmed-native-producer.png": "d2cea9e8bc796311ece88313f4d9766be4f062802418639dc7b20bda2c244d01",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-guest-admitted-native-ice.png": "a15cf3d514b87e4c71b78d0ac97adb12385c2cb71fc83b65ac9de2ab2a0a7786",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-original-temporary-child.png": "74d3d73f387ef9ac4196da07fc7fdbe6a5799c0b29e499dfeb19d4218182fcf3",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111l7\\ammo-hud\\intro-admission\\peer-0-actual-guest-temporary-support.png": "aca42319e3b8c712573d26aa635f4bf6fbab21be2b0dd5a9dc5a2616eb29bb18",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-unarmed-native-producer.png": "eb2ac81ce8da2751e544a9719e827fb9bca084cb92bc5a26d5f9af06676c96db",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-unarmed-native-producer.png": "5a4cde1746abdee4db3d728618c22c8db2b5b4f78a96185c3f4321be422415b3",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-guest-admitted-native-ice.png": "64a6f016dce0caa49054fd2edeef8e4c7343f0b380630501871793489fe5667c",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-guest-admitted-native-ice.png": "3584b43f2f7a8f400405080a9def1aae5fbf4050679274e8d7cdab978a83973a",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-original-temporary-child.png": "ca0d79d63bb1dad4cb38a1881e5b44572bc4b28ea5ceb91a171fe0ca49a973b2",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-original-temporary-child.png": "3045c5806035896082815e75165d3989e1ad492cba5f1cb8864371b933162957",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-0-actual-guest-temporary-support.png": "0db95f4a3a22d3e97612d4319e924a837d03d45323e8b3d6e0c1ab9767a61831",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f111n5\\intro-admission\\peer-1-actual-guest-temporary-support.png": "0db95f4a3a22d3e97612d4319e924a837d03d45323e8b3d6e0c1ab9767a61831"
+    },
+    "notes": [
+      "LOCAL all4 composed renderer captures personally viewed. X/Zero, authored environment and native ice support visible; actual guest support capture shows Zero elevated on ice above original floor.",
+      "Existing white rectangles/garbled background retained; does not establish general stage/rendering correctness. Native actor creation timing/contact geometry relies on separate retained native publications/trace; original-child capture may precede visible falling child.",
+      "NET all8 composed captures personally viewed, including both peer support endpoints. Zero visibly elevated on native ice, X remains on original lower floor. Native FX/enemies and a bright circular flare appear during support capture; white background patches persist. Separate observations/trace establish contact and actual source identity.",
+      "LOCAL/NET12 images reviewed; source-ready/admission/child capture are asynchronous and do not alone establish mechanics."
+    ]
+  },
+  "limits": [
+    "ONLY234 frozen comparisons. Original NorthPole2/0 authored type7/sub0 producer and native child12 are this F111 counterpart.",
+    "Agreed originalCP3 plus one position/previous-position-only approach bypass earlier traversal; declared hostile-contact protection is enabled. No actor/phase/camera/scanner/HP/timer/outcome writes.",
+    "P1 stationary and ineligible through guest-only native8->9 admission. Subsequent original damage/knockback is retained; primary remains alive/ineligible and outside selected-child canonical contact gate.",
+    "Actual original RNG/allocator child12, ordinary guest Right/Cross, native31DA8 contact, actual +71 actor-top contact/air0/landing-to-idle and matching geometry at two native updates on every peer. +70 terrain bit is a separate contract.",
+    "Original terrain at the supported footprint was air. Original child retirement may later deposit lasting terrain; no temporary-support expiry, primary-death lifetime, later subtype or F160 contact-collapse credit.",
+    "Failed l1..l6 reports and source corrections retained. Fixture-tainted recordings remain rejected; no ordinary recording/replay qualification.",
+    "Existing white/garbled background patches are retained in composed captures; no whole-stage graphics or general rendering qualification. See individual root image review notes.",
+    "Same PC muted loopback, exact title45/profile28 image. No performance, physical-controller, audible, other-host or cross-build claim."
+  ]
+}
