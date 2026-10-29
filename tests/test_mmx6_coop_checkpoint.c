@@ -61,6 +61,7 @@ void gpu_write_gp0(uint32_t value){(void)value;}
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
 static uint8_t before_doors_ram[0x200000];
 static uint8_t portal_source_ram[0x200000],northpole_source_ram[0x200000];
+static uint8_t gate_enemy_source_ram[0x200000];
 static const char *test_lab_option="off";
 static const char *test_lab_contact_option="off";
 static const char *test_lab_hp_option[2]={"off","off"};
@@ -670,6 +671,140 @@ static void portal_test_native_ready(void) {
     psx_mod_write_word(a+0x10,0x800F2B7Cu);psx_mod_write_word(a+8,1360u<<16);
     psx_mod_write_word(a+12,1600u<<16);psx_mod_write_word(a+0x68,0x80078910u);psx_mod_write_byte(a+0x70,8);
 }
+static void gate_enemy_test_vy(unsigned seat,int32_t vy) {
+    if(seat)put32(p2.body+0x24,(uint32_t)vy);
+    else psx_mod_write_word(PLAYER+0x24,(uint32_t)vy);
+}
+static void setup_gate_enemy_prerequisite(CPUState *cpu,int online) {
+    setup_agreed(cpu,online);test_lab_option="secretlab2b_enemy_cp0";checkpoint_reset();
+    CHECK(checkpoint_lab_option==14 && checkpoint_lab_index()==94 && checkpoint_lab_nonce()==0x4C474531u);
+    CHECK(strlen(test_lab_option)==21 && sizeof "secretlab2b_enemy_cp0"<=32);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB8)==0x80072E40u);
+    memcpy(test_ram,gate_enemy_source_ram,sizeof test_ram);
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+12,18);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAY+0x1D,0);psx_mod_write_word(PLAY+0x90,10);
+    psx_mod_write_byte(PLAY+0x5B,32);psx_mod_write_byte(PLAY+0x5C,32);
+    portal_test_body(0,152,123);portal_test_body(1,176,122);
+    for(unsigned i=0x5D;i<=0x5E;++i){psx_mod_write_byte(PLAYER+i,32);p2.body[i]=32;}
+    const uint32_t pools[][3]={{0x8008EF48u,0x80090C88u,0x9C},
+        {0x80093C98u,0x80095098u,0xA0},{0x800950A0u,0x800964A0u,0xA0},{0x800C1220u,0x800C4560u,0xA4}};
+    /* External input states only: no native update or spawn is emulated. */
+    for(unsigned pool=0;pool<4;++pool)for(uint32_t a=pools[pool][0];a<pools[pool][1];a+=pools[pool][2])
+        psx_mod_write_byte(a,0);
+    psx_mod_write_word(0x800971F8u+8,0);psx_mod_write_word(0x800971F8u+12,0);
+    psx_mod_write_word(0x800971F8u+0x14,0);psx_mod_write_word(0x800971F8u+0x18,0);
+    const uint16_t bounds[]={1600,0,0,0,1600,0,0,0};
+    for(unsigned i=0;i<8;++i)psx_mod_write_half(0x800971F8u+0x1C+i*2,bounds[i]);
+    uint32_t meta,desc;CHECK(checkpoint_gate_enemy_source() && checkpoint_gate_enemy_inactive());
+    CHECK(checkpoint_gate_enemy_assets(&meta,&desc) && checkpoint_gate_enemy_ground(meta,desc));
+    CHECK(checkpoint_gate_enemy_original_arrival());
+}
+static void gate_enemy_test_native_standing(void) {
+    /* A later real observation is supplied, not the physics that produces it. */
+    psx_mod_write_word(PLAYER+12,123u<<16);psx_mod_write_word(PLAYER+0x1C,123u<<16);
+    put32(p2.body+12,122u<<16);put32(p2.body+0x1C,122u<<16);
+    psx_mod_write_word(0x800971F8u+8,408u<<16);psx_mod_write_word(0x800971F8u+0x14,400u<<16);
+    psx_mod_write_word(PLAY+0x90,12);
+}
+static void agreed_gate_enemy_prerequisite(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+      for(unsigned velocities=0;velocities<4;++velocities) {
+        setup_gate_enemy_prerequisite(cpu,online);
+        gate_enemy_test_vy(0,velocities&1u?-0x80000:0);gate_enemy_test_vy(1,velocities&2u?-0x80000:0);
+        p2.body[5]=1;memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        p2.body[5]=2;partner=p2;CPUState registers=*cpu;Mmx6CoopLifecycle lifecycle=life;
+        memcpy(before_ram,test_ram,sizeof test_ram);
+        const unsigned positions[]={8,0x18,12,0x1C};
+        for(unsigned i=0;i<4;++i) {
+            uint32_t value=(i<2?560u:121u)<<16;
+            for(unsigned n=0;n<4;++n)before_ram[(PLAYER+positions[i]+n)&0x1FFFFF]=(uint8_t)(value>>(n*8));
+        }
+        put32(partner.body+8,576u<<16);put32(partner.body+0x18,576u<<16);
+        put32(partner.body+12,121u<<16);put32(partner.body+0x1C,121u<<16);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) &&
+            !memcmp(&registers,cpu,sizeof registers) && !memcmp(&lifecycle,&life,sizeof life));
+        CHECK(psx_mod_read_byte(diagnostic+0xAD)==1 && !psx_mod_read_byte(diagnostic+0xAE));
+        psx_mod_write_word(PLAY+0x90,12); /* Clock alone is not native standing. */
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        gate_enemy_test_native_standing();psx_mod_write_word(PLAY+0x90,11);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        psx_mod_write_word(PLAY+0x90,12);memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+            psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_byte(diagnostic+0xAD)==2 &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX && checkpoint_gate_enemy_inactive());
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && psx_mod_read_word(diagnostic+0xA4)==1);
+      }
+      const uint32_t corrupt[]={0x8003D850u,0x8003AD18u,0x800EA3B0u,0x800E9BDCu,0x800E9D70u,
+          0x80097438u,0x80100000u,0x80120000u,0x80073D50u,0x8006DA44u,0x800F5CE4u};
+      for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
+        setup_gate_enemy_prerequisite(cpu,online);psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^0x40);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+      }
+      for(unsigned phase=2;phase<=3;++phase)for(unsigned seat=0;seat<2;++seat)for(unsigned below=0;below<2;++below) {
+        setup_gate_enemy_prerequisite(cpu,online);
+        if(phase==3){CHECK(!checkpoint_stage_boundary(cpu));gate_enemy_test_native_standing();}
+        gate_enemy_test_vy(seat,below?-0x80001:1);memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==phase && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+      }
+      for(unsigned bad=0;bad<12;++bad) {
+        setup_gate_enemy_prerequisite(cpu,online);
+        if(bad==0)p2.body[0]=0;if(bad==1)p2.body[4]=2;if(bad==2)p2.body[0x5C]=0x80;
+        if(bad==3)p2.body[0x5D]=31;if(bad==4)p2.body[2]=0;if(bad==5)p2.body[0x70]=0;
+        if(bad==6)put32(p2.body+0x68,0);if(bad==7)life.status[0]=MMX6_COOP_FALLEN;
+        if(bad==8)psx_mod_write_byte(PLAYER+0x5C,31);if(bad==9)psx_mod_write_word(PLAYER+0x20,1);
+        if(bad==10)psx_mod_write_word(0x800971F8u+8,33u<<16);
+        if(bad==11)psx_mod_write_half(0x800971F8u+0x1C,1601);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+      }
+      for(unsigned phase=2;phase<=3;++phase)for(unsigned admitted=0;admitted<3;++admitted) {
+        setup_gate_enemy_prerequisite(cpu,online);
+        if(phase==3){CHECK(!checkpoint_stage_boundary(cpu));gate_enemy_test_native_standing();}
+        if(admitted==0)psx_mod_write_byte(0x800F5CE0u,1);
+        if(admitted==1)psx_mod_write_byte(0x800F5CE3u,0x10);
+        if(admitted==2){psx_mod_write_byte(0x8008EF48u,1);psx_mod_write_word(0x8008EF48u+0x10,0x800F5CE0u);}
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNSAFE &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+      }
+      const uint32_t hostile_pools[]={0x8008EF48u,0x80093C98u,0x800950A0u,0x800C1220u};
+      for(unsigned i=0;i<4;++i) {
+        setup_gate_enemy_prerequisite(cpu,online);uint32_t a=hostile_pools[i];
+        psx_mod_write_byte(a,1);psx_mod_write_word(a+8,576u<<16);psx_mod_write_word(a+12,121u<<16);
+        CHECK(!checkpoint_gate_enemy_clear() && !checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2);
+      }
+      setup_gate_enemy_prerequisite(cpu,online);uint32_t meta,desc;
+      CHECK(checkpoint_gate_enemy_assets(&meta,&desc));
+      unsigned cell=psx_mod_read_byte(0x80097438u+(112u>>8)*25u+(592u>>8));
+      unsigned air_at=cell*512u+((112u>>4)&15u)*32u+((592u>>4)&15u)*2u;
+      unsigned floor_at=cell*512u+((144u>>4)&15u)*32u+((592u>>4)&15u)*2u;
+      uint16_t air_tile=psx_mod_read_half(meta+air_at),floor_tile=psx_mod_read_half(meta+floor_at);
+      psx_mod_write_half(meta+air_at,floor_tile);CHECK(!checkpoint_gate_enemy_ground(meta,desc));
+      psx_mod_write_half(meta+air_at,air_tile);psx_mod_write_half(meta+floor_at,air_tile);
+      CHECK(!checkpoint_gate_enemy_ground(meta,desc)); /* Full floor, not just original pose, is required. */
+    }
+    setup_gate_enemy_prerequisite(cpu,0);
+    psx_mod_write_word(0x8008EF48u+0x10,0x800F5CE0u); /* Inactive stale slot is not a live enemy. */
+    CHECK(checkpoint_gate_enemy_inactive());
+    for(unsigned combo=0;combo<3;++combo) {
+        setup_agreed(cpu,1);test_lab_option="secretlab2b_enemy_cp0";
+        if(combo<2)test_lab_hp_option[combo]="1";else test_lab_earned_option="all";
+        checkpoint_reset();CHECK(failed);
+        test_lab_hp_option[0]=test_lab_hp_option[1]="off";test_lab_earned_option="off";
+    }
+    test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option && !checkpoint_pending.phase);
+}
 static void agreed_portal_prerequisite(CPUState *cpu) {
     for(int online=0;online<=1;++online)for(int distant=0;distant<=1;++distant) {
         setup_portal_prerequisite(cpu,online,distant);p2.body[5]=1; /* Native guest beam has not finished. */
@@ -940,7 +1075,7 @@ static void agreed_northpole_prerequisite(CPUState *cpu) {
 static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
     const char *options[]={"intro_cp2","amazon_cp0","amazon_cp2","intro_before_doors",
         "intro_before_explosion","recycle_cp2","recycle_portal_cp2","recycle_distant_cp2",
-        "recycle_fallen_cp2","recycle_fallen_guest_cp2"};
+        "recycle_fallen_cp2","recycle_fallen_guest_cp2","secretlab2b_enemy_cp0"};
     const uint8_t origins[][3]={{4,0,0},{4,0,1},{4,1,0},{4,1,2},{4,2,0},{3,0,0},{0,1,0},{0,0,1}};
     for(unsigned option=0;option<sizeof options/sizeof options[0];++option)for(unsigned i=0;i<sizeof origins/sizeof origins[0];++i) {
         if(option==5 && i==0)continue; /* The one new accepted origin. */
@@ -1324,6 +1459,11 @@ int main(int argc,char **argv) {
     if(!fixture || !*fixture){puts("SKIP: MMX6_NORTHPOLE_SETUP_RAM must name external original source materialization");return 77;}
     file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"NPI1",4));
     CHECK(fread(northpole_source_ram,1,sizeof northpole_source_ram,file)==sizeof northpole_source_ram && fgetc(file)==EOF);fclose(file);
+    fixture=getenv("MMX6_GATE_ENEMY_SETUP_RAM");
+    if(!fixture || !*fixture){puts("SKIP: MMX6_GATE_ENEMY_SETUP_RAM must name external original source materialization");return 77;}
+    file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"RPS1",4));
+    CHECK(fread(gate_enemy_source_ram,1,sizeof gate_enemy_source_ram,file)==sizeof gate_enemy_source_ram && fgetc(file)==EOF);fclose(file);
+    agreed_gate_enemy_prerequisite(&cpu);
     agreed_northpole_prerequisite(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_recycle_boundary(&cpu);agreed_recycle_loaded_origin_rejections(&cpu);

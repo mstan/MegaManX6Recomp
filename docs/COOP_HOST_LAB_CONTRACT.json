@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 29,
+  "revision": 30,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v46",
+    "title_compatibility": "mmx6-x-zero-delay-v47",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -569,5 +569,36 @@
         "8003AD18..8003ADB4": "24EE2986"
       }
     }
+  },
+  "title_changes_v47_gate_enemy_prerequisite": {
+    "issue": "beads-eio.1.111",
+    "comparisons": [
+      "F80"
+    ],
+    "option": "secretlab2b_enemy_cp0",
+    "default": "off; development catalog only",
+    "lab_option": 14,
+    "nonce": "4C474531",
+    "original": {
+      "stage": 18,
+      "section": 0,
+      "checkpoint": 0,
+      "index": 94,
+      "record": "80072E40"
+    },
+    "placement": {
+      "primary_x": 560,
+      "primary_y": 121,
+      "counterpart_x": 576,
+      "counterpart_y": 121,
+      "native_floor": 144,
+      "settled_primary_y": 123,
+      "settled_counterpart_y": 122
+    },
+    "contract": "After genuine native checkpoint initialization and both healthy grounded idle arrivals, once change body positions and previous positions only. Exact original code, native collision resources, full standing feet and approach air corridor are guarded. Require at least two native updates and actual original ground settling before completion. Target original record800F5CE0 must remain inactive with no matching live native instance before placement and readiness. Only subsequent ordinary guest movement may admit, approach or attack it; those outcomes require separate native validation.",
+    "velocity": "Require VX0 and source-authenticated standing beam handoff VY in[-0x80000,0]; preserve both velocities. This is not a universal gravity policy.",
+    "incompatible_prerequisites": "Starting HP and earned-weapons choices must remain off; original healthy32HP/copies are retained.",
+    "corridor": "Full original air549..821 above floor144 except authored64px recess704..767 with floor176. Walking/drop/jump traversal and combat are unverified outcomes; the setup never writes scanner, camera, velocities, actor, HP, lifecycle or result.",
+    "snapshot": "Existing pending phase and placed_world, schema14; no new serialized state."
   }
 }

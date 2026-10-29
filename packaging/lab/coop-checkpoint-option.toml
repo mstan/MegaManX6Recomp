@@ -53,6 +53,10 @@ value = "recycle_fallen_guest_cp2"
 label = "Recycle: guest pit before original portal"
 
 [[option.choice]]
+value = "secretlab2b_enemy_cp0"
+label = "Gate lab enemy approach (original CP0)"
+
+[[option.choice]]
 value = "northpole_ice_cp3"
 label = "North Pole original ice shaft (position prerequisite)"
 
