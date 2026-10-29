@@ -1,0 +1,133 @@
+{
+  "kind": "F161_partial_native_component_NOT_comparison_or_mode_admission",
+  "status": "unverified",
+  "comparisons": [
+    "F161"
+  ],
+  "frozen_row_sha256": "96733dde7bf44640324515d7b668b3d46b46c4269894ff08fc98cfbc80f7dfdd",
+  "comparison_admissions": 0,
+  "mode_status": {
+    "local": "unverified",
+    "netplay": "unverified"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fallen-forward-v101-final-binding-root-v4.json",
+    "binding_sha256": "437835711ba1b9b8dc0dbf4fdc08f7922b03c719d88cb5ab67a43a83a8e190c1",
+    "image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+    "manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+    "provenance_sha256": "41fda7cfdfdbfc716a36c5023441ed12ec0f5b5db9489a7333f7c9ccd5831dd8",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v101-fallen-forward-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "5c6609dfbc0079354a1a352294365850be48bac2",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v46",
+    "host_revision": 29
+  },
+  "local": {
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "native_checks": {
+      "genuine_later_section_original_loader": true,
+      "original_code_placement_animation_source": true,
+      "inactive_before_guest_only_progress": true,
+      "actual_original_native_initialization": true,
+      "primary_fixed_through_guest_admission_and_attack": true,
+      "native_guest_attack_same_origin_hp_drop": true,
+      "both_native_heroes_alive": true,
+      "raw_original_resource_chain_and_composed_captures_retained": true
+    },
+    "cleanup": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "ordinary_approach": {
+      "before": 0,
+      "near": 167,
+      "settled": 171,
+      "primary_only_scan_exclusion": [
+        760
+      ]
+    },
+    "admitted": 338,
+    "before_attack": 344,
+    "hit_rows": [
+      347
+    ],
+    "before_hp": 10,
+    "first_hit_hp": 6,
+    "final_hp": 0,
+    "same_origin": "800F24C8",
+    "native_type": 15,
+    "subtype": 2,
+    "art_source_component": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F161-LOCAL-retained-art-source-component-root-v1.json",
+      "bytes": 3239,
+      "sha256": "38efc85b15a9916a44f0b01847e2cf3eb3dd4cb7560ecd4f1f4479ca92fa8858"
+    },
+    "raw": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f161l2\\qualification.json",
+        "bytes": 39694404,
+        "sha256": "71fd88f4d85c5bf862f1a0b07e631717056b8b15b7434df9289accb1c2110baf"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f161l2\\ammo-hud\\intro-admission\\F161-observations.json",
+        "bytes": 14681353,
+        "sha256": "e83f7b6ec946dbb47693ddeb3277a8ebd506df352fde12bd81892036268e4068"
+      }
+    ]
+  },
+  "net": {
+    "status": "failed",
+    "error": "Later-section gameplay left living independent native mode",
+    "parent_checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": false,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "native_exit_codes": [
+      0,
+      0
+    ],
+    "raw": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f161n1\\qualification.json",
+        "bytes": 13675966,
+        "sha256": "68ab4bcaba6b6c0492d2ebea00164f4b3920282236174a3eb27a039269b782c8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f161n1\\intro-admission\\F161-observations.json",
+        "bytes": 2122513,
+        "sha256": "3c8dbe957cde04bdaec181837d3c03d86957f697f40a948db0445f90fd7a77b2"
+      }
+    ]
+  },
+  "limits": [
+    "Only frozen234 F161; no comparison or mode admitted.",
+    "LOCAL actual original4/0->20/1 loader, guest-only later enemy admission and fresh native Square10->6->0 retained. Agreed CP2/position/contact-protection scope is disclosed and tainted.",
+    "Retained selected assembly1084B exactly matches original DAT118 resource index1 with original animation/tileA0/CLUT7884. Texture-pixel producer/equality remains unqualified.",
+    "Root personally viewed three composed admitted/hit/postinteraction images; enemy visible only at right edge. Full visual acceptance NOT given. Prepared visual-onlyv3 has not run.",
+    "NET original primaryfatal atX287/Y395 before target; pair graceful0/privatecardsunchanged. Original authoredcat4/type9/sub44 moving-layer solidat288/272 is concrete source lead; independent sourcecause receipt pending. No timing reruns.",
+    "Independent-view f161l1 remained failed because canonicalstationarycamera0 neveradmitted target; sharedcamera used for named counterpart. No distant independent simulation scanner credit.",
+    "All failure/component raw retained. F161 staysunverified in bothmodes; no transfer toV102."
+  ]
+}
