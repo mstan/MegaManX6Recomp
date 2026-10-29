@@ -1,0 +1,2809 @@
+{
+  "kind": "F44_F74_same_V99_native_distant_forward_route_LOCAL_NET",
+  "status": "passed",
+  "comparisons": [
+    "F44",
+    "F74"
+  ],
+  "frozen_rows": {
+    "F44": "9a9fdfeee650e164aca838974adf899891f588171e5c1900d165243d4bc1a3b3",
+    "F74": "d4365490d40fcd1445f40813b65d1c67646671e77d5a309011f424a7a013bf1d"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-final-binding-root-v1.json",
+    "binding_sha256": "309e448f942e2ee37c1e9ed9fb9e4b62ee34af939b15106eba2eed5c803d3568",
+    "image_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+    "manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+    "provenance_sha256": "b08b111474861486e75b089a436c4b3c0debf927de1cc0e5ff5305c61817c04c",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v99-distant-portal-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "fdd319ce633711edb8a025ad098ca67f613f4006",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v44",
+    "host_revision": 27
+  },
+  "LOCAL": {
+    "raw_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\qualification.json",
+      "bytes": 21372667,
+      "sha256": "78882677ffd727bb9e30f0b3fcb93deb1048085bd49e7ca67962c2a9bf9cb249"
+    },
+    "original_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\qualification-parent-original.json",
+      "bytes": 21369857,
+      "sha256": "cb2e08a34bd045c09f7824b765e4d4e794b09efaea4493a1debe3ff0b8cd5762"
+    },
+    "observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 10103071,
+      "sha256": "6654f6290e98645418f37387dae3304e25954af9435e3276cbaff7b6315d1e66"
+    },
+    "candidate_binding": {
+      "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-final-binding-root-v1.json",
+      "binding_sha256": "309e448f942e2ee37c1e9ed9fb9e4b62ee34af939b15106eba2eed5c803d3568",
+      "image_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+      "manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+      "provenance_sha256": "b08b111474861486e75b089a436c4b3c0debf927de1cc0e5ff5305c61817c04c",
+      "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v99-distant-portal-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+      "source_heads": {
+        "game": "fdd319ce633711edb8a025ad098ca67f613f4006",
+        "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+        "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+        "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+      },
+      "title": "mmx6-x-zero-delay-v44",
+      "host_revision": 27
+    },
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "endpoint_checks": {
+      "agreed_native_CP2_and_one_declared_distant_pose": true,
+      "source_original_full_feet_and_air": true,
+      "source_native_geometric_misses_both": true,
+      "primary_stationary_genuinely_distant_through_admission": true,
+      "actual_P2_native_portal_admission_every_peer": true,
+      "original_ordered_major8_9_destination_every_peer": true,
+      "finite_both_living_native_arrivals": true,
+      "original_destination_current_and_target_camera": true,
+      "full_feet_earned_by_ordinary_guest_Left": true,
+      "actual_separate_destination_controls": true,
+      "personal_resources_retained": true,
+      "actual_captures_retained": true
+    },
+    "native_endpoints": [
+      {
+        "peer": 0,
+        "source_positions": [
+          [
+            1490.0,
+            875.0
+          ],
+          [
+            1506.0,
+            1594.0
+          ]
+        ],
+        "distance_vertical_pixels": 719,
+        "distance_through_admission_rows": [
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149
+        ],
+        "actual_owner2_rows": [
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177,
+          178,
+          179,
+          180,
+          181,
+          182,
+          183,
+          184,
+          185,
+          186,
+          187,
+          188,
+          189,
+          190,
+          191,
+          192,
+          193,
+          194,
+          195,
+          196,
+          197,
+          198,
+          199,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          209,
+          210,
+          211,
+          212,
+          213,
+          214,
+          215,
+          216,
+          217,
+          218,
+          219,
+          220,
+          221,
+          222,
+          223,
+          224,
+          225,
+          226,
+          227,
+          228,
+          229,
+          230,
+          231,
+          232,
+          233,
+          234,
+          235,
+          236,
+          237,
+          238,
+          239,
+          240,
+          241,
+          242,
+          243,
+          244,
+          245,
+          246,
+          247
+        ],
+        "native_loader_entries": [
+          {
+            "seq": 0,
+            "func": "0x8001E32C",
+            "ra": "0x8001EBA0",
+            "a0": "0x800CCED0",
+            "a1": "0x8001EB48",
+            "a2": "0x800C4708",
+            "a3": "0x8008EC08",
+            "t1": "0x00000010",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 428,
+            "frame": 3232,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 1,
+            "func": "0x8001E914",
+            "ra": "0x8001E720",
+            "a0": "0x800CCED0",
+            "a1": "0x00009088",
+            "a2": "0x800C4708",
+            "a3": "0x8008EC08",
+            "t1": "0x00000010",
+            "s0": "0x800D0000",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 442,
+            "frame": 3235,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 2,
+            "func": "0x8001E1BC",
+            "ra": "0x8001E720",
+            "a0": "0x800CCED0",
+            "a1": "0x00009088",
+            "a2": "0x00000002",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x00000010",
+            "s0": "0x800D0000",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 533,
+            "frame": 3262,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 3,
+            "func": "0x8001E730",
+            "ra": "0x8001E2D4",
+            "a0": "0x800A47F4",
+            "a1": "0x80162138",
+            "a2": "0x80161F9C",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x0000001E",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 536,
+            "frame": 3263,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 4,
+            "func": "0x8001E78C",
+            "ra": "0x8001E2F4",
+            "a0": "0x8009B840",
+            "a1": "0xFFFFFFFF",
+            "a2": "0x80161F9C",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x0000001E",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 536,
+            "frame": 3263,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          }
+        ],
+        "initial_destination_feet": [
+          {
+            "seat": 0,
+            "foot_y": 384,
+            "x_inclusive": [
+              68,
+              89
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          },
+          {
+            "seat": 1,
+            "foot_y": 384,
+            "x_inclusive": [
+              92,
+              113
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "native_ground": true,
+            "full_support": false
+          }
+        ],
+        "final_destination_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 4980736,
+            "y_raw": 23789568,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 5537792,
+            "y_raw": 23724032,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "final_feet": [
+          {
+            "seat": 0,
+            "foot_y": 384,
+            "x_inclusive": [
+              65,
+              86
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          },
+          {
+            "seat": 1,
+            "foot_y": 384,
+            "x_inclusive": [
+              73,
+              94
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          }
+        ],
+        "destination_camera": {
+          "x": 0,
+          "y": 224,
+          "min_x": 0,
+          "max_x": 2576,
+          "min_y": 224,
+          "max_y": 224,
+          "target_min_x": 0,
+          "target_max_x": 2576,
+          "target_min_y": 224,
+          "target_max_y": 224
+        }
+      }
+    ],
+    "controls": [
+      {
+        "seat": 1,
+        "pulses": [
+          {
+            "before": 278,
+            "movement": 281,
+            "settled": 289,
+            "full_support": [
+              false
+            ]
+          },
+          {
+            "before": 290,
+            "movement": 294,
+            "settled": 302,
+            "full_support": [
+              false
+            ]
+          },
+          {
+            "before": 303,
+            "movement": 307,
+            "settled": 314,
+            "full_support": [
+              false
+            ]
+          },
+          {
+            "before": 315,
+            "movement": 318,
+            "settled": 325,
+            "full_support": [
+              false
+            ]
+          },
+          {
+            "before": 326,
+            "movement": 329,
+            "settled": 336,
+            "full_support": [
+              false
+            ]
+          },
+          {
+            "before": 337,
+            "movement": 341,
+            "settled": 347,
+            "full_support": [
+              false
+            ]
+          },
+          {
+            "before": 348,
+            "movement": 351,
+            "settled": 358,
+            "full_support": [
+              true
+            ]
+          }
+        ],
+        "before": 278,
+        "movement": 351,
+        "settled": 358
+      },
+      {
+        "seat": 0,
+        "pulses": [
+          {
+            "before": 359,
+            "movement": 362,
+            "settled": 364,
+            "full_support": [
+              true
+            ]
+          }
+        ],
+        "before": 359,
+        "movement": 362,
+        "settled": 364
+      }
+    ],
+    "source_guards": [
+      {
+        "kind": "live_collision_resource_identity",
+        "label": "peer-0 source before portal",
+        "attempts": [
+          {
+            "before": "38740980b0a41980b0f81a80",
+            "assets": [
+              {
+                "address": "0x80097438",
+                "bytes": 528,
+                "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin"
+              },
+              {
+                "address": "0x8019a4b0",
+                "bytes": 87040,
+                "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin"
+              },
+              {
+                "address": "0x801af8b0",
+                "bytes": 8000,
+                "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin"
+              }
+            ],
+            "after": "38740980b0a41980b0f81a80"
+          }
+        ]
+      },
+      {
+        "peer": 0,
+        "address": "0x800ebd80",
+        "bytes": 3100,
+        "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+        "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+      },
+      {
+        "peer": 0,
+        "address": "0x800f38b8",
+        "bytes": 124,
+        "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+        "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+      },
+      {
+        "peer": 0,
+        "address": "0x800e9864",
+        "bytes": 20,
+        "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+        "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+      },
+      {
+        "kind": "live_collision_resource_identity",
+        "label": "peer-0 actual alternate destination",
+        "attempts": [
+          {
+            "before": "387409809c1f16809c971680",
+            "assets": [
+              {
+                "address": "0x80097438",
+                "bytes": 270,
+                "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin"
+              },
+              {
+                "address": "0x80161f9c",
+                "bytes": 30720,
+                "actual": "5f5e530c43be9fbe789ed464240a0a8c260f30c35a11503623dead4442349d27",
+                "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin"
+              },
+              {
+                "address": "0x8016979c",
+                "bytes": 4512,
+                "actual": "e32bb486222a8b415701db8b4c3a5bc6e116d9082fa35be9af3063c6b52ea33f",
+                "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin"
+              }
+            ],
+            "after": "387409809c1f16809c971680",
+            "collision_equivalence": {
+              "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+              "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+              "all_descriptor_low16_match": true,
+              "all_metatile_collision_shape_flip_match": true,
+              "original_full_asset_sha256_match": false,
+              "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+            }
+          }
+        ]
+      }
+    ],
+    "personal_resources_before": {
+      "row": 142,
+      "peers": [
+        [
+          {
+            "character": 0,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          },
+          {
+            "character": 1,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          }
+        ]
+      ]
+    },
+    "personal_resources_after": {
+      "row": 365,
+      "peers": [
+        [
+          {
+            "character": 0,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          },
+          {
+            "character": 1,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          }
+        ]
+      ]
+    },
+    "resource_checks": [
+      {
+        "peer": 0,
+        "checks": {
+          "default_roster": true,
+          "personal_HP_retained": true,
+          "weapon_retained": true,
+          "ammo9_retained": true,
+          "resources93_to113_retained": true
+        }
+      }
+    ],
+    "captures": [
+      {
+        "peer": 0,
+        "label": "source-before-guest-portal",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-source-before-guest-portal.png",
+        "bytes": 2074543,
+        "sha256": "75242c7d55af1cb2baf7002a82c308a8f4d85eae4afc755327f3257e6a912090"
+      },
+      {
+        "peer": 0,
+        "label": "original-destination-native-arrivals",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+        "bytes": 2074543,
+        "sha256": "68d65c169731c9a8633660ebdb7b0c5f47c6cf527edabfe67c0a569eee77fe04"
+      },
+      {
+        "peer": 0,
+        "label": "destination-independent-controls",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-destination-independent-controls.png",
+        "bytes": 2074543,
+        "sha256": "8b4aed7dc69694d2dc2f531a9de075be24221042ac24c71b020deb0bac863c07"
+      }
+    ],
+    "resolved_state_crc": [],
+    "resolved_CRC_samples": 0,
+    "retained_fixture_recording_refusals": [
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "events": 5887,
+        "natives": 4150,
+        "p2_reads": 1737,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\recording-rejection\\settings.json",
+            "bytes": 10525,
+            "sha256": "bfd74cb0ae3da49afd7eb9cae69d32e0bbaf3e2bc3d790699b31d64ec12a2f52"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\recording-rejection\\content.json",
+            "bytes": 503,
+            "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\recording-rejection\\simulation-contract.json",
+            "bytes": 259,
+            "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\recording-rejection\\inputs.jsonl",
+            "bytes": 773492,
+            "sha256": "8b959091c7fad64a54af9ec994b3216956cfc55a3eab6033c66b00a330bea204"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\recording-rejection\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\recording-rejection\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\recording-rejection\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ]
+      }
+    ],
+    "owned_cleanup": [
+      {
+        "owned_pid": 74300,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    ],
+    "private_cards_unchanged": true,
+    "executing_source_pins": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-exact-build-guard-root-v1.py": "f8e7a80378e1dae9ae828ce2d5aaff8bb0b855724e5bfe0484e71f669f4d85d5",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_intro_fixture.py": "b48eebf8535ec3a7a21718a36744761b7f7b677ebbf58600cc6d13bd0194282b",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F165_Recycle_portal_v89_root_v5.py": "cb3171c54988ac1b8c4364af84674be475960f26ceea437bcaff83d32b14d214",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F44-F74-distant-portal-v99-root-v1.py": "7eb884dc4d0ec5e0e8fd2c943909040adeee2cea5d72148e99bd9061c71612ec",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Recycle-portal-prerequisite-v89-worker-v1.json": "7636a0f974a2140bffe9e943076a528faa8ff165e06b1b3a016f68abee660f4d",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\qualify_mmx6_coop_state.py": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F21_forward_boundary_hp_v93_worker_v2.py": "3d48089c04cd49e37255c4b3ac45c08f6ee89f9795513c6413c48971fa199712",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_reploid059.py": "e0d0526940eee7a7921a36b15a37b717019c1452e1eeb885ee98db3abed246ec",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F44_F74_distant_portal_v99_root_v1.py": "d2ec635deee622f1437501e6675e6d0ecc0d7f3b45d3bd7b191478df18c83b53",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\audit_mmx6_recycle_terrain.py": "e87e05bb947e9087c4f2f3cf1ac86e0b4bfe87f9ec28b41a39082e299c0d4975",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-original-destination-source-v89-worker-v1.json": "f556d3abca53829c30f5f9a0c6d9a4db1b32ee3fcdd17ded1eecefda6df0bee7",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "5b5a22c4d80aaceb7c8efb10eac32d7c465c495ba814463c7b1c6e87ebd4628a",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_recycle_setup.py": "b96c22b481debf0ed2e459a35973d337c6aa0ae49831c142ef923ced6a9f9d77",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_hud_presentation.py": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-final-binding-root-v1.json": "309e448f942e2ee37c1e9ed9fb9e4b62ee34af939b15106eba2eed5c803d3568",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_collision_boxes.py": "703321d89591ea3ccd464812f23d10c047375475510f7faa4b813151ae56c2d2",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\inventory_mmx6_coop_content.py": "fb078dccd910137f28b8e9679a0f84a53abf15024aea3bb180a8796d94cf36c5",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_recycle_portal.py": "4c9809b4c29f5771b8c873081f58d1526225fc110b7b81338af5aec2bf0e7bd6"
+    }
+  },
+  "NET": {
+    "raw_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\qualification.json",
+      "bytes": 15473385,
+      "sha256": "e407651c3935e94b325dcd28ebde3ee8839fef329e18ed30adc99c20bca98ad7"
+    },
+    "original_parent": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\qualification-parent-original.json",
+      "bytes": 15467543,
+      "sha256": "0c81b11338293913fc042c0d8e8e3ec504af78dc31242bcc2fd88151f257b12f"
+    },
+    "observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\observations.json",
+      "bytes": 13420705,
+      "sha256": "3aabdae993db8129371793dc302e88921059fc2cf582525471abb6655fa76d5f"
+    },
+    "candidate_binding": {
+      "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-final-binding-root-v1.json",
+      "binding_sha256": "309e448f942e2ee37c1e9ed9fb9e4b62ee34af939b15106eba2eed5c803d3568",
+      "image_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+      "manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+      "provenance_sha256": "b08b111474861486e75b089a436c4b3c0debf927de1cc0e5ff5305c61817c04c",
+      "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v99-distant-portal-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+      "source_heads": {
+        "game": "fdd319ce633711edb8a025ad098ca67f613f4006",
+        "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+        "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+        "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+      },
+      "title": "mmx6-x-zero-delay-v44",
+      "host_revision": 27
+    },
+    "parent_checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": true,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_resolved_crc_after_case": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "endpoint_checks": {
+      "agreed_native_CP2_and_one_declared_distant_pose": true,
+      "source_original_full_feet_and_air": true,
+      "source_native_geometric_misses_both": true,
+      "primary_stationary_genuinely_distant_through_admission": true,
+      "actual_P2_native_portal_admission_every_peer": true,
+      "original_ordered_major8_9_destination_every_peer": true,
+      "finite_both_living_native_arrivals": true,
+      "original_destination_current_and_target_camera": true,
+      "full_feet_earned_by_ordinary_guest_Left": true,
+      "actual_separate_destination_controls": true,
+      "personal_resources_retained": true,
+      "actual_captures_retained": true
+    },
+    "native_endpoints": [
+      {
+        "peer": 0,
+        "source_positions": [
+          [
+            1490.0,
+            875.0
+          ],
+          [
+            1506.0,
+            1594.0
+          ]
+        ],
+        "distance_vertical_pixels": 719,
+        "distance_through_admission_rows": [
+          93,
+          94,
+          95,
+          96,
+          97
+        ],
+        "actual_owner2_rows": [
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177
+        ],
+        "native_loader_entries": [
+          {
+            "seq": 0,
+            "func": "0x8001E32C",
+            "ra": "0x8001EBA0",
+            "a0": "0x800CCED0",
+            "a1": "0x8001EB48",
+            "a2": "0x800C4618",
+            "a3": "0x8008EB88",
+            "t1": "0x00000010",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 446,
+            "frame": 4405,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 1,
+            "func": "0x8001E914",
+            "ra": "0x8001E720",
+            "a0": "0x800CCED0",
+            "a1": "0x00009088",
+            "a2": "0x800C4618",
+            "a3": "0x8008EB88",
+            "t1": "0x00000010",
+            "s0": "0x800D0000",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 451,
+            "frame": 4408,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 2,
+            "func": "0x8001E1BC",
+            "ra": "0x8001E720",
+            "a0": "0x800CCED0",
+            "a1": "0x00009088",
+            "a2": "0x00000002",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x00000010",
+            "s0": "0x800D0000",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 547,
+            "frame": 4435,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 3,
+            "func": "0x8001E730",
+            "ra": "0x8001E2D4",
+            "a0": "0x800A47F4",
+            "a1": "0x80162138",
+            "a2": "0x80161F9C",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x0000001E",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 541,
+            "frame": 4436,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 4,
+            "func": "0x8001E78C",
+            "ra": "0x8001E2F4",
+            "a0": "0x8009B840",
+            "a1": "0xFFFFFFFF",
+            "a2": "0x80161F9C",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x0000001E",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 541,
+            "frame": 4436,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          }
+        ],
+        "initial_destination_feet": [
+          {
+            "seat": 0,
+            "foot_y": 384,
+            "x_inclusive": [
+              68,
+              89
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          },
+          {
+            "seat": 1,
+            "foot_y": 384,
+            "x_inclusive": [
+              92,
+              113
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "native_ground": true,
+            "full_support": false
+          }
+        ],
+        "final_destination_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 4816896,
+            "y_raw": 23789568,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 5013504,
+            "y_raw": 23724032,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "final_feet": [
+          {
+            "seat": 0,
+            "foot_y": 384,
+            "x_inclusive": [
+              62,
+              83
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          },
+          {
+            "seat": 1,
+            "foot_y": 384,
+            "x_inclusive": [
+              65,
+              86
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          }
+        ],
+        "destination_camera": {
+          "x": 0,
+          "y": 224,
+          "min_x": 0,
+          "max_x": 2576,
+          "min_y": 224,
+          "max_y": 224,
+          "target_min_x": 0,
+          "target_max_x": 2576,
+          "target_min_y": 224,
+          "target_max_y": 224
+        }
+      },
+      {
+        "peer": 1,
+        "source_positions": [
+          [
+            1490.0,
+            875.0
+          ],
+          [
+            1506.0,
+            1594.0
+          ]
+        ],
+        "distance_vertical_pixels": 719,
+        "distance_through_admission_rows": [
+          93,
+          94,
+          95,
+          96,
+          97
+        ],
+        "actual_owner2_rows": [
+          97,
+          98,
+          99,
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107,
+          108,
+          109,
+          110,
+          111,
+          112,
+          113,
+          114,
+          115,
+          116,
+          117,
+          118,
+          119,
+          120,
+          121,
+          122,
+          123,
+          124,
+          125,
+          126,
+          127,
+          128,
+          129,
+          130,
+          131,
+          132,
+          133,
+          134,
+          135,
+          136,
+          137,
+          138,
+          139,
+          140,
+          141,
+          142,
+          143,
+          144,
+          145,
+          146,
+          147,
+          148,
+          149,
+          150,
+          151,
+          152,
+          153,
+          154,
+          155,
+          156,
+          157,
+          158,
+          159,
+          160,
+          161,
+          162,
+          163,
+          164,
+          165,
+          166,
+          167,
+          168,
+          169,
+          170,
+          171,
+          172,
+          173,
+          174,
+          175,
+          176,
+          177
+        ],
+        "native_loader_entries": [
+          {
+            "seq": 0,
+            "func": "0x8001E32C",
+            "ra": "0x8001EBA0",
+            "a0": "0x800CCED0",
+            "a1": "0x8001EB48",
+            "a2": "0x800C4618",
+            "a3": "0x8008EB88",
+            "t1": "0x00000010",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 445,
+            "frame": 4405,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 1,
+            "func": "0x8001E914",
+            "ra": "0x8001E720",
+            "a0": "0x800CCED0",
+            "a1": "0x00009088",
+            "a2": "0x800C4618",
+            "a3": "0x8008EB88",
+            "t1": "0x00000010",
+            "s0": "0x800D0000",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 459,
+            "frame": 4408,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 2,
+            "func": "0x8001E1BC",
+            "ra": "0x8001E720",
+            "a0": "0x800CCED0",
+            "a1": "0x00009088",
+            "a2": "0x00000002",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x00000010",
+            "s0": "0x800D0000",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 549,
+            "frame": 4435,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 3,
+            "func": "0x8001E730",
+            "ra": "0x8001E2D4",
+            "a0": "0x800A47F4",
+            "a1": "0x80162138",
+            "a2": "0x80161F9C",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x0000001E",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 552,
+            "frame": 4436,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          },
+          {
+            "seq": 4,
+            "func": "0x8001E78C",
+            "ra": "0x8001E2F4",
+            "a0": "0x8009B840",
+            "a1": "0xFFFFFFFF",
+            "a2": "0x80161F9C",
+            "a3": "0xFFFFFFFF",
+            "t1": "0x0000001E",
+            "s0": "0x800CCED0",
+            "s1": "0x8007112C",
+            "s2": "0x800D0000",
+            "s3": "0xFF000000",
+            "depth": 552,
+            "frame": 4436,
+            "exit_seq": 0,
+            "entry_kind": 1,
+            "context": {
+              "schema": 0,
+              "available": 0,
+              "provider": 0,
+              "epoch": 0,
+              "flags": 0,
+              "state0": 0,
+              "state1": 0,
+              "state2": 0,
+              "publication": {
+                "valid": 0,
+                "provider": 0,
+                "epoch": 0,
+                "sequence": 0,
+                "site": 0
+              }
+            }
+          }
+        ],
+        "initial_destination_feet": [
+          {
+            "seat": 0,
+            "foot_y": 384,
+            "x_inclusive": [
+              68,
+              89
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          },
+          {
+            "seat": 1,
+            "foot_y": 384,
+            "x_inclusive": [
+              92,
+              113
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "native_ground": true,
+            "full_support": false
+          }
+        ],
+        "final_destination_players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 4816896,
+            "y_raw": 23789568,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 5013504,
+            "y_raw": 23724032,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "final_feet": [
+          {
+            "seat": 0,
+            "foot_y": 384,
+            "x_inclusive": [
+              62,
+              83
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          },
+          {
+            "seat": 1,
+            "foot_y": 384,
+            "x_inclusive": [
+              65,
+              86
+            ],
+            "codes": [
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56,
+              56
+            ],
+            "native_ground": true,
+            "full_support": true
+          }
+        ],
+        "destination_camera": {
+          "x": 0,
+          "y": 224,
+          "min_x": 0,
+          "max_x": 2576,
+          "min_y": 224,
+          "max_y": 224,
+          "target_min_x": 0,
+          "target_max_x": 2576,
+          "target_min_y": 224,
+          "target_max_y": 224
+        }
+      }
+    ],
+    "controls": [
+      {
+        "seat": 1,
+        "pulses": [
+          {
+            "before": 202,
+            "movement": 206,
+            "settled": 213,
+            "full_support": [
+              false,
+              false
+            ]
+          },
+          {
+            "before": 214,
+            "movement": 217,
+            "settled": 223,
+            "full_support": [
+              false,
+              false
+            ]
+          },
+          {
+            "before": 224,
+            "movement": 227,
+            "settled": 234,
+            "full_support": [
+              true,
+              true
+            ]
+          }
+        ],
+        "before": 202,
+        "movement": 227,
+        "settled": 234
+      },
+      {
+        "seat": 0,
+        "pulses": [
+          {
+            "before": 235,
+            "movement": 239,
+            "settled": 241,
+            "full_support": [
+              true,
+              true
+            ]
+          }
+        ],
+        "before": 235,
+        "movement": 239,
+        "settled": 241
+      }
+    ],
+    "source_guards": [
+      {
+        "kind": "live_collision_resource_identity",
+        "label": "peer-0 source before portal",
+        "attempts": [
+          {
+            "before": "38740980b0a41980b0f81a80",
+            "assets": [
+              {
+                "address": "0x80097438",
+                "bytes": 528,
+                "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin"
+              },
+              {
+                "address": "0x8019a4b0",
+                "bytes": 87040,
+                "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin"
+              },
+              {
+                "address": "0x801af8b0",
+                "bytes": 8000,
+                "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin"
+              }
+            ],
+            "after": "38740980b0a41980b0f81a80"
+          }
+        ]
+      },
+      {
+        "peer": 0,
+        "address": "0x800ebd80",
+        "bytes": 3100,
+        "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+        "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+      },
+      {
+        "peer": 0,
+        "address": "0x800f38b8",
+        "bytes": 124,
+        "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+        "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+      },
+      {
+        "peer": 0,
+        "address": "0x800e9864",
+        "bytes": 20,
+        "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+        "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+      },
+      {
+        "kind": "live_collision_resource_identity",
+        "label": "peer-1 source before portal",
+        "attempts": [
+          {
+            "before": "38740980b0a41980b0f81a80",
+            "assets": [
+              {
+                "address": "0x80097438",
+                "bytes": 528,
+                "actual": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                "expected": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-source-before-portal-0x80097438-actual.bin"
+              },
+              {
+                "address": "0x8019a4b0",
+                "bytes": 87040,
+                "actual": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                "expected": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-source-before-portal-0x8019a4b0-actual.bin"
+              },
+              {
+                "address": "0x801af8b0",
+                "bytes": 8000,
+                "actual": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                "expected": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-source-before-portal-0x801af8b0-actual.bin"
+              }
+            ],
+            "after": "38740980b0a41980b0f81a80"
+          }
+        ]
+      },
+      {
+        "peer": 1,
+        "address": "0x800ebd80",
+        "bytes": 3100,
+        "actual": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+        "expected": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f"
+      },
+      {
+        "peer": 1,
+        "address": "0x800f38b8",
+        "bytes": 124,
+        "actual": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+        "expected": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"
+      },
+      {
+        "peer": 1,
+        "address": "0x800e9864",
+        "bytes": 20,
+        "actual": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+        "expected": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"
+      },
+      {
+        "kind": "live_collision_resource_identity",
+        "label": "peer-0 actual alternate destination",
+        "attempts": [
+          {
+            "before": "387409809c1f16809c971680",
+            "assets": [
+              {
+                "address": "0x80097438",
+                "bytes": 270,
+                "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin"
+              },
+              {
+                "address": "0x80161f9c",
+                "bytes": 30720,
+                "actual": "922e18411ba7101db203e3dd33edd668bf1d47c30fd6aad926c4490776d7711c",
+                "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin"
+              },
+              {
+                "address": "0x8016979c",
+                "bytes": 4512,
+                "actual": "0f5c5fefa7f1082932370dd40ab8302c9d6c6fe327fc85a069dfd9afa4534b7b",
+                "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin"
+              }
+            ],
+            "after": "387409809c1f16809c971680",
+            "collision_equivalence": {
+              "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+              "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+              "all_descriptor_low16_match": true,
+              "all_metatile_collision_shape_flip_match": true,
+              "original_full_asset_sha256_match": false,
+              "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+            }
+          }
+        ]
+      },
+      {
+        "kind": "live_collision_resource_identity",
+        "label": "peer-1 actual alternate destination",
+        "attempts": [
+          {
+            "before": "387409809c1f16809c971680",
+            "assets": [
+              {
+                "address": "0x80097438",
+                "bytes": 270,
+                "actual": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                "expected": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-actual-alternate-destination-0x80097438-actual.bin"
+              },
+              {
+                "address": "0x80161f9c",
+                "bytes": 30720,
+                "actual": "1fad4a80ab8a402d48ce9acadb89955b8dd7ffda0ace47337522781af295f8c6",
+                "expected": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-actual-alternate-destination-0x80161f9c-actual.bin"
+              },
+              {
+                "address": "0x8016979c",
+                "bytes": 4512,
+                "actual": "a4b9f6ee91c8b2d15527a66b3e4f6a0c46c87fa8c14f4c99987d42dda0ec111c",
+                "expected": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b",
+                "raw_capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-actual-alternate-destination-0x8016979c-actual.bin"
+              }
+            ],
+            "after": "387409809c1f16809c971680",
+            "collision_equivalence": {
+              "original_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+              "live_projection_sha256": "f0e2dc9b2b3807e19f17ef6be224311c28a41bd4dbcd30e6e1c44db8d5efad8f",
+              "all_descriptor_low16_match": true,
+              "all_metatile_collision_shape_flip_match": true,
+              "original_full_asset_sha256_match": false,
+              "scope": "Collision only; raw graphic-index differences retained, no general rendering pass."
+            }
+          }
+        ]
+      }
+    ],
+    "personal_resources_before": {
+      "row": 93,
+      "peers": [
+        [
+          {
+            "character": 0,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          },
+          {
+            "character": 1,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          }
+        ],
+        [
+          {
+            "character": 0,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          },
+          {
+            "character": 1,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          }
+        ]
+      ]
+    },
+    "personal_resources_after": {
+      "row": 242,
+      "peers": [
+        [
+          {
+            "character": 0,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          },
+          {
+            "character": 1,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          }
+        ],
+        [
+          {
+            "character": 0,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          },
+          {
+            "character": 1,
+            "hp": 32,
+            "weapon": 0,
+            "ammo9": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ],
+            "resource_hex": "000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff"
+          }
+        ]
+      ]
+    },
+    "resource_checks": [
+      {
+        "peer": 0,
+        "checks": {
+          "default_roster": true,
+          "personal_HP_retained": true,
+          "weapon_retained": true,
+          "ammo9_retained": true,
+          "resources93_to113_retained": true
+        }
+      },
+      {
+        "peer": 1,
+        "checks": {
+          "default_roster": true,
+          "personal_HP_retained": true,
+          "weapon_retained": true,
+          "ammo9_retained": true,
+          "resources93_to113_retained": true
+        }
+      }
+    ],
+    "captures": [
+      {
+        "peer": 0,
+        "label": "source-before-guest-portal",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-source-before-guest-portal.png",
+        "bytes": 2074543,
+        "sha256": "07948e2dc2ffd011174d7cd1bf8fbedb100f7eba080e98290e75b6ab11b811f6"
+      },
+      {
+        "peer": 1,
+        "label": "source-before-guest-portal",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-source-before-guest-portal.png",
+        "bytes": 2074543,
+        "sha256": "1d60e744f6a62604bdafb5056032878a64953d2073133c5a116e9b6b63b96512"
+      },
+      {
+        "peer": 0,
+        "label": "original-destination-native-arrivals",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+        "bytes": 2074543,
+        "sha256": "b95e525d4137a8ac9321a4403bd76b52a43c28afd3a21292acedacf1a69067e9"
+      },
+      {
+        "peer": 1,
+        "label": "original-destination-native-arrivals",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-original-destination-native-arrivals.png",
+        "bytes": 2074543,
+        "sha256": "baa2c2141042f24910759c554b710eff342711c4bfe50dd59f35d7102c6322de"
+      },
+      {
+        "peer": 0,
+        "label": "destination-independent-controls",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-0-destination-independent-controls.png",
+        "bytes": 2074543,
+        "sha256": "4f6cdf2fcdf12922ebfe55887ef1ad6fd80506abff1aa3848f218464e716e6a0"
+      },
+      {
+        "peer": 1,
+        "label": "destination-independent-controls",
+        "root_review": "personally viewed",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\intro-admission\\peer-1-destination-independent-controls.png",
+        "bytes": 2074543,
+        "sha256": "5cba80ab89b02c31c0b7236518fcf69bdcd6002820e82c921feebc12c38915f0"
+      }
+    ],
+    "resolved_state_crc": [
+      {
+        "label": "initial idle",
+        "samples": [
+          {
+            "simulation_tick": 3136,
+            "core": "d16938b2",
+            "mod": "2ef49617"
+          },
+          {
+            "simulation_tick": 3168,
+            "core": "ccfcc1e2",
+            "mod": "bb104665"
+          },
+          {
+            "simulation_tick": 3200,
+            "core": "f893d8e5",
+            "mod": "c36b6175"
+          },
+          {
+            "simulation_tick": 3232,
+            "core": "e6fab1f5",
+            "mod": "8172abc7"
+          },
+          {
+            "simulation_tick": 3264,
+            "core": "406a8a7f",
+            "mod": "f8d88fff"
+          },
+          {
+            "simulation_tick": 3296,
+            "core": "1348bfaf",
+            "mod": "6425684d"
+          },
+          {
+            "simulation_tick": 3328,
+            "core": "b0424796",
+            "mod": "f2943c29"
+          }
+        ],
+        "resolved_through": [
+          3330,
+          3331
+        ]
+      },
+      {
+        "label": "P2 right then release",
+        "samples": [
+          {
+            "simulation_tick": 3392,
+            "core": "4a55db3b",
+            "mod": "5da7ff72"
+          },
+          {
+            "simulation_tick": 3424,
+            "core": "f8d82e3a",
+            "mod": "52004cbd"
+          },
+          {
+            "simulation_tick": 3456,
+            "core": "8680a4ce",
+            "mod": "0dff452b"
+          },
+          {
+            "simulation_tick": 3488,
+            "core": "5ded705f",
+            "mod": "b4bbfd6d"
+          },
+          {
+            "simulation_tick": 3520,
+            "core": "050b2a35",
+            "mod": "f146ee0d"
+          },
+          {
+            "simulation_tick": 3552,
+            "core": "a5efbb8d",
+            "mod": "95140a73"
+          }
+        ],
+        "resolved_through": [
+          3555,
+          3554
+        ]
+      },
+      {
+        "label": "P1 jump then settle",
+        "samples": [
+          {
+            "simulation_tick": 3648,
+            "core": "129171bd",
+            "mod": "f0a2a345"
+          },
+          {
+            "simulation_tick": 3680,
+            "core": "e0b36d7e",
+            "mod": "1f3f40fb"
+          },
+          {
+            "simulation_tick": 3712,
+            "core": "e005bd0b",
+            "mod": "02a70c6b"
+          },
+          {
+            "simulation_tick": 3744,
+            "core": "b6bc4651",
+            "mod": "0be0b63d"
+          },
+          {
+            "simulation_tick": 3776,
+            "core": "1c300422",
+            "mod": "e4ea0b55"
+          },
+          {
+            "simulation_tick": 3808,
+            "core": "6d71dedd",
+            "mod": "9128f143"
+          }
+        ],
+        "resolved_through": [
+          3815,
+          3815
+        ]
+      },
+      {
+        "label": "paired ground-jump audio then settle",
+        "samples": [
+          {
+            "simulation_tick": 4864,
+            "core": "6e4f1fb9",
+            "mod": "9e43884a"
+          },
+          {
+            "simulation_tick": 4896,
+            "core": "ff2d151f",
+            "mod": "2764ef6c"
+          },
+          {
+            "simulation_tick": 4928,
+            "core": "9fce99b5",
+            "mod": "65a54074"
+          },
+          {
+            "simulation_tick": 4960,
+            "core": "156868eb",
+            "mod": "598283d2"
+          },
+          {
+            "simulation_tick": 4992,
+            "core": "f483650e",
+            "mod": "4590863a"
+          },
+          {
+            "simulation_tick": 5024,
+            "core": "40633270",
+            "mod": "3a48b1a4"
+          }
+        ],
+        "resolved_through": [
+          5042,
+          5042
+        ]
+      }
+    ],
+    "resolved_CRC_samples": 25,
+    "retained_fixture_recording_refusals": [
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "events": 7025,
+        "natives": 3248,
+        "p2_reads": 3777,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-0-recording-refusal\\settings.json",
+            "bytes": 26968,
+            "sha256": "0fd9a84bee809d276b994399177e52bfbb8836bb9629a256a43bea77db80d416"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-0-recording-refusal\\content.json",
+            "bytes": 567,
+            "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-0-recording-refusal\\simulation-contract.json",
+            "bytes": 351,
+            "sha256": "e1c8a044f68a3c5cf3e8159acdb25a9113f2c033cedcbf98ea952949a808a9b5"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-0-recording-refusal\\inputs.jsonl",
+            "bytes": 904194,
+            "sha256": "f6f2c550fc4a784f5ad04fc7c9cf17444f45fc504fb59c51f193f0a148cc9c93"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-0-recording-refusal\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-0-recording-refusal\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-0-recording-refusal\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ]
+      },
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "events": 7025,
+        "natives": 3248,
+        "p2_reads": 3777,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-1-recording-refusal\\settings.json",
+            "bytes": 26968,
+            "sha256": "85a8eee196d68936b7bf3b481ba3286bad06018a6a2f0845547c1619806ea0b4"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-1-recording-refusal\\content.json",
+            "bytes": 567,
+            "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-1-recording-refusal\\simulation-contract.json",
+            "bytes": 351,
+            "sha256": "e1c8a044f68a3c5cf3e8159acdb25a9113f2c033cedcbf98ea952949a808a9b5"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-1-recording-refusal\\inputs.jsonl",
+            "bytes": 904194,
+            "sha256": "2c2bcb87490bad9592ba1050605956202f2ae786d89a4364d3e58a4c6bfa0838"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-1-recording-refusal\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-1-recording-refusal\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44n1\\peer-1-recording-refusal\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ]
+      }
+    ],
+    "owned_cleanup": [
+      {
+        "seat": 0,
+        "owned_pid": 34208,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "input_release_errors": null,
+        "private_card_error": null
+      },
+      {
+        "seat": 1,
+        "owned_pid": 88012,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "input_release_errors": null,
+        "private_card_error": null
+      }
+    ],
+    "private_cards_unchanged": true,
+    "executing_source_pins": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_intro_fixture.py": "b48eebf8535ec3a7a21718a36744761b7f7b677ebbf58600cc6d13bd0194282b",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-exact-build-guard-root-v1.py": "f8e7a80378e1dae9ae828ce2d5aaff8bb0b855724e5bfe0484e71f669f4d85d5",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\audit_mmx6_recycle_terrain.py": "e87e05bb947e9087c4f2f3cf1ac86e0b4bfe87f9ec28b41a39082e299c0d4975",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_reploid059.py": "e0d0526940eee7a7921a36b15a37b717019c1452e1eeb885ee98db3abed246ec",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F165_Recycle_portal_v89_root_v5.py": "cb3171c54988ac1b8c4364af84674be475960f26ceea437bcaff83d32b14d214",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Recycle-portal-prerequisite-v89-worker-v1.json": "7636a0f974a2140bffe9e943076a528faa8ff165e06b1b3a016f68abee660f4d",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_recycle_setup.py": "b96c22b481debf0ed2e459a35973d337c6aa0ae49831c142ef923ced6a9f9d77",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "5b5a22c4d80aaceb7c8efb10eac32d7c465c495ba814463c7b1c6e87ebd4628a",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F21_forward_boundary_hp_v93_worker_v2.py": "3d48089c04cd49e37255c4b3ac45c08f6ee89f9795513c6413c48971fa199712",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F44_F74_distant_portal_v99_root_v1.py": "d2ec635deee622f1437501e6675e6d0ecc0d7f3b45d3bd7b191478df18c83b53",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-final-binding-root-v1.json": "309e448f942e2ee37c1e9ed9fb9e4b62ee34af939b15106eba2eed5c803d3568",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_recycle_portal.py": "4c9809b4c29f5771b8c873081f58d1526225fc110b7b81338af5aec2bf0e7bd6",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_collision_boxes.py": "703321d89591ea3ccd464812f23d10c047375475510f7faa4b813151ae56c2d2",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\mmx6_coop_hud_presentation.py": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\qualify_mmx6_coop_state.py": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-distant-portal-v99\\tools\\inventory_mmx6_coop_content.py": "fb078dccd910137f28b8e9679a0f84a53abf15024aea3bb180a8796d94cf36c5",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F44-F74-distant-portal-v99-root-v1.py": "7eb884dc4d0ec5e0e8fd2c943909040adeee2cea5d72148e99bd9061c71612ec",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F165-original-destination-source-v89-worker-v1.json": "f556d3abca53829c30f5f9a0c6d9a4db1b32ee3fcdd17ded1eecefda6df0bee7"
+    }
+  },
+  "build": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-build-receipt-root-v3.json",
+    "bytes": 2261,
+    "sha256": "b5872d87aae72613482467242397300ec3e79646314740c6e542bd15cacb821d"
+  },
+  "limits": [
+    "Only234 frozen comparisons. Recycle4/0 authored alternate portal to original20/1 is the native X6 counterpart; no native3330 coverage.",
+    "Original CP2 entry and one-shot position/previous-position setup bypass earlier traversal. Primary1490/875 is719px above guest1506/1594 and trails inX. Distance is vertical/euclidean; initial horizontal private-view separation is not claimed.",
+    "Default-off negotiated lab choice plus disclosed hostile-contact protection. Original upper/lower floors, complete source foot/air envelopes and native scanner/camera/portal/capsule/Reploid are guarded. No actor, camera, scanner, HP, scene, loader or result writes. Availability/acquisition/earned progress are not qualified.",
+    "Guest ordinaryRight earns source-qualified original portal admission while primary is still stationary/distant. Ordered native8/9 entry traces and genuine new-room bodies establish actual loading, finite release, current/target camera commit and retained personal HP/weapon/9ammo/93..113 bytes.",
+    "Original guest destination103 initially has only4of22 supported foot pixels. Short actualLeft offers earn complete22foot support; both heroes independently move and settle. No initial full-foot landing, return portal/R14/F47 or no-corrective-step F124 credit.",
+    "Nine composed captures personally viewed by root. Source primary is outside the native fixed camera; its actual source position/standing collision is established by coherent native publications and exact original terrain, not by a visible sprite. Destination bodies overlap in some captures; per-seat controls have independent native observations.",
+    "All4LOCAL and15NET parent gates passed,25resolved nonzero core/mod samples across4windows, three owned native exits0/cards unchanged. Fixture-tainted recordings correctly remain failed and refuse ordinary admission/replay; no clean trace claim.",
+    "Only this exact candidate/title44/profile27, same PC and muted loopback. No performance, human controller, audible, other-host or cross-build compatibility claim. Existing accepted/failing evidence preserved."
+  ]
+}

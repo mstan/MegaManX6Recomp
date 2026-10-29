@@ -30,10 +30,20 @@ static int checkpoint_portal_tile(uint32_t meta,uint32_t desc,unsigned x,unsigne
     if(tile*4u+4u>PORTAL_SETUP_DESC_BYTES)return -1;
     unsigned code=psx_mod_read_byte(desc+tile*4u);return code==0x3B?0x38:(int)code;
 }
+static unsigned checkpoint_portal_x(unsigned seat) {
+    return checkpoint_lab_option==10 && !seat?1490u:1506u;
+}
+static unsigned checkpoint_portal_floor(unsigned seat) {
+    return checkpoint_lab_option==10 && !seat?896u:1616u;
+}
 static int checkpoint_portal_ground(uint32_t meta,uint32_t desc) {
-    for(unsigned x=1495;x<1517;++x) {
-        if(checkpoint_portal_tile(meta,desc,x,1616)!=0x38)return 0;
-        for(unsigned y=1568;y<1616;++y)if(checkpoint_portal_tile(meta,desc,x,y))return 0;
+    for(unsigned seat=0;seat<2;++seat) {
+        unsigned center=checkpoint_portal_x(seat);
+        unsigned floor=checkpoint_portal_floor(seat);
+        for(unsigned x=center-11;x<center+11;++x) {
+            if(checkpoint_portal_tile(meta,desc,x,floor)!=0x38)return 0;
+            for(unsigned y=floor-48;y<floor;++y)if(checkpoint_portal_tile(meta,desc,x,y))return 0;
+        }
     }
     return 1;
 }
@@ -51,10 +61,11 @@ static int checkpoint_portal_original_arrival(void) {
         checkpoint_portal_camera();
 }
 static void checkpoint_portal_place(void) {
-    const uint32_t x=1506u<<16,y=1593u<<16;
+    const uint32_t x=checkpoint_portal_x(0)<<16,y=(checkpoint_portal_floor(0)-23u)<<16;
     psx_mod_write_word(PLAYER+8,x);psx_mod_write_word(PLAYER+0x18,x);
     psx_mod_write_word(PLAYER+12,y);psx_mod_write_word(PLAYER+0x1C,y);
-    put32(p2.body+8,x);put32(p2.body+0x18,x);put32(p2.body+12,y);put32(p2.body+0x1C,y);
+    put32(p2.body+8,checkpoint_portal_x(1)<<16);put32(p2.body+0x18,checkpoint_portal_x(1)<<16);
+    put32(p2.body+12,1593u<<16);put32(p2.body+0x1C,1593u<<16);
 #ifdef MMX6_COOP_MODERN_STATE
     independent_invalidate();
 #endif
@@ -64,8 +75,8 @@ static void checkpoint_portal_place(void) {
 static int checkpoint_portal_ready(void) {
     if((uint32_t)(psx_mod_read_word(PLAY+0x90)-checkpoint_pending.placed_world)<2u ||
        !checkpoint_safe_boundary() || !checkpoint_before_doors_idle(0) || !checkpoint_before_doors_idle(1) ||
-       psx_mod_read_word(PLAYER+8)!=(1506u<<16) || le32(p2.body+8)!=(1506u<<16) ||
-       psx_mod_read_word(PLAYER+12)!=(1595u<<16) || le32(p2.body+12)!=(1594u<<16) ||
+       psx_mod_read_word(PLAYER+8)!=(checkpoint_portal_x(0)<<16) || le32(p2.body+8)!=(checkpoint_portal_x(1)<<16) ||
+       psx_mod_read_word(PLAYER+12)!=((checkpoint_portal_floor(0)-21u)<<16) || le32(p2.body+12)!=(1594u<<16) ||
        !checkpoint_portal_camera() || psx_mod_read_half(0x80097202u)!=1264)return 0;
     unsigned portal=0,capsule=0,reploid=0;
     for(uint32_t a=0x8008EF48u;a<0x80090C88u;a+=0x9Cu)

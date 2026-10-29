@@ -10212,25 +10212,128 @@
       "frozen_row_sha256": "9a9fdfeee650e164aca838974adf899891f588171e5c1900d165243d4bc1a3b3",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
-        "analogue": "Alternate-route transition safe floor and bounds",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Guest-led original Recycle forward portal4/0 to20/1 with distant upper-floor primary",
         "bounded_check": "Lead an authored route transition with guest while primary trails; verify camera-bound commit, full-body floor collision and live control after loading.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "fdd319ce633711edb8a025ad098ca67f613f4006",
+            "build_identity": {
+              "executable_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+              "compiled_manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original4/0CP2 then position/previous only: P1(1490,875),guest(1506,1594)",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "one owned process",
+              "local_cameras": "split",
+              "cameras": "independent",
+              "host_profile": "mmx6.win64-clang22.loopback revision27"
+            },
+            "action": "Guest ordinaryRight admits native portal while primary remains stationary719px above; require ordered original loader, finite20/1CP0 arrivals, current/target bounds, unchanged personal resources and real per-seat movement/fullfoot support.",
+            "outcome": "F44 full native safe-floor/bounds/control counterpart passed after original guest-led route loading; initial partial guest ledge retained, actual controls earn complete support.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-distant-native-route-local-netplay-reviewed.json",
+                "sha256": "66c5ed9f9b73ab597b18fe9f152f5e65f5e0a5039f6ba43dab5be9ef815c5e06"
+              },
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-LOCAL-independent-review.json",
+                "sha256": "b4c1c164a69850c7691c489dfb20a9cbbaf80e88f8a83213fa0a76afe4719598"
+              },
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-NET-independent-review.json",
+                "sha256": "c58116e6297e3f7024dd1333519338148e58798b814c1d59678381ecc4a639fb"
+              }
+            ],
+            "limits": [
+              "Only234 frozen comparisons. Recycle4/0 authored alternate portal to original20/1 is the native X6 counterpart; no native3330 coverage.",
+              "Original CP2 entry and one-shot position/previous-position setup bypass earlier traversal. Primary1490/875 is719px above guest1506/1594 and trails inX. Distance is vertical/euclidean; initial horizontal private-view separation is not claimed.",
+              "Default-off negotiated lab choice plus disclosed hostile-contact protection. Original upper/lower floors, complete source foot/air envelopes and native scanner/camera/portal/capsule/Reploid are guarded. No actor, camera, scanner, HP, scene, loader or result writes. Availability/acquisition/earned progress are not qualified.",
+              "Guest ordinaryRight earns source-qualified original portal admission while primary is still stationary/distant. Ordered native8/9 entry traces and genuine new-room bodies establish actual loading, finite release, current/target camera commit and retained personal HP/weapon/9ammo/93..113 bytes.",
+              "Original guest destination103 initially has only4of22 supported foot pixels. Short actualLeft offers earn complete22foot support; both heroes independently move and settle. No initial full-foot landing, return portal/R14/F47 or no-corrective-step F124 credit.",
+              "Nine composed captures personally viewed by root. Source primary is outside the native fixed camera; its actual source position/standing collision is established by coherent native publications and exact original terrain, not by a visible sprite. Destination bodies overlap in some captures; per-seat controls have independent native observations.",
+              "All4LOCAL and15NET parent gates passed,25resolved nonzero core/mod samples across4windows, three owned native exits0/cards unchanged. Fixture-tainted recordings correctly remain failed and refuse ordinary admission/replay; no clean trace claim.",
+              "Only this exact candidate/title44/profile27, same PC and muted loopback. No performance, human controller, audible, other-host or cross-build compatibility claim. Existing accepted/failing evidence preserved."
+            ],
+            "bypasses": [
+              "Original CP2 traversal and one position/previous-position-only approach.",
+              "Explicit predeclared hostile-contact protection; no outcome writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "fdd319ce633711edb8a025ad098ca67f613f4006",
+            "build_identity": {
+              "executable_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+              "compiled_manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original4/0CP2 then position/previous only: P1(1490,875),guest(1506,1594)",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "two same-PC loopback peers",
+              "local_cameras": "split",
+              "cameras": "independent",
+              "host_profile": "mmx6.win64-clang22.loopback revision27"
+            },
+            "action": "Guest ordinaryRight admits native portal while primary remains stationary719px above; require ordered original loader, finite20/1CP0 arrivals, current/target bounds, unchanged personal resources and real per-seat movement/fullfoot support.",
+            "outcome": "F44 full native safe-floor/bounds/control counterpart passed after original guest-led route loading; initial partial guest ledge retained, actual controls earn complete support.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-distant-native-route-local-netplay-reviewed.json",
+                "sha256": "66c5ed9f9b73ab597b18fe9f152f5e65f5e0a5039f6ba43dab5be9ef815c5e06"
+              },
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-LOCAL-independent-review.json",
+                "sha256": "b4c1c164a69850c7691c489dfb20a9cbbaf80e88f8a83213fa0a76afe4719598"
+              },
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-NET-independent-review.json",
+                "sha256": "c58116e6297e3f7024dd1333519338148e58798b814c1d59678381ecc4a639fb"
+              }
+            ],
+            "limits": [
+              "Only234 frozen comparisons. Recycle4/0 authored alternate portal to original20/1 is the native X6 counterpart; no native3330 coverage.",
+              "Original CP2 entry and one-shot position/previous-position setup bypass earlier traversal. Primary1490/875 is719px above guest1506/1594 and trails inX. Distance is vertical/euclidean; initial horizontal private-view separation is not claimed.",
+              "Default-off negotiated lab choice plus disclosed hostile-contact protection. Original upper/lower floors, complete source foot/air envelopes and native scanner/camera/portal/capsule/Reploid are guarded. No actor, camera, scanner, HP, scene, loader or result writes. Availability/acquisition/earned progress are not qualified.",
+              "Guest ordinaryRight earns source-qualified original portal admission while primary is still stationary/distant. Ordered native8/9 entry traces and genuine new-room bodies establish actual loading, finite release, current/target camera commit and retained personal HP/weapon/9ammo/93..113 bytes.",
+              "Original guest destination103 initially has only4of22 supported foot pixels. Short actualLeft offers earn complete22foot support; both heroes independently move and settle. No initial full-foot landing, return portal/R14/F47 or no-corrective-step F124 credit.",
+              "Nine composed captures personally viewed by root. Source primary is outside the native fixed camera; its actual source position/standing collision is established by coherent native publications and exact original terrain, not by a visible sprite. Destination bodies overlap in some captures; per-seat controls have independent native observations.",
+              "All4LOCAL and15NET parent gates passed,25resolved nonzero core/mod samples across4windows, three owned native exits0/cards unchanged. Fixture-tainted recordings correctly remain failed and refuse ordinary admission/replay; no clean trace claim.",
+              "Only this exact candidate/title44/profile27, same PC and muted loopback. No performance, human controller, audible, other-host or cross-build compatibility claim. Existing accepted/failing evidence preserved."
+            ],
+            "bypasses": [
+              "Original CP2 traversal and one position/previous-position-only approach.",
+              "Explicit predeclared hostile-contact protection; no outcome writes."
+            ]
+          }
+        ],
+        "limitations": "Full named counterpart passed on exact V99 LOCAL and NET. Source primary is719px above guest, with16px horizontal trailing distance; declared originalCP2/position and hostile-contact prerequisites. Original destination guest103 initially4/22 supported feet; actual Left earns22/22 and both separate controls. No initial full-foot/no-corrective-step/return-route/horizontal-view/general rendering claim. Fixture-tainted recordings remain rejected; all failed/accepted earlier evidence preserved."
       }
     },
     {
@@ -12900,25 +13003,128 @@
       "frozen_row_sha256": "d4365490d40fcd1445f40813b65d1c67646671e77d5a309011f424a7a013bf1d",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
-        "analogue": "Distant guest-led next-section paired arrival",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Guest-led original Recycle forward portal4/0 to20/1 with distant upper-floor primary",
         "bounded_check": "Use a real authored forward boundary with primary outside the trigger; require both appropriate native arrivals and retained personal resources.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "fdd319ce633711edb8a025ad098ca67f613f4006",
+            "build_identity": {
+              "executable_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+              "compiled_manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original4/0CP2 then position/previous only: P1(1490,875),guest(1506,1594)",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "one owned process",
+              "local_cameras": "split",
+              "cameras": "independent",
+              "host_profile": "mmx6.win64-clang22.loopback revision27"
+            },
+            "action": "Guest ordinaryRight admits native portal while primary remains stationary719px above; require ordered original loader, finite20/1CP0 arrivals, current/target bounds, unchanged personal resources and real per-seat movement/fullfoot support.",
+            "outcome": "F74 full native distant-primary paired-arrival counterpart passed; actual original portal/loading/native20/1 arrivals and both personal resources retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-distant-native-route-local-netplay-reviewed.json",
+                "sha256": "66c5ed9f9b73ab597b18fe9f152f5e65f5e0a5039f6ba43dab5be9ef815c5e06"
+              },
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-LOCAL-independent-review.json",
+                "sha256": "b4c1c164a69850c7691c489dfb20a9cbbaf80e88f8a83213fa0a76afe4719598"
+              },
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-NET-independent-review.json",
+                "sha256": "c58116e6297e3f7024dd1333519338148e58798b814c1d59678381ecc4a639fb"
+              }
+            ],
+            "limits": [
+              "Only234 frozen comparisons. Recycle4/0 authored alternate portal to original20/1 is the native X6 counterpart; no native3330 coverage.",
+              "Original CP2 entry and one-shot position/previous-position setup bypass earlier traversal. Primary1490/875 is719px above guest1506/1594 and trails inX. Distance is vertical/euclidean; initial horizontal private-view separation is not claimed.",
+              "Default-off negotiated lab choice plus disclosed hostile-contact protection. Original upper/lower floors, complete source foot/air envelopes and native scanner/camera/portal/capsule/Reploid are guarded. No actor, camera, scanner, HP, scene, loader or result writes. Availability/acquisition/earned progress are not qualified.",
+              "Guest ordinaryRight earns source-qualified original portal admission while primary is still stationary/distant. Ordered native8/9 entry traces and genuine new-room bodies establish actual loading, finite release, current/target camera commit and retained personal HP/weapon/9ammo/93..113 bytes.",
+              "Original guest destination103 initially has only4of22 supported foot pixels. Short actualLeft offers earn complete22foot support; both heroes independently move and settle. No initial full-foot landing, return portal/R14/F47 or no-corrective-step F124 credit.",
+              "Nine composed captures personally viewed by root. Source primary is outside the native fixed camera; its actual source position/standing collision is established by coherent native publications and exact original terrain, not by a visible sprite. Destination bodies overlap in some captures; per-seat controls have independent native observations.",
+              "All4LOCAL and15NET parent gates passed,25resolved nonzero core/mod samples across4windows, three owned native exits0/cards unchanged. Fixture-tainted recordings correctly remain failed and refuse ordinary admission/replay; no clean trace claim.",
+              "Only this exact candidate/title44/profile27, same PC and muted loopback. No performance, human controller, audible, other-host or cross-build compatibility claim. Existing accepted/failing evidence preserved."
+            ],
+            "bypasses": [
+              "Original CP2 traversal and one position/previous-position-only approach.",
+              "Explicit predeclared hostile-contact protection; no outcome writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "fdd319ce633711edb8a025ad098ca67f613f4006",
+            "build_identity": {
+              "executable_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+              "compiled_manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original4/0CP2 then position/previous only: P1(1490,875),guest(1506,1594)",
+              "contact_protection": "on; declared hostile-contact prerequisite",
+              "transport": "two same-PC loopback peers",
+              "local_cameras": "split",
+              "cameras": "independent",
+              "host_profile": "mmx6.win64-clang22.loopback revision27"
+            },
+            "action": "Guest ordinaryRight admits native portal while primary remains stationary719px above; require ordered original loader, finite20/1CP0 arrivals, current/target bounds, unchanged personal resources and real per-seat movement/fullfoot support.",
+            "outcome": "F74 full native distant-primary paired-arrival counterpart passed; actual original portal/loading/native20/1 arrivals and both personal resources retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-distant-native-route-local-netplay-reviewed.json",
+                "sha256": "66c5ed9f9b73ab597b18fe9f152f5e65f5e0a5039f6ba43dab5be9ef815c5e06"
+              },
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-LOCAL-independent-review.json",
+                "sha256": "b4c1c164a69850c7691c489dfb20a9cbbaf80e88f8a83213fa0a76afe4719598"
+              },
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F44-F74-NET-independent-review.json",
+                "sha256": "c58116e6297e3f7024dd1333519338148e58798b814c1d59678381ecc4a639fb"
+              }
+            ],
+            "limits": [
+              "Only234 frozen comparisons. Recycle4/0 authored alternate portal to original20/1 is the native X6 counterpart; no native3330 coverage.",
+              "Original CP2 entry and one-shot position/previous-position setup bypass earlier traversal. Primary1490/875 is719px above guest1506/1594 and trails inX. Distance is vertical/euclidean; initial horizontal private-view separation is not claimed.",
+              "Default-off negotiated lab choice plus disclosed hostile-contact protection. Original upper/lower floors, complete source foot/air envelopes and native scanner/camera/portal/capsule/Reploid are guarded. No actor, camera, scanner, HP, scene, loader or result writes. Availability/acquisition/earned progress are not qualified.",
+              "Guest ordinaryRight earns source-qualified original portal admission while primary is still stationary/distant. Ordered native8/9 entry traces and genuine new-room bodies establish actual loading, finite release, current/target camera commit and retained personal HP/weapon/9ammo/93..113 bytes.",
+              "Original guest destination103 initially has only4of22 supported foot pixels. Short actualLeft offers earn complete22foot support; both heroes independently move and settle. No initial full-foot landing, return portal/R14/F47 or no-corrective-step F124 credit.",
+              "Nine composed captures personally viewed by root. Source primary is outside the native fixed camera; its actual source position/standing collision is established by coherent native publications and exact original terrain, not by a visible sprite. Destination bodies overlap in some captures; per-seat controls have independent native observations.",
+              "All4LOCAL and15NET parent gates passed,25resolved nonzero core/mod samples across4windows, three owned native exits0/cards unchanged. Fixture-tainted recordings correctly remain failed and refuse ordinary admission/replay; no clean trace claim.",
+              "Only this exact candidate/title44/profile27, same PC and muted loopback. No performance, human controller, audible, other-host or cross-build compatibility claim. Existing accepted/failing evidence preserved."
+            ],
+            "bypasses": [
+              "Original CP2 traversal and one position/previous-position-only approach.",
+              "Explicit predeclared hostile-contact protection; no outcome writes."
+            ]
+          }
+        ],
+        "limitations": "Full named counterpart passed on exact V99 LOCAL and NET. Source primary is719px above guest, with16px horizontal trailing distance; declared originalCP2/position and hostile-contact prerequisites. Original destination guest103 initially4/22 supported feet; actual Left earns22/22 and both separate controls. No initial full-foot/no-corrective-step/return-route/horizontal-view/general rendering claim. Fixture-tainted recordings remain rejected; all failed/accepted earlier evidence preserved."
       }
     },
     {

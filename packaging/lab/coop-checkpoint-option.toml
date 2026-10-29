@@ -41,6 +41,10 @@ value = "recycle_portal_cp2"
 label = "Recycle alternate portal (position prerequisite)"
 
 [[option.choice]]
+value = "recycle_distant_cp2"
+label = "Recycle: distant primary before original portal"
+
+[[option.choice]]
 value = "turtloid_rain_cp1"
 label = "Turtloid original checkpoint 1 rain approach"
 

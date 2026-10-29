@@ -87,7 +87,7 @@ static void setup_checkpoint(CPUState *cpu,unsigned stage,unsigned section,unsig
     memcpy(test_ram,original_ram,sizeof test_ram);memset(test_diagnostic,0,sizeof test_diagnostic);
     memset(cpu,0,sizeof *cpu);memset(&p2,0x32,sizeof p2);diagnostic=0x9F080000u;
     inside=stage_call=player_call=zero_world=zero_projected=scene_owner=scene_phase=failed=0;
-    ready=enrolled=1;pause_owner=-1;zero_menu_loaded=0;guest_calls=0;test_online=0;
+    ready=enrolled=1;pause_owner=-1;zero_menu_loaded=0;guest_calls=0;test_online=0;independent_views=0;
     state_track.count=state_track.error=0;mmx6_coop_lifecycle_init(&life);checkpoint_reset();
 #ifdef MMX6_COOP_CHECKPOINT_TAINT_API
     checkpoint_test_taint=0; /* Test isolation only; the game never clears SDK taint. */
@@ -635,9 +635,10 @@ static void portal_test_body(unsigned seat,unsigned x,unsigned y) {
     if(seat)memcpy(p2.body,body,sizeof body);
     else for(unsigned i=0;i<sizeof body;++i)psx_mod_write_byte(PLAYER+i,body[i]);
 }
-static void setup_portal_prerequisite(CPUState *cpu,int online) {
-    setup_agreed(cpu,online);test_lab_option="recycle_portal_cp2";checkpoint_reset();
-    CHECK(checkpoint_lab_option==7 && checkpoint_lab_index()==23 && checkpoint_lab_nonce()==0x4C525032u);
+static void setup_portal_prerequisite(CPUState *cpu,int online,int distant) {
+    setup_agreed(cpu,online);test_lab_option=distant?"recycle_distant_cp2":"recycle_portal_cp2";checkpoint_reset();
+    independent_views=(unsigned)distant;
+    CHECK(checkpoint_lab_option==(distant?10u:7u) && checkpoint_lab_index()==23 && checkpoint_lab_nonce()==(distant?0x4C525044u:0x4C525032u));
     CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB8)==0x80072444u);
     memcpy(test_ram,portal_source_ram,sizeof test_ram);
@@ -651,7 +652,7 @@ static void setup_portal_prerequisite(CPUState *cpu,int online) {
     CHECK(checkpoint_portal_assets(&meta,&desc) && checkpoint_portal_ground(meta,desc));
 }
 static void portal_test_native_ready(void) {
-    portal_test_body(0,1506,1595);portal_test_body(1,1506,1594);
+    portal_test_body(0,checkpoint_portal_x(0),checkpoint_portal_floor(0)-21u);portal_test_body(1,1506,1594);
     psx_mod_write_word(0x800971F8u+8,1264u<<16);psx_mod_write_word(PLAY+0x90,12);
     uint32_t a=0x8008EF48u;psx_mod_write_byte(a,1);psx_mod_write_byte(a+1,0x1C);
     psx_mod_write_byte(a+2,1);psx_mod_write_byte(a+4,1);psx_mod_write_byte(a+5,1);
@@ -665,15 +666,15 @@ static void portal_test_native_ready(void) {
     psx_mod_write_word(a+12,1600u<<16);psx_mod_write_word(a+0x68,0x80078910u);psx_mod_write_byte(a+0x70,8);
 }
 static void agreed_portal_prerequisite(CPUState *cpu) {
-    for(int online=0;online<=1;++online) {
-        setup_portal_prerequisite(cpu,online);p2.body[5]=1; /* Native guest beam has not finished. */
+    for(int online=0;online<=1;++online)for(int distant=0;distant<=1;++distant) {
+        setup_portal_prerequisite(cpu,online,distant);p2.body[5]=1; /* Native guest beam has not finished. */
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 && !guest_calls);
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
         p2.body[5]=2;partner=p2;put32(partner.body+8,1506u<<16);put32(partner.body+0x18,1506u<<16);
         put32(partner.body+12,1593u<<16);put32(partner.body+0x1C,1593u<<16);
         const unsigned positions[]={8,0x18,12,0x1C};
-        for(unsigned i=0;i<4;++i){uint32_t value=(i<2?1506u:1593u)<<16;
+        for(unsigned i=0;i<4;++i){uint32_t value=(i<2?checkpoint_portal_x(0):checkpoint_portal_floor(0)-23u)<<16;
             for(unsigned n=0;n<4;++n)before_ram[(PLAYER+positions[i]+n)&0x1FFFFF]=(uint8_t)(value>>(n*8));}
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !guest_calls);
         CHECK(!memcmp(&registers,cpu,sizeof registers) && !memcmp(before_ram,test_ram,sizeof test_ram) &&
@@ -693,18 +694,23 @@ static void agreed_portal_prerequisite(CPUState *cpu) {
         CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && psx_mod_read_word(diagnostic+0xA4)==1);
         const uint32_t corrupt[]={0x80097438u,0x80100000u,0x80120000u,0x800F2B0Cu,0x80051924u};
         for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
-            setup_portal_prerequisite(cpu,online);psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^0x40);
+            setup_portal_prerequisite(cpu,online,distant);psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^0x40);
             memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
             CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
                 psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
                 !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
         }
     }
+    setup_portal_prerequisite(cpu,1,1);independent_views=0;
+    memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext saved=p2;
+    CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+        psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN &&
+        !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof saved));
     test_lab_option="off";checkpoint_reset();
 }
 static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
     const char *options[]={"intro_cp2","amazon_cp0","amazon_cp2","intro_before_doors",
-        "intro_before_explosion","recycle_cp2","recycle_portal_cp2"};
+        "intro_before_explosion","recycle_cp2","recycle_portal_cp2","recycle_distant_cp2"};
     const uint8_t origins[][3]={{4,0,0},{4,0,1},{4,1,0},{4,1,2},{4,2,0},{3,0,0},{0,1,0},{0,0,1}};
     for(unsigned option=0;option<sizeof options/sizeof options[0];++option)for(unsigned i=0;i<sizeof origins/sizeof origins[0];++i) {
         if(option==5 && i==0)continue; /* The one new accepted origin. */

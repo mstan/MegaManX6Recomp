@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 24,
+  "revision": 27,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v41",
+    "title_compatibility": "mmx6-x-zero-delay-v44",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -449,5 +449,34 @@
     "source_note": "CP record3024/224, authored floor416 at3024 and next door3152/sub38. Original member28 SHA7f49ac29077a76c6dc0aaafc474ad4d4eece65402282549de2f1ff2b5d748aef. Bounded original DAT118 source proof is retained externally.",
     "default": "off; development catalog only, normal/release catalog unchanged",
     "authority": "Existing exact-image/profile24/title41 agreement, source guards, once-only native initializer and explicit capture taint; offline mailbox prohibited online."
+  },
+  "title_changes_v44_distant_portal_prerequisite": {
+    "issue": "beads-eio.1.94",
+    "comparisons": [
+      "F44",
+      "F74"
+    ],
+    "default": "off",
+    "option": "recycle_distant_cp2",
+    "original": {
+      "stage": 4,
+      "section": 0,
+      "checkpoint": 2,
+      "index": 23,
+      "record": "80072444"
+    },
+    "nonce": "4C525044",
+    "independent_views_required": true,
+    "placement": {
+      "primary_x": 1490,
+      "primary_y": 873,
+      "primary_floor": 896,
+      "counterpart_x": 1506,
+      "counterpart_y": 1593,
+      "counterpart_floor": 1616
+    },
+    "contract": "After genuine original CP2 entry and grounded idle arrivals, change only body position/previous-position once. Validate exact original source/assets, all22 foot pixels and full air envelopes at both source positions. Require at least2 native updates, original ground contact/idle and unchanged original portal/capsule/Reploid before ready. No camera, scanner, actor, input, health, portal, load, scene or success writes. Distance remains a setup bypass; actual guest portal admission/loading/arrival/full-foot/control results must be observed separately on the exact candidate.",
+    "snapshot": "Existing pending/source identity and profile digest; no backward execution-state compatibility claim.",
+    "distance": "Actual primary nativeY875 versus counterpartY1594: vertical719px, primary behind horizontally. Both source floors and air are original. Native primary camera/scanner clamp1264/1424 retained; no horizontally separated-view claim."
   }
 }

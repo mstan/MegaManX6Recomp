@@ -1,0 +1,340 @@
+{
+  "kind": "independent_retained_scalar_review_no_comparison_admission",
+  "mode": "LOCAL",
+  "result": "named_scalar_contract_supported_pending_root_admission",
+  "comparisons": [
+    "F44",
+    "F74"
+  ],
+  "candidate": "fdd319ce633711edb8a025ad098ca67f613f4006",
+  "binding": {
+    "image_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+    "manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+    "provenance_sha256": "b08b111474861486e75b089a436c4b3c0debf927de1cc0e5ff5305c61817c04c",
+    "source_heads": {
+      "game": "fdd319ce633711edb8a025ad098ca67f613f4006",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v44",
+    "profile_revision": 27
+  },
+  "raw": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\qualification.json",
+      "bytes": 21372667,
+      "sha256": "78882677ffd727bb9e30f0b3fcb93deb1048085bd49e7ca67962c2a9bf9cb249"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\qualification-parent-original.json",
+      "bytes": 21369857,
+      "sha256": "cb2e08a34bd045c09f7824b765e4d4e794b09efaea4493a1debe3ff0b8cd5762"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 10103071,
+      "sha256": "6654f6290e98645418f37387dae3304e25954af9435e3276cbaff7b6315d1e66"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\F44-F74-executing-source-pins.json",
+      "bytes": 3985,
+      "sha256": "2f3a283b79ebb2ef8428cb59d2536977babff8d469961aafcb25a0af4312ee38"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F44_F74_distant_portal_v99_root_v1.py",
+      "bytes": 34229,
+      "sha256": "d2ec635deee622f1437501e6675e6d0ecc0d7f3b45d3bd7b191478df18c83b53"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F44-F74-distant-portal-v99-root-v1.py",
+      "bytes": 7285,
+      "sha256": "7eb884dc4d0ec5e0e8fd2c943909040adeee2cea5d72148e99bd9061c71612ec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\distant-portal-v99-final-binding-root-v1.json",
+      "bytes": 269,
+      "sha256": "309e448f942e2ee37c1e9ed9fb9e4b62ee34af939b15106eba2eed5c803d3568"
+    }
+  ],
+  "source_pin_count": 23,
+  "observer_change_from_worker": "Exact bytes except B=__file__.parent instead of parents[1]",
+  "sample_count": 366,
+  "component_check_count": 12,
+  "parent_check_count": 4,
+  "conditions": {
+    "raw_parent_report_preserved_exactly": true,
+    "recorded_parent_checks_all_true": true,
+    "real_distinct_owned_routes_and_host_input": true,
+    "source_ready_native_distant_pose_and_original_geometry": true,
+    "source_original_fullfeet_and_air_both": true,
+    "stationarity_and_genuine_2D_distance_through_admission": true,
+    "actual_guest_owner2_and_original_portal_admission": true,
+    "ordered_original_loader8_then9_with_native_PLAY": true,
+    "finite_native_paired_arrival_and_release": true,
+    "original_destination_current_and_target_camera": true,
+    "actual_guest_partial_initial_support_preserved": true,
+    "ordinary_separate_controls_and_full_support_earned": true,
+    "actual_HP_weapon_ammo_and_all93_to113_retained": true,
+    "source_live_collision_identity_or_equivalence_verified": true,
+    "all_runtime_failure_and_mailbox_flags_clear": true,
+    "current_and_archived_executed_source_pins_exact": true,
+    "actual_staged_image_and_provenance_manifest_bound": true,
+    "actual_typed_prerequisites_match_prelaunch": true,
+    "fixture_taint_and_strict_refusals_preserved": true,
+    "private_cards_and_owned_exit_preserved": true
+  },
+  "peer_observations": [
+    {
+      "peer": 0,
+      "source_sample": 141,
+      "source_positions": [
+        [
+          1490.0,
+          875.0
+        ],
+        [
+          1506.0,
+          1594.0
+        ]
+      ],
+      "source_floors": [
+        896,
+        1616
+      ],
+      "source_full22_feet": true,
+      "source_air22x48_both": true,
+      "distance_through_admission_samples": [
+        142,
+        149
+      ],
+      "minimum_sampled_distance_px": 719.178003,
+      "admission_sample": 149,
+      "admission_positions": [
+        [
+          1490.0,
+          875.0
+        ],
+        [
+          1527.5,
+          1594.0
+        ]
+      ],
+      "admission_distance_px": 719.977257,
+      "native_loader": [
+        {
+          "function": "0x8001E914",
+          "sequence": 1,
+          "frame": 3235,
+          "a0": "0x800CCED0"
+        },
+        {
+          "function": "0x8001E1BC",
+          "sequence": 2,
+          "frame": 3262,
+          "a0": "0x800CCED0"
+        }
+      ],
+      "arrival_sample": 277,
+      "arrival_positions": [
+        [
+          79.0,
+          363.0
+        ],
+        [
+          103.0,
+          362.0
+        ]
+      ],
+      "initial_guest_support": "4/22_partial_retained",
+      "final_sample": 365,
+      "final_positions": [
+        [
+          76.0,
+          363.0
+        ],
+        [
+          84.5,
+          362.0
+        ]
+      ],
+      "final_full22_feet_both": true,
+      "destination_camera": {
+        "x": 0,
+        "y": 224,
+        "min_x": 0,
+        "max_x": 2576,
+        "min_y": 224,
+        "max_y": 224,
+        "target_min_x": 0,
+        "target_max_x": 2576,
+        "target_min_y": 224,
+        "target_max_y": 224
+      },
+      "HP": [
+        32,
+        32
+      ],
+      "weapon": [
+        0,
+        0
+      ],
+      "ammo9": [
+        [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ],
+        [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      ],
+      "all_actual93_to113_bytes_retained": true
+    }
+  ],
+  "independent_controls": [
+    {
+      "seat": 1,
+      "offers": 7,
+      "first_sample": 278,
+      "final_sample": 358,
+      "per_peer": [
+        {
+          "peer": 0,
+          "start": [
+            103.0,
+            362.0
+          ],
+          "final": [
+            84.5,
+            362.0
+          ],
+          "travel_px": -18.5,
+          "other_stationary_through_all_offers": true
+        }
+      ]
+    },
+    {
+      "seat": 0,
+      "offers": 1,
+      "first_sample": 359,
+      "final_sample": 364,
+      "per_peer": [
+        {
+          "peer": 0,
+          "start": [
+            79.0,
+            363.0
+          ],
+          "final": [
+            76.0,
+            363.0
+          ],
+          "travel_px": -3.0,
+          "other_stationary_through_all_offers": true
+        }
+      ]
+    }
+  ],
+  "collision": {
+    "raw_captures": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x80097438-actual.bin",
+        "bytes": 528,
+        "sha256": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x8019a4b0-actual.bin",
+        "bytes": 87040,
+        "sha256": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-source-before-portal-0x801af8b0-actual.bin",
+        "bytes": 8000,
+        "sha256": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80097438-actual.bin",
+        "bytes": 270,
+        "sha256": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x80161f9c-actual.bin",
+        "bytes": 30720,
+        "sha256": "5f5e530c43be9fbe789ed464240a0a8c260f30c35a11503623dead4442349d27"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f44l1\\ammo-hud\\intro-admission\\peer-0-actual-alternate-destination-0x8016979c-actual.bin",
+        "bytes": 4512,
+        "sha256": "e32bb486222a8b415701db8b4c3a5bc6e116d9082fa35be9af3063c6b52ea33f"
+      }
+    ],
+    "original_source_assets_exact": true,
+    "destination_layout_exact": true,
+    "destination_collision_descriptor_low16_and_resolved_shape_flip_exact": true,
+    "full_destination_graphics_hash_identity": false
+  },
+  "parent": {
+    "cleanup": {
+      "owned_pids": [
+        74300
+      ],
+      "exit_codes": [
+        0
+      ],
+      "private_native_cards_preserved": true
+    },
+    "CRC_profile": {
+      "scope": "LOCAL offline; no NET CRC qualification inferred"
+    },
+    "recording_refusals": [
+      {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "native_status": "failed",
+        "events": 5887,
+        "natives": 4150,
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        }
+      }
+    ]
+  },
+  "capture_metadata": {
+    "count": 3,
+    "all_completed": true,
+    "maximum_path_chars": 112,
+    "images_viewed_by_helper": false
+  },
+  "issues": [],
+  "limits": [
+    "Original CP2 and position/previous-position approach plus hostile-contact protection ON are disclosed tainted prerequisites; no earlier traversal claim.",
+    "Distance is vertical/euclidean with only16px horizontal separation, not a horizontal-separation qualification.",
+    "Initial guest native103 has4/22 support; actual ordinary movement earns full22 after arrival. No no-corrective-step F124 claim.",
+    "World/private/inputs/captures are separate asynchronous publications; no instruction/frame identity or continuously observed predicate between samples.",
+    "Destination collision identity excludes graphic upper16 changes; root owns composed image review.",
+    "Only this exact candidate/default X/P1+Zero/P2 route; no opposite roster, portal return, clean native replay, every stage or cross-machine claim."
+  ],
+  "comparison_admissions": 0
+}
