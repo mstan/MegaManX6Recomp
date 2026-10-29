@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 32,
+  "revision": 33,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v49",
+    "title_compatibility": "mmx6-x-zero-delay-v50",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -647,5 +647,17 @@
     "guard": "Require the entire exact source-derived loaded bank and original mutator/copy/table source; retain full layout/descriptors and foot/air checks. No broad resource mask or change to game geometry.",
     "CP2": "Native same-stage mode9 BIN33/DAT75 load retains collision banks. The CP2 camera256 is below the later copy threshold1024. Actual destination resources still require verification.",
     "scope": "Correct the development prerequisite source guard and its external fixture. No result, actor, geometry, player, camera or success writes added. Snapshot14 unchanged; all native comparison acceptance remains pending."
+  },
+  "title_changes_v50_refight_post_solid_owner": {
+    "issue": "beads-eio.1.114",
+    "comparisons": [
+      "F122",
+      "F124",
+      "F7"
+    ],
+    "default_correctness_fix": "After a real guest-only original EC430 hit, execute the full original EC860 callback once in the guest context. Original ECB9C calls31DA8 after its portal action; that native solid pass may adjust the snapped Y. The actual queue20, lock/sharedscene state, portal subphase1 and original snappedX authenticate guest ownership without demanding pre-solidY. No guest position or success writes are added by this fix.",
+    "regression": "Original terrain approach stops at the native pedestal side x1853. Source-qualified ordinary Jump+Right gets onto the original top1248; a full callback can leave ZeroY1226 plus native fractional history and must still establish scene owner2 and allow the queued command to progress.",
+    "qualification": "Current exact-image LOCAL and NET guest-led portal/load/native destination feet/BIN33 intro release and independent controls remain mandatory. Prior native queued20/owner0 stall is a retained rejected candidate; source/C models earn no comparison credit.",
+    "snapshot": "Existing scene owner and player context only; snapshot14 unchanged."
   }
 }
