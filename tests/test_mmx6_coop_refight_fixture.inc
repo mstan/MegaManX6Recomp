@@ -64,6 +64,18 @@ static void agreed_refight_prerequisite(CPUState *cpu) {
     setup_refight_prerequisite(cpu,0);psx_mod_write_byte(0x800ED088u,0x80);
     CHECK(checkpoint_refight_source());
     CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+    /* First native mode10 can precede body/map initialization. Waiting must
+     * preserve all guest state; once typed standing exists, the same bad
+     * resource must be rejected before placement. */
+    setup_refight_prerequisite(cpu,0);psx_mod_write_byte(PLAYER+4,0);
+    psx_mod_write_byte(0x80100000u,psx_mod_read_byte(0x80100000u)^1u);
+    memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext initializing_partner=p2;
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 &&
+        !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&initializing_partner,&p2,sizeof p2));
+    psx_mod_write_byte(PLAYER+4,1);memcpy(before_ram,test_ram,sizeof test_ram);
+    CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase &&
+        psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+        !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&initializing_partner,&p2,sizeof p2));
     const uint8_t wrong_secondary_flags[]={1,0x81,0x40};
     for(unsigned i=0;i<sizeof wrong_secondary_flags;++i) {
         setup_refight_prerequisite(cpu,0);psx_mod_write_byte(0x800ED088u,wrong_secondary_flags[i]);

@@ -632,6 +632,12 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
                 uint32_t meta,desc;
                 if(checkpoint_starting_hp[0] || checkpoint_starting_hp[1] || checkpoint_earned_weapons_option)
                     checkpoint_cancel(CHECKPOINT_FORBIDDEN);
+                /* The first mode10 entry still has pristine DAT104 and an
+                 * uninitialized native player. Let original world/body and
+                 * secondary-mapcopy initialization finish before qualifying
+                 * their loaded resources. Placement still requires the full
+                 * original arrival, standing feet and camera contract. */
+                else if(checkpoint_pending.phase==2 && !checkpoint_refight_standing()) { }
                 else if(!checkpoint_source(entry) || !checkpoint_refight_source() ||
                         !checkpoint_refight_assets(&meta,&desc) || !checkpoint_refight_ground(meta,desc)) {
                     checkpoint_refight_refusal(entry);
