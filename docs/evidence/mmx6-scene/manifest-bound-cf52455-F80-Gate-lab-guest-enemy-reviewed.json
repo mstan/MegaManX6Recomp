@@ -1,0 +1,526 @@
+{
+  "kind": "F80_original_Gate_lab_guest_admission_native_combat_root_review",
+  "status": "passed",
+  "comparisons": [
+    "F80"
+  ],
+  "frozen_rows": {
+    "F80": "725a726766fec54a3a027a9cfab051b8e131070f739f4eb90a1c3c12fb813c18"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "status": "passed",
+      "endpoints": [
+        {
+          "peer": 0,
+          "initial": 73,
+          "admitted": 85,
+          "before_attack": 104,
+          "hit": 106,
+          "origin": "800F5CE0",
+          "native_type": 2,
+          "subtype": 1,
+          "HP_before": 32,
+          "HP_after": 28,
+          "primary_fixed_xy": [
+            560,
+            123
+          ],
+          "primary_only_scan_right": 768,
+          "actual_native_camera_x": 437,
+          "actual_scan_right": 805,
+          "guest_admitted_xy": [
+            631.5,
+            122.0
+          ]
+        }
+      ],
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "genuine_original_late_Gate_checkpoint_arrivals": true,
+        "source_qualified_position_only_setup": true,
+        "original_enemy_inactive_before_guest_lead": true,
+        "primary_only_visibility_excludes_authored_enemy": true,
+        "guest_alone_advances_actual_native_scan": true,
+        "origin_bound_native_type2_sub1_HP32_initialized": true,
+        "guest_native_attack_reduces_same_enemy_HP": true,
+        "primary_fixed_and_both_heroes_alive": true,
+        "source_and_composed_captures_retained": true
+      },
+      "native_terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_crc_windows": [],
+      "matching_crc_samples": 0,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80l1\\ammo-hud\\intro-admission\\peer-0-original-Gate-enemy-inactive-before-guest-lead.png",
+          "bytes": 2074543,
+          "sha256": "568b59d0fc05b21f7eb6ec7d2889d7789519e13bdcc9fe6028363866b690ab1a",
+          "peer": 0,
+          "label": "original-Gate-enemy-inactive-before-guest-lead",
+          "row": 73,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80l1\\ammo-hud\\intro-admission\\peer-0-guest-admitted-original-Gate-enemy.png",
+          "bytes": 2074543,
+          "sha256": "dd58844d3f277553192c6760d272a01f0c4caa77d0b61a13f5c31c5841a38493",
+          "peer": 0,
+          "label": "guest-admitted-original-Gate-enemy",
+          "row": 85,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80l1\\ammo-hud\\intro-admission\\peer-0-actual-guest-native-Gate-enemy-hit.png",
+          "bytes": 2074543,
+          "sha256": "ab07b44817c1675be6437f1eb7441e137a5704749a87df54857d898cbac6b76d",
+          "peer": 0,
+          "label": "actual-guest-native-Gate-enemy-hit",
+          "row": 106,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80l1\\ammo-hud\\intro-admission\\peer-0-native-Gate-enemy-after-guest-interaction.png",
+          "bytes": 2074543,
+          "sha256": "d560f009b3506f5fb6c2b5b59ec682de9d34e1eeb7df615bca17f68cacba9be8",
+          "peer": 0,
+          "label": "native-Gate-enemy-after-guest-interaction",
+          "row": 109,
+          "root_personally_viewed": true
+        }
+      ],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80l1\\qualification.json",
+          "bytes": 9888992,
+          "sha256": "612e2b2d68e93d82c0d918fbc998ad3e9b9d29714f1bc1adbadfcbb6778ff2e5"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80l1\\ammo-hud\\intro-admission\\F80-observations.json",
+          "bytes": 4653302,
+          "sha256": "bcc3597aa4cea9ad2fe7b3a44bfe1d3a87a0dc618a240569b7ee526352d1a452"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80l1\\F80-executing-source-pins.json",
+          "bytes": 2883,
+          "sha256": "fa219d681558433c4329c4ae8d3d8af58fa28bc0e8488739c17bebb4a371fc52"
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "status": "passed",
+      "endpoints": [
+        {
+          "peer": 0,
+          "initial": 76,
+          "admitted": 84,
+          "before_attack": 97,
+          "hit": 99,
+          "origin": "800F5CE0",
+          "native_type": 2,
+          "subtype": 1,
+          "HP_before": 32,
+          "HP_after": 24,
+          "primary_fixed_xy": [
+            560,
+            123
+          ],
+          "primary_only_scan_right": 768,
+          "actual_native_camera_x": 443,
+          "actual_scan_right": 811,
+          "guest_admitted_xy": [
+            641.5,
+            122.0
+          ]
+        },
+        {
+          "peer": 1,
+          "initial": 76,
+          "admitted": 84,
+          "before_attack": 97,
+          "hit": 99,
+          "origin": "800F5CE0",
+          "native_type": 2,
+          "subtype": 1,
+          "HP_before": 32,
+          "HP_after": 12,
+          "primary_fixed_xy": [
+            560,
+            123
+          ],
+          "primary_only_scan_right": 768,
+          "actual_native_camera_x": 443,
+          "actual_scan_right": 811,
+          "guest_admitted_xy": [
+            647.5,
+            122.0
+          ]
+        }
+      ],
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "genuine_original_late_Gate_checkpoint_arrivals": true,
+        "source_qualified_position_only_setup": true,
+        "original_enemy_inactive_before_guest_lead": true,
+        "primary_only_visibility_excludes_authored_enemy": true,
+        "guest_alone_advances_actual_native_scan": true,
+        "origin_bound_native_type2_sub1_HP32_initialized": true,
+        "guest_native_attack_reduces_same_enemy_HP": true,
+        "primary_fixed_and_both_heroes_alive": true,
+        "source_and_composed_captures_retained": true
+      },
+      "native_terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2976,
+              "core": "9ddec7a1",
+              "mod": "28a8bde0"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "79368752",
+              "mod": "e5b1b118"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "f5586f6c",
+              "mod": "d1bcd1a2"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "bded0aec",
+              "mod": "71998292"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "35872a42",
+              "mod": "0d92b068"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "d7235965",
+              "mod": "1ef50c7c"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "7c41b623",
+              "mod": "68dbc6ba"
+            }
+          ],
+          "resolved_through": [
+            3196,
+            3196
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3232,
+              "core": "6c9d39a7",
+              "mod": "908f68f0"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "5d571018",
+              "mod": "42f8ac76"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "1126013a",
+              "mod": "3bbb0834"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "aa1a2ded",
+              "mod": "7be74494"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "4f51e0f2",
+              "mod": "2f78291e"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "443acd02",
+              "mod": "8800d23e"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "751053ad",
+              "mod": "94b7838c"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "8080cc72",
+              "mod": "50a2b380"
+            }
+          ],
+          "resolved_through": [
+            3465,
+            3465
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3552,
+              "core": "657d8b0f",
+              "mod": "a8e41584"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "04680173",
+              "mod": "3706e544"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "44a5aaee",
+              "mod": "3aba73ae"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "f6b8889e",
+              "mod": "e0c4efbe"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "dd014702",
+              "mod": "56b191bc"
+            },
+            {
+              "simulation_tick": 3712,
+              "core": "33a85031",
+              "mod": "908f68f0"
+            },
+            {
+              "simulation_tick": 3744,
+              "core": "36415efc",
+              "mod": "42f8ac76"
+            }
+          ],
+          "resolved_through": [
+            3770,
+            3770
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4320,
+              "core": "875e23b8",
+              "mod": "3b70d145"
+            },
+            {
+              "simulation_tick": 4352,
+              "core": "2cf6dbb0",
+              "mod": "69bc44bf"
+            },
+            {
+              "simulation_tick": 4384,
+              "core": "3eb03d5f",
+              "mod": "4b8eade9"
+            },
+            {
+              "simulation_tick": 4416,
+              "core": "b4f3127a",
+              "mod": "b0c7f089"
+            },
+            {
+              "simulation_tick": 4448,
+              "core": "96dac0ee",
+              "mod": "0bcff8a7"
+            },
+            {
+              "simulation_tick": 4480,
+              "core": "143225e6",
+              "mod": "1ef3afc7"
+            },
+            {
+              "simulation_tick": 4512,
+              "core": "12a8cb87",
+              "mod": "39b1ff61"
+            }
+          ],
+          "resolved_through": [
+            4534,
+            4534
+          ]
+        }
+      ],
+      "matching_crc_samples": 29,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\peer-0-original-Gate-enemy-inactive-before-guest-lead.png",
+          "bytes": 2074543,
+          "sha256": "66eeaa8336515bbde4d87b6b16e427b3bab177d33ff43df6d061b2acf1278325",
+          "peer": 0,
+          "label": "original-Gate-enemy-inactive-before-guest-lead",
+          "row": 76,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\peer-1-original-Gate-enemy-inactive-before-guest-lead.png",
+          "bytes": 2074543,
+          "sha256": "0f7524cfb6deeb2625d2f9de5a98e0ecdbe9fcb330a54c10d2bf7f7aebd32a11",
+          "peer": 1,
+          "label": "original-Gate-enemy-inactive-before-guest-lead",
+          "row": 76,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\peer-0-guest-admitted-original-Gate-enemy.png",
+          "bytes": 2074543,
+          "sha256": "fa2baf113a353a3156feed9bda90d6f4a7c11d4a9dbec0f28698e7400b1ffae6",
+          "peer": 0,
+          "label": "guest-admitted-original-Gate-enemy",
+          "row": 84,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\peer-1-guest-admitted-original-Gate-enemy.png",
+          "bytes": 2074543,
+          "sha256": "3d391128ffb311bd56cff29a1c7f8e0622ea82ae56a965f887053fb3c24a55cf",
+          "peer": 1,
+          "label": "guest-admitted-original-Gate-enemy",
+          "row": 84,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\peer-0-actual-guest-native-Gate-enemy-hit.png",
+          "bytes": 2074543,
+          "sha256": "0d60531c2760722761a12657dcaf7fa44ad3de3f8eb17697d2aedddb7649e505",
+          "peer": 0,
+          "label": "actual-guest-native-Gate-enemy-hit",
+          "row": 99,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\peer-1-actual-guest-native-Gate-enemy-hit.png",
+          "bytes": 2074543,
+          "sha256": "4e95f2443256fba42459387d0800d7bddf3c8e8083beaa435f77ea63e195e68a",
+          "peer": 1,
+          "label": "actual-guest-native-Gate-enemy-hit",
+          "row": 99,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\peer-0-native-Gate-enemy-after-guest-interaction.png",
+          "bytes": 2074543,
+          "sha256": "7c323dae6d45a22392c35aff281875430fc3dddb5639a576fedf41472102ee3b",
+          "peer": 0,
+          "label": "native-Gate-enemy-after-guest-interaction",
+          "row": 101,
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\peer-1-native-Gate-enemy-after-guest-interaction.png",
+          "bytes": 2074543,
+          "sha256": "104717e88665fb80403d5ca350f4cbd56e2fbdbb263723fca5d212a89ceb22cb",
+          "peer": 1,
+          "label": "native-Gate-enemy-after-guest-interaction",
+          "row": 101,
+          "root_personally_viewed": true
+        }
+      ],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\qualification.json",
+          "bytes": 10913769,
+          "sha256": "dd60f3c972da7c88a6e2b23a24fb056389f6eacd5effd4084af4f242e816e936"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\intro-admission\\F80-observations.json",
+          "bytes": 8562094,
+          "sha256": "29f7ab7a58bc51966d8cff1dd0558c622fbcb588bc5a865d4c1a8ce0f344f177"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f80n1\\F80-executing-source-pins.json",
+          "bytes": 2883,
+          "sha256": "0b53905c9f97f73cf834b5f83dbe8519fd90cc233f3dc3b56e07252bcfc1cead"
+        }
+      ]
+    }
+  ],
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\gate-enemy-v102-final-binding-root-v1.json",
+    "binding_sha256": "de07a1a243d7d8bdaed6b8b08b2bb245101aa118b8496ecfd71db95e1f4a3b06",
+    "image_sha256": "aebf1870c2fa70da9854f92e8f87a8e0c08236314d172500d63a18320b13f3d4",
+    "manifest_sha256": "a9fd764467b55723d573338186832639a7720d919ba4f293946498f8a8eaf000",
+    "provenance_sha256": "07d717bb543d2cf87194d91b01034431f3b381656926b9b63704f30d235ba52f",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v102-gate-enemy-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "cf524556c54b837c41bc9cf0e2cc3efc784126ec",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v47",
+    "host_revision": 30
+  },
+  "review_summary": {
+    "native_graceful_exit0": 3,
+    "root_personally_viewed_captures": 12,
+    "private_cards_unchanged": true,
+    "matching_crc_samples": 29,
+    "resolved_crc_windows": 4,
+    "actual_gameplay_policy_change_needed": false
+  },
+  "limits": [
+    "Only frozen234 F80; no native3330/allfortress credit.",
+    "Original SecretLab2B18/0CP0 native loader and healthy arrivals precede disclosed once position/history approach560/121+576/121; original updates settle123/122. Source and full write-footprint compiled checks retained; no scanner/camera/velocity/HP/actor/lifecycle/outcome setup writes.",
+    "Declared hostile-contact protection bypasses enemy/projectile contact damage; guest native attacks, terrain and falls remain original. Native combat32HP decrease is observed, not written.",
+    "Default shared camera: guest input advances actual original camera/scan beyond authored800 while primary-only edge768 excludes it and primary remains560/123. Separate guest presentation camera is not qualified as an independent distant simulation scanner.",
+    "Bound member24/type2/sub1/originF5CE0 only; original64px recess crossed with ordinary native jump. General campaign reachability, sprite ownership, targeting, audio and performance remain separate.",
+    "All12 accepted-case composed images personally viewed by root; observations/captures are asynchronous, not instruction-atomic or matched-frame screenshots.",
+    "Exact samecf52455/imageaebf1870 LOCAL+samehostWin64loopbackNET profile30; no crosshost/controller/human/release delivery claim.",
+    "Agreed fixture taints default native recordings and strict ordinary recording/replay refusals remain retained; no ordinary finalized recording/replay pass.",
+    "F161 retained partials and moving-layer route failure stay unverified and provide no F80 or cross-candidate credit."
+  ]
+}

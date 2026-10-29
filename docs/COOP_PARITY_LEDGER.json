@@ -13640,24 +13640,111 @@
       "frozen_row_sha256": "725a726766fec54a3a027a9cfab051b8e131070f739f4eb90a1c3c12fb813c18",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Late-fortress native placement eligibility",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Original late SecretLab2B type2/sub1 enemy admitted and fought by leading guest",
         "bounded_check": "Map a genuine late Gate-laboratory enemy record; guest advances beyond primary visibility and must cause native spawn plus actual combat.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "cf524556c54b837c41bc9cf0e2cc3efc784126ec",
+            "build_identity": {
+              "executable_sha256": "aebf1870c2fa70da9854f92e8f87a8e0c08236314d172500d63a18320b13f3d4",
+              "compiled_manifest_sha256": "a9fd764467b55723d573338186832639a7720d919ba4f293946498f8a8eaf000",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "original18/0CP0 and agreed once position/history-only approach",
+              "contact_protection": "on; no contactdamage claim",
+              "local_cameras": "unified",
+              "cameras": "unified",
+              "host_profile": "mmx6.win64-clang22.loopback revision30",
+              "transport": "one owned process"
+            },
+            "action": "Guest alone advances native shared camera/scan beyond primary-only visibility, admits original late Gate-lab record and reduces same type2/sub1 HP32 by original Zero attack.",
+            "outcome": "Full named native counterpart passes on same candidate; primary remainsfixed, both heroes live, full parent gates/cards/owned exits0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-cf52455-F80-Gate-lab-guest-enemy-reviewed.json",
+                "sha256": "0284fb6c0d07180b83bf8d6c9a4eadf171b9526d3cc93475ad7ba1a2c8f121bd"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F80; no native3330/allfortress credit.",
+              "Original SecretLab2B18/0CP0 native loader and healthy arrivals precede disclosed once position/history approach560/121+576/121; original updates settle123/122. Source and full write-footprint compiled checks retained; no scanner/camera/velocity/HP/actor/lifecycle/outcome setup writes.",
+              "Declared hostile-contact protection bypasses enemy/projectile contact damage; guest native attacks, terrain and falls remain original. Native combat32HP decrease is observed, not written.",
+              "Default shared camera: guest input advances actual original camera/scan beyond authored800 while primary-only edge768 excludes it and primary remains560/123. Separate guest presentation camera is not qualified as an independent distant simulation scanner.",
+              "Bound member24/type2/sub1/originF5CE0 only; original64px recess crossed with ordinary native jump. General campaign reachability, sprite ownership, targeting, audio and performance remain separate.",
+              "All12 accepted-case composed images personally viewed by root; observations/captures are asynchronous, not instruction-atomic or matched-frame screenshots.",
+              "Exact samecf52455/imageaebf1870 LOCAL+samehostWin64loopbackNET profile30; no crosshost/controller/human/release delivery claim.",
+              "Agreed fixture taints default native recordings and strict ordinary recording/replay refusals remain retained; no ordinary finalized recording/replay pass.",
+              "F161 retained partials and moving-layer route failure stay unverified and provide no F80 or cross-candidate credit."
+            ],
+            "bypasses": [
+              "Original checkpoint and once position/history approach; declared contact protection."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "cf524556c54b837c41bc9cf0e2cc3efc784126ec",
+            "build_identity": {
+              "executable_sha256": "aebf1870c2fa70da9854f92e8f87a8e0c08236314d172500d63a18320b13f3d4",
+              "compiled_manifest_sha256": "a9fd764467b55723d573338186832639a7720d919ba4f293946498f8a8eaf000",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "original18/0CP0 and agreed once position/history-only approach",
+              "contact_protection": "on; no contactdamage claim",
+              "local_cameras": "unified",
+              "cameras": "unified",
+              "host_profile": "mmx6.win64-clang22.loopback revision30",
+              "transport": "two same-machine delay3 owned peers"
+            },
+            "action": "Guest alone advances native shared camera/scan beyond primary-only visibility, admits original late Gate-lab record and reduces same type2/sub1 HP32 by original Zero attack.",
+            "outcome": "Full named native counterpart passes on same candidate; primary remainsfixed, both heroes live, full parent gates/cards/owned exits0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-cf52455-F80-Gate-lab-guest-enemy-reviewed.json",
+                "sha256": "0284fb6c0d07180b83bf8d6c9a4eadf171b9526d3cc93475ad7ba1a2c8f121bd"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F80; no native3330/allfortress credit.",
+              "Original SecretLab2B18/0CP0 native loader and healthy arrivals precede disclosed once position/history approach560/121+576/121; original updates settle123/122. Source and full write-footprint compiled checks retained; no scanner/camera/velocity/HP/actor/lifecycle/outcome setup writes.",
+              "Declared hostile-contact protection bypasses enemy/projectile contact damage; guest native attacks, terrain and falls remain original. Native combat32HP decrease is observed, not written.",
+              "Default shared camera: guest input advances actual original camera/scan beyond authored800 while primary-only edge768 excludes it and primary remains560/123. Separate guest presentation camera is not qualified as an independent distant simulation scanner.",
+              "Bound member24/type2/sub1/originF5CE0 only; original64px recess crossed with ordinary native jump. General campaign reachability, sprite ownership, targeting, audio and performance remain separate.",
+              "All12 accepted-case composed images personally viewed by root; observations/captures are asynchronous, not instruction-atomic or matched-frame screenshots.",
+              "Exact samecf52455/imageaebf1870 LOCAL+samehostWin64loopbackNET profile30; no crosshost/controller/human/release delivery claim.",
+              "Agreed fixture taints default native recordings and strict ordinary recording/replay refusals remain retained; no ordinary finalized recording/replay pass.",
+              "F161 retained partials and moving-layer route failure stay unverified and provide no F80 or cross-candidate credit."
+            ],
+            "bypasses": [
+              "Original checkpoint and once position/history approach; declared contact protection."
+            ]
+          }
+        ],
+        "limitations": "Exactcf52455 LOCAL/NET original18/0CP0/onceposition approach. Guest alone admits type2/sub1/F5CE0 beyond primary-only edge768 and attacks original32HP instance, with primaryfixed560/123 and bothalive. Full4/15parentgates/nativechecks, sameimage/profile30, privatecardsunchanged/3nativeexit0/12rootviewedcaptures. Sharedcamera only; independent distant scanner, contactdamage, reachability, ordinaryrecording/replay and othercomparisons unqualified."
       }
     },
     {
