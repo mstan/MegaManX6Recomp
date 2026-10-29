@@ -10590,25 +10590,106 @@
       "frozen_row_sha256": "d2af0e9233b659232679454f5714a26c060226d2122c076f913d5401c2b26833",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
-        "analogue": "Alternate-route portal initial Y",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Guest-led original alternate portal beam resolves to native floor384 before safe release",
         "bounded_check": "Enter an authored Nightmare route portal with guest; inspect its first destination frames, native floor resolution and safe control release.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "fdd319ce633711edb8a025ad098ca67f613f4006",
+            "build_identity": {
+              "executable_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+              "compiled_manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "original4/0CP2 plus once position/history approach; declared contact protection",
+              "local_cameras": "split",
+              "cameras": "independent",
+              "host_profile": "mmx6.win64-clang22.loopback revision27",
+              "transport": "one owned process"
+            },
+            "action": "Review first real20/1 incoming beams, original native floor resolution, both living idle release and subsequent own-input controls without damage/refill/reload masking.",
+            "outcome": "Actual feet384/nativeground8/air0/standingboxes before safe release. Guest initial4/22 support is disclosed; ordinary Left afterward earns fullfeet. Same-candidate complete parent/finalCRC/card/exit gates retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F47-first-native-arrival-reviewed.json",
+                "sha256": "0d68165f43231767ce8b263503ad6db0dc73b4031da825334dc473860765aaf4"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F47. Frozen X6 counterpart explicitly asks authored Nightmare portal entry, first destination frames, native floor resolution and safe control release; this review does not claim a physical return route or R14.",
+              "Exact accepted fdd319c/imagee18036b0 in both modes, not currentV102 credit. First retained fresh-body incoming beams descend above the actual source floor and acquire original standing boxes, nativeground8/air0, both feet384; no sampled below-platformY, HP loss, failed lifecycle or extra scene hold.",
+              "Guest103 initially retains original4of22 foot pixels on ledge384. This is disclosed partial native support, not complete initial support. Ordinary Left afterward earns full22foot support; no claim that first arrival already has fullfeet or that an arena activates without a corrective step (F124).",
+              "Native shared-world timer remains frozen during paired incoming beams; actual distinct body poses and diagnostic progress are retained. Asynchronous polling does not prove every native instruction or an atomic first frame.",
+              "No HP refill, state reload, native save reload or outcome write between entry and audit. Original CP2/position-only reachability setup and declared contact protection remain tainted prerequisites; ordinary replay is not qualified.",
+              "Six arrival/control images personally reviewed by root. Existing rendering/HUD/art/audio and other-comparison limitations remain; this is floor/landing/control coverage.",
+              "Earlier F44/F74 receipt expressly left F47 unclaimed. This separate review checks the frozen F47 endpoint against original sources, all first-arrival samples and existing same-candidate final CRC; the prior label alone supplies no F47 pass."
+            ],
+            "bypasses": [
+              "Original checkpoint/once position-only approach; declared hostile-contact protection."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "fdd319ce633711edb8a025ad098ca67f613f4006",
+            "build_identity": {
+              "executable_sha256": "e18036b04a3ed844efefae6042ec3086cd041705b5e98f20dbb9825da3650842",
+              "compiled_manifest_sha256": "4cfa76ba7fc4dba2ff93b1bb3b4b9ff27ec2892f23c9a09cbe698f326712ccd4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "original4/0CP2 plus once position/history approach; declared contact protection",
+              "local_cameras": "split",
+              "cameras": "independent",
+              "host_profile": "mmx6.win64-clang22.loopback revision27",
+              "transport": "two same-machine delay3 peers"
+            },
+            "action": "Review first real20/1 incoming beams, original native floor resolution, both living idle release and subsequent own-input controls without damage/refill/reload masking.",
+            "outcome": "Actual feet384/nativeground8/air0/standingboxes before safe release. Guest initial4/22 support is disclosed; ordinary Left afterward earns fullfeet. Same-candidate complete parent/finalCRC/card/exit gates retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fdd319c-F47-first-native-arrival-reviewed.json",
+                "sha256": "0d68165f43231767ce8b263503ad6db0dc73b4031da825334dc473860765aaf4"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F47. Frozen X6 counterpart explicitly asks authored Nightmare portal entry, first destination frames, native floor resolution and safe control release; this review does not claim a physical return route or R14.",
+              "Exact accepted fdd319c/imagee18036b0 in both modes, not currentV102 credit. First retained fresh-body incoming beams descend above the actual source floor and acquire original standing boxes, nativeground8/air0, both feet384; no sampled below-platformY, HP loss, failed lifecycle or extra scene hold.",
+              "Guest103 initially retains original4of22 foot pixels on ledge384. This is disclosed partial native support, not complete initial support. Ordinary Left afterward earns full22foot support; no claim that first arrival already has fullfeet or that an arena activates without a corrective step (F124).",
+              "Native shared-world timer remains frozen during paired incoming beams; actual distinct body poses and diagnostic progress are retained. Asynchronous polling does not prove every native instruction or an atomic first frame.",
+              "No HP refill, state reload, native save reload or outcome write between entry and audit. Original CP2/position-only reachability setup and declared contact protection remain tainted prerequisites; ordinary replay is not qualified.",
+              "Six arrival/control images personally reviewed by root. Existing rendering/HUD/art/audio and other-comparison limitations remain; this is floor/landing/control coverage.",
+              "Earlier F44/F74 receipt expressly left F47 unclaimed. This separate review checks the frozen F47 endpoint against original sources, all first-arrival samples and existing same-candidate final CRC; the prior label alone supplies no F47 pass."
+            ],
+            "bypasses": [
+              "Original checkpoint/once position-only approach; declared hostile-contact protection."
+            ]
+          }
+        ],
+        "limitations": "Independent exactfdd319c retained LOCAL/NET review: first incoming-body frames stay above sourcefloor384, both resolvefeet384/nativeground8/air0/HP32/standingboxes, JOINING3->ALIVE0 and idle before safe owncontrols. Guest initially4/22 native support, ordinaryLeft earnsfull22; no complete-initialfoot/physicalreturn/R14/F124 claim. Full4/15parentgates/25matchingCRC4windows/3nativeexit0/cardsunchanged/6rootviewedimages reused; no newnative/build or native3330 credit."
       }
     },
     {
