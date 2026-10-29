@@ -1,0 +1,181 @@
+{
+  "kind": "F17_LOCAL_actual_other_native_stage_Quit_and_retained_completed_portrait",
+  "comparison": "F17",
+  "mode": "local",
+  "status": "passed",
+  "frozen_row_sha256": "e6f809dff637844600dcdb2bc4d90b8a20a966dbd371563f0eb384f1d474665c",
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-R19-F13-v82-staging-helper-v1\\nearby-explosion-v82-final-binding-root-v1.json",
+    "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+    "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+    "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+    "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-R19-F13-v82-staging-helper-v1\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v31",
+    "host_revision": 14
+  },
+  "checks": {
+    "actual_original_arrow_selected_different_stage": true,
+    "actual_fresh_both_player_stage2_arrival": true,
+    "original_primary_owned_final_Quit": true,
+    "original_current_data_import_returned_Map": true,
+    "original_earned_clear_fields_preserved": true,
+    "actual_returned_completed_portrait_tiles": true
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_observer_bounded_checks_complete": true,
+    "ordinary_default_recording_and_seeded_startup_admitted": true,
+    "reviewed_QA_source_and_seeded_existing_card_preserved": true,
+    "owned_cleanup_private_cards": true
+  },
+  "raw_parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F17-earned-cold-Load-local-v82-root-v3\\qualification.json",
+    "sha256": "0bb4e84733bfb581cd88810a5b077506d43caa14dcb8aa566c2a0f23eee6f6c2",
+    "status": "actual_native_earned_QA_card_cold_Load_selection_fresh_roster_and_guest_menu_local_observed"
+  },
+  "earned_Save_prerequisite": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-LOCAL-reviewed-root-v1.json",
+    "sha256": "7a71c348766fe08ee650133792ed15fce63aef72921289384a795c2f5bc1bdc7"
+  },
+  "actual_route": {
+    "start_cursor": 0,
+    "left_cursor": 3,
+    "start_stage": 1,
+    "other_stage": 2,
+    "stage_table": [
+      1,
+      6,
+      7,
+      2,
+      3,
+      8,
+      4,
+      5
+    ],
+    "stage2_Nightmare_targets": [
+      4,
+      4,
+      4
+    ],
+    "stage2_Nightmare_portrait_slots": [
+      6,
+      6,
+      6
+    ]
+  },
+  "source_current_data_reductions": [
+    {
+      "checks": {
+        "current_data_eligible": true,
+        "original_current_buffer_retained": true,
+        "source_imported_campaign_fields_match": true,
+        "primary_campaign_is_x_at_native_map": true
+      },
+      "differences": [],
+      "limits": [
+        "Current buffer eligibility is not earned-progress or native-card coverage",
+        "Native import does not restore PLAY+38 character or PLAY+5E armor; the real unit selector is checked separately",
+        "HP/ammo spent in the abandoned world may be refilled by original native import/initialization"
+      ]
+    }
+  ],
+  "portrait_checks": {
+    "actual_original_clear_appearance": true,
+    "actual_completed_tile_copy": true,
+    "completed_variant_distinguished_from_uncleared": true,
+    "source_and_map_capture_brackets": true
+  },
+  "native_arrival": {
+    "timer": 112,
+    "lifecycle": [
+      0,
+      0
+    ]
+  },
+  "observation_samples": 3971,
+  "root_reviewed_composed_images": [
+    {
+      "peer": 0,
+      "sample": 523,
+      "label": "actual-other-stage-arrival",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F17-earned-cold-Load-local-v82-root-v3\\ammo-hud\\native-final-quit-native-card\\F17-different-stage-return\\peer-0-actual-other-stage-arrival.png",
+      "sha256": "f43e000d96456c9f2de62bea87ecb0c4360c0109d34f2d172f3a790380554914",
+      "before": {
+        "id": 5786,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5787,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F17-earned-cold-Load-local-v82-root-v3\\ammo-hud\\native-final-quit-native-card\\F17-different-stage-return\\peer-0-actual-other-stage-arrival.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 5788,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      }
+    },
+    {
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F17-earned-cold-Load-local-v82-root-v3\\ammo-hud\\native-final-quit-native-card\\F17-different-stage-return\\returned-completed-Yammark-portrait\\peer-0-completed-Yammark-map.png",
+      "sha256": "f9b8905a3624936e2a5f0b4489944abc5835e97c1552560b8a3e45d4b1b914b3",
+      "before": {
+        "id": 9544,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 9545,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F17-earned-cold-Load-local-v82-root-v3\\ammo-hud\\native-final-quit-native-card\\F17-different-stage-return\\returned-completed-Yammark-portrait\\peer-0-completed-Yammark-map.png",
+        "staged": true,
+        "seq": 5
+      },
+      "completion": {
+        "id": 9546,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "label": "returned-grey-Yammark-after-North-Pole",
+      "peer": 0
+    }
+  ],
+  "failed_observer_prefix": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F17-earned-cold-Load-local-v82-root-v2\\qualification.json",
+    "sha256": "f36190a325fa1f9875db2b4ffa72329a2c101c758097c1a5a2eebd20aa17d858",
+    "status": "failed_setup",
+    "error": "Bounded F17 route observation limit",
+    "retained_native_beam_progress": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F17-stage2-join-retained-prefix-root-v1.json",
+      "sha256": "eff232503a05e0c071d18f5a376a9d9a8b3ccdaf57bf5c3cb5cc34097f148ce9"
+    }
+  },
+  "source_changes": {
+    "observer": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F17_other_stage_return_v82_root_v3.py",
+    "sha256": "0b06de9c273e9db63490cd8bc400a7563b6224de2352dbcacc847ddb15754867",
+    "only_change": "600->6000 observed sample limit; original240sec hard wall and every source/native/portrait/input predicate unchanged"
+  },
+  "outcome": "Actual Map Left0->3, source table selects North Pole2/0, fresh X/Zero arrival, primary original Quit/current-data Map return, clear1 and visible grey Yammark retained.",
+  "limits": [
+    "This is the named F17 counterpart; visiting North Pole is necessary setup, not a native stage-content audit.",
+    "Uses exact V82 previously earned native Yammark card; original native card Load is the current-process prerequisite. No fixture, outcome assignment, native-card write or execution-state LOAD.",
+    "First observer stopped at native106 during a progressing incoming beam; corrected budget observed actual settled co-op native112. The complete route required3971samples including original story. Neither failed raw data nor the native behavior was changed.",
+    "Original full campaign CURRENT imports are checked before/after actual primary Quit. Original Nightmare history is retained, not normalized; its stage2 target does not replace Yammark with a Nightmare portrait.",
+    "Root inspected other-stage arrival and returned grey portrait. All21 copied portrait tiles match original cleared art. Canonical body/RAM/present are asynchronous; the arrival image may retain a nearby beam animation frame.",
+    "All5 original LOCAL parent gates, strict finalized ordinary native recording/startup cards, immutable source/private cards and graceful owned exit0 pass. NET still required; no whole-art/HUD/other-boss/roster claim."
+  ]
+}

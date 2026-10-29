@@ -6906,7 +6906,7 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -6987,9 +6987,46 @@
             "bypasses": [
               "The agreed AmazonCP2 initializer bypasses the preceding route, retaining original door/dialogue/fullHP boss/guest attacks/kill/rewards/native Save/story/selector/fresh entry. No tested clear/death/HP/pose/position/success assignment or execution-state LOAD."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "lab_checkpoint": "off",
+              "startup_card": "exact previously earned native Yammark clear1 card",
+              "native_other_stage": 2
+            },
+            "action": "Original native card Load -> Map Left0to3 -> native North Pole2/0 and fresh both-player arrival -> actual P1 Quit/current-data Map return -> earned grey Yammark.",
+            "outcome": "Actual Map Left0->3, source table selects North Pole2/0, fresh X/Zero arrival, primary original Quit/current-data Map return, clear1 and visible grey Yammark retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-progression/manifest-bound-dcc1002-F17-other-stage-return-LOCAL-reviewed.json",
+                "sha256": "03fe10a4c45ed16888c97f291e5439b9cacc298563b05e729a03086919a5127b"
+              }
+            ],
+            "limits": [
+              "This is the named F17 counterpart; visiting North Pole is necessary setup, not a native stage-content audit.",
+              "Uses exact V82 previously earned native Yammark card; original native card Load is the current-process prerequisite. No fixture, outcome assignment, native-card write or execution-state LOAD.",
+              "First observer stopped at native106 during a progressing incoming beam; corrected budget observed actual settled co-op native112. The complete route required3971samples including original story. Neither failed raw data nor the native behavior was changed.",
+              "Original full campaign CURRENT imports are checked before/after actual primary Quit. Original Nightmare history is retained, not normalized; its stage2 target does not replace Yammark with a Nightmare portrait.",
+              "Root inspected other-stage arrival and returned grey portrait. All21 copied portrait tiles match original cleared art. Canonical body/RAM/present are asynchronous; the arrival image may retain a nearby beam animation frame.",
+              "All5 original LOCAL parent gates, strict finalized ordinary native recording/startup cards, immutable source/private cards and graceful owned exit0 pass. NET still required; no whole-art/HUD/other-boss/roster claim."
+            ],
+            "bypasses": [
+              "Prelaunch copy of exact independently reviewed actually earned native card; prior producer disclosed AmazonCP2 preceding-route bypass. No fixture, tested outcome assignment or execution-state LOAD in this fresh other-stage return run."
+            ]
           }
         ],
-        "limitations": "Exact V82 LOCAL+NET real earned clear/native Save/initial grey portrait observed. Different-stage return remains unverified; LOCAL attempt hit600sample cap during progressing native incoming beam. Changed observer6000sample/same240wall deadline under qualification."
+        "limitations": "LOCAL passed: real earned native card Load, different North Pole2/0 entry/fresh both heroes, original P1 Quit/current-data return and retained clear1/visible grey Yammark. Native incoming beam completed at112; prior600sample cap stopped106 and stayspreserved. Actual3971samples/all5parentgates/ordinarycapture/cards/exit0 pass. NET required."
       }
     },
     {
