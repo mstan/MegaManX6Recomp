@@ -59,6 +59,19 @@ static void agreed_refight_prerequisite(CPUState *cpu) {
             psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
     }
+    /* Original2C9D4 marks this secondary placement retired with0x80 after
+     * the original six-reference mapcopy. This is not portal allocator bit0. */
+    setup_refight_prerequisite(cpu,0);psx_mod_write_byte(0x800ED088u,0x80);
+    CHECK(checkpoint_refight_source());
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+    const uint8_t wrong_secondary_flags[]={1,0x81,0x40};
+    for(unsigned i=0;i<sizeof wrong_secondary_flags;++i) {
+        setup_refight_prerequisite(cpu,0);psx_mod_write_byte(0x800ED088u,wrong_secondary_flags[i]);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+    }
     for(unsigned bad=0;bad<9;++bad) {
         setup_refight_prerequisite(cpu,0);
         if(bad==0)p2.body[4]=2;if(bad==1)p2.body[0x5C]=0x80;if(bad==2)p2.body[0x70]=0;

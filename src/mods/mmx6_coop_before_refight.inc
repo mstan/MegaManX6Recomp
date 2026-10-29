@@ -34,9 +34,12 @@ static int checkpoint_refight_source(void) {
         psx_mod_read_word(0x8006DFACu)==0x800ED424u &&
         psx_mod_read_word(SCRATCH+0x94)==0x800ED424u &&
         psx_mod_read_word(0x800ED480u)==0x800EC860u &&
+        /* The secondary mapcopy retires through original2C9D4, which ORs
+         * record flag0x80; accept only pristine or that exact retired state. */
+        (psx_mod_read_word(0x800ED088u)&0xFFFFFF7Fu)==0x03000100u &&
+        psx_mod_read_word(0x800ED08Cu)==0x04380208u &&
         /* 29E84..29E8C category4 takes29EFC before the category0..2
          * lifetime writes. Only allocator bit0 changes on this placement. */
-        (psx_mod_read_word(0x800ED088u)&0xFFFFFFFEu)==0x03000100u &&
         (psx_mod_read_word(0x800ED040u)&0xFFFFFFFEu)==0x04021700u &&
         psx_mod_read_word(0x800ED044u)==0x04E80760u;
 }
