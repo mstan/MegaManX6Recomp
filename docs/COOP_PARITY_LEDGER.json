@@ -5774,11 +5774,57 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+            "build_identity": {
+              "executable_sha256": "acb27f170c2d49e59e830df4c608046b5121f0fa3cdcd9798d3715b4cfe6fe43",
+              "compiled_manifest_sha256": "e4f614a3336b7672b3966e53fc6dbfa2cb94c19077486c7312a2c640267729df",
+              "provenance_sha256": "72c7e9505d6f8b3f72ae9022f6ad7e37b4dd72b4086a2d9015ad83ee60924095",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+normalZero/P2",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "doors": "either",
+              "host_profile": "mmx6.win64-clang22.loopback revision35",
+              "audio": "dummy muted"
+            },
+            "action": "Guest-only ordinary Jump/Right onto authored portal2; actual original same-stageCP2 initializer/native48HPboss intro without corrective movement, both native fullfeet and separate controls.",
+            "outcome": "LOCAL full named contract and all4parent gates passed; root reviewed5composed images, unchangedprivatecards and1nativeexit0. NET remains pending.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F122-F124-F7-native-refight-local-reviewed.json",
+                "sha256": "3c68d8b1bfce3514352691e00b5a06c09da47283ec4166ab5564d08688df31f3"
+              }
+            ],
+            "limits": [
+              "Only three named rows; no F206, bosskill, allpads or native3330 claim.",
+              "Option15 originalCP1 plus disclosed once position/history bypass; original input remains tainted.",
+              "Publications, PLAY/actors and composed captures are asynchronous; pre/post capture rows retained.",
+              "All direction is neutral after admission until actual native HP48/active4 and released fullfeet.",
+              "First typed bodies are retained, including unresolved contact. F7 qualification requires final original full22feet, native ground, living bodies and independent movement; initial transient motion is not a failed landing.",
+              "Collision equivalence permits native graphical remaps, never claims original full graphical identity.",
+              "Parent exact image/profile/source, recording/card/cleanup and final CRC gates remain mandatory.",
+              "Only LOCAL mode is admitted by this receipt; NET same exact candidate remains required. Overall three comparisons remain unverified until that independent mode passes.",
+              "Default-off agreed original12/0CP1 prerequisite plus once source position/history1852/1241 and hostile-contact protection bypass travel. No destination-position, boss HP/phase/defeat, progress or landing-success writes occur in the observer.",
+              "Native original CP2 initializer restores the exact pristineDAT104 metatile bank; CP1 six-copy persistence was a refuted source inference. Exact wholebank/layout/descriptor/source guards remain checked. First guest typed box can precede its native terrain pass (retained foot449/contactpending); final actual Zero426/foot448 is required and observed.",
+              "Root personally reviewed all five composed captures. Heroes overlap before short separate controls; both identities/resources are additionally established by native publications. Asynchronous screenshots do not establish matched render ticks or complete sprite/palette fidelity.",
+              "Source and model regressions support fixes, not comparison credit. Native card files are unchanged; fixture taint, strict replay refusal, ordinary recordings and all failed attempts remain retained. No F206/camera-follow, other pad, distant passenger, victory, roster inversion, cross-host, human or native3330 credit."
+            ],
+            "bypasses": [
+              "Default-off agreed originalCP1, once source position/history and hostile-contact protection; no tested result seeds."
+            ]
+          }
+        ],
+        "limitations": "LOCAL actual native guest-onlyportal/CP2/HP48activeboss/nativefeet448/independentcontrols passes on92e1ce2/acb27image/profile35; root5captures/full4parentgates/cards/exit0. NET samecandidate pending; no aggregate credit. Retained transient contact and originalbankrestore/correction limits in receipt."
       }
     },
     {
@@ -17570,11 +17616,57 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+            "build_identity": {
+              "executable_sha256": "acb27f170c2d49e59e830df4c608046b5121f0fa3cdcd9798d3715b4cfe6fe43",
+              "compiled_manifest_sha256": "e4f614a3336b7672b3966e53fc6dbfa2cb94c19077486c7312a2c640267729df",
+              "provenance_sha256": "72c7e9505d6f8b3f72ae9022f6ad7e37b4dd72b4086a2d9015ad83ee60924095",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+normalZero/P2",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "doors": "either",
+              "host_profile": "mmx6.win64-clang22.loopback revision35",
+              "audio": "dummy muted"
+            },
+            "action": "Guest-only ordinary Jump/Right onto authored portal2; actual original same-stageCP2 initializer/native48HPboss intro without corrective movement, both native fullfeet and separate controls.",
+            "outcome": "LOCAL full named contract and all4parent gates passed; root reviewed5composed images, unchangedprivatecards and1nativeexit0. NET remains pending.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F122-F124-F7-native-refight-local-reviewed.json",
+                "sha256": "3c68d8b1bfce3514352691e00b5a06c09da47283ec4166ab5564d08688df31f3"
+              }
+            ],
+            "limits": [
+              "Only three named rows; no F206, bosskill, allpads or native3330 claim.",
+              "Option15 originalCP1 plus disclosed once position/history bypass; original input remains tainted.",
+              "Publications, PLAY/actors and composed captures are asynchronous; pre/post capture rows retained.",
+              "All direction is neutral after admission until actual native HP48/active4 and released fullfeet.",
+              "First typed bodies are retained, including unresolved contact. F7 qualification requires final original full22feet, native ground, living bodies and independent movement; initial transient motion is not a failed landing.",
+              "Collision equivalence permits native graphical remaps, never claims original full graphical identity.",
+              "Parent exact image/profile/source, recording/card/cleanup and final CRC gates remain mandatory.",
+              "Only LOCAL mode is admitted by this receipt; NET same exact candidate remains required. Overall three comparisons remain unverified until that independent mode passes.",
+              "Default-off agreed original12/0CP1 prerequisite plus once source position/history1852/1241 and hostile-contact protection bypass travel. No destination-position, boss HP/phase/defeat, progress or landing-success writes occur in the observer.",
+              "Native original CP2 initializer restores the exact pristineDAT104 metatile bank; CP1 six-copy persistence was a refuted source inference. Exact wholebank/layout/descriptor/source guards remain checked. First guest typed box can precede its native terrain pass (retained foot449/contactpending); final actual Zero426/foot448 is required and observed.",
+              "Root personally reviewed all five composed captures. Heroes overlap before short separate controls; both identities/resources are additionally established by native publications. Asynchronous screenshots do not establish matched render ticks or complete sprite/palette fidelity.",
+              "Source and model regressions support fixes, not comparison credit. Native card files are unchanged; fixture taint, strict replay refusal, ordinary recordings and all failed attempts remain retained. No F206/camera-follow, other pad, distant passenger, victory, roster inversion, cross-host, human or native3330 credit."
+            ],
+            "bypasses": [
+              "Default-off agreed originalCP1, once source position/history and hostile-contact protection; no tested result seeds."
+            ]
+          }
+        ],
+        "limitations": "LOCAL actual native guest-onlyportal/CP2/HP48activeboss/nativefeet448/independentcontrols passes on92e1ce2/acb27image/profile35; root5captures/full4parentgates/cards/exit0. NET samecandidate pending; no aggregate credit. Retained transient contact and originalbankrestore/correction limits in receipt."
       }
     },
     {
@@ -17646,11 +17738,57 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+            "build_identity": {
+              "executable_sha256": "acb27f170c2d49e59e830df4c608046b5121f0fa3cdcd9798d3715b4cfe6fe43",
+              "compiled_manifest_sha256": "e4f614a3336b7672b3966e53fc6dbfa2cb94c19077486c7312a2c640267729df",
+              "provenance_sha256": "72c7e9505d6f8b3f72ae9022f6ad7e37b4dd72b4086a2d9015ad83ee60924095",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+normalZero/P2",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "doors": "either",
+              "host_profile": "mmx6.win64-clang22.loopback revision35",
+              "audio": "dummy muted"
+            },
+            "action": "Guest-only ordinary Jump/Right onto authored portal2; actual original same-stageCP2 initializer/native48HPboss intro without corrective movement, both native fullfeet and separate controls.",
+            "outcome": "LOCAL full named contract and all4parent gates passed; root reviewed5composed images, unchangedprivatecards and1nativeexit0. NET remains pending.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F122-F124-F7-native-refight-local-reviewed.json",
+                "sha256": "3c68d8b1bfce3514352691e00b5a06c09da47283ec4166ab5564d08688df31f3"
+              }
+            ],
+            "limits": [
+              "Only three named rows; no F206, bosskill, allpads or native3330 claim.",
+              "Option15 originalCP1 plus disclosed once position/history bypass; original input remains tainted.",
+              "Publications, PLAY/actors and composed captures are asynchronous; pre/post capture rows retained.",
+              "All direction is neutral after admission until actual native HP48/active4 and released fullfeet.",
+              "First typed bodies are retained, including unresolved contact. F7 qualification requires final original full22feet, native ground, living bodies and independent movement; initial transient motion is not a failed landing.",
+              "Collision equivalence permits native graphical remaps, never claims original full graphical identity.",
+              "Parent exact image/profile/source, recording/card/cleanup and final CRC gates remain mandatory.",
+              "Only LOCAL mode is admitted by this receipt; NET same exact candidate remains required. Overall three comparisons remain unverified until that independent mode passes.",
+              "Default-off agreed original12/0CP1 prerequisite plus once source position/history1852/1241 and hostile-contact protection bypass travel. No destination-position, boss HP/phase/defeat, progress or landing-success writes occur in the observer.",
+              "Native original CP2 initializer restores the exact pristineDAT104 metatile bank; CP1 six-copy persistence was a refuted source inference. Exact wholebank/layout/descriptor/source guards remain checked. First guest typed box can precede its native terrain pass (retained foot449/contactpending); final actual Zero426/foot448 is required and observed.",
+              "Root personally reviewed all five composed captures. Heroes overlap before short separate controls; both identities/resources are additionally established by native publications. Asynchronous screenshots do not establish matched render ticks or complete sprite/palette fidelity.",
+              "Source and model regressions support fixes, not comparison credit. Native card files are unchanged; fixture taint, strict replay refusal, ordinary recordings and all failed attempts remain retained. No F206/camera-follow, other pad, distant passenger, victory, roster inversion, cross-host, human or native3330 credit."
+            ],
+            "bypasses": [
+              "Default-off agreed originalCP1, once source position/history and hostile-contact protection; no tested result seeds."
+            ]
+          }
+        ],
+        "limitations": "LOCAL actual native guest-onlyportal/CP2/HP48activeboss/nativefeet448/independentcontrols passes on92e1ce2/acb27image/profile35; root5captures/full4parentgates/cards/exit0. NET samecandidate pending; no aggregate credit. Retained transient contact and originalbankrestore/correction limits in receipt."
       }
     },
     {
