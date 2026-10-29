@@ -1,0 +1,725 @@
+{
+  "kind": "F40_actual_real_UI_START_all_nine_options_NET_root_review",
+  "status": "passed",
+  "mode": "netplay",
+  "comparisons": [
+    "F40"
+  ],
+  "frozen_row_sha256": "5b38303ce345a7bad19c2d2add0bdd73c7f3e785957eb685c9e387b4f39f7790",
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fallen-forward-v101-final-binding-root-v4.json",
+    "binding_sha256": "437835711ba1b9b8dc0dbf4fdc08f7922b03c719d88cb5ab67a43a83a8e190c1",
+    "image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+    "manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+    "provenance_sha256": "41fda7cfdfdbfc716a36c5023441ed12ec0f5b5db9489a7333f7c9ccd5831dd8",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v101-fallen-forward-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "5c6609dfbc0079354a1a352294365850be48bac2",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v46",
+    "host_revision": 29
+  },
+  "parent_checks": {
+    "jump_audio_original_source_bound": true,
+    "F40_runtime_both_peer_windows_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "F40_resolved_crc_after_case": true,
+    "F40_final_private_cards_unchanged": true,
+    "F40_owned_pair_cleanup": true
+  },
+  "actual_UI_actions": {
+    "host": [
+      {
+        "command": "view:netplay_mode",
+        "setup_bypass": "Navigation shortcut only; actual LAN/name/Host/Create/Join clicks follow."
+      },
+      {
+        "command": "click:200,260",
+        "expect_view": "Netplay Mode",
+        "event": "enter_LAN"
+      },
+      {
+        "command": "click:540,490"
+      },
+      {
+        "command": "text:F39 Local Host"
+      },
+      {
+        "command": "click:590,540"
+      },
+      {
+        "command": "click:120,800",
+        "event": "open_Host_Lobby"
+      },
+      {
+        "command": "click:550,600",
+        "event": "Create_Lobby"
+      }
+    ],
+    "guest": [
+      {
+        "command": "view:netplay_mode",
+        "setup_bypass": "Navigation shortcut only; actual LAN/name/Host/Create/Join clicks follow."
+      },
+      {
+        "command": "click:200,260",
+        "expect_view": "Netplay Mode",
+        "event": "enter_LAN"
+      },
+      {
+        "command": "click:540,490"
+      },
+      {
+        "command": "text:F39 Local Guest"
+      },
+      {
+        "command": "click:590,540"
+      },
+      {
+        "command": "click:1000,800",
+        "event": "open_Join_Direct"
+      },
+      {
+        "command": "click:480,220"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "key:Backspace"
+      },
+      {
+        "command": "text:127.0.0.1"
+      },
+      {
+        "command": "click:550,350",
+        "event": "Join_Direct"
+      }
+    ],
+    "first_play": [
+      {
+        "command": "click:990,800",
+        "event": "Play",
+        "expect_view": "Lobby"
+      }
+    ]
+  },
+  "actual_UI_event_count": 114,
+  "actual_network": [
+    {
+      "transport": "lan",
+      "slot": 0,
+      "local_input_player": 0,
+      "delay": 4,
+      "force_turn": 0,
+      "bind_IP": "127.0.0.1",
+      "bind_port": 7777,
+      "peer_IP": null,
+      "peer_port": null,
+      "session": 2,
+      "actual_line": "psxrecomp: netplay transport=lan slot=0 input_player=0 delay=4 force_turn=0 bind=127.0.0.1:7777 peer= session=2",
+      "configured_peer": "accept-first"
+    },
+    {
+      "transport": "lan",
+      "slot": 1,
+      "local_input_player": 0,
+      "delay": 4,
+      "force_turn": 0,
+      "bind_IP": "127.0.0.1",
+      "bind_port": 7778,
+      "peer_IP": "127.0.0.1",
+      "peer_port": 7777,
+      "session": 2,
+      "actual_line": "psxrecomp: netplay transport=lan slot=1 input_player=0 delay=4 force_turn=0 bind=127.0.0.1:7778 peer=127.0.0.1:7777 session=2",
+      "configured_peer": "127.0.0.1:7777"
+    }
+  ],
+  "actual_profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 29,
+    "selected_sha256": "530a71e8cc64d3204c701c1e09c552ea627e3b7acea1cba278970e3a79903626",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 29,
+          "selected_sha256": "530a71e8cc64d3204c701c1e09c552ea627e3b7acea1cba278970e3a79903626",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 29,
+          "selected_sha256": "530a71e8cc64d3204c701c1e09c552ea627e3b7acea1cba278970e3a79903626",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "prelaunch_selections": [
+    {
+      "seat": 0,
+      "choices": {
+        "doors": "both",
+        "hud_layout": "side_by_side",
+        "local_cameras": "split",
+        "cameras": "independent",
+        "lab_checkpoint": "off",
+        "lab_contact_protection": "off",
+        "lab_starting_hp_p1": "off",
+        "lab_starting_hp_p2": "off",
+        "lab_earned_weapons": "off"
+      },
+      "after": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-0\\mods\\state.toml",
+        "bytes": 572,
+        "sha256": "801709f1f7a9488a7089d38f44924148c515c729c892c99fcca43257788a939a"
+      },
+      "catalog": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-0\\mods\\bundled\\mmx6.local-coop\\0.0.1\\manifest.toml",
+        "bytes": 11349,
+        "sha256": "21e4241327b374cb1f4f0d543b7608f4a1107a3aef722e37352ef5368c36686d"
+      }
+    },
+    {
+      "seat": 1,
+      "choices": {
+        "doors": "either",
+        "hud_layout": "stacked",
+        "local_cameras": "unified",
+        "cameras": "unified",
+        "lab_checkpoint": "off",
+        "lab_contact_protection": "off",
+        "lab_starting_hp_p1": "off",
+        "lab_starting_hp_p2": "off",
+        "lab_earned_weapons": "off"
+      },
+      "after": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-1\\mods\\state.toml",
+        "bytes": 567,
+        "sha256": "0bb34e8af4371d29109bcb024af7553b1c9570b520cd6da98e4d86ccd87924ca"
+      },
+      "catalog": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-1\\mods\\bundled\\mmx6.local-coop\\0.0.1\\manifest.toml",
+        "bytes": 11349,
+        "sha256": "21e4241327b374cb1f4f0d543b7608f4a1107a3aef722e37352ef5368c36686d"
+      }
+    }
+  ],
+  "recordings": [
+    {
+      "recording": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-0\\saves\\input-recordings\\session-1793299670059814-1-0\\inputs.jsonl",
+        "bytes": 1132504,
+        "sha256": "a8d7e146bd53e0ad0e7c7c4167a49c460e5a520d1d5b6d6c5e26a76337449798"
+      },
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+        "manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 29,
+          "selected_sha256": "530a71e8cc64d3204c701c1e09c552ea627e3b7acea1cba278970e3a79903626"
+        },
+        "settings_sha256": "716045cce2935d2794898a1b2516f8ccd1dc0e43cfef5dc1dcb264d04c042688",
+        "simulation_contract_sha256": "e278a8361f28ce07803258ee630edf6d62630ac642cf8a3d52034b4c349d3eba"
+      },
+      "actual_values": {
+        "cameras": "independent",
+        "doors": "both",
+        "hud_layout": "side_by_side",
+        "lab_checkpoint": "off",
+        "lab_contact_protection": "off",
+        "lab_earned_weapons": "off",
+        "lab_starting_hp_p1": "off",
+        "lab_starting_hp_p2": "off",
+        "local_cameras": "split"
+      },
+      "committed_fingerprint": "093a50f23409471549416d8f087870eba152c86e0b1d1a0f318abacd0f151b1e",
+      "session_fingerprint": "c41f206011992087ebc29c8ac37c03307c8ae41be984abe15405bc791ae8fb0a",
+      "startup_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-0\\saves\\input-recordings\\session-1793299670059814-1-0\\settings.json",
+          "bytes": 26964,
+          "sha256": "716045cce2935d2794898a1b2516f8ccd1dc0e43cfef5dc1dcb264d04c042688"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-0\\saves\\input-recordings\\session-1793299670059814-1-0\\content.json",
+          "bytes": 567,
+          "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-0\\saves\\input-recordings\\session-1793299670059814-1-0\\simulation-contract.json",
+          "bytes": 351,
+          "sha256": "e278a8361f28ce07803258ee630edf6d62630ac642cf8a3d52034b4c349d3eba"
+        }
+      ],
+      "strict_terminal_validated": true
+    },
+    {
+      "recording": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-1\\saves\\input-recordings\\session-1793299670061450-1-0\\inputs.jsonl",
+        "bytes": 1133260,
+        "sha256": "2dbd407639bda896864f0518f40ba7bcfac8dfd4ed808fd3bc74add5ac399e42"
+      },
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+        "manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 29,
+          "selected_sha256": "530a71e8cc64d3204c701c1e09c552ea627e3b7acea1cba278970e3a79903626"
+        },
+        "settings_sha256": "978061a6f923594ac373fd1493098e0c41236752cbf9327d66330fc3ab5e6563",
+        "simulation_contract_sha256": "e278a8361f28ce07803258ee630edf6d62630ac642cf8a3d52034b4c349d3eba"
+      },
+      "actual_values": {
+        "cameras": "independent",
+        "doors": "both",
+        "hud_layout": "side_by_side",
+        "lab_checkpoint": "off",
+        "lab_contact_protection": "off",
+        "lab_earned_weapons": "off",
+        "lab_starting_hp_p1": "off",
+        "lab_starting_hp_p2": "off",
+        "local_cameras": "split"
+      },
+      "committed_fingerprint": "093a50f23409471549416d8f087870eba152c86e0b1d1a0f318abacd0f151b1e",
+      "session_fingerprint": "c41f206011992087ebc29c8ac37c03307c8ae41be984abe15405bc791ae8fb0a",
+      "startup_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-1\\saves\\input-recordings\\session-1793299670061450-1-0\\settings.json",
+          "bytes": 26964,
+          "sha256": "978061a6f923594ac373fd1493098e0c41236752cbf9327d66330fc3ab5e6563"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-1\\saves\\input-recordings\\session-1793299670061450-1-0\\content.json",
+          "bytes": 567,
+          "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-1\\saves\\input-recordings\\session-1793299670061450-1-0\\simulation-contract.json",
+          "bytes": 351,
+          "sha256": "e278a8361f28ce07803258ee630edf6d62630ac642cf8a3d52034b4c349d3eba"
+        }
+      ],
+      "strict_terminal_validated": true
+    }
+  ],
+  "resolved_crc_windows": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2880,
+          "core": "4aa56315",
+          "mod": "ee0f0122"
+        },
+        {
+          "simulation_tick": 2912,
+          "core": "c893a303",
+          "mod": "fd46e09a"
+        },
+        {
+          "simulation_tick": 2944,
+          "core": "8f773fd0",
+          "mod": "d5cb24fc"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "9673e41d",
+          "mod": "3d070562"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "07737476",
+          "mod": "f51ae382"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "cab9b486",
+          "mod": "887596d4"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "c830b9ec",
+          "mod": "31bf06f4"
+        }
+      ],
+      "resolved_through": [
+        3099,
+        3101
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3168,
+          "core": "7ea1a88d",
+          "mod": "cc8453b9"
+        },
+        {
+          "simulation_tick": 3200,
+          "core": "256c49fc",
+          "mod": "95f58a13"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "2324db99",
+          "mod": "5b90ddf3"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "10e064f1",
+          "mod": "bad3de91"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "fe623415",
+          "mod": "99a67ab1"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "520a7641",
+          "mod": "683fb73b"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "9c4302ab",
+          "mod": "e0070d5b"
+        }
+      ],
+      "resolved_through": [
+        3382,
+        3382
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3456,
+          "core": "f452acdb",
+          "mod": "a3f14b03"
+        },
+        {
+          "simulation_tick": 3488,
+          "core": "9887bdb7",
+          "mod": "2ac0658b"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "e03d323d",
+          "mod": "8703ebe1"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "c5be9819",
+          "mod": "06739599"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "326e862a",
+          "mod": "c1282fcb"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "bc699601",
+          "mod": "704c5b8f"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "74bbd245",
+          "mod": "cc8453b9"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "537e36ed",
+          "mod": "95f58a13"
+        }
+      ],
+      "resolved_through": [
+        3685,
+        3685
+      ]
+    },
+    {
+      "label": "F40 actual launcher START all nine committed host options",
+      "samples": [
+        {
+          "simulation_tick": 3712,
+          "core": "3c82d071",
+          "mod": "5b90ddf3"
+        },
+        {
+          "simulation_tick": 3744,
+          "core": "1f93fb61",
+          "mod": "bad3de91"
+        },
+        {
+          "simulation_tick": 3776,
+          "core": "26d3e65e",
+          "mod": "99a67ab1"
+        },
+        {
+          "simulation_tick": 3808,
+          "core": "560a21ca",
+          "mod": "683fb73b"
+        },
+        {
+          "simulation_tick": 3840,
+          "core": "c7732ccc",
+          "mod": "e0070d5b"
+        },
+        {
+          "simulation_tick": 3872,
+          "core": "2946898c",
+          "mod": "475aa25f"
+        },
+        {
+          "simulation_tick": 3904,
+          "core": "57ed03c5",
+          "mod": "ec70bda9"
+        }
+      ],
+      "resolved_through": [
+        3934,
+        3934
+      ]
+    },
+    {
+      "label": "F40 actual nine-option continuation",
+      "samples": [
+        {
+          "simulation_tick": 3968,
+          "core": "6d3306f2",
+          "mod": "2ac0658b"
+        },
+        {
+          "simulation_tick": 4000,
+          "core": "6d00bda6",
+          "mod": "8703ebe1"
+        },
+        {
+          "simulation_tick": 4032,
+          "core": "4e92d238",
+          "mod": "06739599"
+        },
+        {
+          "simulation_tick": 4064,
+          "core": "18eb08f0",
+          "mod": "c1282fcb"
+        },
+        {
+          "simulation_tick": 4096,
+          "core": "a19936a3",
+          "mod": "704c5b8f"
+        },
+        {
+          "simulation_tick": 4128,
+          "core": "95a5798c",
+          "mod": "cc8453b9"
+        },
+        {
+          "simulation_tick": 4160,
+          "core": "10c446a2",
+          "mod": "95f58a13"
+        }
+      ],
+      "resolved_through": [
+        4187,
+        4187
+      ]
+    },
+    {
+      "label": "F40 actual nine-option START retention then settle",
+      "samples": [
+        {
+          "simulation_tick": 4192,
+          "core": "6355835c",
+          "mod": "5b90ddf3"
+        },
+        {
+          "simulation_tick": 4224,
+          "core": "72cdae66",
+          "mod": "bad3de91"
+        },
+        {
+          "simulation_tick": 4256,
+          "core": "dbe672a8",
+          "mod": "99a67ab1"
+        },
+        {
+          "simulation_tick": 4288,
+          "core": "97857d9f",
+          "mod": "683fb73b"
+        },
+        {
+          "simulation_tick": 4320,
+          "core": "d6b303d7",
+          "mod": "e0070d5b"
+        },
+        {
+          "simulation_tick": 4352,
+          "core": "fbf5b9cf",
+          "mod": "475aa25f"
+        },
+        {
+          "simulation_tick": 4384,
+          "core": "446a3a2c",
+          "mod": "ec70bda9"
+        },
+        {
+          "simulation_tick": 4416,
+          "core": "6ea1ba33",
+          "mod": "a3f14b03"
+        }
+      ],
+      "resolved_through": [
+        4431,
+        4432
+      ]
+    }
+  ],
+  "native_terminals": [
+    {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    }
+  ],
+  "captures": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-0\\logs\\intro-present.png",
+      "bytes": 2074543,
+      "sha256": "fb20c68740695b96c7f4b9464e1a6c5ab5efd49699b4d0cba916d31222e418d2",
+      "root_personally_viewed": true
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\peer-1\\logs\\intro-present.png",
+      "bytes": 2074543,
+      "sha256": "c4aaf96c9508d6d602187abb0b97c2d8d4948be865534f8ba61e230f27d09bf6",
+      "root_personally_viewed": true
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\qualification.json",
+      "bytes": 2973113,
+      "sha256": "43fe71289ff68b84e193344dc3e086483ae282e7cfc8d05159051af0d82b68ab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\qualification-parent-original.json",
+      "bytes": 2964177,
+      "sha256": "8f6fe01f6ceb39c56ea7da69419600c51eef9ae9a24cc76fb24158383f6c6318"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\F40-source-package.json",
+      "bytes": 8198,
+      "sha256": "6d263c94883711ca7cd9751a40900869e1be3b3d2c552e0be176f066b6e5bd37"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\f40n1\\F40-executed-parent.py",
+      "bytes": 76698,
+      "sha256": "60895c9e13db1a663d7fa9a3bbd785006327011b03b59dbb2c3ccb1e4f6b5000"
+    }
+  ],
+  "limits": [
+    "Only frozen234 F40; all9 currently declared co-op typed choices,4public/5LAB, through real UI Host/Create/Join/Play.",
+    "Host4nondefault choices, guest4different saved defaults; all5LABOFF. Both actual committed plans retain every9 host value while saved preferences remain unchanged.",
+    "Two selected trusted packages/settings+loader are the actual supported plan. Disabled catalog rows are not received capability coverage; no arbitrary209-row, oversized/malformed or unsupported-package payload claim.",
+    "Native ordinary complete recorders bind settings/content/simulation identities, exact actual image and profile. No fixture/taint or CLI pair/model/rematch substitution.",
+    "ActualLANsession2/delay4, hostaccept-first7777/guest7778; requested CLI session is unused. Same-machine Win64 only.",
+    "All15source/profile/ordinaryinput/CRC/cards/ownedexit gates pass;44matchingCRC across6windows,2nativegracefulexit0,2rootviewed composedcaptures. No general graphics/audio/performance/replay or LOCAL qualification."
+  ]
+}

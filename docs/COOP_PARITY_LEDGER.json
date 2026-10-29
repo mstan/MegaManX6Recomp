@@ -9914,10 +9914,54 @@
         ],
         "mode_status": {
           "local": "unverified",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "5c6609dfbc0079354a1a352294365850be48bac2",
+            "build_identity": {
+              "executable_sha256": "622fe2524b40793848b30587baef205e469b899daa249888bb5089cac31f3fe1",
+              "compiled_manifest_sha256": "e0140409713fbd64379712067658d950296e03589fd8ac6092e13858be6f92a8",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "choices": {
+                "cameras": "independent",
+                "doors": "both",
+                "hud_layout": "side_by_side",
+                "lab_checkpoint": "off",
+                "lab_contact_protection": "off",
+                "lab_earned_weapons": "off",
+                "lab_starting_hp_p1": "off",
+                "lab_starting_hp_p2": "off",
+                "local_cameras": "split"
+              },
+              "transport": "actual realUI LAN Host/Join/Play, delay4, session2, same-machine Win64",
+              "audio": "dummy muted"
+            },
+            "action": "Select all9 declared choices on host, retain fourdifferent guest saved defaults, realHost/Create/Join/Play then inspect actualcommitted plans and completeordinaryrecorders onboth peers.",
+            "outcome": "Every9 host choice retained onbothpeers, fullcommitted/session/execution identity equal, guest savedpreferences unchanged; all15parentgates/44CRC/6windows/cards/2ownedexit0/root2captures pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lobby/manifest-bound-5c6609d-F40-nine-options-netplay-reviewed.json",
+                "sha256": "2b3683742850a09d4c8ddebea5fdf1fbfa181a44de8a9671ae37b1e2e067decd"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F40; all9 currently declared co-op typed choices,4public/5LAB, through real UI Host/Create/Join/Play.",
+              "Host4nondefault choices, guest4different saved defaults; all5LABOFF. Both actual committed plans retain every9 host value while saved preferences remain unchanged.",
+              "Two selected trusted packages/settings+loader are the actual supported plan. Disabled catalog rows are not received capability coverage; no arbitrary209-row, oversized/malformed or unsupported-package payload claim.",
+              "Native ordinary complete recorders bind settings/content/simulation identities, exact actual image and profile. No fixture/taint or CLI pair/model/rematch substitution.",
+              "ActualLANsession2/delay4, hostaccept-first7777/guest7778; requested CLI session is unused. Same-machine Win64 only.",
+              "All15source/profile/ordinaryinput/CRC/cards/ownedexit gates pass;44matchingCRC across6windows,2nativegracefulexit0,2rootviewed composedcaptures. No general graphics/audio/performance/replay or LOCAL qualification."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "NET exact5c/image622fe252 realUIHost/Join/Play all9declaredchoices retainedbothpeers versus4differentguestdefaults; fullordinaryrecorders/identities/source/profile/44CRC/6windows/cards/2nativeexit0/root2captures pass. Current trustedsettings+loader plan only; disabledcatalogrows notwirecoverage. LOCAL remainsrequired/unverified, no aggregatepromotion."
       }
     },
     {
