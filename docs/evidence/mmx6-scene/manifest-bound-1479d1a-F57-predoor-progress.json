@@ -114,6 +114,63 @@
       },
       "private_cards_unchanged": true,
       "actual_contact_approach": false
+    },
+    {
+      "version": 7,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F57-native-predoor-contact-local-v95-root-v7\\qualification.json",
+        "bytes": 2848740,
+        "sha256": "09741eff70041a4fe229165c242f8d3e0602b8ccb896e218b14d4b5f023c43c4"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F57-native-predoor-contact-local-v95-root-v7\\ammo-hud\\intro-admission\\F57-native-predoor-gate\\observations.json",
+        "bytes": 2432177,
+        "sha256": "84eee42f2711758ecb0d8f9784f0d5ca59a48a4fa91d1f40fb26a89af5cd0e6e"
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F57_native_predoor_contact_v95_root_v7.py",
+        "bytes": 27534,
+        "sha256": "70f56207e8ee6fbdde151dd7378bd1e38f41dc14bcaae3d03a2720406ab02df9"
+      },
+      "raw_status": "failed_setup",
+      "raw_error": "Three actual native shots did not damage source-bound approach solid; stop, do not guess another aim",
+      "ordinary_Square_offers": [
+        {
+          "sample": 68,
+          "before": [
+            32
+          ],
+          "after": [
+            32
+          ]
+        },
+        {
+          "sample": 73,
+          "before": [
+            32
+          ],
+          "after": [
+            32
+          ]
+        },
+        {
+          "sample": 79,
+          "before": [
+            32
+          ],
+          "after": [
+            32
+          ]
+        }
+      ],
+      "projectile_birth_proven": false,
+      "block_retired": null,
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "private_cards_unchanged": true,
+      "comparison_admissions": 0
     }
   ],
   "source_proof": {
@@ -137,10 +194,11 @@
   "observed": [
     "Agreed P1-only startingHP1 receipt02010001, P2HP32, real source-qualified contact enemy.",
     "Two actual approaches, Split and Unified, stopP1 at5531.5/Y427 with Left2 still mapped, native left-contact bit and both heroes alive.",
-    "Original authored category4/type2 FA374 at5488 settles to nativeY416, with32HP and radius32 solidFA984/right5520. Source has native attack damage/break/retirement; live exact slot/boxes confirmed in v5 before its path-constant failure."
+    "Original authored category4/type2 FA374 at5488 settles to nativeY416, with32HP and radius32 solidFA984/right5520. Source has native attack damage/break/retirement; live exact slot/boxes confirmed in v5 before its path-constant failure.",
+    "Corrected v7 reached the exact wall and offered Square three times, with block HP32 unchanged throughout. No projectile-birth witness is retained; these are offers, not proven shots. No block retirement or contact/death/gate endpoint followed. Owned native exit0/cards unchanged."
   ],
   "correction": {
-    "status": "frozen_preflight_passed_native_pending_capacity",
+    "status": "native_endpoint_failed_route_parked",
     "observer": {
       "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F57_native_predoor_contact_v95_root_v6.py",
       "bytes": 25147,
@@ -151,12 +209,19 @@
       "bytes": 4453,
       "sha256": "fc88ac69f8add68ce50840fc510aeba9bf1dafe07a86143c4193d77c0b315656"
     },
-    "endpoint": "Ordinary native Square must damage/retire the actual32HP approach solid before walking to a genuine enemy contact; no solid/death/lifecycle/result writes."
+    "endpoint": "Ordinary native Square must damage/retire the actual32HP approach solid before walking to a genuine enemy contact; no solid/death/lifecycle/result writes.",
+    "previous_status": "frozen_preflight_passed_native_pending_capacity",
+    "tested_observer": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F57_native_predoor_contact_v95_root_v7.py",
+      "bytes": 27534,
+      "sha256": "70f56207e8ee6fbdde151dd7378bd1e38f41dc14bcaae3d03a2720406ab02df9"
+    }
   },
   "limits": [
     "No native death/FALLEN, survivor gate admission/clearance/closure/fresh control or NET result. No F57/F61/F77/F186/F160 credit.",
     "v1 HP-observation ordering, v3 missing640x480 allowance and v5 missing path constant are observer failures, not game failures.",
     "Original native checkpoint/position and HP1 are disclosed prelaunch prerequisites, not ordinary route/earned progress.",
-    "Static terrain lookup omits authored dynamic solids. This blocker establishes no input, camera or renderer defect."
+    "Static terrain lookup omits authored dynamic solids. This blocker establishes no input, camera or renderer defect.",
+    "F57 route parked after the implemented native clearance failed its defined endpoint. Do not guess further aim, weapon or traversal variants; any future attempt needs a concrete distinct source-qualified prerequisite fix."
   ]
 }
