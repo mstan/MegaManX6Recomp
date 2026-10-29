@@ -56,6 +56,26 @@ static int checkpoint_northpole_camera(void) {
     int x=(int16_t)psx_mod_read_half(cam+10),y=(int16_t)psx_mod_read_half(cam+14);
     return x>=4640 && x<=4976 && y>=1264 && y<=1456;
 }
+static int checkpoint_northpole_reploid_miss(uint32_t a) {
+    /* Only the original subtype22 idle Reploid. Native contact2DCF4 rejects
+     * both standing heroes horizontally: source radii8+11, strict overlap<19.
+     * This says nothing about future Left input, which can rescue it. */
+    if(psx_mod_read_word(a)!=0x01160441u || psx_mod_read_word(a+4)!=0x01000001u ||
+       psx_mod_read_word(a+0x10)!=0x800F608Cu || psx_mod_read_word(a+8)!=(5096u<<16) ||
+       psx_mod_read_word(a+12)!=(1600u<<16) || psx_mod_read_byte(a+0x14) ||
+       psx_mod_read_word(a+0x68)!=0x8007891Cu || psx_mod_read_byte(a+0x70)!=8 ||
+       psx_mod_read_byte(a+0x84)!=1 || psx_mod_read_byte(a+0x7E) ||
+       psx_mod_read_word(0x8007891Cu)!=0x10080000u ||
+       psx_mod_read_word(0x800F6564u)!=0x8004F834u ||
+       (psx_mod_read_word(0x800F608Cu)&0xFFFFFFFEu)!=0x04160400u ||
+       psx_mod_read_word(0x800F6090u)!=0x064813E8u)return 0;
+    for(unsigned n=0x20;n<0x30;n+=4)if(psx_mod_read_word(a+n))return 0;
+    for(unsigned i=0;i<9;++i)
+        if(checkpoint_hash(portal_setup_code[i].first,portal_setup_code[i].end)!=portal_setup_code[i].hash)return 0;
+    int x0=(int16_t)psx_mod_read_half(PLAYER+10)-5096;
+    int x1=(int16_t)(le32(p2.body+8)>>16)-5096;
+    return (x0<=-19 || x0>=19) && (x1<=-19 || x1>=19);
+}
 static int checkpoint_northpole_clear(void) {
     /* Refuse a bypass into any nearby active enemy, projectile or shared solid.
      * Original producers atY1376 are outside these conservative rectangles. */
@@ -64,7 +84,8 @@ static int checkpoint_northpole_clear(void) {
     for(unsigned pool=0;pool<4;++pool)for(uint32_t a=pools[pool][0];a<pools[pool][1];a+=pools[pool][2]) {
         if(!(psx_mod_read_byte(a)&1u))continue;
         int x=(int16_t)psx_mod_read_half(a+10),y=(int16_t)psx_mod_read_half(a+14);
-        if(y>1514 && y<1675 && ((x>4952 && x<5080)||(x>5056 && x<5184)))return 0;
+        if(y>1514 && y<1675 && ((x>4952 && x<5080)||(x>5056 && x<5184)) &&
+           !(pool==3 && checkpoint_northpole_reploid_miss(a)))return 0;
     }
     return 1;
 }

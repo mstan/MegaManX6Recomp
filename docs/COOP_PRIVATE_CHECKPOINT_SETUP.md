@@ -361,3 +361,10 @@ and table as well. Partial copies, other collision changes, and the changed
 bank before placement are refused; layout/descriptors and setup ground/air
 remain exact. Two strict failed V100 setup runs retained this native change;
 accepting arbitrary graphic/collision differences would be incorrect.
+
+The nearby original Reploid22 (5096,1600, originF608C) is accepted only in its
+exact source-bound native idle state, variant1/box7891C/ground8/zero motion.
+Its actual contact uses horizontal radius8 plus standing-player11. Both
+current bodies must miss the strict19-pixel overlap; setup distances80/24
+miss. GuestRight increases separation. No future Left/contact/rescue claim is
+implied. Other nearby actors and altered Reploid state/geometry stay refused.

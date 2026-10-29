@@ -753,6 +753,13 @@ static void agreed_northpole_prerequisite(CPUState *cpu) {
         uint16_t preserved=psx_mod_read_half(meta+37966);
         psx_mod_write_half(meta+37966,preserved^1u);CHECK(!checkpoint_northpole_assets(&meta,&desc));psx_mod_write_half(meta+37966,preserved);
         CHECK(checkpoint_northpole_assets(&meta,&desc) && checkpoint_northpole_ground(meta,desc));
+        uint32_t reploid=0x800C12C4u;psx_mod_write_word(reploid,0x01160441u);psx_mod_write_word(reploid+4,0x01000001u);
+        psx_mod_write_word(reploid+0x10,0x800F608Cu);psx_mod_write_word(reploid+8,5096u<<16);psx_mod_write_word(reploid+12,1600u<<16);
+        psx_mod_write_word(reploid+0x68,0x8007891Cu);psx_mod_write_byte(reploid+0x70,8);psx_mod_write_byte(reploid+0x84,1);
+        CHECK(checkpoint_northpole_reploid_miss(reploid) && checkpoint_northpole_clear());
+        put32(p2.body+8,5114u<<16);CHECK(!checkpoint_northpole_reploid_miss(reploid) && !checkpoint_northpole_clear());put32(p2.body+8,5120u<<16);
+        psx_mod_write_byte(reploid+0x84,0);CHECK(!checkpoint_northpole_clear());psx_mod_write_byte(reploid+0x84,1);
+        CHECK(checkpoint_northpole_clear());
         memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
             psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_byte(diagnostic+0xAD)==2 &&

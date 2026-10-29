@@ -515,6 +515,7 @@
       "source_tiles": "DAT96 offsets7728/772A/772C =09C3/09C4/092E",
       "target": "metatile offsets9448/944A/944C; layer0 world4672/4688/4704,Y1056",
       "allowance": "After declared position only, full original bank FNV142A1278 or full exact native variant65F367C2; no partial/other modifications, unchanged layout/descriptors and source ground/air. Writer and table guarded. Before placement only full original bank."
-    }
+    },
+    "nearby_reploid_exclusion": "Allow only source-bound original idle type4/sub22 at5096/1600/originF608C, variant1 box7891C=00000810, ground8 and zero motion; source init/idle/contact/geometry guarded. Both actual standing bodies must miss original horizontal contact strictabs(dx)<19. At approach dx80/24; guestRight moves away. No future Left/contact/rescue qualification."
   }
 }
