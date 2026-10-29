@@ -1,0 +1,553 @@
+{
+  "kind": "F69_same_V82_actual_guest_final_hit_primary_native_rewards_Save_selector_fresh_progress",
+  "comparison": "F69",
+  "frozen_row_sha256": "2dbec107bc3bc7324cfb089674790787f71358be14c43bdb029178b0be01ff58",
+  "status": "passed",
+  "required_modes": [
+    "local",
+    "netplay"
+  ],
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+    "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+    "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+    "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+    "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v31",
+    "host_revision": 14
+  },
+  "LOCAL": {
+    "review": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-dcc1002-earned-Investigator-Save-LOCAL-reviewed.json",
+    "sha256": "7a71c348766fe08ee650133792ed15fce63aef72921289384a795c2f5bc1bdc7",
+    "checks": {
+      "exact_raw_image_manifest_sources_originals": true,
+      "actual_original_guest_final_hit_and_rewards": true,
+      "actual_P1_native_Save_selector_and_fresh_roster_inputs": true,
+      "actual_persistent_campaign_and_whole_private_card_model": true,
+      "complete_inventory_other_cards_and_recorder_initials_unchanged": true,
+      "native_current_clear_retained_in_fresh_stage": true,
+      "actual_fixture_recording_taint_refused": true,
+      "owned_input_release_and_graceful_exit_zero": true
+    },
+    "raw_failed_parent_preserved": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-R19-F13-v82-staging-helper-v1\\earned-Investigator-Save-local-v82-root-v1-server-v1\\qualification.json",
+      "sha256": "2cb1b04391cc7bfc2d1fb5f5fe4dcc2d7972cf7c256afe629ef53515051e98e2",
+      "status": "failed_setup",
+      "error": "Fresh default native X/P1 Zero/P2 roster differs",
+      "original_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "original_private_cards_unchanged": false
+    }
+  },
+  "NET": {
+    "raw_parent": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\qualification.json",
+    "sha256": "23a4aa1daa493f362a9936870c0774783645eee490e6977afbd1e816322bd5e6",
+    "status": "agreed_fixture_native_intro_observations_complete_review_pending",
+    "checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": true,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_resolved_crc_after_case": true,
+      "native_Save_exact_actual_target_cards": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "native_Save_checks": {
+      "actual_native_Save_targets_bound_and_all_inventory_blank_before_input": true,
+      "actual_report_Save_and_source_Yes_inputs": true,
+      "actual_empty_native_slot_selected": true,
+      "source_packed_persistent_campaign_matches": true,
+      "original_native_writer_successful_return": true,
+      "all_peers_original_payload_slot_checksum_campaign_verified": true,
+      "actual_native_active_card_paths_and_clean_status_retained_after_Save": true
+    },
+    "native_frontend_checks": {
+      "earned_source_ready_report_seen": true,
+      "actual_native_selector_return": true,
+      "both_native_victory_bodies_visible_together": true,
+      "each_living_body_native_victory_once": true,
+      "each_living_body_native_departure_once": true,
+      "no_early_primary_withdrawal": true,
+      "no_second_guest_victory": true,
+      "no_direct_game_state_or_card_writes": true,
+      "actual_native_Save_writer_completed": true
+    },
+    "fresh_entry_checks": {
+      "actual_earned_clear_native_Save_selector": true,
+      "ordinary_primary_unit_confirmation": true,
+      "fresh_both_native_arrivals_grounded": true,
+      "correct_default_native_roster_each_peer": true,
+      "source_saved_native_earned_clear_mask_retained": true
+    },
+    "card_contract": {
+      "passed": true,
+      "kind": "exact_actual_native_slot0_Save_targets_and_immutable_other_cards",
+      "peers": [
+        {
+          "peer": 0,
+          "actual_target": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\peer-0\\saves\\card1.mcd",
+          "relative": "saves\\card1.mcd",
+          "before_sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+          "after_sha256": "76aded4f69ec952e47677dcfd7e07b7204e01b5d9b2b75bbe99c245ab1221a81",
+          "all_other_cards_unchanged": true,
+          "model": {
+            "whole_card_matches_strict_native_first_file_model": true,
+            "actual_native_payload_extent": 8192,
+            "only_expected_directory_frame": [
+              128,
+              256
+            ],
+            "only_expected_payload_range": [
+              8192,
+              16384
+            ],
+            "untouched_bytes_equal_exact_SDK_blank": true,
+            "native_filename": "BASLUS-01395",
+            "slot_index": 0,
+            "slot_bytes": 956,
+            "slot_offset": 512,
+            "mask": 1,
+            "slot_sha256": "068c3f10c0c16ef7b17f99c7821075cdf1845201211479c2c7b235cf48d862a1",
+            "payload_sha256": "9f189ff88dbb4c7712604c9a369c67ed518d4a4a8cb9eebc8679b03c9c5dc929",
+            "card_sha256": "76aded4f69ec952e47677dcfd7e07b7204e01b5d9b2b75bbe99c245ab1221a81"
+          }
+        },
+        {
+          "peer": 1,
+          "actual_target": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\peer-1\\saves\\netplay\\card1.mcd",
+          "relative": "saves\\netplay\\card1.mcd",
+          "before_sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+          "after_sha256": "76aded4f69ec952e47677dcfd7e07b7204e01b5d9b2b75bbe99c245ab1221a81",
+          "all_other_cards_unchanged": true,
+          "model": {
+            "whole_card_matches_strict_native_first_file_model": true,
+            "actual_native_payload_extent": 8192,
+            "only_expected_directory_frame": [
+              128,
+              256
+            ],
+            "only_expected_payload_range": [
+              8192,
+              16384
+            ],
+            "untouched_bytes_equal_exact_SDK_blank": true,
+            "native_filename": "BASLUS-01395",
+            "slot_index": 0,
+            "slot_bytes": 956,
+            "slot_offset": 512,
+            "mask": 1,
+            "slot_sha256": "068c3f10c0c16ef7b17f99c7821075cdf1845201211479c2c7b235cf48d862a1",
+            "payload_sha256": "9f189ff88dbb4c7712604c9a369c67ed518d4a4a8cb9eebc8679b03c9c5dc929",
+            "card_sha256": "76aded4f69ec952e47677dcfd7e07b7204e01b5d9b2b75bbe99c245ab1221a81"
+          }
+        }
+      ],
+      "original_unchanged_target_expectation_applicable": false
+    },
+    "corrected_native_roster": [
+      {
+        "peer": 0,
+        "characters": [
+          0,
+          1
+        ],
+        "HP": [
+          32,
+          32
+        ],
+        "stage": 1,
+        "section": 0,
+        "earned_mask": 1
+      },
+      {
+        "peer": 1,
+        "characters": [
+          0,
+          1
+        ],
+        "HP": [
+          32,
+          32
+        ],
+        "stage": 1,
+        "section": 0,
+        "earned_mask": 1
+      }
+    ],
+    "resolved_state_crc": [
+      {
+        "label": "initial idle",
+        "samples": [
+          {
+            "simulation_tick": 2944,
+            "core": "33ca8b3c",
+            "mod": "37aaa2cf"
+          },
+          {
+            "simulation_tick": 2976,
+            "core": "7f85c212",
+            "mod": "a71dac29"
+          },
+          {
+            "simulation_tick": 3008,
+            "core": "620bd97c",
+            "mod": "ca87c4c9"
+          },
+          {
+            "simulation_tick": 3040,
+            "core": "7b947508",
+            "mod": "69ebd801"
+          },
+          {
+            "simulation_tick": 3072,
+            "core": "b2bc3080",
+            "mod": "99341247"
+          },
+          {
+            "simulation_tick": 3104,
+            "core": "5a4d18b7",
+            "mod": "3f2438e3"
+          },
+          {
+            "simulation_tick": 3136,
+            "core": "fe4c4222",
+            "mod": "5e3ba8f1"
+          }
+        ],
+        "resolved_through": [
+          3165,
+          3165
+        ]
+      },
+      {
+        "label": "P2 right then release",
+        "samples": [
+          {
+            "simulation_tick": 3200,
+            "core": "ce8bcc29",
+            "mod": "06b3778f"
+          },
+          {
+            "simulation_tick": 3232,
+            "core": "7ae1bf69",
+            "mod": "8616ddb5"
+          },
+          {
+            "simulation_tick": 3264,
+            "core": "5e94e572",
+            "mod": "727c6a7b"
+          },
+          {
+            "simulation_tick": 3296,
+            "core": "65dcea3d",
+            "mod": "fd322e5b"
+          },
+          {
+            "simulation_tick": 3328,
+            "core": "9f6a429f",
+            "mod": "937db58d"
+          },
+          {
+            "simulation_tick": 3360,
+            "core": "b3046117",
+            "mod": "f11063ad"
+          },
+          {
+            "simulation_tick": 3392,
+            "core": "9474ba39",
+            "mod": "bb9ecf23"
+          },
+          {
+            "simulation_tick": 3424,
+            "core": "03a18733",
+            "mod": "bb765d6f"
+          }
+        ],
+        "resolved_through": [
+          3436,
+          3436
+        ]
+      },
+      {
+        "label": "P1 jump then settle",
+        "samples": [
+          {
+            "simulation_tick": 3520,
+            "core": "c811e645",
+            "mod": "7223b8cb"
+          },
+          {
+            "simulation_tick": 3552,
+            "core": "adce4996",
+            "mod": "893d9883"
+          },
+          {
+            "simulation_tick": 3584,
+            "core": "dd53c5a0",
+            "mod": "083bba5d"
+          },
+          {
+            "simulation_tick": 3616,
+            "core": "fc490d78",
+            "mod": "d63d0b9d"
+          },
+          {
+            "simulation_tick": 3648,
+            "core": "8bb542d0",
+            "mod": "9efb7893"
+          },
+          {
+            "simulation_tick": 3680,
+            "core": "dc77941e",
+            "mod": "06b3778f"
+          },
+          {
+            "simulation_tick": 3712,
+            "core": "552a3509",
+            "mod": "8616ddb5"
+          }
+        ],
+        "resolved_through": [
+          3736,
+          3737
+        ]
+      },
+      {
+        "label": "paired ground-jump audio then settle",
+        "samples": [
+          {
+            "simulation_tick": 16992,
+            "core": "c127013e",
+            "mod": "42fbf6b5"
+          },
+          {
+            "simulation_tick": 17024,
+            "core": "1ce5c1f0",
+            "mod": "f00f917a"
+          },
+          {
+            "simulation_tick": 17056,
+            "core": "a5d0797a",
+            "mod": "f21a585a"
+          },
+          {
+            "simulation_tick": 17088,
+            "core": "b181674d",
+            "mod": "397f1654"
+          },
+          {
+            "simulation_tick": 17120,
+            "core": "1ad89b92",
+            "mod": "ffc324f4"
+          },
+          {
+            "simulation_tick": 17152,
+            "core": "84c9db75",
+            "mod": "89798e12"
+          },
+          {
+            "simulation_tick": 17184,
+            "core": "ea709ae0",
+            "mod": "0c43a31e"
+          }
+        ],
+        "resolved_through": [
+          17211,
+          17210
+        ]
+      }
+    ],
+    "resolved_CRC_samples": 29,
+    "root_reviewed_composed_captures": [
+      {
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\earned-Save-native-frontend\\original-native-Save\\peer-0-native-original-Save-writer-returned.png",
+        "sha256": "67ba34a74a0f39446c41e9b263b3e45f2dacce2f8dfcfa311308edd67a5babd0",
+        "before": {
+          "id": 9060,
+          "ok": true,
+          "seq": 21,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 9061,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\earned-Save-native-frontend\\original-native-Save\\peer-0-native-original-Save-writer-returned.png",
+          "staged": true,
+          "seq": 21
+        },
+        "completion": {
+          "id": 9063,
+          "ok": true,
+          "seq": 22,
+          "wrote": 1
+        },
+        "peer": 0,
+        "label": "native-original-Save-writer-returned"
+      },
+      {
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\earned-Save-native-frontend\\original-native-Save\\peer-1-native-original-Save-writer-returned.png",
+        "sha256": "67ba34a74a0f39446c41e9b263b3e45f2dacce2f8dfcfa311308edd67a5babd0",
+        "before": {
+          "id": 8900,
+          "ok": true,
+          "seq": 21,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 8901,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\earned-Save-native-frontend\\original-native-Save\\peer-1-native-original-Save-writer-returned.png",
+          "staged": true,
+          "seq": 21
+        },
+        "completion": {
+          "id": 8902,
+          "ok": true,
+          "seq": 22,
+          "wrote": 1
+        },
+        "peer": 1,
+        "label": "native-original-Save-writer-returned"
+      },
+      {
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\earned-Save-native-frontend\\cleared-stage-portrait\\peer-0-completed-Yammark-map.png",
+        "sha256": "09ef7e7173713112f0acb95af8f72e41ef1cd4707c1808db49814ae68649ff4f",
+        "before": {
+          "id": 11103,
+          "ok": true,
+          "seq": 23,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 11104,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\earned-Save-native-frontend\\cleared-stage-portrait\\peer-0-completed-Yammark-map.png",
+          "staged": true,
+          "seq": 23
+        },
+        "completion": {
+          "id": 11105,
+          "ok": true,
+          "seq": 24,
+          "wrote": 1
+        },
+        "peer": 0,
+        "label": "actual-earned-grey-Yammark-map"
+      },
+      {
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\earned-Save-native-frontend\\cleared-stage-portrait\\peer-1-completed-Yammark-map.png",
+        "sha256": "09ef7e7173713112f0acb95af8f72e41ef1cd4707c1808db49814ae68649ff4f",
+        "before": {
+          "id": 10721,
+          "ok": true,
+          "seq": 23,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 10722,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\earned-Save-native-frontend\\cleared-stage-portrait\\peer-1-completed-Yammark-map.png",
+          "staged": true,
+          "seq": 23
+        },
+        "completion": {
+          "id": 10724,
+          "ok": true,
+          "seq": 24,
+          "wrote": 1
+        },
+        "peer": 1,
+        "label": "actual-earned-grey-Yammark-map"
+      },
+      {
+        "peer": 0,
+        "row": 166,
+        "label": "actual-postclear-fresh-native-arrival",
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\F69-postSave-fresh-entry\\peer-0-actual-postclear-fresh-native-arrival.png",
+        "sha256": "4bf2de045e40d3ce692ed1b396a12eb6d1edd26dbe8e620e97a9805affb80749",
+        "before": {
+          "id": 11378,
+          "ok": true,
+          "seq": 25,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 11379,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\F69-postSave-fresh-entry\\peer-0-actual-postclear-fresh-native-arrival.png",
+          "staged": true,
+          "seq": 25
+        },
+        "completion": {
+          "id": 11381,
+          "ok": true,
+          "seq": 26,
+          "wrote": 1
+        }
+      },
+      {
+        "peer": 1,
+        "row": 166,
+        "label": "actual-postclear-fresh-native-arrival",
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\F69-postSave-fresh-entry\\peer-1-actual-postclear-fresh-native-arrival.png",
+        "sha256": "4bf2de045e40d3ce692ed1b396a12eb6d1edd26dbe8e620e97a9805affb80749",
+        "before": {
+          "id": 10984,
+          "ok": true,
+          "seq": 25,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 10985,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-Investigator-Save-netplay-v82-worker-v2-local-G-v1\\intro-admission\\F69-postSave-fresh-entry\\peer-1-actual-postclear-fresh-native-arrival.png",
+          "staged": true,
+          "seq": 25
+        },
+        "completion": {
+          "id": 10987,
+          "ok": true,
+          "seq": 26,
+          "wrote": 1
+        }
+      }
+    ],
+    "declared_before_launch_card_contract": "Exact predeclared actual host/guest native slot0 Save targets; every other personal/native/recording card immutable; original owned-cleanup criteria retained."
+  },
+  "outcome": "P2 actually kills the original full-HP Commander Yammark; P1 retains original report/rewards/native Save/Map/unit-selector authority and fresh X/Zero progress in both required modes.",
+  "limits": [
+    "Exact V82 default X/P1 and base Zero/P2, actual Yammark clear and earned mask1 only. No other boss/roster or broad native-content audit.",
+    "The agreed AmazonCP2 initializer bypasses the preceding route, retaining original door/dialogue/fullHP boss/guest attacks/kill/rewards/native Save/story/selector/fresh entry. No tested clear/death/HP/pose/position/success assignment or execution-state LOAD.",
+    "LOCAL raw extra observer byte1 assertion failure remains preserved. Executed Player.parse byte2 and actual retained fresh bodies independently establish correct native roster; skipped raw parent gates are not rewritten.",
+    "NET original15late gates, matching host profile14 and29resolved core/nonzero-mod CRC samples pass; both actual owned processes release inputs and exit0.",
+    "The Save-specific named card contract was installed before launch. Original unchanged-target observation stays false. Actual host saves/card1 and guest saves/netplay/card1 each equal the exact original native first-file8192B payload/card model; every other personal/native/recording mirror stays unchanged.",
+    "Root viewed7LOCAL plus6NET relevant composed images. Both NET images show Save completed, grey Yammark and fresh native heroes. UI/RAM/peer captures are asynchronous; no whole HUD/art/private-view fidelity claim.",
+    "Initial grey portrait evidence is retained for R20/F17 setup only. NET cold Load and another-stage return remain separate unverified requirements.",
+    "SERVER NET87479 refused before emulatedframe0 due unavailable qualified host simulation profile; preserve failed setup, no gameplay verdict or repeated unchanged SERVER variant."
+  ]
+}
