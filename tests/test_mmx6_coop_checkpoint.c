@@ -13,6 +13,7 @@ static uint8_t original_ram[0x200000],before_ram[0x200000];
 static uint16_t checkpoint_vram[1024*512];
 static unsigned before_doors_probe,equipment_probe,equipment_calls;
 static unsigned refight_stub,refight_probe_calls,refight_action_calls,refight_refuse;
+static unsigned refight_post_solid,refight_admission_fault;
 static unsigned refusal_logs;
 static char refusal_log[512];
 static void checkpoint_test_refusal_log(const char *format,...) {
@@ -38,6 +39,17 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
             psx_mod_write_byte(PLAYER+0xD2,psx_mod_read_byte(PLAYER+0x15));
             psx_mod_write_byte(PLAYER+0x7A,1);psx_mod_write_byte(PLAY+0x1C,1);
             psx_mod_write_byte(actor+6,1);
+            /* External full-callback contract from EC934 then ECBD0/31DA8:
+             * native pedestal contact can replace the intermediate Y snap,
+             * preserving the original fixed-point fraction. */
+            if(refight_post_solid)psx_mod_write_half(PLAYER+14,1226);
+            if(refight_admission_fault==1)psx_mod_write_byte(PLAYER+0xD0,0);
+            if(refight_admission_fault==2)psx_mod_write_byte(PLAYER+0xD1,19);
+            if(refight_admission_fault==3)psx_mod_write_byte(PLAYER+0xD2,psx_mod_read_byte(PLAYER+0x15)^1u);
+            if(refight_admission_fault==4)psx_mod_write_byte(PLAYER+0x7A,0);
+            if(refight_admission_fault==5)psx_mod_write_byte(PLAY+0x1C,0);
+            if(refight_admission_fault==6)psx_mod_write_byte(actor+6,0);
+            if(refight_admission_fault==7)psx_mod_write_half(PLAYER+10,1887);
         }
         psx_mod_write_byte(PLAY+0x66,0x5A);cpu->gpr[2]=0x12345678;return 1;
     }

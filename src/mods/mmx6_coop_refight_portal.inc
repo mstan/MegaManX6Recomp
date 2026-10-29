@@ -44,15 +44,16 @@ static int refight_portal_contact(CPUState *cpu,uint32_t address) {
         /* EC914..934 snaps XY and calls3D308, which queues D0/D1/7A and
          * PLAY1C; it does NOT immediately change body action+5. EC95C waits
          * for the next original owning player update to earn action20.
+         * ECB9C then calls31DA8 after the admission action: the pedestal
+         * can resolve Y again. Retain that native result instead of requiring
+         * EC934's intermediate Y after the complete callback has returned.
          * A pure overlap without these native admission writes owns nothing. */
         if(psx_mod_read_byte(actor+4)==1 && !psx_mod_read_byte(actor+5) &&
            psx_mod_read_byte(actor+6)==1 && psx_mod_read_byte(PLAYER+4)==1 &&
            psx_mod_read_byte(PLAYER+0xD0)==1 && psx_mod_read_byte(PLAYER+0xD1)==20 &&
            psx_mod_read_byte(PLAYER+0xD2)==psx_mod_read_byte(PLAYER+0x15) &&
            psx_mod_read_byte(PLAYER+0x7A)==1 && psx_mod_read_byte(PLAY+0x1C)==1 &&
-           psx_mod_read_half(PLAYER+10)==psx_mod_read_half(actor+10) &&
-           psx_mod_read_half(PLAYER+14)==(uint16_t)(psx_mod_read_half(actor+14)-
-               psx_mod_read_byte(psx_mod_read_word(PLAYER+0x68)+3)))scene_begin(1,address);
+           psx_mod_read_half(PLAYER+10)==psx_mod_read_half(actor+10))scene_begin(1,address);
         leave_zero_context(1);
     } else leave_zero();
     inside=0;scene_call=0;STATE_POP(restore_refight);

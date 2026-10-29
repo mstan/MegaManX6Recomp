@@ -121,6 +121,7 @@ static void setup_refight_hook(CPUState *cpu) {
     psx_mod_write_word(actor+0x30,0x800ED7D0u);psx_mod_write_word(actor+0x68,0x800ED7DCu);
     psx_mod_write_byte(0x800ED040u,1);cpu->gpr[4]=actor;
     refight_stub=1;refight_probe_calls=refight_action_calls=refight_refuse=0;
+    refight_post_solid=refight_admission_fault=0;
 }
 static void refight_owner_projection(CPUState *cpu) {
     setup_refight_hook(cpu);uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);
@@ -131,6 +132,28 @@ static void refight_owner_projection(CPUState *cpu) {
         psx_mod_read_byte(0x800C1220u+6)==1 && !memcmp(body,memory(PLAYER),sizeof body) &&
         !inside && !scene_call && !zero_projected && !state_track.count);
     CHECK(psx_mod_read_byte(PLAY+0x66)==0x5A); /* Single native shared write retained. */
+    /* rf7l retained native admission followed by the original pedestal solid
+     * pass: Y1226+fraction is valid after EC934's intermediate Y1237. The
+     * queued command is still pending; the original owner update consumes it. */
+    for(unsigned fraction=0;fraction<2;++fraction) {
+        setup_refight_hook(cpu);refight_post_solid=1;
+        put32(p2.body+8,(1883u<<16)|(fraction?0x8000u:0));
+        put32(p2.body+12,(1226u<<16)|(fraction?0xF600u:0));p2.body[5]=3;
+        capture(PLAYER,body,sizeof body);
+        CHECK(refight_portal_contact(cpu,0x800EC860u));
+        CHECK(refight_probe_calls==2 && refight_action_calls==1 && scene_owner==2 && scene_phase==1 &&
+            p2.body[5]==3 && p2.body[0xD0]==1 && p2.body[0xD1]==20 && p2.body[0x7A]==1 &&
+            le32(p2.body+8)==((1888u<<16)|(fraction?0x8000u:0)) &&
+            le32(p2.body+12)==((1226u<<16)|(fraction?0xF600u:0)) &&
+            psx_mod_read_byte(0x800C1220u+6)==1 && !memcmp(body,memory(PLAYER),sizeof body) &&
+            psx_mod_read_byte(PLAY+0x66)==0x5A && !inside && !scene_call && !zero_projected && !state_track.count);
+    }
+    /* Dropping the intermediate Y assumption does not admit a bare overlap
+     * or incomplete native queue, actor progression, lock or integer X snap. */
+    for(unsigned fault=1;fault<=7;++fault) {
+        setup_refight_hook(cpu);refight_post_solid=1;refight_admission_fault=fault;
+        CHECK(refight_portal_contact(cpu,0x800EC860u) && refight_action_calls==1 && !scene_owner);
+    }
     setup_refight_hook(cpu);psx_mod_write_word(PLAYER+8,1888u<<16);psx_mod_write_word(PLAYER+12,1243u<<16);
     CHECK(!refight_portal_contact(cpu,0x800EC860u) && refight_probe_calls==1 && !refight_action_calls && !scene_owner);
     setup_refight_hook(cpu);put32(p2.body+8,1882u<<16);
