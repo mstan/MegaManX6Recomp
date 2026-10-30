@@ -21,6 +21,17 @@ void mmx6_coop_fatal(Mmx6CoopLifecycle *s, unsigned p) {
 void mmx6_coop_lifecycle_respawn(Mmx6CoopLifecycle *s) {
     mmx6_coop_lifecycle_init(s);
 }
+void mmx6_coop_lifecycle_checkpoint(Mmx6CoopLifecycle *s) {
+    /* A completed voluntary departure is a participation choice, not a
+     * death. Keep its actual Select history/request through a native load;
+     * a held button must not become a fresh return edge. Team death still
+     * takes the ordinary respawn path and restores both players. */
+    if (s->status[0]==MMX6_COOP_ALIVE && s->status[1]==MMX6_COOP_ABSENT && !s->wipe) {
+        s->select_frames=0;
+        return;
+    }
+    mmx6_coop_lifecycle_respawn(s);
+}
 Mmx6CoopJoinAction mmx6_coop_join_input(Mmx6CoopLifecycle *s,
                                      int select, int gameplay, int safe_landing) {
     int pressed = select && !s->select_previous;

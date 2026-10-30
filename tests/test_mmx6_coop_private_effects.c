@@ -1987,6 +1987,42 @@ static void native_scene_after_nonpaired_enrollment(void) {
         CHECK(!memcmp(&owner,&unchanged,sizeof owner) && !memcmp(play,current_play,sizeof play));
     }
 }
+static void native_checkpoint_preserves_completed_voluntary_absence(void) {
+    for(unsigned held=0;held<2;++held) {
+        CPUState cpu;arrival_setup(&cpu);
+        p2.body[0x5C]=23;
+        for(unsigned i=0;i<9;++i){p2.body[0xA8+i*2]=73;p2.body[0xA9+i*2]=0;}
+        memcpy(returning_body,p2.body,sizeof returning_body);
+        returning_body[3]=returning_body[4]=1;returning_body[5]=2;
+        p2.body[3]=0;p2.body[4]=3;p2.body[5]=p2.body[6]=0;
+        life.status[1]=MMX6_COOP_ABSENT;
+        life.select_previous=(uint8_t)held;life.select_armed=(uint8_t)!held;
+        PlayerContext absent=p2;
+        uint8_t saved_return[sizeof returning_body];memcpy(saved_return,returning_body,sizeof saved_return);
+        unsigned before=call_count;
+        native_player_init(&cpu,0x8003BD24u);
+        CHECK(!enrolled && !arrival_pair && life.status[0]==MMX6_COOP_ALIVE &&
+            life.status[1]==MMX6_COOP_ABSENT && life.select_previous==held &&
+            life.select_armed==!held);
+        /* Exercise actual enrollment through the original incoming-beam
+         * dispatcher, not a replacement lifecycle-only model. No guest birth
+         * or beam is authorized for this deliberately absent participant. */
+        CHECK(!paired_arrival(&cpu));
+        CHECK(enrolled && !arrival_pair && !join_phase && !arrival_births && call_count==before &&
+            life.status[1]==MMX6_COOP_ABSENT && !memcmp(&absent,&p2,sizeof p2) &&
+            !memcmp(saved_return,returning_body,sizeof saved_return));
+        if(held)CHECK(mmx6_coop_join_input(&life,1,1,1)==MMX6_COOP_NO_ACTION);
+        CHECK(mmx6_coop_join_input(&life,0,1,1)==MMX6_COOP_NO_ACTION);
+        CHECK(mmx6_coop_join_input(&life,1,1,1)==MMX6_COOP_JOIN);
+        voluntary_transport_probe=1;scene_transport_probe=2;inside=1;
+        start_join(&cpu);
+        inside=0;voluntary_transport_probe=0;
+        CHECK(life.status[1]==MMX6_COOP_JOINING && join_phase==1 && p2.body[0x5C]==23 &&
+            p2.body[2]==1 && !memcmp(saved_return,returning_body,sizeof saved_return));
+        for(unsigned i=0;i<9;++i)CHECK(p2.body[0xA8+i*2]==73 && !p2.body[0xA9+i*2]);
+        CHECK(!zero_projected && !state_track.count && !state_track.error && !failed);
+    }
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
@@ -2009,4 +2045,5 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_paired_arrival_barrier();
     native_scene_preserves_incoming_guest();
     native_scene_after_nonpaired_enrollment();
+    native_checkpoint_preserves_completed_voluntary_absence();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

@@ -560,6 +560,16 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster,int arrival) {
     if (mmx6_coop_resources_fixed_runtime_admit(roster)!=MMX6_COOP_RESOURCES_OK) { failed=1;return; }
     /* Native fresh-stage/checkpoint birth reapplies its own body rows next. */
     if (working_palette_assets_ready && !working_palette_seed(0)) { failed=1;return; }
+    if (life.status[1]==MMX6_COOP_ABSENT) {
+        /* The native primary may enter a new area after Zero has completed
+         * a voluntary departure. Keep that absent body and saved personal
+         * return context; resource admission does not authorize a new birth.
+         * A later deliberate Select still owns the existing return path. */
+        enrolled=1;previous_input=0;
+        arrival_pair=join_phase=0;
+        p2_hud_fade=0;
+        return;
+    }
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
     unsigned arrival_delay=psx_mod_read_byte(PLAYER+0xCE);
     uint32_t arrival_box=psx_mod_read_word(PLAYER+0x68);
@@ -1876,7 +1886,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
     memset(pickup_owners,0,sizeof pickup_owners);
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     memset(shared_effect_owners,0,sizeof shared_effect_owners);
-    mmx6_coop_lifecycle_respawn(&life);
+    mmx6_coop_lifecycle_checkpoint(&life);
     pause_owner=-1; p2_start_previous=0;
     ride_call=0;
 }

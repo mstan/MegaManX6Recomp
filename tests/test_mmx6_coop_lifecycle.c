@@ -92,6 +92,28 @@ static void rejoin_during_departure(void) {
     for (unsigned n=0;n<100;++n) CHECK(mmx6_coop_join_input(&s,1,1,1)==MMX6_COOP_NO_ACTION);
 }
 
+static void voluntary_absence_across_native_checkpoint(void) {
+    Mmx6CoopLifecycle s;
+    depart(&s);
+    /* Original held departure input is not a new rejoin after loading. */
+    mmx6_coop_lifecycle_checkpoint(&s);
+    CHECK(s.status[0]==MMX6_COOP_ALIVE && s.status[1]==MMX6_COOP_ABSENT);
+    CHECK(mmx6_coop_join_input(&s,1,1,1)==MMX6_COOP_NO_ACTION);
+    CHECK(mmx6_coop_join_input(&s,0,1,1)==MMX6_COOP_NO_ACTION);
+    CHECK(mmx6_coop_join_input(&s,1,1,1)==MMX6_COOP_JOIN);
+    depart(&s);
+    CHECK(mmx6_coop_join_input(&s,0,1,0)==MMX6_COOP_NO_ACTION);
+    CHECK(mmx6_coop_join_input(&s,1,1,0)==MMX6_COOP_NO_ACTION);
+    mmx6_coop_lifecycle_checkpoint(&s);
+    CHECK(s.status[1]==MMX6_COOP_ABSENT && s.rejoin_pending);
+    CHECK(mmx6_coop_join_input(&s,0,1,1)==MMX6_COOP_JOIN);
+    depart(&s);
+    mmx6_coop_fatal(&s,0);
+    CHECK(s.wipe==1);
+    mmx6_coop_lifecycle_checkpoint(&s);
+    CHECK(!s.wipe && s.status[0]==MMX6_COOP_ALIVE && s.status[1]==MMX6_COOP_ALIVE);
+}
+
 static void death_and_retry_contract(void) {
     Mmx6CoopLifecycle s;
     for (unsigned first=0;first<2;++first) {
@@ -177,6 +199,7 @@ int main(void) {
     queued_rejoin();
     blocked_input_edges();
     rejoin_during_departure();
+    voluntary_absence_across_native_checkpoint();
     death_and_retry_contract();
     puts("co-op lifecycle rules PASS");
     return 0;

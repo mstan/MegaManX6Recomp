@@ -20,6 +20,9 @@ int mmx6_coop_living(const Mmx6CoopLifecycle *s, unsigned player);
 void mmx6_coop_fatal(Mmx6CoopLifecycle *s, unsigned player);
 /* Only a new stage or a team respawn may clear FALLEN. An ordinary door may not. */
 void mmx6_coop_lifecycle_respawn(Mmx6CoopLifecycle *s);
+/* Native area initialization preserves completed voluntary absence while
+ * the primary lives. A team wipe retains ordinary two-player respawn. */
+void mmx6_coop_lifecycle_checkpoint(Mmx6CoopLifecycle *s);
 Mmx6CoopJoinAction mmx6_coop_join_input(Mmx6CoopLifecycle *s,
                                      int select, int gameplay, int safe_landing);
 /* Call join_input with gameplay=0 during native menus/locks too: those samples
