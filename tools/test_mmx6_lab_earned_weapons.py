@@ -76,7 +76,7 @@ class EarnedWeapons(unittest.TestCase):
         self.assertIn('checkpoint_earned_weapons_option && !checkpoint_lab_option',CHECKPOINT)
         for s in('s->earned_applied=checkpoint_earned_weapons_applied','FIELD(earned_applied,1,1)',
                   'checkpoint_earned_weapons_applied=s->earned_applied','state_fixed(s,checkpoint_earned_weapons_option)',
-                  'state_fixed(s,14)'):
+                  'state_fixed(s,15)'):
             self.assertIn(s,SNAPSHOT)
         digest=function(SNAPSHOT,'state_digest')
         resources=digest.split('const uint32_t resources[]={',1)[1].split('};',1)[0]
@@ -84,11 +84,11 @@ class EarnedWeapons(unittest.TestCase):
 
     def test_current_profile_and_old_title_refusal(self):
         contract=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text())
-        self.assertEqual(contract['revision'],38)
-        self.assertEqual(contract['session']['title_compatibility'],'mmx6-x-zero-delay-v55')
+        self.assertEqual(contract['revision'],39)
+        self.assertEqual(contract['session']['title_compatibility'],'mmx6-x-zero-delay-v56')
         self.assertEqual((ROOT/'src/mods/mmx6_coop_host_lab_contract.h').read_text(),mmx6_host_lab_contract.generated_header())
         test=(ROOT/'tests/test_mmx6_coop_host_lab.c').read_text()
         self.assertIn('title.compatibility_id="mmx6-x-zero-delay-v37";CHECK(!lab_title_eligible(&title))',test)
-        self.assertIn('MMX6_STARTUP_BUILD_ID=\\"mmx6-x-zero-delay-v55\\"',(ROOT/'CMakeLists.txt').read_text(encoding='utf-8'))
+        self.assertIn('MMX6_STARTUP_BUILD_ID=\\"mmx6-x-zero-delay-v56\\"',(ROOT/'CMakeLists.txt').read_text(encoding='utf-8'))
 
 if __name__=='__main__':unittest.main()
