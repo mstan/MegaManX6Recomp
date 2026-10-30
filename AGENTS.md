@@ -55,6 +55,11 @@ finished. These rules supplement the owner's global instructions.
 - Derive input masks from the actual field being read: X6's mapped body input
   differs from raw pad and decoded-pad input. Check existing native samples or
   original source before freezing an observer. Never edit a running observer.
+- Verify source RAM fixture headers and record alignment before interpreting
+  addresses (for example, BCD1 has a four-byte header). A collision code or a
+  stopped walk alone does not establish a lethal hazard. Inspect the actual
+  native body, terrain and nearby solid before choosing a death setup; retain
+  failed prerequisites without credit and switch after two unsuccessful attempts.
 - Before launching a new or edited observer, run the installed undefined-name
   linter on it and its launch adapter (Ruff F821/F822/F823 on this PC), then the
   existing source/build preflight. Check requested capture dimensions against
