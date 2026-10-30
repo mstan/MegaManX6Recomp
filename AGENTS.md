@@ -1,5 +1,34 @@
 # Mega Man X6 burndown execution
 
+## Mandatory action gate (owner correction, 2026-10-30)
+
+The owner has repeatedly had to interrupt low-throughput work. More planning,
+documentation or instructions do not remedy that failure; apply these rules
+before selecting the next action. This section overrides permissive scheduling
+language below without weakening any frozen comparison requirement.
+
+- Choose the next action by the comparison it can actually close or the concrete
+  game defect it will fix and validate. A cleaner harness, another source map,
+  a new proof format or a successful build is not a burndown outcome.
+- Exhaust ready closeouts on the existing exact candidate before creating more
+  infrastructure. Reuse its build, launcher, observer, setup and accepted results;
+  batch compatible missing endpoints in one run and record each row separately.
+  Do not create another script/worktree/build variant merely for the next row.
+  An exception needs a named missing behavior and the specific reason existing
+  tools cannot observe it, recorded in one line in the existing session notes.
+- Reject work that repeats accepted checks, adds unrequested acceptance gates or
+  improves evidence presentation without changing an admission decision. Review
+  sufficient retained results and update the ledger before doing more tooling.
+- Enforce the cumulative time and attempt limits below before every new action.
+  When a limit expires, finish healthy active jobs, preserve their results and
+  pivot. A nearly finished implementation, potential multi-row benefit or new
+  filename is not permission to continue an exhausted investigation.
+- Do not end execution at an arbitrary passed count or routine milestone. While
+  the goal is active, continue to the next actionable batch until the owner stops
+  work, the goal is fulfilled or no autonomous action remains. If no short
+  closeouts remain, say so honestly and choose the least costly concrete fix;
+  do not substitute infrastructure work or imply that activity advanced the ledger.
+
 Owner scope correction, 2026-10-25: ONLY the 234 frozen X4/X5 comparisons
 belong to this task. For each comparison, identify and validate the native X6
 counterpart of the reported action. X6's existing campaign is not being audited
