@@ -61,6 +61,10 @@ value = "refight_portal_cp1"
 label = "Fortress original refight portal approach"
 
 [[option.choice]]
+value = "refight_distant_cp1"
+label = "Fortress refight portal with distant primary"
+
+[[option.choice]]
 value = "northpole_ice_cp3"
 label = "North Pole original ice shaft (position prerequisite)"
 

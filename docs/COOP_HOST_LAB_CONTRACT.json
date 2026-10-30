@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 35,
+  "revision": 36,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v52",
+    "title_compatibility": "mmx6-x-zero-delay-v53",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -683,5 +683,41 @@
     "regression": "Invoke actual enroll(arrival=0), starting with both an empty and a stale other body return context, then exercise the immediate original scene lifecycle. Preserve the freshly initialized native guest identity, HP/assets and owner/shared context through release; no fabricated health, character, feet or completion writes in the product.",
     "qualification": "rf9l rejected title51: original portal and CP2 boss active, guest blank after intro. Its publications omit arrival_pair/join_phase, so the precise internal branch is a source-proven uncovered producer, not a published flag observation. Exact-image LOCAL+NET full native portal/destination/feet/BIN33/controls and parent gates still required.",
     "snapshot": "Capture only existing returning_body; no new persistent fields or snapshot revision."
+  },
+  "title_changes_v53_portal_departure_and_absence": {
+    "issues": [
+      "beads-eio.1.116",
+      "beads-eio.1.117"
+    ],
+    "comparisons": [
+      "F147",
+      "R21"
+    ],
+    "default_correctness_fix": "For the exact original Recycle portal final callback EC8F8 at native counter28, defer only the imminent exit commit while an already voluntary guest departure remains LEAVING in primary scene phase0. Existing original3674C animation/ascent and native outside-view completion continue once per ordinary world; then original portal callback performs its own counter29/fade/mode writes. No new ownership hook, motion, timer or result writes.",
+    "absence": "Native area initialization preserves completed voluntary ABSENT and actual Select history/pending request while primary is ALIVE without a team wipe. Enrollment validates resources but does not initialize or automatically join an absent participant; retain saved personal body, HP and ammo for a deliberate future Select. Team-wipe respawn still restores both players.",
+    "distant_refight_prerequisite": {
+      "option": "refight_distant_cp1",
+      "lab_option": 16,
+      "nonce": "4C524644",
+      "index": 60,
+      "record": "80072978",
+      "native_tuple": [
+        12,
+        0,
+        1
+      ],
+      "primary_native_arrival": [
+        1712,
+        1147
+      ],
+      "guest_once_position": [
+        1852,
+        1241
+      ],
+      "guest_native_settled_y": 1242,
+      "writes": "Only four guest current/previous XY words; primary and both velocities/HP/equipment/lifecycle/camera/portal/result bytes remain untouched. Same original loaded collision/source/fullfeet/48px air guards; wait at least two native updates."
+    },
+    "snapshot": "No new persistent state; snapshot14 unchanged.",
+    "qualification": "Source/model tests confer no native comparison credit. Fresh exact-image LOCAL and NET actual withdrawal-overlap/finite absent arrival/primary controls and distant guest-led refight arrivals/controls, final synchronization/cards/owned exits and capture review remain required."
   }
 }
