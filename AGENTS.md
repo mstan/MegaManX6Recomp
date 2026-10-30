@@ -147,6 +147,14 @@ exceptions; it does not change the frozen acceptance criteria.
   or a native repeat, identify the row IDs and the exact missing behavior that
   this action will decide. Use one short line in the existing session notes,
   not a new planning document. If no missing behavior can be named, skip it.
+- Make the time limits enforceable: keep one checkpoint in those same notes
+  containing the active rows, exact missing endpoint, original UTC start,
+  applicable stop deadline, native attempts already used and last admitted
+  ledger counts. Check it before each research, tooling, build or run action.
+  If the checkpoint is missing or stale, reconstruct spent time and attempts
+  from existing logs; do not grant a fresh budget. A continuation, worktree,
+  renamed script or new build does not restart the clock. Updating this
+  checkpoint must take minutes, not become another tracking project.
 - Choose the shortest actionable closeout from a small ranked queue. Do not
   start a broad shared feature while shorter independent closeouts are ready.
   Keep at most one implementation in progress; preserve parked work intact.
@@ -159,6 +167,13 @@ exceptions; it does not change the frozen acceptance criteria.
   independent comparison. A potential multi-row benefit does not extend this
   budget for tooling, source investigation or documentation. Compiling and
   passing source tests alone do not qualify as a validated game fix.
+- Treat an expired budget as a mandatory decision gate. After the healthy job
+  finishes, admit any already sufficient result or preserve the draft and park
+  the row with its precise missing prerequisite. Do not launch the next repair,
+  build or run on that row merely because the implementation is nearly ready
+  or much time has already been spent. Resume only with the concrete new fact
+  or implemented game fix required by the retry rules above. A generic
+  "continue" does not erase these limits.
 - Keep build identity and evidence binding in the existing shared artifacts.
   Do not create another launcher, curator, receipt hierarchy or handoff format
   when the existing tools can decide the missing behavior. Add only the
@@ -167,6 +182,10 @@ exceptions; it does not change the frozen acceptance criteria.
   commit before expanding scope. At each hourly update report the actual
   passed/failed/unverified delta, elapsed time and next named rows. If the delta
   is zero, say zero and identify the pivot; do not substitute activity counts.
+- If the short autonomous queue is exhausted, state that fact and name the
+  remaining prerequisites honestly. Select the least costly remaining game
+  fix with a concrete runtime endpoint; do not describe long feature work as
+  an easy closeout or keep rebuilding an unproductive observer to stay busy.
 
 At resumption, read `current_session_handoff` and `current_owned_root_job` in
 `G:/Temp/Codex/psxrecomp/x6-parity/storage-retention-index.json`. The initial
