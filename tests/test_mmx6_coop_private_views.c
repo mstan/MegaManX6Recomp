@@ -175,6 +175,7 @@ static void native_camera_context(void) {
     PSXDebugNativeContextWords out,sentinel;memset(&sentinel,0xA5,sizeof sentinel);
     out=sentinel;
     CHECK(!private_view_entry_context(0x80025FB0u,&out,NULL)); /* canonical entry */
+    CHECK(!private_view_entry_context(0x80026D44u,&out,NULL));
     CHECK(!memcmp(&out,&sentinel,sizeof out));
     private_draw=1;private_seat=2;
     CHECK(!private_view_entry_context(0x80025FB0u,&out,NULL));
@@ -201,8 +202,14 @@ static void native_camera_context(void) {
         CHECK(out.state0==1234 && out.state1==x && out.state2==y);
         CHECK(out.flags==(1u | seat<<1 | (seat?8u:4u) | (uint32_t)(8-seat)<<8 |
             (uint32_t)(4+seat)<<16 | (uint32_t)(seat?0x84u:4u)<<24));
+        put32(camera+0x54+8,x+17);put32(camera+0x54+12,y+23);
+        CHECK(private_view_entry_context(0x80026D44u,&out,NULL));
+        CHECK(out.flags==(0x81u | seat<<1) && out.state0==1234 &&
+              out.state1==x+17 && out.state2==y+23);
+        put32(camera+0x54+8,0);put32(camera+0x54+12,0);
 #else
         CHECK(!private_view_entry_context(0x80025FB0u,&out,NULL));
+        CHECK(!private_view_entry_context(0x80026D44u,&out,NULL));
         CHECK(!memcmp(&out,&sentinel,sizeof out)); /* production unavailable */
 #endif
         context_equal(&before);
@@ -453,9 +460,15 @@ static void native_shared_weather_frames(int online,int split) {
     }
 }
 static void native_shared_scenery_y(int online,int split) {
-    for(unsigned area=0;area<2;++area) {
+    for(unsigned area=0;area<3;++area) {
         CPUState cpu;prepare_view(&cpu,online,split);mmx6_view_sdk.local_port=1;
-        psx_mod_write_byte(PLAY+12,area?20:4);psx_mod_write_byte(PLAY+13,area?1:0);
+        psx_mod_write_byte(PLAY+12,area==2?3:area?20:4);psx_mod_write_byte(PLAY+13,area==1?1:0);
+        if(area==2) {
+            const uint32_t boss=0x8008EF48u;
+            psx_mod_write_word(PLAY+0x20,boss);psx_mod_write_byte(boss,65);
+            psx_mod_write_byte(boss+1,52);psx_mod_write_byte(boss+2,0);
+            psx_mod_write_byte(boss+4,1);psx_mod_write_word(boss+0x10,0x800F36C8u);
+        }
         psx_mod_write_byte(VIEW_CAMERA+0x54+4,9);
         psx_mod_write_word(VIEW_CAMERA+12,224u<<16);
         put32(view_cameras[1]+12,1200u<<16); /* independent foreground history */
@@ -484,10 +497,10 @@ static void native_shared_scenery_y(int online,int split) {
             CHECK(frame_count==11+phase);++frame_count;
         }
     }
-    for(unsigned other=0;other<3;++other) {
+    for(unsigned other=0;other<4;++other) {
         CPUState cpu;prepare_view(&cpu,online,split);view_frame=10;frame_count=11;
-        psx_mod_write_byte(PLAY+12,other==0?6:20);
-        psx_mod_write_byte(PLAY+13,other==1?0:1);
+        psx_mod_write_byte(PLAY+12,other==3?3:other==0?6:20);
+        psx_mod_write_byte(PLAY+13,(other==1 || other==3)?0:1);
         psx_mod_write_byte(VIEW_CAMERA+0x54+4,other==2?4:9);
         put32(view_cameras[1]+0x54+12,900u<<16);
         psx_mod_write_word(VIEW_CAMERA+0x54+12,193u<<16);

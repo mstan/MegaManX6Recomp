@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 40,
+  "revision": 41,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v57",
+    "title_compatibility": "mmx6-x-zero-delay-v58",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -762,5 +762,12 @@
     ],
     "native_source": "Original BIN5 Heatnix52 record800F36C8, active800EF0FC uses actual object+8B1/3 layer1Y-2 and2/4 Y+2",
     "acceptance": "Fresh same-candidate LOCAL/NET actual boss admission and stationary native background motion in real composed views; F175 also needs its distinct native atlas scene. Source/setup alone grants no credit."
+  },
+  "title_changes_v58_heatnix_shared_layer_phase": {
+    "scope": "Frozen234 F28 and the scrolling component of F175 only; no new snapshot fields or native-content audit.",
+    "fix": "During independent-view world publication, preserve original Heatnix52 native shared layer1 current and previous Y for the actual stage3/0 authored boss at800F36C8. Native EF0FC phase8B1/3 subtracts2 and2/4 adds2. Native297BC still derives each viewing hero X; unrelated Magma controllers retain their camera history.",
+    "diagnostic": "Additive read-only actual80026D44 private draw-entry context: provider36564350, flags81/83 for seats0/1, state0 worldframe, state1 cached native BG1X, state2 cached native BG1Y. Only host-owned cached reads; no guest calls or mutation. Existing25FB0 context unchanged; unavailable in production.",
+    "snapshot_schema": 15,
+    "qualification": "Fresh same-image LOCAL and NET actual Heatnix admission, stationary native shared phase advancement at each private draw, composed-image review, restoration and all parent gates required. V109 prototypes retain passing native gates but are not admitted as visible scrolling. F175 additionally needs distinct native atlas scene on the final candidate."
   }
 }

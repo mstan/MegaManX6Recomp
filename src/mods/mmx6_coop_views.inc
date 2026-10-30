@@ -51,7 +51,18 @@ enum { VIEW_CONTEXT_PROVIDER=0x36564350u }; /* Diagnostic PCV6, not semantic sta
 static int private_view_entry_context(uint32_t function,PSXDebugNativeContextWords *out,void *opaque) {
     (void)opaque;
 #if PSX_DEBUG_NATIVE_CONTEXT_AVAILABLE
-    if(!out || function!=0x80025FB0u || !private_draw || private_seat>1 || !view_valid)return 0;
+    if(!out || !private_draw || private_seat>1 || !view_valid)return 0;
+    if(function==0x80026D44u) {
+        /* Draw-entry evidence for the shared layer1 phase actually supplied
+         * to this view. Host-owned cached words only; no guest access/calls.
+         * Bit7 identifies this additive layer context, distinct from the
+         * existing 25FB0 foreground/quake context below. */
+        const uint8_t *layer=view_cameras[private_seat]+0x54;
+        out->flags=0x81u | private_seat<<1;
+        out->state0=frame_count;out->state1=le32(layer+8);out->state2=le32(layer+12);
+        return 1;
+    }
+    if(function!=0x80025FB0u)return 0;
     /* Only host-owned words: Zero's native camera updates are captured into
      * this array before 25FB0. No guest reads/calls, allocation or mutation.
      * flags: bit0 private, bit1 seat, bits2/3 vertical/horizontal quake;
@@ -143,6 +154,14 @@ static int independent_door_context(void) {
     unsigned phase=psx_mod_read_byte(both_door_actor+5);
     return phase>=1 && phase<=3;
 }
+static int independent_heatnix_scenery(void) {
+    if(psx_mod_read_byte(PLAY+12)!=3 || psx_mod_read_byte(PLAY+13))return 0;
+    uint32_t actor=psx_mod_read_word(PLAY+0x20);
+    return actor>=0x8008EF48u && actor<0x80090C88u && !((actor-0x8008EF48u)%0x9Cu) &&
+        psx_mod_read_byte(actor) && psx_mod_read_byte(actor+1)==52 &&
+        !psx_mod_read_byte(actor+2) && psx_mod_read_byte(actor+4)==1 &&
+        psx_mod_read_word(actor+0x10)==0x800F36C8u;
+}
 static void independent_world_begin(void) {
     if(private_draw || !independent_views)return;
     view_pending=0;
@@ -185,11 +204,14 @@ static void independent_world_begin(void) {
          * 297BC updates only X for the viewing hero, so retaining the old
          * guest Y freezes this shared controller in that pane. Publish its
          * current/previous Y once; keep the hero's X and other layer history.
-         * These two authored sections use this producer, not weather atlases
-         * or a general replacement for native camera-derived positions. */
+         * Original Heatnix EF0FC likewise owns mode9 Y during its boss phases
+         * (8B1/3 -> -2; 8B2/4 -> +2). Qualify that actual authored boss;
+         * unrelated Magma controllers keep their ordinary camera history.
+         * Native 297BC still computes each viewing hero's X independently. */
         unsigned stage=psx_mod_read_byte(PLAY+12),section=psx_mod_read_byte(PLAY+13);
         if(layer==1 && view_cameras[1][0x54+4]==9 &&
-           ((stage==4 && section==0) || (stage==20 && section==1))) {
+           ((stage==4 && section==0) || (stage==20 && section==1) ||
+            independent_heatnix_scenery())) {
             memcpy(position+4,view_cameras[1]+0x54+12,4);
             memcpy(position+0x10,view_cameras[1]+0x54+0x18,4);
         }
