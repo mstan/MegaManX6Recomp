@@ -23750,14 +23750,14 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -23803,9 +23803,54 @@
               "host_profile": "mmx6.win64-clang22.loopback revision35",
               "audio": "dummy muted"
             }
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+            "build_identity": {
+              "executable_sha256": "acb27f170c2d49e59e830df4c608046b5121f0fa3cdcd9798d3715b4cfe6fe43",
+              "compiled_manifest_sha256": "e4f614a3336b7672b3966e53fc6dbfa2cb94c19077486c7312a2c640267729df",
+              "provenance_sha256": "72c7e9505d6f8b3f72ae9022f6ad7e37b4dd72b4086a2d9015ad83ee60924095"
+            },
+            "settings": {
+              "roster": "X/P1+normalZero/P2",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "input_delay": 3,
+              "host_profile": "mmx6.win64-clang22.loopback revision35",
+              "audio": "dummy muted"
+            },
+            "action": "After actual original refight intro release, separately move both heroes; directly observe each own displayed private camera following within authored current/target bounds on both peers.",
+            "outcome": "Seven native checks,14 current parent passes plus one already accepted exact-build intro component; own4 resolvedCRC windows/9 matching samples,2 nativeexit0/cards unchanged,6 new root-viewed NET captures. Raw wrapper failed pre-fixture full-health gate and remains preserved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F206-native-refight-camera-local-netplay-reviewed.json",
+                "sha256": "eef5e06b68231542cdf8409224d9dd8c1a8758f607b6418d2f4d6f17687db6f0"
+              }
+            ],
+            "limits": [
+              "Only F206 is named for new credit; eight base checks remain prerequisites.",
+              "Option15 originalCP1 plus disclosed once position/history bypass; original input remains tainted.",
+              "Publications, PLAY/actors and composed captures are asynchronous; pre/post capture rows retained.",
+              "All direction is neutral after admission until actual native HP48/active4 and released fullfeet.",
+              "First typed bodies are retained, including unresolved contact. F7 qualification requires final original full22feet, native ground, living bodies and independent movement; initial transient motion is not a failed landing.",
+              "Collision equivalence permits native graphical remaps, never claims original full graphical identity.",
+              "Parent exact image/profile/source, recording/card/cleanup and final CRC gates remain mandatory.",
+              "F206 retains direct post-input quiet interior follow witnesses for each seat. Later legitimate clamping or native boss knockback need not leave both origins interior simultaneously. Other mapped input must stay neutral; actual native other-body motion is retained. PCV6 quake entries are preserved and distinguished from quiet follow, never adjusted or presented as authored static-bound coordinates.",
+              "Actual canonical current/target bounds and both private camera origins are observed. Private bounds inheritance is established by the exact compiled views.inc; the trace does not publish private bounds.",
+              "Prior F122/F124/F7 are setup prerequisites only and gain no additional credit. Same-machine profile35, contact protection, once original CP1 positioning and tainted input limits remain explicit.",
+              "F206 retains direct post-input quiet interior follow witnesses for each seat. Later legitimate clamping or native boss knockback need not leave both origins interior simultaneously. Other mapped input must stay neutral; actual native other-body motion is retained. PCV6 quake entries are preserved and distinguished from quiet follow, never adjusted or presented as authored static-bound coordinates.",
+              "NET fc2n raw wrapper remains failed: repeated pre-fixture intro full-32HP gate failed after original enemy contact. All seven F206 checks and fourteen other parent gates pass, including its own final resolved CRC, cards and exits. The identical runner/image prelude already passed in reviewed rf13n; that exact component is reused, not relabeled in the raw run. Named F206 endpoint directly has both full32HP native grounded heroes on both peers.",
+              "LOCAL observer1 and NET observer2 differ only in the actual displayed-seat procedure: one LOCAL split process renders both; NET peer0 renders seat0 and peer1 renders seat1. Other private render contexts are not claimed observed.",
+              "Only F206 gains new credit; one original arena, same-machine delay3/profile35. No other refight, boss defeat, cross-host, human or native3330 claim."
+            ],
+            "bypasses": [
+              "Default-off agreed original CP1/once position/history and hostile-contact protection; no tested result writes."
+            ]
           }
         ],
-        "limitations": "LOCAL passed exact92e1ce2/acb27/profile35: actual post-release follow for both cameras within original CP2 bounds.3 reviewed captures/4 parent gates/cards unchanged/exit0. NET remains unverified; compiled private-bounds inheritance is distinguished from directly observed origins."
+        "limitations": "Passed exact92e1ce2/acb27/profile35 LOCAL+NET F206 actual post-release camera follow within native current/targetX2048..2080/Y256, healthy fullfeet/independent owned moves.9 new root-viewed captures/4 finalCRCwindows/9 matching samples/3exit0/cardsunchanged. NET observes each peer own rendered camera; private bounds inheritance is compiled-source supported. Raw NET pre-fixture full32HP check failed on original enemy contact; preserve it and reuse accepted identical-runner/image rf13n prelude, with all7 current native and14 other parent gates passed. No acceptance credit for other rows/arenas/human/native3330."
       }
     },
     {

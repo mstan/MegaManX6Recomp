@@ -1,0 +1,635 @@
+{
+  "kind": "F206_native_refight_camera_LOCAL_NET_root_component_review",
+  "status": "passed",
+  "comparisons": {
+    "F206": "2602fe81da30fa6c269e94e5863faa210bf9c5f8fd3b31c42d7b0331d69e9959"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\refight-v105-final-binding-root-v8.json",
+    "binding_sha256": "e1a38c721de82a10a1fe0fe8bd44b90e6816f703b47bbc6e09a46cfc1778b8f3",
+    "image_sha256": "acb27f170c2d49e59e830df4c608046b5121f0fa3cdcd9798d3715b4cfe6fe43",
+    "manifest_sha256": "e4f614a3336b7672b3966e53fc6dbfa2cb94c19077486c7312a2c640267729df",
+    "provenance_sha256": "72c7e9505d6f8b3f72ae9022f6ad7e37b4dd72b4086a2d9015ad83ee60924095",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v105-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v52",
+    "host_revision": 35
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "local_review": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-92e1ce2-F206-native-refight-camera-local-reviewed.json",
+    "bytes": 14553,
+    "sha256": "e20ca76dd4056501a3b69dabc87a21eed79e3afd08446f21d8ea7826bdae6345",
+    "relative_path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F206-native-refight-camera-local-reviewed.json"
+  },
+  "netplay": {
+    "mode": "netplay",
+    "status": "passed_component_review_raw_wrapper_failed",
+    "raw_parent_status": "failed",
+    "raw_parent_checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": true,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": false,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_resolved_crc_after_case": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "accepted_component_reuse": {
+      "component": "pre-fixture ordinary intro full-health prelude",
+      "gate": "both_alive_healthy",
+      "accepted_source": {
+        "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-92e1ce2-F122-F124-F7-native-refight-local-netplay-reviewed.json",
+        "bytes": 40411,
+        "sha256": "19d7937a237a99c541710b65d36c8b0bf2aed1301f387944c85135cf5ea41ff8",
+        "relative_path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F122-F124-F7-native-refight-local-netplay-reviewed.json"
+      },
+      "accepted_raw": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\rf13n\\qualification.json",
+        "bytes": 5147222,
+        "sha256": "6bd25909b6f93757ed1be447b41bc5c0e79638fc2e9b4a1bb47335632059018f"
+      },
+      "exact_candidate_binding_identical": true,
+      "parent_runner_sha256": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+      "raw_current_gate": false,
+      "accepted_component_gate": true,
+      "current_named_endpoint_full32HP_both_peers": true
+    },
+    "native_checks": {
+      "original_current_target_bounds_observed_every_peer": true,
+      "exact_compiled_private_bounds_inheritance_source_pinned": true,
+      "both_owned_private_origins_followed_inside_bounds_on_their_displaying_peers": true,
+      "primary_display_camera_direct_origin_followed_inside_authored_bounds_every_peer": true,
+      "both_distinct_owned_moves_neutral_living_fullfeet": true,
+      "three_named_composed_captures_every_peer": true,
+      "eight_base_checks_are_prerequisites_only": true
+    },
+    "camera_bounds_and_controls": {
+      "status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "controls": [
+        {
+          "seat": 1,
+          "before": 339,
+          "movement": 352,
+          "settled": 357,
+          "private_witnesses": [
+            null,
+            {
+              "seq": 130,
+              "func": "0x80025FB0",
+              "ra": "0x80012128",
+              "a0": "0x00000000",
+              "a1": "0x00000000",
+              "a2": "0x0000005C",
+              "a3": "0x00000000",
+              "t1": "0x0000002A",
+              "s0": "0x00FFFFFF",
+              "s1": "0x1F800000",
+              "s2": "0x800A0000",
+              "s3": "0xFF000000",
+              "depth": 234,
+              "frame": 4910,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 1,
+                "available": 1,
+                "provider": 911622992,
+                "epoch": 3,
+                "flags": 3,
+                "state0": 2224,
+                "state1": 136249344,
+                "state2": 16777216,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "other_native_position_changed": [
+            false,
+            false
+          ]
+        },
+        {
+          "seat": 0,
+          "before": 358,
+          "movement": 372,
+          "settled": 375,
+          "private_witnesses": [
+            {
+              "seq": 296,
+              "func": "0x80025FB0",
+              "ra": "0x80012128",
+              "a0": "0x00000000",
+              "a1": "0x00000000",
+              "a2": "0x0000005C",
+              "a3": "0x00000000",
+              "t1": "0x0000002A",
+              "s0": "0x00FFFFFF",
+              "s1": "0x1F800000",
+              "s2": "0x800A0000",
+              "s3": "0xFF000000",
+              "depth": 529,
+              "frame": 4992,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 1,
+                "available": 1,
+                "provider": 911622992,
+                "epoch": 3,
+                "flags": 1,
+                "state0": 2306,
+                "state1": 136249344,
+                "state2": 16777216,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            null
+          ],
+          "other_native_position_changed": [
+            false,
+            false
+          ]
+        }
+      ],
+      "checks": {
+        "original_current_target_bounds_observed_every_peer": true,
+        "exact_compiled_private_bounds_inheritance_source_pinned": true,
+        "both_owned_private_origins_followed_inside_bounds_on_their_displaying_peers": true,
+        "primary_display_camera_direct_origin_followed_inside_authored_bounds_every_peer": true,
+        "both_distinct_owned_moves_neutral_living_fullfeet": true,
+        "three_named_composed_captures_every_peer": true,
+        "eight_base_checks_are_prerequisites_only": true
+      },
+      "bounds_basis": "Canonical current/target bounds are actual RAM reads. Exact compiled views.inc copies all bounds into both saved views each world update, preserving only position bytes8..1B. PCV6 directly publishes per-seat origins, NOT private bounds; no raw-private-bounds claim.",
+      "bounds_copy_source": {
+        "path": "worktrees/x6-refight-v105/src/mods/mmx6_coop_views.inc",
+        "sha256": "5aedbffa84db2a364483f1808231c9a5f7d3ba5fa65d6ac0e5b1a50993ba16f3"
+      },
+      "expected_bounds": [
+        2080,
+        2048,
+        256,
+        256,
+        2080,
+        2048,
+        256,
+        256
+      ],
+      "displayed_seats": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "baseline": 338,
+      "baseline_origins": [
+        [
+          134217728,
+          null
+        ],
+        [
+          null,
+          134217728
+        ]
+      ],
+      "final_endpoint": 376,
+      "final_private_witnesses": [
+        {
+          "peer": 0,
+          "seats": [
+            {
+              "seq": 326,
+              "func": "0x80025FB0",
+              "ra": "0x80012128",
+              "a0": "0x00000000",
+              "a1": "0x00000000",
+              "a2": "0x0000005C",
+              "a3": "0x00000000",
+              "t1": "0x0000002A",
+              "s0": "0x00FFFFFF",
+              "s1": "0x1F800000",
+              "s2": "0x800A0000",
+              "s3": "0xFF000000",
+              "depth": 577,
+              "frame": 5007,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 1,
+                "available": 1,
+                "provider": 911622992,
+                "epoch": 3,
+                "flags": 1,
+                "state0": 2321,
+                "state1": 136314880,
+                "state2": 16777216,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            },
+            null
+          ]
+        },
+        {
+          "peer": 1,
+          "seats": [
+            null,
+            {
+              "seq": 326,
+              "func": "0x80025FB0",
+              "ra": "0x80012128",
+              "a0": "0x00000000",
+              "a1": "0x00000000",
+              "a2": "0x0000005C",
+              "a3": "0x00000000",
+              "t1": "0x0000002A",
+              "s0": "0x00FFFFFF",
+              "s1": "0x1F800000",
+              "s2": "0x800A0000",
+              "s3": "0xFF000000",
+              "depth": 577,
+              "frame": 5008,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 1,
+                "available": 1,
+                "provider": 911622992,
+                "epoch": 3,
+                "flags": 3,
+                "state0": 2322,
+                "state1": 136314880,
+                "state2": 16777216,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "source_guard_count": 108,
+    "trace_summary": [
+      {
+        "peer": 0,
+        "entries": 327,
+        "drains": 39
+      },
+      {
+        "peer": 1,
+        "entries": 327,
+        "drains": 39
+      }
+    ],
+    "resource_reads": [
+      {
+        "peer": 0,
+        "label": "source",
+        "resources": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-source-layout.bin",
+            "address": "0x80097438",
+            "bytes": 504,
+            "sha256": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64",
+            "original": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-source-meta.bin",
+            "address": "0x801970ac",
+            "bytes": 82944,
+            "sha256": "dd8323c57032785abba6dffd811557a6324623ac8003e4e5d30985b783fc81b1",
+            "original": "dd8323c57032785abba6dffd811557a6324623ac8003e4e5d30985b783fc81b1"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-source-desc.bin",
+            "address": "0x801ab4ac",
+            "bytes": 4036,
+            "sha256": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d",
+            "original": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d"
+          }
+        ],
+        "collision_equivalence": true
+      },
+      {
+        "peer": 1,
+        "label": "source",
+        "resources": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-source-layout.bin",
+            "address": "0x80097438",
+            "bytes": 504,
+            "sha256": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64",
+            "original": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-source-meta.bin",
+            "address": "0x801970ac",
+            "bytes": 82944,
+            "sha256": "dd8323c57032785abba6dffd811557a6324623ac8003e4e5d30985b783fc81b1",
+            "original": "dd8323c57032785abba6dffd811557a6324623ac8003e4e5d30985b783fc81b1"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-source-desc.bin",
+            "address": "0x801ab4ac",
+            "bytes": 4036,
+            "sha256": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d",
+            "original": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d"
+          }
+        ],
+        "collision_equivalence": true
+      },
+      {
+        "peer": 0,
+        "label": "destination",
+        "resources": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-destination-layout.bin",
+            "address": "0x80097438",
+            "bytes": 504,
+            "sha256": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64",
+            "original": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-destination-meta.bin",
+            "address": "0x801970ac",
+            "bytes": 82944,
+            "sha256": "48d7a1de36127273aa28954836ae096a207422f146c71f06431b64dcde83df97",
+            "original": "48d7a1de36127273aa28954836ae096a207422f146c71f06431b64dcde83df97"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-destination-desc.bin",
+            "address": "0x801ab4ac",
+            "bytes": 4036,
+            "sha256": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d",
+            "original": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d"
+          }
+        ],
+        "collision_equivalence": true
+      },
+      {
+        "peer": 1,
+        "label": "destination",
+        "resources": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-destination-layout.bin",
+            "address": "0x80097438",
+            "bytes": 504,
+            "sha256": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64",
+            "original": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-destination-meta.bin",
+            "address": "0x801970ac",
+            "bytes": 82944,
+            "sha256": "48d7a1de36127273aa28954836ae096a207422f146c71f06431b64dcde83df97",
+            "original": "48d7a1de36127273aa28954836ae096a207422f146c71f06431b64dcde83df97"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-destination-desc.bin",
+            "address": "0x801ab4ac",
+            "bytes": 4036,
+            "sha256": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d",
+            "original": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d"
+          }
+        ],
+        "collision_equivalence": true
+      }
+    ],
+    "captures": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-cam-before.png",
+        "bytes": 2074543,
+        "sha256": "e941c580fc7bc819ff0e5ccb02719269ac5a56b941e08c186ca2cabb881a0441",
+        "peer": 0,
+        "label": "cam-before",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-cam-before.png",
+        "bytes": 2074543,
+        "sha256": "720ca622bfdecb96d4c1caefd8cda3c40587e8f567dc6ca836b680896c175618",
+        "peer": 1,
+        "label": "cam-before",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-cam-seat1.png",
+        "bytes": 2074543,
+        "sha256": "e0998693dbd49b652663ec93775ddb6758ddc9760d490a22fd4ef7ba19139b6a",
+        "peer": 0,
+        "label": "cam-seat1",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-cam-seat1.png",
+        "bytes": 2074543,
+        "sha256": "8642fae105d5cddc2dfc010024b74e5c8484ee5712b2a311d68f52ef7a703e47",
+        "peer": 1,
+        "label": "cam-seat1",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p0-cam-seat0.png",
+        "bytes": 2074543,
+        "sha256": "5ec2aa5ca0097048b07bfda8df4b74db15af8200fec0d13cf6ad7c500ee75a68",
+        "peer": 0,
+        "label": "cam-seat0",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\p1-cam-seat0.png",
+        "bytes": 2074543,
+        "sha256": "9d8ec15e6e0b162641396d6ef59950a59adb2354aab34c42d83c8958302da4c2",
+        "peer": 1,
+        "label": "cam-seat0",
+        "root_personally_viewed": true
+      }
+    ],
+    "terminals": [
+      {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    ],
+    "resolved_crc_windows": [
+      {
+        "label": "initial idle",
+        "samples": [
+          {
+            "simulation_tick": 2784,
+            "core": "10cc8d29",
+            "mod": "3348bc59"
+          },
+          {
+            "simulation_tick": 2816,
+            "core": "788fe814",
+            "mod": "f41eb8d5"
+          }
+        ],
+        "resolved_through": [
+          2819,
+          2819
+        ]
+      },
+      {
+        "label": "P2 right then release",
+        "samples": [
+          {
+            "simulation_tick": 2848,
+            "core": "c79d1306",
+            "mod": "e11e2781"
+          },
+          {
+            "simulation_tick": 2880,
+            "core": "52d04f72",
+            "mod": "49674ee7"
+          }
+        ],
+        "resolved_through": [
+          2900,
+          2900
+        ]
+      },
+      {
+        "label": "P1 jump then settle",
+        "samples": [
+          {
+            "simulation_tick": 2976,
+            "core": "d301910d",
+            "mod": "1f50bfdf"
+          },
+          {
+            "simulation_tick": 3008,
+            "core": "32dda4fd",
+            "mod": "4c4a7a3f"
+          },
+          {
+            "simulation_tick": 3040,
+            "core": "4e8ccc9d",
+            "mod": "3861fa65"
+          }
+        ],
+        "resolved_through": [
+          3049,
+          3048
+        ]
+      },
+      {
+        "label": "paired ground-jump audio then settle",
+        "samples": [
+          {
+            "simulation_tick": 5024,
+            "core": "9e65a4ea",
+            "mod": "dad521c3"
+          },
+          {
+            "simulation_tick": 5056,
+            "core": "6d057f0d",
+            "mod": "07c7e4bf"
+          }
+        ],
+        "resolved_through": [
+          5057,
+          5058
+        ]
+      }
+    ],
+    "raw_artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\qualification.json",
+        "bytes": 6493835,
+        "sha256": "b9ada0d6d57d31ca65c370f8b74e5d8a321e46456046f46f396aacc45ba57006"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\intro-admission\\observations.json",
+        "bytes": 4833609,
+        "sha256": "961157c400ef18d6ea30d2f2473f2d1fc460daa454a9ddb494d631ba9c7238fa"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc2n\\F206-executing-source-pins.json",
+        "bytes": 10553,
+        "sha256": "10659f9d5566c5f5842d32a7bc06e9e4bb56d87df003c375d4363aa25c0c0d51"
+      }
+    ]
+  },
+  "failed_attempts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fc1n-NET-undisplayed-render-context-baseline-reviewed-root-v1.json",
+      "bytes": 1811,
+      "sha256": "0063679d36e76f164a3869b22aa844456f77f40e54153a5e40a2cf4257bf6df6"
+    }
+  ],
+  "limits": [
+    "Only F206 is named for new credit; eight base checks remain prerequisites.",
+    "Option15 originalCP1 plus disclosed once position/history bypass; original input remains tainted.",
+    "Publications, PLAY/actors and composed captures are asynchronous; pre/post capture rows retained.",
+    "All direction is neutral after admission until actual native HP48/active4 and released fullfeet.",
+    "First typed bodies are retained, including unresolved contact. F7 qualification requires final original full22feet, native ground, living bodies and independent movement; initial transient motion is not a failed landing.",
+    "Collision equivalence permits native graphical remaps, never claims original full graphical identity.",
+    "Parent exact image/profile/source, recording/card/cleanup and final CRC gates remain mandatory.",
+    "F206 retains direct post-input quiet interior follow witnesses for each seat. Later legitimate clamping or native boss knockback need not leave both origins interior simultaneously. Other mapped input must stay neutral; actual native other-body motion is retained. PCV6 quake entries are preserved and distinguished from quiet follow, never adjusted or presented as authored static-bound coordinates.",
+    "Actual canonical current/target bounds and both private camera origins are observed. Private bounds inheritance is established by the exact compiled views.inc; the trace does not publish private bounds.",
+    "Prior F122/F124/F7 are setup prerequisites only and gain no additional credit. Same-machine profile35, contact protection, once original CP1 positioning and tainted input limits remain explicit.",
+    "F206 retains direct post-input quiet interior follow witnesses for each seat. Later legitimate clamping or native boss knockback need not leave both origins interior simultaneously. Other mapped input must stay neutral; actual native other-body motion is retained. PCV6 quake entries are preserved and distinguished from quiet follow, never adjusted or presented as authored static-bound coordinates.",
+    "NET fc2n raw wrapper remains failed: repeated pre-fixture intro full-32HP gate failed after original enemy contact. All seven F206 checks and fourteen other parent gates pass, including its own final resolved CRC, cards and exits. The identical runner/image prelude already passed in reviewed rf13n; that exact component is reused, not relabeled in the raw run. Named F206 endpoint directly has both full32HP native grounded heroes on both peers.",
+    "LOCAL observer1 and NET observer2 differ only in the actual displayed-seat procedure: one LOCAL split process renders both; NET peer0 renders seat0 and peer1 renders seat1. Other private render contexts are not claimed observed.",
+    "Only F206 gains new credit; one original arena, same-machine delay3/profile35. No other refight, boss defeat, cross-host, human or native3330 claim."
+  ],
+  "review_summary": {
+    "comparisons_closed": 1,
+    "root_personally_viewed_images": 9,
+    "native_graceful_exit0": 3,
+    "private_cards_unchanged": true,
+    "matching_crc_samples": 9,
+    "resolved_crc_windows": 4,
+    "raw_NET_parent_passes": 14,
+    "raw_NET_parent_failures": 1,
+    "accepted_exact_build_component_reused": 1
+  }
+}
