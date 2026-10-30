@@ -225,11 +225,12 @@ static void refight_owner_projection(CPUState *cpu) {
      * waits; neither and both fall through to the original callback. No
      * private/native body, actor, lock, progress or owner is written. */
     for(unsigned contacts=0;contacts<4;++contacts) {
-        setup_refight_hook(cpu);both_doors=1;
+        setup_refight_hook(cpu);both_doors=1;cpu->gpr[31]=0x800ECAFCu;
         psx_mod_write_word(PLAYER+8,((contacts&1)?1888u:1852u)<<16);
         put32(p2.body+8,((contacts&2)?1888u:1852u)<<16);
+        CHECK(!refight_portal_contact(cpu,0x800EC860u) && !refight_probe_calls && !refight_action_calls); /* Original outer support must run. */
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
-        CHECK(refight_portal_contact(cpu,0x800EC860u)==(contacts==1 || contacts==2));
+        CHECK(refight_portal_both_admission(cpu,0x800EC8E8u)==(contacts==1 || contacts==2));
         CHECK(refight_probe_calls==2 && !refight_action_calls && !scene_owner &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) &&
             !inside && !scene_call && !zero_projected && !state_track.count);
@@ -238,15 +239,16 @@ static void refight_owner_projection(CPUState *cpu) {
      * Both into Either. Actual absent/fallen lifecycle states do not block
      * the existing original primary or projected-survivor callback. */
     for(unsigned seat=0;seat<2;++seat) {
-        setup_refight_hook(cpu);both_doors=1;
+        setup_refight_hook(cpu);both_doors=1;cpu->gpr[31]=0x800ECAFCu;
         if(seat)p2.body[0x7A]=1;else psx_mod_write_byte(PLAYER+0x7A,1);
+        CHECK(!refight_portal_contact(cpu,0x800EC860u) && !refight_probe_calls && !refight_action_calls); /* Original outer support must run. */
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
-        CHECK(refight_portal_contact(cpu,0x800EC860u) && !refight_probe_calls && !refight_action_calls &&
+        CHECK(refight_portal_both_admission(cpu,0x800EC8E8u) && !refight_probe_calls && !refight_action_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
         for(unsigned state=MMX6_COOP_ABSENT;state<=MMX6_COOP_FALLEN;++state) {
-            setup_refight_hook(cpu);both_doors=1;life.status[seat]=state;
+            setup_refight_hook(cpu);both_doors=1;cpu->gpr[31]=0x800ECAFCu;life.status[seat]=state;
             memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
-            CHECK(!refight_portal_contact(cpu,0x800EC860u) && !refight_probe_calls && !refight_action_calls &&
+            CHECK(!refight_portal_both_admission(cpu,0x800EC8E8u) && !refight_probe_calls && !refight_action_calls &&
                 !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
         }
     }

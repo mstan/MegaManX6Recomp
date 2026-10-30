@@ -2861,7 +2861,8 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x800EBF18,northpole_ice_live)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EC780,recycle_portal_contact) ||
         !psx_mod_set_function_replacement(0x800EC8F8,recycle_portal_departure_wait) ||
-        !psx_mod_set_function_replacement(0x800EC860,refight_portal_contact)) failed=1;
+        !psx_mod_set_function_replacement(0x800EC860,refight_portal_contact) ||
+        !psx_mod_set_function_replacement(0x800EC8E8,refight_portal_both_admission)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
