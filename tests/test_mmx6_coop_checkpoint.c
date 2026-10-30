@@ -838,6 +838,7 @@ static void agreed_gate_enemy_prerequisite(CPUState *cpu) {
     test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option && !checkpoint_pending.phase);
 }
 #include "test_mmx6_coop_refight_fixture.inc"
+#include "test_mmx6_coop_recycle_departure.inc"
 static void agreed_portal_prerequisite(CPUState *cpu) {
     for(int online=0;online<=1;++online)for(int distant=0;distant<=1;++distant) {
         setup_portal_prerequisite(cpu,online,distant);p2.body[5]=1; /* Native guest beam has not finished. */
@@ -1501,6 +1502,7 @@ int main(int argc,char **argv) {
     file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"RPS1",4));
     CHECK(fread(refight_source_ram,1,sizeof refight_source_ram,file)==sizeof refight_source_ram && fgetc(file)==EOF);fclose(file);
     agreed_refight_prerequisite(&cpu);agreed_refight_distant_prerequisite(&cpu);refight_owner_projection(&cpu);
+    recycle_departure_final_order(&cpu);
     agreed_gate_enemy_prerequisite(&cpu);
     agreed_northpole_prerequisite(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);

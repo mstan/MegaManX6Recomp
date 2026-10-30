@@ -104,3 +104,34 @@ static int recycle_portal_contact(CPUState *cpu,uint32_t address) {
     cpu->gpr[2]=result;
     return 1;
 }
+/* F147: let an already voluntary outgoing beam finish before the original
+ * portal commits its new section. EC880 dispatches this void phase callback
+ * through F3928 and ignores v0. At counter28, EC8F8's next call increments
+ * to29, requests the native fade, writes PLAY+0F=41 and advances phase2.
+ * Defer only that final call. Do not replay a prefix, alter its timer, move
+ * a body or create an arrival: scene_tick phase0 already runs original3674C
+ * during the primary's native lock. Native state3 alone completes departure;
+ * the ordinary callback then resumes and commits its own original writes. */
+static int recycle_portal_departure_wait(CPUState *cpu,uint32_t address) {
+    if(address!=0x800EC8F8u || cpu->gpr[31]!=0x800EC8ACu ||
+       inside || scene_call || zero_world || zero_projected || private_draw || view_call ||
+       !stage_call || !ready || !enrolled || failed || scene_owner!=1 || scene_phase ||
+       life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_LEAVING ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       psx_mod_read_byte(PLAY+12)!=4 || psx_mod_read_byte(PLAY+13) ||
+       psx_mod_read_byte(PLAY+0x0F) || psx_mod_read_byte(PLAY+0x10)!=2 ||
+       !(psx_mod_read_byte(PLAYER)&1u) || !psx_mod_read_byte(PLAYER+0x5C) ||
+       (psx_mod_read_byte(PLAYER+0x5C)&0x80u) ||
+       !(p2.body[0]&1u) || p2.body[4]!=1 || !p2.body[0x5C] || (p2.body[0x5C]&0x80u))return 0;
+    uint32_t actor=cpu->gpr[4];
+    if(actor<0x8008EF48u || actor>=0x80090C88u || (actor-0x8008EF48u)%0x9Cu ||
+       !(psx_mod_read_byte(actor)&1u) || psx_mod_read_byte(actor+1)!=0x1C ||
+       psx_mod_read_byte(actor+2)!=1 || psx_mod_read_byte(actor+4)!=1 ||
+       psx_mod_read_byte(actor+5)!=2 || psx_mod_read_byte(actor+6)!=1 ||
+       psx_mod_read_half(actor+0x7C)!=28 || psx_mod_read_word(actor+0x10)!=0x800F2B0Cu ||
+       psx_mod_read_half(actor+10)!=1552 || psx_mod_read_half(actor+14)!=1584 ||
+       psx_mod_read_word(actor+0x50)!=0x800F38BCu ||
+       psx_mod_read_word(actor+0x54)!=0x800F38C0u ||
+       psx_mod_read_word(actor+0x68)!=0x800F38B8u || !recycle_portal_source())return 0;
+    return 1; /* Void callback deferred; preserve CPU and every native byte. */
+}
