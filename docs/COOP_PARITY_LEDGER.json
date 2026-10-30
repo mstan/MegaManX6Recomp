@@ -23551,25 +23551,100 @@
       "frozen_row_sha256": "fae9402f5a5e0e3ff059837a5122ad2bae03fb920e938e1a2a5417b5b93ae881",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Camera-relative fireball/shake emitter unidentified",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Original Turtloid type0E rain-window admission and camera-relative type0B weather plane",
         "bounded_check": "Identify an original X6 camera-relative environmental emitter and its start/end rules; guest leads while primary stays behind without seeding emission state.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "ffd4086989d26efda8e23257b0449742e9863b05",
+            "build_identity": {
+              "executable_sha256": "5bd17a993eafb8cd14e9cf6d9f3f307c3e20485e4d11790d50be76b8afb985cc",
+              "compiled_manifest_sha256": "0ab6f786fdd23f767f5b8ec270a138e3c4953d651e407c99dadf6e5b6d0c2826",
+              "provenance_sha256": "68220dc8458fa52c3aa040ba0de489def8c354b844c61afb83e47c18d9bc2d9d"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisite": "original TurtloidCP1; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Keep primary behind; only guest enters original native rain window, observe actual five-frame weather/private art, then guest exits and original fade ends visibly.",
+            "outcome": "Native guest-only admission works after source-qualified operand fix; genuine shared weather advances and clears through original native end, while primary position stays fixed. All parent profile/synchronization/restoration/card/owned-exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ffd4086-F194-guest-first-weather-local-netplay-reviewed.json",
+                "sha256": "0cb011542f2dc80c60f46b4c6978c29beea4617b149d14cb7aa93a258f159749"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F194 first original Turtloid6/0 environmental rain window, X/P1-Zero/P2. Actual source-authored inclusive1248..1631 admits living guest while primary remains1120; ordinary guest exit returns both outside. No every-weather/route or native3330 audit.",
+              "Original CP1 reachability and hostile-contact protection are setup bypasses; starting HP/earned weapons off. Actual Left/Right/Jump moves only guest after the one agreed checkpoint chord. No rain flag, phase, fade/counter, atlas index, palette, result or success writes in the observer.",
+              "Product fix changes only the native already-loaded X comparison operand at guardedEB310, after the original load delay. Actual type0E actor/current-window/source words and eligible guest context are checked. Native comparisons, flag stores, producer/animation/fade/end still run once. Main EXE translation units are unchanged because this site is beyond its original8008F000 end; future overlay compilation also declares the site.",
+              "Native end is rainflag0/action1/fade0 and visibly cleared rain, stable for at least16 further native world updates. Original dormant controller may retain atlasX0/animated1 and its clock. Initial dryX320/animated0 is not an authored post-rain requirement; rejected wf3l observer expectation remains preserved.",
+              "Root personally reviewed all33 composed setup/start/five-frame/end images: dense native rain changes in both private views when guest enters, then disappears after guest leaves, with primary fixed and both heroes healthy/controllable. RAM, GP0, CLUT and captures are asynchronous; no same-instruction image claim.",
+              "Earlier wf1l tuple/list check and wf2l terrain-only support guard failed as observers; wf2l nevertheless retains401 original world updates with guest1257/primary1120 and rain0 before the fix. Those partial observations are preserved and grant no full-mode credit. Actual actor support bit71 is accepted by corrected native readiness.",
+              "Same exact v111 image/source/profile42 LOCAL and same-PC loopback NET; no WAN/different-host/cross-platform claim.32 C positive/negative operand cases and18 compiled tests support the fix but do not replace these native results. Snapshot15 unchanged; no old-state compatibility promise.",
+              "F113 primary-death/survivor and F120 post-death palette/fade/upload remain deferred and uncredited. Original paired HUD harness, saves/cards/settings and all accepted/failed evidence remain preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "ffd4086989d26efda8e23257b0449742e9863b05",
+            "build_identity": {
+              "executable_sha256": "5bd17a993eafb8cd14e9cf6d9f3f307c3e20485e4d11790d50be76b8afb985cc",
+              "compiled_manifest_sha256": "0ab6f786fdd23f767f5b8ec270a138e3c4953d651e407c99dadf6e5b6d0c2826",
+              "provenance_sha256": "68220dc8458fa52c3aa040ba0de489def8c354b844c61afb83e47c18d9bc2d9d"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "audio": "dummy muted",
+              "prerequisite": "original TurtloidCP1; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Keep primary behind; only guest enters original native rain window, observe actual five-frame weather/private art, then guest exits and original fade ends visibly.",
+            "outcome": "Native guest-only admission works after source-qualified operand fix; genuine shared weather advances and clears through original native end, while primary position stays fixed. All parent profile/synchronization/restoration/card/owned-exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ffd4086-F194-guest-first-weather-local-netplay-reviewed.json",
+                "sha256": "0cb011542f2dc80c60f46b4c6978c29beea4617b149d14cb7aa93a258f159749"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F194 first original Turtloid6/0 environmental rain window, X/P1-Zero/P2. Actual source-authored inclusive1248..1631 admits living guest while primary remains1120; ordinary guest exit returns both outside. No every-weather/route or native3330 audit.",
+              "Original CP1 reachability and hostile-contact protection are setup bypasses; starting HP/earned weapons off. Actual Left/Right/Jump moves only guest after the one agreed checkpoint chord. No rain flag, phase, fade/counter, atlas index, palette, result or success writes in the observer.",
+              "Product fix changes only the native already-loaded X comparison operand at guardedEB310, after the original load delay. Actual type0E actor/current-window/source words and eligible guest context are checked. Native comparisons, flag stores, producer/animation/fade/end still run once. Main EXE translation units are unchanged because this site is beyond its original8008F000 end; future overlay compilation also declares the site.",
+              "Native end is rainflag0/action1/fade0 and visibly cleared rain, stable for at least16 further native world updates. Original dormant controller may retain atlasX0/animated1 and its clock. Initial dryX320/animated0 is not an authored post-rain requirement; rejected wf3l observer expectation remains preserved.",
+              "Root personally reviewed all33 composed setup/start/five-frame/end images: dense native rain changes in both private views when guest enters, then disappears after guest leaves, with primary fixed and both heroes healthy/controllable. RAM, GP0, CLUT and captures are asynchronous; no same-instruction image claim.",
+              "Earlier wf1l tuple/list check and wf2l terrain-only support guard failed as observers; wf2l nevertheless retains401 original world updates with guest1257/primary1120 and rain0 before the fix. Those partial observations are preserved and grant no full-mode credit. Actual actor support bit71 is accepted by corrected native readiness.",
+              "Same exact v111 image/source/profile42 LOCAL and same-PC loopback NET; no WAN/different-host/cross-platform claim.32 C positive/negative operand cases and18 compiled tests support the fix but do not replace these native results. Snapshot15 unchanged; no old-state compatibility promise.",
+              "F113 primary-death/survivor and F120 post-death palette/fade/upload remain deferred and uncredited. Original paired HUD harness, saves/cards/settings and all accepted/failed evidence remain preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only."
+            ]
+          }
+        ],
+        "limitations": "Only frozen234 F194 first original Turtloid6/0 environmental rain window, X/P1-Zero/P2. Actual source-authored inclusive1248..1631 admits living guest while primary remains1120; ordinary guest exit returns both outside. No every-weather/route or native3330 audit. Original CP1 reachability and hostile-contact protection are setup bypasses; starting HP/earned weapons off. Actual Left/Right/Jump moves only guest after the one agreed checkpoint chord. No rain flag, phase, fade/counter, atlas index, palette, result or success writes in the observer. Product fix changes only the native already-loaded X comparison operand at guardedEB310, after the original load delay. Actual type0E actor/current-window/source words and eligible guest context are checked. Native comparisons, flag stores, producer/animation/fade/end still run once. Main EXE translation units are unchanged because this site is beyond its original8008F000 end; future overlay compilation also declares the site. Native end is rainflag0/action1/fade0 and visibly cleared rain, stable for at least16 further native world updates. Original dormant controller may retain atlasX0/animated1 and its clock. Initial dryX320/animated0 is not an authored post-rain requirement; rejected wf3l observer expectation remains preserved. Root personally reviewed all33 composed setup/start/five-frame/end images: dense native rain changes in both private views when guest enters, then disappears after guest leaves, with primary fixed and both heroes healthy/controllable. RAM, GP0, CLUT and captures are asynchronous; no same-instruction image claim. Earlier wf1l tuple/list check and wf2l terrain-only support guard failed as observers; wf2l nevertheless retains401 original world updates with guest1257/primary1120 and rain0 before the fix. Those partial observations are preserved and grant no full-mode credit. Actual actor support bit71 is accepted by corrected native readiness. Same exact v111 image/source/profile42 LOCAL and same-PC loopback NET; no WAN/different-host/cross-platform claim.32 C positive/negative operand cases and18 compiled tests support the fix but do not replace these native results. Snapshot15 unchanged; no old-state compatibility promise. F113 primary-death/survivor and F120 post-death palette/fade/upload remain deferred and uncredited. Original paired HUD harness, saves/cards/settings and all accepted/failed evidence remain preserved."
       }
     },
     {

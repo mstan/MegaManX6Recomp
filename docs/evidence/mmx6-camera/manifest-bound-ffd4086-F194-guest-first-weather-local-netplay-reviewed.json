@@ -1,0 +1,1365 @@
+{
+  "kind": "F194_actual_guest_first_original_weather_admission_motion_native_end_LOCAL_NET_review",
+  "status": "passed",
+  "comparison": "F194",
+  "frozen_row_sha256": "fae9402f5a5e0e3ff059837a5122ad2bae03fb920e938e1a2a5417b5b93ae881",
+  "source_head": "ffd4086989d26efda8e23257b0449742e9863b05",
+  "candidate_binding": {
+    "image_sha256": "5bd17a993eafb8cd14e9cf6d9f3f307c3e20485e4d11790d50be76b8afb985cc",
+    "manifest_sha256": "0ab6f786fdd23f767f5b8ec270a138e3c4953d651e407c99dadf6e5b6d0c2826",
+    "provenance_sha256": "68220dc8458fa52c3aa040ba0de489def8c354b844c61afb83e47c18d9bc2d9d"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "modes": {
+    "local": {
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\turtloid-weather-trigger-v111-final-binding-root-v1.json",
+        "binding_sha256": "b38db1ded8e8eabd596f00573dc19a41fadcb4dfe8557fb26799b89fb425acb5",
+        "image_sha256": "5bd17a993eafb8cd14e9cf6d9f3f307c3e20485e4d11790d50be76b8afb985cc",
+        "manifest_sha256": "0ab6f786fdd23f767f5b8ec270a138e3c4953d651e407c99dadf6e5b6d0c2826",
+        "provenance_sha256": "68220dc8458fa52c3aa040ba0de489def8c354b844c61afb83e47c18d9bc2d9d",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v111-turtloid-weather-trigger-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "ffd4086989d26efda8e23257b0449742e9863b05",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v59",
+        "host_revision": 42
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "actual_original_guest_only_rain_window": true,
+        "primary_native_position_stays_behind": true,
+        "real_rain_advances_in_private_views": true,
+        "actual_original_weather_end_and_native_idle": true
+      },
+      "weather_checks": {
+        "original_live_source_and_origin_bound_slot": true,
+        "five_original_atlas_frames_each_peer": true,
+        "native_world_delta_inside_real_VBlank_bracket": true,
+        "private_views_advance_without_host_leak": true,
+        "composed_owner_world_ROI_pixels_change_with_stationary_heroes": true,
+        "completed_composed_images_and_GP0_retained": true
+      },
+      "actual_native_checkpoint": [
+        {
+          "timer": 1,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "players": [
+            {
+              "x_raw": 73400320,
+              "y_raw": 37421056,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            },
+            {
+              "x_raw": 74973184,
+              "y_raw": 37355520,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            }
+          ]
+        }
+      ],
+      "actual_guest_only_admission": [
+        {
+          "timer": 118,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "players": [
+            {
+              "x_raw": 73400320,
+              "y_raw": 37421056,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            },
+            {
+              "x_raw": 82313216,
+              "y_raw": 36311552,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            }
+          ]
+        }
+      ],
+      "original_rain_flags": [
+        1
+      ],
+      "actual_original_atlas_Y": [
+        [
+          0,
+          256,
+          512,
+          768,
+          1024
+        ]
+      ],
+      "native_clock_brackets": [
+        {
+          "peer": 0,
+          "native_world_delta": 66,
+          "VBlank_min": 64,
+          "VBlank_max": 68
+        }
+      ],
+      "stationary_native_weather_positions": [
+        {
+          "peer": 0,
+          "before": [
+            [
+              73400320,
+              37421056
+            ],
+            [
+              82313216,
+              36311552
+            ]
+          ],
+          "after": [
+            [
+              73400320,
+              37421056
+            ],
+            [
+              82313216,
+              36311552
+            ]
+          ],
+          "unchanged": true
+        }
+      ],
+      "actual_native_end": [
+        {
+          "state": {
+            "timer": 297,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "players": [
+              {
+                "x_raw": 73400320,
+                "y_raw": 37421056,
+                "hp": 32,
+                "state": 1,
+                "action": 2
+              },
+              {
+                "x_raw": 76283904,
+                "y_raw": 37355520,
+                "hp": 32,
+                "state": 1,
+                "action": 2
+              }
+            ]
+          },
+          "rain": 0,
+          "weather": {
+            "address": 2148120832,
+            "raw_hex": "090b0000010000000000000000000000a0530f8011007a001400000000000100d07b1b80000000000000000000000000",
+            "action": 1,
+            "counter": 17,
+            "fade": 0,
+            "animated": 1,
+            "palette_sequence": 2149284816
+          },
+          "atlas": {
+            "mode": 5,
+            "x": 0,
+            "y": 1024,
+            "refresh": 0
+          }
+        }
+      ],
+      "actual_native_end_after16": [
+        {
+          "state": {
+            "timer": 315,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "players": [
+              {
+                "x_raw": 73400320,
+                "y_raw": 37421056,
+                "hp": 32,
+                "state": 1,
+                "action": 2
+              },
+              {
+                "x_raw": 76283904,
+                "y_raw": 37355520,
+                "hp": 32,
+                "state": 1,
+                "action": 2
+              }
+            ]
+          },
+          "rain": 0,
+          "weather": {
+            "address": 2148120832,
+            "raw_hex": "090b0000010000000000000000000000a0530f8010007a001400000000000100d07b1b80000000000000000000000000",
+            "action": 1,
+            "counter": 16,
+            "fade": 0,
+            "animated": 1,
+            "palette_sequence": 2149284816
+          },
+          "atlas": {
+            "mode": 5,
+            "x": 0,
+            "y": 1024,
+            "refresh": 0
+          }
+        }
+      ],
+      "actual_guest_predicate_calls": [
+        144
+      ],
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "800EB2D4",
+          "bytes": 140,
+          "sha256": "4bf0df3336b34d79907316a0e15c054eee2d95331ecdbda852588dc0ab067efa"
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "label": "native-primary-behind-dry-checkpoint",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\peer-0-native-primary-behind-dry-checkpoint.png",
+            "bytes": 2074543,
+            "sha256": "d954c0cf49f81106d08a110c5e12dd07b3e5e5e92f6d7b2e711f39f709a222e0"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-inside-primary-outside",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\peer-0-native-guest-inside-primary-outside.png",
+            "bytes": 2074543,
+            "sha256": "fc0491f542f7785050722e1a16c51f2a37c68e4e65db7609a5a29f51a1eb013e"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-only-admission-result",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\peer-0-native-guest-only-admission-result.png",
+            "bytes": 2074543,
+            "sha256": "5b8dd9b4def9065735d21e27b6ae405964e4b0a9bc5e783cec67777f8f062bc2"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-exits-original-window",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\peer-0-native-guest-exits-original-window.png",
+            "bytes": 2074543,
+            "sha256": "73e54bc66a1468ca4f4a341be099dc8684e787cfb25a0511c3c2ddc9132a4f47"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-original-weather-ended",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\peer-0-native-original-weather-ended.png",
+            "bytes": 2074543,
+            "sha256": "aa42c4d87cec925e572e260f3afb622fab4eec1cd045c6f38d9e2f751881f51e"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-512",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-512.png",
+            "bytes": 2074543,
+            "sha256": "b4bfe452ad2dcd6056d750fcd8abc81e7f876bd6260f7802eca2292b455c0835"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-0",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-0.png",
+            "bytes": 2074543,
+            "sha256": "c5b0772e8282f6eaa6509e852398872131478e940c95ac8086a153fe286669d3"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-768",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-768.png",
+            "bytes": 2074543,
+            "sha256": "03e797b399bfb81d2b6f519cf8b7c32486b1e53f37562ae6612039266266b675"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-256",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-256.png",
+            "bytes": 2074543,
+            "sha256": "6089c2380993ece4273b58cee4a8b44bb9e94908ebf792a4c580f2601758783d"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-1024",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-1024.png",
+            "bytes": 2074543,
+            "sha256": "cd25e1f312fb92443209c0bf6eed11fc195baa286e5c5f58aa1595c32a2fbf96"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-weather-final",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-weather-final.png",
+            "bytes": 2074543,
+            "sha256": "29f86c02caf6660dc2c7bf5649797ec3fdc3a3a7c665b5f6f1de326e02c9629f"
+          },
+          "root_personally_viewed": true
+        }
+      ],
+      "terminals": [
+        {
+          "owned_pid": 13852,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "resolved_crc_windows": [],
+      "matching_crc_samples": 0,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\qualification.json",
+          "bytes": 17286848,
+          "sha256": "47078cf44687c3aeb2eea1afa307dc0a5ab173e3d978e4a6b45e9a98d83a0cb3"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\observations.json",
+          "bytes": 6675279,
+          "sha256": "422b5dcddb589453f1f32df0e7b2b6b413ed3b3cc33c907790fa2d278eba5f11"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\weather-observations.json",
+          "bytes": 1757409,
+          "sha256": "d6e6b22f78816a3435e584ff4848849c98eddf9682032bd889ec0dade0124173"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\F194-executing-source-pins.json",
+          "bytes": 9644,
+          "sha256": "4d4de11130e2dbe493cae5f9df5ee8dc0f98bc7031a64388a81e907467d0a94b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l-lease-root-v1.json",
+          "bytes": 1729,
+          "sha256": "16a2483f76dd8b71fddd616bcddc1b6c693839a8f915ed49fa6fd516d83f945b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F194-v111-LOCAL-root-image-review-root-v1.json",
+          "bytes": 3194,
+          "sha256": "727e80eed8494d5c0047601f017156d94f6666220c9e3b95a27b48d7042f34ca"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-512-GP0.json.gz",
+          "bytes": 36035,
+          "sha256": "d1aa80cab9ca5179c738d9ffd1200bdf9567dbf292ab80a9fa1509b45f14ceb6"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-0-GP0.json.gz",
+          "bytes": 36274,
+          "sha256": "9e9db1bb8e4d6b93a7e1b8ecc82346f4d328e6b57b662e8f95da3de3efc34d7a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-768-GP0.json.gz",
+          "bytes": 36207,
+          "sha256": "650c41d6598002793fd942c7cd43d202fa2e753251346c66e2210d995ba1f2ea"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-256-GP0.json.gz",
+          "bytes": 36049,
+          "sha256": "8a1f15ec61526000830349b6ea6f82cc188f7739c74eebbdc27ed63daef757a2"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-atlas-1024-GP0.json.gz",
+          "bytes": 36338,
+          "sha256": "1fc8db47f8412ea735e4689fa66bb589c8d32edf143c6deec26f4a758eb9c429"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4l\\ammo-hud\\intro-admission\\guest-only-weather\\peer-0-native-weather-final-GP0.json.gz",
+          "bytes": 36208,
+          "sha256": "e50e0261e00c0a0f182ffcb7c850d618e2bb82472beee651318a8e2156572947"
+        }
+      ]
+    },
+    "netplay": {
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\turtloid-weather-trigger-v111-final-binding-root-v1.json",
+        "binding_sha256": "b38db1ded8e8eabd596f00573dc19a41fadcb4dfe8557fb26799b89fb425acb5",
+        "image_sha256": "5bd17a993eafb8cd14e9cf6d9f3f307c3e20485e4d11790d50be76b8afb985cc",
+        "manifest_sha256": "0ab6f786fdd23f767f5b8ec270a138e3c4953d651e407c99dadf6e5b6d0c2826",
+        "provenance_sha256": "68220dc8458fa52c3aa040ba0de489def8c354b844c61afb83e47c18d9bc2d9d",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v111-turtloid-weather-trigger-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "ffd4086989d26efda8e23257b0449742e9863b05",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v59",
+        "host_revision": 42
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "actual_original_guest_only_rain_window": true,
+        "primary_native_position_stays_behind": true,
+        "real_rain_advances_in_private_views": true,
+        "actual_original_weather_end_and_native_idle": true
+      },
+      "weather_checks": {
+        "original_live_source_and_origin_bound_slot": true,
+        "five_original_atlas_frames_each_peer": true,
+        "native_world_delta_inside_real_VBlank_bracket": true,
+        "private_views_advance_without_host_leak": true,
+        "composed_owner_world_ROI_pixels_change_with_stationary_heroes": true,
+        "completed_composed_images_and_GP0_retained": true
+      },
+      "actual_native_checkpoint": [
+        {
+          "timer": 2,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "players": [
+            {
+              "x_raw": 73400320,
+              "y_raw": 37421056,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            },
+            {
+              "x_raw": 74973184,
+              "y_raw": 37355520,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            }
+          ]
+        },
+        {
+          "timer": 4,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "players": [
+            {
+              "x_raw": 73400320,
+              "y_raw": 37421056,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            },
+            {
+              "x_raw": 74973184,
+              "y_raw": 37355520,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            }
+          ]
+        }
+      ],
+      "actual_guest_only_admission": [
+        {
+          "timer": 140,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "players": [
+            {
+              "x_raw": 73400320,
+              "y_raw": 37421056,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            },
+            {
+              "x_raw": 83558400,
+              "y_raw": 36311552,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            }
+          ]
+        },
+        {
+          "timer": 141,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "players": [
+            {
+              "x_raw": 73400320,
+              "y_raw": 37421056,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            },
+            {
+              "x_raw": 83558400,
+              "y_raw": 36311552,
+              "hp": 32,
+              "state": 1,
+              "action": 2
+            }
+          ]
+        }
+      ],
+      "original_rain_flags": [
+        1,
+        1
+      ],
+      "actual_original_atlas_Y": [
+        [
+          0,
+          256,
+          512,
+          768,
+          1024
+        ],
+        [
+          0,
+          256,
+          512,
+          768,
+          1024
+        ]
+      ],
+      "native_clock_brackets": [
+        {
+          "peer": 0,
+          "native_world_delta": 202,
+          "VBlank_min": 198,
+          "VBlank_max": 205
+        },
+        {
+          "peer": 1,
+          "native_world_delta": 203,
+          "VBlank_min": 199,
+          "VBlank_max": 207
+        }
+      ],
+      "stationary_native_weather_positions": [
+        {
+          "peer": 0,
+          "before": [
+            [
+              73400320,
+              37421056
+            ],
+            [
+              83558400,
+              36311552
+            ]
+          ],
+          "after": [
+            [
+              73400320,
+              37421056
+            ],
+            [
+              83558400,
+              36311552
+            ]
+          ],
+          "unchanged": true
+        },
+        {
+          "peer": 1,
+          "before": [
+            [
+              73400320,
+              37421056
+            ],
+            [
+              83558400,
+              36311552
+            ]
+          ],
+          "after": [
+            [
+              73400320,
+              37421056
+            ],
+            [
+              83558400,
+              36311552
+            ]
+          ],
+          "unchanged": true
+        }
+      ],
+      "actual_native_end": [
+        {
+          "state": {
+            "timer": 488,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "players": [
+              {
+                "x_raw": 73400320,
+                "y_raw": 37421056,
+                "hp": 31,
+                "state": 1,
+                "action": 2
+              },
+              {
+                "x_raw": 75694080,
+                "y_raw": 37355520,
+                "hp": 32,
+                "state": 1,
+                "action": 2
+              }
+            ]
+          },
+          "rain": 0,
+          "weather": {
+            "address": 2148120832,
+            "raw_hex": "090b0000010000000000000000000000a0530f800a006e002300000000000100d07b1b80000000000000000000000000",
+            "action": 1,
+            "counter": 10,
+            "fade": 0,
+            "animated": 1,
+            "palette_sequence": 2149284816
+          },
+          "atlas": {
+            "mode": 5,
+            "x": 0,
+            "y": 512,
+            "refresh": 0
+          }
+        },
+        {
+          "state": {
+            "timer": 488,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "players": [
+              {
+                "x_raw": 73400320,
+                "y_raw": 37421056,
+                "hp": 31,
+                "state": 1,
+                "action": 2
+              },
+              {
+                "x_raw": 75694080,
+                "y_raw": 37355520,
+                "hp": 32,
+                "state": 1,
+                "action": 2
+              }
+            ]
+          },
+          "rain": 0,
+          "weather": {
+            "address": 2148120832,
+            "raw_hex": "090b0000010000000000000000000000a0530f800a006e002300000000000100d07b1b80000000000000000000000000",
+            "action": 1,
+            "counter": 10,
+            "fade": 0,
+            "animated": 1,
+            "palette_sequence": 2149284816
+          },
+          "atlas": {
+            "mode": 5,
+            "x": 0,
+            "y": 512,
+            "refresh": 0
+          }
+        }
+      ],
+      "actual_native_end_after16": [
+        {
+          "state": {
+            "timer": 508,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "players": [
+              {
+                "x_raw": 73400320,
+                "y_raw": 37421056,
+                "hp": 31,
+                "state": 1,
+                "action": 2
+              },
+              {
+                "x_raw": 75694080,
+                "y_raw": 37355520,
+                "hp": 32,
+                "state": 1,
+                "action": 2
+              }
+            ]
+          },
+          "rain": 0,
+          "weather": {
+            "address": 2148120832,
+            "raw_hex": "090b0000010000000000000000000000a0530f8009006e002300000000000100d07b1b80000000000000000000000000",
+            "action": 1,
+            "counter": 9,
+            "fade": 0,
+            "animated": 1,
+            "palette_sequence": 2149284816
+          },
+          "atlas": {
+            "mode": 5,
+            "x": 0,
+            "y": 512,
+            "refresh": 0
+          }
+        },
+        {
+          "state": {
+            "timer": 507,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "players": [
+              {
+                "x_raw": 73400320,
+                "y_raw": 37421056,
+                "hp": 31,
+                "state": 1,
+                "action": 2
+              },
+              {
+                "x_raw": 75694080,
+                "y_raw": 37355520,
+                "hp": 32,
+                "state": 1,
+                "action": 2
+              }
+            ]
+          },
+          "rain": 0,
+          "weather": {
+            "address": 2148120832,
+            "raw_hex": "090b0000010000000000000000000000a0530f8008006e002300000000000100d07b1b80000000000000000000000000",
+            "action": 1,
+            "counter": 8,
+            "fade": 0,
+            "animated": 1,
+            "palette_sequence": 2149284816
+          },
+          "atlas": {
+            "mode": 5,
+            "x": 0,
+            "y": 512,
+            "refresh": 0
+          }
+        }
+      ],
+      "actual_guest_predicate_calls": [
+        298,
+        298
+      ],
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "800EB2D4",
+          "bytes": 140,
+          "sha256": "4bf0df3336b34d79907316a0e15c054eee2d95331ecdbda852588dc0ab067efa"
+        },
+        {
+          "peer": 1,
+          "address": "800EB2D4",
+          "bytes": 140,
+          "sha256": "4bf0df3336b34d79907316a0e15c054eee2d95331ecdbda852588dc0ab067efa"
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "label": "native-primary-behind-dry-checkpoint",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-0-native-primary-behind-dry-checkpoint.png",
+            "bytes": 2074543,
+            "sha256": "cd95cb725760ae52cecfe2188ec5de14977694d50aa732dc3d081a5893fc94de"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-primary-behind-dry-checkpoint",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-1-native-primary-behind-dry-checkpoint.png",
+            "bytes": 2074543,
+            "sha256": "0c9950d614f371d08f0b582afd42328adb49887dc34ea6e50bb31d98a2c1e3d6"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-inside-primary-outside",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-0-native-guest-inside-primary-outside.png",
+            "bytes": 2074543,
+            "sha256": "25dcc22a41f8f0a8ff69ac6eed2beb948329dc3a855022fdbe05b4a167fbd64c"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-guest-inside-primary-outside",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-1-native-guest-inside-primary-outside.png",
+            "bytes": 2074543,
+            "sha256": "85715d419e94c46ce9d0e9ef8894e36f18c1fa9aa0774efb7d2ae56b00c043da"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-only-admission-result",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-0-native-guest-only-admission-result.png",
+            "bytes": 2074543,
+            "sha256": "61b73845b2f08dfb00d792f66c270ba84b409a5a76b3e2f9ab8ec6f837437fd6"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-guest-only-admission-result",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-1-native-guest-only-admission-result.png",
+            "bytes": 2074543,
+            "sha256": "1a6a5fee352babc3031d81c02feaeeb0fe36d931ce830d18606f66cc79efd38b"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-exits-original-window",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-0-native-guest-exits-original-window.png",
+            "bytes": 2074543,
+            "sha256": "5332e4ee639af182616c64ee495cf010771b85eeb0ea60e64fe056bff8cb9c6a"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-guest-exits-original-window",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-1-native-guest-exits-original-window.png",
+            "bytes": 2074543,
+            "sha256": "2c60087f20018bc4a18969dfc109f803ebe0a5292aaa76e9d47c2a3a74ec0dd4"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-original-weather-ended",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-0-native-original-weather-ended.png",
+            "bytes": 2074543,
+            "sha256": "c2489d0ac1ee170d592c792a6f60d9b27ecab382b6a7845dea0a5eb534540b13"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-original-weather-ended",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\peer-1-native-original-weather-ended.png",
+            "bytes": 2074543,
+            "sha256": "c3468eb836dfa96110ba7618e84c9ff69ed8892102f70291fb3366ebd9842335"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-0",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-0.png",
+            "bytes": 2074543,
+            "sha256": "46eacbd8bdc8d77177c0c1423c3e174cd6d12db845233d724c1ec839672fc7f2"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-0",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-0.png",
+            "bytes": 2074543,
+            "sha256": "6404725a51808f4583cd22b90b5e27f05bcd9502b164220878ab7c7fa64cb827"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-256",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-256.png",
+            "bytes": 2074543,
+            "sha256": "1dd6ce5d40ecc99aaa79c181d2a5be2c2699a40657784335494d80460d70cf65"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-256",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-256.png",
+            "bytes": 2074543,
+            "sha256": "c58621755458db5be53069c8e1a5face0f7e16c203a3ad1dcc519adc20ee469f"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-768",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-768.png",
+            "bytes": 2074543,
+            "sha256": "d762a50a11aef2c38b156a63cee49397de34a9c895a2d45e827a4bf832561424"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-768",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-768.png",
+            "bytes": 2074543,
+            "sha256": "a3afcb3191033c37525b160cc9d002309d80224010e948fcdef923fc71a20d13"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-512",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-512.png",
+            "bytes": 2074543,
+            "sha256": "ff4f55fd55d189a7ed8038ca8a0713e546b64eef285346ebf01b625364e92b54"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-512",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-512.png",
+            "bytes": 2074543,
+            "sha256": "46889fea27a44dc698557beb580e3ffb4ce1b53aaedb9d3bb5fda696f4f1a5dc"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-1024",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-1024.png",
+            "bytes": 2074543,
+            "sha256": "0437efbff39ec860123d6cf41b27d0e83278fc08dafa0463ae230d16e7c4a9c7"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-1024",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-1024.png",
+            "bytes": 2074543,
+            "sha256": "6e5efeadd1a550a7efe15c770f648b6c4964c313768c2e3534becb037bb329e7"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-weather-final",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-weather-final.png",
+            "bytes": 2074543,
+            "sha256": "dc9f832a94d103775ee3a59e6412126cc9094de744c0b2b23db200c7173c4582"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-weather-final",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-weather-final.png",
+            "bytes": 2074543,
+            "sha256": "dfe172b297cb9dacbe8cf3b9172f6ea114df9907a44e1d2a8cf9f890515a815e"
+          },
+          "root_personally_viewed": true
+        }
+      ],
+      "terminals": [
+        {
+          "owned_pid": 17500,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "owned_pid": 40300,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 3264,
+              "core": "540783cf",
+              "mod": "42fabbaa"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "2c0706e2",
+              "mod": "ae274a98"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "20f226ce",
+              "mod": "f88647b4"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "cd642171",
+              "mod": "d821ea52"
+            }
+          ],
+          "resolved_through": [
+            3379,
+            3379
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3424,
+              "core": "c7776d78",
+              "mod": "65d93815"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "f87509e2",
+              "mod": "f056afbb"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "b4728c38",
+              "mod": "a301ecf1"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "36c0ce46",
+              "mod": "e6c22261"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "2e428c76",
+              "mod": "922e5e23"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "8395fed3",
+              "mod": "47b768c3"
+            }
+          ],
+          "resolved_through": [
+            3602,
+            3601
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3680,
+              "core": "015f1b1e",
+              "mod": "6a87e84b"
+            },
+            {
+              "simulation_tick": 3712,
+              "core": "adf2041a",
+              "mod": "52585553"
+            },
+            {
+              "simulation_tick": 3744,
+              "core": "8ccd1c1c",
+              "mod": "558bdc01"
+            },
+            {
+              "simulation_tick": 3776,
+              "core": "c1de7508",
+              "mod": "7893d0d3"
+            },
+            {
+              "simulation_tick": 3808,
+              "core": "799ccc73",
+              "mod": "a913c6f3"
+            },
+            {
+              "simulation_tick": 3840,
+              "core": "d67f922d",
+              "mod": "c93219f9"
+            },
+            {
+              "simulation_tick": 3872,
+              "core": "548b69fd",
+              "mod": "5a6f85d9"
+            }
+          ],
+          "resolved_through": [
+            3893,
+            3893
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4736,
+              "core": "8ddfc6f6",
+              "mod": "a7ee1f07"
+            },
+            {
+              "simulation_tick": 4768,
+              "core": "7f57be3b",
+              "mod": "19be9de1"
+            },
+            {
+              "simulation_tick": 4800,
+              "core": "7b6cfe97",
+              "mod": "42908c01"
+            },
+            {
+              "simulation_tick": 4832,
+              "core": "6253661c",
+              "mod": "ed9b624f"
+            }
+          ],
+          "resolved_through": [
+            4837,
+            4838
+          ]
+        }
+      ],
+      "matching_crc_samples": 21,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\qualification.json",
+          "bytes": 14548007,
+          "sha256": "a3f5efbb4c429e677288f979422f0cae1782e94d00028c9c96bece288f0810ef"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\observations.json",
+          "bytes": 8764841,
+          "sha256": "db5224b75568f8ca1b12245ed261c9f3828a19a744dacc212e2088de2621b631"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\weather-observations.json",
+          "bytes": 3227697,
+          "sha256": "5dd74811eeb1b52fe4023b80efde94e99e8fdffa0c5c3ad8468210413283e13d"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\F194-executing-source-pins.json",
+          "bytes": 9644,
+          "sha256": "afc83007a8c6b7608d20a76baa769c74b1da079c9f0ff3824884b2636428ddc1"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n-lease-root-v1.json",
+          "bytes": 1724,
+          "sha256": "8ff3ec1e4d24db3441fdc3c5b0362a766d48936a3d3a81c7835bbcb8bab10f50"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F194-v111-NETPLAY-root-image-review-root-v1.json",
+          "bytes": 5562,
+          "sha256": "5ad8dba7645195ae38bbec14639d4ef4d0e73e7a10aeb0dcf87a35aca2843aa1"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\F194-actual-parent-transport-closure.py",
+          "bytes": 54349,
+          "sha256": "032322d3c1d2b3b65502d8247dbc89f061df24a97c65c6464cf6d32b9dd31b36"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\F194-actual-parent-transport-closure-proof.json",
+          "bytes": 587,
+          "sha256": "b4603f96ecdd549cdfa823e46b74d4a5f61a0689d81ec1b3af5d958561f93125"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-0-GP0.json.gz",
+          "bytes": 24014,
+          "sha256": "f17deb540d774c8843d5ab976483afa082425f558b0fb7896ae58fc73cd4d386"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-0-GP0.json.gz",
+          "bytes": 24576,
+          "sha256": "a5241c2acae929e2a96764ca19d65ee16f898911f7ebef652004e7eb414c47df"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-256-GP0.json.gz",
+          "bytes": 24157,
+          "sha256": "5224a2389de5862153d88509a2f28e32e6d1e8b6025d5822257f4604b838a57a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-256-GP0.json.gz",
+          "bytes": 24435,
+          "sha256": "d031d632322e2d1604995901d62856852cd26a7ce7eb0525f85f73e979aee033"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-768-GP0.json.gz",
+          "bytes": 24067,
+          "sha256": "58d895eda6b09a122dcb8547ea0b83f012a77d79fd1e5ab122202d1f0806b373"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-768-GP0.json.gz",
+          "bytes": 24740,
+          "sha256": "019e1d617b515b26da41cc42ae9269a403046bfce9f0cf01de8c4e73e5d3dc93"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-512-GP0.json.gz",
+          "bytes": 24135,
+          "sha256": "066dc67d0e26a32bd925722e4f61181664a40d741fed40b5015619aefc3d3f48"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-512-GP0.json.gz",
+          "bytes": 24496,
+          "sha256": "310506a2e129440d464db2b4b3792cf9c13241efc387b30a8f295e15009ee504"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-atlas-1024-GP0.json.gz",
+          "bytes": 24243,
+          "sha256": "15db7411adb53bd60332852f80dcfc8313a911490358daa4e967da0512a65408"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-atlas-1024-GP0.json.gz",
+          "bytes": 24446,
+          "sha256": "70206a6f3019e1d2528ee104660ae909db4dd8aeeba9dcf2c392b028c8f50b6b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-0-native-weather-final-GP0.json.gz",
+          "bytes": 24124,
+          "sha256": "4a64bc1bb8a3cc6c2009df46b04c2e165b91366af18798371ba8fd986035b31c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf4n\\intro-admission\\guest-only-weather\\peer-1-native-weather-final-GP0.json.gz",
+          "bytes": 24575,
+          "sha256": "d519c125db6029aa3393f76f66e59175473e5bcfa0bcf93315914f56e9bac546"
+        }
+      ]
+    }
+  },
+  "root_personally_viewed_images": 33,
+  "source_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F194-original-guest-first-rain-source-root-v3.json",
+    "bytes": 1500,
+    "sha256": "6d9327d8eb86df42f7489f90ff5b6f2fcdeb13bfb972dceadf1afa003478ed13"
+  },
+  "build_receipt": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\turtloid-weather-trigger-v111-runtime-build-receipt-root-v1.json",
+    "bytes": 2313,
+    "sha256": "7075c7e6c4595709bf499f1c934f9e0583d2ffa4ea9e67731742a5cad06a7e5c"
+  },
+  "focused_compiled_tests_passed": 18,
+  "prior_partial_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf2l\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 6620692,
+      "sha256": "7a3b13570ef334cb01ef0081db9c04efb5b6f9ed81af419e3508ac1e294407ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wf3l\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 9991278,
+      "sha256": "d3b6415eda6cfa29860abecc865c040d12119096337897bc14abc58d6ab03740"
+    }
+  ],
+  "limits": [
+    "Only frozen234 F194 first original Turtloid6/0 environmental rain window, X/P1-Zero/P2. Actual source-authored inclusive1248..1631 admits living guest while primary remains1120; ordinary guest exit returns both outside. No every-weather/route or native3330 audit.",
+    "Original CP1 reachability and hostile-contact protection are setup bypasses; starting HP/earned weapons off. Actual Left/Right/Jump moves only guest after the one agreed checkpoint chord. No rain flag, phase, fade/counter, atlas index, palette, result or success writes in the observer.",
+    "Product fix changes only the native already-loaded X comparison operand at guardedEB310, after the original load delay. Actual type0E actor/current-window/source words and eligible guest context are checked. Native comparisons, flag stores, producer/animation/fade/end still run once. Main EXE translation units are unchanged because this site is beyond its original8008F000 end; future overlay compilation also declares the site.",
+    "Native end is rainflag0/action1/fade0 and visibly cleared rain, stable for at least16 further native world updates. Original dormant controller may retain atlasX0/animated1 and its clock. Initial dryX320/animated0 is not an authored post-rain requirement; rejected wf3l observer expectation remains preserved.",
+    "Root personally reviewed all33 composed setup/start/five-frame/end images: dense native rain changes in both private views when guest enters, then disappears after guest leaves, with primary fixed and both heroes healthy/controllable. RAM, GP0, CLUT and captures are asynchronous; no same-instruction image claim.",
+    "Earlier wf1l tuple/list check and wf2l terrain-only support guard failed as observers; wf2l nevertheless retains401 original world updates with guest1257/primary1120 and rain0 before the fix. Those partial observations are preserved and grant no full-mode credit. Actual actor support bit71 is accepted by corrected native readiness.",
+    "Same exact v111 image/source/profile42 LOCAL and same-PC loopback NET; no WAN/different-host/cross-platform claim.32 C positive/negative operand cases and18 compiled tests support the fix but do not replace these native results. Snapshot15 unchanged; no old-state compatibility promise.",
+    "F113 primary-death/survivor and F120 post-death palette/fade/upload remain deferred and uncredited. Original paired HUD harness, saves/cards/settings and all accepted/failed evidence remain preserved."
+  ]
+}
