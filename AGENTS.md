@@ -89,6 +89,51 @@ finished. These rules supplement the owner's global instructions.
   storage, source-validation, cleanup and native-save protections. Old execution
   save-state compatibility is not required.
 
+## Owner throughput correction, 2026-10-30
+
+Repeated nights of small ledger gains are unacceptable. Apply these concrete
+limits alongside the frozen acceptance criteria:
+
+- Start with a short queue of named rows and the missing behavior for each.
+  Prefer rows reachable with an existing build, setup and observer. Batch
+  compatible checks; do not launch another general inventory or evidence audit.
+- Use the smallest observation that proves the full named behavior. Do not add
+  acceptance gates for incidental diagnostic fields, instruction-atomic samples,
+  extra snapshots or whole asset families unless the row actually requires them.
+  A transient field missing from one debug read is not a gameplay failure.
+- Inspect retained raw results before rerunning. If they establish the required
+  behavior, finish review and ledger admission. If one endpoint is missing,
+  exercise that endpoint and reuse qualified components on the same exact image.
+  Do not replay accepted combat, introductions or setup merely for cleaner proof.
+- Reuse existing launchers, observers and evidence formats. Add only the missing
+  assertion or observation. Do not create a new per-row launcher, curator or
+  layered proof package by default. Bind a batch's shared source/build identity
+  once and reference it; repeated hashing and source reconstruction are not work
+  on the game's behavior.
+- Limit unknown-producer/setup research to 15 minutes before parking it. Limit
+  observer-only repairs to 15 minutes before inspecting the existing raw outcome
+  and switching rows. These limits include time spent on tool calls. Do not
+  restart a budget after a context reset, new observer version or continuation.
+- Allow at most two native attempts on a row before switching, including attempts
+  lost to observer errors or changed setup. A third requires a concrete game fix
+  already implemented and a specific remaining validation endpoint. The earlier
+  60-minute exception does not authorize more harness, documentation or speculative
+  source work. Let healthy active jobs finish; do not kill them to meet a budget.
+- Before any repeat, state the observed failure, whether it belongs to the game
+  or observer, the relevant change, and the expected distinguishing result. An
+  observer failure must not silently become another full gameplay run.
+- A parked row stays parked until a concrete new fact or implemented fix resolves
+  its recorded prerequisite. Elapsed time, another continuation and an old worker
+  recommendation are not new evidence. Use another independent row meanwhile.
+- Every hour, report actual comparison closures and validated game fixes. If
+  neither advanced, say so and switch approach; do not describe instrumentation,
+  builds or source maps as progress. Finish successful rows promptly with concise
+  evidence, ledger updates and local commits instead of accumulating proof work.
+- Keep required LOCAL/NET behavior, exact candidate identity and meaningful
+  synchronization/save protections. Never inflate counts, dilute a frozen row or
+  hide a real failure to meet throughput expectations. Defer human-dependent and
+  long timing checks; preserve all accepted and failed evidence and the HUD harness.
+
 At resumption, read `current_session_handoff` and `current_owned_root_job` in
 `G:/Temp/Codex/psxrecomp/x6-parity/storage-retention-index.json`. The initial
 execution reset is handoff v294. Live ledger, worktree and job handles take
