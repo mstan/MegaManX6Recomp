@@ -4449,17 +4449,122 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+            "build_identity": {
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\withdraw-v106-final-binding-root-v1.json",
+              "binding_sha256": "1eb4d6b3ebfc678b5a7d40300c64c00d12e78384079ff7177e295fb2f99a15d0",
+              "image_sha256": "8fc658a0fa437ca2224cce6d3320be4d4b0cc3ba96727d23955002c1a82b6401",
+              "manifest_sha256": "34c925dffed6faef67bdc6adb0726da76b6ced7f408a8c4252e169d240a2f9ba",
+              "provenance_sha256": "7921ac6a5c6c6c78027e63a205de1922400a326bd1f631df5ef63c25db97bffa",
+              "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v106-withdraw-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+              "source_heads": {
+                "game": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+                "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+                "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+                "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+                "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+              },
+              "title": "mmx6-x-zero-delay-v53",
+              "host_revision": 36
+            },
+            "settings": {
+              "fixture": "refight_distant_cp1",
+              "contact_protection": "on",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "host_profile": "mmx6.win64-clang22.loopback revision36",
+              "input_delay": 0,
+              "audio": "dummy muted"
+            },
+            "action": "Guest alone enters original refight portal while genuine primary remains neutral at1712/1147; actual CP2 initializer precedes finite passenger landing and independently owned control.",
+            "outcome": "All8 R21 native checks and8 inherited prerequisites,4LOCAL/15NET parent gates;15 root-viewed images,3 owned exits0/cards unchanged,4 NET resolved CRC windows/25 matching samples.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-8a11fa7-R21-distant-refight-local-netplay-reviewed.json",
+                "sha256": "a14615ecc6cd256f36c82fee2e568a5a435391e02603094ecc5f094bbba586b8"
+              }
+            ],
+            "limits": [
+              "Only R21 is named for new credit; inherited refight checks are prerequisites, no F122/F124/F7 re-credit.",
+              "Option16 originalCP1 preserves native P1 1712/1147 and once places only guest1852/1241; original input remains tainted.",
+              "Publications, PLAY/actors and composed captures are asynchronous; pre/post capture rows retained.",
+              "All direction is neutral after admission until actual native HP48/active4 and released fullfeet.",
+              "First typed bodies are retained, including unresolved contact. R21 completion requires final original full22feet, native ground, living bodies and independent movement; initial transient motion is retained.",
+              "Collision equivalence permits native graphical remaps, never claims original full graphical identity.",
+              "Parent exact image/profile/source, recording/card/cleanup and final CRC gates remain mandatory.",
+              "One native portal2/CP2 with genuine primary upper-platform arrival and 176px horizontal separation at admission. LOCAL split and same-machine delay3 NET/profile36 only; no all-portals, boss defeat/return, physical-controller, WAN or native3330 credit."
+            ],
+            "bypasses": [
+              "Default-off agreed originalCP1 and four guest-only source/history XY words once; hostile contact protection. No admission/loader/passenger result seeded."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+            "build_identity": {
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\withdraw-v106-final-binding-root-v1.json",
+              "binding_sha256": "1eb4d6b3ebfc678b5a7d40300c64c00d12e78384079ff7177e295fb2f99a15d0",
+              "image_sha256": "8fc658a0fa437ca2224cce6d3320be4d4b0cc3ba96727d23955002c1a82b6401",
+              "manifest_sha256": "34c925dffed6faef67bdc6adb0726da76b6ced7f408a8c4252e169d240a2f9ba",
+              "provenance_sha256": "7921ac6a5c6c6c78027e63a205de1922400a326bd1f631df5ef63c25db97bffa",
+              "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v106-withdraw-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+              "source_heads": {
+                "game": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+                "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+                "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+                "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+                "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+              },
+              "title": "mmx6-x-zero-delay-v53",
+              "host_revision": 36
+            },
+            "settings": {
+              "fixture": "refight_distant_cp1",
+              "contact_protection": "on",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "host_profile": "mmx6.win64-clang22.loopback revision36",
+              "input_delay": 3,
+              "audio": "dummy muted"
+            },
+            "action": "Guest alone enters original refight portal while genuine primary remains neutral at1712/1147; actual CP2 initializer precedes finite passenger landing and independently owned control.",
+            "outcome": "All8 R21 native checks and8 inherited prerequisites,4LOCAL/15NET parent gates;15 root-viewed images,3 owned exits0/cards unchanged,4 NET resolved CRC windows/25 matching samples.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-8a11fa7-R21-distant-refight-local-netplay-reviewed.json",
+                "sha256": "a14615ecc6cd256f36c82fee2e568a5a435391e02603094ecc5f094bbba586b8"
+              }
+            ],
+            "limits": [
+              "Only R21 is named for new credit; inherited refight checks are prerequisites, no F122/F124/F7 re-credit.",
+              "Option16 originalCP1 preserves native P1 1712/1147 and once places only guest1852/1241; original input remains tainted.",
+              "Publications, PLAY/actors and composed captures are asynchronous; pre/post capture rows retained.",
+              "All direction is neutral after admission until actual native HP48/active4 and released fullfeet.",
+              "First typed bodies are retained, including unresolved contact. R21 completion requires final original full22feet, native ground, living bodies and independent movement; initial transient motion is retained.",
+              "Collision equivalence permits native graphical remaps, never claims original full graphical identity.",
+              "Parent exact image/profile/source, recording/card/cleanup and final CRC gates remain mandatory.",
+              "One native portal2/CP2 with genuine primary upper-platform arrival and 176px horizontal separation at admission. LOCAL split and same-machine delay3 NET/profile36 only; no all-portals, boss defeat/return, physical-controller, WAN or native3330 credit."
+            ],
+            "bypasses": [
+              "Default-off agreed originalCP1 and four guest-only source/history XY words once; hostile contact protection. No admission/loader/passenger result seeded."
+            ]
+          }
+        ],
+        "limitations": "Passed exact8a11fa7/8fc658a0/profile36 LOCAL+NET: genuine native primary upper-platform1712/1147 stays neutral while guest admits original portal176px away; actual originalCP2 load, finite safe native full22feet/floor448 and independent controls.8native/8prerequisites/4LOCAL/15NETgates,4CRCwindows/25matching samples,3ownedexit0/cardsunchanged/15root-viewed images. One portal; setup/asynchrony/graphics limits retained; no other-row or native3330 credit."
       }
     },
     {
