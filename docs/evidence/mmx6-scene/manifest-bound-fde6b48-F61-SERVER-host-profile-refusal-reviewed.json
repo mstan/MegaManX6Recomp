@@ -1,0 +1,179 @@
+{
+  "kind": "exact_candidate_SERVER_NET_host_profile_refusal_root_review",
+  "status": "failed_prerequisite_no_comparison_admission",
+  "comparison": "F61",
+  "frozen_row_sha256": "9713d5a35eecde25a951921023b08acab13a796ab7354e0431fe357b7fa2a8ff",
+  "official_counts_unchanged": {
+    "passed": 131,
+    "failed": 3,
+    "unverified": 100
+  },
+  "source": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F61-v107-root-v2\\both-refight-v107-final-binding-root-v2.json",
+    "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+    "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+    "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+    "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F61-v107-root-v2\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v55",
+    "host_revision": 38
+  },
+  "deployment": {
+    "status": "exact_existing_candidate_staged_preflight_passed_no_native",
+    "host": "SERVER",
+    "root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F61-v107-root-v2",
+    "sources": {
+      "checked_files": {
+        "game": 72,
+        "game-generated": 34
+      },
+      "checked_bytes": 44092954,
+      "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F61-v107-root-v2\\worktrees\\x6-both-refight-v107\\generated-v107",
+      "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+    },
+    "heads": {
+      "x6-both-refight-v107": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+      "net-modern": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "framework-loading/lib/retcomm-rbengine": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "reuse_heads": {
+      "sdk-f39-gl-readback-v90": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui-lan-resume-v54": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "jobs": [
+      {
+        "case": "d61b2n",
+        "job": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F61-v107-root-v2\\d61b2n-SERVER-pool-job.json",
+        "wrapper_sha256": "fedd1ab5ce187b9cb44ff6c03ab16cd90ae6d5a43812cd83ef8e4fea9280c430",
+        "native_job_sha256": "63c226ad7319c0f52f7f420db4e8c28c34c3edd20cc4d87e5ae1f853ea95a2c6"
+      },
+      {
+        "case": "d61a2n",
+        "job": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F61-v107-root-v2\\d61a2n-SERVER-pool-job.json",
+        "wrapper_sha256": "15ddab1ffd6028eff65f9d551b7e17211586f9bf4d84a43e7f8540a311cc63c7",
+        "native_job_sha256": "bf215a3fd8c0e10e6b6a09cddd6a58221b14376ed77dea84725c3c31d519a3d4"
+      },
+      {
+        "case": "d61e2n",
+        "job": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F61-v107-root-v2\\d61e2n-SERVER-pool-job.json",
+        "wrapper_sha256": "de2565e028ead896e5e7fba6e1725e1c029680707c2b08f0759802b683924b7b",
+        "native_job_sha256": "9641ffa62e0c0df72bff1f0ffaddac8e4889bf42c80bdfede9596a10a2c7dfc7"
+      }
+    ],
+    "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+    "no_build": true,
+    "no_native": true,
+    "reused_disc_and_python": true,
+    "cleanup": "Local payload/ZIP and remote ZIP disposable after successful native handoff; retain source/image/receipts."
+  },
+  "mode": "netplay",
+  "native_result": "failed_fixture_recording_validation",
+  "native_error": "An owned peer exited during native boot; Host profile verification: Missing host capability or settlement record",
+  "observed_backend": "OpenGL context created (3.3.0 NVIDIA 456.71); dual raster native1x",
+  "observed_refusal": "No qualified simulation profile is available for this host.",
+  "native_terminals": [
+    {
+      "owned_pid": 8680,
+      "shutdown": "already_exited",
+      "exit_code": 1
+    },
+    {
+      "owned_pid": 4300,
+      "shutdown": "natural_exit_after_quit_protocol_error",
+      "exit_code": 1
+    }
+  ],
+  "final_new_private_card_hashes": [
+    {
+      "card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    }
+  ],
+  "owner_cards_used": false,
+  "raw_parent_checks": {
+    "jump_audio_original_source_bound": true,
+    "jump_audio_both_peers_completed": false,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "jump_audio_final_private_cards_unchanged": false,
+    "jump_audio_owned_pair_cleanup": false,
+    "host_profile_settled_before_guest": false
+  },
+  "raw_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-SERVER-boot-failure-root-v1\\affinity.json",
+      "bytes": 535,
+      "sha256": "2c5d31bb0fe027ecdf24eef6bc1ac4b3d519b5bac142bbcb705faf0a18c67438"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-SERVER-boot-failure-root-v1\\peer-0-stderr.log",
+      "bytes": 592,
+      "sha256": "5d069f97c6d9ab2a38890b7b486ee603be73ea3784525d55a918ea901225c528"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-SERVER-boot-failure-root-v1\\peer-0-stdout.log",
+      "bytes": 2241,
+      "sha256": "4f9bc20cf0675dc48ecff99294cdf52f5d1f62fbc84fa1d52191f29f9ad69d81"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-SERVER-boot-failure-root-v1\\peer-1-stderr.log",
+      "bytes": 592,
+      "sha256": "6c637822426e447bfa3b3e68aaa2154ac5375c33447fa82b0bd242786efe98b8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-SERVER-boot-failure-root-v1\\peer-1-stdout.log",
+      "bytes": 2241,
+      "sha256": "47766a3d1c63a7fce4c2d0a10185fc1eea33a1343531354025e977b404da78d3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-SERVER-boot-failure-root-v1\\qualification.json",
+      "bytes": 47309,
+      "sha256": "65da362df1b10f8ebe11901d56b83824fd3720a91da02f8ac768074a28ca8646"
+    }
+  ],
+  "capacity_receipt": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n-SERVER-native-lease-root-v3.json",
+    "sha256": "a330bf9a335c62a39baccae523f0bb47e4d6ae47cb369c6058e81bc4a95ee875"
+  },
+  "CPU_tree_bound": {
+    "kind": "owned_QA_process_tree_CPU_affinity",
+    "host": "SERVER",
+    "pid": 13384,
+    "logical_processors": [
+      0
+    ],
+    "applied_mask": 1,
+    "available_mask": 15,
+    "logical_cpus": 4,
+    "reserved_cpu": 0.75,
+    "ceiling_physical_core_equivalents": 0.75,
+    "CPU_rate_control": {
+      "flags": 5,
+      "rate": 1875,
+      "whole_host_percent": 18.75
+    },
+    "topology_evidence": "SERVER pool lease measures 4 physical / 4 logical CPUs",
+    "inherits_to": "Driver and its two owned native children",
+    "case": "d61b2n"
+  },
+  "limits": [
+    "Source and generated bytes were checked against the unchanged compiled manifest:72game+34generated/44092954bytes. Only the CMake source path was relocated; no rebuild, regeneration or product source change.",
+    "ZIP omitted two committed empty gitlink directories; restoring them from the actual committed tree made the unchanged Git/source gate pass. Per-process core.autocrlf=false matches the original source checkout; no global Git configuration changed.",
+    "The native backend initialized, but the existing qualified NET profile refused SERVER before guest simulation. This is a failed test prerequisite, not a door-policy failure or a passing native check.",
+    "Both native children exited1. Raw false parent card/cleanup/recording/profile gates remain false. The four final cards are from newly created isolated profiles with no owner source card.",
+    "Do not retry another unchanged NET case/profile on SERVER. Current PC F61 jobs remain fresh; do not weaken profile or frozen comparison requirements.",
+    "F61 still needs NET policy cases and genuine fallen exclusion; F123 also lacks genuine fallen exclusion. Previous LOCAL/components are preserved; no row or mode credit here."
+  ]
+}
