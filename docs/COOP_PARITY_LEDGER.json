@@ -20655,14 +20655,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -20699,9 +20699,83 @@
             "bypasses": [
               "Original checkpoint travel and contact protection only; combat and return results earned."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "786892f434c6faf30d4bf1416df4b47d39118b8f",
+            "build_identity": {
+              "executable_sha256": "9b65df9bd38e9124cb6c8357bffde32b53ec3184852144739b14f194d6336210",
+              "compiled_manifest_sha256": "92cfebac865f35ea1ca46ae08a65ccf5af60f2a5ca24ae7205abc718e6865077",
+              "provenance_sha256": "73362b50c9aaed90a98e670dac3da75b198cb184a1d9445d4c52b5f8883692ad"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "either",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisite": "original refight_distant_cp1 travel/pose; contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual native Zero refight defeat, original CP2-to10 hub return, full native collision/support, retained personal resources and both independent Left/neutral controls.",
+            "outcome": "Original48HP boss defeated by actual owned native attacks; ownHP/ammo/weapon retained, both safe native supported hub bodies accept separate controls; all parent gates/card/exit checks pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-786892f-F156-native-refight-return-local-netplay-reviewed.json",
+                "sha256": "5237dd88e6b0ad162f70bf59822c0dd50b07890807b15e7aca7c996718e69662"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F156, supported X/P1-Zero/P2, original fortress portal2/BIN33 type49 refight48HP and authored CP10 return are qualified. No other refights, reversed roster or native3330 credit.",
+              "Original refight_distant_CP1 travel/pose and hostile-contact protection prerequisite are disclosed; earned weapons/starting HP remain off. The ordinary combat/return tail writes no HP/ammo/position/contact/pose/token/clock/defeat/return/result flag and loads no state.",
+              "Actual return support uses the original actor-top contact/body71 and native standing boxes; empty static terrain foot codes are retained, not presented as22 terrain-floor contacts. Full bodies clear original wall codes and both original independent Left/neutral controls pass.",
+              "Fresh native initialization still creates position, collision, parts and arrival animation. Only living guest personal health/gauge/max, selected weapon and own energy survive the exact original CP2..9 to CP10..17 return. Absent/fallen/team retries retain existing behavior. Snapshot15 includes the pending state; older execution states are disposable.",
+              "HP/resource observations and raw canonical reads are separate debug publications. Unspent ammo/weapon values are retained as observed, not claimed as weapon-acquisition or consumption checks.",
+              "Known scenery/HUD overlap and rendering discrepancies remain explicit; these screenshots establish the bounded safe native return and control behavior, not general graphical parity. Previous failed V107 return and all setup/combat misses remain retained.",
+              "LOCAL and NET share one exact v108 binary/source/profile. Netplay is the qualified same-PC loopback profile; no WAN, different-host or cross-platform qualification. Original paired HUD harness/native cards/owner files remain preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint travel/pose and hostile-contact protection prerequisite only; no death/return/result seeded."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "786892f434c6faf30d4bf1416df4b47d39118b8f",
+            "build_identity": {
+              "executable_sha256": "9b65df9bd38e9124cb6c8357bffde32b53ec3184852144739b14f194d6336210",
+              "compiled_manifest_sha256": "92cfebac865f35ea1ca46ae08a65ccf5af60f2a5ca24ae7205abc718e6865077",
+              "provenance_sha256": "73362b50c9aaed90a98e670dac3da75b198cb184a1d9445d4c52b5f8883692ad"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "either",
+              "cameras": "independent",
+              "audio": "dummy muted",
+              "prerequisite": "original refight_distant_cp1 travel/pose; contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual native Zero refight defeat, original CP2-to10 hub return, full native collision/support, retained personal resources and both independent Left/neutral controls.",
+            "outcome": "Original48HP boss defeated by actual owned native attacks; ownHP/ammo/weapon retained, both safe native supported hub bodies accept separate controls; all parent gates/card/exit checks pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-786892f-F156-native-refight-return-local-netplay-reviewed.json",
+                "sha256": "5237dd88e6b0ad162f70bf59822c0dd50b07890807b15e7aca7c996718e69662"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F156, supported X/P1-Zero/P2, original fortress portal2/BIN33 type49 refight48HP and authored CP10 return are qualified. No other refights, reversed roster or native3330 credit.",
+              "Original refight_distant_CP1 travel/pose and hostile-contact protection prerequisite are disclosed; earned weapons/starting HP remain off. The ordinary combat/return tail writes no HP/ammo/position/contact/pose/token/clock/defeat/return/result flag and loads no state.",
+              "Actual return support uses the original actor-top contact/body71 and native standing boxes; empty static terrain foot codes are retained, not presented as22 terrain-floor contacts. Full bodies clear original wall codes and both original independent Left/neutral controls pass.",
+              "Fresh native initialization still creates position, collision, parts and arrival animation. Only living guest personal health/gauge/max, selected weapon and own energy survive the exact original CP2..9 to CP10..17 return. Absent/fallen/team retries retain existing behavior. Snapshot15 includes the pending state; older execution states are disposable.",
+              "HP/resource observations and raw canonical reads are separate debug publications. Unspent ammo/weapon values are retained as observed, not claimed as weapon-acquisition or consumption checks.",
+              "Known scenery/HUD overlap and rendering discrepancies remain explicit; these screenshots establish the bounded safe native return and control behavior, not general graphical parity. Previous failed V107 return and all setup/combat misses remain retained.",
+              "LOCAL and NET share one exact v108 binary/source/profile. Netplay is the qualified same-PC loopback profile; no WAN, different-host or cross-platform qualification. Original paired HUD harness/native cards/owner files remain preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint travel/pose and hostile-contact protection prerequisite only; no death/return/result seeded."
+            ]
           }
         ],
-        "limitations": "Actual LOCAL V107 refight defeated48to0 by native Zero attacks and returns to authoredCP10 with both bodies supported/clear, but native reload resets Zero26HP to32 while X retains23. Strict personal-resource gate fails before separate return controls; NET unverified. Original failed evidence retained; repair native continuation enrollment before matched-mode rerun."
+        "limitations": "Only frozen234 F156, supported X/P1-Zero/P2, original fortress portal2/BIN33 type49 refight48HP and authored CP10 return are qualified. No other refights, reversed roster or native3330 credit. Original refight_distant_CP1 travel/pose and hostile-contact protection prerequisite are disclosed; earned weapons/starting HP remain off. The ordinary combat/return tail writes no HP/ammo/position/contact/pose/token/clock/defeat/return/result flag and loads no state. Actual return support uses the original actor-top contact/body71 and native standing boxes; empty static terrain foot codes are retained, not presented as22 terrain-floor contacts. Full bodies clear original wall codes and both original independent Left/neutral controls pass. Fresh native initialization still creates position, collision, parts and arrival animation. Only living guest personal health/gauge/max, selected weapon and own energy survive the exact original CP2..9 to CP10..17 return. Absent/fallen/team retries retain existing behavior. Snapshot15 includes the pending state; older execution states are disposable. HP/resource observations and raw canonical reads are separate debug publications. Unspent ammo/weapon values are retained as observed, not claimed as weapon-acquisition or consumption checks. Known scenery/HUD overlap and rendering discrepancies remain explicit; these screenshots establish the bounded safe native return and control behavior, not general graphical parity. Previous failed V107 return and all setup/combat misses remain retained. LOCAL and NET share one exact v108 binary/source/profile. Netplay is the qualified same-PC loopback profile; no WAN, different-host or cross-platform qualification. Original paired HUD harness/native cards/owner files remain preserved."
       }
     },
     {
