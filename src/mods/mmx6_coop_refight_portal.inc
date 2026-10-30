@@ -26,13 +26,33 @@ static int refight_portal_contact(CPUState *cpu,uint32_t address) {
        psx_mod_read_byte(PLAY+12)!=12 || psx_mod_read_byte(PLAY+13) ||
        psx_mod_read_byte(PLAY+0x0F) || psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
        psx_mod_read_byte(0x80097424u) || psx_mod_read_byte(PLAYER+2) || p2.body[2]!=1 ||
-       !recycle_portal_eligible(0) || !recycle_portal_eligible(1) ||
        !refight_portal_actor(cpu->gpr[4]) || !checkpoint_refight_source())return 0;
+    /* A living partner temporarily in a native hold still participates in
+     * Both. An absent/fallen partner follows the existing original survivor
+     * path instead. Do not manufacture a successful contact for either. */
+    unsigned both=both_doors && life.status[0]==MMX6_COOP_ALIVE &&
+        life.status[1]==MMX6_COOP_ALIVE;
+    if(!recycle_portal_eligible(0) || !recycle_portal_eligible(1)) {
+        if(!both)return 0;
+        cpu->gpr[2]=0;return 1;
+    }
     uint32_t actor=cpu->gpr[4],context[4]={address,actor,0,0};
     STATE_WORDS(restore_refight,77,context,4);
     scene_call=1;
-    /* EC430 is pure. Keep original primary precedence on simultaneous hit. */
-    if(guest(cpu,0x800EC430u,actor,PLAYER)) {
+    /* EC430 is pure. Both only gates this idle admission callback; its
+     * original outer animation/pedestal pass keeps running once per world.
+     * No contact leaves the original idle callback intact. Two contacts keep
+     * native primary precedence; exactly one waits without native writes. */
+    uint32_t primary=guest(cpu,0x800EC430u,actor,PLAYER);
+    if(both) {
+        inside=1;enter_zero();
+        uint32_t partner=guest(cpu,0x800EC430u,actor,PLAYER);
+        leave_zero();inside=0;scene_call=0;STATE_POP(restore_refight);
+        if(!!primary!=!!partner) {cpu->gpr[2]=0;return 1;}
+        return 0;
+    }
+    /* Either retains the established guest-owned native admission. */
+    if(primary) {
         scene_call=0;STATE_POP(restore_refight);return 0;
     }
     inside=1;enter_zero();

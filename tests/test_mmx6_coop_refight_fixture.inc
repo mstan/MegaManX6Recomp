@@ -177,7 +177,7 @@ static void setup_refight_hook(CPUState *cpu) {
     psx_mod_write_word(actor+8,1888u<<16);psx_mod_write_word(actor+12,1256u<<16);
     psx_mod_write_word(actor+0x30,0x800ED7D0u);psx_mod_write_word(actor+0x68,0x800ED7DCu);
     psx_mod_write_byte(0x800ED040u,1);cpu->gpr[4]=actor;
-    refight_stub=1;refight_probe_calls=refight_action_calls=refight_refuse=0;
+    both_doors=0;refight_stub=1;refight_probe_calls=refight_action_calls=refight_refuse=0;
     refight_post_solid=refight_admission_fault=0;
 }
 static void refight_owner_projection(CPUState *cpu) {
@@ -221,6 +221,35 @@ static void refight_owner_projection(CPUState *cpu) {
     CHECK(refight_portal_contact(cpu,0x800EC860u) && refight_action_calls==1 && !scene_owner && p2.body[5]==2);
     setup_refight_hook(cpu);psx_mod_write_byte(0x800ED043u,0x14);
     CHECK(!refight_portal_contact(cpu,0x800EC860u) && !refight_probe_calls && !refight_action_calls);
+    /* Original pure contact drives optional Both. Exactly one participant
+     * waits; neither and both fall through to the original callback. No
+     * private/native body, actor, lock, progress or owner is written. */
+    for(unsigned contacts=0;contacts<4;++contacts) {
+        setup_refight_hook(cpu);both_doors=1;
+        psx_mod_write_word(PLAYER+8,((contacts&1)?1888u:1852u)<<16);
+        put32(p2.body+8,((contacts&2)?1888u:1852u)<<16);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(refight_portal_contact(cpu,0x800EC860u)==(contacts==1 || contacts==2));
+        CHECK(refight_probe_calls==2 && !refight_action_calls && !scene_owner &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) &&
+            !inside && !scene_call && !zero_projected && !state_track.count);
+    }
+    /* A living participant in a temporary native hold cannot silently turn
+     * Both into Either. Actual absent/fallen lifecycle states do not block
+     * the existing original primary or projected-survivor callback. */
+    for(unsigned seat=0;seat<2;++seat) {
+        setup_refight_hook(cpu);both_doors=1;
+        if(seat)p2.body[0x7A]=1;else psx_mod_write_byte(PLAYER+0x7A,1);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(refight_portal_contact(cpu,0x800EC860u) && !refight_probe_calls && !refight_action_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        for(unsigned state=MMX6_COOP_ABSENT;state<=MMX6_COOP_FALLEN;++state) {
+            setup_refight_hook(cpu);both_doors=1;life.status[seat]=state;
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+            CHECK(!refight_portal_contact(cpu,0x800EC860u) && !refight_probe_calls && !refight_action_calls &&
+                !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        }
+    }
     setup_refight_hook(cpu);const uint32_t icon=0x800C12C4u;
     psx_mod_write_byte(icon,0x51);psx_mod_write_byte(icon+1,24);psx_mod_write_byte(icon+4,1);
     psx_mod_write_word(icon+0x30,0x800ED7D0u);psx_mod_write_word(icon+0x50,0x800C1220u);
