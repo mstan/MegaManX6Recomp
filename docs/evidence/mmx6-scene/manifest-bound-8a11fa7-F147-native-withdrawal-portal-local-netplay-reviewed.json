@@ -1,0 +1,1278 @@
+{
+  "kind": "F147_native_withdrawal_portal_LOCAL_NET_root_review",
+  "status": "passed",
+  "comparisons": {
+    "F147": "3954c935e4188bc215cad734af7deff538e089fe190990a6fba732e5ad0c674a"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\withdraw-v106-final-binding-root-v1.json",
+    "binding_sha256": "1eb4d6b3ebfc678b5a7d40300c64c00d12e78384079ff7177e295fb2f99a15d0",
+    "image_sha256": "8fc658a0fa437ca2224cce6d3320be4d4b0cc3ba96727d23955002c1a82b6401",
+    "manifest_sha256": "34c925dffed6faef67bdc6adb0726da76b6ced7f408a8c4252e169d240a2f9ba",
+    "provenance_sha256": "7921ac6a5c6c6c78027e63a205de1922400a326bd1f631df5ef63c25db97bffa",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v106-withdraw-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v53",
+    "host_revision": 36
+  },
+  "modes": {
+    "local": {
+      "status": "passed",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "agreed_original_CP2_and_position_only_prerequisite": true,
+        "real_Select_counter_and_source90_threshold_to_LEAVING_every_peer": true,
+        "actual_primary_native_admission_bracketed_by_coherent_LEAVING_every_peer": true,
+        "finite_original_major8_9_and20_1_initializer": true,
+        "voluntary_departure_finished_ABSENT_without_new_Select": true,
+        "primary_actual_floor384_fullfeet_and_fresh_control": true,
+        "actual_composed_captures_retained": true
+      },
+      "departure": {
+        "row": 205,
+        "source_threshold": 90,
+        "observed_counter_max": [
+          88
+        ],
+        "published_native_Select": [
+          true
+        ]
+      },
+      "admission": {
+        "row": 209,
+        "per_peer": [
+          {
+            "row": 209,
+            "portal": {
+              "address": 2148069660,
+              "hex": "491c01010102010000001006000030060c2b0f8000000600000010060000300600000000000000000000000000000000f4380f80d8380f80000000005c9015807003cc780100fb05ff00010000000000bc380f80c0380f8000000000200000000400000000000000b8380f800000080001000000000000000000000004000000fb05f305f5050000503d078000000000000000000000000000000000",
+              "state": 1,
+              "action": 2,
+              "phase": 1
+            },
+            "native_primary_admission_x": 1525,
+            "before_native": 234,
+            "after_native": 238,
+            "before_sequence": 950,
+            "source_basis": "The source-qualified native action1->2/+84 store uses canonical P1. Coherent guest publications bracket the atomic world read in LEAVING1; held/released Select has no rejoin edge, so this monotone departure cannot leave and re-enter1 within the bracket. Not a same-instruction or single-RPC host+RAM claim."
+          }
+        ]
+      },
+      "endpoints": [
+        {
+          "peer": 0,
+          "first_native_absent_row": 231,
+          "first_absent_native_timer": 332,
+          "final_row": 323,
+          "final_native_timer": 392,
+          "lifecycle": [
+            0,
+            2
+          ],
+          "primary_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "x_inclusive": [
+                64,
+                85
+              ],
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "guest_HP_preserved": 32,
+          "guest_ammo_preserved_hex": "200120012001200120012001200120012001"
+        }
+      ],
+      "controls": [
+        {
+          "seat": 0,
+          "before": 320,
+          "movement": 321,
+          "settled": 322
+        }
+      ],
+      "native_initializer_entries": [
+        {
+          "peer": 0,
+          "trace": {
+            "id": 2761,
+            "ok": true,
+            "total": 5,
+            "oldest": 0,
+            "seq_lo": 0,
+            "seq_hi": 5,
+            "entries": [
+              {
+                "seq": 0,
+                "func": "0x8001E32C",
+                "ra": "0x8001EBA0",
+                "a0": "0x800CCED0",
+                "a1": "0x8001EB48",
+                "a2": "0x800C4708",
+                "a3": "0x8008EC08",
+                "t1": "0x00000010",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 984,
+                "frame": 3378,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 1,
+                "func": "0x8001E914",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x800C4708",
+                "a3": "0x8008EC08",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 998,
+                "frame": 3381,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 2,
+                "func": "0x8001E1BC",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x00000002",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1088,
+                "frame": 3408,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 3,
+                "func": "0x8001E730",
+                "ra": "0x8001E2D4",
+                "a0": "0x800A47F4",
+                "a1": "0x80162138",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1091,
+                "frame": 3409,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 4,
+                "func": "0x8001E78C",
+                "ra": "0x8001E2F4",
+                "a0": "0x8009B840",
+                "a1": "0xFFFFFFFF",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1091,
+                "frame": 3409,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              }
+            ],
+            "emitted": 5
+          }
+        }
+      ],
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2l\\ammo-hud\\intro-admission\\peer-0-source-before-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "bb07360db79af92908270d91e1e15b23b0acc16a85db1ab18b7fc311ade4c7f3",
+          "peer": 0,
+          "label": "source-before-withdrawal",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2l\\ammo-hud\\intro-admission\\peer-0-native-overlap.png",
+          "bytes": 2074543,
+          "sha256": "523e66a962a9e8db55394c0027ecadd9f9cceafe05c97f3d37ad6ab2effc9d40",
+          "peer": 0,
+          "label": "native-overlap",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2l\\ammo-hud\\intro-admission\\peer-0-native-arrival.png",
+          "bytes": 2074543,
+          "sha256": "a1b0bf6c2bfe55105e9a5944190a80f7d6e5d55486d9b43889cd7427106aac2f",
+          "peer": 0,
+          "label": "native-arrival",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2l\\ammo-hud\\intro-admission\\peer-0-primary-control.png",
+          "bytes": 2074543,
+          "sha256": "4011971e36426637b85a2d3721d33c48a2a51a0faeb5bf128f5b9fab1d959e8e",
+          "peer": 0,
+          "label": "primary-control",
+          "root_personally_viewed": true
+        }
+      ],
+      "terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "resolved_crc_windows": [],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2l\\qualification.json",
+          "bytes": 26018376,
+          "sha256": "6f21c7acecc12c7c96a625460b7d3ddb4119294cd38aa1ec4715059c753b13be"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2l\\ammo-hud\\intro-admission\\observations.json",
+          "bytes": 12651612,
+          "sha256": "353e5cbeff6bda223cc6f27c72d460d339d6b43b8e2e9566d8294d17c4d90588"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2l\\F147-executing-source-pins.json",
+          "bytes": 10269,
+          "sha256": "02917826ff3759b3dd1d3fb2e5bfcda2947fdfa0a46194bfd3882984c1dcd573"
+        }
+      ],
+      "limits": [
+        "F147 only. Exact declared original CP2 and once-position prerequisite is tainted.",
+        "No native state, lifecycle, HP, pose, velocity, contact, world-time, scene or success writes.",
+        "Guest coherent LEAVING publications bracket native pool/P1 reads; no joint host/RAM instruction or atomic all-peer claim.",
+        "Actual native primary admission and absent final policy are required; involuntary enrollment is a named failure.",
+        "Parent exact image/profile/source, recording/card/exit and final CRC gates remain mandatory."
+      ]
+    },
+    "netplay": {
+      "status": "passed",
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "agreed_original_CP2_and_position_only_prerequisite": true,
+        "real_Select_counter_and_source90_threshold_to_LEAVING_every_peer": true,
+        "actual_primary_native_admission_bracketed_by_coherent_LEAVING_every_peer": true,
+        "finite_original_major8_9_and20_1_initializer": true,
+        "voluntary_departure_finished_ABSENT_without_new_Select": true,
+        "primary_actual_floor384_fullfeet_and_fresh_control": true,
+        "actual_composed_captures_retained": true
+      },
+      "departure": {
+        "row": 125,
+        "source_threshold": 90,
+        "observed_counter_max": [
+          89,
+          87
+        ],
+        "published_native_Select": [
+          true,
+          true
+        ]
+      },
+      "admission": {
+        "row": 128,
+        "per_peer": [
+          {
+            "row": 128,
+            "portal": {
+              "address": 2148069660,
+              "hex": "491c01010102010000001006000030060c2b0f8000000600000010060000300600000000000000000000000000000000f4380f80d0380f80000000005c9015807003cc7802000103ff00010000000000bc380f80c0380f8000000000200000000400000000000000b8380f800000080001000000000000000000000000000000f705f705f5050000503d078000000000000000000000000000000000",
+              "state": 1,
+              "action": 2,
+              "phase": 1
+            },
+            "native_primary_admission_x": 1525,
+            "before_native": 265,
+            "after_native": 266,
+            "before_sequence": 2718,
+            "source_basis": "The source-qualified native action1->2/+84 store uses canonical P1. Coherent guest publications bracket the atomic world read in LEAVING1; held/released Select has no rejoin edge, so this monotone departure cannot leave and re-enter1 within the bracket. Not a same-instruction or single-RPC host+RAM claim."
+          },
+          {
+            "row": 128,
+            "portal": {
+              "address": 2148069660,
+              "hex": "491c01010102010000001006000030060c2b0f8000000600000010060000300600000000000000000000000000000000f4380f80d0380f80000000005c9015807003cc7801000103ff00010000000000bc380f80c0380f8000000000200000000400000000000000b8380f800000080001000000000000000000000001000000f805f605f5050000503d078000000000000000000000000000000000",
+              "state": 1,
+              "action": 2,
+              "phase": 1
+            },
+            "native_primary_admission_x": 1525,
+            "before_native": 265,
+            "after_native": 267,
+            "before_sequence": 2718,
+            "source_basis": "The source-qualified native action1->2/+84 store uses canonical P1. Coherent guest publications bracket the atomic world read in LEAVING1; held/released Select has no rejoin edge, so this monotone departure cannot leave and re-enter1 within the bracket. Not a same-instruction or single-RPC host+RAM claim."
+          }
+        ]
+      },
+      "endpoints": [
+        {
+          "peer": 0,
+          "first_native_absent_row": 141,
+          "first_absent_native_timer": 356,
+          "final_row": 211,
+          "final_native_timer": 439,
+          "lifecycle": [
+            0,
+            2
+          ],
+          "primary_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "x_inclusive": [
+                52,
+                73
+              ],
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "guest_HP_preserved": 32,
+          "guest_ammo_preserved_hex": "200120012001200120012001200120012001"
+        },
+        {
+          "peer": 1,
+          "first_native_absent_row": 141,
+          "first_absent_native_timer": 358,
+          "final_row": 211,
+          "final_native_timer": 441,
+          "lifecycle": [
+            0,
+            2
+          ],
+          "primary_feet": [
+            {
+              "seat": 0,
+              "foot_y": 384,
+              "x_inclusive": [
+                52,
+                73
+              ],
+              "codes": [
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56,
+                56
+              ],
+              "native_ground": true,
+              "full_support": true
+            }
+          ],
+          "guest_HP_preserved": 32,
+          "guest_ammo_preserved_hex": "200120012001200120012001200120012001"
+        }
+      ],
+      "controls": [
+        {
+          "seat": 0,
+          "before": 206,
+          "movement": 208,
+          "settled": 210
+        }
+      ],
+      "native_initializer_entries": [
+        {
+          "peer": 0,
+          "trace": {
+            "id": 2702,
+            "ok": true,
+            "total": 5,
+            "oldest": 0,
+            "seq_lo": 0,
+            "seq_hi": 5,
+            "entries": [
+              {
+                "seq": 0,
+                "func": "0x8001E32C",
+                "ra": "0x8001EBA0",
+                "a0": "0x800CCED0",
+                "a1": "0x8001EB48",
+                "a2": "0x800C4618",
+                "a3": "0x8008EB88",
+                "t1": "0x00000010",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1006,
+                "frame": 4491,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 1,
+                "func": "0x8001E914",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x800C4618",
+                "a3": "0x8008EB88",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1011,
+                "frame": 4494,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 2,
+                "func": "0x8001E1BC",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x00000002",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1107,
+                "frame": 4521,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 3,
+                "func": "0x8001E730",
+                "ra": "0x8001E2D4",
+                "a0": "0x800A47F4",
+                "a1": "0x80162138",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1101,
+                "frame": 4522,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 4,
+                "func": "0x8001E78C",
+                "ra": "0x8001E2F4",
+                "a0": "0x8009B840",
+                "a1": "0xFFFFFFFF",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1101,
+                "frame": 4522,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              }
+            ],
+            "emitted": 5
+          }
+        },
+        {
+          "peer": 1,
+          "trace": {
+            "id": 2527,
+            "ok": true,
+            "total": 5,
+            "oldest": 0,
+            "seq_lo": 0,
+            "seq_hi": 5,
+            "entries": [
+              {
+                "seq": 0,
+                "func": "0x8001E32C",
+                "ra": "0x8001EBA0",
+                "a0": "0x800CCED0",
+                "a1": "0x8001EB48",
+                "a2": "0x800C4618",
+                "a3": "0x8008EB88",
+                "t1": "0x00000010",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1000,
+                "frame": 4491,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 1,
+                "func": "0x8001E914",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x800C4618",
+                "a3": "0x8008EB88",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1005,
+                "frame": 4494,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 2,
+                "func": "0x8001E1BC",
+                "ra": "0x8001E720",
+                "a0": "0x800CCED0",
+                "a1": "0x00009088",
+                "a2": "0x00000002",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x00000010",
+                "s0": "0x800D0000",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1101,
+                "frame": 4521,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 3,
+                "func": "0x8001E730",
+                "ra": "0x8001E2D4",
+                "a0": "0x800A47F4",
+                "a1": "0x80162138",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1095,
+                "frame": 4522,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              },
+              {
+                "seq": 4,
+                "func": "0x8001E78C",
+                "ra": "0x8001E2F4",
+                "a0": "0x8009B840",
+                "a1": "0xFFFFFFFF",
+                "a2": "0x80161F9C",
+                "a3": "0xFFFFFFFF",
+                "t1": "0x0000001E",
+                "s0": "0x800CCED0",
+                "s1": "0x8007112C",
+                "s2": "0x800D0000",
+                "s3": "0xFF000000",
+                "depth": 1095,
+                "frame": 4522,
+                "exit_seq": 0,
+                "entry_kind": 1,
+                "context": {
+                  "schema": 0,
+                  "available": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "flags": 0,
+                  "state0": 0,
+                  "state1": 0,
+                  "state2": 0,
+                  "publication": {
+                    "valid": 0,
+                    "provider": 0,
+                    "epoch": 0,
+                    "sequence": 0,
+                    "site": 0
+                  }
+                }
+              }
+            ],
+            "emitted": 5
+          }
+        }
+      ],
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\peer-0-source-before-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "095883280d8e4ef7b0b8d4b830ed41b1adeb816b34594dd81d2eb762503568e1",
+          "peer": 0,
+          "label": "source-before-withdrawal",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\peer-1-source-before-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "7c0120855d93206f060f7e0eb078962ea8479b6098be5dddfe435bc8748dd08c",
+          "peer": 1,
+          "label": "source-before-withdrawal",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\peer-0-native-overlap.png",
+          "bytes": 2074543,
+          "sha256": "02746554a0bd5ac94b573185227bb11d51fc29b7f6c5eeceb5845203bf40abc1",
+          "peer": 0,
+          "label": "native-overlap",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\peer-1-native-overlap.png",
+          "bytes": 2074543,
+          "sha256": "3c5fb9bc9891ea7604aa6bec660485d8bb6787554431e5479e3f17402e3ca97c",
+          "peer": 1,
+          "label": "native-overlap",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\peer-0-native-arrival.png",
+          "bytes": 2074543,
+          "sha256": "4b50d0d7c4ca46698f483b9bd0d181545f84ee6a9d5ba811fd0c8d92cef9086a",
+          "peer": 0,
+          "label": "native-arrival",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\peer-1-native-arrival.png",
+          "bytes": 2074543,
+          "sha256": "b191a9d24cdb60d736a4b93cef994cb284f24dd9cd2f3a2ecce441259866236d",
+          "peer": 1,
+          "label": "native-arrival",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\peer-0-primary-control.png",
+          "bytes": 2074543,
+          "sha256": "a73002ec99399ccbb8277baea7f027e726420c8beb8f32d5f690da5cddf06527",
+          "peer": 0,
+          "label": "primary-control",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\peer-1-primary-control.png",
+          "bytes": 2074543,
+          "sha256": "0d23caa78fe97c5af9fea28ba123bc7d3c37dd12aac05df0d7f0cf2ba2b2330e",
+          "peer": 1,
+          "label": "primary-control",
+          "root_personally_viewed": true
+        }
+      ],
+      "terminals": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2912,
+              "core": "7f5e31a4",
+              "mod": "3a9047e3"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "ea059a03",
+              "mod": "7e8aa6df"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "f4b8dea7",
+              "mod": "e2a0abff"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "ab5bcb5f",
+              "mod": "235db8f1"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "06a68c80",
+              "mod": "8226d4d1"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "73fc1536",
+              "mod": "12ef0687"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "db648db0",
+              "mod": "dd583e93"
+            }
+          ],
+          "resolved_through": [
+            3135,
+            3135
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3200,
+              "core": "69d829d9",
+              "mod": "67aa8365"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "a773a7cf",
+              "mod": "56d7bb8d"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "8bd1ed0e",
+              "mod": "c7e0ddc3"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "4a29eaec",
+              "mod": "ca59ceed"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "34a0416a",
+              "mod": "9616738d"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "42c1697d",
+              "mod": "b4ca2a3b"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "410d761c",
+              "mod": "df70c35b"
+            }
+          ],
+          "resolved_through": [
+            3411,
+            3408
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3488,
+              "core": "100c1024",
+              "mod": "3b709413"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "f2508e5a",
+              "mod": "13e47f63"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "9c4bc8cd",
+              "mod": "cfb71b9d"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "fd2d3a08",
+              "mod": "2e3125d5"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "2e5e4e59",
+              "mod": "bf0ac98b"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "29203dc1",
+              "mod": "4da79577"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "2d5da1bc",
+              "mod": "67aa8365"
+            },
+            {
+              "simulation_tick": 3712,
+              "core": "88546bba",
+              "mod": "56d7bb8d"
+            }
+          ],
+          "resolved_through": [
+            3719,
+            3719
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4896,
+              "core": "8b17a065",
+              "mod": "9092d999"
+            },
+            {
+              "simulation_tick": 4928,
+              "core": "24fe499f",
+              "mod": "9092d999"
+            },
+            {
+              "simulation_tick": 4960,
+              "core": "fbcedd4b",
+              "mod": "9092d999"
+            },
+            {
+              "simulation_tick": 4992,
+              "core": "a1516d70",
+              "mod": "9092d999"
+            },
+            {
+              "simulation_tick": 5024,
+              "core": "c78d0be1",
+              "mod": "9092d999"
+            },
+            {
+              "simulation_tick": 5056,
+              "core": "a473288a",
+              "mod": "9092d999"
+            },
+            {
+              "simulation_tick": 5088,
+              "core": "5c116f44",
+              "mod": "9092d999"
+            },
+            {
+              "simulation_tick": 5120,
+              "core": "7f0bbf78",
+              "mod": "9092d999"
+            }
+          ],
+          "resolved_through": [
+            5129,
+            5129
+          ]
+        }
+      ],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\qualification.json",
+          "bytes": 18615459,
+          "sha256": "2e210b8ec0f3db3e563acdf17f62ed6f2310ada99d148dcb63ecc9a6633e9cee"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\intro-admission\\observations.json",
+          "bytes": 16508593,
+          "sha256": "70ddc1af225cff68ffd704f56f0b30aaad402e6e3b93c0a23b14eb8648fa336a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp2n\\F147-executing-source-pins.json",
+          "bytes": 10269,
+          "sha256": "902ae1b5e9987fc4a45624cc86772f3143c853b53d5ab9d4ac46000f084458a1"
+        }
+      ],
+      "limits": [
+        "F147 only. Exact declared original CP2 and once-position prerequisite is tainted.",
+        "No native state, lifecycle, HP, pose, velocity, contact, world-time, scene or success writes.",
+        "Guest coherent LEAVING publications bracket native pool/P1 reads; no joint host/RAM instruction or atomic all-peer claim.",
+        "Actual native primary admission and absent final policy are required; involuntary enrollment is a named failure.",
+        "Parent exact image/profile/source, recording/card/exit and final CRC gates remain mandatory."
+      ]
+    }
+  },
+  "implementation": {
+    "commits": [
+      "56e1a74",
+      "7521194",
+      "8a11fa7"
+    ],
+    "portal_ordering": "Guarded original EC8F8 final counter28 callback waits for real native departure completion; original callback owns subsequent counter29/fade/exit.",
+    "absence": "Native checkpoint preserves completed voluntary ABSENT and actual Select history; enrollment does not create a guest birth. Existing personal return context and team-wipe respawn are preserved.",
+    "new_persistent_fields": false,
+    "manual_motion_timer_or_result_writes": false
+  },
+  "failed_attempt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-92e1ce2-F147-withdrawal-portal-LOCAL-reenrollment-failure-reviewed.json",
+    "bytes": 5500,
+    "sha256": "8dd4316e1188961ff14eb6828c76118d110fe0c1dd958e1d1bc53982b19d9c9c",
+    "relative_path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F147-withdrawal-portal-LOCAL-reenrollment-failure-reviewed.json"
+  },
+  "limits": [
+    "Default-off original CP2/once approach positioning and contact protection are disclosed setup bypasses; real Select, admission, outgoing completion, loader, native floor and controls are earned.",
+    "Coherent LEAVING publications bracket original native primary portal contact; asynchronous reads are retained, with no same-instruction/all-peer atomic claim.",
+    "One Recycle portal and same-machine delay3/profile36, LOCAL split and NET independent views. No other portal/withdrawal race, physical controller, WAN or native3330 claim.",
+    "Original failed92e1ce2 reenrollment and refuted missing-owner hypothesis remain retained. Source/C regressions support the fix; new runtime observations establish this comparison."
+  ],
+  "review_summary": {
+    "comparisons_closed": 1,
+    "root_personally_viewed_images": 12,
+    "native_graceful_exit0": 3,
+    "private_cards_unchanged": true,
+    "matching_crc_samples": 30,
+    "resolved_crc_windows": 4
+  }
+}

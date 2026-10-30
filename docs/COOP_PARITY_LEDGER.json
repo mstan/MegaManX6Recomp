@@ -19726,14 +19726,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -19783,9 +19783,105 @@
             "bypasses": [
               "Agreed original CP2/once-position prerequisite and contact protection; actual Select/portal/native loader, no tested-result writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+            "build_identity": {
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\withdraw-v106-final-binding-root-v1.json",
+              "binding_sha256": "1eb4d6b3ebfc678b5a7d40300c64c00d12e78384079ff7177e295fb2f99a15d0",
+              "image_sha256": "8fc658a0fa437ca2224cce6d3320be4d4b0cc3ba96727d23955002c1a82b6401",
+              "manifest_sha256": "34c925dffed6faef67bdc6adb0726da76b6ced7f408a8c4252e169d240a2f9ba",
+              "provenance_sha256": "7921ac6a5c6c6c78027e63a205de1922400a326bd1f631df5ef63c25db97bffa",
+              "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v106-withdraw-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+              "source_heads": {
+                "game": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+                "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+                "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+                "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+                "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+              },
+              "title": "mmx6-x-zero-delay-v53",
+              "host_revision": 36
+            },
+            "settings": {
+              "fixture": "recycle_portal_cp2",
+              "contact_protection": "on",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "host_profile": "mmx6.win64-clang22.loopback revision36",
+              "input_delay": 0,
+              "audio": "dummy muted"
+            },
+            "action": "Real guest Select withdrawal overlaps primary original portal admission; native outgoing finishes ABSENT before original8/9 loader, guest stays absent at20/1, primary native fullfeet/control works.",
+            "outcome": "All7native/4parent gates pass;12 total root-viewed captures,3ownedexit0/cards unchanged; NET4resolvedCRCwindows/30matching samples. Guest nativeHP/ammo preserved, no new Select edge or forced completion.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-8a11fa7-F147-native-withdrawal-portal-local-netplay-reviewed.json",
+                "sha256": "ab2a503bfc0bfde5e72f406ad411df0e09655c1a5903fa4140fec36f55319f22"
+              }
+            ],
+            "limits": [
+              "Default-off original CP2/once approach positioning and contact protection are disclosed setup bypasses; real Select, admission, outgoing completion, loader, native floor and controls are earned.",
+              "Coherent LEAVING publications bracket original native primary portal contact; asynchronous reads are retained, with no same-instruction/all-peer atomic claim.",
+              "One Recycle portal and same-machine delay3/profile36, LOCAL split and NET independent views. No other portal/withdrawal race, physical controller, WAN or native3330 claim.",
+              "Original failed92e1ce2 reenrollment and refuted missing-owner hypothesis remain retained. Source/C regressions support the fix; new runtime observations establish this comparison."
+            ],
+            "bypasses": [
+              "Agreed original CP2/once-position prerequisite and contact protection; no tested outcome writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+            "build_identity": {
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\withdraw-v106-final-binding-root-v1.json",
+              "binding_sha256": "1eb4d6b3ebfc678b5a7d40300c64c00d12e78384079ff7177e295fb2f99a15d0",
+              "image_sha256": "8fc658a0fa437ca2224cce6d3320be4d4b0cc3ba96727d23955002c1a82b6401",
+              "manifest_sha256": "34c925dffed6faef67bdc6adb0726da76b6ced7f408a8c4252e169d240a2f9ba",
+              "provenance_sha256": "7921ac6a5c6c6c78027e63a205de1922400a326bd1f631df5ef63c25db97bffa",
+              "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v106-withdraw-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+              "source_heads": {
+                "game": "8a11fa7766033a451572f5fdd8ceb7c4a7c90c53",
+                "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+                "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+                "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+                "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+              },
+              "title": "mmx6-x-zero-delay-v53",
+              "host_revision": 36
+            },
+            "settings": {
+              "fixture": "recycle_portal_cp2",
+              "contact_protection": "on",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "host_profile": "mmx6.win64-clang22.loopback revision36",
+              "input_delay": 3,
+              "audio": "dummy muted"
+            },
+            "action": "Real guest Select withdrawal overlaps primary original portal admission; native outgoing finishes ABSENT before original8/9 loader, guest stays absent at20/1, primary native fullfeet/control works.",
+            "outcome": "All7native/15parent gates pass;12 total root-viewed captures,3ownedexit0/cards unchanged; NET4resolvedCRCwindows/30matching samples. Guest nativeHP/ammo preserved, no new Select edge or forced completion.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-8a11fa7-F147-native-withdrawal-portal-local-netplay-reviewed.json",
+                "sha256": "ab2a503bfc0bfde5e72f406ad411df0e09655c1a5903fa4140fec36f55319f22"
+              }
+            ],
+            "limits": [
+              "Default-off original CP2/once approach positioning and contact protection are disclosed setup bypasses; real Select, admission, outgoing completion, loader, native floor and controls are earned.",
+              "Coherent LEAVING publications bracket original native primary portal contact; asynchronous reads are retained, with no same-instruction/all-peer atomic claim.",
+              "One Recycle portal and same-machine delay3/profile36, LOCAL split and NET independent views. No other portal/withdrawal race, physical controller, WAN or native3330 claim.",
+              "Original failed92e1ce2 reenrollment and refuted missing-owner hypothesis remain retained. Source/C regressions support the fix; new runtime observations establish this comparison."
+            ],
+            "bypasses": [
+              "Agreed original CP2/once-position prerequisite and contact protection; no tested outcome writes."
+            ]
           }
         ],
-        "limitations": "Actual LOCAL failure exact92e1ce2/acb27/profile35: real withdrawal overlaps primary native portal, but original outgoing beam is unfinished when native20/1 initializer reenrolls guest without Select. Existing sceneowner1/phase0 is observed, refuting missing-owner hypothesis.3root-viewed captures/privatecardsunchanged/ownedexit0; fix in progress, NET unverified."
+        "limitations": "Passed exact8a11fa7/8fc658a0/profile36 LOCAL+NET: real withdrawal/primaryportal overlap, actual native outgoing ABSENT before original8/9 load, absence and guestHP/ammo preserved, native floor384/primary controls.7native/4LOCAL/15NETgates,4CRCwindows/30matching samples,3ownedexit0/cards unchanged/12root-viewed images. Prior92e1ce2 failedraw preserved; no other races/human/native3330 credit."
       }
     },
     {
