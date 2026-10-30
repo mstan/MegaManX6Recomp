@@ -19848,7 +19848,7 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -19885,9 +19885,73 @@
             "bypasses": [
               "Original checkpoint reachability and hostile-contact protection only; no outcome seeding."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+            "build_identity": {
+              "executable_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+              "compiled_manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+              "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "prerequisite": "Original SigmaCP1/contact protection only; starting HP/earned weapons off"
+            },
+            "action": "Real original first-body defeat, retain pair through same-slot later-body intro and attempt own controls after native release.",
+            "outcome": "Full LOCAL first/later sequence and both controls passed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-e7ba6ae-F141-F142-local-complete-net-later-release-fatal-reviewed.json",
+                "sha256": "0902162d5835c4efecd8835317e399005d24314a9b792a6a05672a6a91a786c2"
+              }
+            ],
+            "limits": [
+              "All7LOCAL and10NET composed captures personally reviewed. First-body original48HP dies by real Zero attacks; same slot becomes62 after original2CF0C clears origin to0, later HPfills127.",
+              "Concrete in-place hold eliminates outgoing transport in both modes; complete LOCAL endpoints pass. NET guest dies from native fatalCF1 immediately after release at a different final combat position. Cause not classified; no assumption that it is expected or that original staging is correct.",
+              "No full comparison admission or missing final synchronization/control credit; candidate e7ba6ae remains isolated/unintegrated while this gap is open. Previous actual outgoing failure retained.",
+              "Original checkpoint/contact-protection bypasses disclosed; no HP/death/phase/result writes. Native3330 excluded. Further unchanged transition runs parked; next action is source-trace native fatal and genuine type62 retreat/terrain before choosing safe setup or per-body staging fix."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability/contact protection; no outcome seeding."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+            "build_identity": {
+              "executable_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+              "compiled_manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+              "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "prerequisite": "Original SigmaCP1/contact protection only; starting HP/earned weapons off"
+            },
+            "action": "Real original first-body defeat, retain pair through same-slot later-body intro and attempt own controls after native release.",
+            "outcome": "Native later-body release followed by guestCF1/HP0/state2; no controls/final mode admission. Native fatal source and staging unresolved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-e7ba6ae-F141-F142-local-complete-net-later-release-fatal-reviewed.json",
+                "sha256": "0902162d5835c4efecd8835317e399005d24314a9b792a6a05672a6a91a786c2"
+              }
+            ],
+            "limits": [
+              "All7LOCAL and10NET composed captures personally reviewed. First-body original48HP dies by real Zero attacks; same slot becomes62 after original2CF0C clears origin to0, later HPfills127.",
+              "Concrete in-place hold eliminates outgoing transport in both modes; complete LOCAL endpoints pass. NET guest dies from native fatalCF1 immediately after release at a different final combat position. Cause not classified; no assumption that it is expected or that original staging is correct.",
+              "No full comparison admission or missing final synchronization/control credit; candidate e7ba6ae remains isolated/unintegrated while this gap is open. Previous actual outgoing failure retained.",
+              "Original checkpoint/contact-protection bypasses disclosed; no HP/death/phase/result writes. Native3330 excluded. Further unchanged transition runs parked; next action is source-trace native fatal and genuine type62 retreat/terrain before choosing safe setup or per-body staging fix."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability/contact protection; no outcome seeding."
+            ]
           }
         ],
-        "limitations": "Actual LOCAL first61 defeat reproduces outgoing passenger transport. Fix/native paired requalification pending; later62 release remains F142 unverified."
+        "limitations": "Source-qualified candidate e7ba6ae completes actual native LOCAL first48HP defeat, later127HP body release, continuous pair and both controls. NET retains both through intro but guest dies from native fatalCF1 immediately after release at3767.90625/Y394; cause unclassified, final controls/sync incomplete. Candidate isolated; full row unadmitted; raw failures preserved."
       }
     },
     {
@@ -19921,11 +19985,76 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+            "build_identity": {
+              "executable_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+              "compiled_manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+              "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "prerequisite": "Original SigmaCP1/contact protection only; starting HP/earned weapons off"
+            },
+            "action": "Real original first-body defeat, retain pair through same-slot later-body intro and attempt own controls after native release.",
+            "outcome": "Full LOCAL first/later sequence and both controls passed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-e7ba6ae-F141-F142-local-complete-net-later-release-fatal-reviewed.json",
+                "sha256": "0902162d5835c4efecd8835317e399005d24314a9b792a6a05672a6a91a786c2"
+              }
+            ],
+            "limits": [
+              "All7LOCAL and10NET composed captures personally reviewed. First-body original48HP dies by real Zero attacks; same slot becomes62 after original2CF0C clears origin to0, later HPfills127.",
+              "Concrete in-place hold eliminates outgoing transport in both modes; complete LOCAL endpoints pass. NET guest dies from native fatalCF1 immediately after release at a different final combat position. Cause not classified; no assumption that it is expected or that original staging is correct.",
+              "No full comparison admission or missing final synchronization/control credit; candidate e7ba6ae remains isolated/unintegrated while this gap is open. Previous actual outgoing failure retained.",
+              "Original checkpoint/contact-protection bypasses disclosed; no HP/death/phase/result writes. Native3330 excluded. Further unchanged transition runs parked; next action is source-trace native fatal and genuine type62 retreat/terrain before choosing safe setup or per-body staging fix."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability/contact protection; no outcome seeding."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+            "build_identity": {
+              "executable_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+              "compiled_manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+              "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "prerequisite": "Original SigmaCP1/contact protection only; starting HP/earned weapons off"
+            },
+            "action": "Real original first-body defeat, retain pair through same-slot later-body intro and attempt own controls after native release.",
+            "outcome": "Native later-body release followed by guestCF1/HP0/state2; no controls/final mode admission. Native fatal source and staging unresolved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-e7ba6ae-F141-F142-local-complete-net-later-release-fatal-reviewed.json",
+                "sha256": "0902162d5835c4efecd8835317e399005d24314a9b792a6a05672a6a91a786c2"
+              }
+            ],
+            "limits": [
+              "All7LOCAL and10NET composed captures personally reviewed. First-body original48HP dies by real Zero attacks; same slot becomes62 after original2CF0C clears origin to0, later HPfills127.",
+              "Concrete in-place hold eliminates outgoing transport in both modes; complete LOCAL endpoints pass. NET guest dies from native fatalCF1 immediately after release at a different final combat position. Cause not classified; no assumption that it is expected or that original staging is correct.",
+              "No full comparison admission or missing final synchronization/control credit; candidate e7ba6ae remains isolated/unintegrated while this gap is open. Previous actual outgoing failure retained.",
+              "Original checkpoint/contact-protection bypasses disclosed; no HP/death/phase/result writes. Native3330 excluded. Further unchanged transition runs parked; next action is source-trace native fatal and genuine type62 retreat/terrain before choosing safe setup or per-body staging fix."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability/contact protection; no outcome seeding."
+            ]
+          }
+        ],
+        "limitations": "Source-qualified candidate e7ba6ae completes actual native LOCAL first48HP defeat, later127HP body release, continuous pair and both controls. NET retains both through intro but guest dies from native fatalCF1 immediately after release at3767.90625/Y394; cause unclassified, final controls/sync incomplete. Candidate isolated; full row unadmitted; raw failures preserved."
       }
     },
     {

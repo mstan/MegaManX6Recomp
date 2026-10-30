@@ -1,0 +1,393 @@
+{
+  "kind": "Sigma_transition_LOCAL_complete_NET_later_release_fatal_gap_root_review",
+  "status": "partial_no_comparison_admission",
+  "comparisons": [
+    "F141",
+    "F142"
+  ],
+  "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+  "binding": {
+    "image_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+    "manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+    "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+  },
+  "official_counts_unchanged": {
+    "passed": 136,
+    "failed": 3,
+    "unverified": 95
+  },
+  "local": {
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "native_checks": {
+      "actual_original_Sigma_CP1_and_first_body": true,
+      "actual_accepted_native_first_body_defeat": true,
+      "original_same_actor_61_to62_transition": true,
+      "both_heroes_retained_without_passenger_transport": true,
+      "actual_later_body_original_intro_and_release": true,
+      "both_distinct_owned_controls_after_later_release": true
+    },
+    "first_release": 689,
+    "actual_first_defeat": 1230,
+    "later_release": 1971,
+    "postdeath_rows": 764,
+    "controls": [
+      {
+        "seat": 0,
+        "before": 1984,
+        "after": 1988
+      },
+      {
+        "seat": 1,
+        "before": 1989,
+        "after": 1993
+      }
+    ],
+    "cleanup": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "private_cards_unchanged": true
+  },
+  "net": {
+    "error": "Actual original final hold lost a living/visible hero or started outgoing passenger transport",
+    "first_release": 623,
+    "actual_first_defeat": 1155,
+    "last_healthy_release_row": 1773,
+    "first_rejected_row": 1774,
+    "healthy_postdeath_rows_per_peer": 619,
+    "last_healthy": {
+      "index": 1773,
+      "label": "original native body62 dialogue/warning/HP fill/release",
+      "peers": [
+        {
+          "peer": 0,
+          "native_timer": 3494,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 20,
+              "hp": 32,
+              "x_raw": 233596928,
+              "y_raw": 25886720,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 48,
+              "hp": 32,
+              "x_raw": 246933504,
+              "y_raw": 25821184,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "guest_native_fatal_CF": 0,
+          "boss": {
+            "address": "0x8008ef48",
+            "type": 62,
+            "state": 1,
+            "action": 5,
+            "phase": 1,
+            "hp": 127,
+            "origin": "00000000"
+          }
+        },
+        {
+          "peer": 1,
+          "native_timer": 3494,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "scene_owner": 1,
+          "scene_phase": 0,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 20,
+              "hp": 32,
+              "x_raw": 233596928,
+              "y_raw": 25886720,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 48,
+              "hp": 32,
+              "x_raw": 246933504,
+              "y_raw": 25821184,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "guest_native_fatal_CF": 0,
+          "boss": {
+            "address": "0x8008ef48",
+            "type": 62,
+            "state": 1,
+            "action": 5,
+            "phase": 0,
+            "hp": 127,
+            "origin": "00000000"
+          }
+        }
+      ]
+    },
+    "first_rejected": {
+      "index": 1774,
+      "label": "original native body62 dialogue/warning/HP fill/release",
+      "peers": [
+        {
+          "peer": 0,
+          "native_timer": 3498,
+          "lifecycle": [
+            0,
+            4
+          ],
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 233596928,
+              "y_raw": 25886720,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 2,
+              "action": 1,
+              "hp": 0,
+              "x_raw": 246933504,
+              "y_raw": 25821184,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "guest_native_fatal_CF": 1,
+          "boss": {
+            "address": "0x8008ef48",
+            "type": 62,
+            "state": 1,
+            "action": 5,
+            "phase": 1,
+            "hp": 127,
+            "origin": "00000000"
+          }
+        },
+        {
+          "peer": 1,
+          "native_timer": 3498,
+          "lifecycle": [
+            0,
+            4
+          ],
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 233596928,
+              "y_raw": 25886720,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 2,
+              "action": 1,
+              "hp": 0,
+              "x_raw": 246933504,
+              "y_raw": 25821184,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "guest_native_fatal_CF": 1,
+          "boss": {
+            "address": "0x8008ef48",
+            "type": 62,
+            "state": 1,
+            "action": 5,
+            "phase": 1,
+            "hp": 127,
+            "origin": "00000000"
+          }
+        }
+      ]
+    },
+    "parent_checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": false,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "terminals": [
+      {
+        "owned_pid": 2216,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      {
+        "owned_pid": 48732,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    ],
+    "private_cards_unchanged": true
+  },
+  "raw": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg4l\\qualification.json",
+      "sha256": "d660b84e20b7aa877d0bbb6421c9ec7df4ead6d73b539d58d390244fa19a8eb5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg4l\\ammo-hud\\intro-admission\\observations.json",
+      "sha256": "fc65b0c131446ee463c0bc93af9f46a904d9dc8034eae4cf0268771bb18be369"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg4n\\qualification.json",
+      "sha256": "a67f4457a7cecd0f60ba8e5895b335590c0b474dc4142eb40bf64664902527c9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg4n\\intro-admission\\observations.json",
+      "sha256": "dc0f01439c839504a118f99e03e4573f45650f0c9c8a561b63334c010f92acc4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F141-F142-v113-LOCAL-root-image-review-root-v1.json",
+      "sha256": "8e266f5d65b291918b47acbeb218b473d0b81420a7eaf387fcfb6c67309e3426"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F141-F142-v113-NETPLAY-root-image-review-root-v1.json",
+      "sha256": "09e0b2c7881da0eade69eb85d51a9ea1d7574708cc5c7005baf68fa39e2d71fe"
+    }
+  ],
+  "limits": [
+    "All7LOCAL and10NET composed captures personally reviewed. First-body original48HP dies by real Zero attacks; same slot becomes62 after original2CF0C clears origin to0, later HPfills127.",
+    "Concrete in-place hold eliminates outgoing transport in both modes; complete LOCAL endpoints pass. NET guest dies from native fatalCF1 immediately after release at a different final combat position. Cause not classified; no assumption that it is expected or that original staging is correct.",
+    "No full comparison admission or missing final synchronization/control credit; candidate e7ba6ae remains isolated/unintegrated while this gap is open. Previous actual outgoing failure retained.",
+    "Original checkpoint/contact-protection bypasses disclosed; no HP/death/phase/result writes. Native3330 excluded. Further unchanged transition runs parked; next action is source-trace native fatal and genuine type62 retreat/terrain before choosing safe setup or per-body staging fix."
+  ]
+}
