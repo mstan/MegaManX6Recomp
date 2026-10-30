@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F52"
+  ],
+  "frozen_row_sha256": "feab4ddb768486e52d32708cc047c71a896ed11ec38e713111c809114bf07c91",
+  "result": "failed",
+  "mode": "local",
+  "candidate": "11ded8576d1b8ff63d8cd36743edb205b0138ca4",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v116-root-v1\\private-boss-cooldowns-v116-final-binding-root-v1.json",
+    "binding_sha256": "4751240c51f268d3967b4569578863b3585ecc8ac6aaad37453431d95efc52a4",
+    "image_sha256": "5fd3e21dc0e5230ca4b369f515502c8599ed2530702281a08eb88d9f3ecea4e6",
+    "manifest_sha256": "cd906c8b622c925cd86ed1dbc51b5a30247f491827a4dd25c6bb70d780f7dcf6",
+    "provenance_sha256": "0d8b0fecc859d569b0fc38077854128f39a510deeef81c169f167873ceef519e",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v116-root-v1\\build-v116-private-boss-cooldowns-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "11ded8576d1b8ff63d8cd36743edb205b0138ca4",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v64",
+    "host_revision": 47
+  },
+  "native_observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v116-root-v1\\bbl0l\\ammo-hud\\intro-admission\\observations.json",
+    "sha256": "59c59ad4591439f0c595f07eff2ab9c295379effca344f5d7bce642e24b32607"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v116-root-v1\\bbl0l\\qualification.json",
+    "sha256": "bfd2413af1018619f380c5efcbae84e7324feb9dc41946a9db87163a229250d3"
+  },
+  "actual": {
+    "row": 187,
+    "capsule_phase": 4,
+    "scene_owner": 1,
+    "scene_phase": 3,
+    "lifecycle": [
+      0,
+      0
+    ],
+    "P2_HP": 32,
+    "P2_visible": 0,
+    "P2_native_state": 3,
+    "P2_y": 1354.0,
+    "fixture": {
+      "generation": 1,
+      "state": 3,
+      "reason": 0,
+      "stage": 4,
+      "section": 0,
+      "checkpoint": 2,
+      "nonce": 1280462898,
+      "initializer_entries": 1,
+      "record": "80072444",
+      "tainted": 1,
+      "authority": 1,
+      "latch": 2,
+      "prior_chord": 1,
+      "raw_hex": "434b50310100000003000400020200013250524c010000004424078001010201"
+    }
+  },
+  "composed_captures": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v116-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-capsule-before-contact.png",
+      "sha256": "3d4349a5801b5cbe5028351b11822e885f2ef0e3b697da91ac4f296a28480d9b",
+      "label": "native-capsule-before-contact",
+      "root_reviewed": false
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v116-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-capsule-admitted.png",
+      "sha256": "4ea4762c70fcfae12f02d67ce6fdad2693e80fbca6a848740a2c6fdf28fa556d",
+      "label": "native-capsule-admitted",
+      "root_reviewed": false
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v116-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-capsule-original-dialogue.png",
+      "sha256": "63eb6fb4be94f5fda44db75d29ebb2404a2673165d596aa60b4da858c14932d1",
+      "label": "native-capsule-original-dialogue",
+      "root_reviewed": true
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v116-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-failed-native-capsule-endpoint.png",
+      "sha256": "bc2c042480db28d5c51c4a987507241c7948ec531cbc8b3cbe63adb636f3ec02",
+      "label": "failed-native-capsule-endpoint",
+      "root_reviewed": true
+    }
+  ],
+  "canonical_source": {
+    "function": "interaction_begin",
+    "same_as_main": true,
+    "sha256": "c01086e85ca1dd0a68bc3a67252f61e6fbca76b80bdb07f9b21bca8ca8b8ce67"
+  },
+  "implemented_candidate": {
+    "worktree": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-capsule-visibility-v117",
+    "implementation": "26527bea85969d8e97593c2bc536762b04358ad1",
+    "fixture_correction": "532d66a41e7c95ba2be9867f8861d141ec39d4e8",
+    "runtime_status": "unverified",
+    "policy": "Only original51924 capsule admission selects existing scene_phase0 in-place owner hold; no new snapshot fields/hooks/generated units."
+  },
+  "limits": [
+    "One actual original Recycle capsule LOCAL failure; NET and other F52 scene families remain unverified.",
+    "The observer stops when the healthy living passenger is hidden during native dialogue. It does not establish whether that passenger would later return, and makes no permanent-loss claim.",
+    "Two composed captures personally reviewed; native checkpoint/once position-history reachability and contact protection disclosed. No health/scene/capsule/visibility/result writes.",
+    "No passing parent/card/cleanup/native-release result is inferred from this failed endpoint; raw failed qualification remains unchanged. Owner saves/settings remain outside disposable QA profile."
+  ]
+}

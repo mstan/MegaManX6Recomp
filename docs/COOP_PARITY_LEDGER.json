@@ -11421,17 +11421,50 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "11ded8576d1b8ff63d8cd36743edb205b0138ca4",
+            "build_identity": {
+              "executable_sha256": "5fd3e21dc0e5230ca4b369f515502c8599ed2530702281a08eb88d9f3ecea4e6",
+              "compiled_manifest_sha256": "cd906c8b622c925cd86ed1dbc51b5a30247f491827a4dd25c6bb70d780f7dcf6"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "location": "Original RecycleCP2 DrLight capsule",
+              "view": "split/independent OpenGL native4:3",
+              "audio": "muted dummy"
+            },
+            "action": "Native X Left enters the original capsule, ordinary Cross advances DrLight text; observe healthy passenger through native conversation.",
+            "outcome": "Healthy living Zero enters outgoing native state3 and becomes invisible during actual capsule phase4, while X remains in native capsule action20. Observer stops without claiming later recovery.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-11ded85-F52-native-capsule-passenger-hidden-reviewed.json",
+                "sha256": "b23736eea74424be9775fd573e4f06a525661ba8bcce97db462cdc20f01dbeeb"
+              }
+            ],
+            "limits": [
+              "One actual original Recycle capsule LOCAL failure; NET and other F52 scene families remain unverified.",
+              "The observer stops when the healthy living passenger is hidden during native dialogue. It does not establish whether that passenger would later return, and makes no permanent-loss claim.",
+              "Two composed captures personally reviewed; native checkpoint/once position-history reachability and contact protection disclosed. No health/scene/capsule/visibility/result writes.",
+              "No passing parent/card/cleanup/native-release result is inferred from this failed endpoint; raw failed qualification remains unchanged. Owner saves/settings remain outside disposable QA profile."
+            ],
+            "bypasses": [
+              "Agreed original Recycle CP2 then source-guarded once position/history placement and contact protection; original capsule admission/dialogue/visibility remain native."
+            ]
+          }
+        ],
+        "limitations": "Actual exactC116 LOCAL native Recycle capsule dialogue hides healthyZero: lifecycleALIVE/HP32, nativevisible0/state3 in co-op scenephase3. Two composed images reviewed. interaction_begin is byte-identical in canonical main. Capsule-only in-place hold implemented separately26527be withfixturecorrection532d66a; runtime validation pending. No permanent-loss claim; other F52 scene families and NET remain unverified."
       }
     },
     {
