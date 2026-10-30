@@ -1,0 +1,491 @@
+{
+  "kind": "F156_actual_native_refight_return_resets_only_guest_HP_root_review",
+  "status": "failed",
+  "comparison": "F156",
+  "mode": "local",
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+    "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+    "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+    "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+    "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v55",
+    "host_revision": 38
+  },
+  "actual_native_guest_lethal": {
+    "offer": 11,
+    "row": 353,
+    "main": {
+      "slot": null,
+      "owner": null,
+      "address": "0x8008ef48",
+      "allocation": 65,
+      "active": 65,
+      "type": 49,
+      "subtype": 0,
+      "visible": 1,
+      "state": 2,
+      "action": 1,
+      "phase": 0,
+      "phase2": 0,
+      "x": 2080,
+      "y": 408,
+      "x_raw": 136314880,
+      "y_raw": 26738688,
+      "layer": 0,
+      "facing": 0,
+      "selected_clip": 7,
+      "sprite_frame": 16,
+      "animation_cursor": "0x801008d8",
+      "command": [
+        1,
+        0,
+        0,
+        16
+      ],
+      "attack": "0x80100788",
+      "hurt": "0x8010078c",
+      "table": "0x80074bfc",
+      "hp": 0,
+      "iframe": 25,
+      "disposition": 0,
+      "token": 0,
+      "remembered_token": 1,
+      "recovery": 0,
+      "feedback": 0,
+      "hex": "41310001020100000000200800009801d0cf0e80000005070000200800009801807dffffe010feff000000000000000078091080d80810800000000004891c80e001487901000010ff00010000000000880710808c071080fc4b078000010000041900000001000084071080000000000a00000000000000000000007a001400a0b80980000004010000000000003b00000000000000000000000000",
+      "hurt_rect": [
+        2072,
+        392,
+        2096,
+        440
+      ]
+    }
+  },
+  "offers": [
+    {
+      "attempt": 0,
+      "before_hp": 48,
+      "after_hp": 44,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 1,
+      "before_hp": 44,
+      "after_hp": 40,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 2,
+      "before_hp": 40,
+      "after_hp": 36,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 3,
+      "before_hp": 36,
+      "after_hp": 32,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 4,
+      "before_hp": 32,
+      "after_hp": 28,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 5,
+      "before_hp": 28,
+      "after_hp": 24,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 6,
+      "before_hp": 24,
+      "after_hp": 20,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 7,
+      "before_hp": 20,
+      "after_hp": 14,
+      "emitted_types": [
+        27
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 8,
+      "before_hp": 14,
+      "after_hp": 10,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 9,
+      "before_hp": 10,
+      "after_hp": 6,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 10,
+      "before_hp": 6,
+      "after_hp": 2,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 11,
+      "before_hp": 2,
+      "after_hp": 0,
+      "emitted_types": [
+        24
+      ],
+      "pose_seen": true
+    }
+  ],
+  "resources_before_native_return": [
+    [
+      {
+        "hp": 23,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ],
+        "weapon": 0
+      },
+      {
+        "hp": 26,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ],
+        "weapon": 0
+      }
+    ]
+  ],
+  "resources_after_native_return": [
+    [
+      {
+        "hp": 23,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ],
+        "weapon": 0
+      },
+      {
+        "hp": 32,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ],
+        "weapon": 0
+      }
+    ]
+  ],
+  "native_return_transitions": [
+    {
+      "row": 354,
+      "tuples": [
+        [
+          10,
+          0,
+          12,
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "row": 512,
+      "tuples": [
+        [
+          10,
+          0,
+          12,
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "row": 526,
+      "tuples": [
+        [
+          10,
+          1,
+          12,
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "row": 536,
+      "tuples": [
+        [
+          9,
+          0,
+          12,
+          0,
+          10
+        ]
+      ]
+    },
+    {
+      "row": 537,
+      "tuples": [
+        [
+          10,
+          0,
+          12,
+          0,
+          10
+        ]
+      ]
+    }
+  ],
+  "native_hub_geometry": [
+    {
+      "peer": 0,
+      "seat": 0,
+      "x": 1888,
+      "y": 1227,
+      "foot": 1248,
+      "top": 1210,
+      "original_standing_box": true,
+      "native_air": 0,
+      "native_ground": 0,
+      "native_actor_top": 8,
+      "foot_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "full22_static_floor": false,
+      "full_body_clear_of_original_walls": true,
+      "native_support": true,
+      "valid": 8
+    },
+    {
+      "peer": 0,
+      "seat": 1,
+      "x": 1912,
+      "y": 1226,
+      "foot": 1248,
+      "top": 1210,
+      "original_standing_box": true,
+      "native_air": 0,
+      "native_ground": 0,
+      "native_actor_top": 8,
+      "foot_codes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "full22_static_floor": false,
+      "full_body_clear_of_original_walls": true,
+      "native_support": true,
+      "valid": 8
+    }
+  ],
+  "native_hub_resources": [
+    {
+      "peer": 0,
+      "files": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l\\ammo-hud\\intro-admission\\combat-return\\peer-0-native-hub-layout.bin",
+          "address": "0x80097438",
+          "bytes": 504,
+          "sha256": "066e6ad16f77fcf4d07eb7a7bcee7307431ac670020ac6b4a2b55dc4518cfc64"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l\\ammo-hud\\intro-admission\\combat-return\\peer-0-native-hub-meta.bin",
+          "address": "0x801970ac",
+          "bytes": 82944,
+          "sha256": "dd8323c57032785abba6dffd811557a6324623ac8003e4e5d30985b783fc81b1"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l\\ammo-hud\\intro-admission\\combat-return\\peer-0-native-hub-desc.bin",
+          "address": "0x801ab4ac",
+          "bytes": 4036,
+          "sha256": "5ec4ffbe60803fadea94e541d347d8e590e92285ffe0296a80ef0e72a5fc254d"
+        }
+      ],
+      "original_collision_matches": [
+        "original_CP1_loaded"
+      ]
+    }
+  ],
+  "native_error": "Personal HP/ammo/equipment changed across actual native refight return",
+  "raw_parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true
+  },
+  "original_portal_prerequisite_checks": {
+    "R21_genuine_original_primary_upper_arrival_retained": true,
+    "R21_primary_neutral_and_stationary_through_guest_admission": true,
+    "R21_source_qualified_real_distant_guest_native_admission_every_peer": true,
+    "R21_original_same_stage_CP2_initializer_and_shared_progress": true,
+    "R21_finite_native_passenger_destination_and_released_controls": true,
+    "R21_both_original_fullfeet_and_separate_native_controls": true,
+    "R21_composed_source_admission_arrival_active_controls": true,
+    "original_refight_prerequisites_only": true
+  },
+  "native_cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "private_cards_unchanged": true,
+  "captures": [
+    {
+      "label": "actual-guest-Yammark-lethal",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l\\ammo-hud\\intro-admission\\combat-return\\peer-0-actual-guest-Yammark-lethal.png",
+        "bytes": 2074543,
+        "sha256": "0dff122f26032f2be8f0ce2327122086d3f71955fe9f0c8d9be934f86fe9cada"
+      },
+      "root_personally_viewed": true
+    },
+    {
+      "label": "F156-native-hub-first-supported-release",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l\\ammo-hud\\intro-admission\\combat-return\\peer-0-F156-native-hub-first-supported-release.png",
+        "bytes": 2074543,
+        "sha256": "b27cd4dbd0d08912375caa0096366029fedad36fbee89b9eb779a302091e2c4d"
+      },
+      "root_personally_viewed": true
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l\\qualification.json",
+      "bytes": 14537822,
+      "sha256": "634a13b15db3af34984e5240e2daf16ea53ff2cd45ab214b466bb8e3cf6d5fa9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l\\ammo-hud\\intro-admission\\combat-return\\observations.json",
+      "bytes": 9603899,
+      "sha256": "a5e716d3077c258b12f6b8fca5c911b7688fa1e4bfbb95aff2a4379ccf70f90c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l\\F156-executing-source-pins.json",
+      "bytes": 12074,
+      "sha256": "d65d4c0377e30466cde30039fcb3b222d8b2a58419c28cd1da7fd5cd37572da6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\fr1l-lease-root-v1.json",
+      "bytes": 1748,
+      "sha256": "45685598acb9dce3db0af1fe602784be4d6080998982e64c684897d06e7b61ca"
+    }
+  ],
+  "limits": [
+    "Real original BIN33/type49 refight48HP defeated by12 ordinary owned Zero offers, one aerial27 and grounded24; no boss HP/phase/defeat/return writes.",
+    "Original CP2-to10 loader and both real actor-top feet1248/bodyclearance are observed. Static terrain feet are empty because the native return pad supports both through body71; this is not a claim of22 terrain-floor contacts.",
+    "First supported return retains primary23HP but resets private guest26to32, with unchanged observed own ammo/weapon. This is an actual resource-retention failure, not a wall collision claim.",
+    "Independent return controls were not reached because the strict resource predicate failed first. NET not run on this known failing candidate.",
+    "Source travel/contact-protection bypasses, default Either, current supported roster and known scenery/HUD/overlap limits remain. Raw failed parent status stays failed; nativeexit0 and private cards preserved."
+  ]
+}

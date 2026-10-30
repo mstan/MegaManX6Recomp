@@ -20655,17 +20655,53 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+            "build_identity": {
+              "executable_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+              "compiled_manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+              "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "either",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisite": "original refight_distant_cp1 travel/pose; hostile-contact protection on; earned weapons/starting HP off"
+            },
+            "action": "Actual original portal2, native 48HP refight defeat and authored CP10 return.",
+            "outcome": "Actual LOCAL V107 refight defeated48to0 by native Zero attacks and returns to authoredCP10 with both bodies supported/clear, but native reload resets Zero26HP to32 while X retains23. Strict personal-resource gate fails before separate return controls; NET unverified. Original failed evidence retained; repair native continuation enrollment before matched-mode rerun.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fde6b48-F156-local-native-return-resource-failure-reviewed.json",
+                "sha256": "20e4e9625728a76307e4d415382c707967afcc5a42990b131a74b13a8213a008"
+              }
+            ],
+            "limits": [
+              "Real original BIN33/type49 refight48HP defeated by12 ordinary owned Zero offers, one aerial27 and grounded24; no boss HP/phase/defeat/return writes.",
+              "Original CP2-to10 loader and both real actor-top feet1248/bodyclearance are observed. Static terrain feet are empty because the native return pad supports both through body71; this is not a claim of22 terrain-floor contacts.",
+              "First supported return retains primary23HP but resets private guest26to32, with unchanged observed own ammo/weapon. This is an actual resource-retention failure, not a wall collision claim.",
+              "Independent return controls were not reached because the strict resource predicate failed first. NET not run on this known failing candidate.",
+              "Source travel/contact-protection bypasses, default Either, current supported roster and known scenery/HUD/overlap limits remain. Raw failed parent status stays failed; nativeexit0 and private cards preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint travel and contact protection only; combat and return results earned."
+            ]
+          }
+        ],
+        "limitations": "Actual LOCAL V107 refight defeated48to0 by native Zero attacks and returns to authoredCP10 with both bodies supported/clear, but native reload resets Zero26HP to32 while X retains23. Strict personal-resource gate fails before separate return controls; NET unverified. Original failed evidence retained; repair native continuation enrollment before matched-mode rerun."
       }
     },
     {
