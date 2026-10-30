@@ -19761,23 +19761,90 @@
       "x6": {
         "workstream": "combat",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "Zero combo timing in final encounter",
+        "analogue": "Original Sigma61 native Zero grounded combo and immunity/recovery",
         "bounded_check": "Use native Zero multi-hit attacks against a qualified final phase; retain every accepted hit, combo stage, immunity and original recovery.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+            "build_identity": {
+              "executable_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+              "compiled_manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+              "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "prerequisite": "Original SigmaCP1/contact protection; starting HP/earned weapons off"
+            },
+            "action": "Consume three fresh Square edges in the original combo windows against genuine48HP first Sigma; retain CB stages/private24/25/26/accepted damage/immunity and original recovery.",
+            "outcome": "All three native stages accept damage; actual defense table restores and Zero returns idle with attacks retired. All parent gates, final NET synchronization, root images, native exits and cards pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-325a3bb-F139-Sigma-Zero-combo-local-netplay-reviewed.json",
+                "sha256": "815f6778b3db0b5ce707d49b931cc2c9e185317de6b862f890599743b0ecd426"
+              }
+            ],
+            "limits": [
+              "Frozen234 F139 native/default Zero grounded combo on the original first Sigma61 body. Original48HP release, CB0/1/2 and actual private24/25/26 are observed, all stages earn native damage, then original defense table restores with recovery86=0 and Zero idle/attacks retired.",
+              "Each bracket loses3,2,10HP in both modes and ends at33HP. These are complete observed HP-change intervals with multiple native contacts, not a claim of exactly one collision per stage or an instruction-atomic hit trace. Original base damage entries are1/1/2; raw samples retain immunity, table, child and combo states.",
+              "Original SigmaCP1 reachability and hostile-contact protection are disclosed prerequisites. Starting HP and earned-weapons options off. Only original own inputs; no body pose, position, boss HP/phase/death/scene/result writes.",
+              "Same actual V112 image, LOCAL and same-PC loopback NET. All15 composed images personally reviewed,4/15 parent gates,30 matching resolved samples across4 NET windows, three clean owned exits and unchanged cards. No WAN/cross-platform, elective scaling/per-seat-cooldown, F138 weakness or final transition/ending credit.",
+              "C112 adds only the agreed lab checkpoint prerequisite and is integrated locally as c57257c686141b5436ffd08064a7b294a604b1b7 with exact runtime source bytes. Parked C113 first-hold fix and later guest fatal remain isolated and uncredited. Native3330 excluded."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability/contact protection only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+            "build_identity": {
+              "executable_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+              "compiled_manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+              "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "prerequisite": "Original SigmaCP1/contact protection; starting HP/earned weapons off"
+            },
+            "action": "Consume three fresh Square edges in the original combo windows against genuine48HP first Sigma; retain CB stages/private24/25/26/accepted damage/immunity and original recovery.",
+            "outcome": "All three native stages accept damage; actual defense table restores and Zero returns idle with attacks retired. All parent gates, final NET synchronization, root images, native exits and cards pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-325a3bb-F139-Sigma-Zero-combo-local-netplay-reviewed.json",
+                "sha256": "815f6778b3db0b5ce707d49b931cc2c9e185317de6b862f890599743b0ecd426"
+              }
+            ],
+            "limits": [
+              "Frozen234 F139 native/default Zero grounded combo on the original first Sigma61 body. Original48HP release, CB0/1/2 and actual private24/25/26 are observed, all stages earn native damage, then original defense table restores with recovery86=0 and Zero idle/attacks retired.",
+              "Each bracket loses3,2,10HP in both modes and ends at33HP. These are complete observed HP-change intervals with multiple native contacts, not a claim of exactly one collision per stage or an instruction-atomic hit trace. Original base damage entries are1/1/2; raw samples retain immunity, table, child and combo states.",
+              "Original SigmaCP1 reachability and hostile-contact protection are disclosed prerequisites. Starting HP and earned-weapons options off. Only original own inputs; no body pose, position, boss HP/phase/death/scene/result writes.",
+              "Same actual V112 image, LOCAL and same-PC loopback NET. All15 composed images personally reviewed,4/15 parent gates,30 matching resolved samples across4 NET windows, three clean owned exits and unchanged cards. No WAN/cross-platform, elective scaling/per-seat-cooldown, F138 weakness or final transition/ending credit.",
+              "C112 adds only the agreed lab checkpoint prerequisite and is integrated locally as c57257c686141b5436ffd08064a7b294a604b1b7 with exact runtime source bytes. Parked C113 first-hold fix and later guest fatal remain isolated and uncredited. Native3330 excluded."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability/contact protection only."
+            ]
+          }
+        ],
+        "limitations": "Frozen234 F139 native/default Zero grounded combo on the original first Sigma61 body. Original48HP release, CB0/1/2 and actual private24/25/26 are observed, all stages earn native damage, then original defense table restores with recovery86=0 and Zero idle/attacks retired. Each bracket loses3,2,10HP in both modes and ends at33HP. These are complete observed HP-change intervals with multiple native contacts, not a claim of exactly one collision per stage or an instruction-atomic hit trace. Original base damage entries are1/1/2; raw samples retain immunity, table, child and combo states. Original SigmaCP1 reachability and hostile-contact protection are disclosed prerequisites. Starting HP and earned-weapons options off. Only original own inputs; no body pose, position, boss HP/phase/death/scene/result writes. Same actual V112 image, LOCAL and same-PC loopback NET. All15 composed images personally reviewed,4/15 parent gates,30 matching resolved samples across4 NET windows, three clean owned exits and unchanged cards. No WAN/cross-platform, elective scaling/per-seat-cooldown, F138 weakness or final transition/ending credit. C112 adds only the agreed lab checkpoint prerequisite and is integrated locally as c57257c686141b5436ffd08064a7b294a604b1b7 with exact runtime source bytes. Parked C113 first-hold fix and later guest fatal remain isolated and uncredited. Native3330 excluded."
       }
     },
     {
