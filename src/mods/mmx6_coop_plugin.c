@@ -86,6 +86,10 @@ static unsigned bank_count;
 static int inside, ready, enrolled, failed;
 static Mmx6CoopLifecycle life;
 static uint8_t returning_body[0x158];
+/* A real fortress refight return keeps a living guest's personal resources.
+ * The existing return body owns the saved bytes; this is the authored target
+ * checkpoint, consumed once after fresh native body/parts initialization. */
+static unsigned refight_return_checkpoint;
 static unsigned join_phase;
 /* Fresh native arrival only; voluntary Select returns retain join_phase. */
 static unsigned arrival_pair;
@@ -568,6 +572,7 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster,int arrival) {
         enrolled=1;previous_input=0;
         arrival_pair=join_phase=0;
         p2_hud_fade=0;
+        refight_return_checkpoint=0;
         return;
     }
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
@@ -589,6 +594,18 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster,int arrival) {
     guest(cpu,0x8003D630,PLAYER,0);
     guest(cpu,0x8003AD18,PLAYER,0); /* Native idle transition. */
     leave_zero();
+    if (refight_return_checkpoint && psx_mod_read_byte(PLAY+12)==12 &&
+        !psx_mod_read_byte(PLAY+13) && psx_mod_read_byte(PLAY+0x1D)==refight_return_checkpoint) {
+        /* Native owner initialization uses its saved current HP on this path.
+         * Do the same for Zero, retaining personal weapon/energy but none of
+         * the old room's pose, position, combat objects or solid history. */
+        memcpy(p2.body+0x5C,returning_body+0x5C,3);
+        p2.body[0x5C]&=0x7F;
+        p2.body[0x93]=returning_body[0x93];
+        memcpy(p2.body+0xA8,returning_body+0xA8,18);
+        psx_mod_counter_add("mmx6.coop.refight-resources-restored",1);
+    }
+    refight_return_checkpoint=0;
     enrolled=1; previous_input=0;
     mmx6_coop_lifecycle_respawn(&life);
     /* Reuse the original incoming beam for an actual simultaneous arrival;
@@ -824,7 +841,7 @@ static uint32_t diagnostic_host_digest(void) {
     const uint32_t fields[]={
         (uint32_t)life.status[0],(uint32_t)life.status[1],life.select_frames,
         life.select_armed,life.select_previous,life.wipe,life.rejoin_pending,
-        previous_input,p2_edges,join_phase,arrival_pair,(uint32_t)join_y,
+        previous_input,p2_edges,join_phase,arrival_pair,(uint32_t)join_y,refight_return_checkpoint,
         (uint32_t)pause_owner,(uint32_t)p2_start_previous,
         scene_owner,scene_phase,(uint32_t)scene_y,both_door_actor,both_door_origin,both_door_members,
         (uint32_t)ready,(uint32_t)enrolled,(uint32_t)failed
@@ -2816,6 +2833,7 @@ static void activate(void) {
     memset(saved_play,0,sizeof saved_play);memset(saved_camera,0,sizeof saved_camera);
     memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
     memset(returning_body,0,sizeof returning_body);memset(scene_body,0,sizeof scene_body);
+    refight_return_checkpoint=0;
     memset(saved_portrait_colors,0,sizeof saved_portrait_colors);
     inside=ready=enrolled=failed=0;
     working_palette_assets_ready=0;

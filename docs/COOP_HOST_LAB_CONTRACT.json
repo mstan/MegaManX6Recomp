@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 38,
+  "revision": 39,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v55",
+    "title_compatibility": "mmx6-x-zero-delay-v56",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -731,5 +731,21 @@
     "fix": "Replace only actual original idle admission EC8E8 from RA ECAFC, authenticated actor/source/native phase0. EC860 full original callback always runs under Both, preserving native ECAC8/2CB50 animation and ECB9C/31DA8 per-body support. Pure native EC430 one-contact refusal remains; two-contact original primary admission and absent/fallen original survivor path remain native.",
     "persistent_state": "No new fields, timer/body/progress writes, manual landing or extra world update.",
     "qualification": "Rejected prior full-callback hook preserved. Require fresh exact LOCAL+NET living wait/abort/two contacts plus actual absent/fallen exclusion, original load/feet/control and final parent gates."
+  },
+  "native_refight_return_living_resources": {
+    "snapshot_schema": 15,
+    "source": "Original BIN33 FC244..FC2E4 stage12 CP+8 return; original mode9 entry still exposes prior loaded checkpoint CC868.",
+    "behavior": "Retain only a living guest current/gauge/max HP, selected weapon and nine weapon-energy words across fresh native body/parts/arrival initialization. Death, voluntary absence and unrelated stage/retry paths retain existing behavior.",
+    "previous_failure": {
+      "source": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+      "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+      "receipt": "docs/evidence/mmx6-scene/manifest-bound-fde6b48-F156-local-native-return-resource-failure-reviewed.json",
+      "sha256": "20e4e9625728a76307e4d415382c707967afcc5a42990b131a74b13a8213a008",
+      "observed": "Real refight48HP defeated by native guest attacks; CP10 return keeps X23HP but resets Zero26to32."
+    },
+    "required_fresh_evidence": [
+      "Original actual refight defeat and CP2-to10 return, both native supported bodies and original wall clearance, retained separate personal resources, independent actual hub controls.",
+      "Same exact candidate LOCAL+NET; final parent source/profile/CRC/card/owned-exit gates and composed-image review."
+    ]
   }
 }

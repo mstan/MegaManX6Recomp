@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 14 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 15 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -85,6 +85,7 @@ typedef struct {
     uint32_t lab_state,lab_previous,starting_hp_applied,earned_applied,earned_reason;
     uint32_t clear_phase,clear_members,clear_started;
     uint32_t door_actor,door_origin,door_members;
+    uint32_t refight_return_checkpoint;
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
@@ -104,6 +105,7 @@ static void state_capture(HostState *s) {
     s->earned_applied=checkpoint_earned_weapons_applied;s->earned_reason=checkpoint_earned_weapons_reason;
     s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
     s->door_actor=both_door_actor;s->door_origin=both_door_origin;s->door_members=both_door_members;
+    s->refight_return_checkpoint=refight_return_checkpoint;
 }
 static int state_actor(uint32_t address) {
     return !address || (address>=0x80010000u && address<=0x801FFF00u && !(address&3));
@@ -154,6 +156,8 @@ static void state_core(StateIO *io,HostState *s) {
         s->lifecycle.status[0]!=MMX6_COOP_ALIVE ||
         s->lifecycle.status[1]!=MMX6_COOP_JOINING))io->ok=0;
     FIELD(door_actor,4,UINT32_MAX);FIELD(door_origin,4,UINT32_MAX);FIELD(door_members,1,3);
+    FIELD(refight_return_checkpoint,1,17);
+    if(s->refight_return_checkpoint && s->refight_return_checkpoint<10)io->ok=0;
     if(!s->door_actor) {
         if(s->door_members || s->door_origin)io->ok=0;
     } else if(!both_door_slot(s->door_actor) || !s->door_origin ||
@@ -202,6 +206,7 @@ static void state_commit(const HostState *s) {
     checkpoint_earned_weapons_applied=s->earned_applied;checkpoint_earned_weapons_reason=s->earned_reason;
     clear_phase=s->clear_phase;clear_members=s->clear_members;clear_started=s->clear_started;
     both_door_actor=s->door_actor;both_door_origin=s->door_origin;both_door_members=s->door_members;
+    refight_return_checkpoint=s->refight_return_checkpoint;
     /* These backups are meaningful only under rejected live projections. */
     memset(&p1,0,sizeof p1);memset(saved_overlay,0,sizeof saved_overlay);memset(saved_play,0,sizeof saved_play);
     memset(saved_camera,0,sizeof saved_camera);memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
@@ -256,7 +261,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,14);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,15);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};

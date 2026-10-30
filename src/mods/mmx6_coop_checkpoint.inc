@@ -773,6 +773,22 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #endif
 }
 static void checkpoint_native_entry(CPUState *cpu,uint32_t address) {
+    /* Original mode9 entry still has the prior loaded checkpoint CC868.
+     * BIN33 FC244..FC2E4 retires the real death child, marks the earned
+     * refight and selects oldCP+8. Capture only that living continuation,
+     * before the native loader replaces the old module/body context. */
+    unsigned old_cp=psx_mod_read_byte(0x800CC868u),cp=psx_mod_read_byte(PLAY+0x1D);
+    refight_return_checkpoint=0;
+    if(cpu && address==0x8001E1BCu && cpu->gpr[31]==0x8001E720u && cpu->gpr[4]==PLAY &&
+       ready && !failed && !inside && !zero_projected && psx_mod_read_byte(PLAY)==9 &&
+       psx_mod_read_byte(PLAY+12)==12 && !psx_mod_read_byte(PLAY+13) &&
+       old_cp>=2 && old_cp<=9 && cp==old_cp+8 && !life.wipe &&
+       life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
+       p2.body[2]==1 && (p2.body[0x5C]&0x7F)) {
+        memcpy(returning_body,p2.body,sizeof returning_body);
+        refight_return_checkpoint=cp;
+        psx_mod_counter_add("mmx6.coop.refight-resources-retained",1);
+    }
     if(!checkpoint_pending.phase)return;
     const Mmx6Checkpoint *entry=&checkpoint_inventory[checkpoint_pending.index];
     if(!checkpoint_request_authorized(checkpoint_pending.authority) || failed) {

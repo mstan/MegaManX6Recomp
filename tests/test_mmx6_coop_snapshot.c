@@ -515,6 +515,34 @@ static void paired_arrival_snapshot(void) {
     }
     state_commit(&prior);free(wire);
 }
+static void refight_return_snapshot(void) {
+    HostState prior;state_capture(&prior);
+    refight_return_checkpoint=0;
+    returning_body[0x5C]=19;returning_body[0x93]=4;returning_body[0xA8]=73;
+    uint32_t length=snapshot_bytes();CHECK(length);
+    uint8_t *empty=malloc(length),*pending=malloc(length),*bad=malloc(length);
+    CHECK(empty && pending && bad && snapshot_write(empty,length));
+    refight_return_checkpoint=10;CHECK(snapshot_write(pending,length));
+    unsigned at=0,differences=0;
+    for(unsigned i=0;i<length;++i)if(empty[i]!=pending[i]){at=i;++differences;}
+    CHECK(differences==1 && pending[at]==10 && !empty[at]);
+    for(unsigned target=10;target<=17;++target) {
+        refight_return_checkpoint=target;CHECK(snapshot_write(pending,length));
+        uint32_t digest=state_digest(),diagnostic_digest=diagnostic_host_digest();
+        refight_return_checkpoint=0;returning_body[0x5C]=32;
+        CHECK(state_digest()!=digest && diagnostic_host_digest()!=diagnostic_digest);
+        CHECK(snapshot_validate(pending,length));snapshot_read(pending,length);
+        CHECK(refight_return_checkpoint==target && returning_body[0x5C]==19 &&
+              returning_body[0x93]==4 && returning_body[0xA8]==73 &&
+              state_digest()==digest && diagnostic_host_digest()==diagnostic_digest);
+    }
+    for(unsigned invalid=1;invalid<=18;++invalid)if(invalid<10 || invalid==18) {
+        memcpy(bad,pending,length);bad[at]=(uint8_t)invalid;reject_unchanged(bad,length);
+    }
+    CHECK(snapshot_validate(empty,length));snapshot_read(empty,length);
+    CHECK(!refight_return_checkpoint);
+    state_commit(&prior);free(empty);free(pending);free(bad);
+}
 static void abandoned_guest(void){
     /* Exercise the SDK's actual supported landing, including MinGW GNU's
      * large-frame case. The target function has not returned when dispatched
@@ -527,7 +555,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

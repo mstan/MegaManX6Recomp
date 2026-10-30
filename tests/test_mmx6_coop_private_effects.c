@@ -1987,6 +1987,56 @@ static void native_scene_after_nonpaired_enrollment(void) {
         CHECK(!memcmp(&owner,&unchanged,sizeof owner) && !memcmp(play,current_play,sizeof play));
     }
 }
+static void native_refight_return_preserves_living_personal_resources(void) {
+    CPUState cpu;arrival_setup(&cpu);
+    /* Real return boundary: the prior boss CP2 is still loaded, while its
+     * native death callback has selected authored hub CP10. The outgoing
+     * guest is hidden/state3 but remains living with independently used HP,
+     * weapon and energy. Fresh native body initialization must still run. */
+    psx_mod_write_byte(PLAY,9);psx_mod_write_byte(PLAY+12,12);
+    psx_mod_write_byte(PLAY+13,0);psx_mod_write_byte(PLAY+0x1D,10);
+    psx_mod_write_byte(0x800CC868u,2);
+    cpu.gpr[31]=0x8001E720u;cpu.gpr[4]=PLAY;
+    p2.body[2]=1;p2.body[3]=0;p2.body[4]=3;
+    p2.body[0x5C]=p2.body[0x5D]=23;p2.body[0x5E]=32;p2.body[0x93]=3;
+    put32(p2.body+8,0x11110000);put32(p2.body+12,0x22220000);
+    for(unsigned i=0;i<9;++i){p2.body[0xA8+i*2]=(uint8_t)(73+i);p2.body[0xA9+i*2]=0;}
+    checkpoint_native_entry(&cpu,0x8001E1BCu);
+    CHECK(refight_return_checkpoint==10 && returning_body[0x5C]==23);
+    native_player_init(&cpu,0x8003BD24u);
+    CHECK(!enrolled && refight_return_checkpoint==10);
+    psx_mod_write_byte(PLAY,10);psx_mod_write_word(PLAYER+8,1888u<<16);
+    psx_mod_write_word(PLAYER+12,1216u<<16);
+    Mmx6CoopRosterNative native={0,1,0,1,0};Mmx6CoopRoster roster;
+    CHECK(mmx6_coop_roster_resolve(&native,&roster)==MMX6_COOP_ROSTER_OK);
+    PlayerContext owner;capture_player(&owner);
+    inside=1;enroll(&cpu,&roster,0);inside=0;
+    CHECK(!refight_return_checkpoint && enrolled && arrival_births==1 && join_phase==1 &&
+        p2.body[2]==1 && p2.body[0x5C]==23 && p2.body[0x5D]==23 && p2.body[0x5E]==32 &&
+        p2.body[0x93]==3 && p2.body[0xE7]==5 && le32(p2.body+0x38)==assets &&
+        le32(p2.body+8)==1912u<<16 && le32(p2.body+12)!=0x22220000);
+    for(unsigned i=0;i<9;++i)CHECK(p2.body[0xA8+i*2]==73+i && !p2.body[0xA9+i*2]);
+    PlayerContext unchanged;capture_player(&unchanged);CHECK(!memcmp(&owner,&unchanged,sizeof owner));
+    CHECK(!zero_projected && !state_track.count && !state_track.error && !failed);
+
+    /* Ordinary retries, invalid return relationships and nonliving guests
+     * retain the existing fresh-native-resource behavior. */
+    for(unsigned fault=0;fault<6;++fault) {
+        arrival_setup(&cpu);refight_return_checkpoint=0;
+        psx_mod_write_byte(PLAY,9);psx_mod_write_byte(PLAY+12,12);
+        psx_mod_write_byte(PLAY+13,0);psx_mod_write_byte(PLAY+0x1D,10);
+        psx_mod_write_byte(0x800CC868u,2);cpu.gpr[31]=0x8001E720u;cpu.gpr[4]=PLAY;
+        p2.body[2]=1;p2.body[0x5C]=23;
+        if(fault==0)life.status[1]=MMX6_COOP_FALLEN;
+        if(fault==1)life.status[1]=MMX6_COOP_ABSENT;
+        if(fault==2)life.wipe=1;
+        if(fault==3)psx_mod_write_byte(0x800CC868u,10);
+        if(fault==4)psx_mod_write_byte(PLAY+0x1D,2);
+        if(fault==5)cpu.gpr[31]=0;
+        checkpoint_native_entry(&cpu,0x8001E1BCu);
+        CHECK(!refight_return_checkpoint);
+    }
+}
 static void native_checkpoint_preserves_completed_voluntary_absence(void) {
     for(unsigned held=0;held<2;++held) {
         CPUState cpu;arrival_setup(&cpu);
@@ -2046,4 +2096,5 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_scene_preserves_incoming_guest();
     native_scene_after_nonpaired_enrollment();
     native_checkpoint_preserves_completed_voluntary_absence();
+    native_refight_return_preserves_living_personal_resources();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}
