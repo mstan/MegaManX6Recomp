@@ -1523,6 +1523,99 @@ static void shared_clear_recycle_setup(CPUState *cpu) {
     psx_mod_write_word(0x800F4304u,0x0C00F4C2u);
     psx_mod_write_word(0x800F4308u,0xA06000CAu);
 }
+static void sigma_hold_setup(CPUState *cpu,unsigned later) {
+    setup(cpu);stage_call=0;
+    psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD4,0);
+    psx_mod_write_byte(PLAYER+0x7A,0);
+    const uint32_t actor=0x8008EF48u;
+    const uint32_t guards[][2]={
+        {0x800F5920u,0x800EDE18u},{0x800F5924u,0x800F2154u},
+        {0x800F6674u,0x800EDE88u},{0x800F6E18u,0x800EFC90u},
+        {0x800EDECCu,0x00808021u},{0x800EDEECu,0x90650015u},
+        {0x800EDEF0u,0x24040014u},{0x800EDEF4u,0x0C00F4C2u},
+        {0x800EDEF8u,0xA06000CAu},{0x800EFCA4u,0x00808821u},
+        {0x800EFDB4u,0xA2220004u},{0x800EFDDCu,0xA2320005u},
+        {0x800EFDF0u,0x92650015u},{0x800EFDF4u,0x0C00F4C2u},
+        {0x800EFDF8u,0x24040014u}};
+    for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)
+        psx_mod_write_word(guards[i][0],guards[i][1]);
+    psx_mod_write_byte(PLAY+12,12);psx_mod_write_byte(PLAY+13,1);
+    psx_mod_write_word(PLAY+0x20,later?0:actor);
+    psx_mod_write_byte(actor,0x41);psx_mod_write_byte(actor+1,(uint8_t)(later?62:61));
+    psx_mod_write_byte(actor+4,(uint8_t)(later?1:2));
+    psx_mod_write_byte(actor+5,(uint8_t)(later?2:0));
+    psx_mod_write_word(actor+0x10,0x800F57ECu);
+    cpu->gpr[31]=later?0x800EFDFCu:0x800EDEFCu;
+    cpu->gpr[later?17:16]=actor;cpu->gpr[4]=20;
+}
+static void native_sigma_transition_retains_living_pair(void) {
+    CPUState cpu;
+    for(unsigned later=0;later<2;++later) {
+        for(unsigned negative=0;negative<34;++negative) {
+            sigma_hold_setup(&cpu,later);const uint32_t actor=0x8008EF48u;
+            if(negative==0)cpu.gpr[31]=later?0x800F21F4u:0x800ECDCCu;
+            if(negative==1)cpu.gpr[4]=19;
+            if(negative==2)psx_mod_write_byte(PLAY+12,11);
+            if(negative==3)psx_mod_write_byte(PLAY+13,0);
+            if(negative==4)cpu.gpr[later?17:16]=actor+4;
+            if(negative==5)psx_mod_write_byte(actor,0);
+            if(negative==6)psx_mod_write_byte(actor+1,(uint8_t)(later?61:62));
+            if(negative==7)psx_mod_write_byte(actor+2,1);
+            if(negative==8)psx_mod_write_byte(actor+4,(uint8_t)(later?0:1));
+            if(negative==9)psx_mod_write_byte(actor+5,3);
+            if(negative==10)psx_mod_write_byte(actor+0x5C,1);
+            if(negative==11)psx_mod_write_word(actor+0x10,0x800F57E4u);
+            if(negative==12)ready=0;
+            if(negative==13)enrolled=0;
+            if(negative==14)failed=1;
+            if(negative==15)scene_call=1;
+            if(negative==16)zero_projected=1;
+            if(negative==17)private_draw=1;
+            if(negative==18)world_render=1;
+            if(negative==19)pause_owner=0;
+            if(negative==20)life.status[0]=MMX6_COOP_FALLEN;
+            if(negative==21)life.status[1]=MMX6_COOP_ABSENT;
+            if(negative==22)psx_mod_write_byte(PLAYER+0x5C,0);
+            if(negative==23)p2.body[0x5C]=0;
+            if(negative==24)psx_mod_write_byte(PLAYER+3,0);
+            if(negative==25)p2.body[3]=0;
+            if(negative==26)psx_mod_write_word(0x800F5920u,0);
+            if(negative==27)psx_mod_write_word(0x800F5924u,0);
+            if(negative==28)psx_mod_write_word(0x800F6674u,0);
+            if(negative==29)psx_mod_write_word(0x800F6E18u,0);
+            if(negative==30)psx_mod_write_word(later?0x800EFCA4u:0x800EDECCu,0);
+            if(negative==31)psx_mod_write_word(later?0x800EFDF4u:0x800EDEF4u,0);
+            if(negative==32)psx_mod_write_word(later?0x800EFDF8u:0x800EDEF8u,0);
+            if(negative==33)scene_owner=1;
+            CHECK(!sigma_transition_in_place(&cpu,0x8003D308u));
+            CHECK(!call_count && !clear_phase);
+            private_draw=0;
+        }
+        sigma_hold_setup(&cpu,later);
+        CHECK(!sigma_transition_in_place(&cpu,0x8003D330u));
+        CHECK(sigma_transition_in_place(&cpu,0x8003D308u));
+        CPUState saved_cpu=cpu;PlayerContext saved_guest=p2;uint8_t owner[sizeof p2.body];
+        capture(PLAYER,owner,sizeof owner);
+        script_begin(&cpu,0x8003D308u);
+        CHECK(scene_owner==1 && !scene_phase && !clear_phase && !call_count);
+        CHECK(!memcmp(&cpu,&saved_cpu,sizeof cpu) && !memcmp(&p2,&saved_guest,sizeof p2));
+        uint8_t after[sizeof owner];capture(PLAYER,after,sizeof after);
+        CHECK(!memcmp(after,owner,sizeof owner));
+        /* Original command's shared lock is external to this callback.
+         * Hold it over multiple world ticks, then let native release win. */
+        psx_mod_write_byte(PLAY+0x1C,1);
+        for(unsigned frame=0;frame<8;++frame) {
+            scene_tick(&cpu);
+            CHECK(scene_owner==1 && !scene_phase && !call_count && !failed);
+            CHECK(!memcmp(&p2,&saved_guest,sizeof p2));
+        }
+        script_begin(&cpu,0x8003D308u); /* A chained command keeps phase0. */
+        CHECK(scene_owner==1 && !scene_phase && !call_count);
+        psx_mod_write_byte(PLAY+0x1C,0);scene_tick(&cpu);
+        CHECK(!scene_owner && !scene_phase && !call_count && !failed);
+        CHECK(!memcmp(&p2,&saved_guest,sizeof p2) && !state_track.count);
+    }
+}
 static void native_shared_clear_admission_and_departure(void) {
     CPUState cpu;
     for(unsigned negative=0;negative<10;++negative) {
@@ -2143,6 +2236,7 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     yammar_native_upload_coordinates();
     native_shared_ride_ownership();
     native_shared_clear_admission_and_departure();
+    native_sigma_transition_retains_living_pair();
     native_either_both_door_admission();
     native_both_door_ack_motion_and_release();
     native_paired_arrival_barrier();

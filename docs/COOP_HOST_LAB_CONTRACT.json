@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 43,
+  "revision": 44,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v60",
+    "title_compatibility": "mmx6-x-zero-delay-v61",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -791,5 +791,11 @@
     "source": "Original BIN15 actual class61 placement800F57EC at3648/400; enemy dispatch root800F582C entries61=800EDE18 and62=800F2154. First-fight and later-body behavior require fresh native observation.",
     "snapshot_schema": 15,
     "acceptance": "Same exact LOCAL/NET actual accepted first-body defeat, original later-body initialization/intro/native release, continuous both living heroes without spurious passenger transport, separate actual controls and reviewed composed images; all parent source/profile/CRC/restoration/cards/owned-exit gates. Setup/source/tests grant no comparison credit."
+  },
+  "title_changes_v61_Sigma_in_place_hold": {
+    "scope": "Frozen234 F141/F142 only: actual first Sigma61 defeat and original same-actor Sigma62 init/release.",
+    "fix": "Keep the existing phase0 in-place scene hold for source-qualified original BIN15 first61 death command20 atEDEF4/RAEDEFC (s0,state2/action0/HP0) and later62 init command20 atEFDF4/RAEFDFC (s1,state1/action2/HP0). Require native12/1, original aligned enemy pool actor/placement800F57EC, both living visible ready heroes, dispatch/state tables and actual call/source words. Native command, death, transform, intro, clocks and release still execute once. No actor, HP, result or scene lock writes.",
+    "exclusions": "Initial61 arrival, final62 death, unrelated stages/callers, projected/private draw, absent/fallen/hidden heroes and corrupt source retain existing policy. No new persistent fields; snapshot15 unchanged.",
+    "qualification": "Actual-plugin regression is supporting evidence. Fresh exact LOCAL and NET actual accepted first defeat, continuous pair retention across the native transform and later release, own movement on both peers and reviewed composed captures plus parent gates remain required. BaselineV112 sg2l real outgoing failure remains retained."
   }
 }

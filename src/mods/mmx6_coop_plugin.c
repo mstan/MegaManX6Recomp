@@ -1100,9 +1100,55 @@ static void scene_begin(unsigned seat, uint32_t source) {
     if (life.status[seat^1]==MMX6_COOP_ALIVE ||
         (seat==0 && life.status[1]==MMX6_COOP_JOINING)) scene_phase=1;
 }
+static int sigma_transition_in_place(const CPUState *cpu,uint32_t address) {
+    /* BIN15 first-body death EDEC4 and later-body init EFC90 both request
+     * native command20. They lock the one world; neither departs the room.
+     * Keep the already-living pair in place through those original holds.
+     * Initial type61 arrival and final type62 death retain their policies. */
+    if(address!=0x8003D308u || cpu->gpr[4]!=20 || scene_owner ||
+       !ready || !enrolled || failed || scene_call || zero_projected ||
+       private_draw || world_render || pause_owner>=0 ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       psx_mod_read_byte(PLAY+12)!=12 || psx_mod_read_byte(PLAY+13)!=1 ||
+       !shared_clear_living(0) || !shared_clear_living(1) ||
+       !psx_mod_read_byte(PLAYER) || !psx_mod_read_byte(PLAYER+3) ||
+       !p2.body[0] || !p2.body[3])return 0;
+    const unsigned later=cpu->gpr[31]==0x800EFDFCu;
+    if(!later && cpu->gpr[31]!=0x800EDEFCu)return 0;
+    /* The original death preserves its actor in s0; later init uses s1.
+     * PLAY20 is cleared by the genuine transform, so cannot identify init. */
+    const uint32_t actor=cpu->gpr[later?17:16];
+    if(actor<0x8008EF48u || actor>=0x80090C88u ||
+       (actor-0x8008EF48u)%0x9Cu || !(psx_mod_read_byte(actor)&1u) ||
+       psx_mod_read_byte(actor+1)!=(later?62:61) || psx_mod_read_byte(actor+2) ||
+       psx_mod_read_byte(actor+4)!=(later?1:2) ||
+       psx_mod_read_byte(actor+5)!=(later?2:0) || psx_mod_read_byte(actor+0x5C) ||
+       psx_mod_read_word(actor+0x10)!=0x800F57ECu ||
+       (!later && psx_mod_read_word(PLAY+0x20)!=actor))return 0;
+    static const uint32_t common[][2]={
+        {0x800F5920u,0x800EDE18u},{0x800F5924u,0x800F2154u},
+        {0x800F6674u,0x800EDE88u},{0x800F6E18u,0x800EFC90u}};
+    for(unsigned i=0;i<sizeof common/sizeof common[0];++i)
+        if(psx_mod_read_word(common[i][0])!=common[i][1])return 0;
+    if(later)return psx_mod_read_word(0x800EFCA4u)==0x00808821u &&
+        psx_mod_read_word(0x800EFDB4u)==0xA2220004u &&
+        psx_mod_read_word(0x800EFDDCu)==0xA2320005u &&
+        psx_mod_read_word(0x800EFDF0u)==0x92650015u &&
+        psx_mod_read_word(0x800EFDF4u)==0x0C00F4C2u &&
+        psx_mod_read_word(0x800EFDF8u)==0x24040014u;
+    return psx_mod_read_word(0x800EDECCu)==0x00808021u &&
+        psx_mod_read_word(0x800EDEECu)==0x90650015u &&
+        psx_mod_read_word(0x800EDEF0u)==0x24040014u &&
+        psx_mod_read_word(0x800EDEF4u)==0x0C00F4C2u &&
+        psx_mod_read_word(0x800EDEF8u)==0xA06000CAu;
+}
 static void script_begin(CPUState *cpu, uint32_t address) {
     if(shared_clear_admit(cpu,address))return;
-    if (!scene_call && !failed) scene_begin(zero_projected?1:0,address);
+    if (!scene_call && !failed) {
+        const int in_place=sigma_transition_in_place(cpu,address);
+        scene_begin(zero_projected?1:0,address);
+        if(in_place)scene_phase=0;
+    }
 }
 #include "mmx6_coop_recycle_portal.inc"
 #include "mmx6_coop_refight_portal.inc"
