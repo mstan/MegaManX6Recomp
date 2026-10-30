@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 41,
+  "revision": 42,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v58",
+    "title_compatibility": "mmx6-x-zero-delay-v59",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -769,5 +769,13 @@
     "diagnostic": "Additive read-only actual80026D44 private draw-entry context: provider36564350, flags81/83 for seats0/1, state0 worldframe, state1 cached native BG1X, state2 cached native BG1Y. Only host-owned cached reads; no guest calls or mutation. Existing25FB0 context unchanged; unavailable in production.",
     "snapshot_schema": 15,
     "qualification": "Fresh same-image LOCAL and NET actual Heatnix admission, stationary native shared phase advancement at each private draw, composed-image review, restoration and all parent gates required. V109 prototypes retain passing native gates but are not admitted as visible scrolling. F175 additionally needs distinct native atlas scene on the final candidate."
+  },
+  "title_changes_v59_guest_weather_window": {
+    "scope": "Frozen234 F194 actual original Turtloid guest-first rain window admission and native end.",
+    "native_source": "Original BIN9 EB2D4..EB360 reads resident PLAYER integerX atEB304 and compares currentF5E90window. First window is inclusive1248..1631; original stores/clears PLAY26 rain flag.",
+    "fix": "Guarded EB310 pre-instruction callback changes only the already-loaded X operand to a living native-ready guest X when primary is outside and guest inside the actual current original window. Keep primary priority, absent/fallen/locked exclusions, native comparisons, original flag writes, producer, clocks and end. No extra world/producer call or new persistent/snapshot fields.",
+    "instruction_site": "800EB310 expected84830000; original preceding PLAYER load84C670AA; stage6/0 and actual type0E actor/current source window guards. Main EXE ends below this BIN9 overlay site; declare it for future native overlay emission as well as the guarded interpreter.",
+    "snapshot_schema": 15,
+    "qualification": "Source/pure-register regression is not native qualification. Fresh exact LOCAL+NET guest-only ordinary entry and exit, stationary primary outside, actual native five-frame weather/private views and native blank end, all parent source/profile/CRC/restoration/card/owned-exit gates and root image review remain required. Prior failed observer/setup traces preserved."
   }
 }

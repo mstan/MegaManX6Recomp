@@ -232,6 +232,7 @@ static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1)
 
 #include "mmx6_coop_jump_audio.inc"
 #include "mmx6_coop_intro_target.inc"
+#include "mmx6_coop_weather.inc"
 
 static int unit_choices(CPUState *cpu, uint32_t address) {
     /* ROCK_X6.BIN member 16 shares its load address with stage overlays.
@@ -2950,6 +2951,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_savestate_plugin("mmx6.local-coop.prototype",snapshot_resources_restored);
 #endif
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800EB310u,0x84830000u,weather_window_target);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);

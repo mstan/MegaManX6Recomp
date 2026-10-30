@@ -2073,7 +2073,60 @@ static void native_checkpoint_preserves_completed_voluntary_absence(void) {
         CHECK(!zero_projected && !state_track.count && !state_track.error && !failed);
     }
 }
+static void native_guest_weather_window(void) {
+    for(unsigned variant=0;variant<32;++variant) {
+        CPUState cpu;setup(&cpu);private_draw=0;
+        const uint32_t actor=0x8008EF48u;uint32_t window=0x800F5E90u,address=0x800EB310u;
+        psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+12,6);
+        psx_mod_write_byte(actor,65);psx_mod_write_byte(actor+1,14);
+        psx_mod_write_word(0x800EB304u,0x84C670AAu);psx_mod_write_word(address,0x84830000u);
+        int low=1248,high=1631,primary=1120,guest_x=1257;
+        if(variant==1)primary=1400;
+        if(variant==2)guest_x=1170;
+        if(variant==3)guest_x=1631;
+        if(variant==4)guest_x=1248;
+        if(variant==5)guest_x=1632;
+        if(variant==6)guest_x=1247;
+        if(variant==7)life.status[1]=MMX6_COOP_ABSENT;
+        if(variant==8)life.status[1]=MMX6_COOP_FALLEN;
+        if(variant==9)zero_world=1;
+        if(variant==10)inside=1;
+        if(variant==11)private_draw=1;
+        if(variant==12)scene_owner=1;
+        if(variant==13)pause_owner=0;
+        if(variant==14)psx_mod_write_byte(PLAY+12,0);
+        if(variant==15)psx_mod_write_byte(PLAY+13,1);
+        if(variant==16)psx_mod_write_word(address,0);
+        if(variant==17)psx_mod_write_word(0x800EB304u,0);
+        if(variant==18)psx_mod_write_byte(actor+1,13);
+        if(variant==19)window+=2;
+        if(variant==20)psx_mod_write_byte(0x800F6BA0u,7);
+        if(variant==21)p2.body[0x7A]=1;
+        if(variant==22)p2.body[3]=0;
+        if(variant==23)p2.body[0x5C]=0;
+        if(variant==24)ready=0;
+        if(variant==25)enrolled=0;
+        if(variant==26)failed=1;
+        if(variant==27)address+=4;
+        if(variant==28)p2.body[4]=2;
+        if(variant==29)primary=-100;
+        if(variant==30){low=1631;high=1248;}
+        if(variant==31){window+=4;psx_mod_write_byte(0x800F6BA0u,1);low=-150;high=-10;primary=100;guest_x=-80;}
+        psx_mod_write_half(window,(uint16_t)low);psx_mod_write_half(window+2,(uint16_t)high);
+        put32(p2.body+8,(uint32_t)guest_x*65536u);cpu.gpr[4]=window;cpu.gpr[6]=(uint32_t)primary;cpu.gpr[17]=actor;
+        CPUState expected=cpu;PlayerContext before=p2;unsigned calls_before=call_count;
+        if(variant==0 || variant==3 || variant==4 || variant==29 || variant==31)expected.gpr[6]=(uint32_t)guest_x;
+        static uint8_t before_ram[sizeof ram],before_extra[sizeof extra];
+        memcpy(before_ram,ram,sizeof ram);memcpy(before_extra,extra,sizeof extra);
+        weather_window_target(&cpu,address);
+        CHECK(!memcmp(&cpu,&expected,sizeof cpu) && !memcmp(&p2,&before,sizeof p2));
+        CHECK(!memcmp(ram,before_ram,sizeof ram) && !memcmp(extra,before_extra,sizeof extra));
+        CHECK(call_count==calls_before && !state_track.count && !state_track.error);
+    }
+    private_draw=0;
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
+    native_guest_weather_window();
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
     deferred_dash_effect_uses_allocating_body();
