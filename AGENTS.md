@@ -134,6 +134,40 @@ limits alongside the frozen acceptance criteria:
   hide a real failure to meet throughput expectations. Defer human-dependent and
   long timing checks; preserve all accepted and failed evidence and the HUD harness.
 
+## Enforce closure before more tooling (owner correction, 2026-10-30)
+
+The limits above are stop conditions, not suggestions. Repeatedly preparing
+another observer, build or proof package instead of closing comparisons is the
+failure this section must prevent. It takes precedence over earlier scheduling
+exceptions; it does not change the frozen acceptance criteria.
+
+- First review pending results that may already satisfy a named comparison.
+  Admit sufficient results immediately; do not improve their presentation first.
+- Before further source research, code generation, build work, observer changes
+  or a native repeat, identify the row IDs and the exact missing behavior that
+  this action will decide. Use one short line in the existing session notes,
+  not a new planning document. If no missing behavior can be named, skip it.
+- Choose the shortest actionable closeout from a small ranked queue. Do not
+  start a broad shared feature while shorter independent closeouts are ready.
+  Keep at most one implementation in progress; preserve parked work intact.
+- Enforce the existing 15-minute setup/observer budgets and two-attempt limit
+  across continuations. When exhausted, inspect the retained outcome once,
+  record the missing prerequisite and switch rows. Renaming a script, making
+  another version or adding a proof layer does not authorize another attempt.
+- After 60 minutes with neither a comparison closure nor a game fix validated
+  in the running build, finish any healthy active job and switch to an
+  independent comparison. A potential multi-row benefit does not extend this
+  budget for tooling, source investigation or documentation. Compiling and
+  passing source tests alone do not qualify as a validated game fix.
+- Keep build identity and evidence binding in the existing shared artifacts.
+  Do not create another launcher, curator, receipt hierarchy or handoff format
+  when the existing tools can decide the missing behavior. Add only the
+  smallest necessary observation; do not repeat accepted checks for tidier proof.
+- After a successful check, finish its required review, ledger update and local
+  commit before expanding scope. At each hourly update report the actual
+  passed/failed/unverified delta, elapsed time and next named rows. If the delta
+  is zero, say zero and identify the pivot; do not substitute activity counts.
+
 At resumption, read `current_session_handoff` and `current_owned_root_job` in
 `G:/Temp/Codex/psxrecomp/x6-parity/storage-retention-index.json`. The initial
 execution reset is handoff v294. Live ledger, worktree and job handles take
