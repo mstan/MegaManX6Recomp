@@ -1,0 +1,1640 @@
+{
+  "kind": "F61_same_image_LOCAL_NET_Either_Both_living_actual_ABSENT_components",
+  "status": "partial_FALLEN_missing_no_comparison_admission",
+  "comparisons": [
+    "F61"
+  ],
+  "frozen_row_sha256": "9713d5a35eecde25a951921023b08acab13a796ab7354e0431fe357b7fa2a8ff",
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+    "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+    "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+    "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+    "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v55",
+    "host_revision": 38
+  },
+  "local_reuse": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-fde6b48-F61-local-policy-components-reviewed.json",
+    "bytes": 21447,
+    "sha256": "664c6b22842f465d47844fe7e291643c49b4d0c5e5ac49d0bbc068da75fc2c6d"
+  },
+  "local_components": {
+    "living": {
+      "status": "passed",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "one_session_two_distinct_original_doors": true,
+        "both_policy_refuses_single_hero_at_each": true,
+        "each_living_native_body_crosses_both_full_boxes": true,
+        "no_passenger_withdrawal_or_rejoin": true,
+        "native_opening_and_traversal_private_commits_each_door": true,
+        "actual_private_pairs_resume_each_door": true,
+        "native_checkpoint_marker_and_boss_progression": true,
+        "host_private_state_restored": true,
+        "actual_dialogue_follows_both_full_boxes_and_native_camera": true
+      },
+      "child_native_checks": {
+        "one_session_two_distinct_original_doors": true,
+        "both_policy_refuses_single_hero_at_each": true,
+        "each_living_native_body_crosses_both_full_boxes": true,
+        "no_passenger_withdrawal_or_rejoin": true,
+        "native_opening_and_traversal_private_commits_each_door": true,
+        "actual_private_pairs_resume_each_door": true,
+        "native_checkpoint_marker_and_boss_progression": true,
+        "host_private_state_restored": true,
+        "actual_dialogue_follows_both_full_boxes_and_native_camera": true
+      },
+      "exclusion_precondition": null,
+      "native_door_records": [
+        {
+          "number": 1,
+          "origin": "0x800fa2a4",
+          "authored_x": 5744,
+          "leading": 1,
+          "before": 49,
+          "waiting": 51,
+          "held": 58,
+          "admitted": 66,
+          "released": 306,
+          "observed_phases": [
+            2,
+            3
+          ]
+        },
+        {
+          "number": 2,
+          "origin": "0x800fa2ac",
+          "authored_x": 6064,
+          "leading": 0,
+          "before": 309,
+          "waiting": 339,
+          "held": 347,
+          "admitted": 378,
+          "released": 532,
+          "observed_phases": [
+            2,
+            3
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-before-first-native-door.png",
+          "sha256": "138f4f66adadc7fa6b1469ea68567f5ed5792f56a0873c4c6779c83c1a335944",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "before-first-native-door",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-only-leading-hero-waits.png",
+          "sha256": "4cdea6113483af90fb89923478396d5dc25c5a8a8ed8d2946139cbb5c739b6b3",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-only-leading-hero-waits",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-native-phase2.png",
+          "sha256": "9d50701e2689ba27e6161e03a37b5888c54c3b51a0ebaabb9a52d67c33937d6a",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-native-phase2",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-native-phase3.png",
+          "sha256": "229ce55d9a2358c677c366634770ad143f71bf9d07b8191a1eac74aa4aaea947",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-native-phase3",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-first-door-following-original-dialogue-ready.png",
+          "sha256": "4edd3cd1fbd20da99091ad23166965f68cfb1ed99fc3b4bb78483c3f7e221da1",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "first-door-following-original-dialogue-ready",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-both-full-boxes-released.png",
+          "sha256": "082432d784720706083f98c3cbb93170d562596fbf61e96feccd3f16d085c708",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-both-full-boxes-released",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-only-leading-hero-waits.png",
+          "sha256": "0f3daacce10b9bb45cd909d253bbc633b0f17616f0b34f22f49a3f2cb387e448",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-only-leading-hero-waits",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-native-phase2.png",
+          "sha256": "0c435b9398aa8f5523ea9f0830347b29970ba5c7a1443d3215768eaa37509b33",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-native-phase2",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-native-phase3.png",
+          "sha256": "565012a9fa768d07a6da98b20c28e4d05ed9cb2c4cd13b59172a2ba67bd7a695",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-native-phase3",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-both-full-boxes-released.png",
+          "sha256": "02506ccc74c57b743cd820453238000b0e7c0459e2f18bd5990bea163e0eb2ec",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-both-full-boxes-released",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-both-original-doors-complete-native-boss-ready.png",
+          "sha256": "915c576fcae6a9d4893f08e640b9f1fb991a4dd9cab41103392d28e572ba04cd",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "both-original-doors-complete-native-boss-ready",
+          "root_personally_viewed": true
+        }
+      ],
+      "native_exit0": 1,
+      "private_cards_unchanged": true,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\qualification.json",
+          "sha256": "b8d03ccd2cd571d3dd36c6902036eb1bb66b4d16339be33b9f0cd9212ba62dac",
+          "bytes": 18608333
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "61134466f45bde8f7212005aa3522e6c45d7b5c2b3864d2f9e2248650b8e65d7",
+          "bytes": 2687
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\observations.json",
+          "sha256": "fd86ed0b5a1faa0ee2058e36431aaaf86efe275059841bf9074b349094d6ff5e",
+          "bytes": 16906987
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\F61-executing-source-pins.json",
+          "sha256": "740a323fffe939481294d58825c267d44b8879632003ddc699d97d6c412f681d",
+          "bytes": 8328
+        }
+      ],
+      "limits": [
+        "Only living Both component. Current Either and actual absent/fallen native cases remain required; no comparison credit.",
+        "One continuous original intro NPC hatch5744 and D1000 hatch6064 route, including native NPC dialogue and full-body clearance. No extra comparison credit for already accepted rows.",
+        "Original CP1/once position+scanner prerequisite is disclosed and tainted; native gate admission, traversal, checkpoint marker and boss initialization are earned."
+      ]
+    },
+    "absent": {
+      "status": "passed",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "actual_native_excluded_partner_precondition": true,
+        "one_session_two_original_hatches": true,
+        "sole_living_native_admission_and_full_box_clearance": true,
+        "native_original_NPC_dialogue_and_checkpoint_progression": true,
+        "native_D1000_full32HP_ready": true,
+        "excluded_partner_remains_excluded": true,
+        "actual_native_release_controls": true,
+        "native_results_not_seeded": true
+      },
+      "child_native_checks": {
+        "actual_native_excluded_partner_precondition": true,
+        "one_session_two_original_hatches": true,
+        "sole_living_native_admission_and_full_box_clearance": true,
+        "native_original_NPC_dialogue_and_checkpoint_progression": true,
+        "native_D1000_full32HP_ready": true,
+        "excluded_partner_remains_excluded": true,
+        "actual_native_release_controls": true,
+        "native_results_not_seeded": true
+      },
+      "exclusion_precondition": {
+        "kind": "real_Select_to_native_ABSENT",
+        "leaving": 63,
+        "completed": 78
+      },
+      "native_door_records": [
+        {
+          "number": 1,
+          "origin": "0x800fa2a4",
+          "authored_x": 5744,
+          "leading": 0,
+          "before": 83,
+          "admitted": 86,
+          "released": 269,
+          "observed_phases": [
+            2,
+            3
+          ]
+        },
+        {
+          "number": 2,
+          "origin": "0x800fa2ac",
+          "authored_x": 6064,
+          "leading": 0,
+          "before": 272,
+          "admitted": 286,
+          "released": 404,
+          "observed_phases": [
+            2,
+            3
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-before-first-native-door.png",
+          "sha256": "57358b2dc3bc0c1323fb7bd3b7740f828411c0034fab5e5ec99ae1de680b8404",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "before-first-native-door",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-native-phase2.png",
+          "sha256": "404942fc558ecbca3cd9026cc9613aa05e3ccea3503b22a62e887bb44ccf3fd8",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-native-phase2",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-native-phase3.png",
+          "sha256": "3336fca5ab2fbdcff62c6e028e2b9817e3caca8646d3668ae2846c6e97a615ea",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-native-phase3",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-first-door-following-original-dialogue-ready.png",
+          "sha256": "997f446db8f3d090f80e6e0324917fbc93aba4bf2a69551d67dfde6f5f527805",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "first-door-following-original-dialogue-ready",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-both-full-boxes-released.png",
+          "sha256": "80661e13215dbcc9d3d1a9af80cf25f79a417de21b667d60d2d8210ffd9696e1",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-both-full-boxes-released",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-native-phase2.png",
+          "sha256": "b4efcfc5d5e0be7ac546e39dc99601a7b173cd86999bfaf21095c3d053dc0d5c",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-native-phase2",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-native-phase3.png",
+          "sha256": "f38e3db724b8099cd9bd76bf0f87e256135f422d9066c80dd88e352da40d441f",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-native-phase3",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-both-full-boxes-released.png",
+          "sha256": "1699b879b7639036a691e6d534d2f21e31fd266820c9ea06f969a68f8b330caa",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-both-full-boxes-released",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-both-original-doors-complete-native-boss-ready.png",
+          "sha256": "f06d810f86a78a159557ade91f36454ef1db4181e13b70d625817b74ee5f5a31",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "both-original-doors-complete-native-boss-ready",
+          "root_personally_viewed": true
+        }
+      ],
+      "native_exit0": 1,
+      "private_cards_unchanged": true,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\qualification.json",
+          "sha256": "ba1195684448ebc22ece7366d463bd3a934662b4eb6919290aa216581e85cc1b",
+          "bytes": 14448390
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "1a8b749ba592adc9ccee2ef599a31c971c26803366f58e824b44a567fa09f303",
+          "bytes": 2620
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\observations.json",
+          "sha256": "5fbcd5fc0fe211f6cfca327474cb46388a78cc6dfacf9ae8d578fb88a6ee753f",
+          "bytes": 13115150
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\F61-executing-source-pins.json",
+          "sha256": "aef0941ca2a2ff2833f5dbdf6c28d5df667032446800422724cad263112c4130",
+          "bytes": 8340
+        }
+      ],
+      "limits": [
+        "Only explicitly selected native Both participation component; remaining scenarios and modes require their own observations. No aggregate credit.",
+        "One continuous original intro NPC hatch5744 and D1000 hatch6064 route, including native NPC dialogue and full-body clearance. No extra comparison credit for already accepted rows.",
+        "Original CP1/once position+scanner prerequisite is disclosed and tainted; native gate admission, traversal, checkpoint marker and boss initialization are earned."
+      ]
+    },
+    "either": {
+      "status": "passed",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "child_native_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "exclusion_precondition": null,
+      "native_door_records": [],
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\original-native-door\\peer-0-safe-native-CP2.png",
+          "sha256": "5b2ecf10d6ce7859a11320b6d8d84b8026685e87979890775196be4a9f85e503",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\original-native-door\\peer-0-original-door-scene-begin.png",
+          "sha256": "2cc37a43f0f3e82d101ae30c1e35575ed52adacc35a2263f9fc3a0ed54406931",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\original-native-door\\peer-0-native-boss-both-controls-restored.png",
+          "sha256": "697e0c1456b86aa1aea30c71e740d098810a091fe1deb00e4fc819c11b5024d7",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "root_personally_viewed": true
+        }
+      ],
+      "native_exit0": 1,
+      "private_cards_unchanged": true,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\qualification.json",
+          "sha256": "38ef8232dc4f01e0dbad802b3671f8383bc165544ef089b48b8bcf355ddfa480",
+          "bytes": 1729757
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "9569a5848ae8fb83e65c8ae5d9b83caeb60e17a6c11811cd22a22df337fceeb2",
+          "bytes": 988
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\original-native-door\\observations.json",
+          "sha256": "9957f62290df852344a45fabc6eea71db560f4df687a6ba8b7700ff830d0a83e",
+          "bytes": 1383108
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\F61-executing-source-pins.json",
+          "sha256": "f1ba855f50fbd3e861f8e644970a381068ec176efb321db62ae8b866982eba6a",
+          "bytes": 8185
+        }
+      ],
+      "limits": [
+        "Only default Either component; Both and native absent/fallen exclusion still need their own observations.",
+        "Existing agreed native intro CP2 bypasses preceding reachability; actual guest-led door admission, native boss intro, passenger arrival and controls are earned. No comparison re-credit."
+      ]
+    }
+  },
+  "netplay_components": {
+    "living": {
+      "status": "passed_component_only",
+      "raw_parent_status": "failed",
+      "raw_parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": false,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "accepted_component_reuse": {
+        "component": "pre-fixture ordinary intro full-health prelude",
+        "gate": "both_alive_healthy",
+        "accepted_receipt": {
+          "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-fde6b48-F123-living-local-netplay-component-reviewed.json",
+          "bytes": 14880,
+          "sha256": "027995710cdf76ede5a8addb3ae80bc4f55a4c9823dc39bb5090f7e3a3bcff14"
+        },
+        "accepted_raw": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\qualification.json",
+          "bytes": 6952712,
+          "sha256": "eb7557b55d950f58f91b0358f6e8edfe2ec25d6ca4345d5041cfedf8d24a1f18"
+        },
+        "exact_candidate_binding_identical": true,
+        "parent_runner_sha256": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "raw_current_gate": false,
+        "accepted_component_gate": true,
+        "reason": "Original parent checks both HP==32 before calling the named door fixture. Current named door checks independently prove living supported release; raw false gate is preserved."
+      },
+      "native_checks": {
+        "one_session_two_distinct_original_doors": true,
+        "both_policy_refuses_single_hero_at_each": true,
+        "each_living_native_body_crosses_both_full_boxes": true,
+        "no_passenger_withdrawal_or_rejoin": true,
+        "native_opening_and_traversal_private_commits_each_door": true,
+        "actual_private_pairs_resume_each_door": true,
+        "native_checkpoint_marker_and_boss_progression": true,
+        "host_private_state_restored": true,
+        "actual_dialogue_follows_both_full_boxes_and_native_camera": true
+      },
+      "native_door_records": [
+        {
+          "number": 1,
+          "origin": "0x800fa2a4",
+          "authored_x": 5744,
+          "leading": 1,
+          "before": 41,
+          "waiting": 43,
+          "held": 47,
+          "admitted": 52,
+          "released": 237,
+          "observed_phases": [
+            2,
+            3
+          ],
+          "actual_wait_world_ticks": [
+            43,
+            42
+          ]
+        },
+        {
+          "number": 2,
+          "origin": "0x800fa2ac",
+          "authored_x": 6064,
+          "leading": 0,
+          "before": 240,
+          "waiting": 251,
+          "held": 255,
+          "admitted": 268,
+          "released": 387,
+          "observed_phases": [
+            2,
+            3
+          ],
+          "actual_wait_world_ticks": [
+            41,
+            43
+          ]
+        }
+      ],
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 3520,
+              "core": "7679e3f6",
+              "mod": "eb79802b"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "d39ccdfb",
+              "mod": "a176860b"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "3609b6c3",
+              "mod": "079dbe5d"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "aa9389ff",
+              "mod": "d1854c61"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "a2c818bd",
+              "mod": "9936ae0b"
+            }
+          ],
+          "resolved_through": [
+            3663,
+            3664
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3712,
+              "core": "f7a8995c",
+              "mod": "9030dca1"
+            },
+            {
+              "simulation_tick": 3744,
+              "core": "87ce6526",
+              "mod": "99fefe8b"
+            },
+            {
+              "simulation_tick": 3776,
+              "core": "2f552b05",
+              "mod": "05d6ae05"
+            },
+            {
+              "simulation_tick": 3808,
+              "core": "dc09886f",
+              "mod": "7c7e4645"
+            },
+            {
+              "simulation_tick": 3840,
+              "core": "a75a6f55",
+              "mod": "e6204663"
+            }
+          ],
+          "resolved_through": [
+            3866,
+            3866
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3936,
+              "core": "f4d6264e",
+              "mod": "faff1871"
+            },
+            {
+              "simulation_tick": 3968,
+              "core": "1004ba1f",
+              "mod": "03c66b7b"
+            },
+            {
+              "simulation_tick": 4000,
+              "core": "49adc216",
+              "mod": "abdc4635"
+            },
+            {
+              "simulation_tick": 4032,
+              "core": "d92ba68d",
+              "mod": "a318e5d5"
+            },
+            {
+              "simulation_tick": 4064,
+              "core": "55a7f7bf",
+              "mod": "63e8cdb3"
+            },
+            {
+              "simulation_tick": 4096,
+              "core": "3840fb98",
+              "mod": "15cde793"
+            }
+          ],
+          "resolved_through": [
+            4111,
+            4111
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 8192,
+              "core": "f270340d",
+              "mod": "423fb440"
+            },
+            {
+              "simulation_tick": 8224,
+              "core": "c4af4da4",
+              "mod": "53deb4c8"
+            },
+            {
+              "simulation_tick": 8256,
+              "core": "785407cf",
+              "mod": "07cbfb7c"
+            }
+          ],
+          "resolved_through": [
+            8266,
+            8266
+          ]
+        }
+      ],
+      "matching_crc_samples": 19,
+      "native_exit0": 2,
+      "private_cards_unchanged": true,
+      "captures": [
+        {
+          "peer": 0,
+          "label": "before-first-native-door",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-before-first-native-door.png",
+            "bytes": 1843888,
+            "sha256": "c821c26e5fdb677202ecf99b049a1040d41a773c3f1a57d0f28b85b3e53504aa"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "before-first-native-door",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-before-first-native-door.png",
+            "bytes": 1843888,
+            "sha256": "2095b2abc22ea5e1b294ea9ed02c6d7506c35b5ca52ee499886f464f04fc108b"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "door1-only-leading-hero-waits",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-door1-only-leading-hero-waits.png",
+            "bytes": 1843888,
+            "sha256": "2e621a1f6fe67c8740529917d90a9b8d52829fa5c347e3977ca1c95b4dd239e7"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "door1-only-leading-hero-waits",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-door1-only-leading-hero-waits.png",
+            "bytes": 1843888,
+            "sha256": "2e621a1f6fe67c8740529917d90a9b8d52829fa5c347e3977ca1c95b4dd239e7"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "door1-native-phase2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-door1-native-phase2.png",
+            "bytes": 1843888,
+            "sha256": "47d5200db0c464114b72cf5341ec20be6f8ed059a81dd03a536990881447c2ae"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door1-native-phase2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-door1-native-phase2.png",
+            "bytes": 1843888,
+            "sha256": "4f341bc2d2713a1fb43f5db648e864fe128a32a55ae5c7f8c7c3adf8c5473886"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "door1-native-phase3",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-door1-native-phase3.png",
+            "bytes": 1843888,
+            "sha256": "fb5210c29669d1758abcbd7677aa0e36c8622961aab0a1e82ff6da98b3ec33a1"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door1-native-phase3",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-door1-native-phase3.png",
+            "bytes": 1843888,
+            "sha256": "69101cc9b3e34ca09b2b8fbe28851e76ef5dddc6519005e11f9368f749daa717"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "first-door-following-original-dialogue-ready",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-first-door-following-original-dialogue-ready.png",
+            "bytes": 1843888,
+            "sha256": "d6d64fa01db0a47e2ac60c6b4c72c00cd56f32d1bd67571de438e7b89e832522"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "first-door-following-original-dialogue-ready",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-first-door-following-original-dialogue-ready.png",
+            "bytes": 1843888,
+            "sha256": "0878dbab492f5ceaf01e6846730186e1199facfefab222c6416c68d0f4593666"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "door1-both-full-boxes-released",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-door1-both-full-boxes-released.png",
+            "bytes": 1843888,
+            "sha256": "a60e197bf588f1cb176043c148c22e6f9048b17b9f780ac6470d969ce483a5f6"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "door1-both-full-boxes-released",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-door1-both-full-boxes-released.png",
+            "bytes": 1843888,
+            "sha256": "fec5cbdb5cc5bd854ccf4ebc2cc49b2f8bd088630593710cf6eff202f1f6b01e"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "door2-only-leading-hero-waits",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-door2-only-leading-hero-waits.png",
+            "bytes": 1843888,
+            "sha256": "245fe3e1536c2aa6cf97bdcc2205bd9b611c8d0a0f0369924c965a4614cfd095"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "door2-only-leading-hero-waits",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-door2-only-leading-hero-waits.png",
+            "bytes": 1843888,
+            "sha256": "d309bcb4f8044fb404395bed5c5c24646dc77de90dcdbd80beb11c2c096bbc4c"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "door2-native-phase2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-door2-native-phase2.png",
+            "bytes": 1843888,
+            "sha256": "c620ec389b918ab85ac11260eefb4c0eee2de6e58a2180e2a0b382ad3e9bff44"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door2-native-phase2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-door2-native-phase2.png",
+            "bytes": 1843888,
+            "sha256": "76a4c3f8689d2f875c947c34617869e92f9950d2c8125d644ed0f665431f10fb"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "door2-native-phase3",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-door2-native-phase3.png",
+            "bytes": 1843888,
+            "sha256": "b9a1fc9f7eb1e3a62769408751f18d2d2cc6006b714b37873246fd4de761a0b4"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door2-native-phase3",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-door2-native-phase3.png",
+            "bytes": 1843888,
+            "sha256": "9ca01c240e2f447bbe963b13d01f712f1a6f748db6b65800438df44e5224fbf3"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "door2-both-full-boxes-released",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-door2-both-full-boxes-released.png",
+            "bytes": 1843888,
+            "sha256": "0ffb067a4b4017520488571085895a07c4a60225824dead59ff7262e154df13c"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door2-both-full-boxes-released",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-door2-both-full-boxes-released.png",
+            "bytes": 1843888,
+            "sha256": "744c400de9d23efe18efc2c74115b2022be0d2c7833ae4e54e4d8ef7ed6ea578"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "both-original-doors-complete-native-boss-ready",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-0-both-original-doors-complete-native-boss-ready.png",
+            "bytes": 1843888,
+            "sha256": "ee0728723d004a3f9e53a1384a4df7884e329fe272a02d4ccfb2f5722aa3b2eb"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "both-original-doors-complete-native-boss-ready",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\intro-admission\\two-original-doors\\peer-1-both-original-doors-complete-native-boss-ready.png",
+            "bytes": 1843888,
+            "sha256": "ee0728723d004a3f9e53a1384a4df7884e329fe272a02d4ccfb2f5722aa3b2eb"
+          },
+          "root_personally_viewed": true
+        }
+      ],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\qualification.json",
+          "bytes": 30003021,
+          "sha256": "f6c2ee2391b8b499d7a6dc1fbd17109d34d492254a6dc71701fade2323d6fe5e"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61b2n\\F61-executing-source-pins.json",
+          "bytes": 8331,
+          "sha256": "8d9ae7a2ac18487493d28d5211c79247645987ba4b3213ffc2b6be458c92b134"
+        }
+      ],
+      "exclusion_precondition": null,
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+        "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+        "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+        "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+        "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v55",
+        "host_revision": 38
+      }
+    },
+    "absent": {
+      "status": "passed_component_only",
+      "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "raw_parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "accepted_component_reuse": null,
+      "native_checks": {
+        "actual_native_excluded_partner_precondition": true,
+        "one_session_two_original_hatches": true,
+        "sole_living_native_admission_and_full_box_clearance": true,
+        "native_original_NPC_dialogue_and_checkpoint_progression": true,
+        "native_D1000_full32HP_ready": true,
+        "excluded_partner_remains_excluded": true,
+        "actual_native_release_controls": true,
+        "native_results_not_seeded": true
+      },
+      "native_door_records": [
+        {
+          "number": 1,
+          "origin": "0x800fa2a4",
+          "authored_x": 5744,
+          "leading": 0,
+          "before": 72,
+          "admitted": 76,
+          "released": 285,
+          "observed_phases": [
+            2,
+            3
+          ]
+        },
+        {
+          "number": 2,
+          "origin": "0x800fa2ac",
+          "authored_x": 6064,
+          "leading": 0,
+          "before": 288,
+          "admitted": 304,
+          "released": 432,
+          "observed_phases": [
+            2,
+            3
+          ]
+        }
+      ],
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 3040,
+              "core": "ad67ba32",
+              "mod": "c4ea812b"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "d8a9a35d",
+              "mod": "9078f9cd"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "51d4613f",
+              "mod": "6a9acef7"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "4a2870ed",
+              "mod": "f21704bf"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "48d0d122",
+              "mod": "f333bd65"
+            }
+          ],
+          "resolved_through": [
+            3174,
+            3174
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3232,
+              "core": "c28daa89",
+              "mod": "477346f1"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "45a00330",
+              "mod": "36ab55b9"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "73ff0447",
+              "mod": "7761e2ab"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "4c129755",
+              "mod": "82269a21"
+            }
+          ],
+          "resolved_through": [
+            3340,
+            3340
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3424,
+              "core": "78277bbb",
+              "mod": "e94d5893"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "f25e00c4",
+              "mod": "bdf17097"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "a3b2ba7f",
+              "mod": "66b00c59"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "69b7e7e3",
+              "mod": "8829371b"
+            }
+          ],
+          "resolved_through": [
+            3538,
+            3538
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 7552,
+              "core": "dd029d0c",
+              "mod": "8bca2ea1"
+            },
+            {
+              "simulation_tick": 7584,
+              "core": "dbc7ebec",
+              "mod": "8bca2ea1"
+            },
+            {
+              "simulation_tick": 7616,
+              "core": "b03c65e3",
+              "mod": "8bca2ea1"
+            },
+            {
+              "simulation_tick": 7648,
+              "core": "6d86710d",
+              "mod": "8bca2ea1"
+            },
+            {
+              "simulation_tick": 7680,
+              "core": "dc002a67",
+              "mod": "8bca2ea1"
+            },
+            {
+              "simulation_tick": 7712,
+              "core": "d73287c8",
+              "mod": "8bca2ea1"
+            },
+            {
+              "simulation_tick": 7744,
+              "core": "4f6a37d9",
+              "mod": "8bca2ea1"
+            }
+          ],
+          "resolved_through": [
+            7759,
+            7758
+          ]
+        }
+      ],
+      "matching_crc_samples": 20,
+      "native_exit0": 2,
+      "private_cards_unchanged": true,
+      "captures": [
+        {
+          "peer": 0,
+          "label": "before-first-native-door",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-before-first-native-door.png",
+            "bytes": 1843888,
+            "sha256": "74f94f65b94fb734721d4beb4e01b2c6e46285b7e292f3870fb540eb725c18a1"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "before-first-native-door",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-before-first-native-door.png",
+            "bytes": 1843888,
+            "sha256": "951b8db1e80d032b042065f14ec591f8d8c7462ebcdc9d4f1ef7505c74a78b78"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "door1-native-phase2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-door1-native-phase2.png",
+            "bytes": 1843888,
+            "sha256": "404942fc558ecbca3cd9026cc9613aa05e3ccea3503b22a62e887bb44ccf3fd8"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door1-native-phase2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-door1-native-phase2.png",
+            "bytes": 1843888,
+            "sha256": "9ca6a7817f41dda8813d216d739c862918059e860d06a1bb4465aad129e336dc"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "door1-native-phase3",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-door1-native-phase3.png",
+            "bytes": 1843888,
+            "sha256": "ab7b3969ff39de9234412e6a647baa3d5641c980d7d4b6bb3a3575e1bfe5d0f1"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door1-native-phase3",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-door1-native-phase3.png",
+            "bytes": 1843888,
+            "sha256": "fe2e690d91af875b9ff0894c53c2667d8eca766eb6e3c47505342b740f424c57"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "first-door-following-original-dialogue-ready",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-first-door-following-original-dialogue-ready.png",
+            "bytes": 1843888,
+            "sha256": "99f95fe92ad77ce334fbe1e89a14e87567902d1881f8c1b7e2326d2332e97013"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "first-door-following-original-dialogue-ready",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-first-door-following-original-dialogue-ready.png",
+            "bytes": 1843888,
+            "sha256": "997f446db8f3d090f80e6e0324917fbc93aba4bf2a69551d67dfde6f5f527805"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "door1-both-full-boxes-released",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-door1-both-full-boxes-released.png",
+            "bytes": 1843888,
+            "sha256": "b8ab6c402fcfe32b82e8f76a1850fb56a66fddcb4c7af0b68e2da5e5166f4b97"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "door1-both-full-boxes-released",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-door1-both-full-boxes-released.png",
+            "bytes": 1843888,
+            "sha256": "cd6dd3a6074d1beea2089ca283a38724e82f1a6cba765e74c54fd466fa143fbc"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "door2-native-phase2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-door2-native-phase2.png",
+            "bytes": 1843888,
+            "sha256": "246e727f94e2db753b43be0406a5b95c80d7c2439b03be469ba37c9e19b4f773"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door2-native-phase2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-door2-native-phase2.png",
+            "bytes": 1843888,
+            "sha256": "1378d6e079b812604357ac6843fe0ad92d06f3731117f4be82a89b63fd7c3b13"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "door2-native-phase3",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-door2-native-phase3.png",
+            "bytes": 1843888,
+            "sha256": "c2880377f518017a7e7f73d6f479b810c71fbd1c995aacda4794f3b4ec64f184"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door2-native-phase3",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-door2-native-phase3.png",
+            "bytes": 1843888,
+            "sha256": "c8e2a4a228696ca2926d897e447f40aa4f87484e707768ad661d761ba6cbc098"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "door2-both-full-boxes-released",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-door2-both-full-boxes-released.png",
+            "bytes": 1843888,
+            "sha256": "ab168a60f871e6a54122793011967678db29c18f8ffb26a11fbdccaee8a158b7"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 1,
+          "label": "door2-both-full-boxes-released",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-door2-both-full-boxes-released.png",
+            "bytes": 1843888,
+            "sha256": "8ab4e77d7127f19caf33f5525fdd2189fcc93962b143c116545e6d4cfca78043"
+          },
+          "root_personally_viewed": false
+        },
+        {
+          "peer": 0,
+          "label": "both-original-doors-complete-native-boss-ready",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-0-both-original-doors-complete-native-boss-ready.png",
+            "bytes": 1843888,
+            "sha256": "e491d48d140ac40ce7e3695d76fe1eda2532512a32614ad151125c30a1960260"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "both-original-doors-complete-native-boss-ready",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\intro-admission\\two-original-doors\\peer-1-both-original-doors-complete-native-boss-ready.png",
+            "bytes": 1843888,
+            "sha256": "effb8484b587b74b8ae02c43fa0d50d363153f35ffe74d606b62ea183d010d38"
+          },
+          "root_personally_viewed": true
+        }
+      ],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\qualification.json",
+          "bytes": 31267704,
+          "sha256": "48e5b9b2a025dc3a04abff3beabd451c0855832ad7da5669cc835eceaa8856f1"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a2n\\F61-executing-source-pins.json",
+          "bytes": 8343,
+          "sha256": "c8e91fd8b7906e5bbeb3c42ba4fc19dd26911378222e9419f25feffb509ed4db"
+        }
+      ],
+      "exclusion_precondition": {
+        "kind": "real_Select_to_native_ABSENT",
+        "leaving": 53,
+        "completed": 66
+      },
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+        "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+        "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+        "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+        "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v55",
+        "host_revision": 38
+      }
+    },
+    "either": {
+      "status": "passed_component_only",
+      "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "raw_parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "accepted_component_reuse": null,
+      "native_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "native_door_records": [],
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 4096,
+              "core": "404fc0e7",
+              "mod": "fbc831f4"
+            },
+            {
+              "simulation_tick": 4128,
+              "core": "60034126",
+              "mod": "9d78894e"
+            },
+            {
+              "simulation_tick": 4160,
+              "core": "b72706e2",
+              "mod": "eaeae168"
+            },
+            {
+              "simulation_tick": 4192,
+              "core": "a1e93454",
+              "mod": "325d1790"
+            },
+            {
+              "simulation_tick": 4224,
+              "core": "34f81db1",
+              "mod": "ccb2dda6"
+            }
+          ],
+          "resolved_through": [
+            4230,
+            4231
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 4288,
+              "core": "413d840b",
+              "mod": "415b8bc9"
+            },
+            {
+              "simulation_tick": 4320,
+              "core": "bd66c55e",
+              "mod": "7842c87a"
+            },
+            {
+              "simulation_tick": 4352,
+              "core": "4610b3ab",
+              "mod": "4d9712ac"
+            },
+            {
+              "simulation_tick": 4384,
+              "core": "096928a2",
+              "mod": "4e383fea"
+            },
+            {
+              "simulation_tick": 4416,
+              "core": "c16c5e6d",
+              "mod": "7d550d4a"
+            }
+          ],
+          "resolved_through": [
+            4420,
+            4420
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 4512,
+              "core": "92801926",
+              "mod": "15096520"
+            },
+            {
+              "simulation_tick": 4544,
+              "core": "f722fd64",
+              "mod": "9f806632"
+            },
+            {
+              "simulation_tick": 4576,
+              "core": "0ed2470a",
+              "mod": "fc936e9c"
+            },
+            {
+              "simulation_tick": 4608,
+              "core": "3199c5ba",
+              "mod": "7cf2ba3c"
+            },
+            {
+              "simulation_tick": 4640,
+              "core": "3af24afb",
+              "mod": "2b79e8da"
+            }
+          ],
+          "resolved_through": [
+            4643,
+            4643
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 6432,
+              "core": "a4728900",
+              "mod": "36265426"
+            },
+            {
+              "simulation_tick": 6464,
+              "core": "16a20adf",
+              "mod": "02135d1c"
+            },
+            {
+              "simulation_tick": 6496,
+              "core": "bad0c944",
+              "mod": "be82b53c"
+            },
+            {
+              "simulation_tick": 6528,
+              "core": "df645d67",
+              "mod": "4368c1fe"
+            }
+          ],
+          "resolved_through": [
+            6535,
+            6535
+          ]
+        }
+      ],
+      "matching_crc_samples": 19,
+      "native_exit0": 2,
+      "private_cards_unchanged": true,
+      "captures": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e2n\\intro-admission\\original-native-door\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "5b2ecf10d6ce7859a11320b6d8d84b8026685e87979890775196be4a9f85e503"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "safe-native-CP2",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e2n\\intro-admission\\original-native-door\\peer-1-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "b40af0c0a4c24dc3f2aa62445e710aaf4b7214499a8104d36eb47cb2c5043fc5"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e2n\\intro-admission\\original-native-door\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "05d0df4577723432056252e37645c91cc9f865b87638a5924b96623faa1fdbe5"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "original-door-scene-begin",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e2n\\intro-admission\\original-native-door\\peer-1-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "05d0df4577723432056252e37645c91cc9f865b87638a5924b96623faa1fdbe5"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e2n\\intro-admission\\original-native-door\\peer-0-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "2d831a753c6fab94b0ced386c5b58d9db79415f3eb7c34ac2942156f683faa68"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-boss-both-controls-restored",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e2n\\intro-admission\\original-native-door\\peer-1-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "c92f97bd02d2742109603bf61d63a57931dc62ff00fe85a9c203030197f6f6e9"
+          },
+          "root_personally_viewed": true
+        }
+      ],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e2n\\qualification.json",
+          "bytes": 5343120,
+          "sha256": "2de4263c8b221c32f51e5c47cfafd790b97c2b67bd0da609f1ee530b4dcf4546"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e2n\\F61-executing-source-pins.json",
+          "bytes": 8185,
+          "sha256": "6f40cd71219d28c796b2f5eb2df8946ca5289f1f3c958e721afc826d1dffe3df"
+        }
+      ],
+      "exclusion_precondition": null,
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+        "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+        "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+        "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+        "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v55",
+        "host_revision": 38
+      }
+    }
+  },
+  "review_summary": {
+    "new_NET_key_images_personally_viewed": 24,
+    "new_NET_native_exit0": 6,
+    "new_NET_CRC_windows": 12,
+    "new_NET_matching_CRC_samples": 58,
+    "comparison_admissions": 0
+  },
+  "remaining": [
+    "Genuine native FALLEN participant exclusion in LOCAL and NET. Two crate-blocked death setups remain parked; ABSENT is not FALLEN."
+  ],
+  "limits": [
+    "All six policy components use identical V107 source/image/profile38; no new product build.",
+    "Both live hatches retain real one-hero wait, both full-body traversal, original following NPC dialogue and D1000 activation. ABSENT uses real Select withdrawal and remains excluded; Either uses the existing original CP2 route.",
+    "NET cameras=split supplies the two actual views expected by the unchanged original private-drawing harness. Earlier cameras=independent one-view/harness mismatch remains failed and retained.",
+    "The living raw wrapper fails only its unrelated pre-fixture full32HP gate. Accepted identical-image prelude is reused explicitly; no raw false status/gate is changed or named native result inferred.",
+    "Only the24 listed key NET images were personally reviewed; other generated captures are retained. Existing severe scenery corruption, body/HUD overlap and asynchronous peer capture timing remain explicit; no graphics-row pass.",
+    "Original checkpoint/source-position/scanner bypasses and hostile-contact protection are disclosed. Door, full-body crossing, dialogue/checkpoint/boss and control results are earned through original code and ordinary input.",
+    "No mode or comparison admission until actual FALLEN exclusion is qualified. All previous failed setups, SERVER pre-guest profile refusal, owner/native cards and original paired HUD harness remain preserved."
+  ]
+}
