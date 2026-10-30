@@ -23355,23 +23355,106 @@
       "x6": {
         "workstream": "combat",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "Elective character-specific fractional boss damage",
+        "analogue": "Optional native X/Zero boss damage with shared fractional health budget",
         "bounded_check": "Adapt X6's actual damage contract before optional Zero reduction; qualify mixed accepted/rejected hits, fractional carry and unchanged native weakness identity.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "14e88a9300d74e032021a3dda589d1f5b2372425",
+            "build_identity": {
+              "executable_sha256": "b23c3f9f3f356f7a99152f5b12477de080bd18453cbab199451a59ce480d3d30",
+              "compiled_manifest_sha256": "673842480a04dcbd3b1fd44cb77a9986acc4cbb2952ff0b2dc9a902f607c9c3a",
+              "provenance_sha256": "1b6373e335ce5306916edc99780f494bc6f7294abfa9a6cc5feeae7d28338ad7",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "boss_balance": "on",
+              "checkpoint": "original Sigma12/1CP1",
+              "earned_weapons": "all",
+              "contact_protection": "on",
+              "audio": "dummy muted",
+              "host": "SERVER"
+            },
+            "action": "Earn original Sigma48HP release; native Zero35 weakness, original immune Giga44 contact, then two accepted native X buster hits and recovery.",
+            "outcome": "Raw Zero8 scales3 with unchanged native weakness/action3; rejected Giga consumes no budget. Accepted X1+1 consumes retained fractional point with HP45->45->44; raw10/Zero8/scaled4 agrees on every peer. Same-image disabled baseline keeps original8HP and zero balance counters. Required source/profile/finalCRC/cards/nativeexit gates pass; raw NET jump-endpoint false negative is independently resolved from actual native airborne prefix.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-14e88a9-F181-native-balance-local-netplay-reviewed.json",
+                "sha256": "eabd266a76ba988a2ef37605c7848b58f44870074d181573ac4683096d5e3595"
+              }
+            ],
+            "limits": [
+              "Only frozen F181: optional native boss health budget with X numerator5/10 and Zero4/10, representing20percent Zero reduction relative to the doubled effective boss-health policy. Native integer HP/bar range, accepted attack/result family and original reaction/recovery are retained; no cooldown option or F63/F99/F152/F153 credit.",
+              "Accepted Zero evidence is actual native airborne ability35, raw8 -> scaled3/action3 and finite recovery. Actual X buster hits contribute raw1 each:45->45->44. Native damage/counters agree with the shared bank source and actual-plugin mixed-seat/capture/codec tests. The final extra ordinary Zero offer accepts no additional damage and supplies no new ordinary-Saber qualification.",
+              "Actual original Giga44/pose59 produces additional nonzero native contacts while HP and accepted budget remain unchanged; original defense44 is immune. No instruction-atomic result127 or transient-field observation on every RPC is claimed.",
+              "Enabled LOCAL runs on SERVER; enabled NET is the same frozen executable/source on this PC, same-machine Windows loopback delay3. Both enabled modes and the same-SERVER explicit off baseline are required components. No performance, physical-controller, other OS, remote-peer or universal boss matrix claim.",
+              "NET raw wrapper remains failed14/15 and exit1 because its six-tick prelude P1-jump endpoint flag is false. Complete original prefix independently shows real X jump/airborne samples on both peers with Zero stationary; all14 other raw gates, four final resolved CRC windows, private cards and both owned native exits0 pass. No failed raw data is rewritten or hidden.",
+              "Native checkpoint travel, earned ability initialization and hostile-contact protection are declared setup bypasses. No boss HP, phase, native result, token, timer, success or progression flags are authored. Setup-tainted ordinary recordings/replay remain refused. Snapshot16 actual-plugin capture/codec/digest/invalid-input tests pass; no native rewind/rollback or old-state compatibility claim.",
+              "Twenty composed images were personally reviewed:8enabledLOCAL,8enabledNET and4disabledLOCAL. Other retained setup captures are not additional graphics coverage. All earlier failures, HUD harness, original user saves/settings and raw source/backend evidence remain preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability, earned ability initialization and hostile-contact protection only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "14e88a9300d74e032021a3dda589d1f5b2372425",
+            "build_identity": {
+              "executable_sha256": "b23c3f9f3f356f7a99152f5b12477de080bd18453cbab199451a59ce480d3d30",
+              "compiled_manifest_sha256": "673842480a04dcbd3b1fd44cb77a9986acc4cbb2952ff0b2dc9a902f607c9c3a",
+              "provenance_sha256": "1b6373e335ce5306916edc99780f494bc6f7294abfa9a6cc5feeae7d28338ad7",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "boss_balance": "on",
+              "checkpoint": "original Sigma12/1CP1",
+              "earned_weapons": "all",
+              "contact_protection": "on",
+              "audio": "dummy muted",
+              "host": "DESKTOP-HN15M1H"
+            },
+            "action": "Earn original Sigma48HP release; native Zero35 weakness, original immune Giga44 contact, then two accepted native X buster hits and recovery.",
+            "outcome": "Raw Zero8 scales3 with unchanged native weakness/action3; rejected Giga consumes no budget. Accepted X1+1 consumes retained fractional point with HP45->45->44; raw10/Zero8/scaled4 agrees on every peer. Same-image disabled baseline keeps original8HP and zero balance counters. Required source/profile/finalCRC/cards/nativeexit gates pass; raw NET jump-endpoint false negative is independently resolved from actual native airborne prefix.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-14e88a9-F181-native-balance-local-netplay-reviewed.json",
+                "sha256": "eabd266a76ba988a2ef37605c7848b58f44870074d181573ac4683096d5e3595"
+              }
+            ],
+            "limits": [
+              "Only frozen F181: optional native boss health budget with X numerator5/10 and Zero4/10, representing20percent Zero reduction relative to the doubled effective boss-health policy. Native integer HP/bar range, accepted attack/result family and original reaction/recovery are retained; no cooldown option or F63/F99/F152/F153 credit.",
+              "Accepted Zero evidence is actual native airborne ability35, raw8 -> scaled3/action3 and finite recovery. Actual X buster hits contribute raw1 each:45->45->44. Native damage/counters agree with the shared bank source and actual-plugin mixed-seat/capture/codec tests. The final extra ordinary Zero offer accepts no additional damage and supplies no new ordinary-Saber qualification.",
+              "Actual original Giga44/pose59 produces additional nonzero native contacts while HP and accepted budget remain unchanged; original defense44 is immune. No instruction-atomic result127 or transient-field observation on every RPC is claimed.",
+              "Enabled LOCAL runs on SERVER; enabled NET is the same frozen executable/source on this PC, same-machine Windows loopback delay3. Both enabled modes and the same-SERVER explicit off baseline are required components. No performance, physical-controller, other OS, remote-peer or universal boss matrix claim.",
+              "NET raw wrapper remains failed14/15 and exit1 because its six-tick prelude P1-jump endpoint flag is false. Complete original prefix independently shows real X jump/airborne samples on both peers with Zero stationary; all14 other raw gates, four final resolved CRC windows, private cards and both owned native exits0 pass. No failed raw data is rewritten or hidden.",
+              "Native checkpoint travel, earned ability initialization and hostile-contact protection are declared setup bypasses. No boss HP, phase, native result, token, timer, success or progression flags are authored. Setup-tainted ordinary recordings/replay remain refused. Snapshot16 actual-plugin capture/codec/digest/invalid-input tests pass; no native rewind/rollback or old-state compatibility claim.",
+              "Twenty composed images were personally reviewed:8enabledLOCAL,8enabledNET and4disabledLOCAL. Other retained setup captures are not additional graphics coverage. All earlier failures, HUD harness, original user saves/settings and raw source/backend evidence remain preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability, earned ability initialization and hostile-contact protection only."
+            ]
+          }
+        ],
+        "limitations": "Exact14e LOCAL/NET native mixed accepted/rejected damage, fractional point, original weakness/recovery and disabled8HP baseline pass. All source/profile/CRC/cards/nativeexit protections retained; raw NET prelude jump-endpoint false negative remains unchanged with independent real-jump proof.20composed images reviewed,18compiled checks passed, source integrateddd817b1. No cooldown-policy/all-boss/rewind/physical/otherOS claim."
       }
     },
     {

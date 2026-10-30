@@ -1,0 +1,903 @@
+{
+  "schema": 1,
+  "comparison": "F181",
+  "frozen_row_sha256": "6a61ce958ea5c3b0734f5dc50e45cb1e3ceba42a1e20b5badc9e573db417946f",
+  "result": "passed",
+  "candidate": "14e88a9300d74e032021a3dda589d1f5b2372425",
+  "integration_commit": "dd817b19504745eb14f53e1c827fcaba2cc92ddc",
+  "binding": {
+    "image_sha256": "b23c3f9f3f356f7a99152f5b12477de080bd18453cbab199451a59ce480d3d30",
+    "manifest_sha256": "673842480a04dcbd3b1fd44cb77a9986acc4cbb2952ff0b2dc9a902f607c9c3a",
+    "provenance_sha256": "1b6373e335ce5306916edc99780f494bc6f7294abfa9a6cc5feeae7d28338ad7",
+    "title": "mmx6-x-zero-delay-v62",
+    "host_revision": 45,
+    "snapshot": 16
+  },
+  "source_equivalence": "Integrated CMake/game/config/src/mods/tests/tools/host-contract content equals frozen14e; no rebuild or credit transfer to a different binary.",
+  "build_and_compiled_validation": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\boss-balance-v114-runtime-build-receipt-root-v1.json",
+    "sha256": "b2a71b80b7cf6239e5181bf3fdc98fad522bd1e15aff1f030e084da6c5625bc1",
+    "bytes": 2217
+  },
+  "focused_compiled_tests": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-boss-balance-v114-focused-root-v1.log",
+    "sha256": "a52cfe4f869309d0b10d11ee51e03e307c7a1c5aa95b02b9a8b6ccb015098c5d",
+    "bytes": 5224
+  },
+  "modes": {
+    "LOCAL": {
+      "result": "passed_named_F181_contract",
+      "host": "SERVER",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\qualification.json",
+        "sha256": "047412be36edd6e042e89a86a45765c03f28c8819ed471ce878a428247b2fb66",
+        "bytes": 32723368
+      },
+      "original_parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\qualification-parent-original.json",
+        "sha256": "be486cdc5740bb7aca48597728e2a9745a5693639c39261fdc9a1db57a77bdb0",
+        "bytes": 32720189
+      },
+      "native_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\observations.json",
+        "sha256": "e24c9bc6e586efcfaa45f8f5ca72bbb1202280507f8ea9d7fceac36465ad5cdf",
+        "bytes": 15302814
+      },
+      "executing_source_pins": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\F181-executing-source-pins.json",
+        "sha256": "07ba6311d467f5d8a799883df4c410fe8a9e3e7fa54ada0b1a83369387a4a7f2",
+        "bytes": 11122
+      },
+      "feature_checks": {
+        "original_Sigma_positive48HP_release": true,
+        "original_ability_C9_bit8_and_actual_jump": true,
+        "original_native_action56_animation_and_source_identity": true,
+        "actual_native_weakness_budget_and_original_action3": true,
+        "original_weakness_recovery_and_retirement": true,
+        "no_HP_phase_death_or_result_writes": true,
+        "defaultOff_native8_or_enabled_native3": true,
+        "mixed_native_fraction_and_rejected_contact": true
+      },
+      "endpoints": {
+        "weakness_row": 638,
+        "recovered_row": 715,
+        "weakness_HP": [
+          45
+        ],
+        "budget_before": [
+          {
+            "raw": 0,
+            "scaled": 0,
+            "zero": 0
+          }
+        ],
+        "budget_after_weakness": [
+          {
+            "raw": 8,
+            "scaled": 3,
+            "zero": 8
+          }
+        ],
+        "rejected_contact": {
+          "before": 715,
+          "after": 752,
+          "actual_pose59_peers": [
+            0
+          ],
+          "observed_types": [
+            44
+          ],
+          "native_hit_before": [
+            2
+          ],
+          "native_hit_after": [
+            4
+          ]
+        },
+        "mixed_offers": [
+          {
+            "seat": 0,
+            "before_budget": [
+              {
+                "raw": 8,
+                "scaled": 3,
+                "zero": 8
+              }
+            ],
+            "after_budget": [
+              {
+                "raw": 9,
+                "scaled": 3,
+                "zero": 8
+              }
+            ],
+            "hp_before": [
+              45
+            ],
+            "hp_after": [
+              45
+            ]
+          },
+          {
+            "seat": 0,
+            "before_budget": [
+              {
+                "raw": 9,
+                "scaled": 3,
+                "zero": 8
+              }
+            ],
+            "after_budget": [
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              }
+            ],
+            "hp_before": [
+              45
+            ],
+            "hp_after": [
+              44
+            ]
+          },
+          {
+            "seat": 1,
+            "before_budget": [
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              }
+            ],
+            "after_budget": [
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              }
+            ],
+            "hp_before": [
+              44
+            ],
+            "hp_after": [
+              44
+            ]
+          }
+        ],
+        "final_budget": [
+          {
+            "raw": 10,
+            "scaled": 4,
+            "zero": 8
+          }
+        ],
+        "final_HP": [
+          44
+        ]
+      },
+      "parent_gate_review": {
+        "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+        "raw_parent_checks": {
+          "exact_image_manifest_declared_sources_originals": true,
+          "native_resource_and_window_observations_complete": true,
+          "default_recording_taint_retained_and_replay_refused": true,
+          "owned_cleanup_private_cards": true
+        },
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "private_cards_unchanged": true,
+        "recording_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        }
+      }
+    },
+    "NET": {
+      "result": "passed_named_F181_contract",
+      "host": "DESKTOP-HN15M1H",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\qualification.json",
+        "sha256": "4548c40a3b3a8487b9c362d20ebdb6fe2f964613f996eb8bdc2059617be1d0e9",
+        "bytes": 29804402
+      },
+      "original_parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\qualification-parent-original.json",
+        "sha256": "717273c59ab49821f11d3220371f58de83e2304d6690bddbd83907d2b13ee760",
+        "bytes": 29798288
+      },
+      "native_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\observations.json",
+        "sha256": "f169bf05d871a72f81be2e62a93cb2995c7ead44172a7181477cbffbf0f32fe1",
+        "bytes": 27355712
+      },
+      "executing_source_pins": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\F181-executing-source-pins.json",
+        "sha256": "ed7e10ba159a0dd5b1a9f09f7cd1150939876d38eeb836283f23460ddb5778b0",
+        "bytes": 9692
+      },
+      "feature_checks": {
+        "original_Sigma_positive48HP_release": true,
+        "original_ability_C9_bit8_and_actual_jump": true,
+        "original_native_action56_animation_and_source_identity": true,
+        "actual_native_weakness_budget_and_original_action3": true,
+        "original_weakness_recovery_and_retirement": true,
+        "no_HP_phase_death_or_result_writes": true,
+        "defaultOff_native8_or_enabled_native3": true,
+        "mixed_native_fraction_and_rejected_contact": true
+      },
+      "endpoints": {
+        "weakness_row": 660,
+        "recovered_row": 704,
+        "weakness_HP": [
+          45,
+          45
+        ],
+        "budget_before": [
+          {
+            "raw": 0,
+            "scaled": 0,
+            "zero": 0
+          },
+          {
+            "raw": 0,
+            "scaled": 0,
+            "zero": 0
+          }
+        ],
+        "budget_after_weakness": [
+          {
+            "raw": 8,
+            "scaled": 3,
+            "zero": 8
+          },
+          {
+            "raw": 8,
+            "scaled": 3,
+            "zero": 8
+          }
+        ],
+        "rejected_contact": {
+          "before": 704,
+          "after": 721,
+          "actual_pose59_peers": [
+            0,
+            1
+          ],
+          "observed_types": [
+            44
+          ],
+          "native_hit_before": [
+            3,
+            3
+          ],
+          "native_hit_after": [
+            6,
+            6
+          ]
+        },
+        "mixed_offers": [
+          {
+            "seat": 0,
+            "before_budget": [
+              {
+                "raw": 8,
+                "scaled": 3,
+                "zero": 8
+              },
+              {
+                "raw": 8,
+                "scaled": 3,
+                "zero": 8
+              }
+            ],
+            "after_budget": [
+              {
+                "raw": 9,
+                "scaled": 3,
+                "zero": 8
+              },
+              {
+                "raw": 9,
+                "scaled": 3,
+                "zero": 8
+              }
+            ],
+            "hp_before": [
+              45,
+              45
+            ],
+            "hp_after": [
+              45,
+              45
+            ]
+          },
+          {
+            "seat": 0,
+            "before_budget": [
+              {
+                "raw": 9,
+                "scaled": 3,
+                "zero": 8
+              },
+              {
+                "raw": 9,
+                "scaled": 3,
+                "zero": 8
+              }
+            ],
+            "after_budget": [
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              },
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              }
+            ],
+            "hp_before": [
+              45,
+              45
+            ],
+            "hp_after": [
+              44,
+              44
+            ]
+          },
+          {
+            "seat": 1,
+            "before_budget": [
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              },
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              }
+            ],
+            "after_budget": [
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              },
+              {
+                "raw": 10,
+                "scaled": 4,
+                "zero": 8
+              }
+            ],
+            "hp_before": [
+              44,
+              44
+            ],
+            "hp_after": [
+              44,
+              44
+            ]
+          }
+        ],
+        "final_budget": [
+          {
+            "raw": 10,
+            "scaled": 4,
+            "zero": 8
+          },
+          {
+            "raw": 10,
+            "scaled": 4,
+            "zero": 8
+          }
+        ],
+        "final_HP": [
+          44,
+          44
+        ]
+      },
+      "parent_gate_review": {
+        "raw_parent_status": "failed",
+        "raw_parent_checks": {
+          "jump_audio_original_source_bound": true,
+          "jump_audio_both_peers_completed": true,
+          "declared_build_manifest_bound_to_staged_images": true,
+          "jump_audio_declared_sources_match": true,
+          "host_profile_settled_before_guest": true,
+          "p2_right_reaches_both_peers": true,
+          "p2_right_preserves_p1_x": true,
+          "p1_jump_reaches_both_peers": false,
+          "p1_jump_preserves_p2_y": true,
+          "both_alive_healthy": true,
+          "mailbox_unused": true,
+          "default_resident_loader_committed": true,
+          "jump_audio_resolved_crc_after_case": true,
+          "jump_audio_final_private_cards_unchanged": true,
+          "jump_audio_owned_pair_cleanup": true
+        },
+        "independent_original_jump_prefix_review": [
+          {
+            "peer": 0,
+            "observed_airborne_rows": [
+              273,
+              274,
+              275,
+              276,
+              277,
+              278,
+              279,
+              280,
+              281,
+              282,
+              283
+            ],
+            "floor_Y": 1115.0,
+            "minimum_Y": 1072.2265625,
+            "stationary_partner_Y": 1114.0
+          },
+          {
+            "peer": 1,
+            "observed_airborne_rows": [
+              274,
+              275,
+              276,
+              277,
+              278,
+              279,
+              280,
+              281,
+              282,
+              283,
+              284
+            ],
+            "floor_Y": 1115.0,
+            "minimum_Y": 1072.7421875,
+            "stationary_partner_Y": 1114.0
+          }
+        ],
+        "conclusion": "Both peers actually observe the original P1 jump with P2 stationary. The six-tick endpoint flag is a false negative; original raw report and exit1 remain unchanged.",
+        "final_resolved_CRC": [
+          {
+            "label": "initial idle",
+            "samples": [
+              {
+                "simulation_tick": 3008,
+                "core": "04763fc3",
+                "mod": "5c74e23c"
+              },
+              {
+                "simulation_tick": 3040,
+                "core": "4175a6d0",
+                "mod": "8e032c0a"
+              },
+              {
+                "simulation_tick": 3072,
+                "core": "67b705b9",
+                "mod": "f16e14aa"
+              },
+              {
+                "simulation_tick": 3104,
+                "core": "160f8168",
+                "mod": "ac44bf74"
+              },
+              {
+                "simulation_tick": 3136,
+                "core": "cbada2a5",
+                "mod": "7d269c88"
+              },
+              {
+                "simulation_tick": 3168,
+                "core": "d2d65600",
+                "mod": "c7050980"
+              },
+              {
+                "simulation_tick": 3200,
+                "core": "e38052e8",
+                "mod": "851ef2aa"
+              }
+            ],
+            "resolved_through": [
+              3221,
+              3220
+            ]
+          },
+          {
+            "label": "P2 right then release",
+            "samples": [
+              {
+                "simulation_tick": 3264,
+                "core": "2b0c9d1e",
+                "mod": "426ca0c6"
+              },
+              {
+                "simulation_tick": 3296,
+                "core": "4b6a8fff",
+                "mod": "dd460728"
+              },
+              {
+                "simulation_tick": 3328,
+                "core": "dbfe2ede",
+                "mod": "5333836a"
+              },
+              {
+                "simulation_tick": 3360,
+                "core": "7e9e7547",
+                "mod": "e2b946aa"
+              },
+              {
+                "simulation_tick": 3392,
+                "core": "dffd7cd4",
+                "mod": "cb35df70"
+              },
+              {
+                "simulation_tick": 3424,
+                "core": "2d92f08d",
+                "mod": "acb62c10"
+              },
+              {
+                "simulation_tick": 3456,
+                "core": "9b60789a",
+                "mod": "8d8547c2"
+              },
+              {
+                "simulation_tick": 3488,
+                "core": "02d39c6e",
+                "mod": "8a87f8d6"
+              }
+            ],
+            "resolved_through": [
+              3492,
+              3492
+            ]
+          },
+          {
+            "label": "P1 jump then settle",
+            "samples": [
+              {
+                "simulation_tick": 3584,
+                "core": "a7a1e53b",
+                "mod": "a030ecba"
+              },
+              {
+                "simulation_tick": 3616,
+                "core": "4975cf14",
+                "mod": "d617d340"
+              },
+              {
+                "simulation_tick": 3648,
+                "core": "23923070",
+                "mod": "02508ee0"
+              },
+              {
+                "simulation_tick": 3680,
+                "core": "f77db506",
+                "mod": "3ed6d792"
+              },
+              {
+                "simulation_tick": 3712,
+                "core": "f4f6ace0",
+                "mod": "ab4ed432"
+              },
+              {
+                "simulation_tick": 3744,
+                "core": "756d2e8d",
+                "mod": "426ca0c6"
+              },
+              {
+                "simulation_tick": 3776,
+                "core": "936e473f",
+                "mod": "dd460728"
+              }
+            ],
+            "resolved_through": [
+              3785,
+              3785
+            ]
+          },
+          {
+            "label": "paired ground-jump audio then settle",
+            "samples": [
+              {
+                "simulation_tick": 7264,
+                "core": "c25d5dbc",
+                "mod": "6caa64ef"
+              },
+              {
+                "simulation_tick": 7296,
+                "core": "b025333a",
+                "mod": "ebd49115"
+              },
+              {
+                "simulation_tick": 7328,
+                "core": "66f11a3c",
+                "mod": "57cddc25"
+              },
+              {
+                "simulation_tick": 7360,
+                "core": "e99b5a15",
+                "mod": "8d05bd87"
+              },
+              {
+                "simulation_tick": 7392,
+                "core": "52bbe52d",
+                "mod": "adffa4e7"
+              },
+              {
+                "simulation_tick": 7424,
+                "core": "c2231a0e",
+                "mod": "9b8b681d"
+              }
+            ],
+            "resolved_through": [
+              7440,
+              7439
+            ]
+          }
+        ],
+        "resolved_samples": 28
+      }
+    },
+    "disabled_LOCAL_baseline": {
+      "result": "passed_disabled_baseline_only",
+      "host": "SERVER",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl0l-SERVER\\qualification.json",
+        "sha256": "af0ba530189239ab2c9b10e385f0bf3f26395deea356f9ce93d855cc2edb0ab0",
+        "bytes": 24708144
+      },
+      "original_parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl0l-SERVER\\qualification-parent-original.json",
+        "sha256": "647ac20b535004eaa1c93679747a0e5da381ab0b9cf5769225ef5534315a84c0",
+        "bytes": 24704964
+      },
+      "native_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl0l-SERVER\\ammo-hud\\intro-admission\\observations.json",
+        "sha256": "1ea0e0a8c804908350c5729fcbf10cd2132984018adc1063f47ed23580a11dfd",
+        "bytes": 11710851
+      },
+      "executing_source_pins": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl0l-SERVER\\F181-executing-source-pins.json",
+        "sha256": "afdf2190fdfa7a6650ff39832d844bcd386501c085cea71eb034b587cd1ea2e6",
+        "bytes": 11122
+      },
+      "feature_checks": {
+        "original_Sigma_positive48HP_release": true,
+        "original_ability_C9_bit8_and_actual_jump": true,
+        "original_native_action56_animation_and_source_identity": true,
+        "actual_native_weakness_budget_and_original_action3": true,
+        "original_weakness_recovery_and_retirement": true,
+        "no_HP_phase_death_or_result_writes": true,
+        "defaultOff_native8_or_enabled_native3": true,
+        "mixed_native_fraction_and_rejected_contact": "separate_on_case_required"
+      },
+      "endpoints": {
+        "weakness_row": 624,
+        "recovered_row": 702,
+        "weakness_HP": [
+          40
+        ],
+        "budget_before": [
+          {
+            "raw": 0,
+            "scaled": 0,
+            "zero": 0
+          }
+        ],
+        "budget_after_weakness": [
+          {
+            "raw": 0,
+            "scaled": 0,
+            "zero": 0
+          }
+        ]
+      },
+      "parent_gate_review": {
+        "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+        "raw_parent_checks": {
+          "exact_image_manifest_declared_sources_originals": true,
+          "native_resource_and_window_observations_complete": true,
+          "default_recording_taint_retained_and_replay_refused": true,
+          "owned_cleanup_private_cards": true
+        },
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "private_cards_unchanged": true,
+        "recording_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        }
+      }
+    }
+  },
+  "reviewed_captures": [
+    {
+      "mode": "LOCAL",
+      "peer": 0,
+      "label": "native-original-Sigma-CP1",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+      "sha256": "60bf24b1cf38f7c411ccda628241d13110d4689a297fa0d07fc74096998e2635",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-CP1.png"
+    },
+    {
+      "mode": "LOCAL",
+      "peer": 0,
+      "label": "native-first-Sigma-scene",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+      "sha256": "08df4eb4c9cf844be05eec79eaae25b426cda280bb39414c69b975a195b9cd3f",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-first-Sigma-scene.png"
+    },
+    {
+      "mode": "LOCAL",
+      "peer": 0,
+      "label": "native-Sigma61-released",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "c995e69682407fbf57ecbf3f665e5bab80572facdb21b95ab0895f418e3ff322",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png"
+    },
+    {
+      "mode": "LOCAL",
+      "peer": 0,
+      "label": "native-guest-airborne-weakness-prerequisite",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-guest-airborne-weakness-prerequisite.png",
+      "sha256": "df6abe1efd1f31aa439c7eea70a1b78d43cdd80e1d4489d89ce08d048f004f99",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-guest-airborne-weakness-prerequisite.png"
+    },
+    {
+      "mode": "LOCAL",
+      "peer": 0,
+      "label": "native-actual-Sigma-weakness-reaction",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png",
+      "sha256": "a024afbed55c89eca5dde99156d54262bd0eb0d3c0213fd631116d5193d6b0f1",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png"
+    },
+    {
+      "mode": "LOCAL",
+      "peer": 0,
+      "label": "native-original-Sigma-weakness-recovery",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png",
+      "sha256": "237695c8cda46d037cd2b736ef4b3fc10819af37ea7cfd394938ae7d78e69986",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png"
+    },
+    {
+      "mode": "LOCAL",
+      "peer": 0,
+      "label": "native-original-Giga-rejected",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-original-Giga-rejected.png",
+      "sha256": "85ab83ef2b3210b1cf7d99ce4a5a5ff9c3ee455b127cd5583deff79b3b110701",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-original-Giga-rejected.png"
+    },
+    {
+      "mode": "LOCAL",
+      "peer": 0,
+      "label": "native-final-mixed-budget-control",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-final-mixed-budget-control.png",
+      "sha256": "e8aba3fde5a47ec1cbea0afc63361336815c680f4fab1537cb1b84b79cbbba35",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-final-mixed-budget-control.png"
+    },
+    {
+      "mode": "NET",
+      "peer": 0,
+      "label": "native-actual-Sigma-weakness-reaction",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png",
+      "sha256": "8c5d77111506fe08b6b262bcde847e062c5de3fe34a846cb087cee68f422a77b",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png"
+    },
+    {
+      "mode": "NET",
+      "peer": 1,
+      "label": "native-actual-Sigma-weakness-reaction",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-1-native-actual-Sigma-weakness-reaction.png",
+      "sha256": "db52da8ba91fc4eb72f8b7bd1bbc749b23da14f2e04e4f132779e41aa69dc9ca",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-1-native-actual-Sigma-weakness-reaction.png"
+    },
+    {
+      "mode": "NET",
+      "peer": 0,
+      "label": "native-original-Sigma-weakness-recovery",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png",
+      "sha256": "8b5d67bc3de94b8a1b4e94bc04ff471199d574dfe485939d257031831d797971",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png"
+    },
+    {
+      "mode": "NET",
+      "peer": 1,
+      "label": "native-original-Sigma-weakness-recovery",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-1-native-original-Sigma-weakness-recovery.png",
+      "sha256": "6408d8ca6f83f9f0cd4cfdced546cdbac033f58b6e6947023e42debe6e39a5cf",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-1-native-original-Sigma-weakness-recovery.png"
+    },
+    {
+      "mode": "NET",
+      "peer": 0,
+      "label": "native-original-Giga-rejected",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-0-native-original-Giga-rejected.png",
+      "sha256": "3b14d4dc3309afc248c02cfe0ecd72b0dd7e4360a6be9bba5fd2d00079dcea15",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-0-native-original-Giga-rejected.png"
+    },
+    {
+      "mode": "NET",
+      "peer": 1,
+      "label": "native-original-Giga-rejected",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-1-native-original-Giga-rejected.png",
+      "sha256": "8bd1a7ec288ff1143b27acfc598cef9b0dd0b59d1d7cc9fe2d7d50a11dd13640",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-1-native-original-Giga-rejected.png"
+    },
+    {
+      "mode": "NET",
+      "peer": 0,
+      "label": "native-final-mixed-budget-control",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-0-native-final-mixed-budget-control.png",
+      "sha256": "019df333ee465e1f9cc8b184d00f451f9e386b4c8a4373818105443f5f07e0f5",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-0-native-final-mixed-budget-control.png"
+    },
+    {
+      "mode": "NET",
+      "peer": 1,
+      "label": "native-final-mixed-budget-control",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-1-native-final-mixed-budget-control.png",
+      "sha256": "e96362f4acd697a951320faaddd94a474be255736809b7136eb9ee704d035761",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl1n\\intro-admission\\peer-1-native-final-mixed-budget-control.png"
+    },
+    {
+      "mode": "disabled_LOCAL_baseline",
+      "peer": 0,
+      "label": "native-Sigma61-released",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl0l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "c8a0ded711a2410e30fe708e6deb496493696837778dc70e65fc91af929feb4f",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png"
+    },
+    {
+      "mode": "disabled_LOCAL_baseline",
+      "peer": 0,
+      "label": "native-guest-airborne-weakness-prerequisite",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl0l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-guest-airborne-weakness-prerequisite.png",
+      "sha256": "4b02aa43cbfa1766433efade5edf986ab7fab305858430d4b76ec6d508ed2142",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-guest-airborne-weakness-prerequisite.png"
+    },
+    {
+      "mode": "disabled_LOCAL_baseline",
+      "peer": 0,
+      "label": "native-actual-Sigma-weakness-reaction",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl0l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png",
+      "sha256": "96b84b0aeb992f7173a8320494385099e9fa712dc65eeaaf59c55e51c87fe110",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png"
+    },
+    {
+      "mode": "disabled_LOCAL_baseline",
+      "peer": 0,
+      "label": "native-original-Sigma-weakness-recovery",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bbl0l-SERVER\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png",
+      "sha256": "184ad9246f2edacc8fa81f486e77aff94b0c370bcbf3612aca15dc836494c46c",
+      "original_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-F181-v114-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png"
+    }
+  ],
+  "limits": [
+    "Only frozen F181: optional native boss health budget with X numerator5/10 and Zero4/10, representing20percent Zero reduction relative to the doubled effective boss-health policy. Native integer HP/bar range, accepted attack/result family and original reaction/recovery are retained; no cooldown option or F63/F99/F152/F153 credit.",
+    "Accepted Zero evidence is actual native airborne ability35, raw8 -> scaled3/action3 and finite recovery. Actual X buster hits contribute raw1 each:45->45->44. Native damage/counters agree with the shared bank source and actual-plugin mixed-seat/capture/codec tests. The final extra ordinary Zero offer accepts no additional damage and supplies no new ordinary-Saber qualification.",
+    "Actual original Giga44/pose59 produces additional nonzero native contacts while HP and accepted budget remain unchanged; original defense44 is immune. No instruction-atomic result127 or transient-field observation on every RPC is claimed.",
+    "Enabled LOCAL runs on SERVER; enabled NET is the same frozen executable/source on this PC, same-machine Windows loopback delay3. Both enabled modes and the same-SERVER explicit off baseline are required components. No performance, physical-controller, other OS, remote-peer or universal boss matrix claim.",
+    "NET raw wrapper remains failed14/15 and exit1 because its six-tick prelude P1-jump endpoint flag is false. Complete original prefix independently shows real X jump/airborne samples on both peers with Zero stationary; all14 other raw gates, four final resolved CRC windows, private cards and both owned native exits0 pass. No failed raw data is rewritten or hidden.",
+    "Native checkpoint travel, earned ability initialization and hostile-contact protection are declared setup bypasses. No boss HP, phase, native result, token, timer, success or progression flags are authored. Setup-tainted ordinary recordings/replay remain refused. Snapshot16 actual-plugin capture/codec/digest/invalid-input tests pass; no native rewind/rollback or old-state compatibility claim.",
+    "Twenty composed images were personally reviewed:8enabledLOCAL,8enabledNET and4disabledLOCAL. Other retained setup captures are not additional graphics coverage. All earlier failures, HUD harness, original user saves/settings and raw source/backend evidence remain preserved."
+  ]
+}
