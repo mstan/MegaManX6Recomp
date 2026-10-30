@@ -84,11 +84,11 @@ class EarnedWeapons(unittest.TestCase):
 
     def test_current_profile_and_old_title_refusal(self):
         contract=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text())
-        self.assertEqual(contract['revision'],39)
-        self.assertEqual(contract['session']['title_compatibility'],'mmx6-x-zero-delay-v56')
+        self.assertEqual(contract['revision'],40)
+        self.assertEqual(contract['session']['title_compatibility'],'mmx6-x-zero-delay-v57')
         self.assertEqual((ROOT/'src/mods/mmx6_coop_host_lab_contract.h').read_text(),mmx6_host_lab_contract.generated_header())
         test=(ROOT/'tests/test_mmx6_coop_host_lab.c').read_text()
         self.assertIn('title.compatibility_id="mmx6-x-zero-delay-v37";CHECK(!lab_title_eligible(&title))',test)
-        self.assertIn('MMX6_STARTUP_BUILD_ID=\\"mmx6-x-zero-delay-v56\\"',(ROOT/'CMakeLists.txt').read_text(encoding='utf-8'))
+        self.assertIn('MMX6_STARTUP_BUILD_ID=\\"mmx6-x-zero-delay-v57\\"',(ROOT/'CMakeLists.txt').read_text(encoding='utf-8'))
 
 if __name__=='__main__':unittest.main()

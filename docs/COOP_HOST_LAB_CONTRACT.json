@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 39,
+  "revision": 40,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v56",
+    "title_compatibility": "mmx6-x-zero-delay-v57",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -747,5 +747,20 @@
       "Original actual refight defeat and CP2-to10 return, both native supported bodies and original wall clearance, retained separate personal resources, independent actual hub controls.",
       "Same exact candidate LOCAL+NET; final parent source/profile/CRC/card/owned-exit gates and composed-image review."
     ]
+  },
+  "title_changes_v57_heatnix_scenery": {
+    "scope": "Only frozen234 F28 and F175 stationary native arena scrolling prerequisite",
+    "option": "heatnix_cp7",
+    "original_stage": 3,
+    "section": 0,
+    "checkpoint": 7,
+    "inventory_index": 20,
+    "record": "800723D8",
+    "nonce": "4C484E37",
+    "bypasses": [
+      "Original checkpoint reachability only; no pose, boss, intro, phase, weather, background clock or outcome write"
+    ],
+    "native_source": "Original BIN5 Heatnix52 record800F36C8, active800EF0FC uses actual object+8B1/3 layer1Y-2 and2/4 Y+2",
+    "acceptance": "Fresh same-candidate LOCAL/NET actual boss admission and stationary native background motion in real composed views; F175 also needs its distinct native atlas scene. Source/setup alone grants no credit."
   }
 }
