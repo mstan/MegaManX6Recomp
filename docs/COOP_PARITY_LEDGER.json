@@ -19726,17 +19726,66 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+            "build_identity": {
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\refight-v105-final-binding-root-v8.json",
+              "binding_sha256": "e1a38c721de82a10a1fe0fe8bd44b90e6816f703b47bbc6e09a46cfc1778b8f3",
+              "image_sha256": "acb27f170c2d49e59e830df4c608046b5121f0fa3cdcd9798d3715b4cfe6fe43",
+              "manifest_sha256": "e4f614a3336b7672b3966e53fc6dbfa2cb94c19077486c7312a2c640267729df",
+              "provenance_sha256": "72c7e9505d6f8b3f72ae9022f6ad7e37b4dd72b4086a2d9015ad83ee60924095",
+              "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v105-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+              "source_heads": {
+                "game": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+                "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+                "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+                "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+                "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+              },
+              "title": "mmx6-x-zero-delay-v52",
+              "host_revision": 35
+            },
+            "settings": {
+              "fixture": "recycle_portal_cp2",
+              "contact_protection": "on",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "host_profile": "mmx6.win64-clang22.loopback revision35",
+              "audio": "dummy muted"
+            },
+            "action": "Actual guest Select90-update hold, coherent LEAVING brackets original primary portal action2, then real mode8/9 destination load.",
+            "outcome": "Native departure never publishes ABSENT before fresh20/1 arrival changes guest toJOINING3 without another Select edge.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-92e1ce2-F147-withdrawal-portal-LOCAL-reenrollment-failure-reviewed.json",
+                "sha256": "8dd4316e1188961ff14eb6828c76118d110fe0c1dd958e1d1bc53982b19d9c9c"
+              }
+            ],
+            "limits": [
+              "F147 only. Exact declared original CP2 and once-position prerequisite is tainted.",
+              "No native state, lifecycle, HP, pose, velocity, contact, world-time, scene or success writes.",
+              "Guest coherent LEAVING publications bracket native pool/P1 reads; no joint host/RAM instruction or atomic all-peer claim.",
+              "Actual native primary admission and absent final policy are required; involuntary enrollment is a named failure.",
+              "Parent exact image/profile/source, recording/card/exit and final CRC gates remain mandatory."
+            ],
+            "bypasses": [
+              "Agreed original CP2/once-position prerequisite and contact protection; actual Select/portal/native loader, no tested-result writes."
+            ]
+          }
+        ],
+        "limitations": "Actual LOCAL failure exact92e1ce2/acb27/profile35: real withdrawal overlaps primary native portal, but original outgoing beam is unfinished when native20/1 initializer reenrolls guest without Select. Existing sceneowner1/phase0 is observed, refuting missing-owner hypothesis.3root-viewed captures/privatecardsunchanged/ownedexit0; fix in progress, NET unverified."
       }
     },
     {

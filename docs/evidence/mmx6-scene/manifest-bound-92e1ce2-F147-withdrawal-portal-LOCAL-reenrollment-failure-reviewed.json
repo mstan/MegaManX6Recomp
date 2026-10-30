@@ -1,0 +1,110 @@
+{
+  "kind": "F147_LOCAL_native_withdrawal_portal_failure",
+  "status": "failed",
+  "frozen_row_sha256": "3954c935e4188bc215cad734af7deff538e089fe190990a6fba732e5ad0c674a",
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\refight-v105-final-binding-root-v8.json",
+    "binding_sha256": "e1a38c721de82a10a1fe0fe8bd44b90e6816f703b47bbc6e09a46cfc1778b8f3",
+    "image_sha256": "acb27f170c2d49e59e830df4c608046b5121f0fa3cdcd9798d3715b4cfe6fe43",
+    "manifest_sha256": "e4f614a3336b7672b3966e53fc6dbfa2cb94c19077486c7312a2c640267729df",
+    "provenance_sha256": "72c7e9505d6f8b3f72ae9022f6ad7e37b4dd72b4086a2d9015ad83ee60924095",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v105-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "92e1ce2f7575e62ff91adc9c51c1ae4f262c0890",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v52",
+    "host_revision": 35
+  },
+  "action": "Actual guest Select90-update hold, coherent LEAVING brackets original primary portal action2, then real mode8/9 destination load.",
+  "outcome": "Native departure never publishes ABSENT before fresh20/1 arrival changes guest toJOINING3 without another Select edge.",
+  "departure": {
+    "row": 235,
+    "source_threshold": 90,
+    "observed_counter_max": [
+      88
+    ],
+    "published_native_Select": [
+      true
+    ]
+  },
+  "admission": {
+    "row": 240,
+    "per_peer": [
+      {
+        "row": 240,
+        "portal": {
+          "address": 2148069660,
+          "hex": "491c01010102010000001006000030060c2b0f8000000600000010060000300600000000000000000000000000000000f4380f80c4380f80000000005c9015807003cc7803000100ff00010000000000bc380f80c0380f8000000000200000000400000000000000b8380f800000080001000000000000000000000000000000f705f705f5050000503d078000000000000000000000000000000000",
+          "state": 1,
+          "action": 2,
+          "phase": 1
+        },
+        "native_primary_admission_x": 1525,
+        "before_native": 237,
+        "after_native": 238,
+        "before_sequence": 1300,
+        "source_basis": "The source-qualified native action1->2/+84 store uses canonical P1. Coherent guest publications bracket the atomic world read in LEAVING1; held/released Select has no rejoin edge, so this monotone departure cannot leave and re-enter1 within the bracket. Not a same-instruction or single-RPC host+RAM claim."
+      }
+    ]
+  },
+  "failure": "F147_INVOLUNTARY_REENROLLMENT: voluntary departure became ALIVE/JOINING without a fresh Select edge",
+  "final_row": 333,
+  "important_correction": "Actual source admission already has sceneowner1/phase0. The earlier missing-owner source hypothesis is refuted by runtime; no redundant ownership hook is justified.",
+  "next_fix": "Let actual native outgoing animation/ascent finish before original portal exit; preserve completed voluntary absence through native initialization/enrollment. No forced completion, movement or timer/result writes.",
+  "raw_artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp1l\\qualification.json",
+      "bytes": 12923721,
+      "sha256": "951a874011d3efe8b25f16aba0a1ac6e4cb02ddc91df26f281d2717d20301c0f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp1l\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 12329402,
+      "sha256": "266f98e2ae48b53e981af05aecfbf5b6f00d0dfc433889b3aaf8d3659862bd1a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp1l\\F147-executing-source-pins.json",
+      "bytes": 9867,
+      "sha256": "d69fdc622ffa166f2e8b7e58d164c2d42084b8f363347f735163f5150e91aa3b"
+    }
+  ],
+  "captures": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp1l\\ammo-hud\\intro-admission\\peer-0-source-before-withdrawal.png",
+      "bytes": 2074543,
+      "sha256": "a62522aab9560a4813c2f2b1b7b881faa91151bf4df7cf35f8c7f3661a651b7c",
+      "label": "source-before-withdrawal",
+      "root_personally_viewed": true
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp1l\\ammo-hud\\intro-admission\\peer-0-native-overlap.png",
+      "bytes": 2074543,
+      "sha256": "ceee7766eeeb4a2e53ea572d4177c4660e65d8006302cb7c03f03a8ecbb5fc4e",
+      "label": "native-overlap",
+      "root_personally_viewed": true
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wp1l\\ammo-hud\\intro-admission\\peer-0-failure.png",
+      "bytes": 2074543,
+      "sha256": "e239ccbe2e1e0f0dabfdfed74fae83d5909deaa1df8dcb3912520b9d040e1112",
+      "label": "failure",
+      "root_personally_viewed": true
+    }
+  ],
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "private_cards_unchanged": true,
+  "limits": [
+    "F147 only. Exact declared original CP2 and once-position prerequisite is tainted.",
+    "No native state, lifecycle, HP, pose, velocity, contact, world-time, scene or success writes.",
+    "Guest coherent LEAVING publications bracket native pool/P1 reads; no joint host/RAM instruction or atomic all-peer claim.",
+    "Actual native primary admission and absent final policy are required; involuntary enrollment is a named failure.",
+    "Parent exact image/profile/source, recording/card/exit and final CRC gates remain mandatory."
+  ]
+}
