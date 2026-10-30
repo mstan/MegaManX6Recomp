@@ -1,0 +1,613 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F176"
+  ],
+  "frozen_row_sha256": "dc20a9f8790b64dbbe9f7bd91e2df935b1ce3e2a00b4d66d204a8a1083a8012a",
+  "result": "passed",
+  "candidate": "4cb5f59c18ff9834cc63590c88480c3be1aa61a3",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\two-Both-doors-v79-final-binding-root-v1.json",
+    "binding_sha256": "66d42e5a7297db0395d0efde1f97082a0caaa4335c83fb615e2681127fd51806",
+    "image_sha256": "cc0523d6d63426df5365538764e05b075f0d4dd39af950680898a69967a6d7a8",
+    "manifest_sha256": "7e4e3c5a440b738e861b37ea1f5cde76de31e3dd2f2c84b6ba862fbe2b85017a",
+    "provenance_sha256": "54449461c71d5f9563a460b1b132d27b529f57f60de301eaed03bc528bf2493a",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v79-private-both-doors-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "4cb5f59c18ff9834cc63590c88480c3be1aa61a3",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v28",
+    "host_revision": 11
+  },
+  "mapping": "Original X6 intro NPC rescue/hatch event at5744, followed by NPC departure and original D1000 hatch6064. This proves the native finite gate/rescue event counterpart; no literal X4 explosion implementation is claimed.",
+  "accepted_same_image_packet": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-4cb5f59-F164-second-Both-controls-reviewed.json",
+    "sha256": "c1f5b867d80dbe9fc86c59b65c520ad904dbc8ac51ab6d3ef550dbddc54a8bdc"
+  },
+  "source_guards": [
+    {
+      "address": "0x8003af1c",
+      "bytes": 216,
+      "sha256": "edb4af58ccfefaaa5df5282090250667a6580816d570c26e96126bcd0782feeb"
+    },
+    {
+      "address": "0x80035580",
+      "bytes": 616,
+      "sha256": "1461a228f92538c6d6eacd216bd94052544f35cad50c231b7f565c26bf88a9c7"
+    },
+    {
+      "address": "0x80078dd4",
+      "bytes": 32,
+      "sha256": "ae503e6a7712f30d961ecda9f62fa1d01407dfbaf9e7f94aebefee6d45df0ff5"
+    }
+  ],
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F164-two-doors-local-v79-root-v1\\qualification.json",
+        "bytes": 15864574,
+        "sha256": "3b004a213621717c15f9f9e323be55292686e36029ef157c6c1e89c8b6ad45fc"
+      },
+      "native_event": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F164-two-doors-local-v79-root-v1\\ammo-hud\\intro-admission\\two-original-doors\\observations.json",
+        "bytes": 13176467,
+        "sha256": "bf9c390c3708bfac27066fc7805a00d630fb47ed5923d5aeba0d64234ee6e96e"
+      },
+      "controls": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F164-two-doors-local-v79-root-v1\\ammo-hud\\intro-admission\\F164-controls\\observations.json",
+        "bytes": 619831,
+        "sha256": "7bc80428c6aa6e0133ccf68a5666f52bbf5dcb5ba1ec71ec0ac64d8a39274a37"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "gate_origin": "0x800fa2a4",
+          "gate_state_transitions": [
+            {
+              "row": 60,
+              "state": [
+                1,
+                0
+              ]
+            },
+            {
+              "row": 71,
+              "state": [
+                1,
+                2
+              ]
+            },
+            {
+              "row": 77,
+              "state": [
+                1,
+                3
+              ]
+            },
+            {
+              "row": 89,
+              "state": [
+                1,
+                4
+              ]
+            },
+            {
+              "row": 97,
+              "state": [
+                2,
+                0
+              ]
+            }
+          ],
+          "npc_origin": "0x800fa29c",
+          "npc_state_transitions": [
+            {
+              "row": 83,
+              "state": [
+                1,
+                1
+              ]
+            },
+            {
+              "row": 88,
+              "state": [
+                1,
+                2
+              ]
+            },
+            {
+              "row": 93,
+              "state": [
+                1,
+                3
+              ]
+            },
+            {
+              "row": 240,
+              "state": [
+                1,
+                4
+              ]
+            },
+            {
+              "row": 242,
+              "state": [
+                1,
+                5
+              ]
+            },
+            {
+              "row": 245,
+              "state": [
+                2,
+                5
+              ]
+            },
+            {
+              "row": 246,
+              "state": null
+            }
+          ],
+          "npc_first": 83,
+          "npc_last": 245,
+          "npc_absent_through": 388,
+          "first_event_released": 246,
+          "next_original_gate_released": 383,
+          "next_original_boss": {
+            "state": 1,
+            "action": 4,
+            "hp": 32
+          },
+          "post_second_both_controls": {
+            "two_original_crossings_same_session": true,
+            "prior_door_and_scene_state_retired": true,
+            "no_body_withdrawal_rejoin_or_scene_restart": true,
+            "both_own_seat_native_jump_ascent_and_landing": true,
+            "every_physical_peer_observed_both_inputs": true
+          }
+        }
+      ],
+      "owned_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F164-two-doors-netplay-v79-root-v1\\qualification.json",
+        "bytes": 24760883,
+        "sha256": "b3ec5e32a26575a336373a68418e7a48529e13024e4bf2b1c831ee603a0ad104"
+      },
+      "native_event": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F164-two-doors-netplay-v79-root-v1\\intro-admission\\two-original-doors\\observations.json",
+        "bytes": 20110421,
+        "sha256": "54b3234e96efc067ce8f9f42df9ef5fc406d7a295b5bf34d9ae004a6ee1bbe6f"
+      },
+      "controls": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F164-two-doors-netplay-v79-root-v1\\intro-admission\\F164-controls\\observations.json",
+        "bytes": 1259297,
+        "sha256": "8763b716478bf50ea5e82a5903a0401eedb10dae17fa00cb26bd5f89af535171"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "gate_origin": "0x800fa2a4",
+          "gate_state_transitions": [
+            {
+              "row": 39,
+              "state": [
+                1,
+                0
+              ]
+            },
+            {
+              "row": 49,
+              "state": [
+                1,
+                2
+              ]
+            },
+            {
+              "row": 53,
+              "state": [
+                1,
+                3
+              ]
+            },
+            {
+              "row": 57,
+              "state": [
+                1,
+                4
+              ]
+            },
+            {
+              "row": 62,
+              "state": [
+                2,
+                0
+              ]
+            }
+          ],
+          "npc_origin": "0x800fa29c",
+          "npc_state_transitions": [
+            {
+              "row": 55,
+              "state": [
+                1,
+                1
+              ]
+            },
+            {
+              "row": 57,
+              "state": [
+                1,
+                2
+              ]
+            },
+            {
+              "row": 60,
+              "state": [
+                1,
+                3
+              ]
+            },
+            {
+              "row": 168,
+              "state": [
+                1,
+                4
+              ]
+            },
+            {
+              "row": 170,
+              "state": [
+                1,
+                5
+              ]
+            },
+            {
+              "row": 172,
+              "state": null
+            }
+          ],
+          "npc_first": 55,
+          "npc_last": 171,
+          "npc_absent_through": 259,
+          "first_event_released": 172,
+          "next_original_gate_released": 254,
+          "next_original_boss": {
+            "state": 1,
+            "action": 8,
+            "hp": 32
+          },
+          "post_second_both_controls": {
+            "two_original_crossings_same_session": true,
+            "prior_door_and_scene_state_retired": true,
+            "no_body_withdrawal_rejoin_or_scene_restart": true,
+            "both_own_seat_native_jump_ascent_and_landing": true,
+            "every_physical_peer_observed_both_inputs": true
+          }
+        },
+        {
+          "peer": 1,
+          "gate_origin": "0x800fa2a4",
+          "gate_state_transitions": [
+            {
+              "row": 39,
+              "state": [
+                1,
+                0
+              ]
+            },
+            {
+              "row": 48,
+              "state": [
+                1,
+                2
+              ]
+            },
+            {
+              "row": 53,
+              "state": [
+                1,
+                3
+              ]
+            },
+            {
+              "row": 57,
+              "state": [
+                1,
+                4
+              ]
+            },
+            {
+              "row": 62,
+              "state": [
+                2,
+                0
+              ]
+            }
+          ],
+          "npc_origin": "0x800fa29c",
+          "npc_state_transitions": [
+            {
+              "row": 55,
+              "state": [
+                1,
+                1
+              ]
+            },
+            {
+              "row": 57,
+              "state": [
+                1,
+                2
+              ]
+            },
+            {
+              "row": 59,
+              "state": [
+                1,
+                3
+              ]
+            },
+            {
+              "row": 168,
+              "state": [
+                1,
+                4
+              ]
+            },
+            {
+              "row": 170,
+              "state": [
+                1,
+                5
+              ]
+            },
+            {
+              "row": 172,
+              "state": null
+            }
+          ],
+          "npc_first": 55,
+          "npc_last": 171,
+          "npc_absent_through": 259,
+          "first_event_released": 172,
+          "next_original_gate_released": 254,
+          "next_original_boss": {
+            "state": 1,
+            "action": 8,
+            "hp": 32
+          },
+          "post_second_both_controls": {
+            "two_original_crossings_same_session": true,
+            "prior_door_and_scene_state_retired": true,
+            "no_body_withdrawal_rejoin_or_scene_restart": true,
+            "both_own_seat_native_jump_ascent_and_landing": true,
+            "every_physical_peer_observed_both_inputs": true
+          }
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "seat": 0,
+          "pid": 51960,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "seat": 1,
+          "pid": 21540,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2912,
+              "core": "7ef5894b",
+              "mod": "15ec1b97"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "c168a5af",
+              "mod": "b87b7437"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "674ed3f4",
+              "mod": "a4339995"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "43b43b0e",
+              "mod": "b0517a8d"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "175f45bc",
+              "mod": "e252456f"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "6e3d96a2",
+              "mod": "05d3668b"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "a2d6845e",
+              "mod": "bc7180ea"
+            }
+          ],
+          "resolved_through": [
+            3109,
+            3109
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3168,
+              "core": "ee2f8893",
+              "mod": "45732cc0"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "2574dedd",
+              "mod": "337e5ce8"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "eee946d0",
+              "mod": "bce198ca"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "2ea68717",
+              "mod": "49731b28"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "602eaf82",
+              "mod": "8285eec8"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "2af76200",
+              "mod": "99ab38c2"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "9366abaf",
+              "mod": "f614e3e2"
+            }
+          ],
+          "resolved_through": [
+            3373,
+            3373
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3456,
+              "core": "64ba266c",
+              "mod": "1d5d921a"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "7a56de60",
+              "mod": "83b4305a"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "8d678c3f",
+              "mod": "4e574438"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "b58f07d2",
+              "mod": "ec5af058"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "e28b97e1",
+              "mod": "b8767252"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "4c9bff61",
+              "mod": "979ca86e"
+            }
+          ],
+          "resolved_through": [
+            3619,
+            3620
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 8288,
+              "core": "d4df9aff",
+              "mod": "2d22defb"
+            },
+            {
+              "simulation_tick": 8320,
+              "core": "d98fda61",
+              "mod": "d907d296"
+            },
+            {
+              "simulation_tick": 8352,
+              "core": "0f25afb2",
+              "mod": "3fef0de0"
+            },
+            {
+              "simulation_tick": 8384,
+              "core": "37fa546a",
+              "mod": "6ba26c56"
+            },
+            {
+              "simulation_tick": 8416,
+              "core": "afebd9b9",
+              "mod": "ac4a2f9a"
+            },
+            {
+              "simulation_tick": 8448,
+              "core": "a54f4c33",
+              "mod": "2d8ec13e"
+            }
+          ],
+          "resolved_through": [
+            8463,
+            8463
+          ]
+        }
+      ]
+    }
+  },
+  "limits": [
+    "F164 maps the frozen second-authored-Both-crossing/stale-passenger failure to native X6 intro NPC hatch5744/sub2 followed by D1000 hatch6064/sub1. The first gate leads to NPC dialogue2; this is not a claim of two boss encounters or fortress doors. Frozen X4/X5 definitions remain unchanged.",
+    "Same immutable4cb5f59/title28/host11 candidate independently runs both crossings and post-second controls in LOCAL and NET. Main has later unrelated changes; seven named door/scene functions are byte-identical to the tested candidate. No whole-build equality or cross-build netplay/state claim.",
+    "Agreed intro_before_doors prerequisite invokes original CP1 initializer, source-qualified predoor positions and original placement scanner once; preceding reachability is bypassed. No door admission/traversal/checkpoint grant or control result is assigned. Capture remains tainted and both ordinary/replay qualification refuse it.",
+    "Native enemy damage stays enabled. Each owned jump requires action6/air1/real rise on every physical peer, release and actual landing. The other seat remains neutral; any motion must retain an explicit real nonfatal HP-loss/hurt17 witness. No HP/pose/position/clock/outcome writes or native debug calls.",
+    "The admitted behavior is one original X6 gate/rescue event cycle and native retirement/progression, as named by F176. NPC origin800FA29C and hatch origin800FA2A4 bind the actual authored entities; no decorative-effect census, literal X4 explosion or unrelated effect-family qualification.",
+    "Reuse exact previously accepted LOCAL/NET4cb5f59 raw runs, CRC/cards/cleanup and root-reviewed composed images. No new native launch, build, source alteration or raw result rewrite. No whole-current-build equality or cross-build state/network compatibility claim.",
+    "RAM/actor/scene/render observations are asynchronous; sampled transition order is not an instruction-atomic execution trace."
+  ]
+}
