@@ -19724,23 +19724,90 @@
       "x6": {
         "workstream": "combat",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "First final-encounter weakness contract",
+        "analogue": "Original Sigma61 weakness to native guest Zero airborne ability35",
         "bounded_check": "Identify the native Sigma phase weakness/prerequisites, use the guest-owned valid attack and retain accepted damage/reaction without phase writes.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+            "build_identity": {
+              "executable_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+              "compiled_manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+              "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "prerequisite": "Original SigmaCP1/native all-ability factory/contact protection; starting HP off"
+            },
+            "action": "Use original guest ability after actual jump and source-defined input prerequisites; retain exact8HP, original forced Sigma reaction and native recovery.",
+            "outcome": "Guest native ability takes48->40HP and triggers originalaction3, then native defense/idle/attack retirement restore; exact parent profile/source/final synchronization/visual/card/exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-325a3bb-F138-Sigma-native-weakness-local-netplay-reviewed.json",
+                "sha256": "52f388a4236b0eafe56a137598bd911d2637f2ada281b4d84ecc6415be569ff1"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F138 first native Sigma61 weakness. Original C9 ability8 prerequisite and actual jump/preheld Down/fresh Square select native Zero56/animation98; the sole guest attack takes original48HP to40 and forces original Sigmaaction3, followed by natural recovery. No final defeat/transition, elective balance or native3330 credit.",
+              "Typed original checkpoint and all-ability equipment factory3D718 plus hostile-contact protection bypass campaign/ability reachability and incidental damage. Starting HP off. No actor position, attack pose, boss HP/phase, death, scene or result writes; original game performs the ability, damage and reaction.",
+              "Each peer has an actual recorded native56/98or99 witness and exact8HP/action3 observation. Diagnostic body, actor and images are asynchronous; witness frames may differ across peers. DD is a transient event flag and is recorded with its actual value. Private35 snapshot availability is reported explicitly per mode and is never invented; original source uniquely identifies the observed ability producer.",
+              "Earlier combined-input normal27/2HP, true nonoverlapping blade, transient-child snapshot gate and overly atomic/event-flag observer failures remain raw and uncredited. They do not replace the final mode endpoint, recovery or synchronization checks. F139 completed evidence is reused without another combo run.",
+              "Same exact C112 image LOCAL and same-PC loopback NET, all parent gates and final synchronization, reviewed composed images, three owned clean native exits and unchanged cards. No WAN/cross-platform or later-body roster claim; C113 paired-release fatal remains isolated/parked."
+            ],
+            "bypasses": [
+              "Original checkpoint/ability reachability and hostile-contact protection only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+            "build_identity": {
+              "executable_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+              "compiled_manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+              "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "prerequisite": "Original SigmaCP1/native all-ability factory/contact protection; starting HP off"
+            },
+            "action": "Use original guest ability after actual jump and source-defined input prerequisites; retain exact8HP, original forced Sigma reaction and native recovery.",
+            "outcome": "Guest native ability takes48->40HP and triggers originalaction3, then native defense/idle/attack retirement restore; exact parent profile/source/final synchronization/visual/card/exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-325a3bb-F138-Sigma-native-weakness-local-netplay-reviewed.json",
+                "sha256": "52f388a4236b0eafe56a137598bd911d2637f2ada281b4d84ecc6415be569ff1"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F138 first native Sigma61 weakness. Original C9 ability8 prerequisite and actual jump/preheld Down/fresh Square select native Zero56/animation98; the sole guest attack takes original48HP to40 and forces original Sigmaaction3, followed by natural recovery. No final defeat/transition, elective balance or native3330 credit.",
+              "Typed original checkpoint and all-ability equipment factory3D718 plus hostile-contact protection bypass campaign/ability reachability and incidental damage. Starting HP off. No actor position, attack pose, boss HP/phase, death, scene or result writes; original game performs the ability, damage and reaction.",
+              "Each peer has an actual recorded native56/98or99 witness and exact8HP/action3 observation. Diagnostic body, actor and images are asynchronous; witness frames may differ across peers. DD is a transient event flag and is recorded with its actual value. Private35 snapshot availability is reported explicitly per mode and is never invented; original source uniquely identifies the observed ability producer.",
+              "Earlier combined-input normal27/2HP, true nonoverlapping blade, transient-child snapshot gate and overly atomic/event-flag observer failures remain raw and uncredited. They do not replace the final mode endpoint, recovery or synchronization checks. F139 completed evidence is reused without another combo run.",
+              "Same exact C112 image LOCAL and same-PC loopback NET, all parent gates and final synchronization, reviewed composed images, three owned clean native exits and unchanged cards. No WAN/cross-platform or later-body roster claim; C113 paired-release fatal remains isolated/parked."
+            ],
+            "bypasses": [
+              "Original checkpoint/ability reachability and hostile-contact protection only."
+            ]
+          }
+        ],
+        "limitations": "Only frozen234 F138 first native Sigma61 weakness. Original C9 ability8 prerequisite and actual jump/preheld Down/fresh Square select native Zero56/animation98; the sole guest attack takes original48HP to40 and forces original Sigmaaction3, followed by natural recovery. No final defeat/transition, elective balance or native3330 credit. Typed original checkpoint and all-ability equipment factory3D718 plus hostile-contact protection bypass campaign/ability reachability and incidental damage. Starting HP off. No actor position, attack pose, boss HP/phase, death, scene or result writes; original game performs the ability, damage and reaction. Each peer has an actual recorded native56/98or99 witness and exact8HP/action3 observation. Diagnostic body, actor and images are asynchronous; witness frames may differ across peers. DD is a transient event flag and is recorded with its actual value. Private35 snapshot availability is reported explicitly per mode and is never invented; original source uniquely identifies the observed ability producer. Earlier combined-input normal27/2HP, true nonoverlapping blade, transient-child snapshot gate and overly atomic/event-flag observer failures remain raw and uncredited. They do not replace the final mode endpoint, recovery or synchronization checks. F139 completed evidence is reused without another combo run. Same exact C112 image LOCAL and same-PC loopback NET, all parent gates and final synchronization, reviewed composed images, three owned clean native exits and unchanged cards. No WAN/cross-platform or later-body roster claim; C113 paired-release fatal remains isolated/parked."
       }
     },
     {

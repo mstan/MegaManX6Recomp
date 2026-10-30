@@ -1,0 +1,954 @@
+{
+  "kind": "F138_actual_guest_original_Sigma_weakness_hit_reaction_recovery_LOCAL_NET_root_review",
+  "status": "passed",
+  "comparison": "F138",
+  "frozen_row_sha256": "b149f6823b19cd2cf6170d1dd6154d15a15d9b5f1a63503b4f3a67f1ed353ff3",
+  "candidate": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+  "binding": {
+    "image_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+    "manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+    "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "modes": {
+    "local": {
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sigma-transition-v112-final-binding-root-v1.json",
+        "binding_sha256": "9e26821146adc7324c3c072aa226274f5a2a42d527adb67c25ca270655f4a769",
+        "image_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+        "manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+        "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v112-sigma-transition-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v60",
+        "host_revision": 43
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "original_Sigma_positive48HP_release": true,
+        "original_ability_C9_bit8_and_actual_jump": true,
+        "original_native_action56_and_private35": true,
+        "actual_guest_accepted8HP_and_original_action3": true,
+        "original_weakness_recovery_and_retirement": true,
+        "no_HP_phase_death_or_result_writes": true
+      },
+      "actual_native_ability_witnesses": [
+        {
+          "peer": 0,
+          "row": 706,
+          "actual_action": 56,
+          "actual_animation": 98,
+          "actual_DD_event_flag": 0
+        }
+      ],
+      "private35_snapshot_observed": true,
+      "original_producer_identity": "Original Zero56/animation98 selects C440/CED4/ECD54(35); source-bound identity, not an invented projectile snapshot.",
+      "native_jump_row": 702,
+      "direction_before_attack_row": 704,
+      "actual_weakness_reaction": {
+        "row": 706,
+        "HP_before": [
+          48
+        ],
+        "HP_after": [
+          40
+        ],
+        "original_action": [
+          3
+        ],
+        "original_recovery86": [
+          9998
+        ]
+      },
+      "original_recovery": {
+        "row": 754,
+        "HP": [
+          40
+        ],
+        "defense_table": "8007591C",
+        "timer86": 0,
+        "Zero_idle": true,
+        "private_attacks_retired": true
+      },
+      "captures": [
+        {
+          "peer": 0,
+          "label": "native-original-Sigma-CP1",
+          "row": 108,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+          "sha256": "60bf24b1cf38f7c411ccda628241d13110d4689a297fa0d07fc74096998e2635",
+          "before": {
+            "id": 2468,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 2469,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 2470,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-first-Sigma-scene",
+          "row": 134,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+          "sha256": "75f41a2278c4d898449203146d4309ee5bfb8cb6396f61a6f2af257c1839d8cc",
+          "before": {
+            "id": 2615,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 2616,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+            "staged": true,
+            "seq": 1
+          },
+          "completion": {
+            "id": 2618,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-Sigma61-released",
+          "row": 673,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png",
+          "sha256": "49d4d097a8070702d8596bf9508f9ea373a434908399fe898cae362a9197bf37",
+          "before": {
+            "id": 6073,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 6074,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png",
+            "staged": true,
+            "seq": 2
+          },
+          "completion": {
+            "id": 6076,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-airborne-weakness-prerequisite",
+          "row": 704,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-guest-airborne-weakness-prerequisite.png",
+          "sha256": "6c32d22411d3a8019f12cb49199f604abeb1de35fe5949f156fd472fd15493b3",
+          "before": {
+            "id": 6347,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 6348,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-guest-airborne-weakness-prerequisite.png",
+            "staged": true,
+            "seq": 3
+          },
+          "completion": {
+            "id": 6349,
+            "ok": true,
+            "seq": 4,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-actual-Sigma-weakness-reaction",
+          "row": 706,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png",
+          "sha256": "e59bf29cbe4b25482dde58f5edaca843600824586a19f9a84ef25ca91ea678fa",
+          "before": {
+            "id": 6368,
+            "ok": true,
+            "seq": 4,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 6369,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png",
+            "staged": true,
+            "seq": 4
+          },
+          "completion": {
+            "id": 6371,
+            "ok": true,
+            "seq": 5,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-original-Sigma-weakness-recovery",
+          "row": 754,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png",
+          "sha256": "f69a836481089dc2daa7109dd14b7e02a4f983abc9f55ab98447b7eb94e8aaa2",
+          "before": {
+            "id": 6708,
+            "ok": true,
+            "seq": 5,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 6709,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png",
+            "staged": true,
+            "seq": 5
+          },
+          "completion": {
+            "id": 6711,
+            "ok": true,
+            "seq": 6,
+            "wrote": 1
+          }
+        }
+      ],
+      "terminals": [
+        {
+          "owned_pid": 54376,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "matching_crc_samples": 0,
+      "resolved_crc_windows": [],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\qualification.json",
+          "bytes": 26134942,
+          "sha256": "58fa12924309fcb58216b8418f8bf1968daceafcc6baedbfa17fb0acc0d0a3aa"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\ammo-hud\\intro-admission\\observations.json",
+          "bytes": 12502591,
+          "sha256": "1fbbd738b3244c04989edeb1b0ae614367506080d466f97b4cbe62b3a3d28aa4"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l\\F138-executing-source-pins.json",
+          "bytes": 9347,
+          "sha256": "fd0221b73142f111d9f9e385e9b522d61364ad27d27d42055a369112c8e5ecdd"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2l-lease-root-v1.json",
+          "bytes": 1767,
+          "sha256": "771255035c1211bb9ec17a3892dbd1655ce5120b1f493631bee1d6e2331894e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F138-v112-LOCAL-root-image-review-root-v1.json",
+          "bytes": 2860,
+          "sha256": "ace5ea9fbec3bf5165f07ac869444058ce71ff553059e71f262de999e9df1489"
+        }
+      ]
+    },
+    "netplay": {
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sigma-transition-v112-final-binding-root-v1.json",
+        "binding_sha256": "9e26821146adc7324c3c072aa226274f5a2a42d527adb67c25ca270655f4a769",
+        "image_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+        "manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+        "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v112-sigma-transition-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v60",
+        "host_revision": 43
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "original_Sigma_positive48HP_release": true,
+        "original_ability_C9_bit8_and_actual_jump": true,
+        "original_native_action56_animation_and_source_identity": true,
+        "actual_guest_accepted8HP_and_original_action3": true,
+        "original_weakness_recovery_and_retirement": true,
+        "no_HP_phase_death_or_result_writes": true
+      },
+      "actual_native_ability_witnesses": [
+        {
+          "peer": 0,
+          "row": 330,
+          "actual_action": 56,
+          "actual_animation": 98,
+          "actual_DD_event_flag": 1
+        },
+        {
+          "peer": 1,
+          "row": 331,
+          "actual_action": 56,
+          "actual_animation": 98,
+          "actual_DD_event_flag": 0
+        }
+      ],
+      "private35_snapshot_observed": true,
+      "original_producer_identity": "Original Zero56/animation98 selects C440/CED4/ECD54(35); source-bound identity, not an invented projectile snapshot.",
+      "native_jump_row": 326,
+      "direction_before_attack_row": 328,
+      "actual_weakness_reaction": {
+        "row": 331,
+        "HP_before": [
+          48,
+          48
+        ],
+        "HP_after": [
+          40,
+          40
+        ],
+        "original_action": [
+          3,
+          3
+        ],
+        "original_recovery86": [
+          9994,
+          9996
+        ]
+      },
+      "original_recovery": {
+        "row": 373,
+        "HP": [
+          40,
+          40
+        ],
+        "defense_table": "8007591C",
+        "timer86": 0,
+        "Zero_idle": true,
+        "private_attacks_retired": true
+      },
+      "captures": [
+        {
+          "peer": 0,
+          "label": "native-original-Sigma-CP1",
+          "row": 40,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+          "sha256": "34fad56d5b2389f8529583b75afa7de77f808dbfd190d2106066dab04aba6282",
+          "before": {
+            "id": 1770,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 1771,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 1773,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "native-original-Sigma-CP1",
+          "row": 40,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-original-Sigma-CP1.png",
+          "sha256": "5574bd20d341027d20e0dd8b4a3d5b878ee0c0e71752f3fdb1b4f6f5556249a4",
+          "before": {
+            "id": 1586,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 1587,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-original-Sigma-CP1.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 1588,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-first-Sigma-scene",
+          "row": 61,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+          "sha256": "1a9e9f3f7a0f33916395fdfde1b5b976065de066e59b6d1cfd2c657e90f8d1b3",
+          "before": {
+            "id": 1894,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 1895,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+            "staged": true,
+            "seq": 1
+          },
+          "completion": {
+            "id": 1897,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "native-first-Sigma-scene",
+          "row": 61,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-first-Sigma-scene.png",
+          "sha256": "fc221733359561f5891ce04d4845141fd509659ac37bc7e36035ca2df54bd2e1",
+          "before": {
+            "id": 1705,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 1706,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-first-Sigma-scene.png",
+            "staged": true,
+            "seq": 1
+          },
+          "completion": {
+            "id": 1708,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-Sigma61-released",
+          "row": 304,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-Sigma61-released.png",
+          "sha256": "a56f19e80042f5c202bff19168d0a41f0f8ca4bc344c1e737caa33c5e83d9aeb",
+          "before": {
+            "id": 3497,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 3498,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-Sigma61-released.png",
+            "staged": true,
+            "seq": 2
+          },
+          "completion": {
+            "id": 3500,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "native-Sigma61-released",
+          "row": 304,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-Sigma61-released.png",
+          "sha256": "fb69abba525b5530851a95d31ad29f8d4b5c4cd632162051f466f20e62f3e98f",
+          "before": {
+            "id": 3259,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 3260,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-Sigma61-released.png",
+            "staged": true,
+            "seq": 2
+          },
+          "completion": {
+            "id": 3261,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-guest-airborne-weakness-prerequisite",
+          "row": 328,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-guest-airborne-weakness-prerequisite.png",
+          "sha256": "fdb9e622a96d9c6e9d749ff41df3810bfdc24601b30b20431e94430ad80c09b1",
+          "before": {
+            "id": 3673,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 3674,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-guest-airborne-weakness-prerequisite.png",
+            "staged": true,
+            "seq": 3
+          },
+          "completion": {
+            "id": 3675,
+            "ok": true,
+            "seq": 4,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "native-guest-airborne-weakness-prerequisite",
+          "row": 328,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-guest-airborne-weakness-prerequisite.png",
+          "sha256": "4804ed2284eece948f86ba9ae73de74acb4ca166519a565b3780e1b19182bbfc",
+          "before": {
+            "id": 3466,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 3467,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-guest-airborne-weakness-prerequisite.png",
+            "staged": true,
+            "seq": 3
+          },
+          "completion": {
+            "id": 3469,
+            "ok": true,
+            "seq": 4,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-actual-Sigma-weakness-reaction",
+          "row": 331,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png",
+          "sha256": "7d8b4523f8e830981eeffa1395175280b12584ced7cb3ce260c984655c8f111e",
+          "before": {
+            "id": 3697,
+            "ok": true,
+            "seq": 4,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 3698,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png",
+            "staged": true,
+            "seq": 4
+          },
+          "completion": {
+            "id": 3699,
+            "ok": true,
+            "seq": 5,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "native-actual-Sigma-weakness-reaction",
+          "row": 331,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-actual-Sigma-weakness-reaction.png",
+          "sha256": "03612e171406db290165ba801b7fa657d490e101f045a6b5919dd3d0ff6e0c50",
+          "before": {
+            "id": 3497,
+            "ok": true,
+            "seq": 4,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 3498,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-actual-Sigma-weakness-reaction.png",
+            "staged": true,
+            "seq": 4
+          },
+          "completion": {
+            "id": 3500,
+            "ok": true,
+            "seq": 5,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 0,
+          "label": "native-original-Sigma-weakness-recovery",
+          "row": 373,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png",
+          "sha256": "f3683ca6bf3ed251a24b277d89c33d94126c90de916717d5de0053e12aed6894",
+          "before": {
+            "id": 3996,
+            "ok": true,
+            "seq": 5,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 3997,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png",
+            "staged": true,
+            "seq": 5
+          },
+          "completion": {
+            "id": 3998,
+            "ok": true,
+            "seq": 6,
+            "wrote": 1
+          }
+        },
+        {
+          "peer": 1,
+          "label": "native-original-Sigma-weakness-recovery",
+          "row": 373,
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-original-Sigma-weakness-recovery.png",
+          "sha256": "a2fb40addad2eaa5901140636e64392c7c834d6bd601336efa4a8c4eec91d8ab",
+          "before": {
+            "id": 3797,
+            "ok": true,
+            "seq": 5,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 3798,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\peer-1-native-original-Sigma-weakness-recovery.png",
+            "staged": true,
+            "seq": 5
+          },
+          "completion": {
+            "id": 3800,
+            "ok": true,
+            "seq": 6,
+            "wrote": 1
+          }
+        }
+      ],
+      "terminals": [
+        {
+          "owned_pid": 53868,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "owned_pid": 52480,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "matching_crc_samples": 24,
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 3072,
+              "core": "a96a4e97",
+              "mod": "4b8d8602"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "28aeaef9",
+              "mod": "128f43a2"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "d870dd25",
+              "mod": "d59c8e14"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "b54d72f5",
+              "mod": "f095e7b4"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "fd308edb",
+              "mod": "5a94c6c0"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "cb4161fc",
+              "mod": "73afff2a"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "1c0c8193",
+              "mod": "1482790c"
+            }
+          ],
+          "resolved_through": [
+            3294,
+            3294
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3360,
+              "core": "f6586ce9",
+              "mod": "9dd3e889"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "f8734051",
+              "mod": "994e2398"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "c719222b",
+              "mod": "0a0c113a"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "a5bc2ab6",
+              "mod": "5af2dd40"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "a1a3eff1",
+              "mod": "dd981320"
+            }
+          ],
+          "resolved_through": [
+            3520,
+            3520
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3584,
+              "core": "66a30e7a",
+              "mod": "da47103e"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "2cf4bbd3",
+              "mod": "fd33faf8"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "6ff7c8c6",
+              "mod": "8384b40a"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "964181a6",
+              "mod": "bb8350a2"
+            },
+            {
+              "simulation_tick": 3712,
+              "core": "faa6dd4a",
+              "mod": "bca33030"
+            },
+            {
+              "simulation_tick": 3744,
+              "core": "898159bf",
+              "mod": "7c04ad30"
+            },
+            {
+              "simulation_tick": 3776,
+              "core": "075357cd",
+              "mod": "4b385892"
+            }
+          ],
+          "resolved_through": [
+            3784,
+            3784
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 6880,
+              "core": "943d7273",
+              "mod": "51d99bc2"
+            },
+            {
+              "simulation_tick": 6912,
+              "core": "54d32a3f",
+              "mod": "77d61623"
+            },
+            {
+              "simulation_tick": 6944,
+              "core": "581e7aa6",
+              "mod": "69464883"
+            },
+            {
+              "simulation_tick": 6976,
+              "core": "1e9312f9",
+              "mod": "c9801a59"
+            },
+            {
+              "simulation_tick": 7008,
+              "core": "36c3e52b",
+              "mod": "0bb41d85"
+            }
+          ],
+          "resolved_through": [
+            7035,
+            7035
+          ]
+        }
+      ],
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\qualification.json",
+          "bytes": 14426510,
+          "sha256": "f2e65774c8515cb308463938e66f9a3e7558f7674e85ab2e9050d61aa2699671"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\intro-admission\\observations.json",
+          "bytes": 12390819,
+          "sha256": "8ca25cb5a381e91e49b5b93e9037839794e293961172e077dcdb7c37f1d23108"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n\\F138-executing-source-pins.json",
+          "bytes": 9882,
+          "sha256": "2e9521cb9f22cc6d9121bf24ba721910a6e2080c13849e6d14d2ee9c71421b7a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk6n-lease-root-v1.json",
+          "bytes": 1733,
+          "sha256": "b723d0a8cdd4d2f6a0d643c6105894641e283af3c3f7d03f996c88fe5e2b8c51"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F138-v112-NETPLAY-root-image-review-root-v1.json",
+          "bytes": 4784,
+          "sha256": "845b8f4e00e22433457b70347707d1aa1409ec4a3777498d0f1e091d195bf061"
+        }
+      ]
+    }
+  },
+  "root_personally_viewed_images": 18,
+  "source_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F138-F139-Sigma-source-root-v1\\F138-source.json",
+    "bytes": 2740,
+    "sha256": "3bb356fa96c002589cc3064c3db576a2149c68aba9d24fea5a73f5284e0ec9c1"
+  },
+  "geometry_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F138-F139-Sigma-source-root-v1\\F138-geometry-source-v3.json",
+    "bytes": 1279,
+    "sha256": "89d4cb34a4b4d0d9ee49a4c1194ddf8a34e4542aa72e81d5889d2211916e7b68"
+  },
+  "prior_failed_raw": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk1l\\ammo-hud\\intro-admission\\observations.json",
+      "bytes": 14261490,
+      "sha256": "4e09226e6638a97389bf7e539b0eb9b15785bd2d2b843a5e88196e8c1730fc48"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk2n\\intro-admission\\observations.json",
+      "bytes": 23350037,
+      "sha256": "03c98f0e4cb44559d97cff84b143eefda11d3143afbfe8e86076b4fe18ddee1f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk3n\\intro-admission\\observations.json",
+      "bytes": 20693106,
+      "sha256": "3bc7cc24a9db9fc610102450e2163175cc5164135cbf5d0258d64bb48a8947d5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk4n\\intro-admission\\observations.json",
+      "bytes": 22809636,
+      "sha256": "fda97e8616fec855b0a4d1c644b3bbd589976d4dbb9db905079c38bd279f4bd3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\wk5n\\intro-admission\\observations.json",
+      "bytes": 16163616,
+      "sha256": "c38c20c6c117be576c1fed594e085c796ea9b6fc449b3fa35628299d2f0e19b9"
+    }
+  ],
+  "limits": [
+    "Only frozen234 F138 first native Sigma61 weakness. Original C9 ability8 prerequisite and actual jump/preheld Down/fresh Square select native Zero56/animation98; the sole guest attack takes original48HP to40 and forces original Sigmaaction3, followed by natural recovery. No final defeat/transition, elective balance or native3330 credit.",
+    "Typed original checkpoint and all-ability equipment factory3D718 plus hostile-contact protection bypass campaign/ability reachability and incidental damage. Starting HP off. No actor position, attack pose, boss HP/phase, death, scene or result writes; original game performs the ability, damage and reaction.",
+    "Each peer has an actual recorded native56/98or99 witness and exact8HP/action3 observation. Diagnostic body, actor and images are asynchronous; witness frames may differ across peers. DD is a transient event flag and is recorded with its actual value. Private35 snapshot availability is reported explicitly per mode and is never invented; original source uniquely identifies the observed ability producer.",
+    "Earlier combined-input normal27/2HP, true nonoverlapping blade, transient-child snapshot gate and overly atomic/event-flag observer failures remain raw and uncredited. They do not replace the final mode endpoint, recovery or synchronization checks. F139 completed evidence is reused without another combo run.",
+    "Same exact C112 image LOCAL and same-PC loopback NET, all parent gates and final synchronization, reviewed composed images, three owned clean native exits and unchanged cards. No WAN/cross-platform or later-body roster claim; C113 paired-release fatal remains isolated/parked."
+  ]
+}
