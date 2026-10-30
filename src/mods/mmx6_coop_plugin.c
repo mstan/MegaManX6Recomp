@@ -1340,8 +1340,13 @@ static int interaction_begin(CPUState *cpu, uint32_t address) {
         psx_mod_write_half(0x800C4570,p2_edges);
     }
     uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
-    if (psx_mod_read_byte(PLAYER+0xD0) || psx_mod_read_byte(PLAY+0x10)==2)
+    if (psx_mod_read_byte(PLAYER+0xD0) || psx_mod_read_byte(PLAY+0x10)==2) {
         scene_begin(seat,address);
+        /* Original Dr. Light action20 is an in-place conversation/grant.
+         * Keep its selected owner and native locks, with the living partner
+         * visible. An outgoing passenger beam has no capsule destination. */
+        if (address==0x80051924u) scene_phase=0;
+    }
     if (seat) {
         leave_zero_context(1);
         project(0x800C456C,input,sizeof input);

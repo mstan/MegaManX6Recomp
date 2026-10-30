@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 46,
+  "revision": 48,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v63",
+    "title_compatibility": "mmx6-x-zero-delay-v65",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -812,5 +812,11 @@
     "guard": "Twenty original overlay store sites, exact seven-word source windows, accepted actor provenance, live recognized metered actor and native7433C rejection table. No generic AI timer shortening.",
     "state": "Snapshot17 captures/digests/validates the pending accepted actor; new allocation and activation clear it.",
     "acceptance": "Fresh same-image LOCAL/NET real ordinary hits with original30->15 and finite native expiry; retain weakness/defaultOff regressions and full synchronization/cards/owned-exit gates. No source/unit-only row credit."
+  },
+  "native_capsule_passenger_visibility": {
+    "policy": "Original51924 capsule admission retains the selected scene owner and native locks without withdrawing/rejoining the living passenger. Original conversation, grant, animation and release remain native.",
+    "callback": "interaction_begin at51924, scene_phase0 existing serializer",
+    "runtime_status": "candidate_unverified",
+    "title": 65
   }
 }

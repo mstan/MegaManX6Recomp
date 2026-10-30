@@ -30,7 +30,7 @@ static unsigned icon_packet_probe,dash_packet_probe;
 static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
-static unsigned scene_transport_probe;
+static unsigned scene_transport_probe,capsule_native_probe;
 static unsigned voluntary_transport_probe;
 static unsigned paired_arrival_fixture_probe,arrival_landed,arrival_ticks[2],arrival_births;
 static unsigned clear_probe,clear_worlds,clear_zero_worlds,clear_fades;
@@ -352,6 +352,16 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         }
         CHECK(0);
     }
+    if(capsule_native_probe) {
+        /* External original51924->3D308 request and shared capsule locks. */
+        CHECK(address==0x80051924u);
+        psx_mod_write_byte(PLAYER+0xD0,20);
+        for(unsigned n=0;n<4;++n) {
+            const unsigned offsets[]={0x12,0x13,0x16,0x17};
+            psx_mod_write_byte(PLAY+offsets[n],1);
+        }
+        cpu->gpr[2]=1;return;
+    }
     if(door_native_probe) {
         if(address==0x8003CCBCu) {
             CHECK(cpu->gpr[4]==PLAYER);
@@ -543,7 +553,7 @@ static void setup(CPUState *cpu){
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=0;
     door_native_probe=door_ticks=door_draws=both_doors=scene_call=0;both_door_reset();door_subtype_allowed=1;
     icon_packet_probe=dash_packet_probe=render_replacement_probe=0;
-    death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=voluntary_transport_probe=0;memset(death_effect,0,sizeof death_effect);
+    death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=voluntary_transport_probe=capsule_native_probe=0;memset(death_effect,0,sizeof death_effect);
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=arrival_pair=0;previous_input=p2_edges=0;p2_start_previous=0;
     paired_arrival_fixture_probe=arrival_landed=arrival_births=0;memset(arrival_ticks,0,sizeof arrival_ticks);
@@ -2316,6 +2326,37 @@ static void native_optional_boss_shared_cooldown(void) {
     boss_balance_pending_actor=0;memset(boss_balance,0,sizeof boss_balance);
 }
 
+static void native_capsule_keeps_living_passenger(void) {
+    for(unsigned seat=0;seat<2;++seat) {
+        CPUState cpu;setup(&cpu);capsule_native_probe=1;
+        life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+        psx_mod_write_byte(PLAYER+3,1);psx_mod_write_byte(PLAYER+4,1);
+        psx_mod_write_byte(PLAYER+0x5C,32);p2.body[3]=p2.body[4]=1;p2.body[0x5C]=32;
+        uint32_t actor=0x800C1220u;cpu.gpr[4]=actor;
+        psx_mod_write_word(actor+8,1424u<<16);psx_mod_write_word(actor+12,1604u<<16);
+        psx_mod_write_word(PLAYER+8,(seat?1600u:1424u)<<16);
+        psx_mod_write_word(PLAYER+12,1595u<<16);
+        put32(p2.body+8,(seat?1424u:1600u)<<16);put32(p2.body+12,1594u<<16);
+        CHECK(interaction_begin(&cpu,0x80051924u));
+        CHECK(scene_owner==seat+1 && !scene_phase && !failed && !state_track.count);
+        unsigned before=call_count;
+        for(unsigned tick=0;tick<20;++tick) {
+            scene_tick(&cpu);
+            CHECK(scene_owner==seat+1 && !scene_phase && call_count==before);
+            CHECK(psx_mod_read_byte(PLAYER+3) && psx_mod_read_byte(PLAYER+4)==1 &&
+                  p2.body[3] && p2.body[4]==1 && !failed);
+        }
+        /* The original owner finishes the capsule; no synthetic landing or
+         * passenger constructor is needed to release the shared owner. */
+        if(seat)p2.body[0xD0]=0;else psx_mod_write_byte(PLAYER+0xD0,0);
+        for(unsigned n=0;n<4;++n) {
+            const unsigned offsets[]={0x12,0x13,0x16,0x17};
+            psx_mod_write_byte(PLAY+offsets[n],0);
+        }
+        scene_tick(&cpu);CHECK(!scene_owner && !scene_phase && call_count==before && !failed);
+    }
+}
+
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_guest_weather_window();
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
@@ -2335,6 +2376,7 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_shared_ride_ownership();
     native_shared_clear_admission_and_departure();
     native_sigma_transition_retains_living_pair();
+    native_capsule_keeps_living_passenger();
     native_either_both_door_admission();
     native_both_door_ack_motion_and_release();
     native_paired_arrival_barrier();
