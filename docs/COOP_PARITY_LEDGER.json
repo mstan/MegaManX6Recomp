@@ -19976,14 +19976,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -20083,9 +20083,79 @@
             "bypasses": [
               "Original checkpoint reachability/contact protection; no outcome seeding."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+            "build_identity": {
+              "executable_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+              "compiled_manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+              "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisite": "original SigmaCP1; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Defeat original48HP first Sigma through native attacks; retain both heroes through original death and same-actor62 initialization/intro/release, then consume separate owned movements.",
+            "outcome": "Both living visible heroes remain without passenger departure; original later body fills HP and releases, then each hero moves independently with the partner stationary. Exact parent source/profile/synchronization/restoration/card/owned-exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-e7ba6ae-F141-F142-Sigma-native-transition-local-netplay-reviewed.json",
+                "sha256": "5a35d306a3f6aa2cd59406a529ec108d5866529050c5a453771851cc94cdaf81"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F141/F142 native Sigma61-to62 transition, X/P1+Zero/P2 on exact LOCAL and same-PC loopback NET. No invented third form, later Sigma defeat, ending, WAN or native3330 audit.",
+              "Original12/1CP1 reachability and hostile-contact protection are disclosed bypasses. First Sigma retains full original48HP and dies through real owned Zero attacks; no HP, actor position, phase, death, scene, result or success writes.",
+              "Fix selects existing phase0 hold only for source-qualified original first61 death and later62 init command20 with both living visible heroes. Native script, transform, intro, HP fill and release execute normally; no new persistent state; snapshot15 unchanged.",
+              "Complete observations retain all misses and asynchronous continuing-attack lethal, every postdeath living/visible roster, same original actor through61-to62, native later release and both separate movements with partner stationary. RAM/private/capture observations are asynchronous; no instruction-atomic image claim.",
+              "Earlier same-image sg4n NET native fatal atX3767.90625/Y394 remains preserved in partialreceipt0902162d. Actual collision89 becomes0F andCF1; exact emitting solid/cause is not attributed or declared fixed. Successful NET uses ordinary left-side melee approaches<=3680 and actual lethal stance<=3720, while completed same-image LOCAL ending3732.40625 is reused. This bounded full transition qualification does not clear every final-hit position or that unresolved fatal contact.",
+              "BaselineV112 actual first defeat outgoing failure remains in F141 evidence. Earlier initial-intro HP0 false trigger, old observer assumptions and initial stale identity-test failures remain retained without credit. Source/compiled test counts do not close comparisons."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only; no outcome seeding."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+            "build_identity": {
+              "executable_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+              "compiled_manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+              "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "audio": "dummy muted",
+              "prerequisite": "original SigmaCP1; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Defeat original48HP first Sigma through native attacks; retain both heroes through original death and same-actor62 initialization/intro/release, then consume separate owned movements.",
+            "outcome": "Both living visible heroes remain without passenger departure; original later body fills HP and releases, then each hero moves independently with the partner stationary. Exact parent source/profile/synchronization/restoration/card/owned-exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-e7ba6ae-F141-F142-Sigma-native-transition-local-netplay-reviewed.json",
+                "sha256": "5a35d306a3f6aa2cd59406a529ec108d5866529050c5a453771851cc94cdaf81"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F141/F142 native Sigma61-to62 transition, X/P1+Zero/P2 on exact LOCAL and same-PC loopback NET. No invented third form, later Sigma defeat, ending, WAN or native3330 audit.",
+              "Original12/1CP1 reachability and hostile-contact protection are disclosed bypasses. First Sigma retains full original48HP and dies through real owned Zero attacks; no HP, actor position, phase, death, scene, result or success writes.",
+              "Fix selects existing phase0 hold only for source-qualified original first61 death and later62 init command20 with both living visible heroes. Native script, transform, intro, HP fill and release execute normally; no new persistent state; snapshot15 unchanged.",
+              "Complete observations retain all misses and asynchronous continuing-attack lethal, every postdeath living/visible roster, same original actor through61-to62, native later release and both separate movements with partner stationary. RAM/private/capture observations are asynchronous; no instruction-atomic image claim.",
+              "Earlier same-image sg4n NET native fatal atX3767.90625/Y394 remains preserved in partialreceipt0902162d. Actual collision89 becomes0F andCF1; exact emitting solid/cause is not attributed or declared fixed. Successful NET uses ordinary left-side melee approaches<=3680 and actual lethal stance<=3720, while completed same-image LOCAL ending3732.40625 is reused. This bounded full transition qualification does not clear every final-hit position or that unresolved fatal contact.",
+              "BaselineV112 actual first defeat outgoing failure remains in F141 evidence. Earlier initial-intro HP0 false trigger, old observer assumptions and initial stale identity-test failures remain retained without credit. Source/compiled test counts do not close comparisons."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only; no outcome seeding."
+            ]
           }
         ],
-        "limitations": "Source-qualified candidate e7ba6ae completes actual native LOCAL first48HP defeat, later127HP body release, continuous pair and both controls. NET retains both through intro but guest dies from native fatalCF1 immediately after release at3767.90625/Y394; cause unclassified, final controls/sync incomplete. Candidate isolated; full row unadmitted; raw failures preserved."
+        "limitations": "Only frozen234 F141/F142 native Sigma61-to62 transition, X/P1+Zero/P2 on exact LOCAL and same-PC loopback NET. No invented third form, later Sigma defeat, ending, WAN or native3330 audit. Original12/1CP1 reachability and hostile-contact protection are disclosed bypasses. First Sigma retains full original48HP and dies through real owned Zero attacks; no HP, actor position, phase, death, scene, result or success writes. Fix selects existing phase0 hold only for source-qualified original first61 death and later62 init command20 with both living visible heroes. Native script, transform, intro, HP fill and release execute normally; no new persistent state; snapshot15 unchanged. Complete observations retain all misses and asynchronous continuing-attack lethal, every postdeath living/visible roster, same original actor through61-to62, native later release and both separate movements with partner stationary. RAM/private/capture observations are asynchronous; no instruction-atomic image claim. Earlier same-image sg4n NET native fatal atX3767.90625/Y394 remains preserved in partialreceipt0902162d. Actual collision89 becomes0F andCF1; exact emitting solid/cause is not attributed or declared fixed. Successful NET uses ordinary left-side melee approaches<=3680 and actual lethal stance<=3720, while completed same-image LOCAL ending3732.40625 is reused. This bounded full transition qualification does not clear every final-hit position or that unresolved fatal contact. BaselineV112 actual first defeat outgoing failure remains in F141 evidence. Earlier initial-intro HP0 false trigger, old observer assumptions and initial stale identity-test failures remain retained without credit. Source/compiled test counts do not close comparisons."
       }
     },
     {
@@ -20113,14 +20183,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -20186,9 +20256,79 @@
             "bypasses": [
               "Original checkpoint reachability/contact protection; no outcome seeding."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+            "build_identity": {
+              "executable_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+              "compiled_manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+              "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisite": "original SigmaCP1; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Defeat original48HP first Sigma through native attacks; retain both heroes through original death and same-actor62 initialization/intro/release, then consume separate owned movements.",
+            "outcome": "Both living visible heroes remain without passenger departure; original later body fills HP and releases, then each hero moves independently with the partner stationary. Exact parent source/profile/synchronization/restoration/card/owned-exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-e7ba6ae-F141-F142-Sigma-native-transition-local-netplay-reviewed.json",
+                "sha256": "5a35d306a3f6aa2cd59406a529ec108d5866529050c5a453771851cc94cdaf81"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F141/F142 native Sigma61-to62 transition, X/P1+Zero/P2 on exact LOCAL and same-PC loopback NET. No invented third form, later Sigma defeat, ending, WAN or native3330 audit.",
+              "Original12/1CP1 reachability and hostile-contact protection are disclosed bypasses. First Sigma retains full original48HP and dies through real owned Zero attacks; no HP, actor position, phase, death, scene, result or success writes.",
+              "Fix selects existing phase0 hold only for source-qualified original first61 death and later62 init command20 with both living visible heroes. Native script, transform, intro, HP fill and release execute normally; no new persistent state; snapshot15 unchanged.",
+              "Complete observations retain all misses and asynchronous continuing-attack lethal, every postdeath living/visible roster, same original actor through61-to62, native later release and both separate movements with partner stationary. RAM/private/capture observations are asynchronous; no instruction-atomic image claim.",
+              "Earlier same-image sg4n NET native fatal atX3767.90625/Y394 remains preserved in partialreceipt0902162d. Actual collision89 becomes0F andCF1; exact emitting solid/cause is not attributed or declared fixed. Successful NET uses ordinary left-side melee approaches<=3680 and actual lethal stance<=3720, while completed same-image LOCAL ending3732.40625 is reused. This bounded full transition qualification does not clear every final-hit position or that unresolved fatal contact.",
+              "BaselineV112 actual first defeat outgoing failure remains in F141 evidence. Earlier initial-intro HP0 false trigger, old observer assumptions and initial stale identity-test failures remain retained without credit. Source/compiled test counts do not close comparisons."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only; no outcome seeding."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e7ba6aef79e8999adfe0c6f33c3b23b704ca37eb",
+            "build_identity": {
+              "executable_sha256": "5357f01c59acd8ece798296e6d1d22bcb7337df0b712c6d2dd1f7e6f04181ad3",
+              "compiled_manifest_sha256": "b9cd76f09fe52a51831cec0bffd77e22592c5d700480ebc419847f812a9e4b7c",
+              "provenance_sha256": "b40ca95fc458cca2328fd0df6c30d8a43c55f4490f77d42277861223e6881e9a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "audio": "dummy muted",
+              "prerequisite": "original SigmaCP1; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Defeat original48HP first Sigma through native attacks; retain both heroes through original death and same-actor62 initialization/intro/release, then consume separate owned movements.",
+            "outcome": "Both living visible heroes remain without passenger departure; original later body fills HP and releases, then each hero moves independently with the partner stationary. Exact parent source/profile/synchronization/restoration/card/owned-exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-e7ba6ae-F141-F142-Sigma-native-transition-local-netplay-reviewed.json",
+                "sha256": "5a35d306a3f6aa2cd59406a529ec108d5866529050c5a453771851cc94cdaf81"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F141/F142 native Sigma61-to62 transition, X/P1+Zero/P2 on exact LOCAL and same-PC loopback NET. No invented third form, later Sigma defeat, ending, WAN or native3330 audit.",
+              "Original12/1CP1 reachability and hostile-contact protection are disclosed bypasses. First Sigma retains full original48HP and dies through real owned Zero attacks; no HP, actor position, phase, death, scene, result or success writes.",
+              "Fix selects existing phase0 hold only for source-qualified original first61 death and later62 init command20 with both living visible heroes. Native script, transform, intro, HP fill and release execute normally; no new persistent state; snapshot15 unchanged.",
+              "Complete observations retain all misses and asynchronous continuing-attack lethal, every postdeath living/visible roster, same original actor through61-to62, native later release and both separate movements with partner stationary. RAM/private/capture observations are asynchronous; no instruction-atomic image claim.",
+              "Earlier same-image sg4n NET native fatal atX3767.90625/Y394 remains preserved in partialreceipt0902162d. Actual collision89 becomes0F andCF1; exact emitting solid/cause is not attributed or declared fixed. Successful NET uses ordinary left-side melee approaches<=3680 and actual lethal stance<=3720, while completed same-image LOCAL ending3732.40625 is reused. This bounded full transition qualification does not clear every final-hit position or that unresolved fatal contact.",
+              "BaselineV112 actual first defeat outgoing failure remains in F141 evidence. Earlier initial-intro HP0 false trigger, old observer assumptions and initial stale identity-test failures remain retained without credit. Source/compiled test counts do not close comparisons."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only; no outcome seeding."
+            ]
           }
         ],
-        "limitations": "Source-qualified candidate e7ba6ae completes actual native LOCAL first48HP defeat, later127HP body release, continuous pair and both controls. NET retains both through intro but guest dies from native fatalCF1 immediately after release at3767.90625/Y394; cause unclassified, final controls/sync incomplete. Candidate isolated; full row unadmitted; raw failures preserved."
+        "limitations": "Only frozen234 F141/F142 native Sigma61-to62 transition, X/P1+Zero/P2 on exact LOCAL and same-PC loopback NET. No invented third form, later Sigma defeat, ending, WAN or native3330 audit. Original12/1CP1 reachability and hostile-contact protection are disclosed bypasses. First Sigma retains full original48HP and dies through real owned Zero attacks; no HP, actor position, phase, death, scene, result or success writes. Fix selects existing phase0 hold only for source-qualified original first61 death and later62 init command20 with both living visible heroes. Native script, transform, intro, HP fill and release execute normally; no new persistent state; snapshot15 unchanged. Complete observations retain all misses and asynchronous continuing-attack lethal, every postdeath living/visible roster, same original actor through61-to62, native later release and both separate movements with partner stationary. RAM/private/capture observations are asynchronous; no instruction-atomic image claim. Earlier same-image sg4n NET native fatal atX3767.90625/Y394 remains preserved in partialreceipt0902162d. Actual collision89 becomes0F andCF1; exact emitting solid/cause is not attributed or declared fixed. Successful NET uses ordinary left-side melee approaches<=3680 and actual lethal stance<=3720, while completed same-image LOCAL ending3732.40625 is reused. This bounded full transition qualification does not clear every final-hit position or that unresolved fatal contact. BaselineV112 actual first defeat outgoing failure remains in F141 evidence. Earlier initial-intro HP0 false trigger, old observer assumptions and initial stale identity-test failures remain retained without credit. Source/compiled test counts do not close comparisons."
       }
     },
     {
