@@ -100,7 +100,7 @@ states; old-state migration is never required.
 
 **F94 is closed: 90 passed / 4 failed / 140 unverified (38.5%), one more since89.** The [reviewed authored layered-background evidence](evidence/mmx6-views/manifest-bound-8bd7061-F94-layered-background-reviewed.json) verifies actual owned movement, intact changing LOCAL panes and NET own views on exact V88. Nine composed images, all three original layer records/parallax and918 LOCAL/1047-per-peer sandbox restoration checks pass with no mismatch/VRAM or host-state leak. Finalized current-build recordings, actual initial/final native cards, common NET profile and four resolvedCRC windows pass. The raw NET parent remains failed because the replacement observer omitted its before-card map; actual card exports/files independently prove equality. Earlier window setup failures and the v3 movement false positive remain preserved. No autonomous animation, panorama wrap, every-stage or broader HUD credit.
 
-**F109 is closed: 89 passed / 4 failed / 141 unverified (38.0%), one more since88.** The [reviewed native scripted-emission evidence](evidence/mmx6-targets/manifest-bound-e204513-F109-script-emitted-group-reviewed.json) reuses actual same-candidate V83 LOCAL/NET entry and child interaction. P2 leads while the original Yammark intro progresses2â†’3â†’4 through its source-qualified allocation/group-ready gates; three initialized parented drones are retained and actual child8â†’4 interaction is already verified on every peer. The exact birth instant/count6 were not sampled and are not claimed. Existing route/protection bypasses, raw broader failures, matching CRC/profile/cards/owned exits0 and artwork limits remain explicit. No new game run or generic static-placement substitute.
+**F109 is closed: 89 passed / 4 failed / 141 unverified (38.0%), one more since88.** The [reviewed native scripted-emission evidence](evidence/mmx6-targets/manifest-bound-e204513-F109-script-emitted-group-reviewed.json) reuses actual same-candidate V83 LOCAL/NET entry and child interaction. P2 leads while the original Yammark intro progresses2→3→4 through its source-qualified allocation/group-ready gates; three initialized parented drones are retained and actual child8→4 interaction is already verified on every peer. The exact birth instant/count6 were not sampled and are not claimed. Existing route/protection bypasses, raw broader failures, matching CRC/profile/cards/owned exits0 and artwork limits remain explicit. No new game run or generic static-placement substitute.
 
 **R26 is closed: 88 passed / 4 failed / 142 unverified (37.6%), one more since87.** The [reviewed default diagnostics/location/replay evidence](evidence/mmx6-native-replay/manifest-bound-6c42c5c-R26-default-location-replay-reviewed.json) combines the retained exact5913-event fresh private LOCAL replay with new same-image NET recordings:6651 accepted events per peer, actual starting settings/cards, full location in real application logs and strict expected offline-replay refusal. All8 NET native/profile checks and three resolvedCRC windows pass; both peers exit0 and cards stay unchanged. Original-source decoding corrects a read-only button-mask classifier without another game run or raw rewrite. The failed wrapper classification remains preserved. Location is exposed through the documented OSD/log counterpart; no new path widget, online/whole-machine replay or gameplay-outcome equality is claimed.
 
@@ -138,7 +138,7 @@ F199 remains unverified after [two same-candidate LOCAL setups](evidence/mmx6-so
 
 **F197/F198 are closed: 77 passed / 4 failed / 153 unverified (32.9%).** The [same-candidate nearby native explosion review](evidence/mmx6-camera/manifest-bound-dcc1002-F197-F198-nearby-explosion-reviewed.json) qualifies actual falling impact/aftershocks, visible shared particles and both native private-camera offsets through quiet/shake/quiet in LOCAL and NET. The extra Zero quake tick is fixed by preserving the original pre-update input. All4 LOCAL/15 NET parent gates, resolved CRC, cards and owned exits pass; all18 composed captures reviewed. Native cosmetic-burst/contact-damage distinction and scenery limits remain explicit. This adds two since75.
 
-**F184 is closed: 75 passed / 4 failed / 155 unverified (32.1%).** The [initial native midboss camera review](evidence/mmx6-scene/manifest-bound-50cc26e-F184-initial-midboss-camera-reviewed.json) reuses completed exact50cc26e LOCAL/NET. Only Zero approaches; X stays5904 at admission. First allocation occurs during the original authored door sweep, then both physical peers reach6064/224 before released initial combat. Native boss32â†’28â†’24 establishes actual interaction separately from eventual defeat/exit. All12 composed images re-reviewed, with prerequisite scenery/overlap limits retained; no new runtime needed.
+**F184 is closed: 75 passed / 4 failed / 155 unverified (32.1%).** The [initial native midboss camera review](evidence/mmx6-scene/manifest-bound-50cc26e-F184-initial-midboss-camera-reviewed.json) reuses completed exact50cc26e LOCAL/NET. Only Zero approaches; X stays5904 at admission. First allocation occurs during the original authored door sweep, then both physical peers reach6064/224 before released initial combat. Native boss32→28→24 establishes actual interaction separately from eventual defeat/exit. All12 composed images re-reviewed, with prerequisite scenery/overlap limits retained; no new runtime needed.
 
 **F97 is closed: 73 passed / 4 failed / 157 unverified (31.2%).** The [native midboss handoff review](evidence/mmx6-scene/manifest-bound-723affc-F97-native-midboss-handoff-reviewed.json) reuses completed same-candidate V76 LOCAL/NET evidence. Original source establishes type48 as an intermediate encounter before story16 and the later type55 finale. Actual Both crossings retain both heroes through native HP fill/release, with no passenger/rejoin phase and separate >24px controls afterward on every peer. Root re-reviewed9 composed images; CP2 bypass and presentation limits remain explicit. This adds one since72 without another build or native run.
 
@@ -318,7 +318,7 @@ credit. A separate paired run is checking the same candidate. Aggregate remains
 **49 passed /5 failed /180 unverified** until the required mode completes.
 The ordinary intro route is deferred after its unrelated block/ladder stalls;
 the native campaign is outside this task. V67 stays isolated pending paired
-validation; the unqualified Both-door V64â€“V66 implementations remain parked.
+validation; the unqualified Both-door V64–V66 implementations remain parked.
 
 The Both-door family is now deferred after two second-body traversal attempts.
 V66 `39e1706` requests and runs Zero's original walk, but Zero remains in native
@@ -907,7 +907,7 @@ neutral inputs. It preserves the original camera predicate's false result and
 independently checks the original subtype0 current and target bounds of 2048.
 The revised passive wait preserves the original 75-second and read limits.
 The [six-location entry batch](evidence/mmx6-content/manifest-bound-50f4a31-entry-prefix17to22-reviewed.json)
-also passes original first-section entries for stages 17â€“22 in one owned run.
+also passes original first-section entries for stages 17–22 in one owned run.
 All six composed images and final parent checks were reviewed.
 The [next eight-checkpoint batch](evidence/mmx6-content/manifest-bound-50f4a31-checkpoints01to02-entry-reviewed.json)
 also passes original entry transactions and final parent checks. All eight
@@ -940,13 +940,13 @@ entry gate still set. No destination P2, collision or cause is established.
 The parent remains failed, and all three images retain background corruption
 under `beads-eio.1.52`.
 The [reviewed entry88171 batch](evidence/mmx6-content/manifest-bound-50f4a31-entry88171-twelve-components-reviewed.json)
-adds twelve individual setups: stage5 c01/c02, stage6 c01â€“c05, stage7 c01â€“c03
+adds twelve individual setups: stage5 c01/c02, stage6 c01–c05, stage7 c01–c03
 and stage8 c01/c02, all in section0. Root independently reproduced964 readiness
 samples,3,904 journal RAM links,84 original guards and96 exact mailbox writes,
 then viewed all twelve actual composed captures. All original final predicates,
 four new blank cards, strict recording refusals and owned graceful exit pass.
 The parent completed its entry survey; all six mechanics remain unverified.
-Several stage6â€“8 captures retain severe scrambled tiles or black rectangles,
+Several stage6–8 captures retain severe scrambled tiles or black rectangles,
 so background issue `beads-eio.1.52` remains open.
 The [reviewed entry2458 prefix](evidence/mmx6-content/manifest-bound-50f4a31-entry2458-one-component-failed-parent-reviewed.json)
 adds only `s12-a0-c01`. Root reproduced526 complete readiness observations,
@@ -1127,7 +1127,7 @@ unverified, with no all-boss, scaling-option or post-load recording claim.
 
 The [v23 HUD receipt](evidence/mmx6-hud/manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json)
 qualifies R5 locally and on two separately staged loopback peers for both
-stacked and side-by-side layouts at 960Ã—720, 1200Ã—600 and 640Ã—900 drawable
+stacked and side-by-side layouts at 960×720, 1200×600 and 640×900 drawable
 sizes. Native contact changes both HP values; composed meter anchors remain
 correct. Both menu owners preserve personal resources and resume. The pairs
 retain 73 and 75 distinct matching resolved core/mod samples, exit normally,
@@ -1162,7 +1162,7 @@ rendering and exact-image requalification under beads-eio.1.44. R5 remains passe
 
 The [v24 menu restoration receipt](evidence/mmx6-hud/manifest-bound-1f50059-menu-restoration-reviewed.json)
 qualifies F10 and F18 locally and on exact-image loopback peers. Candidate
-1f50059 retains/restores X's original 64-word Ã— 256-row VRAM sheet across
+1f50059 retains/restores X's original 64-word × 256-row VRAM sheet across
 borrowed native menu stages and renders the complete frozen primary personal
 effect pools during Zero-owned world drawing. Actual-plugin regressions verify
 the native GP0 transfer rectangle, six render dispatches and context restoration.
@@ -1352,7 +1352,7 @@ states now refuse browser entry before its modal pause loop and show the
 unavailable message; offline entry keeps its normal path. Completed refusal
 counters prove actual keyboard/controller handler consumption. Both peers
 also reject backend save/load. Four12second windows retain live progress of
-720â€“723 resolved ticks per peer, followed by matching CRCs:53 distinct samples
+720–723 resolved ticks per peer, followed by matching CRCs:53 distinct samples
 overall,31 after refusal routes. Both processes exit0 and cards are unchanged.
 F33 **netplay passes** this frozen refusal contract; its aggregate returns to
 unverified because local ammo spending/weapon restoration remains open.
