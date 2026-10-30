@@ -17904,8 +17904,54 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+            "build_identity": {
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+              "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+              "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+              "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+              "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+              "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+              "source_heads": {
+                "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+                "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+                "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+                "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+                "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+              },
+              "title": "mmx6-x-zero-delay-v55",
+              "host_revision": 38
+            },
+            "settings": {
+              "doors": "both",
+              "fixture": "refight_portal_cp1",
+              "contact_protection": "on",
+              "cameras": "independent",
+              "local_cameras": "split",
+              "audio": "dummy muted"
+            },
+            "action": "Actual living one-contact wait32 native updates/Left abort/two-contact original portal admission, and separate real guest Select90/nativeABSENT fallback; actual CP2 initializer, active48HP boss, full native feet/control.",
+            "outcome": "Two LOCAL components pass all4 parent gates and10/8native checks;12 root-viewed captures,2ownednativeexit0/privatecards unchanged. Actual fallen and all NET cases still required; zero comparison credit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fde6b48-F123-local-living-and-absent-components-reviewed.json",
+                "sha256": "f2e86eccfeced8026df63e5e8700672ca6c3d159bf27feb594874d9530a1b9f8"
+              }
+            ],
+            "limits": [
+              "LOCAL mode and comparison remain unverified until all required components are admitted. Source/unit tests do not replace missing native cases.",
+              "Rejected full-callback candidate cc7bdca/124b6e3f and failed setup/overshoot prefixes remain retained. Fixed image uses narrow native EC8E8 phase0 admission; original outer animation and per-body support run normally."
+            ],
+            "bypasses": [
+              "Default-off original CP1 once XY/history setup and hostile-contact protection; no tested outcome seeded."
+            ]
+          }
+        ],
+        "limitations": "Exact fde6b48/75b74d1c/profile38 LOCAL living wait32/abort/Both admission and actual Select/nativeABSENT fallback components reviewed, original CP2 load/full48HP activeboss/full22feet448/nativecontrols pass.12 root-viewed images/2nativeexit0/cards unchanged. Actual fallen and all NET components still required. Native full-callback interception failure and observer input misses retained; current fix gates only inner EC8E8 preserving original outer animation/support."
       }
     },
     {
