@@ -1,0 +1,266 @@
+{
+  "schema": 1,
+  "comparison": "F188",
+  "kind": "independent_native_dash_owner_and_rider_independence_review",
+  "frozen_row_sha256": "54f40105e66593d955153113715a66b0896e9a9254d1afb27b4797905da7f421",
+  "result": "passed",
+  "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+  "build_identity": {
+    "executable_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+    "compiled_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "accepted_parent_reviews": {
+    "local": {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-solid\\manifest-bound-e2f9bc8-F15-native-dash-local-reviewed.json",
+      "sha256": "10b6e8c9a635c1a25690c0cafd5677d35f13b82640edff1dfde36e4cb860f26b"
+    },
+    "netplay": {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-solid\\manifest-bound-e2f9bc8-F15-native-dash-netplay-reviewed.json",
+      "sha256": "428c25db83e2b453e945bbadb3b1f832a0119ce000d7dcd32133ed4eeaada371"
+    }
+  },
+  "modes": {
+    "local": {
+      "status": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\qualification.json",
+        "sha256": "3fbabf3c4a06e49a9b5c9a56bfa37e9cfb900e860c3f95d53b0340fc4cb94965"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\F15-observations-with-prerequisites.json",
+        "sha256": "8295149b0005fe6a744b6d4a383d87a341c2d44c33f29b4c3651631194b06d1a"
+      },
+      "native_endpoints": [
+        {
+          "peer": 0,
+          "dash_rows": {
+            "reference": 203,
+            "walking": 205,
+            "started": 207,
+            "traveled": 209,
+            "capture": 210,
+            "released": 212,
+            "travel": [
+              {
+                "peer": 0,
+                "world_ticks": 5,
+                "distance_px": 16.5,
+                "observed_px_per_world_tick": 3.3,
+                "source_px_per_world_tick": 4.125,
+                "limit": "Publication and armor reads are separate; exact native velocity and actual travel are checked independently."
+              }
+            ]
+          },
+          "published_ticks": 5,
+          "armor_travel_px": 16.5,
+          "rider_travel_px": 20.625,
+          "primary_travel_px": 0.0,
+          "release_rider_x": 2050.75,
+          "release_armor_x": 2050.75,
+          "native_dash_velocity": 270336,
+          "native_walk_velocity": 90112
+        }
+      ],
+      "checks": {
+        "authored_native_counterpart_and_both_owner_eligibility": true,
+        "source_exact_guest_dash_pose_and_velocity": true,
+        "guest_body_and_armor_both_advance": true,
+        "neutral_primary_stays_fixed_through_release": true,
+        "both_resource_banks_unchanged": true,
+        "finite_original_release_and_rider_alignment": true,
+        "same_image_full_parent_and_card_exit_gates": true
+      }
+    },
+    "netplay": {
+      "status": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F15-native-armor-dash-v56-root-v2\\qualification.json",
+        "sha256": "9fa1e311fad18a2b475e2c194e53021fd07356875f17b7b0405327bae7ced6d8"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F15-native-armor-dash-v56-root-v2\\F15\\F15-observations.json",
+        "sha256": "d32cf7beda9bff24d69ae34cd0ef2ff51cb352b0f0908b26c06231befc1a76c9"
+      },
+      "native_endpoints": [
+        {
+          "peer": 0,
+          "dash_rows": {
+            "reference": 208,
+            "walking": 211,
+            "started": 214,
+            "traveled": 216,
+            "capture": 217,
+            "released": 221,
+            "travel": [
+              {
+                "peer": 0,
+                "world_ticks": 5,
+                "distance_px": 16.5,
+                "observed_px_per_world_tick": 3.3,
+                "source_px_per_world_tick": 4.125,
+                "limit": "Publication and armor reads are separate; exact native velocity and actual travel are checked independently."
+              },
+              {
+                "peer": 1,
+                "world_ticks": 5,
+                "distance_px": 16.5,
+                "observed_px_per_world_tick": 3.3,
+                "source_px_per_world_tick": 4.125,
+                "limit": "Publication and armor reads are separate; exact native velocity and actual travel are checked independently."
+              }
+            ]
+          },
+          "published_ticks": 5,
+          "armor_travel_px": 16.5,
+          "rider_travel_px": 20.625,
+          "primary_travel_px": 0.0,
+          "release_rider_x": 2097.5,
+          "release_armor_x": 2097.5,
+          "native_dash_velocity": 270336,
+          "native_walk_velocity": 90112
+        },
+        {
+          "peer": 1,
+          "dash_rows": {
+            "reference": 208,
+            "walking": 211,
+            "started": 214,
+            "traveled": 216,
+            "capture": 217,
+            "released": 221,
+            "travel": [
+              {
+                "peer": 0,
+                "world_ticks": 5,
+                "distance_px": 16.5,
+                "observed_px_per_world_tick": 3.3,
+                "source_px_per_world_tick": 4.125,
+                "limit": "Publication and armor reads are separate; exact native velocity and actual travel are checked independently."
+              },
+              {
+                "peer": 1,
+                "world_ticks": 5,
+                "distance_px": 16.5,
+                "observed_px_per_world_tick": 3.3,
+                "source_px_per_world_tick": 4.125,
+                "limit": "Publication and armor reads are separate; exact native velocity and actual travel are checked independently."
+              }
+            ]
+          },
+          "published_ticks": 5,
+          "armor_travel_px": 16.5,
+          "rider_travel_px": 20.625,
+          "primary_travel_px": 0.0,
+          "release_rider_x": 2097.5,
+          "release_armor_x": 2097.5,
+          "native_dash_velocity": 270336,
+          "native_walk_velocity": 90112
+        }
+      ],
+      "checks": {
+        "authored_native_counterpart_and_both_owner_eligibility": true,
+        "source_exact_guest_dash_pose_and_velocity": true,
+        "guest_body_and_armor_both_advance": true,
+        "neutral_primary_stays_fixed_through_release": true,
+        "both_resource_banks_unchanged": true,
+        "finite_original_release_and_rider_alignment": true,
+        "same_image_full_parent_and_card_exit_gates": true
+      }
+    }
+  },
+  "root_composed_review": [
+    {
+      "mode": "local",
+      "label": "seat1-actual-native-dash-armor-and-rider-pose",
+      "peer": 0,
+      "sample": 210,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat1-actual-native-dash-armor-and-rider-pose.png",
+      "sha256": "b499ca1a3f9c553d2741a579c3781de4941cf48a3b8dd61cb71a3bc121b4f5bc",
+      "before": {
+        "id": 2857,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2858,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat1-actual-native-dash-armor-and-rider-pose.png",
+        "staged": true,
+        "seq": 9
+      },
+      "completion": {
+        "id": 2860,
+        "ok": true,
+        "seq": 10,
+        "wrote": 1
+      }
+    },
+    {
+      "mode": "netplay",
+      "label": "seat1-actual-native-dash-armor-and-rider-pose",
+      "peer": 0,
+      "sample": 217,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F15-native-armor-dash-v56-root-v2\\F15\\peer-0-seat1-actual-native-dash-armor-and-rider-pose.png",
+      "sha256": "5736ed939acc131d3c963d0edb108aff43296c601548fb1c3bae06bbb40ecf17",
+      "before": {
+        "id": 23468,
+        "ok": true,
+        "seq": 15,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 23469,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F15-native-armor-dash-v56-root-v2\\F15\\peer-0-seat1-actual-native-dash-armor-and-rider-pose.png",
+        "staged": true,
+        "seq": 15
+      },
+      "completion": {
+        "id": 23471,
+        "ok": true,
+        "seq": 16,
+        "wrote": 1
+      }
+    },
+    {
+      "mode": "netplay",
+      "label": "seat1-actual-native-dash-armor-and-rider-pose",
+      "peer": 1,
+      "sample": 217,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F15-native-armor-dash-v56-root-v2\\F15\\peer-1-seat1-actual-native-dash-armor-and-rider-pose.png",
+      "sha256": "ba65f9358e6fd57c43846914bc7fe4666a789e67c7b13cb96556cee3ad9cdcbe",
+      "before": {
+        "id": 22842,
+        "ok": true,
+        "seq": 15,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 22843,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F15-native-armor-dash-v56-root-v2\\F15\\peer-1-seat1-actual-native-dash-armor-and-rider-pose.png",
+        "staged": true,
+        "seq": 15
+      },
+      "completion": {
+        "id": 22845,
+        "ok": true,
+        "seq": 16,
+        "wrote": 1
+      }
+    }
+  ],
+  "limits": [
+    "Native counterpart is the authored Recycle Lab Ride Armor already qualified for F15. Both X and Zero can own this single original vehicle; F188 independently checks the guest-owned dash against a neutral on-foot primary. No two simultaneous vehicles, literal Chaser, or campaign-wide content absence is claimed.",
+    "Guest actual body travel and actual armor travel are both positive, while primary position is fixed over every retained dash/release sample on every peer. Publication and armor reads are asynchronous; differing sampled distances are not an exact same-tick distance or acceleration measurement. At native idle release the guest and armor X coincide.",
+    "Original action7, armor animation5, applied rider2F and fixed dash velocity42000 are retained versus native walk2/animation1/rider2A/velocity16000. Both personal health, selected weapon and ammo stay unchanged.",
+    "All accepted exact-V56 LOCAL/NET F15 source/build, parent, cards, recording and owned-exit components are reused by hashed reference. Three guest dash composed images were inspected again; normal Zero cockpit head, leaned armor/exhaust and stationary separate X are visible.",
+    "LOCAL retains its initial audited offline checkpoint and expected fixture-tainted ordinary recording/replay refusals. NET retains real original card Load/story/map/fresh stage arrival, native recording, resolved synchronization and graceful peer exits. No new native run, physical controller, other OS or rollback qualification is claimed."
+  ]
+}
