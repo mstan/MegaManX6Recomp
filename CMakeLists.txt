@@ -54,7 +54,7 @@ list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_pl
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$")
 
 set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINITIONS
-    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v59\"")
+    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v60\"")
 
 # The game-owned mod catalog (the two presentation enhancements plus the
 # acediez Tweaks set). Every feature stays disabled until selected on the

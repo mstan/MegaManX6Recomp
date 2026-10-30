@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 42,
+  "revision": 43,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v59",
+    "title_compatibility": "mmx6-x-zero-delay-v60",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -777,5 +777,19 @@
     "instruction_site": "800EB310 expected84830000; original preceding PLAYER load84C670AA; stage6/0 and actual type0E actor/current source window guards. Main EXE ends below this BIN9 overlay site; declare it for future native overlay emission as well as the guarded interpreter.",
     "snapshot_schema": 15,
     "qualification": "Source/pure-register regression is not native qualification. Fresh exact LOCAL+NET guest-only ordinary entry and exit, stationary primary outside, actual native five-frame weather/private views and native blank end, all parent source/profile/CRC/restoration/card/owned-exit gates and root image review remain required. Prior failed observer/setup traces preserved."
+  },
+  "title_changes_v60_original_Sigma_checkpoint": {
+    "scope": "Only frozen234 F141/F142 actual original first-to-later Sigma body transition and both heroes release.",
+    "option": "sigma_cp1",
+    "original_stage": 12,
+    "section": 1,
+    "checkpoint": 1,
+    "inventory_index": 78,
+    "record": "80072C00",
+    "nonce": "4C534731",
+    "bypass": "Original checkpoint reachability only. Native player3360/336, camera3200/224; no pose, boss HP/phase, dialogue, death, transition or result is seeded.",
+    "source": "Original BIN15 actual class61 placement800F57EC at3648/400; enemy dispatch root800F582C entries61=800EDE18 and62=800F2154. First-fight and later-body behavior require fresh native observation.",
+    "snapshot_schema": 15,
+    "acceptance": "Same exact LOCAL/NET actual accepted first-body defeat, original later-body initialization/intro/native release, continuous both living heroes without spurious passenger transport, separate actual controls and reviewed composed images; all parent source/profile/CRC/restoration/cards/owned-exit gates. Setup/source/tests grant no comparison credit."
   }
 }

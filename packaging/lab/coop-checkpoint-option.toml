@@ -80,6 +80,10 @@ label = "Alternate area 20 section 1 checkpoint 1 approach"
 value = "heatnix_cp7"
 label = "Magma original checkpoint 7 boss approach"
 
+[[option.choice]]
+value = "sigma_cp1"
+label = "Original Sigma first-fight CP1 (prerequisite only)"
+
 [[option]]
 feature = "prototype"
 id = "lab_contact_protection"
