@@ -19835,24 +19835,59 @@
       "x6": {
         "workstream": "scene",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "First final-phase native hold without rewarp",
+        "analogue": "Actual original Sigma61 death hold and same-actor Sigma62 initialization",
         "bounded_check": "Defeat the first final body through an actual accepted hit; retain both actors across original death/intro holds without passenger beam cycles.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+            "build_identity": {
+              "executable_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+              "compiled_manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+              "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "doors": "either",
+              "audio": "dummy muted",
+              "prerequisite": "original SigmaCP1; contact protection on; starting HP and earned weapons off"
+            },
+            "action": "Native Sigma12/1CP1, original door/intro and first61 full48HP release;26 actual Zero-owned Square offers defeat it with no HP/death/phase/result writes. Only original checkpoint reachability and contact protection bypassed.",
+            "outcome": "Native first death command20 is classified as a generic passenger scene and starts outgoing Zero transport. This violates the mandatory retention requirement before the later62 release.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-325a3bb-F141-Sigma-native-defeat-outgoing-failure-reviewed.json",
+                "sha256": "d07ab549b16d776138568162a7e1429940aa3a8539f2718a06ebeaa9a34ab3d8"
+              }
+            ],
+            "limits": [
+              "All4 composed captures personally viewed; terminal frame shows the native final attack while complete RAM row establishes outgoing action/phase. No instruction-atomic image claim.",
+              "sg1l initial intro HP0 was an observer false trigger before any attacks and grants no failure/pass; preserved separately. This sg2l failure follows actual native positive48HP release and genuine lethal.",
+              "Parent tail gates were not reached after this mandatory feature failed; no full LOCAL pass, later F142 pass or NET result is inferred. Known-bad NET deferred.",
+              "Concrete source-qualified V113 in-place hold fix is under validation. Native3330 outside scope."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only; no outcome seeding."
+            ]
+          }
+        ],
+        "limitations": "Actual LOCAL first61 defeat reproduces outgoing passenger transport. Fix/native paired requalification pending; later62 release remains F142 unverified."
       }
     },
     {

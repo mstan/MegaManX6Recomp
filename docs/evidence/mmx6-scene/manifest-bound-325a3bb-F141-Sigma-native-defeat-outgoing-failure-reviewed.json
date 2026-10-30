@@ -1,0 +1,120 @@
+{
+  "kind": "actual_first_Sigma_defeat_postdeath_passenger_transport_failure_root_review",
+  "status": "failed",
+  "comparison": "F141",
+  "frozen_row_sha256": "1ac5aef37bd034e9482742f6b5f8c58adfac123ea13ffdeae9bccbabccf10437",
+  "mode": "local",
+  "candidate": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sigma-transition-v112-final-binding-root-v1.json",
+    "binding_sha256": "9e26821146adc7324c3c072aa226274f5a2a42d527adb67c25ca270655f4a769",
+    "image_sha256": "f226a02f73c2c02e6a1ccb71a2cbd60a310977e1a106086810a9f0f946ef290d",
+    "manifest_sha256": "46daa0fd86d70ec5dd38e7e463069d6455acde060885fc32e0a82a19fcc143fa",
+    "provenance_sha256": "1b9a5e4847b1e7a661df53b7530e27c849314ae5a5b0daa43871491fc1de7784",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v112-sigma-transition-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "325a3bbb030b9068d71ac61b0226c8c6996862e7",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v60",
+    "host_revision": 43
+  },
+  "original_stage_member_sha256": "3a6fd0aa690e053909e5f5864d73450aee9449ec82ba81bdf057b0be7adaaed1",
+  "native_action": "Native Sigma12/1CP1, original door/intro and first61 full48HP release;26 actual Zero-owned Square offers defeat it with no HP/death/phase/result writes. Only original checkpoint reachability and contact protection bypassed.",
+  "actual_first_release_row": 574,
+  "first_zero_row": 1180,
+  "first_rejected_retention_row": 1181,
+  "actual_failure": {
+    "first_zero": {
+      "native_timer": 2643,
+      "body": 61,
+      "state": 2,
+      "action": 1,
+      "hp": 0,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "scene_owner": 0,
+      "scene_phase": 0
+    },
+    "next_row": {
+      "native_timer": 2646,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "scene_owner": 1,
+      "scene_phase": 2,
+      "p1_state": 1,
+      "p1_action": 20,
+      "p1_hp": 32,
+      "p2_state": 1,
+      "p2_action": 1,
+      "p2_hp": 32
+    },
+    "finding": "Native first death command20 is classified as a generic passenger scene and starts outgoing Zero transport. This violates the mandatory retention requirement before the later62 release."
+  },
+  "captures": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg2l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+      "sha256": "2316348a4a27e9991e3173e4897eb19d8440d218b6c7b6b18df21b7710257c3e",
+      "label": "native-original-Sigma-CP1",
+      "row": 73,
+      "root_reviewed": true
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg2l\\ammo-hud\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+      "sha256": "c357b66e3219c1fee169df7892e89321ef4b5452aeea808736980cba19bd7794",
+      "label": "native-first-Sigma-scene",
+      "row": 130,
+      "root_reviewed": true
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg2l\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "d031a0b0f48a06a1085ab9619a8273a47356dc8f73c106de80a6b735b4f48384",
+      "label": "native-Sigma61-released",
+      "row": 574,
+      "root_reviewed": true
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg2l\\ammo-hud\\intro-admission\\peer-0-terminal-failed-native-endpoint.png",
+      "sha256": "2fe63528f705e8356e9a38ea5a44e2d83ae78deb130a1b7bf2a84976707e8a3d",
+      "label": "terminal-failed-native-endpoint",
+      "row": 1181,
+      "root_reviewed": true
+    }
+  ],
+  "raw": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg2l\\qualification.json",
+      "sha256": "8e7b1687dd44947989b2cc10574263f7a42d6aa164707e4cac6d38d4161308aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg2l\\ammo-hud\\intro-admission\\observations.json",
+      "sha256": "dfe88c6d903e9f51bebc338815183b1893673e468c23d160c7dedc76e6110a30"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg2l.log",
+      "sha256": "c92a250d6864d7114466e5a74784a421ecff2afb6467c509d316b1399409461b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sg2l-lease-root-v1.json",
+      "sha256": "502b2d0d07db1f8df8c8e23ebc999f9351671462d47017ca6c2b8f83ac5ae54d"
+    }
+  ],
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "private_cards_unchanged": true,
+  "limits": [
+    "All4 composed captures personally viewed; terminal frame shows the native final attack while complete RAM row establishes outgoing action/phase. No instruction-atomic image claim.",
+    "sg1l initial intro HP0 was an observer false trigger before any attacks and grants no failure/pass; preserved separately. This sg2l failure follows actual native positive48HP release and genuine lethal.",
+    "Parent tail gates were not reached after this mandatory feature failed; no full LOCAL pass, later F142 pass or NET result is inferred. Known-bad NET deferred.",
+    "Concrete source-qualified V113 in-place hold fix is under validation. Native3330 outside scope."
+  ]
+}
