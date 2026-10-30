@@ -51,7 +51,7 @@ int main(void){
     if(MMX6_HOST_LAB_EXPECT_OFFER){
         CHECK(cat.count==1&&cat.rules&&cat.rules->flags==PSX_HOST_PROFILE_DIRECT_LOOPBACK);
         CHECK(!strcmp(cat.rules->profile,"mmx6.win64-clang22.loopback"));
-        CHECK(cat.rules->revision==36&&cat.rules->implementation_count==1);
+        CHECK(cat.rules->revision==37&&cat.rules->implementation_count==1);
         PSXHostCapabilities caps;CHECK(psx_host_caps_init(&caps,&c.cpu,2,2,artifact));
         CHECK(psx_host_caps_offer(&caps,cat.rules,2)&&psx_host_caps_validate(&caps,&cat));
         CHECK(!psx_host_caps_offer(&caps,cat.rules,1));
