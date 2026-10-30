@@ -8745,24 +8745,97 @@
       "frozen_row_sha256": "5d7eeb87156311a3e8922940beab4149cd0880636d8a096b14669dd67913a074",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Animated arena scenery controller unidentified",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Original Heatnix52 arena autonomous shared layer1 Y",
         "bounded_check": "Locate original animated X6 arena scenery; observe its shared phase over stationary-actor world ticks and publication to each eventual view.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "3b4285eca543f0a9ed57780749220a72379bbabf",
+            "build_identity": {
+              "executable_sha256": "cae6d347b5af2abc487566e01d5d06cb2103c96eb45ac2ff96f3ab547701b249",
+              "compiled_manifest_sha256": "aebfd7a54aa7cf27ad788b47b473b9fed9076819cd612a83c8afda5911014793",
+              "provenance_sha256": "4c7cee4eae4ecd4788f00ab6e5440752d129924235f2a296ecc59969539f702a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisite": "original heatnix_cp7; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Enter actual original Heatnix boss scene, neutral both heroes, observe native phase and actual advancing layer1 Y at every private seat draw with composed images.",
+            "outcome": "Stationary native heroes, autonomous shared layer phase and actual private draw Y advance; composed lower-scenery motion reviewed; all parent synchronization/restoration/card/owned-exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-3b4285e-F28-Heatnix-shared-scroll-local-netplay-reviewed.json",
+                "sha256": "7450c3160b5e77e1a176a2ee0195fbcad519180714d68a157076adf5d47871a0"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F28 actual Heatnix52 stage3/0 arena shared layer1 phase is qualified, with stationary X/P1 and Zero/P2. No native3330 or every-boss audit.",
+              "Original CP7 reachability and declared hostile-contact protection are setup bypasses. Native Right and owning Cross earn the actual original boss scene/release. No pose, boss HP/phase/AI, scenery clock, result or success write; starting HP and earned weapons off.",
+              "Original EF0FC owns +/-2 shared Y and native297BC keeps each hero camera X. Qualified actual authored boss publication now retains current/prior Y in guest history; unrelated Magma controllers retain ordinary behavior. Snapshot schema15 unchanged.",
+              "Actual26D44 draw-entry provider reads host-owned cached BG1 words only. Canonical reads, body snapshots and screenshots are separate debug observations, not instruction-atomic samples. Each private seat has its own advancing entry witness and reviewed composed lower-scenery motion.",
+              "Existing broad tile/color corruption, HUD overlap and graphical discrepancies are visible and remain unresolved; no pixel-perfect scenery or general graphical parity claim. The bounded shared phase/motion failure is the subject of this comparison.",
+              "V109 prototype native gates without private-entry witness/image qualification remain unadmitted. F175 additionally needs its distinct native atlas scene on this same final image; F113 death/survivor remains deferred.",
+              "Same exact source/image/profile LOCAL and same-PC loopback NET only; no WAN, different-host or cross-platform claim. Original paired HUD harness, cards and prior evidence preserved."
+            ],
+            "bypasses": [
+              "Original CP7 reachability and hostile-contact protection only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "3b4285eca543f0a9ed57780749220a72379bbabf",
+            "build_identity": {
+              "executable_sha256": "cae6d347b5af2abc487566e01d5d06cb2103c96eb45ac2ff96f3ab547701b249",
+              "compiled_manifest_sha256": "aebfd7a54aa7cf27ad788b47b473b9fed9076819cd612a83c8afda5911014793",
+              "provenance_sha256": "4c7cee4eae4ecd4788f00ab6e5440752d129924235f2a296ecc59969539f702a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "audio": "dummy muted",
+              "prerequisite": "original heatnix_cp7; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Enter actual original Heatnix boss scene, neutral both heroes, observe native phase and actual advancing layer1 Y at every private seat draw with composed images.",
+            "outcome": "Stationary native heroes, autonomous shared layer phase and actual private draw Y advance; composed lower-scenery motion reviewed; all parent synchronization/restoration/card/owned-exit gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-3b4285e-F28-Heatnix-shared-scroll-local-netplay-reviewed.json",
+                "sha256": "7450c3160b5e77e1a176a2ee0195fbcad519180714d68a157076adf5d47871a0"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F28 actual Heatnix52 stage3/0 arena shared layer1 phase is qualified, with stationary X/P1 and Zero/P2. No native3330 or every-boss audit.",
+              "Original CP7 reachability and declared hostile-contact protection are setup bypasses. Native Right and owning Cross earn the actual original boss scene/release. No pose, boss HP/phase/AI, scenery clock, result or success write; starting HP and earned weapons off.",
+              "Original EF0FC owns +/-2 shared Y and native297BC keeps each hero camera X. Qualified actual authored boss publication now retains current/prior Y in guest history; unrelated Magma controllers retain ordinary behavior. Snapshot schema15 unchanged.",
+              "Actual26D44 draw-entry provider reads host-owned cached BG1 words only. Canonical reads, body snapshots and screenshots are separate debug observations, not instruction-atomic samples. Each private seat has its own advancing entry witness and reviewed composed lower-scenery motion.",
+              "Existing broad tile/color corruption, HUD overlap and graphical discrepancies are visible and remain unresolved; no pixel-perfect scenery or general graphical parity claim. The bounded shared phase/motion failure is the subject of this comparison.",
+              "V109 prototype native gates without private-entry witness/image qualification remain unadmitted. F175 additionally needs its distinct native atlas scene on this same final image; F113 death/survivor remains deferred.",
+              "Same exact source/image/profile LOCAL and same-PC loopback NET only; no WAN, different-host or cross-platform claim. Original paired HUD harness, cards and prior evidence preserved."
+            ],
+            "bypasses": [
+              "Original CP7 reachability and hostile-contact protection only."
+            ]
+          }
+        ],
+        "limitations": "Only frozen234 F28 actual Heatnix52 stage3/0 arena shared layer1 phase is qualified, with stationary X/P1 and Zero/P2. No native3330 or every-boss audit. Original CP7 reachability and declared hostile-contact protection are setup bypasses. Native Right and owning Cross earn the actual original boss scene/release. No pose, boss HP/phase/AI, scenery clock, result or success write; starting HP and earned weapons off. Original EF0FC owns +/-2 shared Y and native297BC keeps each hero camera X. Qualified actual authored boss publication now retains current/prior Y in guest history; unrelated Magma controllers retain ordinary behavior. Snapshot schema15 unchanged. Actual26D44 draw-entry provider reads host-owned cached BG1 words only. Canonical reads, body snapshots and screenshots are separate debug observations, not instruction-atomic samples. Each private seat has its own advancing entry witness and reviewed composed lower-scenery motion. Existing broad tile/color corruption, HUD overlap and graphical discrepancies are visible and remain unresolved; no pixel-perfect scenery or general graphical parity claim. The bounded shared phase/motion failure is the subject of this comparison. V109 prototype native gates without private-entry witness/image qualification remain unadmitted. F175 additionally needs its distinct native atlas scene on this same final image; F113 death/survivor remains deferred. Same exact source/image/profile LOCAL and same-PC loopback NET only; no WAN, different-host or cross-platform claim. Original paired HUD harness, cards and prior evidence preserved."
       }
     },
     {
