@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 45,
+  "revision": 46,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v62",
+    "title_compatibility": "mmx6-x-zero-delay-v63",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -805,5 +805,12 @@
     "state": "Snapshot16 serializes/digests per-pool recognized boss kind/origin/shared remainder; allocator2BCCC resets reused slots; original kind/origin changes reset phase. Mode is immutable snapshot/config identity.",
     "acceptance": "Fresh same-image LOCAL/NET native accepted/rejected mixed X/Zero attacks, fractional carry, original weakness and defaultOff behavior. Source/unit/component tests grant no row credit.",
     "allocator_emission": "Declare native2BCCC carry reset and the existing required2BFD0 solid_allocate callback in both profiles; source callback/emission parity test exposed the latter old omission."
+  },
+  "title_changes_v63_shared_boss_cooldown": {
+    "scope": "Frozen234 F63 shared recovery prerequisite; independent F99/F152/F153 policy is still unimplemented.",
+    "policy": "With boss_balance on, ceil-half an accepted native shared post-hit clock in1..254 units. Preserve scripted10000/255 sentinel values, original AI/reaction and disabled behavior.",
+    "guard": "Twenty original overlay store sites, exact seven-word source windows, accepted actor provenance, live recognized metered actor and native7433C rejection table. No generic AI timer shortening.",
+    "state": "Snapshot17 captures/digests/validates the pending accepted actor; new allocation and activation clear it.",
+    "acceptance": "Fresh same-image LOCAL/NET real ordinary hits with original30->15 and finite native expiry; retain weakness/defaultOff regressions and full synchronization/cards/owned-exit gates. No source/unit-only row credit."
   }
 }

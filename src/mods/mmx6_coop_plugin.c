@@ -2572,6 +2572,7 @@ static int death_effect_init(CPUState *cpu, uint32_t address) {
 static int enemy_hit(CPUState *cpu, uint32_t address) {
     if (inside || !enrolled || failed || scene_owner || life.status[1]!=MMX6_COOP_ALIVE ||
         psx_mod_read_byte(PLAY)!=0x0A) return 0;
+    boss_balance_pending_actor=0;
     inside=1;
     /* The caller owns enemy AI, invulnerability and applying this result.
      * Check P1 first; only a miss tries P2 with Zero's native hitbox tables.
@@ -2902,7 +2903,7 @@ static void activate(void) {
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
     both_door_reset();
     shared_clear_reset();
-    memset(boss_balance,0,sizeof boss_balance);boss_balance_allocate_call=0;
+    memset(boss_balance,0,sizeof boss_balance);boss_balance_allocate_call=0;boss_balance_pending_actor=0;
     char balance[16];
     boss_balance_enabled=psx_mod_option_value("mmx6.local-coop","prototype","boss_balance",balance,sizeof balance) && !strcmp(balance,"on");
     char doors[16];
@@ -3004,6 +3005,9 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
 #endif
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800318F4u,0x9102005Cu,boss_balance_damage);
+    for(unsigned i=0;i<sizeof boss_cooldown_sites/sizeof boss_cooldown_sites[0];++i)
+        psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",boss_cooldown_sites[i].address,
+            boss_cooldown_sites[i].words[6],boss_balance_shared_cooldown);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800EB310u,0x84830000u,weather_window_target);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);

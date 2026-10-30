@@ -1,5 +1,7 @@
 # Same-machine host-profile lab candidate
 
+Current V63 candidate uses profile46 and snapshot17. It adds guarded accepted-hit shared recovery shortening under the existing optional boss balance. Original scripted/large clocks and disabled behavior are retained. Independent cooldowns remain unimplemented; this candidate grants no comparison credit before source, compiled and same-image LOCAL/NET gates.
+
 The catalog is **disabled by default**. Explicit development builds may set
 `-DMMX6_ENABLE_LOOPBACK_HOST_LAB=ON` to exercise the candidate
 `mmx6.win64-clang22.loopback`, revision2 for title contract

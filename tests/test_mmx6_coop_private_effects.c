@@ -532,7 +532,7 @@ static void setup(CPUState *cpu){
     clear_banks();memset(ram,0,sizeof ram);memset(extra,0,sizeof extra);memset(&p2,0,sizeof p2);memset(cpu,0,sizeof *cpu);
     memset(test_vram,0,sizeof test_vram);memset(bank_first,0,sizeof bank_first);memset(zero_overlay,0x44,sizeof zero_overlay);
     mmx6_coop_lifecycle_init(&life);state_track.count=state_track.error=0;
-    boss_balance_enabled=boss_balance_allocate_call=0;memset(boss_balance,0,sizeof boss_balance);
+    boss_balance_enabled=boss_balance_allocate_call=boss_balance_pending_actor=0;memset(boss_balance,0,sizeof boss_balance);
     inside=failed=player_call=zero_world=world_render=scene_owner=scene_phase=zero_projected=0;
     shared_clear_reset();clear_probe=clear_worlds=clear_zero_worlds=clear_fades=0;
     memset(clear_constructors,0,sizeof clear_constructors);memset(clear_body_ticks,0,sizeof clear_body_ticks);
@@ -2266,8 +2266,56 @@ static void native_optional_boss_damage_budget(void) {
     psx_mod_write_byte(cpu.gpr[8]+4,1);psx_mod_write_byte(cpu.gpr[8]+0x5C,10);
     cpu.gpr[5]=8;boss_balance_damage(&cpu,0x800318F4u);
     CHECK(cpu.gpr[5]==8 && !boss_balance[1].recognized);
-    boss_balance_enabled=0;memset(boss_balance,0,sizeof boss_balance);
+    boss_balance_enabled=0;boss_balance_pending_actor=0;memset(boss_balance,0,sizeof boss_balance);
 }
+
+static void native_optional_boss_shared_cooldown(void) {
+    CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
+    const BossCooldownSite *site=NULL;
+    for(unsigned i=0;i<sizeof boss_cooldown_sites/sizeof boss_cooldown_sites[0];++i)
+        if(boss_cooldown_sites[i].address==0x800ED020u)site=&boss_cooldown_sites[i];
+    CHECK(site!=NULL);
+    for(unsigned j=0;j<7;++j)psx_mod_write_word(site->address-24u+j*4u,site->words[j]);
+    psx_mod_write_byte(PLAY,10);psx_mod_write_word(PLAY+0x20,actor);psx_mod_write_byte(PLAY+0x24,48);
+    psx_mod_write_byte(actor,65);psx_mod_write_byte(actor+1,61);psx_mod_write_byte(actor+4,1);
+    psx_mod_write_byte(actor+0x5C,48);psx_mod_write_word(actor+0x10,0x800F57ECu);
+    boss_balance_enabled=1;cpu.gpr[8]=actor;cpu.gpr[5]=2;
+    boss_balance_damage(&cpu,0x800318F4u);CHECK(boss_balance_pending_actor==actor);
+#ifdef MMX6_COOP_MODERN_STATE
+    HostState saved;state_capture(&saved);boss_balance_pending_actor=0;
+    state_commit(&saved);CHECK(boss_balance_pending_actor==actor);
+#endif
+    psx_mod_write_word(actor+0x58,0x8007433Cu);
+    for(unsigned i=0;i<sizeof boss_cooldown_sites/sizeof boss_cooldown_sites[0];++i) {
+        const BossCooldownSite *actual=&boss_cooldown_sites[i];
+        for(unsigned j=0;j<7;++j)psx_mod_write_word(actual->address-24u+j*4u,actual->words[j]);
+        unsigned base=(actual->words[6]>>21)&31u,value=(actual->words[6]>>16)&31u;
+        CHECK(base!=value);cpu.gpr[base]=actor;cpu.gpr[value]=30;boss_balance_pending_actor=actor;
+        boss_balance_shared_cooldown(&cpu,actual->address);
+        CHECK(cpu.gpr[value]==15 && !boss_balance_pending_actor);
+    }
+#ifdef MMX6_COOP_MODERN_STATE
+    HostState invalid;state_capture(&invalid);invalid.boss_balance_pending_actor=actor+1;
+    StateIO bad={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&bad,&invalid);CHECK(!bad.ok);
+#endif
+    boss_balance_pending_actor=actor;
+    cpu.gpr[16]=actor;cpu.gpr[2]=30;psx_mod_write_word(actor+0x58,0x8007433Cu);
+    boss_balance_shared_cooldown(&cpu,site->address);CHECK(cpu.gpr[2]==15 && !boss_balance_pending_actor);
+    cpu.gpr[2]=30;boss_balance_shared_cooldown(&cpu,site->address);CHECK(cpu.gpr[2]==30); /* No accepted hit. */
+    boss_balance_pending_actor=actor;cpu.gpr[2]=2;
+    boss_balance_shared_cooldown(&cpu,site->address);CHECK(cpu.gpr[2]==1 && !boss_balance_pending_actor);
+    boss_balance_pending_actor=actor;cpu.gpr[2]=10000;
+    boss_balance_shared_cooldown(&cpu,site->address);CHECK(cpu.gpr[2]==10000 && !boss_balance_pending_actor);
+    boss_balance_pending_actor=actor;cpu.gpr[2]=30;
+    psx_mod_write_word(site->address-4u,site->words[5]^1u);
+    boss_balance_shared_cooldown(&cpu,site->address);CHECK(cpu.gpr[2]==30); /* Another overlay. */
+    psx_mod_write_word(site->address-4u,site->words[5]);psx_mod_write_word(actor+0x58,0x8007591Cu);
+    boss_balance_shared_cooldown(&cpu,site->address);CHECK(cpu.gpr[2]==30); /* Ordinary AI clock. */
+    psx_mod_write_word(actor+0x58,0x8007433Cu);boss_balance_enabled=0;
+    boss_balance_shared_cooldown(&cpu,site->address);CHECK(cpu.gpr[2]==30);
+    boss_balance_pending_actor=0;memset(boss_balance,0,sizeof boss_balance);
+}
+
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_guest_weather_window();
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
@@ -2294,5 +2342,5 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_scene_after_nonpaired_enrollment();
     native_checkpoint_preserves_completed_voluntary_absence();
     native_refight_return_preserves_living_personal_resources();
-    native_optional_boss_damage_budget();
+    native_optional_boss_damage_budget();native_optional_boss_shared_cooldown();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

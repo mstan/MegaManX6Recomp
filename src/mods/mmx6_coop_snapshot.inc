@@ -83,6 +83,7 @@ typedef struct {
     uint8_t giga_backup[ZERO_GIGA_BACKUP_BYTES];
     uint8_t shared_owners[96];
     BossBalanceState boss_balance[BOSS_BALANCE_SLOTS];
+    uint32_t boss_balance_pending_actor;
     uint32_t lab_state,lab_previous,starting_hp_applied,earned_applied,earned_reason;
     uint32_t clear_phase,clear_members,clear_started;
     uint32_t door_actor,door_origin,door_members;
@@ -103,6 +104,7 @@ static void state_capture(HostState *s) {
     memcpy(s->giga_backup,zero_giga_backup,sizeof zero_giga_backup);
     memcpy(s->shared_owners,shared_effect_owners,sizeof shared_effect_owners);
     memcpy(s->boss_balance,boss_balance,sizeof boss_balance);
+    s->boss_balance_pending_actor=boss_balance_pending_actor;
     s->lab_state=checkpoint_lab_state;s->lab_previous=checkpoint_lab_previous;s->starting_hp_applied=checkpoint_starting_hp_applied;
     s->earned_applied=checkpoint_earned_weapons_applied;s->earned_reason=checkpoint_earned_weapons_reason;
     s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
@@ -195,6 +197,10 @@ static void state_core(StateIO *io,HostState *s) {
            (!b->kind && (b->origin || b->remainder || b->recognized)) ||
            (!boss_balance_enabled && (b->origin || b->kind || b->remainder || b->recognized)))io->ok=0;
     }
+    FIELD(boss_balance_pending_actor,4,UINT32_MAX);
+    if(s->boss_balance_pending_actor &&
+       (!boss_balance_enabled || boss_balance_slot(s->boss_balance_pending_actor)<0 ||
+        !s->boss_balance[boss_balance_slot(s->boss_balance_pending_actor)].recognized))io->ok=0;
     if(io->mode!=STATE_HASH) {
         FIELD(frame_count,4,UINT32_MAX);FIELD(hud_fade,1,128);FIELD(world_packets,4,UINT32_MAX);FIELD(hud_seat,1,1);
         if(s->world_packets && (s->world_packets<packets || s->world_packets>packets+FRAME_ARENA*2))io->ok=0;
@@ -215,6 +221,7 @@ static void state_commit(const HostState *s) {
     memcpy(zero_giga_backup,s->giga_backup,sizeof zero_giga_backup);
     memcpy(shared_effect_owners,s->shared_owners,sizeof shared_effect_owners);
     memcpy(boss_balance,s->boss_balance,sizeof boss_balance);
+    boss_balance_pending_actor=s->boss_balance_pending_actor;
     checkpoint_lab_state=s->lab_state;checkpoint_lab_previous=s->lab_previous;checkpoint_starting_hp_applied=s->starting_hp_applied;
     checkpoint_earned_weapons_applied=s->earned_applied;checkpoint_earned_weapons_reason=s->earned_reason;
     clear_phase=s->clear_phase;clear_members=s->clear_members;clear_started=s->clear_started;
@@ -274,7 +281,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,16);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,17);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
