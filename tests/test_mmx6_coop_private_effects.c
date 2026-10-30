@@ -1544,7 +1544,7 @@ static void sigma_hold_setup(CPUState *cpu,unsigned later) {
     psx_mod_write_byte(actor,0x41);psx_mod_write_byte(actor+1,(uint8_t)(later?62:61));
     psx_mod_write_byte(actor+4,(uint8_t)(later?1:2));
     psx_mod_write_byte(actor+5,(uint8_t)(later?2:0));
-    psx_mod_write_word(actor+0x10,0x800F57ECu);
+    psx_mod_write_word(actor+0x10,later?0u:0x800F57ECu);
     cpu->gpr[31]=later?0x800EFDFCu:0x800EDEFCu;
     cpu->gpr[later?17:16]=actor;cpu->gpr[4]=20;
 }

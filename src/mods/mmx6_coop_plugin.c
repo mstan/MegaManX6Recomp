@@ -1123,7 +1123,8 @@ static int sigma_transition_in_place(const CPUState *cpu,uint32_t address) {
        psx_mod_read_byte(actor+1)!=(later?62:61) || psx_mod_read_byte(actor+2) ||
        psx_mod_read_byte(actor+4)!=(later?1:2) ||
        psx_mod_read_byte(actor+5)!=(later?2:0) || psx_mod_read_byte(actor+0x5C) ||
-       psx_mod_read_word(actor+0x10)!=0x800F57ECu ||
+       /* Original EE0F4/2CF0C clears the complete actor before type62 init. */
+       psx_mod_read_word(actor+0x10)!=(later?0u:0x800F57ECu) ||
        (!later && psx_mod_read_word(PLAY+0x20)!=actor))return 0;
     static const uint32_t common[][2]={
         {0x800F5920u,0x800EDE18u},{0x800F5924u,0x800F2154u},
