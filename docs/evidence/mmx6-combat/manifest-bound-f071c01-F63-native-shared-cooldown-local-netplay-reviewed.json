@@ -1,0 +1,968 @@
+{
+  "schema": 1,
+  "comparison": "F63",
+  "frozen_row_sha256": "a9890969956d8361a161b3c982f6d112e5ad96f6e37f64e6ec8c0d782d965a80",
+  "result": "passed",
+  "candidate": "f071c01896958e72fe94102263370079f4e0f5c5",
+  "integration_commit": "e8755362d9263ec411d0727e522b282674a314b6",
+  "binding": {
+    "image_sha256": "a141047788d02427986b51d62534c13f2707fb73887670b42612ba526a0bb206",
+    "manifest_sha256": "a6595176fb889b8ae07f4899d436af4805300cbf9933361004165538b5c0e811",
+    "provenance_sha256": "57633c7a96caeac24e8f5f2a374a09c142c1fdf677fda052d3d23a106fdc32ae"
+  },
+  "source_equivalence": {
+    "result": "runtime_config_tests_tools_mods_contract_equal_tested_candidate",
+    "integrated_head": "e8755362d9263ec411d0727e522b282674a314b6",
+    "tested_head": "f071c01896958e72fe94102263370079f4e0f5c5"
+  },
+  "build_and_compiled_validation": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\boss-cooldowns-v115-runtime-build-receipt-root-v2.json",
+    "sha256": "9623a23176876d565313577e93ec38fb0c9444c979544609079cd3a741c24e5d",
+    "bytes": 2393
+  },
+  "focused_compiled_tests": {
+    "passed": 18,
+    "log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\ctest-boss-cooldowns-v115-focused-root-v2.log",
+      "sha256": "c104137cb68cda9524603887aefa5d732d10d630cea3fc3a3694346c096f88b2",
+      "bytes": 5280
+    }
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "host": "SERVER",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl2l\\qualification.json",
+        "sha256": "6b9ab18bcfb734890127167f690567c3394d550f565909f3b40251e4f3f36b36",
+        "bytes": 22156444
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\mmx6_boss_cooldowns_v115_tail_root_v1.py",
+        "sha256": "96ad1f43ea49790453198328e8fcff5117db3699f73e66dac434cba6f602dd76",
+        "bytes": 16540
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "feature_checks": {
+        "original_Sigma48_release": true,
+        "actual_ordinary_X_hits_and_original_expiry": true,
+        "no_HP_timer_phase_or_result_writes": true,
+        "shortened30_to15_or_original_disabled30": true
+      },
+      "actual_hit_and_expiry_witnesses": [
+        [
+          {
+            "peer": 0,
+            "clock_before": {
+              "events": 0,
+              "before": 0,
+              "after": 0
+            },
+            "clock_after": {
+              "events": 1,
+              "before": 30,
+              "after": 15
+            },
+            "observed": [
+              {
+                "row": 609,
+                "ticks": 14
+              },
+              {
+                "row": 610,
+                "ticks": 12
+              },
+              {
+                "row": 611,
+                "ticks": 10
+              },
+              {
+                "row": 612,
+                "ticks": 8
+              },
+              {
+                "row": 613,
+                "ticks": 6
+              },
+              {
+                "row": 614,
+                "ticks": 4
+              },
+              {
+                "row": 615,
+                "ticks": 2
+              }
+            ],
+            "expired_row": 620,
+            "hp_before": 48,
+            "hp_after": 48
+          }
+        ],
+        [
+          {
+            "peer": 0,
+            "clock_before": {
+              "events": 1,
+              "before": 30,
+              "after": 15
+            },
+            "clock_after": {
+              "events": 2,
+              "before": 60,
+              "after": 30
+            },
+            "observed": [
+              {
+                "row": 628,
+                "ticks": 14
+              },
+              {
+                "row": 629,
+                "ticks": 12
+              },
+              {
+                "row": 630,
+                "ticks": 10
+              },
+              {
+                "row": 631,
+                "ticks": 8
+              },
+              {
+                "row": 632,
+                "ticks": 5
+              },
+              {
+                "row": 633,
+                "ticks": 3
+              },
+              {
+                "row": 634,
+                "ticks": 1
+              }
+            ],
+            "expired_row": 639,
+            "hp_before": 48,
+            "hp_after": 47
+          }
+        ]
+      ],
+      "final_native_damage_budget": [
+        {
+          "raw": 2,
+          "scaled": 1,
+          "zero": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "native_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    },
+    "disabled_local": {
+      "result": "passed",
+      "host": "SERVER",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl0l\\qualification.json",
+        "sha256": "2d42239980bbba651454c8731eb6ff0a07e11cdc67cf8b3c3a1fc2ef98beef2e",
+        "bytes": 21891005
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\mmx6_boss_cooldowns_v115_tail_root_v1.py",
+        "sha256": "96ad1f43ea49790453198328e8fcff5117db3699f73e66dac434cba6f602dd76",
+        "bytes": 16540
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "feature_checks": {
+        "original_Sigma48_release": true,
+        "actual_ordinary_X_hits_and_original_expiry": true,
+        "no_HP_timer_phase_or_result_writes": true,
+        "shortened30_to15_or_original_disabled30": true
+      },
+      "actual_hit_and_expiry_witnesses": [
+        [
+          {
+            "peer": 0,
+            "clock_before": {
+              "events": 0,
+              "before": 0,
+              "after": 0
+            },
+            "clock_after": {
+              "events": 0,
+              "before": 0,
+              "after": 0
+            },
+            "observed": [
+              {
+                "row": 595,
+                "ticks": 29
+              },
+              {
+                "row": 596,
+                "ticks": 27
+              },
+              {
+                "row": 597,
+                "ticks": 25
+              },
+              {
+                "row": 598,
+                "ticks": 23
+              },
+              {
+                "row": 599,
+                "ticks": 21
+              },
+              {
+                "row": 600,
+                "ticks": 19
+              },
+              {
+                "row": 601,
+                "ticks": 17
+              },
+              {
+                "row": 602,
+                "ticks": 15
+              },
+              {
+                "row": 603,
+                "ticks": 13
+              },
+              {
+                "row": 604,
+                "ticks": 11
+              },
+              {
+                "row": 605,
+                "ticks": 8
+              },
+              {
+                "row": 606,
+                "ticks": 6
+              },
+              {
+                "row": 607,
+                "ticks": 4
+              },
+              {
+                "row": 608,
+                "ticks": 2
+              }
+            ],
+            "expired_row": 609,
+            "hp_before": 48,
+            "hp_after": 47
+          }
+        ],
+        [
+          {
+            "peer": 0,
+            "clock_before": {
+              "events": 0,
+              "before": 0,
+              "after": 0
+            },
+            "clock_after": {
+              "events": 0,
+              "before": 0,
+              "after": 0
+            },
+            "observed": [
+              {
+                "row": 617,
+                "ticks": 28
+              },
+              {
+                "row": 618,
+                "ticks": 26
+              },
+              {
+                "row": 619,
+                "ticks": 24
+              },
+              {
+                "row": 620,
+                "ticks": 22
+              },
+              {
+                "row": 621,
+                "ticks": 20
+              },
+              {
+                "row": 622,
+                "ticks": 18
+              },
+              {
+                "row": 623,
+                "ticks": 15
+              },
+              {
+                "row": 624,
+                "ticks": 13
+              },
+              {
+                "row": 625,
+                "ticks": 11
+              },
+              {
+                "row": 626,
+                "ticks": 9
+              },
+              {
+                "row": 627,
+                "ticks": 7
+              },
+              {
+                "row": 628,
+                "ticks": 5
+              },
+              {
+                "row": 629,
+                "ticks": 3
+              }
+            ],
+            "expired_row": 630,
+            "hp_before": 47,
+            "hp_after": 46
+          }
+        ]
+      ],
+      "final_native_damage_budget": [
+        {
+          "raw": 0,
+          "scaled": 0,
+          "zero": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "native_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "host": "PC",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl3n\\qualification.json",
+        "sha256": "c876e8f307cb98309d833ae233cc2e6cfc9b1c5c2545f2b252396a7f05c56319",
+        "bytes": 22051118
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\mmx6_boss_cooldowns_v115_tail_root_v2.py",
+        "sha256": "6d4c1a6447318caff1a15b28a2756b191634affb9ef44f34f5967975264e1fb0",
+        "bytes": 16601
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "feature_checks": {
+        "original_Sigma48_release": true,
+        "actual_ordinary_X_hits_and_original_expiry": true,
+        "no_HP_timer_phase_or_result_writes": true,
+        "shortened30_to15_or_original_disabled30": true
+      },
+      "actual_hit_and_expiry_witnesses": [
+        [
+          {
+            "peer": 0,
+            "clock_before": {
+              "events": 0,
+              "before": 0,
+              "after": 0
+            },
+            "clock_after": {
+              "events": 1,
+              "before": 30,
+              "after": 15
+            },
+            "observed": [
+              {
+                "row": 589,
+                "ticks": 12
+              },
+              {
+                "row": 590,
+                "ticks": 7
+              },
+              {
+                "row": 591,
+                "ticks": 3
+              }
+            ],
+            "expired_row": 593,
+            "hp_before": 48,
+            "hp_after": 48
+          },
+          {
+            "peer": 1,
+            "clock_before": {
+              "events": 0,
+              "before": 0,
+              "after": 0
+            },
+            "clock_after": {
+              "events": 1,
+              "before": 30,
+              "after": 15
+            },
+            "observed": [
+              {
+                "row": 589,
+                "ticks": 14
+              },
+              {
+                "row": 590,
+                "ticks": 9
+              },
+              {
+                "row": 591,
+                "ticks": 4
+              }
+            ],
+            "expired_row": 593,
+            "hp_before": 48,
+            "hp_after": 48
+          }
+        ],
+        [
+          {
+            "peer": 0,
+            "clock_before": {
+              "events": 1,
+              "before": 30,
+              "after": 15
+            },
+            "clock_after": {
+              "events": 2,
+              "before": 60,
+              "after": 30
+            },
+            "observed": [
+              {
+                "row": 600,
+                "ticks": 9
+              },
+              {
+                "row": 601,
+                "ticks": 6
+              },
+              {
+                "row": 602,
+                "ticks": 3
+              }
+            ],
+            "expired_row": 605,
+            "hp_before": 48,
+            "hp_after": 47
+          },
+          {
+            "peer": 1,
+            "clock_before": {
+              "events": 1,
+              "before": 30,
+              "after": 15
+            },
+            "clock_after": {
+              "events": 2,
+              "before": 60,
+              "after": 30
+            },
+            "observed": [
+              {
+                "row": 600,
+                "ticks": 11
+              },
+              {
+                "row": 601,
+                "ticks": 7
+              },
+              {
+                "row": 602,
+                "ticks": 3
+              }
+            ],
+            "expired_row": 605,
+            "hp_before": 48,
+            "hp_after": 47
+          }
+        ]
+      ],
+      "final_native_damage_budget": [
+        {
+          "raw": 2,
+          "scaled": 1,
+          "zero": 0
+        },
+        {
+          "raw": 2,
+          "scaled": 1,
+          "zero": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "native_cleanup": [
+        {
+          "owned_pid": 53104,
+          "exit_code": 0
+        },
+        {
+          "owned_pid": 11324,
+          "exit_code": 0
+        }
+      ],
+      "host_profile": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 46,
+        "selected_sha256": "00e1fbb0e461215991b566e093e196ef028fe589c62b33820db5d7f6377979ae",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "a141047788d02427986b51d62534c13f2707fb73887670b42612ba526a0bb206",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 46,
+              "selected_sha256": "00e1fbb0e461215991b566e093e196ef028fe589c62b33820db5d7f6377979ae",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "a141047788d02427986b51d62534c13f2707fb73887670b42612ba526a0bb206",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 46,
+              "selected_sha256": "00e1fbb0e461215991b566e093e196ef028fe589c62b33820db5d7f6377979ae",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2752,
+              "core": "99a29c54",
+              "mod": "fae7be63"
+            },
+            {
+              "simulation_tick": 2784,
+              "core": "03388eae",
+              "mod": "de6b66c5"
+            },
+            {
+              "simulation_tick": 2816,
+              "core": "66f41db8",
+              "mod": "eb0b8fe5"
+            },
+            {
+              "simulation_tick": 2848,
+              "core": "19bbb900",
+              "mod": "809ef38b"
+            },
+            {
+              "simulation_tick": 2880,
+              "core": "09af0794",
+              "mod": "25047863"
+            },
+            {
+              "simulation_tick": 2912,
+              "core": "fbafcf85",
+              "mod": "999a699d"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "efc570d9",
+              "mod": "0d1ae031"
+            }
+          ],
+          "resolved_through": [
+            2974,
+            2973
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3040,
+              "core": "7f75f56b",
+              "mod": "008e45bf"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "9ab90ca4",
+              "mod": "c8c2e1c1"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "981e8910",
+              "mod": "71661621"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "894e18e6",
+              "mod": "7b181f97"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "280d1314",
+              "mod": "b57c3337"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "9be94173",
+              "mod": "9580d7c9"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "9dad5bcd",
+              "mod": "84595369"
+            }
+          ],
+          "resolved_through": [
+            3251,
+            3251
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3328,
+              "core": "ef34073d",
+              "mod": "d3972991"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "c6da4eb6",
+              "mod": "cb1f46b9"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "4249a7cf",
+              "mod": "eb866f47"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "10338b19",
+              "mod": "85115c1f"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "539fd280",
+              "mod": "af03faf9"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "8594eddc",
+              "mod": "020cfe6d"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "5d2afb41",
+              "mod": "008e45bf"
+            }
+          ],
+          "resolved_through": [
+            3535,
+            3535
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 6432,
+              "core": "b0ca04ab",
+              "mod": "d6519a37"
+            },
+            {
+              "simulation_tick": 6464,
+              "core": "adb0c235",
+              "mod": "e63a358f"
+            },
+            {
+              "simulation_tick": 6496,
+              "core": "1aeb6a35",
+              "mod": "c567c8d1"
+            },
+            {
+              "simulation_tick": 6528,
+              "core": "726a24ca",
+              "mod": "fe3d2585"
+            },
+            {
+              "simulation_tick": 6560,
+              "core": "f6529ea7",
+              "mod": "c353212e"
+            },
+            {
+              "simulation_tick": 6592,
+              "core": "9ab61b42",
+              "mod": "0e5c43e7"
+            },
+            {
+              "simulation_tick": 6624,
+              "core": "cb1bdb27",
+              "mod": "67851039"
+            }
+          ],
+          "resolved_through": [
+            6634,
+            6633
+          ]
+        }
+      ]
+    }
+  },
+  "same_image_weakness_and_rejected_contact_regression": {
+    "report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl1l\\qualification.json",
+      "sha256": "c70e8e9b52aea3f4be6432afc0e75b3ae419970f02595492273af98aa10358c6",
+      "bytes": 14445602
+    },
+    "observations": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl1l\\ammo-hud\\intro-admission\\observations.json",
+      "sha256": "5a793889fe574ec23006c34a22936dc8fcc18d2103d8a9f3b69f4275f0250566",
+      "bytes": 13618083
+    },
+    "weakness_budget": [
+      {
+        "raw": 8,
+        "scaled": 3,
+        "zero": 8
+      }
+    ],
+    "weakness_recovered_row": 703,
+    "giga_rejected": {
+      "before": 703,
+      "after": 735,
+      "actual_pose59_peers": [
+        0
+      ],
+      "observed_types": [
+        44
+      ],
+      "native_hit_before": [
+        2
+      ],
+      "native_hit_after": [
+        4
+      ]
+    },
+    "result": "components_only_later_Giga_retirement_timeout_preserved"
+  },
+  "retained_failed_NET_scripted_phase": {
+    "report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl2n\\qualification.json",
+      "sha256": "561b2d84cff9d7d5ea3ef8917eba6e2fda51550ec424871cd243d08b291a3521",
+      "bytes": 12613476
+    },
+    "raw_error": "Observed shortened native clock exceeds15",
+    "scripted_marker_observed": true,
+    "no_game_defect_inferred": true
+  },
+  "reviewed_captures": [
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-X-clock-expired-0",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl2l\\ammo-hud\\intro-admission\\peer-0-native-X-clock-expired-0.png",
+        "sha256": "d9bca1d40228e608b0001f6cdda399a39112f5473a77c8499a3657e8b8584a7e",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Native Sigma and ordinary world remain visible after the hit/expiry. The heroes overlap at the original intro release; no independent art/HUD/palette pass is inferred. Clock values and damage come from retained native RAM and actual guarded-store observations."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-X-clock-expired-1",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl2l\\ammo-hud\\intro-admission\\peer-0-native-X-clock-expired-1.png",
+        "sha256": "4159c88b0780c7a72ffc06ffdeba87d2e3398318d3d260d1423baec76693718d",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Native Sigma and ordinary world remain visible after the hit/expiry. The heroes overlap at the original intro release; no independent art/HUD/palette pass is inferred. Clock values and damage come from retained native RAM and actual guarded-store observations."
+    },
+    {
+      "mode": "disabled_local",
+      "peer": 0,
+      "label": "native-X-clock-expired-0",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-X-clock-expired-0.png",
+        "sha256": "d00dacc8b49555834a8167773cfb08e57243ebd7e95d3ffcdacca97864423bd0",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Native Sigma and ordinary world remain visible after the hit/expiry. The heroes overlap at the original intro release; no independent art/HUD/palette pass is inferred. Clock values and damage come from retained native RAM and actual guarded-store observations."
+    },
+    {
+      "mode": "disabled_local",
+      "peer": 0,
+      "label": "native-X-clock-expired-1",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl0l\\ammo-hud\\intro-admission\\peer-0-native-X-clock-expired-1.png",
+        "sha256": "4834b0e429040826333a6991118d40147b42b0ff31f13337b7c7b64f98276fe1",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Native Sigma and ordinary world remain visible after the hit/expiry. The heroes overlap at the original intro release; no independent art/HUD/palette pass is inferred. Clock values and damage come from retained native RAM and actual guarded-store observations."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-X-clock-expired-0",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl3n\\intro-admission\\peer-0-native-X-clock-expired-0.png",
+        "sha256": "ef62450dc2172a6167ff5b31ef1e0d658ca462401c1a5fe6c7e7500c44cd2c03",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Native Sigma and ordinary world remain visible after the hit/expiry. The heroes overlap at the original intro release; no independent art/HUD/palette pass is inferred. Clock values and damage come from retained native RAM and actual guarded-store observations."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-X-clock-expired-0",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl3n\\intro-admission\\peer-1-native-X-clock-expired-0.png",
+        "sha256": "81ae2293dabe6a046d323a2220f22bd9b09cd6b9c66e910a4cccbe3e9d377bae",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Native Sigma and ordinary world remain visible after the hit/expiry. The heroes overlap at the original intro release; no independent art/HUD/palette pass is inferred. Clock values and damage come from retained native RAM and actual guarded-store observations."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-X-clock-expired-1",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl3n\\intro-admission\\peer-0-native-X-clock-expired-1.png",
+        "sha256": "091ceade051eebe5d7a21338362a9dbdb2077595bc003cd7007251cd53779aaf",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Native Sigma and ordinary world remain visible after the hit/expiry. The heroes overlap at the original intro release; no independent art/HUD/palette pass is inferred. Clock values and damage come from retained native RAM and actual guarded-store observations."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-X-clock-expired-1",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl3n\\intro-admission\\peer-1-native-X-clock-expired-1.png",
+        "sha256": "9717cf8ab6528e10c38efa0a16a1a74172af53b56e0a31ad01622223b32600e8",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Native Sigma and ordinary world remain visible after the hit/expiry. The heroes overlap at the original intro release; no independent art/HUD/palette pass is inferred. Clock values and damage come from retained native RAM and actual guarded-store observations."
+    },
+    {
+      "mode": "partial_local_regression",
+      "peer": 0,
+      "label": "native-actual-Sigma-weakness-reaction",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-actual-Sigma-weakness-reaction.png",
+        "sha256": "79d0a5d8b3a093c037812942b50def9aa7fe15e784026bd5ef738acd2b49c38a",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Both views retain the actual native Zero weakness/recovery or Giga art and the living boss. Terminal Giga retirement is incomplete; it is not credited as an ordinary cooldown endpoint."
+    },
+    {
+      "mode": "partial_local_regression",
+      "peer": 0,
+      "label": "native-original-Sigma-weakness-recovery",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-weakness-recovery.png",
+        "sha256": "7b12518e4dec270df59efd62e15c50b6286f75162cd1c7a41daebe278e679a8b",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Both views retain the actual native Zero weakness/recovery or Giga art and the living boss. Terminal Giga retirement is incomplete; it is not credited as an ordinary cooldown endpoint."
+    },
+    {
+      "mode": "partial_local_regression",
+      "peer": 0,
+      "label": "native-original-Giga-rejected",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-original-Giga-rejected.png",
+        "sha256": "fd344e15e658c3ac4479e0c2134871b8a7faf1d90e79b42336101b31c227f0fc",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Both views retain the actual native Zero weakness/recovery or Giga art and the living boss. Terminal Giga retirement is incomplete; it is not credited as an ordinary cooldown endpoint."
+    },
+    {
+      "mode": "partial_local_regression",
+      "peer": 0,
+      "label": "terminal-failed-native-endpoint",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v115-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-terminal-failed-native-endpoint.png",
+        "sha256": "46d084b42d126b352d095f1bfb322755aebed0e4022215cee5de398b07cc622d",
+        "bytes": 2074543
+      },
+      "personally_reviewed": true,
+      "review": "Both views retain the actual native Zero weakness/recovery or Giga art and the living boss. Terminal Giga retirement is incomplete; it is not credited as an ordinary cooldown endpoint."
+    }
+  ],
+  "limits": [
+    "Only frozen F63 elective effective boss-health budget and shorter shared post-hit recovery. The existing boss_balance default remains off. Independent policy/dropdown and aerial/finisher per-seat rows F99/F152/F153 remain unimplemented and unverified.",
+    "Native Sigma12/1CP1 is the original encounter exercised in both LOCAL and Windows same-machine delay3 NET. Twenty exact post-hit sites across native banks are source/actual-plugin scoped; no universal per-boss/phase matrix, native3330, physical-controller, remote-peer, other-OS or performance claim.",
+    "Both enabled modes execute original ordinary30->15 stores, observe positive shortened clocks, and restore original7591C vulnerability/clock0 after two accepted X hits. Native integer HP/bar remains48; half-damage and shared fractions produce48->48->47. The same-SERVER disabled baseline retains1HP per X hit, original30 clocks and zero scaling/cooldown counters.",
+    "Same-image LOCAL partial evidence retains native Zero35 raw8->scaled3/action3 and finite original recovery, plus immune Giga44 contacts with unchanged HP45. Its later own-Giga retirement20-second timeout remains failed/uncredited. It is not another full-mode pass.",
+    "The earlier NET attempt fired while native Sigma was in initialaction6: originalaction3 uses10000 and later40-tick scripted recovery. The observer incorrectly classified its later36..1 samples as ordinary15; that raw failure is retained. Final NET waits for original ordinary groundaction4, without writing HP/phase/timers/results, and passes all15 gates plus28 matching samples in4 resolved windows.",
+    "Agreed native checkpoint reachability, earned-ability initialization and hostile-contact protection are setup bypasses; no boss HP, attack/result, timer, phase, token, success or progress flags are authored. Setup-tainted ordinary recording/replay stays refused. Current-build HostState/snapshot17 capture/codec/digest/invalid-pointer tests pass; no native rewind/rollback or old-state compatibility claim.",
+    "Twelve endpoint/regression composed images personally reviewed. Remaining setup captures stay retained, without extra graphics credit. All failed raw data, the original uncommitted paired HUD harness, cards and owner saves/settings are preserved."
+  ]
+}

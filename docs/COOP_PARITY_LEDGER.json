@@ -12399,17 +12399,102 @@
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f071c01896958e72fe94102263370079f4e0f5c5",
+            "build_identity": {
+              "executable_sha256": "a141047788d02427986b51d62534c13f2707fb73887670b42612ba526a0bb206",
+              "compiled_manifest_sha256": "a6595176fb889b8ae07f4899d436af4805300cbf9933361004165538b5c0e811",
+              "provenance_sha256": "57633c7a96caeac24e8f5f2a374a09c142c1fdf677fda052d3d23a106fdc32ae",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "boss_balance": "on",
+              "roster": "X/P1+Zero/P2",
+              "checkpoint": "originalSigma12/1CP1",
+              "host": "SERVER",
+              "audio": "dummy muted",
+              "title": "mmx6-x-zero-delay-v63",
+              "host_revision": 46,
+              "snapshot": 17
+            },
+            "action": "Reach original48HP Sigma; offer two genuine X buster hits in native ordinary ground phase4; observe exact30->15 stores and finite native expiry. Compare same-image disabled baseline and preserved weakness/scripted reactions.",
+            "outcome": "Both modes retain48->48->47 through half-damage/fractional carry, native positive clocks<=15 and original vulnerability/clock0. Disabled LOCAL keeps48->47->46,30 clocks/counters0. All4/15 parent gates,28 matching NET CRC samples/4windows, cards and4 accepted-case native exits0 pass. Twelve images reviewed; failed firstGiga and scripted-phase NET tails preserved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-f071c01-F63-native-shared-cooldown-local-netplay-reviewed.json",
+                "sha256": "405cbf2c0416a14daae330b9db2dff41e94965bf0e3d02c53d65d5722fba35bc"
+              }
+            ],
+            "limits": [
+              "Only frozen F63 elective effective boss-health budget and shorter shared post-hit recovery. The existing boss_balance default remains off. Independent policy/dropdown and aerial/finisher per-seat rows F99/F152/F153 remain unimplemented and unverified.",
+              "Native Sigma12/1CP1 is the original encounter exercised in both LOCAL and Windows same-machine delay3 NET. Twenty exact post-hit sites across native banks are source/actual-plugin scoped; no universal per-boss/phase matrix, native3330, physical-controller, remote-peer, other-OS or performance claim.",
+              "Both enabled modes execute original ordinary30->15 stores, observe positive shortened clocks, and restore original7591C vulnerability/clock0 after two accepted X hits. Native integer HP/bar remains48; half-damage and shared fractions produce48->48->47. The same-SERVER disabled baseline retains1HP per X hit, original30 clocks and zero scaling/cooldown counters.",
+              "Same-image LOCAL partial evidence retains native Zero35 raw8->scaled3/action3 and finite original recovery, plus immune Giga44 contacts with unchanged HP45. Its later own-Giga retirement20-second timeout remains failed/uncredited. It is not another full-mode pass.",
+              "The earlier NET attempt fired while native Sigma was in initialaction6: originalaction3 uses10000 and later40-tick scripted recovery. The observer incorrectly classified its later36..1 samples as ordinary15; that raw failure is retained. Final NET waits for original ordinary groundaction4, without writing HP/phase/timers/results, and passes all15 gates plus28 matching samples in4 resolved windows.",
+              "Agreed native checkpoint reachability, earned-ability initialization and hostile-contact protection are setup bypasses; no boss HP, attack/result, timer, phase, token, success or progress flags are authored. Setup-tainted ordinary recording/replay stays refused. Current-build HostState/snapshot17 capture/codec/digest/invalid-pointer tests pass; no native rewind/rollback or old-state compatibility claim.",
+              "Twelve endpoint/regression composed images personally reviewed. Remaining setup captures stay retained, without extra graphics credit. All failed raw data, the original uncommitted paired HUD harness, cards and owner saves/settings are preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability, earned ability initialization and hostile-contact protection only; no HP/phase/timer/result/outcome writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f071c01896958e72fe94102263370079f4e0f5c5",
+            "build_identity": {
+              "executable_sha256": "a141047788d02427986b51d62534c13f2707fb73887670b42612ba526a0bb206",
+              "compiled_manifest_sha256": "a6595176fb889b8ae07f4899d436af4805300cbf9933361004165538b5c0e811",
+              "provenance_sha256": "57633c7a96caeac24e8f5f2a374a09c142c1fdf677fda052d3d23a106fdc32ae",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "boss_balance": "on",
+              "roster": "X/P1+Zero/P2",
+              "checkpoint": "originalSigma12/1CP1",
+              "host": "PC Windows delay3 loopback",
+              "audio": "dummy muted",
+              "title": "mmx6-x-zero-delay-v63",
+              "host_revision": 46,
+              "snapshot": 17
+            },
+            "action": "Reach original48HP Sigma; offer two genuine X buster hits in native ordinary ground phase4; observe exact30->15 stores and finite native expiry. Compare same-image disabled baseline and preserved weakness/scripted reactions.",
+            "outcome": "Both modes retain48->48->47 through half-damage/fractional carry, native positive clocks<=15 and original vulnerability/clock0. Disabled LOCAL keeps48->47->46,30 clocks/counters0. All4/15 parent gates,28 matching NET CRC samples/4windows, cards and4 accepted-case native exits0 pass. Twelve images reviewed; failed firstGiga and scripted-phase NET tails preserved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-f071c01-F63-native-shared-cooldown-local-netplay-reviewed.json",
+                "sha256": "405cbf2c0416a14daae330b9db2dff41e94965bf0e3d02c53d65d5722fba35bc"
+              }
+            ],
+            "limits": [
+              "Only frozen F63 elective effective boss-health budget and shorter shared post-hit recovery. The existing boss_balance default remains off. Independent policy/dropdown and aerial/finisher per-seat rows F99/F152/F153 remain unimplemented and unverified.",
+              "Native Sigma12/1CP1 is the original encounter exercised in both LOCAL and Windows same-machine delay3 NET. Twenty exact post-hit sites across native banks are source/actual-plugin scoped; no universal per-boss/phase matrix, native3330, physical-controller, remote-peer, other-OS or performance claim.",
+              "Both enabled modes execute original ordinary30->15 stores, observe positive shortened clocks, and restore original7591C vulnerability/clock0 after two accepted X hits. Native integer HP/bar remains48; half-damage and shared fractions produce48->48->47. The same-SERVER disabled baseline retains1HP per X hit, original30 clocks and zero scaling/cooldown counters.",
+              "Same-image LOCAL partial evidence retains native Zero35 raw8->scaled3/action3 and finite original recovery, plus immune Giga44 contacts with unchanged HP45. Its later own-Giga retirement20-second timeout remains failed/uncredited. It is not another full-mode pass.",
+              "The earlier NET attempt fired while native Sigma was in initialaction6: originalaction3 uses10000 and later40-tick scripted recovery. The observer incorrectly classified its later36..1 samples as ordinary15; that raw failure is retained. Final NET waits for original ordinary groundaction4, without writing HP/phase/timers/results, and passes all15 gates plus28 matching samples in4 resolved windows.",
+              "Agreed native checkpoint reachability, earned-ability initialization and hostile-contact protection are setup bypasses; no boss HP, attack/result, timer, phase, token, success or progress flags are authored. Setup-tainted ordinary recording/replay stays refused. Current-build HostState/snapshot17 capture/codec/digest/invalid-pointer tests pass; no native rewind/rollback or old-state compatibility claim.",
+              "Twelve endpoint/regression composed images personally reviewed. Remaining setup captures stay retained, without extra graphics credit. All failed raw data, the original uncommitted paired HUD harness, cards and owner saves/settings are preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability, earned ability initialization and hostile-contact protection only; no HP/phase/timer/result/outcome writes."
+            ]
+          }
+        ],
+        "limitations": "One original Sigma encounter per required mode;20 exact native post-hit sites source/unit checked. Shared policy only; independentF99/F152/F153 unimplemented. Same-image disabled baseline and scripted/weakness regressions retained; no universal boss matrix or native3330 credit."
       }
     },
     {
