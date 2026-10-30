@@ -2330,6 +2330,10 @@ static void native_capsule_keeps_living_passenger(void) {
     for(unsigned seat=0;seat<2;++seat) {
         CPUState cpu;setup(&cpu);capsule_native_probe=1;
         life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+        /* setup() deliberately poisons resident fields with B3. This case
+         * starts from genuine idle bodies, without unrelated script locks. */
+        const unsigned locks[]={0xD0,0xD4,0x7A};
+        for(unsigned n=0;n<3;++n) {psx_mod_write_byte(PLAYER+locks[n],0);p2.body[locks[n]]=0;}
         psx_mod_write_byte(PLAYER+3,1);psx_mod_write_byte(PLAYER+4,1);
         psx_mod_write_byte(PLAYER+0x5C,32);p2.body[3]=p2.body[4]=1;p2.body[0x5C]=32;
         uint32_t actor=0x800C1220u;cpu.gpr[4]=actor;
