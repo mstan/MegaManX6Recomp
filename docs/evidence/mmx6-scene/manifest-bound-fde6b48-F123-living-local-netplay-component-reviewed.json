@@ -1,0 +1,450 @@
+{
+  "kind": "F123_living_Both_LOCAL_NET_component_review",
+  "status": "component_passed_comparison_unverified",
+  "comparisons": {
+    "F123": "9e89dc9c86606d8bd916ad40f360ad8e87b7673b9676d955dd57bb73710ce02c"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+    "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+    "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+    "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+    "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v55",
+    "host_revision": 38
+  },
+  "local": {
+    "reviewed_receipt": {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-fde6b48-F123-local-living-and-absent-components-reviewed.json",
+      "sha256": "f2e86eccfeced8026df63e5e8700672ca6c3d159bf27feb594874d9530a1b9f8",
+      "bytes": 14928
+    },
+    "component": "local_components.living"
+  },
+  "netplay": {
+    "parent_checks": {
+      "jump_audio_original_source_bound": true,
+      "jump_audio_both_peers_completed": true,
+      "declared_build_manifest_bound_to_staged_images": true,
+      "jump_audio_declared_sources_match": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "default_resident_loader_committed": true,
+      "jump_audio_resolved_crc_after_case": true,
+      "jump_audio_final_private_cards_unchanged": true,
+      "jump_audio_owned_pair_cleanup": true
+    },
+    "native_checks": {
+      "original_CP1_source_and_native_ready": true,
+      "one_living_contact_waits30_native_updates": true,
+      "primary_neutral_outside_contact": true,
+      "actual_Left_aborts_without_admission": true,
+      "ordinary_primary_approach_then_original_Both_admission": true,
+      "actual_original_CP2_initializer": true,
+      "native_full48HP_boss_active_and_both_released": true,
+      "both_original_full22feet_floor448": true,
+      "separate_native_controls": true,
+      "actual_composed_captures": true
+    },
+    "native_wait_updates": [
+      33,
+      33
+    ],
+    "controls": [
+      {
+        "seat": 1,
+        "before": 513,
+        "moved": 515,
+        "settled": 521
+      },
+      {
+        "seat": 0,
+        "before": 522,
+        "moved": 525,
+        "settled": 527
+      }
+    ],
+    "native_initializer_trace": [
+      {
+        "peer": 0,
+        "trace": {
+          "id": 4084,
+          "ok": true,
+          "total": 1,
+          "oldest": 0,
+          "seq_lo": 0,
+          "seq_hi": 1,
+          "entries": [
+            {
+              "seq": 0,
+              "func": "0x8001E1BC",
+              "ra": "0x8001E720",
+              "a0": "0x800CCED0",
+              "a1": "0x00009088",
+              "a2": "0x800C4618",
+              "a3": "0x8008EB88",
+              "t1": "0x00000010",
+              "s0": "0x800D0000",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 1150,
+              "frame": 4479,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "emitted": 1
+        }
+      },
+      {
+        "peer": 1,
+        "trace": {
+          "id": 3886,
+          "ok": true,
+          "total": 1,
+          "oldest": 0,
+          "seq_lo": 0,
+          "seq_hi": 1,
+          "entries": [
+            {
+              "seq": 0,
+              "func": "0x8001E1BC",
+              "ra": "0x8001E720",
+              "a0": "0x800CCED0",
+              "a1": "0x00009088",
+              "a2": "0x800C4618",
+              "a3": "0x8008EB88",
+              "t1": "0x00000010",
+              "s0": "0x800D0000",
+              "s1": "0x8007112C",
+              "s2": "0x800D0000",
+              "s3": "0xFF000000",
+              "depth": 1153,
+              "frame": 4479,
+              "exit_seq": 0,
+              "entry_kind": 1,
+              "context": {
+                "schema": 0,
+                "available": 0,
+                "provider": 0,
+                "epoch": 0,
+                "flags": 0,
+                "state0": 0,
+                "state1": 0,
+                "state2": 0,
+                "publication": {
+                  "valid": 0,
+                  "provider": 0,
+                  "epoch": 0,
+                  "sequence": 0,
+                  "site": 0
+                }
+              }
+            }
+          ],
+          "emitted": 1
+        }
+      }
+    ],
+    "captures": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p0-source.png",
+        "sha256": "4fd6f799a487d9df1f8b608ccd01cc528d3338776681ab49cfa7e60e7ba59d07",
+        "bytes": 2074543,
+        "peer": 0,
+        "label": "source",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p1-source.png",
+        "sha256": "1151adb71f017cbbc7ddabbbbccf478213b15f7c7fd3b241fe49201e549e1771",
+        "bytes": 2074543,
+        "peer": 1,
+        "label": "source",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p0-one-contact-wait.png",
+        "sha256": "15f2d6e05b2041b8c0a04554dcca047cb2cc4b3883d6096eca7e4083529ec74f",
+        "bytes": 2074543,
+        "peer": 0,
+        "label": "one-contact-wait",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p1-one-contact-wait.png",
+        "sha256": "f9bb10bc45e6409a479645b989a0f4eb75f8a17ad59f00cfc3ff71d0ebe208c0",
+        "bytes": 2074543,
+        "peer": 1,
+        "label": "one-contact-wait",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p0-one-contact-held.png",
+        "sha256": "ddee3ae193d0041b8649d59bfcfa6ab9ad3e62bdbb27e0c0ac52576bd3dcdce4",
+        "bytes": 2074543,
+        "peer": 0,
+        "label": "one-contact-held",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p1-one-contact-held.png",
+        "sha256": "d7d13f0f88a48dd586e9e3138bea6ad1ad4b4a2142bb8046ba471a4cc9a6ea13",
+        "bytes": 2074543,
+        "peer": 1,
+        "label": "one-contact-held",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p0-abort.png",
+        "sha256": "ab938110381bd65753a33cb2cd5f2483eda278f41c8184f05b0a8d6ee22a86bd",
+        "bytes": 2074543,
+        "peer": 0,
+        "label": "abort",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p1-abort.png",
+        "sha256": "82038f3212ae5988d15e207cde1a6372431c51f407332e3be7232a662de22c50",
+        "bytes": 2074543,
+        "peer": 1,
+        "label": "abort",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p0-admit.png",
+        "sha256": "80569b77599745732565ea7c05aec663f255301ec7ebf204c517b4275e37f54c",
+        "bytes": 2074543,
+        "peer": 0,
+        "label": "admit",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p1-admit.png",
+        "sha256": "67101ec777ac9376b5b0dceddb4b9a759319c394303aba0d7bb20ccac4cba9be",
+        "bytes": 2074543,
+        "peer": 1,
+        "label": "admit",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p0-arrive.png",
+        "sha256": "9019cea3f56fc12166cfb04356e5afe570432eafe4a52dba8837498a62eb4a72",
+        "bytes": 2074543,
+        "peer": 0,
+        "label": "arrive",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p1-arrive.png",
+        "sha256": "e8ab194991ab562fb8cfb5b2208e0c18da913b715204506330af5e773f283a35",
+        "bytes": 2074543,
+        "peer": 1,
+        "label": "arrive",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p0-controls.png",
+        "sha256": "92cbd12e6931647fb0728505c4466a83867404088f35d645526fe963589b0ca1",
+        "bytes": 2074543,
+        "peer": 0,
+        "label": "controls",
+        "root_personally_viewed": true
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\p1-controls.png",
+        "sha256": "fa897d0ded88833f4dcf2d85adc04b8b6f4bc8b2923258df0f2cc28f3dd2a6dd",
+        "bytes": 2074543,
+        "peer": 1,
+        "label": "controls",
+        "root_personally_viewed": true
+      }
+    ],
+    "resolved_crc": [
+      {
+        "label": "initial idle",
+        "samples": [
+          {
+            "simulation_tick": 3264,
+            "core": "80fe802c",
+            "mod": "d45dd304"
+          },
+          {
+            "simulation_tick": 3296,
+            "core": "4f5af664",
+            "mod": "ea5a8800"
+          },
+          {
+            "simulation_tick": 3328,
+            "core": "f7b20fb4",
+            "mod": "52b76e96"
+          },
+          {
+            "simulation_tick": 3360,
+            "core": "ff55379d",
+            "mod": "18132d7c"
+          }
+        ],
+        "resolved_through": [
+          3383,
+          3383
+        ]
+      },
+      {
+        "label": "P2 right then release",
+        "samples": [
+          {
+            "simulation_tick": 3424,
+            "core": "40a83cff",
+            "mod": "e0ddbf7b"
+          },
+          {
+            "simulation_tick": 3456,
+            "core": "7da1c046",
+            "mod": "676e51f9"
+          },
+          {
+            "simulation_tick": 3488,
+            "core": "0193a3b6",
+            "mod": "64a45e47"
+          },
+          {
+            "simulation_tick": 3520,
+            "core": "54c503be",
+            "mod": "0c836ce7"
+          },
+          {
+            "simulation_tick": 3552,
+            "core": "3eb05992",
+            "mod": "6fdc1a51"
+          }
+        ],
+        "resolved_through": [
+          3558,
+          3558
+        ]
+      },
+      {
+        "label": "P1 jump then settle",
+        "samples": [
+          {
+            "simulation_tick": 3648,
+            "core": "53707043",
+            "mod": "853b0dd3"
+          },
+          {
+            "simulation_tick": 3680,
+            "core": "dbdc84eb",
+            "mod": "113ab552"
+          },
+          {
+            "simulation_tick": 3712,
+            "core": "f41171d1",
+            "mod": "2f3c9a31"
+          },
+          {
+            "simulation_tick": 3744,
+            "core": "ceb45e23",
+            "mod": "72e9cfb7"
+          }
+        ],
+        "resolved_through": [
+          3764,
+          3765
+        ]
+      },
+      {
+        "label": "paired ground-jump audio then settle",
+        "samples": [
+          {
+            "simulation_tick": 5728,
+            "core": "cceecbde",
+            "mod": "1110efdf"
+          },
+          {
+            "simulation_tick": 5760,
+            "core": "dd55b764",
+            "mod": "6389d54d"
+          },
+          {
+            "simulation_tick": 5792,
+            "core": "0b1482db",
+            "mod": "9829b7c5"
+          }
+        ],
+        "resolved_through": [
+          5825,
+          5824
+        ]
+      }
+    ],
+    "native_exit0": 2,
+    "private_cards_unchanged": true,
+    "raw_artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\qualification.json",
+        "sha256": "eb7557b55d950f58f91b0358f6e8edfe2ec25d6ca4345d5041cfedf8d24a1f18",
+        "bytes": 6952712
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\intro-admission\\observations.json",
+        "sha256": "1e20f199b1daeaab8faa34760d084c6d40a7cb44103c932b366e7c75f8f60f21",
+        "bytes": 4958792
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\bp5n\\F123-executing-source-pins.json",
+        "sha256": "0f256a1f979f6f3e865e00b263a20e422df2c81717cb046d243660be3dce5c65",
+        "bytes": 10773
+      }
+    ]
+  },
+  "review_summary": {
+    "comparisons_closed": 0,
+    "root_personally_viewed_living_images": 21,
+    "native_living_exit0": 3,
+    "matching_CRC_samples": 16,
+    "resolved_CRC_windows": 4
+  },
+  "remaining": [
+    "Actual fallen exclusion LOCAL+NET",
+    "Actual absent exclusion NET"
+  ],
+  "limits": [
+    "Only the explicitly selected native participation component is observed; all three LOCAL+NET components required before comparison admission.",
+    "Default-off originalCP1 and once source1852/1241 XY/history prerequisite bypasses reachability; contact protection is on for living/absent and off for actual fallen hazard. Native original admission/loader/landing/control are earned.",
+    "Original source geometry is evaluated against coherent body publications; portal/PLAY/captures are asynchronous, no same-instruction two-peer claim.",
+    "Same-machine negotiated profile37 delay3 NET or LOCAL split; no other portals, boss defeat/return, human, WAN or native3330 credit.",
+    "LOCAL observer4 and NETobserver6 differ only input-centering stop observations plus unexecuted fallen-scenario preparation; final native living predicates match. Both settled original contacts remain required. Prior failed NETmoving-window reads retained."
+  ]
+}
