@@ -8,6 +8,8 @@ This build includes the combined qualified engine optimizations and uses the sha
 
 Automated gameplay validation for this release batch is limited to Ape Escape and Tomba 2. The other titles use build and package checks followed by owner visual approval; no per-title performance gain is claimed.
 
+# v1.3.3-alpha: audited native execution
+
 Select the audited native SDK frame wait. Move the existing X6 native services onto the modern framework SDK while retaining co-op and Seamless Loading. Regenerate original-disc overlays for ABI 35. Intro gameplay, movement, jump and current-build save/load pass with DualShock input. Three production comparisons observed a median 24.6% reduction in process CPU per frame for the wait package under background load; no full-game or cross-build netplay compatibility is claimed.
 
 # v1.3.2-alpha
