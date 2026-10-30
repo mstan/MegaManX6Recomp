@@ -37,6 +37,7 @@ enum { CHECKPOINT_LAB_DISTANT_PORTAL_NONCE=0x4C525044u }; /* Same native entry, 
 
 enum { CHECKPOINT_LAB_FALLEN_PORTAL_NONCE=0x4C524631u,
     CHECKPOINT_LAB_FALLEN_GUEST_PORTAL_NONCE=0x4C524632u }; /* Position-only pit approaches; death stays native. */
+enum { CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE=0x4C524644u }; /* R21: only guest position/history bypass. */
 enum { CHECKPOINT_LAB_REFIGHT_NONCE=0x4C524650u }; /* Original0C/0 CP1, portal approach only. */
 enum { CHECKPOINT_LAB_GATE_ENEMY_NONCE=0x4C474531u }; /* Original SecretLab2B CP0, position-only approach. */
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint32_t placed_world; } Mmx6CheckpointPending;
@@ -57,7 +58,7 @@ static unsigned checkpoint_lab_index(void) {
     return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
-        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:checkpoint_lab_option==15?60:115;
+        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -74,7 +75,8 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==12?CHECKPOINT_LAB_FALLEN_PORTAL_NONCE:
         checkpoint_lab_option==13?CHECKPOINT_LAB_FALLEN_GUEST_PORTAL_NONCE:
         checkpoint_lab_option==14?CHECKPOINT_LAB_GATE_ENEMY_NONCE:
-        checkpoint_lab_option==15?CHECKPOINT_LAB_REFIGHT_NONCE:0;
+        checkpoint_lab_option==15?CHECKPOINT_LAB_REFIGHT_NONCE:
+        checkpoint_lab_option==16?CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -201,6 +203,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"recycle_fallen_guest_cp2"))checkpoint_lab_option=13;
         else if(!strcmp(option,"secretlab2b_enemy_cp0"))checkpoint_lab_option=14;
         else if(!strcmp(option,"refight_portal_cp1"))checkpoint_lab_option=15;
+        else if(!strcmp(option,"refight_distant_cp1"))checkpoint_lab_option=16;
         else if(!strcmp(option,"turtloid_rain_cp1"))checkpoint_lab_option=8;
         else if(!strcmp(option,"alternate_boss_cp1"))checkpoint_lab_option=9;
         else if(strcmp(option,"off"))failed=1;
@@ -227,7 +230,7 @@ static void checkpoint_reset(void) {
      * is airborne. Do not route this prerequisite through the separate
      * both-grounded HP/equipment completion contract. The Gate enemy setup
      * likewise retains original healthy bodies and disallows these extras. */
-    if((checkpoint_lab_option==12 || checkpoint_lab_option==13 || checkpoint_lab_option==14 || checkpoint_lab_option==15) &&
+    if((checkpoint_lab_option==12 || checkpoint_lab_option==13 || checkpoint_lab_option==14 || checkpoint_lab_option==15 || checkpoint_lab_option==16) &&
        (checkpoint_starting_hp[0] || checkpoint_starting_hp[1] || checkpoint_earned_weapons_option))failed=1;
 #endif
     if(diagnostic) {
@@ -628,7 +631,8 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
         else if((checkpoint_pending.phase==2 || checkpoint_pending.phase==3) && psx_mod_read_byte(PLAY)==10 &&
                 psx_mod_read_byte(PLAY+12)==entry->stage && psx_mod_read_byte(PLAY+13)==entry->section &&
                 psx_mod_read_byte(PLAY+0x1D)==entry->checkpoint) {
-            if(checkpoint_pending.authority==CHECKPOINT_AGREED && checkpoint_lab_option==15) {
+            if(checkpoint_pending.authority==CHECKPOINT_AGREED &&
+               (checkpoint_lab_option==15 || checkpoint_lab_option==16)) {
                 uint32_t meta,desc;
                 if(checkpoint_starting_hp[0] || checkpoint_starting_hp[1] || checkpoint_earned_weapons_option)
                     checkpoint_cancel(CHECKPOINT_FORBIDDEN);
@@ -639,7 +643,8 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
                  * original arrival, standing feet and camera contract. */
                 else if(checkpoint_pending.phase==2 && !checkpoint_refight_standing()) { }
                 else if(!checkpoint_source(entry) || !checkpoint_refight_source() ||
-                        !checkpoint_refight_assets(&meta,&desc) || !checkpoint_refight_ground(meta,desc)) {
+                        !checkpoint_refight_assets(&meta,&desc) || !checkpoint_refight_ground(meta,desc) ||
+                        (checkpoint_lab_option==16 && !checkpoint_refight_distant_ground(meta,desc))) {
                     checkpoint_refight_refusal(entry);
                     checkpoint_refusal_value("refight-source-assets-corridor",0,entry->record,0,1);
                     checkpoint_cancel(CHECKPOINT_SOURCE);

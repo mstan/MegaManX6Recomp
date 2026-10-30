@@ -1500,7 +1500,7 @@ int main(int argc,char **argv) {
     if(!fixture || !*fixture){puts("SKIP: MMX6_REFIGHT_SETUP_RAM must name external original refight source");return 77;}
     file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"RPS1",4));
     CHECK(fread(refight_source_ram,1,sizeof refight_source_ram,file)==sizeof refight_source_ram && fgetc(file)==EOF);fclose(file);
-    agreed_refight_prerequisite(&cpu);refight_owner_projection(&cpu);
+    agreed_refight_prerequisite(&cpu);agreed_refight_distant_prerequisite(&cpu);refight_owner_projection(&cpu);
     agreed_gate_enemy_prerequisite(&cpu);
     agreed_northpole_prerequisite(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);

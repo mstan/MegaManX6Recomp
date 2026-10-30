@@ -1,8 +1,9 @@
 /* External native input contracts only. The C test does not execute or
  * qualify original gravity, portal code, loader, boss or active gameplay. */
-static void setup_refight_prerequisite(CPUState *cpu,int online) {
-    setup_agreed(cpu,online);test_lab_option="refight_portal_cp1";checkpoint_reset();
-    CHECK(checkpoint_lab_option==15 && checkpoint_lab_index()==60 && checkpoint_lab_nonce()==0x4C524650u);
+static void setup_refight_option(CPUState *cpu,int online,unsigned option) {
+    setup_agreed(cpu,online);test_lab_option=option==16?"refight_distant_cp1":"refight_portal_cp1";checkpoint_reset();
+    CHECK(checkpoint_lab_option==option && checkpoint_lab_index()==60 &&
+        checkpoint_lab_nonce()==(option==16?0x4C524644u:0x4C524650u));
     CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB8)==0x80072978u);
     memcpy(test_ram,refight_source_ram,sizeof test_ram);
@@ -21,6 +22,9 @@ static void setup_refight_prerequisite(CPUState *cpu,int online) {
     uint32_t meta,desc;
     CHECK(checkpoint_refight_source() && checkpoint_refight_assets(&meta,&desc) &&
           checkpoint_refight_ground(meta,desc) && checkpoint_refight_original_arrival(meta,desc));
+}
+static void setup_refight_prerequisite(CPUState *cpu,int online) {
+    setup_refight_option(cpu,online,15);
 }
 static void refight_external_standing(void) {
     psx_mod_write_word(PLAYER+12,1243u<<16);psx_mod_write_word(PLAYER+0x1C,1243u<<16);
@@ -105,6 +109,59 @@ static void agreed_refight_prerequisite(CPUState *cpu) {
     psx_mod_write_half(meta+air,empty);psx_mod_write_half(meta+floor,empty);CHECK(!checkpoint_refight_ground(meta,desc));
     for(unsigned combo=0;combo<3;++combo) {
         setup_agreed(cpu,1);test_lab_option="refight_portal_cp1";
+        if(combo<2)test_lab_hp_option[combo]="1";else test_lab_earned_option="all";
+        checkpoint_reset();CHECK(failed);
+        test_lab_hp_option[0]=test_lab_hp_option[1]="off";test_lab_earned_option="off";
+    }
+    test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option);
+}
+/* Model inputs only: original gravity/portal/scene completion are NOT run
+ * or credited by this C fixture. Preserve the entire primary byte-for-byte. */
+static void agreed_refight_distant_prerequisite(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(unsigned velocities=0;velocities<4;++velocities) {
+        setup_refight_option(cpu,online,16);
+        gate_enemy_test_vy(0,velocities&1?-0x80000:0);gate_enemy_test_vy(1,velocities&2?-0x80000:0);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
+        Mmx6CoopLifecycle lifecycle=life;
+        const unsigned offsets[]={8,12,0x18,0x1C};
+        for(unsigned i=0;i<4;++i)put32(partner.body+offsets[i],(i==0 || i==2?1852u:1241u)<<16);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) &&
+            !memcmp(&registers,cpu,sizeof registers) && !memcmp(&lifecycle,&life,sizeof life));
+        CHECK(psx_mod_read_word(PLAYER+8)==(1712u<<16) && psx_mod_read_word(PLAYER+12)==(1147u<<16));
+        psx_mod_write_word(PLAY+0x90,12);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        put32(p2.body+12,1242u<<16);put32(p2.body+0x1C,1242u<<16);
+        psx_mod_write_word(PLAY+0x90,11);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        psx_mod_write_word(PLAY+0x90,12);memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) &&
+            psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+    }
+    /* A different original primary arrival cannot authorize this named pose. */
+    setup_refight_option(cpu,0,16);psx_mod_write_word(PLAYER+8,1713u<<16);
+    memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 && !guest_calls &&
+        !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+    /* Refuse corrupted producer/source, original upper floor/air and bodies. */
+    const uint32_t corrupt[]={0x800EC430u,0x8003D850u,0x80097438u,0x80100000u,0x80120000u,0x80073D50u};
+    for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
+        setup_refight_option(cpu,0,16);psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^1u);
+        memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+    }
+    setup_refight_option(cpu,0,16);uint32_t meta,desc;CHECK(checkpoint_refight_assets(&meta,&desc));
+    CHECK(checkpoint_refight_distant_ground(meta,desc));
+    unsigned cell=psx_mod_read_byte(0x80097438u+(1168u>>8)*12+(1712u>>8));
+    unsigned floor=cell*512u+((1168u>>4)&15)*32+((1712u>>4)&15)*2;
+    unsigned air=cell*512u+((1152u>>4)&15)*32+((1712u>>4)&15)*2;
+    uint16_t empty=psx_mod_read_half(meta+air),solid=psx_mod_read_half(meta+floor);
+    psx_mod_write_half(meta+floor,empty);CHECK(!checkpoint_refight_distant_ground(meta,desc));
+    psx_mod_write_half(meta+floor,solid);psx_mod_write_half(meta+air,solid);
+    CHECK(!checkpoint_refight_distant_ground(meta,desc));
+    for(unsigned combo=0;combo<3;++combo) {
+        setup_agreed(cpu,1);test_lab_option="refight_distant_cp1";
         if(combo<2)test_lab_hp_option[combo]="1";else test_lab_earned_option="all";
         checkpoint_reset();CHECK(failed);
         test_lab_hp_option[0]=test_lab_hp_option[1]="off";test_lab_earned_option="off";

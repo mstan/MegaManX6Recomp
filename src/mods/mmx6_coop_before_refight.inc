@@ -72,6 +72,16 @@ static int checkpoint_refight_ground(uint32_t meta,uint32_t desc) {
     }
     return 1;
 }
+/* R21 retains the exact genuine CP1 primary on the original upper floor.
+ * Authenticated DAT104/loaded-map geometry, not a guessed distant teleport.
+ * The guest's separate lower floor/corridor is the unchanged option15 guard. */
+static int checkpoint_refight_distant_ground(uint32_t meta,uint32_t desc) {
+    for(unsigned x=1701;x<1723;++x) {
+        if(checkpoint_refight_tile(meta,desc,x,1168)!=0x38)return 0;
+        for(unsigned y=1120;y<1168;++y)if(checkpoint_refight_tile(meta,desc,x,y))return 0;
+    }
+    return 1;
+}
 /* Refusal-only LAB reads at the failing world boundary. An asynchronous TCP
  * snapshot can observe resources after the original world changes them. */
 static void checkpoint_refight_refusal(const Mmx6Checkpoint *entry) {
@@ -166,6 +176,8 @@ static int checkpoint_refight_standing(void) {
 }
 static int checkpoint_refight_original_arrival(uint32_t meta,uint32_t desc) {
     if(!checkpoint_refight_standing() || !checkpoint_refight_camera() || !checkpoint_refight_clear())return 0;
+    if(checkpoint_lab_option==16 && (psx_mod_read_word(PLAYER+8)!=(1712u<<16) ||
+       psx_mod_read_word(PLAYER+12)!=(1147u<<16)))return 0;
     for(unsigned seat=0;seat<2;++seat) {
         uint32_t x=seat?le32(p2.body+8):psx_mod_read_word(PLAYER+8);
         uint32_t y=seat?le32(p2.body+12):psx_mod_read_word(PLAYER+12);
@@ -178,8 +190,10 @@ static int checkpoint_refight_original_arrival(uint32_t meta,uint32_t desc) {
     return 1;
 }
 static void checkpoint_refight_place(void) {
-    psx_mod_write_word(PLAYER+8,1852u<<16);psx_mod_write_word(PLAYER+0x18,1852u<<16);
-    psx_mod_write_word(PLAYER+12,1241u<<16);psx_mod_write_word(PLAYER+0x1C,1241u<<16);
+    if(checkpoint_lab_option!=16) {
+        psx_mod_write_word(PLAYER+8,1852u<<16);psx_mod_write_word(PLAYER+0x18,1852u<<16);
+        psx_mod_write_word(PLAYER+12,1241u<<16);psx_mod_write_word(PLAYER+0x1C,1241u<<16);
+    } /* Option16 never writes any primary body, velocity, HP or camera byte. */
     put32(p2.body+8,1852u<<16);put32(p2.body+0x18,1852u<<16);
     put32(p2.body+12,1241u<<16);put32(p2.body+0x1C,1241u<<16);
 #ifdef MMX6_COOP_MODERN_STATE
@@ -190,8 +204,10 @@ static void checkpoint_refight_place(void) {
 }
 static int checkpoint_refight_ready(void) {
     uint32_t elapsed=psx_mod_read_word(PLAY+0x90)-checkpoint_pending.placed_world;
+    uint32_t primary_x=checkpoint_lab_option==16?1712u:1852u;
+    uint32_t primary_y=checkpoint_lab_option==16?1147u:1243u;
     return elapsed>=2u && elapsed<0x80000000u && checkpoint_refight_standing() &&
         checkpoint_refight_camera() && checkpoint_refight_clear() &&
-        psx_mod_read_word(PLAYER+8)==(1852u<<16) && le32(p2.body+8)==(1852u<<16) &&
-        psx_mod_read_word(PLAYER+12)==(1243u<<16) && le32(p2.body+12)==(1242u<<16);
+        psx_mod_read_word(PLAYER+8)==(primary_x<<16) && le32(p2.body+8)==(1852u<<16) &&
+        psx_mod_read_word(PLAYER+12)==(primary_y<<16) && le32(p2.body+12)==(1242u<<16);
 }
