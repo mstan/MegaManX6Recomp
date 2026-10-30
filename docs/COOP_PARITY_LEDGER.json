@@ -12171,8 +12171,60 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "Both policy and living-pair original admission/traversal are integrated and qualified on exact723affc for F79/F114/F137. F61 remains unverified: native absent/fallen exclusion and current-candidate Either cases still need required-mode qualification; source/unit cases alone do not close it."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+            "build_identity": {
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+              "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+              "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+              "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+              "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+              "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+              "source_heads": {
+                "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+                "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+                "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+                "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+                "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+              },
+              "title": "mmx6-x-zero-delay-v55",
+              "host_revision": 38
+            },
+            "settings": {
+              "policies": [
+                "either",
+                "both"
+              ],
+              "fixtures": [
+                "intro_before_doors",
+                "intro_cp2"
+              ],
+              "contact_protection": "on",
+              "host_profile": "mmx6.win64-clang22.loopback revision38",
+              "audio": "dummy muted"
+            },
+            "action": "Current defaultEither guest-led native door/landing/control; Both living one-seat wait/actual full two-body traversal of two original hatches; actual guest SelectABSENT fallback through both hatches, original NPC dialogue/CP2 marker/D1000 readiness.",
+            "outcome": "Three LOCAL components all4parent/nativechecks PASS,3ownedexit0/cards unchanged/12key composed images personally reviewed. Actualfallen and requiredNET qualification missing; comparison/mode remain unverified.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fde6b48-F61-local-policy-components-reviewed.json",
+                "sha256": "664c6b22842f465d47844fe7e291643c49b4d0c5e5ac49d0bbc068da75fc2c6d"
+              }
+            ],
+            "limits": [
+              "Native door-policy components only; no general art/palette/atlas or private-view pass. Known corrupt background/HUD overlap remains visible and retained.",
+              "Original intro-before-doors or introCP2 prerequisites bypass preceding reachability. No original door admission/clearance/dialogue/checkpoint/boss/control result is seeded.",
+              "Fallen LOCAL attempts d61f1l/d61f2l never established a death; primary stayed1HP at5531.5. Both failures/exit0/cards retained. No fallen credit or repeated unsupported approach."
+            ],
+            "bypasses": [
+              "Declared native checkpoint/once source position+scanner prerequisite and contact protection; no tested outcomes assigned."
+            ]
+          }
+        ],
+        "limitations": "Exactfde6b48/75b74d1c/profile38 LOCAL Either, Bothliving two-hatch wait/full-clearance/dialogue/nativeD1000, and realSelectABSENT fallback pass parent/nativechecks;3nativeexit0/cardsunchanged/12keyroot-viewedimages. Actualfallen and allNET components remain unverified. Two nativefallen setup attempts stall at5531.5/1HP before original enemy; allraw retained. Known scenery/HUD defects retained; no visual blanket acceptance."
       }
     },
     {

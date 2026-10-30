@@ -1,0 +1,472 @@
+{
+  "kind": "F61_LOCAL_Either_Both_living_ABSENT_components",
+  "status": "partial_native_components_passed_comparison_unverified",
+  "comparisons": {
+    "F61": "9713d5a35eecde25a951921023b08acab13a796ab7354e0431fe357b7fa2a8ff"
+  },
+  "candidate_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+    "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+    "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+    "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+    "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+      "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+      "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+    },
+    "title": "mmx6-x-zero-delay-v55",
+    "host_revision": 38
+  },
+  "local_components": {
+    "living": {
+      "status": "passed",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "one_session_two_distinct_original_doors": true,
+        "both_policy_refuses_single_hero_at_each": true,
+        "each_living_native_body_crosses_both_full_boxes": true,
+        "no_passenger_withdrawal_or_rejoin": true,
+        "native_opening_and_traversal_private_commits_each_door": true,
+        "actual_private_pairs_resume_each_door": true,
+        "native_checkpoint_marker_and_boss_progression": true,
+        "host_private_state_restored": true,
+        "actual_dialogue_follows_both_full_boxes_and_native_camera": true
+      },
+      "child_native_checks": {
+        "one_session_two_distinct_original_doors": true,
+        "both_policy_refuses_single_hero_at_each": true,
+        "each_living_native_body_crosses_both_full_boxes": true,
+        "no_passenger_withdrawal_or_rejoin": true,
+        "native_opening_and_traversal_private_commits_each_door": true,
+        "actual_private_pairs_resume_each_door": true,
+        "native_checkpoint_marker_and_boss_progression": true,
+        "host_private_state_restored": true,
+        "actual_dialogue_follows_both_full_boxes_and_native_camera": true
+      },
+      "exclusion_precondition": null,
+      "native_door_records": [
+        {
+          "number": 1,
+          "origin": "0x800fa2a4",
+          "authored_x": 5744,
+          "leading": 1,
+          "before": 49,
+          "waiting": 51,
+          "held": 58,
+          "admitted": 66,
+          "released": 306,
+          "observed_phases": [
+            2,
+            3
+          ]
+        },
+        {
+          "number": 2,
+          "origin": "0x800fa2ac",
+          "authored_x": 6064,
+          "leading": 0,
+          "before": 309,
+          "waiting": 339,
+          "held": 347,
+          "admitted": 378,
+          "released": 532,
+          "observed_phases": [
+            2,
+            3
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-before-first-native-door.png",
+          "sha256": "138f4f66adadc7fa6b1469ea68567f5ed5792f56a0873c4c6779c83c1a335944",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "before-first-native-door",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-only-leading-hero-waits.png",
+          "sha256": "4cdea6113483af90fb89923478396d5dc25c5a8a8ed8d2946139cbb5c739b6b3",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-only-leading-hero-waits",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-native-phase2.png",
+          "sha256": "9d50701e2689ba27e6161e03a37b5888c54c3b51a0ebaabb9a52d67c33937d6a",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-native-phase2",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-native-phase3.png",
+          "sha256": "229ce55d9a2358c677c366634770ad143f71bf9d07b8191a1eac74aa4aaea947",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-native-phase3",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-first-door-following-original-dialogue-ready.png",
+          "sha256": "4edd3cd1fbd20da99091ad23166965f68cfb1ed99fc3b4bb78483c3f7e221da1",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "first-door-following-original-dialogue-ready",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-both-full-boxes-released.png",
+          "sha256": "082432d784720706083f98c3cbb93170d562596fbf61e96feccd3f16d085c708",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-both-full-boxes-released",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-only-leading-hero-waits.png",
+          "sha256": "0f3daacce10b9bb45cd909d253bbc633b0f17616f0b34f22f49a3f2cb387e448",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-only-leading-hero-waits",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-native-phase2.png",
+          "sha256": "0c435b9398aa8f5523ea9f0830347b29970ba5c7a1443d3215768eaa37509b33",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-native-phase2",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-native-phase3.png",
+          "sha256": "565012a9fa768d07a6da98b20c28e4d05ed9cb2c4cd13b59172a2ba67bd7a695",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-native-phase3",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-both-full-boxes-released.png",
+          "sha256": "02506ccc74c57b743cd820453238000b0e7c0459e2f18bd5990bea163e0eb2ec",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-both-full-boxes-released",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-both-original-doors-complete-native-boss-ready.png",
+          "sha256": "915c576fcae6a9d4893f08e640b9f1fb991a4dd9cab41103392d28e572ba04cd",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "both-original-doors-complete-native-boss-ready",
+          "root_personally_viewed": true
+        }
+      ],
+      "native_exit0": 1,
+      "private_cards_unchanged": true,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\qualification.json",
+          "sha256": "b8d03ccd2cd571d3dd36c6902036eb1bb66b4d16339be33b9f0cd9212ba62dac",
+          "bytes": 18608333
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "61134466f45bde8f7212005aa3522e6c45d7b5c2b3864d2f9e2248650b8e65d7",
+          "bytes": 2687
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\ammo-hud\\intro-admission\\two-original-doors\\observations.json",
+          "sha256": "fd86ed0b5a1faa0ee2058e36431aaaf86efe275059841bf9074b349094d6ff5e",
+          "bytes": 16906987
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61l1\\F61-executing-source-pins.json",
+          "sha256": "740a323fffe939481294d58825c267d44b8879632003ddc699d97d6c412f681d",
+          "bytes": 8328
+        }
+      ],
+      "limits": [
+        "Only living Both component. Current Either and actual absent/fallen native cases remain required; no comparison credit.",
+        "One continuous original intro NPC hatch5744 and D1000 hatch6064 route, including native NPC dialogue and full-body clearance. No extra comparison credit for already accepted rows.",
+        "Original CP1/once position+scanner prerequisite is disclosed and tainted; native gate admission, traversal, checkpoint marker and boss initialization are earned."
+      ]
+    },
+    "absent": {
+      "status": "passed",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "actual_native_excluded_partner_precondition": true,
+        "one_session_two_original_hatches": true,
+        "sole_living_native_admission_and_full_box_clearance": true,
+        "native_original_NPC_dialogue_and_checkpoint_progression": true,
+        "native_D1000_full32HP_ready": true,
+        "excluded_partner_remains_excluded": true,
+        "actual_native_release_controls": true,
+        "native_results_not_seeded": true
+      },
+      "child_native_checks": {
+        "actual_native_excluded_partner_precondition": true,
+        "one_session_two_original_hatches": true,
+        "sole_living_native_admission_and_full_box_clearance": true,
+        "native_original_NPC_dialogue_and_checkpoint_progression": true,
+        "native_D1000_full32HP_ready": true,
+        "excluded_partner_remains_excluded": true,
+        "actual_native_release_controls": true,
+        "native_results_not_seeded": true
+      },
+      "exclusion_precondition": {
+        "kind": "real_Select_to_native_ABSENT",
+        "leaving": 63,
+        "completed": 78
+      },
+      "native_door_records": [
+        {
+          "number": 1,
+          "origin": "0x800fa2a4",
+          "authored_x": 5744,
+          "leading": 0,
+          "before": 83,
+          "admitted": 86,
+          "released": 269,
+          "observed_phases": [
+            2,
+            3
+          ]
+        },
+        {
+          "number": 2,
+          "origin": "0x800fa2ac",
+          "authored_x": 6064,
+          "leading": 0,
+          "before": 272,
+          "admitted": 286,
+          "released": 404,
+          "observed_phases": [
+            2,
+            3
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-before-first-native-door.png",
+          "sha256": "57358b2dc3bc0c1323fb7bd3b7740f828411c0034fab5e5ec99ae1de680b8404",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "before-first-native-door",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-native-phase2.png",
+          "sha256": "404942fc558ecbca3cd9026cc9613aa05e3ccea3503b22a62e887bb44ccf3fd8",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-native-phase2",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-native-phase3.png",
+          "sha256": "3336fca5ab2fbdcff62c6e028e2b9817e3caca8646d3668ae2846c6e97a615ea",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-native-phase3",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-first-door-following-original-dialogue-ready.png",
+          "sha256": "997f446db8f3d090f80e6e0324917fbc93aba4bf2a69551d67dfde6f5f527805",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "first-door-following-original-dialogue-ready",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door1-both-full-boxes-released.png",
+          "sha256": "80661e13215dbcc9d3d1a9af80cf25f79a417de21b667d60d2d8210ffd9696e1",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door1-both-full-boxes-released",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-native-phase2.png",
+          "sha256": "b4efcfc5d5e0be7ac546e39dc99601a7b173cd86999bfaf21095c3d053dc0d5c",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-native-phase2",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-native-phase3.png",
+          "sha256": "f38e3db724b8099cd9bd76bf0f87e256135f422d9066c80dd88e352da40d441f",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-native-phase3",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-door2-both-full-boxes-released.png",
+          "sha256": "1699b879b7639036a691e6d534d2f21e31fd266820c9ea06f969a68f8b330caa",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "door2-both-full-boxes-released",
+          "root_personally_viewed": false
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\peer-0-both-original-doors-complete-native-boss-ready.png",
+          "sha256": "f06d810f86a78a159557ade91f36454ef1db4181e13b70d625817b74ee5f5a31",
+          "bytes": 1843888,
+          "peer": 0,
+          "label": "both-original-doors-complete-native-boss-ready",
+          "root_personally_viewed": true
+        }
+      ],
+      "native_exit0": 1,
+      "private_cards_unchanged": true,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\qualification.json",
+          "sha256": "ba1195684448ebc22ece7366d463bd3a934662b4eb6919290aa216581e85cc1b",
+          "bytes": 14448390
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "1a8b749ba592adc9ccee2ef599a31c971c26803366f58e824b44a567fa09f303",
+          "bytes": 2620
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\ammo-hud\\intro-admission\\two-original-doors\\observations.json",
+          "sha256": "5fbcd5fc0fe211f6cfca327474cb46388a78cc6dfacf9ae8d578fb88a6ee753f",
+          "bytes": 13115150
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61a1l\\F61-executing-source-pins.json",
+          "sha256": "aef0941ca2a2ff2833f5dbdf6c28d5df667032446800422724cad263112c4130",
+          "bytes": 8340
+        }
+      ],
+      "limits": [
+        "Only explicitly selected native Both participation component; remaining scenarios and modes require their own observations. No aggregate credit.",
+        "One continuous original intro NPC hatch5744 and D1000 hatch6064 route, including native NPC dialogue and full-body clearance. No extra comparison credit for already accepted rows.",
+        "Original CP1/once position+scanner prerequisite is disclosed and tainted; native gate admission, traversal, checkpoint marker and boss initialization are earned."
+      ]
+    },
+    "either": {
+      "status": "passed",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "child_native_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "exclusion_precondition": null,
+      "native_door_records": [],
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\original-native-door\\peer-0-safe-native-CP2.png",
+          "sha256": "5b2ecf10d6ce7859a11320b6d8d84b8026685e87979890775196be4a9f85e503",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\original-native-door\\peer-0-original-door-scene-begin.png",
+          "sha256": "2cc37a43f0f3e82d101ae30c1e35575ed52adacc35a2263f9fc3a0ed54406931",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "root_personally_viewed": true
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\original-native-door\\peer-0-native-boss-both-controls-restored.png",
+          "sha256": "697e0c1456b86aa1aea30c71e740d098810a091fe1deb00e4fc819c11b5024d7",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "root_personally_viewed": true
+        }
+      ],
+      "native_exit0": 1,
+      "private_cards_unchanged": true,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\qualification.json",
+          "sha256": "38ef8232dc4f01e0dbad802b3671f8383bc165544ef089b48b8bcf355ddfa480",
+          "bytes": 1729757
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "9569a5848ae8fb83e65c8ae5d9b83caeb60e17a6c11811cd22a22df337fceeb2",
+          "bytes": 988
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\ammo-hud\\intro-admission\\original-native-door\\observations.json",
+          "sha256": "9957f62290df852344a45fabc6eea71db560f4df687a6ba8b7700ff830d0a83e",
+          "bytes": 1383108
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\d61e1l\\F61-executing-source-pins.json",
+          "sha256": "f1ba855f50fbd3e861f8e644970a381068ec176efb321db62ae8b866982eba6a",
+          "bytes": 8185
+        }
+      ],
+      "limits": [
+        "Only default Either component; Both and native absent/fallen exclusion still need their own observations.",
+        "Existing agreed native intro CP2 bypasses preceding reachability; actual guest-led door admission, native boss intro, passenger arrival and controls are earned. No comparison re-credit."
+      ]
+    }
+  },
+  "review_summary": {
+    "comparisons_closed": 0,
+    "root_personally_viewed_images": 12,
+    "native_exit0": 3,
+    "private_cards_unchanged": true
+  },
+  "remaining": [
+    "Genuine FALLEN exclusion and survivor native traversal LOCAL+NET",
+    "All three passing LOCAL components need NET qualification"
+  ],
+  "limits": [
+    "Native door-policy components only; no general art/palette/atlas or private-view pass. Known corrupt background/HUD overlap remains visible and retained.",
+    "Original intro-before-doors or introCP2 prerequisites bypass preceding reachability. No original door admission/clearance/dialogue/checkpoint/boss/control result is seeded.",
+    "Fallen LOCAL attempts d61f1l/d61f2l never established a death; primary stayed1HP at5531.5. Both failures/exit0/cards retained. No fallen credit or repeated unsupported approach."
+  ]
+}
