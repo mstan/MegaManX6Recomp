@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 44,
+  "revision": 45,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v61",
+    "title_compatibility": "mmx6-x-zero-delay-v62",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -797,5 +797,13 @@
     "fix": "Keep the existing phase0 in-place scene hold for source-qualified original BIN15 first61 death command20 atEDEF4/RAEDEFC (s0,state2/action0/HP0) and later62 init command20 atEFDF4/RAEFDFC (s1,state1/action2/HP0). Require native12/1, original aligned enemy pool actor (first placement800F57EC; later origin0 after originalEE0F4/2CF0C clears all9C bytes), both living visible ready heroes, dispatch/state tables and actual call/source words. Native command, death, transform, intro, clocks and release still execute once. No actor, HP, result or scene lock writes.",
     "exclusions": "Initial61 arrival, final62 death, unrelated stages/callers, projected/private draw, absent/fallen/hidden heroes and corrupt source retain existing policy. No new persistent fields; snapshot15 unchanged.",
     "qualification": "Actual-plugin regression is supporting evidence. Fresh exact LOCAL and NET actual accepted first defeat, continuous pair retention across the native transform and later release, own movement on both peers and reviewed composed captures plus parent gates remain required. BaselineV112 sg2l real outgoing failure remains retained."
+  },
+  "title_changes_v62_optional_boss_damage_budget": {
+    "scope": "Frozen234 F181 damage policy and shared prerequisite for F63/F99/F152/F153; cooldown policies not yet implemented.",
+    "option": "boss_balance off(default)/on; only accepted native boss damage is adjusted. X retains5/10, Zero4/10 with shared tenths carry. Preserve native HP ranges, weakness/reaction identity and original lethal/result selection.",
+    "native_site": "318F4 original9102005C LBU V0,5C(T0). After original token/defense/part/difficulty gates; adjust accepted A1 before native318FC SUBU/31908 HP store and31920 lethal branch. New main instruction site requires regenerated native main code.",
+    "state": "Snapshot16 serializes/digests per-pool recognized boss kind/origin/shared remainder; allocator2BCCC resets reused slots; original kind/origin changes reset phase. Mode is immutable snapshot/config identity.",
+    "acceptance": "Fresh same-image LOCAL/NET native accepted/rejected mixed X/Zero attacks, fractional carry, original weakness and defaultOff behavior. Source/unit/component tests grant no row credit.",
+    "allocator_emission": "Declare native2BCCC carry reset and the existing required2BFD0 solid_allocate callback in both profiles; source callback/emission parity test exposed the latter old omission."
   }
 }

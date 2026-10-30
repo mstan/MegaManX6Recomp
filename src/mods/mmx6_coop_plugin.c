@@ -2568,6 +2568,7 @@ static int death_effect_init(CPUState *cpu, uint32_t address) {
     cpu->gpr[2]=result;
     return 1;
 }
+#include "mmx6_coop_boss_balance.inc"
 static int enemy_hit(CPUState *cpu, uint32_t address) {
     if (inside || !enrolled || failed || scene_owner || life.status[1]!=MMX6_COOP_ALIVE ||
         psx_mod_read_byte(PLAY)!=0x0A) return 0;
@@ -2901,6 +2902,9 @@ static void activate(void) {
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
     both_door_reset();
     shared_clear_reset();
+    memset(boss_balance,0,sizeof boss_balance);boss_balance_allocate_call=0;
+    char balance[16];
+    boss_balance_enabled=psx_mod_option_value("mmx6.local-coop","prototype","boss_balance",balance,sizeof balance) && !strcmp(balance,"on");
     char doors[16];
     both_doors=psx_mod_option_value("mmx6.local-coop","prototype","doors",doors,sizeof doors) &&
         !strcmp(doors,"both");
@@ -2921,6 +2925,7 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80055B14,jump_audio_status) ||
         !psx_mod_set_function_replacement(0x8001750C,jump_audio_stop)) failed=1;
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
+    if (boss_balance_enabled && !psx_mod_set_function_replacement(0x8002BCCC,boss_balance_allocate)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EB14C,intro_near_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x800ED150,northpole_ice_admission) ||
@@ -2998,6 +3003,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_savestate_plugin("mmx6.local-coop.prototype",snapshot_resources_restored);
 #endif
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800318F4u,0x9102005Cu,boss_balance_damage);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800EB310u,0x84830000u,weather_window_target);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);

@@ -543,6 +543,22 @@ static void refight_return_snapshot(void) {
     CHECK(!refight_return_checkpoint);
     state_commit(&prior);free(empty);free(pending);free(bad);
 }
+static void boss_balance_snapshot(void) {
+    HostState prior;state_capture(&prior);
+    boss_balance_enabled=1;memset(boss_balance,0,sizeof boss_balance);
+    boss_balance[0]=(BossBalanceState){0x800F7E48u,56,9,1};
+    uint32_t length=snapshot_bytes();uint8_t *wire=malloc(length),*bad=malloc(length);
+    CHECK(wire && bad && snapshot_write(wire,length));
+    boss_balance_enabled=0;reject_unchanged(wire,length);boss_balance_enabled=1;
+    const uint8_t marker[]={0x48,0x7E,0x0F,0x80,56,9,1};unsigned found=0,offset=0;
+    for(unsigned n=0;n+sizeof marker<=length;++n)
+        if(!memcmp(wire+n,marker,sizeof marker)){++found;offset=n;}
+    CHECK(found==1);memcpy(bad,wire,length);bad[offset+5]=10;reject_unchanged(bad,length);
+    boss_balance[0].remainder=2;
+    CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+    CHECK(boss_balance[0].remainder==9 && boss_balance[0].recognized==1);
+    boss_balance_enabled=0;state_commit(&prior);free(wire);free(bad);
+}
 static void abandoned_guest(void){
     /* Exercise the SDK's actual supported landing, including MinGW GNU's
      * large-frame case. The target function has not returned when dispatched
@@ -555,7 +571,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

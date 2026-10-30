@@ -94,3 +94,20 @@ label = "Separate views"
 [[option.choice]]
 value = "split"
 label = "Side by side"
+
+[[option]]
+feature = "prototype"
+id = "boss_balance"
+label = "Co-op boss balance"
+description = "Double effective boss health. Zero deals a further 20% less damage; fractional damage carries between accepted hits. Original boss phases, weaknesses and health-bar ranges stay intact."
+group = "Gameplay"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off"
+
+[[option.choice]]
+value = "on"
+label = "On"
