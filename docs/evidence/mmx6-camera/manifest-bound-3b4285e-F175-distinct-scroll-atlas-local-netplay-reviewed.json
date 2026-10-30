@@ -1,0 +1,6757 @@
+{
+  "kind": "F175_distinct_original_scroll_and_five_frame_atlas_LOCAL_NET_root_review",
+  "status": "passed",
+  "comparison": "F175",
+  "frozen_row_sha256": "c60ce04e9b10f5d93443ca10de03837921a990afa7f24e6b4875ac6f9230ae7f",
+  "source_head": "3b4285eca543f0a9ed57780749220a72379bbabf",
+  "candidate_binding": {
+    "image_sha256": "cae6d347b5af2abc487566e01d5d06cb2103c96eb45ac2ff96f3ab547701b249",
+    "manifest_sha256": "aebfd7a54aa7cf27ad788b47b473b9fed9076819cd612a83c8afda5911014793",
+    "provenance_sha256": "4c7cee4eae4ecd4788f00ab6e5440752d129924235f2a296ecc59969539f702a"
+  },
+  "mode_status": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "modes": {
+    "local": {
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\heatnix-publication-v110-final-binding-root-v1.json",
+        "binding_sha256": "24a6f3a07b7d33e4001d7454491f2e2ce2bad009fb90305c264aa6f7ba35d467",
+        "image_sha256": "cae6d347b5af2abc487566e01d5d06cb2103c96eb45ac2ff96f3ab547701b249",
+        "manifest_sha256": "aebfd7a54aa7cf27ad788b47b473b9fed9076819cd612a83c8afda5911014793",
+        "provenance_sha256": "4c7cee4eae4ecd4788f00ab6e5440752d129924235f2a296ecc59969539f702a",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v110-heatnix-publication-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "3b4285eca543f0a9ed57780749220a72379bbabf",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v58",
+        "host_revision": 41
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_atlas_checks": {
+        "exact_original_Turtloid_CP1_native_arrival": true,
+        "completed_original_five_frame_atlas_component": true
+      },
+      "weather_checks": {
+        "original_live_source_and_origin_bound_slot": true,
+        "five_original_atlas_frames_each_peer": true,
+        "native_world_delta_inside_real_VBlank_bracket": true,
+        "private_views_advance_without_host_leak": true,
+        "composed_owner_world_ROI_pixels_change_with_stationary_heroes": true,
+        "completed_composed_images_and_GP0_retained": true
+      },
+      "scroll_component_receipt": {
+        "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-camera\\manifest-bound-3b4285e-F28-Heatnix-shared-scroll-local-netplay-reviewed.json",
+        "bytes": 69075,
+        "sha256": "7450c3160b5e77e1a176a2ee0195fbcad519180714d68a157076adf5d47871a0"
+      },
+      "scroll_component_checks": {
+        "original_Heatnix_CP7_and_actual_boss_admission": true,
+        "actual_source_bound_autonomous_scroll_flags": true,
+        "eight_native_layer1_origins_every_peer": true,
+        "both_native_hero_positions_stationary": true,
+        "world_advances_at_least40_native_updates": true,
+        "actual_private_views_and_restoration": true,
+        "actual_layer1_Y_advances_at_every_private_seat_draw": true,
+        "composed_arena_scroll_images_retained_for_root_review": true
+      },
+      "actual_original_atlas_Y": [
+        [
+          0,
+          256,
+          512,
+          768,
+          1024
+        ]
+      ],
+      "native_clock_brackets": [
+        {
+          "peer": 0,
+          "native_world_delta": 91,
+          "VBlank_min": 87,
+          "VBlank_max": 94
+        }
+      ],
+      "stationary_native_positions": [
+        {
+          "peer": 0,
+          "before": [
+            [
+              82182144,
+              36377088
+            ],
+            [
+              83755008,
+              36311552
+            ]
+          ],
+          "after": [
+            [
+              82182144,
+              36377088
+            ],
+            [
+              83755008,
+              36311552
+            ]
+          ],
+          "unchanged": true
+        }
+      ],
+      "displayed_weather_ROI_variation": [
+        {
+          "peer": 0,
+          "seat": 0,
+          "captures": 6,
+          "distinct_pixels": 6
+        },
+        {
+          "peer": 0,
+          "seat": 1,
+          "captures": 6,
+          "distinct_pixels": 6
+        }
+      ],
+      "presentation_start": [
+        {
+          "counters": {
+            "id": 2389,
+            "ok": true,
+            "frame": 3086,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 14,
+                "last_frame": 2657
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2644,
+                "last_frame": 2678
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 16,
+                "last_frame": 2678
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 271,
+                "last_frame": 3086
+              }
+            ],
+            "overflow": 0
+          },
+          "render": {
+            "id": 2390,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 544,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 544,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 10.573,
+            "avg_pass_ms": 11.449,
+            "avg_begin_ms": 2.393,
+            "avg_guest_ms": 5.839,
+            "avg_end_ms": 1.991,
+            "avg_restore_ms": 0.121,
+            "guest_cycles_last": 191531,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 272,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 1,
+            "backups_reused": 272,
+            "pass_attempts": 544,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 0,
+            "local_attempts": 0,
+            "local_status": 4,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 2391,
+            "ok": true,
+            "attempts": 272,
+            "pairs": 272,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 0,
+            "last_pair_id": 272,
+            "last_guest_cycle": 1742603209,
+            "eye_cycles": [
+              1742603209,
+              1742603209
+            ],
+            "eye_hashes": [
+              "e9cdaeb81bf43f7f",
+              "e9cdaeb81bf43f7f"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": 1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 22.21,
+            "avg_pair_ms": 22.987,
+            "published": {
+              "valid": 1,
+              "pair_id": 272,
+              "guest_cycle": 1742603209,
+              "width": 320,
+              "height": 240,
+              "staged_mask": 3,
+              "mode": 2,
+              "presents": 294
+            },
+            "captures": []
+          },
+          "present": {
+            "id": 2392,
+            "ok": true,
+            "total": 2506,
+            "now_ms": 53785,
+            "events": [
+              [
+                2482,
+                3065,
+                "stereo",
+                52847,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2483,
+                3066,
+                "stereo",
+                52887,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2484,
+                3067,
+                "stereo",
+                52929,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2485,
+                3068,
+                "stereo",
+                52972,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2486,
+                3069,
+                "stereo",
+                53013,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2487,
+                3070,
+                "stereo",
+                53052,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2488,
+                3071,
+                "stereo",
+                53090,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2489,
+                3072,
+                "stereo",
+                53126,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2490,
+                3073,
+                "stereo",
+                53163,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2491,
+                3074,
+                "stereo",
+                53200,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2492,
+                3075,
+                "stereo",
+                53245,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2493,
+                3076,
+                "stereo",
+                53282,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2494,
+                3077,
+                "stereo",
+                53319,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2495,
+                3078,
+                "stereo",
+                53356,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2496,
+                3079,
+                "stereo",
+                53394,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2497,
+                3080,
+                "stereo",
+                53433,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2498,
+                3081,
+                "stereo",
+                53474,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2499,
+                3082,
+                "stereo",
+                53517,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2500,
+                3083,
+                "stereo",
+                53558,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2501,
+                3084,
+                "stereo",
+                53595,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2502,
+                3085,
+                "stereo",
+                53636,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2503,
+                3086,
+                "stereo",
+                53675,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2504,
+                3087,
+                "stereo",
+                53719,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2505,
+                3088,
+                "stereo",
+                53758,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "video": {
+            "id": 2393,
+            "ok": true,
+            "dynamic": 0,
+            "level": 1,
+            "floor": 0,
+            "alloc_scale": 0,
+            "backend": "opengl",
+            "preset": 1,
+            "reference_lines": 240,
+            "requested_scale": 1,
+            "effective_scale": 1,
+            "texture_filter": 0,
+            "internal_lines": 240,
+            "gl": 1,
+            "gl_max_dim": 32768,
+            "gl_max_scale": 32,
+            "gl_swap_interval": 0,
+            "gl_clamp_reason": 0,
+            "gl_alloc_retries": 0,
+            "gl_budget_mib": 2048,
+            "fbo_w": 1024,
+            "fbo_h": 512,
+            "hidpi_window": 0,
+            "window_w": 960,
+            "window_h": 720,
+            "drawable_w": 960,
+            "drawable_h": 720,
+            "display_x": 0,
+            "display_y": 240,
+            "display_w": 320,
+            "display_h": 240,
+            "hr_scale": 1,
+            "windowed": 0,
+            "hires_window_x": 0,
+            "hires_window_w": 0,
+            "hires_fbo_w": 0,
+            "hires_fbo_h": 0,
+            "hires_window_grows": 0,
+            "hires_window_tiles": 0,
+            "hires_window_mib": 0
+          }
+        }
+      ],
+      "presentation_end": [
+        {
+          "counters": {
+            "id": 2586,
+            "ok": true,
+            "frame": 3187,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 14,
+                "last_frame": 2657
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2644,
+                "last_frame": 2678
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 16,
+                "last_frame": 2678
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 372,
+                "last_frame": 3187
+              }
+            ],
+            "overflow": 0
+          },
+          "render": {
+            "id": 2587,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 744,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 744,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 10.639,
+            "avg_pass_ms": 11.387,
+            "avg_begin_ms": 2.315,
+            "avg_guest_ms": 5.869,
+            "avg_end_ms": 2.003,
+            "avg_restore_ms": 0.11,
+            "guest_cycles_last": 191531,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 372,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 1,
+            "backups_reused": 372,
+            "pass_attempts": 744,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 0,
+            "local_attempts": 0,
+            "local_status": 4,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 2588,
+            "ok": true,
+            "attempts": 372,
+            "pairs": 372,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 6,
+            "last_pair_id": 372,
+            "last_guest_cycle": 1799051184,
+            "eye_cycles": [
+              1799051184,
+              1799051184
+            ],
+            "eye_hashes": [
+              "6fc461f263bfc05c",
+              "6fc461f263bfc05c"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": 1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 22.25,
+            "avg_pair_ms": 22.766,
+            "published": {
+              "valid": 1,
+              "pair_id": 372,
+              "guest_cycle": 1799051184,
+              "width": 320,
+              "height": 240,
+              "staged_mask": 3,
+              "mode": 2,
+              "presents": 395
+            },
+            "captures": []
+          },
+          "present": {
+            "id": 2589,
+            "ok": true,
+            "total": 2606,
+            "now_ms": 57688,
+            "events": [
+              [
+                2582,
+                3165,
+                "stereo",
+                56767,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2583,
+                3166,
+                "stereo",
+                56803,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2584,
+                3167,
+                "stereo",
+                56839,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2585,
+                3168,
+                "stereo",
+                56877,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2586,
+                3169,
+                "stereo",
+                56915,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2587,
+                3170,
+                "stereo",
+                56957,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2588,
+                3171,
+                "stereo",
+                56996,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2589,
+                3172,
+                "stereo",
+                57034,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2590,
+                3173,
+                "stereo",
+                57072,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2591,
+                3174,
+                "stereo",
+                57110,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2592,
+                3175,
+                "stereo",
+                57148,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2593,
+                3176,
+                "stereo",
+                57186,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2594,
+                3177,
+                "stereo",
+                57223,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2595,
+                3178,
+                "stereo",
+                57261,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2596,
+                3179,
+                "stereo",
+                57298,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2597,
+                3180,
+                "stereo",
+                57342,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2598,
+                3181,
+                "stereo",
+                57380,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2599,
+                3182,
+                "stereo",
+                57417,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2600,
+                3183,
+                "stereo",
+                57454,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2601,
+                3184,
+                "stereo",
+                57492,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2602,
+                3185,
+                "stereo",
+                57534,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2603,
+                3186,
+                "stereo",
+                57571,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2604,
+                3187,
+                "stereo",
+                57613,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                2605,
+                3188,
+                "stereo",
+                57652,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  180,
+                  960,
+                  360
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "video": {
+            "id": 2590,
+            "ok": true,
+            "dynamic": 0,
+            "level": 1,
+            "floor": 0,
+            "alloc_scale": 0,
+            "backend": "opengl",
+            "preset": 1,
+            "reference_lines": 240,
+            "requested_scale": 1,
+            "effective_scale": 1,
+            "texture_filter": 0,
+            "internal_lines": 240,
+            "gl": 1,
+            "gl_max_dim": 32768,
+            "gl_max_scale": 32,
+            "gl_swap_interval": 0,
+            "gl_clamp_reason": 0,
+            "gl_alloc_retries": 0,
+            "gl_budget_mib": 2048,
+            "fbo_w": 1024,
+            "fbo_h": 512,
+            "hidpi_window": 0,
+            "window_w": 960,
+            "window_h": 720,
+            "drawable_w": 960,
+            "drawable_h": 720,
+            "display_x": 0,
+            "display_y": 240,
+            "display_w": 320,
+            "display_h": 240,
+            "hr_scale": 1,
+            "windowed": 0,
+            "hires_window_x": 0,
+            "hires_window_w": 0,
+            "hires_fbo_w": 0,
+            "hires_fbo_h": 0,
+            "hires_window_grows": 0,
+            "hires_window_tiles": 0,
+            "hires_window_mib": 0
+          }
+        }
+      ],
+      "source_guards": [
+        {
+          "address": 2148455696,
+          "bytes": 1052,
+          "sha256": "8ff15fc79297f56c48af5309b4112822bee813bbaa01972fba975b8dc8a0c01a",
+          "live_hex": null
+        },
+        {
+          "address": 2148454796,
+          "bytes": 600,
+          "sha256": "f3b31a2d1e14aa63ec9b3845a6b69573b8f982fb9513bcf5c9f18b1a2ffedcf6",
+          "live_hex": null
+        },
+        {
+          "address": 2148455396,
+          "bytes": 300,
+          "sha256": "6ef8046808b99ad6ec51b96aee446e0229c25f72418f8c432fd20f86b1cf98b2",
+          "live_hex": null
+        },
+        {
+          "address": 2148491436,
+          "bytes": 20,
+          "sha256": "e96ec415ee3062f93f97d2fe17885bc8cce076ec74c83cfa2faeb0d6063f762b",
+          "live_hex": null
+        },
+        {
+          "address": 2148488096,
+          "bytes": 8,
+          "sha256": "fc33b2d5e15de635c096b9c834d880412d151c978cf4507c0038fd44995dcbf5",
+          "live_hex": [
+            "000b000300000000"
+          ]
+        },
+        {
+          "address": 2147660756,
+          "bytes": 60,
+          "sha256": "b93268813cbbd5926cc6df3cd521add9d968ec632b290d2a88e70a6bce8d3e6e",
+          "live_hex": null
+        },
+        {
+          "address": 2147580992,
+          "bytes": 152,
+          "sha256": "e0d89064f1b9c30a877faa9bdc41eadc72412d2d15018377bfd300679dc6a6c4",
+          "live_hex": null
+        },
+        {
+          "address": 2147935072,
+          "bytes": 8,
+          "sha256": "e1a884073de6dc3988e544b7678028a2f147ac2b38d7a18d0539b5b6bea9ae79",
+          "live_hex": null
+        },
+        {
+          "address": 2148490896,
+          "bytes": 28,
+          "sha256": "365c470e053c0a758e247b47cf22e705943ef5b1f91fd41c76dd332425c0c715",
+          "live_hex": null
+        }
+      ],
+      "living_endpoint_adaptation": {
+        "original_source_sha256": "235c47799eacd790faaa90166bd44a945b0acf5a90cf7edf84f8f4794e721b22",
+        "adaptation": "Return after completed existing both-alive five-frame weather gate; independent F113 death/survivor tail stays deferred and gets no credit.",
+        "materialized_sha256": "52b4fee41fddfbd0de4ae28de8ba5838fc01523e8e276689a8232a6065a67381"
+      },
+      "captures": [
+        {
+          "peer": 0,
+          "label": "actual-Turtloid-native-CP1",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\peer-0-actual-Turtloid-native-CP1.png",
+            "bytes": 2074543,
+            "sha256": "c38b2a73b16f8452260e71bb55dd16d27a51a790ec4178aed69ffa599523ad5b"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "actual-first-rain-before-weather-cycle",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\peer-0-actual-first-rain-before-weather-cycle.png",
+            "bytes": 2074543,
+            "sha256": "56053929b74418cb400e5df2e3aeeba584cb954a53910e587731327264f27379"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-512",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-512.png",
+            "bytes": 2074543,
+            "sha256": "c47588702c11d44ab906c68109ba3b5250308f7ac85367ea9bef30c8303e5515"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-768",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-768.png",
+            "bytes": 2074543,
+            "sha256": "c16c950c205de1a80a056cdaf1a57f7c7b298d90161e0cc737478b3eb9be2c5e"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-256",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-256.png",
+            "bytes": 2074543,
+            "sha256": "64494455c33a89191508bf0cb1d33d34a7fef7a3592675b597e13c0860081442"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-0",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-0.png",
+            "bytes": 2074543,
+            "sha256": "6b80a4db5b196adf77da14f1743a0816fe313047bde67a659f2e0c0966448d1b"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-1024",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-1024.png",
+            "bytes": 2074543,
+            "sha256": "60e4eb831f9b9a0abcfa3bd216e8b7e79024c313dcd5ae249c850b444d01b320"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-weather-final",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-weather-final.png",
+            "bytes": 2074543,
+            "sha256": "9d6244279219b03c1e2001b5443764e28a2e23c6bd93df50d6a8d502f7aa1dc4"
+          },
+          "root_personally_viewed": true
+        }
+      ],
+      "terminals": [
+        {
+          "owned_pid": 89392,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "resolved_crc_windows": [],
+      "matching_crc_samples": 0,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\qualification.json",
+          "bytes": 17131054,
+          "sha256": "9a386d55c8307356a23f4050391e769de4b992f2515014e7e2bfa619457923a9"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\observations.json",
+          "bytes": 5289571,
+          "sha256": "dec692f4698902edfcf412e70873f925c4dd759f3f33d5d21549f9e580f8e3e2"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-entry-observations.json",
+          "bytes": 2987696,
+          "sha256": "49cdfa5bdde5e8356497ac069396efb66d845a1f1f04c2f95ff9eb3e16a34598"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\weather-observations.json",
+          "bytes": 1782580,
+          "sha256": "a4995faf41d7b46d82fb8dcb818843a51768e54c1c660267c1fa9f3479404f0c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\F175-executing-source-pins.json",
+          "bytes": 9267,
+          "sha256": "af27e0df0a0e914ab0578441ca1c30eb04b3236c7f0cdde479c0b84c2112aacc"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l-lease-root-v1.json",
+          "bytes": 1724,
+          "sha256": "b890760851ab29159c2b6f715c47430a2fcbb337c847d87bde1526a4a9418c78"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F175-v110-LOCAL-root-image-review-root-v1.json",
+          "bytes": 2571,
+          "sha256": "0e7ffaf7c548afa900af57b52de355ed5f5842a2c79b2f7153b2e96ef4a19142"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-512-GP0.json.gz",
+          "bytes": 36500,
+          "sha256": "7a782a4bb75d368785b638317b4dd8f57e7db4bd035489e6917be14eaa7d0940"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-768-GP0.json.gz",
+          "bytes": 36591,
+          "sha256": "9e30e5f22dfb0897b6b46adbf2a3cc3911c324dec50de6703226d2440faf246f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-256-GP0.json.gz",
+          "bytes": 36549,
+          "sha256": "5dcbd83df07e6741d3e03d2658e345e82bca5da2c85646b8c91c040698bfd11d"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-0-GP0.json.gz",
+          "bytes": 36596,
+          "sha256": "5904cb4ada410e488dfd1d4a02000d9ebf71d1dc0c2069ffc4acc6a6d43df28b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-1024-GP0.json.gz",
+          "bytes": 36835,
+          "sha256": "00d0d9543689f2ab460aa7e3d66a675770a1595f47a39947e385fccee43a3109"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2l\\ammo-hud\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-weather-final-GP0.json.gz",
+          "bytes": 36422,
+          "sha256": "5b5550bbd85bff0c8284bdbe59a4475bb779aa93a4856071b12a918f4b274f53"
+        }
+      ]
+    },
+    "netplay": {
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\heatnix-publication-v110-final-binding-root-v1.json",
+        "binding_sha256": "24a6f3a07b7d33e4001d7454491f2e2ce2bad009fb90305c264aa6f7ba35d467",
+        "image_sha256": "cae6d347b5af2abc487566e01d5d06cb2103c96eb45ac2ff96f3ab547701b249",
+        "manifest_sha256": "aebfd7a54aa7cf27ad788b47b473b9fed9076819cd612a83c8afda5911014793",
+        "provenance_sha256": "4c7cee4eae4ecd4788f00ab6e5440752d129924235f2a296ecc59969539f702a",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v110-heatnix-publication-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "3b4285eca543f0a9ed57780749220a72379bbabf",
+          "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+          "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+        },
+        "title": "mmx6-x-zero-delay-v58",
+        "host_revision": 41
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_atlas_checks": {
+        "exact_original_Turtloid_CP1_native_arrival": true,
+        "completed_original_five_frame_atlas_component": true
+      },
+      "weather_checks": {
+        "original_live_source_and_origin_bound_slot": true,
+        "five_original_atlas_frames_each_peer": true,
+        "native_world_delta_inside_real_VBlank_bracket": true,
+        "private_views_advance_without_host_leak": true,
+        "composed_owner_world_ROI_pixels_change_with_stationary_heroes": true,
+        "completed_composed_images_and_GP0_retained": true
+      },
+      "scroll_component_receipt": {
+        "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-camera\\manifest-bound-3b4285e-F28-Heatnix-shared-scroll-local-netplay-reviewed.json",
+        "bytes": 69075,
+        "sha256": "7450c3160b5e77e1a176a2ee0195fbcad519180714d68a157076adf5d47871a0"
+      },
+      "scroll_component_checks": {
+        "original_Heatnix_CP7_and_actual_boss_admission": true,
+        "actual_source_bound_autonomous_scroll_flags": true,
+        "eight_native_layer1_origins_every_peer": true,
+        "both_native_hero_positions_stationary": true,
+        "world_advances_at_least40_native_updates": true,
+        "actual_private_views_and_restoration": true,
+        "actual_layer1_Y_advances_at_every_private_seat_draw": true,
+        "composed_arena_scroll_images_retained_for_root_review": true
+      },
+      "actual_original_atlas_Y": [
+        [
+          0,
+          256,
+          512,
+          768,
+          1024
+        ],
+        [
+          0,
+          256,
+          512,
+          768,
+          1024
+        ]
+      ],
+      "native_clock_brackets": [
+        {
+          "peer": 0,
+          "native_world_delta": 163,
+          "VBlank_min": 159,
+          "VBlank_max": 167
+        },
+        {
+          "peer": 1,
+          "native_world_delta": 165,
+          "VBlank_min": 161,
+          "VBlank_max": 168
+        }
+      ],
+      "stationary_native_positions": [
+        {
+          "peer": 0,
+          "before": [
+            [
+              82837504,
+              36377088
+            ],
+            [
+              83296256,
+              36311552
+            ]
+          ],
+          "after": [
+            [
+              82837504,
+              36377088
+            ],
+            [
+              83296256,
+              36311552
+            ]
+          ],
+          "unchanged": true
+        },
+        {
+          "peer": 1,
+          "before": [
+            [
+              82837504,
+              36377088
+            ],
+            [
+              83296256,
+              36311552
+            ]
+          ],
+          "after": [
+            [
+              82837504,
+              36377088
+            ],
+            [
+              83296256,
+              36311552
+            ]
+          ],
+          "unchanged": true
+        }
+      ],
+      "displayed_weather_ROI_variation": [
+        {
+          "peer": 0,
+          "seat": 0,
+          "captures": 6,
+          "distinct_pixels": 6
+        },
+        {
+          "peer": 1,
+          "seat": 1,
+          "captures": 6,
+          "distinct_pixels": 6
+        }
+      ],
+      "presentation_start": [
+        {
+          "counters": {
+            "id": 2198,
+            "ok": true,
+            "frame": 4183,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 14,
+                "last_frame": 3727
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2644,
+                "last_frame": 3748
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 16,
+                "last_frame": 3748
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 1191,
+                "last_frame": 4183
+              }
+            ],
+            "overflow": 0
+          },
+          "render": {
+            "id": 2199,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 0,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 1191,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 12.648,
+            "avg_pass_ms": 12.921,
+            "avg_begin_ms": 4.573,
+            "avg_guest_ms": 6.921,
+            "avg_end_ms": 0.084,
+            "avg_restore_ms": 0.142,
+            "guest_cycles_last": 191016,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 596,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 4,
+            "backups_reused": 0,
+            "pass_attempts": 1191,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 1191,
+            "local_attempts": 1191,
+            "local_status": 0,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 2200,
+            "ok": true,
+            "attempts": 0,
+            "pairs": 0,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 4,
+            "last_pair_id": 0,
+            "last_guest_cycle": 0,
+            "eye_cycles": [
+              0,
+              0
+            ],
+            "eye_hashes": [
+              "0000000000000000",
+              "0000000000000000"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": -1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 0.0,
+            "avg_pair_ms": 0.0,
+            "published": {
+              "valid": 0,
+              "pair_id": 0,
+              "guest_cycle": 0,
+              "width": 0,
+              "height": 0,
+              "staged_mask": 0,
+              "mode": 0,
+              "presents": 0
+            },
+            "captures": []
+          },
+          "present": {
+            "id": 2201,
+            "ok": true,
+            "total": 3522,
+            "now_ms": 72271,
+            "events": [
+              [
+                3498,
+                4161,
+                "vram",
+                71379,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3499,
+                4162,
+                "vram",
+                71416,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3500,
+                4163,
+                "vram",
+                71456,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3501,
+                4164,
+                "vram",
+                71495,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3502,
+                4165,
+                "vram",
+                71531,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3503,
+                4166,
+                "vram",
+                71578,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3504,
+                4167,
+                "vram",
+                71611,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3505,
+                4168,
+                "vram",
+                71655,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3506,
+                4169,
+                "vram",
+                71690,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3507,
+                4170,
+                "vram",
+                71724,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3508,
+                4171,
+                "vram",
+                71769,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3509,
+                4172,
+                "vram",
+                71809,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3510,
+                4173,
+                "vram",
+                71852,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3511,
+                4174,
+                "vram",
+                71892,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3512,
+                4175,
+                "vram",
+                71931,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3513,
+                4176,
+                "vram",
+                71973,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3514,
+                4177,
+                "vram",
+                72005,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3515,
+                4178,
+                "vram",
+                72037,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3516,
+                4179,
+                "vram",
+                72070,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3517,
+                4180,
+                "vram",
+                72102,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3518,
+                4181,
+                "vram",
+                72140,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3519,
+                4182,
+                "vram",
+                72174,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3520,
+                4183,
+                "vram",
+                72207,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3521,
+                4184,
+                "vram",
+                72240,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "video": {
+            "id": 2202,
+            "ok": true,
+            "dynamic": 0,
+            "level": 1,
+            "floor": 0,
+            "alloc_scale": 0,
+            "backend": "opengl",
+            "preset": 1,
+            "reference_lines": 240,
+            "requested_scale": 1,
+            "effective_scale": 1,
+            "texture_filter": 0,
+            "internal_lines": 240,
+            "gl": 1,
+            "gl_max_dim": 32768,
+            "gl_max_scale": 32,
+            "gl_swap_interval": 0,
+            "gl_clamp_reason": 0,
+            "gl_alloc_retries": 0,
+            "gl_budget_mib": 2048,
+            "fbo_w": 1024,
+            "fbo_h": 512,
+            "hidpi_window": 0,
+            "window_w": 960,
+            "window_h": 720,
+            "drawable_w": 960,
+            "drawable_h": 720,
+            "display_x": 0,
+            "display_y": 240,
+            "display_w": 320,
+            "display_h": 240,
+            "hr_scale": 1,
+            "windowed": 0,
+            "hires_window_x": 0,
+            "hires_window_w": 0,
+            "hires_fbo_w": 0,
+            "hires_fbo_h": 0,
+            "hires_window_grows": 0,
+            "hires_window_tiles": 0,
+            "hires_window_mib": 0
+          }
+        },
+        {
+          "counters": {
+            "id": 2011,
+            "ok": true,
+            "frame": 4183,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 14,
+                "last_frame": 3727
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2644,
+                "last_frame": 3748
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 16,
+                "last_frame": 3748
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 1191,
+                "last_frame": 4183
+              }
+            ],
+            "overflow": 0
+          },
+          "render": {
+            "id": 2012,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 0,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 1191,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 11.567,
+            "avg_pass_ms": 11.92,
+            "avg_begin_ms": 4.087,
+            "avg_guest_ms": 6.427,
+            "avg_end_ms": 0.079,
+            "avg_restore_ms": 0.152,
+            "guest_cycles_last": 191531,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 596,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 4,
+            "backups_reused": 0,
+            "pass_attempts": 1191,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 1191,
+            "local_attempts": 1191,
+            "local_status": 0,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 2013,
+            "ok": true,
+            "attempts": 0,
+            "pairs": 0,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 4,
+            "last_pair_id": 0,
+            "last_guest_cycle": 0,
+            "eye_cycles": [
+              0,
+              0
+            ],
+            "eye_hashes": [
+              "0000000000000000",
+              "0000000000000000"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": -1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 0.0,
+            "avg_pair_ms": 0.0,
+            "published": {
+              "valid": 0,
+              "pair_id": 0,
+              "guest_cycle": 0,
+              "width": 0,
+              "height": 0,
+              "staged_mask": 0,
+              "mode": 0,
+              "presents": 0
+            },
+            "captures": []
+          },
+          "present": {
+            "id": 2014,
+            "ok": true,
+            "total": 3522,
+            "now_ms": 72126,
+            "events": [
+              [
+                3498,
+                4161,
+                "vram",
+                71267,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3499,
+                4162,
+                "vram",
+                71304,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3500,
+                4163,
+                "vram",
+                71343,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3501,
+                4164,
+                "vram",
+                71382,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3502,
+                4165,
+                "vram",
+                71425,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3503,
+                4166,
+                "vram",
+                71461,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3504,
+                4167,
+                "vram",
+                71504,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3505,
+                4168,
+                "vram",
+                71537,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3506,
+                4169,
+                "vram",
+                71578,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3507,
+                4170,
+                "vram",
+                71617,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3508,
+                4171,
+                "vram",
+                71655,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3509,
+                4172,
+                "vram",
+                71703,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3510,
+                4173,
+                "vram",
+                71738,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3511,
+                4174,
+                "vram",
+                71778,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3512,
+                4175,
+                "vram",
+                71813,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3513,
+                4176,
+                "vram",
+                71856,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3514,
+                4177,
+                "vram",
+                71889,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3515,
+                4178,
+                "vram",
+                71921,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3516,
+                4179,
+                "vram",
+                71958,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3517,
+                4180,
+                "vram",
+                71990,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3518,
+                4181,
+                "vram",
+                72023,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3519,
+                4182,
+                "vram",
+                72057,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3520,
+                4183,
+                "vram",
+                72092,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3521,
+                4184,
+                "vram",
+                72125,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "video": {
+            "id": 2015,
+            "ok": true,
+            "dynamic": 0,
+            "level": 1,
+            "floor": 0,
+            "alloc_scale": 0,
+            "backend": "opengl",
+            "preset": 1,
+            "reference_lines": 240,
+            "requested_scale": 1,
+            "effective_scale": 1,
+            "texture_filter": 0,
+            "internal_lines": 240,
+            "gl": 1,
+            "gl_max_dim": 32768,
+            "gl_max_scale": 32,
+            "gl_swap_interval": 0,
+            "gl_clamp_reason": 0,
+            "gl_alloc_retries": 0,
+            "gl_budget_mib": 2048,
+            "fbo_w": 1024,
+            "fbo_h": 512,
+            "hidpi_window": 0,
+            "window_w": 960,
+            "window_h": 720,
+            "drawable_w": 960,
+            "drawable_h": 720,
+            "display_x": 0,
+            "display_y": 240,
+            "display_w": 320,
+            "display_h": 240,
+            "hr_scale": 1,
+            "windowed": 0,
+            "hires_window_x": 0,
+            "hires_window_w": 0,
+            "hires_fbo_w": 0,
+            "hires_fbo_h": 0,
+            "hires_window_grows": 0,
+            "hires_window_tiles": 0,
+            "hires_window_mib": 0
+          }
+        }
+      ],
+      "presentation_end": [
+        {
+          "counters": {
+            "id": 2472,
+            "ok": true,
+            "frame": 4364,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 14,
+                "last_frame": 3727
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2644,
+                "last_frame": 3748
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 16,
+                "last_frame": 3748
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 1372,
+                "last_frame": 4364
+              }
+            ],
+            "overflow": 0
+          },
+          "render": {
+            "id": 2473,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 0,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 1372,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 21.032,
+            "avg_pass_ms": 14.208,
+            "avg_begin_ms": 6.89,
+            "avg_guest_ms": 5.929,
+            "avg_end_ms": 0.059,
+            "avg_restore_ms": 0.147,
+            "guest_cycles_last": 190988,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 686,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 4,
+            "backups_reused": 0,
+            "pass_attempts": 1372,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 1372,
+            "local_attempts": 1372,
+            "local_status": 0,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 2474,
+            "ok": true,
+            "attempts": 0,
+            "pairs": 0,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 4,
+            "last_pair_id": 0,
+            "last_guest_cycle": 0,
+            "eye_cycles": [
+              0,
+              0
+            ],
+            "eye_hashes": [
+              "0000000000000000",
+              "0000000000000000"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": -1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 0.0,
+            "avg_pair_ms": 0.0,
+            "published": {
+              "valid": 0,
+              "pair_id": 0,
+              "guest_cycle": 0,
+              "width": 0,
+              "height": 0,
+              "staged_mask": 0,
+              "mode": 0,
+              "presents": 0
+            },
+            "captures": []
+          },
+          "present": {
+            "id": 2475,
+            "ok": true,
+            "total": 3703,
+            "now_ms": 78606,
+            "events": [
+              [
+                3679,
+                4342,
+                "vram",
+                77767,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3680,
+                4343,
+                "vram",
+                77805,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3681,
+                4344,
+                "vram",
+                77838,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3682,
+                4345,
+                "vram",
+                77872,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3683,
+                4346,
+                "vram",
+                77906,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3684,
+                4347,
+                "vram",
+                77942,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3685,
+                4348,
+                "vram",
+                77979,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3686,
+                4349,
+                "vram",
+                78017,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3687,
+                4350,
+                "vram",
+                78060,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3688,
+                4351,
+                "vram",
+                78098,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3689,
+                4352,
+                "vram",
+                78128,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3690,
+                4353,
+                "vram",
+                78159,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3691,
+                4354,
+                "vram",
+                78194,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3692,
+                4355,
+                "vram",
+                78231,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3693,
+                4356,
+                "vram",
+                78268,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3694,
+                4357,
+                "vram",
+                78304,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3695,
+                4358,
+                "vram",
+                78338,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3696,
+                4359,
+                "vram",
+                78373,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3697,
+                4360,
+                "vram",
+                78414,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3698,
+                4361,
+                "vram",
+                78444,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3699,
+                4362,
+                "vram",
+                78476,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3700,
+                4363,
+                "vram",
+                78509,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3701,
+                4364,
+                "vram",
+                78542,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3702,
+                4365,
+                "vram",
+                78583,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "video": {
+            "id": 2476,
+            "ok": true,
+            "dynamic": 0,
+            "level": 1,
+            "floor": 0,
+            "alloc_scale": 0,
+            "backend": "opengl",
+            "preset": 1,
+            "reference_lines": 240,
+            "requested_scale": 1,
+            "effective_scale": 1,
+            "texture_filter": 0,
+            "internal_lines": 240,
+            "gl": 1,
+            "gl_max_dim": 32768,
+            "gl_max_scale": 32,
+            "gl_swap_interval": 0,
+            "gl_clamp_reason": 0,
+            "gl_alloc_retries": 0,
+            "gl_budget_mib": 2048,
+            "fbo_w": 1024,
+            "fbo_h": 512,
+            "hidpi_window": 0,
+            "window_w": 960,
+            "window_h": 720,
+            "drawable_w": 960,
+            "drawable_h": 720,
+            "display_x": 0,
+            "display_y": 0,
+            "display_w": 320,
+            "display_h": 240,
+            "hr_scale": 1,
+            "windowed": 0,
+            "hires_window_x": 0,
+            "hires_window_w": 0,
+            "hires_fbo_w": 0,
+            "hires_fbo_h": 0,
+            "hires_window_grows": 0,
+            "hires_window_tiles": 0,
+            "hires_window_mib": 0
+          }
+        },
+        {
+          "counters": {
+            "id": 2285,
+            "ok": true,
+            "frame": 4364,
+            "counters": [
+              {
+                "name": "startup.disc_hash",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "resident.prepared",
+                "count": 1,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.modified_members",
+                "count": 0,
+                "last_frame": 0
+              },
+              {
+                "name": "mmx6.seamless.packed_loads",
+                "count": 14,
+                "last_frame": 3727
+              },
+              {
+                "name": "mmx6.seamless.sectors",
+                "count": 2644,
+                "last_frame": 3748
+              },
+              {
+                "name": "mmx6.seamless.raw_loads",
+                "count": 16,
+                "last_frame": 3748
+              },
+              {
+                "name": "mmx6.coop.private-committed",
+                "count": 1372,
+                "last_frame": 4364
+              }
+            ],
+            "overflow": 0
+          },
+          "render": {
+            "id": 2286,
+            "ok": true,
+            "plans": 0,
+            "planned": 0,
+            "wanted": 0,
+            "refused": 0,
+            "passes": 0,
+            "aborted": 0,
+            "discarded": 0,
+            "watchdog": 0,
+            "vram_leaks": 0,
+            "nesting_repairs": 0,
+            "device_reads": 0,
+            "last_device_read": "0x00000000",
+            "last_device_read_width": 0,
+            "verify_checks": 1373,
+            "verify_mismatch": 0,
+            "dropped": {
+              "spu": 0,
+              "cd": 0,
+              "timer": 0,
+              "dma": 0,
+              "gpu": 0,
+              "other": 0
+            },
+            "last_pass_ms": 10.384,
+            "avg_pass_ms": 12.524,
+            "avg_begin_ms": 5.015,
+            "avg_guest_ms": 6.073,
+            "avg_end_ms": 0.066,
+            "avg_restore_ms": 0.15,
+            "guest_cycles_last": 190580,
+            "disabled": 0,
+            "promotions": 0,
+            "pass_presents": 0,
+            "blended_presents": 0,
+            "expired": 0,
+            "late_presents": 0,
+            "unmatched_flips": 0,
+            "early_presents": 0,
+            "cost_us": 0,
+            "cost_rewarms": 0,
+            "frame_images": 0,
+            "journaled": 687,
+            "image_textures": 0,
+            "image_bytes": 0,
+            "status": 4,
+            "backups_reused": 0,
+            "pass_attempts": 1373,
+            "argument_refused": 0,
+            "status_refused": 0,
+            "begin_refused": 0,
+            "checkpoint_refused": 0,
+            "spans": 0,
+            "span_failures": 0,
+            "local_views": 1373,
+            "local_attempts": 1373,
+            "local_status": 0,
+            "admission": {
+              "plans": 0,
+              "frame": 0,
+              "zero_credit_refusals": 0,
+              "idle_ms": 0.0,
+              "present_ms": 0.0,
+              "prior_pass_ms": 0.0,
+              "present_reserve_ms": 0.0,
+              "spare_ms": 0.0,
+              "frame_ms": 0.0,
+              "cost_ms": 0.0,
+              "budget_ms": 0.0,
+              "wanted": 0,
+              "planned": 0
+            },
+            "last_failure": null,
+            "last_abort_detail": "",
+            "span_fail": {
+              "reason": 0,
+              "pc": "0x00000000",
+              "start": "0x00000000",
+              "stop": "0x00000000",
+              "ra": "0x00000000",
+              "after": "0x00000000",
+              "insns": 0
+            }
+          },
+          "stereo": {
+            "id": 2287,
+            "ok": true,
+            "attempts": 0,
+            "pairs": 0,
+            "refused": 0,
+            "failed": 0,
+            "shed": 0,
+            "status": 4,
+            "last_pair_id": 0,
+            "last_guest_cycle": 0,
+            "eye_cycles": [
+              0,
+              0
+            ],
+            "eye_hashes": [
+              "0000000000000000",
+              "0000000000000000"
+            ],
+            "eye_view": [
+              [
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0
+              ]
+            ],
+            "last_eye": -1,
+            "last_failure": "",
+            "last_failed_attempt": 0,
+            "last_failed_eye": 0,
+            "last_failed_reason": "",
+            "retained_pair_id": 0,
+            "last_pair_ms": 0.0,
+            "avg_pair_ms": 0.0,
+            "published": {
+              "valid": 0,
+              "pair_id": 0,
+              "guest_cycle": 0,
+              "width": 0,
+              "height": 0,
+              "staged_mask": 0,
+              "mode": 0,
+              "presents": 0
+            },
+            "captures": []
+          },
+          "present": {
+            "id": 2288,
+            "ok": true,
+            "total": 3703,
+            "now_ms": 78464,
+            "events": [
+              [
+                3679,
+                4342,
+                "vram",
+                77599,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3680,
+                4343,
+                "vram",
+                77638,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3681,
+                4344,
+                "vram",
+                77674,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3682,
+                4345,
+                "vram",
+                77710,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3683,
+                4346,
+                "vram",
+                77741,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3684,
+                4347,
+                "vram",
+                77774,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3685,
+                4348,
+                "vram",
+                77809,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3686,
+                4349,
+                "vram",
+                77848,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3687,
+                4350,
+                "vram",
+                77882,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3688,
+                4351,
+                "vram",
+                77912,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3689,
+                4352,
+                "vram",
+                77948,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3690,
+                4353,
+                "vram",
+                77980,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3691,
+                4354,
+                "vram",
+                78013,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3692,
+                4355,
+                "vram",
+                78047,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3693,
+                4356,
+                "vram",
+                78081,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3694,
+                4357,
+                "vram",
+                78114,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3695,
+                4358,
+                "vram",
+                78150,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3696,
+                4359,
+                "vram",
+                78202,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3697,
+                4360,
+                "vram",
+                78239,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3698,
+                4361,
+                "vram",
+                78286,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3699,
+                4362,
+                "vram",
+                78323,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3700,
+                4363,
+                "vram",
+                78369,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3701,
+                4364,
+                "vram",
+                78398,
+                [
+                  0,
+                  0,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ],
+              [
+                3702,
+                4365,
+                "vram",
+                78436,
+                [
+                  0,
+                  240,
+                  320,
+                  240
+                ],
+                [
+                  0,
+                  0,
+                  960,
+                  720
+                ],
+                [
+                  0,
+                  0,
+                  0
+                ],
+                0,
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          "video": {
+            "id": 2289,
+            "ok": true,
+            "dynamic": 0,
+            "level": 1,
+            "floor": 0,
+            "alloc_scale": 0,
+            "backend": "opengl",
+            "preset": 1,
+            "reference_lines": 240,
+            "requested_scale": 1,
+            "effective_scale": 1,
+            "texture_filter": 0,
+            "internal_lines": 240,
+            "gl": 1,
+            "gl_max_dim": 32768,
+            "gl_max_scale": 32,
+            "gl_swap_interval": 0,
+            "gl_clamp_reason": 0,
+            "gl_alloc_retries": 0,
+            "gl_budget_mib": 2048,
+            "fbo_w": 1024,
+            "fbo_h": 512,
+            "hidpi_window": 0,
+            "window_w": 960,
+            "window_h": 720,
+            "drawable_w": 960,
+            "drawable_h": 720,
+            "display_x": 0,
+            "display_y": 240,
+            "display_w": 320,
+            "display_h": 240,
+            "hr_scale": 1,
+            "windowed": 0,
+            "hires_window_x": 0,
+            "hires_window_w": 0,
+            "hires_fbo_w": 0,
+            "hires_fbo_h": 0,
+            "hires_window_grows": 0,
+            "hires_window_tiles": 0,
+            "hires_window_mib": 0
+          }
+        }
+      ],
+      "source_guards": [
+        {
+          "address": 2148455696,
+          "bytes": 1052,
+          "sha256": "8ff15fc79297f56c48af5309b4112822bee813bbaa01972fba975b8dc8a0c01a",
+          "live_hex": null
+        },
+        {
+          "address": 2148454796,
+          "bytes": 600,
+          "sha256": "f3b31a2d1e14aa63ec9b3845a6b69573b8f982fb9513bcf5c9f18b1a2ffedcf6",
+          "live_hex": null
+        },
+        {
+          "address": 2148455396,
+          "bytes": 300,
+          "sha256": "6ef8046808b99ad6ec51b96aee446e0229c25f72418f8c432fd20f86b1cf98b2",
+          "live_hex": null
+        },
+        {
+          "address": 2148491436,
+          "bytes": 20,
+          "sha256": "e96ec415ee3062f93f97d2fe17885bc8cce076ec74c83cfa2faeb0d6063f762b",
+          "live_hex": null
+        },
+        {
+          "address": 2148488096,
+          "bytes": 8,
+          "sha256": "fc33b2d5e15de635c096b9c834d880412d151c978cf4507c0038fd44995dcbf5",
+          "live_hex": [
+            "000b000300000000",
+            "000b000300000000"
+          ]
+        },
+        {
+          "address": 2147660756,
+          "bytes": 60,
+          "sha256": "b93268813cbbd5926cc6df3cd521add9d968ec632b290d2a88e70a6bce8d3e6e",
+          "live_hex": null
+        },
+        {
+          "address": 2147580992,
+          "bytes": 152,
+          "sha256": "e0d89064f1b9c30a877faa9bdc41eadc72412d2d15018377bfd300679dc6a6c4",
+          "live_hex": null
+        },
+        {
+          "address": 2147935072,
+          "bytes": 8,
+          "sha256": "e1a884073de6dc3988e544b7678028a2f147ac2b38d7a18d0539b5b6bea9ae79",
+          "live_hex": null
+        },
+        {
+          "address": 2148490896,
+          "bytes": 28,
+          "sha256": "365c470e053c0a758e247b47cf22e705943ef5b1f91fd41c76dd332425c0c715",
+          "live_hex": null
+        }
+      ],
+      "living_endpoint_adaptation": {
+        "original_source_sha256": "235c47799eacd790faaa90166bd44a945b0acf5a90cf7edf84f8f4794e721b22",
+        "adaptation": "Return after completed existing both-alive five-frame weather gate; independent F113 death/survivor tail stays deferred and gets no credit.",
+        "materialized_sha256": "52b4fee41fddfbd0de4ae28de8ba5838fc01523e8e276689a8232a6065a67381"
+      },
+      "captures": [
+        {
+          "peer": 0,
+          "label": "actual-Turtloid-native-CP1",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\peer-0-actual-Turtloid-native-CP1.png",
+            "bytes": 2074543,
+            "sha256": "6800a8b5f061c53dc009b8dcd4b96336ee623951f1637c3d6b82d21d86c3bc4a"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "actual-Turtloid-native-CP1",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\peer-1-actual-Turtloid-native-CP1.png",
+            "bytes": 2074543,
+            "sha256": "82cae1886fc89fe683acc15e2289f1872a1b03a5c72da3297c86299cc6ad9a3f"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "actual-first-rain-before-weather-cycle",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\peer-0-actual-first-rain-before-weather-cycle.png",
+            "bytes": 2074543,
+            "sha256": "7fe8ccc8fc11ac7f379ba46e0f05688f936e9bc0f4e66b716465ec074b8207c3"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "actual-first-rain-before-weather-cycle",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\peer-1-actual-first-rain-before-weather-cycle.png",
+            "bytes": 2074543,
+            "sha256": "e5b62796162c90a115683a8ed9cb652bc4bd7252b59e354cc3c1c14004318f20"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-0",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-0.png",
+            "bytes": 2074543,
+            "sha256": "644863c67321f731710300e00c684823db605ed5e13283e0ba950c55b461cce9"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-0",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-0.png",
+            "bytes": 2074543,
+            "sha256": "1db38922a6a0996f7259809969eb6893c929a60f3fc0b5c82f9f9b6f1e737c1c"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-256",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-256.png",
+            "bytes": 2074543,
+            "sha256": "6f6c49683142128f172a1cb9949de6fdb6fad6aad8c4e10fde2098c9fb248ae8"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-256",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-256.png",
+            "bytes": 2074543,
+            "sha256": "710a973a075854d1401e960893c581d3348b675280cb29efd8ab5c3c5a498d1c"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-768",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-768.png",
+            "bytes": 2074543,
+            "sha256": "17248b5b11616b919d73d15b50506103154bd6a11d9d869c5351115266018420"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-768",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-768.png",
+            "bytes": 2074543,
+            "sha256": "7357d63eec28704103eb819c3aa09d7daedbe5551592cc6e77891eb2e1d0f034"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-512",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-512.png",
+            "bytes": 2074543,
+            "sha256": "3a055ba796a90f2767d7d809e7f4a4818759cf7b095b7d067470ed3be5f1b8f7"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-512",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-512.png",
+            "bytes": 2074543,
+            "sha256": "1028a640e6bed94ff624de375bc71777bcd768ea47317db986c64bdbf9bd8607"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-atlas-1024",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-1024.png",
+            "bytes": 2074543,
+            "sha256": "f9428531f6d863bfee79749d6542a67140123baa2e760c11a84a0373e911e744"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-atlas-1024",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-1024.png",
+            "bytes": 2074543,
+            "sha256": "1264a75db73934158fbd31e1e18e8b94eb47036e4470a970236492b4ca985624"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 0,
+          "label": "native-weather-final",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-weather-final.png",
+            "bytes": 2074543,
+            "sha256": "b1fecd70b232223cc7da0a79a8a6f964eba53682be5689e84e557a9ec34c36b6"
+          },
+          "root_personally_viewed": true
+        },
+        {
+          "peer": 1,
+          "label": "native-weather-final",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-weather-final.png",
+            "bytes": 2074543,
+            "sha256": "c847833a3b88dd33b2b4d055454a0fd7ee60b97d2e26eb0a1f0c6aef63a85f94"
+          },
+          "root_personally_viewed": true
+        }
+      ],
+      "terminals": [
+        {
+          "owned_pid": 96588,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "owned_pid": 76720,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "private_cards_unchanged": true,
+      "resolved_crc_windows": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2912,
+              "core": "1d520388",
+              "mod": "d0e2f872"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "14f36628",
+              "mod": "53351ddc"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "a0ed4b21",
+              "mod": "3578c8fc"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "6a537f45",
+              "mod": "a3317d1a"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "7449aa20",
+              "mod": "d58e98ba"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "a29fd448",
+              "mod": "5fc99256"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "904bd61b",
+              "mod": "fda93314"
+            }
+          ],
+          "resolved_through": [
+            3126,
+            3126
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3168,
+              "core": "c3a0f809",
+              "mod": "4641678e"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "e2fa22dc",
+              "mod": "099cd7e4"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "2a33c2be",
+              "mod": "2242fc52"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "04f1dbbb",
+              "mod": "a38d3f32"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "130c93fa",
+              "mod": "229d7c2c"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "aa666575",
+              "mod": "d0d879cc"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "6f58f1b9",
+              "mod": "a86ac76a"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "0f8c4cde",
+              "mod": "9be6245e"
+            }
+          ],
+          "resolved_through": [
+            3396,
+            3398
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3488,
+              "core": "fb38a5ba",
+              "mod": "d8fa3802"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "10ba528a",
+              "mod": "aa878a9c"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "f91183f1",
+              "mod": "0df76cbc"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "211d3cff",
+              "mod": "5252919a"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "7c1636be",
+              "mod": "44dcbcba"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "c3cc4146",
+              "mod": "4641678e"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "80c69f6c",
+              "mod": "099cd7e4"
+            }
+          ],
+          "resolved_through": [
+            3701,
+            3701
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4384,
+              "core": "63220eb4",
+              "mod": "74c7bfbf"
+            },
+            {
+              "simulation_tick": 4416,
+              "core": "54b21d3c",
+              "mod": "06753833"
+            },
+            {
+              "simulation_tick": 4448,
+              "core": "5bc83264",
+              "mod": "4c7e1a51"
+            },
+            {
+              "simulation_tick": 4480,
+              "core": "4b1519f2",
+              "mod": "b4050ad7"
+            }
+          ],
+          "resolved_through": [
+            4495,
+            4494
+          ]
+        }
+      ],
+      "matching_crc_samples": 26,
+      "raw_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\qualification.json",
+          "bytes": 16053126,
+          "sha256": "2b1b40f59a0e9ba51c3b664a88ac9bc233eccde287d6506223111cd63b5516bc"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\observations.json",
+          "bytes": 6454903,
+          "sha256": "6e71982a612349b5e0a3bec02764eba800cac2a656b0e10868e2060cb684a6e5"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-entry-observations.json",
+          "bytes": 3828579,
+          "sha256": "348bbdeeed4938e588bf88338fbacd86c0c979f98dd16541dabfb98944d52218"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\weather-observations.json",
+          "bytes": 2992408,
+          "sha256": "338ce14023578fa38f078a478638e49e7b99572ada141313fd23d89be005be46"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\F175-executing-source-pins.json",
+          "bytes": 9267,
+          "sha256": "2859103a2b66cc5a47542f897b5741cf1430570b1962628cbd5c250b2f6abb04"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n-lease-root-v1.json",
+          "bytes": 1767,
+          "sha256": "0a9315d63f60d1e715f251d4cc5546ee8b4147f918300bc030c7db014a42f511"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F175-v110-NETPLAY-root-image-review-root-v1.json",
+          "bytes": 4388,
+          "sha256": "cd0aa4c74ae20406850de102aed74e5154850940ca62b35723013c4403ded4d5"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\F175-actual-parent-transport-closure.py",
+          "bytes": 54349,
+          "sha256": "032322d3c1d2b3b65502d8247dbc89f061df24a97c65c6464cf6d32b9dd31b36"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\F175-actual-parent-transport-closure-proof.json",
+          "bytes": 582,
+          "sha256": "a17be4a10c4efe4716d87777de522795308773ed60ed1147532418520a3b4f14"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-0-GP0.json.gz",
+          "bytes": 24641,
+          "sha256": "08b748dd86d38b648aaef4ac8fbc71b36a85f9ae6aa14c0445ad43e7c8b8b7f6"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-0-GP0.json.gz",
+          "bytes": 24832,
+          "sha256": "c6b10158b7e6e6a8172dcb8d54bdc86e254bee72213aee2413593a3e09624da8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-256-GP0.json.gz",
+          "bytes": 24667,
+          "sha256": "8289cef712d6217bfea3158898638a5ee379cf86273ea4b3b6c6b9d8438c304f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-256-GP0.json.gz",
+          "bytes": 24704,
+          "sha256": "c7315bd5fb4e86583df40cfd47c4a7a8855a6a49971d07303061539836cf46b8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-768-GP0.json.gz",
+          "bytes": 24554,
+          "sha256": "a398400c3bd8973d62732255ca6828ba5d85c5323370fdd6af504488880f4bf8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-768-GP0.json.gz",
+          "bytes": 24807,
+          "sha256": "aa8cea1fcf14ccb0c4f758c047d1ebba2bc8d26f61b17f79610b0b185f5de66a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-512-GP0.json.gz",
+          "bytes": 24555,
+          "sha256": "97b8bcd734bb35a40b19fcfc21e1829a9915ece70a4793515823453a4cfde822"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-512-GP0.json.gz",
+          "bytes": 24912,
+          "sha256": "082c73413f37afe07418b399792809a4c2604658dff3e8e8a18a0273e38c790e"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-atlas-1024-GP0.json.gz",
+          "bytes": 24554,
+          "sha256": "b7e8590fd208896440795d9463e46be0e87a11ae6859b11dff6bb98be877c7cf"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-atlas-1024-GP0.json.gz",
+          "bytes": 24707,
+          "sha256": "3647653a3d527895392944de235da9ae79280620de0badc3268143f89afcc9f7"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-0-native-weather-final-GP0.json.gz",
+          "bytes": 24644,
+          "sha256": "665c0cf4faebd8ad9017469987cec06a1f7a35661137960ab84ff6f48db57a53"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\at2n\\intro-admission\\native-weather\\weather-both-alive\\peer-1-native-weather-final-GP0.json.gz",
+          "bytes": 24684,
+          "sha256": "6ac465c95d12945613379f1be03664a9af13fa1649a00a317a19e8dc7c14536b"
+        }
+      ]
+    }
+  },
+  "root_personally_viewed_fresh_atlas_images": 24,
+  "root_personally_viewed_same_image_scroll_images": 21,
+  "earlier_missing_rain_failure": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-camera\\manifest-bound-a878af4-F113-F175-local-missing-rain-failure-reviewed.json",
+    "bytes": 6329,
+    "sha256": "967b6ef03e22fe69c44c2b717c36d03bed2d9ec431523dbf0d4da6ae57c7cdf9"
+  },
+  "limits": [
+    "Only frozen234 F175 two distinct native scenes: Heatnix52 arena autonomous shared layer1 scroll and Turtloid6/0 first-rain five-frame atlas. Both components pass LOCAL and NET on exact3b4285e/imagecae6d347/profile41; no earlier-image credit transfer.",
+    "Original checkpoint reachability and declared hostile-contact protection are setup bypasses. Ordinary native movement earns each scene; starting HP/earned weapons off. No weather flag, atlas index/counter, boss phase/HP, clock or result writes.",
+    "Root personally reviewed all24 fresh atlas/route images plus21 already-reviewed same-image Heatnix images: both actual private owner views retain intended rain changes and bounded lower-scenery motion with stationary heroes. Generic ROI differences alone are insufficient; original rain identity and composed diagonal streaks were reviewed.",
+    "Native world delta is retained inside real SDK VBlank brackets, with actual private publication/restoration and resolved core/mod CRC. RAM, GP0, palette and screenshot observations are asynchronous; no exact same-instruction sampling claim.",
+    "Existing Heatnix broad tile/color corruption and HUD overlap remain visible and unresolved. No pixel-perfect scenery/general graphics claim. F175 qualifies continuing shared native update publication in each view.",
+    "Existing both-living weather route returns immediately after its completed five-frame endpoint; actual source materialization/inverse checks are retained. The historical F113 natural-death/survivor tail is not executed and F113 remains failed. No F120 post-death palette/fade/upload credit.",
+    "Exact loopback profile on one Windows PC only; no WAN/different-host/cross-platform claim. All prior missing-rain failure and unsuccessful setup receipts, original paired HUD harness, cards and owner files remain preserved."
+  ]
+}

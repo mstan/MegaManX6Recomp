@@ -22331,20 +22331,20 @@
       "x6": {
         "workstream": "camera",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "Native-once scroll/atlas publication",
+        "analogue": "Original Heatnix shared scroll and distinct Turtloid native five-frame rain atlas",
         "bounded_check": "Choose distinct native scrolling and atlas-animated X6 scenes; prove both eventual private views retain advancing shared updates rather than render snapshots freezing them.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -22414,9 +22414,81 @@
             "bypasses": [
               "Original checkpoint reachability6/0/CP1 only; no health, death, position, rainflag, weatherindex/counter or success writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "3b4285eca543f0a9ed57780749220a72379bbabf",
+            "build_identity": {
+              "executable_sha256": "cae6d347b5af2abc487566e01d5d06cb2103c96eb45ac2ff96f3ab547701b249",
+              "compiled_manifest_sha256": "aebfd7a54aa7cf27ad788b47b473b9fed9076819cd612a83c8afda5911014793",
+              "provenance_sha256": "4c7cee4eae4ecd4788f00ab6e5440752d129924235f2a296ecc59969539f702a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisites": "original HeatnixCP7 and TurtloidCP1 reachability; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Observe distinct actual Heatnix autonomous arena scroll and original Turtloid five-frame rain atlas, both private views and stationary heroes, on this one exact candidate.",
+            "outcome": "Both distinct shared-update families reach actual private views; root reviews intended motion/rain. Full parent synchronization/restoration/card/owned-exit gates pass for each same-image component.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-3b4285e-F175-distinct-scroll-atlas-local-netplay-reviewed.json",
+                "sha256": "83edcba42e4f8a56d93f1549fbae826b6e21b4d45b4b4b7c0b4161d8cd300cff"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F175 two distinct native scenes: Heatnix52 arena autonomous shared layer1 scroll and Turtloid6/0 first-rain five-frame atlas. Both components pass LOCAL and NET on exact3b4285e/imagecae6d347/profile41; no earlier-image credit transfer.",
+              "Original checkpoint reachability and declared hostile-contact protection are setup bypasses. Ordinary native movement earns each scene; starting HP/earned weapons off. No weather flag, atlas index/counter, boss phase/HP, clock or result writes.",
+              "Root personally reviewed all24 fresh atlas/route images plus21 already-reviewed same-image Heatnix images: both actual private owner views retain intended rain changes and bounded lower-scenery motion with stationary heroes. Generic ROI differences alone are insufficient; original rain identity and composed diagonal streaks were reviewed.",
+              "Native world delta is retained inside real SDK VBlank brackets, with actual private publication/restoration and resolved core/mod CRC. RAM, GP0, palette and screenshot observations are asynchronous; no exact same-instruction sampling claim.",
+              "Existing Heatnix broad tile/color corruption and HUD overlap remain visible and unresolved. No pixel-perfect scenery/general graphics claim. F175 qualifies continuing shared native update publication in each view.",
+              "Existing both-living weather route returns immediately after its completed five-frame endpoint; actual source materialization/inverse checks are retained. The historical F113 natural-death/survivor tail is not executed and F113 remains failed. No F120 post-death palette/fade/upload credit.",
+              "Exact loopback profile on one Windows PC only; no WAN/different-host/cross-platform claim. All prior missing-rain failure and unsuccessful setup receipts, original paired HUD harness, cards and owner files remain preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "3b4285eca543f0a9ed57780749220a72379bbabf",
+            "build_identity": {
+              "executable_sha256": "cae6d347b5af2abc487566e01d5d06cb2103c96eb45ac2ff96f3ab547701b249",
+              "compiled_manifest_sha256": "aebfd7a54aa7cf27ad788b47b473b9fed9076819cd612a83c8afda5911014793",
+              "provenance_sha256": "4c7cee4eae4ecd4788f00ab6e5440752d129924235f2a296ecc59969539f702a"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "independent",
+              "audio": "dummy muted",
+              "prerequisites": "original HeatnixCP7 and TurtloidCP1 reachability; contact protection on; starting HP/earned weapons off"
+            },
+            "action": "Observe distinct actual Heatnix autonomous arena scroll and original Turtloid five-frame rain atlas, both private views and stationary heroes, on this one exact candidate.",
+            "outcome": "Both distinct shared-update families reach actual private views; root reviews intended motion/rain. Full parent synchronization/restoration/card/owned-exit gates pass for each same-image component.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-3b4285e-F175-distinct-scroll-atlas-local-netplay-reviewed.json",
+                "sha256": "83edcba42e4f8a56d93f1549fbae826b6e21b4d45b4b4b7c0b4161d8cd300cff"
+              }
+            ],
+            "limits": [
+              "Only frozen234 F175 two distinct native scenes: Heatnix52 arena autonomous shared layer1 scroll and Turtloid6/0 first-rain five-frame atlas. Both components pass LOCAL and NET on exact3b4285e/imagecae6d347/profile41; no earlier-image credit transfer.",
+              "Original checkpoint reachability and declared hostile-contact protection are setup bypasses. Ordinary native movement earns each scene; starting HP/earned weapons off. No weather flag, atlas index/counter, boss phase/HP, clock or result writes.",
+              "Root personally reviewed all24 fresh atlas/route images plus21 already-reviewed same-image Heatnix images: both actual private owner views retain intended rain changes and bounded lower-scenery motion with stationary heroes. Generic ROI differences alone are insufficient; original rain identity and composed diagonal streaks were reviewed.",
+              "Native world delta is retained inside real SDK VBlank brackets, with actual private publication/restoration and resolved core/mod CRC. RAM, GP0, palette and screenshot observations are asynchronous; no exact same-instruction sampling claim.",
+              "Existing Heatnix broad tile/color corruption and HUD overlap remain visible and unresolved. No pixel-perfect scenery/general graphics claim. F175 qualifies continuing shared native update publication in each view.",
+              "Existing both-living weather route returns immediately after its completed five-frame endpoint; actual source materialization/inverse checks are retained. The historical F113 natural-death/survivor tail is not executed and F113 remains failed. No F120 post-death palette/fade/upload credit.",
+              "Exact loopback profile on one Windows PC only; no WAN/different-host/cross-platform claim. All prior missing-rain failure and unsuccessful setup receipts, original paired HUD harness, cards and owner files remain preserved."
+            ],
+            "bypasses": [
+              "Original checkpoint reachability and hostile-contact protection only."
+            ]
           }
         ],
-        "limitations": "V62 mandatory both-living atlas publication failed. V63 repair now has reviewed both-living LOCAL component: rain animates in both panes,16focusedtests pass. Full mode/row remains at last failure pending distinct autonomous scrolling and NETPLAY. Death setups parked after two bounded failures; no component or build credit promoted to a full comparison."
+        "limitations": "Only frozen234 F175 two distinct native scenes: Heatnix52 arena autonomous shared layer1 scroll and Turtloid6/0 first-rain five-frame atlas. Both components pass LOCAL and NET on exact3b4285e/imagecae6d347/profile41; no earlier-image credit transfer. Original checkpoint reachability and declared hostile-contact protection are setup bypasses. Ordinary native movement earns each scene; starting HP/earned weapons off. No weather flag, atlas index/counter, boss phase/HP, clock or result writes. Root personally reviewed all24 fresh atlas/route images plus21 already-reviewed same-image Heatnix images: both actual private owner views retain intended rain changes and bounded lower-scenery motion with stationary heroes. Generic ROI differences alone are insufficient; original rain identity and composed diagonal streaks were reviewed. Native world delta is retained inside real SDK VBlank brackets, with actual private publication/restoration and resolved core/mod CRC. RAM, GP0, palette and screenshot observations are asynchronous; no exact same-instruction sampling claim. Existing Heatnix broad tile/color corruption and HUD overlap remain visible and unresolved. No pixel-perfect scenery/general graphics claim. F175 qualifies continuing shared native update publication in each view. Existing both-living weather route returns immediately after its completed five-frame endpoint; actual source materialization/inverse checks are retained. The historical F113 natural-death/survivor tail is not executed and F113 remains failed. No F120 post-death palette/fade/upload credit. Exact loopback profile on one Windows PC only; no WAN/different-host/cross-platform claim. All prior missing-rain failure and unsuccessful setup receipts, original paired HUD harness, cards and owner files remain preserved."
       }
     },
     {
