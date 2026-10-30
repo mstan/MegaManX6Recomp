@@ -17997,9 +17997,57 @@
             "bypasses": [
               "Declared original CP1 source/history XY setup and hostile-contact protection; no tested outcome seeds."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+            "build_identity": {
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\both-refight-v107-final-binding-root-v2.json",
+              "binding_sha256": "9a08d6b2b1ed72fbc38a2b782e1c1779135032febc5d4872311d5ac9a3e3a7a3",
+              "image_sha256": "75b74d1c74a234cd9eebd05eee7f80d5b37823068a2cc69be7ac622684856f6c",
+              "manifest_sha256": "fe4b09d813903aaf2c1e7e7bbb6243e3b51705789099c9722e2aa1b079069a53",
+              "provenance_sha256": "bfa2a46cca1b911bfb43fb1fbcda3922074dd84510464438a7992b25d2a1aa87",
+              "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v107-both-refight-root-v1\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+              "source_heads": {
+                "game": "fde6b48d762fe24a7ee291a6cee11b64558f9887",
+                "sdk": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+                "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+                "net": "e53059306824edf4f0aec4aae5ae65151b18535f",
+                "rb": "2a03e73693acee0fb78076ea058642c931bef12e"
+              },
+              "title": "mmx6-x-zero-delay-v55",
+              "host_revision": 38
+            },
+            "settings": {
+              "doors": "both",
+              "fixture": "refight_portal_cp1",
+              "contact_protection": "on",
+              "host_profile": "mmx6.win64-clang22.loopback revision38",
+              "input_delay": 3,
+              "audio": "dummy muted"
+            },
+            "action": "Actual guest Select90 native withdrawal to ABSENT; original primary portal admission/CP2 initializer, native floor448/control, absence and guest inventory preserved.",
+            "outcome": "Absent component passes8native/15NETparent,4CRCwindows/27samples,2ownedexit0/cards unchanged/10root-viewed NETimages. Same exact LOCAL passed. Actual fallen exclusion remains missing; comparison and mode unverified.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-fde6b48-F123-absent-local-netplay-component-reviewed.json",
+                "sha256": "beaee10040bdda9944b1235a97e52052802920a8e349f1c390f15ee1f1cae318"
+              }
+            ],
+            "limits": [
+              "Only the explicitly selected native participation component is observed; all three LOCAL+NET components required before comparison admission.",
+              "Default-off originalCP1 and once source1852/1241 XY/history prerequisite bypasses reachability; contact protection is on for living/absent and off for actual fallen hazard. Native original admission/loader/landing/control are earned.",
+              "Original source geometry is evaluated against coherent body publications; portal/PLAY/captures are asynchronous, no same-instruction two-peer claim.",
+              "Same-machine negotiated profile37 delay3 NET or LOCAL split; no other portals, boss defeat/return, human, WAN or native3330 credit.",
+              "Observed actual Select withdrawal, original native ABSENT completion and preserved personal guestHP/ammo across actual refight CP2 loading. No FALLEN inference."
+            ],
+            "bypasses": [
+              "Declared original CP1 source/history XY setup and hostile-contact protection; no tested outcome seeded."
+            ]
           }
         ],
-        "limitations": "Exact fde6b48/75b74d1c/profile38 living Both wait/abort/admission/load/feet/control passes LOCAL+NET,21root-viewed livingimages/3nativeexit0/cards unchanged/4CRCwindows16samples. Actual Select/nativeABSENT fallback LOCAL also passes,5extra reviewedimages. Actual absent NET and fallen LOCAL+NET still required. Sourcefix gates only innerEC8E8; all failed/rejected candidate and observer prefixes preserved."
+        "limitations": "Exact fde6b48/75b74d1c/profile38 living Both wait/abort/admission/load/feet/control and actual Select/nativeABSENT fallback both pass LOCAL+NET.36 reviewed images/6nativeexit0/cards unchanged,8 finalCRCwindows living16/absent27samples. FALLEN LOCAL+NET still unverified: first supposed hazard-wall setup produced no damage, actual primary stays32HP/x1925; no death inferred from collisioncode39. Preserve rejected full-callback candidate and all failed observer prefixes. Current innerEC8E8 gate preserves native outer animation/support. Defer further unsupported hub death attempts."
       }
     },
     {
