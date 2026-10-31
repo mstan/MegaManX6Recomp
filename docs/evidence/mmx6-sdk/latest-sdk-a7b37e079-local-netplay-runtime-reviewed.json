@@ -1,0 +1,262 @@
+{
+  "schema": 1,
+  "kind": "owner-requested-latest-SDK-local-integration",
+  "status": "qualified_for_continued_local_X6_burndown",
+  "reviewed_utc": "2026-10-31T05:44:30.475185+00:00",
+  "scope": "SDK update only; no new comparison closures or native3330 audit",
+  "counts_before_after": {
+    "passed": 147,
+    "failed": 2,
+    "unverified": 85
+  },
+  "binding": {
+    "image_sha256": "70594cbb098cd539d90e406badf6c967b4f3915ba629dbdf51a3f6abafd3adbd",
+    "manifest_sha256": "04420c48364a2b304dc6bebc0912f717c16f24d660d052c20e1a863370c2dbff",
+    "provenance_sha256": "d56da02278cf3df85d987e7a1840b840f9dbc6e84db86a5c1d9cff53bb205c1e",
+    "game": "9165501",
+    "SDK": "3be00a63e",
+    "upstreamSDK": "a7b37e079",
+    "UI": "fe667e2",
+    "RB": "b29bdde",
+    "net": "e530593",
+    "title": 69,
+    "profile": 52,
+    "schema": 18,
+    "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a"
+  },
+  "upstream_sdk_full": "a7b37e079e8c6e98e04cd1cd42ba559e95911ea7",
+  "pinned_sdk_full": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+  "pinned_ui_full": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+  "SDK_note": "Local merge includes latest upstream and retains57055X6 startup/profile/diagnostics/input/pair-resize/readback services. Current launcher CAPI and upstreamRBcapture dependency are required. All local only.",
+  "implementation_changes": [
+    "Regenerated game34shards and OpenBIOS for ABI35 and source-local nativeCPUspans",
+    "Updated explicit X6 title69/profile52/execution19a97253 for same-image loopback",
+    "Fixed declared build-manifest dependency on generated Windows resource object libraries",
+    "Preserved X6 LAN resume, controller capture, hidden TCP and feature-checkbox settings behavior in launcher merge"
+  ],
+  "build": {
+    "session": 38974,
+    "exit_code": 0,
+    "focused_tests_passed": 14,
+    "readback_lifecycle_source_checks_passed": 14,
+    "manifest_source_checks_passed": 5,
+    "compiled_manifest_object_dependency_and_relocation_regression": "passed"
+  },
+  "local": {
+    "complete_checks": [
+      "p1_jump",
+      "p2_movement",
+      "input_isolation",
+      "healthy_heroes",
+      "native1x_actual_video_info",
+      "current_build_async_save_and_load_after_actual_P2_movement_with_positions_and_HP_restored"
+    ],
+    "reports": [
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/ab-A2/baseline/qualification.json",
+        "bytes": 18540,
+        "sha256": "aa2081323c99f5b46a3ace1110b5be2732ae1505e9854e48faf665a028d876c5"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/ab-B1r/baseline/qualification.json",
+        "bytes": 18920,
+        "sha256": "a075a5d8dea074ab01af62c09b63dc4c7c8a694e96b953aa93f167c424933640"
+      }
+    ],
+    "native_exit_codes": [
+      0,
+      0
+    ],
+    "private_cards": "fresh isolated profiles; existing_private_cards_unchanged true in both reports; owner cards not used",
+    "default_4x_case": "ab-B1 completed all six baseline controls/health gates but rejected for matched timing due actual4x; failed raw outcome preserved"
+  },
+  "netplay": {
+    "root_checks": {
+      "declared_build_manifest_bound_to_staged_images": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "private_effect_pause_automated_checks": true
+    },
+    "private_pause_checks": {
+      "p1_native_menu_freezes_private_state_under_original_p2_input": true,
+      "native_resume_advances_private_effects": true,
+      "genuine_post_resume_native_dash_and_finite_retirement": true,
+      "personal_resources_preserved": true,
+      "p1_independent": true,
+      "composed_captures_completed": true,
+      "resolved_crc_comparison_completed": true
+    },
+    "resolved_crc_windows": 4,
+    "matching_core_mod_samples": 30,
+    "selected_profile": {
+      "profile": "mmx6.win64-clang22.loopback",
+      "revision": 52,
+      "selected_sha256": "1a566e7ac5c8a02c11f8eef3fdd4593e80052ada1810b6cf3a8aa84cf536d858",
+      "peers": [
+        {
+          "capabilities": {
+            "actual_image_sha256": "70594cbb098cd539d90e406badf6c967b4f3915ba629dbdf51a3f6abafd3adbd",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 52,
+            "selected_sha256": "1a566e7ac5c8a02c11f8eef3fdd4593e80052ada1810b6cf3a8aa84cf536d858",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        },
+        {
+          "capabilities": {
+            "actual_image_sha256": "70594cbb098cd539d90e406badf6c967b4f3915ba629dbdf51a3f6abafd3adbd",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 52,
+            "selected_sha256": "1a566e7ac5c8a02c11f8eef3fdd4593e80052ada1810b6cf3a8aa84cf536d858",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        }
+      ]
+    },
+    "native_exit_codes": [
+      0,
+      0
+    ],
+    "shutdown": [
+      "graceful_owned_debug",
+      "graceful_owned_debug"
+    ],
+    "cards": "fresh isolated profiles with no source card; private card file receipts retained per peer",
+    "report": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/qualification.json",
+      "bytes": 5400189,
+      "sha256": "9861e9e58038c1daa23df485f7f5e6fdd91a525a131d32897b264cdd1973150a"
+    }
+  },
+  "performance": {
+    "workload": "One brief matched stationary intro pair on this PC, same native1x/OpenGL/window960x720/affinity5/interpreted overlays; three windows per build",
+    "baseline_cpu_ms_per_update": 9.987408424908425,
+    "candidate_cpu_ms_per_update": 7.509242144177449,
+    "observed_cpu_reduction_percent": 24.812906164430725,
+    "wall_pacing": "both approximately60fps",
+    "interpretation": "Observed lower CPU cost in this brief pair. BaselinevariationA1r is retained. Not a broad performance or FPS claim.",
+    "raw_summary": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/runtime-ab-summary.json",
+      "bytes": 9805,
+      "sha256": "ae2b5af6a907445dab597fa3d058be83bac981be91feb03a3c57e606f8d701cf"
+    },
+    "matched_spec": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/ab-spec-v3.json",
+      "bytes": 1610,
+      "sha256": "11e777ca0ffdad5ecadc48c81c5198079b7224caf6c5c10b37ae84afe0a9df7e"
+    },
+    "capacity_and_host_telemetry": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/ab-capacity-v3.json",
+      "bytes": 1861,
+      "sha256": "0bdf6d5722e2211a81d298b3c8aa351ea90a7c9cb5c1cafc6f7fae196c5f09e1"
+    },
+    "observer": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/measure-existing-baseline.py",
+      "bytes": 5862,
+      "sha256": "1e1dbeb5e5f473d659358485aea28f781fa777d78f2b28899fad1ac3579dfac5"
+    }
+  },
+  "visual_review": {
+    "status": "personally_reviewed",
+    "findings": "Native X/Zero art, both HUDs, original menu, dash and resumed scenes are coherent in both peers and matched local images.",
+    "images": [
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/ab-A2/baseline/timing-present.png",
+        "bytes": 2074543,
+        "sha256": "2f10572800d9d3e6b3310e4d441cf5b5c7639a21be3b14a5525f2a93fa5dd0b0"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/ab-B1r/baseline/timing-present.png",
+        "bytes": 2074543,
+        "sha256": "fff623cceec6b474041f0b3ef6a6e15b4e95e10ff8393217940d22444f7094d4"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/ab-B1/baseline/intro.png",
+        "bytes": 230723,
+        "sha256": "2c6b87f1227cf7d7bf9466a2160ebb3ea66c01dbfacff9132d89e6c76eb234dd"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/private-pause/peer-0-p2-native-dash-present.png",
+        "bytes": 2074543,
+        "sha256": "0db1c5acb5e029f80a588c859d96b5136dc1a422ff838f40de44280e28f7d18b"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/private-pause/peer-0-p1-menu-present.png",
+        "bytes": 2074543,
+        "sha256": "5421a597f40f637bf6b39838bf0cc6046e54c4f579a7fa863fc346ba561d5c77"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/private-pause/peer-0-resumed-present.png",
+        "bytes": 2074543,
+        "sha256": "d9628dbe2f7e8c8d4c0def713172b9a0dcb8f3d42e1a797f5c1269e94acb3b67"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/private-pause/peer-1-p2-native-dash-present.png",
+        "bytes": 2074543,
+        "sha256": "a8dd587601a000f6eee70bf57afce3c432bbf4e292d46e7538f04c92800f9ad9"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/private-pause/peer-1-p1-menu-present.png",
+        "bytes": 2074543,
+        "sha256": "5421a597f40f637bf6b39838bf0cc6046e54c4f579a7fa863fc346ba561d5c77"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/private-pause/peer-1-resumed-present.png",
+        "bytes": 2074543,
+        "sha256": "d9628dbe2f7e8c8d4c0def713172b9a0dcb8f3d42e1a797f5c1269e94acb3b67"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/peer-0/logs/intro-present.png",
+        "bytes": 2074543,
+        "sha256": "4c810259ac9018e2f83c2786625b7b81e6ac8dad498a8eecec7107f11b3210a8"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/net-private-pause/peer-1/logs/intro-present.png",
+        "bytes": 2074543,
+        "sha256": "4c810259ac9018e2f83c2786625b7b81e6ac8dad498a8eecec7107f11b3210a8"
+      }
+    ]
+  },
+  "preservation": {
+    "canonical_link_history": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-sdk-latest-v121/canonical-links-before.json",
+      "bytes": 419,
+      "sha256": "507bd6d18f6bab1373826fd54d329d02c2fd7f866b45bb04cd57371a187b5f83"
+    },
+    "old_dependency_worktrees": "sdk-bridge,ui-modern,sdk-f39-gl-readback-v90,ui-lan-resume-v54 retained untouched",
+    "draft_F37": "3172b18 remains separate and unintegrated",
+    "all_accepted_failed_evidence_and_original_uncommitted_HUD_harness": "preserved",
+    "network_writes": "No push, PR, publication or remote tracker sync"
+  },
+  "limits": [
+    "Local and same-machine delay netplay only; no cross-host/OS/physical-controller/full-campaign claim",
+    "No blanket requalification or transfer of234comparison credit to this binary",
+    "Preserve initial old-parser1x refusal and unmatched4x timing failure",
+    "Ongoing runtime/build/worktree/profile evidence retained under existing storage index; cleanup at task completion"
+  ]
+}
