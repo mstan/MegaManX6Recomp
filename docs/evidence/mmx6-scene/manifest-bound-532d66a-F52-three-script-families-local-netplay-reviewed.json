@@ -1,0 +1,875 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F52"
+  ],
+  "frozen_row_sha256": "feab4ddb768486e52d32708cc047c71a896ed11ec38e713111c809114bf07c91",
+  "candidate": "532d66a41e7c95ba2be9867f8861d141ec39d4e8",
+  "implementation_commit": "26527bea85969d8e97593c2bc536762b04358ad1",
+  "integrated_commits": [
+    "99183ba",
+    "6895c63"
+  ],
+  "binding": {
+    "image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+    "manifest_sha256": "4fb1a60ab2f369bdc308ca64d59f87a688ee0c5c40e5a60a0119778ae1fc9c4d",
+    "provenance_sha256": "d71ea961860413a008ad60cc43033bf3914a32baa8771f46a6503d8e1f216734"
+  },
+  "profile": 48,
+  "title": 65,
+  "snapshot": 17,
+  "semantic_contract_sha256": "ee08053f7125747ba8ee8819748e278b2536060de8b8d3ee5646e79fcdd1d57b",
+  "implementation": "Only original capsule interaction51924 selects existing in-place scene_phase0 after native admission. Original owner/input/conversation/grant/release remain native, without outgoing/rejoin commands for a healthy passenger.",
+  "result": "passed",
+  "full_comparison_status": "passed",
+  "capsule_reused": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-532d66a-F52-native-capsule-visibility-fix-local-netplay-reviewed.json",
+    "sha256": "bb879aea2632d3465edddcb7b75edced1b5dfce52b1e3dafcd6316194b498b4e"
+  },
+  "modes": {
+    "local": {
+      "intro": {
+        "result": "passed",
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52il\\qualification.json",
+          "sha256": "9c0024545088abf5ce252856121322c845a3becfebd44a5f6372bec3e71773e1"
+        },
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52il\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "0bdb58cd8b050649e8932151edd8739a49bc1167f327fcbfacbaf3fe328f5bfb"
+        },
+        "parent_checks": {
+          "exact_image_manifest_declared_sources_originals": true,
+          "native_resource_and_window_observations_complete": true,
+          "default_recording_taint_retained_and_replay_refused": true,
+          "owned_cleanup_private_cards": true
+        },
+        "native_checks": {
+          "agreed_checkpoint_complete": true,
+          "original_leader_selected": true,
+          "actual_native_contact": true,
+          "original_boss_fullHP_released": true,
+          "passenger_landed_both_healthy": true,
+          "independent_native_controls": true,
+          "no_repeated_initializer": true
+        },
+        "released_witnesses": [
+          {
+            "peer": 0,
+            "row": 451,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 402492416,
+                "y_raw": 25886720,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 401968128,
+                "y_raw": 25821184,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ]
+          }
+        ],
+        "owned_cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "active_cards_unchanged": true
+      },
+      "alternate_route": {
+        "result": "passed",
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pl\\qualification.json",
+          "sha256": "4ddd3ec1935a4afcc35fb2f3ceaa2f6af0b7b84dce128d209f27a7f1fb54bf00"
+        },
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pl\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "26406a5ba976d895e9606c1eff433873aab22b04d67942e86356c75ab8e0c943"
+        },
+        "parent_checks": {
+          "exact_image_manifest_declared_sources_originals": true,
+          "native_resource_and_window_observations_complete": true,
+          "default_recording_taint_retained_and_replay_refused": true,
+          "owned_cleanup_private_cards": true
+        },
+        "native_checks": {
+          "agreed_native_CP2_and_one_declared_pose": true,
+          "source_P1_geometric_miss": true,
+          "actual_P2_native_portal_admission_every_peer": true,
+          "native_major8_9_destination_every_peer": true,
+          "finite_both_living_native_arrivals": true,
+          "source_full_feet_after_ordinary_guest_Left": true,
+          "actual_separate_destination_controls": true,
+          "actual_captures_retained": true
+        },
+        "released_witnesses": [
+          {
+            "peer": 0,
+            "row": 300,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 4554752,
+                "y_raw": 23789568,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 4947968,
+                "y_raw": 23724032,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ]
+          }
+        ],
+        "owned_cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "active_cards_unchanged": true
+      },
+      "capsule": {
+        "result": "passed",
+        "receipt": {
+          "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-532d66a-F52-native-capsule-visibility-fix-local-netplay-reviewed.json",
+          "sha256": "bb879aea2632d3465edddcb7b75edced1b5dfce52b1e3dafcd6316194b498b4e"
+        },
+        "qualified_mode": "local"
+      }
+    },
+    "netplay": {
+      "intro": {
+        "result": "passed",
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52in\\qualification.json",
+          "sha256": "5062e81de163844ce4e9fe6147749fac05c512759cc38770222639d88acf0bcf"
+        },
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52in\\intro-admission\\observations.json",
+          "sha256": "0159662b0d3efbf0005b669f975aa8bc1d31141eab2d14eb827c227f69e8182a"
+        },
+        "parent_checks": {
+          "jump_audio_original_source_bound": true,
+          "jump_audio_both_peers_completed": true,
+          "declared_build_manifest_bound_to_staged_images": true,
+          "jump_audio_declared_sources_match": true,
+          "host_profile_settled_before_guest": true,
+          "p2_right_reaches_both_peers": true,
+          "p2_right_preserves_p1_x": true,
+          "p1_jump_reaches_both_peers": true,
+          "p1_jump_preserves_p2_y": true,
+          "both_alive_healthy": true,
+          "mailbox_unused": true,
+          "default_resident_loader_committed": true,
+          "jump_audio_resolved_crc_after_case": true,
+          "jump_audio_final_private_cards_unchanged": true,
+          "jump_audio_owned_pair_cleanup": true
+        },
+        "native_checks": {
+          "agreed_checkpoint_complete": true,
+          "original_leader_selected": true,
+          "actual_native_contact": true,
+          "original_boss_fullHP_released": true,
+          "passenger_landed_both_healthy": true,
+          "independent_native_controls": true,
+          "no_repeated_initializer": true
+        },
+        "released_witnesses": [
+          {
+            "peer": 0,
+            "row": 285,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 400919552,
+                "y_raw": 25886720,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 401312768,
+                "y_raw": 25821184,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ]
+          },
+          {
+            "peer": 1,
+            "row": 285,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 400919552,
+                "y_raw": 25886720,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 401312768,
+                "y_raw": 25821184,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ]
+          }
+        ],
+        "owned_cleanup": [
+          {
+            "seat": 0,
+            "shutdown": "graceful_owned_debug",
+            "exit_code": 0
+          },
+          {
+            "seat": 1,
+            "shutdown": "graceful_owned_debug",
+            "exit_code": 0
+          }
+        ],
+        "active_cards_unchanged": true,
+        "profile_startup": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 48,
+          "selected_sha256": "de9f2f07cefd6c2caac19a572bb199a429a85fb6933adfdc3a9650efb5fb5709",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 48,
+                "selected_sha256": "de9f2f07cefd6c2caac19a572bb199a429a85fb6933adfdc3a9650efb5fb5709",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 48,
+                "selected_sha256": "de9f2f07cefd6c2caac19a572bb199a429a85fb6933adfdc3a9650efb5fb5709",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "profile_final": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 48,
+          "selected_sha256": "de9f2f07cefd6c2caac19a572bb199a429a85fb6933adfdc3a9650efb5fb5709",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 48,
+                "selected_sha256": "de9f2f07cefd6c2caac19a572bb199a429a85fb6933adfdc3a9650efb5fb5709",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 48,
+                "selected_sha256": "de9f2f07cefd6c2caac19a572bb199a429a85fb6933adfdc3a9650efb5fb5709",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "resolved_crc_windows": 4,
+        "resolved_crc_samples": 29
+      },
+      "alternate_route": {
+        "result": "passed",
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn_sync\\qualification.json",
+          "sha256": "30aba9fe3f5956ee794eac96596618125ceada5014d8b27d21c8ce192cf7324a"
+        },
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn_sync\\intro-admission\\observations.json",
+          "sha256": "fd6baeca1e09d4f5ca8440c6b0c1c5a7298b9494d6ca63105b7dd7b84682a82b"
+        },
+        "parent_checks": {
+          "jump_audio_original_source_bound": true,
+          "jump_audio_both_peers_completed": true,
+          "declared_build_manifest_bound_to_staged_images": true,
+          "jump_audio_declared_sources_match": true,
+          "host_profile_settled_before_guest": true,
+          "p2_right_reaches_both_peers": true,
+          "p2_right_preserves_p1_x": true,
+          "p1_jump_reaches_both_peers": true,
+          "p1_jump_preserves_p2_y": true,
+          "both_alive_healthy": true,
+          "mailbox_unused": true,
+          "default_resident_loader_committed": true,
+          "jump_audio_resolved_crc_after_case": true,
+          "jump_audio_final_private_cards_unchanged": true,
+          "jump_audio_owned_pair_cleanup": true
+        },
+        "native_checks": {
+          "agreed_native_CP2_and_one_declared_pose": true,
+          "source_P1_geometric_miss": true,
+          "actual_P2_native_portal_admission_every_peer": true,
+          "native_major8_9_destination_every_peer": true,
+          "finite_both_living_native_arrivals": true,
+          "actual_captures_retained": true
+        },
+        "released_witnesses": [
+          {
+            "peer": 0,
+            "row": 159,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 5177344,
+                "y_raw": 23789568,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 6750208,
+                "y_raw": 23724032,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ]
+          },
+          {
+            "peer": 1,
+            "row": 159,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 5177344,
+                "y_raw": 23789568,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 6750208,
+                "y_raw": 23724032,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ]
+          }
+        ],
+        "owned_cleanup": [
+          {
+            "seat": 0,
+            "shutdown": "graceful_owned_debug",
+            "exit_code": 0
+          },
+          {
+            "seat": 1,
+            "shutdown": "graceful_owned_debug",
+            "exit_code": 0
+          }
+        ],
+        "active_cards_unchanged": true,
+        "profile_startup": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 48,
+          "selected_sha256": "e969449b34f4b640965400c0a3f5a6e3a3140987877999ccc2c47a759532cfa7",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 48,
+                "selected_sha256": "e969449b34f4b640965400c0a3f5a6e3a3140987877999ccc2c47a759532cfa7",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 48,
+                "selected_sha256": "e969449b34f4b640965400c0a3f5a6e3a3140987877999ccc2c47a759532cfa7",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "profile_final": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 48,
+          "selected_sha256": "e969449b34f4b640965400c0a3f5a6e3a3140987877999ccc2c47a759532cfa7",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 48,
+                "selected_sha256": "e969449b34f4b640965400c0a3f5a6e3a3140987877999ccc2c47a759532cfa7",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 48,
+                "selected_sha256": "e969449b34f4b640965400c0a3f5a6e3a3140987877999ccc2c47a759532cfa7",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "resolved_crc_windows": 4,
+        "resolved_crc_samples": 30,
+        "retained_controls": {
+          "qualification": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn\\qualification.json",
+            "sha256": "8834002cdcf54f7d9a81848314d8781d78c1f2637ae41b963acbd3aa79b7f643"
+          },
+          "observations": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn\\intro-admission\\observations.json",
+            "sha256": "61e88f9fff92bd8f2f7e30f04829c6f80de1ea7c84892b0647015caa50a0a527"
+          },
+          "guest": {
+            "seat": 1,
+            "before": 176,
+            "movement": 182,
+            "settled": 185
+          },
+          "primary": {
+            "before": 186,
+            "accepted_rows": [
+              188,
+              189,
+              190
+            ]
+          },
+          "original_run_status": "failed",
+          "original_error": "original native idle after owned movement timed out",
+          "no_failed_parent_credit": true
+        }
+      },
+      "capsule": {
+        "result": "passed",
+        "receipt": {
+          "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-532d66a-F52-native-capsule-visibility-fix-local-netplay-reviewed.json",
+          "sha256": "bb879aea2632d3465edddcb7b75edced1b5dfce52b1e3dafcd6316194b498b4e"
+        },
+        "qualified_mode": "netplay"
+      }
+    }
+  },
+  "root_reviewed_composed_images": [
+    {
+      "peer": 0,
+      "label": "safe-native-CP2",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52il\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+      "sha256": "7de1f32e84e4ce5cf452294cae01b9c420f5f2be1b9b0df409ae21125a88f5f8"
+    },
+    {
+      "peer": 0,
+      "label": "original-door-scene-begin",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52il\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+      "sha256": "cd980637565673f5790aa1348544c194c83808a2d115d542cdc77f1a04e08b26"
+    },
+    {
+      "peer": 0,
+      "label": "native-boss-both-controls-restored",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52il\\ammo-hud\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+      "sha256": "6598f8cf0a93bbf65326199c740d388c50b6c2f6eca09616e5906046b75f63d5"
+    },
+    {
+      "peer": 0,
+      "label": "source-before-guest-portal",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pl\\ammo-hud\\intro-admission\\peer-0-source-before-guest-portal.png",
+      "sha256": "a62522aab9560a4813c2f2b1b7b881faa91151bf4df7cf35f8c7f3661a651b7c"
+    },
+    {
+      "peer": 0,
+      "label": "original-destination-native-arrivals",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pl\\ammo-hud\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+      "sha256": "f6f9813040088165c72f17fc17a336f47c69339b65e165cea43e0969d4f63052"
+    },
+    {
+      "peer": 0,
+      "label": "destination-independent-controls",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pl\\ammo-hud\\intro-admission\\peer-0-destination-independent-controls.png",
+      "sha256": "fc4678002ca7a0cd22492531b97aafbcf34f7b7d84ae4a52d4afe7077c589a10"
+    },
+    {
+      "peer": 0,
+      "label": "safe-native-CP2",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52in\\intro-admission\\peer-0-safe-native-CP2.png",
+      "sha256": "7de1f32e84e4ce5cf452294cae01b9c420f5f2be1b9b0df409ae21125a88f5f8"
+    },
+    {
+      "peer": 1,
+      "label": "safe-native-CP2",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52in\\intro-admission\\peer-1-safe-native-CP2.png",
+      "sha256": "9799b547b9ff03bd27b69f9bfd5158fc37a01e5450796db44908f385659a2e09"
+    },
+    {
+      "peer": 0,
+      "label": "original-door-scene-begin",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52in\\intro-admission\\peer-0-original-door-scene-begin.png",
+      "sha256": "b5aeb6243abb60301dc773ba7029ddffd1a11a447d3065065a1a8cb6a448f6b8"
+    },
+    {
+      "peer": 1,
+      "label": "original-door-scene-begin",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52in\\intro-admission\\peer-1-original-door-scene-begin.png",
+      "sha256": "cd980637565673f5790aa1348544c194c83808a2d115d542cdc77f1a04e08b26"
+    },
+    {
+      "peer": 0,
+      "label": "native-boss-both-controls-restored",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52in\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+      "sha256": "d11f9d5bd37eb7ac52df8d0cf2355cdf02add931d3af3f4936ff2728a2c866d7"
+    },
+    {
+      "peer": 1,
+      "label": "native-boss-both-controls-restored",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52in\\intro-admission\\peer-1-native-boss-both-controls-restored.png",
+      "sha256": "1877c299c6ce801fc5b58c19bf3d268efd592e848eaac4c381871207b602fe26"
+    },
+    {
+      "peer": 0,
+      "label": "source-before-guest-portal",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn_sync\\intro-admission\\peer-0-source-before-guest-portal.png",
+      "sha256": "095883280d8e4ef7b0b8d4b830ed41b1adeb816b34594dd81d2eb762503568e1"
+    },
+    {
+      "peer": 1,
+      "label": "source-before-guest-portal",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn_sync\\intro-admission\\peer-1-source-before-guest-portal.png",
+      "sha256": "4dd4a29dbee25f88bf6bf6bc00f3ea1f7d5cd1041ce32ce984bc28ed5f8a9697"
+    },
+    {
+      "peer": 0,
+      "label": "original-destination-native-arrivals",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn_sync\\intro-admission\\peer-0-original-destination-native-arrivals.png",
+      "sha256": "6b2ccf8e793ecbf9ca5ea5e2c3b2708580f84ff6a3dedd2c34345dd337dbc7e0"
+    },
+    {
+      "peer": 1,
+      "label": "original-destination-native-arrivals",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn_sync\\intro-admission\\peer-1-original-destination-native-arrivals.png",
+      "sha256": "26be4abf57a46efaf3a747ecf108405ddcd67d5396ac8472cee742b90861ea26"
+    },
+    {
+      "peer": 0,
+      "label": "destination-independent-controls",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn_sync\\intro-admission\\peer-0-destination-independent-controls.png",
+      "sha256": "955a775a84238d033ce5305ede291bd70afcd1812d5fd62e8d409b878112116a"
+    },
+    {
+      "peer": 1,
+      "label": "destination-independent-controls",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\f52pn_sync\\intro-admission\\peer-1-destination-independent-controls.png",
+      "sha256": "895c230e72242c6972438d188346f58ba9a21ca46dda95c3f94c3266475511cb"
+    }
+  ],
+  "limits": [
+    "Only frozen234 F52 native intro, DrLight capsule and alternate-route controller retention/release; no native3330 audit or inverse-roster/art-family/vehicle qualification.",
+    "Intro uses original CP2 prerequisite, unified views and normal native passenger transport; no claim of uninterrupted full-body visibility during an intentional original beam. Both heroes return visible, living and controlled.",
+    "Capsule reuses reviewed exact532d66a/3b49 local+net evidence without rerunning it. Route uses declared originalCP2 plus once source/terrain-guarded position setup and contact protection; actual portal/script/loader/release are native.",
+    "Failed f52pn remains failed: both native arrivals and independent Left inputs occurred, then X boarded the nearby original RideArmor (action18,D5FF). Its extra on-foot-idle/full-foot gate expired, so that run supplies behavior witnesses only and does not supply final synchronization.",
+    "Same-image f52pn_sync supplies original route arrival and final resolved CRC/profile/card/cleanup gates; its legacy destination-independent-controls capture label does not claim another control test. Controls are retained from f52pn rows186..189 and its guest controls entry. No F165 admission or full-foot/mounted-control claim.",
+    "All snapshots/RAM/captures are asynchronous. Native recording stays explicitly fixture-tainted and strict ordinary replay is refused. Native cards/settings/failed evidence and HUD harness are preserved."
+  ],
+  "new_reviewed_image_count": 18
+}
