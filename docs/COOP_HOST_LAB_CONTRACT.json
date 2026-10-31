@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
+  "status": "development-candidate-only; latest SDK a7b37e079 plus retained X6 native co-op services requires fresh exact-image qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 50,
+  "revision": 52,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -18,7 +18,7 @@
   },
   "execution": {
     "backend": "ENHANCED",
-    "identity": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+    "identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
     "cpu_architecture": "x64",
     "required_observed_features": "0x7f",
     "fp_contract": 2,
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v67",
+    "title_compatibility": "mmx6-x-zero-delay-v69",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
