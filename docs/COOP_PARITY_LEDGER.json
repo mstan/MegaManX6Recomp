@@ -21576,8 +21576,8 @@
       "frozen_row_sha256": "4204909f3f82a7a9e86bbe34e026cea4c1faf90086fb0b87153970cd235c65fc",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Elective paired X6 story staging unspecified",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Original Alia/Gate/Zero scene eligibility; native Zero-return component",
         "bounded_check": "Inventory original Alia/Gate/Zero scene identities and eligibility; define per-scene paired staging without changing native story prerequisites or claiming generic dialogue coverage.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
@@ -21593,8 +21593,92 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "65841a2b3dc35f3c7655bdd38ac9917cc6088a9a",
+            "build_identity": {
+              "game_source_commit": "65841a2b3dc35f3c7655bdd38ac9917cc6088a9a",
+              "image_sha256": "f9859b44271a9d85142892e38b92ddded2e149147d5a50af5db7a277ff55f7b1",
+              "declared_build_manifest_sha256": "88af7166aee79bb9036c640ca67c771ad6a7fa494b593c0fe9288de42080e9a5",
+              "title": 72,
+              "profile": 55,
+              "snapshot": 19,
+              "SDK": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "host": "PC Windows",
+              "backend": "ENHANCED GL-HLE",
+              "declared_manifest_sha256": "88af7166aee79bb9036c640ca67c771ad6a7fa494b593c0fe9288de42080e9a5"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "setup": "Existing alternate_boss_cp1 original20/1CP1; contact protection ON, starting HP OFF/OFF, earned weapons OFF; fresh private blank cards",
+              "audio": "SDL dummy muted"
+            },
+            "action": "One agreed original checkpoint chord, actual original boss dialogue and initialized NightmareZero0x35 combat via native Zero Square/X Triangle. Follow native defeat into original Zero-return story and report/save frontend; retain current-build continuation snapshot.",
+            "outcome": "LOCAL component observed, not full F151: actual0x35(decimal53) introHP0 becomes initialized48HP/state1, then native attacks48->39->20->0 reach original deathstate2/action1/phase0. Both living X32/Zero28 at defeat; original fullscreen X/Zero return artwork/dialogue transitions live PLAY10->19->20 and nativeREPORT12 credits one defeat/damage4. Save frontend says Save canceled; private cards remain unchanged. Slot0 save completes generation1/last_ok1. Second native attempt requests that exact snapshot during cold openingFMV, stays generation0/pending1/waitmod_snapshot for20s and never reaches load-ready. Both owned natives80564/78936 and leases exit0, input clears/quit acknowledged. Root personally reviewed combat, original return art, report and terminal save screen.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\preparation.json",
+                "sha256": "e18a31d334cbe60722a7eab3754e2ead94c2d4dd265b97125e9a5cfed668b53b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\native-job.json",
+                "sha256": "e38f21c1c1eedac5b54e33e7b2c1b18fd38670f086fe06cc687f1b29b5e7c8ca"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\mods\\state.toml",
+                "sha256": "1bb0d0df3ee1245753bb879c8b0f0259a7d62912f25970809a68bbf48244c041"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\control-observations.jsonl",
+                "sha256": "9b151ee0f3702eae3ea9e83ede6473e64bfddab04eafde2f53e8603cf870406f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\control-observations-attempt2.jsonl",
+                "sha256": "df5e4882134285dc21137f24a7a2e5fa6bea91374223193bdc60ffe668de7617"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\native-combat-1.png",
+                "sha256": "1ab1c750a799b7fa25fe4b8da20c93ac893750c551dd59ccbe18121362e9db47"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\native-defeat-scene.png",
+                "sha256": "5f021f0ce9e315cd730775ae6fd1a411b9ee7b41e8be9d8d9c72b4591910ffc3"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\zero-return-frontend.png",
+                "sha256": "575174bf7bd5c9ceee0ad6707fa6e62a92506ac1ebb3374e5e1244e89d321775"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\native-terminal-before-quit.png",
+                "sha256": "7db7a990010261b197970f19d14d566c8cc3a4b0a1b1c77453cf30e417287512"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\attempt2-typed-load-frontend.png",
+                "sha256": "0ceafa70a7cd7f468bfcbdfdeba15af5dd2f8856c5107c088f52cf0c0cd52bf9"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F151-c124-zero-return-local-1\\saves\\openbios\\state_80054AD8_mods_cf2b1afad7fcd972295ef3fbac9e81a02461a238e190eb80a2f5f1c42df25f14_slot00.pst",
+                "sha256": "854268a225a3e318eeb09b56ae4c27fd8b9f345a057b43ce203b4e8c0ceabd78"
+              }
+            ],
+            "limits": [
+              "Native Zero eligibility/selection still unverified; observed return story/report does not substitute for native unlock readback or selection. Alia/Gate identities/eligibility and per-scene elective paired staging remain incomplete. Both LOCAL and NET mode statuses stay unverified; no aggregate admission.",
+              "Actual original0x35 is decimal53; root initial assumption of hex0x53 was corrected before combat credit. IntroHP0 alone was not counted as defeat.",
+              "Published co-op diagnostics freeze during the original fullscreen story; live PLAY and composed native artwork establish those transitions, without treating stale body diagnostics as current.",
+              "Attempt1 stops574.99s after ready,25.02s before ten-minute limit. Attempt2 is frontend-only exactsnapshot continuation; no chord/combat/story replay and no completed load. Two native attempts spent; no third retry, source/observer repair or budget reset.",
+              "The cold-load wait is a retained readiness failure, not evidence of a gameplay regression or qualified cold-boot snapshot behavior. Existing source/setup limits remain spent.",
+              "Native-card persistence, ordinary default recording/replay, NET/rollback, cross-host/build and performance are not qualified. Declared LAB prerequisite causes ordinary recording refusal, retained without claim."
+            ],
+            "bypasses": [
+              "Original checkpoint entry bypasses preceding alternate-route traversal; protection is a declared prerequisite. No authored card, earned equipment, HP, story, unlock, defeat or scene result writes.",
+              "Current-build slot0 snapshot preserves an actually completed fight/story for continuation; its save passed but the attempted cold load did not complete. Native Save was canceled and cards were not modified."
+            ]
+          }
+        ],
+        "limitations": "Actual native NightmareZero0x35 defeat and original Zero-return story/report observed on C124, but eligibility/selection and full Alia/Gate/Zero per-scene inventory/staging remain unverified. NET unverified. Exactcurrentbuild frontend snapshot retained; continuation load stayed pending atmod_snapshot during coldFMV. Two native attempts/sourcebudget spent; no promotion or further observer loop."
       }
     },
     {
