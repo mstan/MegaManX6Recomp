@@ -5475,11 +5475,75 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "65841a2b3dc35f3c7655bdd38ac9917cc6088a9a",
+            "build_identity": {
+              "game_source_commit": "65841a2b3dc35f3c7655bdd38ac9917cc6088a9a",
+              "image_sha256": "f9859b44271a9d85142892e38b92ddded2e149147d5a50af5db7a277ff55f7b1",
+              "declared_build_manifest_sha256": "88af7166aee79bb9036c640ca67c771ad6a7fa494b593c0fe9288de42080e9a5",
+              "title": 72,
+              "profile": 55,
+              "snapshot": 19,
+              "SDK": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "host": "PC Windows",
+              "backend": "ENHANCED GL-HLE"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "dummy muted",
+              "cameras": "split",
+              "scene": "original native3D308 lock; owner2 fatal during passenger hidden phase3, then original3D330 release"
+            },
+            "action": "Existing offline original native owner2 scene kickoff, then one HP80 original fatal while passenger is hidden before release. Reuse original release and observe existing96-slot native type11h FX pool, passenger recovery, survivor Right and quiet native tail.",
+            "outcome": "LOCAL bounded finite native death work passes:55 observed newly-active slot transitions,23 observed allocation retirements,53 ever-visible type11 slots all visibly retire;32 original radial slots remain allocated/invisible. No visible type11 remains through71 advancing native world ticks. Native FX move/retire during incoming beam; shared PLAY90/CC intentionally stay149 during phases4/5, then world timer resumes150->301 at scene0. P1 completes beam/controls HP32, Zero staysFALLEN/HP0, lives2/checkpoint0/0/0 unchanged; cards unchanged/exit0. Both composed owner/survivor images personally reviewed.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c124-local-fixture-1/native-scene-owner-death.json",
+                "sha256": "becc5a95fbde27686d41b1d33f2a1c885d8539448c36cca3bb961e74b956bcba"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c124-local-fixture-1/binding.json",
+                "sha256": "6a13e9037b9a3bb764e167d54ae5fda5deab718e2ddcda5682ea991f00996f3b"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c124-local-fixture-1/source-preflight.json",
+                "sha256": "8631072e061cde3ff38334b29a07c380684a64aa1bc571762b95f77a666ade46"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c124-local-fixture-1/capacity.json",
+                "sha256": "25e18e4ea357238cadad6ceeb2d55a7f865fc74cdd41c13ae795468cbf9ce792"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c124-local-fixture-1/F4-owner2-locked-passenger-out.png",
+                "sha256": "0acc32b32776d36e21ba5fc790bc1866830b9d81df2044e19ef3d1adebfa56c6"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c124-local-fixture-1/F4-recovered-survivor.png",
+                "sha256": "98d51e265c12d606fa24ae1aa8bfefe1d9b7daffdbad7e8b4e8e085b9b150599"
+              }
+            ],
+            "limits": [
+              "NET independently unverified; no full comparison admission. This covers one original owner2 scene admission/fatal timing and livingX recovery.",
+              "Counts are observed slot activation/free/visibility transitions in existing native pool800CD410..800CF810,96 slots/stride60h,type11h. Asynchronous observations may miss transients;55 is not an exact allocation-attempt or all-created-effect total. No unobserved totals claimed.",
+              "Expiry means every observed visible death slot retires its drawing, not that all memory is freed:32 original radial slots remain allocated/invisible. No claim that this original retention is a leak.",
+              "Shared gameplay timers stay149 during the original incoming transport; actual FX motion/retirement still progresses during recovery, and shared world clock resumes after native beam completion. No continuous gameplay-clock-through-beam or ordinary60FPS/throughput benchmark claim.",
+              "C122 earlier false-retry failure remains retained. Concrete shared world-ownership fix65841a2 has14 passing existing checks and F103 current-build survivor save/load coverage on this same image. F4 itself did not repeat the snapshot test.",
+              "Offline original script/fatal prerequisites and native intro-only scope remain explicit; no all-boss, campaign, art/palette or ordinary recording/replay claim."
+            ],
+            "bypasses": [
+              "Existing offline mailbox5 invokes original3D308 owner2 script directly; preceding traversal is bypassed. Mailbox1 HP80 requests original fatal before release, mailbox6 invokes original3D330 release.",
+              "Native death emission/expiry, body/beam completion, lifecycle, controls, world timers, lives and checkpoint outcomes are read, never assigned. Offline mutation is not available as a NET shortcut."
+            ]
+          }
+        ],
+        "limitations": "LOCAL65841a2 owner fatal before release now has finite observed native death FX, all53 observed visible slots retired,71 quiet native world ticks, native passenger/control recovery and no retry/life/checkpoint loss.55 activation observations are not an exact allocation-attempt total;32 radial slots remain allocated/invisible. Shared world clock pauses through beam then resumes. NET remainsunverified; first failure/limits retained."
       }
     },
     {
