@@ -1,5 +1,38 @@
 # Mega Man X6 burndown execution
 
+## Stop setup churn (owner correction, 2026-10-30)
+
+The owner is asking for completed comparisons, not another night of preparing
+to test them. Apply this section first; stricter existing limits still apply.
+
+- Work only on the 234 frozen comparisons. Select actions by the exact remaining
+  gameplay behavior they can resolve, using the shortest actionable closeouts
+  first. The native3330 audit is excluded.
+- Treat source discovery, fixture research, observer repairs, launch adapters,
+  identity binding and evidence preparation as ONE cumulative overhead budget
+  of 15 minutes per batch, not a separate allowance for each category or row.
+  Reuse the existing session checkpoint; do not add a new tracking mechanism.
+  Healthy builds/runs may finish. A continuation or renamed batch does not
+  replenish time already spent on the same missing prerequisite.
+- When that budget expires, use an existing runnable setup or park the exact
+  prerequisite and move on. Do not start another support layer to rescue it.
+  After two setup-only pivots, stop unknown-setup research: next exercise an
+  existing reachable gameplay endpoint or implement a known game fix with a
+  concrete runtime check. Do not spend the session cycling through research.
+- A new worktree/build must be needed for a named executable behavior change.
+  A new launcher, observer version, manifest or receipt is not itself a reason
+  to build. Reuse the current candidate and batch compatible missing checks.
+- Use the frozen row's actual acceptance criteria. Do not invent additional
+  diagnostic, presentation or campaign-wide gates. Preserve required LOCAL/NET,
+  synchronization and save checks; sufficient retained same-candidate evidence
+  should close a row without another run or a redesigned evidence package.
+- As soon as a check is sufficient, finish its review, ledger update and local
+  commit before adding more machinery. A partial fix stays a partial fix;
+  report it honestly and do not count it as a completed comparison.
+- At each hourly checkpoint report the passed/failed/unverified delta and the
+  concrete runtime-validated fixes. Zero closures means zero closures. Change
+  approach instead of presenting setup, builds or documentation as burndown.
+
 ## Mandatory action gate (owner correction, 2026-10-30)
 
 The owner has repeatedly had to interrupt low-throughput work. More planning,
