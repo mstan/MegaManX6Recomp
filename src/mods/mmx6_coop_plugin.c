@@ -941,6 +941,13 @@ static void diagnostics(uint16_t input) {
     /* Odd sequence denotes publication in progress; finish with an even one.
      * Read the entire block in one emulation-thread debug command. */
     psx_mod_write_word(diagnostic+0x88,frame_count*2u-1u);
+    /* Read-only publication of the active energy policy and both supplies. */
+    psx_mod_write_byte(diagnostic+0x1FF0,(uint8_t)separate_subtanks);
+    psx_mod_write_byte(diagnostic+0x1FF1,(uint8_t)subtank_seeded);
+    for(unsigned i=0;i<2;++i) {
+        psx_mod_write_byte(diagnostic+0x1FF2+i,zero_projected?saved_play[0x63+i]:psx_mod_read_byte(PLAY+0x63+i));
+        psx_mod_write_byte(diagnostic+0x1FF4+i,zero_subtanks[i]);
+    }
     psx_mod_write_word(diagnostic,0x434F4F50);
     psx_mod_write_word(diagnostic+4,frame_count);
     project(diagnostic+8,p2.body+8,8);
