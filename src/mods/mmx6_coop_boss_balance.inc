@@ -8,11 +8,12 @@
 enum { BOSS_BALANCE_SLOTS=48, BOSS_BALANCE_POOL=0x8008EF48u,
        BOSS_BALANCE_STRIDE=0x9Cu };
 typedef struct {
-    uint32_t origin;
+    uint32_t origin,vulnerable_table;
     uint8_t kind,remainder,recognized;
+    uint8_t clocks[2],cookies[2],timer_offset,timer_half,hit_owner,hit_melee;
 } BossBalanceState;
 static BossBalanceState boss_balance[BOSS_BALANCE_SLOTS];
-static unsigned boss_balance_enabled,boss_balance_allocate_call;
+static unsigned boss_balance_enabled,boss_balance_independent,boss_balance_allocate_call;
 static uint32_t boss_balance_pending_actor;
 
 static int boss_balance_slot(uint32_t actor) {
@@ -20,6 +21,54 @@ static int boss_balance_slot(uint32_t actor) {
        actor>=BOSS_BALANCE_POOL+BOSS_BALANCE_SLOTS*BOSS_BALANCE_STRIDE ||
        (actor-BOSS_BALANCE_POOL)%BOSS_BALANCE_STRIDE)return -1;
     return (int)((actor-BOSS_BALANCE_POOL)/BOSS_BALANCE_STRIDE);
+}
+/* The existing31474 replacement runs once per native boss AI update. */
+static BossBalanceState *boss_balance_actor(uint32_t actor) {
+    int slot=boss_balance_slot(actor);
+    if(!boss_balance_enabled || slot<0 || !psx_mod_read_byte(actor) ||
+       psx_mod_read_byte(actor+4)!=1 || !(psx_mod_read_byte(actor+0x5C)&127))return NULL;
+    BossBalanceState *s=&boss_balance[slot];
+    unsigned kind=psx_mod_read_byte(actor+1);uint32_t origin=psx_mod_read_word(actor+0x10);
+    if(s->kind!=kind || s->origin!=origin) {
+        memset(s,0,sizeof *s);s->kind=(uint8_t)kind;s->origin=origin;
+    }
+    if(psx_mod_read_word(PLAY+0x20)==actor && psx_mod_read_byte(PLAY+0x24))s->recognized=1;
+    return s->recognized?s:NULL;
+}
+static unsigned boss_balance_native_clock(uint32_t actor,const BossBalanceState *s) {
+    if(!s->timer_offset)return 0;
+    return s->timer_half?psx_mod_read_half(actor+s->timer_offset):psx_mod_read_byte(actor+s->timer_offset);
+}
+static void boss_balance_write_clock(uint32_t actor,const BossBalanceState *s,unsigned ticks) {
+    if(s->timer_half)psx_mod_write_half(actor+s->timer_offset,(uint16_t)ticks);
+    else psx_mod_write_byte(actor+s->timer_offset,(uint8_t)ticks);
+}
+static uint32_t boss_balance_scan(CPUState *cpu,uint32_t address,uint32_t actor,
+                                  unsigned seat,BossBalanceState *s) {
+    if(!s || !boss_balance_independent)return guest(cpu,address,actor,cpu->gpr[5]);
+    if(s->clocks[seat]) {
+        psx_mod_counter_add("mmx6.coop.boss-own-cooldown-rejected",1);return 0;
+    }
+    uint8_t token=psx_mod_read_byte(actor+0x65);
+    uint32_t table=psx_mod_read_word(actor+0x58);
+    unsigned ticks=boss_balance_native_clock(actor,s);
+    /* Only our one-tick ordinary expiry window may expose the ready seat.
+     * Native scripted/weakness protection (10000 and its40-tick tail) stays
+     * native. The original AI still owns its one expiry/CLUT cleanup pass. */
+    unsigned projected=s->timer_offset && s->vulnerable_table &&
+        table==0x8007433Cu && ticks==1;
+    if(projected) {
+        psx_mod_write_word(actor+0x58,s->vulnerable_table);
+        boss_balance_write_clock(actor,s,0);
+    }
+    psx_mod_write_byte(actor+0x65,s->cookies[seat]);
+    uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
+    s->cookies[seat]=psx_mod_read_byte(actor+0x65);
+    psx_mod_write_byte(actor+0x65,token);
+    if(projected && boss_balance_pending_actor!=actor) {
+        psx_mod_write_word(actor+0x58,table);boss_balance_write_clock(actor,s,ticks);
+    } else if(projected)psx_mod_counter_add("mmx6.coop.boss-ready-partner-table",1);
+    return result;
 }
 static void boss_balance_damage(CPUState *cpu,uint32_t address) {
     (void)address;
@@ -31,21 +80,21 @@ static void boss_balance_damage(CPUState *cpu,uint32_t address) {
        psx_mod_read_byte(actor+4)!=1)return;
     unsigned hp=psx_mod_read_byte(actor+0x5C),amount=cpu->gpr[5];
     if(!hp || hp>127 || !amount || amount>127)return;
-    BossBalanceState *state=&boss_balance[slot];
-    unsigned kind=psx_mod_read_byte(actor+1);
-    uint32_t origin=psx_mod_read_word(actor+0x10);
-    if(state->kind!=kind || state->origin!=origin) {
-        memset(state,0,sizeof *state);state->kind=(uint8_t)kind;state->origin=origin;
-    }
-    /* Admit the real native metered boss. Once identified, its hidden-meter
-     * attack phases keep the same budget; unrelated enemies never acquire it. */
-    if(psx_mod_read_word(PLAY+0x20)==actor && psx_mod_read_byte(PLAY+0x24))
-        state->recognized=1;
-    if(!state->recognized)return;
+    BossBalanceState *state=boss_balance_actor(actor);if(!state)return;
     unsigned zero=psx_mod_read_byte(PLAYER+2)==1;
     unsigned total=amount*(zero?4u:5u)+state->remainder;
     state->remainder=(uint8_t)(total%10u);
     cpu->gpr[5]=total/10u;
+    if(boss_balance_independent) {
+        unsigned seat=(unsigned)!!zero_projected;state->hit_owner=(uint8_t)seat;
+        uint32_t table=psx_mod_read_word(actor+0x58),shot=cpu->gpr[7];
+        if(table>=0x80010000u && table<0x80200000u && !(table&1u) && table!=0x8007433Cu)
+            state->vulnerable_table=table;
+        unsigned type=(shot>=0x800950A0u && shot<0x800964A0u && !((shot-0x800950A0u)%0xA0u))?psx_mod_read_byte(shot+1):255;
+        state->hit_melee=(uint8_t)(zero && type>=24 && type<=28);
+        if(state->clocks[seat^1u])psx_mod_counter_add("mmx6.coop.boss-hit-during-partner-cooldown",1);
+        psx_mod_counter_add(seat?"mmx6.coop.boss-private-seat2-accepted":"mmx6.coop.boss-private-seat1-accepted",1);
+    }
     boss_balance_pending_actor=actor;
     psx_mod_counter_add("mmx6.coop.boss-damage-before-scaling",amount);
     psx_mod_counter_add("mmx6.coop.boss-damage-after-scaling",total/10u);
@@ -111,7 +160,21 @@ static void boss_balance_shared_cooldown(CPUState *cpu,uint32_t address) {
         unsigned source=(instruction>>16)&31u,ticks=cpu->gpr[source];
         boss_balance_pending_actor=0;
         if(ticks<2 || ticks>=255)return;
-        cpu->gpr[source]=(ticks+1u)/2u;
+        unsigned effective=(ticks+1u)/2u;
+        if(boss_balance_independent) {
+            BossBalanceState *s=&boss_balance[slot];
+            if(s->hit_melee && effective>4)effective=4;
+            s->clocks[s->hit_owner]=(uint8_t)effective;
+            s->timer_offset=(uint8_t)(instruction&0xFFFFu);
+            s->timer_half=(uint8_t)((instruction>>26)==0x29u);
+            unsigned next=s->clocks[0]<s->clocks[1]?s->clocks[0]:s->clocks[1];
+            cpu->gpr[source]=next?next:1u;
+            psx_mod_counter_add("mmx6.coop.boss-private-cooldown-installed",1);
+            psx_mod_counter_add("mmx6.coop.boss-private-cooldown-effective",effective);
+            psx_mod_counter_add(s->hit_owner?"mmx6.coop.boss-private-seat2-installed-ticks":"mmx6.coop.boss-private-seat1-installed-ticks",effective);
+            return;
+        }
+        cpu->gpr[source]=effective;
         psx_mod_counter_add("mmx6.coop.shorter-shared-boss-cooldown",1);
         psx_mod_counter_add("mmx6.coop.boss-shared-cooldown-before",ticks);
         psx_mod_counter_add("mmx6.coop.boss-shared-cooldown-after",(ticks+1u)/2u);

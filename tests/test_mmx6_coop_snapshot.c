@@ -546,7 +546,7 @@ static void refight_return_snapshot(void) {
 static void boss_balance_snapshot(void) {
     HostState prior;state_capture(&prior);
     boss_balance_enabled=1;memset(boss_balance,0,sizeof boss_balance);
-    boss_balance[0]=(BossBalanceState){0x800F7E48u,56,9,1};
+    boss_balance[0]=(BossBalanceState){.origin=0x800F7E48u,.kind=56,.remainder=9,.recognized=1};
     uint32_t length=snapshot_bytes();uint8_t *wire=malloc(length),*bad=malloc(length);
     CHECK(wire && bad && snapshot_write(wire,length));
     boss_balance_enabled=0;reject_unchanged(wire,length);boss_balance_enabled=1;
@@ -569,9 +569,20 @@ static void abandoned_guest(void){
     CHECK(landing[0]==17 && landing[sizeof landing-1]==29);
     CHECK(state_track.count && !snapshot_ready());(void)state_digest();
 }
+static void private_boss_balance_snapshot(void) {
+    HostState prior;state_capture(&prior);unsigned old_enabled=boss_balance_enabled,old_separate=boss_balance_independent;
+    boss_balance_enabled=boss_balance_independent=1;memset(boss_balance,0,sizeof boss_balance);
+    boss_balance[0]=(BossBalanceState){.origin=0x800F57ECu,.vulnerable_table=0x8007591Cu,.kind=61,.remainder=5,.recognized=1,.clocks={15,4},.cookies={42,43},.timer_offset=0x86,.timer_half=1,.hit_owner=1,.hit_melee=1};
+    uint32_t length=snapshot_bytes();uint8_t *wire=malloc(length);CHECK(wire && snapshot_write(wire,length));
+    uint32_t digest=state_digest();boss_balance[0].clocks[0]=3;boss_balance[0].cookies[1]=99;CHECK(state_digest()!=digest);
+    CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+    CHECK(boss_balance[0].clocks[0]==15 && boss_balance[0].clocks[1]==4 && boss_balance[0].cookies[1]==43 && state_digest()==digest);
+    boss_balance_independent=0;CHECK(!snapshot_validate(wire,length));boss_balance_independent=1;
+    boss_balance_enabled=old_enabled;boss_balance_independent=old_separate;state_commit(&prior);free(wire);
+}
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

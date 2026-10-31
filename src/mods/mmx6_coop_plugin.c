@@ -2575,27 +2575,29 @@ static int death_effect_init(CPUState *cpu, uint32_t address) {
 }
 #include "mmx6_coop_boss_balance.inc"
 static int enemy_hit(CPUState *cpu, uint32_t address) {
-    if (inside || !enrolled || failed || scene_owner || life.status[1]!=MMX6_COOP_ALIVE ||
-        psx_mod_read_byte(PLAY)!=0x0A) return 0;
-    boss_balance_pending_actor=0;
-    inside=1;
-    /* The caller owns enemy AI, invulnerability and applying this result.
-     * Check P1 first; only a miss tries P2 with Zero's native hitbox tables.
-     * Nested dispatch declines this replacement and executes the stock body. */
-    /* The native enemy pool suppresses collisions during PLAYER+CC hit
-     * pause. Apply that gate per seat: retrying a frozen Zero saber sets
-     * +CD again and restarts the five-tick pause on every player update. */
-    uint32_t enemy=cpu->gpr[4], result=psx_mod_read_byte(PLAYER+0xCC)?0:
-        guest(cpu,address,enemy,cpu->gpr[5]);
-    if (!result && p2.body[0x5C] && !p2.body[0xCC]) {
-        enter_zero();
-        result=guest(cpu,address,enemy,cpu->gpr[5]);
-        leave_zero();
-        if (result) psx_mod_write_word(diagnostic+40,psx_mod_read_word(diagnostic+40)+1);
+    if(boss_balance_independent && (private_draw || psx_mod_local_view_scope()))return 0;
+    if(inside || !enrolled || failed || scene_owner || psx_mod_read_byte(PLAY)!=10)return 0;
+    uint32_t enemy=cpu->gpr[4];
+    BossBalanceState *balance=boss_balance_independent?boss_balance_actor(enemy):NULL;
+    if(life.status[1]!=MMX6_COOP_ALIVE && !balance)return 0;
+    boss_balance_pending_actor=0;inside=1;
+    if(balance) {
+        for(unsigned seat=0;seat<2;++seat)if(balance->clocks[seat])--balance->clocks[seat];
+        if(balance->timer_offset && (psx_mod_read_word(enemy+0x58)!=0x8007433Cu ||
+           !boss_balance_native_clock(enemy,balance)))balance->timer_offset=balance->timer_half=0;
     }
-    cpu->gpr[2]=result;
-    inside=0;
-    return 1;
+    unsigned resident=(unsigned)!!zero_projected;
+    uint32_t result=psx_mod_read_byte(PLAYER+0xCC)?0:
+        boss_balance_scan(cpu,address,enemy,resident,balance);
+    /* Rejected126/127 contacts are not accepted hits and must not consume a
+     * ready partner's separate window. Keep the original P1-first reaction. */
+    if(!resident && (!result || (balance && (result==126 || result==127))) &&
+       (!balance || boss_balance_pending_actor!=enemy) &&
+       life.status[1]==MMX6_COOP_ALIVE && p2.body[0x5C] && !p2.body[0xCC]) {
+        enter_zero();result=boss_balance_scan(cpu,address,enemy,1,balance);leave_zero();
+        if(result)psx_mod_write_word(diagnostic+40,psx_mod_read_word(diagnostic+40)+1);
+    }
+    cpu->gpr[2]=result;inside=0;return 1;
 }
 static int player_contact(CPUState *cpu, uint32_t address) {
     /* A negotiated, tainted prerequisite may bypass enemy contact only.
@@ -2911,6 +2913,10 @@ static void activate(void) {
     memset(boss_balance,0,sizeof boss_balance);boss_balance_allocate_call=0;boss_balance_pending_actor=0;
     char balance[16];
     boss_balance_enabled=psx_mod_option_value("mmx6.local-coop","prototype","boss_balance",balance,sizeof balance) && !strcmp(balance,"on");
+    char cooldowns[16];
+    boss_balance_independent=boss_balance_enabled &&
+        psx_mod_option_value("mmx6.local-coop","prototype","boss_cooldowns",cooldowns,sizeof cooldowns) &&
+        !strcmp(cooldowns,"independent");
     char doors[16];
     both_doors=psx_mod_option_value("mmx6.local-coop","prototype","doors",doors,sizeof doors) &&
         !strcmp(doors,"both");

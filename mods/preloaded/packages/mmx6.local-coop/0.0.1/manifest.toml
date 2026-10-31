@@ -111,3 +111,20 @@ label = "Off"
 [[option.choice]]
 value = "on"
 label = "On"
+
+[[option]]
+feature = "prototype"
+id = "boss_cooldowns"
+label = "Boss hit cooldowns"
+description = "With co-op boss balance enabled, share the shorter recovery or give each hero a separate timer. Native scripted protection remains intact."
+group = "Gameplay"
+type = "choice"
+default = "shared"
+
+[[option.choice]]
+value = "shared"
+label = "Shared"
+
+[[option.choice]]
+value = "independent"
+label = "Separate per player"

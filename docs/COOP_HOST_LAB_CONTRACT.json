@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 48,
+  "revision": 50,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v65",
+    "title_compatibility": "mmx6-x-zero-delay-v67",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -818,5 +818,19 @@
     "callback": "interaction_begin at51924, scene_phase0 existing serializer",
     "runtime_status": "candidate_unverified",
     "title": 65
+  },
+  "title_changes_v64_private_boss_cooldowns": {
+    "scope": "F99/F152/F153 candidate implementation; native qualification pending",
+    "policy": "boss_balance off ignores policy; shared(default) retains V63; independent uses separate accepted-hit clocks and cookies, X half ordinary and Zero standard melee capped4",
+    "native": "existing31474 scanner replacement once per boss update; original315CC contacts and20 guarded post-hit stores; ready seat projects learned defense only at native ordinary1tick expiry",
+    "protection": "Original scripted10000 and40tick recovery remain native; no general AI timer shortening or result writes",
+    "state": "snapshot18 includes per-seat clocks/cookies, learned native timer/table and pending owner; title64/profile47",
+    "acceptance": "fresh same-image LOCAL/NET ready-partner hits, normal/aerial/finisher fresh contacts, exact effective clocks/native reactions, final CRC/cards/owned exits; no source-only row credit"
+  },
+  "title_changes_v67_integrated_private_cooldowns": {
+    "scope": "Frozen234 F99 elective independent boss recovery. F152/F153 remain distinct unverified aerial/finisher checks.",
+    "integration": "Reuse implemented04f87b1 plus fixture11ded85 on capsule-fixed293c7bd. Preserve in-place capsule and all current native behavior. No new hooks or regenerated units.",
+    "snapshot_schema": 18,
+    "acceptance": "Same-candidate LOCAL/NET actual accepted contacts from both seats, positive own-clock rejection and ready-partner admission, exact native-derived installs/expiry, original damage-budget/default-path checks. No source/unit/build-only comparison credit."
   }
 }
