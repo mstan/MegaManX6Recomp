@@ -23821,7 +23821,7 @@
       "frozen_row_sha256": "89421eb7b8ace19b8fb69f2bf3a62c72436c269c79b0d45a8ce064896a97c206",
       "x6": {
         "workstream": "pickup",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "qualified_local_native_scenario_netplay_pending",
         "analogue": "Elective private Sub Tank energy",
         "bounded_check": "Keep native shared acquisition/card progression; with optional separate energy, heal each seat independently then validate native reload and current-build snapshots.",
         "baseline_anchors": [
@@ -23835,11 +23835,42 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+            "build_identity": {
+              "game_source_commit": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+              "image_sha256": "f13de94afef9ba3fafa3563602640ad2533a6c023636ef0dea6c99af4c555415",
+              "manifest_json_sha256": "4d93d68264b90fe5692d8b74bbe634c5b4edc8c6328c54398a57dbd32744c856",
+              "provenance_sha256": "4c57101ab80388ed986aa0c3288a961b2ad2b1decaa56915dc9c32b4f3fdaab8",
+              "SDK": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "title": 70,
+              "profile": 53,
+              "snapshot": 19,
+              "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a"
+            },
+            "action": "Original native owned tank menus heal each seat independently, original checkpoint initializer retains supplies/shared tank ownership, and current-build save/load restores supplies and HP.",
+            "outcome": "P2 private8 heals11->19; P1 later private16 heals13->29; each other supply/HP retained. Actual major8->9 checkpoint continuation and state restore pass. NET empty-bank policy/profile/CRC pass only.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-pickup/manifest-bound-6a7605d-F180-private-energy-local-qualified-net-policy-only.json",
+                "sha256": "762cb04a4ce9b8ef235993117f686a019c730b582f819984f9afa36a16b12e94"
+              }
+            ],
+            "limits": [
+              "Frozen native reload means checkpoint continuation; native-card energy persistence explicitly excluded by frozen X5 evidence. No added card-Load gate.",
+              "Native card campaign fields were not changed by the feature; no new card schema or energy persistence claimed.",
+              "No runtime full-health pickup refill, second-tank acquisition/compaction or Weapon Tank spending claim. Corresponding source paths are covered by focused compiled fixtures.",
+              "No full F180 pass; required NET native energy use remains unverified."
+            ]
+          }
+        ],
+        "limitations": "LOCAL bounded F180 passes on6a7605d/imagef13de94a. NET independent policy/state agreement passes with empty banks only; actual NET tank healing and filled-bank checkpoint retention remain unverified. Native-card energy persistence is excluded, not a new gate."
       }
     },
     {

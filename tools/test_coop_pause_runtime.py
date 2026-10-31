@@ -11,7 +11,7 @@ import socket
 import time
 
 
-def exercise_independent(request, client, output, report):
+def exercise_independent(request, client, output, report, *, reload_checkpoint=False):
     """F180 LOCAL prerequisite grants only; native inputs spend the energy.
 
     Raw RAM grants are confined to the disposable offline profile. This is
@@ -74,9 +74,7 @@ def exercise_independent(request, client, output, report):
         wait(lambda: hp()[seat] == expected_hp, 'Native tank did not heal its owner')
         close(seat)
 
-    banks()
-    try:
-        # Existing fixture health setup, verified at published body boundaries.
+    def damage():
         deadline = time.monotonic()+5
         while hp()[0] != 13:
             write(0x800970FC, 13)
@@ -85,6 +83,11 @@ def exercise_independent(request, client, output, report):
                 raise AssertionError('P1 damaged-health prerequisite failed')
         write(diag+0x51, 11);write(diag+0x50, 1)
         wait(lambda: read(diag+0x50) == b'\0' and hp()[1] == 11, 'P2 damaged-health prerequisite failed')
+
+    banks()
+    try:
+        # Existing fixture health setup, verified at published body boundaries.
+        damage()
         write(0x800CCF3B, read(0x800CCF3B)[0] | 0x10)
         menu(1)
         # The debug service can run inside the native Zero projection. Verify
@@ -95,6 +98,25 @@ def exercise_independent(request, client, output, report):
             time.sleep(.03)
             if time.monotonic() > deadline:
                 raise AssertionError('P2 private energy prerequisite failed')
+        if reload_checkpoint:
+            import mmx6_coop_checkpoint as checkpoint
+            from pathlib import Path
+            close(1)
+            before_reload = banks()
+            found = read(0x800CCF3B)[0]
+            source = Path(__file__).resolve().parents[1]
+            original = checkpoint.original_executable(source/'mmx6/SLUS_013.95')
+            _, rows, sections = checkpoint.verified_inventory(source/'docs/COOP_X6_CONTENT.json', original)
+            target = checkpoint.select(rows, sections, 0, 0, 0)
+            report['checkpoint_reload'] = {}
+            checkpoint.enter_checkpoint(request, client, target, report['checkpoint_reload'], timeout=120, nonce=180)
+            wait(lambda: banks() == before_reload, 'Private supplies changed across original checkpoint initialization')
+            if read(0x800CCF3B)[0] != found:
+                raise AssertionError('Shared native tank acquisition changed at checkpoint')
+            report['checks']['private_energy_and_shared_acquisition_survive_native_checkpoint'] = True
+            report['steps'].append(dict(label='after_native_checkpoint', banks=banks(), hp=hp()))
+            damage()
+            menu(1)
         report['snapshot_operations'] = []
         saved = dict(banks=banks(), hp=hp())
         snapshot_operation(request, 'save', 8, report['snapshot_operations'])

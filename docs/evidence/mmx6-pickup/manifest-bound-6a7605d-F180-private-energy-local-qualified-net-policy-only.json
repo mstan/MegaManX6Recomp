@@ -1,0 +1,216 @@
+{
+  "schema": 1,
+  "kind": "F180_native_private_subtank_energy_partial_qualification",
+  "row": "F180",
+  "aggregate_status": "unverified",
+  "local_status": "passed",
+  "netplay_status": "unverified",
+  "official_counts": {
+    "passed": 147,
+    "failed": 2,
+    "unverified": 85
+  },
+  "candidate": {
+    "game_source_commit": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+    "image_sha256": "f13de94afef9ba3fafa3563602640ad2533a6c023636ef0dea6c99af4c555415",
+    "manifest_json_sha256": "4d93d68264b90fe5692d8b74bbe634c5b4edc8c6328c54398a57dbd32744c856",
+    "provenance_sha256": "4c57101ab80388ed986aa0c3288a961b2ad2b1decaa56915dc9c32b4f3fdaab8",
+    "SDK": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+    "title": 70,
+    "profile": 53,
+    "snapshot": 19,
+    "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a"
+  },
+  "behavior": "Default shared native tank energy retained; optional independent energy projects each seat into original menu, manual/deferred pickup and surviving guest world passes. Shared found flags and Weapon Tank remain native; P1 campaign fields retain native ownership. Current-build snapshots and synchronization include the private bank.",
+  "compiled_checks": {
+    "passed": 14,
+    "log": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-private-subtanks-v122/ctest-runtime-final.log",
+      "sha256": "4db441e787e5d1b9579c6b8794ee03d1648f50488eafc6a1c28165464e72c0a3"
+    },
+    "coverage": "Roster/resources, private effects/views, host-lab variants/contract and debug/production actual plugin snapshots, including cross-collector energy projection, compaction bytes, shared acquisition/Weapon Tank, frontend reset and checkpoint retention."
+  },
+  "local": {
+    "session": 64099,
+    "report": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-private-subtanks-v122/local-native-checkpoint/baseline/qualification.json",
+      "sha256": "5cb4f16674d1b2afa6f01105b23fab7a2f407bc37a05993f1ecb03ae8c997df7"
+    },
+    "earlier_heal_and_snapshot_report": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-private-subtanks-v122/local-native-1/baseline/qualification.json",
+      "sha256": "39b098615e5811d858164a2a4aadfd5fe4750029ebe814afa440fd623f0b5c49"
+    },
+    "checks": {
+      "p2_native_movement": true,
+      "p1_independent": true,
+      "mailbox_unused": true,
+      "p1_native_jump": true,
+      "p2_jump_independent": true,
+      "healthy_heroes": true,
+      "private_energy_and_shared_acquisition_survive_native_checkpoint": true,
+      "both_native_private_heals_and_health_isolation": true,
+      "current_build_private_energy_and_health_restore": true
+    },
+    "steps": [
+      {
+        "label": "after_native_checkpoint",
+        "banks": [
+          136,
+          0,
+          136,
+          0
+        ],
+        "hp": [
+          32,
+          32
+        ]
+      },
+      {
+        "label": "before_p2_native_heal",
+        "banks": [
+          136,
+          0,
+          136,
+          0
+        ],
+        "hp": [
+          13,
+          11
+        ]
+      },
+      {
+        "label": "after_p2_native_heal",
+        "banks": [
+          136,
+          0,
+          128,
+          0
+        ],
+        "hp": [
+          13,
+          19
+        ]
+      },
+      {
+        "label": "after_p1_native_heal",
+        "banks": [
+          128,
+          0,
+          128,
+          0
+        ],
+        "hp": [
+          29,
+          19
+        ]
+      },
+      {
+        "label": "restored_private_supplies",
+        "banks": [
+          136,
+          0,
+          136,
+          0
+        ],
+        "hp": [
+          13,
+          11
+        ]
+      }
+    ],
+    "checkpoint_checks": {
+      "requested_tuple": true,
+      "original_initializer_observed_once": true,
+      "inventoried_record": true,
+      "fixture_bypass_retained": true,
+      "native_gameplay": true,
+      "publication_after_completed_receipt": true,
+      "enrolled_living_idle_roster": true,
+      "native_gameplay_tuple": true,
+      "native_entry_gates_clear": true,
+      "native_p1_visible_idle_grounded": true,
+      "native_previous_position_settled": true,
+      "native_p1_agrees_with_publication": true,
+      "p1_at_authored_x": true,
+      "selected_camera_bounds": true,
+      "camera_inside_authored_bounds": true,
+      "actors_in_current_native_viewport": true,
+      "display_enabled": true
+    },
+    "setup_bypasses": [
+      "Existing offline damaged-HP mailbox; direct native tank/energy prerequisite grants. No healing result writes.",
+      "Existing offline command8 selects original intro0/0/0 loader; actual original initializer, roster settling and retained supplies observed. No death/retry UI claim."
+    ],
+    "actual_heals": "Zero11->19 consumes its private8 while P1 retains8; subsequent P1 sixteen-unit grant heals13->29 with Zero19/empty unchanged.",
+    "current_build_state": "Original runtime save/load slot8 completion receipts; both supplies and both HP values restored.",
+    "native_cards_unchanged": true,
+    "native_exit_code": 0,
+    "reviewed_composed_images": [
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-private-subtanks-v122/local-native-1/baseline/private-tank-restored.png",
+        "sha256": "f933f21002f98ecd9b9e6b4ea0fc984bae6b673dcaf0e8ac88bac20e310e6b9e"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-private-subtanks-v122/local-native-checkpoint/baseline/private-tank-restored.png",
+        "sha256": "c035859e1561ccf3a3cd324f1cc07a4144689b5fde156cf7e5eae11af2f9417a"
+      }
+    ]
+  },
+  "netplay": {
+    "session": 81927,
+    "report": {
+      "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-private-subtanks-v122/net-private-pause/qualification.json",
+      "sha256": "ca49ff9e9882b144cf78a332029be58df9b877e7785f9ab993887b923df5900e"
+    },
+    "checks": {
+      "declared_build_manifest_bound_to_staged_images": true,
+      "host_profile_settled_before_guest": true,
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true,
+      "private_effect_pause_automated_checks": true,
+      "independent_subtank_policy_and_state_match": true
+    },
+    "energy_publications": [
+      [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "selected_profile_sha256": "966222679569c9e43efaa5c3e1cc494d13fe0b5d144dafd66013fa548275fba4",
+    "settled_before_frame_zero": true,
+    "crc_windows": 4,
+    "matching_core_mod_samples": 30,
+    "native_exit_codes": [
+      0,
+      0
+    ],
+    "reviewed_composed_images": 8,
+    "limit": "Native tanks empty. This establishes committed independent policy/state agreement and normal controls/menu/dash only; it does not qualify NET healing or retained filled supplies across native checkpoint continuation."
+  },
+  "remaining": [
+    "NET actual acquired-tank independent healing and filled-bank retention across original checkpoint continuation. Reuse qualified LOCAL components on this exact image; do not repeat them."
+  ],
+  "limits": [
+    "Frozen native reload means checkpoint continuation; native-card energy persistence explicitly excluded by frozen X5 evidence. No added card-Load gate.",
+    "Native card campaign fields were not changed by the feature; no new card schema or energy persistence claimed.",
+    "No runtime full-health pickup refill, second-tank acquisition/compaction or Weapon Tank spending claim. Corresponding source paths are covered by focused compiled fixtures.",
+    "No full F180 pass; required NET native energy use remains unverified.",
+    "All previous accepted/failed evidence, original HUD harness, drafts and owner cards/settings preserved; no push, publication, remote sync or subagents."
+  ]
+}

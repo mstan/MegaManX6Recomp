@@ -526,12 +526,17 @@ package_id = "mmx6.enhancement.seamless-loading"
 id = "seamless-loading"
 enabled = {str(not args.native_loader_diagnostic).lower()}
 ''', encoding="utf-8")
+            values=[]
+            if getattr(args, "subtank_energy", "shared") == "independent":
+                values.append('subtank_energy = "independent"')
             require(receipt["source_card"] is None, "Unexpected source card")
             if hud_pair is not None and args.hud_layout=='side_by_side':
+                values.append('hud_layout = "side_by_side"')
+            if values:
                 path=directory/'mods/state.toml';text=path.read_text(encoding='utf-8')
                 old='id = "prototype"\nenabled = false\n'
-                require(text.count(old)==1,'Unexpected fresh co-op HUD preference')
-                path.write_text(text.replace(old,old+'[feature.values]\nhud_layout = "side_by_side"\n'),encoding='utf-8')
+                require(text.count(old)==1,'Unexpected fresh co-op preference')
+                path.write_text(text.replace(old,old+'[feature.values]\n'+'\n'.join(values)+'\n'),encoding='utf-8')
             require(receipt["exe_sha256"] == report["candidate_exe_sha256"],
                     "Build changed during paired staging")
             if reentry_pair is not None:
@@ -887,6 +892,13 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             require(report["checks"]["private_effect_pause_automated_checks"],
                     "Native P1 private-effect pause case did not complete")
             report["limits"].append("Private-effect pause case retains composed artwork review pending; no R9 ledger pass")
+        if getattr(args,"subtank_energy","shared")=="independent":
+            supplies=[list(client.read(0x9F081FF0,6)) for client in clients]
+            report["subtank_energy_publications"]=supplies
+            require(all(row[:2]==[1,1] for row in supplies) and supplies[0]==supplies[1],
+                    "Independent Sub Tank state was not active and equal on both peers")
+            report["checks"]["independent_subtank_policy_and_state_match"]=True
+            report["limits"].append("Empty-tank policy/state agreement only; no native tank acquisition, healing or card-Load F180 pass")
         if contact is not None:
             # Only the owning peer's published host sampler feeds transport.
             # Paused menu spacing uses resolved transport ticks, never the
@@ -1081,6 +1093,8 @@ def make_parser():
                         help="Also check original published P2/Zero personal-menu ownership, controls and resources; composed artwork review remains pending")
     parser.add_argument("--private-pause-smoke", action="store_true",
                         help="Original published P1 pause while P2 native dash effects are retained; fresh exact image, host profile and resolved CRC required")
+    parser.add_argument("--subtank-energy", choices=("shared","independent"), default="shared",
+                        help="Commit the same native Sub Tank energy policy on both peers before launch")
     parser.add_argument("--contact-pause-contact-smoke", action="store_true",
                         help="Original published P2 body contact before/after its own menu; exact frozen37 candidate, source BIN, host profile and resolved CRC required")
     parser.add_argument("--native-quit-scenario",choices=("guest_authority","p1_pages_cancel","p1_pages_cancel_live_effects"),
