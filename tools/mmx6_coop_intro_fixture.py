@@ -188,6 +188,7 @@ def exercise_final_retry_continue(ctx, *, output, original_exe, leader, success)
             row['peers'].append(dict(peer=i,observation=o,play_hex=p.hex(),
                 tuple=[p[n] for n in (0,1,12,13,0x1D)],lives=struct.unpack_from('<b',p,0x39)[0],
                 fixture=receipt(c),starting_hp=starting_hp_receipt(c),boss=boss,
+                native_ui_hold=c.read(0x80097424,1)[0],
                 dialogue_hex=c.read(0x8008EAF0,16).hex(),
                 p1_body_hex=raw[0x1800:0x1958].hex(),p2_body_hex=raw[0x100:0x258].hex()))
             need(not o['failed'] and not o['mailbox'], 'Native plugin failure or diagnostic mutation')
@@ -340,8 +341,9 @@ def exercise_final_retry_continue(ctx, *, output, original_exe, leader, success)
         wipe(1,'remaining-team-retry',True); enter_final('zero-life-final',False)
         wipe(0,'literal-GameOver',False)
         row=wait('literal native GameOver Continue page',lambda r:all(p['tuple'][:2]==[13,1]
-            and p['lives']==-1 for p in r['peers']),60)
+            and p['lives']==-1 and p['native_ui_hold']==0 for p in r['peers']),60)
         e['literal_GameOver']=row['index']; capture('literal-GameOver-Continue',row)
+        updates('original Continue ready neutral input separation')
         inp(0,0x4000,'primary selects actual default Continue the game')
         try: updates('actual original Continue confirmation')
         finally: inp(0,0,'release original Continue')

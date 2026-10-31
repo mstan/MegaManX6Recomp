@@ -20017,14 +20017,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -20095,9 +20095,110 @@
               "One existing agreed SigmaCP1 chord bypasses preceding traversal. Fixture generation1/initializer_entries1 remain unchanged through real retries and Continue; no second chord, native Load or scene/life/HP/result writes.",
               "Pre-agreed initial HP1/1 shortens only first fatal setup. Retry/Continue restore native32HP; actual deaths, menu selection, intro/boss activation and controls are observed."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+            "build_identity": {
+              "game_source_commit": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+              "image_sha256": "f13de94afef9ba3fafa3563602640ad2533a6c023636ef0dea6c99af4c555415",
+              "manifest_json_sha256": "4d93d68264b90fe5692d8b74bbe634c5b4edc8c6328c54398a57dbd32744c856",
+              "provenance_sha256": "4c57101ab80388ed986aa0c3288a961b2ad2b1decaa56915dc9c32b4f3fdaab8",
+              "SDK": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "title": 70,
+              "profile": 53,
+              "snapshot": 19,
+              "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "declared_manifest_sha256": "379b2ec4bdd8749ee671496751c228c7ac922e6bd680cbf89709197ce60f33f3",
+              "host": "same Windows PC loopback",
+              "backend": "ENHANCED GL-HLE OpenGL3.3 RTX3080Ti native1x",
+              "host_profile": "mmx6.win64-clang22.loopback",
+              "host_profile_revision": 53,
+              "selected_profile_sha256": "f5ebe960a67f706f6d911a38125ed9cbf878aa46a67f41346a58b090971af742",
+              "observer_sha256": "373be0903a84b8dba97f1e6a442eccd7d8102f0a387ac3c07c5ca4ff2b5f3adf",
+              "caller_sha256": "aba41c70fee2fc925f9bdb5b03e2cf59bd9c0e50f528eaca2dca5a29d79e2da0"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "checkpoint": "sigma_cp1 once; contact protection OFF; initial HP1/1; earned weapons OFF",
+              "transport": "two Windows peers, loopback, delay3, session2026103178",
+              "host_profile": "mmx6.win64-clang22.loopback revision53 settled before guest"
+            },
+            "action": "One agreed original SigmaCP1/initialHP1 setup, ordinary published host-pad approach/dialogue/combat deaths through three true team wipes, then primary confirms literal Continue only after original UIhold80097424 clears. Observe native final intro/61HP48/released controls after retry and Continue, then existing final resolved core/mod CRC and owned cleanup.",
+            "outcome": "NET passes on exact same6a7605d/f13de94a image as LOCAL: lives2->1->0->-1, original post-retry scene and61/48 with actual P1/P2 Right controls on bothpeers; literal GAME OVER/Continue at UIhold0 bothpeers; normal Cross returns12/1CP1/lives2/fresh32 pair and repeats original final intro/61/48/both controls. Four accepted control offers move only addressed hero at unchanged32HP on bothpeers. Fixture generation1/initializer_entries1 retained;8/8 native and15/15 parent checks,31 core/mod CRC samples in4windows, both exits0/cards unchanged. Six composed images personally reviewed. No game/runtime change or manual extraCross.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-2/qualification.json",
+                "sha256": "e7b6d29da2a7d8c3cb2b96d7fdbdcb7a25bea964a424669129c6d40323f9ea09"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-2/intro-admission/observations.json",
+                "sha256": "f2cd28cd81909cf9ab7fdea2e6c7ad80ce1874a8cd9950a89977fdf8b21478a9"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-native-net-job-2.json",
+                "sha256": "e4028724098a3a71fda0f83724d538286853567943db4d571ff25296e19a1b1c"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-native-net-capacity-2.json",
+                "sha256": "1da720e239e6f416ae49d8e9abb3dac88269a87aee874965c964822f201d194c"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-native-net-measured-after-2.json",
+                "sha256": "700a61cb9c1ece4887753ee332d3745d187453d93ffc9dcfb97550e86c19cbda"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-1/qualification.json",
+                "sha256": "cbea922c6a32c773cf5257b4d0ca9a623e0ed8b8d98a611a75f70ff80ad903b4"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-1/intro-admission/observations.json",
+                "sha256": "e007b61d124d60281201a373ead1eaeb89165e8cfb1fd06e4500f9aaceb924cf"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-2/intro-admission/peer-0-after-team-retry-both-controls.png",
+                "sha256": "6784460887baf3b07ae05ad5a1fd30053fe673674e4c19724ad0bb3f5a3d13be"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-2/intro-admission/peer-1-after-team-retry-both-controls.png",
+                "sha256": "4c34c488aec73148164ceff6b2daeb626236d3650a5b9a8ae9b9699d4642d8c7"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-2/intro-admission/peer-0-literal-GameOver-Continue.png",
+                "sha256": "454424cc36c38232cf36b72ea6510fe8bf883ec9cf8f23a3874738078ffc1814"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-2/intro-admission/peer-1-literal-GameOver-Continue.png",
+                "sha256": "454424cc36c38232cf36b72ea6510fe8bf883ec9cf8f23a3874738078ffc1814"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-2/intro-admission/peer-0-after-Continue-both-controls.png",
+                "sha256": "01a67975b6211636b14e5d450a6a2b0671da667e5b696051cca75585790fb45a"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F136-c122-final-net-2/intro-admission/peer-1-after-Continue-both-controls.png",
+                "sha256": "ac41853f52645df56d279a11e3b6e8599df5ad63c0e9b247e48a0b5f01572b7c"
+              }
+            ],
+            "limits": [
+              "Same-PC Windows loopback/profile53 only; no WAN/cross-host/platform, performance or general campaign/boss-rush claim. Only original first61 at12/1CP1.",
+              "First NET attempt reached real retries/post-retry controls/literalGameOver but timed out at Continue. Published Cross reached rawpad; UIhold was not sampled then, so its exact first-pulse value is not claimed. Failed raw and exact observer07cd9d6a are retained (localGit5f7c1eb).",
+              "Read-only original source: major13 driver8001FB3C dispatches phase1 handler8001F778, which admits confirmedge800C4570&40 only when80097424==0. Corrective raw rows948..952 directly show UIhold1/1->1/0->0/0; normal Cross after0 completes Continue. PLAY+4 remains120 and is not this admission gate.",
+              "One bounded corrective NET repeat used latest owner session-wide goahead; totalF136nativeattempts3(LOCAL1/NET2), not a reset or gamefix. No new observer/harness family, game build, state/result writes or extra manual input.",
+              "Retained exact-C122 LOCAL current-build save/load supplies that protection. NET profile does not qualify live state loads, replay or rollback; none attempted. Both ordinary fixture recordings are intentionally refused; no ordinary recording/replay pass.",
+              "Observations/captures are asynchronous; peer control deltas differ with read timing, not claimed instruction-atomic. Final CRC window retains legacy parent label paired ground-jump audio then settle; it runs after this F136 case, without a new audio qualification claim.",
+              "Initial HP1/1/CP1 prerequisites and all LOCAL label/capture/death-tail caveats remain attached to LOCAL evidence; no credit is transferred from unlike candidates."
+            ],
+            "bypasses": [
+              "One pre-agreed sigma_cp1 chord initializes original12/1CP1 and requested startingHP1/1, bypassing preceding traversal. Contact protection OFF, earned weapons OFF.",
+              "All subsequent deaths/retries/lives reset, literal Continue, intro/boss activation and controls are original native outcomes driven by canonical published peer pads. Generation1/initializer_entries1 unchanged; no second chord, native Load, scene/HP/life/result writes or unilateral NET state load."
+            ]
           }
         ],
-        "limitations": "C122 SERVER LOCAL real team retry and literal GameOver/Continue original final intro/61HP48/both-control chain passed, including current-build save/load/cards/exit0. Stationary P1Left is excluded; sustained P1Right and separate P2 movement qualify both controls. NET remains unverified; setup spent, no ready continuous NET job. Label correction, CP/initialHP bypasses, later contact tail and recording refusal retained."
+        "limitations": "Passed bounded LOCAL+NET on exact6a7605d/f13de94a C122: genuine native retry and literalGameOver/Continue each lead through original final intro/61HP48 and both controls. SamecandidateLOCAL save/load plus NET15parent/8native checks,31resolved core/mod CRC samples/4windows,cards/twoexits0,6NETimages reviewed. FirstNET confirmation miss and07cd source preserved; nativeUIhold wait correction succeeded without gamefix/manual input. InitialCP1/HP bypasses, LOCAL label/death-tail caveats and unavailable ordinaryrecording/NETstates/replay/rollback remain explicit."
       }
     },
     {
