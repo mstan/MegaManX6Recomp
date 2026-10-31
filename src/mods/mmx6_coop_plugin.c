@@ -1425,7 +1425,12 @@ static void scene_tick(CPUState *cpu) {
     uint8_t owner[sizeof scene_body];
     if (seat) memcpy(owner,p2.body,sizeof owner);
     else capture(PLAYER,owner,sizeof owner);
-    int locked=scene_locked(owner);
+    int owner_dead=owner[4]==2 || life.status[seat]==MMX6_COOP_DYING ||
+        life.status[seat]==MMX6_COOP_FALLEN;
+    /* A fatal body can retain personal control/door acknowledgements. Only
+     * the original shared script/dialogue holds can delay its survivor. */
+    int locked=owner_dead?(psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
+        psx_mod_read_byte(0x8008EAFC)):scene_locked(owner);
     if (!scene_phase) {
         /* A voluntary departure already in flight still finishes, even if
          * native gameplay is now frozen for the other player's dialogue. */
@@ -1451,11 +1456,20 @@ static void scene_tick(CPUState *cpu) {
         if (!locked) { scene_owner=0;both_door_reset(); }
         return;
     }
-    if (locked && scene_phase>=4) scene_phase=1;
+    if (locked && scene_phase>=4 && !owner_dead) scene_phase=1;
     /* Wait for an actual grounded, controllable destination. Native door
      * and script locks, including chained boss dialogue, must all release. */
     int landing=!locked && owner[4]==1 && owner[5]>=2 &&
         !owner[0x67] && (owner[0x70]&8) && owner[0x5C];
+    /* Death cannot supply a new grounded destination. Once the original
+     * script releases, return the still-living passenger to its own retained
+     * grounded body. Keep an incoming beam already in flight intact. */
+    if (owner_dead && !locked && mmx6_coop_living(&life,passenger) &&
+        scene_body[4]==1 && scene_body[0x5C] && scene_body[0x5C]<128 &&
+        !scene_body[0x67] && (scene_body[0x70]&8)) {
+        memcpy(owner,scene_body,sizeof owner);
+        landing=1;
+    }
     if (scene_phase==3 && !landing) return;
     int prior_inside=inside;
     inside=scene_call=1;
@@ -1796,7 +1810,8 @@ static int paired_arrival(CPUState *cpu) {
     return 1;
 }
 static int player_tick(CPUState *cpu, uint32_t address) {
-    if (inside || player_call || !enrolled || failed) return 0;
+    if ((inside && !zero_world) || player_call || !enrolled || failed) return 0;
+    unsigned seat=zero_world?1u:0u;
     /* 8003CD44 has decoded this frame's pad before this native update.
      * Withhold its held/edge words until BOTH original arrivals finish. The
      * native body/terrain/animation pass still runs, including fatal paths. */
@@ -1808,13 +1823,34 @@ static int player_tick(CPUState *cpu, uint32_t address) {
     player_call=1;
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
     player_call=0;
-    if (psx_mod_read_byte(PLAYER+4)==2 || life.status[0]==MMX6_COOP_DYING) {
-        mmx6_coop_fatal(&life,0);
-        if (mmx6_coop_living(&life,1)) project(PLAY+0x12,freeze,sizeof freeze);
-        if (psx_mod_read_byte(PLAYER+4)==3) life.status[0]=MMX6_COOP_FALLEN;
+    if (psx_mod_read_byte(PLAYER+4)==2 || life.status[seat]==MMX6_COOP_DYING) {
+        mmx6_coop_fatal(&life,seat);
+        if (mmx6_coop_living(&life,seat^1u)) project(PLAY+0x12,freeze,sizeof freeze);
+        if (psx_mod_read_byte(PLAYER+4)==3) life.status[seat]=MMX6_COOP_FALLEN;
     }
     STATE_POP(restore_freeze);
     cpu->gpr[2]=result;
+    return 1;
+}
+static int scene_survivor_retry(CPUState *cpu,uint32_t address) {
+    /* Original 1EAE0..1EB00 treats any resident phase3 as a team death,
+     * increments PLAY.phase and calls the death fade. A withdrawn living
+     * passenger has that same native phase. Cancel only this exact retry;
+     * neither the dead body nor an actual team wipe is revived/suppressed. */
+    if(address!=0x800139F4u || !enrolled || failed || !stage_call || clear_phase ||
+       !scene_owner || !scene_phase || life.wipe || cpu->gpr[31]!=0x8001EB04u ||
+       cpu->gpr[4]!=8 || psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1)!=1 ||
+       psx_mod_read_word(0x8001EAFCu)!=0x0C004E7Du ||
+       psx_mod_read_word(0x8001EB00u)!=0xA2020001u) return 0;
+    unsigned seat=scene_owner-1;
+    unsigned passenger=seat^1u;
+    unsigned hp=passenger?(zero_world?psx_mod_read_byte(PLAYER+0x5C):p2.body[0x5C]):
+        (zero_world?p1.body[0x5C]:psx_mod_read_byte(PLAYER+0x5C));
+    if((life.status[seat]!=MMX6_COOP_DYING && life.status[seat]!=MMX6_COOP_FALLEN) ||
+       !mmx6_coop_living(&life,seat^1u) || !hp || hp>=128 ||
+       scene_body[4]!=1 || !scene_body[0x5C] || scene_body[0x5C]>=128) return 0;
+    psx_mod_write_byte(PLAY+1,0);
+    cpu->gpr[2]=0;
     return 1;
 }
 static void diagnostic_inventory_setup(CPUState *cpu) {
@@ -3007,6 +3043,7 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
         !psx_mod_set_function_replacement(0x8001E9EC,stage_tick) ||
+        !psx_mod_set_function_replacement(0x800139F4,scene_survivor_retry) ||
         !psx_mod_set_function_replacement(0x80020A08,ride_tick) ||
         !psx_mod_set_function_replacement(0x800232D4,render_survivor)) failed=1;
     if (!psx_mod_set_function_replacement(0x80014F70,working_palette_native_load)) failed=1;

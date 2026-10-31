@@ -32,6 +32,7 @@ static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
 static unsigned scene_transport_probe,capsule_native_probe;
+static unsigned projected_death_probe;
 static unsigned voluntary_transport_probe;
 static unsigned paired_arrival_fixture_probe,arrival_landed,arrival_ticks[2],arrival_births;
 static unsigned clear_probe,clear_worlds,clear_zero_worlds,clear_fades;
@@ -227,6 +228,12 @@ static uint32_t original_door_predicate(uint32_t actor) {
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
+    if(projected_death_probe && address==0x80034DCCu) {
+        CHECK(zero_world && zero_projected && player_call);
+        for(unsigned i=0x12;i<=0x1C;++i)psx_mod_write_byte(PLAY+i,1);
+        psx_mod_write_byte(PLAYER+4,2);psx_mod_write_byte(PLAYER+0x5C,0);
+        return;
+    }
     if(boss_scan_probe && address==0x80031474u) {
         unsigned seat=(unsigned)!!zero_projected;uint32_t actor=cpu->gpr[4],shot=0x800950A0u;
         ++boss_scan_calls[seat];
@@ -571,6 +578,7 @@ static void setup(CPUState *cpu){
     door_native_probe=door_ticks=door_draws=both_doors=scene_call=0;both_door_reset();door_subtype_allowed=1;
     icon_packet_probe=dash_packet_probe=render_replacement_probe=0;
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=voluntary_transport_probe=capsule_native_probe=0;memset(death_effect,0,sizeof death_effect);
+    projected_death_probe=0;
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=arrival_pair=0;previous_input=p2_edges=0;p2_start_previous=0;
     paired_arrival_fixture_probe=arrival_landed=arrival_births=0;memset(arrival_ticks,0,sizeof arrival_ticks);
@@ -627,6 +635,68 @@ static void check_retired_fixed_pools(const PlayerContext *before,const PlayerCo
         CHECK(after->trails[i]==((i%0x60==3 || i%0x60==4)?0:before->trails[i]));
     for(unsigned i=0;i<sizeof after->effects;++i)
         CHECK(after->effects[i]==((i%0x50==3 || i%0x50==4)?0:before->effects[i]));
+}
+static void scene_owner_death_preserves_living_passenger(void) {
+    for(unsigned passenger=0;passenger<2;++passenger)for(unsigned incoming=0;incoming<2;++incoming) {
+        CPUState cpu;setup(&cpu);
+        PlayerContext primary=p2;primary.body[2]=0;
+        primary.body[0x70]=p2.body[0x70]=8;project_player(&primary);
+        psx_mod_write_half(0x80097206u,980);
+        psx_mod_write_byte(PLAY+0x1C,1);scene_transport_probe=passenger+1;
+        unsigned owner=passenger^1u;
+        scene_begin(owner,0x8003D308u);scene_tick(&cpu);scene_tick(&cpu);
+        CHECK(scene_phase==3 && life.status[passenger]==MMX6_COOP_ALIVE);
+        if(incoming) {psx_mod_write_byte(PLAY+0x1C,0);scene_tick(&cpu);CHECK(scene_phase==4);}
+        uint32_t destination_x=incoming?(owner?le32(p2.body+8):psx_mod_read_word(PLAYER+8)):le32(scene_body+8);
+        if(owner) {
+            p2.body[4]=2;p2.body[0x5C]=p2.body[0x70]=0;
+            p2.body[0xD0]=p2.body[0xD4]=p2.body[0x7A]=255;
+        } else {
+            psx_mod_write_byte(PLAYER+4,2);psx_mod_write_byte(PLAYER+0x5C,0);psx_mod_write_byte(PLAYER+0x70,0);
+            psx_mod_write_byte(PLAYER+0xD0,255);psx_mod_write_byte(PLAYER+0xD4,255);psx_mod_write_byte(PLAYER+0x7A,255);
+        }
+        mmx6_coop_fatal(&life,owner);
+        if(!incoming) {
+            unsigned before=call_count;scene_tick(&cpu);
+            CHECK(scene_phase==3 && call_count==before); /* Original shared script still owns release. */
+            psx_mod_write_byte(PLAY+0x1C,0);scene_tick(&cpu);CHECK(scene_phase==4);
+        } else {
+            psx_mod_write_byte(PLAY+0x1C,1);scene_tick(&cpu);
+            CHECK(scene_phase>=4); /* A fatal hold cannot withdraw the incoming passenger again. */
+            psx_mod_write_byte(PLAY+0x1C,0);
+        }
+        for(unsigned n=0;n<12 && scene_owner;++n)scene_tick(&cpu);
+        CHECK(!scene_owner && !scene_phase && !life.wipe && !failed && !state_track.count && !state_track.error);
+        uint8_t body[sizeof scene_body];if(passenger)memcpy(body,p2.body,sizeof body);else capture(PLAYER,body,sizeof body);
+        CHECK(body[3] && body[4]==1 && body[5]==2 && body[0x5C]==32 && !body[0x67]);
+        CHECK(le32(body+8)==destination_x && le32(body+12)==le32(scene_body+12));
+        CHECK(life.status[passenger]==MMX6_COOP_ALIVE && life.status[owner]==MMX6_COOP_DYING);
+    }
+    CPUState cpu;setup(&cpu);projected_death_probe=1;
+    enter_zero();zero_world=inside=1;
+    CHECK(player_tick(&cpu,0x80034DCCu));
+    CHECK(life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_DYING && !life.wipe);
+    for(unsigned i=0x12;i<=0x1C;++i)CHECK(!psx_mod_read_byte(PLAY+i));
+    zero_world=inside=0;leave_zero();
+    /* An actual team death keeps the original freeze/retry contract. */
+    setup(&cpu);projected_death_probe=1;life.status[0]=MMX6_COOP_FALLEN;
+    enter_zero();zero_world=inside=1;CHECK(player_tick(&cpu,0x80034DCCu));
+    CHECK(life.wipe==2);for(unsigned i=0x12;i<=0x1C;++i)CHECK(psx_mod_read_byte(PLAY+i)==1);
+    zero_world=inside=0;leave_zero();
+    for(unsigned negative=0;negative<7;++negative) {
+        setup(&cpu);scene_owner=2;scene_phase=3;scene_body[4]=1;scene_body[0x5C]=32;
+        life.status[1]=MMX6_COOP_FALLEN;psx_mod_write_byte(PLAY+1,1);
+        psx_mod_write_word(0x8001EAFCu,0x0C004E7Du);psx_mod_write_word(0x8001EB00u,0xA2020001u);
+        cpu.gpr[31]=0x8001EB04u;cpu.gpr[4]=8;
+        if(negative==1) {life.status[0]=MMX6_COOP_FALLEN;life.wipe=2;}
+        if(negative==2) life.status[1]=MMX6_COOP_ALIVE; /* Normal victory/departure retirement. */
+        if(negative==3) clear_phase=1;
+        if(negative==4) cpu.gpr[31]+=4;
+        if(negative==5) psx_mod_write_word(0x8001EAFCu,0);
+        if(negative==6) psx_mod_write_byte(PLAYER+0x5C,0x80);
+        CHECK(scene_survivor_retry(&cpu,0x800139F4u)==(negative==0));
+        CHECK(psx_mod_read_byte(PLAY+1)==(negative?1:0));
+    }
 }
 static void scene_passengers_keep_native_fixed_effects(void) {
     for(unsigned passenger=0;passenger<2;++passenger) {
@@ -2437,6 +2507,7 @@ static void native_optional_private_boss_cooldowns(void) {
 
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_guest_weather_window();
+    scene_owner_death_preserves_living_passenger();
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
     deferred_dash_effect_uses_allocating_body();
