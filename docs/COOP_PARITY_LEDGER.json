@@ -11421,13 +11421,13 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "unverified",
           "netplay": "unverified"
         },
         "evidence": [
@@ -11462,9 +11462,79 @@
             "bypasses": [
               "Agreed original Recycle CP2 then source-guarded once position/history placement and contact protection; original capsule admission/dialogue/visibility remain native."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "532d66a41e7c95ba2be9867f8861d141ec39d4e8",
+            "build_identity": {
+              "executable_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+              "compiled_manifest_sha256": "4fb1a60ab2f369bdc308ca64d59f87a688ee0c5c40e5a60a0119778ae1fc9c4d",
+              "provenance_sha256": "d71ea961860413a008ad60cc43033bf3914a32baa8771f46a6503d8e1f216734"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "location": "Original Recycle capsule",
+              "audio": "emulated muted dummy",
+              "host_profile_revision": 48
+            },
+            "action": "Ordinary X Left admits original capsule; owning Cross advances native dialogue through all six capsule phases, while observing living partner visibility and original release.",
+            "outcome": "Capsule component PASSES with actual in-place owner hold and visible healthy partner. Full F52 remains UNVERIFIED until its distinct intro/route families are qualified on this candidate.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-532d66a-F52-native-capsule-visibility-fix-local-netplay-reviewed.json",
+                "sha256": "bb879aea2632d3465edddcb7b75edced1b5dfce52b1e3dafcd6316194b498b4e"
+              }
+            ],
+            "limits": [
+              "Capsule visibility/native release fix only. Do not mark the combined F52 comparison passed or inherit other script families from different builds.",
+              "One original Recycle capsule, X/P1 and Zero/P2, LOCAL split and same-PC NET delay3; no inverse-roster/F154 part identity, general palette/portrait/art, capsule death or other controller qualification.",
+              "Pre-agreed original Recycle CP2 plus source/terrain-guarded once position-history setup and contact protection replace unrelated reachability. Capsule trigger, dialogue, grant controller and scene release are not assigned.",
+              "RAM, source actors and composed captures are asynchronous. NET captures can show different native animation instants; no instruction-atomic or identical-frame claim.",
+              "Default native captures stay explicitly fixture-tainted and fail strict ordinary recording/replay qualification. Active native cards are unchanged; LOCAL additionally creates expected native recording initial-card snapshots.",
+              "Tested532d66a and integrated source match across all runtime/mod/config/tool/test/host-contract paths. No whole-current-build equality, state compatibility or cross-build netplay claim."
+            ],
+            "bypasses": [
+              "Agreed originalCP2/once source-bound position-history and contact protection; no tested result writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "532d66a41e7c95ba2be9867f8861d141ec39d4e8",
+            "build_identity": {
+              "executable_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+              "compiled_manifest_sha256": "4fb1a60ab2f369bdc308ca64d59f87a688ee0c5c40e5a60a0119778ae1fc9c4d",
+              "provenance_sha256": "d71ea961860413a008ad60cc43033bf3914a32baa8771f46a6503d8e1f216734"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "location": "Original Recycle capsule",
+              "audio": "emulated muted dummy",
+              "host_profile_revision": 48
+            },
+            "action": "Ordinary X Left admits original capsule; owning Cross advances native dialogue through all six capsule phases, while observing living partner visibility and original release.",
+            "outcome": "Capsule component PASSES with actual in-place owner hold and visible healthy partner. Full F52 remains UNVERIFIED until its distinct intro/route families are qualified on this candidate.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-532d66a-F52-native-capsule-visibility-fix-local-netplay-reviewed.json",
+                "sha256": "bb879aea2632d3465edddcb7b75edced1b5dfce52b1e3dafcd6316194b498b4e"
+              }
+            ],
+            "limits": [
+              "Capsule visibility/native release fix only. Do not mark the combined F52 comparison passed or inherit other script families from different builds.",
+              "One original Recycle capsule, X/P1 and Zero/P2, LOCAL split and same-PC NET delay3; no inverse-roster/F154 part identity, general palette/portrait/art, capsule death or other controller qualification.",
+              "Pre-agreed original Recycle CP2 plus source/terrain-guarded once position-history setup and contact protection replace unrelated reachability. Capsule trigger, dialogue, grant controller and scene release are not assigned.",
+              "RAM, source actors and composed captures are asynchronous. NET captures can show different native animation instants; no instruction-atomic or identical-frame claim.",
+              "Default native captures stay explicitly fixture-tainted and fail strict ordinary recording/replay qualification. Active native cards are unchanged; LOCAL additionally creates expected native recording initial-card snapshots.",
+              "Tested532d66a and integrated source match across all runtime/mod/config/tool/test/host-contract paths. No whole-current-build equality, state compatibility or cross-build netplay claim."
+            ],
+            "bypasses": [
+              "Agreed originalCP2/once source-bound position-history and contact protection; no tested result writes."
+            ]
           }
         ],
-        "limitations": "Actual exactC116 LOCAL native Recycle capsule dialogue hides healthyZero: lifecycleALIVE/HP32, nativevisible0/state3 in co-op scenephase3. Two composed images reviewed. interaction_begin is byte-identical in canonical main. Capsule-only in-place hold implemented separately26527be withfixturecorrection532d66a; runtime validation pending. No permanent-loss claim; other F52 scene families and NET remain unverified."
+        "limitations": "Capsule hiding defect FIXED and integrated99183ba/6895c63. Exact532d66a/3b49fe50/title65/profile48 LOCAL+NET passes nativecapsule1..6, Zero visible/ALIVE throughout, both32HP/idle and owner0/phase0 at native release. All4/15parent checks,4CRCwindows28matching samples,3exit0/unchanged activecards and6reviewed passimages. FullF52 staysunverified: separate intro and alternate-route families need SAMEcandidate qualification; old C116failedcomponent retained."
       }
     },
     {

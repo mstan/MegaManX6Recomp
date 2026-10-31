@@ -1,0 +1,635 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F52"
+  ],
+  "frozen_row_sha256": "feab4ddb768486e52d32708cc047c71a896ed11ec38e713111c809114bf07c91",
+  "result": "capsule_component_passed_full_F52_unverified",
+  "candidate": "532d66a41e7c95ba2be9867f8861d141ec39d4e8",
+  "implementation_commit": "26527bea85969d8e97593c2bc536762b04358ad1",
+  "integrated_commits": [
+    "99183ba",
+    "6895c63"
+  ],
+  "binding": {
+    "image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+    "manifest_sha256": "4fb1a60ab2f369bdc308ca64d59f87a688ee0c5c40e5a60a0119778ae1fc9c4d",
+    "provenance_sha256": "d71ea961860413a008ad60cc43033bf3914a32baa8771f46a6503d8e1f216734"
+  },
+  "profile": 48,
+  "title": 65,
+  "snapshot": 17,
+  "semantic_contract_sha256": "ee08053f7125747ba8ee8819748e278b2536060de8b8d3ee5646e79fcdd1d57b",
+  "implementation": "Only original capsule interaction51924 selects existing in-place scene_phase0 after native admission. Original owner/input/conversation/grant/release remain native, without outgoing/rejoin commands for a healthy passenger.",
+  "modes": {
+    "local": {
+      "result": "passed_capsule_component",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1l\\qualification.json",
+        "sha256": "72a900beee7930c22636acb396bad3e82b07976513f093b0c8538132457254a1"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1l\\ammo-hud\\intro-admission\\observations.json",
+        "sha256": "ee4441ffbd3c4f70f48527ac5fdea204d23d8b37a7ed1547182f845716588b8b"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "capsule_checks": {
+        "original_capsule_admission": true,
+        "native_dialogue_observed": true,
+        "living_partner_remains_visible": true,
+        "finite_original_scene_release": true,
+        "no_result_writes": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "admitted": 159,
+          "released": 300,
+          "observations": 142,
+          "P2_visible_and_alive_throughout": true,
+          "final_owner": 0,
+          "final_scene_phase": 0,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 97550336,
+              "y_raw": 104529920,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 98697216,
+              "y_raw": 104464384,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "capsule_stages": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "owned_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "active_cards_before": {
+        "saves\\card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+        "saves\\card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      "active_cards_unchanged": true
+    },
+    "netplay": {
+      "result": "passed_capsule_component",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1n\\qualification.json",
+        "sha256": "90441a379d48497ea7fd305f1a5bd0b0b1716aacc23ba6ea9f61f32e6c0a1274"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1n\\intro-admission\\observations.json",
+        "sha256": "1f8c0197b7d66c1befcb5e4f706e3bf1cbcb71fba4fbd25d17c695b1d4fe824b"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "capsule_checks": {
+        "original_capsule_admission": true,
+        "native_dialogue_observed": true,
+        "living_partner_remains_visible": true,
+        "finite_original_scene_release": true,
+        "no_result_writes": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "admitted": 127,
+          "released": 308,
+          "observations": 182,
+          "P2_visible_and_alive_throughout": true,
+          "final_owner": 0,
+          "final_scene_phase": 0,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 97550336,
+              "y_raw": 104529920,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 98697216,
+              "y_raw": 104464384,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "capsule_stages": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        {
+          "peer": 1,
+          "admitted": 127,
+          "released": 308,
+          "observations": 182,
+          "P2_visible_and_alive_throughout": true,
+          "final_owner": 0,
+          "final_scene_phase": 0,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 97550336,
+              "y_raw": 104529920,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 98697216,
+              "y_raw": 104464384,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "capsule_stages": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "seat": 0,
+          "owned_pid": 51896,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "seat": 1,
+          "owned_pid": 36648,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "active_cards_unchanged": true,
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2848,
+              "core": "d546ff47",
+              "mod": "857891bc"
+            },
+            {
+              "simulation_tick": 2880,
+              "core": "341a63bc",
+              "mod": "69ca34be"
+            },
+            {
+              "simulation_tick": 2912,
+              "core": "1451793c",
+              "mod": "9799d11c"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "1bdceb12",
+              "mod": "d49a29bc"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "c9d10b28",
+              "mod": "80f20416"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "6a254cc2",
+              "mod": "a85371b6"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "03414645",
+              "mod": "530a8a6a"
+            }
+          ],
+          "resolved_through": [
+            3071,
+            3071
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3104,
+              "core": "43cf3af9",
+              "mod": "4d6f6400"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "6489666f",
+              "mod": "2687829a"
+            },
+            {
+              "simulation_tick": 3168,
+              "core": "fc8643eb",
+              "mod": "6f8703f4"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "e22fde4b",
+              "mod": "d76ae054"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "020a134d",
+              "mod": "1f8e64f2"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "856e0b12",
+              "mod": "bb0a2a92"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "cbcd592b",
+              "mod": "c2a3273c"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "5f6694a4",
+              "mod": "d273a51c"
+            }
+          ],
+          "resolved_through": [
+            3342,
+            3342
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3424,
+              "core": "ca1f0f02",
+              "mod": "0545cf04"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "31ddc796",
+              "mod": "d3a5df84"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "5154ec8d",
+              "mod": "f570d882"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "e3bf24ab",
+              "mod": "4819e4e2"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "72ff62e2",
+              "mod": "86fc2cec"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "2813a3b6",
+              "mod": "4d6f6400"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "33a4dc9c",
+              "mod": "2687829a"
+            }
+          ],
+          "resolved_through": [
+            3639,
+            3641
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4832,
+              "core": "fdbf5095",
+              "mod": "ea637a14"
+            },
+            {
+              "simulation_tick": 4864,
+              "core": "61e85849",
+              "mod": "f7bd1a2e"
+            },
+            {
+              "simulation_tick": 4896,
+              "core": "cce7a927",
+              "mod": "79a5ec12"
+            },
+            {
+              "simulation_tick": 4928,
+              "core": "74fcba58",
+              "mod": "effb93c4"
+            },
+            {
+              "simulation_tick": 4960,
+              "core": "0073f8e4",
+              "mod": "cca2c6ac"
+            },
+            {
+              "simulation_tick": 4992,
+              "core": "e32bb2dc",
+              "mod": "6f39f456"
+            }
+          ],
+          "resolved_through": [
+            5016,
+            5016
+          ]
+        }
+      ],
+      "host_profile_startup": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 48,
+        "selected_sha256": "545f06fd76d7923a3e8f1c21f622f685bfcbde1436dea7e4dc90e528bd8f385d",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 48,
+              "selected_sha256": "545f06fd76d7923a3e8f1c21f622f685bfcbde1436dea7e4dc90e528bd8f385d",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 48,
+              "selected_sha256": "545f06fd76d7923a3e8f1c21f622f685bfcbde1436dea7e4dc90e528bd8f385d",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "host_profile_final": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 48,
+        "selected_sha256": "545f06fd76d7923a3e8f1c21f622f685bfcbde1436dea7e4dc90e528bd8f385d",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 48,
+              "selected_sha256": "545f06fd76d7923a3e8f1c21f622f685bfcbde1436dea7e4dc90e528bd8f385d",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "3b49fe505691303b127207dbface80825049f232713ffbce49f5635dcbe35a9c",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 48,
+              "selected_sha256": "545f06fd76d7923a3e8f1c21f622f685bfcbde1436dea7e4dc90e528bd8f385d",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "root_reviewed_composed_images": [
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-capsule-original-dialogue",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-capsule-original-dialogue.png",
+      "sha256": "047d4d5c50ad417f5bcf7bc99d072f35dec275027e52b8ac61b4064dddde2e5f",
+      "root_reviewed": true
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-capsule-released",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1l\\ammo-hud\\intro-admission\\peer-0-native-capsule-released.png",
+      "sha256": "00dabf4118c397a48095bd9bc56b80d8a9a4c3cb751939da467f0b9f4f5cc170",
+      "root_reviewed": true
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-capsule-original-dialogue",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1n\\intro-admission\\peer-0-native-capsule-original-dialogue.png",
+      "sha256": "1d7be33f23f1044f65a0321463585283db82bdc6d363a3d9f70a69405c48fff4",
+      "root_reviewed": true
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-capsule-original-dialogue",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1n\\intro-admission\\peer-1-native-capsule-original-dialogue.png",
+      "sha256": "1de9b82bdd75c37a311e3f6f268393c9b75ac544d77507aea5b1cb49a430e773",
+      "root_reviewed": true
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-capsule-released",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1n\\intro-admission\\peer-0-native-capsule-released.png",
+      "sha256": "d893b2480332c50ba424af5eb36175b3708de8927d1346b22eb7bb36e028a744",
+      "root_reviewed": true
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-capsule-released",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\bbl1n\\intro-admission\\peer-1-native-capsule-released.png",
+      "sha256": "c52437bba4542d27bf2946318c4ffeb267d5b680106c2891ef3f5aa70f57af42",
+      "root_reviewed": true
+    }
+  ],
+  "full_comparison_status": "unverified: separate original intro and alternate-route script families still need same-candidate qualification",
+  "prior_failure": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-11ded85-F52-native-capsule-passenger-hidden-reviewed.json",
+    "sha256": "b23736eea74424be9775fd573e4f06a525661ba8bcce97db462cdc20f01dbeeb"
+  },
+  "limits": [
+    "Capsule visibility/native release fix only. Do not mark the combined F52 comparison passed or inherit other script families from different builds.",
+    "One original Recycle capsule, X/P1 and Zero/P2, LOCAL split and same-PC NET delay3; no inverse-roster/F154 part identity, general palette/portrait/art, capsule death or other controller qualification.",
+    "Pre-agreed original Recycle CP2 plus source/terrain-guarded once position-history setup and contact protection replace unrelated reachability. Capsule trigger, dialogue, grant controller and scene release are not assigned.",
+    "RAM, source actors and composed captures are asynchronous. NET captures can show different native animation instants; no instruction-atomic or identical-frame claim.",
+    "Default native captures stay explicitly fixture-tainted and fail strict ordinary recording/replay qualification. Active native cards are unchanged; LOCAL additionally creates expected native recording initial-card snapshots.",
+    "Tested532d66a and integrated source match across all runtime/mod/config/tool/test/host-contract paths. No whole-current-build equality, state compatibility or cross-build netplay claim."
+  ],
+  "focused_tests": {
+    "count": 18,
+    "build_receipt": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v117-root-v1\\capsule-visibility-v117-runtime-build-receipt-root-v2.json",
+      "sha256": "1c200bb288e91ef8f01088774ab73a6944b9c3654480eb5842261febf422396a"
+    },
+    "first_fixture_failure_retained": "SERVER original77780 focused16/18 due poisoned idle D4/7A; corrected fixture only532d66a and passing actual18 before runtime54387exit0"
+  }
+}
