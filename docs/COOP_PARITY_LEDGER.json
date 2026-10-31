@@ -16417,17 +16417,100 @@
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "ed7aff74194154b5a93818611a0db5651f139440",
+            "build_identity": {
+              "executable_sha256": "13f007a1b738cff0443967f9075fffecffd6c60b0a1586ff312a2fc4aa01fdfc",
+              "compiled_manifest_sha256": "c97939d2c662832b009c67532a08f79f1647b6f325143aac07637f93f3b5bf9d",
+              "provenance_sha256": "8146884d116dc06038cda2c7f884af8cb6c0c98e40ac6355c8d8b5cc672edac9",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "boss_balance": "on",
+              "boss_cooldowns": "independent",
+              "roster": "X/P1+Zero/P2",
+              "checkpoint": "originalSigma12/1CP1",
+              "host": "PC Windows",
+              "audio": "dummy muted",
+              "title": "mmx6-x-zero-delay-v67",
+              "host_revision": 50,
+              "snapshot": 18
+            },
+            "action": "Use actual X buster to prime X recovery, accept native Zero ground slash while X clock is positive, then accept fresh X after original private expiry.",
+            "outcome": "Native X15/Zero1 private installs; ready-partner counter1; raw3/Zero1/scaled1, HP48->47. All required parent/native checks, cards and three native exits0 pass; NET4 resolved windows/26 matching samples;15 images reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-ed7aff7-F99-native-private-cooldowns-local-netplay-reviewed.json",
+                "sha256": "1876dfa75005e65885c99ae58f24bd517f4e23d2200935af8622d829f4c775f3"
+              }
+            ],
+            "limits": [
+              "Frozen F99 only: selectable shared/independent boss recovery and actual overlapping private recovery followed by a fresh alternating hit. F152 aerial and F153 finisher follow-ups remain unverified.",
+              "The ready partner really connects while the other private cooldown is active. No instruction-atomic simultaneous-hit claim; own-gate scan counts alone do not prove duplicate-contact rejection.",
+              "Original Sigma12/1CP1; native checkpoint reachability, earned ability setup and hostile-contact protection are declared bypasses. No authored boss HP, phase, timer, result, token or success flag.",
+              "Source/compiled tests retain the shared alternative, default-off native path and current-build snapshot18 codec/digest. These are not fresh off-mode native runs or a native rewind/rollback claim.",
+              "Windows LOCAL and same-machine delay3 NET only. Fixture-tainted recording/replay remains refused; no ordinary recording admission, WAN, physical-controller, performance or native3330 credit. All older failures and the original uncommitted HUD harness/cards/saves/settings are preserved."
+            ],
+            "bypasses": [
+              "Native checkpoint reachability, earned abilities and hostile-contact protection; no boss HP/phase/timer/result writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "ed7aff74194154b5a93818611a0db5651f139440",
+            "build_identity": {
+              "executable_sha256": "13f007a1b738cff0443967f9075fffecffd6c60b0a1586ff312a2fc4aa01fdfc",
+              "compiled_manifest_sha256": "c97939d2c662832b009c67532a08f79f1647b6f325143aac07637f93f3b5bf9d",
+              "provenance_sha256": "8146884d116dc06038cda2c7f884af8cb6c0c98e40ac6355c8d8b5cc672edac9",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "boss_balance": "on",
+              "boss_cooldowns": "independent",
+              "roster": "X/P1+Zero/P2",
+              "checkpoint": "originalSigma12/1CP1",
+              "host": "PC Windows delay3 loopback",
+              "audio": "dummy muted",
+              "title": "mmx6-x-zero-delay-v67",
+              "host_revision": 50,
+              "snapshot": 18
+            },
+            "action": "Use actual X buster to prime X recovery, accept native Zero ground slash while X clock is positive, then accept fresh X after original private expiry.",
+            "outcome": "Native X15/Zero1 private installs; ready-partner counter1; raw3/Zero1/scaled1, HP48->47. All required parent/native checks, cards and three native exits0 pass; NET4 resolved windows/26 matching samples;15 images reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-ed7aff7-F99-native-private-cooldowns-local-netplay-reviewed.json",
+                "sha256": "1876dfa75005e65885c99ae58f24bd517f4e23d2200935af8622d829f4c775f3"
+              }
+            ],
+            "limits": [
+              "Frozen F99 only: selectable shared/independent boss recovery and actual overlapping private recovery followed by a fresh alternating hit. F152 aerial and F153 finisher follow-ups remain unverified.",
+              "The ready partner really connects while the other private cooldown is active. No instruction-atomic simultaneous-hit claim; own-gate scan counts alone do not prove duplicate-contact rejection.",
+              "Original Sigma12/1CP1; native checkpoint reachability, earned ability setup and hostile-contact protection are declared bypasses. No authored boss HP, phase, timer, result, token or success flag.",
+              "Source/compiled tests retain the shared alternative, default-off native path and current-build snapshot18 codec/digest. These are not fresh off-mode native runs or a native rewind/rollback claim.",
+              "Windows LOCAL and same-machine delay3 NET only. Fixture-tainted recording/replay remains refused; no ordinary recording admission, WAN, physical-controller, performance or native3330 credit. All older failures and the original uncommitted HUD harness/cards/saves/settings are preserved."
+            ],
+            "bypasses": [
+              "Native checkpoint reachability, earned abilities and hostile-contact protection; no boss HP/phase/timer/result writes."
+            ]
+          }
+        ],
+        "limitations": "Original Sigma native overlapping private recovery and alternating fresh acceptance qualified on exacted7aff7 in LOCAL+NET; compiled shared/default-off/snapshot regression checks. F152/F153 remain separate; no universal boss matrix/native3330 credit."
       }
     },
     {

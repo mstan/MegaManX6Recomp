@@ -1,0 +1,808 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F99"
+  ],
+  "frozen_row_sha256": "ab656f0ab2bb25c2406280306da941e50025a098b5a377fce6d15c73d1321343",
+  "candidate": "ed7aff74194154b5a93818611a0db5651f139440",
+  "implementation_commit": "ed7aff74194154b5a93818611a0db5651f139440",
+  "binding": {
+    "executable_sha256": "13f007a1b738cff0443967f9075fffecffd6c60b0a1586ff312a2fc4aa01fdfc",
+    "compiled_manifest_sha256": "c97939d2c662832b009c67532a08f79f1647b6f325143aac07637f93f3b5bf9d",
+    "provenance_sha256": "8146884d116dc06038cda2c7f884af8cb6c0c98e40ac6355c8d8b5cc672edac9",
+    "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "profile": 50,
+  "title": 67,
+  "snapshot": 18,
+  "semantic_contract_sha256": "59fca5246dbbe3fae98cff3491121dd94deecaa960ad2fb3c34ae535083cd6a7",
+  "implementation": "Integrates the existing per-seat admission/native-derived cooldown fix with the accepted capsule fix. Shared/independent dropdown is manifest registered; independent contacts project only their owning clock, preserving native contact and effective-damage accounting.",
+  "result": "passed",
+  "full_comparison_status": "passed",
+  "build": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\integrated-private-cooldowns-v119-runtime-build-receipt-root-v2.json",
+    "sha256": "c21e811e73e81f6069e88cfa85d41b7bcb23e83005bae19ce42da03bdd495e50"
+  },
+  "focused_compiled_tests_passed": 18,
+  "source_build_preflight": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\F99-source-build-preflight.stdout.json",
+    "sha256": "60ab88168856e10545606230897aea84877aa73ad45deddc7f10c97614a06201"
+  },
+  "modes": {
+    "local": {
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99l\\qualification.json",
+        "sha256": "bbd80208b24ca81df1b4d0b62a4a60c707ab8c98c0df3a73e5ddc6fc13e3098e"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99l\\ammo-hud\\intro-admission\\observations.json",
+        "sha256": "457bab0e83737d60c49f6715186fa8e00a4984e49a783aa7c29207016314b6ef"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "actual_both_seats_accepted": true,
+        "ready_partner_accepted_during_other_private_clock": true,
+        "exact_native_derived_clock_installs": true,
+        "fresh_alternating_hit_after_native_expiry": true,
+        "native_fractional_health_budget": true,
+        "no_HP_phase_timer_or_result_writes": true
+      },
+      "X_prime": {
+        "row": 616,
+        "before": [
+          {
+            "raw": 0,
+            "zero": 0,
+            "scaled": 0,
+            "one": 0,
+            "two": 0,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 0,
+            "events": 0,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "after": [
+          {
+            "raw": 1,
+            "zero": 0,
+            "scaled": 0,
+            "one": 1,
+            "two": 0,
+            "partner": 0,
+            "own": 1,
+            "t1": 15,
+            "t2": 0,
+            "events": 1,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ]
+      },
+      "native_Zero_stage0": {
+        "stage": 0,
+        "before": 616,
+        "stats_before": [
+          {
+            "raw": 1,
+            "zero": 0,
+            "scaled": 0,
+            "one": 1,
+            "two": 0,
+            "partner": 0,
+            "own": 1,
+            "t1": 15,
+            "t2": 0,
+            "events": 1,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "hp_before": [
+          48
+        ],
+        "children_observed": [
+          24
+        ],
+        "native_stage": 617,
+        "after": 619,
+        "stats_after": [
+          {
+            "raw": 2,
+            "zero": 1,
+            "scaled": 0,
+            "one": 1,
+            "two": 1,
+            "partner": 1,
+            "own": 12,
+            "t1": 15,
+            "t2": 1,
+            "events": 2,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "hp_after": [
+          48
+        ]
+      },
+      "fresh_X_after_native_expiry": {
+        "row": 639,
+        "before": [
+          {
+            "raw": 2,
+            "zero": 1,
+            "scaled": 0,
+            "one": 1,
+            "two": 1,
+            "partner": 1,
+            "own": 14,
+            "t1": 15,
+            "t2": 1,
+            "events": 2,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "after": [
+          {
+            "raw": 3,
+            "zero": 1,
+            "scaled": 1,
+            "one": 2,
+            "two": 1,
+            "partner": 1,
+            "own": 16,
+            "t1": 30,
+            "t2": 1,
+            "events": 3,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ]
+      },
+      "final_stats": [
+        {
+          "raw": 3,
+          "zero": 1,
+          "scaled": 1,
+          "one": 2,
+          "two": 1,
+          "partner": 1,
+          "own": 28,
+          "t1": 30,
+          "t2": 1,
+          "events": 3,
+          "shared_before": 0,
+          "shared_after": 0
+        }
+      ],
+      "final_boss_HP": [
+        47
+      ],
+      "expected_HP": "48 - floor(((raw-zero)*5 + zero*4)/10) = 47",
+      "native_source_guards": [
+        {
+          "peer": 0,
+          "address": "800EDE18",
+          "bytes": 344,
+          "sha256": "baeed2f4fbb5dce78dd4e85b16d45a6f17d317658229ec4e04f67ed08a4940c5"
+        },
+        {
+          "peer": 0,
+          "address": "800EDE88",
+          "bytes": 640,
+          "sha256": "d2d6774ee46b5f720c0194a55ecc48841cd8c9eb6c249209965b6d6c08afcd8f"
+        },
+        {
+          "peer": 0,
+          "address": "800F2154",
+          "bytes": 380,
+          "sha256": "5ae741444b296fa498fe07bb67c382670d7451273acd5fe13f3c1681fff21568"
+        },
+        {
+          "peer": 0,
+          "address": "800F57EC",
+          "bytes": 8,
+          "sha256": "65ba96aacc252cbe50b489700411591524ef78920c43996c534a16e660115b51"
+        },
+        {
+          "peer": 0,
+          "address": "800F5920",
+          "bytes": 8,
+          "sha256": "5029368026a424e5e170e6c1637784edb51160fe5dd1cb7b70c5b3ae4494b0a4"
+        },
+        {
+          "peer": 0,
+          "address": "800F666C",
+          "bytes": 16,
+          "sha256": "32f4f0e153b8bb3a624fbaf1fe3b128a6be25bf1e14155a8e178e1e1632a1ce6"
+        },
+        {
+          "peer": 0,
+          "address": "800F6E18",
+          "bytes": 16,
+          "sha256": "2c1eea608d9503abc0a66e7598710764b10169459b0fae4bd7643776b1e4246f"
+        },
+        {
+          "peer": 0,
+          "address": "800EE0CC",
+          "bytes": 84,
+          "sha256": "6494098475af86ca5978caf890186e9a9663aebfdaacb564653ee46b16141892"
+        },
+        {
+          "peer": 0,
+          "address": "800ECDCC",
+          "bytes": 392,
+          "sha256": "ef0c836b2f2c9885e4c022d459e9cc9272b358cbc9ef79d7cda643a09eb92e5d"
+        },
+        {
+          "peer": 0,
+          "address": "800EFC90",
+          "bytes": 576,
+          "sha256": "dd91dfaf1c7dcb71f79d36b38791c0fe16ca6d8da29f179cadb283dc137089b4"
+        }
+      ],
+      "resolved_crc_windows": 0,
+      "matching_crc_samples": 0,
+      "fixture_capture_admitted": false,
+      "replay_admitted": false,
+      "cleanup": "parent confirms owned native graceful exit0 and unchanged active private cards",
+      "prelaunch_selection": "boss_balance on; boss_cooldowns independent; native Sigma checkpoint; see F181_prelaunch_selections in qualification"
+    },
+    "netplay": {
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\qualification.json",
+        "sha256": "575ef0323b2e12ce9ae3e211777548ce85a0a9a3fd1dba24c3dec827e609449a"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\observations.json",
+        "sha256": "3a12a35db7ca99e4fae33578627a41393ffcf5cf23a96a20d3f752982299d45e"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "actual_both_seats_accepted": true,
+        "ready_partner_accepted_during_other_private_clock": true,
+        "exact_native_derived_clock_installs": true,
+        "fresh_alternating_hit_after_native_expiry": true,
+        "native_fractional_health_budget": true,
+        "no_HP_phase_timer_or_result_writes": true
+      },
+      "X_prime": {
+        "row": 491,
+        "before": [
+          {
+            "raw": 0,
+            "zero": 0,
+            "scaled": 0,
+            "one": 0,
+            "two": 0,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 0,
+            "events": 0,
+            "shared_before": 0,
+            "shared_after": 0
+          },
+          {
+            "raw": 0,
+            "zero": 0,
+            "scaled": 0,
+            "one": 0,
+            "two": 0,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 0,
+            "events": 0,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "after": [
+          {
+            "raw": 1,
+            "zero": 0,
+            "scaled": 0,
+            "one": 1,
+            "two": 0,
+            "partner": 0,
+            "own": 1,
+            "t1": 15,
+            "t2": 0,
+            "events": 1,
+            "shared_before": 0,
+            "shared_after": 0
+          },
+          {
+            "raw": 1,
+            "zero": 0,
+            "scaled": 0,
+            "one": 1,
+            "two": 0,
+            "partner": 0,
+            "own": 1,
+            "t1": 15,
+            "t2": 0,
+            "events": 1,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ]
+      },
+      "native_Zero_stage0": {
+        "stage": 0,
+        "before": 491,
+        "stats_before": [
+          {
+            "raw": 1,
+            "zero": 0,
+            "scaled": 0,
+            "one": 1,
+            "two": 0,
+            "partner": 0,
+            "own": 2,
+            "t1": 15,
+            "t2": 0,
+            "events": 1,
+            "shared_before": 0,
+            "shared_after": 0
+          },
+          {
+            "raw": 1,
+            "zero": 0,
+            "scaled": 0,
+            "one": 1,
+            "two": 0,
+            "partner": 0,
+            "own": 2,
+            "t1": 15,
+            "t2": 0,
+            "events": 1,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "hp_before": [
+          48,
+          48
+        ],
+        "children_observed": [
+          24
+        ],
+        "native_stage": 493,
+        "after": 495,
+        "stats_after": [
+          {
+            "raw": 2,
+            "zero": 1,
+            "scaled": 0,
+            "one": 1,
+            "two": 1,
+            "partner": 1,
+            "own": 14,
+            "t1": 15,
+            "t2": 1,
+            "events": 2,
+            "shared_before": 0,
+            "shared_after": 0
+          },
+          {
+            "raw": 2,
+            "zero": 1,
+            "scaled": 0,
+            "one": 1,
+            "two": 1,
+            "partner": 1,
+            "own": 14,
+            "t1": 15,
+            "t2": 1,
+            "events": 2,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "hp_after": [
+          48,
+          48
+        ]
+      },
+      "fresh_X_after_native_expiry": {
+        "row": 510,
+        "before": [
+          {
+            "raw": 2,
+            "zero": 1,
+            "scaled": 0,
+            "one": 1,
+            "two": 1,
+            "partner": 1,
+            "own": 14,
+            "t1": 15,
+            "t2": 1,
+            "events": 2,
+            "shared_before": 0,
+            "shared_after": 0
+          },
+          {
+            "raw": 2,
+            "zero": 1,
+            "scaled": 0,
+            "one": 1,
+            "two": 1,
+            "partner": 1,
+            "own": 14,
+            "t1": 15,
+            "t2": 1,
+            "events": 2,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "after": [
+          {
+            "raw": 3,
+            "zero": 1,
+            "scaled": 1,
+            "one": 2,
+            "two": 1,
+            "partner": 1,
+            "own": 17,
+            "t1": 30,
+            "t2": 1,
+            "events": 3,
+            "shared_before": 0,
+            "shared_after": 0
+          },
+          {
+            "raw": 3,
+            "zero": 1,
+            "scaled": 1,
+            "one": 2,
+            "two": 1,
+            "partner": 1,
+            "own": 17,
+            "t1": 30,
+            "t2": 1,
+            "events": 3,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ]
+      },
+      "final_stats": [
+        {
+          "raw": 3,
+          "zero": 1,
+          "scaled": 1,
+          "one": 2,
+          "two": 1,
+          "partner": 1,
+          "own": 28,
+          "t1": 30,
+          "t2": 1,
+          "events": 3,
+          "shared_before": 0,
+          "shared_after": 0
+        },
+        {
+          "raw": 3,
+          "zero": 1,
+          "scaled": 1,
+          "one": 2,
+          "two": 1,
+          "partner": 1,
+          "own": 28,
+          "t1": 30,
+          "t2": 1,
+          "events": 3,
+          "shared_before": 0,
+          "shared_after": 0
+        }
+      ],
+      "final_boss_HP": [
+        47,
+        47
+      ],
+      "expected_HP": "48 - floor(((raw-zero)*5 + zero*4)/10) = 47",
+      "native_source_guards": [
+        {
+          "peer": 0,
+          "address": "800EDE18",
+          "bytes": 344,
+          "sha256": "baeed2f4fbb5dce78dd4e85b16d45a6f17d317658229ec4e04f67ed08a4940c5"
+        },
+        {
+          "peer": 0,
+          "address": "800EDE88",
+          "bytes": 640,
+          "sha256": "d2d6774ee46b5f720c0194a55ecc48841cd8c9eb6c249209965b6d6c08afcd8f"
+        },
+        {
+          "peer": 0,
+          "address": "800F2154",
+          "bytes": 380,
+          "sha256": "5ae741444b296fa498fe07bb67c382670d7451273acd5fe13f3c1681fff21568"
+        },
+        {
+          "peer": 0,
+          "address": "800F57EC",
+          "bytes": 8,
+          "sha256": "65ba96aacc252cbe50b489700411591524ef78920c43996c534a16e660115b51"
+        },
+        {
+          "peer": 0,
+          "address": "800F5920",
+          "bytes": 8,
+          "sha256": "5029368026a424e5e170e6c1637784edb51160fe5dd1cb7b70c5b3ae4494b0a4"
+        },
+        {
+          "peer": 0,
+          "address": "800F666C",
+          "bytes": 16,
+          "sha256": "32f4f0e153b8bb3a624fbaf1fe3b128a6be25bf1e14155a8e178e1e1632a1ce6"
+        },
+        {
+          "peer": 0,
+          "address": "800F6E18",
+          "bytes": 16,
+          "sha256": "2c1eea608d9503abc0a66e7598710764b10169459b0fae4bd7643776b1e4246f"
+        },
+        {
+          "peer": 0,
+          "address": "800EE0CC",
+          "bytes": 84,
+          "sha256": "6494098475af86ca5978caf890186e9a9663aebfdaacb564653ee46b16141892"
+        },
+        {
+          "peer": 0,
+          "address": "800ECDCC",
+          "bytes": 392,
+          "sha256": "ef0c836b2f2c9885e4c022d459e9cc9272b358cbc9ef79d7cda643a09eb92e5d"
+        },
+        {
+          "peer": 0,
+          "address": "800EFC90",
+          "bytes": 576,
+          "sha256": "dd91dfaf1c7dcb71f79d36b38791c0fe16ca6d8da29f179cadb283dc137089b4"
+        },
+        {
+          "peer": 1,
+          "address": "800EDE18",
+          "bytes": 344,
+          "sha256": "baeed2f4fbb5dce78dd4e85b16d45a6f17d317658229ec4e04f67ed08a4940c5"
+        },
+        {
+          "peer": 1,
+          "address": "800EDE88",
+          "bytes": 640,
+          "sha256": "d2d6774ee46b5f720c0194a55ecc48841cd8c9eb6c249209965b6d6c08afcd8f"
+        },
+        {
+          "peer": 1,
+          "address": "800F2154",
+          "bytes": 380,
+          "sha256": "5ae741444b296fa498fe07bb67c382670d7451273acd5fe13f3c1681fff21568"
+        },
+        {
+          "peer": 1,
+          "address": "800F57EC",
+          "bytes": 8,
+          "sha256": "65ba96aacc252cbe50b489700411591524ef78920c43996c534a16e660115b51"
+        },
+        {
+          "peer": 1,
+          "address": "800F5920",
+          "bytes": 8,
+          "sha256": "5029368026a424e5e170e6c1637784edb51160fe5dd1cb7b70c5b3ae4494b0a4"
+        },
+        {
+          "peer": 1,
+          "address": "800F666C",
+          "bytes": 16,
+          "sha256": "32f4f0e153b8bb3a624fbaf1fe3b128a6be25bf1e14155a8e178e1e1632a1ce6"
+        },
+        {
+          "peer": 1,
+          "address": "800F6E18",
+          "bytes": 16,
+          "sha256": "2c1eea608d9503abc0a66e7598710764b10169459b0fae4bd7643776b1e4246f"
+        },
+        {
+          "peer": 1,
+          "address": "800EE0CC",
+          "bytes": 84,
+          "sha256": "6494098475af86ca5978caf890186e9a9663aebfdaacb564653ee46b16141892"
+        },
+        {
+          "peer": 1,
+          "address": "800ECDCC",
+          "bytes": 392,
+          "sha256": "ef0c836b2f2c9885e4c022d459e9cc9272b358cbc9ef79d7cda643a09eb92e5d"
+        },
+        {
+          "peer": 1,
+          "address": "800EFC90",
+          "bytes": 576,
+          "sha256": "dd91dfaf1c7dcb71f79d36b38791c0fe16ca6d8da29f179cadb283dc137089b4"
+        }
+      ],
+      "resolved_crc_windows": 4,
+      "matching_crc_samples": 26,
+      "fixture_capture_admitted": false,
+      "replay_admitted": false,
+      "cleanup": "parent confirms owned native graceful exit0 and unchanged active private cards",
+      "prelaunch_selection": "boss_balance on; boss_cooldowns independent; native Sigma checkpoint; see F181_prelaunch_selections in qualification"
+    }
+  },
+  "root_reviewed_composed_images": [
+    {
+      "peer": 0,
+      "label": "native-original-Sigma-CP1",
+      "row": 106,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+      "sha256": "fe76f9711d2e197b36ab26c97b760e9d5364144b1610f69d664c4cd3afd5712a",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-first-Sigma-scene",
+      "row": 137,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99l\\ammo-hud\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+      "sha256": "08df4eb4c9cf844be05eec79eaae25b426cda280bb39414c69b975a195b9cd3f",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-Sigma61-released",
+      "row": 584,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99l\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "6283360c277812d8e67722575f20ce4ccd16fff04fcdde7722d6115e2f1899a9",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-combo-stage0",
+      "row": 619,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99l\\ammo-hud\\intro-admission\\peer-0-native-private-combo-stage0.png",
+      "sha256": "c7961126ad09c691817c44c5404e9e3a832c8696247c9dbbf5455f01a8442b57",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-F99-fresh-X-after-expiry",
+      "row": 639,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99l\\ammo-hud\\intro-admission\\peer-0-native-F99-fresh-X-after-expiry.png",
+      "sha256": "4dfc9c9886368b15c24bf50dd918d817e42b665d0f54cc9f7591e35e0ef75672",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-original-Sigma-CP1",
+      "row": 95,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+      "sha256": "33a78f0360d0a8631fc54e1827bdb37e8e71024fe88957b5166aa66517533ae5",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-original-Sigma-CP1",
+      "row": 95,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-1-native-original-Sigma-CP1.png",
+      "sha256": "65777310e2962420fe5797040682f913f86bfe689733e0368447afb04c29039f",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-first-Sigma-scene",
+      "row": 118,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+      "sha256": "21add22a7e4cb56c59c913e48c244d4619360887bb2a2f9035a36a03110cf48b",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-first-Sigma-scene",
+      "row": 118,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-1-native-first-Sigma-scene.png",
+      "sha256": "e3ef14294084fdeb9e6e83cf8b4a25776361ab34659d8e749ae470d79c76ff54",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-Sigma61-released",
+      "row": 469,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "cf3634da30b13e5e25367cf93118f86ca390e9686e1eb6791585b68b00fae4e7",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-Sigma61-released",
+      "row": 469,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-1-native-Sigma61-released.png",
+      "sha256": "52d7765240a8281624adfe5d4e66b8baa2ff9d5ec4133756097e3a8312aee8c2",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-combo-stage0",
+      "row": 495,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-0-native-private-combo-stage0.png",
+      "sha256": "7005fd4ee39f7ec5ed0388cc1000303cf8d199112ec156237a6e1c307f9634a3",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-private-combo-stage0",
+      "row": 495,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-1-native-private-combo-stage0.png",
+      "sha256": "4e39dab6842c0d8983f043b303eaf362c6745a0052b2c332eab6328b57ab6cf9",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-F99-fresh-X-after-expiry",
+      "row": 510,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-0-native-F99-fresh-X-after-expiry.png",
+      "sha256": "0ac81beb133ae509af613f21f217749ae38339e9af73cde36f34bcee14ed51af",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-F99-fresh-X-after-expiry",
+      "row": 510,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f99n\\intro-admission\\peer-1-native-F99-fresh-X-after-expiry.png",
+      "sha256": "33d7a76f7dcf25735359b08c1267c7a35183a73b5e3899b49404d0544ee979e8",
+      "review": "personally reviewed: native scene, actors and contact/effect remain visible; no obvious image defect"
+    }
+  ],
+  "limits": [
+    "Frozen F99 only: selectable shared/independent boss recovery and actual overlapping private recovery followed by a fresh alternating hit. F152 aerial and F153 finisher follow-ups remain unverified.",
+    "The ready partner really connects while the other private cooldown is active. No instruction-atomic simultaneous-hit claim; own-gate scan counts alone do not prove duplicate-contact rejection.",
+    "Original Sigma12/1CP1; native checkpoint reachability, earned ability setup and hostile-contact protection are declared bypasses. No authored boss HP, phase, timer, result, token or success flag.",
+    "Source/compiled tests retain the shared alternative, default-off native path and current-build snapshot18 codec/digest. These are not fresh off-mode native runs or a native rewind/rollback claim.",
+    "Windows LOCAL and same-machine delay3 NET only. Fixture-tainted recording/replay remains refused; no ordinary recording admission, WAN, physical-controller, performance or native3330 credit. All older failures and the original uncommitted HUD harness/cards/saves/settings are preserved."
+  ]
+}
