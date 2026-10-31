@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; F4/F103 fatal recovery and inherited F180 private Sub Tank NET gap require native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 54,
+  "revision": 55,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v71",
+    "title_compatibility": "mmx6-x-zero-delay-v72",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,

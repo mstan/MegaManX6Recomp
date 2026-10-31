@@ -1405,10 +1405,20 @@ static int interaction_begin(CPUState *cpu, uint32_t address) {
     cpu->gpr[2]=result;
     return 1;
 }
-static int scene_locked(const uint8_t *owner) {
-    return owner[0xD0] || owner[0xD4] || owner[0x7A] ||
-        psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
+static int scene_shared_locked(void) {
+    return psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
         psx_mod_read_byte(0x8008EAFC);
+}
+static int scene_locked(const uint8_t *owner) {
+    return owner[0xD0] || owner[0xD4] || owner[0x7A] || scene_shared_locked();
+}
+static int scene_owner_fatal(void) {
+    if(!scene_owner || !scene_phase || life.wipe || clear_phase) return 0;
+    unsigned owner=scene_owner-1;
+    unsigned hp=owner?psx_mod_read_byte(PLAYER+0x5C):p2.body[0x5C];
+    return (life.status[owner]==MMX6_COOP_DYING || life.status[owner]==MMX6_COOP_FALLEN) &&
+        mmx6_coop_living(&life,owner^1u) && scene_body[4]==1 &&
+        scene_body[0x5C] && scene_body[0x5C]<128 && hp && hp<128;
 }
 static void scene_tick(CPUState *cpu) {
     if (!scene_owner || !enrolled) return;
@@ -1429,8 +1439,7 @@ static void scene_tick(CPUState *cpu) {
         life.status[seat]==MMX6_COOP_FALLEN;
     /* A fatal body can retain personal control/door acknowledgements. Only
      * the original shared script/dialogue holds can delay its survivor. */
-    int locked=owner_dead?(psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
-        psx_mod_read_byte(0x8008EAFC)):scene_locked(owner);
+    int locked=owner_dead?scene_shared_locked():scene_locked(owner);
     if (!scene_phase) {
         /* A voluntary departure already in flight still finishes, even if
          * native gameplay is now frozen for the other player's dialogue. */
@@ -1812,6 +1821,14 @@ static int paired_arrival(CPUState *cpu) {
 static int player_tick(CPUState *cpu, uint32_t address) {
     if ((inside && !zero_world) || player_call || !enrolled || failed) return 0;
     unsigned seat=zero_world?1u:0u;
+    /* A survivor's original beam belongs to scene_tick, even after its dead
+     * owner stops hosting the native world. Do not run ordinary movement or
+     * contact on that same body before the beam completes. */
+    unsigned hp=psx_mod_read_byte(PLAYER+0x5C);
+    if(scene_passenger(seat) && mmx6_coop_living(&life,seat) && hp && hp<128) {
+        cpu->gpr[2]=0;
+        return 1;
+    }
     /* 8003CD44 has decoded this frame's pad before this native update.
      * Withhold its held/edge words until BOTH original arrivals finish. The
      * native body/terrain/animation pass still runs, including fatal paths. */
@@ -1830,27 +1847,6 @@ static int player_tick(CPUState *cpu, uint32_t address) {
     }
     STATE_POP(restore_freeze);
     cpu->gpr[2]=result;
-    return 1;
-}
-static int scene_survivor_retry(CPUState *cpu,uint32_t address) {
-    /* Original 1EAE0..1EB00 treats any resident phase3 as a team death,
-     * increments PLAY.phase and calls the death fade. A withdrawn living
-     * passenger has that same native phase. Cancel only this exact retry;
-     * neither the dead body nor an actual team wipe is revived/suppressed. */
-    if(address!=0x800139F4u || !enrolled || failed || !stage_call || clear_phase ||
-       !scene_owner || !scene_phase || life.wipe || cpu->gpr[31]!=0x8001EB04u ||
-       cpu->gpr[4]!=8 || psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1)!=1 ||
-       psx_mod_read_word(0x8001EAFCu)!=0x0C004E7Du ||
-       psx_mod_read_word(0x8001EB00u)!=0xA2020001u) return 0;
-    unsigned seat=scene_owner-1;
-    unsigned passenger=seat^1u;
-    unsigned hp=passenger?(zero_world?psx_mod_read_byte(PLAYER+0x5C):p2.body[0x5C]):
-        (zero_world?p1.body[0x5C]:psx_mod_read_byte(PLAYER+0x5C));
-    if((life.status[seat]!=MMX6_COOP_DYING && life.status[seat]!=MMX6_COOP_FALLEN) ||
-       !mmx6_coop_living(&life,seat^1u) || !hp || hp>=128 ||
-       scene_body[4]!=1 || !scene_body[0x5C] || scene_body[0x5C]>=128) return 0;
-    psx_mod_write_byte(PLAY+1,0);
-    cpu->gpr[2]=0;
     return 1;
 }
 static void diagnostic_inventory_setup(CPUState *cpu) {
@@ -1886,6 +1882,11 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     if (!enrolled || failed) return 0;
     diagnostic_inventory_setup(cpu);
     diagnostic_setup(cpu);
+    /* Native 1EAE0 checks the resident body for phase3 before updating it.
+     * Prime a withdrawn living survivor through the existing incoming path
+     * first, after the actual shared script release, in either seat. */
+    if(!psx_mod_read_byte(PLAY+1) && scene_owner_fatal() &&
+       !scene_shared_locked() && scene_phase==3) scene_tick(cpu);
     uint16_t raw=p2_input(MMX6_INPUT_STAGE);
     if(checkpoint_lab_boundary(cpu,raw))return 1;
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
@@ -1916,7 +1917,15 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
         life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);
     stage_context[3]=(uint32_t)survivor;STATE_UPDATE(restore_stage,stage_context);
-    if (!survivor && pause_owner!=1 && scene_owner!=2 && !shared_clear_zero_world()) {
+    /* A dead Zero no longer hosts the world after the shared script releases.
+     * Finish his original body-only death once; controller intentionally
+     * withholds its ordinary private player update while a scene is active. */
+    if(!phase && scene_owner==2 && scene_owner_fatal() && !scene_shared_locked() && p2.body[4]==2) {
+        inside=1;enter_zero();guest(cpu,0x80034DCC,0,0);leave_zero();inside=0;
+        if(p2.body[4]==3) life.status[1]=MMX6_COOP_FALLEN;
+    }
+    if (!survivor && pause_owner!=1 &&
+        (scene_owner!=2 || (scene_owner_fatal() && !scene_shared_locked())) && !shared_clear_zero_world()) {
         uint8_t arrival_input[6];unsigned restore_arrival_input=UINT32_MAX;
         if (arrival_pair) {
             capture(0x800C456C,arrival_input,sizeof arrival_input);
@@ -3043,7 +3052,6 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
         !psx_mod_set_function_replacement(0x8001E9EC,stage_tick) ||
-        !psx_mod_set_function_replacement(0x800139F4,scene_survivor_retry) ||
         !psx_mod_set_function_replacement(0x80020A08,ride_tick) ||
         !psx_mod_set_function_replacement(0x800232D4,render_survivor)) failed=1;
     if (!psx_mod_set_function_replacement(0x80014F70,working_palette_native_load)) failed=1;
