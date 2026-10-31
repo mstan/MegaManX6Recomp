@@ -154,6 +154,223 @@ def exercise_distant_explosion(ctx, *, output, original_exe, leader, success):
         (output/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8')
 
 
+def exercise_final_retry_continue(ctx, *, output, original_exe, leader, success):
+    """F136: actual Sigma retry/Continue, using the existing owned pad routes."""
+    output = Path(output); output.mkdir(parents=True, exist_ok=False)
+    clients = ctx['clients']; deadline = time.monotonic()+1800
+    e = dict(kind='F136_native_final_retry_GameOver_Continue', status='failed_setup',
+        samples=[], inputs=[], captures=[], checks={}, controls=[], network_windows=[],
+        comparison_admissions=0,
+        bypasses=['One agreed Sigma12/1CP1 entry and initial HP1/1 only; contact protection off.'],
+        limits=['Asynchronous native observations; no instruction-atomic peer sampling.',
+                'Same-image LOCAL current-build save/load is retained separately; no unilateral NET state load, replay or rollback qualification.'])
+    ctx['report']['final_retry_continue'] = e
+
+    def need(ok, why):
+        if not ok: raise ValueError(why)
+
+    def inp(seat, bits, label):
+        need(seat in (0, 1) and bits in (0, 6, 8, 0x20, 0x80, 0x4000), 'Only ordinary named host-pad buttons')
+        e['inputs'].append(dict(seat=seat, bits=bits, label=label, ack=ctx['set_input'](seat, bits)))
+
+    def sample(label):
+        row = dict(index=len(e['samples']), label=label, peers=[])
+        e['samples'].append(row)
+        need(time.monotonic()<deadline, 'F136 progressing native observation deadline')
+        for i, c in enumerate(clients):
+            raw=c.read(debug.DIAGNOSTIC_ADDRESS, debug.DIAGNOSTIC_BYTES)
+            o=debug.parse_diagnostic(raw).json(); p=c.read(0x800CCED0, 0xE0)
+            ptr=struct.unpack_from('<I',p,0x20)[0]; boss=None
+            if 0x8008EF48<=ptr<0x80090C88 and (ptr-0x8008EF48)%0x9C==0:
+                a=c.read(ptr,0x9C)
+                if a[0]&1 and a[1]==61 and struct.unpack_from('<I',a,0x10)[0]==0x800F57EC:
+                    boss=dict(address=ptr,type=a[1],state=a[4],action=a[5],hp=a[0x5C],hex=a.hex())
+            row['peers'].append(dict(peer=i,observation=o,play_hex=p.hex(),
+                tuple=[p[n] for n in (0,1,12,13,0x1D)],lives=struct.unpack_from('<b',p,0x39)[0],
+                fixture=receipt(c),starting_hp=starting_hp_receipt(c),boss=boss,
+                dialogue_hex=c.read(0x8008EAF0,16).hex(),
+                p1_body_hex=raw[0x1800:0x1958].hex(),p2_body_hex=raw[0x100:0x258].hex()))
+            need(not o['failed'] and not o['mailbox'], 'Native plugin failure or diagnostic mutation')
+        if len(e['samples'])%16==0 and ctx.get('network'):
+            e['network_windows'].append(dict(row=row['index'],peers=ctx['network']()))
+        return row
+
+    def healthy(p):
+        o=p['observation']
+        return (o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,0)
+            and all(a['active'] and a['state']==1 and 0<a['hp']<=127 for a in o['players']))
+
+    def wait(label, predicate, seconds):
+        stop=min(deadline,time.monotonic()+seconds)
+        while time.monotonic()<stop:
+            row=sample(label)
+            need(not any(p['fixture']['state'] in (4,5) for p in row['peers']), 'Agreed original prerequisite refused')
+            if predicate(row): return row
+            time.sleep(.04)
+        raise ValueError(label+' timed out')
+
+    def updates(label, count=8):
+        # Dialogue holds stop the world clock. Consume actual emulation frames,
+        # including the negotiated pad delay, before making another input edge.
+        online=len(clients)==2 and ctx.get('network')
+        starts=ctx['network']() if online else [c.request('freeze_check',window=1)['frame_count'] for c in clients]
+        stop=min(deadline,time.monotonic()+20)
+        while time.monotonic()<stop:
+            row=sample(label)
+            now=ctx['network']() if online else [c.request('freeze_check',window=1)['frame_count'] for c in clients]
+            consumed=(all(n['resolved_through']>=s['tick']+count for n,s in zip(now,starts)) if online
+                else all(((n-s)&0xFFFFFFFF)>=count for n,s in zip(now,starts)))
+            if consumed: return row
+            time.sleep(.025)
+        raise ValueError(label+' did not consume native frames')
+
+    def capture(label, row):
+        for i,c in enumerate(clients):
+            e['captures'].append(dict(peer=i,label=label,row_index=row['index'],
+                **debug.capture_present(c,output/f'peer-{i}-{label}.png',request=c.request)))
+
+    def released(row):
+        return all(p['tuple']==[10,0,12,1,1] and healthy(p)
+            and not p['observation']['scene_owner'] and not p['observation']['scene_phase']
+            and p['boss'] and p['boss']['state']==1 and p['boss']['hp']==48 for p in row['peers'])
+
+    def controls(label):
+        for seat in (0,1):
+            accepted=None
+            # Right is the already-qualified post-intro route; Left can meet
+            # original room admission/collision bounds and is only a fallback.
+            for bits in (0x20,0x80):
+                before=sample(label+f' seat{seat} before ordinary walk')
+                starts=[c.request('freeze_check',window=1)['frame_count'] for c in clients]
+                inp(seat,bits,label+' actual owned movement')
+                stop=min(deadline,time.monotonic()+8)
+                try:
+                    while time.monotonic()<stop:
+                        row=sample(label+f' seat{seat} native movement')
+                        good=[]
+                        for old,p in zip(before['peers'],row['peers']):
+                            a=old['observation']['players'][seat]; b=p['observation']['players'][seat]
+                            dx=b['x_raw']-a['x_raw']
+                            good.append(healthy(p) and not p['observation']['scene_owner']
+                                and b['hp']==a['hp'] and b['action'] in (3,4,5)
+                                and (dx < -2*65536 if bits==0x80 else dx > 2*65536))
+                        if all(good): accepted=row; break
+                        if any(p['observation']['players'][seat]['hp'] != old['observation']['players'][seat]['hp']
+                                for old,p in zip(before['peers'],row['peers'])):
+                            before=row  # A hurt displacement is not our movement witness.
+                        now=[c.request('freeze_check',window=1)['frame_count'] for c in clients]
+                        if all(((n-s)&0xFFFFFFFF)>=32 for n,s in zip(now,starts)):
+                            break
+                        time.sleep(.025)
+                finally: inp(seat,0,label+' release actual movement')
+                if accepted is not None: break
+            need(accepted is not None,label+' missing accepted control for seat'+str(seat))
+            e['controls'].append(dict(label=label,seat=seat,before=before['index'],accepted=accepted['index'],bits=bits))
+            updates(label+' neutral input separation')
+        row=sample(label+' both accepted controls complete'); capture(label+'-both-controls',row)
+        return row
+
+    def enter_final(label, require_controls):
+        inp(0,0x20,label+' original primary Right door approach')
+        try:
+            row=wait(label+' original door/scene',lambda r:any(p['observation']['scene_owner']
+                or p['boss'] for p in r['peers']),45)
+        finally: inp(0,0,label+' release original approach')
+        e.setdefault('scene_entries',[]).append(dict(label=label,row=row['index']))
+        stop=min(deadline,time.monotonic()+150)
+        while time.monotonic()<stop:
+            row=sample(label+' original Sigma intro/fill/release')
+            if released(row): break
+            # The first HP1 pair may die immediately on original release. Its
+            # purpose is the real retry; post-retry/Continue require both controls.
+            if not require_controls and all(p['boss'] and p['boss']['hp']==48 for p in row['peers']): break
+            owner=row['peers'][0]['observation']['scene_owner']
+            if owner in (1,2) and all(p['observation']['scene_owner']==owner
+                    and p['observation']['players'][owner-1]['action']==20
+                    and bytes.fromhex(p['dialogue_hex'])[12:14]==bytes((255,3)) for p in row['peers']):
+                inp(owner-1,0x4000,label+' original owning Cross dialogue edge')
+                try: updates(label+' consumed original dialogue Cross')
+                finally: inp(owner-1,0,label+' release original dialogue Cross')
+                updates(label+' consumed dialogue neutral')
+            time.sleep(.04)
+        else: raise ValueError(label+' original final intro did not release')
+        e.setdefault('boss_activations',[]).append(dict(label=label,row=row['index']))
+        if require_controls:
+            need(released(row),label+' did not release actual first61/full48HP with both living heroes')
+            return controls(label)
+        return row
+
+    def wipe(old_lives, label, retry):
+        for seat in (0,1): inp(seat,0x20,label+' native boss contact; no attacks')
+        try:
+            row=wait(label+' actual native team death/life decrement',lambda r:all(
+                p['lives']==old_lives-1 for p in r['peers']),240)
+        finally:
+            for seat in (0,1): inp(seat,0,label+' release contact approach')
+        e.setdefault('native_wipes',[]).append(dict(label=label,old_lives=old_lives,row=row['index']))
+        if retry:
+            row=wait(label+' original fresh checkpoint pair',lambda r:all(p['tuple']==[10,0,12,1,1]
+                and p['lives']==old_lives-1 and healthy(p) and all(a['hp']==32
+                    for a in p['observation']['players']) for p in r['peers']),90)
+            e.setdefault('native_retries',[]).append(dict(label=label,row=row['index']))
+        return row
+
+    try:
+        exe=Path(original_exe).read_bytes()
+        need(hashlib.sha256(exe).hexdigest()=='dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046','Original EXE changed')
+        for address,size in ((0x8001E634,0x18),(0x80050250,0x324),(0x80050C88,0x174)):
+            expected=exe[address-0x80010000+2048:address-0x80010000+2048+size]
+            need(all(c.read(address,size)==expected for c in clients),'Original retry/door source changed')
+        for seat in (0,1): inp(seat,0,'original baseline neutral')
+        wait('original intro idle before once-only Sigma setup',lambda r:all(healthy(p)
+            and p['tuple']==[10,0,0,0,0] and all(a['action']==2 for a in p['observation']['players'])
+            and p['fixture']['generation']==p['fixture']['latch']==0 for p in r['peers']),30)
+        inp(1,6,'one accepted guest L3+R3 Sigma prerequisite')
+        try: wait('once-only Sigma chord consumed',lambda r:all(p['fixture']['latch'] in (1,2) for p in r['peers']),20)
+        finally: inp(1,0,'release the only checkpoint chord')
+        wanted=dict(generation=1,state=3,reason=0,stage=12,section=1,checkpoint=1,
+            nonce=0x4C534731,initializer_entries=1,record='80072C00',tainted=1,authority=1,latch=2)
+        row=wait('original Sigma CP1 initial native HP1 pair',lambda r:all(healthy(p)
+            and p['tuple']==[10,0,12,1,1] and all(p['fixture'].get(k)==v for k,v in wanted.items())
+            and p['starting_hp']==dict(status=2,requested=[1,1],applied_mask=3,raw_hex='02010103')
+            and all(a['hp']==1 for a in p['observation']['players']) for p in r['peers']),120)
+        need(all(p['lives']==2 for p in row['peers']),'Expected genuine original two-life budget')
+        e['initial']=row['index']; enter_final('initial-final',False)
+        wipe(2,'first-team-retry',True); enter_final('after-team-retry',True)
+        wipe(1,'remaining-team-retry',True); enter_final('zero-life-final',False)
+        wipe(0,'literal-GameOver',False)
+        row=wait('literal native GameOver Continue page',lambda r:all(p['tuple'][:2]==[13,1]
+            and p['lives']==-1 for p in r['peers']),60)
+        e['literal_GameOver']=row['index']; capture('literal-GameOver-Continue',row)
+        inp(0,0x4000,'primary selects actual default Continue the game')
+        try: updates('actual original Continue confirmation')
+        finally: inp(0,0,'release original Continue')
+        row=wait('actual Continue fresh final checkpoint',lambda r:all(p['tuple']==[10,0,12,1,1]
+            and p['lives']==2 and healthy(p) and all(a['hp']==32 for a in p['observation']['players'])
+            for p in r['peers']),120)
+        e['actual_Continue']=row['index']; enter_final('after-Continue',True)
+        final=sample('F136 final native endpoint')
+        need(all(all(p['fixture'].get(k)==v for k,v in wanted.items()) for p in final['peers']),
+            'A repeated checkpoint initializer or changed prerequisite was observed')
+        e['checks']=dict(actual_team_retry=True,original_final_intro_after_retry=True,
+            first61_fullHP_and_both_controls_after_retry=True,literal_GameOver_Continue=True,
+            actual_native_Continue=True,original_final_intro_after_Continue=True,
+            first61_fullHP_and_both_controls_after_Continue=True,no_repeated_initializer=True)
+        e['status']=success
+        return e
+    except Exception as error:
+        e.update(error=str(error),traceback=traceback.format_exc())
+        if e['samples']:
+            try: capture('terminal-native-observation',e['samples'][-1])
+            except Exception as extra: e['capture_error']=str(extra)
+        raise
+    finally:
+        for seat in (0,1):
+            try: inp(seat,0,'final native neutral')
+            except Exception as error: e.setdefault('cleanup_errors',[]).append(str(error))
+        (output/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8')
+
+
 def starting_hp_receipt(client):
     data = client.read(debug.DIAGNOSTIC_ADDRESS + 0xC0, 4)
     if len(data) != 4 or data[0] > 2 or data[1] > 32 or data[2] > 32 or data[3] > 3:

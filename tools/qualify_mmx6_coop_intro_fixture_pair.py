@@ -114,7 +114,8 @@ def run(args):
         prepared = [p['agreed_checkpoint'] for p in report['jump_audio_prepared']]
         if prepared[0] != prepared[1]:
             raise ValueError('Peers did not predeclare the same private checkpoint option/catalog')
-        exercise = intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise
+        exercise = (intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
+            else intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise)
         case = exercise(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
             output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=SUCCESS)
@@ -171,7 +172,8 @@ def run_local(args):
         return result
 
     def observe(ctx, *, output, **unused):
-        exercise = intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise
+        exercise = (intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
+            else intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise)
         return exercise(ctx, output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=failed_trace.ammo.SUCCESS)
 
@@ -199,8 +201,19 @@ def main():
     parser.add_argument('--intro-leader', type=int, choices=(0, 1), required=True)
     parser.add_argument('--local', action='store_true', help='Use the same candidate with two local pads')
     parser.add_argument('--distant-explosion', action='store_true', help='Observe F158 separated native explosion views')
+    parser.add_argument('--final-retry-continue', action='store_true', help='F136 actual Sigma team retry and literal Game Over/Continue')
     args = parser.parse_args(); args.jump_audio_smoke = True
     parent.validate_options(parser, args)
+    if args.final_retry_continue and args.distant_explosion:
+        parser.error('Select one named native scenario')
+    if args.final_retry_continue and args.intro_leader != 0:
+        parser.error('F136 reuses the primary-owned Sigma intro and Continue route')
+    if args.final_retry_continue:
+        original_select = select_checkpoint
+        def select_final(directory, *, enabled):
+            return original_select(directory, enabled=enabled, option='sigma_cp1',
+                contact_protection='off', starting_hp=('1', '1'), earned_weapons='off')
+        globals()['select_checkpoint'] = select_final
     if args.distant_explosion:
         original_select = select_checkpoint
         def select_distant(directory, *, enabled):
