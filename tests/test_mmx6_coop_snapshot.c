@@ -17,6 +17,8 @@ static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
 static int solid_dispatch,allocator_dispatch;
 static int camera_dispatch;
+static int subtank_dispatch;
+static uint8_t subtank_expected,subtank_result,subtank_new_found;
 static uint32_t expected_camera_axis;
 static uint32_t audio_epoch=1;
 static int foreign_audio23;
@@ -65,6 +67,12 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
     uint32_t h=state_digest();state_track.frame[state_track.count-1].saved[0]^=1;
     CHECK(state_digest()!=h);state_track.frame[state_track.count-1].saved[0]^=1;
     if(allocator_dispatch){cpu->gpr[2]=0x800950A0u+31*0xA0u;return;}
+    if(subtank_dispatch){
+        CHECK(psx_mod_read_byte(PLAY+0x63)==subtank_expected);
+        psx_mod_write_byte(PLAY+0x63,subtank_result);
+        psx_mod_write_byte(PLAY+0x6B,psx_mod_read_byte(PLAY+0x6B)|subtank_new_found);
+        psx_mod_write_byte(PLAY+0x65,0x91);cpu->gpr[2]=1;return;
+    }
     if(camera_dispatch){
         unsigned axis=target==0x80029598u?8:12;
         CHECK((target==0x80029598u || target==0x80029658u) &&
@@ -580,9 +588,42 @@ static void private_boss_balance_snapshot(void) {
     boss_balance_independent=0;CHECK(!snapshot_validate(wire,length));boss_balance_independent=1;
     boss_balance_enabled=old_enabled;boss_balance_independent=old_separate;state_commit(&prior);free(wire);
 }
+static void private_subtank_policy(void) {
+    HostState prior;state_capture(&prior);CPUState cpu;memset(&cpu,0,sizeof cpu);
+    separate_subtanks=1;subtank_seeded=subtank_found=0;
+    psx_mod_write_byte(PLAY+0x63,0x90);psx_mod_write_byte(PLAY+0x64,0x84);
+    psx_mod_write_byte(PLAY+0x6B,0x10);subtank_seed();
+    CHECK(zero_subtanks[0]==0x90 && zero_subtanks[1]==0x84);
+    zero_subtanks[0]=0x88;
+    enter_zero();CHECK(psx_mod_read_byte(PLAY+0x63)==0x88);
+    psx_mod_write_byte(PLAY+0x63,0x80);leave_zero_context(1);
+    CHECK(zero_subtanks[0]==0x80 && psx_mod_read_byte(PLAY+0x63)==0x90);
+    /* Cross-collector deferred refill must update only its collector. */
+    subtank_dispatch=1;subtank_expected=0x80;subtank_result=0x85;
+    CHECK(pickup_as_seat(&cpu,0x8004DCB8u,0x800C5000u,1)==1);
+    CHECK(zero_subtanks[0]==0x85 && psx_mod_read_byte(PLAY+0x63)==0x90 && psx_mod_read_byte(PLAY+0x65)==0x91);
+    /* P1 can collect while the surviving Zero owns the whole world pass. */
+    enter_zero();zero_world=1;subtank_expected=0x90;subtank_result=0x83;subtank_new_found=0x20;
+    CHECK(pickup_as_seat(&cpu,0x8004DCB8u,0x800C5000u,0)==1);
+    CHECK(psx_mod_read_byte(PLAY+0x63)==0x85);
+    zero_world=0;leave_zero_context(1);subtank_dispatch=0;subtank_new_found=0;
+    CHECK(psx_mod_read_byte(PLAY+0x63)==0x83 && zero_subtanks[0]==0x85 && subtank_found==0x30);
+    /* Original arbitrary compaction/order bytes survive a private world pass. */
+    enter_zero();psx_mod_write_byte(PLAY+0x63,0x84);psx_mod_write_byte(PLAY+0x64,0x80);leave_zero();
+    CHECK(zero_subtanks[0]==0x84 && zero_subtanks[1]==0x80 && psx_mod_read_byte(PLAY+0x63)==0x83);
+    uint32_t len=snapshot_bytes(),hash=state_digest();uint8_t *wire=malloc(len);CHECK(wire && snapshot_write(wire,len));
+    zero_subtanks[0]=0x81;CHECK(state_digest()!=hash && snapshot_validate(wire,len));snapshot_read(wire,len);
+    CHECK(zero_subtanks[0]==0x84 && state_digest()==hash);
+    separate_subtanks=0;CHECK(!snapshot_validate(wire,len));separate_subtanks=1;
+    psx_mod_write_byte(PLAY,9);native_player_init(&cpu,0x8003BD24u);CHECK(subtank_seeded && zero_subtanks[0]==0x84);
+    psx_mod_write_byte(PLAY,2);native_player_init(&cpu,0x8003BD24u);CHECK(!subtank_seeded && !zero_subtanks[0]);
+    psx_mod_write_byte(PLAY+0x63,0x87);subtank_seed();CHECK(zero_subtanks[0]==0x87);
+    separate_subtanks=0;state_commit(&prior);free(wire);
+}
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
+    private_subtank_policy();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

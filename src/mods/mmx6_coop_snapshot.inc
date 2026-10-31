@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 16 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 19 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -88,6 +88,8 @@ typedef struct {
     uint32_t clear_phase,clear_members,clear_started;
     uint32_t door_actor,door_origin,door_members;
     uint32_t refight_return_checkpoint;
+    uint8_t subtanks[2];
+    uint32_t subtank_seeded,subtank_found;
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
@@ -110,6 +112,7 @@ static void state_capture(HostState *s) {
     s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
     s->door_actor=both_door_actor;s->door_origin=both_door_origin;s->door_members=both_door_members;
     s->refight_return_checkpoint=refight_return_checkpoint;
+    memcpy(s->subtanks,zero_subtanks,sizeof zero_subtanks);s->subtank_seeded=subtank_seeded;s->subtank_found=subtank_found;
 }
 static int state_actor(uint32_t address) {
     return !address || (address>=0x80010000u && address<=0x801FFF00u && !(address&3));
@@ -134,6 +137,10 @@ static void state_core(StateIO *io,HostState *s) {
     uint32_t menu=state_integer(io,(uint32_t)(s->pause+1),1,2);s->pause=(int)menu-1;
     FIELD(start,1,1);FIELD(menu_loaded,1,1);state_bytes(io,s->portrait,sizeof s->portrait);
     FIELD(enrolled,1,1);FIELD(failed,1,io->mode==STATE_HASH?1:0);
+    state_bytes(io,s->subtanks,sizeof s->subtanks);FIELD(subtank_seeded,1,1);
+    FIELD(subtank_found,1,0x30);if(s->subtank_found&~0x30u)io->ok=0;
+    if((!separate_subtanks && s->subtank_seeded) ||
+       (!s->subtank_seeded && (s->subtanks[0] || s->subtanks[1] || s->subtank_found)))io->ok=0;
     state_bytes(io,s->audio_priorities,sizeof s->audio_priorities);
     for(unsigned i=0;i<128;++i) {
         uint32_t actor=state_integer(io,s->pickups[i].actor,4,UINT32_MAX);
@@ -240,6 +247,7 @@ static void state_commit(const HostState *s) {
     clear_phase=s->clear_phase;clear_members=s->clear_members;clear_started=s->clear_started;
     both_door_actor=s->door_actor;both_door_origin=s->door_origin;both_door_members=s->door_members;
     refight_return_checkpoint=s->refight_return_checkpoint;
+    memcpy(zero_subtanks,s->subtanks,sizeof zero_subtanks);subtank_seeded=s->subtank_seeded;subtank_found=s->subtank_found;
     /* These backups are meaningful only under rejected live projections. */
     memset(&p1,0,sizeof p1);memset(saved_overlay,0,sizeof saved_overlay);memset(saved_play,0,sizeof saved_play);
     memset(saved_camera,0,sizeof saved_camera);memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
@@ -250,7 +258,7 @@ static uint32_t state_digest(void) {
     const uint32_t resources[]={assets,assembly,palette_source,active_palette,packets,diagnostic,
         menu_memory,menu_assembly,hud_packets,(uint32_t)compressed_size,(unsigned)snapshot_asset_valid,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded,independent_views,checkpoint_lab_option,
-        checkpoint_contact_protection_option,checkpoint_starting_hp[0],checkpoint_starting_hp[1],checkpoint_earned_weapons_option,both_doors,boss_balance_enabled,boss_balance_independent};
+        checkpoint_contact_protection_option,checkpoint_starting_hp[0],checkpoint_starting_hp[1],checkpoint_earned_weapons_option,both_doors,boss_balance_enabled,boss_balance_independent,separate_subtanks};
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
@@ -294,8 +302,9 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,18);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,19);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
+    state_fixed(s,separate_subtanks);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);

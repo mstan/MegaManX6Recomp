@@ -128,3 +128,20 @@ label = "Shared"
 [[option.choice]]
 value = "independent"
 label = "Separate per player"
+
+[[option]]
+feature = "prototype"
+id = "subtank_energy"
+label = "Sub Tank energy"
+description = "Share stored healing energy, or keep a separate supply for each player. Finding tanks and campaign saves remain shared. Separate supplies start from the loaded campaign's energy."
+group = "Gameplay"
+type = "choice"
+default = "shared"
+
+[[option.choice]]
+value = "shared"
+label = "Shared"
+
+[[option.choice]]
+value = "independent"
+label = "Separate per player"

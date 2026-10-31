@@ -70,6 +70,10 @@ static uint8_t saved_overlay[OVERLAY_SIZE], zero_overlay[OVERLAY_SIZE];
 enum { ZERO_GIGA_BACKUP_OFFSET=0x5974, ZERO_GIGA_BACKUP_BYTES=64 };
 static uint8_t zero_giga_backup[ZERO_GIGA_BACKUP_BYTES];
 static uint8_t saved_play[0xE0], saved_camera[0x100];
+/* Only energy is private. Native P1 RAM remains the campaign/card authority;
+ * found tanks and the Weapon Tank retain their original shared ownership. */
+static unsigned separate_subtanks,subtank_seeded,subtank_found;
+static uint8_t zero_subtanks[2];
 static uint8_t *zero_compressed;
 static size_t compressed_size;
 static uint32_t assets, assembly, palette_source, active_palette, packets, diagnostic;
@@ -367,10 +371,29 @@ static int load_assets(const Mmx6CoopRoster *roster) {
     fflush(stdout);
     return 1;
 }
+static void subtank_seed(void) {
+    if(!separate_subtanks || subtank_seeded)return;
+    capture(PLAY+0x63,zero_subtanks,sizeof zero_subtanks);
+    subtank_found=psx_mod_read_byte(PLAY+0x6B)&0x30u;
+    subtank_seeded=1;
+}
+static void subtank_acquired(void) {
+    if(!separate_subtanks)return;
+    unsigned found=psx_mod_read_byte(PLAY+0x6B)&0x30u,added=found&~subtank_found;
+    subtank_found=found;
+    for(unsigned i=0;i<2;++i)if(added&(0x10u<<i)) {
+        zero_subtanks[i]|=0x80;
+        psx_mod_write_byte(PLAY+0x63+i,psx_mod_read_byte(PLAY+0x63+i)|0x80);
+        if(zero_projected)saved_play[0x63+i]|=0x80;
+    }
+}
 static void enter_zero(void) {
+    subtank_seed();
+    subtank_acquired();
     capture_player(&p1);
     capture(OVERLAY,saved_overlay,sizeof saved_overlay);
     capture(PLAY,saved_play,sizeof saved_play);
+    if(separate_subtanks)project(PLAY+0x63,zero_subtanks,sizeof zero_subtanks);
     capture(0x800971F8,saved_camera,sizeof saved_camera);
     saved_resources[0]=psx_mod_read_word(SCRATCH+0x14);
     saved_resources[1]=psx_mod_read_word(SCRATCH+0x1C);
@@ -395,6 +418,11 @@ static void enter_zero(void) {
     zero_projected=1;
 }
 static void leave_zero_context(int shared_world) {
+    if(separate_subtanks) {
+        subtank_acquired();
+        capture(PLAY+0x63,zero_subtanks,sizeof zero_subtanks);
+        saved_play[0x6B]|=psx_mod_read_byte(PLAY+0x6B)&0x30u;
+    }
     capture_player(&p2);
     capture(OVERLAY+ZERO_GIGA_BACKUP_OFFSET,zero_giga_backup,sizeof zero_giga_backup);
     project_player(&p1);
@@ -412,6 +440,7 @@ static void leave_zero_context(int shared_world) {
          * world/camera/menu update; only character identity is a projection. */
         psx_mod_write_byte(PLAY+0x38,saved_play[0x38]);
         psx_mod_write_byte(PLAY+0x5E,saved_play[0x5E]);
+        if(separate_subtanks)project(PLAY+0x63,saved_play+0x63,2);
     } else {
         project(PLAY,saved_play,sizeof saved_play);
         project(0x800971F8,saved_camera,sizeof saved_camera);
@@ -466,21 +495,32 @@ static uint32_t pickup_as_seat(CPUState *cpu, uint32_t address, uint32_t actor, 
     uint8_t body[sizeof p2.body], character=psx_mod_read_byte(PLAY+0x38);
     uint8_t armor=psx_mod_read_byte(PLAY+0x5E);
     uint8_t identity[2]={character,armor};
+    uint8_t tanks[3]={psx_mod_read_byte(PLAY+0x63),psx_mod_read_byte(PLAY+0x64),psx_mod_read_byte(PLAY+0x6B)};
     uint8_t *other=seat?p2.body:p1.body;
     capture(PLAYER,body,sizeof body);
     STATE_BYTES(restore_body,2,body,sizeof body);
     STATE_BYTES(restore_identity,3,identity,sizeof identity);
     uint32_t selection[3]={address,actor,seat};
     STATE_WORDS(restore_selection,27,selection,3);
+    STATE_BYTES(restore_tanks,81,tanks,sizeof tanks);
+    if(separate_subtanks) {
+        subtank_seed();
+        project(PLAY+0x63,seat?zero_subtanks:saved_play+0x63,2);
+    }
     project(PLAYER,other,sizeof body);
     psx_mod_write_byte(PLAY+0x38,seat?1:saved_play[0x38]);
     psx_mod_write_byte(PLAY+0x5E,seat?5:saved_play[0x5E]);
     uint32_t result=guest(cpu,address,actor,0);
+    if(separate_subtanks) {
+        capture(PLAY+0x63,seat?zero_subtanks:saved_play+0x63,2);
+        project(PLAY+0x63,tanks,2);
+        subtank_acquired();
+    }
     capture(PLAYER,other,sizeof body);
     project(PLAYER,body,sizeof body);
     psx_mod_write_byte(PLAY+0x38,character);
     psx_mod_write_byte(PLAY+0x5E,armor);
-    STATE_POP(restore_selection);STATE_POP(restore_identity);STATE_POP(restore_body);
+    STATE_POP(restore_tanks);STATE_POP(restore_selection);STATE_POP(restore_identity);STATE_POP(restore_body);
     return result;
 }
 static int pickup_collect(CPUState *cpu, uint32_t address) {
@@ -1945,7 +1985,13 @@ static int retire_quit_stage(CPUState *cpu,uint32_t address) {
 }
 static void native_player_init(CPUState *cpu, uint32_t address) {
     if (inside) return;
-    (void)retire_quit_stage(cpu,address);
+    int retired=retire_quit_stage(cpu,address);
+    /* Frontend initialization (including a new native Load/New Game) retires
+     * the runtime-only second bank. Ordinary major9 checkpoint births keep it.
+     * Seeding is delayed until the loaded campaign actually enters co-op. */
+    if(retired || (psx_mod_read_byte(PLAY)!=9 && psx_mod_read_byte(PLAY)!=10)) {
+        subtank_seeded=subtank_found=0;memset(zero_subtanks,0,sizeof zero_subtanks);
+    }
     /* This is the native fresh-stage/checkpoint-respawn initialization, never
      * an ordinary door. An ordinary native beam may enroll both arrivals. */
     enrolled=0;
@@ -2892,6 +2938,7 @@ static void activate(void) {
     memset(returning_body,0,sizeof returning_body);memset(scene_body,0,sizeof scene_body);
     refight_return_checkpoint=0;
     memset(saved_portrait_colors,0,sizeof saved_portrait_colors);
+    subtank_seeded=subtank_found=0;memset(zero_subtanks,0,sizeof zero_subtanks);
     inside=ready=enrolled=failed=0;
     working_palette_assets_ready=0;
     memset(native_working_palettes,0,sizeof native_working_palettes);
@@ -2920,6 +2967,9 @@ static void activate(void) {
     char doors[16];
     both_doors=psx_mod_option_value("mmx6.local-coop","prototype","doors",doors,sizeof doors) &&
         !strcmp(doors,"both");
+    char tanks[16];
+    separate_subtanks=psx_mod_option_value("mmx6.local-coop","prototype","subtank_energy",tanks,sizeof tanks) &&
+        !strcmp(tanks,"independent");
     unit_choices_call=target_projection_call=0;
     zero_menu_loaded=0;
     memset(zero_giga_backup,0,sizeof zero_giga_backup);

@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; latest SDK a7b37e079 plus retained X6 native co-op services requires fresh exact-image qualification",
+  "status": "development-candidate-only; F180 optional private Sub Tank energy requires native LOCAL/NET qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 52,
+  "revision": 53,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v69",
+    "title_compatibility": "mmx6-x-zero-delay-v70",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -832,5 +832,10 @@
     "integration": "Reuse implemented04f87b1 plus fixture11ded85 on capsule-fixed293c7bd. Preserve in-place capsule and all current native behavior. No new hooks or regenerated units.",
     "snapshot_schema": 18,
     "acceptance": "Same-candidate LOCAL/NET actual accepted contacts from both seats, positive own-clock rejection and ready-partner admission, exact native-derived installs/expiry, original damage-budget/default-path checks. No source/unit/build-only comparison credit."
+  },
+  "title_changes_v70_private_subtanks": {
+    "scope": "Frozen F180 only: optional independent native Sub Tank energy; shared acquisition, Weapon Tank and P1 native campaign/card fields. Default shared behavior retained.",
+    "state": "snapshot19 includes second-seat energy, shared-found observation and seeded latch; frontend/native fresh campaign discards the runtime-only second bank, checkpoint births retain it. No save-state backwards compatibility.",
+    "acceptance": "Same candidate LOCAL/NET native menu healing isolation, native reload and current-build snapshot restore; source/unit/build alone grants no row credit."
   }
 }
