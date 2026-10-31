@@ -40,7 +40,6 @@ int main(void) {
     /* Keep the unchanged actual-plugin effects/restoration checks too. */
     CHECK(mmx6_existing_private_effects_main()==0);
     for(cached=0;cached<2;++cached) {
-        refused_enrollment(cached,1,5,1,5,0x10); /* Valid but unfinished X/P2. */
         refused_enrollment(cached,0,1,0,0,1); /* Init/parts not yet consistent. */
         refused_enrollment(cached,0,5,0,5,0); /* Impossible native form pair. */
         refused_enrollment(cached,2,0,0,0,0); /* Invalid native character. */
@@ -56,12 +55,26 @@ int main(void) {
     }
     {
         CPUState cpu;Mmx6CoopRoster r;PlayerContext before;
-        Mmx6CoopRosterNative n={1,5,1,5,0x10};setup(&cpu);before=p2;
-        CHECK(mmx6_coop_roster_resolve(&n,&r)==MMX6_COOP_ROSTER_OK);
-        CHECK(!load_assets(&r)); /* Direct entry cannot bypass public admission. */
-        CHECK(!call_count && !memcmp(&before,&p2,sizeof p2));
-        enroll(&cpu,&r);CHECK(failed && !call_count && !zero_projected);
+        Mmx6CoopRosterActor cached_actor;uint32_t ram_before,extra_before;
+        setup(&cpu);
+        native_identity(1,5,1,5,0x10);
+        CHECK(fixed_roster(&r) && r.seat[0].character==1 && r.seat[1].character==0 && !call_count);
+        /* setup owns a live cached Zero. An inverse roster cannot relabel it
+         * as X or replace its resources underneath the enrolled actor. */
+        before=p2;cached_actor=private_actor;
+        ram_before=admission_fingerprint(ram,sizeof ram);
+        extra_before=admission_fingerprint(extra,sizeof extra);
+        CHECK(!load_assets(&r));
+        CHECK(ready && enrolled && !failed && !call_count);
+        CHECK(!memcmp(&cached_actor,&private_actor,sizeof cached_actor));
         CHECK(!memcmp(&before,&p2,sizeof p2));
+        CHECK(ram_before==admission_fingerprint(ram,sizeof ram));
+        CHECK(extra_before==admission_fingerprint(extra,sizeof extra));
+        /* Model an already validated matching X cache explicitly. Archive
+         * selection and corruption checks are in the resource-plan target. */
+        private_actor=r.seat[1];
+        CHECK(load_assets(&r));
+        CHECK(!failed && !call_count && psx_mod_read_byte(PLAY+0x5F)==0x10);
     }
     clear_banks();
     puts("actual-plugin cached/fresh roster refusal before disc/native/RAM/private mutation PASS");

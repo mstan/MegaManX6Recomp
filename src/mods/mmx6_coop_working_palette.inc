@@ -50,7 +50,7 @@ static int working_palette_index(unsigned *index) {
 static int working_palette_seed(unsigned require_payload) {
     unsigned index;
     if(!working_palette_assets_ready || !working_palette_index(&index))return 0;
-    unsigned record=working_palette_record(1,index);
+    unsigned record=working_palette_record(private_actor.character,index);
     if(!record)return require_payload?0:1;
     if(record>WORKING_RECORD_COUNT)return 0;
     unsigned bytes=working_palette_lengths[record*2]|(unsigned)working_palette_lengths[record*2+1]<<8;
@@ -67,10 +67,18 @@ static int working_palette_native_load(CPUState *cpu,uint32_t address) {
      * leaves primary loading/CD scheduling native and executes it once. */
     if(cpu->gpr[31]!=0x800140F0u && cpu->gpr[31]!=0x80014124u)return 0;
     unsigned index,character=psx_mod_read_byte(PLAY+0x38);
-    if(character>1 || character!=(unsigned)!!zero_projected ||
-        cpu->gpr[31]!=(character?0x80014124u:0x800140F0u) ||
+    if(character>1 || cpu->gpr[31]!=(character?0x80014124u:0x800140F0u) ||
         !working_palette_index(&index) ||
         cpu->gpr[4]!=working_palette_record(character,index) || cpu->gpr[5]!=1 || cpu->gpr[6]) {
+        failed=1;return 0;
+    }
+    if(character!=(zero_projected?private_actor.character:(private_actor.character^1u))) {
+        /* The native loader installs the next campaign's palette in major8,
+         * before major9 initializes its body and binds the new counterpart.
+         * The previous roster's resources cannot validate or seed this load.
+         * Leave this source-checked native load alone; gameplay mismatches
+         * and mismatched live projections remain fatal. */
+        if(!zero_projected && psx_mod_read_byte(PLAY)!=0x0A)return 0;
         failed=1;return 0;
     }
     int seeded=working_palette_seed(0);

@@ -66,7 +66,7 @@ int spu_get_private_voice_state(unsigned slot,SpuVoiceState *out) {
     out->sample_bank=private_bank[slot];return 1;
 }
 int psx_mod_spu_sample_bank(uint32_t bank,const void *bytes,uint32_t size) {
-    CHECK(bank==30 || bank==31);CHECK(bytes && size==jump_audio_banks[bank==31].layout.sample_bytes);
+    CHECK(bank>=28 && bank<=31);CHECK(bytes && size==jump_audio_banks[bank&1u].layout.sample_bytes);
     ++registrations;return !bank_conflict;
 }
 uint64_t psx_mod_spu_private_voice_owner(unsigned slot){CHECK(slot<24);return private_owner[slot];}
@@ -134,7 +134,7 @@ uint32_t psx_mod_call_guest_uncharged(CPUState *cpu,uint32_t target,uint32_t ret
         return no_keyon?suppressed_result:0;
     }
     CHECK(target==0x8005A9D4 && jump_audio_keyon_call);++keyons;
-    CHECK(a0==jump_audio_slot && a1==(jump_audio_bank==30?14u:15u) && a3==jump_audio_tone);
+    CHECK(a0==jump_audio_slot && a1==((jump_audio_bank&1u)?15u:14u) && a3==jump_audio_tone);
     const JumpAudioBank *b=&jump_audio_banks[a1==15];
     const uint8_t *p=b->parsed+b->layout.programs+a2*16u;
     unsigned rank=(unsigned)p[8]|(unsigned)p[9]<<8;
@@ -166,6 +166,7 @@ static void test_record(JumpAudioBank *b,unsigned record,unsigned id,unsigned pr
     r[3]=(uint8_t)(slot|((count-1u)<<5));
 }
 static void setup_audio(void) {
+    private_actor=default_private_actor;jump_audio_character=MMX6_COOP_CHARACTER_ZERO;
     memset(test_ram,0,sizeof test_ram);memset(&state_track,0,sizeof state_track);
     failed=jump_audio_faulted=jump_audio_call=jump_audio_keyon_call=jump_audio_stop_call=0;
     bank_conflict=play_failure=wrong_keyon=charged_call=no_keyon=bad_output=0;
@@ -418,8 +419,105 @@ static void original_assets(const char *path) {
     CHECK(!jump_audio_load(data,(size_t)length) && !jump_audio_loaded && memory_writes==writes && !registrations);
     free(data);puts("original Zero load, 45 records/47 mocked calculations, allocation rollback and epoch rebind PASS");
 }
+static void character_bank_pairs(void) {
+    setup_audio();
+    Mmx6PrivateAudioBank views[2]={{jump_audio_banks[0].parsed,&jump_audio_banks[0].layout},
+        {jump_audio_banks[1].parsed,&jump_audio_banks[1].layout}};
+    for(unsigned base=28;base<=30;base+=2) {
+        jump_audio_banks[0].layout.bank=base;jump_audio_banks[1].layout.bank=base+1;
+        Mmx6PrivateAudioRecord meta;uint32_t mask=0;
+        CHECK(mmx6_private_audio_validate(views,&mask)==MMX6_JUMP_AUDIO_OK && mask==JUMP_STOP_MASK);
+        CHECK(mmx6_private_audio_record(views,1,1,&meta)==MMX6_JUMP_AUDIO_OK && meta.voices[0].bank==base);
+        CHECK(mmx6_private_audio_record(views,3,1,&meta)==MMX6_JUMP_AUDIO_OK && meta.voices[0].bank==base+1);
+        /* Original voice records may alias the effects VAB. The alias must
+         * stay inside the same character's pair for either roster. */
+        CHECK(mmx6_private_audio_record(views,3,17,&meta)==MMX6_JUMP_AUDIO_OK && meta.voices[0].bank==base);
+    }
+    const unsigned mixed[2][2]={{28,31},{30,29}};
+    for(unsigned i=0;i<2;++i) {
+        jump_audio_banks[0].layout.bank=mixed[i][0];jump_audio_banks[1].layout.bank=mixed[i][1];
+        Mmx6PrivateAudioRecord meta;uint32_t mask=0;
+        CHECK(mmx6_private_audio_validate(views,&mask)==MMX6_JUMP_AUDIO_ARGUMENT);
+        CHECK(mmx6_private_audio_record(views,3,17,&meta)==MMX6_JUMP_AUDIO_ARGUMENT);
+    }
+    setup_audio();
+}
+static void opposite_character_audio_transaction(void) {
+    setup_audio();
+    Mmx6CoopRosterNative native={1,5,1,5,0};Mmx6CoopRoster roster;
+    CHECK(mmx6_coop_roster_resolve(&native,&roster)==MMX6_COOP_ROSTER_OK && private_roster_bind(&roster));
+    jump_audio_character=MMX6_COOP_CHARACTER_X;
+    jump_audio_banks[0].layout.bank=28;jump_audio_banks[1].layout.bank=29;
+    psx_mod_write_byte(PLAYER+2,0);psx_mod_write_byte(PLAYER+0xE7,0);
+    CPUState cpu=request(1,1);
+    CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && calculations==1 && plays==1 && played_bank==28);
+    same_native();CHECK(!state_track.count && jump_audio_extra_idle());
+    /* A matching seat is insufficient: reject another character/form before
+     * either the native calculation or private DSP sees the request. */
+    const unsigned wrong[3][2]={{1,5},{0,5},{1,0}};
+    for(unsigned i=0;i<3;++i) {
+        psx_mod_write_byte(PLAYER+2,(uint8_t)wrong[i][0]);psx_mod_write_byte(PLAYER+0xE7,(uint8_t)wrong[i][1]);
+        cpu=request(1,1);CHECK(!jump_audio_sound(&cpu,0x80016C48) && !failed && calculations==1 && plays==1);
+        same_native();
+    }
+    psx_mod_write_byte(PLAYER+2,0);psx_mod_write_byte(PLAYER+0xE7,0);
+    zero_projected=0;cpu=request(1,1);
+    CHECK(!jump_audio_sound(&cpu,0x80016C48) && calculations==1 && plays==1);
+    zero_projected=1;
+    jump_audio_character=MMX6_COOP_CHARACTER_ZERO;cpu=request(1,1);
+    CHECK(!jump_audio_sound(&cpu,0x80016C48) && calculations==1 && plays==1);
+    jump_audio_bound_epoch=0;unsigned registered=registrations;
+    CHECK(!jump_audio_bind() && registrations==registered && !jump_audio_ready());
+    setup_audio();
+}
+static void opposite_original_audio_assets(const char *path) {
+    FILE *stream=fopen(path,"rb");CHECK(stream && !fseek(stream,0,SEEK_END));
+    long length=ftell(stream);CHECK(length>0 && !fseek(stream,0,SEEK_SET));
+    uint8_t *data=malloc((size_t)length);CHECK(data && fread(data,1,(size_t)length,stream)==(size_t)length);
+    fclose(stream);setup_audio();
+    Mmx6CoopRosterNative native={1,5,1,5,0};Mmx6CoopRoster roster;
+    CHECK(mmx6_coop_roster_resolve(&native,&roster)==MMX6_COOP_ROSTER_OK && private_roster_bind(&roster));
+    psx_mod_write_byte(PLAYER+2,0);psx_mod_write_byte(PLAYER+0xE7,0);
+    CHECK(jump_audio_activate());registrations=0;
+    CHECK(jump_audio_load(data,(size_t)length) && jump_audio_ready() && registrations==2);
+    CHECK(jump_audio_character==0 && jump_audio_banks[0].layout.sample_bytes==172768 &&
+        jump_audio_banks[1].layout.sample_bytes==52608);
+    for(unsigned i=0;i<2;++i) {
+        Mmx6AssetView original;CHECK(mmx6_coop_dat_asset(data,(size_t)length,86,12+i*2,&original));
+        CHECK(!memcmp(jump_audio_banks[i].samples,original.data,original.size));
+    }
+    unsigned routed=0;plays=0;
+    for(unsigned i=0;i<2;++i)for(unsigned r=0;r<jump_audio_banks[i].layout.records;++r) {
+        const uint8_t *entry=jump_audio_banks[i].parsed+8u+r*4u;
+        if(!(entry[0]|entry[1]|entry[2]|entry[3]))continue;
+        CPUState cpu=request(i?3:1,r);
+        CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && !cpu.gpr[2] && jump_audio_extra_idle());
+        same_native();++routed;
+    }
+    CHECK(routed==54 && plays==56);
+    uint32_t handles[2]={jump_audio_banks[0].guest,jump_audio_banks[1].guest};
+    unsigned hashed=0;for(unsigned i=0;i<sizeof jump_audio_asset_sha;++i)hashed|=jump_audio_asset_sha[i];
+    CHECK(hashed);
+    jump_audio_release_character();private_actor=default_private_actor;
+    CHECK(!jump_audio_loaded && !jump_audio_bound_epoch && !jump_audio_owned_epoch && jump_audio_extra_idle());
+    for(unsigned i=0;i<sizeof jump_audio_asset_sha;++i)CHECK(!jump_audio_asset_sha[i]);
+    for(unsigned i=0;i<2;++i)CHECK(!jump_audio_banks[i].parsed && !jump_audio_banks[i].samples && !jump_audio_banks[i].layout.bytes);
+    CHECK(jump_audio_load(data,(size_t)length) && jump_audio_ready());
+    CHECK(jump_audio_banks[0].layout.bank==30 && jump_audio_banks[1].layout.bank==31);
+    CHECK(jump_audio_banks[0].guest==handles[0] && jump_audio_banks[1].guest==handles[1]);
+    jump_audio_release_character();CHECK(private_roster_bind(&roster));
+    CHECK(jump_audio_load(data,(size_t)length) && jump_audio_ready());
+    CHECK(jump_audio_banks[0].layout.bank==28 && jump_audio_banks[1].layout.bank==29);
+    CHECK(jump_audio_banks[0].guest==handles[0] && jump_audio_banks[1].guest==handles[1]);
+    CHECK(jump_audio_activate());
+    Mmx6AssetView sample;CHECK(mmx6_coop_dat_asset(data,(size_t)length,86,12,&sample));
+    data[sample.data-data]^=1;unsigned writes=memory_writes;registrations=0;
+    CHECK(!jump_audio_load(data,(size_t)length) && !jump_audio_loaded && memory_writes==writes && !registrations);
+    jump_audio_release_character();free(data);setup_audio();puts("original base-X load, 54 records/56 mocked calculations, digest refusal and roster switch PASS");
+}
 int main(int argc,char **argv) {
-    transactions();stops();
-    if(argc==2)original_assets(argv[1]);else CHECK(argc==1);
+    transactions();stops();character_bank_pairs();opposite_character_audio_transaction();
+    if(argc>=2)original_assets(argv[1]);else CHECK(argc==1);
+    if(argc==3)opposite_original_audio_assets(argv[2]);else CHECK(argc<=2);
     puts("actual X6 private character callbacks: exact native rollback, routing, refusal and stop PASS");return 0;
 }

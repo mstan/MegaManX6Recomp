@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; F4/F103 fatal recovery and inherited F180 private Sub Tank NET gap require native qualification",
+  "status": "development-candidate-only; inverse roster implementation and inherited F4/F103/F180 gaps require native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 55,
+  "revision": 56,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v72",
+    "title_compatibility": "mmx6-x-zero-delay-v73",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -837,5 +837,12 @@
     "scope": "Frozen F180 only: optional independent native Sub Tank energy; shared acquisition, Weapon Tank and P1 native campaign/card fields. Default shared behavior retained.",
     "state": "snapshot19 includes second-seat energy, shared-found observation and seeded latch; frontend/native fresh campaign discards the runtime-only second bank, checkpoint births retain it. No save-state backwards compatibility.",
     "acceptance": "Same candidate LOCAL/NET native menu healing isolation, native reload and current-build snapshot restore; source/unit/build alone grants no row credit."
+  },
+  "inverse_roster_candidate": {
+    "scope": "Original native Zero/P1 selection with base X/P2 resources, menus, effects, working palettes/audio and canonical current-build state, while retaining X/P1+Zero/P2",
+    "prototype_source": "fd795bfd72395bd8fb3adfe73bd65978d4dcb898",
+    "snapshot_schema": 20,
+    "native_qualification": "pending; source/tests/build do not qualify gameplay",
+    "native_deferred_x_entry": "0x80049478 must have actual generated mod entry dispatch before built-game qualification"
   }
 }

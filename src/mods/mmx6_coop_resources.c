@@ -4,10 +4,6 @@
 Mmx6CoopResourcesReason mmx6_coop_resources_fixed_runtime_admit(const Mmx6CoopRoster *r) {
     if (mmx6_coop_roster_validate(r)!=MMX6_COOP_ROSTER_OK)
         return MMX6_COOP_RESOURCES_INVALID_ROSTER;
-    if (r->seat[0].character!=MMX6_COOP_CHARACTER_X ||
-        r->seat[1].character!=MMX6_COOP_CHARACTER_ZERO ||
-        r->seat[1].form!=MMX6_COOP_FORM_ZERO)
-        return MMX6_COOP_RESOURCES_UNSUPPORTED_RUNTIME_ROSTER;
     return MMX6_COOP_RESOURCES_OK;
 }
 

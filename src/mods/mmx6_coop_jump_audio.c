@@ -88,7 +88,7 @@ Mmx6JumpAudioReason mmx6_jump_audio_prepare_header(const uint8_t *source,size_t 
 static int private_bank_valid(const Mmx6PrivateAudioBank *b,unsigned index) {
     if(!b || !b->parsed || !b->layout)return 0;
     const Mmx6JumpAudioHeader *h=b->layout;
-    if(h->group!=(index?3u:1u) || h->id!=(index?15u:14u) || h->bank!=(index?31u:30u) ||
+    if(h->group!=(index?3u:1u) || h->id!=(index?15u:14u) || (h->bank!=28u+index && h->bank!=30u+index) ||
        h->bytes>8192 || h->vab<8 || (h->vab&3u) || h->vab>h->bytes || h->bytes-h->vab<32 ||
        h->programs!=h->vab+32u || h->programs>h->bytes || h->bytes-h->programs<2048 ||
        h->tones!=h->programs+2048u || h->records!=(h->vab-8u)/4u ||
@@ -101,7 +101,8 @@ static int private_bank_valid(const Mmx6PrivateAudioBank *b,unsigned index) {
 Mmx6JumpAudioReason mmx6_private_audio_record(const Mmx6PrivateAudioBank banks[2],
     unsigned group,unsigned record,Mmx6PrivateAudioRecord *out) {
     if(!banks || !out || (group!=1 && group!=3) ||
-       !private_bank_valid(&banks[0],0) || !private_bank_valid(&banks[1],1))return MMX6_JUMP_AUDIO_ARGUMENT;
+       !private_bank_valid(&banks[0],0) || !private_bank_valid(&banks[1],1) ||
+       banks[1].layout->bank!=banks[0].layout->bank+1u)return MMX6_JUMP_AUDIO_ARGUMENT;
     const Mmx6PrivateAudioBank *table=&banks[group==3];
     if(record>=table->layout->records)return MMX6_JUMP_AUDIO_RECORD;
     const uint8_t *r=table->parsed+8u+record*4u;unsigned id=r[0]&63u;
@@ -135,7 +136,8 @@ Mmx6JumpAudioReason mmx6_private_audio_record(const Mmx6PrivateAudioBank banks[2
     *out=result;return MMX6_JUMP_AUDIO_OK;
 }
 Mmx6JumpAudioReason mmx6_private_audio_validate(const Mmx6PrivateAudioBank banks[2],uint32_t *voice_mask) {
-    if(!voice_mask || !banks || !private_bank_valid(&banks[0],0) || !private_bank_valid(&banks[1],1))
+    if(!voice_mask || !banks || !private_bank_valid(&banks[0],0) || !private_bank_valid(&banks[1],1) ||
+       banks[1].layout->bank!=banks[0].layout->bank+1u)
         return MMX6_JUMP_AUDIO_ARGUMENT;
     uint32_t result=0;
     for(unsigned i=0;i<2;++i)for(unsigned r=0;r<banks[i].layout->records;++r) {

@@ -369,7 +369,7 @@ static void roundtrip_and_malformed(void){
     HostState core;state_capture(&core);StateIO count={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&count);state_core(&count,&core);
     uint32_t cache=count.pos;memcpy(bad,wire,len);put32(bad+cache,4097);reject_unchanged(bad,len);
     memcpy(bad,wire,len);bad[cache-10-96]=3;reject_unchanged(bad,len); /* Invalid shared effect owner. */
-    memcpy(bad,wire,len);bad[cache+4+44]=2;reject_unchanged(bad,len); /* Invalid retained-pixel encoding. */
+    memcpy(bad,wire,len);bad[cache+4+45]=2;reject_unchanged(bad,len); /* Invalid retained-pixel encoding. */
     allocation_fail=1;reject_unchanged(wire,len);allocation_fail=0;
     uint32_t untouched=state_digest();
     for(unsigned i=0;i<200;++i){
@@ -620,12 +620,27 @@ static void private_subtank_policy(void) {
     psx_mod_write_byte(PLAY+0x63,0x87);subtank_seed();CHECK(zero_subtanks[0]==0x87);
     separate_subtanks=0;state_commit(&prior);free(wire);
 }
+static void private_x_overlay_snapshot(void) {
+    Mmx6CoopRosterActor before=private_actor;unsigned old_character=jump_audio_character;
+    uint8_t old_overlay[OVERLAY_SIZE];memcpy(old_overlay,zero_overlay,sizeof old_overlay);
+    Mmx6CoopRosterNative native={1,5,1,5,0};Mmx6CoopRoster roster;
+    CHECK(mmx6_coop_roster_resolve(&native,&roster)==MMX6_COOP_ROSTER_OK && private_roster_bind(&roster));
+    jump_audio_character=MMX6_COOP_CHARACTER_X;
+    zero_overlay[ZERO_GIGA_BACKUP_OFFSET]=0x37;
+    uint32_t length=snapshot_bytes(),digest=state_digest();CHECK(length);
+    uint8_t *wire=malloc(length);CHECK(wire && snapshot_write(wire,length));
+    zero_overlay[ZERO_GIGA_BACKUP_OFFSET]=0x79;CHECK(state_digest()!=digest);
+    CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+    CHECK(zero_overlay[ZERO_GIGA_BACKUP_OFFSET]==0x37 && state_digest()==digest);
+    private_actor=before;jump_audio_character=old_character;memcpy(zero_overlay,old_overlay,sizeof old_overlay);free(wire);
+}
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
+    private_x_overlay_snapshot();
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly
      * cannot be captured/restored as a resumable C stack. Reactivation required. */
     uint32_t v=1;for(unsigned i=0;i<MMX6_STATE_FRAMES;++i)CHECK(mmx6_state_push(i,&v,4,1)!=UINT32_MAX);
