@@ -22927,11 +22927,95 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "FrozenC118 native combat/defeat and subsequent original door commitment are observed, but firstdoor uses P1action19 and P2passenger beam. Later both-foot CP0->1 corridor crossing supports F187LOCAL only, not both actors walking across this earlier real door/collision plane. F166LOCAL+NET remain unverified; prior images/raw/current-buildslot9/limits retained."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "5ae5d36b3ee271c7ce706a3df894eafd793f27bd",
+            "build_identity": {
+              "game_source_commit": "5ae5d36b3ee271c7ce706a3df894eafd793f27bd",
+              "image_sha256": "723967e207cc75e6d69cc6db44df84cad69a96a99ece9655c440aa9ac101842e",
+              "declared_manifest_sha256": "0371045cc98858cd2ace2e2a61d507922303cd52df726c1bbe9c2a6de02cf79e",
+              "execution": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+              "title": 66,
+              "profile": 49,
+              "package": "Frozen C118 Windows build; fresh prelaunch Both door setting and native combat",
+              "host": "Windows PC, ENHANCED GL-HLE"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "SDL dummy muted",
+              "setup": "Original heatnix_cp0; contact protection ON, earned weapons ALL, doors Both selected before cold boot; fresh private cards"
+            },
+            "action": "Use actual original HELP activation, native Giga/Square attacks and midboss death, then ordinary dual platform jumps and Right inputs through the original forward door.",
+            "outcome": "LOCAL F166 passes: genuine0x19/sub5 main reaches0HP/state3/action8/phase4 after live weakpoints0..3 retire. All95 retained forward-door samples show both native bodies visible/state1 and scene_phase0. Both original action19 paths walk917 through943 to985, then1018; scene_owner1 is the valid Both door owner and releases0 naturally. Both remain32HP/ALIVE, without passenger beam/transport. Four composed images personally reviewed. Private cards unchanged; owned native/lease exit0.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\binding.json",
+                "sha256": "c7f8fea9c9acbf9c00a3363282e600048aa4f593562fcd8003fd2a78321e4ff1"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\mods\\state.toml",
+                "sha256": "0d7444fd127eb15d3107c2955608f312117b4bc24cd30cac0da7c2dac5b4c5ee"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\active-combat.json",
+                "sha256": "c79774b8702c22671ff6df8299078b1e03cb3cea8d161eaa36e131b1b2bf8eeb"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\active-combat.png",
+                "sha256": "dddb6443d2d8d1a48528e75d9df984598d00d4c546c5aa016a2f37e6fbab6263"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\native-defeat.json",
+                "sha256": "6e7a8910eb79b6967aba061c88ab41816a6c8d6ff1fe572e54cff1e191456f0a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\boss-pool-native-defeat.bin",
+                "sha256": "1f5bb7a8480846bcf85289ed197b5a9cf8ec8970d1a52b995c5ce1133f11d3df"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\native-defeat-or-blocker.png",
+                "sha256": "fc47c8447870c3109d2272b589cb7c357a9e64e84c7e5b6aee8c756943ba3d36"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\both-real-forward-door.json",
+                "sha256": "6013ef616710d632848bc2e6c4d271940194dda1cb0712aa777a6bc43548d98e"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\both-real-forward-door.png",
+                "sha256": "d007d51bfa0a376b1dcff02c5a80561ebd3eebc6cebc63d755119708a7934d9b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\Both-final.json",
+                "sha256": "d0efb42026d1a07024d2614b8c5d1df975ea91766ef7f5e3a8e0a542a942bd3a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\owned-terminal-summary.json",
+                "sha256": "fb10e9a849d08415c7c3f448b6d3f685e16fbbb18a084b1f7aa161db9c204877"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c118-both-local-1\\capacity.json",
+                "sha256": "65e45c99bced8d68447b513cd9f0e3c749ebc613b08dbb9940e142c996e6a3bb"
+              }
+            ],
+            "limits": [
+              "NET unverified; no full-row, newer-candidate, cross-build/platform or performance claim. C118 title66/profile49/executiona457 remains distinct from C122/C124.",
+              "Retained type0x19/sub4 record is not one of weakpoints0..3; no proved child relationship or all-allocation-free retirement requirement/claim.",
+              "All target door samples finish60.3s before the ten-minute gameplay deadline. An unrelated later CP-extension command was rejected6.1s after deadline before issuing any command; its exact error is retained in Both-final.json. No F187 Both-extension credit.",
+              "Old two attempts and continuation3 remain preserved; fresh Both attempt4 is a narrow current-session owner-goahead exception because Either snapshot identity cannot load under Both. No source/setup budget reset or game/build/harness change.",
+              "Earlier exact-image current-build save/load evidence remains retained; no unilateral NET load, native-card progress, ordinary recording/replay or rollback qualification asserted."
+            ],
+            "bypasses": [
+              "Original checkpoint entry bypasses preceding stage traversal; contact protection and earned techniques are prerequisites only. Native attacks/defeat/door/collision/progress results were not assigned.",
+              "No Either snapshot was loaded under Both and no snapshot identity check was bypassed. Fresh native combat was necessary for the changed prelaunch door contract."
+            ]
+          }
+        ],
+        "limitations": "LOCAL frozenC118 genuine midboss defeat and both actors walking original forward door passed with prelaunch doors Both. NET unverified. Earlier Either passenger transfer and all failures remain retained; no all-NPC-free, cross-build or full-row claim."
       }
     },
     {
@@ -24768,9 +24852,9 @@
             ],
             "limits": [
               "NET independently unverified; no full-row, latest-C124, cross-build/platform or performance claim. FrozenC118 title66/profile49/executiona457 is distinct from currentC124 and F136C122.",
-              "Initial first door was P1 original action19 with P2 passenger transport; it does not prove both actors walked through that door. Only later original in-area checkpoint foot crossing qualifies F187. F166 remains unverified.",
+              "Initial first door was P1 original action19 with P2 passenger transport; it does not prove both actors walked through that door. Only later original in-area checkpoint foot crossing qualifies F187. That earlier Either run did not qualify F166; separate fresh Both LOCAL evidence is recorded under F166.",
               "Rows bracket native CP change between guest1066.5 and1076.5 (both on the same floor); no instruction-atomic exact coordinate/trigger-axis claim. Stage3/sub0 unchanged and no separate section loader exercised.",
-              "Prior raw NPC dumps are48 native0x9C records at boss pool8008EF48, withoutBCD1 header; original0x19/sub5 death pose and invisible0HP child remain in the post-hit dump. Allocation-free/despawn of all boss records is not claimed. New continuation regular enemy pool800C1220/strideA4 showing only door08/sub7 is not proof about that separate boss pool.",
+              "Prior raw NPC dumps are48 native0x9C records at boss pool8008EF48, withoutBCD1 header; original0x19/sub5 death pose and retained invisible0HP type0x19/sub4 record (not a weakpoint or proved child) remain in the post-hit dump. Allocation-free/despawn of all boss records is not claimed. New continuation regular enemy pool800C1220/strideA4 showing only door08/sub7 is not proof about that separate boss pool.",
               "Earlier native failures/misses and fixed manual-window truncation are retained. Native continuation3 is one narrowly authorized session-goahead exception after two old attempts; source/setup budgets not reset, no new observer/harness/build.",
               "No native-card progress/save or ordinary recording/replay/net rollback qualification is asserted; current-build execution snapshot load is distinct from native cards."
             ],
