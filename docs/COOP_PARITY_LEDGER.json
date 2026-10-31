@@ -22931,7 +22931,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "FrozenC118 native combat/defeat and subsequent original door commitment are observed, but firstdoor uses P1action19 and P2passenger beam. Later both-foot CP0->1 corridor crossing supports F187LOCAL only, not both actors walking across this earlier real door/collision plane. F166LOCAL+NET remain unverified; prior images/raw/current-buildslot9/limits retained."
       }
     },
     {
@@ -24682,11 +24682,106 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "5ae5d36b3ee271c7ce706a3df894eafd793f27bd",
+            "build_identity": {
+              "game_source_commit": "5ae5d36b3ee271c7ce706a3df894eafd793f27bd",
+              "image_sha256": "723967e207cc75e6d69cc6db44df84cad69a96a99ece9655c440aa9ac101842e",
+              "declared_manifest_sha256": "0371045cc98858cd2ace2e2a61d507922303cd52df726c1bbe9c2a6de02cf79e",
+              "execution": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+              "title": 66,
+              "profile": 49,
+              "package": "frozen C118 Windows build; same saved fight and continuation image",
+              "host": "Windows PC, ENHANCED GL-HLE"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "audio": "SDL dummy muted",
+              "setup": "original heatnix_cp0; hostile-contact protection ON, earned weapons/techniques ALL as predeclared native-combat prerequisites",
+              "continuation": "exact current-build zero-based slot9, privately retained original cards/settings; no new checkpoint chord"
+            },
+            "action": "Reuse genuine C118 native NightmareSnake combat/defeat, load its exact postdefeat current-build slot9, and use native Right+Cross50/Right120 through original exit. Then independent native Left/Right corridor movement walks guest through actual next authored checkpoint boundary while reading original PLAY stage/section/checkpoint.",
+            "outcome": "LOCAL F187 passes: same-image original Giga/Saber combat changes genuine0x19/sub5 main from32HP and last live weakpoint to0HP/death state3/action8/phase4, then saved postdefeat slot9 loads with typed generation1/last_ok1. After original first-door flow, both living heroes physically walk corridor971->1100 with scene0/0. In recorded rows45->46 guest1066.5->1076.5 (native action4, HP32) crosses progression boundary; original CP0->1 while stage3/sub0 stays unchanged, native timer continuous. Final both32HP/ALIVE/CP1; private cards unchanged, owned nativeexit0. Loaded/first-door/post-checkpoint composed images personally reviewed.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/baseline/qualification.json",
+                "sha256": "c36a9a39749cac3c5bae975e765df513ec2dc5583a00dca263fc48b6c6612a7f"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/baseline/snake-native-after-final-contact.bin",
+                "sha256": "1e06d424a72a0be0f2f995c7c2a6ad2f9454f2ebb01551a59879aa497fa6610a"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/baseline/snake-after-saber.bin",
+                "sha256": "4bc3e25416bd848073fa2f1a27a71987613ea4f1ecd1878ebc54e7ef5eb3cbe3"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/baseline/snake-after-saber.png",
+                "sha256": "c6efb96194efec3f5f10ae3ab7c3ea76816684449bfa826e2b183ef6ae453615"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/baseline/defeated-snake-snapshot.json",
+                "sha256": "3a518e5d428dee2e5f8c157b96c0641b9997d03b21d15a784754b426bfe3c94b"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/saves/openbios/state_80054AD8_slot09.pst",
+                "sha256": "2e38059bb57c839e7fc6dab983076375b55778164b672d56de82717cebd25ad4"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/native-continuation-3-snapshot-load.json",
+                "sha256": "a6b68d4ec1e7ef18eda6db84149deec674fcaa10f10d738ae4e6d9db9424f811"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/native-continuation-3-forward-inputs.json",
+                "sha256": "d565c477c93b7dbd16f8e5aa2f7bfe31b35bef4bf2354f7452284abca16f1a33"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/native-continuation-3-both-boundary.json",
+                "sha256": "d8221eb3440499cbe7d5f34460aedfe928fd83b90cd9cf332a9d0f891bcf7c3d"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/native-continuation-3-final.json",
+                "sha256": "64570315f4f08eea01d496f172dcc780a2de883153f15b7ce24732a5aafbc060"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/native-continuation-3-capacity.json",
+                "sha256": "13c3a8d448f4e65b6b1a85e2421894c0ade23f7fdfea0baabd4e5c48961395d7"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/native-continuation-3-loaded.png",
+                "sha256": "c45a4654270bc873476de3abd87c0072e36fbb2786a812213d2f328d11dc4797"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/native-continuation-3-after-first-crossing.png",
+                "sha256": "d625d82052a1fd710d5935af31aa450963c5b8ee40bea809c7bebd00b2af5db0"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F166-F187-c118-local-1/native-continuation-3-both-boundary.png",
+                "sha256": "be9e12cd68c6e4b406da1dfdf4b561de4a24bf08d160c1abbfda8a325180106f"
+              }
+            ],
+            "limits": [
+              "NET independently unverified; no full-row, latest-C124, cross-build/platform or performance claim. FrozenC118 title66/profile49/executiona457 is distinct from currentC124 and F136C122.",
+              "Initial first door was P1 original action19 with P2 passenger transport; it does not prove both actors walked through that door. Only later original in-area checkpoint foot crossing qualifies F187. F166 remains unverified.",
+              "Rows bracket native CP change between guest1066.5 and1076.5 (both on the same floor); no instruction-atomic exact coordinate/trigger-axis claim. Stage3/sub0 unchanged and no separate section loader exercised.",
+              "Prior raw NPC dumps are48 native0x9C records at boss pool8008EF48, withoutBCD1 header; original0x19/sub5 death pose and invisible0HP child remain in the post-hit dump. Allocation-free/despawn of all boss records is not claimed. New continuation regular enemy pool800C1220/strideA4 showing only door08/sub7 is not proof about that separate boss pool.",
+              "Earlier native failures/misses and fixed manual-window truncation are retained. Native continuation3 is one narrowly authorized session-goahead exception after two old attempts; source/setup budgets not reset, no new observer/harness/build.",
+              "No native-card progress/save or ordinary recording/replay/net rollback qualification is asserted; current-build execution snapshot load is distinct from native cards."
+            ],
+            "bypasses": [
+              "Original CP0 prerequisite bypasses preceding stage traversal; contact protection and earned techniques were predeclared. Actual native attacks/defeat and checkpoint outcomes were not assigned.",
+              "Current-build slot9 resumes an already genuinely defeated midboss on the identical image; no battle replay was needed. Slot8 still held a live weakpoint and was not used.",
+              "The first-door passenger transfer is an explicit route prerequisite; all claimed later checkpoint crossing uses actual guest body movement, without placement, scene, checkpoint or result writes."
+            ]
+          }
+        ],
+        "limitations": "LOCAL frozenC118 genuine midboss defeat plus actual guest foot passage into native CP1 passed; stage3/sub0 unchanged proves in-area checkpoint continuation, not section loader. Current-build postdefeat snapshot/battle prerequisites and first-door passenger transfer explicit; NET unverified. No claim that both walked through firstdoor or all NPC allocations freed."
       }
     },
     {
