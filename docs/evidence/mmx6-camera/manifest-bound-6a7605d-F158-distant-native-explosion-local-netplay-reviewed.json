@@ -1,0 +1,525 @@
+{
+  "schema": 1,
+  "comparison": "F158",
+  "frozen_row_sha256": "949a6b4a2e358e25cf1d98e7a02b0d43a0f793d579f0eeb31433ff685bf1a84e",
+  "result": "passed",
+  "candidate": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+  "build_identity": {
+    "game_source_commit": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+    "image_sha256": "f13de94afef9ba3fafa3563602640ad2533a6c023636ef0dea6c99af4c555415",
+    "manifest_json_sha256": "4d93d68264b90fe5692d8b74bbe634c5b4edc8c6328c54398a57dbd32744c856",
+    "provenance_sha256": "4c57101ab80388ed986aa0c3288a961b2ad2b1decaa56915dc9c32b4f3fdaab8",
+    "SDK": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+    "title": 70,
+    "profile": 53,
+    "snapshot": 19,
+    "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+    "declared_manifest_sha256": "379b2ec4bdd8749ee671496751c228c7ac922e6bd680cbf89709197ce60f33f3"
+  },
+  "action": "Original intro CP1 local explosion with primary neutral; ordinary guest Right+Circle separates native views before observing source-owned burst on each process.",
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-local-1\\qualification.json",
+        "sha256": "89885acc675760c809a374320d9122f0fa0f6a78ae34b7e702cacdff34e5bd1e"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "native_guest_separation": true,
+        "source_owned_native_burst": true,
+        "primary_stays_fixed": true,
+        "both_native_draw_views_observed": true
+      },
+      "draw_origins": [
+        {
+          "peer": 0,
+          "label": "distant-burst-0",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4973.0
+            ]
+          }
+        },
+        {
+          "peer": 0,
+          "label": "distant-burst-1",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4973.0
+            ]
+          }
+        },
+        {
+          "peer": 0,
+          "label": "distant-burst-2",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4973.0
+            ]
+          }
+        },
+        {
+          "peer": 0,
+          "label": "distant-burst-3",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4973.0
+            ]
+          }
+        },
+        {
+          "peer": 0,
+          "label": "distant-after-burst",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4973.0
+            ]
+          }
+        }
+      ],
+      "final_positions": [
+        {
+          "peer": 0,
+          "actors": [
+            {
+              "x": 4736.0,
+              "y": 843.0,
+              "hp": 32
+            },
+            {
+              "x": 5133.75,
+              "y": 870.0,
+              "hp": 32
+            }
+          ]
+        }
+      ],
+      "samples": 117,
+      "composed_images": 6,
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\qualification.json",
+        "sha256": "17eccbbcd7f71729ee346a95176bfd5bad8ae85199591cb7ae0b317900822d6e"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "native_guest_separation": true,
+        "source_owned_native_burst": true,
+        "primary_stays_fixed": true,
+        "both_native_draw_views_observed": true
+      },
+      "draw_origins": [
+        {
+          "peer": 0,
+          "label": "distant-burst-0",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 1,
+          "label": "distant-burst-0",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 0,
+          "label": "distant-burst-1",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 1,
+          "label": "distant-burst-1",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 0,
+          "label": "distant-burst-2",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 1,
+          "label": "distant-burst-2",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 0,
+          "label": "distant-burst-3",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 1,
+          "label": "distant-burst-3",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 0,
+          "label": "distant-after-burst",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        },
+        {
+          "peer": 1,
+          "label": "distant-after-burst",
+          "origins": {
+            "0": [
+              4576.0
+            ],
+            "1": [
+              4985.0
+            ]
+          }
+        }
+      ],
+      "final_positions": [
+        {
+          "peer": 0,
+          "actors": [
+            {
+              "x": 4736.0,
+              "y": 843.0,
+              "hp": 32
+            },
+            {
+              "x": 5145.75,
+              "y": 867.0,
+              "hp": 32
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "actors": [
+            {
+              "x": 4736.0,
+              "y": 843.0,
+              "hp": 32
+            },
+            {
+              "x": 5145.75,
+              "y": 867.0,
+              "hp": 32
+            }
+          ]
+        }
+      ],
+      "samples": 72,
+      "composed_images": 12,
+      "native_exit_codes": [
+        0,
+        0
+      ],
+      "resolved_crc_windows": 4,
+      "resolved_crc_samples": 27,
+      "profile": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 53,
+        "selected_sha256": "ae2d256fd29678864cc3d4e99bf137876fa831530fa30f15e4c6841641f03fe3",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "f13de94afef9ba3fafa3563602640ad2533a6c023636ef0dea6c99af4c555415",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 53,
+              "selected_sha256": "ae2d256fd29678864cc3d4e99bf137876fa831530fa30f15e4c6841641f03fe3",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "f13de94afef9ba3fafa3563602640ad2533a6c023636ef0dea6c99af4c555415",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 53,
+              "selected_sha256": "ae2d256fd29678864cc3d4e99bf137876fa831530fa30f15e4c6841641f03fe3",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "personally_reviewed_images": [
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "distant-before-burst",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-local-1\\ammo-hud\\intro-admission\\peer-0-distant-before-burst.png",
+      "sha256": "67ec4a13a50e7871c4098b16b70890f5d199cb851694f7876c6128b10c836043",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "distant-burst-0",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-local-1\\ammo-hud\\intro-admission\\peer-0-distant-burst-0.png",
+      "sha256": "509722d62581dec95336512ea3472b17fd348fec71f6a272a0f0e2273a9d0411",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "distant-burst-1",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-local-1\\ammo-hud\\intro-admission\\peer-0-distant-burst-1.png",
+      "sha256": "979749cb1fc4305c196e0597a65663cabdabd0e3f8e47d51135a3514640d9644",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "distant-burst-2",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-local-1\\ammo-hud\\intro-admission\\peer-0-distant-burst-2.png",
+      "sha256": "763ef2a70fc26431e0b6e990d8555e19e9b9105427fda8609c9efaf44976826c",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "distant-burst-3",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-local-1\\ammo-hud\\intro-admission\\peer-0-distant-burst-3.png",
+      "sha256": "b09452a87301d4374c4882f21f45a20beae98f38d6c49c908816dfab58c4dfea",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "distant-after-burst",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-local-1\\ammo-hud\\intro-admission\\peer-0-distant-after-burst.png",
+      "sha256": "4ba8512e2d931eec72d044c0212d28cbe1f02a9db2e0257712ff0091dd50f2c5",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "distant-before-burst",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-0-distant-before-burst.png",
+      "sha256": "b7c0720e1ba46f622bf1625a127f9455d08741539b59f348744ef074bc1633cc",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "distant-before-burst",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-1-distant-before-burst.png",
+      "sha256": "2f29d12633e1b149ce53fbd6e551c41c787f5163aec14701916bc25cb70707db",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "distant-burst-0",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-0-distant-burst-0.png",
+      "sha256": "82d05957d09ddb27ff78312076ddffd0be87efbfbe3eb32d21b10740b91744d3",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "distant-burst-0",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-1-distant-burst-0.png",
+      "sha256": "b83e352a165cd7a1f9e4a279fe1dfe8a3a049d56162e9c17675fce98dfae51df",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "distant-burst-1",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-0-distant-burst-1.png",
+      "sha256": "a97d604204a258e9c821cc90d86a9638b158903bf1776a0080a970c07e8452a2",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "distant-burst-1",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-1-distant-burst-1.png",
+      "sha256": "9c6199da3461026c23ca8ebbeb81d12dd2ac6ff8ab373d1080acfd0b14b1807e",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "distant-burst-2",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-0-distant-burst-2.png",
+      "sha256": "2a1a337a7ad8c93a07915c37a2e8378c9983434bc0949cf21fde0feaeae43757",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "distant-burst-2",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-1-distant-burst-2.png",
+      "sha256": "0a1d3b34015d430f403fa633542d7c5f3413124b4781e076afad9907b7428149",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "distant-burst-3",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-0-distant-burst-3.png",
+      "sha256": "9217f52fe5a243c64efb583876a6c6e23e3738b51f85c50eac9b93439aff1507",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "distant-burst-3",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-1-distant-burst-3.png",
+      "sha256": "ab690860842d138f66070fa7d163870b17c2d31d90a1ac41dc9cd9e8eff07874",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "distant-after-burst",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-0-distant-after-burst.png",
+      "sha256": "604ff8c655b5ddf71600739ad2cfe926c6ade8025e9ddcdc8adb8446e05408d7",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "distant-after-burst",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F158-c122-distant-net-1\\intro-admission\\peer-1-distant-after-burst.png",
+      "sha256": "ef1d13b9c2b2f120b6f55dc0990fe5ce010990cad7b4991a027399a6e4fec6db",
+      "review": "Native local smoke/burst/bright effects in X pane; distant Zero pane has no corresponding explosion tint. Existing scenery corruption retained."
+    }
+  ],
+  "limits": [
+    "Only native intro category0/type0/subtype1 origin800FA384 and its actual local explosion/burst; no all-explosion, universal palette, campaign or native3330 claim.",
+    "Existing corrupt scenery is visible on both panes before and throughout the interval. This is a bounded distant-explosion isolation pass, not scenery or general palette fidelity.",
+    "Six LOCAL and twelve NET composed images personally reviewed: moving smoke/orange burst and bright local effect disk remain near X; distant Zero pane retains its own colors without the nearby explosion or corresponding screen tint. No literal red overlay is invented for X6.",
+    "First capture is labelled before-burst by the observer but the original explosion is already in progress. It is context during the event, not a dry pre-explosion baseline. Burst/tail captures establish the claimed bounded visual comparison.",
+    "Body/effect/source reads and composed captures are asynchronous. Native draw-context records separately establish true private camera origins; no instruction-atomic or exact simultaneous peer-frame claim.",
+    "First context trace includes the earlier separation interval and is not used as the final camera witness. Subsequent burst/tail traces retain primary4576 and guest4973 LOCAL or4985 NET.",
+    "Source/image is compiled6a7605d; later ed7a962 source history and this Python-only observer change do not imply a newly built executable. Same f13de94a image in both modes.",
+    "Current-build fixture recording is intentionally tainted and strict ordinary capture/replay rejects it. No finalized ordinary recording, rollback or unrelated snapshot qualification is claimed.",
+    "Same Windows PC, ENHANCED/retained GL/native4:3 private views/profile53; no cross-host, WAN or cross-platform claim."
+  ],
+  "bypasses": [
+    "Existing agreed intro_before_explosion initializes original CP1, authored body/camera positions and one original primary scanner call. Native traversal before this point is bypassed.",
+    "Pre-agreed hostile-contact protection is on. Ordinary dash separation, original explosion controller timing/effects and actual draw projection are never assigned."
+  ]
+}

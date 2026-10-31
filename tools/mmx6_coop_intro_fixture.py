@@ -34,6 +34,126 @@ def receipt(client):
         authority=data[29], latch=data[30], prior_chord=data[31], raw_hex=data.hex())
 
 
+def exercise_distant_explosion(ctx, *, output, original_exe, leader, success):
+    """F158 only: original local burst with a genuinely distant second view."""
+    output = Path(output); output.mkdir(parents=True, exist_ok=False)
+    clients = ctx['clients']; deadline = time.monotonic()+150
+    e = dict(kind='F158_distant_native_explosion', status='failed_setup', samples=[],
+        inputs=[], captures=[], checks={}, comparison_admissions=0,
+        bypasses=['Existing agreed intro_before_explosion CP1/position/scanner prerequisite; '
+                  'hostile-contact protection. Separation and explosion remain native.'],
+        limits=['Composed art needs visual review; asynchronous camera/body/effect reads '
+                'do not establish instruction-atomic or same-frame peer observations.'])
+    ctx['report']['distant_explosion'] = e
+
+    def need(ok, why):
+        if not ok: raise ValueError(why)
+
+    def inp(seat, bits):
+        e['inputs'].append(dict(seat=seat, bits=bits, ack=ctx['set_input'](seat, bits)))
+
+    def sample(label):
+        row = dict(index=len(e['samples']), label=label, peers=[]); e['samples'].append(row)
+        need(time.monotonic()<deadline and len(e['samples'])<600, 'F158 native deadline')
+        for i, c in enumerate(clients):
+            o = hud.state.private_sample(c)['observation']; play = c.read(0x800CCED0, 0xE0)
+            pool = c.read(0x8008EF48, 0x1D40); actors=[]
+            for at in range(0, len(pool), 0x9C):
+                a=pool[at:at+0x9C]
+                if len(a)==0x9C and a[0]&1 and a[1:3]==bytes((0,1)) and struct.unpack_from('<I',a,0x10)[0]==0x800FA384:
+                    actors.append(dict(address=0x8008EF48+at, hex=a.hex(), action=a[5], phase=a[6]))
+            fx = c.read(0x800CD410, 0x2400); effects=[]
+            for at in range(0, len(fx), 0x60):
+                a=fx[at:at+0x60]
+                if a[0]&1 and a[1]==3 and a[0x58] in (7,8,9):
+                    effects.append(dict(address=0x800CD410+at, hex=a.hex(), origin=struct.unpack_from('<I',a,0x54)[0]))
+            row['peers'].append(dict(peer=i, observation=o, tuple=[play[n] for n in (0,1,12,13,0x1D)],
+                fixture=receipt(c), producers=actors, effects=effects))
+        if len(e['samples'])%16==0 and ctx.get('network'): ctx['network']()
+        return row
+
+    def healthy(row):
+        return all(not p['observation']['failed'] and not p['observation']['mailbox']
+            and tuple(p['observation']['lifecycle'])==(0,0)
+            and all(a['active'] and a['state']==1 and a['hp']&127 for a in p['observation']['players'])
+            for p in row['peers'])
+
+    def wait(label, predicate, seconds):
+        stop=min(deadline,time.monotonic()+seconds)
+        while time.monotonic()<stop:
+            row=sample(label)
+            need(not any(p['fixture']['state'] in (4,5) for p in row['peers']), 'Original fixture refused')
+            if predicate(row): return row
+            time.sleep(.02)
+        raise ValueError(label+' timed out')
+
+    def capture(label, row):
+        for i,c in enumerate(clients):
+            trace=c.request('fn_entry_dump',seq_lo='0',count=256)
+            e.setdefault('draw_contexts',[]).append(dict(peer=i,label=label,trace=trace))
+            e['captures'].append(dict(peer=i,label=label,row_index=row['index'],
+                **debug.capture_present(c,output/f'peer-{i}-{label}.png',request=c.request)))
+            c.request('fn_clear')
+
+    try:
+        need(hashlib.sha256(Path(original_exe).read_bytes()).hexdigest()==
+             'dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046','Original EXE changed')
+        for seat in (0,1): inp(seat,0)
+        wait('original idle before agreed setup',lambda r:healthy(r) and all(p['tuple']==[10,0,0,0,0]
+            and all(a['action']==2 for a in p['observation']['players']) for p in r['peers']),20)
+        inp(1,6)
+        try: wait('one agreed chord',lambda r:all(p['fixture']['latch'] in (1,2) for p in r['peers']),15)
+        finally: inp(1,0)
+        ready=wait('original explosion prerequisite ready',lambda r:healthy(r) and all(p['fixture']['state']==3
+            and p['tuple']==[10,0,0,0,1] for p in r['peers']),30)
+        for c in clients:
+            need(hashlib.sha256(c.read(0x800E9F1C,0x2BC)).hexdigest()==
+                 '5704e34728d15883afe3d557d1b27bfd97e78ec138a04160612d42a44283db90','Original explosion source changed')
+            c.request('fn_disable'); c.request('fn_clear'); c.request('fn_filter',lo='80025FB0',hi='80025FB4')
+        e['ready']=ready['index']
+        # Standard host pad Right+Circle. This is original dash travel, never a body write.
+        inp(1,0x2020)
+        try:
+            separated=wait('guest native dash to distant viewport',lambda r:healthy(r) and all(
+                p['observation']['players'][1]['x_raw']>=5120*65536 for p in r['peers']),25)
+        finally: inp(1,0)
+        need(healthy(separated),'Distant approach lost a hero')
+        e['separated']=separated['index']; capture('distant-before-burst',separated)
+        seen=0
+        stop=min(deadline,time.monotonic()+35)
+        while time.monotonic()<stop and seen<4:
+            row=sample('distant original burst'); need(healthy(row),'Native burst lost a hero')
+            if all(any(a['origin'] in {p['address'] for p in peer['producers']} for a in peer['effects'])
+                   for peer in row['peers']):
+                capture('distant-burst-'+str(seen),row); seen+=1
+            time.sleep(.02)
+        need(seen>=2,'No source-owned original burst while views were distant')
+        final=sample('distant native final'); capture('distant-after-burst',final)
+        need(all(p['observation']['players'][0]['x_raw']==ready['peers'][i]['observation']['players'][0]['x_raw']
+            for i,p in enumerate(final['peers'])),'Neutral primary moved during distant burst')
+        for record in e['draw_contexts']:
+            seats={((x['context']['flags']>>1)&1) for x in record['trace']['entries']
+                if x['context']['available'] and x['context']['provider']==0x36564350 and x['context']['flags']&1}
+            need(seats=={0,1},'Missing actual independent draw cameras')
+        e['checks']=dict(native_guest_separation=True,source_owned_native_burst=True,
+            primary_stays_fixed=True,both_native_draw_views_observed=True)
+        e['status']=success
+        return e
+    except Exception as error:
+        e.update(error=str(error),traceback=traceback.format_exc())
+        try: capture('terminal-observation',e['samples'][-1])
+        except Exception as extra: e['capture_error']=str(extra)
+        raise
+    finally:
+        for seat in (0,1):
+            try: inp(seat,0)
+            except Exception: pass
+        for c in clients:
+            try: c.request('fn_disable')
+            except Exception: pass
+        (output/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8')
+
+
 def starting_hp_receipt(client):
     data = client.read(debug.DIAGNOSTIC_ADDRESS + 0xC0, 4)
     if len(data) != 4 or data[0] > 2 or data[1] > 32 or data[2] > 32 or data[3] > 3:

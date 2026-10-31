@@ -21901,25 +21901,118 @@
       "frozen_row_sha256": "949a6b4a2e358e25cf1d98e7a02b0d43a0f793d579f0eeb31433ff685bf1a84e",
       "x6": {
         "workstream": "assets",
-        "mapping_state": "candidate_native_scenario",
-        "analogue": "Distant-view local explosion flash isolation",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Original intro local burst isolated to its visible native private view",
         "bounded_check": "With actual private views, trigger an original local explosion near one hero; retain palette effects only where native proximity/visibility qualifies.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:enter_zero",
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+            "build_identity": {
+              "game_source_commit": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+              "image_sha256": "f13de94afef9ba3fafa3563602640ad2533a6c023636ef0dea6c99af4c555415",
+              "manifest_json_sha256": "4d93d68264b90fe5692d8b74bbe634c5b4edc8c6328c54398a57dbd32744c856",
+              "provenance_sha256": "4c57101ab80388ed986aa0c3288a961b2ad2b1decaa56915dc9c32b4f3fdaab8",
+              "SDK": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "title": 70,
+              "profile": 53,
+              "snapshot": 19,
+              "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "declared_manifest_sha256": "379b2ec4bdd8749ee671496751c228c7ac922e6bd680cbf89709197ce60f33f3"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisite": "agreed original intro_before_explosion; hostile-contact protection ON"
+            },
+            "action": "Original intro CP1 local explosion with primary neutral; ordinary guest Right+Circle separates native views before observing source-owned burst on each process.",
+            "outcome": "Native source-owned local burst stays in near X view while ordinary-dash distant Zero pane retains colors without corresponding flash; actual independent draw origins, both living controls and full parent gates retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-6a7605d-F158-distant-native-explosion-local-netplay-reviewed.json",
+                "sha256": "d2a61e6d48e768db7d3c72188064a246cd87dcd3ce82ba8fe9122c200429faed"
+              }
+            ],
+            "limits": [
+              "Only native intro category0/type0/subtype1 origin800FA384 and its actual local explosion/burst; no all-explosion, universal palette, campaign or native3330 claim.",
+              "Existing corrupt scenery is visible on both panes before and throughout the interval. This is a bounded distant-explosion isolation pass, not scenery or general palette fidelity.",
+              "Six LOCAL and twelve NET composed images personally reviewed: moving smoke/orange burst and bright local effect disk remain near X; distant Zero pane retains its own colors without the nearby explosion or corresponding screen tint. No literal red overlay is invented for X6.",
+              "First capture is labelled before-burst by the observer but the original explosion is already in progress. It is context during the event, not a dry pre-explosion baseline. Burst/tail captures establish the claimed bounded visual comparison.",
+              "Body/effect/source reads and composed captures are asynchronous. Native draw-context records separately establish true private camera origins; no instruction-atomic or exact simultaneous peer-frame claim.",
+              "First context trace includes the earlier separation interval and is not used as the final camera witness. Subsequent burst/tail traces retain primary4576 and guest4973 LOCAL or4985 NET.",
+              "Source/image is compiled6a7605d; later ed7a962 source history and this Python-only observer change do not imply a newly built executable. Same f13de94a image in both modes.",
+              "Current-build fixture recording is intentionally tainted and strict ordinary capture/replay rejects it. No finalized ordinary recording, rollback or unrelated snapshot qualification is claimed.",
+              "Same Windows PC, ENHANCED/retained GL/native4:3 private views/profile53; no cross-host, WAN or cross-platform claim."
+            ],
+            "bypasses": [
+              "Existing agreed intro_before_explosion initializes original CP1, authored body/camera positions and one original primary scanner call. Native traversal before this point is bypassed.",
+              "Pre-agreed hostile-contact protection is on. Ordinary dash separation, original explosion controller timing/effects and actual draw projection are never assigned."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+            "build_identity": {
+              "game_source_commit": "6a7605d5e497ca6cc71096ab2eb5fdc068d30da1",
+              "image_sha256": "f13de94afef9ba3fafa3563602640ad2533a6c023636ef0dea6c99af4c555415",
+              "manifest_json_sha256": "4d93d68264b90fe5692d8b74bbe634c5b4edc8c6328c54398a57dbd32744c856",
+              "provenance_sha256": "4c57101ab80388ed986aa0c3288a961b2ad2b1decaa56915dc9c32b4f3fdaab8",
+              "SDK": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "title": 70,
+              "profile": 53,
+              "snapshot": 19,
+              "execution": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "declared_manifest_sha256": "379b2ec4bdd8749ee671496751c228c7ac922e6bd680cbf89709197ce60f33f3"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "cameras": "split",
+              "audio": "dummy muted",
+              "prerequisite": "agreed original intro_before_explosion; hostile-contact protection ON"
+            },
+            "action": "Original intro CP1 local explosion with primary neutral; ordinary guest Right+Circle separates native views before observing source-owned burst on each process.",
+            "outcome": "Native source-owned local burst stays in near X view while ordinary-dash distant Zero pane retains colors without corresponding flash; actual independent draw origins, both living controls and full parent gates retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-6a7605d-F158-distant-native-explosion-local-netplay-reviewed.json",
+                "sha256": "d2a61e6d48e768db7d3c72188064a246cd87dcd3ce82ba8fe9122c200429faed"
+              }
+            ],
+            "limits": [
+              "Only native intro category0/type0/subtype1 origin800FA384 and its actual local explosion/burst; no all-explosion, universal palette, campaign or native3330 claim.",
+              "Existing corrupt scenery is visible on both panes before and throughout the interval. This is a bounded distant-explosion isolation pass, not scenery or general palette fidelity.",
+              "Six LOCAL and twelve NET composed images personally reviewed: moving smoke/orange burst and bright local effect disk remain near X; distant Zero pane retains its own colors without the nearby explosion or corresponding screen tint. No literal red overlay is invented for X6.",
+              "First capture is labelled before-burst by the observer but the original explosion is already in progress. It is context during the event, not a dry pre-explosion baseline. Burst/tail captures establish the claimed bounded visual comparison.",
+              "Body/effect/source reads and composed captures are asynchronous. Native draw-context records separately establish true private camera origins; no instruction-atomic or exact simultaneous peer-frame claim.",
+              "First context trace includes the earlier separation interval and is not used as the final camera witness. Subsequent burst/tail traces retain primary4576 and guest4973 LOCAL or4985 NET.",
+              "Source/image is compiled6a7605d; later ed7a962 source history and this Python-only observer change do not imply a newly built executable. Same f13de94a image in both modes.",
+              "Current-build fixture recording is intentionally tainted and strict ordinary capture/replay rejects it. No finalized ordinary recording, rollback or unrelated snapshot qualification is claimed.",
+              "Same Windows PC, ENHANCED/retained GL/native4:3 private views/profile53; no cross-host, WAN or cross-platform claim."
+            ],
+            "bypasses": [
+              "Existing agreed intro_before_explosion initializes original CP1, authored body/camera positions and one original primary scanner call. Native traversal before this point is bypassed.",
+              "Pre-agreed hostile-contact protection is on. Ordinary dash separation, original explosion controller timing/effects and actual draw projection are never assigned."
+            ]
+          }
+        ],
+        "limitations": "Same exact C122 LOCAL+NET native explosion isolated from distant guest pane after ordinary dash separation;18 composed images reviewed,4/15 parent gates,27 resolved core/mod CRC samples,3 native exits0 and cards preserved. Existing scenery corruption, agreedCP1/position/scanner/contact-protection bypasses and fixture recording refusals remain explicit. No general scenery/palette or other-explosion credit."
       }
     },
     {
@@ -23821,7 +23914,7 @@
       "frozen_row_sha256": "89421eb7b8ace19b8fb69f2bf3a62c72436c269c79b0d45a8ce064896a97c206",
       "x6": {
         "workstream": "pickup",
-        "mapping_state": "qualified_local_native_scenario_netplay_pending",
+        "mapping_state": "identified_subsystem",
         "analogue": "Elective private Sub Tank energy",
         "bounded_check": "Keep native shared acquisition/card progression; with optional separate energy, heal each seat independently then validate native reload and current-build snapshots.",
         "baseline_anchors": [
@@ -23867,6 +23960,15 @@
               "Native card campaign fields were not changed by the feature; no new card schema or energy persistence claimed.",
               "No runtime full-health pickup refill, second-tank acquisition/compaction or Weapon Tank spending claim. Corresponding source paths are covered by focused compiled fixtures.",
               "No full F180 pass; required NET native energy use remains unverified."
+            ],
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "subtank_energy": "independent",
+              "audio": "dummy muted",
+              "profile": 53
+            },
+            "bypasses": [
+              "Offline prerequisite tank acquisition, energy and damaged HP grants; original checkpoint selection bypasses prior route. Native menu healing and state restoration remain actual original operations."
             ]
           }
         ],

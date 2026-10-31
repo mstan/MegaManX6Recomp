@@ -114,7 +114,8 @@ def run(args):
         prepared = [p['agreed_checkpoint'] for p in report['jump_audio_prepared']]
         if prepared[0] != prepared[1]:
             raise ValueError('Peers did not predeclare the same private checkpoint option/catalog')
-        case = intro.exercise(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
+        exercise = intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise
+        case = exercise(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
             output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=SUCCESS)
         report['checks']['jump_audio_both_peers_completed'] = True
@@ -170,7 +171,8 @@ def run_local(args):
         return result
 
     def observe(ctx, *, output, **unused):
-        return intro.exercise(ctx, output=output/'intro-admission', original_exe=args.original_exe,
+        exercise = intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise
+        return exercise(ctx, output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=failed_trace.ammo.SUCCESS)
 
     args.layout = 'stacked'; args.port = args.host_port
@@ -196,8 +198,22 @@ def main():
     parser.description = __doc__
     parser.add_argument('--intro-leader', type=int, choices=(0, 1), required=True)
     parser.add_argument('--local', action='store_true', help='Use the same candidate with two local pads')
+    parser.add_argument('--distant-explosion', action='store_true', help='Observe F158 separated native explosion views')
     args = parser.parse_args(); args.jump_audio_smoke = True
     parent.validate_options(parser, args)
+    if args.distant_explosion:
+        original_select = select_checkpoint
+        def select_distant(directory, *, enabled):
+            selected = original_select(directory, enabled=enabled, option='intro_before_explosion', contact_protection='on')
+            path = Path(directory)/'mods/state.toml'
+            text = path.read_text(encoding='utf-8')
+            anchor = 'lab_checkpoint = "intro_before_explosion"\n'
+            if text.count(anchor) != 1:
+                raise ValueError('Missing original explosion selection')
+            path.write_text(text.replace(anchor, anchor+'local_cameras = "split"\ncameras = "split"\n'), encoding='utf-8')
+            selected.update(state_sha256=preparation.sha256(path),local_cameras='split',cameras='split')
+            return selected
+        globals()['select_checkpoint'] = select_distant
     if not args.require_state_crc or not args.require_host_profile or args.admission_only or args.native_loader_diagnostic:
         parser.error('Agreed fixture requires full native source/image/manifest/profile/resolved-CRC gates')
     report = run_local(args) if args.local else run(args)
