@@ -18069,8 +18069,63 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "65841a2b3dc35f3c7655bdd38ac9917cc6088a9a",
+            "build_identity": {
+              "image_sha256": "f9859b44271a9d85142892e38b92ddded2e149147d5a50af5db7a277ff55f7b1",
+              "declared_manifest_sha256": "88af7166aee79bb9036c640ca67c771ad6a7fa494b593c0fe9288de42080e9a5",
+              "title": 72,
+              "profile": 55,
+              "snapshot": 19,
+              "host": "Windows PC hidden muted GL-HLE"
+            },
+            "settings": {
+              "setup": "Authored inverse availability card4e2c670f, native original Load/selector only",
+              "lab": "alternate_boss_cp1/contactON/earnedALL/HPoff configured but checkpoint never activated"
+            },
+            "action": "Actual original card Load imports availability0x11, native story advances to original unit selector; inspect actual unlocked unit list before selecting Zero/P1.",
+            "outcome": "No F117 reaction qualification: original PLAY+5F stays0x11 but current native selector table is[0,1], count2, so unlocked Zero/unit5 is absent. Source unit_choices explicitly removesunit5, and fixed runtime admits only canonical roster. No inverse roster, chord, boss, attacks or Xcharge. Owned58352/lease32829 exits0 after610.52s within15min; private cards unchanged. Root personally reviewed selector image. Concrete missing inverse-roster feature now selected for implementation.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F117-c124-inverse-reaction-local-1\\preparation.json",
+                "sha256": "d484d7db737bd52259057980c60ecaa8ea09c9d9688b3f7f027499169e7fd0a9"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F117-c124-inverse-reaction-local-1\\native-job.json",
+                "sha256": "61bc1d602c116a9af9aae9167d398bb715b3e291e77e99be559656702e8a1021"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F117-c124-inverse-reaction-local-1\\mods\\state.toml",
+                "sha256": "f2eb865d6059308968b7121533e939dace6aeb41618c22500a8bf01fca6f65a7"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F117-c124-inverse-reaction-local-1\\control-observations.jsonl",
+                "sha256": "96048e2bb0824421bfbad5c83a969ae2b01ca7704a0e2b67cd6ad825e3ca852d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F117-c124-inverse-reaction-local-1\\native-selector-actual-current.png",
+                "sha256": "4036f65433b9a15f76d772fb943aa791e2330b4d3128f824e312a93506fbedca"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F117-c124-inverse-reaction-local-1\\source-preflight\\original-hit-family-800315CC.txt",
+                "sha256": "21913a37a6553e360b7f6470b48d1a119cc66363d15c390c0dc838097d65507f"
+              }
+            ],
+            "limits": [
+              "F117 LOCAL+NET remain unverified; native Load/selector is setup evidence, not boss reaction or gameplay pass.",
+              "One F117 native attempt spent. Sharedsource/setup window22:47:26?23:02:26Z spent; no reset or further observer/preparation expansion. Two direct NET jobs prepared beforedeadline remain unlaunched; no NET credit.",
+              "Known R9 charged-X/P2 black-display variant was not repeated. No new game build/source changes yet; exposing selection alone would not qualify inverse runtime or art.",
+              "Common original800315CC reaction table interpretation is source evidence only; actual per-family native boss reaction/recovery not observed."
+            ],
+            "bypasses": [
+              "Private authored card availability/inventory/history are declared prerequisites, not earned unlock or native Save evidence. Original Load/import/story/selector were actually executed; no runtime story/result writes."
+            ]
+          }
+        ],
+        "limitations": "Current C124 blocks required inverse prerequisite: actual native Load imports0x11, then co-op unit_choices removes unlockedZero5 and native selector exposes[0,1]; fixed runtime remains X/P1+Zero/P2. No actual counterpart boss reaction/NET pass. One nativeattempt/setupbudgetspent; inverse gameplay/resource/render implementation required before another run."
       }
     },
     {
