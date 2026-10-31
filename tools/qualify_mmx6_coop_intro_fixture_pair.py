@@ -25,9 +25,11 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protec
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
     options = [o for o in catalog.get('option', []) if o.get('id') == 'lab_checkpoint']
+    known_options = {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'heatnix_cp7', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1'}
+    actual_options = {c['value'] for c in options[0].get('choice', [])} if len(options) == 1 else set()
     if (len(options) != 1 or options[0].get('default') != 'off' or options[0].get('feature') != 'prototype'
-            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'heatnix_cp7', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1'}
-            or option not in (intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'heatnix_cp7', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1')):
+            or actual_options not in (known_options, known_options | {'heatnix_cp0'})
+            or option == 'off' or option not in actual_options):
         raise ValueError('Staged image lacks the private typed LAB checkpoint catalog')
     protection = [o for o in catalog.get('option', []) if o.get('id') == 'lab_contact_protection']
     if (len(protection) != 1 or protection[0].get('default') != 'off'
@@ -114,7 +116,8 @@ def run(args):
         prepared = [p['agreed_checkpoint'] for p in report['jump_audio_prepared']]
         if prepared[0] != prepared[1]:
             raise ValueError('Peers did not predeclare the same private checkpoint option/catalog')
-        exercise = (intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
+        exercise = (intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
+            else intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
             else intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise)
         case = exercise(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
             output=output/'intro-admission', original_exe=args.original_exe,
@@ -172,7 +175,8 @@ def run_local(args):
         return result
 
     def observe(ctx, *, output, **unused):
-        exercise = (intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
+        exercise = (intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
+            else intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
             else intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise)
         return exercise(ctx, output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=failed_trace.ammo.SUCCESS)
@@ -202,10 +206,28 @@ def main():
     parser.add_argument('--local', action='store_true', help='Use the same candidate with two local pads')
     parser.add_argument('--distant-explosion', action='store_true', help='Observe F158 separated native explosion views')
     parser.add_argument('--final-retry-continue', action='store_true', help='F136 actual Sigma team retry and literal Game Over/Continue')
+    parser.add_argument('--midboss-forward', action='store_true', help='F166/F187 actual Magma midboss defeat and original forward boundaries')
     args = parser.parse_args(); args.jump_audio_smoke = True
     parent.validate_options(parser, args)
-    if args.final_retry_continue and args.distant_explosion:
+    if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward)) > 1:
         parser.error('Select one named native scenario')
+    if args.midboss_forward:
+        original_select = select_checkpoint
+        def select_midboss(directory, *, enabled):
+            selected = original_select(directory, enabled=enabled, option='heatnix_cp0',
+                contact_protection='on', earned_weapons='all')
+            directory = Path(directory)
+            catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
+            doors = [o for o in catalog.get('option', []) if o.get('id') == 'doors']
+            if (len(doors) != 1 or doors[0].get('default') != 'either' or doors[0].get('feature') != 'prototype'
+                    or {c['value'] for c in doors[0].get('choice', [])} != {'either', 'both'}):
+                raise ValueError('Missing exact existing Either/Both door option')
+            path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8')
+            if 'doors =' in text: raise ValueError('Unexpected pre-existing door choice')
+            path.write_text(text+'doors = "both"\n', encoding='utf-8')
+            selected.update(doors='both', state_sha256=preparation.sha256(path))
+            return selected
+        globals()['select_checkpoint'] = select_midboss
     if args.final_retry_continue and args.intro_leader != 0:
         parser.error('F136 reuses the primary-owned Sigma intro and Continue route')
     if args.final_retry_continue:

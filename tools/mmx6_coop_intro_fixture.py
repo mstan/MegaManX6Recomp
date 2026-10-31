@@ -373,6 +373,251 @@ def exercise_final_retry_continue(ctx, *, output, original_exe, leader, success)
         (output/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8')
 
 
+def exercise_midboss_forward(ctx, *, output, original_exe, leader, success):
+    """F166/F187 separately: fresh Both midboss fight, door, then CP plane."""
+    output=Path(output); output.mkdir(parents=True,exist_ok=False)
+    clients=ctx['clients']; deadline=time.monotonic()+1800
+    e=dict(kind='F166_F187_native_Magma_midboss_forward',status='failed_setup',samples=[],
+        inputs=[],captures=[],checks={},comparison_admissions=0,comparisons={'F166':{'status':'unverified'},'F187':{'status':'unverified'}},
+        bypasses=['One agreed original Magma3/0CP0 entry; contact protection and earned weapons only. Doors Both.'],
+        limits=['Independent row dispositions; a passenger warp cannot qualify F166.',
+                'Asynchronous native observations, not instruction-atomic samples. No NET state load.'])
+    ctx['report']['midboss_forward']=e; seen_main=[False]*len(clients)
+
+    def need(ok,why):
+        if not ok: raise ValueError(why)
+
+    def inp(seat,bits,label):
+        need(seat in (0,1) and bits in (0,6,0x20,0x80,0x200,0x4000,0x8000,0x2020,0x4020,0x6020,0x8020,0x8080),'Ordinary declared host-pad input only')
+        e['inputs'].append(dict(seat=seat,bits=bits,label=label,ack=ctx['set_input'](seat,bits)))
+
+    def sample(label):
+        row=dict(index=len(e['samples']),label=label,peers=[]); e['samples'].append(row)
+        need(time.monotonic()<deadline,'Midboss native progress hard deadline')
+        for i,c in enumerate(clients):
+            raw=c.read(debug.DIAGNOSTIC_ADDRESS,debug.DIAGNOSTIC_BYTES);o=debug.parse_diagnostic(raw).json()
+            play=c.read(0x800CCED0,0xE0);pool=c.read(0x8008EF48,48*0x9C);snake=[]
+            for n in range(48):
+                a=pool[n*0x9C:(n+1)*0x9C]
+                if a[1]==0x19 and a[2]<=5:
+                    snake.append(dict(address=0x8008EF48+n*0x9C,active=bool(a[0]&1),subtype=a[2],
+                        visible=a[3],state=a[4],action=a[5],phase=a[6],hp=a[0x5C],
+                        x=struct.unpack_from('<i',a,8)[0]/65536,y=struct.unpack_from('<i',a,12)[0]/65536,hex=a.hex()))
+            main=[a for a in snake if a['subtype']==5 and a['active']]
+            if any(a['hp']>0 and a['state']==1 for a in main): seen_main[i]=True
+            door=c.read(0x800C1220,0xA4)
+            row['peers'].append(dict(peer=i,observation=o,tuple=[play[n] for n in (0,1,12,13,0x1D)],
+                play_hex=play.hex(),fixture=receipt(c),snake=snake,main=main,
+                door=dict(address=0x800C1220,active=bool(door[0]&1),type=door[1],subtype=door[2],
+                    state=door[4],action=door[5],hex=door.hex()),
+                p1_body_hex=raw[0x1800:0x1958].hex(),p2_body_hex=raw[0x100:0x258].hex(),
+                dialogue_hex=c.read(0x8008EAF0,16).hex()))
+            need(not o['failed'] and not o['mailbox'],'Native plugin failure or diagnostic mutation')
+        if len(e['samples'])%16==0 and ctx.get('network'): ctx['network']()
+        return row
+
+    def healthy(p):
+        o=p['observation']
+        return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,0) and all(
+            a['active'] and a['state']==1 and 0<a['hp']<=127 for a in o['players'])
+
+    def wait(label,predicate,seconds):
+        stop=min(deadline,time.monotonic()+seconds)
+        while time.monotonic()<stop:
+            row=sample(label)
+            if predicate(row): return row
+            time.sleep(.04)
+        raise ValueError(label+' timed out')
+
+    def updates(label,count):
+        online=len(clients)==2 and ctx.get('network')
+        start=ctx['network']() if online else [c.request('freeze_check',window=1)['frame_count'] for c in clients]
+        stop=min(deadline,time.monotonic()+40)
+        while time.monotonic()<stop:
+            row=sample(label)
+            now=ctx['network']() if online else [c.request('freeze_check',window=1)['frame_count'] for c in clients]
+            if (all(n['resolved_through']>=s['tick']+count for n,s in zip(now,start)) if online
+                    else all(((n-s)&0xFFFFFFFF)>=count for n,s in zip(now,start))): return row
+            time.sleep(.025)
+        raise ValueError(label+' native input window did not progress')
+
+    def hold(seat,bits,count,label):
+        inp(seat,bits,label)
+        try: return updates(label,count)
+        finally: inp(seat,0,label+' neutral')
+
+    def capture(label,row):
+        for i,c in enumerate(clients):
+            e['captures'].append(dict(peer=i,label=label,row_index=row['index'],
+                **debug.capture_present(c,output/f'peer-{i}-{label}.png',request=c.request)))
+
+    def defeated(row):
+        result=[]
+        for i,p in enumerate(row['peers']):
+            main=p['main']; weak=[a for a in p['snake'] if a['subtype']<4]
+            main_done=not main or all(a['hp']==0 and (a['state'],a['action'],a['phase'])==(3,8,4) for a in main)
+            result.append(seen_main[i] and main_done and not any(a['active'] and a['visible'] for a in weak))
+        return all(result)
+
+    try:
+        need(hashlib.sha256(Path(original_exe).read_bytes()).hexdigest()==
+            'dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046','Original EXE changed')
+        for seat in (0,1): inp(seat,0,'original baseline neutral')
+        wait('original intro idle before Magma prerequisite',lambda r:all(healthy(p)
+            and p['tuple']==[10,0,0,0,0] and all(a['action']==2 for a in p['observation']['players'])
+            and p['fixture']['generation']==p['fixture']['latch']==0 for p in r['peers']),30)
+        inp(1,6,'one agreed heatnix_cp0 chord')
+        try: wait('Magma chord accepted',lambda r:all(p['fixture']['latch'] in (1,2) for p in r['peers']),20)
+        finally: inp(1,0,'release the only checkpoint chord')
+        row=wait('original Magma CP0 pair and earned weapons ready',lambda r:all(healthy(p)
+            and p['tuple']==[10,0,3,0,0] and p['fixture']['generation']==p['fixture']['initializer_entries']==1
+            and p['fixture']['state']==3 and p['fixture']['nonce']==0x4C484E30
+            and p['observation']['players'][1]['ammo'][5]==288 for p in r['peers']),120)
+        e['initial']=row['index']
+        for window in range(2):
+            for seat in (0,1): inp(seat,0x2020,'native dual Right Circle approach'+str(window))
+            try: updates('actual original Magma approach',60)
+            finally:
+                for seat in (0,1): inp(seat,0,'release approach for native HELP')
+        stop=min(deadline,time.monotonic()+150)
+        while time.monotonic()<stop:
+            row=sample('original HELP intro and actual Snake activation')
+            if all(healthy(p) and not p['observation']['scene_owner'] and p['main']
+                    and any(a['hp']>0 and a['state']==1 and a['action']==3 for a in p['main'])
+                    and any(a['subtype']<4 and a['active'] and a['visible'] and a['state']==1 and a['hp']>0 for a in p['snake'])
+                    for p in row['peers']): break
+            owner=row['peers'][0]['observation']['scene_owner']
+            if owner in (1,2) and all(bytes.fromhex(p['dialogue_hex'])[12:14]==bytes((255,3)) for p in row['peers']):
+                hold(owner-1,0x4000,8,'original owning HELP dialogue Cross'); updates('HELP neutral separation',8)
+            time.sleep(.04)
+        else: raise ValueError('Actual native HELP did not release the active midboss')
+        e['actual_activation']=row['index'];capture('actual-native-midboss-active',row)
+        for cast in range(3):
+            if defeated(row): break
+            if all(not any(a['subtype']<4 and a['active'] and a['visible'] and a['hp']>0
+                    for a in p['snake']) and all(a['hp']==0 for a in p['main']) for p in row['peers']):
+                row=wait('original main death completes after weakpoints retire',defeated,45);break
+            wait('Zero native idle before active Giga',lambda r:all(healthy(p)
+                and p['observation']['players'][1]['action']==2 for p in r['peers']),60)
+            hold(1,0x200,12,'actual active guest R2 Giga'+str(cast));updates('release Giga edge',8)
+            row=wait('native Giga action completes',lambda r:defeated(r) or all(healthy(p)
+                and p['observation']['players'][1]['action']==2 for p in r['peers']),90)
+        if not defeated(row):
+            hold(1,0x6020,60,'proven guest Right Cross Circle to arena melee floor')
+            updates('native melee approach neutral',8)
+            for attack in range(80):
+                row=sample('native surviving weakpoint contact')
+                if defeated(row): break
+                need(all(healthy(p) for p in row['peers']),'Combat lost a living actor')
+                weak=[a for a in row['peers'][0]['snake'] if a['subtype']<4 and a['active'] and a['visible'] and a['hp']>0]
+                if not weak:
+                    row=wait('original Snake death/retirement',defeated,45);break
+                x=row['peers'][0]['observation']['players'][1]['x_raw']/65536
+                target=min(weak,key=lambda a:abs(a['x']-x));direction=0x20 if target['x']>=x else 0x80
+                hold(1,direction|0x8000,12,'owned moving Zero Square contact'+str(attack))
+                hold(1,direction,12,'original movement and fresh Square separation')
+        need(defeated(row),'No complete original main/weakpoint native defeat')
+        e['actual_defeat']=row['index'];capture('original-midboss-defeat-and-cleanup',row)
+        hold(0,0x20,30,'proven native primary approach after defeat')
+        for seat in (0,1):inp(seat,0x2020,'proven dual Right Circle to first exit ledge')
+        try:updates('actual post-defeat dual dash60',60)
+        finally:
+            for seat in (0,1):inp(seat,0,'neutral first exit ledge')
+        for seat in (0,1):inp(seat,0x20,'native approach to first platform at661')
+        try:wait('both feet at first exit platform',lambda r:all(healthy(p)
+            and min(a['x_raw'] for a in p['observation']['players'])>=660*65536 for p in r['peers']),45)
+        finally:
+            for seat in (0,1):inp(seat,0,'neutral first platform approach')
+        for seat in (0,1):inp(seat,0x4020,'proven first dual Right Cross50')
+        try:updates('original first exit platform jump50',50)
+        finally:
+            for seat in (0,1):inp(seat,0,'release first platform jump')
+        for seat in (0,1): inp(seat,0x20,'native approach to exit platform at821')
+        try:wait('both native feet at exit-platform approach',lambda r:all(healthy(p)
+            and min(a['x_raw'] for a in p['observation']['players'])>=820*65536 for p in r['peers']),60)
+        finally:
+            for seat in (0,1):inp(seat,0,'neutral exit-platform approach')
+        for seat in (0,1):inp(seat,0x4020,'proven dual Right Cross to actual door ledge')
+        try:updates('original dual platform jump50',50)
+        finally:
+            for seat in (0,1):inp(seat,0,'release original platform jump')
+        start=sample('both before original forward door'); door_rows=[]
+        for seat in (0,1): inp(seat,0x20,'actual both forward door approach')
+        try:
+            stop=min(deadline,time.monotonic()+120)
+            while time.monotonic()<stop:
+                row=sample('original Both door foot crossing');door_rows.append(row['index'])
+                # A passenger scene disqualifies F166, not an independently
+                # reachable later F187 foot/checkpoint observation.
+                if all(healthy(p) and min(a['x_raw'] for a in p['observation']['players'])>=985*65536
+                        for p in row['peers']): break
+                time.sleep(.025)
+            else: raise ValueError('Original forward door did not admit the pair')
+        finally:
+            for seat in (0,1): inp(seat,0,'release after original door')
+        foot=[]
+        for peer in range(len(clients)):
+            rows=[e['samples'][i]['peers'][peer] for i in door_rows]
+            for seat in (0,1):
+                key=f'p{seat+1}_body_hex'
+                relevant=[p for p in rows if 900*65536<=p['observation']['players'][seat]['x_raw']<=985*65536]
+                good=(start['peers'][peer]['observation']['players'][seat]['x_raw']<=943*65536
+                    and row['peers'][peer]['observation']['players'][seat]['x_raw']>943*65536
+                    and any(p['observation']['players'][seat]['action']==19 for p in relevant)
+                    and all(p['observation']['lifecycle'][seat]==0 and bytes.fromhex(p[key])[3]
+                        and p['observation']['scene_phase']==0 for p in relevant))
+                foot.append(dict(peer=peer,seat=seat,foot_crossing=bool(good)))
+        e['comparisons']['F166']=dict(status='observed' if all(x['foot_crossing'] for x in foot) else 'unverified',
+            witnesses=foot,door_rows=door_rows,limit='Only actual both-foot native door passage qualifies; passenger warps excluded')
+        capture('post-midboss-original-door-result',row)
+        try:
+            # Position with ordinary inputs below the authored CP plane. No map,
+            # checkpoint, collision or result writes and no additional initializer.
+            for seat in (0,1):
+                inp(seat,0x20,'native corridor alignment below checkpoint plane')
+                try: wait('native corridor approach1040',lambda r:all(p['observation']['players'][seat]['x_raw']>=1040*65536 for p in r['peers']),30)
+                finally: inp(seat,0,'corridor approach neutral')
+                updates('corridor neutral delay separation',8)
+            before=sample('guest before original CP0 to1 plane')
+            need(all(p['tuple']==[10,0,3,0,0] and p['observation']['players'][1]['x_raw']<1072*65536 for p in before['peers']),
+                'Native CP plane was already crossed before the named foot window')
+            for seat in (0,1): inp(seat,0x20,'genuine corridor Right across authored CP plane')
+            try:
+                after=wait('guest actual foot CP0 to1 same-area commitment',lambda r:all(healthy(p)
+                    and p['tuple']==[10,0,3,0,1] and not p['observation']['scene_owner']
+                    and p['observation']['players'][1]['x_raw']>=1078*65536
+                    and p['observation']['players'][1]['action'] in (3,4,5) for p in r['peers']),45)
+            finally:
+                for seat in (0,1): inp(seat,0,'final native corridor neutral')
+            e['comparisons']['F187']=dict(status='observed',before=before['index'],after=after['index'],
+                scope='Actual guest foot passage and original3/0CP0to1, not a separate section loader')
+            capture('guest-native-CP1-forward-passage',after)
+        except Exception as error:
+            e['comparisons']['F187']=dict(status='unverified',error=str(error),traceback=traceback.format_exc(),
+                scope='Failed CP observation retained for review; no game/observer cause is assumed')
+            if e['comparisons']['F166']['status']!='observed': raise
+            after=sample('F166 door retained; F187 forward observation failed')
+            try:capture('F187-forward-observation-failed',after)
+            except Exception as extra:e['comparisons']['F187']['capture_error']=str(extra)
+        need(all(p['fixture']['generation']==p['fixture']['initializer_entries']==1 for p in after['peers']),
+            'Repeated prerequisite initializer')
+        e['checks']=dict(actual_native_midboss_defeat=True,original_weakpoints_retired=True,
+            guest_actual_same_area_forward_checkpoint=e['comparisons']['F187']['status']=='observed',
+            no_repeated_initializer=True)
+        e['status']=success;return e
+    except Exception as error:
+        e.update(error=str(error),traceback=traceback.format_exc())
+        if e['samples']:
+            try:capture('terminal-native-midboss-observation',e['samples'][-1])
+            except Exception as extra:e['capture_error']=str(extra)
+        raise
+    finally:
+        for seat in (0,1):
+            try:inp(seat,0,'final native neutral')
+            except Exception as error:e.setdefault('cleanup_errors',[]).append(str(error))
+        (output/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8')
+
+
 def starting_hp_receipt(client):
     data = client.read(debug.DIAGNOSTIC_ADDRESS + 0xC0, 4)
     if len(data) != 4 or data[0] > 2 or data[1] > 32 or data[2] > 32 or data[3] > 3:
