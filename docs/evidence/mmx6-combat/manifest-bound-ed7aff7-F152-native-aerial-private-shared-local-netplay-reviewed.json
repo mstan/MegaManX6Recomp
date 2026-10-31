@@ -1,0 +1,1024 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F152"
+  ],
+  "frozen_row_sha256": "2b0cc7af4921ebdcb966cf3d034e8bc7e80bd7e5b10175303a3d9d8e73018f50",
+  "candidate": "ed7aff74194154b5a93818611a0db5651f139440",
+  "binding": {
+    "executable_sha256": "13f007a1b738cff0443967f9075fffecffd6c60b0a1586ff312a2fc4aa01fdfc",
+    "compiled_manifest_sha256": "c97939d2c662832b009c67532a08f79f1647b6f325143aac07637f93f3b5bf9d",
+    "provenance_sha256": "8146884d116dc06038cda2c7f884af8cb6c0c98e40ac6355c8d8b5cc672edac9",
+    "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "title": 67,
+  "profile": 50,
+  "snapshot": 18,
+  "semantic_contract_sha256": "59fca5246dbbe3fae98cff3491121dd94deecaa960ad2fb3c34ae535083cd6a7",
+  "shared_source_build_tests": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-combat\\manifest-bound-ed7aff7-F99-native-private-cooldowns-local-netplay-reviewed.json",
+    "sha256": "1876dfa75005e65885c99ae58f24bd517f4e23d2200935af8622d829f4c775f3"
+  },
+  "focused_compiled_tests_passed": 18,
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\mmx6_private_boss_cooldowns_F152_only.py",
+    "sha256": "e697f494e5df27fecd6462d690720617f812945b532cfa6b1654630902631cbd"
+  },
+  "source_build_preflight": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\F152-source-build-preflight.stdout.json",
+    "sha256": "abe5f4b312021f7197b07f554cef387e2e70614a8070a2ad75a5bcbf1397c5cc"
+  },
+  "result": "passed",
+  "modes": {
+    "local": {
+      "independent": {
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152l\\qualification.json",
+          "sha256": "6ecaa923dacf5f117686e45bb5c54e756abef4ecb58574ef95ae10ee746be363"
+        },
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152l\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "544e2007817ef5faf7dbbbb4527f89e4b8b021442d38adc4b24f018e8b189628"
+        },
+        "parent_checks": {
+          "exact_image_manifest_declared_sources_originals": true,
+          "native_resource_and_window_observations_complete": true,
+          "default_recording_taint_retained_and_replay_refused": true,
+          "owned_cleanup_private_cards": true
+        },
+        "native_checks": {
+          "actual_two_aerial_contacts_and_native_return": true,
+          "native_health_budget_and_original_reactions": true,
+          "no_HP_phase_timer_or_result_writes": true,
+          "aerial_private_clock_at_most_shared15": true
+        },
+        "aerial_offers": [
+          {
+            "before": [
+              {
+                "raw": 0,
+                "zero": 0,
+                "scaled": 0,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "air": 592,
+            "hit": 594,
+            "recovered": 617,
+            "after": [
+              {
+                "raw": 12,
+                "zero": 12,
+                "scaled": 4,
+                "one": 0,
+                "two": 6,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 24,
+                "events": 6,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "observed_types": [
+              27
+            ]
+          },
+          {
+            "before": [
+              {
+                "raw": 12,
+                "zero": 12,
+                "scaled": 4,
+                "one": 0,
+                "two": 6,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 24,
+                "events": 6,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "air": 626,
+            "hit": 628,
+            "recovered": 661,
+            "after": [
+              {
+                "raw": 24,
+                "zero": 24,
+                "scaled": 9,
+                "one": 0,
+                "two": 12,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 48,
+                "events": 12,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "observed_types": [
+              27
+            ]
+          }
+        ],
+        "final_stats": [
+          {
+            "raw": 24,
+            "zero": 24,
+            "scaled": 9,
+            "one": 0,
+            "two": 12,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 48,
+            "events": 12,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "final_boss_HP": [
+          39
+        ],
+        "per_accepted_contact_installed_ticks": 4,
+        "resolved_crc_windows": 0,
+        "matching_crc_samples": 0,
+        "owned_exit_card_protection": "all owned native exits0 and active private cards unchanged; see parent checks",
+        "fixture_capture_admitted": false,
+        "replay_admitted": false
+      },
+      "shared": {
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sl\\qualification.json",
+          "sha256": "bd463b362df0eee76282f97e959e46dcacb430ae7922c3c8b1064fdb13b60147"
+        },
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sl\\ammo-hud\\intro-admission\\observations.json",
+          "sha256": "cb9c0abc4b6c368fae636840aba2b3272e98e82e9f7ddb8a662c3c2129c36fa7"
+        },
+        "parent_checks": {
+          "exact_image_manifest_declared_sources_originals": true,
+          "native_resource_and_window_observations_complete": true,
+          "default_recording_taint_retained_and_replay_refused": true,
+          "owned_cleanup_private_cards": true
+        },
+        "native_checks": {
+          "actual_two_aerial_contacts_and_native_return": true,
+          "native_health_budget_and_original_reactions": true,
+          "no_HP_phase_timer_or_result_writes": true
+        },
+        "aerial_offers": [
+          {
+            "before": [
+              {
+                "raw": 0,
+                "zero": 0,
+                "scaled": 0,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "air": 574,
+            "hit": 575,
+            "recovered": 613,
+            "after": [
+              {
+                "raw": 12,
+                "zero": 12,
+                "scaled": 4,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 180,
+                "shared_after": 90
+              }
+            ],
+            "observed_types": []
+          },
+          {
+            "before": [
+              {
+                "raw": 12,
+                "zero": 12,
+                "scaled": 4,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 180,
+                "shared_after": 90
+              }
+            ],
+            "air": 623,
+            "hit": 625,
+            "recovered": 664,
+            "after": [
+              {
+                "raw": 24,
+                "zero": 24,
+                "scaled": 9,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 360,
+                "shared_after": 180
+              }
+            ],
+            "observed_types": [
+              27
+            ]
+          }
+        ],
+        "final_stats": [
+          {
+            "raw": 24,
+            "zero": 24,
+            "scaled": 9,
+            "one": 0,
+            "two": 0,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 0,
+            "events": 0,
+            "shared_before": 360,
+            "shared_after": 180
+          }
+        ],
+        "final_boss_HP": [
+          39
+        ],
+        "per_accepted_contact_installed_ticks": 15,
+        "resolved_crc_windows": 0,
+        "matching_crc_samples": 0,
+        "owned_exit_card_protection": "all owned native exits0 and active private cards unchanged; see parent checks",
+        "fixture_capture_admitted": false,
+        "replay_admitted": false
+      }
+    },
+    "netplay": {
+      "independent": {
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\qualification.json",
+          "sha256": "47604a9544c09ffa34ed5bbb431aa8cab5ddff284223dba1895d5d6203c919e5"
+        },
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\observations.json",
+          "sha256": "3863985547d681cb5b26971c4fa4f2a384ea099771ac90ca7d22900a364ce7b6"
+        },
+        "parent_checks": {
+          "jump_audio_original_source_bound": true,
+          "jump_audio_both_peers_completed": true,
+          "declared_build_manifest_bound_to_staged_images": true,
+          "jump_audio_declared_sources_match": true,
+          "host_profile_settled_before_guest": true,
+          "p2_right_reaches_both_peers": true,
+          "p2_right_preserves_p1_x": true,
+          "p1_jump_reaches_both_peers": true,
+          "p1_jump_preserves_p2_y": true,
+          "both_alive_healthy": true,
+          "mailbox_unused": true,
+          "default_resident_loader_committed": true,
+          "jump_audio_resolved_crc_after_case": true,
+          "jump_audio_final_private_cards_unchanged": true,
+          "jump_audio_owned_pair_cleanup": true
+        },
+        "native_checks": {
+          "actual_two_aerial_contacts_and_native_return": true,
+          "native_health_budget_and_original_reactions": true,
+          "no_HP_phase_timer_or_result_writes": true,
+          "aerial_private_clock_at_most_shared15": true
+        },
+        "aerial_offers": [
+          {
+            "before": [
+              {
+                "raw": 0,
+                "zero": 0,
+                "scaled": 0,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 0,
+                "shared_after": 0
+              },
+              {
+                "raw": 0,
+                "zero": 0,
+                "scaled": 0,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "air": 589,
+            "hit": 592,
+            "recovered": 608,
+            "after": [
+              {
+                "raw": 10,
+                "zero": 10,
+                "scaled": 4,
+                "one": 0,
+                "two": 5,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 20,
+                "events": 5,
+                "shared_before": 0,
+                "shared_after": 0
+              },
+              {
+                "raw": 10,
+                "zero": 10,
+                "scaled": 4,
+                "one": 0,
+                "two": 5,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 20,
+                "events": 5,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "observed_types": [
+              27
+            ]
+          },
+          {
+            "before": [
+              {
+                "raw": 10,
+                "zero": 10,
+                "scaled": 4,
+                "one": 0,
+                "two": 5,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 20,
+                "events": 5,
+                "shared_before": 0,
+                "shared_after": 0
+              },
+              {
+                "raw": 10,
+                "zero": 10,
+                "scaled": 4,
+                "one": 0,
+                "two": 5,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 20,
+                "events": 5,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "air": 622,
+            "hit": 625,
+            "recovered": 640,
+            "after": [
+              {
+                "raw": 16,
+                "zero": 16,
+                "scaled": 6,
+                "one": 0,
+                "two": 8,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 32,
+                "events": 8,
+                "shared_before": 0,
+                "shared_after": 0
+              },
+              {
+                "raw": 16,
+                "zero": 16,
+                "scaled": 6,
+                "one": 0,
+                "two": 8,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 32,
+                "events": 8,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "observed_types": [
+              27
+            ]
+          }
+        ],
+        "final_stats": [
+          {
+            "raw": 16,
+            "zero": 16,
+            "scaled": 6,
+            "one": 0,
+            "two": 8,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 32,
+            "events": 8,
+            "shared_before": 0,
+            "shared_after": 0
+          },
+          {
+            "raw": 16,
+            "zero": 16,
+            "scaled": 6,
+            "one": 0,
+            "two": 8,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 32,
+            "events": 8,
+            "shared_before": 0,
+            "shared_after": 0
+          }
+        ],
+        "final_boss_HP": [
+          42,
+          42
+        ],
+        "per_accepted_contact_installed_ticks": 4,
+        "resolved_crc_windows": 4,
+        "matching_crc_samples": 23,
+        "owned_exit_card_protection": "all owned native exits0 and active private cards unchanged; see parent checks",
+        "fixture_capture_admitted": false,
+        "replay_admitted": false
+      },
+      "shared": {
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\qualification.json",
+          "sha256": "069143a2f8c19d6abf8bcceb0ebdef8ee6a1c038d5c4893028909c1de6081c40"
+        },
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\observations.json",
+          "sha256": "05eefa295de1254db6383d638d10d92e1d8973f6a8e3c305f9abb4c8fcb0ea95"
+        },
+        "parent_checks": {
+          "jump_audio_original_source_bound": true,
+          "jump_audio_both_peers_completed": true,
+          "declared_build_manifest_bound_to_staged_images": true,
+          "jump_audio_declared_sources_match": true,
+          "host_profile_settled_before_guest": true,
+          "p2_right_reaches_both_peers": true,
+          "p2_right_preserves_p1_x": true,
+          "p1_jump_reaches_both_peers": true,
+          "p1_jump_preserves_p2_y": true,
+          "both_alive_healthy": true,
+          "mailbox_unused": true,
+          "default_resident_loader_committed": true,
+          "jump_audio_resolved_crc_after_case": true,
+          "jump_audio_final_private_cards_unchanged": true,
+          "jump_audio_owned_pair_cleanup": true
+        },
+        "native_checks": {
+          "actual_two_aerial_contacts_and_native_return": true,
+          "native_health_budget_and_original_reactions": true,
+          "no_HP_phase_timer_or_result_writes": true
+        },
+        "aerial_offers": [
+          {
+            "before": [
+              {
+                "raw": 0,
+                "zero": 0,
+                "scaled": 0,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 0,
+                "shared_after": 0
+              },
+              {
+                "raw": 0,
+                "zero": 0,
+                "scaled": 0,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 0,
+                "shared_after": 0
+              }
+            ],
+            "air": 566,
+            "hit": 568,
+            "recovered": 590,
+            "after": [
+              {
+                "raw": 8,
+                "zero": 8,
+                "scaled": 3,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 120,
+                "shared_after": 60
+              },
+              {
+                "raw": 8,
+                "zero": 8,
+                "scaled": 3,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 120,
+                "shared_after": 60
+              }
+            ],
+            "observed_types": [
+              27
+            ]
+          },
+          {
+            "before": [
+              {
+                "raw": 8,
+                "zero": 8,
+                "scaled": 3,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 120,
+                "shared_after": 60
+              },
+              {
+                "raw": 8,
+                "zero": 8,
+                "scaled": 3,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 120,
+                "shared_after": 60
+              }
+            ],
+            "air": 593,
+            "hit": 597,
+            "recovered": 655,
+            "after": [
+              {
+                "raw": 16,
+                "zero": 16,
+                "scaled": 6,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 240,
+                "shared_after": 120
+              },
+              {
+                "raw": 16,
+                "zero": 16,
+                "scaled": 6,
+                "one": 0,
+                "two": 0,
+                "partner": 0,
+                "own": 0,
+                "t1": 0,
+                "t2": 0,
+                "events": 0,
+                "shared_before": 240,
+                "shared_after": 120
+              }
+            ],
+            "observed_types": [
+              27
+            ]
+          }
+        ],
+        "final_stats": [
+          {
+            "raw": 16,
+            "zero": 16,
+            "scaled": 6,
+            "one": 0,
+            "two": 0,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 0,
+            "events": 0,
+            "shared_before": 240,
+            "shared_after": 120
+          },
+          {
+            "raw": 16,
+            "zero": 16,
+            "scaled": 6,
+            "one": 0,
+            "two": 0,
+            "partner": 0,
+            "own": 0,
+            "t1": 0,
+            "t2": 0,
+            "events": 0,
+            "shared_before": 240,
+            "shared_after": 120
+          }
+        ],
+        "final_boss_HP": [
+          42,
+          42
+        ],
+        "per_accepted_contact_installed_ticks": 15,
+        "resolved_crc_windows": 4,
+        "matching_crc_samples": 24,
+        "owned_exit_card_protection": "all owned native exits0 and active private cards unchanged; see parent checks",
+        "fixture_capture_admitted": false,
+        "replay_admitted": false
+      }
+    }
+  },
+  "root_reviewed_composed_images": [
+    {
+      "peer": 0,
+      "label": "native-original-Sigma-CP1",
+      "row": 99,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152l\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+      "sha256": "b1d19338982fe53298338c03d09a9f4ff557ec4d8d96499f86ac80767437f03e",
+      "case": "f152l",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-first-Sigma-scene",
+      "row": 124,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152l\\ammo-hud\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+      "sha256": "1a40a28a4d5c79094aeef5cadfe957440720090c051ac5d6073f50e108e4e800",
+      "case": "f152l",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-Sigma61-released",
+      "row": 561,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152l\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "bae4a3348510c9f16c57e6e5987f8bb8ace84686da887f14a0c6a2455cee1eb0",
+      "case": "f152l",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-air-hit0",
+      "row": 594,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152l\\ammo-hud\\intro-admission\\peer-0-native-private-air-hit0.png",
+      "sha256": "44ea5a99ec30b29f6b2a95892cea524f0b1e66cc16cb13d26641f6e25464fe3d",
+      "case": "f152l",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-air-hit1",
+      "row": 628,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152l\\ammo-hud\\intro-admission\\peer-0-native-private-air-hit1.png",
+      "sha256": "602a88db0018e0894dcd2d1ddb1b1dfb28447ca4f8fbbc275086fac46e3cc244",
+      "case": "f152l",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-original-Sigma-CP1",
+      "row": 95,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+      "sha256": "5fe5384966b56481baa8d1a832e79cc39c3bbde2e87c171758c58794129c17d7",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-original-Sigma-CP1",
+      "row": 95,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-1-native-original-Sigma-CP1.png",
+      "sha256": "3ab3c89d1f00386b3cd4523d57f5ced571ce9bbf874688b106cd1a61b9dcc21d",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-first-Sigma-scene",
+      "row": 116,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+      "sha256": "aa8d369d9d6a02c214fddad40b91ea5d5ba7202bd49c26c566b9204ac167ac72",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-first-Sigma-scene",
+      "row": 116,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-1-native-first-Sigma-scene.png",
+      "sha256": "32892f699dfa12e00307c92f40092746089572497b28e6b04517ffcbafefe76c",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-Sigma61-released",
+      "row": 503,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "90c015ce316b2c027b34294a82354f01fbae7c8b7d1db2710eacda4e627974bb",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-Sigma61-released",
+      "row": 503,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-1-native-Sigma61-released.png",
+      "sha256": "f7f5ed0a6255677992715aa342ccc121ca4f32c2764c7e15cd01a25ab7f0d6aa",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-air-hit0",
+      "row": 592,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-0-native-private-air-hit0.png",
+      "sha256": "daccbc3b20e65437d92f00216b92f6abbde189020eabe404ea176a07125fc415",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-private-air-hit0",
+      "row": 592,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-1-native-private-air-hit0.png",
+      "sha256": "f6449a9853dac85b2eebf83b8f9152a9cdd53dd32233e9cf0401704b0b89328b",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-air-hit1",
+      "row": 625,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-0-native-private-air-hit1.png",
+      "sha256": "12d0f97e9af803b09fdd2ddb9bebee40bc0904ef374d687735c2b491667d4dcf",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-private-air-hit1",
+      "row": 625,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152n\\intro-admission\\peer-1-native-private-air-hit1.png",
+      "sha256": "f3636e803eae7d043ff71d857ff7060b99135cb6f6393786850e9997147242a1",
+      "case": "f152n",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-original-Sigma-CP1",
+      "row": 99,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sl\\ammo-hud\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+      "sha256": "fe76f9711d2e197b36ab26c97b760e9d5364144b1610f69d664c4cd3afd5712a",
+      "case": "f152sl",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-first-Sigma-scene",
+      "row": 126,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sl\\ammo-hud\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+      "sha256": "1a40a28a4d5c79094aeef5cadfe957440720090c051ac5d6073f50e108e4e800",
+      "case": "f152sl",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-Sigma61-released",
+      "row": 554,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sl\\ammo-hud\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "c59321f5d77b2e2286677edbe505bcbd338852d6e1be3d67f278e782d5442897",
+      "case": "f152sl",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-air-hit0",
+      "row": 575,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sl\\ammo-hud\\intro-admission\\peer-0-native-private-air-hit0.png",
+      "sha256": "e9c66495cfea73e96db65869c3a872a359badff2ac5f299bcec5b8c80db7a61a",
+      "case": "f152sl",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-air-hit1",
+      "row": 625,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sl\\ammo-hud\\intro-admission\\peer-0-native-private-air-hit1.png",
+      "sha256": "a7db4fb8bf6ba1ed92aa8a475c4e66b12b4145bf580018ec810b239825910f38",
+      "case": "f152sl",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-original-Sigma-CP1",
+      "row": 95,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-0-native-original-Sigma-CP1.png",
+      "sha256": "33a78f0360d0a8631fc54e1827bdb37e8e71024fe88957b5166aa66517533ae5",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-original-Sigma-CP1",
+      "row": 95,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-1-native-original-Sigma-CP1.png",
+      "sha256": "65777310e2962420fe5797040682f913f86bfe689733e0368447afb04c29039f",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-first-Sigma-scene",
+      "row": 117,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-0-native-first-Sigma-scene.png",
+      "sha256": "9cfce375f0a341d353f32c9cfc5d96042193072e9fcd7e3bf472f8f083b1d66b",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-first-Sigma-scene",
+      "row": 117,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-1-native-first-Sigma-scene.png",
+      "sha256": "9cfce375f0a341d353f32c9cfc5d96042193072e9fcd7e3bf472f8f083b1d66b",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-Sigma61-released",
+      "row": 533,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-0-native-Sigma61-released.png",
+      "sha256": "59104191f4cd511f79b9ab7cd5653515a5cfa70bbc955fcd81789c14b67cb5c2",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-Sigma61-released",
+      "row": 533,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-1-native-Sigma61-released.png",
+      "sha256": "4c8aefb4af4a530ce856861d8647a3311b1d70174a92ce2726ab0e4226532e07",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-air-hit0",
+      "row": 568,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-0-native-private-air-hit0.png",
+      "sha256": "fe04f062845831a1e292879c4d7fc3037c9e50ebd35af59531f0bf94e23ad034",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-private-air-hit0",
+      "row": 568,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-1-native-private-air-hit0.png",
+      "sha256": "d97d244267b9c8dee9e02f5180b498fa09f0ad71375cf00bab65f1889b54d7c7",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 0,
+      "label": "native-private-air-hit1",
+      "row": 597,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-0-native-private-air-hit1.png",
+      "sha256": "b8bff9888c85977bec3de44c890dc7d5ccb40fb0742a05750823b70d4df1733f",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    },
+    {
+      "peer": 1,
+      "label": "native-private-air-hit1",
+      "row": 597,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f152sn\\intro-admission\\peer-1-native-private-air-hit1.png",
+      "sha256": "87bec54c427bf2afa9d075a23a07d1eba31ecc173fdb4cc1bc03d4d347bf4006",
+      "case": "f152sn",
+      "review": "personally reviewed; native actors and aerial-contact effects visible without obvious image defect"
+    }
+  ],
+  "limits": [
+    "F152 native aerial timing/follow-ups only; F153 ground finisher remains unverified. No broader encounter or native3330 claim.",
+    "Two real Jump/Square aerial offers per case, native airborne body plus accepted damage and natural ground return. Original type27 is observed; an individual asynchronous hit sample can miss an already retired child. No instruction-atomic sample claim.",
+    "Private type27 melee-family installs are4 ticks per accepted contact; shared native30 becomes15 on the same exact image. Different wall-driven LOCAL/NET contact totals are retained, not normalized or treated as performance results.",
+    "Checkpoint reachability, earned abilities and hostile-contact protection are disclosed setup bypasses. No boss HP/phase/timer/result, position or success flags are authored.",
+    "All source/build/profile/cards/CRC/owned graceful-exit gates pass. Fixture-tainted recording/replay stays refused. Windows LOCAL and same-machine delay3 NET only; current-build compiled snapshot tests are supporting evidence, not native rewind/rollback or old-state compatibility. Preserve all earlier failures, HUD harness, cards and owner settings/saves."
+  ]
+}
