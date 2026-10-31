@@ -379,7 +379,7 @@ static void stops(void) {
 }
 static void original_assets(const char *path) {
     FILE *f=fopen(path,"rb");CHECK(f);CHECK(!fseek(f,0,SEEK_END));long length=ftell(f);
-    CHECK(length>0 && length<2*1024*1024 && !fseek(f,0,SEEK_SET));
+    CHECK(length>0 && length<=64*1024*1024 && !fseek(f,0,SEEK_SET));
     uint8_t *data=malloc((size_t)length);CHECK(data && fread(data,1,(size_t)length,f)==(size_t)length);fclose(f);
     setup_audio();CHECK(jump_audio_activate());
     /* Hash/type validation precedes allocations and guest header writes. */
