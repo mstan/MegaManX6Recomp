@@ -65,7 +65,7 @@ def exercise_subtank_policy(ctx, *, output, original_exe, leader, success):
                 tuple=[play[n] for n in (0,1,12,13,0x1D)],bank_hex=bank.hex(),
                 policy=list(bank[:2]),banks=list(bank[2:]),acquired=play[0x6B],
                 hp=[a['hp'] for a in s['observation']['players']],fixture=receipt(c),
-                starting_hp=starting_hp_receipt(c),menu=list(c.read(0x800CF814,2)),cursor=c.read(0x800CF824)[0]))
+                starting_hp=starting_hp_receipt(c),menu=list(c.read(0x800CF814,2)),cursor=c.read(0x800CF824,1)[0]))
         if len(e['samples'])%16==0 and ctx.get('network'): ctx['network']()
         return row
 
