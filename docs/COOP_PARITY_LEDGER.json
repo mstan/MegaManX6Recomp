@@ -2586,9 +2586,108 @@
             "bypasses": [
               "Prelaunch authored native availability/inventory/history prerequisites only; no runtime memory/result writes."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Actual original unit5 Zero/P1-baseX/P2, forms5/0, both peers",
+              "session": 2026103182,
+              "delay": 3,
+              "rollback": false,
+              "host_profile": "mmx6.win64-clang22.loopback revision56 selectedSHA33feea2244248fa9a8590e525660de784f4d2b6759be30deef7e1f585f28e93e settledcycles0/sim_tick0/before-enter-guest1",
+              "renderer": "NET dual-raster GL; ALL acceptance PNGs existing capture_present/present_shot, completed960x720 actualdrawable, SDLdummy",
+              "fixtures": "LABalloff, isolated declared native availability/inventory card; source/mirror/recordinginitial cards unchanged"
+            },
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\control-observations.jsonl",
+                "sha256": "a98389d1291c008f748b8508fbf11ba3da5eb9324354993063f1d438c908b80c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-owned-2.json",
+                "sha256": "c6d2f22e2e6fdbeaa68cf6315c4a9bb6b3f0e2347569ed900667e9d68805f289"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-native-net-capacity-2.json",
+                "sha256": "2e525bc89cd36862face2ea3099519f3d3dc97bc7c8d15ce66de728cf1257da8"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\psx_last_run_report.json",
+                "sha256": "d1b14b60cb3184c87136d8c9fdcc5395c22b8baa93454e2b1ccf69577da93295"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\psx_freeze_heartbeat.json",
+                "sha256": "a461c009d726ec403e92a42eb24d0dcedfee01f74042a60d6fbaac467080d5d0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\logs\\native-stdout.log",
+                "sha256": "6fb5d81a3a0f255b7b756584213b920f67e54994a944e6d248073647f6e1b922"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\logs\\native-stderr.log",
+                "sha256": "7f5e420b1b512b700bb24c8899c51f7c35bfc0d48595eb5f8a5640ccaa4cc40b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu0-X-held-charge-present.png",
+                "sha256": "e33cc7a56f76b76ca0f1c6d25fbc6f0a53522784ef678fbd4d29b099794d6b30"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu1-X-BUSTER-present.png",
+                "sha256": "2167177767d52d821148542fd43b43c17e7d05d190a8410d1e3ab56f59300896"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu1-shot-present.png",
+                "sha256": "dae5bb31f0ef29bab02cbac6905466125a92247a08a3117dd9dcf6fd74481f35"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\logs\\native-stdout.log",
+                "sha256": "b6eab8f94e8c505e9cfe3b4a27739138345cccc3017f98d459e26ed20bf96859"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\logs\\native-stderr.log",
+                "sha256": "0708c96a09efaae354091d51f6a1868cb928494dc40cb0887727b83a5d3b1bdd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu0-X-held-charge-present.png",
+                "sha256": "cb93ea58a5dc74958fc251578a1f5a47538125f9aa6292d080b5db2d85bb2368"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu1-X-BUSTER-present.png",
+                "sha256": "2167177767d52d821148542fd43b43c17e7d05d190a8410d1e3ab56f59300896"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu1-shot-present.png",
+                "sha256": "49791c88706e7eb6e0ca5a25d52bff6991e636340bd7cb18c7a39f21dbdc4817"
+              }
+            ],
+            "limits": [
+              "Inverse roster component passed on both peers; canonical X/P1-Zero/P2 NET tail never reached, so mode and aggregate remain unverified.",
+              "Both guest executions unexpectedly ended PC0/OSexit0 after last optional R1 input, without worker quit; R1 causality not proven. Postexit clear/status requests refused, no clear/quit acknowledgement claimed.",
+              "Final sim64224 logged core/mod equality is NOT a resolved-watermark qualification gate. Each completed inverse case has its own later-than-case resolved windows.",
+              "Terminal decoder report B0->F30 is928 sequential instructions before unsupported ASCII65736572; existing SDK turns unsupported midblock into PC0. Missing failing B0/vector-table/TCB bytes or first corrupting write; no corrective title/SDK fix established.",
+              "LOCAL1/NET1CPU-capture/NET2spent; do not launch another R9/F179 retry without a relevant implemented fix. Preserve existing HUD harness, all images/raw/cards and budgets."
+            ],
+            "bypasses": [
+              "Authored prelaunch native availability/inventory/history prerequisites only; original Load/story/selector and native actions execute, no runtime result/RAM writes."
+            ],
+            "action": "Inverse actualGL both peers: full X/P2 Square charge/release/basic recovery and short dash after each owned native menu, Zero/P1 stationary; source-defined private pools and composed art.",
+            "outcome": "PASS inverse NET component. Both menus leave full tier2/clock90/held20 visible; initialized private0x12/allocation21 travels139->109->-11->expiry after menu0 and87->47->edge->expiry after menu1; bothown counters/charge clear, fresh basic shot increments onlyX, dash/trails/quiet remain visible. Resolved windows aftercase0after45917: sim45920 core997d99a4/modff19459c and45952 core106350a0/mode0bf425c; aftercase1after57954:57984 core4a2f9ee7/mode4bb020a and58016 cored73404cd/modfe46a99d. Root reviewed actualGL art. Later optional weapon-selection attempt ended bothguest executions before canonical tail; no fullmode/rowadmission."
           }
         ],
-        "limitations": "C125 LOCAL both rosters passed. NET1 profile/native state/CRC/cards/owned cleanup passed, but CPU screenshot was mistaken for GL presentation; actual composed art and native menus/effects remain unverified. Reuse existing present_shot API on same implemented candidate; preserve raw failures."
+        "limitations": "C125 LOCAL both rosters passed and NET inverse menus/effects passed with actual composedGL and resolved core/mod CRC. Both guest executions then ended PC0 without requested quit; canonical NET tail remains missing. Native/observer attempts spent; a relevant implemented fix is required before retry."
       }
     },
     {
@@ -18307,7 +18406,7 @@
             ]
           }
         ],
-        "limitations": "Current C124 blocks required inverse prerequisite: actual native Load imports0x11, then co-op unit_choices removes unlockedZero5 and native selector exposes[0,1]; fixed runtime remains X/P1+Zero/P2. No actual counterpart boss reaction/NET pass. One nativeattempt/setupbudgetspent; inverse gameplay/resource/render implementation required before another run."
+        "limitations": "C125 actualinverse support resolves prior C124 roster prerequisite. Retained F151NightmareZero type35 actor8008EF48/HP48 table800750FC has Xplain00 reaction0/damage1 and actualcharge12h reaction0/damage4. Differentdamage/accepted-return01vs13h does not prove differentnativebossreaction; originalNPC35caller mapping remains missing. Source/setupbudgetspent, no newnative/research loop or qualification credit."
       }
     },
     {
@@ -24022,8 +24121,108 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Actual original unit5 Zero/P1-baseX/P2, forms5/0, both peers",
+              "session": 2026103182,
+              "delay": 3,
+              "rollback": false,
+              "host_profile": "mmx6.win64-clang22.loopback revision56 selectedSHA33feea2244248fa9a8590e525660de784f4d2b6759be30deef7e1f585f28e93e settledcycles0/sim_tick0/before-enter-guest1",
+              "renderer": "NET dual-raster GL; ALL acceptance PNGs existing capture_present/present_shot, completed960x720 actualdrawable, SDLdummy",
+              "fixtures": "LABalloff, isolated declared native availability/inventory card; source/mirror/recordinginitial cards unchanged"
+            },
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\control-observations.jsonl",
+                "sha256": "a98389d1291c008f748b8508fbf11ba3da5eb9324354993063f1d438c908b80c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-owned-2.json",
+                "sha256": "c6d2f22e2e6fdbeaa68cf6315c4a9bb6b3f0e2347569ed900667e9d68805f289"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-native-net-capacity-2.json",
+                "sha256": "2e525bc89cd36862face2ea3099519f3d3dc97bc7c8d15ce66de728cf1257da8"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\psx_last_run_report.json",
+                "sha256": "d1b14b60cb3184c87136d8c9fdcc5395c22b8baa93454e2b1ccf69577da93295"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\psx_freeze_heartbeat.json",
+                "sha256": "a461c009d726ec403e92a42eb24d0dcedfee01f74042a60d6fbaac467080d5d0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\logs\\native-stdout.log",
+                "sha256": "6fb5d81a3a0f255b7b756584213b920f67e54994a944e6d248073647f6e1b922"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\logs\\native-stderr.log",
+                "sha256": "7f5e420b1b512b700bb24c8899c51f7c35bfc0d48595eb5f8a5640ccaa4cc40b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu0-X-held-charge-present.png",
+                "sha256": "e33cc7a56f76b76ca0f1c6d25fbc6f0a53522784ef678fbd4d29b099794d6b30"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu1-X-BUSTER-present.png",
+                "sha256": "2167177767d52d821148542fd43b43c17e7d05d190a8410d1e3ab56f59300896"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu1-shot-present.png",
+                "sha256": "dae5bb31f0ef29bab02cbac6905466125a92247a08a3117dd9dcf6fd74481f35"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\logs\\native-stdout.log",
+                "sha256": "b6eab8f94e8c505e9cfe3b4a27739138345cccc3017f98d459e26ed20bf96859"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\logs\\native-stderr.log",
+                "sha256": "0708c96a09efaae354091d51f6a1868cb928494dc40cb0887727b83a5d3b1bdd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu0-X-held-charge-present.png",
+                "sha256": "cb93ea58a5dc74958fc251578a1f5a47538125f9aa6292d080b5db2d85bb2368"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu1-X-BUSTER-present.png",
+                "sha256": "2167177767d52d821148542fd43b43c17e7d05d190a8410d1e3ab56f59300896"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu1-shot-present.png",
+                "sha256": "49791c88706e7eb6e0ca5a25d52bff6991e636340bd7cb18c7a39f21dbdc4817"
+              }
+            ],
+            "limits": [
+              "Inverse roster component passed on both peers; canonical X/P1-Zero/P2 NET tail never reached, so mode and aggregate remain unverified.",
+              "Both guest executions unexpectedly ended PC0/OSexit0 after last optional R1 input, without worker quit; R1 causality not proven. Postexit clear/status requests refused, no clear/quit acknowledgement claimed.",
+              "Final sim64224 logged core/mod equality is NOT a resolved-watermark qualification gate. Each completed inverse case has its own later-than-case resolved windows.",
+              "Terminal decoder report B0->F30 is928 sequential instructions before unsupported ASCII65736572; existing SDK turns unsupported midblock into PC0. Missing failing B0/vector-table/TCB bytes or first corrupting write; no corrective title/SDK fix established.",
+              "LOCAL1/NET1CPU-capture/NET2spent; do not launch another R9/F179 retry without a relevant implemented fix. Preserve existing HUD harness, all images/raw/cards and budgets."
+            ],
+            "bypasses": [
+              "Authored prelaunch native availability/inventory/history prerequisites only; original Load/story/selector and native actions execute, no runtime result/RAM writes."
+            ],
+            "action": "At independent endpoint after completed inverse R9/F179 resolved gate, begin bounded native weapon selection with first ordinary X/P2 R1 pulse. Stop on existing read busy/mismatched response; do not retry.",
+            "outcome": "UNVERIFIED. No RayArrow8 selection, native beam actor, spending, animation/travel or expiry was observed. Both processes later confirmed normalOSexit0 with guestPC0, no worker quit; root/source review does not establish R1 causality or a corrective fix. This is F174 nativeattempt1, not a pass. Existing originalmenu index8 and personal-dispatch source remain preparation only."
+          }
+        ],
+        "limitations": "ActualC125nativeXguest prerequisite now works, but F174 first selection attempt ended before RayArrow8/ability proof with subsequent guestPC0 exits. One nativeattemptspent; first failing BIOSvector/TCB bytes unavailable, no causal weapon bug established. Reuse unchanged source/evidence; no native repeat without a distinguishing valid hypothesis/setup or implemented fix under original limits."
       }
     },
     {
@@ -24827,9 +25026,108 @@
             "bypasses": [
               "Prelaunch authored native availability/inventory/history prerequisites only; no runtime memory/result writes."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Actual original unit5 Zero/P1-baseX/P2, forms5/0, both peers",
+              "session": 2026103182,
+              "delay": 3,
+              "rollback": false,
+              "host_profile": "mmx6.win64-clang22.loopback revision56 selectedSHA33feea2244248fa9a8590e525660de784f4d2b6759be30deef7e1f585f28e93e settledcycles0/sim_tick0/before-enter-guest1",
+              "renderer": "NET dual-raster GL; ALL acceptance PNGs existing capture_present/present_shot, completed960x720 actualdrawable, SDLdummy",
+              "fixtures": "LABalloff, isolated declared native availability/inventory card; source/mirror/recordinginitial cards unchanged"
+            },
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\control-observations.jsonl",
+                "sha256": "a98389d1291c008f748b8508fbf11ba3da5eb9324354993063f1d438c908b80c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-owned-2.json",
+                "sha256": "c6d2f22e2e6fdbeaa68cf6315c4a9bb6b3f0e2347569ed900667e9d68805f289"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-native-net-capacity-2.json",
+                "sha256": "2e525bc89cd36862face2ea3099519f3d3dc97bc7c8d15ce66de728cf1257da8"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\psx_last_run_report.json",
+                "sha256": "d1b14b60cb3184c87136d8c9fdcc5395c22b8baa93454e2b1ccf69577da93295"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\psx_freeze_heartbeat.json",
+                "sha256": "a461c009d726ec403e92a42eb24d0dcedfee01f74042a60d6fbaac467080d5d0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\logs\\native-stdout.log",
+                "sha256": "6fb5d81a3a0f255b7b756584213b920f67e54994a944e6d248073647f6e1b922"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\logs\\native-stderr.log",
+                "sha256": "7f5e420b1b512b700bb24c8899c51f7c35bfc0d48595eb5f8a5640ccaa4cc40b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu0-X-held-charge-present.png",
+                "sha256": "e33cc7a56f76b76ca0f1c6d25fbc6f0a53522784ef678fbd4d29b099794d6b30"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu1-X-BUSTER-present.png",
+                "sha256": "2167177767d52d821148542fd43b43c17e7d05d190a8410d1e3ab56f59300896"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-2\\NET2-inverse-menu1-shot-present.png",
+                "sha256": "dae5bb31f0ef29bab02cbac6905466125a92247a08a3117dd9dcf6fd74481f35"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\logs\\native-stdout.log",
+                "sha256": "b6eab8f94e8c505e9cfe3b4a27739138345cccc3017f98d459e26ed20bf96859"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\logs\\native-stderr.log",
+                "sha256": "0708c96a09efaae354091d51f6a1868cb928494dc40cb0887727b83a5d3b1bdd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu0-X-held-charge-present.png",
+                "sha256": "cb93ea58a5dc74958fc251578a1f5a47538125f9aa6292d080b5db2d85bb2368"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu1-X-BUSTER-present.png",
+                "sha256": "2167177767d52d821148542fd43b43c17e7d05d190a8410d1e3ab56f59300896"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-2\\NET2-inverse-menu1-shot-present.png",
+                "sha256": "49791c88706e7eb6e0ca5a25d52bff6991e636340bd7cb18c7a39f21dbdc4817"
+              }
+            ],
+            "limits": [
+              "Inverse roster component passed on both peers; canonical X/P1-Zero/P2 NET tail never reached, so mode and aggregate remain unverified.",
+              "Both guest executions unexpectedly ended PC0/OSexit0 after last optional R1 input, without worker quit; R1 causality not proven. Postexit clear/status requests refused, no clear/quit acknowledgement claimed.",
+              "Final sim64224 logged core/mod equality is NOT a resolved-watermark qualification gate. Each completed inverse case has its own later-than-case resolved windows.",
+              "Terminal decoder report B0->F30 is928 sequential instructions before unsupported ASCII65736572; existing SDK turns unsupported midblock into PC0. Missing failing B0/vector-table/TCB bytes or first corrupting write; no corrective title/SDK fix established.",
+              "LOCAL1/NET1CPU-capture/NET2spent; do not launch another R9/F179 retry without a relevant implemented fix. Preserve existing HUD harness, all images/raw/cards and budgets."
+            ],
+            "bypasses": [
+              "Authored prelaunch native availability/inventory/history prerequisites only; original Load/story/selector and native actions execute, no runtime result/RAM writes."
+            ],
+            "action": "Inverse both peers: actual native redZero/P1 Z-SABER0 and blueX/P2 X-BUSTER0 owned menus, other-seat Start rejection, owner resume, actual selected core abilities and resources.",
+            "outcome": "PASS inverse NET component. Menu0 frozen nativeTimer6308/pause_owner1 remains unchanged after fresh otherStart; menu1 timer21281/pause_owner2 unchanged. Owner resumes0, bothHP32/ammo288/weapons0 retained; nativeZero Saber and nativeXheld/fullcharge/travellingBuster/basic recovery execute with actualGL art. Both postcase resolved core/mod windows match (raw retains57984/58016 finalcase). Canonical bothownedmenus/abilities NET never reached because subsequent guest executions ended PC0; no fullmode/rowadmission."
           }
         ],
-        "limitations": "C125 LOCAL both rosters passed. NET1 profile/native state/CRC/cards/owned cleanup passed, but CPU screenshot was mistaken for GL presentation; actual composed art and native menus/effects remain unverified. Reuse existing present_shot API on same implemented candidate; preserve raw failures."
+        "limitations": "C125 LOCAL both rosters passed and NET inverse menus/effects passed with actual composedGL and resolved core/mod CRC. Both guest executions then ended PC0 without requested quit; canonical NET tail remains missing. Native/observer attempts spent; a relevant implemented fix is required before retry."
       }
     },
     {
