@@ -4198,7 +4198,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "No X6 runtime qualification performed by this inventory import. Rejected concrete mounted-READY mapping: originalRecycle stage4/sec0 table6DEB4=F32D8/category3dispatcher204F8/class1E F3350->EE158 initializes emptyCD340 singleton then retiresplacement via2C9D4; no rider/READY init. All member6 authored lists: root7349C/F2A7C118records has onlyF2B1C subtype0 x1872/y395; root73554/F2E3460records hasnone. Positive originaldd4bea EXE/member6c7b195 source and acceptedF92 evidence support this producer rejection only. Separate stage-entryREADY producer remains unidentified; no whole-row rejection/N/A/pass inferred."
       }
     },
     {
@@ -13026,7 +13026,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "No X6 runtime qualification performed by this inventory import. Rejected concrete mounted-READY mapping: originalRecycle stage4/sec0 table6DEB4=F32D8/category3dispatcher204F8/class1E F3350->EE158 initializes emptyCD340 singleton then retiresplacement via2C9D4; no rider/READY init. All member6 authored lists: root7349C/F2A7C118records has onlyF2B1C subtype0 x1872/y395; root73554/F2E3460records hasnone. Positive originaldd4bea EXE/member6c7b195 source and acceptedF92 evidence support this producer rejection only. Separate stage-entryREADY producer remains unidentified; no whole-row rejection/N/A/pass inferred."
       }
     },
     {
@@ -14594,7 +14594,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "No X6 runtime qualification performed by this inventory import. Rejected concrete mounted-READY mapping: originalRecycle stage4/sec0 table6DEB4=F32D8/category3dispatcher204F8/class1E F3350->EE158 initializes emptyCD340 singleton then retiresplacement via2C9D4; no rider/READY init. All member6 authored lists: root7349C/F2A7C118records has onlyF2B1C subtype0 x1872/y395; root73554/F2E3460records hasnone. Positive originaldd4bea EXE/member6c7b195 source and acceptedF92 evidence support this producer rejection only. Separate stage-entryREADY producer remains unidentified; no whole-row rejection/N/A/pass inferred."
       }
     },
     {
@@ -16475,7 +16475,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "No X6 runtime qualification performed by this inventory import. Rejected concrete mounted-READY mapping: originalRecycle stage4/sec0 table6DEB4=F32D8/category3dispatcher204F8/class1E F3350->EE158 initializes emptyCD340 singleton then retiresplacement via2C9D4; no rider/READY init. All member6 authored lists: root7349C/F2A7C118records has onlyF2B1C subtype0 x1872/y395; root73554/F2E3460records hasnone. Positive originaldd4bea EXE/member6c7b195 source and acceptedF92 evidence support this producer rejection only. Separate stage-entryREADY producer remains unidentified; no whole-row rejection/N/A/pass inferred."
       }
     },
     {
@@ -24009,9 +24009,67 @@
               "One agreed original MagmaCP0 entry bypasses earlier stage traversal; predeclared contact protection and earned weapons. Actual attacks, defeat, door and checkpoint results were not assigned.",
               "No execution-state load or unilateral NET state mutation; no NET launched."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "9c5b02e0bf6f787b427a7e098361066f4578caca",
+            "build_identity": {
+              "source_commit": "9c5b02e0bf6f787b427a7e098361066f4578caca",
+              "exe_sha256": "313e34a51c8c157f489cfca6574413fe63531fe8be892f4fce71653c07478672",
+              "declared_manifest_sha256": "060c0a44b12f785b0065cbf447effed268bb32e1876dd51cbb1ef50fe9a84712",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 76,
+              "profile": 59,
+              "snapshot": 20,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "851a3d6a43e7d4b73e07818be447ba7272f5c4918fc5ac9a52f6f5ae9e5f9262",
+              "package": "C128 unchanged game/image; MAIN observerfc71043; Windows ENHANCED OpenGL HLE"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "both",
+              "setup": "Fresh blank cards; originalNewGame/Alia; agreedheatnix_cp0/contactprotectionON/earnedall; exactlyoneoriginalinitializer",
+              "audio": "SDLdummy muted"
+            },
+            "action": "Original HELP and ordinary native R2/Square/jump attacks; original dual jumps and Right feet through actual forward door and CP plane.",
+            "outcome": "Genuine main19h/sub5 HP0/state3/action8/phase4 and all four weakpoints0..3 retired. Both real native bodies walk through original Both door across943; 45 door samples retain both living visible foot bodies, action19 and scene_phase0, with valid native scene_owner1 then natural release. No passenger warp. Root reviewed all4 composed captures. LOCAL parent all4 gates pass; ownedPID66776 gracefulexit0/TCP18166 released, cards unchanged. Current-build postdefeat SAVE9 generation1/last_ok1 retained; no load or native-card progress claim.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\qualification.json",
+                "sha256": "692a78a44bfde6609db01795911c18dc90a80dc65d60053cfee41ac050ce4834"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\ammo-hud\\intro-admission\\observations.json",
+                "sha256": "45732410b6c712c8631f85747c332f60280a165205315f283e6b711d0dbc03bd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\ammo-hud\\intro-admission\\peer-0-original-midboss-defeat-and-cleanup.png",
+                "sha256": "7954b6af7c8797da207c4310f41adc3afd645d065292b9fe45a396ab1fba4e68"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\ammo-hud\\intro-admission\\peer-0-post-midboss-original-door-result.png",
+                "sha256": "367ac1b9f79efacee744369e01adefd36d70e5c036d0876aa425ba7c381cfd1a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\ammo-hud\\intro-admission\\peer-0-guest-native-CP1-forward-passage.png",
+                "sha256": "4ccb1d760f669f1e6c6fbc59edd94fcfe940b83f125448c0313b9df670eb3967"
+              }
+            ],
+            "limits": [
+              "Only exactcurrentC128LOCAL admitted; samecandidate NET still pending before aggregate admission. AllC118passes andC128failedattempts remain distinct.",
+              "FirstC128scriptmistook invisible liveweakpoint for retired; second leftnativeammo72 and missed elevatedweakpoint; third genuinely defeatedmain but stopped atfirst501step. Allraw retained, not gamefailure claims.",
+              "Allocated invisible subtype4 record and native main death pose may remain; only weakpoint retirement/forward behavior claimed. No allallocationfree or rendering-family claim.",
+              "SAVE9 retained for current-build continuation; no snapshotLOAD/rewind/replay or native-card progression qualification."
+            ],
+            "bypasses": [
+              "Agreed originalMagmaCP0 bypasses preceding stage traversal; contact protection and earned weapons predeclared. No HP, death, actor position, door, collision, checkpoint or result writes.",
+              "Fixturetaint remains canonical failed recording; ordinary capture/replay not admitted. No unilateral NET state load."
+            ]
           }
         ],
-        "limitations": "LOCAL frozenC118 genuine midboss defeat and both actors walking original forward door passed with prelaunch doors Both. NET unverified. Earlier Either passenger transfer and all failures remain retained; no all-NPC-free, cross-build or full-row claim. Required NET attempt refused beforeframe0 on SERVER: no qualified simulation profile available. No gameplay/NET admission; raw refusal retained, no compatibility rescue. C1289c5b02e current PC continuation ended at live8HPweakpoint because observer mistook temporary invisibility for retirement; no defeat/forward/NET credit. Raw preserved, normalexit0/cardsunchanged. Original overhead/attempt limits consumed; parked without another repair/run."
+        "limitations": "LOCAL frozenC118 genuine midboss defeat and both actors walking original forward door passed with prelaunch doors Both. NET unverified. Earlier Either passenger transfer and all failures remain retained; no all-NPC-free, cross-build or full-row claim. Required NET attempt refused beforeframe0 on SERVER: no qualified simulation profile available. No gameplay/NET admission; raw refusal retained, no compatibility rescue. C1289c5b02e current PC continuation ended at live8HPweakpoint because observer mistook temporary invisibility for retirement; no defeat/forward/NET credit. Raw preserved, normalexit0/cardsunchanged. Original overhead/attempt limits consumed; parked without another repair/run. CurrentC1289c5b02e/image313e34a LOCAL4 fully qualifies originalnative defeat+both-footdoor+guestCP1 (root4imagesreviewed; exit0/cardsunchanged/SAVE9complete). SamecandidateNETpending; oldfailedraw preserved."
       }
     },
     {
@@ -26560,9 +26618,67 @@
               "One agreed original MagmaCP0 entry bypasses earlier stage traversal; predeclared contact protection and earned weapons. Actual attacks, defeat, door and checkpoint results were not assigned.",
               "No execution-state load or unilateral NET state mutation; no NET launched."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "9c5b02e0bf6f787b427a7e098361066f4578caca",
+            "build_identity": {
+              "source_commit": "9c5b02e0bf6f787b427a7e098361066f4578caca",
+              "exe_sha256": "313e34a51c8c157f489cfca6574413fe63531fe8be892f4fce71653c07478672",
+              "declared_manifest_sha256": "060c0a44b12f785b0065cbf447effed268bb32e1876dd51cbb1ef50fe9a84712",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 76,
+              "profile": 59,
+              "snapshot": 20,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "851a3d6a43e7d4b73e07818be447ba7272f5c4918fc5ac9a52f6f5ae9e5f9262",
+              "package": "C128 unchanged game/image; MAIN observerfc71043; Windows ENHANCED OpenGL HLE"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "both",
+              "setup": "Fresh blank cards; originalNewGame/Alia; agreedheatnix_cp0/contactprotectionON/earnedall; exactlyoneoriginalinitializer",
+              "audio": "SDLdummy muted"
+            },
+            "action": "Original HELP and ordinary native R2/Square/jump attacks; original dual jumps and Right feet through actual forward door and CP plane.",
+            "outcome": "After genuine native midboss defeat and original Both door foot passage, guest walks corridor across original CP0 to1 while stage3/section0 stay unchanged. Actual before row623 and after629 bracket foot crossing; both actors remain living/controlled and scene_owner0. This is in-area checkpoint continuation, not a separate section loader. Root reviewed all4 composed captures. LOCAL parent all4 gates pass; ownedPID66776 gracefulexit0/TCP18166 released, cards unchanged. Current-build postdefeat SAVE9 generation1/last_ok1 retained; no load or native-card progress claim.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\qualification.json",
+                "sha256": "692a78a44bfde6609db01795911c18dc90a80dc65d60053cfee41ac050ce4834"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\ammo-hud\\intro-admission\\observations.json",
+                "sha256": "45732410b6c712c8631f85747c332f60280a165205315f283e6b711d0dbc03bd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\ammo-hud\\intro-admission\\peer-0-original-midboss-defeat-and-cleanup.png",
+                "sha256": "7954b6af7c8797da207c4310f41adc3afd645d065292b9fe45a396ab1fba4e68"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\ammo-hud\\intro-admission\\peer-0-post-midboss-original-door-result.png",
+                "sha256": "367ac1b9f79efacee744369e01adefd36d70e5c036d0876aa425ba7c381cfd1a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-4\\ammo-hud\\intro-admission\\peer-0-guest-native-CP1-forward-passage.png",
+                "sha256": "4ccb1d760f669f1e6c6fbc59edd94fcfe940b83f125448c0313b9df670eb3967"
+              }
+            ],
+            "limits": [
+              "Only exactcurrentC128LOCAL admitted; samecandidate NET still pending before aggregate admission. AllC118passes andC128failedattempts remain distinct.",
+              "FirstC128scriptmistook invisible liveweakpoint for retired; second leftnativeammo72 and missed elevatedweakpoint; third genuinely defeatedmain but stopped atfirst501step. Allraw retained, not gamefailure claims.",
+              "Allocated invisible subtype4 record and native main death pose may remain; only weakpoint retirement/forward behavior claimed. No allallocationfree or rendering-family claim.",
+              "SAVE9 retained for current-build continuation; no snapshotLOAD/rewind/replay or native-card progression qualification."
+            ],
+            "bypasses": [
+              "Agreed originalMagmaCP0 bypasses preceding stage traversal; contact protection and earned weapons predeclared. No HP, death, actor position, door, collision, checkpoint or result writes.",
+              "Fixturetaint remains canonical failed recording; ordinary capture/replay not admitted. No unilateral NET state load."
+            ]
           }
         ],
-        "limitations": "LOCAL frozenC118 genuine midboss defeat plus actual guest foot passage into native CP1 passed; stage3/sub0 unchanged proves in-area checkpoint continuation, not section loader. Current-build postdefeat snapshot/battle prerequisites and first-door passenger transfer explicit; NET unverified. No claim that both walked through firstdoor or all NPC allocations freed. Required NET attempt refused beforeframe0 on SERVER: no qualified simulation profile available. No gameplay/NET admission; raw refusal retained, no compatibility rescue. C1289c5b02e current PC continuation ended at live8HPweakpoint because observer mistook temporary invisibility for retirement; no defeat/forward/NET credit. Raw preserved, normalexit0/cardsunchanged. Original overhead/attempt limits consumed; parked without another repair/run."
+        "limitations": "LOCAL frozenC118 genuine midboss defeat plus actual guest foot passage into native CP1 passed; stage3/sub0 unchanged proves in-area checkpoint continuation, not section loader. Current-build postdefeat snapshot/battle prerequisites and first-door passenger transfer explicit; NET unverified. No claim that both walked through firstdoor or all NPC allocations freed. Required NET attempt refused beforeframe0 on SERVER: no qualified simulation profile available. No gameplay/NET admission; raw refusal retained, no compatibility rescue. C1289c5b02e current PC continuation ended at live8HPweakpoint because observer mistook temporary invisibility for retirement; no defeat/forward/NET credit. Raw preserved, normalexit0/cardsunchanged. Original overhead/attempt limits consumed; parked without another repair/run. CurrentC1289c5b02e/image313e34a LOCAL4 fully qualifies originalnative defeat+both-footdoor+guestCP1 (root4imagesreviewed; exit0/cardsunchanged/SAVE9complete). SamecandidateNETpending; oldfailedraw preserved."
       }
     },
     {
