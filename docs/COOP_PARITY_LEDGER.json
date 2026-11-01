@@ -24291,14 +24291,14 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -24547,9 +24547,84 @@
             "bypasses": [
               "Prelaunch original card availability/inventory only; native menu/ability/expiry, no synthetic beam or success flags."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "4b2b5476d401b664d96a196d73f476e223157915",
+            "build_identity": {
+              "exe_sha256": "c736fa151b28b79e98928439b85de1f891155df7cbcf5471725d2d635fb3e18b",
+              "declared_manifest_sha256": "cf520292e958831273f86c2ca113e7c1f0edcda773e0b750966466a6c6e84874",
+              "compiled_source_commit": "4b2b5476d401b664d96a196d73f476e223157915",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 74,
+              "host_profile_version": 57,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Original unit5 Zero/P1 and baseX/P2 forms5/0, native Amazonstage1, both peers",
+              "session": 2026103184,
+              "delay": 3,
+              "rollback": false,
+              "host_profile": "mmx6.win64-clang22.loopback revision57 selectedSHA2a5e3ce208671b4ac074020fcba1bfb15e866aef4491433afa59003b54ffe312. Actualimagec736/arch2/features7f/backend2/fp2/interpretedoverlays/offers1 each; cycles0/simtick0/before-enter-guest1.",
+              "renderer": "Both actual composed capture_present 960x720, OpenGL dual-raster/native1x per video_info, dummy/hidden; LOCAL4x presentation difference explicit, no performance claim.",
+              "fixtures": "LABalloff; isolated authored availability/inventory card through nativeLoad/story/selector, two digital slots on both freshprofiles; no runtime RAM/result writes"
+            },
+            "action": "One guestX native MENU/Cross RayArrow8 and Trianglecast; both actualcomposed beam animation/travel/nativeexpiry/ownership, then later-than-case resolvedcore/mod gates and ownedcleanup.",
+            "outcome": "PASS. Both actualcomposed live-start/live-animation captures show orangebeam with distinct nativeframes. Private allocation1/type8 state1 frame0/1->2->3 travelsx28/21->8->-13, state3x-26 then bothpoolsfree nativeTimer5506/counter0. GuestRay8ammo288->270/HP32; P1Zero x10485760/HP32/ammo288 unchanged. Aftercase sim22032, resolved22048 coreb5c925ae/modb4437f5d and22080 coref09eedc5/modba653d60. All178 common laterresolved samples through27736 match, last27680 core2624d951/mod0c26ba5d and27712 core6d03ffae/mod7136760d. Final profile57 selectedSHAstable, active2/desync0; hostinputsneutral/clearACK, quits1221/120, ownedexit[0,0], PIDs79108/82424/listeners30228/30229absent, allnative/mirror/recordinginitialcards unchanged. Native-consumptionrecordings finalized, no replayclaim.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-peer-0-1\\control-observations.jsonl",
+                "sha256": "f03a343c1b00e811e9aa7fb0372c3a3522306dffc40108e6deb9b6de08ef2529"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-owned-1.json",
+                "sha256": "df8f331263e26b98ef0813d7d6340bd84b85df46287d2811178ee374540e7bbf"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-peer-0-1\\binding.json",
+                "sha256": "a27119bd2c2da2e681cd4c6a5dbf9cd752ed7d2c1cecd783b551454c16c09020"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-peer-0-1\\F174-C126-NET-Ray-live-start.png",
+                "sha256": "a30e5dc106f1a2a85109c0908bfd7feebb778f1e85837a7eceec7f0d32c2b163"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-peer-0-1\\F174-C126-NET-Ray-live-animation.png",
+                "sha256": "92eaa48c973ecbc78a050455119b3dcdad241fb78f103908eaca14b43facb9cf"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-peer-0-1\\F174-C126-NET-Ray-quiet-expired.png",
+                "sha256": "5b0e38605d186883710edb4c429ac0852c46d0e2914518ad477d5af3c826796f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-peer-1-1\\F174-C126-NET-Ray-live-start.png",
+                "sha256": "682c13a1af94d12ae06b979bd85cbcfcafff1f6eb2c66985c9838bfbc56007ef"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-peer-1-1\\F174-C126-NET-Ray-live-animation.png",
+                "sha256": "4d8a6b1ae9b17b67229419ee8752dcd611d4730aa3c5fae2c088d7d5ccea9e85"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F174-c126-net-peer-1-1\\F174-C126-NET-Ray-quiet-expired.png",
+                "sha256": "a0a41a6a89c9ab27acc31af3571739007f36186c725648e5a23eb228e4c45b66"
+              }
+            ],
+            "limits": [
+              "One cast, natural offscreen native expiry; no extra bounce variant, enemyhit/damage or broaderabilityfamily claim.",
+              "Exact C126 LOCAL warmstate reused; no unilateral NET state or previousbuildstate claim.",
+              "Both composed GL outputs establishart; CPU screenshot/VRAM omits retainedbanks and is not presentation proof.",
+              "C126 qualification closes onlyF174; older C125R9/F179unexpectedPC0/canonicalNETgap remainsparked, no unrelatedtail repeated.",
+              "Old C125 failures and LOCALdigitalsetupomission retained. NET464s withinoriginal20min/noextension."
+            ],
+            "bypasses": [
+              "Prelaunch availability/inventory only; actual original native menu/cast/animation/travel/expiry/resources, no syntheticbeam/resultflags."
+            ]
           }
         ],
-        "limitations": "C126 guarded native Ray atlasY32 fix now qualified LOCAL: actual orange animated/traveling guest beam, native expiry/ownership/resources and current-build warm state. Same exact C126 NET endpoint pending. Old C125 render failure and setup/PC0 attempts retained; no unchanged parked-row retry."
+        "limitations": "F174 source-qualified native RayArrow8 fully passes LOCAL+NET exactC126source4b2b547/imagec736/title74/profile57/schema20: visible animated/traveling guestbeam, nativeexpiry/ownership/ownammo/P1isolation, current-build LOCAL warmstate and NET resolvedcore/mod equality. Prior C125 failure/setup/PC0 evidence preserved. No armored/allweapons/damage/replay or broader inverse-roster feature claim."
       }
     },
     {
