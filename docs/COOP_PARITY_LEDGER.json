@@ -10416,14 +10416,14 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -10656,9 +10656,94 @@
             "bypasses": [
               "Prelaunchavailability/inventoryonly, actualoriginalLoad/menu/control/SDKsessionboundary. No RAM/resultwrites."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "a0df4320a27345fd3694ae4fc059338bdcde979d",
+            "build_identity": {
+              "exe_sha256": "6efea733209f2bb1a6768bd0d64e612786344a6d9ae0b770460e1c22e380a8f5",
+              "declared_manifest_sha256": "a1825871b2eade92bd37d06afcad95abda491a477e459a0c3aabf266c807fe2b",
+              "compiled_source_commit": "a0df4320a27345fd3694ae4fc059338bdcde979d",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title_version": 75,
+              "host_profile_version": 58,
+              "snapshot_schema": 20,
+              "mod_session_resources": 1
+            },
+            "settings": {
+              "roster": "Actualcanonicalunit0 X/P1+Zero/P2, originalcardLoad/nativeAmazonstage1 bothactualmatches",
+              "boundary": "NormalownedhiddenLANUIHost/Join/Play, actualSDKhost_keyEscape/normalBYE/lobbyreturn/re-Play inSAMEPIDs15076/5104, no processrelaunch orCLI-netbypass",
+              "host_profile": "Revision58actualcommonbefore0eachmatch; image6ef/arch2/features7f/backend2/FP2/interpreted/offers1, cycles0/simtick0/beforeguest1. SelectedSHA match1 9b5ddb458ce4d8346a3a1c6c55bd99e46203bd12501840b9c9d69c7f0333ea68; match2 cdd81bfde9ef99050d960d92c6b5b4b91ed03c003c768b72793073acb33d96a5; eachcommon/stable, freshidentityacrossmatchesexpected.",
+              "network": "LANdirect127.0.0.1:35258, delay/rollback0, twooccupiedslots. OwnedfiletrackinglabelisnotactualNETsessionidentity.",
+              "fixtures": "LABalloff, privatecards4e2c/7706, bothDigital, dummy/hidden, actualcomposed960x720 GLdual-raster/native1x"
+            },
+            "action": "TwoactualnativeNETactivations/one realSDL Escape-BYE-return-lobby-rePlay boundary inSAMEownedPIDs. FreshP2drawing/independentacceptedmovement/resourcewindows andlaterresolvedcore+modCRC eachmatch; finalneutral/card/ownedcleanup.",
+            "outcome": "PASS SAMEC127asLOCAL. Bothpeers actualP2draw+lowerHUD andP2-onlyRight x12058624->12255232 whileP1x10485760unchanged eachmatch. Secondfreshpublicationtick61/world0/lifecycle0,3 ->tick486/world379/lifecycle0,0/actions2; notoldstaledata. Both3sample resourcewindows stable guest548864/DMA513024/snapshot1061904/layoutcookie1080537090/packetarenas2+327680/replacements45; boundaryclearsbanks0/0, postwarm178/1266176 ->177/1135104(-128KiBvariation), no1x2xgrowth. Match1after9901 has24equalresolvedcore+mod samples9920(c43a8ad7/b81d211c)..10656(88c9562c/a4a2b70c). Match2after8855 has52samples8864(84f76aaa/5a1d2bde)..10496(4cd9d920/224bac76); finalplayers2/desync0/rollback0/profile58stable. Actualhoststdoutnetplay_escape/guestpeer_disconnect returningtolobby andbothrematchfromlobby(netplay1) preserved. Bothpadsneutral/clear/digital; ownedexit[0,0]/allnative+LNGlistenersreleased/cardsunchanged, underORIGINAL05:01:22Zdeadline.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-0-2\\control-observations.jsonl",
+                "sha256": "da2f40c0cf79d36624de8835097d33062994864707f1ba2b6bda697c3ddaf822"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-owned-2.json",
+                "sha256": "70363d7a3aaf0e3a9280162921b7856a854c9b1d58dd60d2b826bce39069a92f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-benchmark-2.json",
+                "sha256": "67be5648f5ab168fb568e12e280c685f2474fe952dd1bbf604799d72df54ca0b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-0-1\\control-observations.jsonl",
+                "sha256": "0a77291385530f04b2cc0f90030f0488107e761958efd081b038360b4ee42870"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-0-2\\native-job.json",
+                "sha256": "aa3b643ed580e795c778deed747e2836f27e200f2a9bce1917787218d9ebb94e"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-0-2\\binding.json",
+                "sha256": "bfe5bb8edde66cf1d43023f206177c03e74caf486f8cd8f6348cdcc322818ae5"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-0-2\\logs\\F39-actual-return-lobby.png",
+                "sha256": "6e7e876faa79ab572f1027a7d35a5b528bd02b55b1af13a0db86fbe1244579c6"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-0-2\\logs\\F39-match2-P2-moved-present.png",
+                "sha256": "a87d4f2245ac710dc6ceeaf31fd806cc690f4dfc1dfcd382626bc6a3114b9671"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-1-2\\native-job.json",
+                "sha256": "d57f9f2acc7738b71539bd615794d4b5b13a307ada4f3d3b1e0436d2c214a873"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-1-2\\binding.json",
+                "sha256": "82d1f253abd4e78b21dde9274bec3c19b720326580478070dd5895c9f0d9bde0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-1-2\\logs\\F39-actual-return-lobby.png",
+                "sha256": "344ce0da24657eefda5877e3c6bebcd48d9558f20c1e77d8b96bd31317e0f3fb"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-net-peer-1-2\\logs\\F39-match2-P2-moved-present.png",
+                "sha256": "aea7687beda867b1014405bfbc195d9f931fd3865e13ab8f5eb49534cf0fd7c3"
+              }
+            ],
+            "limits": [
+              "InitialC127NETattempt1 reachedreal2/2LANlobby butbothprocessesexited1 BEFOREframe0 becausejobsretainedoffline-onlysealflag. No gameplaycredit. Exactfailedprofiles/raw0a77291385530f04b2cc0f90030f0488107e761958efd081b038360b4ee42870 preserved. Correctedfreshattempt2removesonlyofflineflag; actualNETselectsqualifiedprofile/overlaypolicy, strictgatesunchanged. OriginaldeadlineNOTreset.",
+              "NormalexistingLNGplainTCP/API+runtimehost_keyactualSDLevents used; no oldV90Popen/proof/bindingretarget, fakeACK, RAM/resultwrites orforegroundinput. Playcommitprovedbyactualnativebefore0startup.",
+              "Twoactualmatches/oneboundary, no inventedthree-matchminimum/exactbankequality/universalno-leak/perbankidentityclaim.",
+              "ExactC127LOCALwarmstate reused; no unilateralNETstate/coldload/previousbuild/replay orotherrowcredit.",
+              "OldV90boundedNETandstrictgatefailure/NVIDIAcrash andC126realgrowth/missingP2evidence retained; fullcurrentrowusesONLYsameC127LOCAL+NET."
+            ],
+            "bypasses": [
+              "Prelaunchauthoredavailability/inventoryonly andordinaryUIviewnavigation; actualHostJoinPlay/normalNETend/rematch andnativeLoad/controls/resources, no resultflags."
+            ]
           }
         ],
-        "limitations": "CurrentC127 authoredresourcecontractfix fullyqualifiesLOCALsamePIDrestart: resourcesresetatbaseline, P2freshdraw/menu/control/Saber, currentwarmstatepass. ExactcurrentC127NETlifecycle/profile/resolvedCRCstillrequired. HistoricalV90NETboundedpass remainsvalidindependent, cannotcrosscandidateaggregate. AllC126growth/P2failure/oldstrictbankgate evidence retained."
+        "limitations": "F39fullyqualifies SAMEC127sourcea0df/image6ef/title75/profile58/schema20 LOCAL+NET normalteardown/restart/rematch: authoredsessionresourcecontractON, cachedbackground/widescreenhandles/banksreacquire, freshP2draw/control andboundedguest/DMA/snapshot/packetregistrations; currentLOCALwarmstate andNETresolvedcore/modgatesPASS. OldC126growth/P2loss andV90strictbankgate/rawcrash preserved. Noexactbankidentity/universalno-leak/replay/crosscandidateclaim."
       }
     },
     {
