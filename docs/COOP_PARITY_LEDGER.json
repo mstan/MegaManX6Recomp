@@ -23049,17 +23049,89 @@
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+            "build_identity": {
+              "source_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "exe_sha256": "f752fa4cf5acffa44bbe424a165880e87071ed609390dc3813aea18960625b2a",
+              "declared_manifest_sha256": "467ccfecd3e2fe0fc41f96692910bf933583d27da9a98f9e83b6c06d5360f0b8",
+              "title": 81,
+              "profile": 64,
+              "snapshot": 22,
+              "game_change_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "observer_source_commit": "Manual owned TCP using existing original baseline input and diagnostic APIs, exact RPC transcript retained"
+            },
+            "settings": {
+              "roster": "Canonical X/P1+Zero/P2, both32HP before/after position prerequisite",
+              "policy": "Selected Both; original first intro subtype2 hatchFA2A4 x5744/394",
+              "fixture": "Agreed intro_before_doors/contacton/HPoff/earnedoff/fataloff; original CP1 and ordinary native Right admission",
+              "audio": "HiddenSDLdummy, explicitsealed interpreted overlays, actualcomposedGL frames"
+            },
+            "action": "During actual native phase3 with both contact pointers68=0, prewrite existing offline command4 payload then commit it once: living guest x5744/y394, with no HP/phase/box/lifecycle/result writes. Observe natural native transport and close.",
+            "outcome": "FAIL native clearance. Beforecommitrow118 bothalive32/action19/box0 atX5770.671875/5770.171875. After actualposition rows120..123 guest remainsalive32/box0 and advances5745.921875->5756.171875 under original native motion. Row124 hatch beginsclosing1/4 while guestcenter5757.453125 remains inside authored5728..5760 aperture; guestHP32->0/lifecycleDYING4. Row125 hatchclosedsolid2/0, guestFALLEN5 atsameposition; primaryalive32, lives2/CP2 unchanged. OwnedquitACK/nativecapacityexit0/cardsunchanged. Defaultclearancefix is beingprepared in isolatedC133, not built/qualified.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c132-local-baseline-1/F145-preparation.json",
+                "sha256": "73baa53c68f449f358dbf79aa42713e5297272a80d590e32fa8cf1cd2df379e0"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c132-local-baseline-1/preparation.json",
+                "sha256": "32825df7639ca2826b0769e67e7f042946f2f207358b26e457758328c429a982"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c132-local-baseline-1/native-job.json",
+                "sha256": "aea48f7264bb0baa4644c56a18967c4ba185506aa2000945361f2da17fcc8b64"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c132-local-baseline-1/capacity.json",
+                "sha256": "54af497f99e05bb548153763254ae3d74f8b6a6824f01f72ee28d097ce656cd3"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c132-local-baseline-1/logs/F145-native-report.json",
+                "sha256": "4c79e3cc42ad5b6ff265ba53d1e4bde2335589801bbb34f60ca9526b64eddd0b"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c132-local-baseline-1/logs/native-F145-control.jsonl",
+                "sha256": "5f05b057fa61d0dee9134e939766bc6cc0ba0a7a8f60e00cdbd07d41122b6e7c"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c132-local-baseline-1/logs/F145-first-native-closing-after-stagger.png",
+                "sha256": "08a990b03d813f473be893725bf5fbb365b0d172afdde796808f854019026810"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c132-local-baseline-1/logs/F145-native-closed-solid-after-stagger.png",
+                "sha256": "70454904da50ae9bef0402a91c92b415d78d9e94dc7bed1d5b5c5bfae82be482"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F183-native-hatch-held-occupancy-feasibility-v82-worker-v1.txt",
+                "sha256": "3a720ebc34cece577cec92a448f458e9feeef1e58a204b0800bd7e2526514b68"
+              }
+            ],
+            "limits": [
+              "One disclosed position-only stagger. It establishes F145 missing-contact-box clearance failure, not F183 stationary held occupancy, every hatch or defaultEither.",
+              "Actor pool is read before coherent body publication. These samples establish native closing followed by later inside/dead guest data, but do not identify the exact original HP store instruction.",
+              "Source50EA0 closes on alreadycommitted camera equality; existing door_update projects trailingactor yet does not establish full extent clearance when originalBox0. Native motion/closing/drawing stay original in the baseline.",
+              "NET remains unverified. No candidate fix, source test, build or prepared fixture may be counted as a pass."
+            ],
+            "bypasses": [
+              "Existing agreed CP1/predoor original placement bypasses approach. ONE existing OFFLINE atomic position command4 creates stagger only; actual HP, box0, native closing and death outcomes are observed, never assigned.",
+              "Unilateral fixture taint and ordinary recording refusal remain retained. Native cards/settings were private and unchanged."
+            ]
+          }
+        ],
+        "limitations": "Demonstrated exact C132 LOCAL premature native closure with livingguest contactbox0: after one disclosed position-only stagger, native close begins while guestcenter5757.453125 is inside5728..5760; HP32->0/DYING->FALLEN, primary32/lives2CP2 preserved. No forced closure/death/box/result. Source/default full-extent guard in isolatedC133 is preparation only until built/nativequalified; NET unverified. F183stationary-held contract remains separate."
       }
     },
     {
