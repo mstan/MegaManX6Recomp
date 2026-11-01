@@ -72,6 +72,13 @@ int main(void) {
     CHECK(!state_track.count && !state_track.error && psx_mod_read_byte(diagnostic+0x3C)==2);
     open_guest_menu=0;
 
+    /* Native task replacement can retire an ordinary gameplay or scene pass,
+     * as well as the primary menu. Keep the same exact fresh root signature. */
+    for(unsigned phase=0;phase<3;++phase) {
+        abandoned_stage(&cpu);saved_host_word(&state_track.frame[0],1,phase);
+        CHECK(retire_quit_stage(&cpu,0x8003BD24u));
+        CHECK(!stage_call && !state_track.count && !state_track.error);
+    }
     for(unsigned variant=0;variant<25;++variant) {
         abandoned_stage(&cpu);uint32_t address=0x8003BD24u;
         switch(variant) {
@@ -95,7 +102,7 @@ int main(void) {
         case 17:state_track.frame[1].tag=42;break;
         case 18:saved_host_word(&state_track.frame[1],99,0x8003BD24u);break;
         case 19:saved_host_word(&state_track.frame[1],31,0x80020C70u);break;
-        case 20:saved_host_word(&state_track.frame[0],1,0);break;
+        case 20:saved_host_word(&state_track.frame[0],1,3);break;
         case 21:saved_host_word(&state_track.frame[0],3,1);break;
         case 22:saved_host_word(&state_track.frame[1],100,PLAYER);break;
         case 23:state_track.frame[1].bytes=100*4;break;

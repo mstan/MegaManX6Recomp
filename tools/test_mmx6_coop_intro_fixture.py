@@ -1,11 +1,68 @@
 """Reject unilateral/partial fixture receipts before named mechanic admission."""
+import ast
 import copy
+import inspect
 from pathlib import Path
 import tempfile
 import tomllib
 import unittest
 
 import mmx6_coop_intro_fixture as intro
+
+
+class NativeScenePredicateTests(unittest.TestCase):
+    def test_released_walk_settles_before_idle_assertion(self):
+        tree=ast.parse(inspect.getsource(intro.exercise_scene_owner_fatal))
+        funcs=[n for n in tree.body[0].body if isinstance(n,ast.FunctionDef) and n.name in ('recovered','neutral')]
+        idle=dict(observation=dict(ready=1,enrolled=1,lifecycle=(0,5),scene_owner=0,scene_phase=0,pause_owner=0,
+            players=[dict(state=1,hp=32,action=2),dict(hp=0)]))
+        held=copy.deepcopy(idle);held['observation']['players'][0]['action']=4
+        tested=[]
+        def wait(label,predicate):
+            for p in (held,idle):
+                row=dict(peers=[p]);tested.append(predicate(row))
+                if tested[-1]:return row
+            self.fail('Neutral never settled')
+        scope={'wait':wait};exec(compile(ast.Module(body=funcs,type_ignores=[]),'<actual neutral predicate>','exec'),scope)
+        self.assertIs(scope['neutral']('released native walk')['peers'][0],idle)
+        self.assertEqual(tested,[False,True])
+
+    def test_native_fatal_accepts_source_bound_transient_miss_but_not_wrong_option_or_live_owner(self):
+        tree=ast.parse(inspect.getsource(intro.exercise_scene_owner_fatal))
+        func=next(n for n in tree.body[0].body if isinstance(n,ast.FunctionDef) and n.name=='native_fatal')
+        scope={'option':3};exec(compile(ast.Module(body=[func],type_ignores=[]),'<actual native fatal predicate>','exec'),scope)
+        p=dict(fatal_option=3,fatal_state=2,observation=dict(scene_owner=2,scene_phase=4,lifecycle=(0,4),players=[dict(hp=32),dict(hp=0)]))
+        self.assertTrue(scope['native_fatal'](p))
+        p['fatal_option']=4;self.assertFalse(scope['native_fatal'](p));p['fatal_option']=3
+        p['observation']['lifecycle']=(0,0);p['observation']['players'][1]['hp']=32
+        self.assertFalse(scope['native_fatal'](p))
+        p['observation']['lifecycle']=(0,5);p['observation']['players'][1]['hp']=0
+        self.assertTrue(scope['native_fatal'](p))
+        scope['option']=4;p['fatal_option']=4;p['observation']['scene_phase']=5
+        self.assertFalse(scope['native_fatal'](p))
+        p['observation']['scene_phase']=4;self.assertTrue(scope['native_fatal'](p))
+
+    def test_live_lifecycle_tuple_and_saved_json_list_use_same_native_guards(self):
+        # The debug dataclass retains tuple lifecycle in live .json(); JSON
+        # serialization alone hid the mismatch in failed C132 LOCAL1 evidence.
+        import json
+        import coop_debug as debug
+        tree=ast.parse(inspect.getsource(intro.exercise_scene_owner_fatal))
+        funcs=[n for n in tree.body[0].body if isinstance(n,ast.FunctionDef) and n.name in ('healthy','recovered')]
+        self.assertEqual(len(funcs),2)
+        scope={};exec(compile(ast.Module(body=funcs,type_ignores=[]),'<actual scene predicates>','exec'),scope)
+        players=tuple(debug.Player(1,seat,1,2,32,0,0) for seat in (0,1))
+        o=debug.Observation(schema=1,tick=1,sequence=2,native_timer=0,lifecycle=(0,0),pause_owner=0,
+            scene_owner=0,scene_phase=0,mailbox=0,ready=1,enrolled=1,failed=0,native_mode=10,
+            native_phase=0,host_digest=1,host_digest_algorithm=1,players=players).json()
+        self.assertIsInstance(o['lifecycle'],tuple)
+        for saved in (False,True):
+            active=json.loads(json.dumps(o)) if saved else copy.deepcopy(o)
+            self.assertTrue(scope['healthy'](dict(observation=active)))
+            active['lifecycle']=(0,5);active['players'][1]['hp']=0
+            self.assertTrue(scope['recovered'](dict(observation=active)))
+            active['scene_phase']=4
+            self.assertFalse(scope['recovered'](dict(observation=active)))
 
 
 class NamedPrerequisiteCatalogTests(unittest.TestCase):
@@ -108,11 +165,30 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             self.assertEqual(parsed['feature'][1], trailing)
             self.assertEqual(receipt['doors'], 'both')
 
+    def test_subtank_policy_stays_in_prototype_before_later_packages(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source=Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as temporary:
+            directory=Path(temporary); manifest=directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True)
+            manifest.write_text((source/'packaging/lab/coop-checkpoint-option.toml').read_text(),encoding='utf-8')
+            state=directory/'mods/state.toml'
+            state.write_text('[[feature]]\npackage_id = "mmx6.local-coop"\nid = "prototype"\nenabled = false\n'
+                '[[package]]\nid = "later-package"\nversion = "1"\n[[feature]]\npackage_id = "later-package"\nid = "later"\nenabled = true\n',encoding='utf-8')
+            pair.select_subtank_policy(directory,enabled=False)
+            parsed=tomllib.loads(state.read_text())
+            self.assertEqual(parsed['feature'][0]['values']['subtank_energy'],'independent')
+            self.assertEqual(parsed['feature'][0]['values']['lab_checkpoint'],'intro_subtank_cp2')
+            self.assertEqual(parsed['feature'][0]['values']['lab_starting_hp_p1'],'13')
+            self.assertEqual(parsed['feature'][0]['values']['lab_starting_hp_p2'],'11')
+            self.assertNotIn('subtank_energy',parsed['package'][0])
+            self.assertNotIn('values',parsed['feature'][1])
+
     def test_named_positions_are_explicit_lab_only_with_strict_choice_set(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
         normal = tomllib.loads((source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons') for o in normal.get('option', [])))
+        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons', 'lab_fatal') for o in normal.get('option', [])))
         catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
@@ -122,7 +198,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            for option in ('intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'heatnix_cp7', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1'):
+            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1'):
                 state.write_text(initial, encoding='utf-8')
                 receipt = pair.select_checkpoint(directory, enabled=True, option=option)
                 self.assertEqual(receipt['option'], option)
@@ -150,6 +226,14 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='intro_before_doors')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
+
+    def test_native_fatal_is_an_explicit_default_off_lab_choice(self):
+        source=Path(__file__).resolve().parents[1]
+        catalog=tomllib.loads((source/'packaging/lab/coop-checkpoint-option.toml').read_text())
+        options=[o for o in catalog['option'] if o['id']=='lab_fatal']
+        self.assertEqual(len(options),1)
+        self.assertEqual((options[0]['feature'],options[0]['type'],options[0]['default']),('prototype','choice','off'))
+        self.assertEqual([c['value'] for c in options[0]['choice']],['off','p1','p2','scene_before_release','scene_during_arrival'])
 
     def test_protection_requires_explicit_typed_prelaunch_choice(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair

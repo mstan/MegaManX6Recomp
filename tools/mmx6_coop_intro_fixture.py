@@ -34,6 +34,277 @@ def receipt(client):
         authority=data[29], latch=data[30], prior_chord=data[31], raw_hex=data.hex())
 
 
+def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
+    """F4/F103: agreed prerequisite, original native death/beam outcomes only."""
+    output=Path(output);output.mkdir(parents=True,exist_ok=False)
+    clients=ctx['clients'];choice=ctx['scene_owner_fatal'];option=3 if choice=='before_release' else 4
+    state_tail=bool(ctx.get('scene_owner_state_tail'))
+    deadline=time.monotonic()+180
+    e=dict(kind='native_scene_owner_fatal',choice=choice,status='failed_setup',samples=[],inputs=[],captures=[],
+        checks={},snapshot_operations=[],effects=[dict(births=[],retirements=[],ever_visible=[],visible_retired=[]) for _ in clients],
+        bypasses=['Agreed intro_cp2 and predeclared original lock/release/HP80 sequence; all death/beam/recovery outcomes remain native.'],
+        limits=['Asynchronous body/pool reads; observed slot transitions are not exact allocation-attempt totals.'])
+    ctx['report']['scene_owner_fatal']=e
+    previous=[set() for _ in clients];visible=[set() for _ in clients];ever=[set() for _ in clients];retired=[set() for _ in clients]
+    def need(ok,why):
+        if not ok:raise ValueError(why)
+    def inp(seat,bits,label):
+        e['inputs'].append(dict(seat=seat,bits=bits,label=label,ack=ctx['set_input'](seat,bits)))
+    def sample(label):
+        need(time.monotonic()<deadline and len(e['samples'])<2000,'Native scene-fatal deadline')
+        row=dict(index=len(e['samples']),label=label,peers=[]);e['samples'].append(row)
+        for i,c in enumerate(clients):
+            q=hud.state.private_sample(c);o=q['observation'];play=c.read(0x800CCED0,0xE0)
+            state=c.read(debug.DIAGNOSTIC_ADDRESS+0xC8,1)[0];pool=c.read(0x800CD410,0x2400)
+            allocated={j for j in range(96) if pool[j*0x60]&1 and pool[j*0x60+1]==0x11}
+            shown={j for j in allocated if pool[j*0x60+3]}
+            eff=e['effects'][i];eff['births']+= [dict(slot=j,tick=o['tick']) for j in sorted(allocated-previous[i])]
+            eff['retirements']+=[dict(slot=j,tick=o['tick']) for j in sorted(previous[i]-allocated)]
+            ever[i]|=shown;retired[i]|=visible[i]-shown;previous[i]=allocated;visible[i]=shown
+            eff.update(ever_visible=sorted(ever[i]),visible_retired=sorted(retired[i]))
+            row['peers'].append(dict(peer=i,observation=o,p1_body_hex=q['p1_body_hex'],p2_body_hex=q['p2_body_hex'],
+                play_hex=play.hex(),tuple=[play[n] for n in (0,1,12,13,0x1D)],lives=play[0x39],
+                native_timer=struct.unpack_from('<I',play,0x90)[0],fixture=receipt(c),fatal_raw=state,
+                fatal_option=state&7,fatal_state=state>>3,native_fx_pool=pool.hex(),type11_slots=sorted(allocated),visible_type11_slots=sorted(shown)))
+        if len(e['samples'])%16==0 and ctx.get('network'):ctx['network']()
+        return row
+    def wait(label,predicate,seconds=20):
+        stop=min(deadline,time.monotonic()+seconds)
+        while time.monotonic()<stop:
+            row=sample(label)
+            need(not any(p['fixture']['state'] in (4,5) or p['observation']['failed'] for p in row['peers']),'Native prerequisite refused or co-op failed')
+            if predicate(row):return row
+            time.sleep(.015)
+        raise ValueError(label+' timed out')
+    def healthy(p):
+        o=p['observation'];return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,0) and all(a['hp']&127 and a['state']==1 for a in o['players'])
+    def recovered(p):
+        o=p['observation'];return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,5) and not o['scene_owner'] and not o['scene_phase'] and not o['pause_owner'] and o['players'][0]['state']==1 and o['players'][0]['hp']==32 and o['players'][0]['action']==2 and o['players'][1]['hp']==0
+    def neutral(label):
+        return wait(label,lambda r:all(recovered(p) for p in r['peers']))
+    def native_fatal(p):
+        o=p['observation']
+        # Source-bound option3 requests HP80 only at phase3 and waits native
+        # DYING before original release. Correct recovery can prime phase4 in
+        # that same pass; asynchronous reads need not retain transient phase3.
+        phases=(3,4,5) if option==3 else (4,)
+        return p['fatal_option']==option and p['fatal_state']==2 and o['scene_owner']==2 and o['scene_phase'] in phases and o['lifecycle'][1] in (4,5) and o['players'][1]['hp']==0
+    def capture(label,row):
+        for i,c in enumerate(clients):e['captures'].append(dict(peer=i,label=label,row=row['index'],**debug.capture_present(c,output/f'peer-{i}-{label}.png',request=c.request)))
+    def updates(label,count=8):
+        old=sample(label+' start')
+        return wait(label,lambda r:all((p['observation']['tick']-a['observation']['tick'])&0xffffffff>=count for p,a in zip(r['peers'],old['peers'])))
+    try:
+        need(hashlib.sha256(Path(original_exe).read_bytes()).hexdigest()=='dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046','Original EXE changed')
+        for seat in (0,1):inp(seat,0,'original baseline neutral')
+        wait('original fresh idle before agreed checkpoint',lambda r:all(healthy(p) and p['tuple']==[10,0,0,0,0] and all(a['action']==2 for a in p['observation']['players']) for p in r['peers']))
+        inp(1,6,'accepted original checkpoint chord')
+        try:wait('original checkpoint request consumed',lambda r:all(p['fixture']['latch'] in (1,2) for p in r['peers']))
+        finally:inp(1,0,'neutral release between original chords')
+        ready=wait('original intro CP2 healthy native arrival',lambda r:all(healthy(p) and p['tuple']==[10,0,0,0,2] and p['fixture']['state']==3 and p['fixture']['generation']==1 and p['fixture']['initializer_entries']==1 and p['fixture']['record']==RECORD and p['fixture']['nonce']==NONCE and p['fixture']['authority']==1 and p['fatal_option']==option and p['fatal_state']==1 and not p['observation']['scene_owner'] for p in r['peers']),90)
+        e['ready']=ready['index'];baseline=[(p['lives'],p['tuple'][2:]) for p in ready['peers']]
+        inp(1,6,'fresh accepted agreed native scene-fatal chord')
+        try:wait('original scene lock admitted',lambda r:all(p['observation']['scene_owner']==2 and p['fatal_state']>=3 for p in r['peers']))
+        finally:inp(1,0,'release scene-fatal chord')
+        if not state_tail:
+            fatal=wait('source-bound original owner native fatal after required sequence',lambda r:all(native_fatal(p) for p in r['peers']))
+            e['native_fatal']=fatal['index'];e['native_fatal_observed_phases']=[p['observation']['scene_phase'] for p in fatal['peers']]
+            if any(p['visible_type11_slots'] for p in fatal['peers']):capture('native-fatal-effects',fatal)
+        else:
+            need(len(clients)==1 and option==3,'State tail requires LOCAL before-release selection')
+            e['limits'].append('Only missing current-build state/control tail; root must bind retained same-image LOCAL3 native fatal/effect/recovery components separately.')
+        row=wait('living original passenger finishes beam and regains native control',lambda r:all(recovered(p) and p['fatal_state']==2 for p in r['peers']),40)
+        capture('native-recovered-survivor',row)
+        if not state_tail:
+            x=[p['observation']['players'][0]['x_raw'] for p in row['peers']]
+            inp(0,0x20,'ordinary survivor Right after original scene release')
+            try:row=updates('survivor native accepted walk')
+            finally:inp(0,0,'release survivor Right')
+            need(all(p['observation']['players'][0]['x_raw']>a for p,a in zip(row['peers'],x)),'Survivor control did not move')
+            row=neutral('native survivor neutral after released walk')
+        else:
+            e['limits'].append('Initial survivor walk is retained in same-image LOCAL4; this run performs only missing SAVE/LOAD and restored-control endpoints.')
+        if option==3 and not state_tail:
+            quiet=wait('native death effects visibly retire',lambda r:all(recovered(p) and not p['visible_type11_slots'] for p in r['peers']),40)
+            births=[len(z['births']) for z in e['effects']]
+            row=updates('quiet original world cadence',64)
+            for i,(p,a) in enumerate(zip(row['peers'],quiet['peers'])):
+                need(e['effects'][i]['births'] and e['effects'][i]['retirements'] and ever[i] and ever[i]<=retired[i] and not p['visible_type11_slots'],'Original effect birth/retirement incomplete')
+                need(len(e['effects'][i]['births'])==births[i],'Original death effects keep allocating after recovery')
+                dt=(p['observation']['tick']-a['observation']['tick'])&0xffffffff;dw=(p['native_timer']-a['native_timer'])&0xffffffff
+                need(dt-2<=dw<=dt+2,'Native free-world cadence changed')
+            e['checks']['native_effect_birth_retirement_and_world_cadence']=True
+            capture('native-effects-quiet-retirement',row)
+        need(all(recovered(p) and (p['lives'],p['tuple'][2:])==a for p,a in zip(row['peers'],baseline)),'Native lives/checkpoint or survivor state changed')
+        if state_tail:
+            row=updates('ordinary quiet native publications before SAVE',64)
+            capture('state-tail-native-quiet-before-SAVE',row)
+        if len(clients)==1:
+            from qualify_mmx6_coop_state import snapshot_operation
+            c=clients[0];saved=row['peers'][0]
+            snapshot_operation(c.request,'save',7,e['snapshot_operations'],timeout=20)
+            inp(0,0x80,'native survivor Left after current-build SAVE')
+            try:row=updates('native survivor control after SAVE')
+            finally:inp(0,0,'release survivor after SAVE')
+            need(row['peers'][0]['observation']['players'][0]['x_raw']<saved['observation']['players'][0]['x_raw'],'Post-SAVE native Left did not move')
+            neutral('native survivor neutral after SAVE walk')
+            snapshot_operation(c.request,'load',7,e['snapshot_operations'],timeout=20)
+            wait('current-build scene disposition restored',lambda r:all(recovered(p) and p['observation']['players'][0]['x_raw']==saved['observation']['players'][0]['x_raw'] for p in r['peers']))
+            inp(0,0x80,'fresh native survivor Left after LOAD')
+            try:row=updates('native survivor control after LOAD')
+            finally:inp(0,0,'release survivor after LOAD')
+            need(row['peers'][0]['observation']['players'][0]['x_raw']<saved['observation']['players'][0]['x_raw'],'Post-LOAD survivor control absent')
+            row=neutral('native survivor neutral after LOAD walk')
+            need(all((p['lives'],p['tuple'][2:])==a for p,a in zip(row['peers'],baseline)),'Current-build LOAD changed native lives/checkpoint')
+        e['checks'].update(native_passenger_beam_recovery=True,native_survivor_controls=True,no_life_or_checkpoint_reset=True)
+        e['checks']['current_build_state_tail' if state_tail else 'source_bound_before_release_native_death' if option==3 else 'native_phase4_owner_death']=True
+        e['status']=success;return e
+    except Exception as error:
+        e.update(error=str(error),traceback=traceback.format_exc());raise
+    finally:
+        for seat in (0,1):
+            try:inp(seat,0,'final native neutral')
+            except Exception:pass
+        (output/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf8',newline='\n')
+
+
+def exercise_subtank_policy(ctx, *, output, original_exe, leader, success):
+    """F180: declared supplies cross original CP2, then native owner heals.
+
+    No RAM/mailbox writes or unilateral NET state operations. The selected
+    one-shot game prerequisite owns setup; all tested results use native input.
+    """
+    output = Path(output); output.mkdir(parents=True, exist_ok=False)
+    clients = ctx['clients']; deadline = time.monotonic()+180
+    e = dict(kind='F180_native_independent_subtanks', status='failed_setup',
+        samples=[], inputs=[], captures=[], checks={}, snapshot_operations=[],
+        bypasses=['Agreed intro_subtank_cp2: first tank acquired, P1 energy16/P2 energy8 before original initializer; HP13/11 afterward.'],
+        limits=['Private disposable LAB prerequisites; no naturally earned acquisition, ordinary capture or replay claim.'])
+    ctx['report']['F180_subtanks'] = e
+
+    def need(ok, message):
+        if not ok: raise ValueError(message)
+
+    def inp(seat, bits, label):
+        e['inputs'].append(dict(seat=seat, bits=bits, label=label, ack=ctx['set_input'](seat,bits)))
+
+    def sample(label):
+        row=dict(index=len(e['samples']),label=label,peers=[]); e['samples'].append(row)
+        need(time.monotonic()<deadline and len(e['samples'])<1800,'F180 native deadline')
+        for i,c in enumerate(clients):
+            s=hud.state.private_sample(c); play=c.read(0x800CCED0,0xE0)
+            bank=c.read(debug.DIAGNOSTIC_ADDRESS+0x1FF0,6)
+            row['peers'].append(dict(peer=i,observation=s['observation'],
+                p1_body_hex=s['p1_body_hex'],p2_body_hex=s['p2_body_hex'],play_hex=play.hex(),
+                tuple=[play[n] for n in (0,1,12,13,0x1D)],bank_hex=bank.hex(),
+                policy=list(bank[:2]),banks=list(bank[2:]),acquired=play[0x6B],
+                hp=[a['hp'] for a in s['observation']['players']],fixture=receipt(c),
+                starting_hp=starting_hp_receipt(c),menu=list(c.read(0x800CF814,2)),cursor=c.read(0x800CF824,1)[0]))
+        if len(e['samples'])%16==0 and ctx.get('network'): ctx['network']()
+        return row
+
+    def wait(label,predicate,seconds=15):
+        stop=min(deadline,time.monotonic()+seconds)
+        while time.monotonic()<stop:
+            row=sample(label)
+            need(all(p['fixture']['state'] not in (4,5) for p in row['peers']),'Agreed Sub Tank prerequisite refused')
+            if predicate(row): return row
+            time.sleep(.025)
+        raise ValueError(label+' timed out')
+
+    def updates(label,count=6):
+        old=sample(label+' start')
+        return wait(label,lambda r:all((p['observation']['tick']-a['observation']['tick'])&0xFFFFFFFF>=count
+            for p,a in zip(r['peers'],old['peers'])))
+
+    def pulse(seat,bits,label):
+        inp(seat,bits,label)
+        try: updates(label+' accepted input window')
+        finally: inp(seat,0,label+' neutral')
+        updates(label+' fresh neutral')
+
+    def capture(label,row):
+        for i,c in enumerate(clients):
+            e['captures'].append(dict(peer=i,label=label,row_index=row['index'],
+                **debug.capture_present(c,output/f'peer-{i}-{label}.png',request=c.request)))
+
+    def idle(row,cp):
+        return all(p['tuple']==[10,0,0,0,cp] and p['observation']['ready']==p['observation']['enrolled']==1
+            and not p['observation']['failed'] and not p['observation']['scene_owner']
+            and not p['observation']['pause_owner'] and tuple(p['observation']['lifecycle'])==(0,0)
+            and all(a['state']==1 and a['action']==2 and 0<a['hp']<128 for a in p['observation']['players'])
+            for p in row['peers'])
+
+    try:
+        need(hashlib.sha256(Path(original_exe).read_bytes()).hexdigest()==
+            'dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046','Original EXE changed')
+        for seat in (0,1): inp(seat,0,'initial neutral')
+        wait('actual intro idle before prerequisite',lambda r:idle(r,0),30)
+        inp(1,6,'one agreed Sub Tank CP2 chord')
+        try: wait('one-shot accepted chord',lambda r:all(p['fixture']['latch'] in (1,2) for p in r['peers']))
+        finally: inp(1,0,'release chord')
+        ready=wait('actual native CP2 supplies and post-initializer HP',lambda r:idle(r,2)
+            and authored_checkpoint_arrivals(r['peers']) and all(p['fixture']['state']==3
+                and p['starting_hp']['status']==2 and p['hp']==[13,11] for p in r['peers']),75)
+        wanted=dict(generation=1,state=3,reason=0,stage=0,section=0,checkpoint=2,
+            nonce=0x4C535432,initializer_entries=1,record=RECORD,tainted=1,authority=1,latch=2)
+        need(all(all(p['fixture'].get(k)==v for k,v in wanted.items()) and p['policy']==[1,1]
+            and p['banks'][0]==0x90 and p['banks'][2]==0x88 and p['acquired']&0x10
+            for p in ready['peers']),'Declared native/private supplies did not survive original initializer')
+        e['ready']=ready['index']; capture('native-CP2-filled-private-supplies',ready)
+        e['checks']['declared_supplies_acquisition_survive_original_initializer']=True
+        for seat,target,energy in ((1,19,8),(0,29,16)):
+            before=sample(f'P{seat+1} before native heal')
+            pulse(seat,8,f'P{seat+1} native Start')
+            wait('settled owned native menu',lambda r:all(p['tuple'][1]==2 and p['menu']==[1,0]
+                and p['observation']['pause_owner']==seat+1 for p in r['peers']))
+            pulse(seat,0x20,'original Sub Tank cursor Right')
+            selected=wait('native Sub Tank selected',lambda r:all(p['cursor']==10 for p in r['peers']))
+            capture(f'P{seat+1}-native-tank-selected',selected)
+            pulse(seat,0x4000,'original Cross uses only menu owner tank')
+            healed=wait('native owner heal and private energy drain',lambda r:all(p['hp'][seat]==target
+                and p['banks'][seat*2]==0x80 and p['menu'] in ([1,0],[1,1]) for p in r['peers']),25)
+            for p,old in zip(healed['peers'],before['peers']):
+                need(p['hp'][seat^1]==old['hp'][seat^1] and p['banks'][(seat^1)*2:(seat^1)*2+2]==old['banks'][(seat^1)*2:(seat^1)*2+2]
+                    and p['banks'][seat*2+1]==old['banks'][seat*2+1] and p['acquired']==old['acquired'],
+                    'Native heal altered other HP/bank/acquisition')
+                need((old['banks'][seat*2]&127)-(p['banks'][seat*2]&127)==energy,'Wrong native energy spend')
+            capture(f'P{seat+1}-native-owner-healed',healed)
+            pulse(seat,8,'owner resumes original gameplay')
+            wait('native owned menu closed',lambda r:all(p['tuple'][1]==0 and not p['observation']['pause_owner'] for p in r['peers']))
+            e['checks'][f'P{seat+1}_native_heal_private_drain_and_isolation']=True
+        final=sample('both actual native heals complete')
+        need(all(p['hp']==[29,19] and p['banks'][0]==p['banks'][2]==0x80
+            and all(p['fixture'].get(k)==v for k,v in wanted.items()) for p in final['peers']),
+            'Final native private heal result or one-shot receipt changed')
+        if len(clients)==1:
+            from qualify_mmx6_coop_state import snapshot_operation
+            c=clients[0]; saved=final['peers'][0]
+            snapshot_operation(c.request,'save',8,e['snapshot_operations'],timeout=20)
+            pulse(1,0x80,'native guest movement after warm SAVE')
+            snapshot_operation(c.request,'load',8,e['snapshot_operations'],timeout=20)
+            restored=wait('warm native supplies and guest position restored',lambda r:all(p['hp']==saved['hp']
+                and p['banks']==saved['banks'] and p['observation']['players'][1]['x_raw']==saved['observation']['players'][1]['x_raw']
+                for p in r['peers']))
+            pulse(1,0x80,'fresh guest control after current-build LOAD')
+            moved=sample('restored guest accepted native Left')
+            need(moved['peers'][0]['observation']['players'][1]['x_raw']<restored['peers'][0]['observation']['players'][1]['x_raw'],
+                'Guest control did not resume after current-build LOAD')
+            e['checks']['current_build_warm_restore_and_fresh_guest_control']=True
+        e['status']=success;return e
+    except Exception as error:
+        e.update(error=str(error),traceback=traceback.format_exc())
+        if e['samples']:
+            try:capture('terminal-observation',e['samples'][-1])
+            except Exception as extra:e['capture_error']=str(extra)
+        raise
+    finally:
+        for seat in (0,1):
+            try:inp(seat,0,'final native neutral')
+            except Exception as error:e.setdefault('cleanup_errors',[]).append(str(error))
+        (output/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8')
+
+
 def exercise_distant_explosion(ctx, *, output, original_exe, leader, success):
     """F158 only: original local burst with a genuinely distant second view."""
     output = Path(output); output.mkdir(parents=True, exist_ok=False)
@@ -1059,9 +1330,9 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
   elif scenario=='fallen':
    e['bypasses'].append('Predeclared lab_fatal=p2 requests only native HP80 after the checkpoint; original updates must earn death/FALLEN. Door, lifecycle, lives and progress results are never assigned.')
    inp(1,0,'neutral after completed checkpoint before separate fatal edge')
-   armed=wait('agreed P2 fatal armed after neutral',lambda r:idle(r,1)and all(p['fatal_status']==6 for p in r['peers']),15)
+   armed=wait('agreed P2 fatal armed after neutral',lambda r:idle(r,1)and all(p['fatal_status']==10 for p in r['peers']),15)
    inp(1,6,'ordinary second P2 L3+R3 requests declared native fatal')
-   try:requested=wait('one agreed P2 native fatal request consumed',lambda r:all(p['fatal_status']==10 for p in r['peers']),15)
+   try:requested=wait('one agreed P2 native fatal request consumed',lambda r:all(p['fatal_status']==18 for p in r['peers']),15)
    finally:inp(1,0,'release consumed native fatal chord')
    dying=wait('original P2 native fatal handling',lambda r:all(p['state']['observation']['lifecycle'][1]in(4,5)for p in r['peers']),30)
    fallen=wait('actual native guest death finishes FALLEN',lambda r:all(tuple(p['state']['observation']['lifecycle'])==(0,5)and bytes.fromhex(p['state']['p2_body_hex'])[4]==3 for p in r['peers']),45)
@@ -1347,9 +1618,9 @@ def exercise_refight_policy(ctx,*,output,original_exe,leader,success,scenario):
                 capture('native-absent',absent);traveler=0
             else:
                 inp(1,0,'neutral after completed CP1 before agreed primary fatal edge')
-                armed=wait('agreed P1 fatal armed after neutral',lambda r:all(base.native_idle(p,1)and p['fatal_status']==5 for p in r['peers']),15,900)
+                armed=wait('agreed P1 fatal armed after neutral',lambda r:all(base.native_idle(p,1)and p['fatal_status']==9 for p in r['peers']),15,900)
                 inp(1,6,'ordinary second P2 L3+R3 requests declared P1 native fatal')
-                try:requested=wait('one agreed primary fatal request consumed',lambda r:all(p['fatal_status']==9 for p in r['peers']),15,900)
+                try:requested=wait('one agreed primary fatal request consumed',lambda r:all(p['fatal_status']==17 for p in r['peers']),15,900)
                 finally:inp(1,0,'release consumed native fatal chord')
                 fatal=wait('actual original primary native fatal',lambda r:all(p['observation']['lifecycle'][0]in(4,5)and p['observation']['lifecycle'][1]==0 for p in r['peers']),30,1800)
                 fallen=wait('original native death fully FALLEN with living guest',lambda r:all(p['observation']['lifecycle']==[5,0]and body(p,0)[4]==3 and body(p,1)[0x5C]>0 for p in r['peers']),70,4200)
@@ -1510,10 +1781,10 @@ def exercise_weather_survivor(ctx,*,output,original_exe,leader,success):
     pace()
    raise ValueError(label+' timed out')
   for seat in(0,1):inp(seat,0)
-  armed=fatal_wait('both idle and P1 fatal armed',lambda rows:all(p['fatal_status']==5 and tuple(p['state']['observation']['lifecycle'])==(0,0)and all(x['action']==2 for x in p['state']['observation']['players'])for p in rows),15)
+  armed=fatal_wait('both idle and P1 fatal armed',lambda rows:all(p['fatal_status']==9 and tuple(p['state']['observation']['lifecycle'])==(0,0)and all(x['action']==2 for x in p['state']['observation']['players'])for p in rows),15)
   e['native_primary_death']['before']=armed
   inp(1,6)
-  try:fatal_wait('agreed P1 native fatal consumed',lambda rows:all(p['fatal_status']==9 for p in rows),15)
+  try:fatal_wait('agreed P1 native fatal consumed',lambda rows:all(p['fatal_status']==17 for p in rows),15)
   finally:inp(1,0)
   rows=fatal_wait('actual native primary HP0 and DYING/FALLEN',lambda rows:all(p['state']['observation']['players'][0]['hp']&127==0 and p['state']['observation']['lifecycle'][0]in(4,5)and bytes.fromhex(p['state']['p1_body_hex'])[4]in(2,3)for p in rows),30)
   inp(0,0)

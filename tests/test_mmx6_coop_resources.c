@@ -107,8 +107,8 @@ static void preparation(void) {
         CHECK(v.graphics.size==229672 && v.graphics.data[0]==88 && v.layout.used==291852);
         CHECK(v.portrait.data[0]==165 && v.portrait_colors.data[0]==166);
     }
-    /* Base X can be prepared, but never admitted to the unfinished runtime. */
-    CHECK(mmx6_coop_resources_fixed_runtime_admit(&zero)==MMX6_COOP_RESOURCES_UNSUPPORTED_RUNTIME_ROSTER);
+    /* Native Zero/P1 uses the original base X overlay and UI for P2. */
+    CHECK(mmx6_coop_resources_fixed_runtime_admit(&zero)==MMX6_COOP_RESOURCES_OK);
     CHECK(mmx6_coop_resource_prepare(&zero,1,bin,BIN_SIZE,dat,DAT_SIZE,ARENA,&v)==MMX6_COOP_RESOURCES_OK);
     CHECK(v.overlay.data==bin+4096 && v.overlay.type==0x3C && v.graphics.size==245288);
     CHECK(v.graphics.data[0]==89 && v.portrait.data[0]==163 && v.portrait_colors.data[0]==164);
@@ -142,9 +142,39 @@ static void preparation(void) {
     CHECK(mmx6_coop_resource_prepare(&x,1,bin,BIN_SIZE,NULL,0,ARENA,&v)==MMX6_COOP_RESOURCES_INVALID_ARGUMENT);
     CHECK(mmx6_coop_resource_prepare(&x,1,bin,BIN_SIZE,dat,DAT_SIZE,ARENA,NULL)==MMX6_COOP_RESOURCES_INVALID_ARGUMENT);
 }
+static void inverse_failures(void) {
+    Mmx6CoopRoster zero=roster(5),bad,falcon=roster(1);
+    Mmx6CoopResourceViews v;
+    archives(2656);
+    /* The inverse primary still prepares the original ordinary Zero assets. */
+    CHECK(mmx6_coop_resource_prepare(&zero,0,bin,BIN_SIZE,dat,DAT_SIZE,ARENA,&v)==MMX6_COOP_RESOURCES_OK);
+    CHECK(v.overlay.data==bin+24*2048 && v.graphics.size==229672);
+    CHECK(v.portrait.data[0]==165 && v.portrait_colors.data[0]==166);
+    /* Only base X is the inverse counterpart; valid Falcon resources do not
+     * permit an unsupported private form through direct runtime admission. */
+    bad=zero;bad.seat[1]=falcon.seat[0];
+    CHECK(mmx6_coop_resources_fixed_runtime_admit(&bad)==MMX6_COOP_RESOURCES_INVALID_ROSTER);
+    plan_failure(&bad,1,BIN_SIZE,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_ROSTER);
+    bad=zero;bad.seat[1].portrait_palette=166;
+    CHECK(mmx6_coop_resources_fixed_runtime_admit(&bad)==MMX6_COOP_RESOURCES_INVALID_ROSTER);
+    plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,315027,MMX6_COOP_RESOURCES_ALLOCATION_BOUND);
+    plan_failure(&zero,1,4096+44588-1,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_OVERLAY);
+    put32(bin+4096,0x3D);
+    plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_OVERLAY);
+    put32(bin+4096,0x3C);put32(bin+4,0xB001);
+    plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_OVERLAY);
+    archives(2656);put32(dat+bundle[1]+8+3*8,3);
+    plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_ASSET);
+    archives(2656);put32(dat+bundle[1]+12+7*8,0x7FFF);
+    plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_UI);
+    archives(2656);put32(dat+163*8+4,0x1FFF);
+    plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_UI);
+    archives(2656);put32(dat+164*8+4,0x1FF);
+    plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_UI);
+}
 int main(void) {
     bin=malloc(BIN_SIZE);dat=malloc(DAT_SIZE);CHECK(bin && dat);
-    layouts();preparation();free(bin);free(dat);
+    layouts();preparation();inverse_failures();free(bin);free(dat);
     CHECK(!strcmp(mmx6_coop_resources_reason(MMX6_COOP_RESOURCES_UNSUPPORTED_RUNTIME_ROSTER),"unsupported_runtime_roster"));
     puts("X6 bounded typed resource plans/aligned allocations/fixed runtime admission PASS");return 0;
 }

@@ -11,6 +11,7 @@ typedef struct {
 static JumpAudioBank jump_audio_banks[2];
 static uint8_t jump_audio_asset_sha[32];
 static unsigned jump_audio_loaded,jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call;
+static unsigned jump_audio_character=MMX6_COOP_CHARACTER_ZERO;
 static uint32_t jump_audio_bound_epoch,jump_audio_owned_epoch;
 static unsigned jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_faulted;
 static uint32_t jump_audio_stop_mask;
@@ -21,6 +22,8 @@ static Mmx6PrivateAudioRecord jump_audio_meta;
 static uint8_t jump_audio_priorities[24];
 #define JUMP_AUDIO_OWNER UINT64_C(0x4D4D583650320001)
 enum { JUMP_DRIVER=0x800E4E30u,JUMP_DRIVER_BYTES=0x900,
+       /* Reserve the union of original X/Zero voices across roster changes.
+        * X's original records use the subset 0x00F00808. */
        JUMP_STOP_MASK=0x00F00B09u };
 
 static uint32_t jump_audio_owned_mask(void) {
@@ -63,7 +66,7 @@ static int jump_audio_fault(const char *reason) {
 }
 static int jump_audio_bind(void) {
     uint32_t epoch=psx_mod_spu_sample_bank_epoch();
-    if(!jump_audio_loaded || !epoch)return 0;
+    if(!jump_audio_loaded || jump_audio_character!=private_actor.character || !epoch)return 0;
     for(unsigned slot=0;slot<24;++slot)
         if((JUMP_STOP_MASK&(1u<<slot)) && !jump_audio_slot_available(slot,0,epoch))return 0;
     if(epoch==jump_audio_bound_epoch && (jump_audio_owned_mask()&JUMP_STOP_MASK)==JUMP_STOP_MASK)return 1;
@@ -76,7 +79,7 @@ static int jump_audio_bind(void) {
     jump_audio_bound_epoch=jump_audio_owned_epoch=epoch;return 1;
 }
 static int jump_audio_ready(void) {
-    if(!jump_audio_loaded || !jump_audio_bound_epoch ||
+    if(!jump_audio_loaded || jump_audio_character!=private_actor.character || !jump_audio_bound_epoch ||
         jump_audio_bound_epoch!=psx_mod_spu_sample_bank_epoch())return 0;
     for(unsigned i=0;i<2;++i) {
         const JumpAudioBank *b=&jump_audio_banks[i];
@@ -85,6 +88,17 @@ static int jump_audio_ready(void) {
             b->layout.sample_bytes>=0x80000u)return 0;
     }
     return (jump_audio_owned_mask()&JUMP_STOP_MASK)==JUMP_STOP_MASK;
+}
+static void jump_audio_release_character(void) {
+    jump_audio_stop_private();
+    for(unsigned i=0;i<2;++i) {
+        free(jump_audio_banks[i].parsed);free(jump_audio_banks[i].samples);
+        jump_audio_banks[i].parsed=jump_audio_banks[i].samples=NULL;
+        memset(&jump_audio_banks[i].layout,0,sizeof jump_audio_banks[i].layout);
+    }
+    jump_audio_loaded=0;jump_audio_bound_epoch=jump_audio_owned_epoch=0;
+    jump_audio_clear_calculation();memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
+    memset(jump_audio_asset_sha,0,sizeof jump_audio_asset_sha);
 }
 static int jump_audio_activate(void) {
     jump_audio_stop_private();
@@ -109,23 +123,31 @@ static int jump_audio_hash_is(const uint8_t *data,size_t size,const char *expect
     return 1;
 }
 static int jump_audio_load(const uint8_t *dat,size_t size) {
-    static const char *const hashes[2][2]={
-        {"abf6451ffee33fa526e91be07e9c4f854c38ef0840ffa19c50a89c896536c857","425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8"},
-        {"7c9fedd98a3d4740a2baddcc77323984e8b0a1ae139e24f36043cdfd0fa757ce","203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd"}};
+    /* Both original characters use native groups1/3; their source records,
+     * programs and samples differ. Source: original DAT86 base-X/DAT85 Zero. */
+    static const char *const hashes[2][2][2]={
+        {{"b4c3506a39e2c2b81cecc2614352059e4c1d8b14730f5ae4871723ac426c65fc","ace87356c352818958e936d7b133c59955e7f71aa3363b98ba862c3db7a1430b"},
+         {"1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c","fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58"}},
+        {{"abf6451ffee33fa526e91be07e9c4f854c38ef0840ffa19c50a89c896536c857","425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8"},
+         {"7c9fedd98a3d4740a2baddcc77323984e8b0a1ae139e24f36043cdfd0fa757ce","203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd"}}};
+    unsigned character=private_actor.character;
+    if(character>1 || private_actor.form!=(character?5u:0u) ||
+       private_actor.dat_member!=(character?85u:86u))return 0;
     Mmx6AssetView headers[2],samples[2];Mmx6JumpAudioHeader layouts[2];uint8_t parsed[2][8192];
-    if(jump_audio_loaded)return jump_audio_bind();
+    if(jump_audio_loaded)return jump_audio_character==character && jump_audio_bind();
     for(unsigned i=0;i<2;++i) {
         unsigned group=i?3:1;
-        if(!mmx6_coop_dat_asset(dat,size,85,11+i*2,&headers[i]) || headers[i].type!=6 ||
-            !mmx6_coop_dat_asset(dat,size,85,12+i*2,&samples[i]) || samples[i].type!=(i?0x20303u:0x20101u) ||
-            !jump_audio_hash_is(headers[i].data,headers[i].size,hashes[i][0]) ||
-            !jump_audio_hash_is(samples[i].data,samples[i].size,hashes[i][1]) ||
+        if(!mmx6_coop_dat_asset(dat,size,private_actor.dat_member,11+i*2,&headers[i]) || headers[i].type!=6 ||
+            !mmx6_coop_dat_asset(dat,size,private_actor.dat_member,12+i*2,&samples[i]) || samples[i].type!=(i?0x20303u:0x20101u) ||
+            !jump_audio_hash_is(headers[i].data,headers[i].size,hashes[character][i][0]) ||
+            !jump_audio_hash_is(samples[i].data,samples[i].size,hashes[character][i][1]) ||
             mmx6_jump_audio_prepare_header(headers[i].data,headers[i].size,samples[i].size,group,
                 parsed[i],sizeof parsed[i],&layouts[i])!=MMX6_JUMP_AUDIO_OK)return 0;
     }
+    if(!character)for(unsigned i=0;i<2;++i)layouts[i].bank-=2;
     Mmx6PrivateAudioBank views[2]={{parsed[0],&layouts[0]},{parsed[1],&layouts[1]}};
     uint32_t mask=0;
-    if(mmx6_private_audio_validate(views,&mask)!=MMX6_JUMP_AUDIO_OK || mask!=JUMP_STOP_MASK)return 0;
+    if(mmx6_private_audio_validate(views,&mask)!=MMX6_JUMP_AUDIO_OK || mask!=(character?JUMP_STOP_MASK:0x00F00808u))return 0;
     uint8_t *owned_headers[2]={NULL,NULL},*owned_samples[2]={NULL,NULL};
     for(unsigned i=0;i<2;++i) {
         owned_headers[i]=malloc(layouts[i].bytes);owned_samples[i]=malloc(layouts[i].sample_bytes);
@@ -144,13 +166,15 @@ static int jump_audio_load(const uint8_t *dat,size_t size) {
     for(unsigned i=0;i<2;++i) {
         psx_sha256_update(&sha,headers[i].data,headers[i].size);psx_sha256_update(&sha,samples[i].data,samples[i].size);
     }
-    psx_sha256_final(&sha,jump_audio_asset_sha);jump_audio_loaded=1;
+    psx_sha256_final(&sha,jump_audio_asset_sha);jump_audio_loaded=1;jump_audio_character=character;
     return jump_audio_bind();
 }
 static int jump_audio_projected(void) {
     return ready && enrolled && !failed && (zero_projected || zero_world) &&
         !psx_mod_local_view_scope() && psx_mod_read_byte(PLAYER+4)<=3 &&
-        psx_mod_read_byte(PLAYER+2)==1 && psx_mod_read_byte(PLAYER+0xE7)==5;
+        psx_mod_read_byte(PLAYER+2)==private_actor.character &&
+        psx_mod_read_byte(PLAYER+0xE7)==private_actor.form &&
+        jump_audio_character==private_actor.character;
 }
 static Mmx6JumpAudioReason jump_audio_record(unsigned group,unsigned record,Mmx6PrivateAudioRecord *out) {
     Mmx6PrivateAudioBank views[2]={{jump_audio_banks[0].parsed,&jump_audio_banks[0].layout},

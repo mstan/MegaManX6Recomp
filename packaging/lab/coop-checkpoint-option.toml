@@ -13,6 +13,10 @@ value = "off"
 label = "Off"
 
 [[option.choice]]
+value = "intro_subtank_cp2"
+label = "Intro CP2 + independent Sub Tank prerequisite (LAB)"
+
+[[option.choice]]
 value = "intro_cp2"
 label = "Intro checkpoint 2 prerequisite"
 
@@ -75,6 +79,10 @@ label = "Turtloid original checkpoint 1 rain approach"
 [[option.choice]]
 value = "alternate_boss_cp1"
 label = "Alternate area 20 section 1 checkpoint 1 approach"
+
+[[option.choice]]
+value = "heatnix_cp0"
+label = "Magma original checkpoint 0 midboss approach"
 
 [[option.choice]]
 value = "heatnix_cp7"
@@ -399,3 +407,32 @@ label = "Off"
 [[option.choice]]
 value = "all"
 label = "All earned weapons (prerequisite only)"
+
+[[option]]
+feature = "prototype"
+id = "lab_fatal"
+label = "Lab native fatal request"
+description = "After the agreed checkpoint completes and both heroes are idle, release the chord, then press Player 2 L3 + R3 once. Chosen-seat options request only native fatal HP. Scene options require intro_cp2 and invoke the original Zero script lock/release before requesting fatal HP at the actual outgoing-complete or incoming phase. Native death, beam, recovery, lives and retry remain untouched. Both peers agree before launch; ordinary recording qualification is refused."
+group = "Lab validation"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off"
+
+[[option.choice]]
+value = "p1"
+label = "Player 1 native fatal request"
+
+[[option.choice]]
+value = "p2"
+label = "Player 2 native fatal request"
+
+[[option.choice]]
+value = "scene_before_release"
+label = "Zero scene owner fatal before original release (intro CP2 only)"
+
+[[option.choice]]
+value = "scene_during_arrival"
+label = "Zero scene owner fatal during original partner arrival (intro CP2 only)"

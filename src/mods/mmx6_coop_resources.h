@@ -27,9 +27,8 @@ typedef struct {
     Mmx6CoopResourceLayout layout;
 } Mmx6CoopResourceViews;
 
-/* Temporary PUBLIC runtime admission: only native X/P1 -> ordinary Zero/P2.
- * Preparing views for X/P2 does not enable it. Menus/HUD/deferred effects,
- * audio and canonical runtime-state integration must precede that expansion. */
+/* Validate the native primary and its opposite base counterpart. Black Zero
+ * remains a distinct unsupported native variant; never clear persistent bits. */
 Mmx6CoopResourcesReason mmx6_coop_resources_fixed_runtime_admit(const Mmx6CoopRoster *roster);
 
 /* Checked 32-bit guest offsets, including every 16-byte alignment gap, the
@@ -42,7 +41,7 @@ Mmx6CoopResourcesReason mmx6_coop_resource_layout(size_t graphics,size_t assembl
  * buffers are released. No file I/O, allocation, guest call, or publication.
  * This checks descriptors/types/extents, not a cryptographic content identity
  * or native readiness. The caller binds its mounted-disc/content identity.
- * Supports either canonical seat for helper/future preparation; runtime must
+ * Supports either canonical seat; runtime must
  * ALSO use fixed_runtime_admit. On failure a non-null output is cleared. */
 Mmx6CoopResourcesReason mmx6_coop_resource_prepare(const Mmx6CoopRoster *roster,
     unsigned seat,const uint8_t *bin,size_t bin_size,const uint8_t *dat,size_t dat_size,

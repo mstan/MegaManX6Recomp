@@ -31,7 +31,11 @@ int psx_mod_option_value(const char *package,const char *feature,const char *opt
      * and HUD drawing. Camera options use the existing current-plugin API. */
     CHECK(package&&feature&&option&&out);
     CHECK(!strcmp(package,"mmx6.local-coop")&&!strcmp(feature,"prototype"));
-    const char *value=!strcmp(option,"doors")?"either":!strcmp(option,"hud_layout")?"stacked":NULL;
+    const char *value=!strcmp(option,"doors")?"either":
+        !strcmp(option,"hud_layout")?"stacked":
+        !strcmp(option,"boss_balance")?"off":
+        !strcmp(option,"boss_cooldowns")?"shared":
+        !strcmp(option,"subtank_energy")?"shared":NULL;
     CHECK(value && capacity>strlen(value));
     strcpy(out,value);++option_reads;return 1;
 }
@@ -84,6 +88,7 @@ static void allocated(void) {
     CHECK(option_reads==before+1&&hud_x==0&&hud_y==P2_HUD_Y);
     Mmx6SessionResources r=mmx6_test_session_resources();
     CHECK(!failed&&!ready&&!enrolled&&r.guest_used==ASSET_SPACE+0x2000+2*MMX6_JUMP_AUDIO_HEADER_BYTES);
+    CHECK(!boss_balance_enabled&&!boss_balance_independent&&!separate_subtanks);
     CHECK(r.dma_used==FRAME_ARENA*2+0x10000+MENU_STORAGE_BYTES&&r.packet_arenas==2);
     CHECK(r.function_replacements>20&&r.function_replacements<=64);
     CHECK(guest_allocations==4&&assets&&diagnostic&&packets&&hud_packets&&menu_memory);

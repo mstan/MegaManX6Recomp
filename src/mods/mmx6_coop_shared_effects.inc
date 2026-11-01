@@ -1,5 +1,8 @@
 /* Original shared pool80091298..80093C98, allocator8002C398 and deferred
- * dispatch80020430 (return80020438). Dash follow uses type1; Giga uses17/26.
+ * dispatch80020430 (return80020438). Dash follow uses type1; X muzzle uses2;
+ * Giga uses17/26. Original49854 waits for the muzzle's animation command,
+ * allocates the real shot in the resident pool and increments PLAYER+98.
+ * Its shared-pool lifetime must therefore retain the allocating player too.
  * Type26's selected801EE254 is a Zero entry but an unrelated X continuation.
  * Preserve the native selector, loop, order and shared palette/packet state;
  * run the selected callback in its allocating player's actual context. */
@@ -67,6 +70,7 @@ static int shared_effect_callback(CPUState *cpu,uint32_t address) {
     /* Original80049100 reads canonical PLAYER for both birth and follow.
      * A Zero-owned dash must not initialize or chase the stationary primary. */
     if(!((address==0x80049100u && type==1) ||
+         (address==0x80049478u && type==2) ||
          (address==0x8004AE1Cu && type==17) || (address==0x801EE254u && type==26)))return 0;
     uint32_t table=psx_mod_read_word(SCRATCH+0x88);
     if(table<0x80010000u || table>0x801FFF00u || (table&3u) ||

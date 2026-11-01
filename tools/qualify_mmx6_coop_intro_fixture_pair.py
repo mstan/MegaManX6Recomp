@@ -25,7 +25,7 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protec
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
     options = [o for o in catalog.get('option', []) if o.get('id') == 'lab_checkpoint']
-    known_options = {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'heatnix_cp7', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1'}
+    known_options = {'off', intro.OPTION, 'intro_subtank_cp2', 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'heatnix_cp7', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1'}
     actual_options = {c['value'] for c in options[0].get('choice', [])} if len(options) == 1 else set()
     if (len(options) != 1 or options[0].get('default') != 'off' or options[0].get('feature') != 'prototype'
             or actual_options not in (known_options, known_options | {'heatnix_cp0'})
@@ -62,6 +62,23 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protec
     path.write_bytes(text.replace(anchor, anchor+values).encode('utf-8'))
     return dict(option=option, contact_protection=contact_protection, starting_hp=list(starting_hp), earned_weapons=earned_weapons, state_sha256=preparation.sha256(path),
         catalog_sha256=preparation.sha256(directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'))
+
+
+def select_subtank_policy(directory, *, enabled, selector=select_checkpoint):
+    selected = selector(directory, enabled=enabled, option='intro_subtank_cp2',
+        contact_protection='on', starting_hp=('13','11'), earned_weapons='off')
+    path = Path(directory)/'mods/state.toml'; text = path.read_text(encoding='utf-8')
+    anchor = 'lab_checkpoint = "intro_subtank_cp2"\n'
+    if text.count(anchor)!=1 or 'subtank_energy =' in text:
+        raise ValueError('Unexpected fresh Sub Tank prerequisite preferences')
+    updated = text.replace(anchor,anchor+'subtank_energy = "independent"\n')
+    parsed = tomllib.loads(updated)
+    features = [f for f in parsed.get('feature',[]) if f.get('package_id')=='mmx6.local-coop' and f.get('id')=='prototype']
+    if len(features)!=1 or features[0].get('values',{}).get('subtank_energy')!='independent':
+        raise ValueError('Sub Tank policy escaped prototype values')
+    path.write_text(updated,encoding='utf-8')
+    selected.update(subtank_energy='independent',state_sha256=preparation.sha256(path))
+    return selected
 
 
 def blank_card():
@@ -133,10 +150,12 @@ def run(args):
                 leader=args.intro_leader, success=SUCCESS, scenario=args.door_policy_scenario)
             report['checks']['jump_audio_both_peers_completed'] = True
             return case
-        exercise = (intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
+        exercise = (intro.exercise_scene_owner_fatal if getattr(args, 'scene_owner_fatal', None)
+            else intro.exercise_subtank_policy if getattr(args, 'subtank_policy', False)
+            else intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
             else intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
             else intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise)
-        case = exercise(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
+        case = exercise(dict(ctx, scene_owner_fatal=getattr(args, 'scene_owner_fatal', None), scene_owner_state_tail=getattr(args, 'scene_owner_state_tail', False), set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
             output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=SUCCESS)
         report['checks']['jump_audio_both_peers_completed'] = True
@@ -201,10 +220,12 @@ def run_local(args):
         if getattr(args, 'door_policy_scenario', None):
             return intro.exercise_door_policy(ctx, output=output/'intro-admission', original_exe=args.original_exe,
                 leader=args.intro_leader, success=failed_trace.ammo.SUCCESS, scenario=args.door_policy_scenario)
-        exercise = (intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
+        exercise = (intro.exercise_scene_owner_fatal if getattr(args, 'scene_owner_fatal', None)
+            else intro.exercise_subtank_policy if getattr(args, 'subtank_policy', False)
+            else intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
             else intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
             else intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise)
-        return exercise(ctx, output=output/'intro-admission', original_exe=args.original_exe,
+        return exercise(dict(ctx, scene_owner_fatal=getattr(args, 'scene_owner_fatal', None), scene_owner_state_tail=getattr(args, 'scene_owner_state_tail', False)), output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=failed_trace.ammo.SUCCESS)
 
     args.layout = 'stacked'; args.port = args.host_port
@@ -255,7 +276,7 @@ def select_door_policy(directory, *, enabled, scenario, selector=select_checkpoi
         contact_protection='on', starting_hp=('off', 'off'), earned_weapons='off')
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-    for key, choices, default in (('doors', {'either', 'both'}, 'either'), ('lab_fatal', {'off', 'p1', 'p2'}, 'off')):
+    for key, choices, default in (('doors', {'either', 'both'}, 'either'), ('lab_fatal', {'off', 'p1', 'p2', 'scene_before_release', 'scene_during_arrival'}, 'off')):
         options = [o for o in catalog.get('option', []) if o.get('id') == key]
         if (len(options) != 1 or options[0].get('feature') != 'prototype' or options[0].get('type') != 'choice'
                 or options[0].get('default') != default or {c['value'] for c in options[0].get('choice', [])} != choices):
@@ -282,7 +303,7 @@ def select_refight_policy(directory, *, enabled, scenario, selector=select_check
         contact_protection='on', starting_hp=('off', 'off'), earned_weapons='off')
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-    for key, choices, default in (('doors', {'either', 'both'}, 'either'), ('lab_fatal', {'off', 'p1', 'p2'}, 'off')):
+    for key, choices, default in (('doors', {'either', 'both'}, 'either'), ('lab_fatal', {'off', 'p1', 'p2', 'scene_before_release', 'scene_during_arrival'}, 'off')):
         options = [o for o in catalog.get('option', []) if o.get('id') == key]
         if (len(options) != 1 or options[0].get('feature') != 'prototype' or options[0].get('type') != 'choice'
                 or options[0].get('default') != default or {c['value'] for c in options[0].get('choice', [])} != choices):
@@ -305,7 +326,7 @@ def select_weather_survivor(directory, *, enabled, selector=select_checkpoint):
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
     fatal = [o for o in catalog.get('option', []) if o.get('id') == 'lab_fatal']
     if (len(fatal) != 1 or fatal[0].get('feature') != 'prototype' or fatal[0].get('type') != 'choice'
-            or fatal[0].get('default') != 'off' or {c['value'] for c in fatal[0].get('choice', [])} != {'off', 'p1', 'p2'}):
+            or fatal[0].get('default') != 'off' or {c['value'] for c in fatal[0].get('choice', [])} != {'off', 'p1', 'p2', 'scene_before_release', 'scene_during_arrival'}):
         raise ValueError('Missing exact agreed native fatal option')
     values = dict(local_cameras='split', cameras='independent', lab_fatal='p1')
     path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8'); anchor = 'lab_earned_weapons = "off"\n'
@@ -331,10 +352,31 @@ def main():
     parser.add_argument('--refight-policy-scenario', choices=('living', 'absent', 'fallen'),
                         help='F123 original portal wait/abort/admission, including agreed P1 fatal exclusion')
     parser.add_argument('--weather-survivor', action='store_true', help='F113 original rain before/after agreed P1 native fatal')
+    parser.add_argument('--subtank-policy', action='store_true', help='F180 native owner heals after agreed private Sub Tank supplies cross original CP2')
+    parser.add_argument('--scene-owner-fatal', choices=('before_release','during_arrival'), help='F4/F103 original scene-owner death and native passenger recovery')
+    parser.add_argument('--scene-owner-state-tail', action='store_true', help='Only missing LOCAL current-build scene survivor state/control tail; prior same-image components are reviewed separately')
     args = parser.parse_args(); args.jump_audio_smoke = True
     parent.validate_options(parser, args)
-    if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, bool(args.door_policy_scenario), bool(args.refight_policy_scenario), args.weather_survivor)) > 1:
+    if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, bool(args.door_policy_scenario), bool(args.refight_policy_scenario), args.weather_survivor, args.subtank_policy, bool(args.scene_owner_fatal))) > 1:
         parser.error('Select one named native scenario')
+    if args.scene_owner_state_tail and (not args.local or args.scene_owner_fatal!='before_release'):
+        parser.error('Scene state tail requires LOCAL before_release')
+    if args.scene_owner_fatal:
+        original_select = select_checkpoint
+        def select_scene(directory, *, enabled):
+            selected=original_select(directory,enabled=enabled,option='intro_cp2')
+            path=Path(directory)/'mods/state.toml';text=path.read_text(encoding='utf8')
+            choice='scene_'+args.scene_owner_fatal
+            text=text.replace('lab_checkpoint = "intro_cp2"\n','lab_checkpoint = "intro_cp2"\nlab_fatal = "'+choice+'"\n')
+            state=tomllib.loads(text)
+            features=[f for f in state['feature'] if f.get('id')=='prototype' and f.get('package_id')=='mmx6.local-coop']
+            if len(features)!=1 or features[0].get('values',{}).get('lab_fatal')!=choice:
+                raise ValueError('Scene fatal prerequisite escaped prototype preferences')
+            path.write_text(text,encoding='utf8',newline='\n')
+            selected.update(lab_fatal=choice,state_sha256=preparation.sha256(path));return selected
+        globals()['select_checkpoint']=select_scene
+    if args.subtank_policy:
+        globals()['select_checkpoint'] = select_subtank_policy
     if args.midboss_forward:
         globals()['select_checkpoint'] = select_midboss
     if args.weather_survivor:

@@ -253,9 +253,10 @@ static int mmx6_native_attack_scene(void) {
 static void mmx6_widescreen_activate(void) {
     char aspect[16], camera[16];
     ui_packet_pending = supplemental_scan = 0;
+    resize_state = 0;
     if (!mmx6_adaptive_background_activate()) return;
     gpu_ws_set_native_scene_predicate(mmx6_native_attack_scene);
-    if (!resize_state) resize_state = psx_mod_alloc_guest_memory(8u, 4u);
+    resize_state = psx_mod_alloc_guest_memory(8u, 4u);
     if (resize_state)
         (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80029d18u, mmx6_resize_placement_scan);
     (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x80029e7cu, mmx6_extra_placement_filter);
