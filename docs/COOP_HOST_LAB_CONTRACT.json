@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; authored session-resource lifetime fix requires fresh F39 LOCAL/NET qualification; inherited unrelated gaps remain unqualified",
+  "status": "development-candidate-only; existing native Magma CP0 selector restored for F166/F187 same-candidate LOCAL/NET qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 58,
+  "revision": 59,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v75",
+    "title_compatibility": "mmx6-x-zero-delay-v76",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -867,5 +867,11 @@
     "observed_failure": "C126 built0; samePID LOCALrestart doubledDMA/packetregistrations, +537600snapshotbytes eachactivation and subsequent524288assetallocation overflowed1MiB guestspace, losingP2.",
     "snapshot_schema": 20,
     "qualification": "Actual samePID LOCAL normalrestart, freshcounterpart menu/controls and bounded resource reinitialization plus current-build warmstate; matched exactcandidate NET lifecycle where supported, actualprofilebefore0/resolvedcoremodCRC/cards/ownedcleanup. No oldV90NET crosscandidateaggregate."
+  },
+  "title_changes_v76": {
+    "scope": "Restore exact existing C118 QA heatnix_cp0 selector only: option19/native checkpoint index13/nonce0x4C484E30. Both-door and forward-checkpoint gameplay is unchanged and already inherited.",
+    "source_commit": "5ae5d36b3ee271c7ce706a3df894eafd793f27bd",
+    "snapshot_schema": 20,
+    "qualification": "One compatibility-prerequisite-resolved currentcandidate LOCAL+NET native midboss defeat, independent realBothfootdoorcrossing F166 andguestforwardCP0to1 F187; no C118state/credit transfer, no bossdead/resultwrites. Existing contact protection/earned weapons/starting checkpoint are declared setup bypasses."
   }
 }
