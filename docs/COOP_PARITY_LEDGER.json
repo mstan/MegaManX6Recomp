@@ -13127,14 +13127,14 @@
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -13174,9 +13174,117 @@
             "bypasses": [
               "Agreed native CP1 initializer, declared position/placement bypass and prelaunch startingHP1; no fatal/lifecycle/door-result write."
             ]
+          },
+          {
+            "candidate": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+            "build_identity": {
+              "source_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "exe_sha256": "f752fa4cf5acffa44bbe424a165880e87071ed609390dc3813aea18960625b2a",
+              "declared_manifest_sha256": "467ccfecd3e2fe0fc41f96692910bf933583d27da9a98f9e83b6c06d5360f0b8",
+              "title": 81,
+              "profile": 64,
+              "snapshot": 22,
+              "game_change_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "observer_source_commit": "a4e56bd73c770e58e3c7f12ff78cba6aa78033e8"
+            },
+            "settings": {
+              "roster": "Canonical X/P1 and Zero/P2",
+              "policy": "Selected Both hatch admission; no default Either matrix claim",
+              "fixture": "Agreed intro_before_doors, contactprotectionon, HPoff/earnedoff, predeclared lab_fatal=p1",
+              "input": "Original NewGame/arrival; P2L3+R3 checkpoint then separate nativefatal chord; native guest Right and original hatch/script updates",
+              "audio": "Hidden SDLdummy, actual composed GL frames"
+            },
+            "action": "After original CP1 preparation, request only P1 native fatalHP80. Wait real DYING/FALLEN before guest leads first authored hatch; observe native opening/traversal/closing and persistent closed-solid state2/phase0, original box80078DC8 bytes00001020 and full guest box beyond aperture.",
+            "limits": [
+              "One original intro subtype2 hatch at5744/384, sourceFA2A4. Closing source50EA0/50F58 then510C4 original31DA8 collision and50DFC drawing identifies state2 as persistent closed solid, not retirement.",
+              "F57 qualifies closure after primary death, not F183 independent living held occupancy, defaultEither, everygate, followingNPC/story staging, scenery/palette or ordinary recording/replay.",
+              "Actual closed-state composed frames were reviewed; hatch is mostly beyond the left native camera edge. RAM/source establish closing and solid state; no full closed-door art-quality claim.",
+              "NET1 already closed on both peers but later failed an unrelated following-NPC camera assertion and lacked final CRC. Its raw failed label remains unchanged; F57-only endpoint now returns at native closure before that distinct story sequence."
+            ],
+            "bypasses": [
+              "Agreed CP1/predoor placement bypasses preceding traversal. Declared P1 fatal requestsHP80 only; original death/lifecycle, hatch admission/closure, CP2 marker and lives are never assigned.",
+              "Fixture taint and ordinary recording/replay refusal remain explicit."
+            ],
+            "mode": "local",
+            "result": "passed",
+            "outcome": "P1 native fatal request armed41/consumed42, DYING43/FALLEN50 before guest traversal; X remainsHP0 at5692/395. Native Zero crosses full box, original hatch finishes closing to allocatedtype8/subtype2/state2phase0 with actual solid box atrow269. Zero5824.546875/394 returns nativeidle2/HP32, lives2 and originalCP2 retained. All4parent/6case checks, source/image binding, unchangedcards and nativeexit0. Rootreviewed before/traversal/closed composedframes.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F57-c132-primary-fallen-local-1/qualification.json",
+                "sha256": "35652e52a5b8fd0b9e2e143629f1cfa58a16192dc73d2fb86912e91bfa951b75"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-native-scene-fatal-v132/F57-local-capacity.json",
+                "sha256": "1b5e16552702f8bc301db372d9663892e133303e8955c86394ac29cb0d84a404"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F183-native-hatch-held-occupancy-feasibility-v82-worker-v1.txt",
+                "sha256": "3a720ebc34cece577cec92a448f458e9feeef1e58a204b0800bd7e2526514b68"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F57-c132-primary-fallen-local-1/ammo-hud/intro-admission/peer-0-first-hatch-native-closed-solid-primary-fallen.png",
+                "sha256": "1c6e40a66abd654dc322788a86d140dafe63bab527b21b6270d39e6b9f5a0cf0"
+              }
+            ]
+          },
+          {
+            "candidate": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+            "build_identity": {
+              "source_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "exe_sha256": "f752fa4cf5acffa44bbe424a165880e87071ed609390dc3813aea18960625b2a",
+              "declared_manifest_sha256": "467ccfecd3e2fe0fc41f96692910bf933583d27da9a98f9e83b6c06d5360f0b8",
+              "title": 81,
+              "profile": 64,
+              "snapshot": 22,
+              "game_change_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "observer_source_commit": "a4e56bd73c770e58e3c7f12ff78cba6aa78033e8"
+            },
+            "settings": {
+              "roster": "Canonical X/P1 and Zero/P2",
+              "policy": "Selected Both hatch admission; no default Either matrix claim",
+              "fixture": "Agreed intro_before_doors, contactprotectionon, HPoff/earnedoff, predeclared lab_fatal=p1",
+              "input": "Original NewGame/arrival; P2L3+R3 checkpoint then separate nativefatal chord; native guest Right and original hatch/script updates",
+              "audio": "Hidden SDLdummy, actual composed GL frames"
+            },
+            "action": "After original CP1 preparation, request only P1 native fatalHP80. Wait real DYING/FALLEN before guest leads first authored hatch; observe native opening/traversal/closing and persistent closed-solid state2/phase0, original box80078DC8 bytes00001020 and full guest box beyond aperture.",
+            "limits": [
+              "One original intro subtype2 hatch at5744/384, sourceFA2A4. Closing source50EA0/50F58 then510C4 original31DA8 collision and50DFC drawing identifies state2 as persistent closed solid, not retirement.",
+              "F57 qualifies closure after primary death, not F183 independent living held occupancy, defaultEither, everygate, followingNPC/story staging, scenery/palette or ordinary recording/replay.",
+              "Actual closed-state composed frames were reviewed; hatch is mostly beyond the left native camera edge. RAM/source establish closing and solid state; no full closed-door art-quality claim.",
+              "NET1 already closed on both peers but later failed an unrelated following-NPC camera assertion and lacked final CRC. Its raw failed label remains unchanged; F57-only endpoint now returns at native closure before that distinct story sequence."
+            ],
+            "bypasses": [
+              "Agreed CP1/predoor placement bypasses preceding traversal. Declared P1 fatal requestsHP80 only; original death/lifecycle, hatch admission/closure, CP2 marker and lives are never assigned.",
+              "Fixture taint and ordinary recording/replay refusal remain explicit."
+            ],
+            "mode": "netplay",
+            "result": "passed",
+            "outcome": "Both peers observe P1 consumed31/DYING32/FALLEN36 before guest crossing. Finalrow63 keeps XHP0/FALLEN and Zero32HP at5824.546875 beyond full hatch aperture, lives2/CP2 retained; original actor remains allocated/state2phase0/solidbox. All15parent/5case gates pass. Four resolved CRC windows29 matching core/mod samples; final7 at4416..4608 resolved4640/4639 after endpoint. Profile64 fixed beforeframe0 selected0cd0ae31..., cardsunchanged/nativeexits0/0. Subsequent nativeNPC dialogue owner2/action20 legitimately remains in progress and is outsideF57; no fresh postclosure control claim.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F57-c132-primary-fallen-net-2/qualification.json",
+                "sha256": "a496cfc89b91d5887ef693ae5e602bbb1f7a96e0da371f17bed457a1e4ace1df"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F57-c132-primary-fallen-net-1/qualification.json",
+                "sha256": "8c1ea835f322b33ff7c174f397d7bcd1217bd145a1c1568d481c05032cd09d4d"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-native-scene-fatal-v132/F57-net2-capacity.json",
+                "sha256": "cdf6f033b4cb3a8adac1bcc46fc75ada45714b33d01e9d6cdf95e9850d97f07c"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F57-c132-primary-fallen-net-2/intro-admission/peer-0-first-hatch-native-closed-solid-primary-fallen.png",
+                "sha256": "74d47bf0613178fd86a0cf28d3c798e2e19f00d6d9da65dc2e3189d3727099d4"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F57-c132-primary-fallen-net-2/intro-admission/peer-1-first-hatch-native-closed-solid-primary-fallen.png",
+                "sha256": "7471883c140d008657bb723214ebf53cd1901d9baa6b7c8c6e9383351591185c"
+              }
+            ]
           }
         ],
-        "limitations": "No genuine death or gate outcome. Source/live32HP solid explains approach stop; corrected v7 three Square offers produced no HP drop or retirement. Projectile births not proven; route parked. Full LOCAL/NET contract unverified."
+        "limitations": "Passed exact C132 LOCAL+NET bounded primaryFALLEN/guest-led native hatch closure: original first hatch completes closing and persists as original solid while corpse remains excluded, guest fullbox clears, lives2/CP2 retained. FinalNETresolvedCRC/profile/cards/exits pass. Preserve old32HPsolid setup failures and NET1 unrelatedNPCcamera failure; no F183heldoccupancy, wholeart/defaultEither/story/campaign claim. No F57gamefix/rebuild was needed."
       }
     },
     {
