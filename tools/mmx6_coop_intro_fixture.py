@@ -511,6 +511,10 @@ def exercise_midboss_forward(ctx, *, output, original_exe, leader, success):
                 need(all(healthy(p) for p in row['peers']),'Combat lost a living actor')
                 weak=[a for a in row['peers'][0]['snake'] if a['subtype']<4 and a['active'] and a['visible'] and a['hp']>0]
                 if not weak:
+                    if any(a['subtype']<4 and a['active'] and a['hp']>0
+                            for p in row['peers'] for a in p['snake']):
+                        updates('live weakpoint temporarily hidden; retain combat',12)
+                        continue
                     row=wait('original Snake death/retirement',defeated,45);break
                 x=row['peers'][0]['observation']['players'][1]['x_raw']/65536
                 target=min(weak,key=lambda a:abs(a['x']-x));direction=0x20 if target['x']>=x else 0x80
