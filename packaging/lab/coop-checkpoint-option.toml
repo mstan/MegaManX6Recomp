@@ -403,3 +403,24 @@ label = "Off"
 [[option.choice]]
 value = "all"
 label = "All earned weapons (prerequisite only)"
+
+[[option]]
+feature = "prototype"
+id = "lab_fatal"
+label = "Lab native fatal request"
+description = "After the agreed checkpoint completes and both heroes are idle, release the checkpoint chord, then press Player 2 L3 + R3 again once. Request native fatal HP for the chosen seat only; original death, lifecycle, doors, lives and retry remain native. Both peers must agree before launch; ordinary recording qualification is refused."
+group = "Lab validation"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off"
+
+[[option.choice]]
+value = "p1"
+label = "Player 1 native fatal request"
+
+[[option.choice]]
+value = "p2"
+label = "Player 2 native fatal request"

@@ -48,6 +48,7 @@ typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint3
 static Mmx6CheckpointPending checkpoint_pending;
 static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previous;
 static unsigned checkpoint_contact_protection_option;
+enum { CHECKPOINT_FATAL_RELEASE, CHECKPOINT_FATAL_ARMED, CHECKPOINT_FATAL_CONSUMED };
 /* Starting-HP storage is declared before diagnostics in the plugin. */
 static unsigned checkpoint_earned_weapons_option,checkpoint_earned_weapons_applied,checkpoint_earned_weapons_reason;
 
@@ -190,6 +191,7 @@ static void checkpoint_reset(void) {
     memset(&checkpoint_pending,0,sizeof checkpoint_pending);
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
     checkpoint_contact_protection_option=0;
+    checkpoint_fatal_option=checkpoint_fatal_state=0;
     checkpoint_starting_hp[0]=checkpoint_starting_hp[1]=checkpoint_starting_hp_applied=0;
     checkpoint_earned_weapons_option=checkpoint_earned_weapons_applied=checkpoint_earned_weapons_reason=0;
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
@@ -220,6 +222,12 @@ static void checkpoint_reset(void) {
         if(!strcmp(option,"all"))checkpoint_earned_weapons_option=1;
         else if(strcmp(option,"off"))failed=1;
     }
+    if(psx_mod_option_value("mmx6.local-coop","prototype","lab_fatal",option,sizeof option)) {
+        if(!strcmp(option,"p1"))checkpoint_fatal_option=1;
+        else if(!strcmp(option,"p2"))checkpoint_fatal_option=2;
+        else if(strcmp(option,"off"))failed=1;
+    }
+    if(checkpoint_fatal_option && !checkpoint_lab_option)failed=1;
     if(checkpoint_earned_weapons_option && !checkpoint_lab_option)failed=1;
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {
         if(!strcmp(option,"on"))checkpoint_contact_protection_option=1;
@@ -242,11 +250,33 @@ static void checkpoint_reset(void) {
        (checkpoint_starting_hp[0] || checkpoint_starting_hp[1] || checkpoint_earned_weapons_option))failed=1;
 #endif
     if(diagnostic) {
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+        psx_mod_write_byte(diagnostic+0xC8,(uint8_t)checkpoint_fatal_option);
+#endif
         if(psx_mod_read_byte(diagnostic+0x50)==8)psx_mod_write_byte(diagnostic+0x50,0);
         for(unsigned i=0xA0;i<0xC4;++i)psx_mod_write_byte(diagnostic+i,0);
         for(unsigned i=0xC4;i<0xC8;++i)psx_mod_write_byte(diagnostic+i,0);
         psx_mod_write_word(diagnostic+0xA0,CHECKPOINT_CAPABILITY);
     }
+}
+static int checkpoint_lab_completed(void) {
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+    if(checkpoint_pending.phase || checkpoint_lab_state!=CHECKPOINT_LAB_CONSUMED ||
+       !diagnostic || !checkpoint_lab_authorized())return 0;
+    const Mmx6Checkpoint *entry=&checkpoint_inventory[checkpoint_lab_index()];
+    return psx_mod_read_byte(PLAY+12)==entry->stage && psx_mod_read_byte(PLAY+13)==entry->section &&
+        psx_mod_read_byte(PLAY+0x1D)==entry->checkpoint &&
+        psx_mod_read_word(diagnostic+0xA0)==CHECKPOINT_CAPABILITY && psx_mod_read_word(diagnostic+0xA4)==1 &&
+        psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && !psx_mod_read_byte(diagnostic+0xA9) &&
+        psx_mod_read_byte(diagnostic+0xAA)==entry->stage && psx_mod_read_byte(diagnostic+0xAB)==entry->section &&
+        psx_mod_read_byte(diagnostic+0xAC)==entry->checkpoint &&
+        psx_mod_read_word(diagnostic+0xB0)==checkpoint_lab_nonce() && psx_mod_read_word(diagnostic+0xB4)==1 &&
+        psx_mod_read_word(diagnostic+0xB8)==entry->record && psx_mod_read_byte(diagnostic+0xBC)==1 &&
+        psx_mod_read_byte(diagnostic+0xBD)==CHECKPOINT_AGREED &&
+        psx_mod_read_byte(diagnostic+0xBE)==CHECKPOINT_LAB_CONSUMED;
+#else
+    return 0;
+#endif
 }
 /* Derived authorization only: no new latch, guest body write or live setting
  * switch. Keep P1 covered when P2 voluntarily leaves/joins; a real fall still
@@ -744,9 +774,36 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
     return checkpoint_request(psx_mod_read_byte(diagnostic+0x51),psx_mod_read_byte(diagnostic+0x52),
         psx_mod_read_byte(diagnostic+0x53),psx_mod_read_word(diagnostic+0x54),CHECKPOINT_OFFLINE);
 }
+static int checkpoint_fatal_idle(unsigned seat) {
+    uint8_t body[sizeof p2.body];
+    if(seat)memcpy(body,p2.body,sizeof body);else capture(PLAYER,body,sizeof body);
+    const unsigned locks[]={0x7A,0x8E,0xA4,0xCC,0xCD,0xD0,0xD3,0xD4,0xE0};
+    for(unsigned i=0;i<sizeof locks/sizeof locks[0];++i)if(body[locks[i]])return 0;
+    return body[0] && body[2]<2 && body[4]==1 && body[5]==2 &&
+        !body[0x67] && (body[0x70]&8);
+}
 static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
-    if(!checkpoint_lab_option || checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED)return 0;
+    if(checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED) {
+        if(!checkpoint_fatal_option || !diagnostic || checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED)return 0;
+        if(!checkpoint_lab_completed())checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE;
+        else if(raw!=6)checkpoint_fatal_state=raw?CHECKPOINT_FATAL_RELEASE:CHECKPOINT_FATAL_ARMED;
+        else if(checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED) {
+            checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE; /* Unsafe edges never fire later while held. */
+            if(checkpoint_safe_boundary() && !clear_phase && !join_phase && !arrival_pair &&
+               checkpoint_fatal_idle(0) && checkpoint_fatal_idle(1)) {
+                psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
+                if(checkpoint_fatal_option==1)psx_mod_write_byte(PLAYER+0x5C,0x80);
+                else p2.body[0x5C]=0x80;
+                checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
+            }
+        }
+        /* C8: chosen seat in bits0..1, release/armed/consumed in bits2..3.
+         * Existing checkpoint receipt and original chord latch stay untouched. */
+        psx_mod_write_byte(diagnostic+0xC8,(uint8_t)(checkpoint_fatal_option|(checkpoint_fatal_state<<2)));
+        return 0; /* Original player/world update performs fatal handling. */
+    }
+    if(!checkpoint_lab_option)return 0;
     unsigned chord=raw==0x0006u;
     if(chord && !checkpoint_lab_previous)checkpoint_lab_state=CHECKPOINT_LAB_ARMED;
     checkpoint_lab_previous=chord;

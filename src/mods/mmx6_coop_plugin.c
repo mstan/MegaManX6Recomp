@@ -83,6 +83,7 @@ static uint8_t saved_play[0xE0], saved_camera[0x100];
 /* Only energy is private. Native P1 RAM remains the campaign/card authority;
  * found tanks and the Weapon Tank retain their original shared ownership. */
 static unsigned separate_subtanks,subtank_seeded,subtank_found;
+static unsigned checkpoint_fatal_option,checkpoint_fatal_state;
 static uint8_t zero_subtanks[2];
 static uint8_t *zero_compressed;
 static size_t compressed_size;
@@ -903,7 +904,8 @@ static uint32_t diagnostic_host_digest(void) {
         private_actor.dat_member,private_actor.portrait_index,private_actor.portrait_graphics,private_actor.portrait_palette,
         (uint32_t)pause_owner,(uint32_t)p2_start_previous,
         scene_owner,scene_phase,(uint32_t)scene_y,both_door_actor,both_door_origin,both_door_members,
-        (uint32_t)ready,(uint32_t)enrolled,(uint32_t)failed
+        (uint32_t)ready,(uint32_t)enrolled,(uint32_t)failed,
+        checkpoint_fatal_option,checkpoint_fatal_state
     };
     for (size_t i=0;i<sizeof fields/sizeof fields[0];++i) {
         uint8_t bytes[4]; put32(bytes,fields[i]); HASH_BYTES(bytes,sizeof bytes);

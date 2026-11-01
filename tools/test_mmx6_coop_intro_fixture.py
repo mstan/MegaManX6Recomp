@@ -13,7 +13,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
         normal = tomllib.loads((source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons') for o in normal.get('option', [])))
+        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons', 'lab_fatal') for o in normal.get('option', [])))
         catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
@@ -51,6 +51,14 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='intro_before_doors')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
+
+    def test_native_fatal_is_an_explicit_default_off_lab_choice(self):
+        source=Path(__file__).resolve().parents[1]
+        catalog=tomllib.loads((source/'packaging/lab/coop-checkpoint-option.toml').read_text())
+        options=[o for o in catalog['option'] if o['id']=='lab_fatal']
+        self.assertEqual(len(options),1)
+        self.assertEqual((options[0]['feature'],options[0]['type'],options[0]['default']),('prototype','choice','off'))
+        self.assertEqual([c['value'] for c in options[0]['choice']],['off','p1','p2'])
 
     def test_protection_requires_explicit_typed_prelaunch_choice(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair

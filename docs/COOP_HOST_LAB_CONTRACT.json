@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; existing native Magma CP0 selector restored for F166/F187 same-candidate LOCAL/NET qualification",
+  "status": "development-candidate-only; agreed one-shot native fatal HP request for F61/F123/F113 qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 59,
+  "revision": 60,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v76",
+    "title_compatibility": "mmx6-x-zero-delay-v77",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -873,5 +873,13 @@
     "source_commit": "5ae5d36b3ee271c7ce706a3df894eafd793f27bd",
     "snapshot_schema": 20,
     "qualification": "One compatibility-prerequisite-resolved currentcandidate LOCAL+NET native midboss defeat, independent realBothfootdoorcrossing F166 andguestforwardCP0to1 F187; no C118state/credit transfer, no bossdead/resultwrites. Existing contact protection/earned weapons/starting checkpoint are declared setup bypasses."
+  },
+  "title_changes_v77": {
+    "scope": "Development-only negotiated lab_fatal off(default)/p1/p2 after an existing agreed checkpoint completes. A separate neutral release followed by one ordinary exact P2 L3+R3 edge requests selected native body HP5C=0x80 only.",
+    "guards": "Exact existing profile/qualification and completed checkpoint receipt, both native living/idle/grounded bodies, original shared and personal locks clear. Unsafe edges require a new release. No lifecycle, scene, checkpoint, door, lives or progression result writes.",
+    "state": "Snapshot21 fixes chosen-seat option identity and serializes/digests release/armed/consumed latch. Original checkpoint receipt and chord latch unchanged; C8 diagnostic bits0..1 chosen seat, bits2..3 latch. Taint uses existing GAME_MAILBOX provenance.",
+    "native_basis": "Existing offline diagnostic command1 writes only private body5C fatal sentinel; original800282F0 pit_death requests the same80h. Native update must earn actual death/cleanup and survivor behavior.",
+    "snapshot_schema": 21,
+    "qualification": "F61/F123 actual FALLEN exclusion and F113 both-alive then primary native fatal/weather, same candidate LOCAL+NET with actual profile, resolved core/mod CRC, native controls/cards/owned exits. No source/unit-only admission."
   }
 }

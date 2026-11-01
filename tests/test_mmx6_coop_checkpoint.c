@@ -98,15 +98,17 @@ static const char *test_lab_option="off";
 static const char *test_lab_contact_option="off";
 static const char *test_lab_hp_option[2]={"off","off"};
 static const char *test_lab_earned_option="off";
+static const char *test_lab_fatal_option="off";
 static unsigned test_lab_ready=1,test_lab_failed,test_lab_selected=1;
 static PSXHostSelection test_lab_profile;
 int psx_mod_option_value(const char *package,const char *feature,const char *option,char *out,uint32_t size) {
     CHECK(!strcmp(package,"mmx6.local-coop") && !strcmp(feature,"prototype"));
     CHECK(!strcmp(option,"lab_checkpoint") || !strcmp(option,"lab_contact_protection") || !strcmp(option,"lab_earned_weapons") ||
-        !strcmp(option,"lab_starting_hp_p1") || !strcmp(option,"lab_starting_hp_p2"));
+        !strcmp(option,"lab_starting_hp_p1") || !strcmp(option,"lab_starting_hp_p2") || !strcmp(option,"lab_fatal"));
     const char *value=!strcmp(option,"lab_checkpoint")?test_lab_option:
         !strcmp(option,"lab_contact_protection")?test_lab_contact_option:
         !strcmp(option,"lab_earned_weapons")?test_lab_earned_option:
+        !strcmp(option,"lab_fatal")?test_lab_fatal_option:
         test_lab_hp_option[!strcmp(option,"lab_starting_hp_p2")];
     CHECK(size>strlen(value));strcpy(out,value);return 1;
 }
@@ -177,6 +179,57 @@ static void starting_hp_pending(CPUState *cpu,int online) {
     for(unsigned i=0x5C;i<=0x5E;++i)psx_mod_write_byte(PLAYER+i,32);
     psx_mod_write_byte(PLAYER+0x70,8);psx_mod_write_word(PLAYER+0x68,0x80073D50u);
     psx_mod_write_byte(PLAY+0x5B,32);psx_mod_write_byte(PLAY+0x5C,32);
+}
+static void fatal_ready(CPUState *cpu,int online,unsigned seat) {
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    test_lab_earned_option=test_lab_contact_option="off";
+    clear_phase=clear_members=clear_started=0;
+    test_lab_fatal_option=seat?"p2":"p1";
+    starting_hp_pending(cpu,online);checkpoint_complete(cpu);
+    CHECK(checkpoint_lab_completed() && !checkpoint_pending.phase && !checkpoint_fatal_state);
+}
+static void agreed_native_fatal(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(unsigned seat=0;seat<2;++seat) {
+        fatal_ready(cpu,online,seat);
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state); /* Held first chord is not a new edge. */
+        CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext expected=p2;
+        Mmx6CoopLifecycle expected_life=life;uint8_t receipt[sizeof test_diagnostic];
+        memcpy(receipt,test_diagnostic,sizeof receipt);
+        if(seat)expected.body[0x5C]=0x80;else before_ram[(PLAYER+0x5C)&0x1FFFFF]=0x80;
+        receipt[0xC8]=(uint8_t)((seat+1)|(CHECKPOINT_FATAL_CONSUMED<<2));
+        unsigned calls=guest_calls;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&expected,&p2,sizeof p2));
+        CHECK(!memcmp(&expected_life,&life,sizeof life) && !memcmp(receipt,test_diagnostic,sizeof receipt));
+        CHECK(guest_calls==calls && checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        if(seat)p2.body[0x5C]=7;else psx_mod_write_byte(PLAYER+0x5C,7);
+        for(unsigned edge=0;edge<4;++edge)CHECK(!checkpoint_lab_boundary(cpu,edge&1?6:0));
+        CHECK((seat?p2.body[0x5C]:psx_mod_read_byte(PLAYER+0x5C))==7);
+    }
+    for(unsigned bad=0;bad<10;++bad) {
+        fatal_ready(cpu,1,0);CHECK(!checkpoint_lab_boundary(cpu,0));
+        if(bad==0)pause_owner=0;if(bad==1)scene_owner=1;if(bad==2)p2.body[5]=3;
+        if(bad==3)p2.body[0xD0]=1;if(bad==4)psx_mod_write_byte(PLAYER+0x70,0);
+        if(bad==5)test_lab_ready=0;if(bad==6)test_lab_failed=1;if(bad==7)test_lab_selected=0;
+        if(bad==8)test_lab_profile.qualification[0]^=1;
+        if(bad==9)psx_mod_write_byte(diagnostic+0xA8,CHECKPOINT_INITIALIZING);
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state);
+        pause_owner=-1;scene_owner=0;p2.body[5]=2;p2.body[0xD0]=0;psx_mod_write_byte(PLAYER+0x70,8);
+        test_lab_ready=test_lab_selected=1;test_lab_failed=0;
+        if(bad==8)test_lab_profile.qualification[0]^=1;
+        psx_mod_write_byte(diagnostic+0xA8,CHECKPOINT_COMPLETE);
+        CHECK(!checkpoint_lab_boundary(cpu,6) && psx_mod_read_byte(PLAYER+0x5C)==32 && p2.body[0x5C]==32);
+        CHECK(!checkpoint_lab_boundary(cpu,0));CHECK(!checkpoint_lab_boundary(cpu,6));
+        CHECK(psx_mod_read_byte(PLAYER+0x5C)==0x80 && p2.body[0x5C]==32);
+    }
+    test_lab_fatal_option="invalid";setup_agreed(cpu,0);CHECK(failed);
+    test_lab_fatal_option="p1";test_lab_option="off";checkpoint_reset();CHECK(failed);
+    test_lab_fatal_option="off";test_lab_option="off";failed=0;checkpoint_reset();
+    CHECK(!checkpoint_fatal_option && !checkpoint_fatal_state);
+    starting_hp_pending(cpu,0);checkpoint_complete(cpu);
+    CHECK(!checkpoint_lab_boundary(cpu,0));CHECK(!checkpoint_lab_boundary(cpu,6));
+    CHECK(psx_mod_read_byte(PLAYER+0x5C)==32 && p2.body[0x5C]==32);
 }
 static void agreed_starting_hp(CPUState *cpu) {
     CHECK(!checkpoint_starting_hp_parse("off") && checkpoint_starting_hp_parse("1")==1 && checkpoint_starting_hp_parse("32")==32);
@@ -1549,7 +1602,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
-    agreed_earned_weapons(&cpu);
+    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }
