@@ -207,7 +207,31 @@ int main(void) {
     CHECK(!memcmp(zero_overlay+OVERLAY_SIZE-4,"\x11\x22\x33\x44",4));
     CHECK(!memcmp(memory(0x80073D54),"\x55\x66\x77\x88",4));
     for(unsigned i=0x1958;i<MMX6_FX_DIAG_HEADER;++i)CHECK(test_diagnostic[i]==0xA5);
-    for(unsigned i=MMX6_BOX_DIAG_END;i<0x2000;++i)CHECK(test_diagnostic[i]==0xA5);
+    /* The declared energy publication occupies exactly six tail bytes.
+     * A projected private actor must still report the saved native supply. */
+    {
+        unsigned old_policy=separate_subtanks,old_seed=subtank_seeded,old_projection=zero_projected;
+        uint8_t old_native[2],old_saved[2],old_private[2];
+        memcpy(old_native,memory(PLAY+0x63),2);memcpy(old_saved,saved_play+0x63,2);
+        memcpy(old_private,zero_subtanks,2);
+        const uint8_t native[2]={17,28},saved[2]={59,70},private[2]={35,46};
+        separate_subtanks=subtank_seeded=1;
+        memcpy(memory(PLAY+0x63),native,2);memcpy(saved_play+0x63,saved,2);
+        memcpy(zero_subtanks,private,2);
+        for(unsigned projected=0;projected<2;++projected) {
+            zero_projected=projected;diagnostics(0xFFFF);
+            const uint8_t expected[6]={1,1,projected?59:17,projected?70:28,35,46};
+            CHECK(!memcmp(test_diagnostic+0x1FF0,expected,sizeof expected));
+            CHECK(!memcmp(memory(PLAY+0x63),native,2) && !memcmp(saved_play+0x63,saved,2));
+            CHECK(!memcmp(zero_subtanks,private,2) && !memcmp(&published,&p2,sizeof p2));
+            CHECK(separate_subtanks==1 && subtank_seeded==1 && zero_projected==projected);
+            for(unsigned i=MMX6_BOX_DIAG_END;i<0x1FF0;++i)CHECK(test_diagnostic[i]==0xA5);
+            for(unsigned i=0x1FF6;i<0x2000;++i)CHECK(test_diagnostic[i]==0xA5);
+        }
+        memcpy(memory(PLAY+0x63),old_native,2);memcpy(saved_play+0x63,old_saved,2);
+        memcpy(zero_subtanks,old_private,2);
+        separate_subtanks=old_policy;subtank_seeded=old_seed;zero_projected=old_projection;
+    }
     /* All bytes, including hidden/unallocated stale native fields, are copied;
      * the observer decides whether they are eligible source-bound evidence. */
     p2.trails[0x50]^=0x80;p2.effects[0x42]^=0x40;
