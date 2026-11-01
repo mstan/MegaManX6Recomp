@@ -1250,7 +1250,9 @@ def exercise_refight_policy(ctx,*,output,original_exe,leader,success,scenario):
     def endpoint(p):
         if scenario=='living':return base.native_idle(p,2)and base.fullfeet(p,source['destination_terrain'])
         o=p['observation'];seat=0 if scenario=='absent'else 1;b=body(p,seat)
-        if not(p['tuple']==[10,0,12,0,2]and o['ready']==o['enrolled']==1 and o['lifecycle']==([0,2]if scenario=='absent'else[5,0])and not any(o[k]for k in('scene_owner','scene_phase','pause_owner'))):return False
+        # native_player_init calls lifecycle_checkpoint at the original CP2
+        # initializer: voluntary absence persists, while a fallen actor respawns.
+        if not(p['tuple']==[10,0,12,0,2]and o['ready']==o['enrolled']==1 and o['lifecycle']==([0,2]if scenario=='absent'else[0,0])and not any(o[k]for k in('scene_owner','scene_phase','pause_owner'))):return False
         x=i32(b,8)>>16;foot=(i32(b,12)>>16)+2+seat+19
         codes=[source['destination_terrain'].query(xx,foot)['code']for xx in range(x-11,x+11)]
         p['survivor_feet']=dict(seat=seat,x=x,foot=foot,codes=codes,native_ground=b[0x70])
@@ -1258,7 +1260,7 @@ def exercise_refight_policy(ctx,*,output,original_exe,leader,success,scenario):
         if scenario=='absent':
             original=body(e['samples'][e['source_ready']]['peers'][p['peer']],1);other=body(p,1)
             return other[4]==3 and other[0x5C]==original[0x5C]and other[0xA8:0xBA]==original[0xA8:0xBA]
-        return body(p,0)[4]==3
+        return body(p,0)[4]==1 and 0<body(p,0)[0x5C]<128
 
     def approach_portal(seat,label):
         def admitted(r):
@@ -1378,7 +1380,7 @@ def exercise_refight_policy(ctx,*,output,original_exe,leader,success,scenario):
             e['checks']=dict(original_CP1_source_and_native_ready=True,actual_native_absent_or_fallen_precondition=True,
                 Both_permits_genuine_sole_living_original_portal_admission=True,actual_original_CP2_initializer=True,
                 native_full48HP_boss_active_and_survivor_released=True,source_full22feet_floor448_and_native_control=len(e['controls'])==1,
-                excluded_partner_remains_absent_or_fallen_every_peer=all(endpoint(p)for p in final['peers']),actual_composed_captures=len(e['captures'])==5*len(clients))
+                original_checkpoint_preserves_absence_or_respawns_fallen_every_peer=all(endpoint(p)for p in final['peers']),actual_composed_captures=len(e['captures'])==5*len(clients))
         need(all(e['checks'].values()),'F123 living native component incomplete')
         if callable(ctx.get('network')):ctx['network']()
         e['status']=success;return e
