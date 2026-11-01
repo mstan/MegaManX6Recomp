@@ -32,6 +32,7 @@ enum { CHECKPOINT_LAB_RECYCLE_NONCE=0x4C435232u }; /* Original Recycle section1 
 enum { CHECKPOINT_LAB_ALTERNATE_NONCE=0x4C414231u }; /* Original alternate20/1 CP1; encounter prerequisites stay native. */
 enum { CHECKPOINT_LAB_SIGMA_NONCE=0x4C534731u }; /* Original SecretLab3 section1 CP1; actual Sigma fight/transition stay native. */
 
+enum { CHECKPOINT_LAB_MAGMA_START_NONCE=0x4C484E30u }; /* Original Magma3/0 CP0, no encounter/result writes. */
 enum { CHECKPOINT_LAB_HEATNIX_NONCE=0x4C484E37u }; /* Original Magma3/0 CP7, no boss/result writes. */
 enum { CHECKPOINT_LAB_TURTLOID_NONCE=0x4C545231u }; /* Original Turtloid6/0 CP1; native rain remains unmodified. */
 enum { CHECKPOINT_LAB_PORTAL_NONCE=0x4C525032u }; /* Original Recycle section0 CP2 plus declared approach. */
@@ -61,7 +62,7 @@ static unsigned checkpoint_lab_index(void) {
     return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
-        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:115;
+        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -80,7 +81,7 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==14?CHECKPOINT_LAB_GATE_ENEMY_NONCE:
         checkpoint_lab_option==15?CHECKPOINT_LAB_REFIGHT_NONCE:
         checkpoint_lab_option==16?CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE:
-        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:0;
+        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -210,6 +211,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"refight_distant_cp1"))checkpoint_lab_option=16;
         else if(!strcmp(option,"heatnix_cp7"))checkpoint_lab_option=17;
         else if(!strcmp(option,"sigma_cp1"))checkpoint_lab_option=18;
+        else if(!strcmp(option,"heatnix_cp0"))checkpoint_lab_option=19;
         else if(!strcmp(option,"turtloid_rain_cp1"))checkpoint_lab_option=8;
         else if(!strcmp(option,"alternate_boss_cp1"))checkpoint_lab_option=9;
         else if(strcmp(option,"off"))failed=1;

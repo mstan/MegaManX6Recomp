@@ -77,6 +77,10 @@ value = "alternate_boss_cp1"
 label = "Alternate area 20 section 1 checkpoint 1 approach"
 
 [[option.choice]]
+value = "heatnix_cp0"
+label = "Magma original checkpoint 0 midboss approach"
+
+[[option.choice]]
 value = "heatnix_cp7"
 label = "Magma original checkpoint 7 boss approach"
 

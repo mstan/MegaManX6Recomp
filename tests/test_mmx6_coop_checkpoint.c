@@ -257,6 +257,18 @@ static void agreed_heatnix_boundary(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();
 }
+static void agreed_magma_start_boundary(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);test_lab_option="heatnix_cp0";checkpoint_reset();
+        CHECK(checkpoint_lab_option==19 && checkpoint_lab_index()==13 && checkpoint_lab_nonce()==0x4C484E30u);
+        CHECK(checkpoint_lab_boundary(cpu,6));CHECK(checkpoint_pending.index==13 && checkpoint_pending.nonce==0x4C484E30u);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(psx_mod_read_byte(PLAY+12)==3 && !psx_mod_read_byte(PLAY+13) && psx_mod_read_byte(PLAY+0x1D)==0);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
+        CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && psx_mod_read_word(diagnostic+0xB8)==0x800722DCu);
+    }
+    test_lab_option="off";checkpoint_reset();
+}
 static void agreed_sigma_boundary(CPUState *cpu) {
     for(int online=0;online<=1;++online) {
         setup_agreed(cpu,online);test_lab_option="sigma_cp1";checkpoint_reset();
@@ -1536,7 +1548,7 @@ int main(int argc,char **argv) {
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
-    agreed_starting_hp(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
+    agreed_starting_hp(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
     agreed_earned_weapons(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
