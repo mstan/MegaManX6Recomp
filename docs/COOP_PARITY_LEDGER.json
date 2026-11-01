@@ -2529,8 +2529,8 @@
               "host_profile": "mmx6.win64-clang22.loopback revision56, selectedSHA b9d131e11ff98c8e6b45f649770abda5b982d33966b53b4833f2ee152317d475",
               "fixtures": "LAB alloff; declared isolated authored availability/inventory cards unchanged"
             },
-            "action": "One same-image NET pair: actual native card Load/story/unit5/arrival; quiet20-native-update recapture and existing raw observations. Stop before menus/attacks when rendered prerequisite remains invalid.",
-            "outcome": "BLOCKED by concrete native rendering defect: both peers retain black X/P2 body rectangle and missing lowerHUDportrait, while Zero/background render. Quiet samples are actually nativeTimers4732/4733, fullHUDfade128, bank_count156/privatepackets7/failed0; terminal nativeTimers12082/12084, both chars[1,0]/forms[5,0], HP32/lifecycle0/scene0. Before-frame0 profile56 verified cycles0/sim_tick0/before-enter-guest1; final resolved sim51136 core17c39a59/modaf94c32a and sim51168 corec13aee25/mod17a49bea match. No R9/F179 NET behavior credit. Both owned inputs cleared, quits acknowledged, native exits[0,0], listeners released, all private cards unchanged; pair857.94seconds within40min.",
+            "action": "One same-image NET pair: actual native card Load/story/unit5/arrival; screenshot CPU-VRAM captures and quiet recapture, then clean exit before menus/attacks. Existing source review identifies the wrong capture surface.",
+            "outcome": "UNVERIFIED: both peers native chars[1,0]/forms[5,0], HP32/lifecycle0/scene0/profile56 and resolved core+modCRC match, but the retained command=screenshot images read CPU VRAM. SDK debug_server handle_screenshot_file calls gl_renderer_sync_cpu then gpu_display_pixel_rgb; gpu_gl_renderer ensure_cpu skips FBO readback when netplay_active/cpu_vram_authoritative. Software texel_fetch uses native VRAM without retained host texture banks, while actual NET display uses a separate GL FBO. Thus black guest-X body/HUD in these CPU readouts does NOT establish an actual presentation defect. Earlier interpretation in commit6db97b5 is superseded by this concrete source fact. No composed present_shot was taken, and no menus/attacks were exercised. Both native exit0/listeners released/cards unchanged. LOCAL remains valid; NET requires actual composed presentation and full native behavior.",
             "artifacts": [
               {
                 "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\control-observations.jsonl",
@@ -2578,17 +2578,17 @@
               }
             ],
             "limits": [
-              "Persistent composed rendering defect on both peers; CRC/native-state agreement does not establish visual correctness.",
-              "No native menu/attack/charge executed, no NET or aggregate admission; LOCAL result on same candidate remains valid.",
-              "Actual NET1 attempt spent; another run requires a relevant implemented game fix and distinguishing endpoint, no observer/source variant or budget reset.",
-              "Source investigation is bounded15min for this concrete LOCAL-vs-NET render defect; no general instrumentation project."
+              "Capture-surface mistake: command=screenshot is CPU/native-VRAM readout in NET; it does not establish actual GL body/HUD/charge art. Preserve all raw images and initial interpretation in history.",
+              "No native menu/attack/charge executed; no NET or aggregate admission. No engine/cache fix is justified by these images.",
+              "Existing coop_debug.capture_present and original paired HUD harness use present_shot/present_shot_seq and completed file generation, returning composed_renderer_output; reuse unchanged for missing NET endpoints.",
+              "LOCAL1 and NET1 retained; only a bounded required NET tail on implemented C125 inverse-game fix is next, with a specific existing-RPC capture correction. No source/build/observer framework variant, budget reset or repeated acceptance components."
             ],
             "bypasses": [
               "Prelaunch authored native availability/inventory/history prerequisites only; no runtime memory/result writes."
             ]
           }
         ],
-        "limitations": "C125 LOCAL both-roster native behavior passed, but same-image NET shows persistent black guest-X body/missing HUD before menus or attacks. Native/pair exited cleanly with CRC/cards intact; a relevant rendering fix is required before retry."
+        "limitations": "C125 LOCAL both rosters passed. NET1 profile/native state/CRC/cards/owned cleanup passed, but CPU screenshot was mistaken for GL presentation; actual composed art and native menus/effects remain unverified. Reuse existing present_shot API on same implemented candidate; preserve raw failures."
       }
     },
     {
@@ -24770,8 +24770,8 @@
               "host_profile": "mmx6.win64-clang22.loopback revision56, selectedSHA b9d131e11ff98c8e6b45f649770abda5b982d33966b53b4833f2ee152317d475",
               "fixtures": "LAB alloff; declared isolated authored availability/inventory cards unchanged"
             },
-            "action": "One same-image NET pair: actual native card Load/story/unit5/arrival; quiet20-native-update recapture and existing raw observations. Stop before menus/attacks when rendered prerequisite remains invalid.",
-            "outcome": "BLOCKED by concrete native rendering defect: both peers retain black X/P2 body rectangle and missing lowerHUDportrait, while Zero/background render. Quiet samples are actually nativeTimers4732/4733, fullHUDfade128, bank_count156/privatepackets7/failed0; terminal nativeTimers12082/12084, both chars[1,0]/forms[5,0], HP32/lifecycle0/scene0. Before-frame0 profile56 verified cycles0/sim_tick0/before-enter-guest1; final resolved sim51136 core17c39a59/modaf94c32a and sim51168 corec13aee25/mod17a49bea match. No R9/F179 NET behavior credit. Both owned inputs cleared, quits acknowledged, native exits[0,0], listeners released, all private cards unchanged; pair857.94seconds within40min.",
+            "action": "One same-image NET pair: actual native card Load/story/unit5/arrival; screenshot CPU-VRAM captures and quiet recapture, then clean exit before menus/attacks. Existing source review identifies the wrong capture surface.",
+            "outcome": "UNVERIFIED: both peers native chars[1,0]/forms[5,0], HP32/lifecycle0/scene0/profile56 and resolved core+modCRC match, but the retained command=screenshot images read CPU VRAM. SDK debug_server handle_screenshot_file calls gl_renderer_sync_cpu then gpu_display_pixel_rgb; gpu_gl_renderer ensure_cpu skips FBO readback when netplay_active/cpu_vram_authoritative. Software texel_fetch uses native VRAM without retained host texture banks, while actual NET display uses a separate GL FBO. Thus black guest-X body/HUD in these CPU readouts does NOT establish an actual presentation defect. Earlier interpretation in commit6db97b5 is superseded by this concrete source fact. No composed present_shot was taken, and no menus/attacks were exercised. Both native exit0/listeners released/cards unchanged. LOCAL remains valid; NET requires actual composed presentation and full native behavior.",
             "artifacts": [
               {
                 "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\control-observations.jsonl",
@@ -24819,17 +24819,17 @@
               }
             ],
             "limits": [
-              "Persistent composed rendering defect on both peers; CRC/native-state agreement does not establish visual correctness.",
-              "No native menu/attack/charge executed, no NET or aggregate admission; LOCAL result on same candidate remains valid.",
-              "Actual NET1 attempt spent; another run requires a relevant implemented game fix and distinguishing endpoint, no observer/source variant or budget reset.",
-              "Source investigation is bounded15min for this concrete LOCAL-vs-NET render defect; no general instrumentation project."
+              "Capture-surface mistake: command=screenshot is CPU/native-VRAM readout in NET; it does not establish actual GL body/HUD/charge art. Preserve all raw images and initial interpretation in history.",
+              "No native menu/attack/charge executed; no NET or aggregate admission. No engine/cache fix is justified by these images.",
+              "Existing coop_debug.capture_present and original paired HUD harness use present_shot/present_shot_seq and completed file generation, returning composed_renderer_output; reuse unchanged for missing NET endpoints.",
+              "LOCAL1 and NET1 retained; only a bounded required NET tail on implemented C125 inverse-game fix is next, with a specific existing-RPC capture correction. No source/build/observer framework variant, budget reset or repeated acceptance components."
             ],
             "bypasses": [
               "Prelaunch authored native availability/inventory/history prerequisites only; no runtime memory/result writes."
             ]
           }
         ],
-        "limitations": "C125 LOCAL both-roster native behavior passed, but same-image NET shows persistent black guest-X body/missing HUD before menus or attacks. Native/pair exited cleanly with CRC/cards intact; a relevant rendering fix is required before retry."
+        "limitations": "C125 LOCAL both rosters passed. NET1 profile/native state/CRC/cards/owned cleanup passed, but CPU screenshot was mistaken for GL presentation; actual composed art and native menus/effects remain unverified. Reuse existing present_shot API on same implemented candidate; preserve raw failures."
       }
     },
     {
