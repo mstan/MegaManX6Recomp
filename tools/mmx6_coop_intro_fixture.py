@@ -38,6 +38,7 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
     """F4/F103: agreed prerequisite, original native death/beam outcomes only."""
     output=Path(output);output.mkdir(parents=True,exist_ok=False)
     clients=ctx['clients'];choice=ctx['scene_owner_fatal'];option=3 if choice=='before_release' else 4
+    state_tail=bool(ctx.get('scene_owner_state_tail'))
     deadline=time.monotonic()+180
     e=dict(kind='native_scene_owner_fatal',choice=choice,status='failed_setup',samples=[],inputs=[],captures=[],
         checks={},snapshot_operations=[],effects=[dict(births=[],retirements=[],ever_visible=[],visible_retired=[]) for _ in clients],
@@ -79,6 +80,13 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
         o=p['observation'];return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,0) and all(a['hp']&127 and a['state']==1 for a in o['players'])
     def recovered(p):
         o=p['observation'];return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,5) and not o['scene_owner'] and not o['scene_phase'] and not o['pause_owner'] and o['players'][0]['state']==1 and o['players'][0]['hp']==32 and o['players'][0]['action']==2 and o['players'][1]['hp']==0
+    def native_fatal(p):
+        o=p['observation']
+        # Source-bound option3 requests HP80 only at phase3 and waits native
+        # DYING before original release. Correct recovery can prime phase4 in
+        # that same pass; asynchronous reads need not retain transient phase3.
+        phases=(3,4,5) if option==3 else (4,)
+        return p['fatal_option']==option and p['fatal_state']==2 and o['scene_owner']==2 and o['scene_phase'] in phases and o['lifecycle'][1] in (4,5) and o['players'][1]['hp']==0
     def capture(label,row):
         for i,c in enumerate(clients):e['captures'].append(dict(peer=i,label=label,row=row['index'],**debug.capture_present(c,output/f'peer-{i}-{label}.png',request=c.request)))
     def updates(label,count=8):
@@ -96,8 +104,13 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
         inp(1,6,'fresh accepted agreed native scene-fatal chord')
         try:wait('original scene lock admitted',lambda r:all(p['observation']['scene_owner']==2 and p['fatal_state']>=3 for p in r['peers']))
         finally:inp(1,0,'release scene-fatal chord')
-        fatal=wait('actual original owner fatal in required native scene phase',lambda r:all(p['observation']['scene_owner']==2 and p['observation']['scene_phase']==(3 if option==3 else 4) and p['observation']['lifecycle'][1] in (4,5) and p['observation']['players'][1]['hp']==0 for p in r['peers']))
-        e['native_fatal']=fatal['index']
+        if not state_tail:
+            fatal=wait('source-bound original owner native fatal after required sequence',lambda r:all(native_fatal(p) for p in r['peers']))
+            e['native_fatal']=fatal['index'];e['native_fatal_observed_phases']=[p['observation']['scene_phase'] for p in fatal['peers']]
+            if any(p['visible_type11_slots'] for p in fatal['peers']):capture('native-fatal-effects',fatal)
+        else:
+            need(len(clients)==1 and option==3,'State tail requires LOCAL before-release selection')
+            e['limits'].append('Only missing current-build state/control tail; root must bind retained same-image LOCAL3 native fatal/effect/recovery components separately.')
         row=wait('living original passenger finishes beam and regains native control',lambda r:all(recovered(p) and p['fatal_state']==2 for p in r['peers']),40)
         capture('native-recovered-survivor',row)
         x=[p['observation']['players'][0]['x_raw'] for p in row['peers']]
@@ -105,7 +118,7 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
         try:row=updates('survivor native accepted walk')
         finally:inp(0,0,'release survivor Right')
         need(all(p['observation']['players'][0]['x_raw']>a for p,a in zip(row['peers'],x)),'Survivor control did not move')
-        if option==3:
+        if option==3 and not state_tail:
             quiet=wait('native death effects visibly retire',lambda r:all(recovered(p) and not p['visible_type11_slots'] for p in r['peers']),40)
             births=[len(z['births']) for z in e['effects']]
             row=updates('quiet original world cadence',64)
@@ -129,7 +142,8 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
             try:row=updates('native survivor control after LOAD')
             finally:inp(0,0,'release survivor after LOAD')
             need(row['peers'][0]['observation']['players'][0]['x_raw']>saved['observation']['players'][0]['x_raw'],'Post-LOAD survivor control absent')
-        e['checks'].update(original_required_phase_owner_death=True,native_passenger_beam_recovery=True,native_survivor_controls=True,no_life_or_checkpoint_reset=True)
+        e['checks'].update(native_passenger_beam_recovery=True,native_survivor_controls=True,no_life_or_checkpoint_reset=True)
+        e['checks']['current_build_state_tail' if state_tail else 'source_bound_before_release_native_death' if option==3 else 'native_phase4_owner_death']=True
         e['status']=success;return e
     except Exception as error:
         e.update(error=str(error),traceback=traceback.format_exc());raise

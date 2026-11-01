@@ -138,7 +138,7 @@ def run(args):
             else intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
             else intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
             else intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise)
-        case = exercise(dict(ctx, scene_owner_fatal=getattr(args, 'scene_owner_fatal', None), set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
+        case = exercise(dict(ctx, scene_owner_fatal=getattr(args, 'scene_owner_fatal', None), scene_owner_state_tail=getattr(args, 'scene_owner_state_tail', False), set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
             output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=SUCCESS)
         report['checks']['jump_audio_both_peers_completed'] = True
@@ -199,7 +199,7 @@ def run_local(args):
             else intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
             else intro.exercise_final_retry_continue if getattr(args, 'final_retry_continue', False)
             else intro.exercise_distant_explosion if getattr(args, 'distant_explosion', False) else intro.exercise)
-        return exercise(dict(ctx, scene_owner_fatal=getattr(args, 'scene_owner_fatal', None)), output=output/'intro-admission', original_exe=args.original_exe,
+        return exercise(dict(ctx, scene_owner_fatal=getattr(args, 'scene_owner_fatal', None), scene_owner_state_tail=getattr(args, 'scene_owner_state_tail', False)), output=output/'intro-admission', original_exe=args.original_exe,
             leader=args.intro_leader, success=failed_trace.ammo.SUCCESS)
 
     args.layout = 'stacked'; args.port = args.host_port
@@ -230,10 +230,13 @@ def main():
     parser.add_argument('--midboss-forward', action='store_true', help='F166/F187 actual Magma midboss defeat and original forward boundaries')
     parser.add_argument('--subtank-policy', action='store_true', help='F180 native owner heals after agreed private Sub Tank supplies cross original CP2')
     parser.add_argument('--scene-owner-fatal', choices=('before_release','during_arrival'), help='F4/F103 original scene-owner death and native passenger recovery')
+    parser.add_argument('--scene-owner-state-tail', action='store_true', help='Only missing LOCAL current-build scene survivor state/control tail; prior same-image components are reviewed separately')
     args = parser.parse_args(); args.jump_audio_smoke = True
     parent.validate_options(parser, args)
     if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, args.subtank_policy, bool(args.scene_owner_fatal))) > 1:
         parser.error('Select one named native scenario')
+    if args.scene_owner_state_tail and (not args.local or args.scene_owner_fatal!='before_release'):
+        parser.error('Scene state tail requires LOCAL before_release')
     if args.scene_owner_fatal:
         original_select = select_checkpoint
         def select_scene(directory, *, enabled):

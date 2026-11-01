@@ -11,6 +11,21 @@ import mmx6_coop_intro_fixture as intro
 
 
 class NativeScenePredicateTests(unittest.TestCase):
+    def test_native_fatal_accepts_source_bound_transient_miss_but_not_wrong_option_or_live_owner(self):
+        tree=ast.parse(inspect.getsource(intro.exercise_scene_owner_fatal))
+        func=next(n for n in tree.body[0].body if isinstance(n,ast.FunctionDef) and n.name=='native_fatal')
+        scope={'option':3};exec(compile(ast.Module(body=[func],type_ignores=[]),'<actual native fatal predicate>','exec'),scope)
+        p=dict(fatal_option=3,fatal_state=2,observation=dict(scene_owner=2,scene_phase=4,lifecycle=(0,4),players=[dict(hp=32),dict(hp=0)]))
+        self.assertTrue(scope['native_fatal'](p))
+        p['fatal_option']=4;self.assertFalse(scope['native_fatal'](p));p['fatal_option']=3
+        p['observation']['lifecycle']=(0,0);p['observation']['players'][1]['hp']=32
+        self.assertFalse(scope['native_fatal'](p))
+        p['observation']['lifecycle']=(0,5);p['observation']['players'][1]['hp']=0
+        self.assertTrue(scope['native_fatal'](p))
+        scope['option']=4;p['fatal_option']=4;p['observation']['scene_phase']=5
+        self.assertFalse(scope['native_fatal'](p))
+        p['observation']['scene_phase']=4;self.assertTrue(scope['native_fatal'](p))
+
     def test_live_lifecycle_tuple_and_saved_json_list_use_same_native_guards(self):
         # The debug dataclass retains tuple lifecycle in live .json(); JSON
         # serialization alone hid the mismatch in failed C132 LOCAL1 evidence.
