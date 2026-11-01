@@ -18560,14 +18560,14 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -18637,9 +18637,103 @@
             "bypasses": [
               "Original checkpoint reachability6/0/CP1 only; no health, death, position, rainflag, weatherindex/counter or success writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "166d38e06c99f8c23d86236e6136ea325ba59b04",
+            "build_identity": {
+              "source_commit": "166d38e06c99f8c23d86236e6136ea325ba59b04",
+              "exe_sha256": "4c18e4c9e3ba4e29d9de75efd31fe6f318cc5ec87d343d28a6cb6f64e798096e",
+              "declared_manifest_sha256": "368e9d3db9f4c7fafa6de82e1ad1a16e3e871443cef3f241596dd98a59539606",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 78,
+              "profile": 61,
+              "snapshot": 21,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "3496c926fc78133dfbca7b6fa0346ee559a4f55290ebab6ac580a69fdaf21ecf"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "fixture": "turtloid_rain_cp1; original stage6/0/CP1, bodyarrival/sourceground required",
+              "lab_fatal": "p1, defaultoff predeclaredone-shot",
+              "contact_protection": "on; earned/startHPoff",
+              "cameras": "LOCALsplit/NETindependent; canonical survivor fallback",
+              "audio": "dummy muted"
+            },
+            "action": "Ordinary agreed CP1 chord, actual native jump/Right rain approach; source-bound five-frame native weather cycle beforedeath, ordinary secondP2chord requestsXHP80 only, actualnativeHP0/DYING/FALLEN, unchanged survivorweather cycle andownP2control.",
+            "outcome": "All4parent/4entry/6before/7survivorchecksPASS. Bothalive original fiveatlasY0/256/512/768/1024/world122withinVBlank117..124. Actualactor-supportednativeidle70=0/71=8, C8armed5; ordinarysecondP2chord consumes9, XHP32->0/DYING thenFALLENwhileZero32alive. AfterfullFALLENfiveoriginalatlasframes/world124within122..126; nativeP2Left1280->1278.5, finalZero31HP. Rootpersonallyviewedall10before/afteratlasimages: diagonalrain/scenery/Zero retained. NativePID76464gracefulexit0/privatecardsunchanged.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-c130-weather-local-1\\qualification.json",
+                "sha256": "281366472858392a987c8c80b9294b9d8389b18a0952e986f5ee4af080a033b6"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-c130-weather-local-1\\ammo-hud\\intro-admission\\weather-entry-observations.json",
+                "sha256": "68113af7aff5c85aab641867a7e19bbc0afc5158d38c6482883b5ecadb4c39cc"
+              }
+            ],
+            "limits": [
+              "Only original Turtloid weather before/after actual primary death; no F120 background-palette/F175 fade, general scenery, save/load, WAN/cross-platform/performance or native3330 claim.",
+              "All original failed weather evidence, C129 premature CP1 receipt/unsafe fatal edge, and C130 NET1 missing caller transport callback remain preserved. New raw statuses are not rewritten; root admits after review.",
+              "C130 changes only the default-off fatal prerequisite ground guard: actor support71 OR terrain70, original350F8 clears71 and2E3C4/2E658 accumulate support8; terrain2F2A4 separately clears70. Existing native action/locks/alive/boundary guards and unchanged weather observers remain. This is not claimed as a new weather-renderer implementation.",
+              "Survivor fallback is canonical displayed Zero after X FALLEN; LOCAL duplicated8:3 canonical canvas, NET independent physical outputs. Unchanged7survivor guards verify stopped private publication/no host leak. No two living private views are claimed after one actor falls.",
+              "Current source/build tested10focused Ctests+30Pythoncheckpointtests; all298runtime unitsresourceflagON. No old source/build credit transferred."
+            ],
+            "bypasses": [
+              "Agreed original CP1 bypasses prior stage travel, contact protection and predeclared native HP80 fatal request; no lifecycle/weather/scene/phase/result flags or native completion outcomes assigned."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "166d38e06c99f8c23d86236e6136ea325ba59b04",
+            "build_identity": {
+              "source_commit": "166d38e06c99f8c23d86236e6136ea325ba59b04",
+              "exe_sha256": "4c18e4c9e3ba4e29d9de75efd31fe6f318cc5ec87d343d28a6cb6f64e798096e",
+              "declared_manifest_sha256": "368e9d3db9f4c7fafa6de82e1ad1a16e3e871443cef3f241596dd98a59539606",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 78,
+              "profile": 61,
+              "snapshot": 21,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "3496c926fc78133dfbca7b6fa0346ee559a4f55290ebab6ac580a69fdaf21ecf"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "fixture": "turtloid_rain_cp1; original stage6/0/CP1, bodyarrival/sourceground required",
+              "lab_fatal": "p1, defaultoff predeclaredone-shot",
+              "contact_protection": "on; earned/startHPoff",
+              "cameras": "LOCALsplit/NETindependent; canonical survivor fallback",
+              "audio": "dummy muted"
+            },
+            "action": "Ordinary agreed CP1 chord, actual native jump/Right rain approach; source-bound five-frame native weather cycle beforedeath, ordinary secondP2chord requestsXHP80 only, actualnativeHP0/DYING/FALLEN, unchanged survivorweather cycle andownP2control.",
+            "outcome": "All15parent/4entry/6before/7survivorchecksPASS. Originalfiveatlasframesoneachphysicalpeer beforeandafteractualXfatal. NativeC8armed5->consumed9, XHP31->0/DYING->fullFALLEN[5,0]; Zero32->31positiveandordinaryLeft1286->1280.5bothpeers. Beforeworld159/157insideVBlank154..161/155..161; survivor159/161inside158..165/157..163. Commonprofile61settledbefore0andfixed selected104433e7d8f2278cde527f27b0892ace6b4590246e48367bbacdfe774b0924c7. Fourmatchingcore/modCRCwindows7/8/8/8(total31), final8samples4576..4800resolvedthrough4802both. Rootviewed4actualbefore/afterphysicalpeerimages; rain/Zero/sceneryvisibleafterXfatal. Owned80804/9540exit0/privatecardsunchanged; fixturecapture/replayrefused.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-c130-weather-net-2\\qualification.json",
+                "sha256": "73a4c9e6a074f1ff9e18694630ce0eb8912ed7f4ab7854d777996826468cc143"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-c130-weather-net-2\\intro-admission\\weather-entry-observations.json",
+                "sha256": "ea9da4e9c4da6943fc24f4ef5e88fb0572b8dc1b3db7e167e1a1c38b9efba46b"
+              }
+            ],
+            "limits": [
+              "Only original Turtloid weather before/after actual primary death; no F120 background-palette/F175 fade, general scenery, save/load, WAN/cross-platform/performance or native3330 claim.",
+              "All original failed weather evidence, C129 premature CP1 receipt/unsafe fatal edge, and C130 NET1 missing caller transport callback remain preserved. New raw statuses are not rewritten; root admits after review.",
+              "C130 changes only the default-off fatal prerequisite ground guard: actor support71 OR terrain70, original350F8 clears71 and2E3C4/2E658 accumulate support8; terrain2F2A4 separately clears70. Existing native action/locks/alive/boundary guards and unchanged weather observers remain. This is not claimed as a new weather-renderer implementation.",
+              "Survivor fallback is canonical displayed Zero after X FALLEN; LOCAL duplicated8:3 canonical canvas, NET independent physical outputs. Unchanged7survivor guards verify stopped private publication/no host leak. No two living private views are claimed after one actor falls.",
+              "Current source/build tested10focused Ctests+30Pythoncheckpointtests; all298runtime unitsresourceflagON. No old source/build credit transferred."
+            ],
+            "bypasses": [
+              "Agreed original CP1 bypasses prior stage travel, contact protection and predeclared native HP80 fatal request; no lifecycle/weather/scene/phase/result flags or native completion outcomes assigned."
+            ]
           }
         ],
-        "limitations": "V62 mandatory both-living atlas publication failed. V63 repair now has reviewed both-living LOCAL component: rain animates in both panes,16focusedtests pass. Full mode/row remains at last failure pending actual primary-death survivor and NETPLAY. Death setups parked after two bounded failures; no component or build credit promoted to a full comparison."
+        "limitations": "ExactC130166d/4c18/profile61 LOCAL+NET originalTurtloidfiveatlasframes/refreshpublication beforeandafteractualXHP0/DYING/fullFALLEN; healthyZerorain/control preserved. Allsource/native/parent/profile/finalCRC/cards/exits checks pass. Rootall10LOCALatlasimages+4NETbefore/afterphysicalimagesreviewed. Originalfailedraw preserved; noF120/F175/generalgraphics/performance claim."
       }
     },
     {
