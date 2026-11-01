@@ -10416,14 +10416,14 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "unverified",
-          "netplay": "failed"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -10495,9 +10495,43 @@
             "bypasses": [
               "Navigation-only initial LAN page shortcut; real UI actions start both matches and rematches; no native outcome/HP/position/fixture writes."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f461288646db296a7eccdf59f68f5f7bc5a42ba1",
+            "build_identity": {
+              "executable_sha256": "d3e5093debec882ac1735ef494a509e28b87dc86c323fc2cdc9715a60007b37d",
+              "compiled_manifest_sha256": "72f44aea918220bef0dff013707658e33d978bfc8121f629c646df4f74b2e65a",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "renderer": "native4:3 OpenGL; hidden muted actual UI loopback",
+              "profile": "mmx6.win64-clang22.loopback revision20"
+            },
+            "action": "Review retained V90 actual three same-PID NETactivations/two genuine UIEscape/BYE/lobby/Play boundaries against frozen bounded resource/readiness contract; no new native run.",
+            "outcome": "PASS bounded NET lifecycle endpoint. Three actual healthy activations in same PIDs2152/66340, both native menus and independentcontrols eachtime, actual before0profile20 and resolvedCRC/card/ownedexit gates all complete. Each three-sample resourcewindow stable, guest548864/DMA513024/snapshot1061904/layout1080537090/packet2+327680/replacements38 identical acrossallthree. Bankcounts219->220->219 and bytes1809408->1940480->1809408 are bounded observed128KiB variation returningbaseline, not persistentgrowth. Exactcross-sessiontotalequality was an addedgate absent fromfrozenrow; its raw failure remains unchanged. Actualnative reinitialization/controls/resourcebounds satisfy this boundedNETcheck; oldNVIDIAcrash didnotrecur afterSDK57055. LOCALsamePIDboundary stillrequired andnotqualifiedhere.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-launcher/manifest-bound-f461288-sdk57055-F39-three-rematches-allocation-pending-reviewed.json",
+                "sha256": "505beb08031f3e1e5be53ad52767f72b51114f0f995d278b3c3c35d00ec8a443"
+              }
+            ],
+            "limits": [
+              "Retained rawqualification.json strictfinalequalityfailure and partialreviewreceipt505beb08 are unchanged; this new evidence-backed frozen-contract disposition supersedes onlytheir missingNETadmission.",
+              "Unattributed128KiBbankvariation remains; no exactper-bankidentity/generation or universalno-leak proof, hostgamecachecountunavailable.",
+              "No actualartwork claim fromCPU-VRAM screenshots; nativebody/readiness/menus/independentcontrols andresourceobservations are the endpoint.",
+              "Within eachmatch actualprofile20/selectedSHA agreebefore0; selectedSHA changesbetweenmatches withfreshsessionidentity, not a failure.",
+              "V90only: sourcef461288/image d3e509, SDK57055/UI34b. CurrentC126 LOCAL orNET results cannot be combinedwithV90forfull-rowadmission.",
+              "LOCALactualsamePIDrestart remainsmissing onV90; currentSDK3be newlyhasnormaloffline session_restart path, requiresactualcurrentcandidatequalification. No newtoolbuild/receipt ornativeNETrepeat forV90."
+            ],
+            "bypasses": [
+              "Navigation-only initial LAN page shortcut; real UI actions start both matches and rematches; no native outcome/HP/position/fixture writes."
+            ]
           }
         ],
-        "limitations": "SDK57055 actual V90 repairs stale GL readback state; three real same-PID NET activations now reach healthy menus/controls/CRC and normal exits. Full F39 remains open: exact bank totals differ219/220/219 (source cause/ownership unqualified), and LOCAL repeat lacks a supported return-to-launcher path. Historical failures and new raw allocation failure preserved. No mode or aggregate promotion."
+        "limitations": "RetainedV90NET actual three same-PID sessions/two genuineUIrematches qualify frozenboundedresource/readiness endpoint: otherpersistenttotalsidentical, bank219/220/219 returnsbaseline. Exacttotalequality wasextra gate; rawfailure/oldcrash/unattributed128KiBvariation preserved, no universalleak/artclaim. LOCALsamePIDboundary remainsunverified; currentSDK3be session_restart newlyavailable forC126. No crosscandidateaggregate."
       }
     },
     {
