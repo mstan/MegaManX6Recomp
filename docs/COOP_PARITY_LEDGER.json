@@ -5949,14 +5949,14 @@
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -6021,9 +6021,115 @@
               "Existing offline mailbox5 invokes original3D308 owner2 script directly; preceding traversal is bypassed. Mailbox1 HP80 requests original fatal before release, mailbox6 invokes original3D330 release.",
               "Native death emission/expiry, body/beam completion, lifecycle, controls, world timers, lives and checkpoint outcomes are read, never assigned. Offline mutation is not available as a NET shortcut."
             ]
+          },
+          {
+            "candidate": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+            "build_identity": {
+              "source_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "exe_sha256": "f752fa4cf5acffa44bbe424a165880e87071ed609390dc3813aea18960625b2a",
+              "declared_manifest_sha256": "467ccfecd3e2fe0fc41f96692910bf933583d27da9a98f9e83b6c06d5360f0b8",
+              "title": 81,
+              "profile": 64,
+              "snapshot": 22,
+              "game_change_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "observer_source_commit": "5a0ed226e082d5194666395c372e90c003f4eab9"
+            },
+            "settings": {
+              "roster": "X/P1 and Zero/P2",
+              "fixture": "Agreed intro_cp2 plus scene_before_release, native original lock/release/fatal sequence",
+              "audio": "hidden SDL dummy, published host input",
+              "native_cards": "isolated blank cards, unchanged"
+            },
+            "limits": [
+              "Asynchronous pool reads count observed slot activation/retirement, not exact allocation attempts. Original 32 radial allocations remain invisible; no leak claim.",
+              "The fixed sequence requests fatal at phase3 and waits original DYING before release. Live publications first sample fatal at phase4; no instruction-atomic phase3 death observation is invented.",
+              "One bounded intro scene timing; no ordinary FPS benchmark, all-boss, whole-scene scenery or recording/replay qualification. CP2 background fixture corruption remains separate.",
+              "LOCAL3/4 parent failures remain unchanged and are admitted only as sufficient named components, not automatic parent PASS."
+            ],
+            "bypasses": [
+              "Agreed CP2 prerequisite bypasses prior traversal. Fresh L3+R3 invokes existing original3D308/3D330 and requests HP80; original death, emissions, beam completion, control, lives/checkpoint outcomes are never assigned.",
+              "Unilateral fixture taint and ordinary recording/replay refusal remain retained."
+            ],
+            "mode": "local",
+            "result": "passed",
+            "action": "Reuse same-image LOCAL3 native fatal/effects/cadence/recovery, LOCAL4 survivor walk and LOCAL5 current-build SAVE/LOAD plus restored Left control.",
+            "outcome": "Owner2 natively DYING->FALLEN; living P1 completes beam phases4/5->scene0 at HP32, lives2/CP2 unchanged. LOCAL3 observes65 activations/33 allocation retirements; all54 ever-visible death slots retire, then984 publications equal984 native world ticks with no visible FX. LOCAL4 Right moves5904->5930px. LOCAL5 slot7 SAVEgen1/LOADgen2 restores living/dead state and fresh Left5904->5894.5px. Late actual composed capture has no residual death rings. All3 native exits0/private cards unchanged.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c132-native-scene-local-3/qualification.json",
+                "sha256": "c5709ac206d9d23689fc06effa25dbe0155184d501933bfdab75a6c3ab08bde4"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c132-native-scene-local-4/qualification.json",
+                "sha256": "a39f86f20343548bb951ec5761fc04b0e094090b7eb6bc9bedd30182864ce1f5"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c132-native-scene-local-5/qualification.json",
+                "sha256": "d5e184d7a8fbb9d64c722d05789665a07113c394527abb196d7f1492d9d6c441"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-native-scene-fatal-v132/binding.json",
+                "sha256": "d8d94ee5ad7ac7311130c9434c04a2542339053a8ac0f950781e5b985198b3af"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c132-native-scene-local-5/ammo-hud/intro-admission/peer-0-state-tail-native-quiet-before-SAVE.png",
+                "sha256": "8a9402d931c9f760d8af02824f77ebca4ad078350b8832c7f8b7af4e4a94580e"
+              }
+            ]
+          },
+          {
+            "candidate": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+            "build_identity": {
+              "source_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "exe_sha256": "f752fa4cf5acffa44bbe424a165880e87071ed609390dc3813aea18960625b2a",
+              "declared_manifest_sha256": "467ccfecd3e2fe0fc41f96692910bf933583d27da9a98f9e83b6c06d5360f0b8",
+              "title": 81,
+              "profile": 64,
+              "snapshot": 22,
+              "game_change_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "observer_source_commit": "5a0ed226e082d5194666395c372e90c003f4eab9"
+            },
+            "settings": {
+              "roster": "X/P1 and Zero/P2",
+              "fixture": "Agreed intro_cp2 plus scene_before_release, native original lock/release/fatal sequence",
+              "audio": "hidden SDL dummy, published host input",
+              "native_cards": "isolated blank cards, unchanged"
+            },
+            "limits": [
+              "Asynchronous pool reads count observed slot activation/retirement, not exact allocation attempts. Original 32 radial allocations remain invisible; no leak claim.",
+              "The fixed sequence requests fatal at phase3 and waits original DYING before release. Live publications first sample fatal at phase4; no instruction-atomic phase3 death observation is invented.",
+              "One bounded intro scene timing; no ordinary FPS benchmark, all-boss, whole-scene scenery or recording/replay qualification. CP2 background fixture corruption remains separate.",
+              "LOCAL3/4 parent failures remain unchanged and are admitted only as sufficient named components, not automatic parent PASS."
+            ],
+            "bypasses": [
+              "Agreed CP2 prerequisite bypasses prior traversal. Fresh L3+R3 invokes existing original3D308/3D330 and requests HP80; original death, emissions, beam completion, control, lives/checkpoint outcomes are never assigned.",
+              "Unilateral fixture taint and ordinary recording/replay refusal remain retained."
+            ],
+            "mode": "netplay",
+            "result": "passed",
+            "action": "Matching exact C132 paired native before-release fatal, finite effects, passenger recovery and fresh survivor controls; normal input baseline, fixed pre-frame0 profile and final later-than-case resolved core/mod CRC.",
+            "outcome": "Both peers observe actual owner fatal at phase4 after source-bound before-release sequence, P2 FALLEN0/P1 recovered32HP, lives2/CP2 stable and ordinary survivor control. Each peer observes55 visible death slots and all55 retire; observed activations66/69 and allocation retirements34/37, with32 invisible original radial slots retained. Quiet cadence advances natively and both late composed images show no lingering death effects. All15 parent/5 scene gates pass; four resolved CRC windows30 matching samples, final7 at4224..4416 resolved4441 on both peers. Profile64 fixed before frame0 (82618548...); both native exits0/private cards unchanged.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c132-native-scene-net-1/qualification.json",
+                "sha256": "13e9a8f42927141f9f6306a146f0538f07ddcdef2e8b028b08591ed1c9ac4875"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-native-scene-fatal-v132/F4-net1-capacity.json",
+                "sha256": "a015b00d5c82f4c2d878bea9fc64c0c8e9c7fd6a4c18046410ba981eb47e8836"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c132-native-scene-net-1/intro-admission/peer-0-native-effects-quiet-retirement.png",
+                "sha256": "0fc202d2f7857edf5e1e437aa9fdebec8077a903b24a96403def984aa0f6b5f9"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F4-c132-native-scene-net-1/intro-admission/peer-1-native-effects-quiet-retirement.png",
+                "sha256": "f7ecb09ace1c0c8bf86128e0b795f74fcec09d42a9f995ee1e4e8fda6a8656ee"
+              }
+            ]
           }
         ],
-        "limitations": "LOCAL65841a2 owner fatal before release now has finite observed native death FX, all53 observed visible slots retired,71 quiet native world ticks, native passenger/control recovery and no retry/life/checkpoint loss.55 activation observations are not an exact allocation-attempt total;32 radial slots remain allocated/invisible. Shared world clock pauses through beam then resumes. NET remainsunverified; first failure/limits retained."
+        "limitations": "Passed exact C132 LOCAL+NET bounded native scene-owner death before release after default survivor-prime ordering fix. Native finite visible effects/cadence/recovery/controls, same-build LOCAL save/load and final NET CRC/cards/exits reviewed. Preserve all C124 and failed C132 raw labels; source-bound phase3 prerequisite with actual sampled fatal phase4, observed allocation counts only, original invisible radial retention and CP2 scenery caveats remain explicit."
       }
     },
     {
