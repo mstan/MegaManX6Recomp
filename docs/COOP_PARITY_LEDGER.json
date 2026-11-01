@@ -12103,8 +12103,63 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "4b2b5476d401b664d96a196d73f476e223157915",
+            "build_identity": {
+              "exe_sha256": "c736fa151b28b79e98928439b85de1f891155df7cbcf5471725d2d635fb3e18b",
+              "declared_manifest_sha256": "cf520292e958831273f86c2ca113e7c1f0edcda773e0b750966466a6c6e84874",
+              "compiled_source_commit": "4b2b5476d401b664d96a196d73f476e223157915",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 74,
+              "host_profile_version": 57,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Canonical attempted X/P1+Zero/P2; inverse unit5 not exercised",
+              "fixtures": "Existing agreed intro_cp2/contactprotectionon/earnedoff/startingHPoff; privateavailabilitycard4e2c and blankcard2, two digital slots, SDLDUMMY/hidden",
+              "entry": "First originalLoadlandsAmazon1; originalQuit/NewGame thenactualintro0 andordinaryAliadialogue toactualnativeidle. No runtime RAM/dead/result writes."
+            },
+            "action": "Attempt existing native CP2 ingress before actual counterpart D1000 combat. Verify typedfixture generation/initialization and actualboss before any final-hit claim.",
+            "outcome": "UNVERIFIED setup; no CP2/NPC30/D1000 combat/finalhit/cleanup/campaigncontinuation observed. Firsttypedreceipt gen0/state5/reason6/entries0 whileactualstage1; CP2-ready/CP2-native filenames were invalid readiness labels and corrected inraw. NativeNewGame actuallyreachesintro0, nativeP1x144/y1115/action14 withAliaactive; originaldialogue advances toactualidle2/clearlocks. Cached co-op body initiallymisled; freshpublication shows P2arrival lifecycle3 thenlater0. Receiptneverobservedapplied:gen0/state5/reason6/nonce0/entries0/latch2. Two latechords were only3.1/9.4ms because oldterminalreceipt endedhold immediately, so nottrustedfreshrefusals; final0.2s pulse lacks start/endnativecounter proof ofrequired6 updates. No further repair/gesture. Ownedquit3131/exit0, PID65804/listener18154gone, cardsunchanged4e2c/7706, native-consumptionrecordingfinalized/noreplayclaim.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F54-c126-d1000-local-1\\control-observations.jsonl",
+                "sha256": "c17fe93eb523f9ccc096e99434d1fa32bf054656d9a0210a4949881cf92e67eb"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F54-c126-d1000-local-1\\native-job.json",
+                "sha256": "affc6de78d833bdcf2d543bd2a8d4cff07408aefcc5abaa603c4dd3d6755f12d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F54-c126-d1000-local-1\\binding.json",
+                "sha256": "50cbbca639c068ccb0e6d613ef7bbb57b8766b10f2dc1328ba61f0d2d4215d48"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F54-c126-d1000-local-1\\benchmark.json",
+                "sha256": "c9af13d4b5bc57e9bc471455e305a0eaeab1df79c76bc4353c81489b33faa2ac"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F54-c126-d1000-local-1\\F54-canonical-actual-intro-ingress.png",
+                "sha256": "6f3e31358187bd3e775348fe4b83dc04bc6523ca2f51a913de71d6b6dbea98a5"
+              }
+            ],
+            "limits": [
+              "One owned native launch, two setup contexts (wrongstage1 thennativeintro0), repeatedgesture failures retained. Original25minharddeadline notreset; stopped withabout420secondsremaining. No fresh budget/unchangedrepeat.",
+              "Current precise prerequisite: accepted fresh CP2 initializer at genuine intro0 with both arrivals settled and proven6 nativeupdates for first validgesture. Reason6 andstickyreceipt causality not established; do not label a game defect or invent a freshrefusal.",
+              "Prelaunch/staticchecks andactualintroingress are preparation, notF54acceptance. Inverseunit5intro entry andbothLOCALrosters/NET remainunverified.",
+              "ReusedC126genericwarmstate fromF174; no newF54state orreplayclaim. No source/tooling added."
+            ],
+            "bypasses": [
+              "Agreed CP/contactprotection settings were prelaunch prerequisites only; initializer neverobservedapplied. No resultflags/HP/bossdead writes."
+            ]
+          }
+        ],
+        "limitations": "First C126LOCALlaunch didnotreachD1000: existingtypedCP2 neverapplied; initialwrongstage, cachedpublication andsubframegesture faults retained, lateractualintro0idle stillonlyoldgen0/state5/reason6. Need firstvalidgesture withsettledbotharrivals/proven6updates andfresh acceptedinitializer; no game-failure orcombatcredit. Originalbounds/attempt retained; no immediateunchangedretry. Bothrosters LOCAL+NET finalhit/cleanup/continuation stillunverified."
       }
     },
     {
