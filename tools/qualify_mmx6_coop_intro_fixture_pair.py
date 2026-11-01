@@ -116,6 +116,12 @@ def run(args):
         prepared = [p['agreed_checkpoint'] for p in report['jump_audio_prepared']]
         if prepared[0] != prepared[1]:
             raise ValueError('Peers did not predeclare the same private checkpoint option/catalog')
+        if getattr(args, 'refight_policy_scenario', None):
+            case = intro.exercise_refight_policy(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
+                output=output/'intro-admission', original_exe=args.original_exe,
+                leader=args.intro_leader, success=SUCCESS, scenario=args.refight_policy_scenario)
+            report['checks']['jump_audio_both_peers_completed'] = True
+            return case
         if getattr(args, 'door_policy_scenario', None):
             case = intro.exercise_door_policy(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
                 output=output/'intro-admission', original_exe=args.original_exe,
@@ -181,6 +187,9 @@ def run_local(args):
         return result
 
     def observe(ctx, *, output, **unused):
+        if getattr(args, 'refight_policy_scenario', None):
+            return intro.exercise_refight_policy(ctx, output=output/'intro-admission', original_exe=args.original_exe,
+                leader=args.intro_leader, success=failed_trace.ammo.SUCCESS, scenario=args.refight_policy_scenario)
         if getattr(args, 'door_policy_scenario', None):
             return intro.exercise_door_policy(ctx, output=output/'intro-admission', original_exe=args.original_exe,
                 leader=args.intro_leader, success=failed_trace.ammo.SUCCESS, scenario=args.door_policy_scenario)
@@ -258,6 +267,29 @@ def select_door_policy(directory, *, enabled, scenario, selector=select_checkpoi
     selected.update(values, state_sha256=preparation.sha256(path))
     return selected
 
+def select_refight_policy(directory, *, enabled, scenario, selector=select_checkpoint):
+    if scenario not in ('living', 'absent', 'fallen'):
+        raise ValueError('Explicit native refight scenario required')
+    selected = selector(directory, enabled=enabled, option='refight_portal_cp1',
+        contact_protection='on', starting_hp=('off', 'off'), earned_weapons='off')
+    directory = Path(directory)
+    catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
+    for key, choices, default in (('doors', {'either', 'both'}, 'either'), ('lab_fatal', {'off', 'p1', 'p2'}, 'off')):
+        options = [o for o in catalog.get('option', []) if o.get('id') == key]
+        if (len(options) != 1 or options[0].get('feature') != 'prototype' or options[0].get('type') != 'choice'
+                or options[0].get('default') != default or {c['value'] for c in options[0].get('choice', [])} != choices):
+            raise ValueError('Missing exact current refight/fatal option: '+key)
+    values = dict(local_cameras='split', cameras='independent', doors='both', lab_fatal='p1' if scenario == 'fallen' else 'off')
+    path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8'); anchor = 'lab_earned_weapons = "off"\n'
+    if text.count(anchor) != 1 or any(key+' =' in text for key in values):
+        raise ValueError('Unexpected fresh prototype refight preferences')
+    updated = text.replace(anchor, anchor+''.join(key+' = '+json.dumps(value)+'\n' for key, value in values.items()))
+    prototype = [f for f in tomllib.loads(updated).get('feature', []) if f.get('package_id') == 'mmx6.local-coop' and f.get('id') == 'prototype']
+    if len(prototype) != 1 or any(prototype[0].get('values', {}).get(key) != value for key, value in values.items()):
+        raise ValueError('Refight/fatal preferences escaped the co-op prototype')
+    path.write_text(updated, encoding='utf-8'); selected.update(values, state_sha256=preparation.sha256(path))
+    return selected
+
 def main():
     parser = parent.make_parser()
     parser.description = __doc__
@@ -268,9 +300,11 @@ def main():
     parser.add_argument('--midboss-forward', action='store_true', help='F166/F187 actual Magma midboss defeat and original forward boundaries')
     parser.add_argument('--door-policy-scenario', choices=('either', 'living', 'absent', 'fallen'),
                         help='F61 original native hatches, including agreed P2 fatal exclusion')
+    parser.add_argument('--refight-policy-scenario', choices=('living', 'absent', 'fallen'),
+                        help='F123 original portal wait/abort/admission, including agreed P1 fatal exclusion')
     args = parser.parse_args(); args.jump_audio_smoke = True
     parent.validate_options(parser, args)
-    if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, bool(args.door_policy_scenario))) > 1:
+    if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, bool(args.door_policy_scenario), bool(args.refight_policy_scenario))) > 1:
         parser.error('Select one named native scenario')
     if args.midboss_forward:
         globals()['select_checkpoint'] = select_midboss
@@ -279,6 +313,13 @@ def main():
         def select_policy(directory, *, enabled):
             return select_door_policy(directory, enabled=enabled, scenario=args.door_policy_scenario, selector=original_select)
         globals()['select_checkpoint'] = select_policy
+    if args.refight_policy_scenario:
+        if args.intro_leader != 1:
+            parser.error('F123 reuses the original guest-led refight route')
+        original_select = select_checkpoint
+        def select_refight(directory, *, enabled):
+            return select_refight_policy(directory, enabled=enabled, scenario=args.refight_policy_scenario, selector=original_select)
+        globals()['select_checkpoint'] = select_refight
     if args.final_retry_continue and args.intro_leader != 0:
         parser.error('F136 reuses the primary-owned Sigma intro and Continue route')
     if args.final_retry_continue:

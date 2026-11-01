@@ -1127,3 +1127,274 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
    try:inp(seat,0,'final owned neutral')
    except Exception as error:e.setdefault('cleanup_errors',[]).append(str(error))
   (out/'observations.json').write_bytes((json.dumps(e,indent=2)+'\n').encode())
+
+
+def exercise_refight_policy(ctx,*,output,original_exe,leader,success,scenario):
+    """Original F123 portal case with only the native fatal prerequisite replaced."""
+    import importlib.util
+    # This immutable helper owns original-disc parsing/terrain/source guards,
+    # not a game build, profile or launcher binding.
+    source_path=Path(original_exe).resolve().parent.parent/'mmx6_R21_distant_refight_v106_root_v1.py'
+    source_sha='8860068f0219560ab039237cde1d81d552d0fbf2eb05bf776ad52993d5a7238b'
+    if hashlib.sha256(source_path.read_bytes()).hexdigest()!=source_sha:
+        raise ValueError('Retained original refight source helper changed')
+    spec=importlib.util.spec_from_file_location('refight_retained_original_sources',source_path)
+    base=importlib.util.module_from_spec(spec);spec.loader.exec_module(base)
+    original_sources=base.original_sources;sha=base.sha;body=base.body;i32=base.i32;u32=base.u32;u16=base.u16
+    PLAY=base.PLAY
+    def need(value,message):
+        if not value:raise ValueError(message)
+    def contact(p,seat):
+        b=body(p,seat);x=i32(b,8)>>16;y=i32(b,12)>>16
+        return (u32(b,0x68)==0x80073D50+4*seat and b[2]==seat and b[5] in(2,3,4,20)
+            and 1883<=x<=1893 and abs(1256-y-(2+seat))<=27)
+    need(leader==1 and callable(ctx.get('set_input')),'Owned native guest input route required')
+    need(scenario in('living','absent','fallen'),'Explicit F123 native participation scenario required')
+    clients=ctx['clients'];need(len(clients)in(1,2),'Owned LOCAL or NET required')
+    out=Path(output);out.mkdir(parents=True,exist_ok=False)
+    e=dict(kind='F123_Both_original_refight_'+scenario,scenario=scenario,
+        frozen_rows={'F123':'9e89dc9c86606d8bd916ad40f360ad8e87b7673b9676d955dd57bb73710ce02c'},
+        status='failed',samples=[],inputs=[],captures=[],source_guards=[],resource_reads=[],checks={},controls=[],
+        limits=['Only the explicitly selected native participation component is observed; all three LOCAL+NET components required before comparison admission.',
+            'Default-off originalCP1 and once source1852/1241 XY/history prerequisite bypasses reachability; Contact protection remains on; fallen uses the predeclared P1 native HP80 prerequisite only. Native original admission/loader/landing/control are earned.',
+            'Original source geometry is evaluated against coherent body publications; portal/PLAY/captures are asynchronous, no same-instruction two-peer claim.',
+            'Current exact candidate negotiated profile/delay NET or LOCAL split; no other portals, boss defeat/return, human, WAN or native3330 credit.'])
+    e['retained_original_source_helper']=dict(path=str(source_path),sha256=source_sha)
+    ctx['report']['F123_both_refight']=e
+    deadline=time.monotonic()+420;source=None;trace_enabled=False
+
+    def inp(seat,bits,label):
+        need(bits in(0,1,6,0x20,0x80,0x4020),'Only declared ordinary pad input')
+        e['inputs'].append(dict(seat=seat,bits=bits,label=label,ack=ctx['set_input'](seat,bits)))
+
+    def sample(label):
+        need(time.monotonic()<deadline and len(e['samples'])<6000,'F123 bounded420s deadline')
+        row=dict(index=len(e['samples']),label=label,peers=[]);e['samples'].append(row)
+        for peer,c in enumerate(clients):
+            for _ in range(4):
+                raw=c.read(debug.DIAGNOSTIC_ADDRESS,debug.DIAGNOSTIC_BYTES)
+                try:
+                    o=debug.parse_diagnostic(raw).json();o['lifecycle']=list(o['lifecycle']);break
+                except debug.UnstableObservation:continue
+            else:raise ValueError('No coherent F123 native publication')
+            play=c.read(PLAY,0xE0)
+            p=dict(peer=peer,observation=o,p1_body_hex=raw[0x1800:0x1958].hex(),p2_body_hex=raw[0x100:0x258].hex(),
+                play_hex=play.hex(),tuple=[play[0],play[1],play[12],play[13],play[0x1D]],fixture=receipt(c),fatal_status=raw[0xC8],portal=None,boss=None)
+            row['peers'].append(p)
+            need(not o['failed'] and not o['mailbox'] and p['fixture']['state']not in(4,5),'Native failure/mailbox/prerequisite refusal')
+            if p['tuple'][2:]==[12,0,1]:
+                pool=c.read(0x800C1220,0x3340)
+                matches=[dict(address=0x800C1220+at,hex=pool[at:at+0xA4].hex())for at in range(0,len(pool),0xA4)
+                    if pool[at]&1 and pool[at+1:at+3]==bytes((23,2)) and u32(pool,at+0x10)==0x800ED040]
+                need(len(matches)<=1,'Duplicate original portal2');p['portal']=matches[0]if matches else None
+                p['original_contacts']=[contact(p,s)for s in(0,1)]
+            if p['tuple'][2:]==[12,0,2]:
+                ptr=u32(play,0x20)
+                if 0x8008EF48<=ptr<0x80090C88 and (ptr-0x8008EF48)%0x9C==0:
+                    b=c.read(ptr,0x9C)
+                    if b[0]and b[1:3]==bytes((49,0))and u32(b,0x10)==0x800ECFD0:
+                        p['boss']=dict(address=ptr,state=b[4],action=b[5],hp=b[0x5C],original_full_hp=play[0x8C])
+        return row
+
+    def wait(label,predicate,seconds,updates=18000):
+        stop=min(deadline,time.monotonic()+seconds);previous=None;progress=[0]*len(clients)
+        while time.monotonic()<stop:
+            r=sample(label);now=[p['observation']['native_timer']for p in r['peers']]
+            if previous is not None:
+                for n,(a,b)in enumerate(zip(previous,now)):
+                    delta=(b-a)&0xffffffff
+                    if delta<0x80000000:progress[n]+=delta
+                    need(progress[n]<=updates,label+': native update bound')
+            previous=now
+            if predicate(r):return r
+            time.sleep(.008)
+        raise ValueError(label+': native predicate timed out')
+
+    def capture(label,row):
+        for peer,c in enumerate(clients):
+            need(len(str(out/f'p{peer}-{label}.png'))<248,'Native capture path bound')
+            e['captures'].append(dict(peer=peer,label=label,before_row=row['index'],
+                **debug.capture_present(c,out/f'p{peer}-{label}.png',request=c.request),after=debug.observe(c).json()))
+
+    def unused(p):
+        return(p['tuple']==[10,0,12,0,1]and p['portal']and bytes.fromhex(p['portal']['hex'])[4:7]==bytes((1,0,0))
+            and not any(p['observation'][k]for k in('scene_owner','scene_phase','pause_owner'))
+            and not any(bytes.fromhex(p['play_hex'])[n]for n in(0xF,0x10,0x1C)))
+
+    def guest_at_center(p):
+        return unused(p)and base.native_pedestal_supported(p)and contact(p,1)and not contact(p,0)and u16(body(p,1),0x7C)==0
+
+    def center_guest(row):
+        for _ in range(6):
+            if all(guest_at_center(p)for p in row['peers']):return row
+            x=i32(body(row['peers'][-1],1),8)
+            inp(1,0x80 if x>1888*65536 else 0x20,'guest ordinary centerward pedestal correction')
+            # The ten-pixel interval lasts only a few simulation updates.
+            # Read one coherent control-peer publication while moving; the
+            # full two-peer actor/resource read is deliberately outside this
+            # input stop decision. Final settled contact still requires both.
+            direction=0x80 if x>1888*65536 else 0x20
+            stop=min(deadline,time.monotonic()+6);hit=False
+            try:
+                for _ in range(512):
+                    need(time.monotonic()<stop,'Bounded native guest center approach expired')
+                    o=debug.observe(clients[-1]).json();player=o['players'][1];xx=player['x_raw']
+                    e.setdefault('fast_center_publications',[]).append(dict(peer=len(clients)-1,native_timer=o['native_timer'],sequence=o['sequence'],x_raw=xx,y_raw=player['y_raw'],action=player['action'],direction=direction))
+                    if (direction==0x20 and xx>=1883*65536)or(direction==0x80 and xx<=1893*65536):hit=True;break
+                    time.sleep(.005)
+                need(hit,'No source-qualified native guest center approach')
+            finally:inp(1,0,'neutral guest at control-peer interval; await both settled publications')
+            row=wait('native pedestal support and consumed neutral',lambda r:all(unused(p)and body(p,1)[5]==2 and u16(body(p,1),0x7C)==0 for p in r['peers']),12,720)
+        need(all(guest_at_center(p)for p in row['peers']),'Bounded native pedestal centering failed')
+        return row
+
+    def endpoint(p):
+        if scenario=='living':return base.native_idle(p,2)and base.fullfeet(p,source['destination_terrain'])
+        o=p['observation'];seat=0 if scenario=='absent'else 1;b=body(p,seat)
+        if not(p['tuple']==[10,0,12,0,2]and o['ready']==o['enrolled']==1 and o['lifecycle']==([0,2]if scenario=='absent'else[5,0])and not any(o[k]for k in('scene_owner','scene_phase','pause_owner'))):return False
+        x=i32(b,8)>>16;foot=(i32(b,12)>>16)+2+seat+19
+        codes=[source['destination_terrain'].query(xx,foot)['code']for xx in range(x-11,x+11)]
+        p['survivor_feet']=dict(seat=seat,x=x,foot=foot,codes=codes,native_ground=b[0x70])
+        if not(b[0]and b[3]and b[4:6]==bytes((1,2))and b[2]==seat and 0<b[0x5C]<128 and u32(b,0x68)==0x80073D50+4*seat and not b[0x67]and b[0x70]&8 and foot==448 and set(codes)=={0x38}and not any(b[n]for n in(0x7A,0xD0,0xD4,0xE0))):return False
+        if scenario=='absent':
+            original=body(e['samples'][e['source_ready']]['peers'][p['peer']],1);other=body(p,1)
+            return other[4]==3 and other[0x5C]==original[0x5C]and other[0xA8:0xBA]==original[0xA8:0xBA]
+        return body(p,0)[4]==3
+
+    def approach_portal(seat,label):
+        def admitted(r):
+            return all(p['portal']and bytes.fromhex(p['portal']['hex'])[4]==1 and bytes.fromhex(p['portal']['hex'])[6]in(1,2,3)
+                and (body(p,seat)[5]in(20,22)or body(p,seat)[0xD1]in(20,22))for p in r['peers'])
+        inp(seat,0x4020,label+' ordinary jump Right to pedestal left edge')
+        try:over=wait('native traveler over pedestal edge or actual admission',lambda r:admitted(r)or i32(body(r['peers'][-1],seat),8)>=1877*65536,8,480)
+        finally:inp(seat,0,'release jump Right over original pedestal')
+        e.setdefault('ordinary_approaches',[]).append(dict(seat=seat,over_row=over['index']))
+        if admitted(over):return over
+        def supported(p):
+            b=body(p,seat)
+            return unused(p)and b[4:6]==bytes((1,2))and not b[0x67]and b[0x71]&8 and 1875*65536<=i32(b,8)<=1901*65536 and (i32(b,12)>>16)+2+seat+19==1248
+        landed=wait('native traveler pedestal support or actual admission',lambda r:admitted(r)or all(supported(p)for p in r['peers']),15,900)
+        if admitted(landed):return landed
+        direction=0x80 if i32(body(landed['peers'][-1],seat),8)>1888*65536 else 0x20
+        inp(seat,direction,label+' ordinary centerward native pedestal input')
+        try:return wait('actual native original contact command20 and portal progression',admitted,20,1200)
+        finally:inp(seat,0,'neutral after actual original admission')
+
+    def guards(label,boss=False):
+        for peer,c in enumerate(clients):
+            for g in source['boss_proof']['guards']if boss else source['guards']:
+                if g.get('name')in('portal2_placement','Yammark_CP2_placement'):continue
+                a=int(g['address'],16);count=int(g['end'],16)-a if boss else g['bytes']
+                wanted=source['boss'][a-0x800FA000:a-0x800FA000+count]if boss and a>=0x800FA000 else source['raw'](a,count)
+                raw=c.read(a,count);need(raw==wanted,'Original native code differs '+hex(a))
+                e['source_guards'].append(dict(peer=peer,label=label,address=hex(a),bytes=count,sha256=sha(raw),expected=sha(wanted)))
+
+    def resources(label):
+        t=source['destination_terrain']if label=='destination'else source['terrain']
+        for peer,c in enumerate(clients):
+            before=c.read(0x1F800004,12);records=[];values=[]
+            for name,address,wanted in zip(('layout','meta','desc'),struct.unpack('<III',before),(t.layout,t.metatiles,t.descriptors)):
+                need(not address&3 and 0x80010000<=address<=0x80200000-len(wanted),'Original resource pointer extent')
+                raw=b''.join(c.read(address+n,min(65536,len(wanted)-n))for n in range(0,len(wanted),65536));p=out/f'p{peer}-{label}-{name}.bin';p.write_bytes(raw);values.append(raw)
+                records.append(dict(path=str(p),sha256=sha(raw),original=sha(wanted)))
+            need(before==c.read(0x1F800004,12)and values[0]==t.layout,'Native resource read bracket/layout differs')
+            need(base.collision_projection(values[1],values[2])==base.collision_projection(t.metatiles,t.descriptors),'Original collision projection differs')
+            e['resource_reads'].append(dict(peer=peer,label=label,resources=records,collision_equivalence=True))
+
+    try:
+        source=original_sources(original_exe)
+        for seat in(0,1):inp(seat,0,'neutral original pads')
+        initial=wait('fresh original baseline',lambda r:all(p['tuple']==[10,0,0,0,0]and p['observation']['lifecycle']==[0,0]for p in r['peers']),25)
+        need(all(p['fixture']['generation']==p['fixture']['latch']==p['fixture']['tainted']==0 for p in initial['peers']),'Fresh one-shot prerequisite required')
+        inp(1,6,'ordinary guest L3+R3 original CP1 prerequisite')
+        try:wait('accepted one-shot chord',lambda r:all(p['fixture']['latch']in(1,2)for p in r['peers']),15)
+        finally:inp(1,0,'release one-shot chord')
+        ready=wait('native original CP1 standing after once XY setup',lambda r:all(base.native_idle(p,1)and p['fixture']['state']==3 and unused(p)
+            and all((i32(body(p,s),8),i32(body(p,s),12))==(1852*65536,y*65536)for s,y in((0,1243),(1,1242)))for p in r['peers']),300)
+        expected=dict(generation=1,state=3,reason=0,stage=12,section=0,checkpoint=1,nonce=0x4C524650,initializer_entries=1,record='80072978',tainted=1,authority=1,latch=2)
+        for p in ready['peers']:need(all(p['fixture'].get(k)==v for k,v in expected.items()),'Exact original CP1 receipt changed')
+        guards('source');resources('source');e['source_ready']=ready['index'];capture('source',ready)
+        for c in clients:c.request('fn_disable');c.request('fn_clear');c.request('fn_filter',lo='8001E1BC',hi='8001E1C0')
+        trace_enabled=True
+        if scenario=='living':
+            inp(1,0x4020,'guest alone ordinary jump Right onto native pedestal')
+            try:over=wait('guest passes original pedestal left edge',lambda r:i32(body(r['peers'][-1],1),8)>=1877*65536,8,480)
+            finally:inp(1,0,'neutral over pedestal')
+            supported=wait('native pedestal landing',lambda r:all(base.native_pedestal_supported(p)for p in r['peers']),15,900)
+            centered=center_guest(supported);capture('one-contact-wait',centered);e['wait_begin']=centered['index']
+            start=[p['observation']['native_timer']for p in centered['peers']]
+            waiting=wait('Both waits30 real native world updates',lambda r:all(((p['observation']['native_timer']-start[n])&0xffffffff)>=30 for n,p in enumerate(r['peers'])),20,1200)
+            window=e['samples'][centered['index']:waiting['index']+1]
+            need(all(guest_at_center(p)and i32(body(p,0),8)==1852*65536 and u16(body(p,0),0x7C)==0 for r in window for p in r['peers']),'Both admitted with only one living contact')
+            e['wait_end']=waiting['index'];capture('one-contact-held',waiting)
+            inp(1,0x80,'ordinary guest Left aborts its waiting native contact')
+            try:aborted=wait('actual Left abort leaves original portal unused',lambda r:all(unused(p)and not contact(p,1)and i32(body(p,1),8)<1883*65536 for p in r['peers']),6,360)
+            finally:inp(1,0,'neutral after genuine contact abort')
+            e['abort']=aborted['index'];capture('abort',aborted)
+            centered=center_guest(aborted);e['last_guest_contact']=centered['index']
+            admit=approach_portal(0,'primary joins waiting living guest')
+            e['admission']=admit['index'];capture('admit',admit)
+        else:
+            if scenario=='absent':
+                original=[body(p,1)for p in ready['peers']]
+                inp(1,1,'real guest Select90 native withdrawal')
+                try:leaving=wait('native guest LEAVING from actual Select hold',lambda r:all(p['observation']['lifecycle'][1]==1 for p in r['peers']),30,1800)
+                finally:inp(1,0,'release Select; no new request through portal arrival')
+                absent=wait('genuine native outgoing finishes ABSENT',lambda r:all(p['observation']['lifecycle']==[0,2]and body(p,1)[4]==3 for p in r['peers']),45,2700)
+                need(all(body(p,1)[0x5C]==original[n][0x5C]and body(p,1)[0xA8:0xBA]==original[n][0xA8:0xBA]for n,p in enumerate(absent['peers'])),'Withdrawal altered guest personal inventory')
+                e['native_precondition']=dict(kind='Select_LEAVING_to_native_ABSENT',leaving=leaving['index'],completed=absent['index'],source_threshold=90)
+                capture('native-absent',absent);traveler=0
+            else:
+                inp(1,0,'neutral after completed CP1 before agreed primary fatal edge')
+                armed=wait('agreed P1 fatal armed after neutral',lambda r:all(base.native_idle(p,1)and p['fatal_status']==5 for p in r['peers']),15,900)
+                inp(1,6,'ordinary second P2 L3+R3 requests declared P1 native fatal')
+                try:requested=wait('one agreed primary fatal request consumed',lambda r:all(p['fatal_status']==9 for p in r['peers']),15,900)
+                finally:inp(1,0,'release consumed native fatal chord')
+                fatal=wait('actual original primary native fatal',lambda r:all(p['observation']['lifecycle'][0]in(4,5)and p['observation']['lifecycle'][1]==0 for p in r['peers']),30,1800)
+                fallen=wait('original native death fully FALLEN with living guest',lambda r:all(p['observation']['lifecycle']==[5,0]and body(p,0)[4]==3 and body(p,1)[0x5C]>0 for p in r['peers']),70,4200)
+                e['native_precondition']=dict(kind='agreed_P1_HP80_request_then_original_native_FATAL_FALLEN',armed=armed['index'],requested=requested['index'],fatal=fatal['index'],completed=fallen['index'],contact_protection='on')
+                capture('native-fallen',fallen);traveler=1
+            admit=approach_portal(traveler,'sole living participant excludes absent/fallen partner')
+            e['admission']=admit['index'];capture('admit',admit)
+        arrived=wait('actual CP2 loader then native released both arrivals',lambda r:all(endpoint(p)and p['boss']and p['boss']['hp']==p['boss']['original_full_hp']==48 and 4<=p['boss']['action']<=10 for p in r['peers']),300)
+        e['arrival']=arrived['index'];guards('destination',True);resources('destination');capture('arrive',arrived)
+        e['native_initializer_trace']=[]
+        for peer,c in enumerate(clients):
+            t=c.request('fn_entry_dump',seq_lo='0',count=256);need(t['oldest']==0 and len(t['entries'])==t['seq_hi']and any(int(x['func'],16)==0x8001E1BC and int(x['a0'],16)==PLAY for x in t['entries']),'Actual original CP2 initializer trace missing')
+            e['native_initializer_trace'].append(dict(peer=peer,trace=t));c.request('fn_disable')
+        for seat in ((1,0)if scenario=='living'else(0,)if scenario=='absent'else(1,)):
+            before=sample('before separate native control');xs=[i32(body(p,seat),8)for p in before['peers']];other=[body(p,1-seat)[8:16]for p in before['peers']]
+            inp(seat,0x80,'ordinary independent Left after native release')
+            try:moved=wait('actual independent native movement',lambda r:any(i32(body(p,seat),8)<xs[n]-65536 for n,p in enumerate(r['peers'])),5,300)
+            finally:inp(seat,0,'neutral at first observed movement')
+            settled=wait('native fullfeet and consumed neutral',lambda r:all(endpoint(p)and i32(body(p,seat),8)<xs[n]-65536 and body(p,1-seat)[8:16]==other[n]and u16(body(p,seat),0x7C)==0 for n,p in enumerate(r['peers'])),15,900)
+            e['controls'].append(dict(seat=seat,before=before['index'],moved=moved['index'],settled=settled['index']))
+        final=sample('F123 living component final endpoint');e['final_endpoint']=final['index'];capture('controls',final)
+        if scenario=='living':
+            e['checks']=dict(original_CP1_source_and_native_ready=True,one_living_contact_waits30_native_updates=True,primary_neutral_outside_contact=True,
+                actual_Left_aborts_without_admission=True,ordinary_primary_approach_then_original_Both_admission=True,actual_original_CP2_initializer=True,
+                native_full48HP_boss_active_and_both_released=True,both_original_full22feet_floor448=True,separate_native_controls=len(e['controls'])==2,
+                actual_composed_captures=len(e['captures'])==7*len(clients))
+        else:
+            e['checks']=dict(original_CP1_source_and_native_ready=True,actual_native_absent_or_fallen_precondition=True,
+                Both_permits_genuine_sole_living_original_portal_admission=True,actual_original_CP2_initializer=True,
+                native_full48HP_boss_active_and_survivor_released=True,source_full22feet_floor448_and_native_control=len(e['controls'])==1,
+                excluded_partner_remains_absent_or_fallen_every_peer=all(endpoint(p)for p in final['peers']),actual_composed_captures=len(e['captures'])==5*len(clients))
+        need(all(e['checks'].values()),'F123 living native component incomplete')
+        if callable(ctx.get('network')):ctx['network']()
+        e['status']=success;return e
+    except Exception as error:
+        e.update(error=str(error),traceback=traceback.format_exc())
+        if e['samples']:
+            try:capture('failure',e['samples'][-1])
+            except Exception as capture_error:e['capture_error']=str(capture_error)
+        raise
+    finally:
+        for seat in(0,1):
+            try:inp(seat,0,'final owned neutral')
+            except Exception as error:e.setdefault('cleanup_errors',[]).append(str(error))
+        if trace_enabled:
+            for c in clients:
+                try:c.request('fn_disable')
+                except Exception as error:e.setdefault('cleanup_errors',[]).append(str(error))
+        (out/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8',newline='\n')
