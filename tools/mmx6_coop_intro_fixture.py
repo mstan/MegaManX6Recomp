@@ -525,11 +525,19 @@ def exercise_midboss_forward(ctx, *, output, original_exe, leader, success):
                 hold(1,direction,12,'original movement and fresh Square separation')
         need(defeated(row),'No complete original main/weakpoint native defeat')
         e['actual_defeat']=row['index'];capture('original-midboss-defeat-and-cleanup',row)
+        if len(clients)==1:
+            e['postdefeat_snapshot']=[]
+            try: hud.state.snapshot_operation(clients[0].request,'save',9,e['postdefeat_snapshot'])
+            except Exception as error: e['postdefeat_snapshot_error']=str(error)
         hold(0,0x20,30,'proven native primary approach after defeat')
         for seat in (0,1):inp(seat,0x2020,'proven dual Right Circle to first exit ledge')
         try:updates('actual post-defeat dual dash60',60)
         finally:
             for seat in (0,1):inp(seat,0,'neutral first exit ledge')
+        for seat in (0,1):inp(seat,0x4020,'native dual jump over first step at501')
+        try:updates('original first arena exit step jump50',50)
+        finally:
+            for seat in (0,1):inp(seat,0,'release first arena exit step jump')
         for seat in (0,1):inp(seat,0x20,'native approach to first platform at661')
         try:wait('both feet at first exit platform',lambda r:all(healthy(p)
             and min(a['x_raw'] for a in p['observation']['players'])>=660*65536 for p in r['peers']),45)
