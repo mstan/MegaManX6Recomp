@@ -1208,6 +1208,7 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario,falle
    rows.append(dict(peer=i,fatal_status=c.read(debug.DIAGNOSTIC_ADDRESS+0xC8,1)[0],state=state,play_hex=play.hex(),camera_hex=c.read(0x800971F8,0xFC).hex(),fixture=f,doors=actors,boxes=boxes,boss=boss,npc=npcs[0]if npcs else None,stage=play[12],section=play[13],mode=list(play[:3]),dialogue_hex=c.read(0x8008EAF0,16).hex(),decoded=list(struct.unpack('<3H',c.read(0x800C456C,6)))))
   r=dict(index=len(e['samples']),label=label,peers=rows);e['samples'].append(r)
   for p in rows:
+   if closed_survivor:continue  # F57 ends at native closure, before the unrelated following NPC.
    if dialogue.dialogue_state(p)['active']:
     # Pool, text and diagnostics are separate safe-point RPCs. The native
     # action2->3 transition can happen between the pool read and text queue.
@@ -1273,6 +1274,13 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario,falle
    if (struct.unpack_from('<i',body,8)[0]>>16)+offset-s[2]<=right:return False
    if body[0xD4]or body[0x67]or not body[0x70]&8:return False
   return True
+ def closed(p):
+  origin=ORIGINS[0];actor=p['doors'].get(str(origin))
+  if not actor:return False
+  a=bytes.fromhex(actor['hex'])
+  # Source50F58 completes native closing animation to state2/phase0;
+  # state2's510C4 continues31DA8 solid collision, outer50DFC draws it.
+  return a[0]&1 and a[1:3]==bytes((8,2)) and a[4:6]==bytes((2,0)) and struct.unpack_from('<I',a,0x10)[0]==origin and struct.unpack_from('<I',a,0x68)[0]==0x80078DC8 and actor['box']=='00001020'
  def release_scene(number,x):
   until=min(deadline,time.monotonic()+65)
   while time.monotonic()<until:
@@ -1371,13 +1379,19 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario,falle
     r=sample('door%d native opening/traversal'%(number+1));need(alive(r),'Door traversal lost living original bodies')
     for p in r['peers']:
      need(not p['state']['observation']['scene_owner']or p['state']['observation']['scene_phase']==0,'Door used passenger transport')
-     if dialogue.dialogue_state(p)['active']:
+     if not closed_survivor and dialogue.dialogue_state(p)['active']:
       need(number==0 and crossed(p,x+16)and camera_committed(p,x),'Following dialogue began before native full-box/camera commitment')
     actor=r['peers'][0]['doors'].get(str(origin));phase=bytes.fromhex(actor['hex'])[5]if actor else-1
     if phase in(1,2,3)and phase not in seen:
      seen.add(phase);capture('door%d-native-phase%d'%(number+1,phase))
     if all(crossed(p,x+16)for p in r['peers']):
      for seat in(0,1):inp(seat,0,'release ordinary Right after full-box crossing')
+     if closed_survivor and number==0:
+      shut=wait('native first hatch closes as persistent solid after primary corpse exclusion',lambda r:alive(r)and all(closed(p)and crossed(p,x+16)for p in r['peers']),25,True)
+      record['closed']=shut['index'];e['final']=shut['index'];capture('first-hatch-native-closed-solid-primary-fallen')
+      e['checks']=dict(actual_primary_native_FATAL_FALLEN=True,guest_original_full_box_clearance=True,native_first_hatch_closed_persistent_solid=True,primary_remains_FALLEN=alive(shut),native_results_not_seeded=True)
+      e['limits'].append('F57 first-hatch closure only. Following original NPC may legitimately own guest action20; no fresh guest-control, NPC-dialogue, F61 two-hatch/boss or F183 held-occupancy claim.')
+      e['status']=success;return e
      released=release_scene(number,x);break
     pace()
    need(released is not None,'Original door failed complete full-box traversal')
@@ -1387,19 +1401,6 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario,falle
      ac,zc=counts(a),counts(z);need(z['stereo']['pairs']>a['stereo']['pairs']and z['stereo']['published']['mode']==2 and not zc.get('mmx6.coop.private-state-leak',0),'Native door lost actual independent pairs or leaked context')
      for phase in ('opening','traversal'):need(zc.get('mmx6.coop.private-door-'+phase,0)>ac.get('mmx6.coop.private-door-'+phase,0),'No committed private views through native door '+phase)
    if number==0:need(all(bytes.fromhex(p['play_hex'])[0x1D]==2 for p in released['peers']),'Original CP2 marker was not crossed naturally')
-   if closed_survivor and number==0:
-    def closed(p):
-     actor=p['doors'].get(str(origin))
-     if not actor:return False
-     a=bytes.fromhex(actor['hex'])
-     # Source50F58 completes native closing animation to state2/phase0;
-     # state2's510C4 continues31DA8 solid collision, outer50DFC draws it.
-     return a[0]&1 and a[1:3]==bytes((8,2)) and a[4:6]==bytes((2,0)) and struct.unpack_from('<I',a,0x10)[0]==origin and struct.unpack_from('<I',a,0x68)[0]==0x80078DC8 and actor['box']=='00001020'
-    shut=wait('native first hatch closes as persistent solid after primary corpse exclusion',lambda r:idle(r,2)and all(closed(p)and crossed(p,x+16)for p in r['peers']),25,True)
-    record['closed']=shut['index'];e['final']=shut['index'];capture('first-hatch-native-closed-solid-primary-fallen')
-    e['checks']=dict(actual_primary_native_FATAL_FALLEN=True,guest_original_full_box_clearance=True,native_first_hatch_closed_persistent_solid=True,actual_native_guest_controls=idle(shut,2),primary_remains_FALLEN=alive(shut),native_results_not_seeded=True)
-    e['limits'].append('F57 first-hatch closing after primary native death only; no F61 two-hatch/boss or F183 living-held-occupancy credit.')
-    e['status']=success;return e
   final=wait('native original boss readiness after second door',lambda r:idle(r,2)and all(p['boss']and p['boss']['state']==1 and p['boss']['action']>=4 and p['boss']['hp']==32 for p in r['peers']),65,True)
   e['final']=final['index'];capture('both-original-doors-complete-native-boss-ready')
   if not excluded:
