@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; agreed native scene-owner fatal prerequisite for F4/F103 qualification",
+  "status": "development-candidate-only; scene-owner fatal safe-boundary release ordering correction",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 63,
+  "revision": 64,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v80",
+    "title_compatibility": "mmx6-x-zero-delay-v81",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -905,5 +905,12 @@
     "guards": "Existing agreed profile+completed checkpoint receipt and healthy idle chord gate; active-sequence guards require outer unprojected gameplay, owner2, no wipe/clear/menu, same checkpoint and live authority. Lost authority retires the one-shot without mutation.",
     "snapshot_schema": 22,
     "qualification": "Fresh same-image LOCAL+NET original outgoing/incoming beam, native owner death, finite effects/cadence, passenger recovery/controls, no life/checkpoint reset; final profile/CRC/cards/owned exits. Prior C124 LOCAL evidence does not qualify C132."
+  },
+  "title_changes_v81": {
+    "scope": "Default scene survivor recovery: run the existing withdrawn-living-passenger prime after all safe-boundary script releases and before original world dispatch. No new state, scene result, death result, life or checkpoint writes.",
+    "failure": "C132 original shared release from agreed boundary occurred after early prime. Resident living passenger remained native state3 at original1EAE0 pre-body retry gate; F4 LOCAL2 spent life2->1 despite 32HP passenger and no team wipe. C124 offline diagnostic release ran before that early prime.",
+    "regression": "Existing private-effects guest contract requires resident passenger state1 at original retry gate. Add release at input/boundary timing for both owner seats; retain original-held and both-dead negative checks.",
+    "snapshot_schema": 22,
+    "qualification": "Fresh same-image LOCAL/NET F4 before-release and F103 during-arrival death, finite native passenger recovery/controls/effects/cadence, unchanged lives/checkpoint, LOCAL current-build state, NET final CRC/cards/exits. Failed originalC132 retained; no previous candidate credit transfer."
   }
 }

@@ -33,6 +33,7 @@ static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
 static unsigned scene_transport_probe,capsule_native_probe;
+static unsigned scene_release_on_input;
 static unsigned projected_death_probe;
 static unsigned scene_survivor_worlds,scene_corpse_updates[2],scene_native_retries;
 static unsigned voluntary_transport_probe;
@@ -67,6 +68,12 @@ void psx_mod_write_code_word(uint32_t a,uint32_t v){psx_mod_write_word(a,v);}
 uint16_t sio_get_pad_buttons_slot(int slot){CHECK(slot==1);return pad_buttons;}
 uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
     CHECK(consumer<6 && buttons==(uint16_t)~pad_buttons && !contaminated);
+    /* External safe-boundary release contract, at the same point as the
+     * agreed LAB callback: after diagnostic setup, before original world. */
+    if(consumer==MMX6_INPUT_STAGE && scene_release_on_input) {
+        CHECK(scene_owner_fatal() && scene_phase==3);
+        psx_mod_write_byte(PLAY+0x1C,0);scene_release_on_input=0;
+    }
     return buttons;
 }
 #ifdef MMX6_COOP_INPUT_TAINT_API
@@ -683,7 +690,9 @@ static void check_retired_fixed_pools(const PlayerContext *before,const PlayerCo
         CHECK(after->effects[i]==((i%0x50==3 || i%0x50==4)?0:before->effects[i]));
 }
 static void scene_owner_death_preserves_living_passenger(void) {
-    for(unsigned passenger=0;passenger<2;++passenger)for(unsigned incoming=0;incoming<2;++incoming) {
+    for(unsigned passenger=0;passenger<2;++passenger)for(unsigned incoming=0;incoming<2;++incoming)
+    for(unsigned late_release=0;late_release<2;++late_release) {
+        if(incoming && late_release)continue;
         CPUState cpu;setup(&cpu);
         PlayerContext primary=p2;primary.body[2]=0;
         primary.body[0x70]=p2.body[0x70]=8;project_player(&primary);
@@ -705,7 +714,8 @@ static void scene_owner_death_preserves_living_passenger(void) {
         if(!incoming) {
             unsigned before=call_count;scene_tick(&cpu);
             CHECK(scene_phase==3 && call_count==before); /* Original shared script still owns release. */
-            psx_mod_write_byte(PLAY+0x1C,0);
+            if(late_release)scene_release_on_input=1;
+            else psx_mod_write_byte(PLAY+0x1C,0);
         } else {
             psx_mod_write_byte(PLAY+0x1C,1);scene_tick(&cpu);
             CHECK(scene_phase>=4); /* A fatal hold cannot withdraw the incoming passenger again. */
@@ -714,7 +724,7 @@ static void scene_owner_death_preserves_living_passenger(void) {
         stage_call=0;
         for(unsigned n=0;n<12 && scene_owner;++n)CHECK(stage_tick(&cpu,0x8001E9ECu));
         CHECK(!scene_owner && !scene_phase && !life.wipe && !failed && !state_track.count && !state_track.error);
-        CHECK(scene_survivor_worlds && scene_corpse_updates[owner]==1 && !scene_native_retries);
+        CHECK(scene_survivor_worlds && scene_corpse_updates[owner]==1 && !scene_native_retries && !scene_release_on_input);
         CHECK(psx_mod_read_word(PLAY+0x90)==scene_survivor_worlds && !psx_mod_read_byte(PLAY+1));
         uint8_t body[sizeof scene_body];if(passenger)memcpy(body,p2.body,sizeof body);else capture(PLAYER,body,sizeof body);
         CHECK(body[3] && body[4]==1 && body[5]==2 && body[0x5C]==32 && !body[0x67]);

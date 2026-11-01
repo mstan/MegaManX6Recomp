@@ -1902,13 +1902,15 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     if (!enrolled || failed) return 0;
     diagnostic_inventory_setup(cpu);
     diagnostic_setup(cpu);
-    /* Native 1EAE0 checks the resident body for phase3 before updating it.
-     * Prime a withdrawn living survivor through the existing incoming path
-     * first, after the actual shared script release, in either seat. */
-    if(!psx_mod_read_byte(PLAY+1) && scene_owner_fatal() &&
-       !scene_shared_locked() && scene_phase==3) scene_tick(cpu);
     uint16_t raw=p2_input(MMX6_INPUT_STAGE);
     if(checkpoint_lab_boundary(cpu,raw))return 1;
+    /* Native 1EAE0 checks the resident body for phase3 before updating it.
+     * Prime a withdrawn living survivor through the existing incoming path
+     * first, after ALL safe-boundary script releases, in either seat. A
+     * predeclared LAB call can release after diagnostic_setup; checking
+     * before that call exposes withdrawn state3 to the original retry gate. */
+    if(!psx_mod_read_byte(PLAY+1) && scene_owner_fatal() &&
+       !scene_shared_locked() && scene_phase==3) scene_tick(cpu);
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
     unsigned phase=psx_mod_read_byte(PLAY+1);
     p2_start_previous=start;
