@@ -23963,9 +23963,55 @@
             "bypasses": [
               "No gameplay scenario ran, no native progress/result/state writes or unilateral NET load."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "9c5b02e0bf6f787b427a7e098361066f4578caca",
+            "build_identity": {
+              "game_source_commit": "9c5b02e0bf6f787b427a7e098361066f4578caca",
+              "image_sha256": "313e34a51c8c157f489cfca6574413fe63531fe8be892f4fce71653c07478672",
+              "declared_manifest_sha256": "060c0a44b12f785b0065cbf447effed268bb32e1876dd51cbb1ef50fe9a84712",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 76,
+              "profile": 59,
+              "snapshot": 20,
+              "package": "C128 exact current PC build; original Magma CP0 selector restored, existing Both door gameplay inherited",
+              "host": "Windows PC, ENHANCED OpenGL HLE"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "both",
+              "setup": "Fresh blank private cards; original NewGame intro0/Alia, agreed heatnix_cp0/contact protection ON/earned weapons ALL",
+              "audio": "SDL dummy muted"
+            },
+            "action": "One existing midboss-forward LOCAL validator; original checkpoint entry, native HELP and Giga/Square combat; no outcome or actor writes.",
+            "outcome": "No C128 admission: actual3/0/0 generation1/state3/reason0/entries1/nonce4C484E30 accepted. Native Snake reduced to8HP with one active8HP weakpoint. Observer filtered temporarily invisible weakpoint, stopped attacks and waited45s for death; 939 samples end with live main8HP/state1/action3 and active subtype1 HP8/visible0, both actors32HP. No genuine defeat or forward endpoint. Native quit0, owned PID66860 and TCP18166 absent, both private cards unchanged.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-1\\qualification.json",
+                "sha256": "d294f9424e353f14a1960782e73ff839cbe395eeca697a746d5b90e87817e83c",
+                "bytes": 8557547
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-1\\ammo-hud\\intro-admission\\observations.json",
+                "sha256": "7909096edddf1dc6bb465cb4dfaaec87753ea037247a1e5d45c983a2d7bec0c6",
+                "bytes": 7808952
+              }
+            ],
+            "limits": [
+              "Existing C118 LOCAL passes remain distinct; no cross-candidate aggregation or C128 LOCAL/NET credit. This observer stop does not establish a game failure.",
+              "One prerequisite-resolved continuation consumed; original15minute source/observer window expired, old attempts/limits preserved. F166/F187 parked; no NET launch or unchanged retry.",
+              "Ready correction only: continue ordinary native attacks while an active positive-HP weakpoint exists despite temporary invisibility. No new run allowance granted."
+            ],
+            "bypasses": [
+              "One agreed original MagmaCP0 entry bypasses earlier stage traversal; predeclared contact protection and earned weapons. Actual attacks, defeat, door and checkpoint results were not assigned.",
+              "No execution-state load or unilateral NET state mutation; no NET launched."
+            ]
           }
         ],
-        "limitations": "LOCAL frozenC118 genuine midboss defeat and both actors walking original forward door passed with prelaunch doors Both. NET unverified. Earlier Either passenger transfer and all failures remain retained; no all-NPC-free, cross-build or full-row claim. Required NET attempt refused beforeframe0 on SERVER: no qualified simulation profile available. No gameplay/NET admission; raw refusal retained, no compatibility rescue."
+        "limitations": "LOCAL frozenC118 genuine midboss defeat and both actors walking original forward door passed with prelaunch doors Both. NET unverified. Earlier Either passenger transfer and all failures remain retained; no all-NPC-free, cross-build or full-row claim. Required NET attempt refused beforeframe0 on SERVER: no qualified simulation profile available. No gameplay/NET admission; raw refusal retained, no compatibility rescue. C1289c5b02e current PC continuation ended at live8HPweakpoint because observer mistook temporary invisibility for retirement; no defeat/forward/NET credit. Raw preserved, normalexit0/cardsunchanged. Original overhead/attempt limits consumed; parked without another repair/run."
       }
     },
     {
@@ -26468,9 +26514,55 @@
             "bypasses": [
               "No gameplay scenario ran, no native progress/result/state writes or unilateral NET load."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "9c5b02e0bf6f787b427a7e098361066f4578caca",
+            "build_identity": {
+              "game_source_commit": "9c5b02e0bf6f787b427a7e098361066f4578caca",
+              "image_sha256": "313e34a51c8c157f489cfca6574413fe63531fe8be892f4fce71653c07478672",
+              "declared_manifest_sha256": "060c0a44b12f785b0065cbf447effed268bb32e1876dd51cbb1ef50fe9a84712",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 76,
+              "profile": 59,
+              "snapshot": 20,
+              "package": "C128 exact current PC build; original Magma CP0 selector restored, existing Both door gameplay inherited",
+              "host": "Windows PC, ENHANCED OpenGL HLE"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "both",
+              "setup": "Fresh blank private cards; original NewGame intro0/Alia, agreed heatnix_cp0/contact protection ON/earned weapons ALL",
+              "audio": "SDL dummy muted"
+            },
+            "action": "One existing midboss-forward LOCAL validator; original checkpoint entry, native HELP and Giga/Square combat; no outcome or actor writes.",
+            "outcome": "No C128 admission: actual3/0/0 generation1/state3/reason0/entries1/nonce4C484E30 accepted. Native Snake reduced to8HP with one active8HP weakpoint. Observer filtered temporarily invisible weakpoint, stopped attacks and waited45s for death; 939 samples end with live main8HP/state1/action3 and active subtype1 HP8/visible0, both actors32HP. No genuine defeat or forward endpoint. Native quit0, owned PID66860 and TCP18166 absent, both private cards unchanged.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-1\\qualification.json",
+                "sha256": "d294f9424e353f14a1960782e73ff839cbe395eeca697a746d5b90e87817e83c",
+                "bytes": 8557547
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F166-F187-c128-both-local-1\\ammo-hud\\intro-admission\\observations.json",
+                "sha256": "7909096edddf1dc6bb465cb4dfaaec87753ea037247a1e5d45c983a2d7bec0c6",
+                "bytes": 7808952
+              }
+            ],
+            "limits": [
+              "Existing C118 LOCAL passes remain distinct; no cross-candidate aggregation or C128 LOCAL/NET credit. This observer stop does not establish a game failure.",
+              "One prerequisite-resolved continuation consumed; original15minute source/observer window expired, old attempts/limits preserved. F166/F187 parked; no NET launch or unchanged retry.",
+              "Ready correction only: continue ordinary native attacks while an active positive-HP weakpoint exists despite temporary invisibility. No new run allowance granted."
+            ],
+            "bypasses": [
+              "One agreed original MagmaCP0 entry bypasses earlier stage traversal; predeclared contact protection and earned weapons. Actual attacks, defeat, door and checkpoint results were not assigned.",
+              "No execution-state load or unilateral NET state mutation; no NET launched."
+            ]
           }
         ],
-        "limitations": "LOCAL frozenC118 genuine midboss defeat plus actual guest foot passage into native CP1 passed; stage3/sub0 unchanged proves in-area checkpoint continuation, not section loader. Current-build postdefeat snapshot/battle prerequisites and first-door passenger transfer explicit; NET unverified. No claim that both walked through firstdoor or all NPC allocations freed. Required NET attempt refused beforeframe0 on SERVER: no qualified simulation profile available. No gameplay/NET admission; raw refusal retained, no compatibility rescue."
+        "limitations": "LOCAL frozenC118 genuine midboss defeat plus actual guest foot passage into native CP1 passed; stage3/sub0 unchanged proves in-area checkpoint continuation, not section loader. Current-build postdefeat snapshot/battle prerequisites and first-door passenger transfer explicit; NET unverified. No claim that both walked through firstdoor or all NPC allocations freed. Required NET attempt refused beforeframe0 on SERVER: no qualified simulation profile available. No gameplay/NET admission; raw refusal retained, no compatibility rescue. C1289c5b02e current PC continuation ended at live8HPweakpoint because observer mistook temporary invisibility for retirement; no defeat/forward/NET credit. Raw preserved, normalexit0/cardsunchanged. Original overhead/attempt limits consumed; parked without another repair/run."
       }
     },
     {
