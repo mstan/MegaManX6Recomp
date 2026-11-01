@@ -10482,8 +10482,84 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "3172b181c0e565030cd2403ff935ae46e8ab50e4",
+            "build_identity": {
+              "exe_sha256": "f0076a5c5813390837566c5865aa876a4b632bf4a55f6cc6f3b6ab205d5bda2f",
+              "declared_manifest_sha256": "3da52934f8f56cac9625e29a22d0f30a88b5bcec94b1adfd23405569891722ab",
+              "compiled_source_commit": "3172b181c0e565030cd2403ff935ae46e8ab50e4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+              "net_commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+              "rb_commit": "2a03e73693acee0fb78076ea058642c931bef12e",
+              "title_version": 68,
+              "host_profile_version": 51,
+              "snapshot_schema": 18
+            },
+            "settings": {
+              "forms": "Native Ultimate X/P1 E7=4 and Black Zero/P2 E7=5; PLAY5F=39",
+              "preferences": "Existing elective NewGame Ultimate/Zero/Black options, profile-private; pristine weapon inventory",
+              "input": "Ordinary native owned Down/Up menu and R2 Nova; hidden SDLdummy actual composed GL captures"
+            },
+            "action": "Black Zero owns actual native menu, wrong-seat Start/cursor rejected, native Down->Up0->0D->0 and resume preserve resources; Ultimate X executes genuine R2 Nova launch and cleanup beside Black Zero.",
+            "outcome": "PASS named LOCAL components only, NOT full F37. All18 automated menu/control checks and original native Nova launch/cleanup pass. Actual Black portrait/body and simultaneous Ultimate form art reviewed; native action22/phase2/velocity8px with native flags, golden effect and original control return observed. Both heroes remain32HP; native exit0/private cards unchanged. No new full comparison closure.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\f37l-down-up-1\\qualification.json",
+                "sha256": "1a87188475563891e8849a37a8f25b26446074e2831e18947089c76deb36b2d5"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\F37-source-build-preflight.json",
+                "sha256": "95e46c04eb0fe37c5f51834bda049da38437d9f353ae7b76ea84ebeccb1920ee"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\private-boss-cooldowns-v116-final-binding-root-v1.json",
+                "sha256": "c7ed733dc479e91f2312dfca496e1d64ce5ab88f9698d40d5ce4aa8bcd3b83ec"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\run-existing-F37-pair.py",
+                "sha256": "60cfa1ed3fce056e1ce7ccd0003341e7d1da5f1ed92c6952bc27079c51143947"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\f37l-down-up-1\\baseline\\F37-native-abilities\\observations.json",
+                "sha256": "bc2fae56abb0dbb0c6929d2b7a97ba628e011545b8fd53f1055ea5f07e432f5e"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\f37l-down-up-1\\baseline\\F37-native-abilities\\peer-0-actual-simultaneous-native-forms.png",
+                "sha256": "a6263b10a0790f3853d8738a6ac82c8f520ec447f9e3fe587ed8d028b22b2233"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\f37l-down-up-1\\baseline\\F37-native-abilities\\peer-0-native-Nova-8px-launch.png",
+                "sha256": "852d4af98f2b29822bc5891a856ad6750e21beb3c83510933417096e5d5b573b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\f37l-down-up-1\\baseline\\F37-native-abilities\\peer-0-native-form-abilities-natural-control-return.png",
+                "sha256": "1e2b189997cc5e68d10c6c23d1adddab518b23b7ef199c22be48baa05ae07739"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\f37l-down-up-1\\baseline\\personal-menu\\p2-peer-0-paused-present.png",
+                "sha256": "2d1f5f0c0753075ba0696b370656b6ae3f6cc50e88438417b5cc96a63008449b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v120-root-v1\\f37l-down-up-1\\baseline\\personal-menu\\p2-peer-0-resumed-present.png",
+                "sha256": "781f3fed58a758e9a2e93fa08f6ae80fddb57ab2346cea40b5ac313225948abe"
+              }
+            ],
+            "limits": [
+              "LOCAL and NET remain unverified as full modes. Black form-specific ability, remaining menu/form resource contract, actual death/team retry and current-build restoration still need qualification; NET on exact C120 remains required.",
+              "Native Black body/portrait alone does not prove form-specific combat behavior. Ordinary Saber action is not Black Giga48cost proof.",
+              "Pristine profile does not grant weapons; do not override Ultimate-incompatible earned-weapons LAB guard. Separately authored card39 is only a prepared prerequisite until genuine native Load/unit4 is executed.",
+              "Existing staging report explicitly is not compilation provenance; bind this component to retained exact C120 source/build preflight and actual image hash, never a newer C131/C132 image."
+            ],
+            "bypasses": [
+              "Prelaunch elective form unlocks only, no runtime HP/energy/phase/animation/result writes."
+            ]
+          }
+        ],
+        "limitations": "Exact C120 LOCAL Black own-menu/cursor/resources and genuine Ultimate Nova now qualified as components; fullLOCAL andNET remain open for Black ability, remaining resources, actual death/teamretry/current-buildrestore. Preserve old failures and reuse these completed same-image components."
       }
     },
     {
