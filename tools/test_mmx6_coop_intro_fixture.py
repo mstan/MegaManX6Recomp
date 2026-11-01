@@ -9,6 +9,33 @@ import mmx6_coop_intro_fixture as intro
 
 
 class NamedPrerequisiteCatalogTests(unittest.TestCase):
+    def test_midboss_both_stays_in_prototype_with_trailing_net_feature(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source = Path(__file__).resolve().parents[1]
+        catalog = (source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text()
+        catalog += '\n'+(source/'packaging/lab/coop-checkpoint-option.toml').read_text()
+        marker = '[[option.choice]]\nvalue = "heatnix_cp7"'
+        catalog = catalog.replace(marker, '[[option.choice]]\nvalue = "heatnix_cp0"\nlabel = "Magma CP0"\n'+marker, 1)
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            manifest = directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True)
+            manifest.write_text(catalog)
+            state = directory/'mods/state.toml'
+            initial = '\n'.join(('[[feature]]', 'package_id = "mmx6.local-coop"',
+                'id = "prototype"', 'enabled = false', '[[feature]]',
+                'package_id = "mmx6.enhancement.seamless-loading"', 'id = "resident"',
+                'enabled = true', '[feature.values]', 'strategy = "unchanged"', ''))
+            state.write_text(initial)
+            trailing = tomllib.loads(initial)['feature'][1]
+            receipt = pair.select_midboss(directory, enabled=False)
+            parsed = tomllib.loads(state.read_text())
+            self.assertEqual(parsed['feature'][0]['values']['doors'], 'both')
+            self.assertEqual(parsed['feature'][0]['values']['lab_checkpoint'], 'heatnix_cp0')
+            self.assertEqual(parsed['feature'][0]['values']['lab_earned_weapons'], 'all')
+            self.assertEqual(parsed['feature'][1], trailing)
+            self.assertEqual(receipt['doors'], 'both')
+
     def test_named_positions_are_explicit_lab_only_with_strict_choice_set(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]

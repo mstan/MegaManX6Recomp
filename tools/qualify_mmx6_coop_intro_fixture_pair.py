@@ -199,6 +199,29 @@ def run_local(args):
     return report
 
 
+def select_midboss(directory, *, enabled, selector=select_checkpoint):
+    selected = selector(directory, enabled=enabled, option='heatnix_cp0',
+        contact_protection='on', earned_weapons='all')
+    directory = Path(directory)
+    catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
+    doors = [o for o in catalog.get('option', []) if o.get('id') == 'doors']
+    if (len(doors) != 1 or doors[0].get('default') != 'either' or doors[0].get('feature') != 'prototype'
+            or {c['value'] for c in doors[0].get('choice', [])} != {'either', 'both'}):
+        raise ValueError('Missing exact existing Either/Both door option')
+    path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8')
+    if 'doors =' in text: raise ValueError('Unexpected pre-existing door choice')
+    anchor = 'lab_earned_weapons = "all"\n'
+    if text.count(anchor) != 1:
+        raise ValueError('Missing unique prototype earned-weapon preference')
+    updated = text.replace(anchor, anchor+'doors = "both"\n')
+    features = tomllib.loads(updated).get('feature', [])
+    prototype = [f for f in features if f.get('package_id') == 'mmx6.local-coop' and f.get('id') == 'prototype']
+    if len(prototype) != 1 or prototype[0].get('values', {}).get('doors') != 'both':
+        raise ValueError('Both door preference is not bound to the co-op prototype')
+    path.write_text(updated, encoding='utf-8')
+    selected.update(doors='both', state_sha256=preparation.sha256(path))
+    return selected
+
 def main():
     parser = parent.make_parser()
     parser.description = __doc__
@@ -212,21 +235,6 @@ def main():
     if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward)) > 1:
         parser.error('Select one named native scenario')
     if args.midboss_forward:
-        original_select = select_checkpoint
-        def select_midboss(directory, *, enabled):
-            selected = original_select(directory, enabled=enabled, option='heatnix_cp0',
-                contact_protection='on', earned_weapons='all')
-            directory = Path(directory)
-            catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-            doors = [o for o in catalog.get('option', []) if o.get('id') == 'doors']
-            if (len(doors) != 1 or doors[0].get('default') != 'either' or doors[0].get('feature') != 'prototype'
-                    or {c['value'] for c in doors[0].get('choice', [])} != {'either', 'both'}):
-                raise ValueError('Missing exact existing Either/Both door option')
-            path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8')
-            if 'doors =' in text: raise ValueError('Unexpected pre-existing door choice')
-            path.write_text(text+'doors = "both"\n', encoding='utf-8')
-            selected.update(doors='both', state_sha256=preparation.sha256(path))
-            return selected
         globals()['select_checkpoint'] = select_midboss
     if args.final_retry_continue and args.intro_leader != 0:
         parser.error('F136 reuses the primary-owned Sigma intro and Continue route')
