@@ -451,6 +451,18 @@ static void native_fatal_snapshot(void) {
         io=(StateIO){STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&io,&invalid);CHECK(!io.ok);
         free(wire);
     }
+    checkpoint_lab_option=1;
+    for(unsigned option=3;option<=4;++option)for(unsigned state=0;state<=CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL;++state) {
+        checkpoint_fatal_option=option;checkpoint_fatal_state=state;
+        uint32_t n=snapshot_bytes(),hash=state_digest();uint8_t *wire=malloc(n);CHECK(wire && snapshot_write(wire,n));
+        checkpoint_fatal_option=7-option;CHECK(!snapshot_validate(wire,n));checkpoint_fatal_option=option;
+        checkpoint_fatal_state=state^1;CHECK(state_digest()!=hash);
+        CHECK(snapshot_validate(wire,n));snapshot_read(wire,n);
+        CHECK(checkpoint_fatal_state==state && state_digest()==hash);
+        HostState invalid;state_capture(&invalid);invalid.fatal_state=CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL+1;
+        StateIO io={STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&io,&invalid);CHECK(!io.ok);
+        free(wire);
+    }
     checkpoint_fatal_option=0;state_commit(&prior);checkpoint_lab_option=0;
 }
 static void starting_hp_snapshot(void) {

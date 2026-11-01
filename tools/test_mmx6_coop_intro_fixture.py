@@ -77,7 +77,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         options=[o for o in catalog['option'] if o['id']=='lab_fatal']
         self.assertEqual(len(options),1)
         self.assertEqual((options[0]['feature'],options[0]['type'],options[0]['default']),('prototype','choice','off'))
-        self.assertEqual([c['value'] for c in options[0]['choice']],['off','p1','p2'])
+        self.assertEqual([c['value'] for c in options[0]['choice']],['off','p1','p2','scene_before_release','scene_during_arrival'])
 
     def test_protection_requires_explicit_typed_prelaunch_choice(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair

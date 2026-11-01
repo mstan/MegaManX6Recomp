@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; agreed one-shot native Sub Tank prerequisite for F180 qualification",
+  "status": "development-candidate-only; agreed native scene-owner fatal prerequisite for F4/F103 qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 62,
+  "revision": 63,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v79",
+    "title_compatibility": "mmx6-x-zero-delay-v80",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -897,5 +897,13 @@
     "setup": "After agreed accepted request, before original initializer: first tank acquisition flag, P1nativeenergy16/P2privateenergy8. Independent policy required; shared policy refuses before game writes. Existing consumed latch and bank/snapshot state only; no new mutable field.",
     "health": "Existing post-initializer lab_starting_hp13/11; no healing, drain, retention or result flag assigned.",
     "qualification": "Fresh exact-image LOCAL and NET native owner heals/isolation and native initializer retention required; old C122 results are not transferred."
+  },
+  "title_changes_v80": {
+    "scope": "Existing lab_fatal gains scene_before_release/scene_during_arrival, restricted to agreed intro_cp2. A fresh neutral then P2L3+R3 invokes original8003D308 as Zero owner; actual native phase3 gates original8003D330 and HP80 request in the required order. No scene/beam/death/result writes.",
+    "state": "Existing fatal_option fixed/hash identity and fatal_state snapshot/digest reused; no new mutable field. C8 bits0..2 option, bits3..5 state. Extended state range and snapshot22 reject old snapshots.",
+    "sequence": "Before-release requests HP80 at actual phase3 and waits original DYING/FALLEN+HP0 before release. During-arrival releases from actual phase3 then requests HP80 only at actual phase4 with healthy incoming passenger.",
+    "guards": "Existing agreed profile+completed checkpoint receipt and healthy idle chord gate; active-sequence guards require outer unprojected gameplay, owner2, no wipe/clear/menu, same checkpoint and live authority. Lost authority retires the one-shot without mutation.",
+    "snapshot_schema": 22,
+    "qualification": "Fresh same-image LOCAL+NET original outgoing/incoming beam, native owner death, finite effects/cadence, passenger recovery/controls, no life/checkpoint reset; final profile/CRC/cards/owned exits. Prior C124 LOCAL evidence does not qualify C132."
   }
 }

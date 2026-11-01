@@ -49,7 +49,8 @@ typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint3
 static Mmx6CheckpointPending checkpoint_pending;
 static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previous;
 static unsigned checkpoint_contact_protection_option;
-enum { CHECKPOINT_FATAL_RELEASE, CHECKPOINT_FATAL_ARMED, CHECKPOINT_FATAL_CONSUMED };
+enum { CHECKPOINT_FATAL_RELEASE, CHECKPOINT_FATAL_ARMED, CHECKPOINT_FATAL_CONSUMED,
+    CHECKPOINT_FATAL_SCENE_LOCKED, CHECKPOINT_FATAL_SCENE_WAIT_DEATH, CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL };
 /* Starting-HP storage is declared before diagnostics in the plugin. */
 static unsigned checkpoint_earned_weapons_option,checkpoint_earned_weapons_applied,checkpoint_earned_weapons_reason;
 
@@ -227,9 +228,12 @@ static void checkpoint_reset(void) {
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_fatal",option,sizeof option)) {
         if(!strcmp(option,"p1"))checkpoint_fatal_option=1;
         else if(!strcmp(option,"p2"))checkpoint_fatal_option=2;
+        else if(!strcmp(option,"scene_before_release"))checkpoint_fatal_option=3;
+        else if(!strcmp(option,"scene_during_arrival"))checkpoint_fatal_option=4;
         else if(strcmp(option,"off"))failed=1;
     }
     if(checkpoint_fatal_option && !checkpoint_lab_option)failed=1;
+    if(checkpoint_fatal_option>=3 && checkpoint_lab_option!=1)failed=1;
     if(checkpoint_earned_weapons_option && !checkpoint_lab_option)failed=1;
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {
         if(!strcmp(option,"on"))checkpoint_contact_protection_option=1;
@@ -799,25 +803,71 @@ static int checkpoint_fatal_idle(unsigned seat) {
     return body[0] && body[2]<2 && body[4]==1 && body[5]==2 &&
         !body[0x67] && ((body[0x70]|body[0x71])&8);
 }
+/* Fixed F4/F103 reachability only. These are the same original lock/release
+ * calls as offline commands5/6, selected and hashed before boot. The existing
+ * scene hooks own all phase/beam state; only native fatal HP80 is requested.
+ * No caller may manufacture a scene phase, death or successful recovery. */
+static void checkpoint_scene_call(CPUState *cpu,uint32_t address) {
+    enter_zero();guest(cpu,address,0x14,0x40);leave_zero_context(1);
+}
+static void checkpoint_scene_fatal_boundary(CPUState *cpu) {
+    if(!checkpoint_lab_completed() || !ready || !enrolled || failed || inside || stage_call ||
+       player_call || ride_call || view_call || private_draw || zero_world || zero_projected ||
+       pause_owner>=0 || clear_phase || life.wipe || psx_mod_read_byte(PLAY)!=10 ||
+       psx_mod_read_byte(PLAY+1) || scene_owner!=2) {
+        checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;return;
+    }
+    if(checkpoint_fatal_state==CHECKPOINT_FATAL_SCENE_LOCKED) {
+        /* Native outgoing beam must actually retire before either operation. */
+        if(scene_phase!=3 || psx_mod_read_byte(PLAYER+4)!=3 ||
+           life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
+           p2.body[4]!=1 || !p2.body[0x5C] || p2.body[0x5C]>=128)return;
+        if(checkpoint_fatal_option==3) {
+            p2.body[0x5C]=0x80;checkpoint_fatal_state=CHECKPOINT_FATAL_SCENE_WAIT_DEATH;
+        } else {
+            checkpoint_scene_call(cpu,0x8003D330u);
+            checkpoint_fatal_state=CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL;
+        }
+    } else if(checkpoint_fatal_state==CHECKPOINT_FATAL_SCENE_WAIT_DEATH) {
+        /* Observe original fatal handling before asking the script to release. */
+        if(scene_phase!=3 || p2.body[0x5C] ||
+           (life.status[1]!=MMX6_COOP_DYING && life.status[1]!=MMX6_COOP_FALLEN))return;
+        checkpoint_scene_call(cpu,0x8003D330u);
+        checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
+    } else if(checkpoint_fatal_state==CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL) {
+        if(scene_phase!=4 || life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
+           psx_mod_read_byte(PLAYER+4)!=1 || !psx_mod_read_byte(PLAYER+0x5C) ||
+           psx_mod_read_byte(PLAYER+0x5C)>=128 || p2.body[4]!=1 ||
+           !p2.body[0x5C] || p2.body[0x5C]>=128)return;
+        p2.body[0x5C]=0x80;checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
+    }
+}
 static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     if(checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED) {
         if(!checkpoint_fatal_option || !diagnostic || checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED)return 0;
-        if(!checkpoint_lab_completed())checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE;
+        if(checkpoint_fatal_option>=3 && checkpoint_fatal_state>=CHECKPOINT_FATAL_SCENE_LOCKED) {
+            checkpoint_scene_fatal_boundary(cpu);
+        } else if(!checkpoint_lab_completed())checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE;
         else if(raw!=6)checkpoint_fatal_state=raw?CHECKPOINT_FATAL_RELEASE:CHECKPOINT_FATAL_ARMED;
         else if(checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED) {
             checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE; /* Unsafe edges never fire later while held. */
             if(checkpoint_safe_boundary() && !clear_phase && !join_phase && !arrival_pair &&
                checkpoint_fatal_idle(0) && checkpoint_fatal_idle(1)) {
                 psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
-                if(checkpoint_fatal_option==1)psx_mod_write_byte(PLAYER+0x5C,0x80);
-                else p2.body[0x5C]=0x80;
-                checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
+                if(checkpoint_fatal_option>=3) {
+                    checkpoint_scene_call(cpu,0x8003D308u);
+                    checkpoint_fatal_state=CHECKPOINT_FATAL_SCENE_LOCKED;
+                } else {
+                    if(checkpoint_fatal_option==1)psx_mod_write_byte(PLAYER+0x5C,0x80);
+                    else p2.body[0x5C]=0x80;
+                    checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
+                }
             }
         }
-        /* C8: chosen seat in bits0..1, release/armed/consumed in bits2..3.
+        /* C8: fixed prerequisite in bits0..2, sequence state in bits3..5.
          * Existing checkpoint receipt and original chord latch stay untouched. */
-        psx_mod_write_byte(diagnostic+0xC8,(uint8_t)(checkpoint_fatal_option|(checkpoint_fatal_state<<2)));
+        psx_mod_write_byte(diagnostic+0xC8,(uint8_t)(checkpoint_fatal_option|(checkpoint_fatal_state<<3)));
         return 0; /* Original player/world update performs fatal handling. */
     }
     if(!checkpoint_lab_option)return 0;

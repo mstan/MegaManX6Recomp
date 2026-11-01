@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 21 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 22 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -202,7 +202,8 @@ static void state_core(StateIO *io,HostState *s) {
     FIELD(earned_applied,1,1);FIELD(earned_reason,1,CHECKPOINT_PLUGIN_FAILED);
     if((!checkpoint_earned_weapons_option && (s->earned_applied || s->earned_reason)) ||
        (s->earned_applied && (s->lab_state!=CHECKPOINT_LAB_CONSUMED || s->earned_reason)))io->ok=0;
-    FIELD(fatal_state,1,CHECKPOINT_FATAL_CONSUMED);
+    FIELD(fatal_state,1,CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL);
+    if(s->fatal_state>=CHECKPOINT_FATAL_SCENE_LOCKED && checkpoint_fatal_option<3)io->ok=0;
     if(s->fatal_state && (!checkpoint_fatal_option || s->lab_state!=CHECKPOINT_LAB_CONSUMED))io->ok=0;
     state_bytes(io,s->giga_backup,sizeof s->giga_backup);
     if(private_actor.character==MMX6_COOP_CHARACTER_X)state_bytes(io,s->x_overlay,sizeof s->x_overlay);
@@ -317,7 +318,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,21);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,22);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
     state_fixed(s,separate_subtanks);
     state_fixed(s,checkpoint_fatal_option);

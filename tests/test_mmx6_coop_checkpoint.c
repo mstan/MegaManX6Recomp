@@ -12,6 +12,7 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret);
 static uint8_t original_ram[0x200000],before_ram[0x200000];
 static uint16_t checkpoint_vram[1024*512];
 static unsigned before_doors_probe,equipment_probe,equipment_calls;
+static unsigned scene_fatal_probe,scene_lock_calls,scene_release_calls;
 static unsigned refight_stub,refight_probe_calls,refight_action_calls,refight_refuse;
 static unsigned refight_post_solid,refight_admission_fault;
 static unsigned refusal_logs;
@@ -23,6 +24,21 @@ static void checkpoint_test_refusal_log(const char *format,...) {
 }
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
     (void)ret;
+    if(scene_fatal_probe && (target==0x8003D308u || target==0x8003D330u)) {
+        /* External original-call contract only. Native beam/death outcomes
+         * below are explicitly supplied by the test, never the fixture. */
+        CHECK(zero_projected && cpu->gpr[4]==0x14 && cpu->gpr[5]==0x40);
+        if(target==0x8003D308u) {
+            CHECK(!scene_owner && p2.body[0x5C]==32);++scene_lock_calls;
+            script_begin(cpu,target);psx_mod_write_byte(PLAYER+5,20);
+            psx_mod_write_byte(PLAYER+0x7A,1);psx_mod_write_byte(PLAY+0x1C,1);
+        } else {
+            CHECK(scene_owner==2);++scene_release_calls;
+            psx_mod_write_byte(PLAYER+5,2);psx_mod_write_byte(PLAYER+0x7A,0);
+            psx_mod_write_byte(PLAY+0x1C,0);
+        }
+        ++guest_calls;return 1;
+    }
     if(refight_stub && (target==0x800EC430u || target==0x800EC860u)) {
         uint32_t actor=cpu->gpr[4];CHECK(scene_call && actor==0x800C1220u);
         uint32_t box=psx_mod_read_word(PLAYER+0x68);
@@ -199,7 +215,7 @@ static void agreed_native_fatal(CPUState *cpu) {
         Mmx6CoopLifecycle expected_life=life;uint8_t receipt[sizeof test_diagnostic];
         memcpy(receipt,test_diagnostic,sizeof receipt);
         if(seat)expected.body[0x5C]=0x80;else before_ram[(PLAYER+0x5C)&0x1FFFFF]=0x80;
-        receipt[0xC8]=(uint8_t)((seat+1)|(CHECKPOINT_FATAL_CONSUMED<<2));
+        receipt[0xC8]=(uint8_t)((seat+1)|(CHECKPOINT_FATAL_CONSUMED<<3));
         unsigned calls=guest_calls;
         CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED);
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&expected,&p2,sizeof p2));
@@ -236,6 +252,55 @@ static void agreed_native_fatal(CPUState *cpu) {
     starting_hp_pending(cpu,0);checkpoint_complete(cpu);
     CHECK(!checkpoint_lab_boundary(cpu,0));CHECK(!checkpoint_lab_boundary(cpu,6));
     CHECK(psx_mod_read_byte(PLAYER+0x5C)==32 && p2.body[0x5C]==32);
+}
+static void agreed_scene_fatal(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(unsigned option=3;option<=4;++option) {
+        test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+        test_lab_earned_option=test_lab_contact_option="off";
+        test_lab_fatal_option=option==3?"scene_before_release":"scene_during_arrival";
+        starting_hp_pending(cpu,online);checkpoint_complete(cpu);
+        CHECK(checkpoint_fatal_option==option && checkpoint_lab_completed());
+        scene_fatal_probe=1;scene_lock_calls=scene_release_calls=0;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !scene_lock_calls);
+        CHECK(!checkpoint_lab_boundary(cpu,0));CHECK(!checkpoint_lab_boundary(cpu,6));
+        CHECK(scene_lock_calls==1 && !scene_release_calls && scene_owner==2 && scene_phase==1);
+        CHECK(checkpoint_fatal_state==CHECKPOINT_FATAL_SCENE_LOCKED && p2.body[0x5C]==32);
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        for(unsigned held=0;held<3;++held)CHECK(!checkpoint_lab_boundary(cpu,6));
+        CHECK(scene_lock_calls==1 && !scene_release_calls && p2.body[0x5C]==32);
+        /* Supply actual outgoing completion; the fixture may not write it. */
+        scene_phase=3;psx_mod_write_byte(PLAYER+4,3);
+        CHECK(!checkpoint_lab_boundary(cpu,0));
+        if(option==3) {
+            CHECK(!scene_release_calls && p2.body[0x5C]==0x80 &&
+                checkpoint_fatal_state==CHECKPOINT_FATAL_SCENE_WAIT_DEATH);
+            CHECK(life.status[1]==MMX6_COOP_ALIVE);
+            CHECK(!checkpoint_lab_boundary(cpu,0) && !scene_release_calls);
+            /* Only the external native death result enables original release. */
+            p2.body[0x5C]=0;p2.body[4]=2;life.status[1]=MMX6_COOP_DYING;
+            CHECK(!checkpoint_lab_boundary(cpu,0));CHECK(scene_release_calls==1);
+        } else {
+            CHECK(scene_release_calls==1 && p2.body[0x5C]==32 &&
+                checkpoint_fatal_state==CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL);
+            CHECK(!checkpoint_lab_boundary(cpu,0) && p2.body[0x5C]==32);
+            /* Only the external incoming phase permits the fatal request. */
+            scene_phase=4;psx_mod_write_byte(PLAYER+4,1);
+            CHECK(!checkpoint_lab_boundary(cpu,0));CHECK(p2.body[0x5C]==0x80);
+            CHECK(life.status[1]==MMX6_COOP_ALIVE);
+        }
+        CHECK(checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED);
+        for(unsigned edge=0;edge<4;++edge)CHECK(!checkpoint_lab_boundary(cpu,edge&1?6:0));
+        CHECK(scene_lock_calls==1 && scene_release_calls==1);
+        scene_fatal_probe=0;
+    }
+    /* Loss of agreed authority consumes an active request without mutation. */
+    test_lab_fatal_option="scene_before_release";starting_hp_pending(cpu,1);checkpoint_complete(cpu);
+    scene_fatal_probe=1;CHECK(!checkpoint_lab_boundary(cpu,0));CHECK(!checkpoint_lab_boundary(cpu,6));
+    scene_phase=3;psx_mod_write_byte(PLAYER+4,3);test_lab_ready=0;
+    CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED);
+    CHECK(p2.body[0x5C]==32);scene_fatal_probe=0;test_lab_ready=1;
+    test_lab_option="turtloid_cp1";checkpoint_reset();CHECK(failed);
+    test_lab_fatal_option="off";test_lab_option="off";failed=0;checkpoint_reset();
 }
 static void agreed_starting_hp(CPUState *cpu) {
     CHECK(!checkpoint_starting_hp_parse("off") && checkpoint_starting_hp_parse("1")==1 && checkpoint_starting_hp_parse("32")==32);
@@ -1638,7 +1703,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
-    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);
+    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);agreed_scene_fatal(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }
