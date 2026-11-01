@@ -885,3 +885,245 @@ def exercise(ctx, *, output, original_exe, leader, success):
             except Exception as error:
                 e.setdefault('cleanup_errors', []).append(str(error))
         (output/'observations.json').write_bytes((json.dumps(e, indent=2)+'\n').encode('utf-8'))
+
+
+def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
+ """Reuse the original two-hatch case; only the declared fatal setup differs."""
+ import mmx6_coop_native_reentry as dialogue
+ h=hud
+ ORIGINS=(0x800FA2A4,0x800FA2AC);DOOR_X=(5744,6064)
+ def need(ok,message):
+  if not ok:raise ValueError(message)
+ if scenario=='either':
+  return exercise(ctx,output=output,original_exe=original_exe,leader=leader,success=success)
+ need(scenario in ('living','absent','fallen'),'Explicit original door policy scenario required')
+ if (1280,480) not in h.SIZES:h.SIZES=tuple(h.SIZES)+((1280,480),)
+ out=Path(output);out.mkdir(parents=True,exist_ok=False)
+ clients=ctx['clients'];report=ctx['report'];online=len(clients)==2
+ excluded=False
+ def participants():return (0,1)if not excluded else (0,)
+ e=dict(kind='two_original_Both_doors_private_views',status='failed_setup',samples=[],inputs=[],dialogue_inputs=[],dialogue_responses=[],captures=[],doors=[],checks={},source_guards=[],bypasses=['Explicit agreed intro_before_doors fixture initializes nativeCP1, then positions living heroes/camera on source-qualified predoor ground and calls the original primary placement scanner once with its native full-window envelope. Already resident secondary controllers are preserved. It bypasses unrelated approach traversal only. No native door admission, acknowledgement, CP2 grant, traversal or outcome is assigned.'],limits=['F101/F116 original intro subtype2 then subtype1 in one physical process/session per mode. No fortress/consecutive-boss-door/F83/F164 inference; no whole intro traversal, ordinary recording/replay, cross-host/OS or all-door-subtype claim.'])
+ report['two_Both_doors']=e;deadline=time.monotonic()+210
+ windows=[h.OwnedWindow(dict(request=c.request,report=dict(owned_pid=report['peers'][i]['owned_pid']if online else report['owned_pid'])),{})for i,c in enumerate(clients)]
+ def inp(seat,bits,label):
+  if excluded and seat not in participants() and bits:return
+  e['inputs'].append(dict(seat=seat,bits=bits,label=label,ack=ctx['set_input'](seat,bits)))
+ def pace():time.sleep(.015)
+ def sample(label):
+  need(time.monotonic()<deadline and len(e['samples'])<1600,'Bounded two-door observation exhausted')
+  rows=[]
+  for i,c in enumerate(clients):
+   state=h.state.private_sample(c);o=state['observation'];play=c.read(0x800CCED0,0xE0);pool=c.read(0x800C1220,0x3340);actors={}
+   for at in range(0,len(pool),0xA4):
+    a=pool[at:at+0xA4];origin=struct.unpack_from('<I',a,0x10)[0]
+    if a[0]&1 and a[1]==8 and origin in ORIGINS:
+     need(str(origin)not in actors,'Duplicate original native door allocation')
+     pointer=struct.unpack_from('<I',a,0x68)[0]
+     actors[str(origin)]=dict(address=0x800C1220+at,hex=a.hex(),box=c.read(pointer,4).hex()if 0x80010000<=pointer<=0x801ffffc else None)
+   bodies=[bytes.fromhex(state[k])for k in ('p1_body_hex','p2_body_hex')];boxes=[]
+   for body in bodies:
+    pointer=struct.unpack_from('<I',body,0x68)[0];boxes.append(c.read(pointer,4).hex()if 0x80010000<=pointer<=0x801ffffc else None)
+   pointer=struct.unpack_from('<I',play,0x20)[0];boss=None
+   if 0x8008EF48<=pointer<0x8008EF48+0x9C*48 and not (pointer-0x8008EF48)%0x9C:
+    b=c.read(pointer,0x9C)
+    if b[0]and b[1:3]==bytes((48,0)):boss=dict(address=pointer,state=b[4],action=b[5],hp=b[0x5C],hex=b.hex())
+   f=receipt(c);raw=bytes.fromhex(f['raw_hex']);f.update(pose=raw[13],placement_calls=raw[14])
+   npc_pool=c.read(0x800CD410,0x2400);npcs=[]
+   for at in range(0,len(npc_pool),0x60):
+    a=npc_pool[at:at+0x60]
+    if a[0]&1 and a[1:3]==bytes((8,0))and struct.unpack_from('<I',a,0x10)[0]==0x800FA29C:npcs.append(dict(address=0x800CD410+at,hex=a.hex()))
+   need(len(npcs)<=1,'Duplicate original following NPC allocation')
+   rows.append(dict(peer=i,fatal_status=c.read(debug.DIAGNOSTIC_ADDRESS+0xC8,1)[0],state=state,play_hex=play.hex(),camera_hex=c.read(0x800971F8,0xFC).hex(),fixture=f,doors=actors,boxes=boxes,boss=boss,npc=npcs[0]if npcs else None,stage=play[12],section=play[13],mode=list(play[:3]),dialogue_hex=c.read(0x8008EAF0,16).hex(),decoded=list(struct.unpack('<3H',c.read(0x800C456C,6)))))
+  r=dict(index=len(e['samples']),label=label,peers=rows);e['samples'].append(r)
+  for p in rows:
+   if dialogue.dialogue_state(p)['active']:
+    # Pool, text and diagnostics are separate safe-point RPCs. The native
+    # action2->3 transition can happen between the pool read and text queue.
+    # Retain both raw observations, then recheck this same typed slot AFTER
+    # the text read. This never writes an actor or normalizes its phase.
+    need(p['npc']is not None,'Active dialogue has no original typed NPC')
+    p['npc_before_dialogue_recheck']=dict(p['npc'])
+    current=clients[p['peer']].read(p['npc']['address'],0x60)
+    need(current[0]&1 and current[1:3]==bytes((8,0))and struct.unpack_from('<I',current,0x10)[0]==0x800FA29C,'Following NPC identity changed across dialogue read')
+    p['npc']=dict(address=p['npc']['address'],hex=current.hex())
+    if current[4:6]!=bytes((1,3)):
+     p['dialogue_before_npc_recheck_hex']=p['dialogue_hex']
+     p['dialogue_hex']=clients[p['peer']].read(0x8008EAF0,16).hex()
+   if dialogue.dialogue_state(p)['active']:
+    need(crossed(p,DOOR_X[0]+16)and camera_committed(p,DOOR_X[0]),'Actual first-door dialogue appeared before both full boxes/camera committed')
+    need(p['npc']and bytes.fromhex(p['npc']['hex'])[4:6]==bytes((1,3)),'Following dialogue did not retain its original typed NPC controller')
+  if online and len(e['samples'])%16==0:ctx['network']()
+  return r
+ def alive(r):
+  expected=(0,0)if not excluded else(0,2)if scenario=='absent'else(0,5)
+  return all(p['state']['observation']['native_mode']==10 and not p['state']['observation']['failed']and not p['state']['observation']['mailbox']and tuple(p['state']['observation']['lifecycle'])==expected and all(p['state']['observation']['players'][seat]['active']and p['state']['observation']['players'][seat]['state']==1 and 0<p['state']['observation']['players'][seat]['hp']<128 for seat in participants())for p in r['peers'])
+ def idle(r,cp=None):
+  return alive(r)and all(not p['state']['observation']['scene_owner']and not p['state']['observation']['pause_owner']and p['state']['observation']['native_phase']==0 and all(p['state']['observation']['players'][seat]['action']==2 for seat in participants())and(cp is None or bytes.fromhex(p['play_hex'])[0x1D]==cp)for p in r['peers'])
+ def wait(label,predicate,seconds=18,ordinary=False):
+  until=min(deadline,time.monotonic()+seconds)
+  while time.monotonic()<until:
+   r=sample(label)
+   if ordinary:
+    need(alive(r),'Two-door native living/no-passenger body contract failed')
+    for p in r['peers']:
+     o=p['state']['observation'];play=bytes.fromhex(p['play_hex'])
+     need((play[12],play[13])==(0,0)and play[0x1D]in(1,2),'Native two-door stage/checkpoint changed unexpectedly')
+     need(not o['scene_owner']or o['scene_phase']==0,'Both door entered passenger transport')
+   if predicate(r):return r
+   pace()
+  raise ValueError(label+' timed out')
+ def presentation():
+  return [dict(counters=c.request('mod_counters'),stereo=c.request('stereo_stats'),video=c.request('video_info'),present=c.request('gl_present_ring',n=240))for c in clients]
+ def counts(p):return {x['name']:x['count']for x in p['counters']['counters']}
+ def capture(label):
+  before=sample(label+' before composed capture');shots=[debug.capture_present(c,out/f'peer-{i}-{label}.png',request=c.request)for i,c in enumerate(clients)];after=sample(label+' after composed capture');ps=presentation()
+  for i,shot in enumerate(shots):e['captures'].append(dict(peer=i,label=label,before_sample=before['index'],after_sample=after['index'],presentation=ps[i],**shot))
+  return ps
+ def ticks(n,label):
+  r=sample(label+' before');start=[p['state']['observation']['native_timer']for p in r['peers']]
+  return wait(label,lambda r:all(p['state']['observation']['native_timer']>=v+n for p,v in zip(r['peers'],start)),ordinary=True)
+ def eligible(p,origin,seat):
+  if p['state']['observation']['lifecycle'][seat]!=0:return False
+  a=p['doors'].get(str(origin));b=bytes.fromhex(p['state']['p2_body_hex'if seat else'p1_body_hex']);shape=p['boxes'][seat]
+  if not a or not a['box']or not shape or b[0xA4]or b[0x5C]&128 or b[5]==3 or b[0x8E if b[2]else 0x7A]:return False
+  door=bytes.fromhex(a['hex']);x,y=struct.unpack_from('<ii',b,8);dx,dy=struct.unpack_from('<ii',door,8);x>>=16;y>>=16;dx>>=16;dy>>=16
+  s=bytes.fromhex(shape);d=bytes.fromhex(a['box']);signed=lambda v:v if v<128 else v-256
+  px=x+signed(s[0]);py=y+signed(s[1]);ax=dx+signed(d[0]);ay=dy+signed(d[1])
+  return x<=dx and abs(px-ax)<=s[2]+d[2]and py-s[3]>=ay-d[3]and py+s[3]<=ay+d[3]
+ def camera_committed(p,x):
+  cam=bytes.fromhex(p['camera_hex'])
+  return struct.unpack_from('<ii',cam,8)==(x<<16,224<<16)and all(struct.unpack_from('<H',cam,k)[0]==x for k in(0x1C,0x1E,0x24,0x26))and all(struct.unpack_from('<H',cam,k)[0]==224 for k in(0x20,0x22,0x28,0x2A))
+ def crossed(p,right):
+  for seat,(key,shape)in enumerate(zip(('p1_body_hex','p2_body_hex'),p['boxes'])):
+   if seat not in participants():continue
+   if not shape:return False
+   body=bytes.fromhex(p['state'][key]);s=bytes.fromhex(shape);offset=s[0]if s[0]<128 else s[0]-256
+   if (struct.unpack_from('<i',body,8)[0]>>16)+offset-s[2]<=right:return False
+   if body[0xD4]or body[0x67]or not body[0x70]&8:return False
+  return True
+ def release_scene(number,x):
+  until=min(deadline,time.monotonic()+65)
+  while time.monotonic()<until:
+   r=sample('door%d native scene release and original dialogue'%(number+1));need(alive(r),'Native post-door scene lost a living body')
+   need(all(not p['state']['observation']['scene_phase']for p in r['peers']),'Post-door native scene used passenger transport')
+   if idle(r)and all(crossed(p,x+16)and dialogue.dialogue_state(p)['active']==0 for p in r['peers']):return r
+   def ready(item):
+    return all((p['stage'],p['section'],p['mode'])==(0,0,[10,0,0])and (p['state']['observation']['scene_owner']==1 if not excluded else p['state']['observation']['scene_owner']in(0,1+participants()[0]))and p['state']['observation']['players'][0 if not excluded else participants()[0]]['action']==20 and (dialogue.dialogue_state(p)['active'],dialogue.dialogue_state(p)['phase'])==(255,3)for p in item['peers'])
+   if ready(r):
+    need(number==0,'Unexpected dialogue family after second door')
+    need(all(crossed(p,x+16)and camera_committed(p,x)for p in r['peers']),'Actual native dialogue admitted before both full boxes/camera committed')
+    if not e['dialogue_responses']:capture('first-door-following-original-dialogue-ready')
+    offered=[];accepted=[]
+    def pulse_ready(item):
+     if not ready(item):return False
+     offered[:]=[dialogue.dialogue_state(p)for p in item['peers']];return True
+    def response(item):
+     after=[dialogue.dialogue_state(p)for p in item['peers']]
+     reasons=[dialogue.dialogue_response(a,z)for a,z in zip(offered,after)]
+     if len(after)!=len(clients)or not all(reasons):return False
+     accepted[:]=[dict(before=a,after=z,response=why)for a,z,why in zip(offered,after,reasons)];return True
+    dialogue.pulse(dict(ctx,input_path='published_host',set_input=lambda seat,bits:inp(seat if not excluded else participants()[0],bits,'native NPC dialogue Cross/neutral')),e['dialogue_inputs'],0x4000,response,sample,label='Original NPC2 ready dialogue Cross',ready=pulse_ready,timeout=min(10,max(.1,(until-time.monotonic())/3)))
+    e['dialogue_responses'].append(dict(sample=r['index'],native_response_and_neutral=True,peers=accepted))
+   pace()
+  raise ValueError('door%d original scene release and both control timed out'%(number+1))
+ try:
+  exe=Path(original_exe).read_bytes();need(hashlib.sha256(exe).hexdigest()=='dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046','Original EXE differs')
+  for address,size in ((0x80050250,0x324),(0x80050C88,0x174),(0x80050DFC,0xFC),(0x80050EA0,0xB8),(0x8007212C,36),(0x8005211C,0x13C),(0x80079230,0x30),(0x80079290,0x20),(0x8002A3E8,0x50),(0x80029F38,0x404),(0x8003D308,0x44),(0x800219EC,0x30),(0x80021FC4,0x874)):
+   raw=exe[address-0x80010000+2048:address-0x80010000+2048+size];need(all(c.read(address,size)==raw for c in clients),'Original setup/door source differs')
+   e['source_guards'].append(dict(address=hex(address),bytes=size,sha256=hashlib.sha256(raw).hexdigest()))
+  # Original BIN2/index2/sector36/baseE9860; parent pins the original archive.
+  # F9334 queues D0, F936C waits action20, F93E8 opens ID2 after X>=5824;
+  # F9548 calls original3D330 only after native NPC departure below Y192.
+  for address,size,wanted in ((0x800F90FC,1140,'ef0f6d9cce2bdba994d07e35497dc32e88decee1c7a7ebd5c698caa7528662ab'),(0x800FBB3C,36,'2b9ec31ce03c897435ddae949b46ab810dc224e96e9101a18ee2b14988b814f0')):
+   need(all(hashlib.sha256(c.read(address,size)).hexdigest()==wanted for c in clients),'Original typed NPC scene code/table differs')
+   e['source_guards'].append(dict(address=hex(address),bytes=size,sha256=wanted,original_bin2_sha256='d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607'))
+  for seat in(0,1):inp(seat,0,'ordinary native neutral before declared fixture')
+  before=wait('original CP0 idle before accepted setup chord',lambda r:idle(r,0),20)
+  need(all(p['fixture']['generation']==p['fixture']['tainted']==p['fixture']['latch']==0 for p in before['peers']),'Fixture used before accepted chord')
+  inp(1,6,'accepted P2 L3+R3 arms declared intro_before_doors')
+  try:wait('accepted agreed prerequisite latch',lambda r:all(p['fixture']['latch']in(1,2)for p in r['peers']),15)
+  finally:inp(1,0,'release accepted prerequisite chord')
+  def setup_ready(r):
+   need(all(p['fixture']['state']not in(4,5)for p in r['peers']),'Declared native prerequisite rejected')
+   return idle(r,1)and all(p['fixture']['state']==3 and p['fixture']['pose']==2 and p['fixture']['placement_calls']==1 and str(ORIGINS[0])in p['doors']for p in r['peers'])
+  ready=wait('original CP1 then one-shot native-grounded predoor setup',setup_ready,65)
+  wanted=dict(generation=1,state=3,reason=0,stage=0,section=0,checkpoint=1,nonce=0x4C434431,initializer_entries=1,record='8007212C',tainted=1,authority=1,latch=2,pose=2,placement_calls=1)
+  need(all(all(p['fixture'].get(k)==v for k,v in wanted.items())for p in ready['peers']),'Full agreed one-shot CP1/pose/placement receipt differs')
+  need(all(not eligible(p,ORIGINS[0],0)and not eligible(p,ORIGINS[0],1)for p in ready['peers']),'Setup already granted original door eligibility')
+  e['prerequisite']=dict(sample=ready['index'],expected_receipt=wanted)
+  if scenario=='absent':
+   inp(1,1,'real guest Select90 native withdrawal before first door')
+   leaving=wait('actual guest LEAVING',lambda r:all(p['state']['observation']['lifecycle'][1]==1 for p in r['peers']),30)
+   inp(1,0,'release actual Select without fresh request')
+   gone=wait('actual native guest completion ABSENT',lambda r:all(tuple(p['state']['observation']['lifecycle'])==(0,2)and bytes.fromhex(p['state']['p2_body_hex'])[4]==3 for p in r['peers']),45)
+   e['exclusion_precondition']=dict(kind='real_Select_to_native_ABSENT',leaving=leaving['index'],completed=gone['index']);excluded=True
+  elif scenario=='fallen':
+   e['bypasses'].append('Predeclared lab_fatal=p2 requests only native HP80 after the checkpoint; original updates must earn death/FALLEN. Door, lifecycle, lives and progress results are never assigned.')
+   inp(1,0,'neutral after completed checkpoint before separate fatal edge')
+   armed=wait('agreed P2 fatal armed after neutral',lambda r:idle(r,1)and all(p['fatal_status']==6 for p in r['peers']),15)
+   inp(1,6,'ordinary second P2 L3+R3 requests declared native fatal')
+   try:requested=wait('one agreed P2 native fatal request consumed',lambda r:all(p['fatal_status']==10 for p in r['peers']),15)
+   finally:inp(1,0,'release consumed native fatal chord')
+   dying=wait('original P2 native fatal handling',lambda r:all(p['state']['observation']['lifecycle'][1]in(4,5)for p in r['peers']),30)
+   fallen=wait('actual native guest death finishes FALLEN',lambda r:all(tuple(p['state']['observation']['lifecycle'])==(0,5)and bytes.fromhex(p['state']['p2_body_hex'])[4]==3 for p in r['peers']),45)
+   e['exclusion_precondition']=dict(kind='agreed_P2_HP80_request_then_original_native_FATAL_FALLEN',armed=armed['index'],requested=requested['index'],dying=dying['index'],completed=fallen['index']);excluded=True
+  else:need(scenario=='living','Explicit F61 scenario required')
+  for w in windows:w.resize(1280,480)
+  ticks(8,'actual predoor private pairs');capture('before-first-native-door')
+  for number,(origin,x)in enumerate(zip(ORIGINS,DOOR_X)):
+   leading=1-number if not excluded else participants()[0];trailing=leading^1;record=dict(number=number+1,origin=hex(origin),authored_x=x,leading=leading);e['doors'].append(record)
+   initial=wait('original door%d allocated and both idle'%(number+1),lambda r:idle(r)and all(str(origin)in p['doors']for p in r['peers']),20,True)
+   before_views=presentation();record['before']=initial['index'];record['presentation_before']=before_views
+   for p in initial['peers']:
+    actor=bytes.fromhex(p['doors'][str(origin)]['hex']);need((actor[1],actor[2])==(8,2 if number==0 else 1)and struct.unpack_from('<i',actor,8)[0]==x*65536,'Wrong original authored door')
+   if not excluded:
+    inp(leading,0x20,'one hero reaches door%d while partner stays outside'%(number+1))
+    waiting=wait('only leading native body eligible at door%d'%(number+1),lambda r:all(eligible(p,origin,leading)and not eligible(p,origin,trailing)for p in r['peers']),20,True)
+    inp(leading,0,'leading hero waits at original Both door');held=ticks(24,'Both door%d refuses single hero'%(number+1))
+    need(all(not p['state']['observation']['scene_owner']and bytes.fromhex(p['doors'][str(origin)]['hex'])[5]==0 for p in held['peers']),'Both policy admitted only one eligible hero')
+    for a,z in zip(initial['peers'],held['peers']):need(a['state']['observation']['players'][trailing]['x_raw']==z['state']['observation']['players'][trailing]['x_raw'],'Waiting door moved distant hero')
+    record['waiting']=waiting['index'];record['held']=held['index'];record['waiting_presentation']=capture('door%d-only-leading-hero-waits'%(number+1))
+    for a,z in zip(before_views,record['waiting_presentation']):
+     need(z['stereo']['pairs']>a['stereo']['pairs'] and counts(z).get('mmx6.coop.private-committed',0)>counts(a).get('mmx6.coop.private-committed',0),'Waiting at native Both door stopped private drawing')
+     need(z['stereo']['published']['mode']==2 and z['stereo']['published']['valid']==1 and z['stereo']['published']['width']*3==z['stereo']['published']['height']*4 and not counts(z).get('mmx6.coop.private-state-leak',0),'Waiting door lost native4:3 panes or leaked state')
+     need(all(v[2]=='stereo' and not v[7] and v[5][2]*3==v[5][3]*8 for v in z['present']['events'][-2:]),'Waiting native door did not present independent8:3 canvas')
+   inp(trailing,0x20,'partner approaches actual door%d'%(number+1));inp(leading,0x20,'leading hero crosses only after both admit')
+   admitted=wait('original door%d Both admission'%(number+1),lambda r:all(p['state']['observation']['scene_owner']or (excluded and bytes.fromhex(p['doors'][str(origin)]['hex'])[5]in(1,2,3))for p in r['peers']),20,True);record['admitted']=admitted['index']
+   seen=set();until=min(deadline,time.monotonic()+65);released=None
+   while time.monotonic()<until:
+    r=sample('door%d native opening/traversal'%(number+1));need(alive(r),'Door traversal lost living original bodies')
+    for p in r['peers']:
+     need(not p['state']['observation']['scene_owner']or p['state']['observation']['scene_phase']==0,'Door used passenger transport')
+     if dialogue.dialogue_state(p)['active']:
+      need(number==0 and crossed(p,x+16)and camera_committed(p,x),'Following dialogue began before native full-box/camera commitment')
+    actor=r['peers'][0]['doors'].get(str(origin));phase=bytes.fromhex(actor['hex'])[5]if actor else-1
+    if phase in(1,2,3)and phase not in seen:
+     seen.add(phase);capture('door%d-native-phase%d'%(number+1,phase))
+    if all(crossed(p,x+16)for p in r['peers']):
+     for seat in(0,1):inp(seat,0,'release ordinary Right after full-box crossing')
+     released=release_scene(number,x);break
+    pace()
+   need(released is not None,'Original door failed complete full-box traversal')
+   after_views=capture('door%d-both-full-boxes-released'%(number+1));record.update(released=released['index'],presentation_after=after_views,observed_phases=sorted(seen))
+   if not excluded:
+    for a,z in zip(before_views,after_views):
+     ac,zc=counts(a),counts(z);need(z['stereo']['pairs']>a['stereo']['pairs']and z['stereo']['published']['mode']==2 and not zc.get('mmx6.coop.private-state-leak',0),'Native door lost actual independent pairs or leaked context')
+     for phase in ('opening','traversal'):need(zc.get('mmx6.coop.private-door-'+phase,0)>ac.get('mmx6.coop.private-door-'+phase,0),'No committed private views through native door '+phase)
+   if number==0:need(all(bytes.fromhex(p['play_hex'])[0x1D]==2 for p in released['peers']),'Original CP2 marker was not crossed naturally')
+  final=wait('native original boss readiness after second door',lambda r:idle(r,2)and all(p['boss']and p['boss']['state']==1 and p['boss']['action']>=4 and p['boss']['hp']==32 for p in r['peers']),65,True)
+  e['final']=final['index'];capture('both-original-doors-complete-native-boss-ready')
+  if not excluded:
+   e['checks']=dict(one_session_two_distinct_original_doors=True,both_policy_refuses_single_hero_at_each=True,each_living_native_body_crosses_both_full_boxes=True,no_passenger_withdrawal_or_rejoin=True,native_opening_and_traversal_private_commits_each_door=True,actual_private_pairs_resume_each_door=True,native_checkpoint_marker_and_boss_progression=True,host_private_state_restored=True,actual_dialogue_follows_both_full_boxes_and_native_camera=bool(e['dialogue_responses'])and all(d['native_response_and_neutral']for d in e['dialogue_responses']))
+  else:
+   e['checks']=dict(actual_native_excluded_partner_precondition=True,one_session_two_original_hatches=True,sole_living_native_admission_and_full_box_clearance=True,native_original_NPC_dialogue_and_checkpoint_progression=bool(e['dialogue_responses']),native_D1000_full32HP_ready=True,excluded_partner_remains_excluded=alive(final),actual_native_release_controls=idle(final,2),native_results_not_seeded=True)
+  e['status']=success;return e
+ except Exception as error:
+  e.update(error=str(error),traceback=traceback.format_exc())
+  try:capture('terminal-observation')
+  except Exception as extra:e['terminal_capture_error']=str(extra)
+  raise
+ finally:
+  for seat in(0,1):
+   try:inp(seat,0,'final owned neutral')
+   except Exception as error:e.setdefault('cleanup_errors',[]).append(str(error))
+  (out/'observations.json').write_bytes((json.dumps(e,indent=2)+'\n').encode())

@@ -9,6 +9,32 @@ import mmx6_coop_intro_fixture as intro
 
 
 class NamedPrerequisiteCatalogTests(unittest.TestCase):
+    def test_door_policy_fatal_stays_in_prototype_before_trailing_net_feature(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source=Path(__file__).resolve().parents[1]
+        catalog=(source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text()
+        catalog+='\n'+(source/'packaging/lab/coop-checkpoint-option.toml').read_text()
+        # Typed catalog extension in the separately built C129 game candidate.
+        if not any(o['id']=='lab_fatal' for o in tomllib.loads(catalog)['option']):
+            catalog+='\n[[option]]\nfeature="prototype"\nid="lab_fatal"\ntype="choice"\ndefault="off"\n'
+            catalog+=''.join('[[option.choice]]\nvalue="'+value+'"\n' for value in ('off','p1','p2'))
+        with tempfile.TemporaryDirectory() as temporary:
+            directory=Path(temporary);manifest=directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True);manifest.write_text(catalog)
+            state=directory/'mods/state.toml'
+            initial='[[feature]]\npackage_id="mmx6.local-coop"\nid = "prototype"\nenabled = false\n[[feature]]\npackage_id="mmx6.enhancement.seamless-loading"\nid="resident"\nenabled=true\n[feature.values]\nstrategy="unchanged"\n'
+            trailing=tomllib.loads(initial)['feature'][1]
+            for scenario in ('either','living','absent','fallen'):
+                state.write_text(initial)
+                pair.select_door_policy(directory,enabled=False,scenario=scenario)
+                features=tomllib.loads(state.read_text())['feature'];values=features[0]['values']
+                self.assertEqual(features[1],trailing)
+                self.assertEqual(values['doors'],'either' if scenario=='either' else 'both')
+                self.assertEqual(values['lab_fatal'],'p2' if scenario=='fallen' else 'off')
+                self.assertEqual(values['lab_checkpoint'],'intro_cp2' if scenario=='either' else 'intro_before_doors')
+                self.assertEqual(values['lab_contact_protection'],'on')
+                self.assertEqual((values['lab_starting_hp_p1'],values['lab_starting_hp_p2'],values['lab_earned_weapons']),('off','off','off'))
+
     def test_midboss_both_stays_in_prototype_with_trailing_net_feature(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
