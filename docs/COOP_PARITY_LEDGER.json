@@ -10416,14 +10416,14 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "passed"
+          "local": "passed",
+          "netplay": "unverified"
         },
         "evidence": [
           {
@@ -10589,9 +10589,76 @@
             "bypasses": [
               "Prelaunchauthoredavailability/inventoryonly. RealnormalSDKsessionboundary/nativeLoad/control, no RAM/resultwrites."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "a0df4320a27345fd3694ae4fc059338bdcde979d",
+            "build_identity": {
+              "exe_sha256": "6efea733209f2bb1a6768bd0d64e612786344a6d9ae0b770460e1c22e380a8f5",
+              "declared_manifest_sha256": "a1825871b2eade92bd37d06afcad95abda491a477e459a0c3aabf266c807fe2b",
+              "compiled_source_commit": "a0df4320a27345fd3694ae4fc059338bdcde979d",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title_version": 75,
+              "host_profile_version": 58,
+              "snapshot_schema": 20,
+              "mod_session_resources": 1
+            },
+            "settings": {
+              "roster": "Actualcanonicalunit0 X/P1 Zero/P2, originalauthoredcardLoad/nativeAmazonstage1 eachactivation",
+              "fixtures": "LABalloff; privatecard4e2c/blank7706, twoDigital; SDLdummy/hidden960x720 GL1",
+              "boundary": "One actualSDKsession_restart n0 ACK1241 acrossTWOactivations inSAMEPID46428/TCP18139; normalteardown/commit/activation/BIOSfreshGLcontext, no processrelaunch"
+            },
+            "action": "Nativecounterpartmenu/ownmovement/P1isolation/Saber/expiry andresourcewindows eachactivation, realnormalrestart andfreshP2reinitialization, thenONEcurrent-buildwarmSAVE/LOAD plusrestoredresources/control.",
+            "outcome": "PASS implementedtitlecontractfix. Both3samplewindows haveguest548864/DMA513024/snapshot1061904/layoutcookie1080537090/packetarenas2+327680/replacements45 unchanged. Actualboundaryclearsbanks195/3494400bytes->0/0 and reinitializesresources atbaseline; no C1261x2x3growth. Postwarmbanks195->196/+128KiBordinaryvariationretained, no exactbankgate. Activation2fresh9Ftick118/nativeTimer11/ready/enrolled/lifecycle0, actualcomposedX+Zero/lowerHUD+Saberarc, counterpartnativeownmenu/movement/attackexpiryworks. WarmSAVEslot0gen1/LOADgen2 last_ok1, P2x12222464->12419072->12222464restored->12025856freshcontrol, P1stationary/HP32/ownresourcesretained. Ownedquit1287/exit0/PID46428+18139absent/nativecardsunchanged, about751s<25min.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-local-restart-1\\control-observations.jsonl",
+                "sha256": "12ab3ff54ec7ab1ff7a05dbf07733e20fcf50db515ae553b6fc5a63714767eb4"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-local-restart-1\\native-job.json",
+                "sha256": "af55f94e6cae4036cd717ec1ce22d840dd74bfd432bb13e556849366044b0d93"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-local-restart-1\\binding.json",
+                "sha256": "6044f4067271de22260ba91a87f91cc753ec1d9f727731fd5505d34fd05f5c5e"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-local-restart-1\\benchmark.json",
+                "sha256": "295eb49ce46ea419031dd6a0d4c7caa41581e386517047b009c03b2e3d2df454"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-local-restart-1\\F39-C127-activation-1-counterpart-native-menu.png",
+                "sha256": "9926fdf468c0db9ccd7d0f175f8aa5c34487d3eb8eaeaed3676254a00cb375c0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-local-restart-1\\F39-C127-activation-2-counterpart-native-menu.png",
+                "sha256": "e8671779d3ea5dbae84278d46cde7f9083dd4dbf2bfa9c290359b747bd557ffc"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-local-restart-1\\F39-C127-activation-2-native-Saber.png",
+                "sha256": "0c0ed43172cf9436bd874ebc26364dcef6873d153508e788c8cf1eb2dcca2251"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c127-local-restart-1\\F39-C127-current-state-restored-present.png",
+                "sha256": "6e691cb3aa73b7f09002bebf9f5c5ec72a31f3385fb71349fc2ef04fae82bbb5"
+              }
+            ],
+            "limits": [
+              "CurrentC127LOCALpassed only. HistoricalV90NETboundedpass preserved, but differentcandidate cannotaggregate; C127NETsameimage lifecycle/profile/CRC gate remainsunverified.",
+              "Native_entry_contextproviderunregistered0 retainedasAPIlimit, notperbankidentityproof. Actualprivatebody/readiness/input/art/resourcecountersestablishboundedcheck; no universalnoleak claim.",
+              "Twoactualactivations/oneboundary, no inventedthree-cycleminimum/exactbankequality/per-bankinventory.",
+              "Warmstateis currentbuildsamecontext; no previousbuild/coldload/NETstate orordinaryreplayclaim. Epoch1recordingfinalized; epoch2statusfailed atallowedLOAD: guestexecutionstate replaced/capturesegmentended.",
+              "C126failure/source/binary/raw andoldV90strictgatefailure/NVIDIAcrash evidence preserved. SDKlegacydefault0unchanged; onlytitleoptsinexistingcontract."
+            ],
+            "bypasses": [
+              "Prelaunchavailability/inventoryonly, actualoriginalLoad/menu/control/SDKsessionboundary. No RAM/resultwrites."
+            ]
           }
         ],
-        "limitations": "C126LOCALactualsamePIDrestartfails: resourcesgrow1x/2x/3x andP2disappears aftersecondactivation. ExactcompiledtitlecontractPSX_MOD_SESSION_RESOURCES=0 preserveslegacyarenaswhiletitleallocatesagain. C127titleoptin+cachedhandlereacquisitionimplementedpendingbuild/native. RetainedV90NETboundedpass independent, no crosscandidateaggregate."
+        "limitations": "CurrentC127 authoredresourcecontractfix fullyqualifiesLOCALsamePIDrestart: resourcesresetatbaseline, P2freshdraw/menu/control/Saber, currentwarmstatepass. ExactcurrentC127NETlifecycle/profile/resolvedCRCstillrequired. HistoricalV90NETboundedpass remainsvalidindependent, cannotcrosscandidateaggregate. AllC126growth/P2failure/oldstrictbankgate evidence retained."
       }
     },
     {
