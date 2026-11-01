@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; agreed one-shot native fatal HP request for F61/F123/F113 qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 60,
+  "revision": 61,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v77",
+    "title_compatibility": "mmx6-x-zero-delay-v78",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -881,5 +881,12 @@
     "native_basis": "Existing offline diagnostic command1 writes only private body5C fatal sentinel; original800282F0 pit_death requests the same80h. Native update must earn actual death/cleanup and survivor behavior.",
     "snapshot_schema": 21,
     "qualification": "F61/F123 actual FALLEN exclusion and F113 both-alive then primary native fatal/weather, same candidate LOCAL+NET with actual profile, resolved core/mod CRC, native controls/cards/owned exits. No source/unit-only admission."
+  },
+  "title_changes_v78": {
+    "scope": "F113 agreed native fatal prerequisite only; accept original actor-supported idle as well as terrain-supported idle.",
+    "native_source": "Original8002F2A4 clears terrain contact+70; native800350F8 clears actor contact+71 before body update; original8002E2F4 selects support8 and8002E3C4/8002E658 accumulate actor contact+71.",
+    "guard": "Keep both bodies active, gameplay phase1/action2, no air state, all existing personal/shared locks and agreed completed checkpoint; require (body70|body71)&8.",
+    "snapshot_schema": 21,
+    "qualification": "Actual same-candidate primary native fatal on Turtloid actor support, healthy counterpart, unchanged before/after five-atlas rain observations and final parent gates; no inherited C129 credit."
   }
 }

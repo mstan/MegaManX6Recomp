@@ -774,13 +774,15 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
     return checkpoint_request(psx_mod_read_byte(diagnostic+0x51),psx_mod_read_byte(diagnostic+0x52),
         psx_mod_read_byte(diagnostic+0x53),psx_mod_read_word(diagnostic+0x54),CHECKPOINT_OFFLINE);
 }
+/* Original terrain contact uses +70; actor support uses +71 (8002E3C4/8002E658).
+ * Native800350F8 clears +71 each body update; it is not a previous-ground copy. */
 static int checkpoint_fatal_idle(unsigned seat) {
     uint8_t body[sizeof p2.body];
     if(seat)memcpy(body,p2.body,sizeof body);else capture(PLAYER,body,sizeof body);
     const unsigned locks[]={0x7A,0x8E,0xA4,0xCC,0xCD,0xD0,0xD3,0xD4,0xE0};
     for(unsigned i=0;i<sizeof locks/sizeof locks[0];++i)if(body[locks[i]])return 0;
     return body[0] && body[2]<2 && body[4]==1 && body[5]==2 &&
-        !body[0x67] && (body[0x70]&8);
+        !body[0x67] && ((body[0x70]|body[0x71])&8);
 }
 static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT

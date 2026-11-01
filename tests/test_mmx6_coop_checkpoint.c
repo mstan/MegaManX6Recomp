@@ -189,8 +189,10 @@ static void fatal_ready(CPUState *cpu,int online,unsigned seat) {
     CHECK(checkpoint_lab_completed() && !checkpoint_pending.phase && !checkpoint_fatal_state);
 }
 static void agreed_native_fatal(CPUState *cpu) {
-    for(int online=0;online<=1;++online)for(unsigned seat=0;seat<2;++seat) {
+    for(int online=0;online<=1;++online)for(unsigned seat=0;seat<2;++seat)for(unsigned support=0;support<2;++support) {
         fatal_ready(cpu,online,seat);
+        /* Real Turtloid idle can be actor-supported with terrain contact zero. */
+        if(support) {psx_mod_write_byte(PLAYER+0x70,0);psx_mod_write_byte(PLAYER+0x71,8);p2.body[0x70]=0;p2.body[0x71]=8;}
         CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state); /* Held first chord is not a new edge. */
         CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED);
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext expected=p2;
@@ -207,15 +209,19 @@ static void agreed_native_fatal(CPUState *cpu) {
         for(unsigned edge=0;edge<4;++edge)CHECK(!checkpoint_lab_boundary(cpu,edge&1?6:0));
         CHECK((seat?p2.body[0x5C]:psx_mod_read_byte(PLAYER+0x5C))==7);
     }
-    for(unsigned bad=0;bad<10;++bad) {
-        fatal_ready(cpu,1,0);CHECK(!checkpoint_lab_boundary(cpu,0));
+    for(unsigned support=0;support<2;++support)for(unsigned bad=0;bad<12;++bad) {
+        fatal_ready(cpu,1,0);
+        if(support) {psx_mod_write_byte(PLAYER+0x70,0);psx_mod_write_byte(PLAYER+0x71,8);p2.body[0x70]=0;p2.body[0x71]=8;}
+        CHECK(!checkpoint_lab_boundary(cpu,0));
         if(bad==0)pause_owner=0;if(bad==1)scene_owner=1;if(bad==2)p2.body[5]=3;
-        if(bad==3)p2.body[0xD0]=1;if(bad==4)psx_mod_write_byte(PLAYER+0x70,0);
+        if(bad==3)p2.body[0xD0]=1;if(bad==4) {psx_mod_write_byte(PLAYER+0x70,0);psx_mod_write_byte(PLAYER+0x71,0);}
         if(bad==5)test_lab_ready=0;if(bad==6)test_lab_failed=1;if(bad==7)test_lab_selected=0;
         if(bad==8)test_lab_profile.qualification[0]^=1;
         if(bad==9)psx_mod_write_byte(diagnostic+0xA8,CHECKPOINT_INITIALIZING);
+        if(bad==10)p2.body[0x67]=1;if(bad==11)p2.body[4]=2;
         CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state);
-        pause_owner=-1;scene_owner=0;p2.body[5]=2;p2.body[0xD0]=0;psx_mod_write_byte(PLAYER+0x70,8);
+        pause_owner=-1;scene_owner=0;p2.body[4]=1;p2.body[5]=2;p2.body[0x67]=p2.body[0xD0]=0;
+        psx_mod_write_byte(PLAYER+0x70,support?0:8);psx_mod_write_byte(PLAYER+0x71,support?8:0);
         test_lab_ready=test_lab_selected=1;test_lab_failed=0;
         if(bad==8)test_lab_profile.qualification[0]^=1;
         psx_mod_write_byte(diagnostic+0xA8,CHECKPOINT_COMPLETE);
