@@ -76,9 +76,9 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
             time.sleep(.015)
         raise ValueError(label+' timed out')
     def healthy(p):
-        o=p['observation'];return o['ready']==o['enrolled']==1 and o['lifecycle']==[0,0] and all(a['hp']&127 and a['state']==1 for a in o['players'])
+        o=p['observation'];return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,0) and all(a['hp']&127 and a['state']==1 for a in o['players'])
     def recovered(p):
-        o=p['observation'];return o['ready']==o['enrolled']==1 and o['lifecycle']==[0,5] and not o['scene_owner'] and not o['scene_phase'] and not o['pause_owner'] and o['players'][0]['state']==1 and o['players'][0]['hp']==32 and o['players'][0]['action']==2 and o['players'][1]['hp']==0
+        o=p['observation'];return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,5) and not o['scene_owner'] and not o['scene_phase'] and not o['pause_owner'] and o['players'][0]['state']==1 and o['players'][0]['hp']==32 and o['players'][0]['action']==2 and o['players'][1]['hp']==0
     def capture(label,row):
         for i,c in enumerate(clients):e['captures'].append(dict(peer=i,label=label,row=row['index'],**debug.capture_present(c,output/f'peer-{i}-{label}.png',request=c.request)))
     def updates(label,count=8):

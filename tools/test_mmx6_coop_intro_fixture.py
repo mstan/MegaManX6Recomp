@@ -1,11 +1,37 @@
 """Reject unilateral/partial fixture receipts before named mechanic admission."""
+import ast
 import copy
+import inspect
 from pathlib import Path
 import tempfile
 import tomllib
 import unittest
 
 import mmx6_coop_intro_fixture as intro
+
+
+class NativeScenePredicateTests(unittest.TestCase):
+    def test_live_lifecycle_tuple_and_saved_json_list_use_same_native_guards(self):
+        # The debug dataclass retains tuple lifecycle in live .json(); JSON
+        # serialization alone hid the mismatch in failed C132 LOCAL1 evidence.
+        import json
+        import coop_debug as debug
+        tree=ast.parse(inspect.getsource(intro.exercise_scene_owner_fatal))
+        funcs=[n for n in tree.body[0].body if isinstance(n,ast.FunctionDef) and n.name in ('healthy','recovered')]
+        self.assertEqual(len(funcs),2)
+        scope={};exec(compile(ast.Module(body=funcs,type_ignores=[]),'<actual scene predicates>','exec'),scope)
+        players=tuple(debug.Player(1,seat,1,2,32,0,0) for seat in (0,1))
+        o=debug.Observation(schema=1,tick=1,sequence=2,native_timer=0,lifecycle=(0,0),pause_owner=0,
+            scene_owner=0,scene_phase=0,mailbox=0,ready=1,enrolled=1,failed=0,native_mode=10,
+            native_phase=0,host_digest=1,host_digest_algorithm=1,players=players).json()
+        self.assertIsInstance(o['lifecycle'],tuple)
+        for saved in (False,True):
+            active=json.loads(json.dumps(o)) if saved else copy.deepcopy(o)
+            self.assertTrue(scope['healthy'](dict(observation=active)))
+            active['lifecycle']=(0,5);active['players'][1]['hp']=0
+            self.assertTrue(scope['recovered'](dict(observation=active)))
+            active['scene_phase']=4
+            self.assertFalse(scope['recovered'](dict(observation=active)))
 
 
 class NamedPrerequisiteCatalogTests(unittest.TestCase):
