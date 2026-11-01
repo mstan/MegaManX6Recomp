@@ -26244,14 +26244,14 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -26534,9 +26534,89 @@
             ],
             "action": "Inverse both peers: actual native redZero/P1 Z-SABER0 and blueX/P2 X-BUSTER0 owned menus, other-seat Start rejection, owner resume, actual selected core abilities and resources.",
             "outcome": "PASS inverse NET component. Menu0 frozen nativeTimer6308/pause_owner1 remains unchanged after fresh otherStart; menu1 timer21281/pause_owner2 unchanged. Owner resumes0, bothHP32/ammo288/weapons0 retained; nativeZero Saber and nativeXheld/fullcharge/travellingBuster/basic recovery execute with actualGL art. Both postcase resolved core/mod windows match (raw retains57984/58016 finalcase). Canonical bothownedmenus/abilities NET never reached because subsequent guest executions ended PC0; no fullmode/rowadmission."
+          },
+          {
+            "mode": "netplay",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Native canonical X/P1 + Zero/P2; reuse accepted same-image inverse Zero/P1 + X/P2 and LOCAL both rosters",
+              "session": 2026110179,
+              "delay": 3,
+              "host_profile": "mmx6.win64-clang22.loopback revision56 selectedSHA fee00757479c53290da026a82293d376a0455f7c202f9b8b8a53b4d74a30da8e; settled before frame0",
+              "renderer": "Completed actual composed present_shot images; unattended hidden/SDLdummy",
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07"
+            },
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-0-1\\logs\\takeover-control.jsonl",
+                "sha256": "4554d83fd177a8fb992a696cda3709cb420c690bb42bc6bf863a28049a27c750"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-owned-1.json",
+                "sha256": "8a48f3081c959a557e20c53581617326bd2ce7dba3373faa0806523db3c149ec"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-native-net-capacity-1.json",
+                "sha256": "2512326898cfce0c1ee383db65227af9cff8fa81f808ff808cb63e9f0585c565"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-0-1\\logs\\takeover-P1-owned-native-menu.png",
+                "sha256": "23bfe8de2b840593f0d46bb81b442041bbe72a00ddd1f328edf26a120262d03e"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-0-1\\logs\\takeover-P2-owned-native-menu.png",
+                "sha256": "267903cb6737f966704da617d01bed235dcf83c166b359db6321ef388c5ed19f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-0-1\\logs\\takeover-P1-selected-core-attack.png",
+                "sha256": "f0bf117fd3510704d23eed3ca3e45ef7652927535c65a96c4318e6be1e0c5ff8"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-0-1\\logs\\takeover-P2-selected-core-attack.png",
+                "sha256": "6f693c6810649e7180d29754ae114f82e6467d6b8667447ea9cd2e3edd419604"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-1-1\\logs\\takeover-P1-owned-native-menu.png",
+                "sha256": "23bfe8de2b840593f0d46bb81b442041bbe72a00ddd1f328edf26a120262d03e"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-1-1\\logs\\takeover-P2-owned-native-menu.png",
+                "sha256": "4dad7437e692a54dd0ab157e279bca9ec070db5585b09f80f98fd8bb37a89541"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-1-1\\logs\\takeover-P1-selected-core-attack.png",
+                "sha256": "f0bf117fd3510704d23eed3ca3e45ef7652927535c65a96c4318e6be1e0c5ff8"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F179-c125-canonical-net-peer-1-1\\logs\\takeover-P2-selected-core-attack.png",
+                "sha256": "734bc8b61759b9c42e451d96ad24cb515836431be4f0daca925aec65b6e66043"
+              }
+            ],
+            "action": "Canonical native X-BUSTER0 and Z-SABER0 owned menus on both peers; wrong-seat fresh Start rejected, owner resumes; ordinary selected Square ability, release and native recovery.",
+            "outcome": "PASS canonical NET component and full F179. Raw lines251-384 and479-599 prove both native menus/ownership/resume; root personally reviewed all eight composed menu/ability images. Canonical X uses selected Buster: mapped held20h, native charge clock4/7 then0 after release, native shooting frame86/85 versus idle119 and actual composed Buster shooting pose. Zero executes original action48 and visible Saber. HP32/ammo288/weapon0 retained. Final later-than-case baseline148086, resolved CRC148096 ee124569/97f0165a and148128 e6c6070b/5f97ab9c; profile56/actual image bound before guest, both native exit0, private cards unchanged.",
+            "limits": [
+              "Canonical transient travelling X projectile was not captured and is NOT claimed. F179 requires operation of selected ability; original native shooting/charging behavior and visible art establish that endpoint. R9 full charge/projectile ownership/lifetime/recovery/dash after each menu remains separate and unverified.",
+              "Retain earlier failed/partial runs unchanged. No new run or source change was required for this evidence review."
+            ],
+            "bypasses": [
+              "Declared isolated authored availability/inventory native card prerequisite, ordinary native conversation advanced with Cross; no runtime RAM/result writes."
+            ],
+            "result": "passed"
           }
         ],
-        "limitations": "C125 LOCAL both rosters passed and NET inverse menus/effects passed with actual composedGL and resolved core/mod CRC. Both guest executions then ended PC0 without requested quit; canonical NET tail remains missing. Native/observer attempts spent; a relevant implemented fix is required before retry."
+        "limitations": "Qualified LOCAL both rosters plus inverse and canonical NET on exact C125. Canonical native Buster shooting/charging operation satisfies selected-ability endpoint; no transient canonical projectile, full-charge/dash or R9 credit claimed. Earlier failures retained."
       }
     },
     {
