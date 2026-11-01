@@ -13,6 +13,10 @@ value = "off"
 label = "Off"
 
 [[option.choice]]
+value = "intro_subtank_cp2"
+label = "Intro CP2 + independent Sub Tank prerequisite (LAB)"
+
+[[option.choice]]
 value = "intro_cp2"
 label = "Intro checkpoint 2 prerequisite"
 

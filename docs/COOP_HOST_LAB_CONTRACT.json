@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; agreed one-shot native fatal HP request for F61/F123/F113 qualification",
+  "status": "development-candidate-only; agreed one-shot native Sub Tank prerequisite for F180 qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 61,
+  "revision": 62,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v78",
+    "title_compatibility": "mmx6-x-zero-delay-v79",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -888,5 +888,14 @@
     "guard": "Keep both bodies active, gameplay phase1/action2, no air state, all existing personal/shared locks and agreed completed checkpoint; require (body70|body71)&8.",
     "snapshot_schema": 21,
     "qualification": "Actual same-candidate primary native fatal on Turtloid actor support, healthy counterpart, unchanged before/after five-atlas rain observations and final parent gates; no inherited C129 credit."
+  },
+  "subtank_prerequisite": {
+    "option": "intro_subtank_cp2",
+    "id": 20,
+    "nonce": "0x4C535432",
+    "entry": "Existing intro_cp2 inventory index2, original8->9 and original initializer exactly once",
+    "setup": "After agreed accepted request, before original initializer: first tank acquisition flag, P1nativeenergy16/P2privateenergy8. Independent policy required; shared policy refuses before game writes. Existing consumed latch and bank/snapshot state only; no new mutable field.",
+    "health": "Existing post-initializer lab_starting_hp13/11; no healing, drain, retention or result flag assigned.",
+    "qualification": "Fresh exact-image LOCAL and NET native owner heals/isolation and native initializer retention required; old C122 results are not transferred."
   }
 }

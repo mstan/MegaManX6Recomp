@@ -24,6 +24,7 @@ enum { CHECKPOINT_OK=0,CHECKPOINT_FORBIDDEN=1,CHECKPOINT_UNKNOWN=2,
 enum { CHECKPOINT_OFFLINE=0,CHECKPOINT_AGREED=1,
     CHECKPOINT_LAB_WAITING=0,CHECKPOINT_LAB_ARMED=1,CHECKPOINT_LAB_CONSUMED=2 };
 enum { CHECKPOINT_LAB_NONCE=0x4C435032u }; /* Immutable intro CP2 request identity. */
+enum { CHECKPOINT_LAB_SUBTANK_NONCE=0x4C535432u }; /* Same native CP2; declared F180 supplies only. */
 enum { CHECKPOINT_LAB_AMAZON_NONCE=0x4C434130u }; /* Immutable Amazon CP0 identity. */
 enum { CHECKPOINT_LAB_INVESTIGATOR_NONCE=0x4C434132u }; /* Immutable Amazon CP2 identity. */
 enum { CHECKPOINT_LAB_BEFORE_DOORS_NONCE=0x4C434431u }; /* Intro CP1 plus declared position bypass. */
@@ -60,13 +61,13 @@ static void checkpoint_earned_weapons_diagnostics(void) {
 }
 
 static unsigned checkpoint_lab_index(void) {
-    return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
+    return (checkpoint_lab_option==1 || checkpoint_lab_option==20)?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
         checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
-    return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
+    return checkpoint_lab_option==20?CHECKPOINT_LAB_SUBTANK_NONCE:checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
         checkpoint_lab_option==2?CHECKPOINT_LAB_AMAZON_NONCE:
         checkpoint_lab_option==3?CHECKPOINT_LAB_INVESTIGATOR_NONCE:
         checkpoint_lab_option==4?CHECKPOINT_LAB_BEFORE_DOORS_NONCE:
@@ -198,6 +199,7 @@ static void checkpoint_reset(void) {
     char option[32]; /* Longest named development prerequisite plus NUL. */
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_checkpoint",option,sizeof option)) {
         if(!strcmp(option,"intro_cp2"))checkpoint_lab_option=1;
+        else if(!strcmp(option,"intro_subtank_cp2"))checkpoint_lab_option=20;
         else if(!strcmp(option,"amazon_cp0"))checkpoint_lab_option=2;
         else if(!strcmp(option,"amazon_cp2"))checkpoint_lab_option=3;
         else if(!strcmp(option,"intro_before_doors"))checkpoint_lab_option=4;
@@ -633,6 +635,8 @@ static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32
     else if(authority==CHECKPOINT_AGREED &&
         (index!=checkpoint_lab_index() || nonce!=checkpoint_lab_nonce()))reason=CHECKPOINT_UNKNOWN;
     else if(!checkpoint_source(entry))reason=CHECKPOINT_SOURCE;
+    else if(authority==CHECKPOINT_AGREED && checkpoint_lab_option==20 && !separate_subtanks)
+        reason=CHECKPOINT_FORBIDDEN;
     /* Reject before any authoritative game write. These are diagnostic receipts. */
     psx_mod_write_byte(diagnostic+0x50,0);
     psx_mod_write_word(diagnostic+0xA4,psx_mod_read_word(diagnostic+0xA4)+1);
@@ -657,6 +661,17 @@ static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32
 #ifdef MMX6_COOP_CHECKPOINT_TAINT_API
     psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
 #endif
+    if(authority==CHECKPOINT_AGREED && checkpoint_lab_option==20) {
+        /* Fixed, declared prerequisite before the ORIGINAL 8->9 initializer.
+         * Its completion/retention and both native heals remain unmodified.
+         * The consumed LAB request is the sole one-shot guard; existing
+         * bank storage/serializer owns this state, with no extra latch. */
+        subtank_seed();
+        psx_mod_write_byte(PLAY+0x6B,psx_mod_read_byte(PLAY+0x6B)|0x10u);
+        psx_mod_write_byte(PLAY+0x63,0x90u);
+        zero_subtanks[0]=0x88u;
+        subtank_found=psx_mod_read_byte(PLAY+0x6B)&0x30u;
+    }
     psx_mod_write_byte(PLAY+12,(uint8_t)stage);
     psx_mod_write_byte(PLAY+13,(uint8_t)section);
     psx_mod_write_byte(PLAY,8);

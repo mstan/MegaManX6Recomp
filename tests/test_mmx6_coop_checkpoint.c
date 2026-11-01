@@ -292,6 +292,36 @@ static void agreed_starting_hp(CPUState *cpu) {
     test_lab_hp_option[0]=test_lab_hp_option[1]="off";setup_agreed(cpu,1);checkpoint_reset();
     CHECK(!checkpoint_starting_hp[0] && !checkpoint_starting_hp[1] && !checkpoint_starting_hp_applied);
 }
+static void agreed_subtank_prerequisite(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);test_lab_option="intro_subtank_cp2";checkpoint_reset();
+        separate_subtanks=0;memcpy(before_ram,test_ram,sizeof test_ram);
+        CHECK(checkpoint_lab_option==20 && checkpoint_lab_index()==2 && checkpoint_lab_nonce()==0x4C535432u);
+        CHECK(!checkpoint_lab_boundary(cpu,6));
+        CHECK(!checkpoint_pending.phase && !memcmp(before_ram,test_ram,sizeof test_ram));
+        CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
+        setup_agreed(cpu,online);test_lab_option="intro_subtank_cp2";checkpoint_reset();
+        separate_subtanks=1;subtank_seeded=0;memset(zero_subtanks,0,sizeof zero_subtanks);
+        psx_mod_write_byte(PLAY+0x63,0x81);psx_mod_write_byte(PLAY+0x64,0x86);
+        psx_mod_write_byte(PLAY+0x6B,4);
+        CHECK(checkpoint_lab_boundary(cpu,6));
+        CHECK(checkpoint_pending.index==2 && checkpoint_pending.nonce==0x4C535432u && checkpoint_pending.phase==1);
+        CHECK(psx_mod_read_byte(PLAY)==8 && psx_mod_read_byte(PLAY+0x63)==0x90 && psx_mod_read_byte(PLAY+0x64)==0x86);
+        CHECK(subtank_seeded && zero_subtanks[0]==0x88 && zero_subtanks[1]==0x86 && subtank_found==0x10);
+        CHECK(psx_mod_read_byte(PLAY+0x6B)==0x14);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+0x1D)==2);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu));
+        CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE);
+        CHECK(psx_mod_read_byte(PLAY+0x63)==0x90 && zero_subtanks[0]==0x88 && psx_mod_read_byte(PLAY+0x6B)==0x14);
+        /* Consumed request never replenishes a spent native/private bank. */
+        psx_mod_write_byte(PLAY+0x63,0x80);zero_subtanks[0]=0x80;
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+        CHECK(psx_mod_read_byte(PLAY+0x63)==0x80 && zero_subtanks[0]==0x80);
+    }
+    separate_subtanks=subtank_seeded=subtank_found=0;memset(zero_subtanks,0,sizeof zero_subtanks);
+    test_lab_option="off";checkpoint_reset();
+}
 static void agreed_turtloid_boundary(CPUState *cpu) {
     for(int online=0;online<=1;++online) {
         setup_agreed(cpu,online);test_lab_option="turtloid_rain_cp1";checkpoint_reset();
@@ -1607,7 +1637,7 @@ int main(int argc,char **argv) {
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
-    agreed_starting_hp(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
+    agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
     agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
