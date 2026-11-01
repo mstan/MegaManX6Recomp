@@ -14710,24 +14710,172 @@
       "frozen_row_sha256": "138fcc32045634268b513c82bf033217526d152e13a36cec5834197095b61c4f",
       "x6": {
         "workstream": "lifecycle",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Network mounted entrance analogue unidentified",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Recycle Lab original Ride Armor boarding and network rider animation",
         "bounded_check": "Locate a native X6 vehicle arrival first; both peers must execute the partner's original mounted animation, not a copied idle pose.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_lifecycle.c:mmx6_coop_fatal",
           "src/mods/mmx6_coop_plugin.c:begin_join"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import. Rejected concrete mounted-READY mapping: originalRecycle stage4/sec0 table6DEB4=F32D8/category3dispatcher204F8/class1E F3350->EE158 initializes emptyCD340 singleton then retiresplacement via2C9D4; no rider/READY init. All member6 authored lists: root7349C/F2A7C118records has onlyF2B1C subtype0 x1872/y395; root73554/F2E3460records hasnone. Positive originaldd4bea EXE/member6c7b195 source and acceptedF92 evidence support this producer rejection only. Separate stage-entryREADY producer remains unidentified; no whole-row rejection/N/A/pass inferred."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+            "build_identity": {
+              "source_commit": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+              "exe_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+              "declared_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+              "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+              "host_profile": 2,
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\candidate-v56-ride-armor.json",
+              "binding_sha256": "bf739f2fca645085257d34ddce3e32e54f939da7eda788b9fe300fa8b3ad55fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "native_stage": "Recycle Lab4/0, original emptyRideArmor placement800F2B1C/singleton800CD340",
+              "audio": "dummy muted",
+              "prerequisite": "Original native cardLoad/mission entry with existing guarded copied privatecard, no resultwrites",
+              "observer": "boarding_only=True; onlyP2mount; no drive/overlap/dismountreplay"
+            },
+            "action": "Ordinary P2 directional jump into original empty Ride Armor; observe native mounted entrance progressing and capture actual midboarding on each physical peer.",
+            "outcome": "All4parent and2nativechecks PASS; ordinary P2 jump/approach boards original singletonF2B1C, rider action18/armoraction10 with changing native frame47 and >=2worldupdates. One actual composed capture is bracketed in that same native boarding phase; root viewed Zero in the original cockpit entrance pose rather than a copied foot-idle pose. Owned native exit0 and privatecards unchanged.",
+            "native_boarding_witnesses": [
+              {
+                "peer": 0,
+                "native_world": [
+                  239,
+                  241
+                ],
+                "rider_frame47": [
+                  31,
+                  18
+                ],
+                "hero_action": [
+                  18,
+                  18
+                ],
+                "armor_action": [
+                  10,
+                  10
+                ]
+              }
+            ],
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F75-native-boarding-local-v56-root-v1\\qualification.json",
+                "sha256": "93a2af4f5d1ce2886dc2a53659b9104e3ca860fc10a34d5eaafb4533f53bf95f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F75-native-boarding-local-v56-root-v1\\ammo-hud\\F75\\F75-observations.json",
+                "sha256": "4364016078e5d0a3a843e3f2761577696ae3b9e019041ce1b4da75d7afba96bd"
+              }
+            ],
+            "limits": [
+              "Native X6 boarding is the mapped arrival-animation counterpart. The distinct literal stage-entry READY mapping was source-rejected and R16 is separately inapplicable; this pass does not claim a missing mounted READY controller.",
+              "No F60 enrollment-during-boarding, F93 solo timing, two simultaneous riders, forced ejection or general graphics credit. Old F92/F98 full checks are retained without replay; this run boards only P2.",
+              "NETv1 failed before any PID because fresh output lacked the existing required paired-FF-R6 ownership prefix. Original failure retained; v2 changes only the fresh output path, no ownership/card/scene predicates weakened.",
+              "Exact existing V56 source/image in both modes; no C129 credit transfer. Raw result labels remain review pending; root reviewed actual midboarding composed images before this admission."
+            ],
+            "bypasses": [
+              "Existing copied QA-nativecard progression selects actual Recycle mission; no boarding/action/pose/animation/armor/result fields written."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+            "build_identity": {
+              "source_commit": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+              "exe_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+              "declared_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+              "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+              "host_profile": 2,
+              "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\candidate-v56-ride-armor.json",
+              "binding_sha256": "bf739f2fca645085257d34ddce3e32e54f939da7eda788b9fe300fa8b3ad55fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "native_stage": "Recycle Lab4/0, original emptyRideArmor placement800F2B1C/singleton800CD340",
+              "audio": "dummy muted",
+              "prerequisite": "Original native cardLoad/mission entry with existing guarded copied privatecard, no resultwrites",
+              "observer": "boarding_only=True; onlyP2mount; no drive/overlap/dismountreplay"
+            },
+            "action": "Ordinary P2 directional jump into original empty Ride Armor; observe native mounted entrance progressing and capture actual midboarding on each physical peer.",
+            "outcome": "All16parent and2nativechecks PASS on bothphysicalpeers; native P2action18/armoraction10 frame changes with world progress and each own composed capture bracketed insideboarding. Root viewed bothactualimages (native Zero cockpit entrance). Commonprofile2 beforeframe0 staysfixed, selected381abb43b1a0731a456f3b12f2de7e94c3a4f6b8166f76c1357f32fb558f566f. Seven matched core/mod CRCwindows36samples total, finalafter-boarding2samples. Owned85300/85368both exit0; privatecards, reviewedsource/QA profiles preserved.",
+            "native_boarding_witnesses": [
+              {
+                "peer": 0,
+                "native_world": [
+                  570,
+                  578
+                ],
+                "rider_frame47": [
+                  18,
+                  19
+                ],
+                "hero_action": [
+                  18,
+                  18
+                ],
+                "armor_action": [
+                  10,
+                  10
+                ]
+              },
+              {
+                "peer": 1,
+                "native_world": [
+                  569,
+                  578
+                ],
+                "rider_frame47": [
+                  18,
+                  19
+                ],
+                "hero_action": [
+                  18,
+                  18
+                ],
+                "armor_action": [
+                  10,
+                  10
+                ]
+              }
+            ],
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F75-native-boarding-v56-root-v2\\qualification.json",
+                "sha256": "69aeec699564b9727ac990a37e3278a4c91d9e38148e32d5b92f135568664371"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F75-native-boarding-v56-root-v2\\F75\\F75-observations.json",
+                "sha256": "9454558dc0e2b49743791118eb86015f7935d1ec9d31d91ec95491cf01721aae"
+              }
+            ],
+            "limits": [
+              "Native X6 boarding is the mapped arrival-animation counterpart. The distinct literal stage-entry READY mapping was source-rejected and R16 is separately inapplicable; this pass does not claim a missing mounted READY controller.",
+              "No F60 enrollment-during-boarding, F93 solo timing, two simultaneous riders, forced ejection or general graphics credit. Old F92/F98 full checks are retained without replay; this run boards only P2.",
+              "NETv1 failed before any PID because fresh output lacked the existing required paired-FF-R6 ownership prefix. Original failure retained; v2 changes only the fresh output path, no ownership/card/scene predicates weakened.",
+              "Exact existing V56 source/image in both modes; no C129 credit transfer. Raw result labels remain review pending; root reviewed actual midboarding composed images before this admission."
+            ],
+            "bypasses": [
+              "Existing copied QA-nativecard progression selects actual Recycle mission; no boarding/action/pose/animation/armor/result fields written."
+            ]
+          }
+        ],
+        "limitations": "ExactV56 e2f9bc8/ab33f5b/profile2 LOCAL+NET actualP2nativeboarding/action18/armor10/changingframe+world and mid-animationcomposedposes allqualified; root3imagesreviewed, finalNETCRC/cards/exits pass. Nativeboardingcounterpart only: literalstage-entryREADY is separatelyR16N/A, F60enrollment/F93solotimingremainopen. All oldraw/rejectedREADYcandidate/prePIDfailure/HUD/nativecards preserved."
       }
     },
     {
