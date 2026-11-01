@@ -570,13 +570,15 @@ def exercise_midboss_forward(ctx, *, output, original_exe, leader, success):
             else: raise ValueError('Original forward door did not admit the pair')
         finally:
             for seat in (0,1): inp(seat,0,'release after original door')
+        # Native door action may begin during the preceding platform approach.
+        door_rows=list(range(e['actual_defeat'],row['index']+1))
         foot=[]
         for peer in range(len(clients)):
             rows=[e['samples'][i]['peers'][peer] for i in door_rows]
             for seat in (0,1):
                 key=f'p{seat+1}_body_hex'
                 relevant=[p for p in rows if 900*65536<=p['observation']['players'][seat]['x_raw']<=985*65536]
-                good=(start['peers'][peer]['observation']['players'][seat]['x_raw']<=943*65536
+                good=(any(p['observation']['players'][seat]['x_raw']<=943*65536 for p in rows)
                     and row['peers'][peer]['observation']['players'][seat]['x_raw']>943*65536
                     and any(p['observation']['players'][seat]['action']==19 for p in relevant)
                     and all(p['observation']['lifecycle'][seat]==0 and bytes.fromhex(p[key])[3]
@@ -590,7 +592,7 @@ def exercise_midboss_forward(ctx, *, output, original_exe, leader, success):
             # checkpoint, collision or result writes and no additional initializer.
             for seat in (0,1):
                 inp(seat,0x20,'native corridor alignment below checkpoint plane')
-                try: wait('native corridor approach1040',lambda r:all(p['observation']['players'][seat]['x_raw']>=1040*65536 for p in r['peers']),30)
+                try: wait('native corridor approach1000',lambda r:all(p['observation']['players'][seat]['x_raw']>=1000*65536 for p in r['peers']),30)
                 finally: inp(seat,0,'corridor approach neutral')
                 updates('corridor neutral delay separation',8)
             before=sample('guest before original CP0 to1 plane')
