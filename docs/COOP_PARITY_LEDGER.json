@@ -10416,13 +10416,13 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "passed"
         },
         "evidence": [
@@ -10529,9 +10529,69 @@
             "bypasses": [
               "Navigation-only initial LAN page shortcut; real UI actions start both matches and rematches; no native outcome/HP/position/fixture writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "4b2b5476d401b664d96a196d73f476e223157915",
+            "build_identity": {
+              "exe_sha256": "c736fa151b28b79e98928439b85de1f891155df7cbcf5471725d2d635fb3e18b",
+              "declared_manifest_sha256": "cf520292e958831273f86c2ca113e7c1f0edcda773e0b750966466a6c6e84874",
+              "compiled_source_commit": "4b2b5476d401b664d96a196d73f476e223157915",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 74,
+              "host_profile_version": 57,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Canonical native unit0 X/P1+Zero/P2; originalcardLoad Amazonstage1 eachactualgameplay",
+              "audio": "dummy/muted hidden",
+              "fixtures": "LABalloff, privateauthcard4e2c/blankcard2/twodigital",
+              "boundary": "ExistingSDKsession_restart n0 normalteardown/commit/activation/BIOS reboot, SAMEPID50788/TCP18139, no processrelaunch"
+            },
+            "action": "Actualfirstenrollment/menu/independentcontrols/Saber/resourcewindow, realrestartACK1243 andsecondnativeLoad, then conditionalrestartACK1690 withthirdINITIALresourcequeryonly todiscriminatepersistentgrowth.",
+            "outcome": "FAIL realper-sessionretention andmissingP2. Firstactivationhealthy; afteractualrestart, primaryworldprogresses nativeTimer14523->14562 whileco-oppubstaysoldtick7647/nativeTimer7462 andactualcomposedstage1showsonlyX/noZero/lowerHUD. Initialactivations1/2/3 DMA513024->1026048->1539072; packetarenas2->4->6/bytes327680->655360->983040; snapshot1061904->1599504->2137104; guestused548864->573440->598016. Fixedperrestart increments, notone-timebankvariation. Build.ninja provesPSX_MOD_SESSION_RESOURCES=0; SDKbegin_session(0) deliberatelykeepslegacyresources, whiletitleactivateunconditionallyreacquires. Retained548864 leaves<524288assetspace, explainingfailedP2reinit. No thirdstory/gameplay. Ownedquit10/exit0/PID50788+18139absent/cardsunchanged, all3 native-consumptionepochsfinalized/noreplayclaim.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c126-local-restart-1\\control-observations.jsonl",
+                "sha256": "b5d86ea12725430224dacae62fb31c99307ba2c58af9d0475e62d4acc60042b1"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c126-local-restart-1\\native-job.json",
+                "sha256": "9d1d94f22c6ce2ff85d69b6cc572ec27dc5e30811dce0ffb22a6dc08bc52ef75"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c126-local-restart-1\\binding.json",
+                "sha256": "e1437e417aaa3bd4dc61c99cd76758d55553712b6f2aed55e9a695beeb01e964"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c126-local-restart-1\\benchmark.json",
+                "sha256": "3b15ab055797dc87cbbf3e948180aaada63cd5e11f50ab5f2003b284ca22dba7"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-c126-local-restart-1\\F39-activation2-actual-postrestart-stage.png",
+                "sha256": "405631b9b66f9f21d6fac068eb43b65a56391251cccb9955c13a662980d81a6b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-ray-origin-v126\\runtime\\build.ninja",
+                "sha256": "94f3127094fa1f84e8a62813d15efbbe64cfd713953c440baf1f7b8ec500511e"
+              }
+            ],
+            "limits": [
+              "ThirdactivationINITIALqueryonly was conditionalgrowthdiscrimination, notanextrafullgameplaymatrix. Original25min endedabout1043s, noextension.",
+              "ActualcomposedP2absence andfreshnativeprimaryprogress establishfailure; stale9Fpublication nevercreditedasfreshcycle2enrollment.",
+              "OldV90NETboundedpass remainsindependentcandidate; no currentC126NET/fullrowcredit.",
+              "No per-bankidentitycollector/exactbankequalitygate; legacySDKdefault0isintentional andmustremainforothertitles.",
+              "Concretefix nowimplementedisolatedC127b79c046: authoredtitlepropertyON plusbackground/widescreencachedhandle/bankreacquisition; notbuilt/nativequalifiedyet. C126source/binary/failedrawpreserved."
+            ],
+            "bypasses": [
+              "Prelaunchauthoredavailability/inventoryonly. RealnormalSDKsessionboundary/nativeLoad/control, no RAM/resultwrites."
+            ]
           }
         ],
-        "limitations": "RetainedV90NET actual three same-PID sessions/two genuineUIrematches qualify frozenboundedresource/readiness endpoint: otherpersistenttotalsidentical, bank219/220/219 returnsbaseline. Exacttotalequality wasextra gate; rawfailure/oldcrash/unattributed128KiBvariation preserved, no universalleak/artclaim. LOCALsamePIDboundary remainsunverified; currentSDK3be session_restart newlyavailable forC126. No crosscandidateaggregate."
+        "limitations": "C126LOCALactualsamePIDrestartfails: resourcesgrow1x/2x/3x andP2disappears aftersecondactivation. ExactcompiledtitlecontractPSX_MOD_SESSION_RESOURCES=0 preserveslegacyarenaswhiletitleallocatesagain. C127titleoptin+cachedhandlereacquisitionimplementedpendingbuild/native. RetainedV90NETboundedpass independent, no crosscandidateaggregate."
       }
     },
     {
