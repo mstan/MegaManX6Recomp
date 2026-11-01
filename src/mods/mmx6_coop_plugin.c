@@ -152,6 +152,7 @@ static unsigned both_doors;
 static uint32_t both_door_actor;
 static uint32_t both_door_origin;
 static unsigned both_door_members;
+static int16_t both_door_extents[2][2]; /* Authored full native left/right offsets. */
 static int unit_choices_call;
 static int target_projection_call;
 /* Elective independent presentation. The canonical world still runs once. */
@@ -183,7 +184,10 @@ static int both_door_traversal_active(void) {
     return both_doors && both_door_actor && both_door_members && both_door_source_valid() &&
         scene_owner && !scene_phase && pause_owner<0;
 }
-static void both_door_reset(void) { both_door_actor=both_door_origin=both_door_members=0; }
+static void both_door_reset(void) {
+    both_door_actor=both_door_origin=both_door_members=0;
+    memset(both_door_extents,0,sizeof both_door_extents);
+}
 
 static void put32(uint8_t *p, uint32_t v) {
     for (unsigned i=0;i<4;++i) p[i]=(uint8_t)(v>>(8*i));
@@ -1263,6 +1267,45 @@ static uint8_t door_body_byte(unsigned seat,unsigned offset) {
 static uint32_t door_body_x(unsigned seat) {
     return seat?le32(p2.body+8):psx_mod_read_word(PLAYER+8);
 }
+static void door_capture_extents(void) {
+    memset(both_door_extents,0,sizeof both_door_extents);
+    for(unsigned seat=0;seat<2;++seat)if(both_door_members&(1u<<seat)) {
+        uint8_t body[sizeof p2.body];
+        if(seat==(unsigned)!!zero_projected)capture(PLAYER,body,sizeof body);
+        else memcpy(body,seat?p2.body:p1.body,sizeof body);
+        uint32_t box=le32(body+0x68);
+        if(body[2]>1 || box<0x80010000u || box>0x801FFFFCu)continue;
+        /* Native3CCBC's standing box bounds must survive the original ghost
+         * interval. Include an already larger authored admission pose too. */
+        uint32_t standing=0x80073D50u+body[2]*4u;
+        int left=0,right=0;
+        for(unsigned n=0;n<2;++n) {
+            uint32_t shape=n?standing:box;
+            int offset=(int8_t)psx_mod_read_byte(shape);
+            unsigned radius=psx_mod_read_byte(shape+2),height=psx_mod_read_byte(shape+3);
+            if(!radius || !height) {left=right=0;break;}
+            int l=offset-(int)radius,h=offset+(int)radius;
+            if(!n || l<left)left=l;
+            if(!n || h>right)right=h;
+        }
+        both_door_extents[seat][0]=(int16_t)left;both_door_extents[seat][1]=(int16_t)right;
+    }
+}
+static int door_all_living_clear(uint32_t actor,unsigned members,uint32_t velocity) {
+    uint32_t box=psx_mod_read_word(actor+0x68);
+    if(box<0x80010000u || box>0x801FFFFCu || !psx_mod_read_byte(box+2))return 0;
+    int direction=(int32_t)velocity<0?-1:1;
+    int edge=(int8_t)psx_mod_read_byte(box)+direction*(int)psx_mod_read_byte(box+2);
+    int64_t plane=(int32_t)psx_mod_read_word(actor+8)+(int64_t)edge*65536;
+    for(unsigned seat=0;seat<2;++seat)if(members&(1u<<seat)) {
+        int left=both_door_extents[seat][0],right=both_door_extents[seat][1];
+        if(left>=right)return 0; /* Missing box is never clearance permission. */
+        int32_t next=(int32_t)(door_body_x(seat)+velocity); /* Native wrapping ADdu. */
+        int64_t extent=(int64_t)next+(int64_t)(direction>0?left:right)*65536;
+        if(direction>0?extent<=plane:extent>=plane)return 0;
+    }
+    return 1;
+}
 static int door_update(CPUState *cpu,uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     if(address!=0x80050DFCu || inside || scene_call || zero_projected || failed ||
@@ -1290,6 +1333,26 @@ static int door_update(CPUState *cpu,uint32_t address) {
     uint32_t context[6]={address,actor,seat,phase,members,velocity};
     STATE_WORDS(restore_door_update,58,context,6);
     scene_call=1;
+    if(phase==3 && !door_all_living_clear(actor,members,velocity)) {
+        /* Literal native50DFC outer history and50EB4..50ECC wrapping carry.
+         * 50EA0 has no other side effect before its close-only branch.
+         * Defer that branch while any full living extent is inside; do not
+         * forge camera equality, a phase, an animation or a close result.
+         * Original2CB50 still draws once as the outer50E40 call does. */
+        psx_mod_write_word(actor+0x18,psx_mod_read_word(actor+8));
+        psx_mod_write_word(actor+0x1C,psx_mod_read_word(actor+12));
+        for(unsigned member=0;member<2;++member)if(members&(1u<<member)) {
+            uint32_t next=door_body_x(member)+velocity;
+            if(member)put32(p2.body+8,next);else psx_mod_write_word(PLAYER+8,next);
+        }
+        if(seat) {inside=1;enter_zero();}
+        uint32_t draw_a2=cpu->gpr[6];STATE_WORDS(restore_door_draw,68,&draw_a2,1);
+        cpu->gpr[6]=PLAYER; /* Original50E8C's A2 survives into outer drawing. */
+        uint32_t result=guest(cpu,0x8002CB50u,actor,PLAY);
+        cpu->gpr[6]=draw_a2;STATE_POP(restore_door_draw);
+        if(seat) {leave_zero_context(1);inside=0;}
+        scene_call=0;STATE_POP(restore_door_update);cpu->gpr[2]=result;return 1;
+    }
     if(seat) {inside=1;enter_zero();}
     uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
     if(members==3) {
@@ -1354,6 +1417,7 @@ static int door_begin(CPUState *cpu, uint32_t address) {
             both_door_origin=psx_mod_read_word(actor+0x10);
             both_door_members=(life.status[0]==MMX6_COOP_ALIVE?1u:0u)|
                 (life.status[1]==MMX6_COOP_ALIVE?2u:0u);
+            door_capture_extents();
             /* Native AI admitted every living original body box, but sets
          * D4 only on its resident player. Give the other admitted body
          * that same request1. Each original player earns its own FF ack;

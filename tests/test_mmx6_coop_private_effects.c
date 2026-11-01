@@ -420,6 +420,10 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         cpu->gpr[2]=1;return;
     }
     if(door_native_probe) {
+        if(address==0x8002CB50u) {
+            CHECK(scene_call && inside==zero_projected && cpu->gpr[4]==0x800C12C4u && cpu->gpr[5]==PLAY && cpu->gpr[6]==PLAYER);
+            ++door_draws;cpu->gpr[2]=0xD008;return;
+        }
         if(address==0x8003CCBCu) {
             CHECK(cpu->gpr[4]==PLAYER);
             psx_mod_write_word(cpu->gpr[4]+0x68,psx_mod_read_byte(cpu->gpr[4]+2)?0x80073D54u:0x80073D50u);
@@ -2007,6 +2011,7 @@ static void door_setup(CPUState *cpu,unsigned both,int x,int zero) {
     psx_mod_write_word(TEST_DOOR_BOX,0x281000FCu); /* x=-4,y=0,w=16,h=40 */
     psx_mod_write_word(TEST_X_BOX,0x10080000u);
     psx_mod_write_word(TEST_ZERO_BOX,0x14080002u); /* x=2,w=8,h=20 */
+    psx_mod_write_word(0x80073D50u,0x160B0000u);psx_mod_write_word(0x80073D54u,0x160C0000u);
     cpu->gpr[4]=TEST_DOOR;cpu->gpr[6]=PLAYER;cpu->gpr[31]=0x80020C60;
 }
 static void check_door_result(CPUState *cpu,unsigned owner,unsigned phase) {
@@ -2130,6 +2135,9 @@ static void native_both_door_ack_motion_and_release(void) {
               door_draws==draws+1 && psx_mod_read_byte(TEST_DOOR+5)==3);
         CHECK(psx_mod_read_byte(PLAY+0x10)==1 && psx_mod_read_byte(PLAY+0x12)==1);
         psx_mod_write_half(0x80097202u,200);
+        /* Native camera equality alone is insufficient until both full boxes clear. */
+        CHECK(door_update(&cpu,0x80050DFCu) && psx_mod_read_byte(TEST_DOOR+5)==3);
+        psx_mod_write_word(PLAYER+8,550u<<16);put32(p2.body+8,552u<<16);
         CHECK(door_update(&cpu,0x80050DFCu));
         CHECK(!psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4] &&
               psx_mod_read_word(PLAYER+0x68)==0x80073D50u && le32(p2.body+0x68)==0x80073D54u &&
@@ -2149,6 +2157,34 @@ static void native_both_door_ack_motion_and_release(void) {
         CHECK(!both_door_traversal_active());scene_tick(&cpu);
         CHECK(failed && !both_door_actor && !both_door_origin && !both_door_members &&
               psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 && !scene_phase);
+    }
+}
+static void native_hatch_missing_box_clearance(void) {
+    for(unsigned inverse=0;inverse<2;++inverse)for(unsigned negative=0;negative<2;++negative)
+    for(unsigned corpse=0;corpse<2;++corpse) {
+        CPUState cpu;door_setup(&cpu,1,480,480);
+        if(inverse) {psx_mod_write_byte(PLAYER+2,1);p2.body[2]=0;}
+        check_door_result(&cpu,1,0);
+        CHECK(both_door_extents[0][0]<0 && both_door_extents[1][1]>0);
+        psx_mod_write_byte(TEST_DOOR+5,3);
+        uint32_t velocity=negative?0xFFFF5C00u:0xA400u;
+        psx_mod_write_word(TEST_DOOR+0x84,velocity);
+        psx_mod_write_word(PLAYER+8,(negative?450u:550u)<<16);put32(p2.body+8,500u<<16);
+        psx_mod_write_word(PLAYER+0x68,0);put32(p2.body+0x68,0);
+        psx_mod_write_byte(PLAYER+0xD4,0xFE);p2.body[0xD4]=0xFE;
+        psx_mod_write_half(0x80097202u,200);psx_mod_write_half(0x8009721Eu,200);
+        uint32_t x=psx_mod_read_word(PLAYER+8),z=le32(p2.body+8),camera=psx_mod_read_word(0x80097202u),draws=door_draws;
+        CHECK(door_update(&cpu,0x80050DFCu));
+        CHECK(psx_mod_read_byte(TEST_DOOR+5)==3 && psx_mod_read_word(PLAYER+8)==x+velocity && le32(p2.body+8)==z+velocity);
+        CHECK(!psx_mod_read_word(PLAYER+0x68) && !le32(p2.body+0x68) && p2.body[0x5C]==32 && psx_mod_read_byte(PLAYER+0x5C)==32);
+        CHECK(door_draws==draws+1 && psx_mod_read_word(0x80097202u)==camera && !psx_mod_read_word(PLAY+0x90));
+        if(corpse) {life.status[1]=MMX6_COOP_FALLEN;p2.body[4]=3;p2.body[0x5C]=0;}
+        else put32(p2.body+8,(negative?448u:552u)<<16);
+        CHECK(door_update(&cpu,0x80050DFCu));
+        CHECK(psx_mod_read_byte(TEST_DOOR+5)==4 && psx_mod_read_word(PLAY+0x90)==1 && door_draws==draws+2);
+        CHECK(!psx_mod_read_byte(PLAYER+0xD4));
+        if(corpse)CHECK(life.status[1]==MMX6_COOP_FALLEN && p2.body[0x5C]==0);
+        else CHECK(!p2.body[0xD4] && p2.body[0x5C]==32);
     }
 }
 static void arrival_setup(CPUState *cpu) {
@@ -2751,7 +2787,7 @@ int main(void){
     native_sigma_transition_retains_living_pair();
     native_capsule_keeps_living_passenger();
     native_either_both_door_admission();
-    native_both_door_ack_motion_and_release();
+    native_both_door_ack_motion_and_release();native_hatch_missing_box_clearance();
     native_paired_arrival_barrier();
     native_scene_preserves_incoming_guest();
     native_scene_after_nonpaired_enrollment();

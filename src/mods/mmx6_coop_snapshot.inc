@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 22 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 23 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -95,6 +95,7 @@ typedef struct {
     uint32_t lab_state,lab_previous,starting_hp_applied,earned_applied,earned_reason,fatal_state;
     uint32_t clear_phase,clear_members,clear_started;
     uint32_t door_actor,door_origin,door_members;
+    int16_t door_extents[2][2];
     uint32_t refight_return_checkpoint;
     uint8_t subtanks[2];
     uint32_t subtank_seeded,subtank_found;
@@ -121,6 +122,7 @@ static void state_capture(HostState *s) {
     s->fatal_state=checkpoint_fatal_state;
     s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
     s->door_actor=both_door_actor;s->door_origin=both_door_origin;s->door_members=both_door_members;
+    memcpy(s->door_extents,both_door_extents,sizeof s->door_extents);
     s->refight_return_checkpoint=refight_return_checkpoint;
     memcpy(s->subtanks,zero_subtanks,sizeof zero_subtanks);s->subtank_seeded=subtank_seeded;s->subtank_found=subtank_found;
 }
@@ -177,6 +179,13 @@ static void state_core(StateIO *io,HostState *s) {
         s->lifecycle.status[0]!=MMX6_COOP_ALIVE ||
         s->lifecycle.status[1]!=MMX6_COOP_JOINING))io->ok=0;
     FIELD(door_actor,4,UINT32_MAX);FIELD(door_origin,4,UINT32_MAX);FIELD(door_members,1,3);
+    for(unsigned seat=0;seat<2;++seat) {
+        for(unsigned side=0;side<2;++side)
+            s->door_extents[seat][side]=(int16_t)((int)state_integer(io,(uint32_t)(s->door_extents[seat][side]+383),2,766)-383);
+        if(s->door_members&(1u<<seat)) {
+            if(s->door_extents[seat][0]>=s->door_extents[seat][1])io->ok=0;
+        } else if(s->door_extents[seat][0] || s->door_extents[seat][1])io->ok=0;
+    }
     FIELD(refight_return_checkpoint,1,17);
     if(s->refight_return_checkpoint && s->refight_return_checkpoint<10)io->ok=0;
     if(!s->door_actor) {
@@ -262,6 +271,7 @@ static void state_commit(const HostState *s) {
     checkpoint_fatal_state=s->fatal_state;
     clear_phase=s->clear_phase;clear_members=s->clear_members;clear_started=s->clear_started;
     both_door_actor=s->door_actor;both_door_origin=s->door_origin;both_door_members=s->door_members;
+    memcpy(both_door_extents,s->door_extents,sizeof both_door_extents);
     refight_return_checkpoint=s->refight_return_checkpoint;
     memcpy(zero_subtanks,s->subtanks,sizeof zero_subtanks);subtank_seeded=s->subtank_seeded;subtank_found=s->subtank_found;
     /* These backups are meaningful only under rejected live projections. */
@@ -318,7 +328,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,22);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,23);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
     state_fixed(s,separate_subtanks);
     state_fixed(s,checkpoint_fatal_option);
