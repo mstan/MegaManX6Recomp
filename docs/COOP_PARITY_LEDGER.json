@@ -18077,14 +18077,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -18147,9 +18147,105 @@
               "Existing offline mailbox5/6 invokes original script lock/release directly; preceding authored traversal is bypassed. Mailbox1 HP80 requests original owner fatal. Native death/beam completion/lifecycle/controls/lives/checkpoint outcomes are never assigned.",
               "This diagnostic mutation is offline only and is not available as a NET qualification shortcut."
             ]
+          },
+          {
+            "candidate": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+            "build_identity": {
+              "source_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "exe_sha256": "f752fa4cf5acffa44bbe424a165880e87071ed609390dc3813aea18960625b2a",
+              "declared_manifest_sha256": "467ccfecd3e2fe0fc41f96692910bf933583d27da9a98f9e83b6c06d5360f0b8",
+              "title": 81,
+              "profile": 64,
+              "snapshot": 22,
+              "game_change_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "observer_source_commit": "5a0ed226e082d5194666395c372e90c003f4eab9"
+            },
+            "settings": {
+              "roster": "X/P1 and Zero/P2",
+              "fixture": "Agreed intro_cp2 plus scene_during_arrival",
+              "audio": "hidden SDL dummy, published host input",
+              "native_cards": "isolated blank cards, unchanged"
+            },
+            "limits": [
+              "One bounded original owner2/livingP1 arrival timing, not every native scene or a particle/rendering audit.",
+              "Actual sampled native fatal phase4 is directly required and observed. No manually assigned death, beam, scene-success, retry or control result.",
+              "CP2 background fixture artifacts and ordinary recording/replay taint refusal remain retained. Current-build LOCAL execution states are disposable; no native-card progress claim."
+            ],
+            "bypasses": [
+              "Agreed CP2 prerequisite bypasses prior traversal. Fresh L3+R3 invokes existing original3D308/3D330 and requests HP80; original death, emissions, beam completion, control, lives/checkpoint outcomes are never assigned.",
+              "Unilateral fixture taint and ordinary recording/replay refusal remain retained."
+            ],
+            "mode": "local",
+            "result": "passed",
+            "action": "Fresh original lock/release, then one owner2 HP80 request only while actual living passenger is arriving in native phase4; observe death/beam/scene ownership/control and stable lives/checkpoint.",
+            "outcome": "All4 parent/4 scene gates pass. Actual owner2 fatal at native phase4 -> FALLEN0 while livingP1 completes phase4/5->scene0 at32HP. Native Right5928->5949.5px, lives2/CP2 retained. Slot7 SAVEgeneration1/LOADgeneration2 restores position5949.5 and living/dead disposition; fresh Left reaches5936px/action4 then native idle. Composed survivor reviewed, private cards unchanged/native exit0.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F103-c132-native-scene-local-1/qualification.json",
+                "sha256": "789c2e928e129f723246ca6731ce4726913030a2dab4737bb1342097a91073d4"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-native-scene-fatal-v132/binding.json",
+                "sha256": "d8d94ee5ad7ac7311130c9434c04a2542339053a8ac0f950781e5b985198b3af"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F103-c132-native-scene-local-1/ammo-hud/intro-admission/peer-0-native-recovered-survivor.png",
+                "sha256": "960f834c8356953f045c5c282bf8036717559380f8181ca1e0cb52559d4eb3dc"
+              }
+            ]
+          },
+          {
+            "candidate": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+            "build_identity": {
+              "source_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "exe_sha256": "f752fa4cf5acffa44bbe424a165880e87071ed609390dc3813aea18960625b2a",
+              "declared_manifest_sha256": "467ccfecd3e2fe0fc41f96692910bf933583d27da9a98f9e83b6c06d5360f0b8",
+              "title": 81,
+              "profile": 64,
+              "snapshot": 22,
+              "game_change_commit": "bbc264e0f967eb2a3cb758161a7ac0d2a9573b12",
+              "observer_source_commit": "5a0ed226e082d5194666395c372e90c003f4eab9"
+            },
+            "settings": {
+              "roster": "X/P1 and Zero/P2",
+              "fixture": "Agreed intro_cp2 plus scene_during_arrival",
+              "audio": "hidden SDL dummy, published host input",
+              "native_cards": "isolated blank cards, unchanged"
+            },
+            "limits": [
+              "One bounded original owner2/livingP1 arrival timing, not every native scene or a particle/rendering audit.",
+              "Actual sampled native fatal phase4 is directly required and observed. No manually assigned death, beam, scene-success, retry or control result.",
+              "CP2 background fixture artifacts and ordinary recording/replay taint refusal remain retained. Current-build LOCAL execution states are disposable; no native-card progress claim."
+            ],
+            "bypasses": [
+              "Agreed CP2 prerequisite bypasses prior traversal. Fresh L3+R3 invokes existing original3D308/3D330 and requests HP80; original death, emissions, beam completion, control, lives/checkpoint outcomes are never assigned.",
+              "Unilateral fixture taint and ordinary recording/replay refusal remain retained."
+            ],
+            "mode": "netplay",
+            "result": "passed",
+            "action": "Fresh original lock/release, then one owner2 HP80 request only while actual living passenger is arriving in native phase4; observe death/beam/scene ownership/control and stable lives/checkpoint.",
+            "outcome": "Both peers directly observe owner fatal atphase4, P1 beam completes/native scene0 with32HP and P2FALLEN0. Fresh survivor Right reaches both peers; lives2/CP2 stable and finalX5951.5px/ammo288. All15 parent/4scene gates pass. Four resolvedCRC windows29 matching samples, final7 at4320..4512 resolved4531/4530. Profile64 fixed beforeframe0, private cards unchanged/both native exits0. Both composed survivor images reviewed.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F103-c132-native-scene-net-1/qualification.json",
+                "sha256": "e420e05eebabfad925ba1e892498be125de8d9b44265cc4465ee05c21ae87173"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-native-scene-fatal-v132/binding.json",
+                "sha256": "d8d94ee5ad7ac7311130c9434c04a2542339053a8ac0f950781e5b985198b3af"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F103-c132-native-scene-net-1/intro-admission/peer-0-native-recovered-survivor.png",
+                "sha256": "123efbdc1e04f2a8e212a18687a500c8f1559416a2222512bec02d6f6b7b381c"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F103-c132-native-scene-net-1/intro-admission/peer-1-native-recovered-survivor.png",
+                "sha256": "123efbdc1e04f2a8e212a18687a500c8f1559416a2222512bec02d6f6b7b381c"
+              }
+            ]
           }
         ],
-        "limitations": "LOCAL65841a2 native owner-death-during-beam recovery now passes after concrete world-ownership fix: survivor controls/resources/checkpoint/lives retained, dead owner remains fallen; current-build save/load, cards/exit0 and14 checks pass. NET unverified. Offline original-script/fatal bypasses and both earlier failed native results preserved; no particle or campaign claim."
+        "limitations": "Passed exact C132 LOCAL+NET native owner death during actual phase4 passenger arrival. Native beam completion, released controls, survivor ownership and lives2/CP2 retention pass; same-build LOCAL save/load and fresh restored controls plus fixed NET profile/final resolved CRC/cards/owned exits qualify. Earlier C122/C123 failures and C124 LOCAL components retained. One bounded scene timing, no whole-scene rendering or campaign audit."
       }
     },
     {
