@@ -10663,9 +10663,104 @@
             "bypasses": [
               "Prelaunch elective form unlocks only, no runtime HP/energy/phase/animation/result writes."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "3172b181c0e565030cd2403ff935ae46e8ab50e4",
+            "build_identity": {
+              "exe_sha256": "f0076a5c5813390837566c5865aa876a4b632bf4a55f6cc6f3b6ab205d5bda2f",
+              "declared_manifest_sha256": "3da52934f8f56cac9625e29a22d0f30a88b5bcec94b1adfd23405569891722ab",
+              "compiled_source_commit": "3172b181c0e565030cd2403ff935ae46e8ab50e4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+              "net_commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+              "rb_commit": "2a03e73693acee0fb78076ea058642c931bef12e",
+              "title_version": 68,
+              "host_profile_version": 51,
+              "snapshot_schema": 18
+            },
+            "settings": {
+              "forms": "Actual original Load availability39, nativeunitlist[0,1,4] selectunit4/index2; UltimateX/P1 E7=4, BlackZero/P2 E7=5",
+              "prerequisite": "Authored FF QA card270e8812 availability39; imported native inventory/C9bit80, not earned acquisition",
+              "input": "Original title/card/selector and published host inputs only; no runtime body/HP/ammo/unlock/result writes",
+              "session": 2026110138,
+              "audio": "hidden SDLdummy, actual composed GL capture",
+              "profile": "Fixed native mmx6.win64-clang22.loopback revision51 beforeframe0"
+            },
+            "action": "Original native card1/slot0/Yes Load and genuine unit4; execute native Nova and Black Giga, then both owners native menus/cursor/resource/resume while rejecting wrong owner. Reuse completed Black menu prefix after creating missing capture directory; no prefix replay.",
+            "outcome": "PASS named NET components only. Actual simultaneous native forms and original Nova action22/phase2/8px launch/natural cleanup; Black Giga action3B/weapon5/B2 energy288->240 then natural idle, primary resources unchanged. Both original form portraits/body/effects reviewed. Black menu all5 ownership/cursor/resource prefix gates pass; missing capture-directory parent failure stays failed, separate completed capture/resume tail passes. Ultimate owns its actual menu, rejects Black Start, Down/Up changes/restores cursor, preserves both resources and resumes natively. Four later-than-case resolved CRC windows8 matching samples, final47136/47168; fixedprofile51, allprivatecards unchanged, owned native exits0/0. FullF37 remains unverified.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/F37-native-endpoint-report.json",
+                "sha256": "d04220999a5fdac571f56037beee34e1442d903e18935ce9e12fa2f2cdb0460c"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/F37-native-abilities/observations.json",
+                "sha256": "3584bf100175cecb0bbbee050a69c3f16709bb60ff48590de8023c0d479300d8"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-control-tail-2.jsonl",
+                "sha256": "8b3b4d4cbc1431d50fde6f97cbdee1f6c1a8ad7aec882604089a3011f1d0e68a"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-native-net-owned-1.json",
+                "sha256": "a12abb9dd9edf16548e3a76378081bf24ee3d6fb183630eccc3f54b2be77fb47"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-native-net-preparation-1/preparation.json",
+                "sha256": "488c789ca161eadbd978c0756b3a176fa8c841c4cc4e84a0f8e420a82954fe50"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-native-net-capacity-1.json",
+                "sha256": "1378fa41b9b0592686ec1e8e1a8a6dcb75bcc9391b74eed2015bdfb5e80662fe"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/F37-native-abilities/peer-0-native-Nova-8px-launch.png",
+                "sha256": "0011ca9808230614600323265c19998efaaa119fe61510a165901bf50218f674"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/F37-native-abilities/peer-0-native-Black-Giga-48-energy-cost.png",
+                "sha256": "8b18e891c3c9377deaa52e3097cedbcb068c45a1a5a7e8109c04d88753fa20d8"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/F37-native-abilities/peer-1-native-Nova-8px-launch.png",
+                "sha256": "8216de25d2fc62bc57388c461000c5a03302f314517429e5629dc69b0def1909"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/F37-native-abilities/peer-1-native-Black-Giga-48-energy-cost.png",
+                "sha256": "940272c41130bca5066f5743191b18640b2c7fefde12f086fc4d8631469bc592"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/personal-menu/p1-peer-0-paused-present.png",
+                "sha256": "93f38024f334a04f2767ceb4abac8e3473c0929dadbf864eb225239ef8ae8c78"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/personal-menu/p1-peer-1-paused-present.png",
+                "sha256": "93f38024f334a04f2767ceb4abac8e3473c0929dadbf864eb225239ef8ae8c78"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/personal-menu/p2-peer-0-paused-present.png",
+                "sha256": "38375134949e3b24e1e9719e632da131503ba33f76277536103bebb331f1a924"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-card39-net-peer-0-1/logs/F37-card39-native-endpoints-1/personal-menu/p2-peer-1-paused-present.png",
+                "sha256": "38375134949e3b24e1e9719e632da131503ba33f76277536103bebb331f1a924"
+              }
+            ],
+            "limits": [
+              "Full LOCAL/NET modes remain unverified: actual native death/teamretry/current-build restoration and remaining LOCAL Black-specific ability/resources need qualification on exactC120.",
+              "Authored native availability/inventory prerequisite is distinct from earned unlock/weapon acquisition. Raw observer labels saying earned describe native C9 branch eligibility, not actual acquisition.",
+              "Prior NewGame enhancement preferences were cleared in vanilla NET; this run uses source-qualified original native card Load, not another preference retry.",
+              "Wrong setup predicates timed out after successful Down/slot input: actual frontend[2] choice and PLAY+0A confirmation were read and continued in the same native run. Read-only mode4 wait likewise timed out at actual20/3 story; raw retained. No automatic parent PASS relabel.",
+              "Existing C120 pit aliases qualify only first natural fall. No demonstrated second-survivor fatal/teamretry or combined card39Load/LAB job exists; preserve original spent budgets instead of another setup framework."
+            ],
+            "bypasses": [
+              "Authored QA card availability39/weaponsFF copied before launch; original Load and genuine selector execute. Ordinary Start skips setup story only; no story coverage claim."
+            ]
           }
         ],
-        "limitations": "Exact C120 LOCAL Black own-menu/cursor/resources and genuine Ultimate Nova now qualified as components; fullLOCAL andNET remain open for Black ability, remaining resources, actual death/teamretry/current-buildrestore. Preserve old failures and reuse these completed same-image components."
+        "limitations": "Exact C120 LOCAL Black owned-menu/cursor/resources and UltimateNova retained. Matching NET now has original native card39Load/unit4, both forms/abilities (Nova8px and BlackGiga48cost), both ownedmenus/resources, later resolvedCRC/cards/cleanexits. FullF37 LOCAL/NET remains open for remainingLOCAL Black-specificability/resources and actualdeath/teamretry/current-buildrestore; nativecardfixture is not earned acquisition. Old setup/predicate/capture-directory failures retained without parent relabel."
       }
     },
     {
