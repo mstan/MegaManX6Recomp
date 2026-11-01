@@ -21882,14 +21882,14 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -21971,9 +21971,107 @@
             "bypasses": [
               "Authored prelaunch native availability/inventory/history prerequisites only; all claimed menu/stage/ability actions are ordinary nativeinput."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "rosters": "Originalunit0canonical thenunit5inverse; actualnativegameplay1->6 withX/P1 then6->1 withX/P2",
+              "session": 2026103183,
+              "delay": 3,
+              "rollback": false,
+              "host_profile": "mmx6.win64-clang22.loopback revision56 selectedSHA5960eb332a16382e007224c9172073d4e01405439e6183b976059cc7e94596ea; actualbothcapabilities/settlementcycle0/simtick0/beforeguest1 verified",
+              "renderer": "NET dual-raster GL atnative1x softwareauthority; ALLacceptanceimages actualcompletedcapture_present960x720bothpeers; presentation-onlydiff fromLOCALdirectGLdynamic3x..6xexplicit, no performance claim",
+              "fixtures": "LABalloff; isolatedprelaunchavailability/inventorynativecardsunchanged; no runtimeRAM/resultwrites"
+            },
+            "action": "OriginalnativeLoad/card/mapunit0 stage1baseline; gatednativeQuit/CURRENT/story/map toactualstage6; X/P1native menus selected/unselected andRay8Crossconfirmation/Triangleuse. Repeatnativegatedroute toactualstage1unit5; X/P2native menu selected/unselected/Ray8use.",
+            "outcome": "PASS NET on BOTHpeers; rootreviewednativeblueXmenu/portraitandcorrectgreeniconpalettesafteractualstagechanges. Crossconfirmsweapon8; ownRayammo288->270 andnativeactive/completedtype8records, otherheroHP32/ammo288/stationary. Correct9Fmagic/evenconsistentsequence supportsbody/privatepoolclaims. Postcase1after22476 resolved22496 coree4d63feb/mod537dd8f6 and22528 corebdd12700/mode0d9fda8; postcase2after34293 resolved34304 coreb364fd26/modd7bc30a9 and34336 coref2d95e0a/mod383284d1; postcase3after47212 resolved47232 core8e9cc6fc/mod3462ab0d and47264 core9cbd3def/mod570b27d2. Finalprofile unchanged/desync0, bothhostinputsneutral/clearACK, quitACK3361/230, bothnativeexit0/listenersreleased/allcardsunchanged, elapsed~833s within45min. SameC125LOCALresult qualifiesfullF150.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-0-1\\control-observations.jsonl",
+                "sha256": "19918ad84ad710d4567ce6d887af452181d5eaab35bc9d2b0e8ab28294365c7a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-owned-1.json",
+                "sha256": "69c0b9b88c0d15af15a03a8d95a270a9fb602097bf168e4cc48bc54c1b029196"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-native-net-capacity-1.json",
+                "sha256": "c4e7a1fe349cfc391403ab7f9ebe1f5ae9b45a47042b9c53d24346c19f2147d6"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-0-1\\F150-NET-visit1-stage1-X-P1-Buster-unselected-icons.png",
+                "sha256": "2376ca3bb2a38d7c46bdaa7ff8b65bb8ff2058d26df7ba6567fbf20d243b8a3f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-0-1\\F150-NET-visit2-stage6-X-P1-RayArrow-selected-icons.png",
+                "sha256": "c424f3c616e2d9f81441a0a724316d22aa50a68ee5f865482e2395e59de5c7cd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-0-1\\F150-NET-visit3-stage1-X-P2-RayArrow-selected-icons.png",
+                "sha256": "25c9c5a59ba8a237d61810831f0f168bdfa7949c85210983c14c946db4b4e194"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-0-1\\F150-NET-visit3-stage1-X-P2-Buster-unselected-icons.png",
+                "sha256": "45962e2b3bbb26e7ac65551fc273f17dcec64acd62100e28b2b3cb4c909b4dae"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-0-1\\logs\\native-stdout.log",
+                "sha256": "11d85dc3ecf5efcb0c864d74aaa399f608e0785f8032e208e649396200ff2081"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-0-1\\logs\\native-stderr.log",
+                "sha256": "3373afb60141ff4e47ca1506ae5d91312d607c780da8ebe284603193975625ac"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-1-1\\F150-NET-visit1-stage1-X-P1-Buster-unselected-icons.png",
+                "sha256": "2376ca3bb2a38d7c46bdaa7ff8b65bb8ff2058d26df7ba6567fbf20d243b8a3f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-1-1\\F150-NET-visit2-stage6-X-P1-RayArrow-selected-icons.png",
+                "sha256": "c424f3c616e2d9f81441a0a724316d22aa50a68ee5f865482e2395e59de5c7cd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-1-1\\F150-NET-visit3-stage1-X-P2-RayArrow-selected-icons.png",
+                "sha256": "25c9c5a59ba8a237d61810831f0f168bdfa7949c85210983c14c946db4b4e194"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-1-1\\F150-NET-visit3-stage1-X-P2-Buster-unselected-icons.png",
+                "sha256": "11f7a645431c69fe52eb4e4cb05f04e1655772f52f1c1342c77073fe78c28400"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-1-1\\logs\\native-stdout.log",
+                "sha256": "431d5adc9c8deb96282baa0087841227d3ddf22af831df7cb17bbaab39bc955f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-c125-net-peer-1-1\\logs\\native-stderr.log",
+                "sha256": "6228bf1bdb0dcbfab22dfd51ae3c3e42b59c10d3c1e6b177cdf130e1ac82fda7"
+              }
+            ],
+            "limits": [
+              "F150only: actualiconpalettes/menu-selection/nativeuse; F174guestactivebeamartfailure independentlyretained, no beamart/hit/damage credit inferred.",
+              "NoR9/F179canonicalNETtail/repeatedacceptedtests; theirPC0gap/attemptsspentremainparked.",
+              "OrdinaryNETuserstate/load/rollbacknotqualified. ExactC125LOCALschema20warmstateevidence reused; oldstatesnotrequired.",
+              "NativeCURRENTstory/titlegatesusednormally; noextra4-visitcross-product or forcedstorybypass."
+            ],
+            "bypasses": [
+              "Authored prelaunch native availability/inventory/history prerequisites only; alltestedstage/menu/ability actionsoriginalnativeinput."
+            ]
           }
         ],
-        "limitations": "C125 LOCAL actualstagechanges and selected/unselectedXweaponmenus/nativeuse pass ineachseat. Same-candidate NET stillrequired. Separate F174guestbeam-renderfailure is not inferred as an iconpalette failure; all wrong-address and recovery caveats retained."
+        "limitations": "Passed bounded exactC125 LOCAL+developmentloopback: nativeXselected/unselectedweaponiconpalettesafteractualgameplaystagechangesineachseat, nativeRay8selection/use, resolvedcore/modCRC/cards/ownedexit. SeparateF174beamartfailure/othercampaign,armor,physicalLAN,rollbackandcrossbuildscope remainunqualified."
       }
     },
     {
