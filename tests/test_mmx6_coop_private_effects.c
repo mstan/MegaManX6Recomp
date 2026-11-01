@@ -1672,6 +1672,66 @@ static void yammar_native_upload_coordinates(void) {
     compressed_size=sizeof graphics;CHECK(sprite_bank(table,0,0x7849,0x4000));
     clear_banks();
 }
+static void ray_native_upload_coordinates(void) {
+    CPUState cpu;setup(&cpu);
+    Mmx6CoopRosterNative native={1,5,1,5,0};Mmx6CoopRoster roster;
+    CHECK(mmx6_coop_roster_resolve(&native,&roster)==MMX6_COOP_ROSTER_OK);
+    CHECK(private_roster_bind(&roster));
+    static uint8_t graphics[0x240];memset(graphics,0,sizeof graphics);
+    zero_compressed=graphics;compressed_size=sizeof graphics;
+    put32(graphics+0x24,0x100);
+    for(unsigned i=0;i<26;++i)put32(graphics+0x100+i*4,0x02000068u);
+    /* Same compressed stream, ordinary origin0, encountered in either order. */
+    put32(graphics+0x40,0x02000128u);
+    const uint16_t two_rows[]={0x5800,0x1111,0x0001,1023,0x2222,0x0001,1023,0,0};
+    for(unsigned i=0;i<sizeof two_rows/sizeof *two_rows;++i){
+        graphics[0x168+i*2]=(uint8_t)two_rows[i];graphics[0x169+i*2]=(uint8_t)(two_rows[i]>>8);
+    }
+    for(unsigned c=0;c<16;++c)psx_mod_write_half(active_palette+32+c*2,0);
+    psx_mod_write_half(active_palette+34,0x1234);psx_mod_write_half(active_palette+36,0x4321);
+    const uint32_t table=assets+0x100,alias=assets+0x40;
+    uint16_t pixels[256];static uint16_t page[65536];
+    /* Sample the actual Ray UV rows32..63, including a late frame alias. */
+    uint16_t upper=sprite_bank(table,17,0x7801,0x2000);CHECK(upper);
+    CHECK(mmx6_pixels_decode(banks[upper-0x6000].pixels,banks[upper-0x6000].pixel_bytes,256,pixels));
+    for(unsigned i=0;i<256;++i)CHECK(pixels[i]==0x1234);
+    uint16_t lower=sprite_bank(table,5,0x7801,0x3000);CHECK(lower && lower!=upper);
+    CHECK(mmx6_pixels_decode(banks[lower-0x6000].pixels,banks[lower-0x6000].pixel_bytes,256,pixels));
+    for(unsigned i=0;i<256;++i)CHECK(pixels[i]==0x4321);
+    uint16_t full=sprite_bank(table,25,0x7801,UINT16_MAX);CHECK(full);
+    CHECK(mmx6_pixels_decode(banks[full-0x6000].pixels,banks[full-0x6000].pixel_bytes,65536,page));
+    for(unsigned y=0;y<256;++y)for(unsigned x=0;x<256;++x)
+        CHECK(page[y*256+x]==(y>=32 && y<48?0x1234:y>=48 && y<64?0x4321:0));
+    unsigned count=bank_count;
+    CHECK(sprite_bank(table,0,0x7801,UINT16_MAX)==full && bank_count==count);
+    uint16_t normal=sprite_bank(alias,0,0x7801,UINT16_MAX);CHECK(normal && normal!=full);
+    CHECK(mmx6_pixels_decode(banks[normal-0x6000].pixels,banks[normal-0x6000].pixel_bytes,65536,page));
+    CHECK(page[0]==0x1234 && page[16*256]==0x4321 && !page[32*256]);
+    count=bank_count;
+    CHECK(sprite_bank(table,1,0x7801,UINT16_MAX)==full &&
+        sprite_bank(alias,0,0x7801,UINT16_MAX)==normal && bank_count==count);
+    clear_banks();normal=sprite_bank(alias,0,0x7801,UINT16_MAX);full=sprite_bank(table,0,0x7801,UINT16_MAX);
+    CHECK(normal && full && normal!=full);
+    CHECK(mmx6_pixels_decode(banks[full-0x6000].pixels,banks[full-0x6000].pixel_bytes,65536,page));
+    CHECK(!page[0] && page[32*256]==0x1234 && page[48*256]==0x4321);
+    psx_mod_write_half(active_palette+34,0x5678);
+    uint16_t changed=sprite_bank(table,0,0x7801,UINT16_MAX);CHECK(changed && changed!=full);
+    CHECK(mmx6_pixels_decode(banks[full-0x6000].pixels,banks[full-0x6000].pixel_bytes,65536,page));
+    CHECK(page[32*256]==0x1234);
+    CHECK(mmx6_pixels_decode(banks[changed-0x6000].pixels,banks[changed-0x6000].pixel_bytes,65536,page));
+    CHECK(page[32*256]==0x5678);
+    CHECK(!sprite_bank(table,26,0x7801,0x2000));
+    CHECK(!sprite_bank(table,0,0x7810,0x2000));
+    private_actor=default_private_actor;CHECK(!x_ray_upload_table());
+    CHECK(private_roster_bind(&roster));
+    put32(graphics+0x100+25*4,0x02000069u);CHECK(!x_ray_upload_table());
+    put32(graphics+0x100+25*4,0x02000068u);
+    put32(graphics+0x24,UINT32_MAX);CHECK(!x_ray_upload_table());
+    put32(graphics+0x24,0x100);clear_banks();compressed_size=0x169;
+    CHECK(!sprite_bank(table,0,0x7801,0x2000));
+    compressed_size=sizeof graphics;CHECK(sprite_bank(table,0,0x7801,0x2000));
+    clear_banks();
+}
 static void ride_setup(CPUState *cpu) {
     setup(cpu);ride_probe=1;life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
     static const unsigned fields[]={0xCC,0xCD,0xD0,0xD5,0x8E,0x7A,0xE0,0xA4,0x79};
@@ -2675,6 +2735,7 @@ int main(void){
     native_working_palette_class_and_load_events();
     native_working_palette_rectangle();
     yammar_native_upload_coordinates();
+    ray_native_upload_coordinates();
     native_shared_ride_ownership();
     native_shared_clear_admission_and_departure();
     native_sigma_transition_retains_living_pair();

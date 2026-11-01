@@ -2209,6 +2209,21 @@ static uint32_t zero_yammar_upload_table(void) {
         if (le32(zero_compressed+relative+i*4u)!=0x0200005Cu) return 0;
     return assets+relative;
 }
+/* Original X801F226C resolves graphics header+24h for Ray Arrow. Native
+ *8004AF94's subtype0Ch uploads that same table at VRAM(0140h words,0020h)
+ * through8004B1AC/80017B04. Page5 starts at0140h: atlas origin(0,32).
+ * Its26 frames alias one32-tile stream; retain only this checked geometry. */
+static uint32_t x_ray_upload_table(void) {
+    if (private_actor.character!=MMX6_COOP_CHARACTER_X ||
+        !zero_compressed || compressed_size<0x28u) return 0;
+    uint32_t relative=le32(zero_compressed+0x24);
+    if (relative<0x28u || relative>=compressed_size ||
+        compressed_size-relative<26u*4u+2u ||
+        (uint64_t)assets+relative+0x68u>UINT32_MAX) return 0;
+    for (unsigned i=0;i<26;++i)
+        if (le32(zero_compressed+relative+i*4u)!=0x02000068u) return 0;
+    return assets+relative;
+}
 static int working_palette_clut_offset(uint16_t clut,size_t *offset) {
     /* Native17C40 uploads rectangle8006E360=(0,480,256,32), not a full
      *1024-word VRAM row. CLUT7849 is144,481, hence working byte320;
@@ -2250,11 +2265,17 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     tiles=packed>>20;
     if (!tiles || tiles>256 ||
         palette_offset+32>0x4000) return 0;
-    uint32_t yammar=render_x_death?0:zero_yammar_upload_table();
+    uint32_t yammar=render_x_death || private_actor.character!=MMX6_COOP_CHARACTER_ZERO?
+        0:zero_yammar_upload_table();
+    uint32_t ray=render_x_death?0:x_ray_upload_table();
     unsigned upload_y=0;
     if (yammar && table==yammar) {
         if (frame>=23 || packed!=0x0200005Cu) return 0;
         upload_y=64;
+    }
+    if (ray && table==ray) {
+        if (frame>=26 || packed!=0x02000068u) return 0;
+        upload_y=32;
     }
     unsigned upload_height=((tiles+15u)/16u)*16u;
     if (upload_y>256u-upload_height) return 0;
@@ -2264,7 +2285,8 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     /* Different tables can reference the same compressed source with
      * different native upload origins. For this source, decode and let the
      * existing exact-pixel cache distinguish both aliases without new keys. */
-    if (!render_x_death && !(yammar && source==yammar+0x5Cu))
+    if (!render_x_death && !(yammar && source==yammar+0x5Cu) &&
+        !(ray && source==ray+0x68u))
         for (unsigned i=0;i<bank_count;++i)
         if (banks[i].character==private_actor.character && banks[i].source==source && banks[i].tile==tile &&
             !memcmp(banks[i].colors,colors,sizeof colors)) return banks[i].id;
