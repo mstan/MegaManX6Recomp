@@ -1158,7 +1158,7 @@ def exercise(ctx, *, output, original_exe, leader, success):
         (output/'observations.json').write_bytes((json.dumps(e, indent=2)+'\n').encode('utf-8'))
 
 
-def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
+def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario,fallen_seat=1,closed_survivor=False):
  """Reuse the original two-hatch case; only the declared fatal setup differs."""
  import mmx6_coop_native_reentry as dialogue
  h=hud
@@ -1168,11 +1168,13 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
  if scenario=='either':
   return exercise(ctx,output=output,original_exe=original_exe,leader=leader,success=success)
  need(scenario in ('living','absent','fallen'),'Explicit original door policy scenario required')
+ need(type(fallen_seat)is int and fallen_seat in(0,1),'Explicit native fallen seat required')
+ need(not closed_survivor or scenario=='fallen'and fallen_seat==0,'Closed survivor check requires primary native FALLEN')
  if (1280,480) not in h.SIZES:h.SIZES=tuple(h.SIZES)+((1280,480),)
  out=Path(output);out.mkdir(parents=True,exist_ok=False)
  clients=ctx['clients'];report=ctx['report'];online=len(clients)==2
  excluded=False
- def participants():return (0,1)if not excluded else (0,)
+ def participants():return (0,1)if not excluded else (0,)if scenario=='absent'else(fallen_seat^1,)
  e=dict(kind='two_original_Both_doors_private_views',status='failed_setup',samples=[],inputs=[],dialogue_inputs=[],dialogue_responses=[],captures=[],doors=[],checks={},source_guards=[],bypasses=['Explicit agreed intro_before_doors fixture initializes nativeCP1, then positions living heroes/camera on source-qualified predoor ground and calls the original primary placement scanner once with its native full-window envelope. Already resident secondary controllers are preserved. It bypasses unrelated approach traversal only. No native door admission, acknowledgement, CP2 grant, traversal or outcome is assigned.'],limits=['F101/F116 original intro subtype2 then subtype1 in one physical process/session per mode. No fortress/consecutive-boss-door/F83/F164 inference; no whole intro traversal, ordinary recording/replay, cross-host/OS or all-door-subtype claim.'])
  report['two_Both_doors']=e;deadline=time.monotonic()+210
  def inp(seat,bits,label):
@@ -1225,7 +1227,7 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
   if online and len(e['samples'])%16==0:ctx['network']()
   return r
  def alive(r):
-  expected=(0,0)if not excluded else(0,2)if scenario=='absent'else(0,5)
+  expected=(0,0)if not excluded else(0,2)if scenario=='absent'else tuple(5 if seat==fallen_seat else 0 for seat in(0,1))
   return all(p['state']['observation']['native_mode']==10 and not p['state']['observation']['failed']and not p['state']['observation']['mailbox']and tuple(p['state']['observation']['lifecycle'])==expected and all(p['state']['observation']['players'][seat]['active']and p['state']['observation']['players'][seat]['state']==1 and 0<p['state']['observation']['players'][seat]['hp']<128 for seat in participants())for p in r['peers'])
  def idle(r,cp=None):
   return alive(r)and all(not p['state']['observation']['scene_owner']and not p['state']['observation']['pause_owner']and p['state']['observation']['native_phase']==0 and all(p['state']['observation']['players'][seat]['action']==2 for seat in participants())and(cp is None or bytes.fromhex(p['play_hex'])[0x1D]==cp)for p in r['peers'])
@@ -1301,6 +1303,10 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
   for address,size in ((0x80050250,0x324),(0x80050C88,0x174),(0x80050DFC,0xFC),(0x80050EA0,0xB8),(0x8007212C,36),(0x8005211C,0x13C),(0x80079230,0x30),(0x80079290,0x20),(0x8002A3E8,0x50),(0x80029F38,0x404),(0x8003D308,0x44),(0x800219EC,0x30),(0x80021FC4,0x874)):
    raw=exe[address-0x80010000+2048:address-0x80010000+2048+size];need(all(c.read(address,size)==raw for c in clients),'Original setup/door source differs')
    e['source_guards'].append(dict(address=hex(address),bytes=size,sha256=hashlib.sha256(raw).hexdigest()))
+  if closed_survivor:
+   for address,size in ((0x80050F58,0xC0),(0x800510C4,0x40)):
+    raw=exe[address-0x80010000+2048:address-0x80010000+2048+size];need(all(c.read(address,size)==raw for c in clients),'Original native hatch closing/closed-solid source differs')
+    e['source_guards'].append(dict(address=hex(address),bytes=size,sha256=hashlib.sha256(raw).hexdigest()))
   # Original BIN2/index2/sector36/baseE9860; parent pins the original archive.
   # F9334 queues D0, F936C waits action20, F93E8 opens ID2 after X>=5824;
   # F9548 calls original3D330 only after native NPC departure below Y192.
@@ -1328,15 +1334,16 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
    gone=wait('actual native guest completion ABSENT',lambda r:all(tuple(p['state']['observation']['lifecycle'])==(0,2)and bytes.fromhex(p['state']['p2_body_hex'])[4]==3 for p in r['peers']),45)
    e['exclusion_precondition']=dict(kind='real_Select_to_native_ABSENT',leaving=leaving['index'],completed=gone['index']);excluded=True
   elif scenario=='fallen':
-   e['bypasses'].append('Predeclared lab_fatal=p2 requests only native HP80 after the checkpoint; original updates must earn death/FALLEN. Door, lifecycle, lives and progress results are never assigned.')
+   e['bypasses'].append('Predeclared lab_fatal=p%d requests only native HP80; original updates must earn death/FALLEN. No door, lifecycle, lives or progress result writes.'%(fallen_seat+1))
    inp(1,0,'neutral after completed checkpoint before separate fatal edge')
-   armed=wait('agreed P2 fatal armed after neutral',lambda r:idle(r,1)and all(p['fatal_status']==10 for p in r['peers']),15)
+   armed=wait('agreed selected-seat fatal armed after neutral',lambda r:idle(r,1)and all(p['fatal_status']==fallen_seat+9 for p in r['peers']),15)
    inp(1,6,'ordinary second P2 L3+R3 requests declared native fatal')
-   try:requested=wait('one agreed P2 native fatal request consumed',lambda r:all(p['fatal_status']==18 for p in r['peers']),15)
+   try:requested=wait('one agreed selected-seat native fatal request consumed',lambda r:all(p['fatal_status']==fallen_seat+17 for p in r['peers']),15)
    finally:inp(1,0,'release consumed native fatal chord')
-   dying=wait('original P2 native fatal handling',lambda r:all(p['state']['observation']['lifecycle'][1]in(4,5)for p in r['peers']),30)
-   fallen=wait('actual native guest death finishes FALLEN',lambda r:all(tuple(p['state']['observation']['lifecycle'])==(0,5)and bytes.fromhex(p['state']['p2_body_hex'])[4]==3 for p in r['peers']),45)
-   e['exclusion_precondition']=dict(kind='agreed_P2_HP80_request_then_original_native_FATAL_FALLEN',armed=armed['index'],requested=requested['index'],dying=dying['index'],completed=fallen['index']);excluded=True
+   dying=wait('original selected-seat native fatal handling',lambda r:all(p['state']['observation']['lifecycle'][fallen_seat]in(4,5)for p in r['peers']),30)
+   wanted_life=tuple(5 if seat==fallen_seat else 0 for seat in(0,1))
+   fallen=wait('actual native selected-seat death finishes FALLEN',lambda r:all(tuple(p['state']['observation']['lifecycle'])==wanted_life and bytes.fromhex(p['state']['p2_body_hex'if fallen_seat else'p1_body_hex'])[4]==3 for p in r['peers']),45)
+   e['exclusion_precondition']=dict(kind='agreed_HP80_request_then_original_native_FATAL_FALLEN',seat=fallen_seat,armed=armed['index'],requested=requested['index'],dying=dying['index'],completed=fallen['index']);excluded=True
   else:need(scenario=='living','Explicit F61 scenario required')
   # Native door eligibility uses world/body boxes; capture the actual drawable.
   ticks(8,'actual predoor private pairs');capture('before-first-native-door')
@@ -1380,6 +1387,19 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
      ac,zc=counts(a),counts(z);need(z['stereo']['pairs']>a['stereo']['pairs']and z['stereo']['published']['mode']==2 and not zc.get('mmx6.coop.private-state-leak',0),'Native door lost actual independent pairs or leaked context')
      for phase in ('opening','traversal'):need(zc.get('mmx6.coop.private-door-'+phase,0)>ac.get('mmx6.coop.private-door-'+phase,0),'No committed private views through native door '+phase)
    if number==0:need(all(bytes.fromhex(p['play_hex'])[0x1D]==2 for p in released['peers']),'Original CP2 marker was not crossed naturally')
+   if closed_survivor and number==0:
+    def closed(p):
+     actor=p['doors'].get(str(origin))
+     if not actor:return False
+     a=bytes.fromhex(actor['hex'])
+     # Source50F58 completes native closing animation to state2/phase0;
+     # state2's510C4 continues31DA8 solid collision, outer50DFC draws it.
+     return a[0]&1 and a[1:3]==bytes((8,2)) and a[4:6]==bytes((2,0)) and struct.unpack_from('<I',a,0x10)[0]==origin and struct.unpack_from('<I',a,0x68)[0]==0x80078DC8 and actor['box']=='00001020'
+    shut=wait('native first hatch closes as persistent solid after primary corpse exclusion',lambda r:idle(r,2)and all(closed(p)and crossed(p,x+16)for p in r['peers']),25,True)
+    record['closed']=shut['index'];e['final']=shut['index'];capture('first-hatch-native-closed-solid-primary-fallen')
+    e['checks']=dict(actual_primary_native_FATAL_FALLEN=True,guest_original_full_box_clearance=True,native_first_hatch_closed_persistent_solid=True,actual_native_guest_controls=idle(shut,2),primary_remains_FALLEN=alive(shut),native_results_not_seeded=True)
+    e['limits'].append('F57 first-hatch closing after primary native death only; no F61 two-hatch/boss or F183 living-held-occupancy credit.')
+    e['status']=success;return e
   final=wait('native original boss readiness after second door',lambda r:idle(r,2)and all(p['boss']and p['boss']['state']==1 and p['boss']['action']>=4 and p['boss']['hp']==32 for p in r['peers']),65,True)
   e['final']=final['index'];capture('both-original-doors-complete-native-boss-ready')
   if not excluded:

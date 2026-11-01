@@ -147,7 +147,7 @@ def run(args):
         if getattr(args, 'door_policy_scenario', None):
             case = intro.exercise_door_policy(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
                 output=output/'intro-admission', original_exe=args.original_exe,
-                leader=args.intro_leader, success=SUCCESS, scenario=args.door_policy_scenario)
+                leader=args.intro_leader, success=SUCCESS, scenario=args.door_policy_scenario, fallen_seat=args.door_fallen_seat, closed_survivor=args.door_closed_survivor)
             report['checks']['jump_audio_both_peers_completed'] = True
             return case
         exercise = (intro.exercise_scene_owner_fatal if getattr(args, 'scene_owner_fatal', None)
@@ -219,7 +219,7 @@ def run_local(args):
                 leader=args.intro_leader, success=failed_trace.ammo.SUCCESS, scenario=args.refight_policy_scenario)
         if getattr(args, 'door_policy_scenario', None):
             return intro.exercise_door_policy(ctx, output=output/'intro-admission', original_exe=args.original_exe,
-                leader=args.intro_leader, success=failed_trace.ammo.SUCCESS, scenario=args.door_policy_scenario)
+                leader=args.intro_leader, success=failed_trace.ammo.SUCCESS, scenario=args.door_policy_scenario, fallen_seat=args.door_fallen_seat, closed_survivor=args.door_closed_survivor)
         exercise = (intro.exercise_scene_owner_fatal if getattr(args, 'scene_owner_fatal', None)
             else intro.exercise_subtank_policy if getattr(args, 'subtank_policy', False)
             else intro.exercise_midboss_forward if getattr(args, 'midboss_forward', False)
@@ -269,9 +269,11 @@ def select_midboss(directory, *, enabled, selector=select_checkpoint):
     selected.update(doors='both', state_sha256=preparation.sha256(path))
     return selected
 
-def select_door_policy(directory, *, enabled, scenario, selector=select_checkpoint):
+def select_door_policy(directory, *, enabled, scenario, fallen_seat=1, selector=select_checkpoint):
     if scenario not in ('either', 'living', 'absent', 'fallen'):
         raise ValueError('Explicit native door scenario required')
+    if type(fallen_seat)is not int or fallen_seat not in(0,1):
+        raise ValueError('Explicit native fallen seat required')
     selected = selector(directory, enabled=enabled, option=intro.OPTION if scenario == 'either' else 'intro_before_doors',
         contact_protection='on', starting_hp=('off', 'off'), earned_weapons='off')
     directory = Path(directory)
@@ -282,7 +284,7 @@ def select_door_policy(directory, *, enabled, scenario, selector=select_checkpoi
                 or options[0].get('default') != default or {c['value'] for c in options[0].get('choice', [])} != choices):
             raise ValueError('Missing exact current native door/fatal option: '+key)
     values = dict(local_cameras='split', cameras='split', doors='either' if scenario == 'either' else 'both',
-                  lab_fatal='p2' if scenario == 'fallen' else 'off')
+                  lab_fatal='p'+str(fallen_seat+1) if scenario == 'fallen' else 'off')
     path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8')
     anchor = 'lab_earned_weapons = "off"\n'
     if text.count(anchor) != 1 or any(key+' =' in text for key in values):
@@ -349,6 +351,8 @@ def main():
     parser.add_argument('--midboss-forward', action='store_true', help='F166/F187 actual Magma midboss defeat and original forward boundaries')
     parser.add_argument('--door-policy-scenario', choices=('either', 'living', 'absent', 'fallen'),
                         help='F61 original native hatches, including agreed P2 fatal exclusion')
+    parser.add_argument('--door-fallen-seat', type=int, choices=(0,1), default=1, help='Native fallen seat; existing F61 default is guest1')
+    parser.add_argument('--door-closed-survivor', action='store_true', help='F57 guest traversal and actual first closed solid after primary FALLEN')
     parser.add_argument('--refight-policy-scenario', choices=('living', 'absent', 'fallen'),
                         help='F123 original portal wait/abort/admission, including agreed P1 fatal exclusion')
     parser.add_argument('--weather-survivor', action='store_true', help='F113 original rain before/after agreed P1 native fatal')
@@ -359,6 +363,8 @@ def main():
     parent.validate_options(parser, args)
     if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, bool(args.door_policy_scenario), bool(args.refight_policy_scenario), args.weather_survivor, args.subtank_policy, bool(args.scene_owner_fatal))) > 1:
         parser.error('Select one named native scenario')
+    if args.door_closed_survivor and (args.door_policy_scenario!='fallen' or args.door_fallen_seat!=0):
+        parser.error('Closed survivor check requires fallen primary seat0')
     if args.scene_owner_state_tail and (not args.local or args.scene_owner_fatal!='before_release'):
         parser.error('Scene state tail requires LOCAL before_release')
     if args.scene_owner_fatal:
@@ -384,7 +390,7 @@ def main():
     if args.door_policy_scenario:
         original_select = select_checkpoint
         def select_policy(directory, *, enabled):
-            return select_door_policy(directory, enabled=enabled, scenario=args.door_policy_scenario, selector=original_select)
+            return select_door_policy(directory, enabled=enabled, scenario=args.door_policy_scenario, fallen_seat=args.door_fallen_seat, selector=original_select)
         globals()['select_checkpoint'] = select_policy
     if args.refight_policy_scenario:
         if args.intro_leader != 1:

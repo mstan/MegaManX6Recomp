@@ -112,6 +112,21 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
                 self.assertEqual(values['lab_contact_protection'],'on')
                 self.assertEqual((values['lab_starting_hp_p1'],values['lab_starting_hp_p2'],values['lab_earned_weapons']),('off','off','off'))
 
+    def test_door_fallen_seat_selects_actual_survivor_and_lifecycle(self):
+        tree=ast.parse(inspect.getsource(intro.exercise_door_policy))
+        funcs=[n for n in tree.body[0].body if isinstance(n,ast.FunctionDef) and n.name in ('participants','alive')]
+        for seat in (0,1):
+            scope=dict(excluded=True,scenario='fallen',fallen_seat=seat)
+            exec(compile(ast.Module(body=funcs,type_ignores=[]),'<actual fallen-seat predicates>','exec'),scope)
+            self.assertEqual(scope['participants'](),(seat^1,))
+            players=[dict(active=1,state=1,hp=32),dict(active=1,state=1,hp=32)]
+            players[seat].update(state=3,hp=0)
+            o=dict(native_mode=10,failed=0,mailbox=0,lifecycle=tuple(5 if x==seat else 0 for x in (0,1)),players=players)
+            row=dict(peers=[dict(state=dict(observation=o))])
+            self.assertTrue(scope['alive'](row))
+            o['lifecycle']=tuple(reversed(o['lifecycle']))
+            self.assertFalse(scope['alive'](row))
+
     def test_door_policy_fatal_stays_in_prototype_before_trailing_net_feature(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source=Path(__file__).resolve().parents[1]
@@ -137,6 +152,13 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
                 self.assertEqual(values['lab_checkpoint'],'intro_cp2' if scenario=='either' else 'intro_before_doors')
                 self.assertEqual(values['lab_contact_protection'],'on')
                 self.assertEqual((values['lab_starting_hp_p1'],values['lab_starting_hp_p2'],values['lab_earned_weapons']),('off','off','off'))
+
+            state.write_text(initial)
+            pair.select_door_policy(directory,enabled=False,scenario='fallen',fallen_seat=0)
+            features=tomllib.loads(state.read_text())['feature']
+            self.assertEqual(features[0]['values']['lab_fatal'],'p1')
+            self.assertEqual(features[0]['values']['doors'],'both')
+            self.assertEqual(features[1],trailing)
 
     def test_midboss_both_stays_in_prototype_with_trailing_net_feature(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
