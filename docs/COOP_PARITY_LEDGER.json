@@ -26564,14 +26564,14 @@
           "src/mods/mmx6_coop_plugin.c:pickup_tick",
           "src/mods/mmx6_coop_plugin.c:nightmare_soul"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -26612,9 +26612,105 @@
             "bypasses": [
               "Offline prerequisite tank acquisition, energy and damaged HP grants; original checkpoint selection bypasses prior route. Native menu healing and state restoration remain actual original operations."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "1ff585f0bbe6a673bb37f67889ebf590c26cbc70",
+            "build_identity": {
+              "source_commit": "1ff585f0bbe6a673bb37f67889ebf590c26cbc70",
+              "observer_source_commit": "57afe1cff51f69cf53cfea9b1a6e4e2cb170426e",
+              "exe_sha256": "01bf3bb87fbf22e02699992d5edfe4c4e7f09887d77ab2ff1f912c7736c9fe29",
+              "declared_manifest_sha256": "4dcd76e0a1e4e40db49b47b0f43c1d7992471b407c13cefbb2fc552f0c523ad1",
+              "title": 79,
+              "profile": 62,
+              "snapshot": 21,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "90aeb241f26d37cadfa2209dbc6d29f2ca8b3f57fee245422bab37a34267f5ef",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "scope": "One real compiled clean1ff585f image; laterobserver-onlyscope/APIcommits do notchange declaredgame/generatedbytes. Bothmodes samebinary/manifest, no provenance relabel."
+            },
+            "settings": {
+              "subtank_energy": "independent",
+              "fixture": "intro_subtank_cp2 alias20/originalintroCP2entry/noncel4C535432",
+              "supplies": "P1nativeenergy16/P2private8, firsttanksharedownership; seededbeforeoriginalinitializer",
+              "starting_HP": "13/11 afteroriginalinitializer",
+              "audio": "dummy muted"
+            },
+            "action": "Ordinaryagreedcheckpointchord, originalnative8->9load, ownnativeSubTankmenuselection/Crosshealing ineachseat andisolatedbank/HP checks; LOCALcurrentbuildwarmstate/freshcontrol.",
+            "outcome": "All4parent/4nativechecksPASS. ActualoriginalCP2 generation=entries1/nonce4C535432 retains prerequisitenativebank90/private88/acq10h throughinitializer withHP13/11. OriginalP2menuheals11->19, onlyP2bank88->80; originalP1menuheals13->29, onlyP1bank90->80; otherHP/bank andsharedacq10h unchanged. WarmSAVE8gen0->1/LOAD1->2last_ok1 restoresfilledresources/guestx5928, then freshP2Left to5906.5. Rootviewed3actualnativeZero/Xtankmenus. Owned83180gracefulexit0/cards7706unchanged.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F180-c131-native-subtanks-local-2\\qualification.json",
+                "sha256": "7dbf00167bfac5c555707d29a3aa535be6328aeb32c6bcd941320e0f4b77558f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F180-c131-native-subtanks-local-2\\ammo-hud\\intro-admission\\observations.json",
+                "sha256": "24a10343eaf926ac7762c97ae71d16bdb0317513fb9fe05a1dedf5b6a013c4e7"
+              }
+            ],
+            "limits": [
+              "Native tank acquisition/progress remains shared; declared first-tankownership/16+8energy is a disclosed starting prerequisite, not earned acquisition. Actual native healing, private drain/isolation and original checkpoint retention are not written.",
+              "No native-card tank-energy persistence claim (excluded by frozen comparison); owner and original privatecard bytes remain unchanged. LOCAL currentbuildSAVE/LOAD qualified; no NETunilateral snapshot load.",
+              "All old C122 LOCALpasses/NETemptybankpolicy and failedC131LOCAL1read-widthraw retained. NewC131 qualification uses same01bf image inbothmodes; no C122credit transfer.",
+              "One declared alias20 reuses originalintroCP2entry, taint/profile/onceguard and existing serializedstate/schema21; independent-only supplyseed precedesoriginalmode8->9, existingHP13/11prerequisiteappliesafterinitializer. No general fixture API or success flags.",
+              "Initial source-binding helper calledwithoneimage incorrectlyrefuseditsrequiredtwoimageAPI; actualbuilt/staged image/manifest/sourceguardspassed normally. Compiledsource1ff andlaterobserver-onlyHEAD explicitlydistinct; no forgedmanifest/cache."
+            ],
+            "bypasses": [
+              "Declared acquisition/filledbanks beforeoriginalinitializer anddamagedHPafterload bypassresource-farming/damage prerequisites only; alltestedretention/healing/drain/control/state-restoreresults earned throughactualengine/menu/save-load."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "1ff585f0bbe6a673bb37f67889ebf590c26cbc70",
+            "build_identity": {
+              "source_commit": "1ff585f0bbe6a673bb37f67889ebf590c26cbc70",
+              "observer_source_commit": "57afe1cff51f69cf53cfea9b1a6e4e2cb170426e",
+              "exe_sha256": "01bf3bb87fbf22e02699992d5edfe4c4e7f09887d77ab2ff1f912c7736c9fe29",
+              "declared_manifest_sha256": "4dcd76e0a1e4e40db49b47b0f43c1d7992471b407c13cefbb2fc552f0c523ad1",
+              "title": 79,
+              "profile": 62,
+              "snapshot": 21,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "90aeb241f26d37cadfa2209dbc6d29f2ca8b3f57fee245422bab37a34267f5ef",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "scope": "One real compiled clean1ff585f image; laterobserver-onlyscope/APIcommits do notchange declaredgame/generatedbytes. Bothmodes samebinary/manifest, no provenance relabel."
+            },
+            "settings": {
+              "subtank_energy": "independent",
+              "fixture": "intro_subtank_cp2 alias20/originalintroCP2entry/noncel4C535432",
+              "supplies": "P1nativeenergy16/P2private8, firsttanksharedownership; seededbeforeoriginalinitializer",
+              "starting_HP": "13/11 afteroriginalinitializer",
+              "audio": "dummy muted"
+            },
+            "action": "Ordinaryagreedcheckpointchord, originalnative8->9load, ownnativeSubTankmenuselection/Crosshealing ineachseat andisolatedbank/HP checks; LOCALcurrentbuildwarmstate/freshcontrol.",
+            "outcome": "All15parent/3nativechecksPASS onBOTHpeers,112native samples. OriginalCP2retains16/8supplies+sharedacq10h andHP13/11; ordinaryP2heals11->19withONLY8energy, ordinaryP1heals13->29withONLY16energy; otherHP/bankisolated/flagretained. Commonprofile62before0/finalfixed selected0d9ac731872506ec4bad3af32e734fd4907e5587999335819f27953260273ca6, desync0. Fourmatchedcore+modCRCwindows8/7/6/8(total29), final8samples4352..4576resolved4587both. Rootviewed3actualboth-peerZero/Xmenuimages. Owned73924/68628gracefulexit0/fourprivatecardsunchanged; fixturecapture/replayrefused.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F180-c131-native-subtanks-net-1\\qualification.json",
+                "sha256": "caa661895b8f46c2d69aee32e931a8fe8b686674c869d4c620397e3a9444bc59"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F180-c131-native-subtanks-net-1\\intro-admission\\observations.json",
+                "sha256": "d79b6ec99f1841614ed97fcf6bef2694fe6d1d67ad214c8df657b2393d302cc3"
+              }
+            ],
+            "limits": [
+              "Native tank acquisition/progress remains shared; declared first-tankownership/16+8energy is a disclosed starting prerequisite, not earned acquisition. Actual native healing, private drain/isolation and original checkpoint retention are not written.",
+              "No native-card tank-energy persistence claim (excluded by frozen comparison); owner and original privatecard bytes remain unchanged. LOCAL currentbuildSAVE/LOAD qualified; no NETunilateral snapshot load.",
+              "All old C122 LOCALpasses/NETemptybankpolicy and failedC131LOCAL1read-widthraw retained. NewC131 qualification uses same01bf image inbothmodes; no C122credit transfer.",
+              "One declared alias20 reuses originalintroCP2entry, taint/profile/onceguard and existing serializedstate/schema21; independent-only supplyseed precedesoriginalmode8->9, existingHP13/11prerequisiteappliesafterinitializer. No general fixture API or success flags.",
+              "Initial source-binding helper calledwithoneimage incorrectlyrefuseditsrequiredtwoimageAPI; actualbuilt/staged image/manifest/sourceguardspassed normally. Compiledsource1ff andlaterobserver-onlyHEAD explicitlydistinct; no forgedmanifest/cache."
+            ],
+            "bypasses": [
+              "Declared acquisition/filledbanks beforeoriginalinitializer anddamagedHPafterload bypassresource-farming/damage prerequisites only; alltestedretention/healing/drain/control/state-restoreresults earned throughactualengine/menu/save-load."
+            ]
           }
         ],
-        "limitations": "LOCAL bounded F180 passes on6a7605d/imagef13de94a. NET independent policy/state agreement passes with empty banks only; actual NET tank healing and filled-bank checkpoint retention remain unverified. Native-card energy persistence is excluded, not a new gate."
+        "limitations": "SameC131compiled1ff/01bf/4dcd/profile62 LOCAL+NET nativecheckpointretention, independent8/16heals/HP-bankisolation/sharedacquisition andLOCALwarmstate/controlfullyqualified. Root6nativeZero/Xmenuimagesreviewed, finalNETCRC/cards/exits pass. Supplyseed explicitlyprerequisite, no earnedacquisition/cardenergypersistence/NETsnapshot claim; alloldraw preserved."
       }
     },
     {
