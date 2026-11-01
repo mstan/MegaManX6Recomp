@@ -123,6 +123,8 @@ if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
 endif()
 foreach(_mmx6_host_target psx-runtime psx-runtime-pgxp)
     if(TARGET ${_mmx6_host_target})
+        # Every activation reacquires title-owned arenas and retained banks.
+        set_property(TARGET ${_mmx6_host_target} PROPERTY PSX_MOD_SESSION_RESOURCES ON)
         target_compile_definitions(${_mmx6_host_target} PRIVATE
             MMX6_ENABLE_LOOPBACK_HOST_LAB=$<BOOL:${MMX6_ENABLE_LOOPBACK_HOST_LAB}>)
         if(TARGET mmx6_host_lab_contract_check)

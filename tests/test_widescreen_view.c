@@ -27,6 +27,9 @@ static int netplay_active, netplay_aspect;
 int psx_mod_netplay_is_active(void) { return netplay_active; }
 int psx_mod_netplay_aspect(void) { return netplay_aspect; }
 static uint32_t scan_state[2], stack_arg=0x1234;
+static uint32_t scan_base=0x9f000000u;
+static unsigned scan_allocations;
+static int background_available=1,scan_allocation_available=1;
 static unsigned scan_calls, world_count;
 static int32_t scan_bounds[2][4];
 static int (*native_scene)(void);
@@ -36,10 +39,13 @@ static unsigned mask_tags;
 void gpu_ws_set_native_scene_predicate(int (*p)(void)) { native_scene=p; }
 void gpu_ws_tag_screen_mask_quad(uint32_t p) { (void)p; ++mask_tags; }
 static uint32_t scan_directions[2];
-int mmx6_adaptive_background_activate(void) { return 1; }
+int mmx6_adaptive_background_activate(void) { return background_available; }
 void mmx6_adaptive_background_begin(unsigned layer) { assert(layer == 2); }
 void mmx6_adaptive_background_end(unsigned layer, uint32_t p) { assert(layer == 2 && p == packet); }
-uint32_t psx_mod_alloc_guest_memory(uint32_t n, uint32_t a) { assert(n==8 && a==4); return 0x9f000000u; }
+uint32_t psx_mod_alloc_guest_memory(uint32_t n, uint32_t a) {
+    assert(n==8 && a==4); ++scan_allocations;
+    return scan_allocation_available?scan_base:0;
+}
 uint16_t psx_mod_read_half(uint32_t p) {
     if (p==0x8009100au || p==0x8009100eu)
         return (uint16_t)(object[p-0x80091000u] | object[p-0x80091000u+1u]<<8);
@@ -49,7 +55,7 @@ uint16_t psx_mod_read_half(uint32_t p) {
     return (uint16_t)(p==0x80097202u ? camera_x : camera_y);
 }
 void psx_mod_write_word(uint32_t p, uint32_t v) {
-    if(p>=0x9f000000u && p<=0x9f000004u) scan_state[(p-0x9f000000u)/4]=v;
+    if(p>=scan_base && p<=scan_base+4u) scan_state[(p-scan_base)/4]=v;
     else { assert(p==0x801ffef0u); stack_arg=v; }
 }
 void psx_mod_write_byte(uint32_t p, uint8_t v) {
@@ -123,7 +129,7 @@ uint32_t psx_mod_read_word(uint32_t addr) {
     if (addr==0x800cced0u) return main_state;
     if(addr==0x800734ccu) return 0x80092000u;
     if(addr==0x80091010u) return actor_record;
-    if(addr>=0x9f000000u && addr<=0x9f000004u) return scan_state[(addr-0x9f000000u)/4];
+    if(addr>=scan_base && addr<=scan_base+4u) return scan_state[(addr-scan_base)/4];
     if(addr==0x801ffef0u) return stack_arg;
     assert(addr == 0x1f800100u || addr == 0x1f800108u); return packet;
 }
@@ -369,6 +375,25 @@ int main(void) {
         assert(anchor_calls == 1 && adaptive_calls == 0);
         assert(hook_count == 10 && placement_filter && fixed_view_filter);
     }
+    /* The next activation owns a new address. Execute the registered resize
+     * callback against that address; an old-session handle must not survive. */
+    unsigned previous_allocations=scan_allocations;
+    hook_count=0; scan_base=0x9f000100u;
+    scan_state[0]=scan_state[1]=0xffffffffu;
+    activate();
+    assert(scan_allocations==previous_allocations+1 && resize_state==scan_base);
+    memset(&cpu,0,sizeof cpu); cpu.gpr[29]=0x801fff00u;
+    camera_x=500; camera_y=944; reveal_margin=566; scan_calls=0;
+    enter(0x80029d18u,&cpu);
+    assert(scan_calls==2 && scan_state[0]==0x58365253u && scan_state[1]==566);
+    scan_calls=0; enter(0x80029d18u,&cpu);
+    assert(scan_calls==2 && scan_allocations==previous_allocations+1);
+    background_available=0; hook_count=0;
+    activate();
+    assert(!resize_state && !hook_count && scan_allocations==previous_allocations+1);
+    background_available=1; scan_allocation_available=0; hook_count=0;
+    activate();
+    assert(!resize_state && hook_count==9 && scan_allocations==previous_allocations+2);
     puts("mmx6_widescreen_view: enhanced rendering, guarded actors, and locked netplay views PASS");
     return 0;
 }

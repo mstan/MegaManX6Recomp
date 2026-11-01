@@ -76,7 +76,9 @@ static int intro_panorama_width(unsigned layer) {
 }
 
 int mmx6_adaptive_background_activate(void) {
-    if (!arena) arena = psx_mod_alloc_gpu_dma_memory(ARENA_BYTES, 32u);
+    /* The SDK retires arenas and banks before each title activation. */
+    intro_banks = weather_bank = 0;
+    arena = psx_mod_alloc_gpu_dma_memory(ARENA_BYTES, 32u);
     if (!arena) {
         fprintf(stderr, "MMX6 Custom Renderer: background arena allocation failed\n");
         return 0;

@@ -30,8 +30,20 @@ Mmx6SessionResources mmx6_test_session_resources(void) {
     return out;
 }
 int mmx6_test_session_reset(void) {
+    /* Legacy callers retain their resources; title opt-in retires them. */
+    uint32_t guest=mod_memory_used,dma=mod_gpu_dma_memory_used;
+    uint32_t packets=arena_count,pixels=bank_bytes;
+    if(!mod_texture_banks_begin_session(0)||!psx_mod_memory_begin_session(0) ||
+       mod_memory_used!=guest || mod_gpu_dma_memory_used!=dma ||
+       arena_count!=packets || bank_bytes!=pixels) abort();
+    g_psx_render_pass_active=1;
+    int banks_reset=mod_texture_banks_begin_session(1);
+    int memory_reset=psx_mod_memory_begin_session(1);
+    g_psx_render_pass_active=0;
+    if(banks_reset || memory_reset || mod_memory_used!=guest ||
+       mod_gpu_dma_memory_used!=dma || arena_count!=packets || bank_bytes!=pixels) abort();
     /* Exactly the SDK start_mod_session order after renderer teardown. */
-    if(!mod_texture_banks_reset_session()||!psx_mod_memory_reset_session())return 0;
+    if(!mod_texture_banks_begin_session(1)||!psx_mod_memory_begin_session(1))return 0;
     /* mod_runtime_activate_plugins clears this actual table immediately
      * before invoking the newly committed activation callbacks. */
     psx_mod_clear_function_replacements();

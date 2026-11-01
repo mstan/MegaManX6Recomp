@@ -33,12 +33,22 @@ class SessionContract(unittest.TestCase):
     def test_real_SDK_boundary_retires_all_ownership_before_activation(self):
         start=self.main.index('auto start_mod_session =')
         text=self.main[start:self.main.index('if (!start_mod_session(',start)]
-        self.assertLess(text.index('mod_texture_banks_reset_session()'),text.index('mod_runtime_activate_plugins()'))
-        self.assertLess(text.index('psx_mod_memory_reset_session()'),text.index('mod_runtime_activate_plugins()'))
+        for api,source in (('mod_texture_banks',self.textures),('psx_mod_memory',self.memory)):
+            self.assertLess(text.index(api+'_begin_session(PSX_MOD_SESSION_RESOURCES)'),text.index('mod_runtime_activate_plugins()'))
+            self.assertIn('return !session_owned || '+api+'_reset_session();',function(source,api+'_begin_session'))
         self.assertIn('mod_memory_used = mod_gpu_dma_memory_used = 0;',function(self.memory,'psx_mod_memory_reset_session'))
         reset=function(self.textures,'mod_texture_banks_reset_session')
         self.assertIn('psx_mod_forget_texture_bank_range(1,65535)',reset)
         self.assertIn('arena_count=0;',reset)
+    def test_title_opts_in_both_runtime_targets_without_changing_legacy_default(self):
+        cmake=(ROOT/'CMakeLists.txt').read_text(encoding='utf-8')
+        targets=cmake[cmake.index('foreach(_mmx6_host_target psx-runtime psx-runtime-pgxp)'):]
+        targets=targets[:targets.index('endforeach()')]
+        self.assertIn('set_property(TARGET ${_mmx6_host_target} PROPERTY PSX_MOD_SESSION_RESOURCES ON)',targets)
+        header=(SDK/'runtime/include/mod_memory.h').read_text(encoding='utf-8')
+        self.assertRegex(header,r'#ifndef PSX_MOD_SESSION_RESOURCES\s+#define PSX_MOD_SESSION_RESOURCES 0')
+        runtime=(SDK/'runtime/runtime.cmake').read_text(encoding='utf-8')
+        self.assertIn('PSX_MOD_SESSION_RESOURCES=$<BOOL:$<TARGET_PROPERTY:PSX_MOD_SESSION_RESOURCES>>',runtime)
     def test_every_current_session_handle_is_reacquired(self):
         for name,api in(('assets','guest'),('diagnostic','guest'),('packets','texture_packet'),
             ('hud_packets','texture_packet'),('menu_memory','gpu_dma')):
@@ -57,7 +67,10 @@ class SessionContract(unittest.TestCase):
         bridge=(ROOT/'tests/mmx6_coop_session_sdk_fixture.c').read_text(encoding='utf-8')
         self.assertIn('#include "memory.c"',bridge)
         self.assertIn('#include "mod_texture_banks.c"',bridge)
-        self.assertIn('if(!mod_texture_banks_reset_session()||!psx_mod_memory_reset_session())return 0;',bridge)
+        self.assertIn('if(!mod_texture_banks_begin_session(1)||!psx_mod_memory_begin_session(1))return 0;',bridge)
+        for api in ('mod_texture_banks','psx_mod_memory'):
+            self.assertIn(api+'_begin_session(0)',bridge)
+        self.assertIn('if(banks_reset || memory_reset',bridge)
         self.assertIn('#include "mod_function_replacements.c"',bridge)
         self.assertIn('psx_mod_clear_function_replacements()',bridge)
         self.assertIn('mod_memory_offset(physical,1,&offset)',bridge)

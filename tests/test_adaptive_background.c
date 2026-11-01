@@ -9,20 +9,23 @@
 static uint8_t ram[0x200000], extra[ARENA_BYTES];
 static WsViewAnchor test_view;
 static int support_banks;
+static uint32_t arena_base=0x80800000u;
+static unsigned allocations,arena_bindings,weather_definitions,disc_reads;
 static uint16_t test_vram[1024u*512u];
 const uint16_t *gpu_get_vram(void) { return test_vram; }
 int psx_mod_texture_banks_supported(void) { return support_banks; }
-int psx_mod_read_disc_file(const char *p,void *b,uint32_t c,uint32_t *n) { (void)p;(void)b;(void)c;(void)n;return 0; }
+int psx_mod_read_disc_file(const char *p,void *b,uint32_t c,uint32_t *n) { (void)p;(void)b;(void)c;(void)n;++disc_reads;return 0; }
 int psx_mod_define_texture_bank(uint16_t id,uint32_t w,uint32_t h,const uint16_t *p) {
     if(id!=WEATHER_BANK) return 0;
-    assert(w==1024 && h==512 && p==test_vram); return 1;
+    assert(w==1024 && h==512 && p==test_vram); ++weather_definitions; return 1;
 }
 void psx_mod_set_texture_bank_resolver(PSXModTextureBankResolver r) { assert(r); }
 void psx_mod_set_texture_bank_batching(int e) { assert(e); }
 void gpu_ws_set_view_bounds_override(int e,int lo,int hi) { (void)e; assert(lo==0 && hi==7872); }
 static uint8_t *memory(uint32_t p, unsigned n) {
     p &= 0x1fffffffu;
-    if (p >= 0x800000u && p - 0x800000u <= sizeof extra - n) return extra + p - 0x800000u;
+    uint32_t base=arena_base&0x1fffffffu;
+    if (p >= base && p - base <= sizeof extra - n) return extra + p - base;
     assert(p <= sizeof ram - n);
     return ram + p;
 }
@@ -40,9 +43,9 @@ uint32_t psx_mod_read_word(uint32_t p) {
 }
 void psx_mod_write_word(uint32_t p, uint32_t v) { memcpy(memory(p,4),&v,4); }
 uint32_t psx_mod_alloc_gpu_dma_memory(uint32_t n,uint32_t a) {
-    assert(n==sizeof extra && a==32); return 0x80800000u;
+    assert(n==sizeof extra && a==32); ++allocations; return arena_base;
 }
-void gpu_ws_bg2d_set_host_arena(uint32_t p,uint32_t n) { assert(p==0x80800000u && n==sizeof extra); }
+void gpu_ws_bg2d_set_host_arena(uint32_t p,uint32_t n) { assert(p==arena_base && n==sizeof extra); ++arena_bindings; }
 int gpu_ws_bg2d_get_view(unsigned layer,WsViewAnchor *v) { assert(layer<3); *v=test_view; return 320; }
 static void half(uint32_t p,uint16_t v) { memcpy(memory(p,2),&v,2); }
 static void fixture(void) {
@@ -286,5 +289,32 @@ int main(void) {
     memset(pixels,0,sizeof pixels);mmx6_unpack_intro_bank(pixels,asset,1);
     assert(pixels[288u*1024u+320u]==0xbaad);
     assert(pixels[256u*1024u+384u]==0);
+    /* A restarted session may reuse a different arena layout and has no old
+     * retained banks. The real draw path must publish into the new arena. */
+    unsigned old_allocations=allocations,old_bindings=arena_bindings;
+    intro_banks=1; weather_bank=1;
+    arena_base=0x80900000u;
+    assert(mmx6_adaptive_background_activate());
+    assert(allocations==old_allocations+1 && arena_bindings==old_bindings+1);
+    assert(!intro_banks && !weather_bank);
+    fixture(); test_view=(WsViewAnchor){138,138,0,0,0};
+    mmx6_adaptive_background_begin(0);
+    mmx6_adaptive_background_end(0,0x800b91c0u);
+    uint32_t current_packet=psx_mod_read_word(0x80090e7cu)&0xffffffu;
+    assert(current_packet>=(arena_base&0xffffffu) &&
+           current_packet<(arena_base&0xffffffu)+ARENA_BYTES);
+    ram[0xccedc]=6; ram[0xccedd]=0;
+    unsigned definitions=weather_definitions;
+    assert(load_background_bank(WEATHER_BANK));
+    assert(load_background_bank(WEATHER_BANK));
+    assert(weather_definitions==definitions+1);
+    unsigned reads=disc_reads;
+    assert(!load_background_bank(INTRO_BANK));
+    assert(!load_background_bank(INTRO_BANK));
+    assert(disc_reads==reads+1); /* Failed lookup is cached only this session. */
+    assert(allocations==old_allocations+1); /* Drawing/resizing does not allocate. */
+    assert(mmx6_adaptive_background_activate());
+    assert(!intro_banks && !weather_bank && allocations==old_allocations+2);
+    assert(!load_background_bank(INTRO_BANK) && disc_reads==reads+2);
     puts("adaptive background: >64-ring columns, texture buckets, packet metadata, finite maps, native ring and 4:3 identity PASS");
 }
