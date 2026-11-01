@@ -771,7 +771,7 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                     "Audio default resident loader did not commit on both peers")
             report["checks"]["default_resident_loader_committed"]=True
             case=audio_pair.exercise(dict(clients=clients,both=both,report=report,output=output,
-                network=network,native_advance=lambda frames,label:advance(frames)),
+                network=network,transport_window=transport_window,native_advance=lambda frames,label:advance(frames)),
                 expected_sha=args.expected_exe_sha256,source=audio_source,
                 first_seat=args.audio_first_seat if args.audio_first_seat is not None else 0,
                 max_attempts=args.audio_max_attempts if args.audio_max_attempts is not None else 32)
