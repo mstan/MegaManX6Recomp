@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; guarded native Ray Arrow atlas-origin fix requires fresh LOCAL/NET qualification; inherited scene/SubTank/other gaps remain unqualified",
+  "status": "development-candidate-only; authored session-resource lifetime fix requires fresh F39 LOCAL/NET qualification; inherited unrelated gaps remain unqualified",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 57,
+  "revision": 58,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v74",
+    "title_compatibility": "mmx6-x-zero-delay-v75",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -860,5 +860,12 @@
     "cache": "Known compressed-source aliases bypass address-only lookup and use existing exact decoded-pixel comparison; no new cache metadata or source registry.",
     "snapshot_schema": 20,
     "qualification": "Fresh exactcandidate LOCAL/NET activeRay8composedart, sourceownednativeallocation/animation/travel/bounce/expiry and currentbuildstate required. Does not resolve unexplained C125 NET guestPC0 or transfer other row credit."
+  },
+  "title_changes_v75": {
+    "scope": "Title runtime targets explicitly PSX_MOD_SESSION_RESOURCES=1. SDK begin_session resets guest/DMA/snapshot/packet/texture registrations before activation; co-op reacquires existing owned resources. Background/widescreen reacquire cached addresses and reset retained-bank IDs on activation.",
+    "sdk_legacy_default": "UNCHANGED: begin_session(0) preserves legacy clients; title opts into existing authored contract, no SDK global change.",
+    "observed_failure": "C126 built0; samePID LOCALrestart doubledDMA/packetregistrations, +537600snapshotbytes eachactivation and subsequent524288assetallocation overflowed1MiB guestspace, losingP2.",
+    "snapshot_schema": 20,
+    "qualification": "Actual samePID LOCAL normalrestart, freshcounterpart menu/controls and bounded resource reinitialization plus current-build warmstate; matched exactcandidate NET lifecycle where supported, actualprofilebefore0/resolvedcoremodCRC/cards/ownedcleanup. No oldV90NET crosscandidateaggregate."
   }
 }
