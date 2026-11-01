@@ -840,7 +840,7 @@
               "network_user_states": 0,
               "muted": "SDL_AUDIODRIVER=dummy"
             },
-            "action": "Launch separate fresh same-machine pairs for each jump order; use owned published host inputs; independently probe both peers’ sample bytes, numeric DSP state and natural overlapping lifetimes; require pre-frame0 agreement and resolved matching core/mod CRC.",
+            "action": "Launch separate fresh same-machine pairs for each jump order; use owned published host inputs; independently probe both peers\u2019 sample bytes, numeric DSP state and natural overlapping lifetimes; require pre-frame0 agreement and resolved matching core/mod CRC.",
             "outcome": "Both jump orders pass all 19 audio checks independently on both peers. Each pair has 30 matching core/mod CRC samples, including 8/7 after its audio case; natural owned exit0 for all four processes. General paired audio and full comparisons remain incomplete.",
             "artifacts": [
               {
@@ -2504,9 +2504,91 @@
             ],
             "action": "Both actual rosters; full X Square charge/release and short dash after each owned menu, other hero stationary. Inspect coherent bodies/private actors, original P1 pool, native lifetime, counter recovery and visible composed art.",
             "outcome": "PASS LOCAL. Both seats reach held tier2/clock90/nativeheld20 with visible charge. Post-menu0/1 native charged0x12 allocation0x21 initializes, moves and expires in allocating X pool; inverse x110->90->40->0->expiry, canonical x205->285->expiry and x96->56->16->-14->expiry. Own counter/charge clear, fresh basic shot works without changing stationary other hero. Moving and quiet dash captures remain visible; correct native P1 three-trail headers transition 1100000101/1100010101/1100020101 to inactive. Hot inverse save/load generations1/2 pass with resources/roster restored and X movement12058624->11894784. Actual owned PID76592 exit0, input clear/quit acknowledged, both cards unchanged."
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Actual original Load/unit5 gives Zero/P1 + baseX/P2, forms5/0, both peers",
+              "session": 2026103181,
+              "delay": 3,
+              "rollback": false,
+              "renderer": "NET dual-raster OpenGL with SW@1x authority; matched native1x settings; SDLdummy",
+              "host_profile": "mmx6.win64-clang22.loopback revision56, selectedSHA b9d131e11ff98c8e6b45f649770abda5b982d33966b53b4833f2ee152317d475",
+              "fixtures": "LAB alloff; declared isolated authored availability/inventory cards unchanged"
+            },
+            "action": "One same-image NET pair: actual native card Load/story/unit5/arrival; quiet20-native-update recapture and existing raw observations. Stop before menus/attacks when rendered prerequisite remains invalid.",
+            "outcome": "BLOCKED by concrete native rendering defect: both peers retain black X/P2 body rectangle and missing lowerHUDportrait, while Zero/background render. Quiet samples are actually nativeTimers4732/4733, fullHUDfade128, bank_count156/privatepackets7/failed0; terminal nativeTimers12082/12084, both chars[1,0]/forms[5,0], HP32/lifecycle0/scene0. Before-frame0 profile56 verified cycles0/sim_tick0/before-enter-guest1; final resolved sim51136 core17c39a59/modaf94c32a and sim51168 corec13aee25/mod17a49bea match. No R9/F179 NET behavior credit. Both owned inputs cleared, quits acknowledged, native exits[0,0], listeners released, all private cards unchanged; pair857.94seconds within40min.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\control-observations.jsonl",
+                "sha256": "35db101f0a1e59251470ec50c1e438df74f3d1837dd9ea3ea889a606887f9e1a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-owned-1.json",
+                "sha256": "2a4cd25ebb10bcdb67766a04efc5f4d99856cfee0107adbc9316d18a3d44ecb3"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-native-net-capacity-1.json",
+                "sha256": "6a6a27b47b075ff181501adf9ff2f6d79556b6247f843c16e94bdcf312cb4f6d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\NET-inverse-settled-visible.png",
+                "sha256": "8aea1100897c78306a782a6bfe983d6bc3c71a0d0fdb336a2eef2667b645e297"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\NET-inverse-quiet-visible-settling.png",
+                "sha256": "72705f29ee91b8caeb8f49c48749801873cdeef1c730febef4d370dd9c944b36"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\logs\\native-stderr.log",
+                "sha256": "26fda7b7eb094be18ce933be0c3624a18c13ee9283879eca56214fa34db5232f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\logs\\native-stdout.log",
+                "sha256": "65da3caa8ae652a57199fe50dbe79dbc878c723bc1aeaaf344406d2288c0bc9c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-1\\NET-inverse-settled-visible.png",
+                "sha256": "8aea1100897c78306a782a6bfe983d6bc3c71a0d0fdb336a2eef2667b645e297"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-1\\NET-inverse-quiet-visible-settling.png",
+                "sha256": "72705f29ee91b8caeb8f49c48749801873cdeef1c730febef4d370dd9c944b36"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-1\\logs\\native-stderr.log",
+                "sha256": "b432178c51326f877ca972316ba95055d688c4c3cf2bb79973fb716a9d7d7f5a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-1\\logs\\native-stdout.log",
+                "sha256": "1ea798a154a73f2d6833752275a58f8b25ca73fc443ddb8d1aefe1f5c45c92b8"
+              }
+            ],
+            "limits": [
+              "Persistent composed rendering defect on both peers; CRC/native-state agreement does not establish visual correctness.",
+              "No native menu/attack/charge executed, no NET or aggregate admission; LOCAL result on same candidate remains valid.",
+              "Actual NET1 attempt spent; another run requires a relevant implemented game fix and distinguishing endpoint, no observer/source variant or budget reset.",
+              "Source investigation is bounded15min for this concrete LOCAL-vs-NET render defect; no general instrumentation project."
+            ],
+            "bypasses": [
+              "Prelaunch authored native availability/inventory/history prerequisites only; no runtime memory/result writes."
+            ]
           }
         ],
-        "limitations": "C125 LOCAL both-roster native behavior passed after actual game fix; same-candidate NET qualification remains required. Historical failures and spent limits preserved."
+        "limitations": "C125 LOCAL both-roster native behavior passed, but same-image NET shows persistent black guest-X body/missing HUD before menus or attacks. Native/pair exited cleanly with CRC/cards intact; a relevant rendering fix is required before retry."
       }
     },
     {
@@ -3088,7 +3170,7 @@
               "network_user_states": 0,
               "muted": "SDL_AUDIODRIVER=dummy"
             },
-            "action": "Launch separate fresh same-machine pairs for each jump order; use owned published host inputs; independently probe both peers’ sample bytes, numeric DSP state and natural overlapping lifetimes; require pre-frame0 agreement and resolved matching core/mod CRC.",
+            "action": "Launch separate fresh same-machine pairs for each jump order; use owned published host inputs; independently probe both peers\u2019 sample bytes, numeric DSP state and natural overlapping lifetimes; require pre-frame0 agreement and resolved matching core/mod CRC.",
             "outcome": "Both jump orders pass all 19 audio checks independently on both peers. Each pair has 30 matching core/mod CRC samples, including 8/7 after its audio case; natural owned exit0 for all four processes. General paired audio and full comparisons remain incomplete.",
             "artifacts": [
               {
@@ -6112,7 +6194,7 @@
               "host_profile": "mmx6.win64-clang22.loopback revision35",
               "audio": "dummy muted"
             },
-            "action": "Guest-only native portal2→actual originalCP2 initializer→originalBIN33 HP48activeboss without corrective approach; both native fullfeet and separately owned controls.",
+            "action": "Guest-only native portal2\u2192actual originalCP2 initializer\u2192originalBIN33 HP48activeboss without corrective approach; both native fullfeet and separately owned controls.",
             "outcome": "All8native/15NETparent gates,4resolvedCRCwindows/13matching samples,2ownedexit0/cards unchanged,10rootviewedNETcaptures. Exact samecandidateLOCAL alreadypasses; named comparison complete.",
             "artifacts": [
               {
@@ -10081,7 +10163,7 @@
         "counterpart_check": "Compare X5's original armor/Zero enhancement contracts with X4's elective options; if implemented, enable both together and verify native pose/art/abilities without changing campaign flags.",
         "burndown": "P19, P30",
         "status": "passed",
-        "evidence_limits": "Implemented independent default-off native forms/host choices, guarded virtual reads, full privateDAT93/cache source identity and schema7. Corrected nativeFourthArmor1 automatic miss on89E80004 (effectiveX0..4->4; native49/4A/capsule fields genuine). Current automatic primary/nativeNova+partner, guestmenu save-load, standalone FA4/fullDAT93/Right, real Both/native boss defeat/reward/Save and cold cardLoad pass; saved4A01/earnedmask8/bothC9=8 unchanged, native forms4/5/cycle/menu pass. Current13-checkpoint host peer bundle ignores opposite standalone choices:271core+mod matches through8724/1816clean draws each, no desync. A121 inverse privateDAT93/GPUUI/BlackZero palette+ownedSaber/P2Nova/P1jump/schema7 and option-off nativecode08 control retain prior-candidate identity. New current genuineF9 Zero native R2 action3A costs48=4*12 (288->240, FC0), recovers/Right2.5px. Actual incoming5->2/HP42->40, facing40->A5 and hitkind2 motion clears pass;174samples preserve4A0/C9F9/capsule/program0/cards. This supersedes earlier generic cost/injury gaps for those native branches only. Fresh post-injuryLeft interrupted by another native hit24->22; no repeat. Special31E5C, distinct deferred producer ownership, specific preview/Gaea/capsule and actual rewind/inducedrollback remain unverified. Palette/basicSaber/ordinary peer CRCs prove none of those. All21CTest pass; standalone wrong-pool projectile observer and interpreter fallback disclosed. qa-auto-forms-20261022/qualification.json; subagent-black-native-mechanics-20261022/qualification.json. Current89 original4B7EC ordinary Saber palette-index3 -> BlackZero4E qualifies; type3 was an incorrect earned-attack label. Actual family18 initializes,4B88C->3CEAC(4E,1,1)->2C338, exact32 private palette bytes match native4E and differ from3. Purple Saber is visible in both panes, naturally expires, idle02/ownRight3.5px recover, and genuine4A01/4B0/4C0/A10/FC0 stay unchanged. No enemy contact/damage or other family; full F37 remains unverified. subagent-enhanced-type3-20261022/qualification.json. Current89 inverseBlackZero/P1-UltimateX/P2 now additionally has actual nativeowned aerialdash effect/palette/follow/expiry/control with bothautomaticchoicesON; genuineflags unchanged. Contractaudit separates nativeX5immediate automaticequipment from earnedcapsule F55/F71; removes invented earnedSaber type3 prerequisite (ordinarypalette3→4E alreadyqualified). Preserve actualF37 death/retry/reinit, mappedrewind/inducedrollback and same-process teardown/reopen obligations plus distinctspecial/deferred/conditional native contexts. No fullF37 pass or everyhook×seat matrix. subagent-ultimate-movement-20261022/qualification.json. Reviewed named evidence also lacks standaloneBlackZero co-opOFF runtime and hostOFF versusofflineON runtime; reconcile existing receipts before scheduling those distinct gate checks. Current4DB4A5F3 inverse both-automatic forms: actual P2 native fatal/FALLEN retains BlackZero/P1 survivor controls and retries; native team wipe spends2->1, original raw1/0CP0 reinit restores both forms. Actual private DAT93/Zero90 guest graphics exactly match selected immutable sources; native private assembly, composed bodies and original BlackZero Saber4E/purple slash recover. Current slot7 save/load after native reload restores P2-owned menu/world645/positions/resources; both Right7.5px, partner0px. Mapped filmstrip/Left/Cross rewinds world702->676/P2 menu; same later live pair retains exact sources, BlackZero Saber and ownedX buster allocation/expiry/independent controls, genuine4A/4B/4C/A1 unchanged. Durable menu/input isolation remains unverified: menu later resumed without intended Start, cause unknown. Post-retry Nova admits actual private action22 but narrow roof causes native pit death; no extra Nova setup. Separate co-opOFF/standaloneBlackZeroON native NewGame passes no activation, original Saber18/4E exact native working slot1, purple/black art, expiry/Right/genuine flags. Original observer failures and one standalone source-backed correction retained. Background holes/rewind thumbnails remain visual gaps; no full F37 pass, inducedrollback/rematch/hostOFF policy or conditional producer promotion. subagent-form-lifecycle-20261022/qualification.json. Current D1B93AFC one actual Split delay3 CLI loopback bundle passes13 checkpoints/271 matching core+mod samples through8672, resolved8675,1218 clean private draws each. Real native class36 X/P1 buster advances serial1->2/carry0->5/10 with actualHP54 unchanged; own positive clock observed13 then native expiry0, ready partner clock0. Earlier F111 same setup directly observes15. Actual P2groundSaber18 is emitted while boss is about100px above; no accepted P2contact/token-rejection proof. Host formsOFF overrides both standalone offline choicesON: actual native FourthArmor1/Zero5, private choices0/0/source0 and genuineflags preserved. No phase/HP/death/outcome repair or extra aim variant. qa-logger-complete-options-20261022/observer-corrected/qualification.json. This supersedes earlier missing hostOFF policy runtime only. Deferred producers/conditional mechanics, durable rewind/input isolation, inducedrollback and same-process rematch remain open; no fullF37 pass. Final bounded F37 feature audit passes eight actual contracts: independent default-off simultaneous native forms in both rosters, original art/abilities and genuine campaign flags, standalone behavior, host choices, death/retry/reinit, current states and mapped rewind. Current D1 clean rewind restores actual open P2 controller[1,0,0]/world638 through51 neutral host frames; P1Start stays open, only P2Start closes, both fresh controls work. Fresh D1slot7 restores changed HP/ammo/world/positions/selected inventory/exact privateDAT93+Zero90/split cameras/genuine flags. Preserve the initial false extra-subpage guard and one exact observer correction; both owned runners stop/cards unchanged. 19 unique prior/current receipt hashes and unchanged forms source reconcile the actual feature gates. Global inducedrollback/rematch/general scenery remain in their workstreams; conditional native read-site/property paths are not claimed exhaustively covered and are retained as coverage limits, without inventing an all-context feature matrix. qa-beam-rewind-protection-20261022/F37-root-review.json; qa-rewind-input-clean-20261022/F37-feature-scope-review.json."
+        "evidence_limits": "Implemented independent default-off native forms/host choices, guarded virtual reads, full privateDAT93/cache source identity and schema7. Corrected nativeFourthArmor1 automatic miss on89E80004 (effectiveX0..4->4; native49/4A/capsule fields genuine). Current automatic primary/nativeNova+partner, guestmenu save-load, standalone FA4/fullDAT93/Right, real Both/native boss defeat/reward/Save and cold cardLoad pass; saved4A01/earnedmask8/bothC9=8 unchanged, native forms4/5/cycle/menu pass. Current13-checkpoint host peer bundle ignores opposite standalone choices:271core+mod matches through8724/1816clean draws each, no desync. A121 inverse privateDAT93/GPUUI/BlackZero palette+ownedSaber/P2Nova/P1jump/schema7 and option-off nativecode08 control retain prior-candidate identity. New current genuineF9 Zero native R2 action3A costs48=4*12 (288->240, FC0), recovers/Right2.5px. Actual incoming5->2/HP42->40, facing40->A5 and hitkind2 motion clears pass;174samples preserve4A0/C9F9/capsule/program0/cards. This supersedes earlier generic cost/injury gaps for those native branches only. Fresh post-injuryLeft interrupted by another native hit24->22; no repeat. Special31E5C, distinct deferred producer ownership, specific preview/Gaea/capsule and actual rewind/inducedrollback remain unverified. Palette/basicSaber/ordinary peer CRCs prove none of those. All21CTest pass; standalone wrong-pool projectile observer and interpreter fallback disclosed. qa-auto-forms-20261022/qualification.json; subagent-black-native-mechanics-20261022/qualification.json. Current89 original4B7EC ordinary Saber palette-index3 -> BlackZero4E qualifies; type3 was an incorrect earned-attack label. Actual family18 initializes,4B88C->3CEAC(4E,1,1)->2C338, exact32 private palette bytes match native4E and differ from3. Purple Saber is visible in both panes, naturally expires, idle02/ownRight3.5px recover, and genuine4A01/4B0/4C0/A10/FC0 stay unchanged. No enemy contact/damage or other family; full F37 remains unverified. subagent-enhanced-type3-20261022/qualification.json. Current89 inverseBlackZero/P1-UltimateX/P2 now additionally has actual nativeowned aerialdash effect/palette/follow/expiry/control with bothautomaticchoicesON; genuineflags unchanged. Contractaudit separates nativeX5immediate automaticequipment from earnedcapsule F55/F71; removes invented earnedSaber type3 prerequisite (ordinarypalette3\u21924E alreadyqualified). Preserve actualF37 death/retry/reinit, mappedrewind/inducedrollback and same-process teardown/reopen obligations plus distinctspecial/deferred/conditional native contexts. No fullF37 pass or everyhook\u00d7seat matrix. subagent-ultimate-movement-20261022/qualification.json. Reviewed named evidence also lacks standaloneBlackZero co-opOFF runtime and hostOFF versusofflineON runtime; reconcile existing receipts before scheduling those distinct gate checks. Current4DB4A5F3 inverse both-automatic forms: actual P2 native fatal/FALLEN retains BlackZero/P1 survivor controls and retries; native team wipe spends2->1, original raw1/0CP0 reinit restores both forms. Actual private DAT93/Zero90 guest graphics exactly match selected immutable sources; native private assembly, composed bodies and original BlackZero Saber4E/purple slash recover. Current slot7 save/load after native reload restores P2-owned menu/world645/positions/resources; both Right7.5px, partner0px. Mapped filmstrip/Left/Cross rewinds world702->676/P2 menu; same later live pair retains exact sources, BlackZero Saber and ownedX buster allocation/expiry/independent controls, genuine4A/4B/4C/A1 unchanged. Durable menu/input isolation remains unverified: menu later resumed without intended Start, cause unknown. Post-retry Nova admits actual private action22 but narrow roof causes native pit death; no extra Nova setup. Separate co-opOFF/standaloneBlackZeroON native NewGame passes no activation, original Saber18/4E exact native working slot1, purple/black art, expiry/Right/genuine flags. Original observer failures and one standalone source-backed correction retained. Background holes/rewind thumbnails remain visual gaps; no full F37 pass, inducedrollback/rematch/hostOFF policy or conditional producer promotion. subagent-form-lifecycle-20261022/qualification.json. Current D1B93AFC one actual Split delay3 CLI loopback bundle passes13 checkpoints/271 matching core+mod samples through8672, resolved8675,1218 clean private draws each. Real native class36 X/P1 buster advances serial1->2/carry0->5/10 with actualHP54 unchanged; own positive clock observed13 then native expiry0, ready partner clock0. Earlier F111 same setup directly observes15. Actual P2groundSaber18 is emitted while boss is about100px above; no accepted P2contact/token-rejection proof. Host formsOFF overrides both standalone offline choicesON: actual native FourthArmor1/Zero5, private choices0/0/source0 and genuineflags preserved. No phase/HP/death/outcome repair or extra aim variant. qa-logger-complete-options-20261022/observer-corrected/qualification.json. This supersedes earlier missing hostOFF policy runtime only. Deferred producers/conditional mechanics, durable rewind/input isolation, inducedrollback and same-process rematch remain open; no fullF37 pass. Final bounded F37 feature audit passes eight actual contracts: independent default-off simultaneous native forms in both rosters, original art/abilities and genuine campaign flags, standalone behavior, host choices, death/retry/reinit, current states and mapped rewind. Current D1 clean rewind restores actual open P2 controller[1,0,0]/world638 through51 neutral host frames; P1Start stays open, only P2Start closes, both fresh controls work. Fresh D1slot7 restores changed HP/ammo/world/positions/selected inventory/exact privateDAT93+Zero90/split cameras/genuine flags. Preserve the initial false extra-subpage guard and one exact observer correction; both owned runners stop/cards unchanged. 19 unique prior/current receipt hashes and unchanged forms source reconcile the actual feature gates. Global inducedrollback/rematch/general scenery remain in their workstreams; conditional native read-site/property paths are not claimed exhaustively covered and are retained as coverage limits, without inventing an all-context feature matrix. qa-beam-rewind-protection-20261022/F37-root-review.json; qa-rewind-input-clean-20261022/F37-feature-scope-review.json."
       },
       "frozen_row_sha256": "c28aacdc30c21bc18219b2d492fc7c30881912e7cc79f6a14a890949510840cf",
       "x6": {
@@ -18700,7 +18782,7 @@
               "host_profile": "mmx6.win64-clang22.loopback revision35",
               "audio": "dummy muted"
             },
-            "action": "Guest-only native portal2→actual originalCP2 initializer→originalBIN33 HP48activeboss without corrective approach; both native fullfeet and separately owned controls.",
+            "action": "Guest-only native portal2\u2192actual originalCP2 initializer\u2192originalBIN33 HP48activeboss without corrective approach; both native fullfeet and separately owned controls.",
             "outcome": "All8native/15NETparent gates,4resolvedCRCwindows/13matching samples,2ownedexit0/cards unchanged,10rootviewedNETcaptures. Exact samecandidateLOCAL alreadypasses; named comparison complete.",
             "artifacts": [
               {
@@ -19012,7 +19094,7 @@
               "host_profile": "mmx6.win64-clang22.loopback revision35",
               "audio": "dummy muted"
             },
-            "action": "Guest-only native portal2→actual originalCP2 initializer→originalBIN33 HP48activeboss without corrective approach; both native fullfeet and separately owned controls.",
+            "action": "Guest-only native portal2\u2192actual originalCP2 initializer\u2192originalBIN33 HP48activeboss without corrective approach; both native fullfeet and separately owned controls.",
             "outcome": "All8native/15NETparent gates,4resolvedCRCwindows/13matching samples,2ownedexit0/cards unchanged,10rootviewedNETcaptures. Exact samecandidateLOCAL alreadypasses; named comparison complete.",
             "artifacts": [
               {
@@ -19550,7 +19632,7 @@
         "counterpart_check": "Use a native persistent X5 weakness attack against its boss, separate and re-contact it, and inspect accepted/rejected contacts plus token expiry for that owner.",
         "burndown": "P09, P23",
         "status": "unverified",
-        "evidence_limits": "Unverified993C8CA6 bounded follow-up: original regularclass36 uses the same native normal7/result8/reaction0A/actor80 family as refight. GenuineF9card native load/CP4 intro takes mission-report branch beforefight; directclear-bit cause unproven. One freshnativeNewGame correction reaches actualbossHP56/controlrelease; disclosed pausedP2 C9 00→40/ammo288 setup and original7 cycle succeed. Muzzlefixture incorrectly uses pre-arena ledgeY75 instead of actualarena floor; P2fatal9816/Y75 occurs beforefire. No weakness failure inferred, no pose/hurt/timer/token/success writes, bothownedrunners stopped. subagent-persistent-weakness-20261022/receipt.json. Persistent same-ball separation/recontact, legitimate rejects, rearm/contactcount/owner-token expiry remain unverified. Future opportunity must first observe genuinearena floor via nativeRight/drop; no third setup in this batch."
+        "evidence_limits": "Unverified993C8CA6 bounded follow-up: original regularclass36 uses the same native normal7/result8/reaction0A/actor80 family as refight. GenuineF9card native load/CP4 intro takes mission-report branch beforefight; directclear-bit cause unproven. One freshnativeNewGame correction reaches actualbossHP56/controlrelease; disclosed pausedP2 C9 00\u219240/ammo288 setup and original7 cycle succeed. Muzzlefixture incorrectly uses pre-arena ledgeY75 instead of actualarena floor; P2fatal9816/Y75 occurs beforefire. No weakness failure inferred, no pose/hurt/timer/token/success writes, bothownedrunners stopped. subagent-persistent-weakness-20261022/receipt.json. Persistent same-ball separation/recontact, legitimate rejects, rearm/contactcount/owner-token expiry remain unverified. Future opportunity must first observe genuinearena floor via nativeRight/drop; no third setup in this batch."
       },
       "frozen_row_sha256": "940912f56495866c9c9c43d1be0f5f085b80e9ba2342051f6795359e22ddc8a1",
       "x6": {
@@ -19587,7 +19669,7 @@
         "counterpart_check": "Exercise another distinct X5 weakness/reaction family only if its native code differs; verify native reaction and attacker-specific resources without a blanket every-configuration matrix.",
         "burndown": "P09, P23",
         "status": "passed",
-        "evidence_limits": "Unverified993C8CA6 bounded follow-up: original regularclass36 uses the same native normal7/result8/reaction0A/actor80 family as refight. GenuineF9card native load/CP4 intro takes mission-report branch beforefight; directclear-bit cause unproven. One freshnativeNewGame correction reaches actualbossHP56/controlrelease; disclosed pausedP2 C9 00→40/ammo288 setup and original7 cycle succeed. Muzzlefixture incorrectly uses pre-arena ledgeY75 instead of actualarena floor; P2fatal9816/Y75 occurs beforefire. No weakness failure inferred, no pose/hurt/timer/token/success writes, bothownedrunners stopped. subagent-persistent-weakness-20261022/receipt.json. Distinct native0A weakness reaction and actualP2accepted damage/ammo ownership remain unverified because no ball emitted. Actualclear/grant flags staynative; weaponfixture is not acquisition evidence. No further variants. Passed bounded comparative reuse of already qualified E61EFF70 actual P2-owned WingSpiral8/class34 weakness family: original result9, HP71->66, one P2 hit, own ammo288->276 with P1 ammo unchanged, native phase0B/controller halfword protection and finite recovery75FC0/timer0. Actual native selected8 menu and wind-wrap reaction images inspected. Original member6 F7ECC..7EFC result9/12/2D -> halfword10000/phase0B differs from previously qualified class39 byte90/phase0A family, satisfying this row’s distinct-native-family comparison. This uses retained actual weakness/attacker-resource evidence, not current class39 scaling/accounting. Historical candidate/route/acquisition/reopen bypasses and failed class36 fire setup remain explicit; no literal Frost/all-boss/scaling/currentF111 hit claim. F135 remains unverified for actual surface/parent. qa-weakness-airborne-20261021/normal8-contact-safe-floor/report.json SHA924a70c2; subagent-class39-contact-20261022/qualification.json. Primitive native32188 trace has a2=5/s0=8; result9 is source-derived from accepted nonlethal kind8/return321D0, not a directly sampled result register. Actual boss8E9994 follows source10000 install. Both heroes later native1/2/life0 and boss AI resume; no separate post-reaction controller-input probe claimed."
+        "evidence_limits": "Unverified993C8CA6 bounded follow-up: original regularclass36 uses the same native normal7/result8/reaction0A/actor80 family as refight. GenuineF9card native load/CP4 intro takes mission-report branch beforefight; directclear-bit cause unproven. One freshnativeNewGame correction reaches actualbossHP56/controlrelease; disclosed pausedP2 C9 00\u219240/ammo288 setup and original7 cycle succeed. Muzzlefixture incorrectly uses pre-arena ledgeY75 instead of actualarena floor; P2fatal9816/Y75 occurs beforefire. No weakness failure inferred, no pose/hurt/timer/token/success writes, bothownedrunners stopped. subagent-persistent-weakness-20261022/receipt.json. Distinct native0A weakness reaction and actualP2accepted damage/ammo ownership remain unverified because no ball emitted. Actualclear/grant flags staynative; weaponfixture is not acquisition evidence. No further variants. Passed bounded comparative reuse of already qualified E61EFF70 actual P2-owned WingSpiral8/class34 weakness family: original result9, HP71->66, one P2 hit, own ammo288->276 with P1 ammo unchanged, native phase0B/controller halfword protection and finite recovery75FC0/timer0. Actual native selected8 menu and wind-wrap reaction images inspected. Original member6 F7ECC..7EFC result9/12/2D -> halfword10000/phase0B differs from previously qualified class39 byte90/phase0A family, satisfying this row\u2019s distinct-native-family comparison. This uses retained actual weakness/attacker-resource evidence, not current class39 scaling/accounting. Historical candidate/route/acquisition/reopen bypasses and failed class36 fire setup remain explicit; no literal Frost/all-boss/scaling/currentF111 hit claim. F135 remains unverified for actual surface/parent. qa-weakness-airborne-20261021/normal8-contact-safe-floor/report.json SHA924a70c2; subagent-class39-contact-20261022/qualification.json. Primitive native32188 trace has a2=5/s0=8; result9 is source-derived from accepted nonlethal kind8/return321D0, not a directly sampled result register. Actual boss8E9994 follows source10000 install. Both heroes later native1/2/life0 and boss AI resume; no separate post-reaction controller-input probe claimed."
       },
       "frozen_row_sha256": "3aa3c6401e27500053261abe870115d08943d817883959e62ca4ffb50fad038d",
       "x6": {
@@ -21186,7 +21268,7 @@
             "limits": [
               "Frozen F143 is the bounded background writer contract: accepted-prefix order, explicit queue/I/O failures and wall-time flush. No game speed, per-input stall benchmark, successful gameplay replay or elimination of synchronous session-setup I/O is claimed.",
               "The existing bounded POD producer/queue remains unchanged. The worker alone checks its steady-clock deadline and calls stdio. Startup settings export and native-card copies remain separate synchronous setup costs.",
-              "Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102–123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim.",
+              "Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102\u2013123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim.",
               "Actual worker saturation retains8192 ordered accepted events before explicit QueueFull in offline and netplay fixtures. Real owned OS-handle invalidation makes FileSink::flush throw. Strict complete parsing refuses failed prefixes; no silent successful truncation is admitted.",
               "Native local and both netplay peers show the current-image ordinary N/C prefix growing while execution and capture remain live, before the independent F20 fixture. The later agreed checkpoint setup deliberately taints each recording; final order/hash/count/status and strict complete refusal are verified. These are truthful failed terminal recordings, not clean fixture-route replay evidence.",
               "The preserved NET parent run failed the separate F20 observer progress assertion. Its broader callback-completed flag remains false. All13 other parent checks and all7 F143 checks pass, both owned peers exit0, cards stay unchanged and baseline resolved CRC windows match. Only F143 is admitted here; no F20 or full parent gameplay pass is claimed.",
@@ -21223,7 +21305,7 @@
             "limits": [
               "Frozen F143 is the bounded background writer contract: accepted-prefix order, explicit queue/I/O failures and wall-time flush. No game speed, per-input stall benchmark, successful gameplay replay or elimination of synchronous session-setup I/O is claimed.",
               "The existing bounded POD producer/queue remains unchanged. The worker alone checks its steady-clock deadline and calls stdio. Startup settings export and native-card copies remain separate synchronous setup costs.",
-              "Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102–123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim.",
+              "Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102\u2013123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim.",
               "Actual worker saturation retains8192 ordered accepted events before explicit QueueFull in offline and netplay fixtures. Real owned OS-handle invalidation makes FileSink::flush throw. Strict complete parsing refuses failed prefixes; no silent successful truncation is admitted.",
               "Native local and both netplay peers show the current-image ordinary N/C prefix growing while execution and capture remain live, before the independent F20 fixture. The later agreed checkpoint setup deliberately taints each recording; final order/hash/count/status and strict complete refusal are verified. These are truthful failed terminal recordings, not clean fixture-route replay evidence.",
               "The preserved NET parent run failed the separate F20 observer progress assertion. Its broader callback-completed flag remains false. All13 other parent checks and all7 F143 checks pass, both owned peers exit0, cards stay unchanged and baseline resolved CRC windows match. Only F143 is admitted here; no F20 or full parent gameplay pass is claimed.",
@@ -21234,7 +21316,7 @@
             ]
           }
         ],
-        "limitations": "Frozen F143 is the bounded background writer contract: accepted-prefix order, explicit queue/I/O failures and wall-time flush. No game speed, per-input stall benchmark, successful gameplay replay or elimination of synchronous session-setup I/O is claimed. The existing bounded POD producer/queue remains unchanged. The worker alone checks its steady-clock deadline and calls stdio. Startup settings export and native-card copies remain separate synchronous setup costs. Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102–123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim. Actual worker saturation retains8192 ordered accepted events before explicit QueueFull in offline and netplay fixtures. Real owned OS-handle invalidation makes FileSink::flush throw. Strict complete parsing refuses failed prefixes; no silent successful truncation is admitted. Native local and both netplay peers show the current-image ordinary N/C prefix growing while execution and capture remain live, before the independent F20 fixture. The later agreed checkpoint setup deliberately taints each recording; final order/hash/count/status and strict complete refusal are verified. These are truthful failed terminal recordings, not clean fixture-route replay evidence. The preserved NET parent run failed the separate F20 observer progress assertion. Its broader callback-completed flag remains false. All13 other parent checks and all7 F143 checks pass, both owned peers exit0, cards stay unchanged and baseline resolved CRC windows match. Only F143 is admitted here; no F20 or full parent gameplay pass is claimed. The tested candidate includes independent F20 changes. F143 source/test files are byte-identical to the integrated standalone fix bf039698a6b6b0a9b2493c7716526bbac9342cff. Runtime credit names the actual tested8bd7061 candidate, not an unbuilt integration head."
+        "limitations": "Frozen F143 is the bounded background writer contract: accepted-prefix order, explicit queue/I/O failures and wall-time flush. No game speed, per-input stall benchmark, successful gameplay replay or elimination of synchronous session-setup I/O is claimed. The existing bounded POD producer/queue remains unchanged. The worker alone checks its steady-clock deadline and calls stdio. Startup settings export and native-card copies remain separate synchronous setup costs. Sparse actual-worker fixtures offer one N and one C, then no additional producer events while capture remains open. Both old modes fail the two-second visibility check; fixed debug/production offline/netplay fixtures see the prefix in102\u2013123ms. This is observed visibility with a100ms worker target, not a hard real-time guarantee or fsync/power-loss durability claim. Actual worker saturation retains8192 ordered accepted events before explicit QueueFull in offline and netplay fixtures. Real owned OS-handle invalidation makes FileSink::flush throw. Strict complete parsing refuses failed prefixes; no silent successful truncation is admitted. Native local and both netplay peers show the current-image ordinary N/C prefix growing while execution and capture remain live, before the independent F20 fixture. The later agreed checkpoint setup deliberately taints each recording; final order/hash/count/status and strict complete refusal are verified. These are truthful failed terminal recordings, not clean fixture-route replay evidence. The preserved NET parent run failed the separate F20 observer progress assertion. Its broader callback-completed flag remains false. All13 other parent checks and all7 F143 checks pass, both owned peers exit0, cards stay unchanged and baseline resolved CRC windows match. Only F143 is admitted here; no F20 or full parent gameplay pass is claimed. The tested candidate includes independent F20 changes. F143 source/test files are byte-identical to the integrated standalone fix bf039698a6b6b0a9b2493c7716526bbac9342cff. Runtime credit names the actual tested8bd7061 candidate, not an unbuilt integration head."
       }
     },
     {
@@ -21652,7 +21734,7 @@
         "counterpart_check": "Use X5's actual X armor movement ability with X/P2 where legitimately available; inspect owned effect parent, colors and cleanup without inventing X4-only boot abilities.",
         "burndown": "P07, P19",
         "status": "passed",
-        "evidence_limits": "Source/receipt review only: X/P2 base roster/regular resource selection and prior actual program40 acquisition do not establish an equipped X5 movement form. Original bodyFA/FC roster selection and separate14A/PLAY4B path remain distinct; enhanced graphics reuse/ability initialization is unresolved. No actual owned equipped-form movement effect, color or expiry reached. Defer this prerequisite without synthesizing ability bytes or declaring the native special-form path absent. Ride Armor movement is a different mechanic. qa-mounted-entry-breadth-20261022/equipped-armor-prerequisite-review.json. Remains unverified. Supplement current source review: Literal X4 upgraded-boots blue hover jets remain unestablished for native X5 Ultimate. Meaningful source analogue: original38850 X aerial-dash admission accepts FA1/4 with native mapped Dash80&0100/facing/contact, then389CC->3ABD0 animation12/pose0D/3CE30. Actual emitted effect class/owner/colors/expiry and genuine X/P2 equipment transition remain unverified. Special8 nativegrant/report/access prerequisite is separate; do not borrow another armor's art or pass emission from pose/source registration. subagent-native-earned-armor-20261022/receipt.json. Passed bounded unchanged89E80004 nativeX5 Ultimate/P2 aerialdash analogue in nativeZero campaign, bothautomaticformsON. Original38850/389CC→3ABD0/action0D/anim12 produces deferredtype1 ownerP2; it survives worlds345/351/355 whileZero/P1 staysidle02 at144/1130, followsX(155.1875→121.25→102.375; effect181→148→130), uses actualprivateX assembly9F04A134/CLUT7802. Working32Bcolors exactly match originalDAT1 asset0/commonoffset40 and differfromZeroDAT2; two composedimages show nativeexhaust/blueafterimages. Originaldashends(action07/anim14), effectnaturallyretires before groundedidle02 and ownRight recover. Overstrict third-active-screenshot observer retained; same-encounter continuation accepts actualexpiry/no newdash/setup. LiteralX4hovereffect33/capsuleacquisition not claimed. subagent-ultimate-movement-20261022/qualification.json."
+        "evidence_limits": "Source/receipt review only: X/P2 base roster/regular resource selection and prior actual program40 acquisition do not establish an equipped X5 movement form. Original bodyFA/FC roster selection and separate14A/PLAY4B path remain distinct; enhanced graphics reuse/ability initialization is unresolved. No actual owned equipped-form movement effect, color or expiry reached. Defer this prerequisite without synthesizing ability bytes or declaring the native special-form path absent. Ride Armor movement is a different mechanic. qa-mounted-entry-breadth-20261022/equipped-armor-prerequisite-review.json. Remains unverified. Supplement current source review: Literal X4 upgraded-boots blue hover jets remain unestablished for native X5 Ultimate. Meaningful source analogue: original38850 X aerial-dash admission accepts FA1/4 with native mapped Dash80&0100/facing/contact, then389CC->3ABD0 animation12/pose0D/3CE30. Actual emitted effect class/owner/colors/expiry and genuine X/P2 equipment transition remain unverified. Special8 nativegrant/report/access prerequisite is separate; do not borrow another armor's art or pass emission from pose/source registration. subagent-native-earned-armor-20261022/receipt.json. Passed bounded unchanged89E80004 nativeX5 Ultimate/P2 aerialdash analogue in nativeZero campaign, bothautomaticformsON. Original38850/389CC\u21923ABD0/action0D/anim12 produces deferredtype1 ownerP2; it survives worlds345/351/355 whileZero/P1 staysidle02 at144/1130, followsX(155.1875\u2192121.25\u2192102.375; effect181\u2192148\u2192130), uses actualprivateX assembly9F04A134/CLUT7802. Working32Bcolors exactly match originalDAT1 asset0/commonoffset40 and differfromZeroDAT2; two composedimages show nativeexhaust/blueafterimages. Originaldashends(action07/anim14), effectnaturallyretires before groundedidle02 and ownRight recover. Overstrict third-active-screenshot observer retained; same-encounter continuation accepts actualexpiry/no newdash/setup. LiteralX4hovereffect33/capsuleacquisition not claimed. subagent-ultimate-movement-20261022/qualification.json."
       },
       "frozen_row_sha256": "4beb8659b35d46ba22f0fd2b198cbee8353cba79e1cc6a8774967b0d83a67538",
       "x6": {
@@ -24663,9 +24745,91 @@
             ],
             "action": "Native unit5 inverse and unit0 canonical: each hero opens own settled native menu, inspect selected default weapon/art, try fresh other-seat Start, owner resumes; use the selected native Saber/Buster.",
             "outcome": "PASS LOCAL. All four owned menus project correct native red Zero/Z-SABER0 or blue X/X-BUSTER0, pause_owner1/2. Wrong-seat Start leaves frozen native timer/menu ownership; owner resumes with characters/forms/HP32 and ammo288 intact. Zero Square Saber and X Square full-charge/release/basic Buster actually execute after own menus. Same-image inverse hot save/load restores roster/resources and subsequent native control. Native exit0 and unchanged private cards retained."
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "roster": "Actual original Load/unit5 gives Zero/P1 + baseX/P2, forms5/0, both peers",
+              "session": 2026103181,
+              "delay": 3,
+              "rollback": false,
+              "renderer": "NET dual-raster OpenGL with SW@1x authority; matched native1x settings; SDLdummy",
+              "host_profile": "mmx6.win64-clang22.loopback revision56, selectedSHA b9d131e11ff98c8e6b45f649770abda5b982d33966b53b4833f2ee152317d475",
+              "fixtures": "LAB alloff; declared isolated authored availability/inventory cards unchanged"
+            },
+            "action": "One same-image NET pair: actual native card Load/story/unit5/arrival; quiet20-native-update recapture and existing raw observations. Stop before menus/attacks when rendered prerequisite remains invalid.",
+            "outcome": "BLOCKED by concrete native rendering defect: both peers retain black X/P2 body rectangle and missing lowerHUDportrait, while Zero/background render. Quiet samples are actually nativeTimers4732/4733, fullHUDfade128, bank_count156/privatepackets7/failed0; terminal nativeTimers12082/12084, both chars[1,0]/forms[5,0], HP32/lifecycle0/scene0. Before-frame0 profile56 verified cycles0/sim_tick0/before-enter-guest1; final resolved sim51136 core17c39a59/modaf94c32a and sim51168 corec13aee25/mod17a49bea match. No R9/F179 NET behavior credit. Both owned inputs cleared, quits acknowledged, native exits[0,0], listeners released, all private cards unchanged; pair857.94seconds within40min.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\control-observations.jsonl",
+                "sha256": "35db101f0a1e59251470ec50c1e438df74f3d1837dd9ea3ea889a606887f9e1a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-owned-1.json",
+                "sha256": "2a4cd25ebb10bcdb67766a04efc5f4d99856cfee0107adbc9316d18a3d44ecb3"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-native-net-capacity-1.json",
+                "sha256": "6a6a27b47b075ff181501adf9ff2f6d79556b6247f843c16e94bdcf312cb4f6d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\NET-inverse-settled-visible.png",
+                "sha256": "8aea1100897c78306a782a6bfe983d6bc3c71a0d0fdb336a2eef2667b645e297"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\NET-inverse-quiet-visible-settling.png",
+                "sha256": "72705f29ee91b8caeb8f49c48749801873cdeef1c730febef4d370dd9c944b36"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\logs\\native-stderr.log",
+                "sha256": "26fda7b7eb094be18ce933be0c3624a18c13ee9283879eca56214fa34db5232f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-0-1\\logs\\native-stdout.log",
+                "sha256": "65da3caa8ae652a57199fe50dbe79dbc878c723bc1aeaaf344406d2288c0bc9c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-1\\NET-inverse-settled-visible.png",
+                "sha256": "8aea1100897c78306a782a6bfe983d6bc3c71a0d0fdb336a2eef2667b645e297"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-1\\NET-inverse-quiet-visible-settling.png",
+                "sha256": "72705f29ee91b8caeb8f49c48749801873cdeef1c730febef4d370dd9c944b36"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-1\\logs\\native-stderr.log",
+                "sha256": "b432178c51326f877ca972316ba95055d688c4c3cf2bb79973fb716a9d7d7f5a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R9-F179-c125-net-peer-1-1\\logs\\native-stdout.log",
+                "sha256": "1ea798a154a73f2d6833752275a58f8b25ca73fc443ddb8d1aefe1f5c45c92b8"
+              }
+            ],
+            "limits": [
+              "Persistent composed rendering defect on both peers; CRC/native-state agreement does not establish visual correctness.",
+              "No native menu/attack/charge executed, no NET or aggregate admission; LOCAL result on same candidate remains valid.",
+              "Actual NET1 attempt spent; another run requires a relevant implemented game fix and distinguishing endpoint, no observer/source variant or budget reset.",
+              "Source investigation is bounded15min for this concrete LOCAL-vs-NET render defect; no general instrumentation project."
+            ],
+            "bypasses": [
+              "Prelaunch authored native availability/inventory/history prerequisites only; no runtime memory/result writes."
+            ]
           }
         ],
-        "limitations": "C125 LOCAL both-roster native behavior passed after actual game fix; same-candidate NET qualification remains required. Historical failures and spent limits preserved."
+        "limitations": "C125 LOCAL both-roster native behavior passed, but same-image NET shows persistent black guest-X body/missing HUD before menus or attacks. Native/pair exited cleanly with CRC/cards intact; a relevant rendering fix is required before retry."
       }
     },
     {
