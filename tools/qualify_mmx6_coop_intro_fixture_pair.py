@@ -64,6 +64,23 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protec
         catalog_sha256=preparation.sha256(directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'))
 
 
+def select_subtank_policy(directory, *, enabled, selector=select_checkpoint):
+    selected = selector(directory, enabled=enabled, option='intro_subtank_cp2',
+        contact_protection='on', starting_hp=('13','11'), earned_weapons='off')
+    path = Path(directory)/'mods/state.toml'; text = path.read_text(encoding='utf-8')
+    anchor = 'lab_checkpoint = "intro_subtank_cp2"\n'
+    if text.count(anchor)!=1 or 'subtank_energy =' in text:
+        raise ValueError('Unexpected fresh Sub Tank prerequisite preferences')
+    updated = text.replace(anchor,anchor+'subtank_energy = "independent"\n')
+    parsed = tomllib.loads(updated)
+    features = [f for f in parsed.get('feature',[]) if f.get('package_id')=='mmx6.local-coop' and f.get('id')=='prototype']
+    if len(features)!=1 or features[0].get('values',{}).get('subtank_energy')!='independent':
+        raise ValueError('Sub Tank policy escaped prototype values')
+    path.write_text(updated,encoding='utf-8')
+    selected.update(subtank_energy='independent',state_sha256=preparation.sha256(path))
+    return selected
+
+
 def blank_card():
     """Existing SDK formatter translation; fresh fixture cards, never user data."""
     data = bytearray([255])*131072
@@ -215,16 +232,7 @@ def main():
     if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, args.subtank_policy)) > 1:
         parser.error('Select one named native scenario')
     if args.subtank_policy:
-        original_select = select_checkpoint
-        def select_subtank(directory, *, enabled):
-            selected = original_select(directory, enabled=enabled, option='intro_subtank_cp2',
-                contact_protection='on', starting_hp=('13','11'), earned_weapons='off')
-            path = Path(directory)/'mods/state.toml'; text = path.read_text(encoding='utf-8')
-            if 'subtank_energy =' in text: raise ValueError('Unexpected pre-existing energy policy')
-            path.write_text(text+'subtank_energy = "independent"\n',encoding='utf-8')
-            selected.update(subtank_energy='independent',state_sha256=preparation.sha256(path))
-            return selected
-        globals()['select_checkpoint'] = select_subtank
+        globals()['select_checkpoint'] = select_subtank_policy
     if args.midboss_forward:
         original_select = select_checkpoint
         def select_midboss(directory, *, enabled):

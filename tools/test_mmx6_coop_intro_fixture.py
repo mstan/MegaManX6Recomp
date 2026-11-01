@@ -9,6 +9,25 @@ import mmx6_coop_intro_fixture as intro
 
 
 class NamedPrerequisiteCatalogTests(unittest.TestCase):
+    def test_subtank_policy_stays_in_prototype_before_later_packages(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source=Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as temporary:
+            directory=Path(temporary); manifest=directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True)
+            manifest.write_text((source/'packaging/lab/coop-checkpoint-option.toml').read_text(),encoding='utf-8')
+            state=directory/'mods/state.toml'
+            state.write_text('[[feature]]\npackage_id = "mmx6.local-coop"\nid = "prototype"\nenabled = false\n'
+                '[[package]]\nid = "later-package"\nversion = "1"\n[[feature]]\npackage_id = "later-package"\nid = "later"\nenabled = true\n',encoding='utf-8')
+            pair.select_subtank_policy(directory,enabled=False)
+            parsed=tomllib.loads(state.read_text())
+            self.assertEqual(parsed['feature'][0]['values']['subtank_energy'],'independent')
+            self.assertEqual(parsed['feature'][0]['values']['lab_checkpoint'],'intro_subtank_cp2')
+            self.assertEqual(parsed['feature'][0]['values']['lab_starting_hp_p1'],'13')
+            self.assertEqual(parsed['feature'][0]['values']['lab_starting_hp_p2'],'11')
+            self.assertNotIn('subtank_energy',parsed['package'][0])
+            self.assertNotIn('values',parsed['feature'][1])
+
     def test_named_positions_are_explicit_lab_only_with_strict_choice_set(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
