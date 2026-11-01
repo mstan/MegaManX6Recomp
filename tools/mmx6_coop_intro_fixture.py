@@ -904,7 +904,6 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
  def participants():return (0,1)if not excluded else (0,)
  e=dict(kind='two_original_Both_doors_private_views',status='failed_setup',samples=[],inputs=[],dialogue_inputs=[],dialogue_responses=[],captures=[],doors=[],checks={},source_guards=[],bypasses=['Explicit agreed intro_before_doors fixture initializes nativeCP1, then positions living heroes/camera on source-qualified predoor ground and calls the original primary placement scanner once with its native full-window envelope. Already resident secondary controllers are preserved. It bypasses unrelated approach traversal only. No native door admission, acknowledgement, CP2 grant, traversal or outcome is assigned.'],limits=['F101/F116 original intro subtype2 then subtype1 in one physical process/session per mode. No fortress/consecutive-boss-door/F83/F164 inference; no whole intro traversal, ordinary recording/replay, cross-host/OS or all-door-subtype claim.'])
  report['two_Both_doors']=e;deadline=time.monotonic()+210
- windows=[h.OwnedWindow(dict(request=c.request,report=dict(owned_pid=report['peers'][i]['owned_pid']if online else report['owned_pid'])),{})for i,c in enumerate(clients)]
  def inp(seat,bits,label):
   if excluded and seat not in participants() and bits:return
   e['inputs'].append(dict(seat=seat,bits=bits,label=label,ack=ctx['set_input'](seat,bits)))
@@ -1068,7 +1067,7 @@ def exercise_door_policy(ctx,*,output,original_exe,leader,success,scenario):
    fallen=wait('actual native guest death finishes FALLEN',lambda r:all(tuple(p['state']['observation']['lifecycle'])==(0,5)and bytes.fromhex(p['state']['p2_body_hex'])[4]==3 for p in r['peers']),45)
    e['exclusion_precondition']=dict(kind='agreed_P2_HP80_request_then_original_native_FATAL_FALLEN',armed=armed['index'],requested=requested['index'],dying=dying['index'],completed=fallen['index']);excluded=True
   else:need(scenario=='living','Explicit F61 scenario required')
-  for w in windows:w.resize(1280,480)
+  # Native door eligibility uses world/body boxes; capture the actual drawable.
   ticks(8,'actual predoor private pairs');capture('before-first-native-door')
   for number,(origin,x)in enumerate(zip(ORIGINS,DOOR_X)):
    leading=1-number if not excluded else participants()[0];trailing=leading^1;record=dict(number=number+1,origin=hex(origin),authored_x=x,leading=leading);e['doors'].append(record)
