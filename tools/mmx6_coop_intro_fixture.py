@@ -1401,6 +1401,12 @@ def exercise_refight_policy(ctx,*,output,original_exe,leader,success,scenario):
         (out/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8',newline='\n')
 
 
+def turtloid_checkpoint_arrivals(peers):
+ return bool(peers)and all(abs(p['observation']['players'][0]['x_raw']-1120*65536)<65536
+  and all((b:=bytes.fromhex(p[k]))[0]and b[2]==seat and b[4:6]==bytes((1,2))and b[0x70]&8
+   for seat,k in enumerate(('p1_body_hex','p2_body_hex')))for p in peers)
+
+
 def exercise_weather_survivor(ctx,*,output,original_exe,leader,success):
  import importlib,sys
  h=hud
@@ -1460,7 +1466,7 @@ def exercise_weather_survivor(ctx,*,output,original_exe,leader,success):
   inp(1,6)
   try:entry_wait('agreed Turtloid checkpoint chord accepted',lambda r:all(p['fixture']['latch']in(1,2)for p in r['peers']),15)
   finally:inp(1,0)
-  ready=entry_wait('original Turtloid CP1 completed and both native idle',lambda r:all(tuple(bytes.fromhex(p['play_hex'])[n]for n in(0,1,12,13,0x1D))==(10,0,6,0,1)and all(p['fixture'].get(k)==v for k,v in dict(generation=1,state=3,reason=0,initializer_entries=1,nonce=0x4C545231).items())and tuple(p['observation']['lifecycle'])==(0,0)and all(x['action']==2 and 0<x['hp']<128 for x in p['observation']['players'])for p in r['peers']),100)
+  ready=entry_wait('original Turtloid CP1 completed and both native idle',lambda r:turtloid_checkpoint_arrivals(r['peers'])and all(tuple(bytes.fromhex(p['play_hex'])[n]for n in(0,1,12,13,0x1D))==(10,0,6,0,1)and all(p['fixture'].get(k)==v for k,v in dict(generation=1,state=3,reason=0,initializer_entries=1,nonce=0x4C545231).items())and tuple(p['observation']['lifecycle'])==(0,0)and all(x['action']==2 and 0<x['hp']<128 for x in p['observation']['players'])for p in r['peers']),100)
   e['checkpoint_ready']=ready['index']
   initial=capture('actual-Turtloid-native-CP1');e['initial']=initial['index']
   jump_end=[None,None];last_release=[-100,-100];held=[None,None];until=time.monotonic()+55

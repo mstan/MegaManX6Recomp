@@ -291,6 +291,19 @@ class NativeControlWitnessTests(unittest.TestCase):
 
 
 class NativeTransportBoundaryTests(unittest.TestCase):
+    def test_Turtloid_receipt_with_old_bodies_or_incoming_actors_is_not_arrival(self):
+        def peer(x=1120, incoming=False):
+            bodies=[]
+            for seat in (0,1):
+                body=bytearray(0x158);body[0]=1;body[2]=seat
+                body[4:6]=bytes((1,0 if incoming else 2));body[0x70]=8
+                bodies.append(body.hex())
+            return dict(observation=dict(players=[dict(x_raw=x*65536)]),
+                        p1_body_hex=bodies[0],p2_body_hex=bodies[1])
+        self.assertFalse(intro.turtloid_checkpoint_arrivals([peer(359)]))
+        self.assertFalse(intro.turtloid_checkpoint_arrivals([peer(incoming=True)]))
+        self.assertTrue(intro.turtloid_checkpoint_arrivals([peer(),peer()]))
+
     def test_zero_HP_passenger_requires_actual_transport_phase_and_alive_lifecycle(self):
         value = dict(scene_owner=1, scene_phase=2, lifecycle=[0, 0], players=[dict(hp=32), dict(hp=0)])
         self.assertTrue(intro.native_admission_health(value, 0))
