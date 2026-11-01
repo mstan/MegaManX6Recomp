@@ -19520,14 +19520,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -19670,9 +19670,107 @@
             "bypasses": [
               "Declared original CP1 source/history XY setup and hostile-contact protection; no tested outcome seeded."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c896a0f2f300d62adf443e9b155d34c383fec9ed",
+            "build_identity": {
+              "source_commit": "c896a0f2f300d62adf443e9b155d34c383fec9ed",
+              "exe_sha256": "5b4a4558a1d701f5d43bee35ae98044a38bf881765940b71a492b514bf5b8250",
+              "declared_manifest_sha256": "c336f591e133c9c38eab83f6e2a504bc8fb72e84995b9896f06b83d8770cefa1",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 77,
+              "profile": 60,
+              "snapshot": 21,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "0e326035be915039031d54997b3146fc0d851317ce9379d8e5f3faf650a2b28e"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "both, parsed actual prototype.feature.values",
+              "prerequisite": "Fresh private cards, agreed refight_portal_cp1/once source1852 position; contact protection on; HP/earned off; lab_fatal=p1 only for fallen",
+              "cameras": "LOCAL split / NET independent",
+              "audio": "dummy muted"
+            },
+            "action": "Exercise original native portal with all3 participation components using ordinary pad input, actual death/withdrawal, source-qualified admission, original CP2 loader, full48HP boss and full-foot/control endpoint.",
+            "outcome": "All3sameC129 components PASS: Bothliving waits30actualnativeworldupdates withprimaryneutraloutside, actualLeftcontactabort leavesportalunused, ordinaryprimaryjoins andoriginaladmission/CP2/boss48/bothfull22feetfloor448/separatecontrols. RealP1nativeHP80->DYING->FALLEN127/128/129/154 permitslivingZerooriginaladmission; actualfreshCP2respawnsP1 andP2owncontrolpasses. ActualP2Select90 LEAVING->ABSENT permitssoleXoriginalportal andpreservesabsence/resources throughfreshCP2, sourcefullfeet/control. PCfallen/living parentguardsalltrue; SERVERabsentportableimage+manifestverified/PCsourcebuildpreflight retained. All3nativeexit0/cardsunchanged. Rootviewed7keyLOCALfatal/wait/control/absenceimages.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F123-c129-fallen-local-pc-2\\qualification.json",
+                "sha256": "832268664dafe9152d6e8e74f3c64b470dae94ac926be41d07168f362aea3e87"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F123-c129-living-local-pc-1\\qualification.json",
+                "sha256": "0f937e8b819f7c07f6fba28b8b4320bc09c4583abd62b02d83dee61eed7d7f20"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\parallel-refight-c129-v1\\qualification-absent.json",
+                "sha256": "f7a00a752d6e4bff8096f8f5f2256f54a41c40c0721216e9fbbbe4068cf45b8d"
+              }
+            ],
+            "limits": [
+              "Named native fortress refight portal only, original CP1->CP2 and boss49 full48HP; no all-portals, boss-defeat/return, WAN, cross-platform, performance or native3330 claim.",
+              "Original checkpoint policy legitimately respawns fallen actors at fresh CP2, while voluntary Select absence persists. Pre-admission actual FALLEN exclusion remains mandatory; no invented corpse persistence after original respawn. Source native_player_init and lifecycle_checkpoint, corrected observerbd874ee.",
+              "SERVER fallen CP2 and living BIOS boot watchdogs remain retained and uncredited; no causal fix or generic game failure inferred. PC original wrong post-CP2 corpse assertion and NET pre-PID occupied18124 refusal also retained. No unrelated process killed or failed raw changed.",
+              "No finalized fixture recording/replay claim: capture/replay are explicitly refused for fixture taint. Current-build save/load is not claimed. Existing visual defects and asynchronous captures are retained without graphics-row credit."
+            ],
+            "bypasses": [
+              "Agreed original CP1/source1852 position bypasses prior reachability; contact protection and predeclared P1HP80 prerequisite only where named. Native admission, death/lifecycle, loader, landing and control results are not assigned."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "c896a0f2f300d62adf443e9b155d34c383fec9ed",
+            "build_identity": {
+              "source_commit": "c896a0f2f300d62adf443e9b155d34c383fec9ed",
+              "exe_sha256": "5b4a4558a1d701f5d43bee35ae98044a38bf881765940b71a492b514bf5b8250",
+              "declared_manifest_sha256": "c336f591e133c9c38eab83f6e2a504bc8fb72e84995b9896f06b83d8770cefa1",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 77,
+              "profile": 60,
+              "snapshot": 21,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "0e326035be915039031d54997b3146fc0d851317ce9379d8e5f3faf650a2b28e"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "doors": "both, parsed actual prototype.feature.values",
+              "prerequisite": "Fresh private cards, agreed refight_portal_cp1/once source1852 position; contact protection on; HP/earned off; lab_fatal=p1 only for fallen",
+              "cameras": "LOCAL split / NET independent",
+              "audio": "dummy muted"
+            },
+            "action": "Exercise original native portal with all3 participation components using ordinary pad input, actual death/withdrawal, source-qualified admission, original CP2 loader, full48HP boss and full-foot/control endpoint.",
+            "outcome": "All3sameC129 NETcomponents pass15parent andnativechecks. Bothlivingwait/abort/bothfullfeet/separatecontrols; actualP1FALLEN exclusion atadmission thenoriginalCP2respawn, survivingP2control; actualSelectABSENT exclusion andpreservedabsence plussoleXcontrol. Commonprofile60beforeframe0 andstablefinal ineachcase; matchedresolvedcore/modCRCwindows fallen7/7/7/3, living8/7/7/3, absent7/8/7/8, eachfinalwindowaftercase (absent5568..5792). Sixownedpeers85628/46220,55044/77832,68924/71308 allgracefulexit0, privatecardsunchanged/desync0. Rootviewed6keyNETfatal/wait/absence/controlimages.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F123-c129-fallen-net-2\\qualification.json",
+                "sha256": "14fcc0c2db5328a642ef555fa6ae684ac90cb2a5d143a23224a18af612ee95f9"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F123-c129-living-net-1\\qualification.json",
+                "sha256": "c7ad475b9b545e7646fcddfaf2fe36b810654d6bcf543a731d844960a6c60c20"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F123-c129-absent-net-1\\qualification.json",
+                "sha256": "8741b9384b9c46188280e515fc7a0e0f0df1003e998009da63394bf2042f0c8d"
+              }
+            ],
+            "limits": [
+              "Named native fortress refight portal only, original CP1->CP2 and boss49 full48HP; no all-portals, boss-defeat/return, WAN, cross-platform, performance or native3330 claim.",
+              "Original checkpoint policy legitimately respawns fallen actors at fresh CP2, while voluntary Select absence persists. Pre-admission actual FALLEN exclusion remains mandatory; no invented corpse persistence after original respawn. Source native_player_init and lifecycle_checkpoint, corrected observerbd874ee.",
+              "SERVER fallen CP2 and living BIOS boot watchdogs remain retained and uncredited; no causal fix or generic game failure inferred. PC original wrong post-CP2 corpse assertion and NET pre-PID occupied18124 refusal also retained. No unrelated process killed or failed raw changed.",
+              "No finalized fixture recording/replay claim: capture/replay are explicitly refused for fixture taint. Current-build save/load is not claimed. Existing visual defects and asynchronous captures are retained without graphics-row credit."
+            ],
+            "bypasses": [
+              "Agreed original CP1/source1852 position bypasses prior reachability; contact protection and predeclared P1HP80 prerequisite only where named. Native admission, death/lifecycle, loader, landing and control results are not assigned."
+            ]
           }
         ],
-        "limitations": "Exact fde6b48/75b74d1c/profile38 living Both wait/abort/admission/load/feet/control and actual Select/nativeABSENT fallback both pass LOCAL+NET.36 reviewed images/6nativeexit0/cards unchanged,8 finalCRCwindows living16/absent27samples. FALLEN LOCAL+NET still unverified: first supposed hazard-wall setup produced no damage, actual primary stays32HP/x1925; no death inferred from collisioncode39. Preserve rejected full-callback candidate and all failed observer prefixes. Current innerEC8E8 gate preserves native outer animation/support. Defer further unsupported hub death attempts."
+        "limitations": "ExactC129c896/5b4a/profile60 LOCAL+NET all3nativeBothportal living/actualSelectABSENT/actualP1FALLEN components fully qualified; original CP2 loader/48HPboss/fullfeet/control/finalNETsync/cards/ownedexits pass. Fresh checkpoint respawnsfallen/preservesabsence peroriginalpolicy. Alloldfailedraw/watchdogs/HUD/source/cards preserved; no allportal/graphics/save/performance claim."
       }
     },
     {
