@@ -388,7 +388,7 @@ def exercise_midboss_forward(ctx, *, output, original_exe, leader, success):
         if not ok: raise ValueError(why)
 
     def inp(seat,bits,label):
-        need(seat in (0,1) and bits in (0,6,0x20,0x80,0x200,0x4000,0x8000,0x2020,0x4020,0x6020,0x8020,0x8080),'Ordinary declared host-pad input only')
+        need(seat in (0,1) and bits in (0,6,0x20,0x80,0x200,0x4000,0x8000,0x2020,0x4020,0x4080,0x6020,0x8020,0x8080),'Ordinary declared host-pad input only')
         e['inputs'].append(dict(seat=seat,bits=bits,label=label,ack=ctx['set_input'](seat,bits)))
 
     def sample(label):
@@ -492,7 +492,7 @@ def exercise_midboss_forward(ctx, *, output, original_exe, leader, success):
             time.sleep(.04)
         else: raise ValueError('Actual native HELP did not release the active midboss')
         e['actual_activation']=row['index'];capture('actual-native-midboss-active',row)
-        for cast in range(3):
+        for cast in range(4):
             if defeated(row): break
             if all(not any(a['subtype']<4 and a['active'] and a['visible'] and a['hp']>0
                     for a in p['snake']) and all(a['hp']==0 for a in p['main']) for p in row['peers']):
@@ -518,6 +518,9 @@ def exercise_midboss_forward(ctx, *, output, original_exe, leader, success):
                     row=wait('original Snake death/retirement',defeated,45);break
                 x=row['peers'][0]['observation']['players'][1]['x_raw']/65536
                 target=min(weak,key=lambda a:abs(a['x']-x));direction=0x20 if target['x']>=x else 0x80
+                y=row['peers'][0]['observation']['players'][1]['y_raw']/65536
+                if target['y']<y-48:
+                    hold(1,direction|0x4000,12,'native jump toward elevated surviving weakpoint'+str(attack))
                 hold(1,direction|0x8000,12,'owned moving Zero Square contact'+str(attack))
                 hold(1,direction,12,'original movement and fresh Square separation')
         need(defeated(row),'No complete original main/weakpoint native defeat')
