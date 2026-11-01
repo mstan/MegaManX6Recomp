@@ -10758,9 +10758,79 @@
             "bypasses": [
               "Authored QA card availability39/weaponsFF copied before launch; original Load and genuine selector execute. Ordinary Start skips setup story only; no story coverage claim."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "3172b181c0e565030cd2403ff935ae46e8ab50e4",
+            "build_identity": {
+              "exe_sha256": "f0076a5c5813390837566c5865aa876a4b632bf4a55f6cc6f3b6ab205d5bda2f",
+              "declared_manifest_sha256": "3da52934f8f56cac9625e29a22d0f30a88b5bcec94b1adfd23405569891722ab",
+              "compiled_source_commit": "3172b181c0e565030cd2403ff935ae46e8ab50e4",
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316",
+              "net_commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+              "rb_commit": "2a03e73693acee0fb78076ea058642c931bef12e",
+              "title_version": 68,
+              "host_profile_version": 51,
+              "snapshot_schema": 18,
+              "execution_identity": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9"
+            },
+            "settings": {
+              "forms": "Genuine original NewGame Ultimate4/Black5, nativeavailability39; blank private cards",
+              "fixture": "Predeclared recycle_fallen_cp2, contactprotectionon, HPoff/off, earnedweaponsoff; native original CP2 record80072444/nonce4C524631",
+              "input": "Existing baseline original Start/Cross sequence, nativeP2L3+R3 then original jump/dash/Left; no runtime HP/pose/death/result writes",
+              "audio": "hidden SDLdummy, native resolution actual composed capture"
+            },
+            "action": "Finish original intro enrollment, admit declared pit approach, observe actual P1 native pit fatal with Black survivor. Save current-build slot7, attempt ordinary survivor jump-left, then restore the saved one-fallen forms and execute fresh native survivor jump/landing.",
+            "outcome": "PASS named LOCAL fatal/current-state components only. NativeCP2 state3/gen1/entries1, P1x1312/Y1689.789 original fatalHP80 and lifecycleFALLEN5, BlackP2 alive32HP/form5 at1506/1594; lives2/CP2 retained. SAVEgen1/LOADgen2 restore one-fallen disposition, availability39, survivor form/position and lives2. Fresh native survivor jump and original landing afterLOAD pass; both composed images reviewed. Actual second jump-left reached onlyY1558.727 and then nativecapsule at1487.0625/Y1594/action14, so no secondfatal/teamretry. Both owned native attempts quit/exit0 and privatecards unchanged; first stopped before intro dialogue/enrollment, not a game failure.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-native-forms-lifecycle-local-1/lifecycle-preparation.json",
+                "sha256": "40cf13af49a0ca15fc896adf356f530f716e1c50dfcf9f32e8e9277a0a31c2db"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-native-forms-lifecycle-local-1/logs/native-lifecycle-report-2.json",
+                "sha256": "dba826c8e7d55791fa312ae4d619b12d5813787d5a36ba98be03fc7638e6d6e3"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-native-forms-lifecycle-local-1/logs/native-lifecycle-control-2.jsonl",
+                "sha256": "4359aa1e186631a8370b2b52a52785c4bf5a1db7b239fa1518df9da4503e3b30"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-native-forms-lifecycle-local-1/logs/native-lifecycle-report.json",
+                "sha256": "8828f10408c5746f12127be475e13d0424fab8a7b5ad9f6e3e1d47d086dd8a46"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-native-forms-lifecycle-local-capacity-1.json",
+                "sha256": "4d226b1349a5056766d2ca50472dcfc2b6401499a18978a202b3b53296a9da66"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-native-forms-lifecycle-local-capacity-2.json",
+                "sha256": "22e781045245d8f9ea0539a85932a7ab3935a8c7ded9a862e7a68bf5bf827d3c"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-native-forms-lifecycle-local-1/logs/F37-native-Ultimate-fallen-Black-survivor.png",
+                "sha256": "167dba3610ea562abbef2e024523cc3311885c1667fc4daa08a40eb21e9477c0"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F37-c120-native-forms-lifecycle-local-1/logs/F37-restored-one-fallen-forms-native-survivor-control.png",
+                "sha256": "c0d869025e9868008005387001e864cc08b7f791d1179a0e715006cdfc222a27"
+              }
+            ],
+            "limits": [
+              "FullF37 remains unverified. Actual teamretry aftersecondfatal, remainingLOCAL BlackGiga/resources and matchingNETlifecycle remain missing. Do not rerun unchanged capsule geometry.",
+              "Firstfall rawwait incorrectly demanded HP0; original pit retains HP80 with genuine lifecycleFALLEN5. Raw failure stays retained; no invented HP0 or automatic parent PASS.",
+              "Firstattempt had appliedprototype/NewGameforms but originalintroAlia/action14 beforeenrollment. Corrected existing baselineStart/Cross boot onattempt2; no --no-launcher causal claim.",
+              "Native state operations are disposable same-build snapshots, not native-card progress. No legacy compatibility, earnedacquisition, allscene or fullcampaign claim."
+            ],
+            "bypasses": [
+              "Agreed originalCP2 load and position-only pit prerequisite skip traversal. Original pit condition282F0 atY>=1688 earns death; source/nonce/receipt/nativeoutcomes retained.",
+              "LOAD restores the exact earlier current-build one-fallen state after the unsuccessful capsule approach. No teamretry or additional nativeattempt credit is manufactured."
+            ]
           }
         ],
-        "limitations": "Exact C120 LOCAL Black owned-menu/cursor/resources and UltimateNova retained. Matching NET now has original native card39Load/unit4, both forms/abilities (Nova8px and BlackGiga48cost), both ownedmenus/resources, later resolvedCRC/cards/cleanexits. FullF37 LOCAL/NET remains open for remainingLOCAL Black-specificability/resources and actualdeath/teamretry/current-buildrestore; nativecardfixture is not earned acquisition. Old setup/predicate/capture-directory failures retained without parent relabel."
+        "limitations": "Exact C120 LOCAL menus/UltimateNova plus actual primarypitFALLEN/Blacksurvivor and current-build one-fallen SAVE/LOAD/freshcontrol now qualified as components. Matching NET nativecard39Load/unit4, bothforms/Nova/BlackGiga48cost/bothownedmenus/resources/CRC/cards/exits retained. FullLOCAL/NET remain unverified: actualteamretry aftersecondfatal, remainingLOCAL BlackGiga/resources and matchingNETlifecycle. Actual secondjump entered nativecapsule; preserve measuredY1558.727/position/action rather than another unchanged geometry loop. All original budgets/failures retained; no earned acquisition claim."
       }
     },
     {
