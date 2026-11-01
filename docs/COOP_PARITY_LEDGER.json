@@ -23126,11 +23126,92 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "ed7aff74194154b5a93818611a0db5651f139440",
+            "build_identity": {
+              "source_commit": "ed7aff74194154b5a93818611a0db5651f139440",
+              "exe_sha256": "13f007a1b738cff0443967f9075fffecffd6c60b0a1586ff312a2fc4aa01fdfc",
+              "declared_manifest_sha256": "c97939d2c662832b009c67532a08f79f1647b6f325143aac07637f93f3b5bf9d",
+              "host_profile_revision": 50,
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "boss_balance": "on",
+              "boss_cooldowns": "independent",
+              "checkpoint": "sigma_cp1",
+              "contact_protection": "on",
+              "earned_weapons": "all",
+              "audio": "dummy muted"
+            },
+            "action": "Actual native grounded Zero CB0/1/2 combo and fresh post-finisher native CB0 slash, ordinary Square inputs only. Root reviewed original raw after Python tail failure.",
+            "outcome": "Native children24/25/26 and per-seat accepted counters advance for all3stages; finisher reduces Sigma48->43. RPC5382 tick2715 P2idle/CB2/nochildren,5387 sameboundSigma61 HP43/action4/recovery0. Fresh P2Square5396 ACK/5397actualpad7FFF precedes5398 tick2724 P2action48/CB0/newactivevisibleowner2child24allocation1. RPC5403 SAMEboundSigma61 HP42/action3/recovery9998 before5404neutral/5418quit. Fourpinnedread-onlyparsers+rawbytes independentlydecodedbyroot. Exactimage/source/originalgatePASS,10nativeSourceguards, offlineidentity, ownedgracefulexit0/cardsunchanged. Rootviewedfinisherandterminalnativehitimages. Frozen LOCAL gameplayendpointfullymet.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f153tl\\qualification.json",
+                "sha256": "157d6bc69b2226716d2c9750b288b5d270aac0054b9ec6636ff9e649486f4135"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f153tl\\ammo-hud\\intro-admission\\observations.json",
+                "sha256": "80d25bdd3b02ce7d2d72fa1a403af0211d5dd6333a152a73a167d80e68e1ef4d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f153tl\\candidate\\jump-audio\\control.jsonl",
+                "sha256": "6de4d6087b1667e3df0e2e488adfb825f8d9ec9f68cd5e3d57d962bf61193313"
+              }
+            ],
+            "limits": [
+              "Original parent remains failed_setup: localvariable f overwrote parserdict, raising KeyError actor AFTER actual fresh-hit reads. No parentPASS/finalcounters/CRC/replay claim. LOCAL finalCRC is not a frozen gameplayrequirement.",
+              "Source-only tracking2 fixes shadowing; secondLOCAL missedstance andremainsfailed. Do not repeat qualifiedLOCALcombat forcleanerwrapper.",
+              "No NET or aggregate admission. Bothrequiredmodes stillneed exactsamecandidate."
+            ],
+            "bypasses": [
+              "Agreed original SigmaCP1/contactprotection/earnedweapons skipreachability only; no HP/pose/phase/cooldown/scene/result writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "ed7aff74194154b5a93818611a0db5651f139440",
+            "build_identity": {
+              "source_commit": "ed7aff74194154b5a93818611a0db5651f139440",
+              "exe_sha256": "13f007a1b738cff0443967f9075fffecffd6c60b0a1586ff312a2fc4aa01fdfc",
+              "declared_manifest_sha256": "c97939d2c662832b009c67532a08f79f1647b6f325143aac07637f93f3b5bf9d",
+              "host_profile_revision": 50,
+              "sdk_commit": "57055e8382b63db9f2578b02f0221ef48fda1de2",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "boss_balance": "on",
+              "boss_cooldowns": "independent",
+              "checkpoint": "sigma_cp1",
+              "observer": "tracking3, no inventedSigmaaction4stance gate",
+              "audio": "dummy muted"
+            },
+            "action": "Actual matching NETpair attempts grounded native combo after source-grounded32..48px stance; accepted hits required.",
+            "outcome": "Bothpeers actualCB0/type24+raw1/private1 accepted, HP48fractionalcarry. Stage1Squareoffer row639 thennoCB1/child25 retained; nofinisher/freshNETendpoint. Profile50before0 onboth13f images and22initialCRCmatching samples pass; nofinalscenarioCRC. Peers0/1 exit0/1 (secondownedprocess terminatedafterexitdeadline); cardsunchanged/allPIDs+portsreleased. No desync observedbeforecleanup, no decodedfresh-edge/game-defect claim fromnullobserverACK.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\server-build-v119-root-v1\\f153tn3\\qualification.json",
+                "sha256": "3c2b41860c2b2834e861be60b0105d75473f82f45862514d93917329793dd3f8"
+              }
+            ],
+            "limits": [
+              "NET remains unverified; actual first-hit component only. Preserveall f153tl2/tn2 stance failures, oldmisses and tn3input-window/cleanupfailure. No more unchanged retries."
+            ],
+            "bypasses": [
+              "Same agreed original SigmaCP1/protection/earned prerequisites; no testedresults seeded."
+            ]
+          }
+        ],
+        "limitations": "C119ed7aff/13f007a1/profile50 LOCAL fullnative0/1/2finisher+freshacceptedCB0 proven inrawbeforePythonparserfailure; parentraw remainsfailed_setup, no replay/finalcounterclaim. NET3onlyfirstCB0accepted; missingdecodedfreshstage1/finisher/postfinisher+finalCRC andclean2peerexit. Allfailurespreserved, noaggregatecredit."
       }
     },
     {
