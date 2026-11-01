@@ -13079,14 +13079,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -13176,9 +13176,117 @@
               "doors": "both for living/absent; either for default",
               "prerequisite": "original intro_before_doors for Both; intro_cp2 for Either; contact protection on; earned weapons/starting HP off"
             }
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c896a0f2f300d62adf443e9b155d34c383fec9ed",
+            "build_identity": {
+              "source_commit": "c896a0f2f300d62adf443e9b155d34c383fec9ed",
+              "exe_sha256": "5b4a4558a1d701f5d43bee35ae98044a38bf881765940b71a492b514bf5b8250",
+              "declared_manifest_sha256": "c336f591e133c9c38eab83f6e2a504bc8fb72e84995b9896f06b83d8770cefa1",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 77,
+              "profile": 60,
+              "snapshot": 21,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "0e326035be915039031d54997b3146fc0d851317ce9379d8e5f3faf650a2b28e"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "policies": "Either and Both living/actual Select ABSENT/actual native FALLEN",
+              "audio": "SDL dummy muted",
+              "setup": "Fresh private cards; agreed original intro_before_doors or intro_cp2; contact protection on; earned/starting HP off; lab_fatal=p2 only for fallen",
+              "presentation": "Actual drawable; no forced desktop resize acceptance gate"
+            },
+            "action": "Exercise four native door-policy components on exact C129 using existing paired/local validator, ordinary pad input and original two-hatch route.",
+            "outcome": "Four same-image components PASS: default Either original contact/fullHP D1000/control; Both living one-hero wait at each of two original hatches followed by both full-body clearances; real Select ABSENT and real native FALLEN each excluded while sole living X traverses both hatches, original NPC dialogue/CP2/D1000HP32 and own control. Fallen LOCAL actual armed52/request53/DYING54/FALLEN65, ownedPID82084exit0. SERVER living/absent/Either PIDs15460/5836/17256 all exit0, all native checks true and cards unchanged. PC original source/build preflight then313 exact transported files hashverified on SERVER; no rebuilt or retargeted metadata. Root reviewed fallen four captures and SERVER living wait, absent boss-ready and Either controls-restored captures; helper reviewed additional endpoints.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-c129-fallen-local-1\\qualification.json",
+                "sha256": "9d7980bca0c55ed715e8555b095e043470eccc0ce733cb4104a491014440250b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\parallel-local-c129-v1\\qualification2.json",
+                "sha256": "4466240f7bea4668959a9bd730852bc0ab113dab6a9a1751bd4ca931512cca26"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\parallel-local-c129-v1\\qualification3.json",
+                "sha256": "525900e630cc8b6cb7739b512a486af2c1dee6f4925d81652427931ccfc48e27"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\parallel-local-c129-v1\\qualification4.json",
+                "sha256": "031b613a276e49dd6abd993e2d089e895f63e51024a7f3a324eef36caa3e2fae"
+              }
+            ],
+            "limits": [
+              "Only native admission/clearance/dialogue/checkpoint/boss/control contract. Severe existing scenery/palette/HUD defects remain visible and retained; no graphics-row acceptance.",
+              "All old V107 partials and failed fatal prerequisites retained. SERVER first C129 living attempt failed observer forced1280x480 against actual1028x480; original raw retained, unnecessary resize gate removed. No game predicate weakened.",
+              "Agreed checkpoint bypasses preceding reachability; native policy/door crossing/dialogue/checkpoint/boss/control results are earned with ordinary input.",
+              "One-shot agreed fatal prerequisite writes only selected native HP80 after a fresh chord; original engine performs DYING/FALLEN. No life/scene/door/checkpoint/result writes.",
+              "Fixture-tainted recordings and replay remain refused. No general save/load, WAN, cross-platform or performance claim."
+            ],
+            "bypasses": [
+              "Declared original checkpoint travel/source position/scanner prerequisite, contact protection, and fatalP2 only where named; no tested result seeded."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "c896a0f2f300d62adf443e9b155d34c383fec9ed",
+            "build_identity": {
+              "source_commit": "c896a0f2f300d62adf443e9b155d34c383fec9ed",
+              "exe_sha256": "5b4a4558a1d701f5d43bee35ae98044a38bf881765940b71a492b514bf5b8250",
+              "declared_manifest_sha256": "c336f591e133c9c38eab83f6e2a504bc8fb72e84995b9896f06b83d8770cefa1",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "title": 77,
+              "profile": 60,
+              "snapshot": 21,
+              "mod_session_resources": 1,
+              "semantic_contract_sha256": "0e326035be915039031d54997b3146fc0d851317ce9379d8e5f3faf650a2b28e"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "policies": "Either and Both living/actual Select ABSENT/actual native FALLEN",
+              "audio": "SDL dummy muted",
+              "setup": "Fresh private cards; agreed original intro_before_doors or intro_cp2; contact protection on; earned/starting HP off; lab_fatal=p2 only for fallen",
+              "presentation": "Actual drawable; no forced desktop resize acceptance gate"
+            },
+            "action": "Exercise four native door-policy components on exact C129 using existing paired/local validator, ordinary pad input and original two-hatch route.",
+            "outcome": "All four same-image components PASS all15parent and respective native checks; genuine FALLEN armed25/request26/DYING27/FALLEN34. Both living waits/refuses one hero at both hatches then both full boxes clear; ABSENT/FALLEN remain excluded through original dialogue/CP2/D1000HP32/control. Four matched resolved core+mod CRC windows per case: fallen8/7/8/7, living7/7/8/6, absent8/7/7/8, Either7/8/7/5; each final window after native endpoint. Common profile60 settles beforeframe0 and stays fixed; per-case selected identity recorded in raw. Eight owned peers exit0, all private cards unchanged. Root viewed representative actual guest fallen, host living second-hatch release, guest absent endpoint and guest Either controls-restored captures.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-c129-fallen-net-1\\qualification.json",
+                "sha256": "4016d1ec3fff9a5a27f2d0659a513af3262dd1a7b0e9a6a8a69b52189db4e4fa"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-c129-living-net-1\\qualification.json",
+                "sha256": "4e8c07fa76f2442e69e9c9a62112ff34d5c8e4153d602a499c51b7e459eb5d81"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-c129-absent-net-1\\qualification.json",
+                "sha256": "d18ef0aab7de7718bb6b42f698594004367fb004f1992826547ea8e4c0e48c29"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F61-c129-either-net-1\\qualification.json",
+                "sha256": "ad26d46a9aab3d8f7c533dca04e84f6ee0de0016e18c0d5d78511ee3485d219b"
+              }
+            ],
+            "limits": [
+              "Only native admission/clearance/dialogue/checkpoint/boss/control contract. Severe existing scenery/palette/HUD defects remain visible and retained; no graphics-row acceptance.",
+              "All old V107 partials and failed fatal prerequisites retained. SERVER first C129 living attempt failed observer forced1280x480 against actual1028x480; original raw retained, unnecessary resize gate removed. No game predicate weakened.",
+              "Agreed checkpoint bypasses preceding reachability; native policy/door crossing/dialogue/checkpoint/boss/control results are earned with ordinary input.",
+              "One-shot agreed fatal prerequisite writes only selected native HP80 after a fresh chord; original engine performs DYING/FALLEN. No life/scene/door/checkpoint/result writes.",
+              "Fixture-tainted recordings and replay remain refused. No general save/load, WAN, cross-platform or performance claim."
+            ],
+            "bypasses": [
+              "Declared original checkpoint travel/source position/scanner prerequisite, contact protection, and fatalP2 only where named; no tested result seeded."
+            ]
           }
         ],
-        "limitations": "Exactfde6b48/75b74d1c/profile38 LOCAL Either, Bothliving two-hatch wait/full-clearance/dialogue/nativeD1000, and realSelectABSENT fallback pass parent/nativechecks;3nativeexit0/cardsunchanged/12keyroot-viewedimages. Actualfallen and allNET components remain unverified. Two nativefallen setup attempts stall at5531.5/1HP before original enemy; allraw retained. Known scenery/HUD defects retained; no visual blanket acceptance. Six same-V107 components now pass: Either, Both living and real Select ABSENT in LOCAL+NET. Genuine FALLEN exclusion remains unverified in both modes; no aggregate/mode credit. Living NET preserves its unrelated raw pre-fixture HP==32 failure with accepted identical-image prelude reuse. Full other parent/native/CRC/cards/exits and24 newly reviewed key NET images retained."
+        "limitations": "C129 exactsame-image LOCAL+NET qualification covers Either/Both living/actual SelectABSENT/real nativeFALLEN; no inherited V107 credit. Native contract only; existing visual defects and all failed raw preserved. LOCAL PCfallen plus SHAverified SERVERliving/absent/Either; NET four PCpairs. No general graphics, save/load or performance claim."
       }
     },
     {
