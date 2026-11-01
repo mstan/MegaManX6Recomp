@@ -21888,11 +21888,92 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "loader": "Original native card Load/CURRENT/map/unit selectors; native stage1->6 canonical, then genuine NewGame0/recovery->6 inverse; recovery itself earns no endpoint credit",
+              "rosters": "unit0 X/P1-Zero/P2 thenunit5 Zero/P1-baseX/P2",
+              "renderer": "Actualcomposed capture_present PNG960x720; LOCAL directGL starts4x/dynamic3x..6x per retained runtime output; no claimnative1x. SDLdummy, hidden/background",
+              "fixtures": "LABalloff; declared isolated authored native availability/inventory cards unchanged; no runtime RAM/result writes"
+            },
+            "action": "Native X/P1 after actualstage1->6 and X/P2 after genuinegameplay0->6: openownXmenu, inspectnative selected/unselectedspecialicons; ordinaryDown/Cross selectsRayArrow8, resume anduseTriangle.",
+            "outcome": "PASS LOCAL. Both seats retain blueXmenu/portrait/correctgreenicons after actualstagechanges. OrdinaryCross confirmsweapon8; Start-only cancellation retained/excluded. CanonicalRayammo288->270 andnativevisible type8projectile. GuestownRayammo288->270->252, purplefiringpose and50 valid9FRPC snapshots prove private type8allocation/frameanimation/travel/bounce/expiry whileP1Zero staysunchanged. Menusmatchnativecanonical references. ActualquitACK4495, ownedPID74216exit0/listenergone/cardsunchanged; totalrunwith originalstart/revised45minbound retained. No fullrow untilNET.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\control-observations.jsonl",
+                "sha256": "8125190a53ed2d08b08d049aca9170ad0cd8a68815e97401a48a3e52f7c7bc08"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\benchmark.json",
+                "sha256": "7227d9655c2b3d13651a90fbe631e13cf5b388c7ac2b9ab2ac4a3191abc03e05"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit2-stage6-X-P1-RayArrow-selected-menu.png",
+                "sha256": "65d4c2b903c8d26d807f328aacd06e15671044363c5b01c087f751d5ce83ed86"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit2-stage6-RayArrow-actual-use.png",
+                "sha256": "5b633a6896391cbbd4d81817643a50dae449e3cd1aa791717cb558f70f8829d0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit3-stage6-X-P2-Buster-unselected-specials-menu.png",
+                "sha256": "7c746aa1b4fa23f6438d7c8b9f40b8460d5cf99903813a01798ab57800574a96"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit3-stage6-X-P2-RayArrow-selected-menu.png",
+                "sha256": "91469321085ccdd19960095430fc0d9892d44a33e39c9c5a881b6a885211aec0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit3-real-stage6-inverse-gameplay.png",
+                "sha256": "406b84c3b1c842679eba2404615110195ec123d91e921a0a7db63554df8e33bf"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\F174-LOCAL-guest-RayArrow-start-present.png",
+                "sha256": "4283625a824801e335ad229268a78c966b7def959c6eca2311201c1670e5961b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\F174-LOCAL-guest-RayArrow-flight-0-present.png",
+                "sha256": "4283625a824801e335ad229268a78c966b7def959c6eca2311201c1670e5961b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\F174-LOCAL-guest-RayArrow-flight-3-present.png",
+                "sha256": "448d5873a05ca7c09555e45b1ae336e406da04ba808d2372287c3cbc5a26b6f0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\F174-LOCAL-guest-RayArrow-flight-7-present.png",
+                "sha256": "e5042b6e0ebce0e1b0d564ab2c590604975954d92e9186d8716d7bb8fa661b31"
+              }
+            ],
+            "limits": [
+              "LOCAL only; fullF150 requires same-candidate NET.",
+              "Only validmagic/even-sequence actual RPC read_ram9F080000 response.hex supports private-body/pool claims. Manual publication80B80000 fields are allzero/wrongaddress and EXCLUDED.",
+              "Native recovery input sequencing errors and attemptedCURRENT labels retained without endpoint credit; original clocks retained. Unrequested four-visit cross-product removed after frozen-definition focusaudit.",
+              "Guest active RayArrow beam artwork is missing and recorded separately as F174 failure; F150 admission claims native iconpalettes and actualnativeweaponuse, not beamart fidelity/hit/damage.",
+              "Current-build schema20 warmed inverse save/load already qualified on exactsameimage in R9LOCAL; reused, no extra state/replaymatrix or backwards-state guarantee."
+            ],
+            "bypasses": [
+              "Authored prelaunch native availability/inventory/history prerequisites only; all claimed menu/stage/ability actions are ordinary nativeinput."
+            ]
+          }
+        ],
+        "limitations": "C125 LOCAL actualstagechanges and selected/unselectedXweaponmenus/nativeuse pass ineachseat. Same-candidate NET stillrequired. Separate F174guestbeam-renderfailure is not inferred as an iconpalette failure; all wrong-address and recovery caveats retained."
       }
     },
     {
@@ -24112,13 +24193,13 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -24220,9 +24301,89 @@
             ],
             "action": "At independent endpoint after completed inverse R9/F179 resolved gate, begin bounded native weapon selection with first ordinary X/P2 R1 pulse. Stop on existing read busy/mismatched response; do not retry.",
             "outcome": "UNVERIFIED. No RayArrow8 selection, native beam actor, spending, animation/travel or expiry was observed. Both processes later confirmed normalOSexit0 with guestPC0, no worker quit; root/source review does not establish R1 causality or a corrective fix. This is F174 nativeattempt1, not a pass. Existing originalmenu index8 and personal-dispatch source remain preparation only."
+          },
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+            "build_identity": {
+              "exe_sha256": "6d4df73bc0ad23f41bff12832820644ba7e8198f9a92cc15215c53e0702e504a",
+              "declared_manifest_sha256": "3d3398cc6297f18b20bcbbddda2f483291e47c4de8407dcc2a4bc7ab4e17cb07",
+              "compiled_source_commit": "4fe5075c8a2dddcd39382aec4589ba27fbda419f",
+              "sdk_commit": "3be00a63ec0ee2b5d412eff8f25ce02a555f765c",
+              "ui_commit": "fe667e2b9a992c67f82e421c926258cab0225a0a",
+              "execution_identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+              "title_version": 73,
+              "host_profile_version": 56,
+              "snapshot_schema": 20
+            },
+            "settings": {
+              "loader": "Original native card Load/CURRENT/map/unit selectors; native stage1->6 canonical, then genuine NewGame0/recovery->6 inverse; recovery itself earns no endpoint credit",
+              "rosters": "unit0 X/P1-Zero/P2 thenunit5 Zero/P1-baseX/P2",
+              "renderer": "Actualcomposed capture_present PNG960x720; LOCAL directGL starts4x/dynamic3x..6x per retained runtime output; no claimnative1x. SDLdummy, hidden/background",
+              "fixtures": "LABalloff; declared isolated authored native availability/inventory cards unchanged; no runtime RAM/result writes"
+            },
+            "action": "ActualguestXRayArrow8selectednativeMENU/Cross, Trianglecasts inInamiTemple stage6; inspectcorrect9Fprivatepool, nativecanonicalreference andactualGL captures duringliveprojectile.",
+            "outcome": "FAIL LOCAL beamart. Correct9FRPC data shows type8/allocation1 emitted/animated/moved/bounced/expired (50 livesnapshots, firstt+.121 tick20494 x143/y594/frame17;+.312 tick20505 x102/y580/frame5, then upwardY486 etc). Sourcecallback table80071220[type8]=801F26B4. Canonicalsame-stageRay8 is visibleorange; guestactualpresent at+.308/.429/.808seconds whileprivateactorsalive/inview shows noRaygraphic. Nativeownammo288->270->252 andP1unchanged. Earlier private-empty inference was wrong-address80Bzero data and is superseded; validactual9Fdata salvaged without anothernative run. Originalsource identifies native Ray graphics upload(page5,x0,y32) while generic decoder places it atY0, leaving RayUV rowsblank; specific rendererfix nowready.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\control-observations.jsonl",
+                "sha256": "8125190a53ed2d08b08d049aca9170ad0cd8a68815e97401a48a3e52f7c7bc08"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\benchmark.json",
+                "sha256": "7227d9655c2b3d13651a90fbe631e13cf5b388c7ac2b9ab2ac4a3191abc03e05"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit2-stage6-X-P1-RayArrow-selected-menu.png",
+                "sha256": "65d4c2b903c8d26d807f328aacd06e15671044363c5b01c087f751d5ce83ed86"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit2-stage6-RayArrow-actual-use.png",
+                "sha256": "5b633a6896391cbbd4d81817643a50dae449e3cd1aa791717cb558f70f8829d0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit3-stage6-X-P2-Buster-unselected-specials-menu.png",
+                "sha256": "7c746aa1b4fa23f6438d7c8b9f40b8460d5cf99903813a01798ab57800574a96"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit3-stage6-X-P2-RayArrow-selected-menu.png",
+                "sha256": "91469321085ccdd19960095430fc0d9892d44a33e39c9c5a881b6a885211aec0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\visit3-real-stage6-inverse-gameplay.png",
+                "sha256": "406b84c3b1c842679eba2404615110195ec123d91e921a0a7db63554df8e33bf"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\F174-LOCAL-guest-RayArrow-start-present.png",
+                "sha256": "4283625a824801e335ad229268a78c966b7def959c6eca2311201c1670e5961b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\F174-LOCAL-guest-RayArrow-flight-0-present.png",
+                "sha256": "4283625a824801e335ad229268a78c966b7def959c6eca2311201c1670e5961b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\F174-LOCAL-guest-RayArrow-flight-3-present.png",
+                "sha256": "448d5873a05ca7c09555e45b1ae336e406da04ba808d2372287c3cbc5a26b6f0"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F150-F174-c125-stage-menus-local-1\\F174-LOCAL-guest-RayArrow-flight-7-present.png",
+                "sha256": "e5042b6e0ebce0e1b0d564ab2c590604975954d92e9186d8716d7bb8fa661b31"
+              }
+            ],
+            "limits": [
+              "F174NETattempt1 neverreachedweapon; thisLOCALattempt2finds actualrenderfailure. No unchangedrepeat; implementqualifiednativeoriginfixbeforeanotherF174run.",
+              "EXCLUDE everymanual80Bpublication/private-emptyclaim; actualresponse.hex9Fvalidmagic/sequence is source.",
+              "OriginalsourceEXEdd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046;8004B19C=24050140/B1A0=24060020/B1A4=24020520/B1AC=0C005EC1, uploader17BB0/A4930000 and17BB4/A4920002. DAT03c0c927...record86graphics+24=2D390,26aliases02000068,32tiles uploadedatlocalV32. ExistingZeroYammarV64mustremain.",
+              "No beamdamage/hit, armoredguest, NETbeam or broadability-family credit.",
+              "Actualownedquitexit0/cardsunchanged; no failed ordinaryrecording/replay credit transferred."
+            ],
+            "bypasses": [
+              "Prelaunch availability/inventory only; actual nativeabilityinput, no syntheticbeam/resultflags."
+            ]
           }
         ],
-        "limitations": "ActualC125nativeXguest prerequisite now works, but F174 first selection attempt ended before RayArrow8/ability proof with subsequent guestPC0 exits. One nativeattemptspent; first failing BIOSvector/TCB bytes unavailable, no causal weapon bug established. Reuse unchanged source/evidence; no native repeat without a distinguishing valid hypothesis/setup or implemented fix under original limits."
+        "limitations": "C125actualprivateRay8lifecycle works but active beamgraphic absent in composedGL. Qualified native upload origin isY32; genericY0decoder leaves nativeUVblank. Implementsmallguardedoriginfix, preserveYammar64/sourcealiascache, thenqualifynewcandidateLOCAL+NET. Attempts2spent; oldwrong80Bmanualclaims excluded."
       }
     },
     {
