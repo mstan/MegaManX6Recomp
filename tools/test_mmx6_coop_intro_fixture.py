@@ -11,6 +11,22 @@ import mmx6_coop_intro_fixture as intro
 
 
 class NativeScenePredicateTests(unittest.TestCase):
+    def test_released_walk_settles_before_idle_assertion(self):
+        tree=ast.parse(inspect.getsource(intro.exercise_scene_owner_fatal))
+        funcs=[n for n in tree.body[0].body if isinstance(n,ast.FunctionDef) and n.name in ('recovered','neutral')]
+        idle=dict(observation=dict(ready=1,enrolled=1,lifecycle=(0,5),scene_owner=0,scene_phase=0,pause_owner=0,
+            players=[dict(state=1,hp=32,action=2),dict(hp=0)]))
+        held=copy.deepcopy(idle);held['observation']['players'][0]['action']=4
+        tested=[]
+        def wait(label,predicate):
+            for p in (held,idle):
+                row=dict(peers=[p]);tested.append(predicate(row))
+                if tested[-1]:return row
+            self.fail('Neutral never settled')
+        scope={'wait':wait};exec(compile(ast.Module(body=funcs,type_ignores=[]),'<actual neutral predicate>','exec'),scope)
+        self.assertIs(scope['neutral']('released native walk')['peers'][0],idle)
+        self.assertEqual(tested,[False,True])
+
     def test_native_fatal_accepts_source_bound_transient_miss_but_not_wrong_option_or_live_owner(self):
         tree=ast.parse(inspect.getsource(intro.exercise_scene_owner_fatal))
         func=next(n for n in tree.body[0].body if isinstance(n,ast.FunctionDef) and n.name=='native_fatal')

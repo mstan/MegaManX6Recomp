@@ -80,6 +80,8 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
         o=p['observation'];return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,0) and all(a['hp']&127 and a['state']==1 for a in o['players'])
     def recovered(p):
         o=p['observation'];return o['ready']==o['enrolled']==1 and tuple(o['lifecycle'])==(0,5) and not o['scene_owner'] and not o['scene_phase'] and not o['pause_owner'] and o['players'][0]['state']==1 and o['players'][0]['hp']==32 and o['players'][0]['action']==2 and o['players'][1]['hp']==0
+    def neutral(label):
+        return wait(label,lambda r:all(recovered(p) for p in r['peers']))
     def native_fatal(p):
         o=p['observation']
         # Source-bound option3 requests HP80 only at phase3 and waits native
@@ -113,11 +115,15 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
             e['limits'].append('Only missing current-build state/control tail; root must bind retained same-image LOCAL3 native fatal/effect/recovery components separately.')
         row=wait('living original passenger finishes beam and regains native control',lambda r:all(recovered(p) and p['fatal_state']==2 for p in r['peers']),40)
         capture('native-recovered-survivor',row)
-        x=[p['observation']['players'][0]['x_raw'] for p in row['peers']]
-        inp(0,0x20,'ordinary survivor Right after original scene release')
-        try:row=updates('survivor native accepted walk')
-        finally:inp(0,0,'release survivor Right')
-        need(all(p['observation']['players'][0]['x_raw']>a for p,a in zip(row['peers'],x)),'Survivor control did not move')
+        if not state_tail:
+            x=[p['observation']['players'][0]['x_raw'] for p in row['peers']]
+            inp(0,0x20,'ordinary survivor Right after original scene release')
+            try:row=updates('survivor native accepted walk')
+            finally:inp(0,0,'release survivor Right')
+            need(all(p['observation']['players'][0]['x_raw']>a for p,a in zip(row['peers'],x)),'Survivor control did not move')
+            row=neutral('native survivor neutral after released walk')
+        else:
+            e['limits'].append('Initial survivor walk is retained in same-image LOCAL4; this run performs only missing SAVE/LOAD and restored-control endpoints.')
         if option==3 and not state_tail:
             quiet=wait('native death effects visibly retire',lambda r:all(recovered(p) and not p['visible_type11_slots'] for p in r['peers']),40)
             births=[len(z['births']) for z in e['effects']]
@@ -133,15 +139,19 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
             from qualify_mmx6_coop_state import snapshot_operation
             c=clients[0];saved=row['peers'][0]
             snapshot_operation(c.request,'save',7,e['snapshot_operations'],timeout=20)
-            inp(0,0x20,'native survivor movement after current-build SAVE')
-            try:updates('native survivor control after SAVE')
+            inp(0,0x80,'native survivor Left after current-build SAVE')
+            try:row=updates('native survivor control after SAVE')
             finally:inp(0,0,'release survivor after SAVE')
+            need(row['peers'][0]['observation']['players'][0]['x_raw']<saved['observation']['players'][0]['x_raw'],'Post-SAVE native Left did not move')
+            neutral('native survivor neutral after SAVE walk')
             snapshot_operation(c.request,'load',7,e['snapshot_operations'],timeout=20)
             wait('current-build scene disposition restored',lambda r:all(recovered(p) and p['observation']['players'][0]['x_raw']==saved['observation']['players'][0]['x_raw'] for p in r['peers']))
-            inp(0,0x20,'fresh native survivor walk after LOAD')
+            inp(0,0x80,'fresh native survivor Left after LOAD')
             try:row=updates('native survivor control after LOAD')
             finally:inp(0,0,'release survivor after LOAD')
-            need(row['peers'][0]['observation']['players'][0]['x_raw']>saved['observation']['players'][0]['x_raw'],'Post-LOAD survivor control absent')
+            need(row['peers'][0]['observation']['players'][0]['x_raw']<saved['observation']['players'][0]['x_raw'],'Post-LOAD survivor control absent')
+            row=neutral('native survivor neutral after LOAD walk')
+            need(all((p['lives'],p['tuple'][2:])==a for p,a in zip(row['peers'],baseline)),'Current-build LOAD changed native lives/checkpoint')
         e['checks'].update(native_passenger_beam_recovery=True,native_survivor_controls=True,no_life_or_checkpoint_reset=True)
         e['checks']['current_build_state_tail' if state_tail else 'source_bound_before_release_native_death' if option==3 else 'native_phase4_owner_death']=True
         e['status']=success;return e
