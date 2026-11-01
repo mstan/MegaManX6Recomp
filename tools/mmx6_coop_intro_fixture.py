@@ -1397,3 +1397,140 @@ def exercise_refight_policy(ctx,*,output,original_exe,leader,success,scenario):
                 try:c.request('fn_disable')
                 except Exception as error:e.setdefault('cleanup_errors',[]).append(str(error))
         (out/'observations.json').write_text(json.dumps(e,indent=2)+'\n',encoding='utf-8',newline='\n')
+
+
+def exercise_weather_survivor(ctx,*,output,original_exe,leader,success):
+ import importlib,sys
+ h=hud
+ root=Path(original_exe).resolve().parent.parent
+ expected={'mmx6_F113_weather_atlas_v63_root_v2':'8a2a595140a8da11d84a769dbcfe892da88f089059229837930ad5db2ed93e18','mmx6_F113_weather_survivor_v63_root_v2':'4842dd55f44a8be9a6715f4ebc388979c168aa1b71ca33b76e5c542b56c64414'}
+ previous=list(sys.path)
+ try:
+  sys.path.append(str(root)) # Current MAIN tools retain priority over old dependencies.
+  modules={name:importlib.import_module(name)for name in expected}
+ finally:sys.path[:]=previous
+ for name,module in modules.items():
+  path=Path(module.__file__).resolve()
+  if path!=root/(name+'.py')or hashlib.sha256(path.read_bytes()).hexdigest()!=expected[name]:raise ValueError('Immutable weather helper changed: '+name)
+ weather=modules['mmx6_F113_weather_atlas_v63_root_v2'];survivor=modules['mmx6_F113_weather_survivor_v63_root_v2']
+ def need(ok,message):
+  if not ok:raise ValueError(message)
+ out=Path(output);out.mkdir(parents=True,exist_ok=False)
+ clients=ctx['clients'];online=len(clients)==2;both=ctx['both']if online else lambda fn:[fn(0)]
+ inp=ctx.get('set_input')or(lambda seat,bits:clients[seat].host_input(bits))
+ e=dict(status='failed',checks={},samples=[],inputs=[],captures=[],bypasses=[],scope='F113 before/after actual native primary fatal only; root artwork/late gates pending, F120/F175 remain separate')
+ e['retained_helpers']=[dict(path=str(Path(m.__file__).resolve()),sha256=hashlib.sha256(Path(m.__file__).read_bytes()).hexdigest())for m in tuple(sys.modules.values())if getattr(m,'__file__',None)and Path(m.__file__).resolve().parent==root]
+ ctx['report']['weather_entry']=e;end=time.monotonic()+240
+ def pace():
+  if online:ctx['transport_window'](1)
+  else:time.sleep(.02)
+ def sample(label):
+  need(time.monotonic()<end and len(e['samples'])<1000,'Bounded native weather entry exhausted')
+  def read(i):
+   p=h.state.private_sample(clients[i]);p['play_hex']=clients[i].read(0x800CCED0,0x94).hex();return p
+  rows=both(read);r=dict(index=len(e['samples']),label=label,peers=rows);e['samples'].append(r)
+  for p in rows:
+   o=p['observation'];play=bytes.fromhex(p['play_hex'])
+   need((o['native_mode'],o['native_phase'],play[12],play[13])==(10,0,6,0)and tuple(o['lifecycle'])==(0,0)and not(o['scene_owner']or o['pause_owner'])and all(x['active']and x['state']==1 and x['hp']&127>0 for x in o['players']),'Native weather entry lost living stage6/0 context')
+  if online:ctx['network']()
+  return r
+ def capture(label):
+  row=sample(label)
+  for i,c in enumerate(clients):e['captures'].append(dict(peer=i,label=label,sample=row['index'],**debug.capture_present(c,out/f'peer-{i}-{label}.png',request=c.request)))
+  return row
+ try:
+  for seat in(0,1):inp(seat,0)
+  window_evidence={}
+  windows=[h.OwnedWindow(dict(request=c.request,report=dict(owned_pid=ctx['report']['peers'][i]['owned_pid']if online else ctx['report']['owned_pid'])),window_evidence.setdefault(str(i),{}))for i,c in enumerate(clients)]
+  for window in windows:window.resize(960,720)
+  def entry_wait(label,predicate,seconds):
+   until=min(end,time.monotonic()+seconds)
+   while time.monotonic()<until:
+    peers=[]
+    for c in clients:
+     state=h.state.private_sample(c);play=c.read(0x800CCED0,0x94);peers.append(dict(state,play_hex=play.hex(),fixture=receipt(c)))
+    row=dict(index=len(e['samples']),label=label,peers=peers);e['samples'].append(row)
+    if predicate(row):return row
+    pace()
+   raise ValueError(label+' timed out')
+  initial=entry_wait('original intro both idle before Turtloid checkpoint',lambda r:all(bytes.fromhex(p['play_hex'])[:2]==bytes((10,0))and bytes.fromhex(p['play_hex'])[12:14]==bytes((0,0))and tuple(p['observation']['lifecycle'])==(0,0)and all(x['action']==2 and x['hp']==32 for x in p['observation']['players'])for p in r['peers']),30)
+  need(all(p['fixture']['generation']==p['fixture']['latch']==0 for p in initial['peers']),'Fresh agreed checkpoint required')
+  inp(1,6)
+  try:entry_wait('agreed Turtloid checkpoint chord accepted',lambda r:all(p['fixture']['latch']in(1,2)for p in r['peers']),15)
+  finally:inp(1,0)
+  ready=entry_wait('original Turtloid CP1 completed and both native idle',lambda r:all(tuple(bytes.fromhex(p['play_hex'])[n]for n in(0,1,12,13,0x1D))==(10,0,6,0,1)and all(p['fixture'].get(k)==v for k,v in dict(generation=1,state=3,reason=0,initializer_entries=1,nonce=0x4C545231).items())and tuple(p['observation']['lifecycle'])==(0,0)and all(x['action']==2 and 0<x['hp']<128 for x in p['observation']['players'])for p in r['peers']),100)
+  e['checkpoint_ready']=ready['index']
+  initial=capture('actual-Turtloid-native-CP1');e['initial']=initial['index']
+  jump_end=[None,None];last_release=[-100,-100];held=[None,None];until=time.monotonic()+55
+  while time.monotonic()<until:
+   r=sample('ordinary both-owner first-rain approach');p=r['peers'][0];o=p['observation'];tick=o['native_timer']
+   if all(1248*65536<=q['observation']['players'][0]['x_raw']<=1550*65536 and bytes.fromhex(q['play_hex'])[0x26]for q in r['peers']):break
+   for seat in(0,1):
+    body=bytes.fromhex(p['p1_body_hex'if seat==0 else'p2_body_hex']);x=o['players'][seat]['x_raw']/65536
+    if jump_end[seat]is not None and tick>=jump_end[seat]:jump_end[seat]=None;last_release[seat]=tick
+    if jump_end[seat]is None and tick-last_release[seat]>=8 and body[0x70]&8 and x<1248:jump_end[seat]=tick+20
+    wanted=(0x20 if x<1390 else 0)|(0x4000 if jump_end[seat]is not None else 0)|(0x8000 if seat==0 and tick%32<6 else 0)
+    if wanted!=held[seat]:e['inputs'].append(dict(seat=seat,bits=wanted,native_timer=tick,ack=inp(seat,wanted)));held[seat]=wanted
+   pace()
+  else:raise ValueError('Ordinary native CP1 approach did not reach first real rain window')
+  for seat in(0,1):inp(seat,0)
+  stable=None;until=time.monotonic()+8
+  while time.monotonic()<until:
+   r=sample('neutral original idle stationary weather footing')
+   grounded=all(all(p['observation']['players'][seat]['action']==2 for seat,k in enumerate(('p1_body_hex','p2_body_hex')))for p in r['peers'])
+   if grounded:
+    positions=[[tuple(x[k]for k in('x_raw','y_raw'))for x in p['observation']['players']]for p in r['peers']]
+    if stable is not None and positions==stable[0]and all(p['observation']['native_timer']>=q+2 for p,q in zip(r['peers'],stable[1])):break
+    stable=(positions,[p['observation']['native_timer']for p in r['peers']])if stable is None or positions!=stable[0]else stable
+   else:stable=None
+   pace()
+  else:raise ValueError('Native rain approach did not settle both stationary native idle heroes')
+  e['rain_arrival']=capture('actual-first-rain-before-weather-cycle')['index']
+  e['weather']=weather.observe(ctx,out/'weather-both-alive',phase='both_alive',native_updates=48,timeout=25)
+  need(all(e['weather']['checks'].values()),'Native both-alive weather observations incomplete')
+  e['native_primary_death']=dict(source='Predeclared lab_fatal=p1, one ordinary second P2 chord requests nativeHP80 only; original updates earn HP0/DYING/FALLEN.',observations=[],status='waiting')
+  slots=[p['weather']['address']for p in e['weather']['samples'][0]['peers']]
+  def fatal_wait(label,predicate,seconds):
+   until=min(end,time.monotonic()+seconds)
+   while time.monotonic()<until:
+    rows=weather.read(ctx,slots)
+    for i,p in enumerate(rows):p['fatal_status']=clients[i].read(debug.DIAGNOSTIC_ADDRESS+0xC8,1)[0]
+    need(len(e['native_primary_death']['observations'])<1000,'Bounded native fatal observations exhausted')
+    e['native_primary_death']['observations'].append(dict(label=label,peers=rows))
+    need(all(p['state']['observation']['lifecycle'][1]==0 and p['state']['observation']['players'][1]['hp']&127>0 for p in rows),'Lost healthy guest during native fatal prerequisite')
+    if predicate(rows):return rows
+    pace()
+   raise ValueError(label+' timed out')
+  for seat in(0,1):inp(seat,0)
+  armed=fatal_wait('both idle and P1 fatal armed',lambda rows:all(p['fatal_status']==5 and tuple(p['state']['observation']['lifecycle'])==(0,0)and all(x['action']==2 for x in p['state']['observation']['players'])for p in rows),15)
+  e['native_primary_death']['before']=armed
+  inp(1,6)
+  try:fatal_wait('agreed P1 native fatal consumed',lambda rows:all(p['fatal_status']==9 for p in rows),15)
+  finally:inp(1,0)
+  rows=fatal_wait('actual native primary HP0 and DYING/FALLEN',lambda rows:all(p['state']['observation']['players'][0]['hp']&127==0 and p['state']['observation']['lifecycle'][0]in(4,5)and bytes.fromhex(p['state']['p1_body_hex'])[4]in(2,3)for p in rows),30)
+  inp(0,0)
+  e['native_primary_death']['fatal']=rows;e['native_primary_death']['status']='actual_native_X_fatal_with_Zero_alive';fatal_tick=[p['state']['observation']['native_timer']for p in rows];until=time.monotonic()+8
+  while time.monotonic()<until:
+   rows=weather.read(ctx,slots)
+   if all(p['state']['observation']['native_timer']>=tick+60 for p,tick in zip(rows,fatal_tick)):break
+   if online:ctx['transport_window'](1)
+   else:time.sleep(.04)
+  else:raise ValueError('Native survivor world did not continue after actual primary fatal')
+  e['survivor_weather']=survivor.observe_survivor(ctx,out/'weather-survivor',native_updates=48,timeout=25)
+  need(all(e['survivor_weather']['checks'].values()),'Native survivor weather observations incomplete')
+  e['checks']['actual_primary_native_fatal_and_survivor_weather']=True
+  e['checks']['actual_native_Turtloid_CP1_and_first_rain']=True;e['checks']['actual_both_alive_original_weather_cycle']=True
+  before=weather.read(ctx,slots);xs=[p['state']['observation']['players'][1]['x_raw']for p in before]
+  inp(1,0x80)
+  try:moved=fatal_wait('owned surviving P2 ordinary Left',lambda rows:all(p['state']['observation']['players'][1]['x_raw']<x-65536 for p,x in zip(rows,xs)),8)
+  finally:inp(1,0)
+  e['survivor_control']=dict(before=before,after=moved)
+  e['checks']['owned_survivor_native_control']=True
+  e['bypasses'].append('Agreed original Turtloid CP1/contact protection and predeclared one-shot P1HP80 request; no lifecycle, weather, scene, death-result or progress writes.')
+  e['status']=success;return e
+ except Exception as x:e.update(error=str(x),traceback=traceback.format_exc());raise
+ finally:
+  for seat in(0,1):
+   try:inp(seat,0)
+   except Exception as x:e.setdefault('cleanup_errors',[]).append(str(x))
+  (out/'weather-entry-observations.json').write_bytes((json.dumps(e,indent=2)+'\n').encode())

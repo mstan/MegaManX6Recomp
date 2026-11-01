@@ -9,6 +9,27 @@ import mmx6_coop_intro_fixture as intro
 
 
 class NamedPrerequisiteCatalogTests(unittest.TestCase):
+    def test_weather_fatal_preferences_stay_in_prototype(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source=Path(__file__).resolve().parents[1]
+        catalog=(source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text()
+        catalog+='\n'+(source/'packaging/lab/coop-checkpoint-option.toml').read_text()
+        if not any(o['id']=='lab_fatal' for o in tomllib.loads(catalog)['option']):
+            catalog+='\n[[option]]\nfeature="prototype"\nid="lab_fatal"\ntype="choice"\ndefault="off"\n'
+            catalog+=''.join('[[option.choice]]\nvalue="'+v+'"\n' for v in ('off','p1','p2'))
+        with tempfile.TemporaryDirectory() as temporary:
+            directory=Path(temporary);manifest=directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True);manifest.write_text(catalog)
+            state=directory/'mods/state.toml'
+            initial='[[feature]]\npackage_id="mmx6.local-coop"\nid = "prototype"\nenabled = false\n[[feature]]\npackage_id="mmx6.enhancement.seamless-loading"\nid="resident"\nenabled=true\n[feature.values]\nstrategy="unchanged"\n'
+            state.write_text(initial);trailing=tomllib.loads(initial)['feature'][1]
+            pair.select_weather_survivor(directory,enabled=False)
+            features=tomllib.loads(state.read_text())['feature'];v=features[0]['values']
+            self.assertEqual(features[1],trailing)
+            self.assertEqual((v['lab_checkpoint'],v['lab_contact_protection'],v['lab_fatal']),('turtloid_rain_cp1','on','p1'))
+            self.assertEqual((v['lab_starting_hp_p1'],v['lab_starting_hp_p2'],v['lab_earned_weapons']),('off','off','off'))
+            self.assertEqual((v['local_cameras'],v['cameras']),('split','independent'))
+
     def test_refight_fatal_stays_in_prototype_before_trailing_feature(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source=Path(__file__).resolve().parents[1]

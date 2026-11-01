@@ -116,6 +116,11 @@ def run(args):
         prepared = [p['agreed_checkpoint'] for p in report['jump_audio_prepared']]
         if prepared[0] != prepared[1]:
             raise ValueError('Peers did not predeclare the same private checkpoint option/catalog')
+        if getattr(args, 'weather_survivor', False):
+            case = intro.exercise_weather_survivor(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
+                output=output/'intro-admission', original_exe=args.original_exe, leader=args.intro_leader, success=SUCCESS)
+            report['checks']['jump_audio_both_peers_completed'] = True
+            return case
         if getattr(args, 'refight_policy_scenario', None):
             case = intro.exercise_refight_policy(dict(ctx, set_input=lambda seat, bits: ctx['clients'][seat].host_input(bits)),
                 output=output/'intro-admission', original_exe=args.original_exe,
@@ -187,6 +192,9 @@ def run_local(args):
         return result
 
     def observe(ctx, *, output, **unused):
+        if getattr(args, 'weather_survivor', False):
+            return intro.exercise_weather_survivor(ctx, output=output/'intro-admission', original_exe=args.original_exe,
+                leader=args.intro_leader, success=failed_trace.ammo.SUCCESS)
         if getattr(args, 'refight_policy_scenario', None):
             return intro.exercise_refight_policy(ctx, output=output/'intro-admission', original_exe=args.original_exe,
                 leader=args.intro_leader, success=failed_trace.ammo.SUCCESS, scenario=args.refight_policy_scenario)
@@ -290,6 +298,26 @@ def select_refight_policy(directory, *, enabled, scenario, selector=select_check
     path.write_text(updated, encoding='utf-8'); selected.update(values, state_sha256=preparation.sha256(path))
     return selected
 
+def select_weather_survivor(directory, *, enabled, selector=select_checkpoint):
+    selected = selector(directory, enabled=enabled, option='turtloid_rain_cp1',
+        contact_protection='on', starting_hp=('off', 'off'), earned_weapons='off')
+    directory = Path(directory)
+    catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
+    fatal = [o for o in catalog.get('option', []) if o.get('id') == 'lab_fatal']
+    if (len(fatal) != 1 or fatal[0].get('feature') != 'prototype' or fatal[0].get('type') != 'choice'
+            or fatal[0].get('default') != 'off' or {c['value'] for c in fatal[0].get('choice', [])} != {'off', 'p1', 'p2'}):
+        raise ValueError('Missing exact agreed native fatal option')
+    values = dict(local_cameras='split', cameras='independent', lab_fatal='p1')
+    path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8'); anchor = 'lab_earned_weapons = "off"\n'
+    if text.count(anchor) != 1 or any(key+' =' in text for key in values):
+        raise ValueError('Unexpected fresh weather preferences')
+    updated = text.replace(anchor, anchor+''.join(key+' = '+json.dumps(value)+'\n' for key, value in values.items()))
+    prototype = [f for f in tomllib.loads(updated).get('feature', []) if f.get('package_id') == 'mmx6.local-coop' and f.get('id') == 'prototype']
+    if len(prototype) != 1 or any(prototype[0].get('values', {}).get(key) != value for key, value in values.items()):
+        raise ValueError('Weather/fatal preferences escaped the co-op prototype')
+    path.write_text(updated, encoding='utf-8'); selected.update(values, state_sha256=preparation.sha256(path))
+    return selected
+
 def main():
     parser = parent.make_parser()
     parser.description = __doc__
@@ -302,12 +330,15 @@ def main():
                         help='F61 original native hatches, including agreed P2 fatal exclusion')
     parser.add_argument('--refight-policy-scenario', choices=('living', 'absent', 'fallen'),
                         help='F123 original portal wait/abort/admission, including agreed P1 fatal exclusion')
+    parser.add_argument('--weather-survivor', action='store_true', help='F113 original rain before/after agreed P1 native fatal')
     args = parser.parse_args(); args.jump_audio_smoke = True
     parent.validate_options(parser, args)
-    if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, bool(args.door_policy_scenario), bool(args.refight_policy_scenario))) > 1:
+    if sum((args.final_retry_continue, args.distant_explosion, args.midboss_forward, bool(args.door_policy_scenario), bool(args.refight_policy_scenario), args.weather_survivor)) > 1:
         parser.error('Select one named native scenario')
     if args.midboss_forward:
         globals()['select_checkpoint'] = select_midboss
+    if args.weather_survivor:
+        globals()['select_checkpoint'] = select_weather_survivor
     if args.door_policy_scenario:
         original_select = select_checkpoint
         def select_policy(directory, *, enabled):
