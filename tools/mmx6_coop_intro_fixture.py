@@ -134,7 +134,11 @@ def exercise_scene_owner_fatal(ctx, *, output, original_exe, leader, success):
                 dt=(p['observation']['tick']-a['observation']['tick'])&0xffffffff;dw=(p['native_timer']-a['native_timer'])&0xffffffff
                 need(dt-2<=dw<=dt+2,'Native free-world cadence changed')
             e['checks']['native_effect_birth_retirement_and_world_cadence']=True
+            capture('native-effects-quiet-retirement',row)
         need(all(recovered(p) and (p['lives'],p['tuple'][2:])==a for p,a in zip(row['peers'],baseline)),'Native lives/checkpoint or survivor state changed')
+        if state_tail:
+            row=updates('ordinary quiet native publications before SAVE',64)
+            capture('state-tail-native-quiet-before-SAVE',row)
         if len(clients)==1:
             from qualify_mmx6_coop_state import snapshot_operation
             c=clients[0];saved=row['peers'][0]
