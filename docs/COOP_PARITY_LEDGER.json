@@ -25710,24 +25710,177 @@
       "x6": {
         "workstream": "scene",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "Capsule-owner death and living partner landing",
+        "analogue": "Original Recycle Dr Light capsule owner death and surviving partner release",
         "bounded_check": "During a genuine capsule sequence, kill the owning hero at an admissible point; require surviving partner release onto real safe terrain.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "d2400291e7de601f7a3b113ee370bd06f4bdfec1",
+            "build_identity": {
+              "source_commit": "d2400291e7de601f7a3b113ee370bd06f4bdfec1",
+              "exe_sha256": "f199ade3288f7bc1c3d9cd846e0fac1fa6da5e5e746b3b84f2c6137b0eead44b",
+              "declared_manifest_sha256": "a6c36a7d2c02ab2729d43717a0b44e145e39e590769a397fa5357124d206fe40",
+              "title": 84,
+              "profile": 67,
+              "snapshot": 22,
+              "semantic_contract_sha256": "1853b7281a9ee0966cf46519e4826a991aad31284e656281340c231175f4d331",
+              "game_change_commit": "d2400291e7de601f7a3b113ee370bd06f4bdfec1",
+              "integrated_commit": "87bd32d",
+              "observer_source_commit": "Owned manual TCP using existing F52 source/approach, baseline controls/diagnostics, native8frame reply edges; exact RPC retained"
+            },
+            "settings": {
+              "roster": "Canonical X/P1 + Zero/P2",
+              "fixture": "Agreed recycle_portal_cp2/contacton/HPoff/earnedoff/lab_fatal=capsule_owner_p1; split cameras, two digital pads",
+              "audio": "Hidden muted SDLdummy; actual composed GL captures",
+              "fatal": "Fresh P2 neutral/6 after actual original capsule admission; native P1HP80 only, pending5/armed13/consumed21"
+            },
+            "action": "Enter actual original capsule with native X Left, confirm owner1/action20/source51924 and type26/sub4/F2E24 state1/phase1/subphase0. Fresh declared P2 chord requests only P1HP80. Require original native body3/FALLEN/HP0, then let living P2 alone offer original Cross edges and observe native scene release, real ground and fresh P2 Right.",
+            "outcome": "PASS6native gates. Admissionrow69 P1X32/action20 at1488.5/1595, P2Zero32 at1506/1594; actualcapsule1/1/0/owner1/phase0. Requestconsumed70; original nativebody3/FALLEN5/HP0 byrow82 whilecapsule1/3/0, P2alive32. Only livingP2 Cross30offers advances originaldialogue. Row232 capsule1/6/0/owner0, sharedlocks clear, P2nativeidle/realgroundsupport8; freshRightrow235 movesP2to1509/1594. Lives2/Recycle4,0,CP2 preserved. Nativeexit0/cardsunchanged/zero debugRAMwrites; root reviewed actual fallen/safe-control frames.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-local-1/F167-preparation.json",
+                "sha256": "c2870718503f28d7064394dfa6560b512e4ac25fd039bb1ee5c10267df08d454"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-local-1/native-job.json",
+                "sha256": "153c09ea3670106716b8c9a9159bd305803dc3c76bf57deb11f3dd33d726c87b"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-local-1/capacity.json",
+                "sha256": "e1dfe5283dd0ae4f50d83bd4fff06b787fde4b9c092ae08ed572c39aa3ef0fda"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-local-1/logs/F167-native-report.json",
+                "sha256": "c88ad3eabe9f795a6c6e876176342cd281d874b2383948877f8a912ec576143f"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-local-1/logs/native-F167-control.jsonl",
+                "sha256": "2420472e52f59e9b5dcabba93d933b7ffe0bf819cd1323f4ed41481b97e67ae4"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-local-1/logs/F167-native-owner-fallen.png",
+                "sha256": "36630bcb1876c3d481855d1337bb656a13523f62b3e4927f8a54225200d767ed"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-local-1/logs/F167-native-survivor-safe-control.png",
+                "sha256": "9370c000e55200b08f12b2e2e4356e4fa7fa5529c7ca9c67cfed265d41b36c80"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-native-scene-fatal-v132/c135-focused-ctest.log",
+                "sha256": "4cfd85717dd931820e117662c575ed07baf96e325767f6d50ac6a362cb4b9b34"
+              }
+            ],
+            "limits": [
+              "One genuine original Recycle capsule/canonical Xprimary owner and Zero survivor. Inverse X seat/other capsules and F154 DrLight text/resource/grant identity remain separate.",
+              "Living P2 supplies ordinary Cross through remaining native dialogue. Qualification is finite native release/safe footing/control, not automatic release.",
+              "Current existing scene behavior passed; code change is a defaultoff LAB reachability prerequisite, not a claimed new production scene fix.",
+              "No cross-host/OS, whole-game content, ordinary recording or broad renderer qualification inferred."
+            ],
+            "bypasses": [
+              "Agreed original RecycleCP2/once source-guarded position-history fixture bypasses preceding traversal; actual capsule admission/dialogue/death/release/control remain native.",
+              "Predeclared HP80 is a fatal prerequisite only. No direct HP0, death/lifecycle, capsule phase, lock/release, pose/position, lives/checkpoint, text/grant or success-result writes. No debug RAM writes.",
+              "Original capsule source code ranges verified against original EXE on each physical peer. No ordinary enemy-damage-inside-capsule or armor-acquisition claim."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "d2400291e7de601f7a3b113ee370bd06f4bdfec1",
+            "build_identity": {
+              "source_commit": "d2400291e7de601f7a3b113ee370bd06f4bdfec1",
+              "exe_sha256": "f199ade3288f7bc1c3d9cd846e0fac1fa6da5e5e746b3b84f2c6137b0eead44b",
+              "declared_manifest_sha256": "a6c36a7d2c02ab2729d43717a0b44e145e39e590769a397fa5357124d206fe40",
+              "title": 84,
+              "profile": 67,
+              "snapshot": 22,
+              "semantic_contract_sha256": "1853b7281a9ee0966cf46519e4826a991aad31284e656281340c231175f4d331",
+              "game_change_commit": "d2400291e7de601f7a3b113ee370bd06f4bdfec1",
+              "integrated_commit": "87bd32d",
+              "observer_source_commit": "Owned manual TCP using existing F52 source/approach, baseline controls/diagnostics, native8frame reply edges; exact RPC retained"
+            },
+            "settings": {
+              "roster": "Canonical X/P1 + Zero/P2",
+              "fixture": "Agreed recycle_portal_cp2/contacton/HPoff/earnedoff/lab_fatal=capsule_owner_p1; split cameras, two digital pads",
+              "audio": "Hidden muted SDLdummy; actual composed GL captures",
+              "fatal": "Fresh P2 neutral/6 after actual original capsule admission; native P1HP80 only, pending5/armed13/consumed21"
+            },
+            "action": "Enter actual original capsule with native X Left, confirm owner1/action20/source51924 and type26/sub4/F2E24 state1/phase1/subphase0. Fresh declared P2 chord requests only P1HP80. Require original native body3/FALLEN/HP0, then let living P2 alone offer original Cross edges and observe native scene release, real ground and fresh P2 Right. Actual loopback delay3 pair; core/mod samples must match after final endpoint below both resolved watermarks.",
+            "outcome": "PASS7native gates on both physical peers. Actualadmission46 / HP80consumed47 / originalbody3/FALLEN55 withP1HP0/P2HP32; sourcecapsule and original scene authentications match. Only livingP2 Cross22offers; nativephase6/owner0/lockrelease row78, realgroundsupport8 and freshP2Right to1515.5/1594 row80. Lives2/CP2 preserved. Fixedprofile67/selectedcb6986bd111041279f68e97876a96081024f1d82e8744b3e130f78d806dd8309 beforeguest. ThreeCRCwindows6actualcommonresolvedcore/mod matches:7616/7648,7808/7840, finalafter8612 at8640/8672 below8673/8673. BothquitACKs/nativeexits0/0/cardsunchanged/zero debugRAMwrites. Root reviewed representative peer0fallen/peer1safe-control composedframes.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-net-peer-0-1/F167-preparation.json",
+                "sha256": "91fb58540d353730aaa5f144cdba48fad2f2a7467b5db40caf896c13a7538432"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-net-peer-1-1/F167-preparation.json",
+                "sha256": "0325e485d34e2197df2821a46cc4c0478343d7a33081a0d2265a08fe4bb3c00a"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-native-net-pair-job-1.json",
+                "sha256": "a2cbebd0c6c67bb1fd1cc80cd448e1b21c70bd62dc083515daffcf9cdad6eb5d"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-native-net-owned-1.json",
+                "sha256": "e8e6a523277e741ba02d0bce22eaef748dc7b20bf361d32a419c041054024eb8"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-native-net-capacity-1.json",
+                "sha256": "99c10408b25208bbba9a0fec4c50eb3ee6cc4f0517117cbe336aed62a4a6f65d"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-net-peer-0-1/logs/F167-native-net-report.json",
+                "sha256": "8806f642b0620765c5ff8727019f9644f163d15bfb15847043a7ea5447d7fa5f"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-net-peer-0-1/logs/native-F167-net-control.jsonl",
+                "sha256": "e0b0ff314be57d41024bc08e5066067e9ec6fb14e91f808506fe427bab481151"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-net-peer-0-1/logs/native-stderr.log",
+                "sha256": "b69d2627b37e12160bed1718e6e54ea5b2ea1dbbf2e06446f82b662dd6225efe"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-net-peer-1-1/logs/native-stderr.log",
+                "sha256": "53cc5f4e0a0cbee13143eaf50d64375e6031c27481681edbe46b3f60ccf525d0"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-net-peer-0-1/logs/peer-0-native-owner-fallen.png",
+                "sha256": "2fdb5538e8f6c6e0b398f249b7a715a67550998967d2947799f922909529f692"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F167-c135-net-peer-0-1/logs/peer-1-native-survivor-safe-control.png",
+                "sha256": "1b79d3ba5ab4115637d3a93e123d1d060a603c7253a3dddfc1a5724a141d1b58"
+              }
+            ],
+            "limits": [
+              "One genuine original Recycle capsule/canonical Xprimary owner and Zero survivor. Inverse X seat/other capsules and F154 DrLight text/resource/grant identity remain separate.",
+              "Living P2 supplies ordinary Cross through remaining native dialogue. Qualification is finite native release/safe footing/control, not automatic release.",
+              "Current existing scene behavior passed; code change is a defaultoff LAB reachability prerequisite, not a claimed new production scene fix.",
+              "No cross-host/OS, whole-game content, ordinary recording or broad renderer qualification inferred."
+            ],
+            "bypasses": [
+              "Agreed original RecycleCP2/once source-guarded position-history fixture bypasses preceding traversal; actual capsule admission/dialogue/death/release/control remain native.",
+              "Predeclared HP80 is a fatal prerequisite only. No direct HP0, death/lifecycle, capsule phase, lock/release, pose/position, lives/checkpoint, text/grant or success-result writes. No debug RAM writes.",
+              "Original capsule source code ranges verified against original EXE on each physical peer. No ordinary enemy-damage-inside-capsule or armor-acquisition claim."
+            ]
+          }
+        ],
+        "limitations": "Exact C135 LOCAL+NET proves original admitted capsule owner native death and living partner finite original-dialogue release onto real floor with fresh controls/lives2CP2, final resolvedCRC/cards/exits. Defaultoff HP80-only prerequisite supplies admissible fatal point; no forced outcome. Not automatic release, other/inverse capsules, F154 dialogue/grant identity or ordinary damage reachability."
       }
     },
     {
