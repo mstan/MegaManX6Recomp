@@ -23042,20 +23042,20 @@
       "frozen_row_sha256": "522970f0a6b9c8f9994e0b011ff3a345c5eb08e4863a8e4c9ac39dbd2fd2e7f2",
       "x6": {
         "workstream": "solid",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Gate clearance with transient missing foot box unidentified",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Original intro closing hatch with native transient contact-box gap",
         "bounded_check": "Find a closing gate and cross with one living actor temporarily lacking a contact box; keep the gate safe until actual partner clearance.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -23129,9 +23129,93 @@
               "Existing agreed CP1/predoor original placement bypasses approach. ONE existing OFFLINE atomic position command4 creates stagger only; actual HP, box0, native closing and death outcomes are observed, never assigned.",
               "Unilateral fixture taint and ordinary recording refusal remain retained. Native cards/settings were private and unchanged."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "43a192529029d46bc7d2576a7239b0fdfa3cd1c4",
+            "build_identity": {
+              "source_commit": "43a192529029d46bc7d2576a7239b0fdfa3cd1c4",
+              "exe_sha256": "e1aa8df14bfe7081656cebe0352e21ce46c9db9f8256888bc36461a3ccd49aae",
+              "declared_manifest_sha256": "340d2054af7026ddb6f795b0695ce2fd709880cf5421dbd61ff7e01461d7e180",
+              "title": 82,
+              "profile": 65,
+              "snapshot": 23,
+              "game_change_commit": "43a192529029d46bc7d2576a7239b0fdfa3cd1c4",
+              "test_fixture_commit": "6c279189214a84340bb30dbfc38690f823e0b6df",
+              "observer_source_commit": "Manual owned TCP using same baseline inputs/diagnostics and exact retained RPC transcript"
+            },
+            "settings": {
+              "roster": "Canonical X/P1 + Zero/P2, both32HP",
+              "policy": "Selected Both; original first intro subtype2 FA2A4 at5744/384",
+              "fixture": "intro_before_doors/contacton/HPoff/earnedoff/fataloff; same one offline phase3 P2 position-only stagger as failed C132",
+              "audio": "Hidden SDLdummy, sealed interpreted overlays; actual composed GL captures"
+            },
+            "action": "Repeat failed C132 prerequisite on C133: prewrite9 payload bytes then one command4 during actual phase3/Box0, P2 x5744/y394 only. Observe natural carry/close, actual native following dialogue release and fresh per-seat Right. Save mid-hatch slot7, close, load7 and let native close again.",
+            "outcome": "PASS LOCAL only. Rows88..94 retain bothalive32/contactbox0 while trailingZero5747.84375..5766.421875, hatchphase3. Original standing shape00030b13 has radius11; native release atrow95 guestcentre5771.546875 yields fullleft5760.546875 beyond farplane5760. Firstobserved closingrow96 state1/4 retains both32; closedrow109 state2/0 bothalive32, lives2CP2. Savegen1/loadgen2 restores mid-door phase3/insideBox0 atrow110, then original safeclose row133. Actual native dialogue ends; both freshRightcontrols pass. Nativeexit0/cardsunchanged; root reviewed4 composedframes. Genuine source manifest74+36 checked; initial12Ctests plus corrected-fixture2 rerun pass, game bytes unchanged.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/F145-preparation.json",
+                "sha256": "e7d722e822c5663ab2ddf49b619ea2d6cf09f66a9d3e1382165839f9c1198924"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/native-job.json",
+                "sha256": "99bea57020977302b0c1595baaeb5382eacd2b2cae6290ab60917192e11f9b75"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/capacity.json",
+                "sha256": "9a9d30db59f3e27adafd0fa337da938d9251a90e08645e867a42b6387b9da9b3"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/logs/F145-native-report.json",
+                "sha256": "6db98f9c17d9c7409d8ce6744a57ebc72b4e8dceb44a030a6612bd0c4335fe02"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/logs/native-F145-control.jsonl",
+                "sha256": "9b3e0e1c4bebfe8a25207e30016345e5f158eff3c108760e7f9281b63d856d79"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/logs/F145-first-native-closing-after-stagger.png",
+                "sha256": "97fb9a8ba7e926daa252102d461cda9a511b1b65d2c9ab63ceb3f6fef71ba4b0"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/logs/F145-native-closed-solid-after-stagger.png",
+                "sha256": "9d4715104246377dec245288114ed11a292468904fd888a28d9a40fde4e65950"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/logs/F145-fresh-seat2-control.png",
+                "sha256": "129f90efadae35da70cd11a5bf20903095dbdb0a43523e03bba3752dcebb26ce"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c133-local-1/logs/F145-fresh-seat1-control.png",
+                "sha256": "3b6d5077d6c127a9c8390935472953582723fb581d04feaae4069dead8eafff9"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-hatch-box-guard-v133/focused-ctest-1-failed.log",
+                "sha256": "eebb2761035e622b4a9335337d4b8b766f31b2103d75be38b62fdbe074c8b369"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-hatch-box-guard-v133/focused-effects-ctest-2.log",
+                "sha256": "5a117a694e3d656418bf1c9d3ead34b6fbd4e704a50cdbb686a4961e173b5366"
+              }
+            ],
+            "limits": [
+              "Exact C133 canonical Both first intro subtype2 hatch only; no NET or F183 stationary hold credit.",
+              "One position-only offline command4 prerequisite. No door phase, contact box, HP, lifecycle or result writes.",
+              "Source-qualified full standing left extent uses original Zero radius11; first closing guest centre5771.546875 gives left5760.546875 beyond gate plane5760.",
+              "Actual composed frames reviewed; shared original dialogue/scenery remains outside mechanical clearance admission.",
+              "Default fix remains isolated pending final same-candidate LOCAL+NET qualification.",
+              "C132 baseline failure remains untouched. C133 default fix is isolated, not integrated or full-row qualified. Final NET prerequisite will change candidate; required final LOCAL+NET must use that same final candidate, without transferred credit.",
+              "First compiled private-effects tests failed because new inverse-roster fixture retained oldX garbage in Zero8E native admission lock. Fixture-only6c27918 clears it; behavior assertions remain strict. Failed log retained."
+            ],
+            "bypasses": [
+              "Agreed CP1/predoor prerequisite bypasses preceding traversal; original native Right earns hatch admission.",
+              "Exactly one existing offline atomic command4 changes P2 position and XY history during original phase3, to expose the contact-box gap. This is a disclosed stagger prerequisite, not ordinary-route or independently stationary-held coverage.",
+              "No HP, collision-box, door phase/animation, lifecycle, CP2, lives or clearance outcome writes. Current-build save/load restores the actual cache/native state; fixture taint and ordinary recording refusal remain."
+            ]
           }
         ],
-        "limitations": "Demonstrated exact C132 LOCAL premature native closure with livingguest contactbox0: after one disclosed position-only stagger, native close begins while guestcenter5757.453125 is inside5728..5760; HP32->0/DYING->FALLEN, primary32/lives2CP2 preserved. No forced closure/death/box/result. Source/default full-extent guard in isolatedC133 is preparation only until built/nativequalified; NET unverified. F183stationary-held contract remains separate."
+        "limitations": "Exact C133 LOCAL default full-extent fix passed same disclosed stagger, both living/full clearance/original close/fresh controls/current-build mid-door save-load. C132 failed baseline retained. Matching NET remains unverified; minimal predeclared deterministic NET stagger is being implemented, requiring final same-candidate LOCAL+NET. F183 stationary held occupancy remains separate."
       }
     },
     {
