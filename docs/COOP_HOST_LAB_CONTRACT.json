@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; combined qualified hatch-clearance and capsule-owner prerequisites awaiting integration qualification",
+  "status": "development-candidate-only; loaded native Recycle origin for existing capsule prerequisite",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 68,
+  "revision": 69,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v85",
+    "title_compatibility": "mmx6-x-zero-delay-v86",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -941,5 +941,11 @@
     "options": "Six typed lab_fatal choices including capsule_owner_p1, separate defaultoff lab_hatch_stagger. Capsule requires recycle_portal_cp2; stagger requires Both intro_before_doors and fataloff. Their actual original phase/ownership/receipt guards remain unchanged and mutually exclusive.",
     "snapshot_schema": 24,
     "qualification": "C134 hatch LOCAL+NET and C135 capsule LOCAL+NET qualification remains attached to each actual compiled image. This combined source requires its own genuine build and proportional native integration checks; do not relabel prior evidence."
+  },
+  "title_changes_v86": {
+    "scope": "Permit existing recycle_portal_cp2 alias7, alongside alias6, after actual native card Load and Recycle mission origin4/0/0. All other nonzero origins/aliases remain refused. No new fixture, native call or armor/part/progress/result writes.",
+    "guards": "Existing predeclared/profile/chord/once/idle/source/geometry/position-only grant and native completion guards retained. Alias7 still chooses exact original4/0/CP2 record80072444/nonce4C525032; other Recycle aliases do not gain this origin.",
+    "snapshot_schema": 24,
+    "qualification": "Source preparation only for F55/F154 genuine acquired inverse capsule reachability. Native card Load, actual capsule top contact/part grant, DrLight resource/script, reload/equipped Shadow and each required roster/mode remain separate native endpoints. C136 image/source identity retained before mutable build; no inherited native credit."
   }
 }

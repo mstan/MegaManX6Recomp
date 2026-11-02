@@ -1373,7 +1373,7 @@ static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
         "recycle_fallen_cp2","recycle_fallen_guest_cp2","secretlab2b_enemy_cp0"};
     const uint8_t origins[][3]={{4,0,0},{4,0,1},{4,1,0},{4,1,2},{4,2,0},{3,0,0},{0,1,0},{0,0,1}};
     for(unsigned option=0;option<sizeof options/sizeof options[0];++option)for(unsigned i=0;i<sizeof origins/sizeof origins[0];++i) {
-        if(option==5 && i==0)continue; /* The one new accepted origin. */
+        if((option==5 || option==6) && i==0)continue; /* Only aliases6/7 at real Recycle4/0/0. */
         setup_agreed(cpu,1);test_lab_option=options[option];checkpoint_reset();
         psx_mod_write_byte(PLAY+12,origins[i][0]);psx_mod_write_byte(PLAY+13,origins[i][1]);
         psx_mod_write_byte(PLAY+0x1D,origins[i][2]);
@@ -1384,10 +1384,26 @@ static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
         CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
     }
+    /* Alias7 admits only its existing source-qualified CP2 transaction after
+     * modeled native card/mission arrival. No armor/part/body fields change. */
+    for(int online=0;online<=1;++online)for(unsigned inverse=0;inverse<=1;++inverse) {
+        setup_agreed(cpu,online);test_lab_option="recycle_portal_cp2";checkpoint_reset();psx_mod_write_byte(PLAY+12,4);
+        if(inverse){psx_mod_write_byte(PLAYER+2,1);p2.body[2]=0;} /* Existing acquired inverse roster. */
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.index==23 &&
+            checkpoint_pending.nonce==0x4C525032u && checkpoint_pending.authority==CHECKPOINT_AGREED);
+        before_ram[PLAY&0x1FFFFF]=8;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body) && !guest_calls);
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX && psx_mod_read_word(diagnostic+0xB8)==0x80072444u);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+0x1D)==2 &&
+            psx_mod_read_word(diagnostic+0xB4)==1 && !guest_calls);
+    }
     /* Loaded origin retains transient safety waits, then consumes the same
      * chord once only when native bodies and callback context settle. */
-    for(unsigned unsafe=0;unsafe<7;++unsafe) {
-        setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();psx_mod_write_byte(PLAY+12,4);
+    for(unsigned alias=6;alias<=7;++alias)for(unsigned unsafe=0;unsafe<7;++unsafe) {
+        setup_agreed(cpu,1);test_lab_option=alias==6?"recycle_cp2":"recycle_portal_cp2";checkpoint_reset();psx_mod_write_byte(PLAY+12,4);
         if(unsafe==0)pause_owner=0;if(unsafe==1)private_draw=1;if(unsafe==2)zero_projected=1;
         if(unsafe==3)psx_mod_write_byte(PLAYER+5,7);if(unsafe==4)p2.body[0x67]=1;
         if(unsafe==5)state_track.count=1;if(unsafe==6)scene_owner=1;
@@ -1397,8 +1413,8 @@ static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
         pause_owner=-1;private_draw=zero_projected=scene_owner=0;state_track.count=0;
         psx_mod_write_byte(PLAYER+5,2);p2.body[0x67]=0;
-        CHECK(checkpoint_lab_boundary(cpu,0) && checkpoint_pending.index==27 &&
-            checkpoint_pending.nonce==CHECKPOINT_LAB_RECYCLE_NONCE);
+        CHECK(checkpoint_lab_boundary(cpu,0) && checkpoint_pending.index==(alias==6?27u:23u) &&
+            checkpoint_pending.nonce==(alias==6?CHECKPOINT_LAB_RECYCLE_NONCE:0x4C525032u));
         CHECK(!checkpoint_lab_boundary(cpu,6)); /* Pending and consumed cannot rearm. */
     }
     /* Current profile remains required at both admission and mode9. */
