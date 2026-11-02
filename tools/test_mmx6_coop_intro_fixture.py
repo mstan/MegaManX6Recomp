@@ -165,6 +165,12 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         source=Path(__file__).resolve().parents[1]
         catalog=(source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text()
         catalog+='\n'+(source/'packaging/lab/coop-checkpoint-option.toml').read_text()
+        fatal_begin=catalog.index('\n[[option]]\nfeature = "prototype"\nid = "lab_fatal"')
+        fatal_end=catalog.find('\n[[option]]',fatal_begin+1)
+        if fatal_end<0:fatal_end=len(catalog)
+        fatal=catalog[fatal_begin:fatal_end]
+        fatal=fatal[:fatal.index('\n[[option.choice]]\nvalue = "capsule_owner_p1"')]
+        prefix,suffix=catalog[:fatal_begin]+fatal,catalog[fatal_end:]
         capsule='\n[[option.choice]]\nvalue="capsule_owner_p1"\nlabel="Native capsule owner fatal"\n'
         cases=((pair.select_door_policy,dict(scenario='fallen',fallen_seat=0),'intro_before_doors'),
                (pair.select_refight_policy,dict(scenario='fallen'),'refight_portal_cp1'),
@@ -176,13 +182,13 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             for select,arguments,checkpoint in cases:
                 for extension in ('',capsule):
                     with self.subTest(selector=select.__name__,capsule=bool(extension)):
-                        manifest.write_text(catalog+extension);state.write_text(initial)
+                        manifest.write_text(prefix+extension+suffix);state.write_text(initial)
                         select(directory,enabled=False,**arguments)
                         values=tomllib.loads(state.read_text())['feature'][0]['values']
                         self.assertEqual(values['lab_fatal'],'p1')
                         self.assertEqual(values['lab_checkpoint'],checkpoint)
                         self.assertEqual((values['lab_starting_hp_p1'],values['lab_starting_hp_p2'],values['lab_earned_weapons']),('off','off','off'))
-                manifest.write_text(catalog+capsule+'\n[[option.choice]]\nvalue="unknown_fatal"\n')
+                manifest.write_text(prefix+capsule+'\n[[option.choice]]\nvalue="unknown_fatal"\n'+suffix)
                 state.write_text(initial)
                 with self.assertRaises(ValueError):select(directory,enabled=False,**arguments)
 
@@ -236,7 +242,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
         normal = tomllib.loads((source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons', 'lab_fatal') for o in normal.get('option', [])))
+        self.assertFalse(any(o.get('id') in ('lab_checkpoint', 'lab_contact_protection', 'lab_starting_hp_p1', 'lab_starting_hp_p2', 'lab_earned_weapons', 'lab_fatal', 'lab_hatch_stagger') for o in normal.get('option', [])))
         catalog = (source/'packaging/lab/coop-checkpoint-option.toml').read_text(encoding='utf-8')
         with tempfile.TemporaryDirectory() as temporary:
             directory = Path(temporary)
@@ -282,6 +288,14 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         self.assertEqual(len(options),1)
         self.assertEqual((options[0]['feature'],options[0]['type'],options[0]['default']),('prototype','choice','off'))
         self.assertEqual([c['value'] for c in options[0]['choice']],['off','p1','p2','scene_before_release','scene_during_arrival','capsule_owner_p1'])
+
+    def test_hatch_stagger_is_an_explicit_default_off_lab_choice(self):
+        source=Path(__file__).resolve().parents[1]
+        catalog=tomllib.loads((source/'packaging/lab/coop-checkpoint-option.toml').read_text())
+        options=[o for o in catalog['option'] if o['id']=='lab_hatch_stagger']
+        self.assertEqual(len(options),1)
+        self.assertEqual((options[0]['feature'],options[0]['type'],options[0]['default']),('prototype','choice','off'))
+        self.assertEqual([c['value'] for c in options[0]['choice']],['off','on'])
 
     def test_protection_requires_explicit_typed_prelaunch_choice(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair

@@ -440,3 +440,20 @@ label = "Zero scene owner fatal during original partner arrival (intro CP2 only)
 [[option.choice]]
 value = "capsule_owner_p1"
 label = "Player 1 fatal during native Recycle capsule admission"
+
+[[option]]
+feature = "prototype"
+id = "lab_hatch_stagger"
+label = "Lab first-hatch guest stagger"
+description = "Predeclared one-shot position/history-only prerequisite: Both intro_before_doors, first native hatch phase3, both living with original contact boxes absent and primary X at least5768. Places guest at5744/394 once. Native carry, collision, closure, HP and lifecycle remain untouched. Both peers agree before boot; ordinary recording remains refused."
+group = "Lab validation"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off"
+
+[[option.choice]]
+value = "on"
+label = "One original first-hatch stagger (prerequisite only)"

@@ -243,6 +243,7 @@ static void prepare_door_view(CPUState *cpu,int online,int split,unsigned phase)
     prepare_view(cpu,online,split);
     both_doors=1;scene_owner=1;scene_phase=0;both_door_members=3;
     both_door_actor=0x800C1220u;both_door_origin=0x800FA2A4u;
+    both_door_extents[0][0]=both_door_extents[1][0]=-11;both_door_extents[0][1]=both_door_extents[1][1]=11;
     psx_mod_write_byte(both_door_actor,1);psx_mod_write_byte(both_door_actor+1,8);
     psx_mod_write_byte(both_door_actor+4,1);psx_mod_write_byte(both_door_actor+5,(uint8_t)phase);
     psx_mod_write_word(both_door_actor+0x10,both_door_origin);
