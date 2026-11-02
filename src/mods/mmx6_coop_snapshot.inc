@@ -291,7 +291,7 @@ static uint32_t state_digest(void) {
     const uint32_t resources[]={assets,assembly,palette_source,active_palette,packets,diagnostic,
         menu_memory,menu_assembly,hud_packets,(uint32_t)compressed_size,(unsigned)snapshot_asset_valid,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded,independent_views,checkpoint_lab_option,
-        checkpoint_contact_protection_option,checkpoint_starting_hp[0],checkpoint_starting_hp[1],checkpoint_earned_weapons_option,checkpoint_fatal_option,checkpoint_hatch_stagger_option,both_doors,boss_balance_enabled,boss_balance_independent,separate_subtanks};
+        checkpoint_contact_protection_option,checkpoint_starting_hp[0],checkpoint_starting_hp[1],checkpoint_earned_weapons_option,checkpoint_fatal_option,checkpoint_hatch_stagger_option,both_doors,boss_balance_enabled,boss_balance_independent,separate_subtanks,partner_x_armor,private_actor.form};
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
@@ -337,7 +337,7 @@ static void snapshot_discard_prepared(void) {
 static void snapshot_resources(StateIO *s) {
     state_fixed(s,0x53503658u);state_fixed(s,24);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
-    state_fixed(s,separate_subtanks);
+    state_fixed(s,separate_subtanks);state_fixed(s,partner_x_armor);state_fixed(s,private_actor.form);
     state_fixed(s,checkpoint_fatal_option);state_fixed(s,checkpoint_hatch_stagger_option);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};

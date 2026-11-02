@@ -62,8 +62,13 @@ typedef enum {
  * On any failure a non-NULL out is cleared, including stale prior success. */
 Mmx6CoopRosterReason mmx6_coop_roster_resolve(const Mmx6CoopRosterNative *native,
                                             Mmx6CoopRoster *out);
+/* Immutable wearing choice, applied only at original enrollment/reinit.
+ * Native availability/full parts authorize a form; locked choices use base X.
+ * No progression bytes or native actor fields are modified. */
+Mmx6CoopRosterReason mmx6_coop_roster_resolve_partner(const Mmx6CoopRosterNative *native,
+    unsigned requested_x_form,uint8_t parts,Mmx6CoopRoster *out);
 
-/* Checks canonical actor resources and the fixed counterpart policy only.
+/* Checks canonical actor resources and supported counterpart forms only.
  * To compare against current guest identity/flags, resolve those native reads
  * again. This does not assert callback readiness or freeze campaign progress. */
 Mmx6CoopRosterReason mmx6_coop_roster_validate(const Mmx6CoopRoster *roster);

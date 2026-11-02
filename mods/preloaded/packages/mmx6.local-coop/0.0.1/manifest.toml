@@ -145,3 +145,28 @@ label = "Shared"
 [[option.choice]]
 value = "independent"
 label = "Separate per player"
+
+[[option]]
+feature = "prototype"
+id = "partner_x_armor"
+label = "Partner X armor"
+description = "Choose X's armor when Player 1 is Zero. Applies on native enrollment or stage reinitialization. Requires the armor's earned availability and all Shadow or Blade parts; locked choices use base X. Campaign progress is never granted."
+group = "Gameplay"
+type = "choice"
+default = "base"
+
+[[option.choice]]
+value = "base"
+label = "Base X"
+
+[[option.choice]]
+value = "falcon"
+label = "Falcon"
+
+[[option.choice]]
+value = "shadow"
+label = "Shadow"
+
+[[option.choice]]
+value = "blade"
+label = "Blade"

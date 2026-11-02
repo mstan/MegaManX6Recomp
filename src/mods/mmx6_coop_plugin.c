@@ -68,6 +68,7 @@ static PlayerContext p2, p1;
  * Native roster admission binds one descriptor for every private helper. */
 static const Mmx6CoopRosterActor default_private_actor={1,5,1,0x3D,85,1,165,166};
 static Mmx6CoopRosterActor private_actor={1,5,1,0x3D,85,1,165,166};
+static unsigned partner_x_armor; /* Immutable prototype choice; no live switch. */
 static int private_roster_bind(const Mmx6CoopRoster *roster) {
     if(mmx6_coop_roster_validate(roster)!=MMX6_COOP_ROSTER_OK)return 0;
     private_actor=roster->seat[1];
@@ -298,7 +299,7 @@ static int ui_upload(const Mmx6AssetView *asset) {
 static int fixed_roster(Mmx6CoopRoster *roster) {
     Mmx6CoopRosterNative native={psx_mod_read_byte(PLAYER+2),psx_mod_read_byte(PLAYER+0xE7),
         psx_mod_read_byte(PLAY+0x38),psx_mod_read_byte(PLAY+0x5E),psx_mod_read_byte(PLAY+0x5F)};
-    Mmx6CoopRosterReason identity=mmx6_coop_roster_resolve(&native,roster);
+    Mmx6CoopRosterReason identity=mmx6_coop_roster_resolve_partner(&native,partner_x_armor,psx_mod_read_byte(PLAY+0x69),roster);
     if (identity!=MMX6_COOP_ROSTER_OK) {
         fprintf(stderr,"mmx6 co-op: native roster refused (%s)\n",mmx6_coop_roster_reason(identity));
         return 0;
@@ -1871,7 +1872,7 @@ static int paired_arrival(CPUState *cpu) {
         Mmx6CoopRoster roster;
         Mmx6CoopRosterNative native={psx_mod_read_byte(PLAYER+2),psx_mod_read_byte(PLAY+0x5E),
             psx_mod_read_byte(PLAY+0x38),psx_mod_read_byte(PLAY+0x5E),psx_mod_read_byte(PLAY+0x5F)};
-        if (mmx6_coop_roster_resolve(&native,&roster)!=MMX6_COOP_ROSTER_OK ||
+        if (mmx6_coop_roster_resolve_partner(&native,partner_x_armor,psx_mod_read_byte(PLAY+0x69),&roster)!=MMX6_COOP_ROSTER_OK ||
             mmx6_coop_resources_fixed_runtime_admit(&roster)!=MMX6_COOP_RESOURCES_OK) return 0;
         inside=1;
         ready=load_assets(&roster);
@@ -3134,6 +3135,13 @@ static void activate(void) {
     char tanks[16];
     separate_subtanks=psx_mod_option_value("mmx6.local-coop","prototype","subtank_energy",tanks,sizeof tanks) &&
         !strcmp(tanks,"independent");
+    char armor[16];partner_x_armor=MMX6_COOP_FORM_X;
+    if(psx_mod_option_value("mmx6.local-coop","prototype","partner_x_armor",armor,sizeof armor)) {
+        if(!strcmp(armor,"falcon"))partner_x_armor=MMX6_COOP_FORM_FALCON;
+        else if(!strcmp(armor,"shadow"))partner_x_armor=MMX6_COOP_FORM_SHADOW;
+        else if(!strcmp(armor,"blade"))partner_x_armor=MMX6_COOP_FORM_BLADE;
+        else if(strcmp(armor,"base"))failed=1;
+    }
     unit_choices_call=target_projection_call=0;
     zero_menu_loaded=0;
     private_actor=default_private_actor;

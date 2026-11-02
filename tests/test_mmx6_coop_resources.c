@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %d: %s\n",__LINE__,#x);exit(1); } } while (0)
-enum { BIN_SIZE=0x18000,DAT_SIZE=0x200000,ARENA=0x80000 };
+enum { BIN_SIZE=0x18000,DAT_SIZE=0x400000,ARENA=0x80000 };
 static uint8_t *bin,*dat;
-static size_t bundle[2],end;
+static size_t bundle[5],end;
 static void put32(uint8_t *p,uint32_t v) {
     unsigned i;for(i=0;i<4;++i)p[i]=(uint8_t)(v>>(8*i));
 }
@@ -34,8 +34,8 @@ static void archives(size_t zero_palette) {
     memset(bin,0,BIN_SIZE);memset(dat,0,DAT_SIZE);end=2048;
     put32(bin,2);put32(bin+4,44588);put32(bin+4096,0x3C);
     put32(bin+8,24);put32(bin+12,22964);put32(bin+24*2048,0x3D);
-    add_bundle(85,zero_palette);add_bundle(86,2688);
-    for(record=163;record<=166;++record) {
+    add_bundle(85,zero_palette);for(record=86;record<=89;++record)add_bundle(record,2688);
+    for(record=163;record<=174;++record) {
         size_t size=(record&1)?8192:512;
         descriptor(record,end,size);memset(dat+end,(int)record,size);end+=rounded(size);
     }
@@ -143,18 +143,24 @@ static void preparation(void) {
     CHECK(mmx6_coop_resource_prepare(&x,1,bin,BIN_SIZE,dat,DAT_SIZE,ARENA,NULL)==MMX6_COOP_RESOURCES_INVALID_ARGUMENT);
 }
 static void inverse_failures(void) {
-    Mmx6CoopRoster zero=roster(5),bad,falcon=roster(1);
+    Mmx6CoopRoster zero=roster(5),bad;
     Mmx6CoopResourceViews v;
     archives(2656);
     /* The inverse primary still prepares the original ordinary Zero assets. */
     CHECK(mmx6_coop_resource_prepare(&zero,0,bin,BIN_SIZE,dat,DAT_SIZE,ARENA,&v)==MMX6_COOP_RESOURCES_OK);
     CHECK(v.overlay.data==bin+24*2048 && v.graphics.size==229672);
     CHECK(v.portrait.data[0]==165 && v.portrait_colors.data[0]==166);
-    /* Only base X is the inverse counterpart; valid Falcon resources do not
-     * permit an unsupported private form through direct runtime admission. */
-    bad=zero;bad.seat[1]=falcon.seat[0];
+    /* Every supported partner form keeps its own source DAT and portrait. */
+    for(unsigned form=1;form<=3;++form) {
+        Mmx6CoopRosterNative n={1,5,1,5,7};Mmx6CoopRoster selected;
+        CHECK(mmx6_coop_roster_resolve_partner(&n,form,255,&selected)==MMX6_COOP_ROSTER_OK);
+        CHECK(mmx6_coop_resources_fixed_runtime_admit(&selected)==MMX6_COOP_RESOURCES_OK);
+        CHECK(mmx6_coop_resource_prepare(&selected,1,bin,BIN_SIZE,dat,DAT_SIZE,ARENA,&v)==MMX6_COOP_RESOURCES_OK);
+        CHECK(v.overlay.data==bin+4096 && v.graphics.data[0]==89+form);
+        CHECK(v.portrait.data[0]==167+form*2 && v.portrait_colors.data[0]==168+form*2);
+    }
+    bad=zero;bad.seat[1]=roster(4).seat[0];
     CHECK(mmx6_coop_resources_fixed_runtime_admit(&bad)==MMX6_COOP_RESOURCES_INVALID_ROSTER);
-    plan_failure(&bad,1,BIN_SIZE,DAT_SIZE,ARENA,MMX6_COOP_RESOURCES_INVALID_ROSTER);
     bad=zero;bad.seat[1].portrait_palette=166;
     CHECK(mmx6_coop_resources_fixed_runtime_admit(&bad)==MMX6_COOP_RESOURCES_INVALID_ROSTER);
     plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,315027,MMX6_COOP_RESOURCES_ALLOCATION_BOUND);

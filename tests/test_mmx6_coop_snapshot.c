@@ -215,7 +215,7 @@ static void digest_and_readiness(void){
     PERTURB(checkpoint_hatch_stagger_option);PERTURB(checkpoint_hatch_stagger_state);
     PERTURB(checkpoint_pending.authority);
     PERTURB(checkpoint_pending.placed_world);
-    PERTURB(both_doors);
+    PERTURB(both_doors);PERTURB(partner_x_armor);
     PERTURB(saved_portrait_colors[7]);PERTURB(pickup_owners[0].seat);PERTURB(zero_solid_contacts[3].carried);
     PERTURB(death_effect[2].x);
     PERTURB(death_effect[3].owner);
@@ -690,17 +690,20 @@ static void private_subtank_policy(void) {
 }
 static void private_x_overlay_snapshot(void) {
     Mmx6CoopRosterActor before=private_actor;unsigned old_character=jump_audio_character;
+    unsigned old_armor=partner_x_armor;partner_x_armor=MMX6_COOP_FORM_SHADOW;
     uint8_t old_overlay[OVERLAY_SIZE];memcpy(old_overlay,zero_overlay,sizeof old_overlay);
-    Mmx6CoopRosterNative native={1,5,1,5,0};Mmx6CoopRoster roster;
-    CHECK(mmx6_coop_roster_resolve(&native,&roster)==MMX6_COOP_ROSTER_OK && private_roster_bind(&roster));
+    Mmx6CoopRosterNative native={1,5,1,5,7};Mmx6CoopRoster roster;
+    CHECK(mmx6_coop_roster_resolve_partner(&native,MMX6_COOP_FORM_SHADOW,255,&roster)==MMX6_COOP_ROSTER_OK && private_roster_bind(&roster));
     jump_audio_character=MMX6_COOP_CHARACTER_X;
     zero_overlay[ZERO_GIGA_BACKUP_OFFSET]=0x37;
     uint32_t length=snapshot_bytes(),digest=state_digest();CHECK(length);
     uint8_t *wire=malloc(length);CHECK(wire && snapshot_write(wire,length));
+    partner_x_armor=0;CHECK(!snapshot_validate(wire,length));partner_x_armor=MMX6_COOP_FORM_SHADOW;
+    private_actor.form=0;CHECK(!snapshot_validate(wire,length));private_actor.form=MMX6_COOP_FORM_SHADOW;
     zero_overlay[ZERO_GIGA_BACKUP_OFFSET]=0x79;CHECK(state_digest()!=digest);
     CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
     CHECK(zero_overlay[ZERO_GIGA_BACKUP_OFFSET]==0x37 && state_digest()==digest);
-    private_actor=before;jump_audio_character=old_character;memcpy(zero_overlay,old_overlay,sizeof old_overlay);free(wire);
+    private_actor=before;partner_x_armor=old_armor;jump_audio_character=old_character;memcpy(zero_overlay,old_overlay,sizeof old_overlay);free(wire);
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();

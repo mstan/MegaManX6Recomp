@@ -281,6 +281,14 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
                 pair.select_checkpoint(directory, enabled=True, option='intro_before_doors')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
 
+    def test_partner_x_armor_is_a_default_base_prototype_choice(self):
+        source=Path(__file__).resolve().parents[1]
+        catalog=tomllib.loads((source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text())
+        options=[o for o in catalog['option'] if o['id']=='partner_x_armor']
+        self.assertEqual(len(options),1)
+        self.assertEqual((options[0]['feature'],options[0]['type'],options[0]['default']),('prototype','choice','base'))
+        self.assertEqual([c['value'] for c in options[0]['choice']],['base','falcon','shadow','blade'])
+
     def test_native_fatal_is_an_explicit_default_off_lab_choice(self):
         source=Path(__file__).resolve().parents[1]
         catalog=tomllib.loads((source/'packaging/lab/coop-checkpoint-option.toml').read_text())

@@ -2761,6 +2761,28 @@ static void opposite_resource_identity_projection(void) {
     setup(&cpu);Mmx6CoopRoster invalid={0};
     CHECK(!private_roster_bind(&invalid));
     CHECK(private_actor.character==MMX6_COOP_CHARACTER_ZERO && private_actor.form==MMX6_COOP_FORM_ZERO);
+    for(unsigned form=0;form<=3;++form) {
+        setup(&cpu);partner_x_armor=form;
+        psx_mod_write_byte(PLAYER+2,1);psx_mod_write_byte(PLAYER+0xE7,5);
+        psx_mod_write_byte(PLAY+0x38,1);psx_mod_write_byte(PLAY+0x5E,5);
+        psx_mod_write_byte(PLAY+0x5F,7);psx_mod_write_byte(PLAY+0x69,255);
+        Mmx6CoopRoster selected;CHECK(fixed_roster(&selected) && selected.seat[1].form==form && private_roster_bind(&selected));
+        enter_zero();CHECK(psx_mod_read_byte(PLAY+0x38)==0 && psx_mod_read_byte(PLAY+0x5E)==form);
+        leave_zero();CHECK(psx_mod_read_byte(PLAY+0x38)==1 && psx_mod_read_byte(PLAY+0x5E)==5 && psx_mod_read_byte(PLAY+0x69)==255);
+        /* Availability changes cannot poll/switch the already-bound actor. */
+        psx_mod_write_byte(PLAY+0x5F,0);psx_mod_write_byte(PLAY+0x69,0);
+        enter_zero();CHECK(psx_mod_read_byte(PLAY+0x5E)==form);leave_zero();
+    }
+    setup(&cpu);partner_x_armor=MMX6_COOP_FORM_SHADOW;
+    psx_mod_write_byte(PLAYER+2,1);psx_mod_write_byte(PLAYER+0xE7,5);
+    psx_mod_write_byte(PLAY+0x38,1);psx_mod_write_byte(PLAY+0x5E,5);
+    psx_mod_write_byte(PLAY+0x5F,0x10);psx_mod_write_byte(PLAY+0x69,0xE0);
+    Mmx6CoopRoster fallback;CHECK(fixed_roster(&fallback) && fallback.seat[1].form==0 && private_roster_bind(&fallback));
+    psx_mod_write_byte(PLAY+0x5F,0x12);psx_mod_write_byte(PLAY+0x69,0xF0);
+    enter_zero();CHECK(psx_mod_read_byte(PLAY+0x5E)==0);leave_zero(); /* Earned during this stage, no live rebind. */
+    enrolled=0;CHECK(fixed_roster(&fallback) && fallback.seat[1].form==2 && private_roster_bind(&fallback));
+    enter_zero();CHECK(psx_mod_read_byte(PLAY+0x5E)==2);leave_zero(); /* Next original reinit admission. */
+    partner_x_armor=0;
 }
 int main(void){
     opposite_resource_identity_projection();CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);

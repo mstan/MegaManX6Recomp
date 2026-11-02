@@ -158,17 +158,34 @@ static void canonical_validation(void) {
         CHECK(mmx6_coop_roster_validate(&roster)==MMX6_COOP_ROSTER_NOT_RESOLVED);
     }
     {
-        Mmx6CoopRoster roster=resolved(5),falcon=resolved(1);
-        roster.seat[1]=falcon.seat[0]; /* Genuine native resources, wrong policy. */
+        Mmx6CoopRoster roster=resolved(5),ultimate=resolved(4);
+        roster.seat[1]=ultimate.seat[0]; /* Native resources, unsupported partner choice. */
         CHECK(mmx6_coop_roster_validate(&roster)==MMX6_COOP_ROSTER_COUNTERPART_MISMATCH);
         roster=resolved(0);roster.seat[1]=roster.seat[0];
         CHECK(mmx6_coop_roster_validate(&roster)==MMX6_COOP_ROSTER_COUNTERPART_MISMATCH);
     }
 }
 
+static void earned_partner_armors(void) {
+    for(unsigned choice=0;choice<=3;++choice)for(unsigned flags=0;flags<8;++flags)for(unsigned parts=0;parts<256;++parts) {
+        Mmx6CoopRosterNative n=native(5,flags),before=n;Mmx6CoopRoster r;
+        unsigned expected=((choice==1 && (flags&1)) || (choice==2 && (flags&2) && (parts&0xF0)==0xF0) ||
+            (choice==3 && (flags&4) && (parts&15)==15))?choice:0;
+        CHECK(mmx6_coop_roster_resolve_partner(&n,choice,(uint8_t)parts,&r)==MMX6_COOP_ROSTER_OK);
+        CHECK(!memcmp(&n,&before,sizeof n) && mmx6_coop_roster_validate(&r)==MMX6_COOP_ROSTER_OK);
+        actor_matches(&r.seat[0],5);actor_matches(&r.seat[1],expected);
+    }
+    for(unsigned form=0;form<5;++form)for(unsigned choice=0;choice<=3;++choice) {
+        Mmx6CoopRosterNative n=native(form,7);Mmx6CoopRoster r;
+        CHECK(mmx6_coop_roster_resolve_partner(&n,choice,255,&r)==MMX6_COOP_ROSTER_OK);
+        actor_matches(&r.seat[0],form);actor_matches(&r.seat[1],5);
+    }
+    Mmx6CoopRosterNative n=native(5,7);Mmx6CoopRoster r,empty={0};
+    CHECK(mmx6_coop_roster_resolve_partner(&n,4,255,&r)==MMX6_COOP_ROSTER_INVALID_FORM && !memcmp(&r,&empty,sizeof r));
+}
 int main(void) {
     unsigned reason;
-    native_resolution();invalid_native();canonical_validation();
+    native_resolution();invalid_native();canonical_validation();earned_partner_armors();
     CHECK(!strcmp(mmx6_coop_roster_reason(MMX6_COOP_ROSTER_BLACK_ZERO_UNSUPPORTED),
                   "black_zero_unsupported"));
     for (reason=0;reason<=MMX6_COOP_ROSTER_COUNTERPART_MISMATCH;++reason)
