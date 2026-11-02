@@ -51,6 +51,56 @@ static void rejected(CPUState *cpu){
     memcpy(before,ram,sizeof ram);CHECK(!intro_near_target(cpu,0x800EB14C));
     CHECK(!calls && !memcmp(before,ram,sizeof ram) && !state_track.count && !target_projection_call);
 }
+static const uint32_t sigma_child=0x80093C98u;
+static void sigma_setup(CPUState *cpu){
+    setup(cpu);private_draw=0;pause_owner=-1;
+    psx_mod_write_byte(PLAY+12,12);psx_mod_write_byte(PLAY+13,1);
+    psx_mod_write_byte(enemy+1,61);psx_mod_write_byte(enemy+0x5C,48);
+    psx_mod_write_byte(sigma_child,0x41);psx_mod_write_byte(sigma_child+1,0x1F);
+    psx_mod_write_half(sigma_child+10,416);psx_mod_write_half(sigma_child+14,128);
+    psx_mod_write_word(sigma_child+0x7C,enemy);
+    psx_mod_write_word(0x800F6768u,0x800EF48Cu);
+    psx_mod_write_half(PLAYER+14,128);put32(p2.body+12,96u<<16);
+    for(unsigned i=0;i<sizeof sigma_special_target_words/sizeof sigma_special_target_words[0];++i)
+        psx_mod_write_word(0x800EF4E0u+i*4,sigma_special_target_words[i]);
+    cpu->gpr[2]=PLAYER;cpu->gpr[17]=sigma_child;
+    cpu->gpr[4]=0;cpu->gpr[5]=416;cpu->gpr[6]=144;
+}
+static void sigma_rejected(CPUState *cpu){
+    CPUState original=*cpu;memcpy(before,ram,sizeof ram);
+    sigma_special_target(cpu,0x800EF510u);
+    CHECK(!memcmp(&original,cpu,sizeof original) && !memcmp(before,ram,sizeof ram));
+}
+static void sigma_tests(void){
+    CPUState cpu;sigma_setup(&cpu);CPUState original=cpu;memcpy(before,ram,sizeof ram);
+    sigma_special_target(&cpu,0x800EF510u);
+    CHECK(cpu.gpr[4]==32 && cpu.gpr[6]==400); /* Original angle inputs: Y128-96, X400-416. */
+    original.gpr[4]=32;original.gpr[6]=400;
+    CHECK(!memcmp(&original,&cpu,sizeof cpu) && !memcmp(before,ram,sizeof ram) && !calls);
+    sigma_setup(&cpu);put32(p2.body+8,688u<<16);put32(p2.body+12,128u<<16);
+    sigma_rejected(&cpu); /* Equal distance keeps P1. */
+    sigma_setup(&cpu);life.status[0]=MMX6_COOP_FALLEN;psx_mod_write_half(PLAYER+10,416);
+    sigma_special_target(&cpu,0x800EF510u);CHECK(cpu.gpr[4]==32 && cpu.gpr[6]==400);
+    const unsigned status[]={MMX6_COOP_ABSENT,MMX6_COOP_DYING,MMX6_COOP_FALLEN,MMX6_COOP_JOINING};
+    for(unsigned i=0;i<sizeof status/sizeof status[0];++i){sigma_setup(&cpu);life.status[1]=status[i];sigma_rejected(&cpu);}
+    int *guards[]={&inside,&zero_world,&zero_projected,&private_draw,&failed};
+    for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i){sigma_setup(&cpu);*guards[i]=1;sigma_rejected(&cpu);*guards[i]=0;}
+    sigma_setup(&cpu);scene_owner=1;sigma_rejected(&cpu);
+    sigma_setup(&cpu);scene_phase=1;sigma_rejected(&cpu);
+    sigma_setup(&cpu);pause_owner=0;sigma_rejected(&cpu);pause_owner=-1;
+    sigma_setup(&cpu);cpu.gpr[17]=sigma_child+1;sigma_rejected(&cpu);
+    sigma_setup(&cpu);psx_mod_write_byte(sigma_child+1,0x10);sigma_rejected(&cpu);
+    sigma_setup(&cpu);psx_mod_write_byte(sigma_child+6,1);sigma_rejected(&cpu);
+    sigma_setup(&cpu);psx_mod_write_word(sigma_child+0x7C,enemy+1);sigma_rejected(&cpu);
+    sigma_setup(&cpu);psx_mod_write_byte(enemy+1,62);sigma_rejected(&cpu);
+    sigma_setup(&cpu);psx_mod_write_byte(enemy+0x5C,0);sigma_rejected(&cpu);
+    sigma_setup(&cpu);psx_mod_write_byte(PLAY+12,13);sigma_rejected(&cpu);
+    sigma_setup(&cpu);cpu.gpr[2]=PLAYER+4;sigma_rejected(&cpu);
+    sigma_setup(&cpu);psx_mod_write_word(0x800F6768u,0x800EF490u);sigma_rejected(&cpu);
+    for(unsigned i=0;i<sizeof sigma_special_target_words/sizeof sigma_special_target_words[0];++i){
+        sigma_setup(&cpu);psx_mod_write_word(0x800EF4E0u+i*4,sigma_special_target_words[i]^1u);sigma_rejected(&cpu);
+    }
+}
 int main(void){
     CPUState cpu;setup(&cpu);native_leaf(&cpu);
     CHECK(psx_mod_read_byte(enemy+5)==1); /* Native negative control: P1 is272 away. */
@@ -78,5 +128,6 @@ int main(void){
     setup(&cpu);cpu.gpr[4]=enemy+1;rejected(&cpu);
     setup(&cpu);psx_mod_write_byte(enemy+1,2);rejected(&cpu);
     setup(&cpu);psx_mod_write_word(0x800FAB5C,0x800EB150);rejected(&cpu);
-    puts("intro target actual-plugin projection, native negative control and guards PASS");return 0;
+    sigma_tests();
+    puts("intro/Sigma special actual-plugin targeting, native negative controls and guards PASS");return 0;
 }

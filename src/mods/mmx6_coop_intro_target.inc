@@ -50,3 +50,45 @@ static int intro_near_target(CPUState *cpu,uint32_t address) {
     target_projection_call=0;
     return 1;
 }
+
+/* Original BIN15 (3a6fd0aa690e053909e5f5864d73450aee9449ec82ba81bdf057b0be7adaaed1)
+ * EF0B0 allocates a type1F child from the native 93C98/A0 pool and stores its
+ * parent at +7C. Its phase0 EF48C reads PLAYER.Y/X at EF504/508. At EF510 both
+ * loads have completed: A0 is child.Y-player.Y, A1 is child.X, and A2 is
+ * player.X. Supply only the selected target operands before the original
+ * angle call and its X-delta delay instruction. Facing EF2E8 is independent;
+ * native allocation, velocity, lifetime, damage and contact remain original. */
+static const uint32_t sigma_special_target_words[]={
+    0x3C028009u,0x9624000Eu,0x8625000Au,0x244270A0u,
+    0xAE230068u,0x2484FFF1u,0xA624000Eu,0x00042400u,
+    0x00042403u,0x8443000Eu,0x8446000Au,0x00832023u,
+    0x0C0196DDu,0x00C52823u
+};
+static void sigma_special_target(CPUState *cpu,uint32_t address) {
+    if(address!=0x800EF510u || !ready || !enrolled || failed || inside ||
+       zero_world || zero_projected || private_draw || scene_owner || scene_phase ||
+       pause_owner>=0 || psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       psx_mod_read_byte(PLAY+12)!=12 || psx_mod_read_byte(PLAY+13)!=1 ||
+       !intro_target_eligible(1) || cpu->gpr[2]!=PLAYER)return;
+    uint32_t child=cpu->gpr[17];
+    if(child<0x80093C98u || child>=0x80095098u || (child-0x80093C98u)%0xA0u ||
+       !(psx_mod_read_byte(child)&1u) || psx_mod_read_byte(child+1)!=0x1Fu ||
+       psx_mod_read_byte(child+6) || psx_mod_read_word(0x800F6768u)!=0x800EF48Cu)return;
+    uint32_t parent=psx_mod_read_word(child+0x7Cu);
+    if(parent<0x8008EF48u || parent>=0x80090C88u || (parent-0x8008EF48u)%0x9Cu ||
+       !(psx_mod_read_byte(parent)&1u) || psx_mod_read_byte(parent+1)!=61 ||
+       psx_mod_read_byte(parent+4)!=1 || !psx_mod_read_byte(parent+0x5Cu) ||
+       (psx_mod_read_byte(parent+0x5Cu)&0x80u))return;
+    for(unsigned i=0;i<sizeof sigma_special_target_words/sizeof sigma_special_target_words[0];++i)
+        if(psx_mod_read_word(0x800EF4E0u+i*4)!=sigma_special_target_words[i])return;
+    int x=(int16_t)psx_mod_read_half(child+10),y=(int16_t)psx_mod_read_half(child+14);
+    int gx=(int16_t)(le32(p2.body+8)>>16),gy=(int16_t)(le32(p2.body+12)>>16);
+    if(intro_target_eligible(0)) {
+        int px=(int16_t)psx_mod_read_half(PLAYER+10),py=(int16_t)psx_mod_read_half(PLAYER+14);
+        int64_t px_delta=px-x,py_delta=py-y,gx_delta=gx-x,gy_delta=gy-y;
+        if(px_delta*px_delta+py_delta*py_delta<=gx_delta*gx_delta+gy_delta*gy_delta)return;
+    }
+    cpu->gpr[4]=(uint32_t)(int32_t)(y-gy);
+    cpu->gpr[6]=(uint32_t)(int32_t)gx;
+    psx_mod_counter_add("mmx6.coop.sigma-special-guest-target",1);
+}
