@@ -169,7 +169,12 @@ static void mode9(CPUState *cpu) {
 }
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
 static void setup_agreed(CPUState *cpu,int online) {
+    /* Individual capsule tests select the actual Recycle option after this
+     * shared CP2 factory. Do not apply its fixture-specific choice here. */
+    const char *fatal=test_lab_fatal_option;
+    if(!strcmp(fatal,"capsule_owner_p1"))test_lab_fatal_option="off";
     test_lab_option="intro_cp2";setup_checkpoint(cpu,0,0,2);test_online=online;
+    test_lab_fatal_option=fatal;
     const uint8_t expected[32]=MMX6_HOST_LAB_QUALIFICATION_BYTES;
     memset(&test_lab_profile,0,sizeof test_lab_profile);
     strcpy(test_lab_profile.profile,MMX6_HOST_LAB_PROFILE);test_lab_profile.revision=MMX6_HOST_LAB_REVISION;
@@ -1072,6 +1077,68 @@ static void agreed_portal_prerequisite(CPUState *cpu) {
         !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof saved));
     test_lab_option="off";checkpoint_reset();
 }
+static void capsule_fatal_ready(CPUState *cpu,int online) {
+    clear_phase=clear_members=clear_started=join_phase=arrival_pair=scene_call=0;both_door_reset();
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    test_lab_earned_option=test_lab_contact_option="off";test_lab_fatal_option="capsule_owner_p1";
+    setup_portal_prerequisite(cpu,online,0);
+    CHECK(!failed && checkpoint_fatal_option==5 && !checkpoint_fatal_state);
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+    portal_test_native_ready();CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+    /* External actual-admission precondition only. No capsule routine,
+     * native death or survivor release is emulated by this unit fixture. */
+    scene_owner=1;scene_phase=0;psx_mod_write_word(diagnostic+0x74,0x80051924u);
+    /* Accepted F52 LOCAL row159: D0=255,D4=0,7A=1,PLAY10=0,PLAY1C=1. */
+    psx_mod_write_byte(PLAYER+5,20);psx_mod_write_byte(PLAYER+0xD0,255);psx_mod_write_byte(PLAYER+0x7A,1);
+    psx_mod_write_byte(PLAYER+0xD4,0);psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,1);
+    psx_mod_write_byte(0x800C1225u,1);psx_mod_write_byte(0x800C1226u,0);
+    CHECK(checkpoint_capsule_fatal_ready());
+}
+static void agreed_capsule_fatal(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        capsule_fatal_ready(cpu,online);
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state); /* Old held chord cannot fire. */
+        CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED);
+        memcpy(before_ram,test_ram,sizeof test_ram);before_ram[(PLAYER+0x5C)&0x1FFFFF]=0x80;
+        PlayerContext expected=p2;Mmx6CoopLifecycle expected_life=life;
+        uint8_t receipt[sizeof test_diagnostic];memcpy(receipt,test_diagnostic,sizeof receipt);receipt[0xC8]=21;
+        unsigned calls=guest_calls;CHECK(!checkpoint_lab_boundary(cpu,6));
+        CHECK(checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED && !memcmp(before_ram,test_ram,sizeof test_ram));
+        CHECK(!memcmp(&expected,&p2,sizeof p2) && !memcmp(&expected_life,&life,sizeof life));
+        CHECK(!memcmp(receipt,test_diagnostic,sizeof receipt) && calls==guest_calls);
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        psx_mod_write_byte(PLAYER+0x5C,7);
+        for(unsigned edge=0;edge<4;++edge)CHECK(!checkpoint_lab_boundary(cpu,edge&1?6:0));
+        CHECK(psx_mod_read_byte(PLAYER+0x5C)==7); /* Once, including later native HP changes. */
+    }
+    for(unsigned bad=0;bad<17;++bad) {
+        capsule_fatal_ready(cpu,1);CHECK(!checkpoint_lab_boundary(cpu,0));
+        if(bad==0)scene_owner=2;if(bad==1)scene_phase=1;
+        if(bad==2)psx_mod_write_byte(PLAYER+5,2);
+        if(bad==3){psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0x7A,0);
+            psx_mod_write_byte(PLAY+0x1C,0);psx_mod_write_byte(0x8008EAFCu,0);}
+        if(bad==4)psx_mod_write_word(diagnostic+0x74,0x8003D308u);
+        if(bad==5)psx_mod_write_word(0x800C1230u,0x800F2E2Cu);
+        if(bad==6)psx_mod_write_byte(0x800C1221u,25);
+        if(bad==7)psx_mod_write_byte(0x800C1222u,3);
+        if(bad==8)psx_mod_write_byte(0x800C1224u,2);
+        if(bad==9)psx_mod_write_byte(0x800C1225u,0);
+        if(bad==10)psx_mod_write_byte(0x800C1226u,1);
+        if(bad==11)life.status[1]=MMX6_COOP_FALLEN;
+        if(bad==12)test_lab_ready=0;
+        if(bad==13)psx_mod_write_byte(diagnostic+0xA8,CHECKPOINT_INITIALIZING);
+        if(bad==14)zero_projected=1;
+        if(bad==15)state_track.count=1;
+        if(bad==16)psx_mod_write_byte(PLAY+0x1D,1);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext expected=p2;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&expected,&p2,sizeof p2));
+        CHECK(!checkpoint_lab_boundary(cpu,6) && psx_mod_read_byte(PLAYER+0x5C)==32);
+    }
+    state_track.count=state_track.error=0;zero_projected=scene_owner=scene_phase=0;test_lab_ready=1;
+    test_lab_fatal_option="capsule_owner_p1";test_lab_option="intro_cp2";failed=0;checkpoint_reset();CHECK(failed);
+    test_lab_fatal_option="off";test_lab_option="off";failed=0;checkpoint_reset();
+}
 static void fallen_portal_native_fall(void) {
     /* External observations only, not an emulation of native physics/death.
      * The production prerequisite must observe these; it never writes them. */
@@ -1703,7 +1770,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
-    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);agreed_scene_fatal(&cpu);
+    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }

@@ -203,7 +203,8 @@ static void state_core(StateIO *io,HostState *s) {
     if((!checkpoint_earned_weapons_option && (s->earned_applied || s->earned_reason)) ||
        (s->earned_applied && (s->lab_state!=CHECKPOINT_LAB_CONSUMED || s->earned_reason)))io->ok=0;
     FIELD(fatal_state,1,CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL);
-    if(s->fatal_state>=CHECKPOINT_FATAL_SCENE_LOCKED && checkpoint_fatal_option<3)io->ok=0;
+    if(s->fatal_state>=CHECKPOINT_FATAL_SCENE_LOCKED &&
+       checkpoint_fatal_option!=3 && checkpoint_fatal_option!=4)io->ok=0;
     if(s->fatal_state && (!checkpoint_fatal_option || s->lab_state!=CHECKPOINT_LAB_CONSUMED))io->ok=0;
     state_bytes(io,s->giga_backup,sizeof s->giga_backup);
     if(private_actor.character==MMX6_COOP_CHARACTER_X)state_bytes(io,s->x_overlay,sizeof s->x_overlay);

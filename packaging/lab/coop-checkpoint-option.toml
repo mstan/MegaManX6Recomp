@@ -412,7 +412,7 @@ label = "All earned weapons (prerequisite only)"
 feature = "prototype"
 id = "lab_fatal"
 label = "Lab native fatal request"
-description = "After the agreed checkpoint completes and both heroes are idle, release the chord, then press Player 2 L3 + R3 once. Chosen-seat options request only native fatal HP. Scene options require intro_cp2 and invoke the original Zero script lock/release before requesting fatal HP at the actual outgoing-complete or incoming phase. Native death, beam, recovery, lives and retry remain untouched. Both peers agree before launch; ordinary recording qualification is refused."
+description = "After the agreed checkpoint completes, release the chord, then press Player 2 L3 + R3 once. Chosen-seat options require both heroes idle. Scene options require intro_cp2 and invoke the original Zero script lock/release. Capsule owner requires recycle_portal_cp2 and the actual original Recycle capsule admission with Player 1 owning its native locked action20. It requests only Player 1 fatal HP. Native death, beam, capsule grant/release, recovery, lives and retry remain untouched. Both peers agree before launch; ordinary recording qualification is refused."
 group = "Lab validation"
 type = "choice"
 default = "off"
@@ -436,3 +436,7 @@ label = "Zero scene owner fatal before original release (intro CP2 only)"
 [[option.choice]]
 value = "scene_during_arrival"
 label = "Zero scene owner fatal during original partner arrival (intro CP2 only)"
+
+[[option.choice]]
+value = "capsule_owner_p1"
+label = "Player 1 fatal during native Recycle capsule admission"

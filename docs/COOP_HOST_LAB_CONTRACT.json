@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; scene-owner fatal safe-boundary release ordering correction",
+  "status": "development-candidate-only; native capsule owner fatal prerequisite",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 64,
+  "revision": 67,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v81",
+    "title_compatibility": "mmx6-x-zero-delay-v84",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -912,5 +912,12 @@
     "regression": "Existing private-effects guest contract requires resident passenger state1 at original retry gate. Add release at input/boundary timing for both owner seats; retain original-held and both-dead negative checks.",
     "snapshot_schema": 22,
     "qualification": "Fresh same-image LOCAL/NET F4 before-release and F103 during-arrival death, finite native passenger recovery/controls/effects/cadence, unchanged lives/checkpoint, LOCAL current-build state, NET final CRC/cards/exits. Failed originalC132 retained; no previous candidate credit transfer."
+  },
+  "title_changes_v84": {
+    "scope": "LAB lab_fatal=capsule_owner_p1 requests only P1 HP80 on a fresh released/armed P2 L3+R3 edge during actual original Recycle capsule admission. Defaultoff remains unchanged. No script calls or scene/death/release/box/position/result writes.",
+    "authority": "Strict completed recycle_portal_cp2 receipt and existing agreed profile. Exact unique live original F2E24/type26/sub4 phase1/1/0, P1 sceneowner1/phase0/native source51924/state1/action20/positiveHP/native locks, living visible P2 and outer unprojected stable boundary. HP/earned extras refused.",
+    "state": "New immutable fatal choice value5; existing release/armed/consumed states, reset/hash/fixed resource identity and canonical wire retained. C8 pending5/armed13/consumed21; snapshot22 layout unchanged. Existing scene fatal choices3/4 remain separate.",
+    "snapshot_schema": 22,
+    "qualification": "Fresh same-image LOCAL and NET actual native owner DYING/FALLEN during capsule, living partner original release and safe terrain/controls, unchanged lives/checkpoint, current-build state and final CRC/cards/exits. HP80 admissibility is unverified until native measurement; no forced fatal workaround or inherited F52 credit."
   }
 }
