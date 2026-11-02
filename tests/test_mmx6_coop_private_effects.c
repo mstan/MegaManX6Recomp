@@ -2163,7 +2163,7 @@ static void native_hatch_missing_box_clearance(void) {
     for(unsigned inverse=0;inverse<2;++inverse)for(unsigned negative=0;negative<2;++negative)
     for(unsigned corpse=0;corpse<2;++corpse) {
         CPUState cpu;door_setup(&cpu,1,480,480);
-        if(inverse) {psx_mod_write_byte(PLAYER+2,1);p2.body[2]=0;}
+        if(inverse) {psx_mod_write_byte(PLAYER+2,1);psx_mod_write_byte(PLAYER+0x8E,0);p2.body[2]=0;}
         check_door_result(&cpu,1,0);
         CHECK(both_door_extents[0][0]<0 && both_door_extents[1][1]>0);
         psx_mod_write_byte(TEST_DOOR+5,3);
