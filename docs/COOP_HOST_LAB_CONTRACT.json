@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; original Sigma special guest targeting",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 76,
+  "revision": 77,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v93",
+    "title_compatibility": "mmx6-x-zero-delay-v94",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -629,7 +629,7 @@
       "settled_counterpart_y": 1242
     },
     "contract": "Original CP1 initialization and both original full-foot healthy idle arrivals first. Exactly once change current/previous body positions only. Require exact original code/resources/layout/full standing feet/48px air corridor and no nearby hostile/contact actors; preserve exact unused portal2 and its original draw-only child. At least two original updates and actual grounded native settling are required. No velocity, camera, scanner, actor, HP, lifecycle, checkpoint or outcome writes by placement.",
-    "incompatible_prerequisites": "Starting HP and earned-weapons remain off; retain original healthy32HP and the source-qualified standing VY[-0x80000,0] without changing velocity.",
+    "incompatible_prerequisites": "Starting HP remains off; retain original healthy32HP and source-qualified standing VY[-0x80000,0]. Existing defaultoff earned-weapons all may run only after authenticated refight setup and healthy original completion, as qualified by the unchanged factory guards.",
     "default_correctness_fix": "Default co-op guest admission of original member14 refight portal types2..9: original pure leaf EC430 keeps primary precedence; if guest alone qualifies, execute the original EC860 action once in guest context. Only actual native snap plus queued command20 and portal subphase1 establish owner; body action20 is earned by the next original update. Subsequent scene/progress/loader/boss controls remain native. No optional fix toggle.",
     "snapshot": "Existing pending phase/placed_world and scene owner context only; schema14 unchanged; previous accepted scenery publication fix retained.",
     "unqualified": "Source/C fixtures do not qualify native portal transport, destination support, boss intro/release or camera follow; same exact-image LOCAL/NET observations and root review remain required."
@@ -1011,5 +1011,11 @@
     "guard": "Exact original target-load/angle words and phase table; genuine12/1, native93C98/A0 childtype1F withactual+7C parent61 active/alive; own sharedworld only, eligibleguest; nearest2D livingtarget withP1tie.",
     "behavior": "Only completed A0Ydelta andA2targetX inputs change beforeoriginal65B74 andits delay-slotXdelta. Original allocation/velocity/contact/damage/lifetime, actorRAM and snapshots unchanged. No new mutable fields; profile76/title93/schema24.",
     "qualification": "UNVERIFIED until actual native special trajectory and guestcontact LOCALNET onone compiled candidate; source/unit tests are preparation."
+  },
+  "native_refight_earned_weapon_prerequisite": {
+    "scope": "F135 LAB prerequisite only: existing refight_portal_cp1/refight_distant_cp1 may select existing defaultoff lab_earned_weapons=all. Starting HP remains forbidden; no new option, authority or mutable state.",
+    "ordering": "Keep original refight code/assets/mapcopy, once position/history setup, two native updates and full healthy standing/readiness. Only checkpoint_complete then admits existing source-pinned original8003D718 for both bodies; keep existing safe boundary/profile/taint/full-health/form/SP guards.",
+    "preservation": "Original PLAY60 campaign clear mask restored after factory. No direct HP/ammo/selection/boss/phase/progress/result writes; existing earned latch/digest/snapshot24 reused.",
+    "qualification": "UNVERIFIED native prerequisite until exact-image original refight completion and owned X attack availability are measured. No portal CP3 retention or F135 wall/reaction claim from source/unit tests."
   }
 }

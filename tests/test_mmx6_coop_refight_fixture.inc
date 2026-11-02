@@ -107,9 +107,9 @@ static void agreed_refight_prerequisite(CPUState *cpu) {
     uint16_t empty=psx_mod_read_half(meta+air),solid=psx_mod_read_half(meta+floor);
     psx_mod_write_half(meta+air,solid);CHECK(!checkpoint_refight_ground(meta,desc));
     psx_mod_write_half(meta+air,empty);psx_mod_write_half(meta+floor,empty);CHECK(!checkpoint_refight_ground(meta,desc));
-    for(unsigned combo=0;combo<3;++combo) {
+    for(unsigned combo=0;combo<2;++combo) {
         setup_agreed(cpu,1);test_lab_option="refight_portal_cp1";
-        if(combo<2)test_lab_hp_option[combo]="1";else test_lab_earned_option="all";
+        test_lab_hp_option[combo]="1";
         checkpoint_reset();CHECK(failed);
         test_lab_hp_option[0]=test_lab_hp_option[1]="off";test_lab_earned_option="off";
     }
@@ -160,13 +160,68 @@ static void agreed_refight_distant_prerequisite(CPUState *cpu) {
     psx_mod_write_half(meta+floor,empty);CHECK(!checkpoint_refight_distant_ground(meta,desc));
     psx_mod_write_half(meta+floor,solid);psx_mod_write_half(meta+air,solid);
     CHECK(!checkpoint_refight_distant_ground(meta,desc));
-    for(unsigned combo=0;combo<3;++combo) {
+    for(unsigned combo=0;combo<2;++combo) {
         setup_agreed(cpu,1);test_lab_option="refight_distant_cp1";
-        if(combo<2)test_lab_hp_option[combo]="1";else test_lab_earned_option="all";
+        test_lab_hp_option[combo]="1";
         checkpoint_reset();CHECK(failed);
         test_lab_hp_option[0]=test_lab_hp_option[1]="off";test_lab_earned_option="off";
     }
     test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option);
+}
+/* Reuse the external refight inputs and the existing original3D718 model.
+ * This verifies admission/order, not native attacks or portal persistence. */
+static void refight_earned_ready(CPUState *cpu,int online,unsigned option) {
+    test_lab_earned_option="all";setup_refight_option(cpu,online,option);
+    CHECK(!failed && checkpoint_earned_weapons_option && !checkpoint_earned_weapons_applied);
+    equipment_probe=1;equipment_calls=0;cpu->gpr[29]=0x801FFF00u;
+    psx_mod_write_byte(PLAY+0x38,0);psx_mod_write_byte(PLAY+0x5E,1);
+    psx_mod_write_byte(PLAY+0x60,0x40);psx_mod_write_byte(PLAYER+0xE7,1);p2.body[0xE7]=5;
+    psx_mod_write_byte(PLAYER+0xC9,0);p2.body[0xC9]=0;
+    psx_mod_write_word(PLAY+0x74,0x00102030u);psx_mod_write_word(PLAY+0x78,0x00405060u);
+    psx_mod_write_byte(PLAYER+0x93,3);p2.body[0x93]=2;
+    for(unsigned i=0;i<9;++i) {
+        psx_mod_write_half(PLAYER+0xA8+i*2,(uint16_t)(100+i));
+        p2.body[0xA8+i*2]=(uint8_t)(200+i);p2.body[0xA9+i*2]=0;
+    }
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !equipment_calls);
+    CHECK(!psx_mod_read_byte(PLAYER+0xC9) && !p2.body[0xC9] && psx_mod_read_byte(PLAY+0x60)==0x40);
+    /* Factory cannot precede both the two-update wait and native settling. */
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !equipment_calls);
+    if(option==15)refight_external_standing();
+    else {
+        put32(p2.body+12,1242u<<16);put32(p2.body+0x1C,1242u<<16);
+        psx_mod_write_word(PLAY+0x90,12);
+    }
+}
+static void agreed_refight_earned_weapons(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(unsigned option=15;option<=16;++option) {
+        refight_earned_ready(cpu,online,option);
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && equipment_calls==2 &&
+            checkpoint_earned_weapons_applied && !checkpoint_earned_weapons_reason &&
+            psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE &&
+            psx_mod_read_byte(PLAY+0x60)==0x40 && psx_mod_read_byte(PLAYER+0xC9)==255 && p2.body[0xC9]==255);
+        CHECK(psx_mod_read_byte(PLAYER+0x5C)==32 && p2.body[0x5C]==32 &&
+            psx_mod_read_byte(PLAYER+0x5D)==32 && p2.body[0x5D]==32 &&
+            psx_mod_read_byte(PLAYER+0x5E)==32 && p2.body[0x5E]==32 &&
+            psx_mod_read_byte(PLAYER+0x93)==3 && p2.body[0x93]==2 &&
+            psx_mod_read_byte(PLAYER+0xE7)==1 && p2.body[0xE7]==5);
+        for(unsigned i=0;i<9;++i)CHECK(psx_mod_read_half(PLAYER+0xA8+i*2)==100+i &&
+            (p2.body[0xA8+i*2]|p2.body[0xA9+i*2]<<8)==200+i);
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX && !state_track.count && !state_track.error);
+        psx_mod_write_byte(PLAYER+0xC9,0);p2.body[0xC9]=0;checkpoint_complete(cpu);
+        CHECK(equipment_calls==2 && !psx_mod_read_byte(PLAYER+0xC9) && !p2.body[0xC9]);
+    }
+    for(unsigned option=15;option<=16;++option)for(unsigned bad=0;bad<5;++bad) {
+        refight_earned_ready(cpu,1,option);
+        if(bad==0)p2.body[0x5D]=31;
+        if(bad==1)scene_owner=1;
+        if(bad==2)cpu->gpr[29]|=1;
+        if(bad==3)test_lab_ready=0;
+        if(bad==4)psx_mod_write_byte(0x8003D718u,psx_mod_read_byte(0x8003D718u)^1u);
+        CHECK(!checkpoint_stage_boundary(cpu) && !equipment_calls && !checkpoint_earned_weapons_applied &&
+            psx_mod_read_byte(PLAY+0x60)==0x40 && !psx_mod_read_byte(PLAYER+0xC9) && !p2.body[0xC9]);
+    }
+    equipment_probe=0;test_lab_earned_option="off";setup_agreed(cpu,1);
 }
 static void setup_refight_hook(CPUState *cpu) {
     setup_refight_prerequisite(cpu,0);checkpoint_pending.phase=0;stage_call=1;scene_call=0;

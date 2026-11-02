@@ -266,8 +266,12 @@ static void checkpoint_reset(void) {
      * is airborne. Do not route this prerequisite through the separate
      * both-grounded HP/equipment completion contract. The Gate enemy setup
      * likewise retains original healthy bodies and disallows these extras. */
-    if((checkpoint_lab_option==12 || checkpoint_lab_option==13 || checkpoint_lab_option==14 || checkpoint_lab_option==15 || checkpoint_lab_option==16) &&
+    if((checkpoint_lab_option==12 || checkpoint_lab_option==13 || checkpoint_lab_option==14) &&
        (checkpoint_starting_hp[0] || checkpoint_starting_hp[1] || checkpoint_earned_weapons_option))failed=1;
+    /* Refight placement still requires original healthy arrivals. The existing
+     * earned factory runs only after source/standing completion, below. */
+    if((checkpoint_lab_option==15 || checkpoint_lab_option==16) &&
+       (checkpoint_starting_hp[0] || checkpoint_starting_hp[1]))failed=1;
 #endif
     if(diagnostic) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
@@ -716,7 +720,7 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
             if(checkpoint_pending.authority==CHECKPOINT_AGREED &&
                (checkpoint_lab_option==15 || checkpoint_lab_option==16)) {
                 uint32_t meta,desc;
-                if(checkpoint_starting_hp[0] || checkpoint_starting_hp[1] || checkpoint_earned_weapons_option)
+                if(checkpoint_starting_hp[0] || checkpoint_starting_hp[1])
                     checkpoint_cancel(CHECKPOINT_FORBIDDEN);
                 /* The first mode10 entry still has pristine DAT104 and an
                  * uninitialized native player. Let original world/body and
