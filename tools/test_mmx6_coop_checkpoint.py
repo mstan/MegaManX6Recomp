@@ -58,7 +58,7 @@ class FrozenInventoryTests(unittest.TestCase):
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
         self.assertEqual(record['revision'],73)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v90')
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v92')
 
     def test_recycle_lab_destination_is_existing_original_campaign_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)

@@ -232,6 +232,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"scene_before_release"))checkpoint_fatal_option=3;
         else if(!strcmp(option,"scene_during_arrival"))checkpoint_fatal_option=4;
         else if(!strcmp(option,"capsule_owner_p1"))checkpoint_fatal_option=5;
+        else if(!strcmp(option,"boss_admission_p1"))checkpoint_fatal_option=6;
         else if(strcmp(option,"off"))failed=1;
     }
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_hatch_stagger",option,sizeof option)) {
@@ -243,6 +244,7 @@ static void checkpoint_reset(void) {
     if(checkpoint_fatal_option && !checkpoint_lab_option)failed=1;
     if((checkpoint_fatal_option==3 || checkpoint_fatal_option==4) && checkpoint_lab_option!=1)failed=1;
     if(checkpoint_fatal_option==5 && checkpoint_lab_option!=7)failed=1;
+    if(checkpoint_fatal_option==6 && checkpoint_lab_option!=9)failed=1;
     if(checkpoint_earned_weapons_option && !checkpoint_lab_option)failed=1;
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {
         if(!strcmp(option,"on"))checkpoint_contact_protection_option=1;
@@ -851,6 +853,28 @@ static int checkpoint_capsule_fatal_ready(void) {
     }
     return capsules==1;
 }
+/* F41 prerequisite: the original route-boss HP0 admission, before combat.
+ * Original BIN43 800FA0B0/C0 selects NPC53 CLUT7948. The other living hero
+ * may already be hidden by the original paired scene; do not require it idle.
+ * Only request native fatal HP80. Native death/retry and the next introduction
+ * remain outcomes, never fixture writes or calls into the boss controller. */
+static int checkpoint_boss_admission_fatal_ready(void) {
+    if(checkpoint_lab_option!=9 || !checkpoint_lab_completed() || !ready || !enrolled || failed ||
+       inside || stage_call || player_call || ride_call || view_call || private_draw || zero_world ||
+       zero_projected || scene_call || state_track.count || state_track.error || pause_owner>=0 ||
+       clear_phase || life.wipe || arrival_pair || join_phase || both_door_actor ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) || scene_owner!=1 || scene_phase>3 ||
+       life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
+       !psx_mod_read_byte(PLAYER) || psx_mod_read_byte(PLAYER+2)!=0 || psx_mod_read_byte(PLAYER+4)!=1 ||
+       psx_mod_read_byte(PLAYER+5)!=20 || !psx_mod_read_byte(PLAYER+0x5C) || psx_mod_read_byte(PLAYER+0x5C)>=128 ||
+       !p2.body[0] || (p2.body[4]!=1 && p2.body[4]!=3) || !p2.body[0x5C] || p2.body[0x5C]>=128 ||
+       psx_mod_read_word(0x800FA0B0u)!=0x24027948u || psx_mod_read_word(0x800FA0C0u)!=0xA6420042u)return 0;
+    uint32_t boss=psx_mod_read_word(PLAY+0x20);
+    if(boss<0x8008EF48u || boss>=0x8008EF48u+48u*0x9Cu || (boss-0x8008EF48u)%0x9Cu)return 0;
+    return (psx_mod_read_byte(boss)&1u) && psx_mod_read_byte(boss+1)==53 &&
+        !psx_mod_read_byte(boss+2) && psx_mod_read_byte(boss+4)==1 && psx_mod_read_byte(boss+5)==2 &&
+        !psx_mod_read_byte(boss+0x5C) && psx_mod_read_half(boss+0x42)==0x7948u;
+}
 /* Fixed F4/F103 reachability only. These are the same original lock/release
  * calls as offline commands5/6, selected and hashed before boot. The existing
  * scene hooks own all phase/beam state; only native fatal HP80 is requested.
@@ -928,7 +952,8 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
         else if(raw!=6)checkpoint_fatal_state=raw?CHECKPOINT_FATAL_RELEASE:CHECKPOINT_FATAL_ARMED;
         else if(checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED) {
             checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE; /* Unsafe edges never fire later while held. */
-            if(checkpoint_fatal_option==5?checkpoint_capsule_fatal_ready():
+            if(checkpoint_fatal_option==6?checkpoint_boss_admission_fatal_ready():
+               checkpoint_fatal_option==5?checkpoint_capsule_fatal_ready():
                (checkpoint_safe_boundary() && !clear_phase && !join_phase && !arrival_pair &&
                 checkpoint_fatal_idle(0) && checkpoint_fatal_idle(1))) {
                 psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
@@ -936,7 +961,7 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
                     checkpoint_scene_call(cpu,0x8003D308u);
                     checkpoint_fatal_state=CHECKPOINT_FATAL_SCENE_LOCKED;
                 } else {
-                    if(checkpoint_fatal_option==1 || checkpoint_fatal_option==5)psx_mod_write_byte(PLAYER+0x5C,0x80);
+                    if(checkpoint_fatal_option==1 || checkpoint_fatal_option==5 || checkpoint_fatal_option==6)psx_mod_write_byte(PLAYER+0x5C,0x80);
                     else p2.body[0x5C]=0x80;
                     checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
                 }

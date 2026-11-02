@@ -175,7 +175,7 @@ static void setup_agreed(CPUState *cpu,int online) {
     /* Individual tests select their actual Recycle/first-hatch options after
      * this shared CP2 factory. Do not apply fixture-specific choices here. */
     const char *fatal=test_lab_fatal_option;
-    if(!strcmp(fatal,"capsule_owner_p1"))test_lab_fatal_option="off";
+    if(!strcmp(fatal,"capsule_owner_p1") || !strcmp(fatal,"boss_admission_p1"))test_lab_fatal_option="off";
     const char *stagger=test_lab_hatch_stagger_option;test_lab_hatch_stagger_option="off";
     test_lab_option="intro_cp2";setup_checkpoint(cpu,0,0,2);test_online=online;
     test_lab_fatal_option=fatal;test_lab_hatch_stagger_option=stagger;
@@ -1173,6 +1173,58 @@ static void agreed_capsule_fatal(CPUState *cpu) {
     test_lab_fatal_option="capsule_owner_p1";test_lab_option="intro_cp2";failed=0;checkpoint_reset();CHECK(failed);
     test_lab_fatal_option="off";test_lab_option="off";failed=0;checkpoint_reset();
 }
+static void boss_admission_fatal_ready(CPUState *cpu,int online,unsigned phase) {
+    clear_phase=clear_members=clear_started=join_phase=arrival_pair=scene_call=0;both_door_reset();
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    test_lab_earned_option=test_lab_contact_option="off";test_lab_fatal_option="boss_admission_p1";
+    setup_agreed(cpu,online);test_lab_option="alternate_boss_cp1";checkpoint_reset();
+    CHECK(!failed && checkpoint_fatal_option==6 && checkpoint_lab_boundary(cpu,6));
+    mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+    /* Actual admission observations supplied externally; no emulated death. */
+    scene_owner=1;scene_phase=phase;life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAYER,1);psx_mod_write_byte(PLAYER+2,0);psx_mod_write_byte(PLAYER+4,1);
+    psx_mod_write_byte(PLAYER+5,20);psx_mod_write_byte(PLAYER+0x5C,32);
+    p2.body[0]=1;p2.body[4]=phase?3:1;p2.body[0x5C]=32;
+    psx_mod_write_word(0x800FA0B0u,0x24027948u);psx_mod_write_word(0x800FA0C0u,0xA6420042u);
+    psx_mod_write_word(PLAY+0x20,0x8008EF48u);
+    psx_mod_write_byte(0x8008EF48u,0x41);psx_mod_write_byte(0x8008EF49u,53);
+    psx_mod_write_byte(0x8008EF4Au,0);psx_mod_write_byte(0x8008EF4Cu,1);psx_mod_write_byte(0x8008EF4Du,2);
+    psx_mod_write_byte(0x8008EF48u+0x5C,0);psx_mod_write_byte(0x8008EF48u+0x42,0x48);psx_mod_write_byte(0x8008EF48u+0x43,0x79);
+    CHECK(checkpoint_boss_admission_fatal_ready());
+}
+static void agreed_boss_admission_fatal(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(unsigned phase=0;phase<=3;phase+=3) {
+        boss_admission_fatal_ready(cpu,online,phase);
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED);
+        memcpy(before_ram,test_ram,sizeof test_ram);before_ram[(PLAYER+0x5C)&0x1FFFFF]=0x80;
+        PlayerContext partner=p2;Mmx6CoopLifecycle expected_life=life;unsigned calls=guest_calls;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2));
+        CHECK(!memcmp(&expected_life,&life,sizeof life) && guest_calls==calls);
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        psx_mod_write_byte(PLAYER+0x5C,7);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+        CHECK(psx_mod_read_byte(PLAYER+0x5C)==7);
+    }
+    for(unsigned bad=0;bad<9;++bad) {
+        boss_admission_fatal_ready(cpu,1,3);CHECK(!checkpoint_lab_boundary(cpu,0));
+        if(bad==0)scene_owner=2;if(bad==1)scene_phase=4;
+        if(bad==2)psx_mod_write_byte(PLAYER+5,2);
+        if(bad==3)psx_mod_write_byte(0x8008EF48u+0x5C,48);
+        if(bad==4)psx_mod_write_byte(0x8008EF49u,55);
+        if(bad==5)psx_mod_write_byte(0x8008EF48u+0x42,0x49);
+        if(bad==6)psx_mod_write_word(0x800FA0B0u,0);
+        if(bad==7)life.status[1]=MMX6_COOP_FALLEN;
+        if(bad==8)psx_mod_write_word(PLAY+0x20,0x8008EF49u);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2));
+        CHECK(!checkpoint_lab_boundary(cpu,6) && psx_mod_read_byte(PLAYER+0x5C)==32);
+    }
+    test_lab_fatal_option="off";test_lab_option="off";scene_owner=scene_phase=0;checkpoint_reset();
+}
 static void fallen_portal_native_fall(void) {
     /* External observations only, not an emulation of native physics/death.
      * The production prerequisite must observe these; it never writes them. */
@@ -1885,7 +1937,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
-    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_hatch_stagger(&cpu);
+    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }
