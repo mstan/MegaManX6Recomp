@@ -212,6 +212,7 @@ static void digest_and_readiness(void){
     PERTURB(checkpoint_lab_option);PERTURB(checkpoint_lab_state);PERTURB(checkpoint_lab_previous);
     PERTURB(checkpoint_contact_protection_option);PERTURB(checkpoint_starting_hp[0]);PERTURB(checkpoint_starting_hp[1]);PERTURB(checkpoint_starting_hp_applied);
     PERTURB(checkpoint_fatal_option);PERTURB(checkpoint_fatal_state);
+    PERTURB(checkpoint_hatch_stagger_option);PERTURB(checkpoint_hatch_stagger_state);
     PERTURB(checkpoint_pending.authority);
     PERTURB(checkpoint_pending.placed_world);
     PERTURB(both_doors);
@@ -465,6 +466,25 @@ static void native_fatal_snapshot(void) {
     }
     checkpoint_fatal_option=0;state_commit(&prior);checkpoint_lab_option=0;
 }
+static void hatch_stagger_snapshot(void) {
+    HostState prior;state_capture(&prior);
+    checkpoint_lab_option=4;checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
+    checkpoint_hatch_stagger_option=checkpoint_hatch_stagger_state=1;
+    uint32_t n=snapshot_bytes(),hash=state_digest();uint8_t *wire=malloc(n);CHECK(wire && snapshot_write(wire,n));
+    checkpoint_hatch_stagger_option=0;CHECK(!snapshot_validate(wire,n));checkpoint_hatch_stagger_option=1;
+    checkpoint_hatch_stagger_state=0;CHECK(state_digest()!=hash && snapshot_validate(wire,n));
+    snapshot_read(wire,n);CHECK(checkpoint_hatch_stagger_state==1 && state_digest()==hash);
+    for(unsigned bad=0;bad<3;++bad) {
+        HostState invalid;state_capture(&invalid);
+        if(bad==0)invalid.hatch_stagger_state=2;
+        if(bad==1)invalid.lab_state=CHECKPOINT_LAB_ARMED;
+        if(bad==2)checkpoint_hatch_stagger_option=0;
+        StateIO io={STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&io,&invalid);CHECK(!io.ok);
+        checkpoint_hatch_stagger_option=1;
+    }
+    checkpoint_lab_option=1;CHECK(!snapshot_validate(wire,n));
+    checkpoint_hatch_stagger_option=0;state_commit(&prior);checkpoint_lab_option=0;free(wire);
+}
 static void starting_hp_snapshot(void) {
     HostState prior;state_capture(&prior);
     checkpoint_lab_option=8;checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;checkpoint_lab_previous=0;
@@ -675,7 +695,7 @@ static void private_x_overlay_snapshot(void) {
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
-    private_subtank_policy();native_fatal_snapshot();
+    private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     private_x_overlay_snapshot();

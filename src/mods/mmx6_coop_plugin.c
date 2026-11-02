@@ -84,6 +84,7 @@ static uint8_t saved_play[0xE0], saved_camera[0x100];
  * found tanks and the Weapon Tank retain their original shared ownership. */
 static unsigned separate_subtanks,subtank_seeded,subtank_found;
 static unsigned checkpoint_fatal_option,checkpoint_fatal_state;
+static unsigned checkpoint_hatch_stagger_option,checkpoint_hatch_stagger_state;
 static uint8_t zero_subtanks[2];
 static uint8_t *zero_compressed;
 static size_t compressed_size;

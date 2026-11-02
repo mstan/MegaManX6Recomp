@@ -194,6 +194,7 @@ static void checkpoint_reset(void) {
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
     checkpoint_contact_protection_option=0;
     checkpoint_fatal_option=checkpoint_fatal_state=0;
+    checkpoint_hatch_stagger_option=checkpoint_hatch_stagger_state=0;
     checkpoint_starting_hp[0]=checkpoint_starting_hp[1]=checkpoint_starting_hp_applied=0;
     checkpoint_earned_weapons_option=checkpoint_earned_weapons_applied=checkpoint_earned_weapons_reason=0;
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
@@ -232,6 +233,12 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"scene_during_arrival"))checkpoint_fatal_option=4;
         else if(strcmp(option,"off"))failed=1;
     }
+    if(psx_mod_option_value("mmx6.local-coop","prototype","lab_hatch_stagger",option,sizeof option)) {
+        if(!strcmp(option,"on"))checkpoint_hatch_stagger_option=1;
+        else if(strcmp(option,"off"))failed=1;
+    }
+    if(checkpoint_hatch_stagger_option && (checkpoint_lab_option!=4 || !both_doors ||
+       checkpoint_fatal_option || checkpoint_earned_weapons_option))failed=1;
     if(checkpoint_fatal_option && !checkpoint_lab_option)failed=1;
     if(checkpoint_fatal_option>=3 && checkpoint_lab_option!=1)failed=1;
     if(checkpoint_earned_weapons_option && !checkpoint_lab_option)failed=1;
@@ -248,6 +255,7 @@ static void checkpoint_reset(void) {
     /* A selected damage prerequisite cannot acquire authority without the
      * existing immutable agreed checkpoint/chord/profile pipeline. */
     if((checkpoint_starting_hp[0] || checkpoint_starting_hp[1]) && !checkpoint_lab_option)failed=1;
+    if(checkpoint_hatch_stagger_option && (checkpoint_starting_hp[0] || checkpoint_starting_hp[1]))failed=1;
     /* Falling readiness deliberately precedes death, while the selected hero
      * is airborne. Do not route this prerequisite through the separate
      * both-grounded HP/equipment completion contract. The Gate enemy setup
@@ -257,7 +265,7 @@ static void checkpoint_reset(void) {
 #endif
     if(diagnostic) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
-        psx_mod_write_byte(diagnostic+0xC8,(uint8_t)checkpoint_fatal_option);
+        psx_mod_write_byte(diagnostic+0xC8,(uint8_t)(checkpoint_fatal_option|(checkpoint_hatch_stagger_option<<6)));
 #endif
         if(psx_mod_read_byte(diagnostic+0x50)==8)psx_mod_write_byte(diagnostic+0x50,0);
         for(unsigned i=0xA0;i<0xC4;++i)psx_mod_write_byte(diagnostic+i,0);
@@ -265,14 +273,12 @@ static void checkpoint_reset(void) {
         psx_mod_write_word(diagnostic+0xA0,CHECKPOINT_CAPABILITY);
     }
 }
-static int checkpoint_lab_completed(void) {
+static int checkpoint_lab_receipt_complete(void) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     if(checkpoint_pending.phase || checkpoint_lab_state!=CHECKPOINT_LAB_CONSUMED ||
        !diagnostic || !checkpoint_lab_authorized())return 0;
     const Mmx6Checkpoint *entry=&checkpoint_inventory[checkpoint_lab_index()];
-    return psx_mod_read_byte(PLAY+12)==entry->stage && psx_mod_read_byte(PLAY+13)==entry->section &&
-        psx_mod_read_byte(PLAY+0x1D)==entry->checkpoint &&
-        psx_mod_read_word(diagnostic+0xA0)==CHECKPOINT_CAPABILITY && psx_mod_read_word(diagnostic+0xA4)==1 &&
+    return psx_mod_read_word(diagnostic+0xA0)==CHECKPOINT_CAPABILITY && psx_mod_read_word(diagnostic+0xA4)==1 &&
         psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && !psx_mod_read_byte(diagnostic+0xA9) &&
         psx_mod_read_byte(diagnostic+0xAA)==entry->stage && psx_mod_read_byte(diagnostic+0xAB)==entry->section &&
         psx_mod_read_byte(diagnostic+0xAC)==entry->checkpoint &&
@@ -280,6 +286,16 @@ static int checkpoint_lab_completed(void) {
         psx_mod_read_word(diagnostic+0xB8)==entry->record && psx_mod_read_byte(diagnostic+0xBC)==1 &&
         psx_mod_read_byte(diagnostic+0xBD)==CHECKPOINT_AGREED &&
         psx_mod_read_byte(diagnostic+0xBE)==CHECKPOINT_LAB_CONSUMED;
+#else
+    return 0;
+#endif
+}
+static int checkpoint_lab_completed(void) {
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+    if(!checkpoint_lab_receipt_complete())return 0;
+    const Mmx6Checkpoint *entry=&checkpoint_inventory[checkpoint_lab_index()];
+    return psx_mod_read_byte(PLAY+12)==entry->stage && psx_mod_read_byte(PLAY+13)==entry->section &&
+        psx_mod_read_byte(PLAY+0x1D)==entry->checkpoint;
 #else
     return 0;
 #endif
@@ -813,6 +829,7 @@ static void checkpoint_scene_call(CPUState *cpu,uint32_t address) {
 static void checkpoint_scene_fatal_boundary(CPUState *cpu) {
     if(!checkpoint_lab_completed() || !ready || !enrolled || failed || inside || stage_call ||
        player_call || ride_call || view_call || private_draw || zero_world || zero_projected ||
+       state_track.count || state_track.error ||
        pause_owner>=0 || clear_phase || life.wipe || psx_mod_read_byte(PLAY)!=10 ||
        psx_mod_read_byte(PLAY+1) || scene_owner!=2) {
         checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;return;
@@ -842,9 +859,36 @@ static void checkpoint_scene_fatal_boundary(CPUState *cpu) {
         p2.body[0x5C]=0x80;checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
     }
 }
+/* Matching F145 prerequisite only, equivalent to offline atomic command4.
+ * Native CP2 can already be earned during phase3. Authenticate the immutable
+ * completed CP1 receipt, then this exact live first hatch/current CP1-or2. */
+static void checkpoint_hatch_stagger_boundary(void) {
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+    if(!checkpoint_hatch_stagger_option || checkpoint_hatch_stagger_state || checkpoint_lab_option!=4 ||
+       !checkpoint_lab_receipt_complete() || !ready || !enrolled || failed || inside || stage_call ||
+       player_call || ride_call || view_call || private_draw || zero_world || zero_projected ||
+       pause_owner>=0 || clear_phase || life.wipe || !both_door_traversal_active() || both_door_members!=3 ||
+       both_door_origin!=0x800FA2A4u || psx_mod_read_byte(both_door_actor+4)!=1 ||
+       psx_mod_read_byte(both_door_actor+5)!=3 || psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13) ||
+       (psx_mod_read_byte(PLAY+0x1D)!=1 && psx_mod_read_byte(PLAY+0x1D)!=2) ||
+       psx_mod_read_byte(diagnostic+0xAD)!=2 || psx_mod_read_byte(diagnostic+0xAE)!=1 ||
+       life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
+       !psx_mod_read_byte(PLAYER) || !p2.body[0] || psx_mod_read_byte(PLAYER+4)!=1 || p2.body[4]!=1 ||
+       !psx_mod_read_byte(PLAYER+0x5C) || psx_mod_read_byte(PLAYER+0x5C)>=128 || !p2.body[0x5C] || p2.body[0x5C]>=128 ||
+       psx_mod_read_word(PLAYER+0x68) || le32(p2.body+0x68) ||
+       (int32_t)psx_mod_read_word(PLAYER+8)<(5768<<16))return;
+    psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
+    put32(p2.body+8,5744u<<16);put32(p2.body+12,394u<<16);
+    put32(p2.body+0x18,5744u<<16);put32(p2.body+0x1C,394u<<16);
+    checkpoint_hatch_stagger_state=1;
+    psx_mod_write_byte(diagnostic+0xC8,(uint8_t)(checkpoint_fatal_option|(checkpoint_fatal_state<<3)|0xC0u));
+#endif
+}
 static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     if(checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED) {
+        checkpoint_hatch_stagger_boundary();
         if(!checkpoint_fatal_option || !diagnostic || checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED)return 0;
         if(checkpoint_fatal_option>=3 && checkpoint_fatal_state>=CHECKPOINT_FATAL_SCENE_LOCKED) {
             checkpoint_scene_fatal_boundary(cpu);
@@ -865,9 +909,10 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
                 }
             }
         }
-        /* C8: fixed prerequisite in bits0..2, sequence state in bits3..5.
+        /* C8: fatal choice bits0..2, fatal state bits3..5, stagger selected/
+         * consumed bits6/7.
          * Existing checkpoint receipt and original chord latch stay untouched. */
-        psx_mod_write_byte(diagnostic+0xC8,(uint8_t)(checkpoint_fatal_option|(checkpoint_fatal_state<<3)));
+        psx_mod_write_byte(diagnostic+0xC8,(uint8_t)(checkpoint_fatal_option|(checkpoint_fatal_state<<3)|(checkpoint_hatch_stagger_option<<6)|(checkpoint_hatch_stagger_state<<7)));
         return 0; /* Original player/world update performs fatal handling. */
     }
     if(!checkpoint_lab_option)return 0;

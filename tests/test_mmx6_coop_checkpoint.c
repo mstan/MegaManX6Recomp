@@ -115,16 +115,19 @@ static const char *test_lab_contact_option="off";
 static const char *test_lab_hp_option[2]={"off","off"};
 static const char *test_lab_earned_option="off";
 static const char *test_lab_fatal_option="off";
+static const char *test_lab_hatch_stagger_option="off";
 static unsigned test_lab_ready=1,test_lab_failed,test_lab_selected=1;
 static PSXHostSelection test_lab_profile;
 int psx_mod_option_value(const char *package,const char *feature,const char *option,char *out,uint32_t size) {
     CHECK(!strcmp(package,"mmx6.local-coop") && !strcmp(feature,"prototype"));
     CHECK(!strcmp(option,"lab_checkpoint") || !strcmp(option,"lab_contact_protection") || !strcmp(option,"lab_earned_weapons") ||
-        !strcmp(option,"lab_starting_hp_p1") || !strcmp(option,"lab_starting_hp_p2") || !strcmp(option,"lab_fatal"));
+        !strcmp(option,"lab_starting_hp_p1") || !strcmp(option,"lab_starting_hp_p2") || !strcmp(option,"lab_fatal") ||
+        !strcmp(option,"lab_hatch_stagger"));
     const char *value=!strcmp(option,"lab_checkpoint")?test_lab_option:
         !strcmp(option,"lab_contact_protection")?test_lab_contact_option:
         !strcmp(option,"lab_earned_weapons")?test_lab_earned_option:
         !strcmp(option,"lab_fatal")?test_lab_fatal_option:
+        !strcmp(option,"lab_hatch_stagger")?test_lab_hatch_stagger_option:
         test_lab_hp_option[!strcmp(option,"lab_starting_hp_p2")];
     CHECK(size>strlen(value));strcpy(out,value);return 1;
 }
@@ -169,7 +172,11 @@ static void mode9(CPUState *cpu) {
 }
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
 static void setup_agreed(CPUState *cpu,int online) {
+    /* This common factory starts at CP2 before individual tests select their
+     * actual fixture. Do not apply the first-hatch-only option to that factory. */
+    const char *stagger=test_lab_hatch_stagger_option;test_lab_hatch_stagger_option="off";
     test_lab_option="intro_cp2";setup_checkpoint(cpu,0,0,2);test_online=online;
+    test_lab_hatch_stagger_option=stagger;
     const uint8_t expected[32]=MMX6_HOST_LAB_QUALIFICATION_BYTES;
     memset(&test_lab_profile,0,sizeof test_lab_profile);
     strcpy(test_lab_profile.profile,MMX6_HOST_LAB_PROFILE);test_lab_profile.revision=MMX6_HOST_LAB_REVISION;
@@ -1368,6 +1375,66 @@ static void setup_position_prerequisite(CPUState *cpu,int online,int explosion) 
 static void setup_before_doors(CPUState *cpu,int online) {
     setup_position_prerequisite(cpu,online,0);
 }
+static void hatch_stagger_ready(CPUState *cpu,int online) {
+    test_lab_hatch_stagger_option="on";both_doors=1;
+    setup_before_doors(cpu,online);CHECK(checkpoint_hatch_stagger_option && !failed);
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+    psx_mod_write_word(PLAY+0x90,102);psx_mod_write_byte(0x800C1224u,1);
+    psx_mod_write_word(0x800C1288u,0x80078DC8u);
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());before_doors_probe=0;
+    /* External native traversal precondition, not an emulated hatch or a
+     * gameplay claim. The actual plugin produced the completed CP1 receipt. */
+    both_door_actor=0x800C1220u;both_door_origin=0x800FA2A4u;both_door_members=3;
+    scene_owner=1;scene_phase=0;psx_mod_write_byte(both_door_actor+5,3);
+    psx_mod_write_word(PLAYER+8,5768u<<16);psx_mod_write_word(PLAYER+0x68,0);put32(p2.body+0x68,0);
+    psx_mod_write_byte(PLAYER+0x5C,32);p2.body[0x5C]=32;
+    psx_mod_write_byte(PLAY+0x1D,2);
+    CHECK(checkpoint_lab_receipt_complete() && !checkpoint_lab_completed());
+    CHECK(psx_mod_read_byte(diagnostic+0xC8)==64 && !checkpoint_hatch_stagger_state);
+}
+static void agreed_hatch_stagger(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        hatch_stagger_ready(cpu,online);memcpy(before_ram,test_ram,sizeof test_ram);
+        PlayerContext expected=p2;put32(expected.body+8,5744u<<16);put32(expected.body+12,394u<<16);
+        put32(expected.body+0x18,5744u<<16);put32(expected.body+0x1C,394u<<16);
+        uint8_t receipt[sizeof test_diagnostic];memcpy(receipt,test_diagnostic,sizeof receipt);receipt[0xC8]=192;
+        Mmx6CoopLifecycle expected_life=life;unsigned calls=guest_calls;
+        CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_hatch_stagger_state==1);
+        CHECK(!memcmp(&expected,&p2,sizeof p2) && !memcmp(before_ram,test_ram,sizeof test_ram));
+        CHECK(!memcmp(receipt,test_diagnostic,sizeof receipt) && !memcmp(&life,&expected_life,sizeof life));
+        CHECK(guest_calls==calls && checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        put32(p2.body+8,5750u<<16);checkpoint_hatch_stagger_boundary();
+        CHECK(le32(p2.body+8)==5750u<<16 && psx_mod_read_byte(diagnostic+0xC8)==192); /* Exactly once. */
+    }
+    for(unsigned bad=0;bad<16;++bad) {
+        hatch_stagger_ready(cpu,1);
+        if(bad==0)psx_mod_write_byte(both_door_actor+5,2);
+        if(bad==1)put32(p2.body+0x68,0x80073D54u);
+        if(bad==2)psx_mod_write_word(PLAYER+0x68,0x80073D50u);
+        if(bad==3)p2.body[0x5C]=0;
+        if(bad==4)life.status[0]=MMX6_COOP_FALLEN;
+        if(bad==5)psx_mod_write_word(PLAYER+8,(5768u<<16)-1);
+        if(bad==6)both_door_origin=0x800FA2ACu;
+        if(bad==7)test_lab_ready=0;
+        if(bad==8)psx_mod_write_byte(diagnostic+0xAD,1);
+        if(bad==9)zero_projected=1;
+        if(bad==10)both_doors=0;
+        if(bad==11)psx_mod_write_byte(PLAY+0x1D,3);
+        if(bad==12)psx_mod_write_byte(diagnostic+0xA8,CHECKPOINT_INITIALIZING);
+        if(bad==13)both_door_members=1;
+        if(bad==14)psx_mod_write_byte(both_door_actor+4,2);
+        if(bad==15)checkpoint_hatch_stagger_option=0;
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext expected=p2;
+        checkpoint_hatch_stagger_boundary();CHECK(!checkpoint_hatch_stagger_state);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&expected,&p2,sizeof p2));
+    }
+    zero_projected=0;test_lab_ready=1;both_door_reset();scene_owner=0;
+    test_lab_hatch_stagger_option="on";test_lab_option="intro_before_doors";both_doors=0;failed=0;
+    checkpoint_reset();CHECK(failed); /* Policy is fixed before frame0, never live-selected. */
+    both_doors=1;test_lab_hatch_stagger_option="invalid";failed=0;checkpoint_reset();CHECK(failed);
+    test_lab_hatch_stagger_option="off";test_lab_option="off";failed=0;checkpoint_reset();
+    CHECK(!checkpoint_hatch_stagger_option && !checkpoint_hatch_stagger_state);
+}
 static int before_doors_write_allowed(unsigned at) {
     const unsigned p=PLAYER&0x1FFFFFu,c=0x800971F8u&0x1FFFFFu;
     return (at>=p+8 && at<p+16) || (at>=p+0x18 && at<p+0x20) ||
@@ -1703,7 +1770,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
-    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);agreed_scene_fatal(&cpu);
+    agreed_earned_weapons(&cpu);agreed_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }

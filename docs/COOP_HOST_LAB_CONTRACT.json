@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; full living native hatch extent clearance including ghost boxes",
+  "status": "development-candidate-only; deterministic one-shot hatch stagger for matched F145 qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 65,
+  "revision": 66,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v82",
+    "title_compatibility": "mmx6-x-zero-delay-v83",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -920,5 +920,12 @@
     "state": "Existing door context gains 8 bytes of signed extent bounds, explicit canonical wire/hash/capture/commit/reset. Snapshot23 is build-specific; no migration.",
     "snapshot_schema": 23,
     "qualification": "Fresh exact-image source tests plus unchanged F145 LOCAL stagger baseline and meaningful NET matched setup/finalCRC required. Keep baseline f752 premature-close/guest-death evidence; source-only fix is not qualification."
+  },
+  "title_changes_v83": {
+    "scope": "LAB-only lab_hatch_stagger defaultoff/on. Requires Both intro_before_doors, no fatal/HP/earned extras. On exact actual firstFA2A4/state1/phase3, bothALIVE/positiveHP/originalbox0 and P1X>=5768, place only P2body8/12/18/1C=5744/394 once. No outcome fields or NET debug writes.",
+    "authority": "Existing negotiated profile/qualification/completed originalCP1receipt and pose/scanner witnesses; actualcurrentCP1or2 explicitly allowed because native CP2 is already earned nearX5761 before threshold. Exact firsthatch identity/traversal remains required. Other checkpoint_lab_completed callers retain exact current checkpoint behavior.",
+    "state": "Immutable selected option fixed in compatibility/hash; one consumed byte serialized/digested/reset under snapshot24. C8 bits6selected/7consumed, fatal low6 bits unchanged. Existing GAME_MAILBOX input provenance taint retained.",
+    "snapshot_schema": 24,
+    "qualification": "Fresh C134 LOCAL+NET same-image exact stagger, actual ghost-box carry/unsafe-close refusal/full-extent-clear/nativeclosure/no damage and current-build LOCAL door-state restore plus final NET CRC/cards/exits. C133 LOCAL positive result remains separate; no credit transfer."
   }
 }
