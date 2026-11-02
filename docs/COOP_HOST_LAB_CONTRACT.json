@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; original Wolfang refight checkpoint prerequisite",
+  "status": "development-candidate-only; damaged living equipment prerequisite",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 78,
+  "revision": 79,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v95",
+    "title_compatibility": "mmx6-x-zero-delay-v96",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1023,5 +1023,11 @@
     "source": "Original EXE selector8006D9EE selects BIN34 atFA000, SHA256 d15a9b539228de6e9ec0b7d68860f79a73a367d6344c8f05410fb8b10e35e4b4. Existing original13D10/1E1BC loader and authenticated checkpoint factory own initialization, intro and AI.",
     "limits": "No custom coordinates, boss/phase/HP/progress/result writes. Starting HP forbidden; optional existing earned factory retains all original healthy/source/authority/taint/once guards after native completion. Original intro/readiness is unmodified.",
     "qualification": "UNVERIFIED native prerequisite; actual wall-phase weakness attack/reaction LOCAL and matching NET remain required. Source/model tests do not qualify F135."
+  },
+  "native_equipment_damaged_health_prerequisite": {
+    "scope": "F135 equipment-only LAB completion with both starting-HP options off; no new mutable fields or snapshot schema change. Existing original8003D718/source/once/authority/idle/lifecycle/taint protections remain.",
+    "health": "Both native living idle actors may retain positive actual/display HP after damage; display/history may lag. Actual/display zero or high-bit fatal values refuse; maxHP5E must still match native PLAY5B+character full capacity. Original factory preserves actual5C/display5D/max5E, campaign mask, selection and ammo.",
+    "HP_seed": "If ANY starting-HP seed is configured, both actors still require original5C/5D/5E equal full health before equipment or HP seed. No repair/heal or repeated grant after damage is permitted.",
+    "qualification": "UNVERIFIED until native originalCP3 wall9/sub2 sole-X weakness overlap/reaction/recovery LOCALNET; equipment grant alone is no F135 pass."
   }
 }

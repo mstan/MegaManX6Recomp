@@ -213,7 +213,7 @@ static void agreed_refight_earned_weapons(CPUState *cpu) {
     }
     for(unsigned option=15;option<=16;++option)for(unsigned bad=0;bad<5;++bad) {
         refight_earned_ready(cpu,1,option);
-        if(bad==0)p2.body[0x5D]=31;
+        if(bad==0)p2.body[0x5E]=31;
         if(bad==1)scene_owner=1;
         if(bad==2)cpu->gpr[29]|=1;
         if(bad==3)test_lab_ready=0;

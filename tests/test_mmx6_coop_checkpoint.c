@@ -500,11 +500,21 @@ static void agreed_wolfang_boundary(CPUState *cpu) {
             psx_mod_read_word(diagnostic+0xB8)==0x800729C0u && !equipment_calls && !guest_calls);
         CHECK(!memcmp(&zero,&p2,sizeof zero));uint8_t unchanged[sizeof p2.body];capture(PLAYER,unchanged,sizeof unchanged);
         CHECK(!memcmp(primary,unchanged,sizeof primary)); /* No custom placement or body initialization. */
-        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+        psx_mod_write_byte(PLAY,10);
+        if(earned) {
+            /* Native damage after CP3 entry: display/history may lag actual HP. */
+            psx_mod_write_byte(PLAYER+0x5C,28);psx_mod_write_byte(PLAYER+0x5D,26);
+            p2.body[0x5C]=24;p2.body[0x5D]=25;
+        }
+        capture(PLAYER,primary,sizeof primary);zero=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+        primary[0xC9]=zero.body[0xC9]=(uint8_t)(255*earned);capture(PLAYER,unchanged,sizeof unchanged);
+        CHECK(!memcmp(primary,unchanged,sizeof primary) && !memcmp(&zero,&p2,sizeof zero));
         CHECK(equipment_calls==2*earned && checkpoint_earned_weapons_applied==earned &&
             psx_mod_read_byte(PLAYER+0xC9)==255*earned && p2.body[0xC9]==255*earned);
-        CHECK(psx_mod_read_byte(PLAY+0x60)==0x40 && psx_mod_read_byte(PLAYER+0x5C)==32 &&
-            p2.body[0x5C]==32 && psx_mod_read_byte(PLAYER+0xC8)==3 && p2.body[0xC8]==5 &&
+        CHECK(psx_mod_read_byte(PLAY+0x60)==0x40 && psx_mod_read_byte(PLAYER+0x5C)==(earned?28:32) &&
+            p2.body[0x5C]==(earned?24:32) && psx_mod_read_byte(PLAYER+0x5E)==32 && p2.body[0x5E]==32 &&
+            psx_mod_read_byte(PLAY+0x5B)==32 && psx_mod_read_byte(PLAY+0x5C)==32 && psx_mod_read_byte(PLAYER+0xC8)==3 && p2.body[0xC8]==5 &&
             psx_mod_read_half(PLAYER+0xB2)==288 && p2.body[0xB2]==240 && !p2.body[0xB3]);
         CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX && !state_track.count && !state_track.error);
         CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && !checkpoint_stage_boundary(cpu));
@@ -571,10 +581,33 @@ static void agreed_earned_weapons(CPUState *cpu) {
         if(bad==4)psx_mod_write_byte(PLAY+0x5E,2);
         if(bad==5)cpu->gpr[29]=0;if(bad==6)cpu->gpr[29]|=1;
         if(bad==7)p2.body[0x70]=0;if(bad==8)enrolled=0;
-        if(bad==9)p2.body[0x5D]=31;if(bad==10)p2.body[5]=0;
+        if(bad==9)p2.body[0x5E]=31;if(bad==10)p2.body[5]=0;
         CHECK(!checkpoint_stage_boundary(cpu) && !equipment_calls && !checkpoint_earned_weapons_applied);
         CHECK(psx_mod_read_byte(PLAY+0x60)==0x40u && !psx_mod_read_byte(PLAYER+0xC9) && !p2.body[0xC9]);
     }
+    for(unsigned seat=0;seat<2;++seat)for(unsigned bad=0;bad<6;++bad) {
+        earned_pending(cpu,1,0x40u);
+        if(bad<2) {if(seat)p2.body[0x5C]=(uint8_t)(bad?0x80:0);else psx_mod_write_byte(PLAYER+0x5C,(uint8_t)(bad?0x80:0));}
+        if(bad==2)life.status[seat]=MMX6_COOP_DYING;
+        if(bad==3)life.status[seat]=MMX6_COOP_JOINING;
+        if(bad>=4) {if(seat)p2.body[0x5D]=(uint8_t)(bad==4?0:0x80);else psx_mod_write_byte(PLAYER+0x5D,(uint8_t)(bad==4?0:0x80));}
+        uint8_t health[6]={psx_mod_read_byte(PLAYER+0x5C),psx_mod_read_byte(PLAYER+0x5D),psx_mod_read_byte(PLAYER+0x5E),p2.body[0x5C],p2.body[0x5D],p2.body[0x5E]};
+        CHECK(!checkpoint_stage_boundary(cpu) && !equipment_calls && !checkpoint_earned_weapons_applied);
+        CHECK(psx_mod_read_byte(PLAYER+0x5C)==health[0] && psx_mod_read_byte(PLAYER+0x5D)==health[1] &&
+            psx_mod_read_byte(PLAYER+0x5E)==health[2] && p2.body[0x5C]==health[3] &&
+            p2.body[0x5D]==health[4] && p2.body[0x5E]==health[5]);
+    }
+    /* Either HP seed keeps BOTH heroes' original full-health admission,
+     * including the unseeded companion, before either factory can run. */
+    for(unsigned seeded=0;seeded<2;++seeded)for(unsigned damaged=0;damaged<2;++damaged) {
+        test_lab_hp_option[0]=test_lab_hp_option[1]="off";test_lab_hp_option[seeded]="17";
+        earned_pending(cpu,1,0x40u);
+        if(damaged)p2.body[0x5C]=24;else psx_mod_write_byte(PLAYER+0x5C,28);
+        CHECK(!checkpoint_stage_boundary(cpu) && !equipment_calls && !checkpoint_earned_weapons_applied &&
+            !checkpoint_starting_hp_applied && checkpoint_pending.phase==2);
+        CHECK(psx_mod_read_byte(PLAYER+0x5C)==(damaged?32:28) && p2.body[0x5C]==(damaged?24:32));
+    }
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";
     /* Grant before HP seed: native technique/resources/capacities survive,
      * and the independent explicitly selected starting HP is applied once. */
     test_lab_hp_option[0]="17";test_lab_hp_option[1]="23";earned_pending(cpu,1,0x40u);

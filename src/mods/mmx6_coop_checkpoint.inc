@@ -402,11 +402,14 @@ static void checkpoint_complete(CPUState *cpu) {
         uint8_t primary[sizeof p2.body];capture(PLAYER,primary,sizeof primary);
         for(unsigned seat=0;seat<2;++seat) {
             const uint8_t *b=seat?p2.body:primary;
-            /* Original boot/enrollment must finish healthy before either
-             * prerequisite. Never repair prior damage or a dead/incoming body. */
+            /* Any configured HP seed still requires native full health.
+             * Equipment alone may follow native damage: actual/display HP
+             * remain positive (display may lag), max HP stays native full.
+             * The original factory must preserve all three health bytes. */
             unsigned full=psx_mod_read_byte(PLAY+0x5Bu+b[2]);
-            if(full<32 || full>=128 || b[0x5C]!=full || b[0x5D]!=full || b[0x5E]!=full ||
-               checkpoint_starting_hp[seat]>full)return;
+            if(full<32 || full>=128 || b[0x5E]!=full || checkpoint_starting_hp[seat]>full)return;
+            if(mask && (b[0x5C]!=full || b[0x5D]!=full))return;
+            if(!mask && (!b[0x5C] || b[0x5C]>=128 || !b[0x5D] || b[0x5D]>=128))return;
         }
         /* Original checkpoint initialization has finished; it cannot clobber
          * these native per-body flags. Acquire before the optional HP seed. */
