@@ -829,7 +829,6 @@ static void checkpoint_scene_call(CPUState *cpu,uint32_t address) {
 static void checkpoint_scene_fatal_boundary(CPUState *cpu) {
     if(!checkpoint_lab_completed() || !ready || !enrolled || failed || inside || stage_call ||
        player_call || ride_call || view_call || private_draw || zero_world || zero_projected ||
-       state_track.count || state_track.error ||
        pause_owner>=0 || clear_phase || life.wipe || psx_mod_read_byte(PLAY)!=10 ||
        psx_mod_read_byte(PLAY+1) || scene_owner!=2) {
         checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;return;
@@ -867,6 +866,7 @@ static void checkpoint_hatch_stagger_boundary(void) {
     if(!checkpoint_hatch_stagger_option || checkpoint_hatch_stagger_state || checkpoint_lab_option!=4 ||
        !checkpoint_lab_receipt_complete() || !ready || !enrolled || failed || inside || stage_call ||
        player_call || ride_call || view_call || private_draw || zero_world || zero_projected ||
+       state_track.count || state_track.error ||
        pause_owner>=0 || clear_phase || life.wipe || !both_door_traversal_active() || both_door_members!=3 ||
        both_door_origin!=0x800FA2A4u || psx_mod_read_byte(both_door_actor+4)!=1 ||
        psx_mod_read_byte(both_door_actor+5)!=3 || psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||

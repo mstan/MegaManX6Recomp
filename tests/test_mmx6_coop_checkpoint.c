@@ -1406,7 +1406,7 @@ static void agreed_hatch_stagger(CPUState *cpu) {
         put32(p2.body+8,5750u<<16);checkpoint_hatch_stagger_boundary();
         CHECK(le32(p2.body+8)==5750u<<16 && psx_mod_read_byte(diagnostic+0xC8)==192); /* Exactly once. */
     }
-    for(unsigned bad=0;bad<16;++bad) {
+    for(unsigned bad=0;bad<18;++bad) {
         hatch_stagger_ready(cpu,1);
         if(bad==0)psx_mod_write_byte(both_door_actor+5,2);
         if(bad==1)put32(p2.body+0x68,0x80073D54u);
@@ -1424,11 +1424,13 @@ static void agreed_hatch_stagger(CPUState *cpu) {
         if(bad==13)both_door_members=1;
         if(bad==14)psx_mod_write_byte(both_door_actor+4,2);
         if(bad==15)checkpoint_hatch_stagger_option=0;
+        if(bad==16)state_track.count=1;
+        if(bad==17)state_track.error=1;
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext expected=p2;
         checkpoint_hatch_stagger_boundary();CHECK(!checkpoint_hatch_stagger_state);
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&expected,&p2,sizeof p2));
     }
-    zero_projected=0;test_lab_ready=1;both_door_reset();scene_owner=0;
+    state_track.count=state_track.error=0;zero_projected=0;test_lab_ready=1;both_door_reset();scene_owner=0;
     test_lab_hatch_stagger_option="on";test_lab_option="intro_before_doors";both_doors=0;failed=0;
     checkpoint_reset();CHECK(failed); /* Policy is fixed before frame0, never live-selected. */
     both_doors=1;test_lab_hatch_stagger_option="invalid";failed=0;checkpoint_reset();CHECK(failed);
