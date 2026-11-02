@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; original Sigma special guest targeting",
+  "status": "development-candidate-only; original Wolfang refight checkpoint prerequisite",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 77,
+  "revision": 78,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v94",
+    "title_compatibility": "mmx6-x-zero-delay-v95",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1017,5 +1017,11 @@
     "ordering": "Keep original refight code/assets/mapcopy, once position/history setup, two native updates and full healthy standing/readiness. Only checkpoint_complete then admits existing source-pinned original8003D718 for both bodies; keep existing safe boundary/profile/taint/full-health/form/SP guards.",
     "preservation": "Original PLAY60 campaign clear mask restored after factory. No direct HP/ammo/selection/boss/phase/progress/result writes; existing earned latch/digest/snapshot24 reused.",
     "qualification": "UNVERIFIED native prerequisite until exact-image original refight completion and owned X attack availability are measured. No portal CP3 retention or F135 wall/reaction claim from source/unit tests."
+  },
+  "native_wolfang_refight_checkpoint_prerequisite": {
+    "scope": "F135 prerequisite only: defaultoff refight_wolfang_cp3 is immutable option21/index62/nonce4C574633, original12/0CP3 record800729C0/table80073220/hashE17C77B4. No new mutable fields; snapshot schema24.",
+    "source": "Original EXE selector8006D9EE selects BIN34 atFA000, SHA256 d15a9b539228de6e9ec0b7d68860f79a73a367d6344c8f05410fb8b10e35e4b4. Existing original13D10/1E1BC loader and authenticated checkpoint factory own initialization, intro and AI.",
+    "limits": "No custom coordinates, boss/phase/HP/progress/result writes. Starting HP forbidden; optional existing earned factory retains all original healthy/source/authority/taint/once guards after native completion. Original intro/readiness is unmodified.",
+    "qualification": "UNVERIFIED native prerequisite; actual wall-phase weakness attack/reaction LOCAL and matching NET remain required. Source/model tests do not qualify F135."
   }
 }

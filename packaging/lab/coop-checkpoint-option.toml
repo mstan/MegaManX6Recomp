@@ -69,6 +69,10 @@ value = "refight_distant_cp1"
 label = "Fortress refight portal with distant primary"
 
 [[option.choice]]
+value = "refight_wolfang_cp3"
+label = "Original Wolfang refight checkpoint 3 (prerequisite only)"
+
+[[option.choice]]
 value = "northpole_ice_cp3"
 label = "North Pole original ice shaft (position prerequisite)"
 
