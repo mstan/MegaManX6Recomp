@@ -130,24 +130,34 @@ static int jump_audio_load(const uint8_t *dat,size_t size) {
          {"1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c","fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58"}},
         {{"abf6451ffee33fa526e91be07e9c4f854c38ef0840ffa19c50a89c896536c857","425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8"},
          {"7c9fedd98a3d4740a2baddcc77323984e8b0a1ae139e24f36043cdfd0fa757ce","203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd"}}};
-    unsigned character=private_actor.character;
-    if(character>1 || private_actor.form!=(character?5u:0u) ||
-       private_actor.dat_member!=(character?85u:86u))return 0;
+    /* Original DAT87/88/89 group1 differs from DAT86; group3 is identical.
+     * Source member hashes and original bank comparison are in contractv90. */
+    static const char *const armor_group1[3][2]={
+        {"3fc7f1fcd8f9fd4180af09cdf7aab3f907c1406ab513145a7cc2490a93c4e98a","4d34d0ff6e09dd9c764391583aeda4cb4f5a46e35e92a916b56b221f7da30c7f"},
+        {"d4549a99331ae79e5c3f6a844185445629cb64a81737b1fef6b540f2364cc6e8","a61f117dc0121daae9d9dd4d2d49f2bb9e63952de39c8bfd1c88c3630abe0b4c"},
+        {"0442d04cbf6fdab0e8a369bbff6d03495adde6aac75bca472dc32ec7d4e8fce9","4c08eb599c9905fba248d0608f018748ce0a476b27c9abd4db1ed06fd2c63acb"}};
+    unsigned character=private_actor.character,form=private_actor.form;
+    if(character>1 || (character?(form!=5u || private_actor.dat_member!=85u):
+       (form>3u || private_actor.dat_member!=86u+form)))return 0;
+    const char *const *first=!character && form?armor_group1[form-1u]:hashes[character][0];
     Mmx6AssetView headers[2],samples[2];Mmx6JumpAudioHeader layouts[2];uint8_t parsed[2][8192];
-    if(jump_audio_loaded)return jump_audio_character==character && jump_audio_bind();
+    if(jump_audio_loaded)return jump_audio_character==character && jump_audio_banks[0].samples &&
+        jump_audio_hash_is(jump_audio_banks[0].samples,jump_audio_banks[0].layout.sample_bytes,first[1]) && jump_audio_bind();
     for(unsigned i=0;i<2;++i) {
         unsigned group=i?3:1;
+        const char *const *expected=i?hashes[character][1]:first;
         if(!mmx6_coop_dat_asset(dat,size,private_actor.dat_member,11+i*2,&headers[i]) || headers[i].type!=6 ||
             !mmx6_coop_dat_asset(dat,size,private_actor.dat_member,12+i*2,&samples[i]) || samples[i].type!=(i?0x20303u:0x20101u) ||
-            !jump_audio_hash_is(headers[i].data,headers[i].size,hashes[character][i][0]) ||
-            !jump_audio_hash_is(samples[i].data,samples[i].size,hashes[character][i][1]) ||
+            !jump_audio_hash_is(headers[i].data,headers[i].size,expected[0]) ||
+            !jump_audio_hash_is(samples[i].data,samples[i].size,expected[1]) ||
             mmx6_jump_audio_prepare_header(headers[i].data,headers[i].size,samples[i].size,group,
                 parsed[i],sizeof parsed[i],&layouts[i])!=MMX6_JUMP_AUDIO_OK)return 0;
     }
     if(!character)for(unsigned i=0;i<2;++i)layouts[i].bank-=2;
     Mmx6PrivateAudioBank views[2]={{parsed[0],&layouts[0]},{parsed[1],&layouts[1]}};
     uint32_t mask=0;
-    if(mmx6_private_audio_validate(views,&mask)!=MMX6_JUMP_AUDIO_OK || mask!=(character?JUMP_STOP_MASK:0x00F00808u))return 0;
+    if(mmx6_private_audio_validate(views,&mask)!=MMX6_JUMP_AUDIO_OK ||
+       mask!=(character?JUMP_STOP_MASK:(form==2u?0x00F00008u:0x00F00808u)))return 0;
     uint8_t *owned_headers[2]={NULL,NULL},*owned_samples[2]={NULL,NULL};
     for(unsigned i=0;i<2;++i) {
         owned_headers[i]=malloc(layouts[i].bytes);owned_samples[i]=malloc(layouts[i].sample_bytes);

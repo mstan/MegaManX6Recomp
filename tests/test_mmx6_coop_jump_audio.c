@@ -509,7 +509,35 @@ static void opposite_original_audio_assets(const char *path) {
     CHECK(jump_audio_load(data,(size_t)length) && jump_audio_ready());
     CHECK(jump_audio_banks[0].layout.bank==28 && jump_audio_banks[1].layout.bank==29);
     CHECK(jump_audio_banks[0].guest==handles[0] && jump_audio_banks[1].guest==handles[1]);
-    CHECK(jump_audio_activate());
+    /* Genuine original armor members retain their own group1; group3 is
+     * source-identical. Validate every original routed record and sample. */
+    const unsigned samples[3]={182064,91872,171712};
+    for(unsigned form=1;form<=3;++form) {
+        Mmx6CoopRosterNative earned={1,5,1,5,7};Mmx6CoopRoster armor;
+        CHECK(mmx6_coop_roster_resolve_partner(&earned,form,255,&armor)==MMX6_COOP_ROSTER_OK && private_roster_bind(&armor));
+        psx_mod_write_byte(PLAYER+0xE7,(uint8_t)form);CHECK(jump_audio_activate());registrations=0;
+        unsigned writes=memory_writes;private_actor.dat_member=86;
+        CHECK(!jump_audio_load(data,(size_t)length) && !jump_audio_loaded && !registrations && memory_writes==writes);
+        private_actor=armor.seat[1];CHECK(jump_audio_load(data,(size_t)length) && jump_audio_ready() && registrations==2);
+        CHECK(jump_audio_banks[0].layout.sample_bytes==samples[form-1] && jump_audio_banks[1].layout.sample_bytes==52608);
+        for(unsigned i=0;i<2;++i) {
+            Mmx6AssetView original;CHECK(mmx6_coop_dat_asset(data,(size_t)length,86+form,12+i*2,&original));
+            CHECK(!memcmp(jump_audio_banks[i].samples,original.data,original.size));
+            for(unsigned record=0;record<jump_audio_banks[i].layout.records;++record) {
+                const uint8_t *entry=jump_audio_banks[i].parsed+8u+record*4u;
+                if(!(entry[0]|entry[1]|entry[2]|entry[3]))continue;
+                CPUState cpu=request(i?3:1,record);CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && !cpu.gpr[2]);same_native();
+            }
+        }
+        /* A cached other-form bank cannot masquerade as this form. */
+        private_actor.form=(uint8_t)(form==3?1:form+1);private_actor.dat_member=(uint8_t)(86+private_actor.form);
+        CHECK(!jump_audio_load(data,(size_t)length));private_actor=armor.seat[1];
+        CHECK(jump_audio_activate());Mmx6AssetView corrupt;
+        CHECK(mmx6_coop_dat_asset(data,(size_t)length,86+form,12,&corrupt));data[corrupt.data-data]^=1;
+        writes=memory_writes;registrations=0;CHECK(!jump_audio_load(data,(size_t)length) && !jump_audio_loaded && !registrations && memory_writes==writes);
+        data[corrupt.data-data]^=1;
+    }
+    CHECK(private_roster_bind(&roster));psx_mod_write_byte(PLAYER+0xE7,0);CHECK(jump_audio_activate());
     Mmx6AssetView sample;CHECK(mmx6_coop_dat_asset(data,(size_t)length,86,12,&sample));
     data[sample.data-data]^=1;unsigned writes=memory_writes;registrations=0;
     CHECK(!jump_audio_load(data,(size_t)length) && !jump_audio_loaded && memory_writes==writes && !registrations);

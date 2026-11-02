@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; earned elective partner X armors",
+  "status": "development-candidate-only; original armor-specific counterpart audio",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 72,
+  "revision": 73,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v89",
+    "title_compatibility": "mmx6-x-zero-delay-v90",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -962,5 +962,42 @@
     "identity": "Choice read once at activation through normal agreed prototype settings; immutable choice and active private_actor.form fixed in snapshot/hash resources, existing asset hashes bind actual payloads. Existing host-state wire schema24; no new mutable core field or migration.",
     "snapshot_schema": 24,
     "qualification": "Source preparation only. Fresh same-candidate native Shadow guest constructor/body/ability/HUD/portrait/control/current-build state and LOCAL+NET first, then other earned armors for F71/F149. Prepared QA availability/fullparts are disclosed prerequisites, never F55 acquisition credit. C139 native top/no-grant failure remains parked."
+  },
+  "title_changes_v90": {
+    "scope": "Admit only native X forms0..3 with exact DAT86+form in existing private audio loader; native Zero5/DAT85 unchanged. No sound synthesis, disabled emulation or hash bypass. C140 native audio resource refusal remains retained.",
+    "original_comparison": "Existing audit_mmx6_coop_audio reproduced exact original DAT85..89 whole-member identities. DAT87/88/89 group1 headers/samples differ from86; all X group3 headers/samples are identical. Bind genuine per-form group1 hashes; keep exact type/header/program/tone/sample/record/driver guards and per-form original voice mask.",
+    "group1": [
+      {
+        "form": 1,
+        "dat": 87,
+        "header_bytes": 5312,
+        "sample_bytes": 182064,
+        "header_sha256": "3fc7f1fcd8f9fd4180af09cdf7aab3f907c1406ab513145a7cc2490a93c4e98a",
+        "sample_sha256": "4d34d0ff6e09dd9c764391583aeda4cb4f5a46e35e92a916b56b221f7da30c7f",
+        "mask": "00F00808"
+      },
+      {
+        "form": 2,
+        "dat": 88,
+        "header_bytes": 4212,
+        "sample_bytes": 91872,
+        "header_sha256": "d4549a99331ae79e5c3f6a844185445629cb64a81737b1fef6b540f2364cc6e8",
+        "sample_sha256": "a61f117dc0121daae9d9dd4d2d49f2bb9e63952de39c8bfd1c88c3630abe0b4c",
+        "mask": "00F00008"
+      },
+      {
+        "form": 3,
+        "dat": 89,
+        "header_bytes": 5824,
+        "sample_bytes": 171712,
+        "header_sha256": "0442d04cbf6fdab0e8a369bbff6d03495adde6aac75bca472dc32ec7d4e8fce9",
+        "sample_sha256": "4c08eb599c9905fba248d0608f018748ce0a476b27c9abd4db1ed06fd2c63acb",
+        "mask": "00F00808"
+      }
+    ],
+    "group3": "Original X shared header1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c /samplefb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58; existing character-private bank28/29 and owned voice lease stay unchanged.",
+    "cached_identity": "Cached bank must match actual selected form original group1 sample digest before rebind; resources release/reload at existing original enrollment. No new mutable host field; existing audio SHA/bank/sample snapshot registration retained.",
+    "snapshot_schema": 24,
+    "qualification": "Source-only C141. Queue actual-original DAT85..89 audio-loader checks plus source reproduction. Native enrollment and genuine muted jump/action audio must pass before any armor body/effect/color/stage-change credit."
   }
 }
