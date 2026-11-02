@@ -160,6 +160,32 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             self.assertEqual(features[0]['values']['doors'],'both')
             self.assertEqual(features[1],trailing)
 
+    def test_existing_fatal_selectors_accept_capsule_catalog_without_selecting_capsule(self):
+        import qualify_mmx6_coop_intro_fixture_pair as pair
+        source=Path(__file__).resolve().parents[1]
+        catalog=(source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text()
+        catalog+='\n'+(source/'packaging/lab/coop-checkpoint-option.toml').read_text()
+        capsule='\n[[option.choice]]\nvalue="capsule_owner_p1"\nlabel="Native capsule owner fatal"\n'
+        cases=((pair.select_door_policy,dict(scenario='fallen',fallen_seat=0),'intro_before_doors'),
+               (pair.select_refight_policy,dict(scenario='fallen'),'refight_portal_cp1'),
+               (pair.select_weather_survivor,{},'turtloid_rain_cp1'))
+        with tempfile.TemporaryDirectory() as temporary:
+            directory=Path(temporary);manifest=directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'
+            manifest.parent.mkdir(parents=True);state=directory/'mods/state.toml'
+            initial='[[feature]]\npackage_id="mmx6.local-coop"\nid = "prototype"\nenabled = false\n'
+            for select,arguments,checkpoint in cases:
+                for extension in ('',capsule):
+                    with self.subTest(selector=select.__name__,capsule=bool(extension)):
+                        manifest.write_text(catalog+extension);state.write_text(initial)
+                        select(directory,enabled=False,**arguments)
+                        values=tomllib.loads(state.read_text())['feature'][0]['values']
+                        self.assertEqual(values['lab_fatal'],'p1')
+                        self.assertEqual(values['lab_checkpoint'],checkpoint)
+                        self.assertEqual((values['lab_starting_hp_p1'],values['lab_starting_hp_p2'],values['lab_earned_weapons']),('off','off','off'))
+                manifest.write_text(catalog+capsule+'\n[[option.choice]]\nvalue="unknown_fatal"\n')
+                state.write_text(initial)
+                with self.assertRaises(ValueError):select(directory,enabled=False,**arguments)
+
     def test_midboss_both_stays_in_prototype_with_trailing_net_feature(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]

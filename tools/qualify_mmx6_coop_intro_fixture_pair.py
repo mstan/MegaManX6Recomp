@@ -269,6 +269,9 @@ def select_midboss(directory, *, enabled, selector=select_checkpoint):
     selected.update(doors='both', state_sha256=preparation.sha256(path))
     return selected
 
+_FATAL_CHOICES = {'off', 'p1', 'p2', 'scene_before_release', 'scene_during_arrival'}
+_FATAL_CATALOGS = (_FATAL_CHOICES, _FATAL_CHOICES | {'capsule_owner_p1'})
+
 def select_door_policy(directory, *, enabled, scenario, fallen_seat=1, selector=select_checkpoint):
     if scenario not in ('either', 'living', 'absent', 'fallen'):
         raise ValueError('Explicit native door scenario required')
@@ -278,10 +281,10 @@ def select_door_policy(directory, *, enabled, scenario, fallen_seat=1, selector=
         contact_protection='on', starting_hp=('off', 'off'), earned_weapons='off')
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-    for key, choices, default in (('doors', {'either', 'both'}, 'either'), ('lab_fatal', {'off', 'p1', 'p2', 'scene_before_release', 'scene_during_arrival'}, 'off')):
+    for key, choices, default in (('doors', ({'either', 'both'},), 'either'), ('lab_fatal', _FATAL_CATALOGS, 'off')):
         options = [o for o in catalog.get('option', []) if o.get('id') == key]
         if (len(options) != 1 or options[0].get('feature') != 'prototype' or options[0].get('type') != 'choice'
-                or options[0].get('default') != default or {c['value'] for c in options[0].get('choice', [])} != choices):
+                or options[0].get('default') != default or {c['value'] for c in options[0].get('choice', [])} not in choices):
             raise ValueError('Missing exact current native door/fatal option: '+key)
     values = dict(local_cameras='split', cameras='split', doors='either' if scenario == 'either' else 'both',
                   lab_fatal='p'+str(fallen_seat+1) if scenario == 'fallen' else 'off')
@@ -305,10 +308,10 @@ def select_refight_policy(directory, *, enabled, scenario, selector=select_check
         contact_protection='on', starting_hp=('off', 'off'), earned_weapons='off')
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
-    for key, choices, default in (('doors', {'either', 'both'}, 'either'), ('lab_fatal', {'off', 'p1', 'p2', 'scene_before_release', 'scene_during_arrival'}, 'off')):
+    for key, choices, default in (('doors', ({'either', 'both'},), 'either'), ('lab_fatal', _FATAL_CATALOGS, 'off')):
         options = [o for o in catalog.get('option', []) if o.get('id') == key]
         if (len(options) != 1 or options[0].get('feature') != 'prototype' or options[0].get('type') != 'choice'
-                or options[0].get('default') != default or {c['value'] for c in options[0].get('choice', [])} != choices):
+                or options[0].get('default') != default or {c['value'] for c in options[0].get('choice', [])} not in choices):
             raise ValueError('Missing exact current refight/fatal option: '+key)
     values = dict(local_cameras='split', cameras='independent', doors='both', lab_fatal='p1' if scenario == 'fallen' else 'off')
     path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8'); anchor = 'lab_earned_weapons = "off"\n'
@@ -328,7 +331,7 @@ def select_weather_survivor(directory, *, enabled, selector=select_checkpoint):
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
     fatal = [o for o in catalog.get('option', []) if o.get('id') == 'lab_fatal']
     if (len(fatal) != 1 or fatal[0].get('feature') != 'prototype' or fatal[0].get('type') != 'choice'
-            or fatal[0].get('default') != 'off' or {c['value'] for c in fatal[0].get('choice', [])} != {'off', 'p1', 'p2', 'scene_before_release', 'scene_during_arrival'}):
+            or fatal[0].get('default') != 'off' or {c['value'] for c in fatal[0].get('choice', [])} not in _FATAL_CATALOGS):
         raise ValueError('Missing exact agreed native fatal option')
     values = dict(local_cameras='split', cameras='independent', lab_fatal='p1')
     path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8'); anchor = 'lab_earned_weapons = "off"\n'
