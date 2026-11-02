@@ -9,7 +9,7 @@
 #include "../src/mods/mmx6_coop_plugin.c"
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"line %d: %s\n",__LINE__,#x);exit(1);}}while(0)
 static uint8_t ram[0x200000],before[0x200000];
-static unsigned calls;
+static unsigned calls,sigma_targets;
 static const uint32_t enemy=0x8008EF48;
 uint8_t psx_mod_read_byte(uint32_t a){return ram[a&0x1FFFFF];}
 uint16_t psx_mod_read_half(uint32_t a){return psx_mod_read_byte(a)|((uint16_t)psx_mod_read_byte(a+1)<<8);}
@@ -17,6 +17,10 @@ uint32_t psx_mod_read_word(uint32_t a){return psx_mod_read_half(a)|((uint32_t)ps
 void psx_mod_write_byte(uint32_t a,uint8_t v){ram[a&0x1FFFFF]=v;}
 void psx_mod_write_half(uint32_t a,uint16_t v){psx_mod_write_byte(a,(uint8_t)v);psx_mod_write_byte(a+1,(uint8_t)(v>>8));}
 void psx_mod_write_word(uint32_t a,uint32_t v){for(unsigned i=0;i<4;++i)psx_mod_write_byte(a+i,(uint8_t)(v>>(i*8)));}
+void psx_mod_counter_add(const char *name,uint32_t delta){
+    CHECK(!strcmp(name,"mmx6.coop.sigma-special-guest-target") && delta==1);
+    sigma_targets+=delta;
+}
 static void native_leaf(CPUState *cpu){
     int d=(int16_t)psx_mod_read_half(cpu->gpr[4]+10)-(int16_t)psx_mod_read_half(PLAYER+10);
     if(d<0)d=-d;
@@ -53,7 +57,7 @@ static void rejected(CPUState *cpu){
 }
 static const uint32_t sigma_child=0x80093C98u;
 static void sigma_setup(CPUState *cpu){
-    setup(cpu);private_draw=0;pause_owner=-1;
+    setup(cpu);private_draw=0;pause_owner=-1;sigma_targets=0;
     psx_mod_write_byte(PLAY+12,12);psx_mod_write_byte(PLAY+13,1);
     psx_mod_write_byte(enemy+1,61);psx_mod_write_byte(enemy+0x5C,48);
     psx_mod_write_byte(sigma_child,0x41);psx_mod_write_byte(sigma_child+1,0x1F);
@@ -69,14 +73,14 @@ static void sigma_setup(CPUState *cpu){
 static void sigma_rejected(CPUState *cpu){
     CPUState original=*cpu;memcpy(before,ram,sizeof ram);
     sigma_special_target(cpu,0x800EF510u);
-    CHECK(!memcmp(&original,cpu,sizeof original) && !memcmp(before,ram,sizeof ram));
+    CHECK(!memcmp(&original,cpu,sizeof original) && !memcmp(before,ram,sizeof ram) && !sigma_targets);
 }
 static void sigma_tests(void){
     CPUState cpu;sigma_setup(&cpu);CPUState original=cpu;memcpy(before,ram,sizeof ram);
     sigma_special_target(&cpu,0x800EF510u);
     CHECK(cpu.gpr[4]==32 && cpu.gpr[6]==400); /* Original angle inputs: Y128-96, X400-416. */
     original.gpr[4]=32;original.gpr[6]=400;
-    CHECK(!memcmp(&original,&cpu,sizeof cpu) && !memcmp(before,ram,sizeof ram) && !calls);
+    CHECK(!memcmp(&original,&cpu,sizeof cpu) && !memcmp(before,ram,sizeof ram) && !calls && sigma_targets==1);
     sigma_setup(&cpu);put32(p2.body+8,688u<<16);put32(p2.body+12,128u<<16);
     sigma_rejected(&cpu); /* Equal distance keeps P1. */
     sigma_setup(&cpu);life.status[0]=MMX6_COOP_FALLEN;psx_mod_write_half(PLAYER+10,416);
