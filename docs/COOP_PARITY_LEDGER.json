@@ -23213,9 +23213,146 @@
               "Exactly one existing offline atomic command4 changes P2 position and XY history during original phase3, to expose the contact-box gap. This is a disclosed stagger prerequisite, not ordinary-route or independently stationary-held coverage.",
               "No HP, collision-box, door phase/animation, lifecycle, CP2, lives or clearance outcome writes. Current-build save/load restores the actual cache/native state; fixture taint and ordinary recording refusal remain."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "a6eb102c6f13d8b2382b911a5f780d697d7d2d54",
+            "build_identity": {
+              "source_commit": "a6eb102c6f13d8b2382b911a5f780d697d7d2d54",
+              "exe_sha256": "32ac97ea0543b53cd82c5ec40051228388cbb02e2ee32f5ccd00958392d2d63a",
+              "declared_manifest_sha256": "2478143cdd79f652f0a2bc2236a47d578144c5bc9493c103b5f1eb58a9d38f1a",
+              "title": 83,
+              "profile": 66,
+              "snapshot": 24,
+              "game_change_commit": "43a192529029d46bc7d2576a7239b0fdfa3cd1c4",
+              "fixture_change_commit": "a6eb102c6f13d8b2382b911a5f780d697d7d2d54",
+              "observer_source_commit": "Manual owned TCP with existing controls/diagnostics; exact RPC transcript retained"
+            },
+            "settings": {
+              "roster": "Canonical X/P1 + Zero/P2, both32HP",
+              "policy": "Selected Both first intro subtype2 FA2A4 at5744/384",
+              "fixture": "Agreed intro_before_doors/contacton/HPoff/earnedoff/fataloff/lab_hatch_stagger=on; same compiled candidate for both modes",
+              "audio": "Hidden SDLdummy, nativeGL"
+            },
+            "action": "Exercise actual C134 declared one-shot, natural carry/close and native following-dialogue release; fresh per-seat Right. Save7 after consumed position-only stagger, close, load7 and let native close again.",
+            "outcome": "PASS13LOCAL gates on actual32ac97ea/2478143c/profile66. PendingC8=64->consumed192 during actualphase3/Box0; bothHP32 survive through fullguest clearance. Native release/closing row108 guestcentre5771.546875 gives originalradius11 left5760.546875 beyondplane5760; nativeclosedsolid row121. Mid-door savegen1/loadgen2 restoresphase3/guest5750-ish Box0 and consumed192, then nativeclosedsolid row141. Both fresh controls/lives2/CP2 pass. Nativeexit0/cardsunchanged/zero debug RAM writes; rootreviewed closing/closed composedframes. All14Ctests pass. No NET credit transferred from C133.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-local-1/F145-preparation.json",
+                "sha256": "ef8157dcb46ab7090b16c8fa7255ef9df40e419cb0f2f5e8f9990644dd812e26"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-local-1/native-job.json",
+                "sha256": "1dd4cc47cfd060c96ae792b2da6d3dc607a086ac0506105a5abaea1d643d76f1"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-local-1/capacity.json",
+                "sha256": "a81ed7040d018b873b9cec59cb29ba77307969bfea14093792f76ac3aa0b43ea"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-local-1/logs/F145-native-report.json",
+                "sha256": "afe24d68d3ed6eea46bb687ce28be5ecc48c7cc2e70198f361ac50f7df5a572e"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-local-1/logs/native-F145-control.jsonl",
+                "sha256": "fa68eedaa56d9b44b6ccada156ca529927dc6103295149608c30776473dd32fb"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-local-1/logs/F145-first-native-closing-after-stagger.png",
+                "sha256": "adaeea9d922574b57cf9be50ad73fd8e858c50bd4abca20ae353b84694155b96"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-local-1/logs/F145-native-closed-solid-after-stagger.png",
+                "sha256": "3e4c7589fd19216b07574eea7b012ff19bd163e3ec1dd84ec80079e32998da66"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-hatch-box-guard-v133/C134-source-build-preflight.json",
+                "sha256": "69abc465e459bc96a3a7cecd78e4f66c397488f696860f7ab6afbd27563e9b66"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/build-hatch-box-guard-v133/c134-focused-ctest.log",
+                "sha256": "7659c2bf244ef4c9cef228ed886f7c49c57016063ab828c02df23b2b93ee0337"
+              }
+            ],
+            "limits": [
+              "Exact first intro hatch/canonical Both only; no F183 independent stationary hold, everygate or defaultEither claim.",
+              "Existing scenery/shared-scene presentation is outside mechanical F145 qualification.",
+              "Defaultfix remains isolated pending same-candidate NET; prepared capability negotiation or startup CRCs do not close the row."
+            ],
+            "bypasses": [
+              "Agreed predoor CP1 placement bypasses preceding traversal; original Right earns hatch admission.",
+              "Predeclared deterministic one-shot at exact first hatch phase3/bothlive Box0/P1>=5768 changes only P2 position/history to5744/394. Native CP2 publication is preserved; immutable completed CP1 receipt plus actualCP1/2 authenticates the point.",
+              "No debug RAM writes, HP/lifecycle, collision box, camera, hatch phase/animation, closure, lives or checkpoint outcome writes. Existing fixture taint/ordinary-recording restrictions remain."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "a6eb102c6f13d8b2382b911a5f780d697d7d2d54",
+            "build_identity": {
+              "source_commit": "a6eb102c6f13d8b2382b911a5f780d697d7d2d54",
+              "exe_sha256": "32ac97ea0543b53cd82c5ec40051228388cbb02e2ee32f5ccd00958392d2d63a",
+              "declared_manifest_sha256": "2478143cdd79f652f0a2bc2236a47d578144c5bc9493c103b5f1eb58a9d38f1a",
+              "title": 83,
+              "profile": 66,
+              "snapshot": 24,
+              "game_change_commit": "43a192529029d46bc7d2576a7239b0fdfa3cd1c4",
+              "fixture_change_commit": "a6eb102c6f13d8b2382b911a5f780d697d7d2d54",
+              "observer_source_commit": "Manual owned TCP with existing controls/diagnostics; exact RPC transcript retained"
+            },
+            "settings": {
+              "roster": "Canonical X/P1 + Zero/P2, both32HP",
+              "policy": "Selected Both first intro subtype2 FA2A4 at5744/384",
+              "fixture": "Agreed intro_before_doors/contacton/HPoff/earnedoff/fataloff/lab_hatch_stagger=on; same compiled candidate for both modes",
+              "audio": "Hidden SDLdummy, nativeGL"
+            },
+            "action": "Two owned fresh C134 loopback starts; attempt1 mistakenly supplied offline-only overlay policy, attempt2 removes it and uses normal SDK negotiated NET profile. No F145 control/fixture/gameplay endpoint reached.",
+            "outcome": "UNVERIFIED. NET1 bothnativeexit1 explicitly refuse offline-only seal flag before gameplay; original failed logs/jobs retained. NET2 validates identical actualimage and matching fixedprofile66/selected2846faebb84bdf2d4971f0ea04cd01fccaf43993228c7f36ee706da5e051590a beforeguest. Both then report other player left/stopped responding and exit0 before first control RPC; ownership assertion correctly refuses stale PID. Blankcards remain7706. No closure, controls or final after-endpoint CRC gate exists. Park unchanged retries until concrete transport/setup prerequisite resolves; no game defect inferred from this stop.",
+            "artifacts": [
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-net-peer-0-2/logs/F145-native-net-report.json",
+                "sha256": "83bf28fdb1f40e60b6f186fe582692962322af631bc4b2ef793fda5ed5b86789"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-native-net-owned-1.json",
+                "sha256": "1003ac2bac4f20aa7e31d0f7db5bf502a5163a23ee9a9e7c0c7a19e128500b12"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-native-net-owned-2.json",
+                "sha256": "b6f966b4d329aa43edd255fab7daf85f21819d6ec99e93e3db5fd15be6bd91c5"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-native-net-capacity-2.json",
+                "sha256": "155223e0efd2d74651c9826924bfa1fcb328905d50f2725134688c958755c6b0"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-native-net-pair-job-2.json",
+                "sha256": "0a3fe43af18a2c3f37d7517047fb8622db9f00303157836a758607ba333dab12"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-net-peer-0-2/logs/native-stderr.log",
+                "sha256": "57e50696ac99fc0d6c457dc87fdb258c8de255ac19fb0fd37bbf4a7fae6fa776"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-net-peer-1-2/logs/native-stderr.log",
+                "sha256": "2af48f0edb4e9c1ec28e5c20353a87de2760ad24dcd970cb446dc3c656c1126c"
+              },
+              {
+                "path": "G:/Temp/Codex/psxrecomp/x6-parity/F145-c134-net-peer-0-1/logs/native-stderr.log",
+                "sha256": "1e0bb8279143f8da8f09f0bc5912936f0d949b9ad497b8b9fe62d7e6fd703b7d"
+              }
+            ],
+            "limits": [
+              "Only startup negotiation/transport termination observed; native endpoint unverified.",
+              "No third unchanged NET launch, observer/capture expansion or new harness justified; preserve ready C134 candidate and move to independent row."
+            ],
+            "bypasses": [
+              "F145 predeclared fixture was selected but never armed or exercised; no debug RAM/control writes sent."
+            ]
           }
         ],
-        "limitations": "Exact C133 LOCAL default full-extent fix passed same disclosed stagger, both living/full clearance/original close/fresh controls/current-build mid-door save-load. C132 failed baseline retained. Matching NET remains unverified; minimal predeclared deterministic NET stagger is being implemented, requiring final same-candidate LOCAL+NET. F183 stationary held occupancy remains separate."
+        "limitations": "C133 and final C134 LOCAL full-extent fixes qualified with native closure/control/current-build restore; C132 failed baseline preserved. C134 NET1 offline-flag refusal then NET2 matchedprofile66 peer-response termination before controls, no F145 endpoint/final CRC. NET remains unverified; isolate ready candidate until concrete transport/setup fact permits retry. No F183 stationary hold credit."
       }
     },
     {
