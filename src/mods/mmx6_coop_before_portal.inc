@@ -55,9 +55,10 @@ static int checkpoint_portal_camera(void) {
     return psx_mod_read_half(cam+14)==1424 && psx_mod_read_half(cam+10)>=320 && psx_mod_read_half(cam+10)<=1264;
 }
 static int checkpoint_portal_original_arrival(void) {
-    return checkpoint_safe_boundary() && checkpoint_before_doors_idle(0) && checkpoint_before_doors_idle(1) &&
+    unsigned c0=psx_mod_read_byte(PLAYER+2),c1=p2.body[2];
+    return checkpoint_safe_boundary() && checkpoint_before_doors_idle_character(0,c0) && checkpoint_before_doors_idle_character(1,c1) &&
         psx_mod_read_word(PLAYER+8)==(480u<<16) && le32(p2.body+8)==(504u<<16) &&
-        psx_mod_read_word(PLAYER+12)==(1595u<<16) && le32(p2.body+12)==(1594u<<16) &&
+        psx_mod_read_word(PLAYER+12)==((1595u-c0)<<16) && le32(p2.body+12)==((1595u-c1)<<16) &&
         checkpoint_portal_camera();
 }
 static void checkpoint_portal_place(void) {
@@ -73,10 +74,11 @@ static void checkpoint_portal_place(void) {
     psx_mod_write_byte(diagnostic+0xAD,1); /* Position applied; no scanner call. */
 }
 static int checkpoint_portal_ready(void) {
+    unsigned c0=psx_mod_read_byte(PLAYER+2),c1=p2.body[2];
     if((uint32_t)(psx_mod_read_word(PLAY+0x90)-checkpoint_pending.placed_world)<2u ||
-       !checkpoint_safe_boundary() || !checkpoint_before_doors_idle(0) || !checkpoint_before_doors_idle(1) ||
+       !checkpoint_safe_boundary() || !checkpoint_before_doors_idle_character(0,c0) || !checkpoint_before_doors_idle_character(1,c1) ||
        psx_mod_read_word(PLAYER+8)!=(checkpoint_portal_x(0)<<16) || le32(p2.body+8)!=(checkpoint_portal_x(1)<<16) ||
-       psx_mod_read_word(PLAYER+12)!=((checkpoint_portal_floor(0)-21u)<<16) || le32(p2.body+12)!=(1594u<<16) ||
+       psx_mod_read_word(PLAYER+12)!=((checkpoint_portal_floor(0)-21u-c0)<<16) || le32(p2.body+12)!=((checkpoint_portal_floor(1)-21u-c1)<<16) ||
        !checkpoint_portal_camera() || psx_mod_read_half(0x80097202u)!=1264)return 0;
     unsigned portal=0,capsule=0,reploid=0;
     for(uint32_t a=0x8008EF48u;a<0x80090C88u;a+=0x9Cu)

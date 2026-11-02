@@ -353,14 +353,17 @@ static int checkpoint_safe_boundary(void) {
 /* These named lab bypasses skip only the route to the original door/explosion.
  * Native CP1 initialization and arrival finish first. No action/HP/ground,
  * checkpoint2, door command, allocation flag or outcome is manufactured. */
-static int checkpoint_before_doors_idle(unsigned seat) {
+static int checkpoint_before_doors_idle_character(unsigned seat,unsigned character) {
     uint8_t body[sizeof p2.body];
     if(seat)memcpy(body,p2.body,sizeof body);else capture(PLAYER,body,sizeof body);
     const unsigned locks[]={0x7A,0x8E,0xA4,0xCC,0xCD,0xD0,0xD3,0xD4,0xE0};
     for(unsigned i=0;i<sizeof locks/sizeof locks[0];++i)if(body[locks[i]])return 0;
-    return body[0] && body[2]==seat && body[4]==1 && body[5]==2 &&
+    return character<2 && body[0] && body[2]==character && body[4]==1 && body[5]==2 &&
         body[0x5C]>0 && body[0x5C]<128 && !body[0x14] && !body[0x67] &&
-        (body[0x70]&8) && le32(body+0x68)==0x80073D50u+seat*4u;
+        (body[0x70]&8) && le32(body+0x68)==0x80073D50u+character*4u;
+}
+static int checkpoint_before_doors_idle(unsigned seat) {
+    return checkpoint_before_doors_idle_character(seat,seat);
 }
 static unsigned checkpoint_starting_hp_mask(void) {
     return (checkpoint_starting_hp[0]?1u:0u)|(checkpoint_starting_hp[1]?2u:0u);

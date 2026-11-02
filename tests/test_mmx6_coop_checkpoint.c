@@ -1081,6 +1081,36 @@ static void agreed_portal_prerequisite(CPUState *cpu) {
         !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof saved));
     test_lab_option="off";checkpoint_reset();
 }
+static void portal_test_character(unsigned seat,unsigned character,unsigned y) {
+    if(seat) {p2.body[2]=(uint8_t)character;put32(p2.body+0x68,0x80073D50u+character*4u);put32(p2.body+12,y<<16);}
+    else {psx_mod_write_byte(PLAYER+2,(uint8_t)character);psx_mod_write_word(PLAYER+0x68,0x80073D50u+character*4u);psx_mod_write_word(PLAYER+12,y<<16);}
+}
+static void agreed_portal_native_heights(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(int distant=0;distant<=1;++distant)for(unsigned inverse=0;inverse<=1;++inverse) {
+        setup_portal_prerequisite(cpu,online,distant);
+        for(unsigned seat=0;seat<2;++seat)portal_test_character(seat,seat^inverse,1595u-(seat^inverse));
+        CHECK(checkpoint_portal_original_arrival());
+        /* Exact native character, standing box and height are all necessary. */
+        psx_mod_write_word(PLAYER+12,(1595u-(inverse^1u))<<16);CHECK(!checkpoint_portal_original_arrival());
+        portal_test_character(0,inverse,1595u-inverse);
+        psx_mod_write_word(PLAYER+0x68,0x80073D50u+(inverse^1u)*4u);CHECK(!checkpoint_portal_original_arrival());
+        portal_test_character(0,2,1595u-inverse);CHECK(!checkpoint_portal_original_arrival());
+        portal_test_character(0,inverse,1595u-inverse);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        CHECK(psx_mod_read_word(PLAYER+12)==(checkpoint_portal_floor(0)-23u)<<16 && le32(p2.body+12)==1593u<<16);
+        /* Native settlement is supplied externally, never by the prerequisite. */
+        portal_test_native_ready();
+        for(unsigned seat=0;seat<2;++seat)portal_test_character(seat,seat^inverse,checkpoint_portal_floor(seat)-21u-(seat^inverse));
+        CHECK(checkpoint_portal_ready());
+        put32(p2.body+12,(checkpoint_portal_floor(1)-21u-(inverse^1u)+1u)<<16);CHECK(!checkpoint_portal_ready());
+        portal_test_character(1,inverse^1u,checkpoint_portal_floor(1)-21u-(inverse^1u));
+        put32(p2.body+0x68,0x80073D50u+inverse*4u);CHECK(!checkpoint_portal_ready());
+        portal_test_character(1,2,1595);CHECK(!checkpoint_portal_ready());
+        portal_test_character(1,inverse^1u,checkpoint_portal_floor(1)-21u-(inverse^1u));
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && checkpoint_lab_completed());
+    }
+    test_lab_option="off";checkpoint_reset();
+}
 static void capsule_fatal_ready(CPUState *cpu,int online) {
     clear_phase=clear_members=clear_started=join_phase=arrival_pair=scene_call=0;both_door_reset();
     test_lab_hp_option[0]=test_lab_hp_option[1]="off";
@@ -1849,7 +1879,7 @@ int main(int argc,char **argv) {
     agreed_northpole_prerequisite(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_recycle_boundary(&cpu);agreed_recycle_loaded_origin_rejections(&cpu);
-    agreed_portal_prerequisite(&cpu);
+    agreed_portal_prerequisite(&cpu);agreed_portal_native_heights(&cpu);
     agreed_fallen_portal_prerequisite(&cpu);
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
