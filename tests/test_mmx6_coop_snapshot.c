@@ -16,6 +16,8 @@ static int allocation_fail,allocation_calls,local_scope,texture_support=1;
 static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
 static int solid_dispatch,allocator_dispatch;
+static int mounted_return_dispatch;
+static unsigned mounted_return_constructors;
 static int camera_dispatch;
 static int subtank_dispatch;
 static uint8_t subtank_expected,subtank_result,subtank_new_found;
@@ -66,6 +68,18 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
     if(abandon_guest)longjmp(abandon_target,1);
     uint32_t h=state_digest();state_track.frame[state_track.count-1].saved[0]^=1;
     CHECK(state_digest()!=h);state_track.frame[state_track.count-1].saved[0]^=1;
+    if(mounted_return_dispatch) {
+        if(target==0x8003AD18u)psx_mod_write_byte(PLAYER+5,2);
+        else if(target==0x8003CCBCu)psx_mod_write_word(PLAYER+0x68,0x80073D50u+4*psx_mod_read_byte(PLAYER+2));
+        else if(target==0x8003A268u) {
+            /* Original3A278..3A2B8 consumes the positive boarding request. */
+            CHECK(psx_mod_read_byte(PLAYER+0xD5)==1);++mounted_return_constructors;
+            psx_mod_write_word(PLAYER+0x68,0);psx_mod_write_byte(PLAYER+0x67,1);
+            psx_mod_write_byte(PLAYER+5,18);psx_mod_write_byte(PLAYER+6,1);
+            psx_mod_write_byte(PLAYER+0xD5,255);
+        }
+        cpu->gpr[2]=42;return;
+    }
     if(allocator_dispatch){cpu->gpr[2]=0x800950A0u+31*0xA0u;return;}
     if(subtank_dispatch){
         CHECK(psx_mod_read_byte(PLAY+0x63)==subtank_expected);
@@ -709,13 +723,62 @@ static void private_x_overlay_snapshot(void) {
     CHECK(zero_overlay[ZERO_GIGA_BACKUP_OFFSET]==0x37 && state_digest()==digest);
     private_actor=before;partner_x_armor=old_armor;jump_audio_character=old_character;memcpy(zero_overlay,old_overlay,sizeof old_overlay);free(wire);
 }
+static void mounted_scene_return_keeps_native_rider(void) {
+    PlayerContext old_p1=p1,old_p2=p2;Mmx6CoopLifecycle old_life=life;
+    unsigned old_scene=scene_owner,old_phase=scene_phase;int old_pause=pause_owner;
+    uint8_t old_scene_body[sizeof scene_body];memcpy(old_scene_body,scene_body,sizeof scene_body);
+    uint8_t old_player[sizeof p2.body];capture(PLAYER,old_player,sizeof old_player);
+    mounted_return_dispatch=1;pause_owner=-1;inside=scene_call=zero_projected=0;
+    for(unsigned passenger=0;passenger<2;++passenger)for(unsigned variant=0;variant<8;++variant) {
+        memset(&p1,0,sizeof p1);memset(&p2,0,sizeof p2);
+        mmx6_coop_lifecycle_init(&life);scene_owner=(passenger^1u)+1;scene_phase=5;
+        uint8_t bodies[2][0x158];memset(bodies,0,sizeof bodies);
+        for(unsigned seat=0;seat<2;++seat) {
+            uint8_t *b=bodies[seat];b[0]=b[3]=b[4]=1;b[2]=(uint8_t)seat;
+            b[5]=2;b[0x5C]=32;b[0x70]=8;
+            put32(b+8,(1704u+seat*24u)<<16);put32(b+12,346u<<16);
+        }
+        uint8_t *rider=bodies[passenger];rider[0xD5]=255;rider[0x70]=0;
+        memcpy(scene_body,rider,sizeof scene_body);scene_body[5]=18;
+        if(variant==1)scene_body[5]=2;
+        if(variant==3)rider[0xD5]=0;
+        if(variant==4){rider[0xD5]=0;bodies[passenger^1u][0xD5]=255;}
+        if(variant==6)rider[0x5C]=0;
+        project(PLAYER,bodies[0],sizeof bodies[0]);memcpy(p2.body,bodies[1],sizeof p2.body);
+        psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+        psx_mod_write_byte(PLAY+12,variant==7?1:4);psx_mod_write_byte(PLAY+13,0);
+        psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);psx_mod_write_byte(0x8008EAFCu,0);
+        psx_mod_write_byte(RIDE,65);psx_mod_write_byte(RIDE+1,0);
+        psx_mod_write_byte(RIDE+4,variant==2?2:1);psx_mod_write_byte(RIDE+0x5C,32);
+        psx_mod_write_byte(RIDE+0x97,variant==5?0xC0:0x40);
+        psx_mod_write_word(RIDE+0x10,0x800F2B1Cu);
+        psx_mod_write_word(RIDE+8,1887u<<16);psx_mod_write_word(RIDE+12,384u<<16);
+        psx_mod_write_word(0x80071380u,0x800F2414u);psx_mod_write_word(0x800F2414u,0x27BDFFE8u);
+        psx_mod_write_word(0x800EE924u,0x27BDFFD8u);psx_mod_write_word(0x800EEA74u,0x24050012u);
+        CPUState cpu;memset(&cpu,0,sizeof cpu);unsigned before=mounted_return_constructors;
+        scene_tick(&cpu);
+        uint8_t actual[0x158];if(passenger)memcpy(actual,p2.body,sizeof actual);else capture(PLAYER,actual,sizeof actual);
+        CHECK(!scene_owner && !scene_phase && !inside && !scene_call && !zero_projected && !state_track.count);
+        CHECK(actual[0x5C]==(variant==6?0:32));
+        CHECK(psx_mod_read_word(RIDE+8)==(1887u<<16) && psx_mod_read_word(RIDE+12)==(384u<<16));
+        if(!variant) {
+            CHECK(mounted_return_constructors==before+1 && actual[5]==18 && actual[6]==1 && actual[0xD5]==255);
+            CHECK(!le32(actual+0x68) && actual[0x67]==1);
+            CHECK(le32(actual+8)==(1887u<<16) && le32(actual+12)==(384u<<16));
+            CHECK(le32(actual+0x18)==le32(actual+8) && le32(actual+0x1C)==le32(actual+12));
+        } else CHECK(mounted_return_constructors==before && actual[5]==2);
+    }
+    mounted_return_dispatch=0;p1=old_p1;p2=old_p2;life=old_life;
+    scene_owner=old_scene;scene_phase=old_phase;pause_owner=old_pause;
+    memcpy(scene_body,old_scene_body,sizeof scene_body);project(PLAYER,old_player,sizeof old_player);
+}
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
-    private_x_overlay_snapshot();
+    private_x_overlay_snapshot();mounted_scene_return_keeps_native_rider();
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly
      * cannot be captured/restored as a resumable C stack. Reactivation required. */
     uint32_t v=1;for(unsigned i=0;i<MMX6_STATE_FRAMES;++i)CHECK(mmx6_state_push(i,&v,4,1)!=UINT32_MAX);

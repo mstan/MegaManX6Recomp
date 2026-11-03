@@ -1149,6 +1149,31 @@ static void ride_sync_rider(void) {
     }
 }
 #include "mmx6_coop_victory.inc"
+/* A scene's ordinary incoming constructor returns an on-foot action. A
+ * passenger who still owns the intact native armor must consume the original
+ * boarding request again; retaining D5=-1 alone leaves an on-foot pilot. */
+static int ride_resume_passenger(CPUState *cpu,unsigned seat,const uint8_t *before) {
+    unsigned hp=psx_mod_read_byte(PLAYER+0x5C),ride_hp=psx_mod_read_byte(RIDE+0x5C);
+    if(before[4]!=1 || before[5]!=0x12 ||
+       (before[0xD5]!=1 && before[0xD5]!=255) ||
+       before[2]!=psx_mod_read_byte(PLAYER+2) || life.status[seat]!=MMX6_COOP_ALIVE ||
+       psx_mod_read_byte(PLAYER+4)!=1 || !hp || hp>=128 ||
+       !ride_source() || ride_owner()!=seat || psx_mod_read_byte(RIDE+4)!=1 ||
+       !ride_hp || ride_hp>=128 || (psx_mod_read_byte(RIDE+0x97)&0xC0u)!=0x40u)
+        return 0;
+    /* Original31F14..31F28 anchors a mounted body to this one vehicle. New
+     * boarding begins with matching history, not the outgoing beam's Y. */
+    for(unsigned axis=8;axis<=12;axis+=4) {
+        uint32_t value=psx_mod_read_word(RIDE+axis);
+        psx_mod_write_word(PLAYER+axis,value);
+        psx_mod_write_word(PLAYER+axis+0x10,value);
+    }
+    /* OriginalEEAA8 requests D5=1. Original3A268 initializes the actor's
+     * mounted resources/action18/null foot box and consumes it as D5=-1. */
+    psx_mod_write_byte(PLAYER+0xD5,1);
+    guest(cpu,0x8003A268u,PLAYER,0);
+    return 1;
+}
 static int arrival_source(void);
 static int arrival_grounded(const uint8_t *body);
 /* One projected incoming actor only. Callers own enter/leave_zero and retain
@@ -1659,6 +1684,7 @@ static void scene_tick(CPUState *cpu) {
         } else if (!psx_mod_read_byte(PLAYER+0x46)) {
             guest(cpu,0x8003AD18,PLAYER,0);
             guest(cpu,0x8003CCBC,PLAYER,0);
+            (void)ride_resume_passenger(cpu,passenger,scene_body);
             psx_mod_write_byte(PLAYER+0x61,60);
             scene_owner=scene_phase=0;
             life.select_frames=0;

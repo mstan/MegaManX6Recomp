@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; damaged living equipment prerequisite",
+  "status": "development-candidate-only; mounted passenger native boarding restoration",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 79,
+  "revision": 80,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v96",
+    "title_compatibility": "mmx6-x-zero-delay-v97",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
