@@ -2551,6 +2551,20 @@ static int zero_dash_effect(uint32_t actor) {
         psx_mod_read_byte(actor+1)==1 && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
+static int private_falcon_flight_effect(uint32_t actor) {
+    /* Original3F310 allocates shared18 during Falcon action23. 4B3A0
+     * resolves assembly header1C, sets page0500/CLUT7802 and uses the
+     * current body frame minus42. DAT87 body frame42 has20 tiles; its
+     * three jet shapes select tiles8/9/10 of that SAME compressed frame. */
+    if(render_x_death || private_actor.character!=MMX6_COOP_CHARACTER_X ||
+       private_actor.form!=MMX6_COOP_FORM_FALCON || !assembly)return 0;
+    int slot=shared_effect_slot(actor);
+    if(slot<0 || shared_effect_owners[slot]!=2 || !psx_mod_read_byte(actor) ||
+       psx_mod_read_byte(actor+1)!=18 || psx_mod_read_word(actor+0x38) ||
+       psx_mod_read_half(actor+0x40)!=0x0500)return 0;
+    uint32_t offset=psx_mod_read_word(assembly+0x1C);
+    return offset && offset<ASSET_SPACE && psx_mod_read_word(actor+0x3C)==assembly+offset;
+}
 static int zero_death_effect(uint32_t actor) {
     /* Native global FX11 resolves assembly word4 and remaps packed icon
      * tiles (flags21). Its original origin is already retained at birth;
@@ -2710,8 +2724,9 @@ static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int 
     /* Native saber actors share the player's uploaded frame, with their own
      * assembly and palette (801ED4F4); they have no decompression pointer. */
     const uint8_t *retained_body=render_x_death?p1.body:p2.body;
-    if (!table && psx_mod_read_word(actor+0x3C)==le32(retained_body+0x3C) &&
-        psx_mod_read_half(actor+0x40)==(uint16_t)(retained_body[0x40]|retained_body[0x41]<<8)) {
+    if (!table && (private_falcon_flight_effect(actor) ||
+        (psx_mod_read_word(actor+0x3C)==le32(retained_body+0x3C) &&
+         psx_mod_read_half(actor+0x40)==(uint16_t)(retained_body[0x40]|retained_body[0x41]<<8)))) {
         table=zero_world&&!render_x_death?psx_mod_read_word(PLAYER+0x38):le32(retained_body+0x38);
         frame=zero_world&&!render_x_death?psx_mod_read_byte(PLAYER+0x47):retained_body[0x47];
     }
@@ -2851,7 +2866,7 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
-    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
+    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor)||private_falcon_flight_effect(actor);
     if (!zero_world && !retained) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
@@ -3371,6 +3386,7 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80049100,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x80049478,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x8004AE1C,shared_effect_callback) ||
+        !psx_mod_set_function_replacement(0x8004B3A0,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x801EE254,shared_effect_callback)) failed=1;
     independent_activate();
     fprintf(stdout,"mmx6 co-op: development prototype active (OpenGL rendering required)\n");

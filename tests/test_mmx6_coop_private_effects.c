@@ -25,10 +25,11 @@ static uint16_t menu_input[3];
 static unsigned native_budget;
 static unsigned boss_scan_probe,boss_scan_type[2],boss_scan_cookie[2],boss_scan_present[2],boss_scan_calls[2];
 static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_calls;
+static unsigned falcon_flight_probe;
 static unsigned muzzle_probe,muzzle_expected_seat,muzzle_calls;
 static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat,ride_primary_character,ride_character;
 static unsigned door_native_probe,door_ticks,door_draws,door_subtype_allowed;
-static unsigned icon_packet_probe,dash_packet_probe,armor_packet_probe;
+static unsigned icon_packet_probe,dash_packet_probe,armor_packet_probe,falcon_packet_probe;
 static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
@@ -182,7 +183,11 @@ static void native_draw(uint32_t actor){
     CHECK(at>=arena && at+40<=arena+40000 && mode==arena+MODES_AT+(at-arena)/5);
     uint32_t q[10]={0x09000000u|((mode+8)&0xFFFFFFu),0x2C808080u,0x0014000Au,0,0x0014001Au,0x00000010u,0x0024000Au,0x00001000u,0x0024001Au,0x00001010u};
     q[3]=(uint32_t)psx_mod_read_half(actor+0x42)<<16;
-    if(armor_packet_probe) {
+    if(falcon_packet_probe && actor==0x80091298u) {
+        /* Original DAT87 header1C flight frame0 selects jet tile8 at page5
+         * with fixed7802, independently of the retention admission guard. */
+        q[1]=0x7D000000u;q[3]=0x78020080u;memset(q+4,0,6*sizeof *q);
+    } else if(armor_packet_probe) {
         /* Original25984 + DAT88 header5 frame0: page5/UV C0,0,
          * packed flags0 select fixed CLUT7843 (working slot19). This
          * armor uses the upper tiles of actor+38's compressed body frame.
@@ -217,7 +222,7 @@ static void native_draw(uint32_t actor){
     }
     for(unsigned i=0;i<10;++i)psx_mod_write_word(at+i*4,q[i]);
     psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFFu));
-    psx_mod_write_word(mode+4,armor_packet_probe?0xE1000025u:dash_packet_probe && actor==0x80091298u?0xE1000025u:
+    psx_mod_write_word(mode+4,(armor_packet_probe || falcon_packet_probe)?0xE1000025u:dash_packet_probe && actor==0x80091298u?0xE1000025u:
         death_packet_probe && actor==0x800CD410u?0xE1000027u:zero_ui_effect(actor)?0xE100003Eu:
         icon_packet_probe==2 && actor>=0x800950A0u && actor<0x800964A0u?0xE100002Eu:0xE1000040u);
     unsigned priority=psx_mod_read_byte(actor+0x16);
@@ -540,6 +545,22 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     if(shared_probe && address==0x8002C398u) {
         memset(memory(0x80091298u),0,0x70);cpu->gpr[2]=0x80091298u;return;
     }
+    if(falcon_flight_probe && address==0x8004B3A0u) {
+        CHECK(shared_fx_call && zero_projected && psx_mod_read_byte(PLAYER+2)==0);
+        CHECK(psx_mod_read_byte(PLAYER+0xE7)==1 && psx_mod_read_word(SCRATCH+0x1C)==assembly);
+        uint32_t actor=cpu->gpr[4];
+        if(psx_mod_read_byte(PLAYER+5)!=0x23){psx_mod_write_byte(actor,0);return;}
+        /* External original4B3D0..4B46C contract: no compression pointer;
+         * distinct jet assembly, body-derived pose and the flyer's origin. */
+        psx_mod_write_byte(actor+3,1);psx_mod_write_byte(actor+4,1);
+        psx_mod_write_word(actor+0x3C,assembly+psx_mod_read_word(assembly+0x1C));
+        psx_mod_write_half(actor+0x40,0x0500);psx_mod_write_half(actor+0x42,0x7802);
+        psx_mod_write_byte(actor+0x16,3);
+        psx_mod_write_byte(actor+0x47,psx_mod_read_byte(PLAYER+0x47)-0x42);
+        psx_mod_write_word(actor+8,psx_mod_read_word(PLAYER+8));
+        psx_mod_write_word(actor+12,psx_mod_read_word(PLAYER+12));
+        cpu->gpr[2]=0x1823;return;
+    }
     if(muzzle_probe && address==0x80049478u) {
         /* External original49854 contract: the deferred shot is allocated
          * in the resident pool and increments the resident counter. It has
@@ -648,11 +669,11 @@ static void setup(CPUState *cpu){
     memset(clear_poses,0,sizeof clear_poses);memset(clear_outgoing,0,sizeof clear_outgoing);
     clear_air_ticks=clear_air_limit=clear_air_seat=0;
     shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
-    shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
+    shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=falcon_flight_probe=0;
     muzzle_probe=muzzle_expected_seat=muzzle_calls=0;
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=ride_primary_character=ride_character=0;
     door_native_probe=door_ticks=door_draws=both_doors=scene_call=0;both_door_reset();door_subtype_allowed=1;
-    icon_packet_probe=dash_packet_probe=armor_packet_probe=render_replacement_probe=0;
+    icon_packet_probe=dash_packet_probe=armor_packet_probe=falcon_packet_probe=render_replacement_probe=0;
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=voluntary_transport_probe=capsule_native_probe=0;memset(death_effect,0,sizeof death_effect);
     projected_death_probe=0;
     scene_survivor_worlds=scene_native_retries=0;memset(scene_corpse_updates,0,sizeof scene_corpse_updates);
@@ -1196,6 +1217,43 @@ static void deferred_shared_effect_owner_context(void) {
     CHECK(shared_probe_calls==3);
     native_player_init(&cpu,0x8003BD24u);
     for(unsigned i=0;i<96;++i)CHECK(!shared_effect_owners[i]);
+}
+static void deferred_falcon_flight_tracks_owner_and_body_pixels(void) {
+    CPUState cpu;setup(&cpu);shared_probe=1;
+    private_actor.character=MMX6_COOP_CHARACTER_X;private_actor.form=MMX6_COOP_FORM_FALCON;
+    p2.body[2]=0;p2.body[0xE7]=1;p2.body[5]=0x23;p2.body[0x47]=0x42;
+    static uint8_t graphics[0x400];memset(graphics,0,sizeof graphics);
+    zero_compressed=graphics;compressed_size=sizeof graphics;
+    put32(p2.body+0x38,assets+0x100);put32(graphics+0x100+0x42*4,0x01400280u);
+    const uint16_t stream[]={0x6000,0x1111,0x0001,1279,0,0};
+    for(unsigned i=0;i<sizeof stream/sizeof *stream;++i){
+        graphics[0x380+i*2]=(uint8_t)stream[i];graphics[0x381+i*2]=(uint8_t)(stream[i]>>8);
+    }
+    psx_mod_write_word(assembly+0x1C,0x400);psx_mod_write_half(active_palette+2*32+2,0x1234);
+    memset(test_vram,0xBB,sizeof test_vram);memset(test_zero_ui,0xCC,sizeof test_zero_ui);
+    psx_mod_write_byte(PLAYER+2,1); /* Idle Zero must not delete the flyer's jet. */
+    psx_mod_write_byte(PLAY+0x38,1);psx_mod_write_byte(PLAY+0x5E,5);
+    PlayerContext primary;capture_player(&primary);
+    inside=1;enter_zero();CHECK(shared_effect_allocate(&cpu,0x8002C398u));
+    const uint32_t actor=0x80091298u,table=0x800F699Cu;
+    CHECK(cpu.gpr[2]==actor && shared_effect_owners[0]==2);leave_zero();inside=0;
+    psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,18);
+    psx_mod_write_word(SCRATCH+0x88,table);psx_mod_write_word(table+18*4,0x8004B3A0u);
+    cpu.gpr[4]=actor;cpu.gpr[31]=0x80020438u;shared_probe=0;falcon_flight_probe=1;
+    CHECK(shared_effect_callback(&cpu,0x8004B3A0u));
+    CHECK(cpu.gpr[2]==0x1823 && psx_mod_read_word(actor+8)==400u*65536u);
+    CHECK(psx_mod_read_word(actor+0x3C)==assembly+0x400 && !psx_mod_read_word(actor+0x38));
+    CHECK(private_falcon_flight_effect(actor));falcon_packet_probe=1;
+    CHECK(render_survivor(&cpu,0x800232D4u));
+    CHECK(draw_count==1 && bank_count==1 && bank_first[0]==0x1234 && !failed);
+    CHECK(banks[0].tile==0x0080 && banks[0].source==assets+0x380);
+    PlayerContext after;capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof primary));
+    CHECK(psx_mod_read_word(SCRATCH+0x1C)==0x80030100u && !state_track.count && !state_track.error);
+    psx_mod_write_word(actor+0x3C,assembly);CHECK(!private_falcon_flight_effect(actor));
+    psx_mod_write_word(actor+0x3C,assembly+0x400);
+    p2.body[5]=7;CHECK(shared_effect_callback(&cpu,0x8004B3A0u));
+    CHECK(!psx_mod_read_byte(actor) && !shared_effect_owners[0] && !private_falcon_flight_effect(actor));
+    CHECK(!render_survivor(&cpu,0x800232D4u));clear_banks();
 }
 static void deferred_X_muzzle_retains_shot_pool_and_counter(void) {
     for(unsigned inverse=0;inverse<2;++inverse)for(unsigned borrowed=0;borrowed<2;++borrowed) {
@@ -3042,6 +3100,7 @@ int main(void){
     scene_owner_death_preserves_living_passenger();
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
+    deferred_falcon_flight_tracks_owner_and_body_pixels();
     deferred_X_muzzle_retains_shot_pool_and_counter();
     deferred_dash_effect_uses_allocating_body();
     deferred_ui_effect_retains_owner_atlas();clear_banks();
