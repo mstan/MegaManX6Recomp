@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; retain primary in guest-owned in-place scene world draw",
+  "status": "development-candidate-only; native Recycle portal guest contact supports reciprocal X/Zero rosters",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 83,
+  "revision": 84,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v100",
+    "title_compatibility": "mmx6-x-zero-delay-v101",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1052,5 +1052,10 @@
   "native_guest_inplace_primary_render": {
     "scope": "Living primary body and existing frozen personal pools are emitted through existing guest-owned pause projection/retained-bank restoration path while scene_owner2/phase0. No new mutable state or scene admission/position/camera changes.",
     "qualification": "Source/render-seam tests prepared. C150 original optionalAlia owners1/2 release and postrelease independent controls32HP were observed; owner2 far-primary capture cannot distinguish source render omission from native camera exclusion. C151 native check will request guest Alia first with both nearby. C147 retained guest-Alia portrait corruption is pre-existing."
+  },
+  "native_reciprocal_portal_contact": {
+    "scope": "Original source-authenticated Recycle type1C/sub1 F2B0C guest native contact retry accepts validated native reciprocal0/1 or1/0. Preserve all actor/source/lifecycle/geometry gates, nativeP1 priority, original native contact/admission/deferred owner/single world/transition.",
+    "state": "No new mutable or serialized state; snapshot24 unchanged.",
+    "qualification": "C151 actual inverse originalLoad/Recycle then option7 source-authenticated portal setup succeeds but XP2Right1506->1557.5 has no admission because oldguard refuses1/0. C152 fixture covers bothrosters and invalidpairs; actual nativepostfix LOCAL/NET endpoint pending. No F117 hit/recovery pass."
   }
 }
