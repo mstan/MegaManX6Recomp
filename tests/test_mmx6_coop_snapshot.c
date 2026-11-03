@@ -20,6 +20,7 @@ static int mounted_return_dispatch;
 static unsigned mounted_return_constructors;
 static int interaction_dispatch,interaction_accept;
 static unsigned inplace_render_dispatch,inplace_render_calls;
+static unsigned armor_snapshot_dispatch;
 static int camera_dispatch;
 static int subtank_dispatch;
 static uint8_t subtank_expected,subtank_result,subtank_new_found;
@@ -82,6 +83,22 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
     if(abandon_guest)longjmp(abandon_target,1);
     uint32_t h=state_digest();state_track.frame[state_track.count-1].saved[0]^=1;
     CHECK(state_digest()!=h);state_track.frame[state_track.count-1].saved[0]^=1;
+    if(armor_snapshot_dispatch) {
+        CHECK(target==0x8002619Cu && cpu->gpr[4]==PLAYER && world_render);
+        CHECK(psx_mod_read_word(SCRATCH+0x1C)==assembly && !snapshot_bytes());
+        unsigned packet_frames=0,assembly_frames=0;
+        for(unsigned i=0;i<state_track.count;++i) {
+            Mmx6StateFrame *f=&state_track.frame[i];if(f->tag!=15)continue;
+            CHECK(f->words);
+            if(f->bytes==16)++packet_frames;
+            else {
+                CHECK(f->bytes==4);++assembly_frames;
+                uint32_t before=state_digest();f->saved[0]^=1;
+                CHECK(state_digest()!=before);f->saved[0]^=1;CHECK(state_digest()==before);
+            }
+        }
+        CHECK(packet_frames==1 && assembly_frames==1);cpu->gpr[2]=42;return;
+    }
     if(inplace_render_dispatch) {
         CHECK(target==0x800232D4u && cpu->gpr[4]==PLAYER);
         CHECK(psx_mod_read_byte(PLAYER+2)==(inplace_render_calls?0:1));
@@ -161,6 +178,30 @@ static void setup(void){
         b->samples=malloc(128);CHECK(b->samples);memset(b->samples,(int)(0x73+i),128);
     }
     Mmx6AssetView source={zero_compressed,compressed_size,2};snapshot_assets_loaded(&source,1);CHECK(snapshot_ready());
+}
+static void native_armor_transient_then_snapshot(void) {
+    CPUState cpu;memset(&cpu,0,sizeof cpu);cpu.gpr[31]=0x80020000u;
+    uint8_t body[0x158];capture(PLAYER,body,sizeof body);
+    uint32_t original[4]={psx_mod_read_word(SCRATCH+0x1C),psx_mod_read_word(SCRATCH+0x100),
+        psx_mod_read_word(SCRATCH+0x104),psx_mod_read_word(SCRATCH+0x124)};
+    psx_mod_write_byte(PLAYER+2,0);psx_mod_write_byte(PLAYER+0xE7,2);
+    psx_mod_write_word(SCRATCH+0x1C,0x80054320u);
+    psx_mod_write_word(SCRATCH+0x100,packets);psx_mod_write_word(SCRATCH+0x104,packets+PLAYER_MODE_OFFSET);
+    psx_mod_write_word(SCRATCH+0x124,0);
+    unsigned calls_before=guest_calls;world_render=1;armor_snapshot_dispatch=1;
+    render_armor(&cpu,packets);armor_snapshot_dispatch=world_render=0;
+    CHECK(guest_calls==calls_before+1 && !state_track.count && !state_track.error && !failed);
+    CHECK(psx_mod_read_word(SCRATCH+0x1C)==0x80054320u && snapshot_ready());
+    /* The native call stack is rejected above. The first stable boundary
+     * after the armor pass retains the existing current-build wire24 path. */
+    uint32_t hash=state_digest(),length=snapshot_bytes();uint8_t *wire=malloc(length);
+    CHECK(wire && length && snapshot_write(wire,length));
+    p2.body[8]^=1;CHECK(state_digest()!=hash && snapshot_validate(wire,length));
+    snapshot_read(wire,length);CHECK(state_digest()==hash && snapshot_ready());free(wire);
+    project(PLAYER,body,sizeof body);
+    psx_mod_write_word(SCRATCH+0x1C,original[0]);psx_mod_write_word(SCRATCH+0x100,original[1]);
+    psx_mod_write_word(SCRATCH+0x104,original[2]);psx_mod_write_word(SCRATCH+0x124,original[3]);
+    guest_calls=calls_before;
 }
 static void pixel_edges(void){
     uint16_t *pixels=malloc(65536*2u);CHECK(pixels);for(unsigned i=0;i<65536;++i)pixels[i]=0x1234;
@@ -952,7 +993,7 @@ static void inplace_guest_scene_draws_primary_once(void) {
     project(PLAYER,old_player,sizeof old_player);
 }
 int main(void){
-    pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
+    pixel_edges();setup();native_armor_transient_then_snapshot();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();default_boss_cookie_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
