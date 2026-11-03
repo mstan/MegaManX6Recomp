@@ -28,7 +28,7 @@ static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_
 static unsigned muzzle_probe,muzzle_expected_seat,muzzle_calls;
 static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat,ride_primary_character,ride_character;
 static unsigned door_native_probe,door_ticks,door_draws,door_subtype_allowed;
-static unsigned icon_packet_probe,dash_packet_probe;
+static unsigned icon_packet_probe,dash_packet_probe,armor_packet_probe;
 static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
@@ -182,7 +182,13 @@ static void native_draw(uint32_t actor){
     CHECK(at>=arena && at+40<=arena+40000 && mode==arena+MODES_AT+(at-arena)/5);
     uint32_t q[10]={0x09000000u|((mode+8)&0xFFFFFFu),0x2C808080u,0x0014000Au,0,0x0014001Au,0x00000010u,0x0024000Au,0x00001000u,0x0024001Au,0x00001010u};
     q[3]=(uint32_t)psx_mod_read_half(actor+0x42)<<16;
-    if(dash_packet_probe && actor==0x80091298u) {
+    if(armor_packet_probe) {
+        /* Original25984 + DAT88 header5 frame0: page5/UV C0,0,
+         * packed flags0 select fixed CLUT7843 (working slot19). This
+         * static atlas is independent of actor+38's compressed body. */
+        q[1]=0x7D000000u;q[3]=0x784300C0u;
+        memset(q+4,0,6*sizeof *q);
+    } else if(dash_packet_probe && actor==0x80091298u) {
         /* Original Zero follow frame43: common tile0 at page5/UV0,B0,
          * packed flags4 select C3 from the actor's base C2 palette. */
         q[1]=0x7D000000u;q[3]=0x7803B000u;
@@ -210,7 +216,7 @@ static void native_draw(uint32_t actor){
     }
     for(unsigned i=0;i<10;++i)psx_mod_write_word(at+i*4,q[i]);
     psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFFu));
-    psx_mod_write_word(mode+4,dash_packet_probe && actor==0x80091298u?0xE1000025u:
+    psx_mod_write_word(mode+4,armor_packet_probe?0xE1000025u:dash_packet_probe && actor==0x80091298u?0xE1000025u:
         death_packet_probe && actor==0x800CD410u?0xE1000027u:zero_ui_effect(actor)?0xE100003Eu:
         icon_packet_probe==2 && actor>=0x800950A0u && actor<0x800964A0u?0xE100002Eu:0xE1000040u);
     unsigned priority=psx_mod_read_byte(actor+0x16);
@@ -586,6 +592,15 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         CHECK(found==1); /* Saved resident mode cursor is typed future state. */
     }
 #endif
+    if(address==0x8002619Cu) {
+        CHECK(world_render && cpu->gpr[4]==PLAYER && !psx_mod_read_byte(PLAYER+2));
+        CHECK(psx_mod_read_word(SCRATCH+0x1C)==assembly);
+        /* Original2619C's action1/frame7E exclusion applies except form4.
+         * The plugin calls the actual native gate, not its own pose copy. */
+        if(psx_mod_read_byte(PLAYER+0xE7)!=4 && psx_mod_read_byte(PLAYER+5)==1 &&
+           psx_mod_read_byte(PLAYER+0x47)==0x7E)return;
+        armor_packet_probe=1;native_draw(PLAYER);armor_packet_probe=0;return;
+    }
     if(address==0x800232D4u){native_draw(cpu->gpr[4]);return;}
     if(address==0x8001E9ECu && menu_probe){
         CHECK(stage_call);
@@ -636,7 +651,7 @@ static void setup(CPUState *cpu){
     muzzle_probe=muzzle_expected_seat=muzzle_calls=0;
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=ride_primary_character=ride_character=0;
     door_native_probe=door_ticks=door_draws=both_doors=scene_call=0;both_door_reset();door_subtype_allowed=1;
-    icon_packet_probe=dash_packet_probe=render_replacement_probe=0;
+    icon_packet_probe=dash_packet_probe=armor_packet_probe=render_replacement_probe=0;
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=voluntary_transport_probe=capsule_native_probe=0;memset(death_effect,0,sizeof death_effect);
     projected_death_probe=0;
     scene_survivor_worlds=scene_native_retries=0;memset(scene_corpse_updates,0,sizeof scene_corpse_updates);
@@ -993,6 +1008,55 @@ static void native_menu_campaign_authority(void){
     CHECK(stage_tick(&cpu,0x8001E9EC));
     CHECK(call_count==1 && menu_input[0]==0x0100 && menu_input[2]==0x0100 && pause_owner==-1);
     CHECK(!inside && !zero_world && !stage_call && !state_track.count && !failed);
+}
+static void native_X_armor_static_atlas_and_survivor(void) {
+    for(unsigned form=0;form<=4;++form) {
+        CPUState cpu;setup(&cpu);
+        private_actor.character=MMX6_COOP_CHARACTER_X;private_actor.form=form;
+        p2.body[2]=0;p2.body[0xE7]=(uint8_t)form;p2.body[0xDC]=5;
+        /* Wrong shared VRAM and the ordinary compressed body deliberately
+         * disagree with the actual retained armor atlas and CLUT. */
+        for(unsigned y=0;y<16;++y)for(unsigned x=0;x<4;++x) {
+            test_zero_ui[y*1024+368+x]=0x1111;
+            test_vram[y*1024+368+x]=0x2222;
+        }
+        psx_mod_write_half(active_palette+0x260+2,0x5A31);
+        PlayerContext resident;capture_player(&resident);PlayerContext guest_before=p2;
+        uint32_t sprites=psx_mod_read_word(SCRATCH+0x1C);
+        render(&cpu,0x800232D4u);
+        CHECK(draw_count==(form?2u:1u) && occurrences(0x8002619Cu)==!!form);
+        CHECK(bank_count==(form?2u:1u) && !failed);
+        if(form) {
+            CHECK(bank_first[1]==0x5A31 && banks[1].tile==0x00C0);
+            CHECK(banks[1].character==MMX6_COOP_CHARACTER_X);
+            /* Native same-priority append preserves the base body's tail. */
+            CHECK((psx_mod_read_word(packets+PLAYER_PACKET_BYTES+40)&0xFFFFFFu)==
+                ((packets+PLAYER_MODE_OFFSET+8)&0xFFFFFFu));
+        }
+        PlayerContext after;capture_player(&after);
+        CHECK(!memcmp(&resident,&after,sizeof resident) && !memcmp(&p2,&guest_before,sizeof p2));
+        CHECK(psx_mod_read_word(SCRATCH+0x1C)==sprites && !state_track.count && !state_track.error);
+        if(form==2) {
+            /* A private-owned native world calls body and armor separately.
+             * The armor replacement appends once and restores both cursors. */
+            enter_zero();inside=zero_world=1;world_packets=packets;
+            psx_mod_write_word(SCRATCH+0x124,0);native_budget=0;draw_count=0;
+            cpu.gpr[4]=PLAYER;
+            CHECK(render_survivor(&cpu,0x800232D4u));
+            CHECK(world_packets==packets+40 && draw_count==1);
+            CHECK(render_armor_survivor(&cpu,0x8002619Cu));
+            CHECK(world_packets==packets+80 && draw_count==2 && !failed);
+            CHECK(psx_mod_read_word(SCRATCH+0x100)==0x800A0000 &&
+                  psx_mod_read_word(SCRATCH+0x104)==0x800A8000);
+            psx_mod_write_byte(PLAYER+5,1);psx_mod_write_byte(PLAYER+0x47,0x7E);
+            CHECK(render_armor_survivor(&cpu,0x8002619Cu));
+            CHECK(world_packets==packets+80 && draw_count==2); /* Native beam gate. */
+            leave_zero();inside=zero_world=0;
+            CHECK(!render_armor_survivor(&cpu,0x8002619Cu));
+        }
+    }
+    CPUState cpu;setup(&cpu);render(&cpu,0x800232D4u);
+    CHECK(!occurrences(0x8002619Cu)); /* Ordinary native Zero retains its path. */
 }
 static void draw_order_retained_packets_and_survivor(void){
     CPUState cpu;setup(&cpu);for(unsigned i=0;i<3;++i){p2.trails[i*0x60+3]=1;p2.effects[i*0x50+3]=1;}
@@ -2941,6 +3005,7 @@ int main(void){
     private_giga_shots_retain_zero_source();
     private_native_weapon_atlas_retains_zero_source();
     deferred_death_effect_retains_zero_source();clear_banks();
+    native_X_armor_static_atlas_and_survivor();clear_banks();
     native_shared_dialogue_palette();
     native_working_palette_class_and_load_events();
     native_working_palette_rectangle();

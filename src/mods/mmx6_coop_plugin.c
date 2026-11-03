@@ -2649,7 +2649,7 @@ static void begin_world_draw(CPUState *cpu,uint32_t address) {
     giga_packet_trace("world-begin",0);
     (void)cpu;(void)address;
 }
-static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
+static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int armor) {
     uint32_t base=psx_mod_read_word(SCRATCH+0x100);
     uint32_t mode=psx_mod_read_word(SCRATCH+0x104);
     /* Preserve native's no-output return at budget>=1000. A negative budget
@@ -2663,7 +2663,17 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     uint32_t restore_words[4]={base,mode,actor,arena};
     STATE_WORDS(restore_packet,15,restore_words,4);
     giga_packet_trace("before-native",actor);
-    guest(cpu,0x800232D4,actor,0);
+    /* Native22960 follows the ordinary X body with2619C. That pass
+     * resolves actor+DC in the assembly HEADER, not actor+3C, and samples
+     * the character's static common/icons atlas rather than its compressed
+     * body frame. Project only that pointer; native owns form/pose gates,
+     * shape geometry, camera, priority, CLUT selection and packet budget. */
+    uint32_t original_assembly=psx_mod_read_word(SCRATCH+0x1C);
+    STATE_WORDS(restore_assembly,15,&original_assembly,1);
+    if(armor)psx_mod_write_word(SCRATCH+0x1C,assembly);
+    guest(cpu,armor?0x8002619Cu:0x800232D4u,actor,0);
+    if(armor)psx_mod_write_word(SCRATCH+0x1C,original_assembly);
+    STATE_POP(restore_assembly);
     STATE_POP(restore_packet);
     giga_packet_trace("after-native",actor);
     uint32_t end=psx_mod_read_word(SCRATCH+0x100);
@@ -2686,7 +2696,7 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
     int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
-    if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
+    if (!armor && !ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
         giga_packet_trace("native-only",actor);return;
     }
     if (render_x_death && (table<0x80010000u || table>=0x80200000u)) {
@@ -2702,7 +2712,7 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
             q[5]|=(psx_mod_read_word(mode+4)&0x60u)<<16;
         uint16_t bank=0;
         uint16_t page=tile==UINT16_MAX?(uint16_t)(q[5]>>16):(uint16_t)psx_mod_read_word(mode+4);
-        if(supported)bank=ui?zero_ui_effect_bank(page,
+        if(supported)bank=armor?zero_atlas_effect_bank(page,(uint16_t)(q[3]>>16),tile,0):ui?zero_ui_effect_bank(page,
             (uint16_t)(q[3]>>16),tile):icons?zero_atlas_effect_bank(page,
             (uint16_t)(q[3]>>16),tile,0):sprite_bank(table,frame,(uint16_t)(q[3]>>16),tile);
         /* Native OT links still address the original tag. Turn it into a
@@ -2728,6 +2738,39 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     }
     giga_packet_trace("after-conversion",actor);
 }
+static void render_actor(CPUState *cpu,uint32_t actor,uint32_t arena) {
+    render_actor_pass(cpu,actor,arena,0);
+}
+static int native_x_armor_draw(void) {
+    unsigned form=psx_mod_read_byte(PLAYER+0xE7);
+    return !psx_mod_read_byte(PLAYER+2) && form>=1 && form<=4;
+}
+static void render_armor(CPUState *cpu,uint32_t arena) {
+    if(native_x_armor_draw() && !failed)render_actor_pass(cpu,PLAYER,arena,1);
+}
+static int render_armor_survivor(CPUState *cpu,uint32_t address) {
+    (void)address;
+    /* When the guest owns the original world,22960 still invokes its own
+     * armor pass. Replace that single call instead of appending it again
+     * from the ordinary body replacement. */
+    if(world_render || !zero_world || !enrolled || failed || cpu->gpr[4]!=PLAYER ||
+       private_actor.character!=MMX6_COOP_CHARACTER_X ||
+       psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_texture_banks_supported())return 0;
+    world_render=1;
+    uint32_t original=psx_mod_read_word(SCRATCH+0x100);
+    uint32_t original_mode=psx_mod_read_word(SCRATCH+0x104);
+    uint32_t arena=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
+    uint32_t context[4]={original,original_mode,PLAYER,arena};
+    STATE_WORDS(restore_packet,18,context,4);
+    psx_mod_write_word(SCRATCH+0x100,world_packets);
+    psx_mod_write_word(SCRATCH+0x104,arena+PLAYER_MODE_OFFSET+(world_packets-arena)/5);
+    render_armor(cpu,arena);
+    world_packets=psx_mod_read_word(SCRATCH+0x100);
+    psx_mod_write_word(SCRATCH+0x100,original);
+    psx_mod_write_word(SCRATCH+0x104,original_mode);
+    STATE_POP(restore_packet);world_render=0;
+    return 1;
+}
 static void render(CPUState *cpu, uint32_t address) {
     (void)address;
     if (inside || world_render || failed || !enrolled || cpu->gpr[4]!=PLAYER || !p2.body[3] ||
@@ -2749,6 +2792,7 @@ static void render(CPUState *cpu, uint32_t address) {
     psx_mod_write_word(SCRATCH+0x100,base);
     psx_mod_write_word(SCRATCH+0x104,arena+PLAYER_MODE_OFFSET+(base-arena)/5);
     render_actor(cpu,PLAYER,arena);
+    render_armor(cpu,arena);
     /* 80022960 draws X-only attached actors, then visible trails2/1/0.
      * Fixed P2 is Zero, so preserve the native no-charge-glow draw gate;
      * updating its attached pool does not authorize synthetic X artwork. */
@@ -3276,7 +3320,8 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
         !psx_mod_set_function_replacement(0x8001E9EC,stage_tick) ||
         !psx_mod_set_function_replacement(0x80020A08,ride_tick) ||
-        !psx_mod_set_function_replacement(0x800232D4,render_survivor)) failed=1;
+        !psx_mod_set_function_replacement(0x800232D4,render_survivor) ||
+        !psx_mod_set_function_replacement(0x8002619C,render_armor_survivor)) failed=1;
     if (!psx_mod_set_function_replacement(0x80014F70,working_palette_native_load)) failed=1;
     if (!psx_mod_set_function_replacement(0x80030ECC,player_contact)) failed=1;
     if (!psx_mod_set_function_replacement(0x80031DA8,solid_player_collision) ||
