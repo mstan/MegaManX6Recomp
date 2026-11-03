@@ -16,6 +16,7 @@ static int allocation_fail,allocation_calls,local_scope,texture_support=1;
 static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
 static int solid_dispatch,allocator_dispatch;
+static unsigned snail_dispatch,snail_calls,snail_new_sides,snail_seen_masks[2];
 static int mounted_return_dispatch;
 static unsigned mounted_return_constructors;
 static int interaction_dispatch,interaction_accept;
@@ -140,6 +141,13 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
         CHECK((target==0x80029598u || target==0x80029658u) &&
               psx_mod_read_word(PLAYER+axis)==expected_camera_axis);
         cpu->gpr[2]=77;return;
+    }
+    if(snail_dispatch){
+        uint32_t actor=cpu->gpr[4];CHECK(target==0x80031DA8u && actor==0x800C1220u);
+        unsigned seat=psx_mod_read_byte(PLAYER+2);CHECK(seat<2 && snail_calls<2);
+        snail_seen_masks[seat]=psx_mod_read_byte(PLAYER+0x72);++snail_calls;
+        psx_mod_write_byte(actor+0x72,(uint8_t)(seat?snail_new_sides:8));
+        psx_mod_write_byte(actor+0x76,1);cpu->gpr[2]=seat?17:42;return;
     }
     if(solid_dispatch){
         uint32_t actor=cpu->gpr[4];CHECK(target==0x80031DA8u && actor==0x800950A0u);
@@ -380,6 +388,55 @@ static void weapon_support_projection_and_reuse(void){
     CHECK(solid_allocate(&cpu,0x8002C32Cu)==1);
     CHECK(zero_solid_contacts[111].sides==7 && zero_solid_contacts[111].carried==255);
     zero_projected=0;allocator_dispatch=0;CHECK(snapshot_ready());
+}
+static void native_snail_guest_support_mask(void) {
+    /* Source EC0A4..EC0E8 brackets only the first native body's 31DA8 call.
+     * Reproduce its externally observable input/output for the extra seat. */
+    static const uint32_t addresses[]={0x800EC0A4u,0x800EC0A8u,0x800EC0ACu,
+        0x800EC0B0u,0x800EC0D0u,0x800EC0E8u};
+    static const uint32_t words[]={0x92710072u,0xA2620072u,0x92500072u,
+        0x0C00C76Au,0xA2710072u,0xA2620072u};
+    uint32_t old_words[6];for(unsigned i=0;i<6;++i) {
+        old_words[i]=psx_mod_read_word(addresses[i]);psx_mod_write_word(addresses[i],words[i]);
+    }
+    uint8_t old_player[0x158],old_actor[0xA4],old_play[0x20],old_origin[8];
+    capture(PLAYER,old_player,sizeof old_player);capture(0x800C1220u,old_actor,sizeof old_actor);
+    capture(PLAY,old_play,sizeof old_play);capture(0x800F6540u,old_origin,sizeof old_origin);
+    PlayerContext old_partner=p2;SolidContact old_contact=zero_solid_contacts[0];
+    Mmx6CoopLifecycle old_life=life;
+    CPUState cpu;memset(&cpu,0,sizeof cpu);cpu.gpr[4]=cpu.gpr[18]=0x800C1220u;
+    cpu.gpr[19]=PLAYER;cpu.gpr[31]=0x800EC0B8u;
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+12,1);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAYER+2,0);psx_mod_write_byte(PLAYER+0x72,8);
+    memset(&p2,0,sizeof p2);p2.body[0]=p2.body[3]=p2.body[4]=1;
+    p2.body[2]=1;p2.body[5]=2;p2.body[0x5C]=32;
+    mmx6_coop_lifecycle_init(&life);
+    psx_mod_write_byte(cpu.gpr[4]+1,1);psx_mod_write_byte(cpu.gpr[4]+4,1);
+    psx_mod_write_word(cpu.gpr[4]+0x10,0x800F6540u);
+    psx_mod_write_word(cpu.gpr[4]+0x30,0x800F73D4u);
+    psx_mod_write_word(cpu.gpr[4]+0x68,0x800F73ECu);
+    psx_mod_write_byte(0x800F6541u,7);psx_mod_write_byte(0x800F6542u,0);
+    for(unsigned test=0;test<7;++test) {
+        /* Tests 0..3 cover landing, retained top, lost top and no contact.
+         * Other callers, overlays and source drift retain generic behavior. */
+        unsigned qualified=test<4,old_sides=test==1 || test==2?8:0;
+        snail_new_sides=test==0 || test==1?8:0;
+        cpu.gpr[31]=test==4?0x800EC0BCu:0x800EC0B8u;
+        psx_mod_write_byte(PLAY+12,(uint8_t)(test==5?2:1));
+        psx_mod_write_word(addresses[1],words[1]^(test==6?4u:0u));
+        p2.body[0x72]=2;zero_solid_contacts[0]=(SolidContact){(uint8_t)old_sides,0};
+        snail_calls=0;snail_seen_masks[0]=snail_seen_masks[1]=255;snail_dispatch=1;
+        CHECK(solid_player_collision(&cpu,0x80031DA8u)==1);snail_dispatch=0;
+        CHECK(snail_calls==2 && snail_seen_masks[0]==8 && snail_seen_masks[1]==(qualified?8u:2u));
+        CHECK(p2.body[0x72]==(2u|(qualified?((old_sides|snail_new_sides)&8u):0u)));
+        CHECK(psx_mod_read_byte(PLAYER+0x72)==8 && psx_mod_read_byte(cpu.gpr[4]+0x72)==8);
+        CHECK(zero_solid_contacts[0].sides==snail_new_sides && zero_solid_contacts[0].carried==1);
+        CHECK(cpu.gpr[2]==42 && !solid_call && !inside && !state_track.count && !state_track.error);
+    }
+    for(unsigned i=0;i<6;++i)psx_mod_write_word(addresses[i],old_words[i]);
+    project(PLAYER,old_player,sizeof old_player);project(0x800C1220u,old_actor,sizeof old_actor);
+    project(PLAY,old_play,sizeof old_play);project(0x800F6540u,old_origin,sizeof old_origin);
+    p2=old_partner;life=old_life;zero_solid_contacts[0]=old_contact;
 }
 static void native_health_freeze_camera(void){
     uint8_t old_body[sizeof p2.body],old_play[0x20];
@@ -994,7 +1051,7 @@ static void inplace_guest_scene_draws_primary_once(void) {
 }
 int main(void){
     pixel_edges();setup();native_armor_transient_then_snapshot();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();default_boss_cookie_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
+    weapon_support_projection_and_reuse();native_snail_guest_support_mask();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();default_boss_cookie_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);

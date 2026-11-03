@@ -3058,6 +3058,25 @@ static uint32_t solid_as_zero(CPUState *cpu, uint32_t address, uint32_t actor,
     STATE_POP(restore_target);STATE_POP(restore_contact);
     return result;
 }
+static int snail_support_mask(const CPUState *cpu,uint32_t actor) {
+    /* Amazon's original outer callback brackets 31DA8 with a body-local
+     * support mask. The extra player collision call must carry that same
+     * bracket; it does not execute the enemy's outer callback a second time. */
+    if(cpu->gpr[31]!=0x800EC0B8u || cpu->gpr[18]!=actor || cpu->gpr[19]!=PLAYER ||
+       psx_mod_read_byte(PLAY+12)!=1 || psx_mod_read_byte(PLAY+13) ||
+       psx_mod_read_byte(actor+1)!=1 || psx_mod_read_byte(actor+4)!=1 ||
+       psx_mod_read_word(actor+0x30)!=0x800F73D4u ||
+       psx_mod_read_word(actor+0x68)!=0x800F73ECu)return 0;
+    uint32_t origin=psx_mod_read_word(actor+0x10);
+    if(origin<0x800F6540u || origin>0x800F6588u || ((origin-0x800F6540u)&7u) ||
+       psx_mod_read_byte(origin+1)!=7 || psx_mod_read_byte(origin+2))return 0;
+    return psx_mod_read_word(0x800EC0A4u)==0x92710072u &&
+        psx_mod_read_word(0x800EC0A8u)==0xA2620072u &&
+        psx_mod_read_word(0x800EC0ACu)==0x92500072u &&
+        psx_mod_read_word(0x800EC0B0u)==0x0C00C76Au &&
+        psx_mod_read_word(0x800EC0D0u)==0xA2710072u &&
+        psx_mod_read_word(0x800EC0E8u)==0xA2620072u;
+}
 static int solid_player_collision(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     SolidContact *contact=solid_contact(actor);
@@ -3087,7 +3106,20 @@ static int solid_player_collision(CPUState *cpu, uint32_t address) {
             uint8_t ride=psx_mod_read_byte(0x800CD340);
             STATE_BYTES(restore_ride,23,&ride,1);
             psx_mod_write_byte(0x800CD340,0);
+            uint32_t mask_context[3]={(unsigned)snail_support_mask(cpu,actor),
+                psx_mod_read_byte(PLAYER+0x72),contact->sides};
+            STATE_WORDS(restore_mask,82,mask_context,3);
+            if(mask_context[0])psx_mod_write_byte(PLAYER+0x72,8);
             solid_as_zero(cpu,address,actor,contact);
+            if(mask_context[0]) {
+                /* Literal EC0B8..EC0E8: merge this player's own old/new
+                 * support bits, including the one-frame lost-top marker.
+                 * The native outer call still performs P1's bracket once. */
+                unsigned mask=mask_context[1]|(contact->sides&8u);
+                if((mask_context[2]&8u) && !(contact->sides&8u))mask|=8u;
+                psx_mod_write_byte(PLAYER+0x72,(uint8_t)mask);
+            }
+            STATE_POP(restore_mask);
             psx_mod_write_byte(0x800CD340,ride);
             capture(PLAYER,p2.body,sizeof p2.body);
             project(PLAYER,body,sizeof body);
