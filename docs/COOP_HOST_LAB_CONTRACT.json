@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; grounded owned Armor partner return",
+  "status": "development-candidate-only; optional Alia radio paired staging",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 81,
+  "revision": 82,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v98",
+    "title_compatibility": "mmx6-x-zero-delay-v99",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1035,5 +1035,13 @@
     "guards": "Existing ordinary foot contact unchanged. Additional anchor requires living primary action18/D5=1orFF, exact original Recycle source, soleprimary owner, alive/intact occupied Armor and actual native ground70or71 bit8. Airborne/unclaimed/retired/destroyed/selfdestruct/otherowner/invalidsource remain deferred.",
     "behavior": "Reuse saved guest body and existing original incoming beam/idle/foot recovery; no new vehicle, extra state, health/ground/result assignment or fixture. Existing queued Select request remains pending until safe. Profile81/title98/snapshot24.",
     "qualification": "UNVERIFIED until actual overlapping native boarding/partner beam, retainedvehicleownership, foot landing/controls LOCALNET same exact image. Guard tests are not runtime qualification."
+  },
+  "native_optional_Alia_paired_staging": {
+    "scope": "F151 eligible gameplay scene family only: original52F64 optional high-nibble event/Alia radio conversation, after the unchanged original admission succeeds. DrLight51924 already uses the same in-place hold.",
+    "eligibility": "Original52F64 retains live HP, stage/section authored region, original event-once bits, body-state/D4 restrictions and optional fresh mappedSelect100h admission. Only its actual D0/PLAY10 lock result starts the existing scene owner. No story/unlock/result, pose, position or input predicate is assigned by this change.",
+    "staging": "Keep the already-living partner visibly in place with existing native shared locks and selected owner. No outgoing/incoming passenger beam or relocation for this stationary optional dialogue. Absent/fallen partner remains absent/fallen. Original owner/shared lock release ends the hold.",
+    "other_scenes": "Mandatory52F64 event/story zones retain original withdrawal policy; doors, transports, boss scenes and original fullscreen Gate/Zero story/ending presentation are unchanged. This identifies no global narrative/ending pass.",
+    "identity": "Profile82/title99/snapshot24; no mutable fields, new hooks or regenerated code.",
+    "qualification": "UNVERIFIED until actual optional Alia conversation keeps both living heroes visible and native owner release restores independent controls LOCALNET on one exact candidate. Full F151 Alia/Gate/Zero eligibility and per-scene staging remain incomplete."
   }
 }

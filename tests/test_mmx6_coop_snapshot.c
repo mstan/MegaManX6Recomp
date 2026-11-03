@@ -18,6 +18,7 @@ static int abandon_guest;
 static int solid_dispatch,allocator_dispatch;
 static int mounted_return_dispatch;
 static unsigned mounted_return_constructors;
+static int interaction_dispatch,interaction_accept;
 static int camera_dispatch;
 static int subtank_dispatch;
 static uint8_t subtank_expected,subtank_result,subtank_new_found;
@@ -68,6 +69,17 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
     if(abandon_guest)longjmp(abandon_target,1);
     uint32_t h=state_digest();state_track.frame[state_track.count-1].saved[0]^=1;
     CHECK(state_digest()!=h);state_track.frame[state_track.count-1].saved[0]^=1;
+    if(interaction_dispatch) {
+        /* Supply only the external native admission/lock contract. The
+         * original bounds/input/story predicate is not emulated here. */
+        CHECK(target==0x80052F64u && scene_call);
+        if(interaction_accept) {
+            psx_mod_write_byte(PLAYER+0xD0,1);
+            psx_mod_write_byte(PLAYER+0x7A,1);
+            psx_mod_write_byte(PLAY+0x10,2);
+        }
+        cpu->gpr[2]=42;return;
+    }
     if(mounted_return_dispatch) {
         if(target==0x8003AD18u)psx_mod_write_byte(PLAYER+5,2);
         else if(target==0x8003CCBCu)psx_mod_write_word(PLAYER+0x68,0x80073D50u+4*psx_mod_read_byte(PLAYER+2));
@@ -815,13 +827,65 @@ static void grounded_native_rider_return(void) {
     }
     p2=old_p2;life=old_life;project(PLAYER,old_player,sizeof old_player);
 }
+static void optional_radio_scene_keeps_living_pair(void) {
+    PlayerContext old_p1=p1,old_p2=p2;Mmx6CoopLifecycle old_life=life;
+    uint8_t old_player[0x158];capture(PLAYER,old_player,sizeof old_player);
+    unsigned old_scene=scene_owner,old_phase=scene_phase;int old_pause=pause_owner;
+    CPUState cpu;memset(&cpu,0,sizeof cpu);
+    const uint32_t actor=0x8008EF48u,bounds=0x8007A154u;
+    interaction_dispatch=1;pause_owner=-1;
+    for(unsigned seat=0;seat<2;++seat)for(unsigned optional=0;optional<2;++optional)
+        for(unsigned accepted=0;accepted<2;++accepted) {
+        memset(&p1,0,sizeof p1);memset(&p2,0,sizeof p2);
+        mmx6_coop_lifecycle_init(&life);life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+        ready=enrolled=1;failed=inside=scene_call=zero_projected=scene_owner=scene_phase=clear_phase=0;
+        uint8_t bodies[2][0x158];memset(bodies,0,sizeof bodies);
+        for(unsigned s=0;s<2;++s) {
+            uint8_t *b=bodies[s];b[0]=b[3]=b[4]=1;b[2]=(uint8_t)s;
+            b[5]=2;b[0x5C]=(uint8_t)(24+s);b[0x70]=8;
+            put32(b+8,(100u+s*300u)<<16);b[0x93]=(uint8_t)(7+s);
+        }
+        project(PLAYER,bodies[0],sizeof bodies[0]);memcpy(p2.body,bodies[1],sizeof p2.body);
+        psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+        psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAY+13,0);
+        psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);psx_mod_write_byte(0x8008EAFCu,0);
+        psx_mod_write_byte(actor+2,optional?0x10:0);
+        psx_mod_write_byte(0x8007A124u+8,0);
+        psx_mod_write_half(bounds,(uint16_t)(seat?300:0));psx_mod_write_half(bounds+2,(uint16_t)(seat?500:200));
+        psx_mod_write_half(bounds+4,(uint16_t)-100);psx_mod_write_half(bounds+6,100);
+        cpu.gpr[4]=actor;interaction_accept=(int)accepted;
+        unsigned before=guest_calls;
+        CHECK(interaction_begin(&cpu,0x80052F64u)==1 && cpu.gpr[2]==42);
+        CHECK(guest_calls==before+1 && !inside && !scene_call && !zero_projected && !state_track.count);
+        CHECK(scene_owner==(accepted?seat+1:0));
+        CHECK(scene_phase==(accepted && !optional?1:0));
+        for(unsigned s=0;s<2;++s) {
+            uint8_t actual[0x158];if(s)memcpy(actual,p2.body,sizeof actual);else capture(PLAYER,actual,sizeof actual);
+            if(accepted && s==seat){bodies[s][0xD0]=1;bodies[s][0x7A]=1;}
+            CHECK(!memcmp(actual,bodies[s],sizeof actual));
+        }
+        if(accepted && optional) {
+            /* The shared hold neither withdraws nor relocates either body.
+             * Only the original owner/shared locks release it. */
+            scene_tick(&cpu);CHECK(scene_owner==seat+1 && !scene_phase && guest_calls==before+1);
+            if(seat){p2.body[0xD0]=p2.body[0x7A]=0;}
+            else {psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0x7A,0);}
+            psx_mod_write_byte(PLAY+0x10,0);
+            scene_tick(&cpu);CHECK(!scene_owner && !scene_phase && guest_calls==before+1);
+            CHECK(life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE);
+        }
+    }
+    interaction_dispatch=interaction_accept=0;p1=old_p1;p2=old_p2;life=old_life;
+    scene_owner=old_scene;scene_phase=old_phase;pause_owner=old_pause;
+    project(PLAYER,old_player,sizeof old_player);
+}
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
-    private_x_overlay_snapshot();mounted_scene_return_keeps_native_rider();grounded_native_rider_return();
+    private_x_overlay_snapshot();mounted_scene_return_keeps_native_rider();grounded_native_rider_return();optional_radio_scene_keeps_living_pair();
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly
      * cannot be captured/restored as a resumable C stack. Reactivation required. */
     uint32_t v=1;for(unsigned i=0;i<MMX6_STATE_FRAMES;++i)CHECK(mmx6_state_push(i,&v,4,1)!=UINT32_MAX);

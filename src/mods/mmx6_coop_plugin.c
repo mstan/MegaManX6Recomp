@@ -1513,10 +1513,16 @@ static int interaction_begin(CPUState *cpu, uint32_t address) {
     uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
     if (psx_mod_read_byte(PLAYER+0xD0) || psx_mod_read_byte(PLAY+0x10)==2) {
         scene_begin(seat,address);
-        /* Original Dr. Light action20 is an in-place conversation/grant.
-         * Keep its selected owner and native locks, with the living partner
-         * visible. An outgoing passenger beam has no capsule destination. */
-        if (address==0x80051924u) scene_phase=0;
+        /* Original Dr. Light action20 and optional Alia radio conversations
+         * stay in this room. 530E4..53194 admits the latter only after its
+         * authored bounds, live body and fresh Select check; the high nibble
+         * distinguishes it from mandatory event/story zones on the same path.
+         * Retain the selected owner and original locks, with the living
+         * partner visible in place. Neither scene has a passenger destination.
+         * Mandatory story zones, doors and authored transports retain their
+         * own withdrawal/arrival policy; never bypass their prerequisites. */
+        if (address==0x80051924u ||
+            (address==0x80052F64u && (psx_mod_read_byte(actor+2)&0xF0u))) scene_phase=0;
     }
     if (seat) {
         leave_zero_context(1);
