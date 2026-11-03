@@ -11,6 +11,7 @@
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"line %d: %s\n",__LINE__,#x);exit(1);}}while(0)
 static uint8_t ram[0x200000],original[0x200000];
 static unsigned probes,actions,worlds,returned,setup_calls,transition_calls;
+static unsigned guest_character;
 static int refuse_admission;
 static const uint32_t portal=0x8008EF48u;
 static const unsigned resources[]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
@@ -53,7 +54,7 @@ static void native_action(CPUState *cpu){
     cpu->gpr[2]=0x12345678;
 }
 static void native_portal_world(void){
-    CHECK(zero_world && inside && stage_call && psx_mod_read_byte(PLAYER+2)==1);
+    CHECK(zero_world && inside && stage_call && psx_mod_read_byte(PLAYER+2)==guest_character);
     ++worlds;
     /* 20C60 executes the native player before the enemy update20C78.
      * Source3B870 receives41h: PLAY1C=1 and body phase3 before restore. */
@@ -98,7 +99,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     if(address==0x800EC780u) {
         CHECK(scene_call && inside && zero_projected);
         CHECK(!psx_mod_try_function_replacement(cpu,address));
-        CHECK(psx_mod_read_byte(PLAYER+2)==1 && psx_mod_read_word(SCRATCH+0x1C)==assembly);
+        CHECK(psx_mod_read_byte(PLAYER+2)==guest_character && psx_mod_read_word(SCRATCH+0x1C)==assembly);
         native_action(cpu);return;
     }
     if(address==0x8001E9ECu) {
@@ -143,6 +144,7 @@ static void load_original(const char *exe_path,const char *disc_path){
     CHECK(!strcmp(actual,"c7b195e3e3968ebbd6c177cf023e47b35a9a816382c9b54ca157a80b393468f5"));
 }
 static void setup(CPUState *cpu){
+    private_actor=default_private_actor;guest_character=1;
     memcpy(ram,original,sizeof ram);memset(&p2,0,sizeof p2);memset(&p1,0,sizeof p1);
     memset(cpu,0,sizeof *cpu);mmx6_coop_lifecycle_init(&life);
     state_track.count=state_track.error=0;inside=scene_call=zero_world=zero_projected=failed=0;
@@ -181,6 +183,18 @@ static void rejected(CPUState *cpu){
     CHECK(!recycle_portal_contact(cpu,0x800EC780u));
     CHECK(!probes && !actions && !scene_owner && !memcmp(before,ram,sizeof ram));free(before);
 }
+static void roster(unsigned primary){
+    Mmx6CoopRosterNative native={(uint8_t)primary,(uint8_t)(primary?5:0),
+        (uint8_t)primary,(uint8_t)(primary?5:0),0};
+    Mmx6CoopRoster resolved;CHECK(mmx6_coop_roster_resolve(&native,&resolved)==MMX6_COOP_ROSTER_OK);
+    CHECK(private_roster_bind(&resolved));guest_character=primary^1u;
+    psx_mod_write_byte(PLAYER+2,(uint8_t)primary);
+    psx_mod_write_byte(PLAYER+0xE7,(uint8_t)(primary?5:0));
+    psx_mod_write_byte(PLAY+0x38,(uint8_t)primary);
+    psx_mod_write_byte(PLAY+0x5E,(uint8_t)(primary?5:0));
+    p2.body[2]=(uint8_t)guest_character;p2.body[0xE7]=private_actor.form;
+    CHECK(private_actor.character==guest_character);
+}
 int main(int argc,char **argv){
     CHECK(argc==1 || argc==3);
     const char *exe=argc==3?argv[1]:getenv("MMX6_CONTENT_EXE");
@@ -188,7 +202,11 @@ int main(int argc,char **argv){
     if(!exe || !*exe || !disc || !*disc){
         puts("Original EXE/raw disc required (arguments or MMX6_CONTENT_EXE/DISC)");return 77;
     }
-    load_original(exe,disc);CPUState cpu;setup(&cpu);
+    load_original(exe,disc);CPUState cpu;
+    /* The exact same native-contract sequence must project either native
+     * guest identity. Probe success alone cannot fabricate portal admission. */
+    for(unsigned primary=0;primary<2;++primary){
+    setup(&cpu);roster(primary);
     native_action(&cpu);CHECK(psx_mod_read_byte(portal+5)==1);actions=0; /* Native P1-only negative control. */
     uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);PlayerContext private_before=p2;
     CHECK(psx_mod_try_function_replacement(&cpu,0x800EC780));
@@ -196,6 +214,7 @@ int main(int argc,char **argv){
     CHECK(psx_mod_read_byte(portal+5)==2 && psx_mod_read_half(portal+0x84)==1540);
     CHECK(!memcmp(body,ram+(PLAYER&0x1FFFFF),sizeof body));
     CHECK(!memcmp(&private_before,&p2,sizeof p2));
+    CHECK(psx_mod_read_byte(PLAYER+2)==primary && p2.body[2]==guest_character);
     CHECK(psx_mod_read_byte(OVERLAY)==0x11 && psx_mod_read_byte(OVERLAY+OVERLAY_SIZE-1)==0x11);
     CHECK(scene_owner==2 && scene_phase==1 && !scene_call && !inside && !zero_projected && !state_track.count);
     CHECK(!psx_mod_read_byte(PLAY+0x0F) && !psx_mod_read_byte(PLAY+0x10)); /* Native deferred writes only. */
@@ -207,18 +226,25 @@ int main(int argc,char **argv){
     for(unsigned i=0;i<31;++i){CHECK(stage_tick(&cpu,0x8001E9EC));CHECK(!returned && scene_phase<=3);}
     CHECK(worlds==31 && setup_calls==1 && transition_calls==1 && scene_owner==2);
     CHECK(p2.body[4]==3 && le32(p2.body+0x68)==0x801EF123u);
+    CHECK(psx_mod_read_byte(PLAYER+2)==primary && p2.body[2]==guest_character);
     CHECK(psx_mod_read_word(PLAYER+0x68)==0x801F1234u);
     CHECK(psx_mod_read_byte(PLAY+0x0F)==0x41 && psx_mod_read_byte(PLAY+0x1C));
     psx_mod_write_byte(PLAY+1,1);CHECK(stage_tick(&cpu,0x8001E9EC));
     CHECK(!enrolled && scene_owner==2 && !inside && !zero_projected && !zero_world && !returned);
     CHECK(worlds==31 && psx_mod_read_byte(PLAY)==8 && psx_mod_read_byte(PLAY+12)==20 && psx_mod_read_byte(PLAY+13)==1);
     native_player_init(&cpu,0x8003BD24);CHECK(!scene_owner && !scene_phase && !enrolled);
-    setup(&cpu);psx_mod_write_half(PLAYER+10,1540);CHECK(!recycle_portal_contact(&cpu,0x800EC780));
-    CHECK(probes==1 && !actions && !scene_owner);native_action(&cpu);CHECK(actions==1); /* P1 tie. */
-    setup(&cpu);put32(p2.body+8,1400u<<16);CHECK(!recycle_portal_contact(&cpu,0x800EC780));
-    CHECK(probes==2 && !actions && !scene_owner && !scene_call && !inside);
-    setup(&cpu);refuse_admission=1;CHECK(recycle_portal_contact(&cpu,0x800EC780));
-    CHECK(actions==1 && !scene_owner); /* Probe success alone never arms ownership. */
+    }
+    for(unsigned primary=0;primary<2;++primary){
+        setup(&cpu);roster(primary);psx_mod_write_half(PLAYER+10,1540);CHECK(!recycle_portal_contact(&cpu,0x800EC780));
+        CHECK(probes==1 && !actions && !scene_owner);native_action(&cpu);CHECK(actions==1); /* P1 tie. */
+        setup(&cpu);roster(primary);put32(p2.body+8,1400u<<16);CHECK(!recycle_portal_contact(&cpu,0x800EC780));
+        CHECK(probes==2 && !actions && !scene_owner && !scene_call && !inside);
+    }
+    for(unsigned primary=0;primary<2;++primary){
+        setup(&cpu);roster(primary);refuse_admission=1;CHECK(recycle_portal_contact(&cpu,0x800EC780));
+        CHECK(actions==1 && !scene_owner && psx_mod_read_byte(portal+5)==1);
+        /* Either guest's geometric hit still requires original admission. */
+    }
     setup(&cpu);p2.body[0x61]=1;CHECK(!recycle_portal_contact(&cpu,0x800EC780));
     CHECK(probes==2 && !actions && !scene_owner && !scene_call && !inside);
     const unsigned excluded[]={MMX6_COOP_ABSENT,MMX6_COOP_DYING,MMX6_COOP_FALLEN,MMX6_COOP_JOINING,MMX6_COOP_LEAVING};
@@ -237,7 +263,10 @@ int main(int argc,char **argv){
     for(unsigned i=0;i<sizeof blocked/sizeof blocked[0];++i){setup(&cpu);*blocked[i]=1;CHECK(!recycle_portal_contact(&cpu,0x800EC780) && !probes);}
     setup(&cpu);stage_call=0;rejected(&cpu);setup(&cpu);ready=0;rejected(&cpu);
     setup(&cpu);enrolled=0;rejected(&cpu);setup(&cpu);scene_phase=1;rejected(&cpu);
-    setup(&cpu);p2.body[2]=0;rejected(&cpu);setup(&cpu);psx_mod_write_byte(PLAYER+2,1);rejected(&cpu);
+    const uint8_t invalid_rosters[][2]={{0,0},{1,1},{2,0},{0,2},{255,1},{1,255},{255,255}};
+    for(unsigned i=0;i<sizeof invalid_rosters/sizeof invalid_rosters[0];++i){
+        setup(&cpu);psx_mod_write_byte(PLAYER+2,invalid_rosters[i][0]);p2.body[2]=invalid_rosters[i][1];rejected(&cpu);
+    }
     for(unsigned flags=0;flags<256;++flags){setup(&cpu);psx_mod_write_byte(0x800F2B0Cu,(uint8_t)flags);CHECK(recycle_portal_source()==(flags<=1));}
     for(unsigned state=0;state<256;++state)for(unsigned flags=0;flags<2;++flags){
         setup(&cpu);psx_mod_write_byte(0x800F2B0Cu,(uint8_t)flags);

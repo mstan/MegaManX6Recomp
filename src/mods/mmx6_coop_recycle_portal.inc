@@ -70,7 +70,8 @@ static int recycle_portal_contact(CPUState *cpu,uint32_t address) {
        psx_mod_read_byte(PLAY+1) || psx_mod_read_byte(PLAY+12)!=4 || psx_mod_read_byte(PLAY+13) ||
        psx_mod_read_byte(PLAY+0x0F) || psx_mod_read_byte(PLAY+0x10) ||
        psx_mod_read_byte(PLAY+0x1C) || psx_mod_read_byte(0x80097424u) ||
-       psx_mod_read_byte(PLAYER+2) || p2.body[2]!=1 ||
+       /* Either reciprocal native roster owns the same original portal. */
+       psx_mod_read_byte(PLAYER+2)>1 || p2.body[2]!=(psx_mod_read_byte(PLAYER+2)^1u) ||
        !recycle_portal_eligible(0) || !recycle_portal_eligible(1))return 0;
     uint32_t actor=cpu->gpr[4];
     if(actor<0x8008EF48u || actor>=0x80090C88u || (actor-0x8008EF48u)%0x9Cu ||
