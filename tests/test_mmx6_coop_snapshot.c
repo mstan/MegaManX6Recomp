@@ -58,6 +58,10 @@ int psx_mod_local_view_scope(void){return local_scope;}
 uint16_t sio_get_pad_buttons_slot(int slot){CHECK(slot==1);return 0xFFFE;}
 int psx_mod_netplay_is_active(void){return 0;}
 void psx_mod_counter_add(const char *name,uint32_t count){(void)name;(void)count;CHECK(0);}
+void psx_mod_tag_world_primitive(uint32_t packet,int world){
+    /* The external draw seam emits no native packets; never fake their tags. */
+    (void)packet;(void)world;CHECK(0);
+}
 void psx_session_input_taint_add(uint32_t flags){(void)flags;CHECK(0);}
 uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
     CHECK(consumer==MMX6_INPUT_INTERACTION && buttons==1 && !contaminated);return buttons;
