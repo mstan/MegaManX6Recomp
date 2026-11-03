@@ -2389,6 +2389,22 @@ static uint32_t x_ray_upload_table(void) {
         if (le32(zero_compressed+relative+i*4u)!=0x02000068u) return 0;
     return assets+relative;
 }
+/* Original Shadow801ED524 resolves graphics header8 for native type45.
+ * Deferred4AF94/subtype5 selects the same table at4B084..4B098, then
+ *4B1AC/17B04 uploads it at VRAM(0140h words,0020h). DAT88's18 frames
+ * alias one16-tile stream; native page0520 therefore samples UV row32. */
+static uint32_t x_shadow_upload_table(void) {
+    if(private_actor.character!=MMX6_COOP_CHARACTER_X ||
+       private_actor.form!=MMX6_COOP_FORM_SHADOW ||
+       !zero_compressed || compressed_size<0x0Cu)return 0;
+    uint32_t relative=le32(zero_compressed+8);
+    if(relative<0x0Cu || relative>=compressed_size ||
+       compressed_size-relative<18u*4u+2u ||
+       (uint64_t)assets+relative+0x48u>UINT32_MAX)return 0;
+    for(unsigned i=0;i<18;++i)
+        if(le32(zero_compressed+relative+i*4u)!=0x01000048u)return 0;
+    return assets+relative;
+}
 static int working_palette_clut_offset(uint16_t clut,size_t *offset) {
     /* Native17C40 uploads rectangle8006E360=(0,480,256,32), not a full
      *1024-word VRAM row. CLUT7849 is144,481, hence working byte320;
@@ -2433,6 +2449,7 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     uint32_t yammar=render_x_death || private_actor.character!=MMX6_COOP_CHARACTER_ZERO?
         0:zero_yammar_upload_table();
     uint32_t ray=render_x_death?0:x_ray_upload_table();
+    uint32_t shadow=render_x_death?0:x_shadow_upload_table();
     unsigned upload_y=0;
     if (yammar && table==yammar) {
         if (frame>=23 || packed!=0x0200005Cu) return 0;
@@ -2440,6 +2457,10 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     }
     if (ray && table==ray) {
         if (frame>=26 || packed!=0x02000068u) return 0;
+        upload_y=32;
+    }
+    if(shadow && table==shadow) {
+        if(frame>=18 || packed!=0x01000048u)return 0;
         upload_y=32;
     }
     unsigned upload_height=((tiles+15u)/16u)*16u;
@@ -2451,7 +2472,7 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
      * different native upload origins. For this source, decode and let the
      * existing exact-pixel cache distinguish both aliases without new keys. */
     if (!render_x_death && !(yammar && source==yammar+0x5Cu) &&
-        !(ray && source==ray+0x68u))
+        !(ray && source==ray+0x68u) && !(shadow && source==shadow+0x48u))
         for (unsigned i=0;i<bank_count;++i)
         if (banks[i].character==private_actor.character && banks[i].source==source && banks[i].tile==tile &&
             !memcmp(banks[i].colors,colors,sizeof colors)) return banks[i].id;
