@@ -772,13 +772,56 @@ static void mounted_scene_return_keeps_native_rider(void) {
     scene_owner=old_scene;scene_phase=old_phase;pause_owner=old_pause;
     memcpy(scene_body,old_scene_body,sizeof scene_body);project(PLAYER,old_player,sizeof old_player);
 }
+static void grounded_native_rider_return(void) {
+    PlayerContext old_p2=p2;Mmx6CoopLifecycle old_life=life;
+    uint8_t old_player[0x158];capture(PLAYER,old_player,sizeof old_player);
+    for(unsigned variant=0;variant<16;++variant) {
+        uint8_t pilot[0x158]={0};memset(&p2,0,sizeof p2);
+        mmx6_coop_lifecycle_init(&life);life.status[1]=MMX6_COOP_ABSENT;
+        life.select_armed=1;pilot[0]=pilot[3]=pilot[4]=1;
+        pilot[5]=18;pilot[0x5C]=32;pilot[0x67]=1;pilot[0xD5]=variant==1?255:1;
+        project(PLAYER,pilot,sizeof pilot);zero_projected=0;
+        psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAY+13,0);
+        psx_mod_write_byte(RIDE,65);psx_mod_write_byte(RIDE+1,0);
+        psx_mod_write_byte(RIDE+4,1);psx_mod_write_byte(RIDE+0x5C,32);
+        psx_mod_write_byte(RIDE+0x97,0x40);psx_mod_write_byte(RIDE+0x70,8);psx_mod_write_byte(RIDE+0x71,0);
+        psx_mod_write_word(RIDE+0x10,0x800F2B1Cu);
+        psx_mod_write_word(0x80071380u,0x800F2414u);psx_mod_write_word(0x800F2414u,0x27BDFFE8u);
+        psx_mod_write_word(0x800EE924u,0x27BDFFD8u);psx_mod_write_word(0x800EEA74u,0x24050012u);
+        if(variant==2)psx_mod_write_byte(RIDE+0x70,0);
+        if(variant==3)psx_mod_write_byte(PLAY+12,1);
+        if(variant==4){psx_mod_write_byte(PLAYER+0xD5,0);p2.body[0xD5]=255;}
+        if(variant==5)p2.body[0xD5]=255;
+        if(variant==6)psx_mod_write_byte(RIDE+0x97,0xC0);
+        if(variant==7)psx_mod_write_byte(RIDE+4,2);
+        if(variant==8)psx_mod_write_byte(RIDE+0x5C,0);
+        if(variant==9)psx_mod_write_byte(PLAYER+0x5C,0);
+        if(variant==10)psx_mod_write_byte(PLAYER+5,2);
+        if(variant==11)psx_mod_write_byte(PLAYER+0xD5,0);
+        if(variant==12)psx_mod_write_byte(RIDE+0x5C,128);
+        if(variant==13)life.status[0]=MMX6_COOP_DYING;
+        if(variant>=14){psx_mod_write_byte(PLAYER+5,2);psx_mod_write_byte(PLAYER+0xD5,0);
+            psx_mod_write_byte(PLAYER+0x67,0);psx_mod_write_byte(PLAYER+0x70,variant==14?8:0);}
+        int expected=variant<2 || variant==14;unsigned before=guest_writes;
+        CHECK(!!safe_join_landing()==expected && guest_writes==before);
+        Mmx6CoopJoinAction result=mmx6_coop_join_input(&life,1,1,safe_join_landing());
+        CHECK(result==(expected?MMX6_COOP_JOIN:MMX6_COOP_NO_ACTION));
+        CHECK(life.status[1]==(expected?MMX6_COOP_JOINING:MMX6_COOP_ABSENT));
+        if(variant==2){
+            CHECK(life.rejoin_pending);psx_mod_write_byte(RIDE+0x70,8);
+            CHECK(mmx6_coop_join_input(&life,0,1,safe_join_landing())==MMX6_COOP_JOIN);
+        }
+        CHECK(psx_mod_read_byte(PLAYER+0x5C)==(variant==9?0:32));
+    }
+    p2=old_p2;life=old_life;project(PLAYER,old_player,sizeof old_player);
+}
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
-    private_x_overlay_snapshot();mounted_scene_return_keeps_native_rider();
+    private_x_overlay_snapshot();mounted_scene_return_keeps_native_rider();grounded_native_rider_return();
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly
      * cannot be captured/restored as a resumable C stack. Reactivation required. */
     uint32_t v=1;for(unsigned i=0;i<MMX6_STATE_FRAMES;++i)CHECK(mmx6_state_push(i,&v,4,1)!=UINT32_MAX);

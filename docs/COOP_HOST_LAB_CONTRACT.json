@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; mounted passenger native boarding restoration",
+  "status": "development-candidate-only; grounded owned Armor partner return",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 80,
+  "revision": 81,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v97",
+    "title_compatibility": "mmx6-x-zero-delay-v98",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1029,5 +1029,11 @@
     "health": "Both native living idle actors may retain positive actual/display HP after damage; display/history may lag. Actual/display zero or high-bit fatal values refuse; maxHP5E must still match native PLAY5B+character full capacity. Original factory preserves actual5C/display5D/max5E, campaign mask, selection and ammo.",
     "HP_seed": "If ANY starting-HP seed is configured, both actors still require original5C/5D/5E equal full health before equipment or HP seed. No repair/heal or repeated grant after damage is permitted.",
     "qualification": "UNVERIFIED until native originalCP3 wall9/sub2 sole-X weakness overlap/reaction/recovery LOCALNET; equipment grant alone is no F135 pass."
+  },
+  "native_grounded_armor_partner_return": {
+    "scope": "F60 native X6 boarding counterpart: deliberate absent guest return may begin during grounded intact primary RideArmor boarding. Original stages contain empty armor, not a mounted-stage READY; R16 remains separate.",
+    "guards": "Existing ordinary foot contact unchanged. Additional anchor requires living primary action18/D5=1orFF, exact original Recycle source, soleprimary owner, alive/intact occupied Armor and actual native ground70or71 bit8. Airborne/unclaimed/retired/destroyed/selfdestruct/otherowner/invalidsource remain deferred.",
+    "behavior": "Reuse saved guest body and existing original incoming beam/idle/foot recovery; no new vehicle, extra state, health/ground/result assignment or fixture. Existing queued Select request remains pending until safe. Profile81/title98/snapshot24.",
+    "qualification": "UNVERIFIED until actual overlapping native boarding/partner beam, retainedvehicleownership, foot landing/controls LOCALNET same exact image. Guard tests are not runtime qualification."
   }
 }

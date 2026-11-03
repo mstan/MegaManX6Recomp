@@ -1080,6 +1080,19 @@ static int ride_source(void) {
         psx_mod_read_word(0x800EE924u)==0x27BDFFD8u &&
         psx_mod_read_word(0x800EEA74u)==0x24050012u;
 }
+/* Native boarding replaces the pilot foot box/contact with action18/D5.
+ * A deliberate partner return may use that one grounded, intact owner as its
+ * anchor; airborne/unclaimed/retired armor still defers the queued request. */
+static int safe_join_landing(void) {
+    if(!psx_mod_read_byte(PLAYER+0x67) && (psx_mod_read_byte(PLAYER+0x70)&8u))return 1;
+    unsigned hp=psx_mod_read_byte(PLAYER+0x5C),armor_hp=psx_mod_read_byte(RIDE+0x5C);
+    unsigned claim=psx_mod_read_byte(PLAYER+0xD5);
+    return life.status[0]==MMX6_COOP_ALIVE && psx_mod_read_byte(PLAYER+4)==1 &&
+        psx_mod_read_byte(PLAYER+5)==0x12 && (claim==1 || claim==255) && hp && hp<128 &&
+        ride_source() && ride_owner()==0 && psx_mod_read_byte(RIDE+4)==1 &&
+        armor_hp && armor_hp<128 && (psx_mod_read_byte(RIDE+0x97)&0xC0u)==0x40u &&
+        ((psx_mod_read_byte(RIDE+0x70)|psx_mod_read_byte(RIDE+0x71))&8u);
+}
 static int ride_entry(CPUState *cpu,unsigned seat) {
     uint8_t body[0x158];ride_body(seat,body);
     /* Literal native EE924 eligibility plus F2414's personal hit-pause gate.
@@ -2214,7 +2227,7 @@ static void controller(CPUState *cpu, uint32_t address) {
         uint32_t input_context=raw;STATE_WORDS(restore_raw,42,&input_context,1);
         uint8_t saved_input[6];
         if (!stage_call) diagnostic_setup(cpu);
-        int safe=!psx_mod_read_byte(PLAYER+0x67) && (psx_mod_read_byte(PLAYER+0x70)&8);
+        int safe=safe_join_landing();
         Mmx6CoopJoinAction action=scene_owner?MMX6_COOP_NO_ACTION:
             mmx6_coop_join_input(&life,raw&1,1,safe);
         if (action==MMX6_COOP_LEAVE) start_leave(cpu);
