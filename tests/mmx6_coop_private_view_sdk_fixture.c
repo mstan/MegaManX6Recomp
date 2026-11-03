@@ -15,6 +15,7 @@ int psx_mod_current_option_value(const char *id,char *out,uint32_t size) {
     memcpy(out,value,strlen(value)+1);return 1;
 }
 int psx_netplay_local_port(void) { return mmx6_view_sdk.local_port; }
+int psx_mod_local_view_scope(void) { return mmx6_view_sdk.busy; }
 int psx_mod_set_fixed_display_aspect(uint32_t n,uint32_t d) {
     ++mmx6_view_sdk.aspect_calls;return n==4 && d==3;
 }
