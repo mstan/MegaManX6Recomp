@@ -53,6 +53,14 @@ void psx_mod_write_half(uint32_t a,uint16_t v){psx_mod_write_byte(a,(uint8_t)v);
 void psx_mod_write_word(uint32_t a,uint32_t v){for(unsigned i=0;i<4;++i)psx_mod_write_byte(a+i,(uint8_t)(v>>(i*8)));}
 void psx_mod_write_code_word(uint32_t a,uint32_t v){psx_mod_write_word(a,v);}
 int psx_mod_local_view_scope(void){return local_scope;}
+/* The optional-radio seam uses an ordinary local guest Select sample. */
+uint16_t sio_get_pad_buttons_slot(int slot){CHECK(slot==1);return 0xFFFE;}
+int psx_mod_netplay_is_active(void){return 0;}
+void psx_mod_counter_add(const char *name,uint32_t count){(void)name;(void)count;CHECK(0);}
+void psx_session_input_taint_add(uint32_t flags){(void)flags;CHECK(0);}
+uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
+    CHECK(consumer==MMX6_INPUT_INTERACTION && buttons==1 && !contaminated);return buttons;
+}
 int psx_mod_texture_banks_supported(void){return texture_support;}
 const uint16_t *gpu_get_vram(void){return vram;}
 int psx_mod_define_texture_bank(uint16_t id,uint32_t width,uint32_t height,const uint16_t *pixels){
