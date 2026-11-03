@@ -2724,6 +2724,13 @@ static void render(CPUState *cpu, uint32_t address) {
     psx_mod_write_word(diagnostic+32,(end-base)/40);
     inside=world_render=0;
 }
+static int living_primary_frozen_draw(void) {
+    /* A guest-owned in-place dialogue and a guest-owned pause both keep
+     * the living primary's own frozen body/personal pools in this world.
+     * Transport scenes retain their separate passenger animation policy. */
+    return life.status[0]==MMX6_COOP_ALIVE &&
+        (pause_owner==1 || (scene_owner==2 && !scene_phase));
+}
 static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
@@ -2743,19 +2750,19 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     psx_mod_write_word(SCRATCH+0x100,world_packets);
     psx_mod_write_word(SCRATCH+0x104,arena+PLAYER_MODE_OFFSET+(world_packets-arena)/5);
     render_actor(cpu,actor,arena);
-    /* A Zero-owned pause still draws the native world during its fades.
-     * The resident PLAYER is Zero there; retain living X in that same world
-     * draw instead of making him disappear until gameplay resumes. Native
-     * menu-only pages do not call this path. */
+    /* A guest-owned pause or in-place dialogue draws the native world with
+     * its owner projected at PLAYER. Retain the living primary in that same
+     * draw instead of hiding it until gameplay resumes. Native menu-only
+     * pages do not call this path. */
     if (actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0) ||
-        (pause_owner==1 && life.status[0]==MMX6_COOP_ALIVE)) && p1.body[3]) {
+        living_primary_frozen_draw()) && p1.body[3]) {
         PlayerContext zero_player;
         capture_player(&zero_player);
         STATE_BYTES(restore_player,19,&zero_player,sizeof zero_player);
         project_player(&p1);
         render_x_death=1;
         render_actor(cpu,PLAYER,arena);
-        if (pause_owner==1 && life.status[0]==MMX6_COOP_ALIVE) {
+        if (living_primary_frozen_draw()) {
             /* Original PLAYER world dispatch also owns X's frozen personal
              * pools. Native menu-only pages never invoke this branch. Common
              * charge art keeps its original stage texture; X-frame trails and

@@ -19,6 +19,7 @@ static int solid_dispatch,allocator_dispatch;
 static int mounted_return_dispatch;
 static unsigned mounted_return_constructors;
 static int interaction_dispatch,interaction_accept;
+static unsigned inplace_render_dispatch,inplace_render_calls;
 static int camera_dispatch;
 static int subtank_dispatch;
 static uint8_t subtank_expected,subtank_result,subtank_new_found;
@@ -77,6 +78,12 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
     if(abandon_guest)longjmp(abandon_target,1);
     uint32_t h=state_digest();state_track.frame[state_track.count-1].saved[0]^=1;
     CHECK(state_digest()!=h);state_track.frame[state_track.count-1].saved[0]^=1;
+    if(inplace_render_dispatch) {
+        CHECK(target==0x800232D4u && cpu->gpr[4]==PLAYER);
+        CHECK(psx_mod_read_byte(PLAYER+2)==(inplace_render_calls?0:1));
+        CHECK(render_x_death==(inplace_render_calls?1:0));
+        ++inplace_render_calls;cpu->gpr[2]=42;return;
+    }
     if(interaction_dispatch) {
         /* Supply only the external native admission/lock contract. The
          * original bounds/input/story predicate is not emulated here. */
@@ -906,13 +913,47 @@ static void optional_radio_scene_keeps_living_pair(void) {
     scene_owner=old_scene;scene_phase=old_phase;pause_owner=old_pause;
     project(PLAYER,old_player,sizeof old_player);
 }
+static void inplace_guest_scene_draws_primary_once(void) {
+    PlayerContext old_p1=p1,old_p2=p2;Mmx6CoopLifecycle old_life=life;
+    uint8_t old_player[0x158];capture(PLAYER,old_player,sizeof old_player);
+    unsigned old_scene=scene_owner,old_phase=scene_phase;
+    int old_pause=pause_owner,old_world=zero_world;
+    CPUState cpu;memset(&cpu,0,sizeof cpu);
+    /* Exercise eligibility separately from actual native packet production.
+     * Only a living primary gains this new in-place draw permission. */
+    for(unsigned status=MMX6_COOP_ALIVE;status<=MMX6_COOP_FALLEN;++status)
+        for(unsigned owner=0;owner<3;++owner)for(unsigned phase=0;phase<2;++phase) {
+        life.status[0]=(Mmx6CoopStatus)status;scene_owner=owner;scene_phase=phase;pause_owner=-1;
+        CHECK(!!living_primary_frozen_draw()==(status==MMX6_COOP_ALIVE && owner==2 && !phase));
+        pause_owner=1;CHECK(!!living_primary_frozen_draw()==(status==MMX6_COOP_ALIVE));
+    }
+    memset(&p1,0,sizeof p1);memset(&p2,0,sizeof p2);
+    p1.body[0]=p1.body[3]=p1.body[4]=1;p1.body[0x5C]=32;p1.body[5]=2;
+    p2.body[0]=p2.body[3]=p2.body[4]=1;p2.body[2]=1;p2.body[0x5C]=32;p2.body[5]=20;
+    project_player(&p2);mmx6_coop_lifecycle_init(&life);
+    life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    scene_owner=2;scene_phase=0;pause_owner=-1;zero_world=1;
+    world_render=inside=failed=render_x_death=0;enrolled=1;psx_mod_write_byte(PLAY,10);
+    psx_mod_write_word(SCRATCH,0);psx_mod_write_word(SCRATCH+0x100,0x80070000u);
+    psx_mod_write_word(SCRATCH+0x104,0x80071000u);psx_mod_write_word(SCRATCH+0x124,0);
+    world_packets=packets;inplace_render_dispatch=1;inplace_render_calls=0;cpu.gpr[4]=PLAYER;
+    CHECK(render_survivor(&cpu,0x800232D4u)==1);
+    CHECK(inplace_render_calls==2 && !failed && !inside && !world_render && !render_x_death);
+    CHECK(psx_mod_read_word(SCRATCH+0x100)==0x80070000u && psx_mod_read_word(SCRATCH+0x104)==0x80071000u);
+    uint8_t actual[0x158];capture(PLAYER,actual,sizeof actual);
+    CHECK(!memcmp(actual,p2.body,sizeof actual) && !state_track.count && !state_track.error);
+    CHECK(scene_owner==2 && !scene_phase && life.status[0]==MMX6_COOP_ALIVE);
+    inplace_render_dispatch=0;p1=old_p1;p2=old_p2;life=old_life;
+    scene_owner=old_scene;scene_phase=old_phase;pause_owner=old_pause;zero_world=old_world;
+    project(PLAYER,old_player,sizeof old_player);
+}
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();default_boss_cookie_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
-    private_x_overlay_snapshot();mounted_scene_return_keeps_native_rider();grounded_native_rider_return();optional_radio_scene_keeps_living_pair();
+    private_x_overlay_snapshot();mounted_scene_return_keeps_native_rider();grounded_native_rider_return();optional_radio_scene_keeps_living_pair();inplace_guest_scene_draws_primary_once();
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly
      * cannot be captured/restored as a resumable C stack. Reactivation required. */
     uint32_t v=1;for(unsigned i=0;i<MMX6_STATE_FRAMES;++i)CHECK(mmx6_state_push(i,&v,4,1)!=UINT32_MAX);
