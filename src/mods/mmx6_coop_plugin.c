@@ -38,6 +38,7 @@
 
 #define PLAYER 0x800970A0u
 #define PLAY 0x800CCED0u
+#define RIDE 0x800CD340u
 #define OVERLAY 0x801EA000u
 #define OVERLAY_SIZE 0xB000u
 #define SCRATCH 0x1F800000u
@@ -1035,6 +1036,7 @@ static int diagnostic_mutation_allowed(void) {
     return !psx_mod_netplay_is_active();
 #endif
 }
+static int checkpoint_mounted_fatal_ready(unsigned seat);
 #include "mmx6_coop_checkpoint.inc"
 static uint16_t p2_input(unsigned consumer) {
     uint16_t raw=(uint16_t)~sio_get_pad_buttons_slot(1);
@@ -1057,7 +1059,6 @@ static uint16_t p2_input(unsigned consumer) {
  * second vehicle/world pass. Recycle EE924 and alternate EC6B4 both request
  * D5=1 for CD340 (2 denotes the secondary slot); 3A268 consumes it as -1.
  * Existing body bytes/shared RAM own the snapshot/digest; no owner cache. */
-#define RIDE 0x800CD340u
 enum { RIDE_NONE=2, RIDE_INVALID=3, RIDE_RECYCLE=1, RIDE_ALTERNATE=2 };
 static void ride_body(unsigned seat,uint8_t body[0x158]) {
     if(seat==(unsigned)!!zero_projected)capture(PLAYER,body,0x158);
@@ -1175,6 +1176,26 @@ static int ride_tick(CPUState *cpu,uint32_t address) {
         project(0x800C456C,input,sizeof input);STATE_POP(restore_input);
     } else result=shared_effect_as_primary(cpu,address,cpu->gpr[4]);
     STATE_POP(restore_context);ride_call=0;cpu->gpr[2]=result;return 1;
+}
+/* Existing agreed p1/p2 fatal choices only. The completed Recycle option7
+ * receipt may precede the real portal; this exact original mounted20/1
+ * context permits native EFCCC/EFCD0's HP-only rider/armor request. */
+static int checkpoint_mounted_fatal_ready(unsigned seat) {
+    if(seat>1 || checkpoint_fatal_option!=seat+1 || checkpoint_lab_option!=7 ||
+       !checkpoint_lab_receipt_complete() || !checkpoint_safe_boundary() ||
+       scene_call || clear_phase || life.wipe || join_phase || arrival_pair || both_door_actor ||
+       psx_mod_read_byte(PLAY+12)!=20 || psx_mod_read_byte(PLAY+13)!=1 ||
+       psx_mod_read_byte(diagnostic+0xAD)!=2 || ride_source()!=RIDE_ALTERNATE ||
+       ride_owner()!=seat || !(psx_mod_read_byte(RIDE)&1u) || psx_mod_read_byte(RIDE+4)!=1 ||
+       !psx_mod_read_byte(RIDE+0x5C) || psx_mod_read_byte(RIDE+0x5C)>=128 ||
+       (psx_mod_read_byte(RIDE+0x97)&0xC0u)!=0x40u || !(psx_mod_read_byte(RIDE+0xA8)&8u) ||
+       !checkpoint_fatal_idle(seat^1u) ||
+       psx_mod_read_word(0x800EFCC8u)!=0x2402FF80u ||
+       psx_mod_read_word(0x800EFCCCu)!=0xA102005Cu ||
+       psx_mod_read_word(0x800EFCD0u)!=0xA202005Cu)return 0;
+    uint8_t pilot[0x158],partner[0x158];ride_body(seat,pilot);ride_body(seat^1u,partner);
+    return pilot[0] && pilot[3] && pilot[4]==1 && pilot[5]==0x12 && pilot[0xD5]==255 &&
+        pilot[0x5C] && pilot[0x5C]<128 && !partner[0xD5];
 }
 static void ride_sync_rider(void) {
     if(!ride_source() || !(psx_mod_read_byte(RIDE+0x97)&0x40u))return;

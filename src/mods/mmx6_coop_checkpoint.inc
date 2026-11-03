@@ -956,16 +956,17 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
     if(checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED) {
         checkpoint_hatch_stagger_boundary();
         if(!checkpoint_fatal_option || !diagnostic || checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED)return 0;
+        int mounted=checkpoint_fatal_option<=2 && checkpoint_mounted_fatal_ready(checkpoint_fatal_option-1);
         if((checkpoint_fatal_option==3 || checkpoint_fatal_option==4) && checkpoint_fatal_state>=CHECKPOINT_FATAL_SCENE_LOCKED) {
             checkpoint_scene_fatal_boundary(cpu);
-        } else if(!checkpoint_lab_completed())checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE;
+        } else if(!checkpoint_lab_completed() && !mounted)checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE;
         else if(raw!=6)checkpoint_fatal_state=raw?CHECKPOINT_FATAL_RELEASE:CHECKPOINT_FATAL_ARMED;
         else if(checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED) {
             checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE; /* Unsafe edges never fire later while held. */
             if(checkpoint_fatal_option==6?checkpoint_boss_admission_fatal_ready():
                checkpoint_fatal_option==5?checkpoint_capsule_fatal_ready():
-               (checkpoint_safe_boundary() && !clear_phase && !join_phase && !arrival_pair &&
-                checkpoint_fatal_idle(0) && checkpoint_fatal_idle(1))) {
+               (mounted || (checkpoint_safe_boundary() && !clear_phase && !join_phase && !arrival_pair &&
+                checkpoint_fatal_idle(0) && checkpoint_fatal_idle(1)))) {
                 psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
                 if(checkpoint_fatal_option==3 || checkpoint_fatal_option==4) {
                     checkpoint_scene_call(cpu,0x8003D308u);
@@ -973,6 +974,7 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
                 } else {
                     if(checkpoint_fatal_option==1 || checkpoint_fatal_option==5 || checkpoint_fatal_option==6)psx_mod_write_byte(PLAYER+0x5C,0x80);
                     else p2.body[0x5C]=0x80;
+                    if(mounted)psx_mod_write_byte(RIDE+0x5C,0x80);
                     checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
                 }
             }

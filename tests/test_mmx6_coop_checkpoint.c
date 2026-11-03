@@ -1200,6 +1200,107 @@ static void agreed_portal_native_heights(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();
 }
+static void mounted_fatal_ready(CPUState *cpu,int online,unsigned seat,unsigned inverse) {
+    clear_phase=clear_members=clear_started=join_phase=arrival_pair=scene_call=ride_call=view_call=private_draw=0;
+    both_door_reset();test_lab_hatch_stagger_option="off";
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    test_lab_earned_option=test_lab_contact_option="off";test_lab_fatal_option=seat?"p2":"p1";
+    setup_portal_prerequisite(cpu,online,0);
+    CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+    portal_test_native_ready();CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+    /* External original portal/boarding state only. No native death, FX,
+     * cleanup or result is supplied by this actual-plugin boundary test. */
+    psx_mod_write_byte(PLAY+12,20);psx_mod_write_byte(PLAY+13,1);psx_mod_write_byte(PLAY+0x1D,0);
+    portal_test_body(0,32,352);portal_test_body(1,56,352);
+    for(unsigned s=0;s<2;++s)portal_test_character(s,s^inverse,352);
+    if(seat) {p2.body[5]=0x12;p2.body[0xD5]=255;p2.body[0x67]=1;put32(p2.body+0x68,0);}
+    else {psx_mod_write_byte(PLAYER+5,0x12);psx_mod_write_byte(PLAYER+0xD5,255);
+        psx_mod_write_byte(PLAYER+0x67,1);psx_mod_write_word(PLAYER+0x68,0);}
+    for(unsigned i=0;i<0xB0;++i)psx_mod_write_byte(RIDE+i,0);
+    psx_mod_write_byte(RIDE,0x41);psx_mod_write_byte(RIDE+1,1);psx_mod_write_byte(RIDE+4,1);
+    psx_mod_write_byte(RIDE+0x5C,32);psx_mod_write_byte(RIDE+0x97,0x40);psx_mod_write_byte(RIDE+0xA8,8);
+    psx_mod_write_word(RIDE+0x10,0x800F2588u);psx_mod_write_word(RIDE+0x68,0x800F2F28u);
+    const uint32_t words[][2]={
+        {0x80071384u,0x800F01A4u},{0x800F01A4u,0x27BDFFE8u},
+        {0x800F2F34u,0x800EBF64u},{0x800F2F38u,0x800EFC54u},
+        {0x800EFC54u,0x27BDFFE0u},{0x800F2F58u,0x800EC6B4u},
+        {0x800EC6B4u,0x27BDFFD8u},{0x800EC7B0u,0x24422F2Cu},
+        {0x800EC804u,0x24050012u},{0x800EC830u,0x24020002u},
+        {0x800EC834u,0x24020001u},{0x800EC838u,0xA22200D5u},
+        {0x800F2F28u,0x1D0F0300u},{0x800F2F2Cu,0x0A0F1600u},
+        {0x800F2588u,0x03011E00u},{0x800F258Cu,0x01620020u},
+        {0x800EFCC8u,0x2402FF80u},{0x800EFCCCu,0xA102005Cu},{0x800EFCD0u,0xA202005Cu}
+    };
+    for(unsigned i=0;i<sizeof words/sizeof words[0];++i)psx_mod_write_word(words[i][0],words[i][1]);
+    CHECK(checkpoint_lab_receipt_complete() && !checkpoint_lab_completed());
+    CHECK(ride_source()==RIDE_ALTERNATE && ride_owner()==seat && checkpoint_mounted_fatal_ready(seat));
+}
+static void agreed_mounted_native_fatal(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(unsigned seat=0;seat<2;++seat)for(unsigned inverse=0;inverse<2;++inverse) {
+        mounted_fatal_ready(cpu,online,seat,inverse);
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state); /* Old held chord cannot fire. */
+        CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext expected=p2;Mmx6CoopLifecycle expected_life=life;
+        CPUState expected_cpu=*cpu;uint8_t receipt[sizeof test_diagnostic];memcpy(receipt,test_diagnostic,sizeof receipt);
+        if(seat)expected.body[0x5C]=0x80;else before_ram[(PLAYER+0x5C)&0x1FFFFF]=0x80;
+        before_ram[(RIDE+0x5C)&0x1FFFFF]=0x80;receipt[0xC8]=(uint8_t)((seat+1)|(CHECKPOINT_FATAL_CONSUMED<<3));
+        unsigned calls=guest_calls;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&expected,&p2,sizeof p2));
+        CHECK(!memcmp(&expected_life,&life,sizeof life) && !memcmp(&expected_cpu,cpu,sizeof *cpu));
+        CHECK(!memcmp(receipt,test_diagnostic,sizeof receipt) && guest_calls==calls);
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        if(seat)p2.body[0x5C]=7;else psx_mod_write_byte(PLAYER+0x5C,7);
+        psx_mod_write_byte(RIDE+0x5C,9);
+        for(unsigned edge=0;edge<4;++edge)CHECK(!checkpoint_lab_boundary(cpu,edge&1?6:0));
+        CHECK((seat?p2.body[0x5C]:psx_mod_read_byte(PLAYER+0x5C))==7 && psx_mod_read_byte(RIDE+0x5C)==9);
+    }
+    for(unsigned bad=0;bad<24;++bad) {
+        mounted_fatal_ready(cpu,1,1,0);CHECK(!checkpoint_lab_boundary(cpu,0));
+        PlayerContext healthy=p2;Mmx6CoopLifecycle healthy_life=life;
+        uint8_t primary[0x158],armor[0xB0];capture(PLAYER,primary,sizeof primary);capture(RIDE,armor,sizeof armor);
+        if(bad==0)psx_mod_write_word(0x800EFCCCu,0); /* Exact HP-only native pair. */
+        if(bad==1)psx_mod_write_word(RIDE+0x10,0x800F2590u);
+        if(bad==2)psx_mod_write_byte(RIDE+4,2);
+        if(bad==3)p2.body[0xD5]=1; /* Request not yet consumed. */
+        if(bad==4)p2.body[0xD5]=254; /* Unsupported secondary slot. */
+        if(bad==5)psx_mod_write_byte(PLAYER+0xD5,255); /* Two claims. */
+        if(bad==6)psx_mod_write_byte(RIDE+0xA8,0);
+        if(bad==7)psx_mod_write_byte(RIDE+0x97,0xC0);
+        if(bad==8)psx_mod_write_byte(RIDE+0x5C,0);
+        if(bad==9)psx_mod_write_byte(PLAYER+5,3); /* Partner must be idle. */
+        if(bad==10)psx_mod_write_byte(PLAY+13,0);
+        if(bad==11)psx_mod_write_byte(diagnostic+0xAD,1);
+        if(bad==12)psx_mod_write_word(diagnostic+0xB0,0);
+        if(bad==13)checkpoint_lab_option=10; /* No other option's receipt exception. */
+        if(bad==14)pause_owner=0;if(bad==15)scene_owner=1;if(bad==16)life.wipe=1;
+        if(bad==17)join_phase=1;if(bad==18)scene_call=1;if(bad==19)test_lab_ready=0;
+        if(bad==20)p2.body[4]=2;if(bad==21)p2.body[5]=2;
+        if(bad==22)psx_mod_write_byte(RIDE,0x40);
+        if(bad==23) { /* Ordinary on-foot fatal readiness must not gain this post-portal exception. */
+            p2.body[5]=2;p2.body[0xD5]=p2.body[0x67]=0;put32(p2.body+0x68,0x80073D54u);
+        }
+        CHECK(!checkpoint_mounted_fatal_ready(1));
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext expected=p2;Mmx6CoopLifecycle expected_life=life;
+        CPUState expected_cpu=*cpu;uint8_t receipt[sizeof test_diagnostic];memcpy(receipt,test_diagnostic,sizeof receipt);
+        receipt[0xC8]=2;unsigned calls=guest_calls;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_fatal_state==CHECKPOINT_FATAL_RELEASE);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&expected,&p2,sizeof p2));
+        CHECK(!memcmp(&expected_life,&life,sizeof life) && !memcmp(&expected_cpu,cpu,sizeof *cpu));
+        CHECK(!memcmp(receipt,test_diagnostic,sizeof receipt) && guest_calls==calls);
+        /* Restoring eligibility while still held must not replay the edge. */
+        project(PLAYER,primary,sizeof primary);project(RIDE,armor,sizeof armor);p2=healthy;life=healthy_life;
+        psx_mod_write_word(0x800EFCCCu,0xA102005Cu);psx_mod_write_byte(PLAY+13,1);
+        psx_mod_write_byte(diagnostic+0xAD,2);psx_mod_write_word(diagnostic+0xB0,CHECKPOINT_LAB_PORTAL_NONCE);
+        checkpoint_lab_option=7;pause_owner=-1;scene_owner=join_phase=scene_call=0;test_lab_ready=1;
+        CHECK(checkpoint_mounted_fatal_ready(1));
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state);
+        CHECK(p2.body[0x5C]==32 && psx_mod_read_byte(RIDE+0x5C)==32);
+        CHECK(!checkpoint_lab_boundary(cpu,0));CHECK(!checkpoint_lab_boundary(cpu,6));
+        CHECK(p2.body[0x5C]==0x80 && psx_mod_read_byte(RIDE+0x5C)==0x80);
+    }
+    test_lab_fatal_option=test_lab_option="off";checkpoint_reset();
+}
 static void capsule_fatal_ready(CPUState *cpu,int online) {
     clear_phase=clear_members=clear_started=join_phase=arrival_pair=scene_call=0;both_door_reset();
     test_lab_hp_option[0]=test_lab_hp_option[1]="off";
@@ -2027,7 +2128,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
-    agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
+    agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }
