@@ -26,7 +26,7 @@ static unsigned native_budget;
 static unsigned boss_scan_probe,boss_scan_type[2],boss_scan_cookie[2],boss_scan_present[2],boss_scan_calls[2];
 static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_calls;
 static unsigned muzzle_probe,muzzle_expected_seat,muzzle_calls;
-static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat;
+static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat,ride_primary_character,ride_character;
 static unsigned door_native_probe,door_ticks,door_draws,door_subtype_allowed;
 static unsigned icon_packet_probe,dash_packet_probe;
 static unsigned render_replacement_probe;
@@ -470,10 +470,10 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     }
     if(nova_probe)CHECK(psx_mod_read_byte(PLAY+0x1C)==1);
     if(ride_probe) {
-        unsigned seat=psx_mod_read_byte(PLAYER+2);
+        unsigned character=psx_mod_read_byte(PLAYER+2),seat=character!=ride_primary_character;
         if(address==0x8002DCF4u) {
             CHECK(cpu->gpr[4]==PLAYER && cpu->gpr[5]==RIDE &&
-                psx_mod_read_word(RIDE+0x68)==0x800F3A48u);
+                psx_mod_read_word(RIDE+0x68)==(psx_mod_read_byte(RIDE+1)==1?0x800F2F2Cu:0x800F3A48u));
             cpu->gpr[2]=!!(ride_overlap&(1u<<seat));return;
         }
         if(address==0x8003CD44u) {
@@ -485,7 +485,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         if(address==0x80020A08u) {
             /* External native boarding/dismount contract, not game evidence.
              * The plugin must select context; only this model sets D5/pose. */
-            ++ride_ticks;ride_seat=seat;
+            ++ride_ticks;ride_seat=seat;ride_character=character;
             if(!(psx_mod_read_byte(RIDE+0x97)&0x40)) {
                 if(ride_overlap&(1u<<seat)) {
                     psx_mod_write_byte(PLAYER+0xD5,1);
@@ -634,7 +634,7 @@ static void setup(CPUState *cpu){
     shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
     muzzle_probe=muzzle_expected_seat=muzzle_calls=0;
-    ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=0;
+    ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=ride_primary_character=ride_character=0;
     door_native_probe=door_ticks=door_draws=both_doors=scene_call=0;both_door_reset();door_subtype_allowed=1;
     icon_packet_probe=dash_packet_probe=render_replacement_probe=0;
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=voluntary_transport_probe=capsule_native_probe=0;memset(death_effect,0,sizeof death_effect);
@@ -1794,6 +1794,82 @@ static void native_shared_ride_ownership(void) {
     ride_setup(&cpu);psx_mod_write_byte(PLAY+12,1);CHECK(!ride_tick(&cpu,0x80020A08) && !call_count);
     ride_probe=0;
 }
+/* Known original BIN28 type1 contract, not a fabricated second vehicle.
+ * The native callback model above still owns every D5/occupied result. */
+static const uint32_t alternate_ride_words[][2]={
+    {0x80071384u,0x800F01A4u},{0x800F01A4u,0x27BDFFE8u},
+    {0x800F2F34u,0x800EBF64u},{0x800F2F38u,0x800EFC54u},
+    {0x800EFC54u,0x27BDFFE0u},{0x800F2F58u,0x800EC6B4u},
+    {0x800EC6B4u,0x27BDFFD8u},{0x800EC7B0u,0x24422F2Cu},
+    {0x800EC804u,0x24050012u},{0x800EC830u,0x24020002u},
+    {0x800EC834u,0x24020001u},{0x800EC838u,0xA22200D5u},
+    {0x800F2F28u,0x1D0F0300u},{0x800F2F2Cu,0x0A0F1600u},
+    {0x800F2588u,0x03011E00u},{0x800F258Cu,0x01620020u}
+};
+static void ride_binding_setup(CPUState *cpu,unsigned kind,unsigned primary) {
+    ride_setup(cpu);ride_primary_character=primary;
+    Mmx6CoopRosterNative native={(uint8_t)primary,(uint8_t)(primary?5:0),
+        (uint8_t)primary,(uint8_t)(primary?5:0),0};
+    Mmx6CoopRoster roster;CHECK(mmx6_coop_roster_resolve(&native,&roster)==MMX6_COOP_ROSTER_OK);
+    CHECK(private_roster_bind(&roster));
+    psx_mod_write_byte(PLAYER+2,(uint8_t)primary);psx_mod_write_byte(PLAYER+0xE7,(uint8_t)(primary?5:0));
+    psx_mod_write_byte(PLAY+0x38,(uint8_t)primary);psx_mod_write_byte(PLAY+0x5E,(uint8_t)(primary?5:0));
+    p2.body[2]=private_actor.character;p2.body[0xE7]=private_actor.form;
+    psx_mod_write_byte(RIDE+0x5C,32);
+    if(kind==RIDE_ALTERNATE) {
+        psx_mod_write_byte(PLAY+12,20);psx_mod_write_byte(PLAY+13,1);psx_mod_write_byte(RIDE+1,1);
+        psx_mod_write_word(RIDE+0x10,0x800F2588u);psx_mod_write_word(RIDE+0x68,0x800F2F28u);
+        psx_mod_write_byte(RIDE+0x70,0);psx_mod_write_byte(RIDE+0x71,0);psx_mod_write_byte(RIDE+0xA8,8);
+        for(unsigned i=0;i<sizeof alternate_ride_words/sizeof alternate_ride_words[0];++i)
+            psx_mod_write_word(alternate_ride_words[i][0],alternate_ride_words[i][1]);
+    }
+    CHECK(ride_source()==(int)kind);
+}
+static void native_both_ride_bindings_and_rosters(void) {
+    CPUState cpu;
+    for(unsigned kind=RIDE_RECYCLE;kind<=RIDE_ALTERNATE;++kind)for(unsigned primary=0;primary<2;++primary) {
+        ride_binding_setup(&cpu,kind,primary);ride_overlap=2;
+        PlayerContext before,after;capture_player(&before);uint8_t input[6],restored[6];capture(0x800C456C,input,6);
+        uint32_t box=psx_mod_read_word(RIDE+0x68);
+        CHECK(ride_tick(&cpu,0x80020A08u) && ride_ticks==1 && ride_seat==1 && ride_character==(primary^1u));
+        capture_player(&after);capture(0x800C456C,restored,6);
+        CHECK(!memcmp(&before,&after,sizeof before) && !memcmp(input,restored,6));
+        CHECK(p2.body[0xD5]==1 && !psx_mod_read_byte(PLAYER+0xD5) && psx_mod_read_word(RIDE+0x68)==box);
+        CHECK(!previous_input && !ride_call && !state_track.count && !zero_projected);
+        p2.body[0xD5]=255;p2.body[5]=0x12;
+        psx_mod_write_word(RIDE+8,32u<<16);psx_mod_write_word(RIDE+12,352u<<16);ride_sync_rider();
+        CHECK(le32(p2.body+8)==(32u<<16) && le32(p2.body+12)==(352u<<16) && ride_owner()==1 && ride_ticks==1);
+        ride_binding_setup(&cpu,kind,primary);ride_overlap=3;
+        CHECK(ride_tick(&cpu,0x80020A08u) && ride_seat==0 && ride_character==primary);
+        CHECK(psx_mod_read_byte(PLAYER+0xD5)==1 && !p2.body[0xD5]);
+        ride_binding_setup(&cpu,kind,primary);p2.body[0xD5]=254;ride_overlap=2;
+        CHECK(ride_owner()==RIDE_NONE && ride_tick(&cpu,0x80020A08u) && !psx_mod_read_byte(PLAYER+0xD5) && p2.body[0xD5]==254);
+        /* Each binding uses its original native ground field. Unrelated
+         * contact bytes cannot admit an airborne first-slot vehicle. */
+        ride_binding_setup(&cpu,kind,primary);ride_overlap=2;
+        psx_mod_write_byte(RIDE+(kind==RIDE_ALTERNATE?0xA8:0x70),0);
+        psx_mod_write_byte(RIDE+(kind==RIDE_ALTERNATE?0x70:0xA8),8);
+        CHECK(!ride_entry(&cpu,1) && !call_count);
+        ride_binding_setup(&cpu,kind,primary);psx_mod_write_byte(PLAYER+0xD5,255);
+        psx_mod_write_byte(PLAYER+5,0x12);psx_mod_write_byte(PLAYER+0x67,1);psx_mod_write_byte(RIDE+0x97,0x40);
+        CHECK(safe_join_landing());psx_mod_write_byte(RIDE+(kind==RIDE_ALTERNATE?0xA8:0x70),0);
+        CHECK(!safe_join_landing());
+    }
+    for(unsigned i=0;i<sizeof alternate_ride_words/sizeof alternate_ride_words[0];++i) {
+        ride_binding_setup(&cpu,RIDE_ALTERNATE,0);
+        uint32_t at=alternate_ride_words[i][0],mask=at==0x800F2588u?2u:1u;
+        psx_mod_write_word(at,psx_mod_read_word(at)^mask);
+        CHECK(!ride_source() && !ride_tick(&cpu,0x80020A08u) && !call_count && !failed);
+    }
+    ride_binding_setup(&cpu,RIDE_ALTERNATE,1);psx_mod_write_word(0x800F2588u,0x03011E01u);
+    CHECK(ride_source()==RIDE_ALTERNATE); /* Native allocation marker only. */
+    ride_binding_setup(&cpu,RIDE_ALTERNATE,0);psx_mod_write_byte(PLAY+13,0);
+    CHECK(!ride_tick(&cpu,0x80020A08u) && !call_count);
+    ride_binding_setup(&cpu,RIDE_ALTERNATE,0);psx_mod_write_word(RIDE+0x10,0x800F2590u);
+    CHECK(!ride_tick(&cpu,0x80020A08u) && !call_count);
+    ride_binding_setup(&cpu,RIDE_ALTERNATE,0);psx_mod_write_byte(RIDE+1,0);
+    CHECK(!ride_tick(&cpu,0x80020A08u) && !call_count);ride_probe=0;
+}
 static void shared_clear_setup(CPUState *cpu) {
     setup(cpu);stage_call=0;
     PlayerContext primary=p2;primary.body[2]=0;primary.body[0xE7]=1;
@@ -2862,7 +2938,7 @@ int main(void){
     native_working_palette_rectangle();
     yammar_native_upload_coordinates();
     ray_native_upload_coordinates();
-    native_shared_ride_ownership();
+    native_shared_ride_ownership();native_both_ride_bindings_and_rosters();
     native_shared_clear_admission_and_departure();
     native_sigma_transition_retains_living_pair();
     native_capsule_keeps_living_passenger();

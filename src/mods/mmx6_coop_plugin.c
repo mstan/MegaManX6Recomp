@@ -1053,12 +1053,12 @@ static uint16_t p2_input(unsigned consumer) {
     }
     return mmx6_diagnostics_p2(consumer,raw,contaminated);
 }
-/* One original Recycle Lab armor, never a second vehicle/world pass. Native
- * EE924 writes D5=1 for CD340 (2 is a different armor); 3A268 consumes it as
- * -1, and EFFCC clears it on manual dismount. Those existing body bytes and
- * shared RAM already belong to the snapshot/digest, so no owner cache exists. */
+/* One original first-slot armor in each authenticated native stage, never a
+ * second vehicle/world pass. Recycle EE924 and alternate EC6B4 both request
+ * D5=1 for CD340 (2 denotes the secondary slot); 3A268 consumes it as -1.
+ * Existing body bytes/shared RAM own the snapshot/digest; no owner cache. */
 #define RIDE 0x800CD340u
-enum { RIDE_NONE=2, RIDE_INVALID=3 };
+enum { RIDE_NONE=2, RIDE_INVALID=3, RIDE_RECYCLE=1, RIDE_ALTERNATE=2 };
 static void ride_body(unsigned seat,uint8_t body[0x158]) {
     if(seat==(unsigned)!!zero_projected)capture(PLAYER,body,0x158);
     else memcpy(body,seat?p2.body:p1.body,0x158);
@@ -1072,13 +1072,39 @@ static unsigned ride_owner(void) {
     return claims>1?RIDE_INVALID:owner;
 }
 static int ride_source(void) {
-    return psx_mod_read_byte(PLAY+12)==4 && !psx_mod_read_byte(PLAY+13) &&
+    if(psx_mod_read_byte(PLAY+12)==4 && !psx_mod_read_byte(PLAY+13) &&
         psx_mod_read_byte(RIDE) && !psx_mod_read_byte(RIDE+1) &&
         psx_mod_read_word(RIDE+0x10)==0x800F2B1Cu &&
         psx_mod_read_word(0x80071380u)==0x800F2414u &&
         psx_mod_read_word(0x800F2414u)==0x27BDFFE8u &&
         psx_mod_read_word(0x800EE924u)==0x27BDFFD8u &&
-        psx_mod_read_word(0x800EEA74u)==0x24050012u;
+        psx_mod_read_word(0x800EEA74u)==0x24050012u)return RIDE_RECYCLE;
+    /* Original BIN28 7f49ac29...; only authored20/1 recordF2588 and the
+     * first-slot type1 dispatcher/action/geometry. Native allocation may set
+     * only record bit0. Secondary requests2/FE never claim this slot. */
+    return psx_mod_read_byte(PLAY+12)==20 && psx_mod_read_byte(PLAY+13)==1 &&
+        psx_mod_read_byte(RIDE) && psx_mod_read_byte(RIDE+1)==1 &&
+        psx_mod_read_word(RIDE+0x10)==0x800F2588u &&
+        (psx_mod_read_word(0x800F2588u)&~1u)==0x03011E00u &&
+        psx_mod_read_word(0x800F258Cu)==0x01620020u &&
+        psx_mod_read_word(0x80071384u)==0x800F01A4u &&
+        psx_mod_read_word(0x800F01A4u)==0x27BDFFE8u &&
+        psx_mod_read_word(0x800F2F34u)==0x800EBF64u &&
+        psx_mod_read_word(0x800F2F38u)==0x800EFC54u &&
+        psx_mod_read_word(0x800EFC54u)==0x27BDFFE0u &&
+        psx_mod_read_word(0x800F2F58u)==0x800EC6B4u &&
+        psx_mod_read_word(0x800EC6B4u)==0x27BDFFD8u &&
+        psx_mod_read_word(0x800EC7B0u)==0x24422F2Cu &&
+        psx_mod_read_word(0x800EC804u)==0x24050012u &&
+        psx_mod_read_word(0x800EC830u)==0x24020002u &&
+        psx_mod_read_word(0x800EC834u)==0x24020001u &&
+        psx_mod_read_word(0x800EC838u)==0xA22200D5u &&
+        psx_mod_read_word(0x800F2F28u)==0x1D0F0300u &&
+        psx_mod_read_word(0x800F2F2Cu)==0x0A0F1600u?RIDE_ALTERNATE:0;
+}
+static int ride_grounded(unsigned kind) {
+    return ((kind==RIDE_ALTERNATE?psx_mod_read_byte(RIDE+0xA8):
+        (psx_mod_read_byte(RIDE+0x70)|psx_mod_read_byte(RIDE+0x71)))&8u)!=0;
 }
 /* Native boarding replaces the pilot foot box/contact with action18/D5.
  * A deliberate partner return may use that one grounded, intact owner as its
@@ -1086,29 +1112,30 @@ static int ride_source(void) {
 static int safe_join_landing(void) {
     if(!psx_mod_read_byte(PLAYER+0x67) && (psx_mod_read_byte(PLAYER+0x70)&8u))return 1;
     unsigned hp=psx_mod_read_byte(PLAYER+0x5C),armor_hp=psx_mod_read_byte(RIDE+0x5C);
-    unsigned claim=psx_mod_read_byte(PLAYER+0xD5);
+    unsigned claim=psx_mod_read_byte(PLAYER+0xD5),kind=ride_source();
     return life.status[0]==MMX6_COOP_ALIVE && psx_mod_read_byte(PLAYER+4)==1 &&
         psx_mod_read_byte(PLAYER+5)==0x12 && (claim==1 || claim==255) && hp && hp<128 &&
-        ride_source() && ride_owner()==0 && psx_mod_read_byte(RIDE+4)==1 &&
+        kind && ride_owner()==0 && psx_mod_read_byte(RIDE+4)==1 &&
         armor_hp && armor_hp<128 && (psx_mod_read_byte(RIDE+0x97)&0xC0u)==0x40u &&
-        ((psx_mod_read_byte(RIDE+0x70)|psx_mod_read_byte(RIDE+0x71))&8u);
+        ride_grounded(kind);
 }
 static int ride_entry(CPUState *cpu,unsigned seat) {
     uint8_t body[0x158];ride_body(seat,body);
-    /* Literal native EE924 eligibility plus F2414's personal hit-pause gate.
-     * The original callback still decides and performs the actual boarding. */
-    if(life.status[seat]!=MMX6_COOP_ALIVE || scene_passenger(seat) ||
+    unsigned kind=ride_source();
+    /* Native EE924/EC6B4 eligibility plus the dispatcher's personal hit-pause
+     * gate. The original callback still performs the actual boarding. */
+    if(!kind || life.status[seat]!=MMX6_COOP_ALIVE || scene_passenger(seat) ||
        body[0xCC] || body[0xD0] || body[0xD5] || psx_mod_read_byte(PLAY+0x0F) ||
        (body[2] && body[0x8E]) || body[0x7A] || body[0xE0] ||
        (int8_t)body[0x5C]<=0 || body[0xA4] || body[0x79] ||
        (psx_mod_read_half(RIDE+0x96)&0x8200u) ||
-       !((psx_mod_read_byte(RIDE+0x70)|psx_mod_read_byte(RIDE+0x71))&8u))return 0;
+       !ride_grounded(kind))return 0;
     uint8_t resident[0x158];capture(PLAYER,resident,sizeof resident);
     uint32_t box=psx_mod_read_word(RIDE+0x68);
     STATE_BYTES(restore_body,58,resident,sizeof resident);
     STATE_WORDS(restore_box,59,&box,1);
     project(PLAYER,body,sizeof body);
-    psx_mod_write_word(RIDE+0x68,0x800F3A48u);
+    psx_mod_write_word(RIDE+0x68,kind==RIDE_ALTERNATE?0x800F2F2Cu:0x800F3A48u);
     uint32_t overlap=guest(cpu,0x8002DCF4u,PLAYER,RIDE);
     psx_mod_write_word(RIDE+0x68,box);project(PLAYER,resident,sizeof resident);
     STATE_POP(restore_box);STATE_POP(restore_body);
