@@ -1081,12 +1081,14 @@ static int ride_source(void) {
         psx_mod_read_word(0x800EE924u)==0x27BDFFD8u &&
         psx_mod_read_word(0x800EEA74u)==0x24050012u)return RIDE_RECYCLE;
     /* Original BIN28 7f49ac29...; only authored20/1 recordF2588 and the
-     * first-slot type1 dispatcher/action/geometry. Native allocation may set
-     * only record bit0. Secondary requests2/FE never claim this slot. */
+     * first-slot type1 dispatcher/action/geometry. Preserve source flags0/1
+     * and native-observed allocated81; other flags remain unsupported.
+     * Secondary requests2/FE never claim this slot. */
+    uint32_t record=psx_mod_read_word(0x800F2588u);
     return psx_mod_read_byte(PLAY+12)==20 && psx_mod_read_byte(PLAY+13)==1 &&
         psx_mod_read_byte(RIDE) && psx_mod_read_byte(RIDE+1)==1 &&
         psx_mod_read_word(RIDE+0x10)==0x800F2588u &&
-        (psx_mod_read_word(0x800F2588u)&~1u)==0x03011E00u &&
+        (record==0x03011E00u || record==0x03011E01u || record==0x03011E81u) &&
         psx_mod_read_word(0x800F258Cu)==0x01620020u &&
         psx_mod_read_word(0x80071384u)==0x800F01A4u &&
         psx_mod_read_word(0x800F01A4u)==0x27BDFFE8u &&

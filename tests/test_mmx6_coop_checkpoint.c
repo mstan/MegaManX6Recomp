@@ -1228,7 +1228,7 @@ static void mounted_fatal_ready(CPUState *cpu,int online,unsigned seat,unsigned 
         {0x800EC804u,0x24050012u},{0x800EC830u,0x24020002u},
         {0x800EC834u,0x24020001u},{0x800EC838u,0xA22200D5u},
         {0x800F2F28u,0x1D0F0300u},{0x800F2F2Cu,0x0A0F1600u},
-        {0x800F2588u,0x03011E00u},{0x800F258Cu,0x01620020u},
+        {0x800F2588u,0x03011E81u},{0x800F258Cu,0x01620020u},
         {0x800EFCC8u,0x2402FF80u},{0x800EFCCCu,0xA102005Cu},{0x800EFCD0u,0xA202005Cu}
     };
     for(unsigned i=0;i<sizeof words/sizeof words[0];++i)psx_mod_write_word(words[i][0],words[i][1]);

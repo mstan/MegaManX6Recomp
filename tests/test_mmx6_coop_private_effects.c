@@ -1822,6 +1822,7 @@ static void ride_binding_setup(CPUState *cpu,unsigned kind,unsigned primary) {
         psx_mod_write_byte(RIDE+0x70,0);psx_mod_write_byte(RIDE+0x71,0);psx_mod_write_byte(RIDE+0xA8,8);
         for(unsigned i=0;i<sizeof alternate_ride_words/sizeof alternate_ride_words[0];++i)
             psx_mod_write_word(alternate_ride_words[i][0],alternate_ride_words[i][1]);
+        psx_mod_write_byte(0x800F2588u,0x81); /* Actual native allocated record. */
     }
     CHECK(ride_source()==(int)kind);
 }
@@ -1861,8 +1862,15 @@ static void native_both_ride_bindings_and_rosters(void) {
         psx_mod_write_word(at,psx_mod_read_word(at)^mask);
         CHECK(!ride_source() && !ride_tick(&cpu,0x80020A08u) && !call_count && !failed);
     }
-    ride_binding_setup(&cpu,RIDE_ALTERNATE,1);psx_mod_write_word(0x800F2588u,0x03011E01u);
-    CHECK(ride_source()==RIDE_ALTERNATE); /* Native allocation marker only. */
+    const uint8_t known_flags[]={0,1,0x81},unknown_flags[]={2,0x80,0x82,0x83,0xFF};
+    for(unsigned i=0;i<sizeof known_flags;++i) {
+        ride_binding_setup(&cpu,RIDE_ALTERNATE,1);psx_mod_write_byte(0x800F2588u,known_flags[i]);
+        CHECK(ride_source()==RIDE_ALTERNATE);
+    }
+    for(unsigned i=0;i<sizeof unknown_flags;++i) {
+        ride_binding_setup(&cpu,RIDE_ALTERNATE,1);psx_mod_write_byte(0x800F2588u,unknown_flags[i]);
+        CHECK(!ride_source() && !ride_tick(&cpu,0x80020A08u) && !call_count && !failed);
+    }
     ride_binding_setup(&cpu,RIDE_ALTERNATE,0);psx_mod_write_byte(PLAY+13,0);
     CHECK(!ride_tick(&cpu,0x80020A08u) && !call_count);
     ride_binding_setup(&cpu,RIDE_ALTERNATE,0);psx_mod_write_word(RIDE+0x10,0x800F2590u);
