@@ -9,6 +9,8 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret);
 #define main diagnostic_tests
 #include "test_mmx6_coop_diagnostics.c"
 #undef main
+/* These checkpoint calls execute in the shared world, never a private draw. */
+int psx_mod_local_view_scope(void) { return 0; }
 static uint8_t original_ram[0x200000],before_ram[0x200000];
 static uint16_t checkpoint_vram[1024*512];
 static unsigned before_doors_probe,equipment_probe,equipment_calls;
