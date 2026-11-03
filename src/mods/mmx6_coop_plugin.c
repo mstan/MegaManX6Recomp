@@ -2665,8 +2665,9 @@ static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int 
     giga_packet_trace("before-native",actor);
     /* Native22960 follows the ordinary X body with2619C. That pass
      * resolves actor+DC in the assembly HEADER, not actor+3C, and samples
-     * the character's static common/icons atlas rather than its compressed
-     * body frame. Project only that pointer; native owns form/pose gates,
+     * the remaining tiles in that SAME compressed body frame, with fixed
+     * armor CLUTs instead of actor+42. Project only the assembly pointer;
+     * native owns form/pose gates,
      * shape geometry, camera, priority, CLUT selection and packet budget. */
     uint32_t original_assembly=psx_mod_read_word(SCRATCH+0x1C);
     STATE_WORDS(restore_assembly,15,&original_assembly,1);
@@ -2696,7 +2697,7 @@ static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int 
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
     int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
-    if (!armor && !ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
+    if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
         giga_packet_trace("native-only",actor);return;
     }
     if (render_x_death && (table<0x80010000u || table>=0x80200000u)) {
@@ -2712,7 +2713,7 @@ static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int 
             q[5]|=(psx_mod_read_word(mode+4)&0x60u)<<16;
         uint16_t bank=0;
         uint16_t page=tile==UINT16_MAX?(uint16_t)(q[5]>>16):(uint16_t)psx_mod_read_word(mode+4);
-        if(supported)bank=armor?zero_atlas_effect_bank(page,(uint16_t)(q[3]>>16),tile,0):ui?zero_ui_effect_bank(page,
+        if(supported)bank=ui?zero_ui_effect_bank(page,
             (uint16_t)(q[3]>>16),tile):icons?zero_atlas_effect_bank(page,
             (uint16_t)(q[3]>>16),tile,0):sprite_bank(table,frame,(uint16_t)(q[3]>>16),tile);
         /* Native OT links still address the original tag. Turn it into a

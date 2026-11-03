@@ -185,7 +185,8 @@ static void native_draw(uint32_t actor){
     if(armor_packet_probe) {
         /* Original25984 + DAT88 header5 frame0: page5/UV C0,0,
          * packed flags0 select fixed CLUT7843 (working slot19). This
-         * static atlas is independent of actor+38's compressed body. */
+         * armor uses the upper tiles of actor+38's compressed body frame.
+         * DAT88 frame0 uploads14 tiles; armor selects {12,13,7..11}. */
         q[1]=0x7D000000u;q[3]=0x784300C0u;
         memset(q+4,0,6*sizeof *q);
     } else if(dash_packet_probe && actor==0x80091298u) {
@@ -1009,15 +1010,18 @@ static void native_menu_campaign_authority(void){
     CHECK(call_count==1 && menu_input[0]==0x0100 && menu_input[2]==0x0100 && pause_owner==-1);
     CHECK(!inside && !zero_world && !stage_call && !state_track.count && !failed);
 }
-static void native_X_armor_static_atlas_and_survivor(void) {
+static void native_X_armor_compressed_frame_and_survivor(void) {
     for(unsigned form=0;form<=4;++form) {
         CPUState cpu;setup(&cpu);
         private_actor.character=MMX6_COOP_CHARACTER_X;private_actor.form=form;
         p2.body[2]=0;p2.body[0xE7]=(uint8_t)form;p2.body[0xDC]=5;
-        /* Wrong shared VRAM and the ordinary compressed body deliberately
-         * disagree with the actual retained armor atlas and CLUT. */
+        /* The actual14-tile body stream contains both generic and armor
+         * shapes. Poison static/common pixels and shared VRAM so neither
+         * can stand in for the native compressed upper tiles. */
+        put32(zero_compressed,0x00E00020u);
+        zero_compressed[38]=0x7F;zero_compressed[39]=3; /* Native word-LZ repeat895. */
         for(unsigned y=0;y<16;++y)for(unsigned x=0;x<4;++x) {
-            test_zero_ui[y*1024+368+x]=0x1111;
+            test_zero_ui[y*1024+368+x]=0x3333;
             test_vram[y*1024+368+x]=0x2222;
         }
         psx_mod_write_half(active_palette+0x260+2,0x5A31);
@@ -3005,7 +3009,7 @@ int main(void){
     private_giga_shots_retain_zero_source();
     private_native_weapon_atlas_retains_zero_source();
     deferred_death_effect_retains_zero_source();clear_banks();
-    native_X_armor_static_atlas_and_survivor();clear_banks();
+    native_X_armor_compressed_frame_and_survivor();clear_banks();
     native_shared_dialogue_palette();
     native_working_palette_class_and_load_events();
     native_working_palette_rectangle();
