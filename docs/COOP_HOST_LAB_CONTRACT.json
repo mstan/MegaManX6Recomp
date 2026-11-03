@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; optional Alia paired staging and default per-seat native boss duplicate cookies",
+  "status": "development-candidate-only; retain primary in guest-owned in-place scene world draw",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 82,
+  "revision": 83,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v99",
+    "title_compatibility": "mmx6-x-zero-delay-v100",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1048,5 +1048,9 @@
     "scope": "Original boss315CC attacker64/enemy65 duplicate token now remains per seat under default unscaled shared-cooldown policy as well as elective balance. Native no-overlap31474 rearm affects only scanning owner; attacker token is never rewritten.",
     "state": "Reuse existing source/kind-keyed BossBalanceState cookies, digest and snapshot24; allocation hook invalidates reused NPC slots under either policy. Optional clocks/scaling stay gated.",
     "qualification": "Prepared source/test cases only; no native F130 persistent allocation admission. Required same-candidate LOCALNET remains missing."
+  },
+  "native_guest_inplace_primary_render": {
+    "scope": "Living primary body and existing frozen personal pools are emitted through existing guest-owned pause projection/retained-bank restoration path while scene_owner2/phase0. No new mutable state or scene admission/position/camera changes.",
+    "qualification": "Source/render-seam tests prepared. C150 original optionalAlia owners1/2 release and postrelease independent controls32HP were observed; owner2 far-primary capture cannot distinguish source render omission from native camera exclusion. C151 native check will request guest Alia first with both nearby. C147 retained guest-Alia portrait corruption is pre-existing."
   }
 }
