@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; original native guest X armor compositor restored",
+  "status": "development-candidate-only; native Snail support mask and guest Falcon flight jets corrected",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 87,
+  "revision": 88,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v104",
+    "title_compatibility": "mmx6-x-zero-delay-v105",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1071,5 +1071,17 @@
     "state": "No mutablegameplay/selector/serializerfields added; useexistingframe restoration andsnapshot24.",
     "qualification": "Pending compiled/native qualification; actualC154inverseShadow2 has7basebodytilebanks butnoarmorpass, originalnativeShadow reference includes armor. F71LOCALNET body/effects andstagechange remainunverified untilnewimagechecked.",
     "effect_resources": "Original Shadow type45 uses DAT88 header8 with eighteen01000048 frames, uploaded by original4AF94 subtype5/17B04 at VRAM320,32. Existing retained sprite bank now preserves that exact UV row32 and native CLUT7849; source aliases bypass early key cache. No guest FX27 callback or shared VRAM upload change."
+  },
+  "native_guest_falcon_flight_jet": {
+    "scope": "Original shared18 callback8004B3A0 runs under actual allocating player context; native Falcon body frame minus42 and assemblyheader1C remain original.",
+    "pixels": "Retain original compressed current body tiles8/9/10 and native CLUT7802 for real jet shapes; no common atlas substitution or FX27 upload change.",
+    "state": "Existing shared owner array and snapshot24 reused; no new mutable state.",
+    "qualification": "Prepared source tests; actual F149 LOCALNET required on this exact candidate."
+  },
+  "native_guest_snail_support_mask": {
+    "scope": "Extra guest31DA8 call only at authenticated Amazon1/0 original Snail EC0B8/S2actor/S3PLAYER with authored origin and instruction guards.",
+    "behavior": "Original EC0A4..EC0E8 bracket sets this rider body72=8 before collision, then merges its own previous body72 and old/new solid topbit. Canonical body and native single outer callback remain intact.",
+    "state": "Existing SolidContact and body bytes; snapshot24 unchanged. No HP/position/result assignment or second AI pass.",
+    "qualification": "C155 actual guest landing fell into support0F and HP32->0 while protection active. C156 must establish real stable carry, then native nonlethal hit/retraction and unassisted release/landing LOCALNET."
   }
 }
