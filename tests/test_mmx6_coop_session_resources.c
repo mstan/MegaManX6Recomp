@@ -35,7 +35,8 @@ int psx_mod_option_value(const char *package,const char *feature,const char *opt
         !strcmp(option,"hud_layout")?"stacked":
         !strcmp(option,"boss_balance")?"off":
         !strcmp(option,"boss_cooldowns")?"shared":
-        !strcmp(option,"subtank_energy")?"shared":NULL;
+        !strcmp(option,"subtank_energy")?"shared":
+        !strcmp(option,"partner_x_armor")?"base":NULL;
     CHECK(value && capacity>strlen(value));
     strcpy(out,value);++option_reads;return 1;
 }
