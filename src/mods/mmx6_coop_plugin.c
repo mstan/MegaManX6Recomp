@@ -2831,13 +2831,13 @@ static int death_effect_init(CPUState *cpu, uint32_t address) {
 }
 #include "mmx6_coop_boss_balance.inc"
 static int enemy_hit(CPUState *cpu, uint32_t address) {
-    if(boss_balance_independent && (private_draw || psx_mod_local_view_scope()))return 0;
+    if(private_draw || psx_mod_local_view_scope())return 0;
     if(inside || !enrolled || failed || scene_owner || psx_mod_read_byte(PLAY)!=10)return 0;
     uint32_t enemy=cpu->gpr[4];
-    BossBalanceState *balance=boss_balance_independent?boss_balance_actor(enemy):NULL;
+    BossBalanceState *balance=boss_balance_actor(enemy);
     if(life.status[1]!=MMX6_COOP_ALIVE && !balance)return 0;
     boss_balance_pending_actor=0;inside=1;
-    if(balance) {
+    if(balance && boss_balance_independent) {
         for(unsigned seat=0;seat<2;++seat)if(balance->clocks[seat])--balance->clocks[seat];
         if(balance->timer_offset && (psx_mod_read_word(enemy+0x58)!=0x8007433Cu ||
            !boss_balance_native_clock(enemy,balance)))balance->timer_offset=balance->timer_half=0;
@@ -2847,7 +2847,7 @@ static int enemy_hit(CPUState *cpu, uint32_t address) {
         boss_balance_scan(cpu,address,enemy,resident,balance);
     /* Rejected126/127 contacts are not accepted hits and must not consume a
      * ready partner's separate window. Keep the original P1-first reaction. */
-    if(!resident && (!result || (balance && (result==126 || result==127))) &&
+    if(!resident && (!result || (balance && boss_balance_independent && (result==126 || result==127))) &&
        (!balance || boss_balance_pending_actor!=enemy) &&
        life.status[1]==MMX6_COOP_ALIVE && p2.body[0x5C] && !p2.body[0xCC]) {
         enter_zero();result=boss_balance_scan(cpu,address,enemy,1,balance);leave_zero();
@@ -3205,7 +3205,7 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80055B14,jump_audio_status) ||
         !psx_mod_set_function_replacement(0x8001750C,jump_audio_stop)) failed=1;
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
-    if (boss_balance_enabled && !psx_mod_set_function_replacement(0x8002BCCC,boss_balance_allocate)) failed=1;
+    if (!psx_mod_set_function_replacement(0x8002BCCC,boss_balance_allocate)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EB14C,intro_near_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x800ED150,northpole_ice_admission) ||

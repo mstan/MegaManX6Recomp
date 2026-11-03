@@ -25,7 +25,7 @@ static int boss_balance_slot(uint32_t actor) {
 /* The existing31474 replacement runs once per native boss AI update. */
 static BossBalanceState *boss_balance_actor(uint32_t actor) {
     int slot=boss_balance_slot(actor);
-    if(!boss_balance_enabled || slot<0 || !psx_mod_read_byte(actor) ||
+    if(slot<0 || !psx_mod_read_byte(actor) ||
        psx_mod_read_byte(actor+4)!=1 || !(psx_mod_read_byte(actor+0x5C)&127))return NULL;
     BossBalanceState *s=&boss_balance[slot];
     unsigned kind=psx_mod_read_byte(actor+1);uint32_t origin=psx_mod_read_word(actor+0x10);
@@ -45,8 +45,8 @@ static void boss_balance_write_clock(uint32_t actor,const BossBalanceState *s,un
 }
 static uint32_t boss_balance_scan(CPUState *cpu,uint32_t address,uint32_t actor,
                                   unsigned seat,BossBalanceState *s) {
-    if(!s || !boss_balance_independent)return guest(cpu,address,actor,cpu->gpr[5]);
-    if(s->clocks[seat]) {
+    if(!s)return guest(cpu,address,actor,cpu->gpr[5]);
+    if(boss_balance_independent && s->clocks[seat]) {
         psx_mod_counter_add("mmx6.coop.boss-own-cooldown-rejected",1);return 0;
     }
     uint8_t token=psx_mod_read_byte(actor+0x65);
@@ -55,12 +55,16 @@ static uint32_t boss_balance_scan(CPUState *cpu,uint32_t address,uint32_t actor,
     /* Only our one-tick ordinary expiry window may expose the ready seat.
      * Native scripted/weakness protection (10000 and its40-tick tail) stays
      * native. The original AI still owns its one expiry/CLUT cleanup pass. */
-    unsigned projected=s->timer_offset && s->vulnerable_table &&
+    unsigned projected=boss_balance_independent && s->timer_offset && s->vulnerable_table &&
         table==0x8007433Cu && ticks==1;
     if(projected) {
         psx_mod_write_word(actor+0x58,s->vulnerable_table);
         boss_balance_write_clock(actor,s,0);
     }
+    /* Original315CC compares attacker64 with enemy65 before defense lookup;
+     * original31474 clears65 when this seat has no overlapping attack. Keep
+     * that exact lifetime independently for each owner, including the default
+     * unscaled/shared-cooldown policy. Never rewrite a projectile's token. */
     psx_mod_write_byte(actor+0x65,s->cookies[seat]);
     uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
     s->cookies[seat]=psx_mod_read_byte(actor+0x65);
@@ -101,7 +105,7 @@ static void boss_balance_damage(CPUState *cpu,uint32_t address) {
     if(zero)psx_mod_counter_add("mmx6.coop.zero-boss-damage-before-scaling",amount);
 }
 static int boss_balance_allocate(CPUState *cpu,uint32_t address) {
-    if(!boss_balance_enabled || boss_balance_allocate_call || private_draw ||
+    if(boss_balance_allocate_call || private_draw ||
        psx_mod_local_view_scope())return 0;
     boss_balance_allocate_call=1;
     uint32_t actor=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);

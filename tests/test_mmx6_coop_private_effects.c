@@ -249,6 +249,10 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         psx_mod_write_byte(PLAYER+4,2);psx_mod_write_byte(PLAYER+0x5C,0);
         return;
     }
+    if(boss_scan_probe && address==0x8002BCCCu) {
+        /* Allocator result may reuse the exact kind/origin/address. */
+        cpu->gpr[2]=cpu->gpr[4];return;
+    }
     if(boss_scan_probe && address==0x80031474u) {
         unsigned seat=(unsigned)!!zero_projected;uint32_t actor=cpu->gpr[4],shot=0x800950A0u;
         ++boss_scan_calls[seat];
@@ -2669,6 +2673,60 @@ static void native_capsule_keeps_living_passenger(void) {
         scene_tick(&cpu);CHECK(!scene_owner && !scene_phase && call_count==before && !failed);
     }
 }
+static void native_default_private_boss_cookies(void) {
+    CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
+    boss_scan_probe=1;boss_balance_enabled=boss_balance_independent=0;
+    psx_mod_write_byte(PLAYER+0xCC,0);p2.body[0xCC]=0;
+    memset(boss_scan_calls,0,sizeof boss_scan_calls);
+    boss_scan_present[0]=boss_scan_present[1]=1;
+    boss_scan_cookie[0]=boss_scan_cookie[1]=42;boss_scan_type[0]=0;boss_scan_type[1]=44;
+    psx_mod_write_byte(PLAY,10);psx_mod_write_word(PLAY+0x20,actor);psx_mod_write_byte(PLAY+0x24,48);
+    psx_mod_write_byte(actor,65);psx_mod_write_byte(actor+1,56);psx_mod_write_byte(actor+4,1);
+    psx_mod_write_byte(actor+0x5C,48);psx_mod_write_word(actor+0x10,0x800F7E48u);
+    psx_mod_write_word(actor+0x58,0x8007555Cu);psx_mod_write_byte(actor+0x65,91);
+    cpu.gpr[4]=actor;CHECK(enemy_hit(&cpu,0x80031474u) && cpu.gpr[2]==1);
+    CHECK(psx_mod_read_byte(actor+0x5C)==46 && boss_balance[0].cookies[0]==42);
+    /* The other owner uses the same native token; it is independently new. */
+    cpu.gpr[4]=actor;CHECK(enemy_hit(&cpu,0x80031474u) && cpu.gpr[2]==45);
+    CHECK(psx_mod_read_byte(actor+0x5C)==44 && boss_balance[0].cookies[1]==42);
+    cpu.gpr[4]=actor;CHECK(enemy_hit(&cpu,0x80031474u) && !cpu.gpr[2]);
+    CHECK(psx_mod_read_byte(actor+0x5C)==44 && psx_mod_read_byte(actor+0x65)==91);
+    /* A fresh primary shot must not rearm the still-overlapping guest one. */
+    boss_scan_cookie[0]=43;cpu.gpr[4]=actor;enemy_hit(&cpu,0x80031474u);
+    CHECK(psx_mod_read_byte(actor+0x5C)==42);
+    cpu.gpr[4]=actor;enemy_hit(&cpu,0x80031474u);
+    CHECK(!cpu.gpr[2] && psx_mod_read_byte(actor+0x5C)==42);
+    /* Native no-overlap clears only that owner's memory. The unchanged
+     * persistent guest allocation may then make a fresh valid recontact. */
+    boss_scan_present[0]=boss_scan_present[1]=0;cpu.gpr[4]=actor;enemy_hit(&cpu,0x80031474u);
+    CHECK(!boss_balance[0].cookies[0] && !boss_balance[0].cookies[1]);
+    boss_scan_present[1]=1;cpu.gpr[4]=actor;enemy_hit(&cpu,0x80031474u);
+    CHECK(cpu.gpr[2]==45 && psx_mod_read_byte(actor+0x5C)==40 && boss_scan_cookie[1]==42);
+    /* Token zero keeps the original repeatable-contact contract. */
+    boss_scan_cookie[1]=0;
+    for(unsigned n=0;n<2;++n){cpu.gpr[4]=actor;enemy_hit(&cpu,0x80031474u);CHECK(cpu.gpr[2]==45);}
+    CHECK(psx_mod_read_byte(actor+0x5C)==36 && !boss_balance_pending_actor);
+    /* Default shared immunity still ends the scan at the original P1
+     * rejection; this correctness fix does not opt into private cooldowns. */
+    boss_scan_present[0]=1;boss_scan_cookie[0]=44;psx_mod_write_word(actor+0x58,0x8007433Cu);
+    unsigned guest_calls=boss_scan_calls[1];cpu.gpr[4]=actor;enemy_hit(&cpu,0x80031474u);
+    CHECK(cpu.gpr[2]==127 && boss_scan_calls[1]==guest_calls && psx_mod_read_byte(actor+0x5C)==36);
+#ifdef MMX6_COOP_MODERN_STATE
+    HostState saved;state_capture(&saved);uint32_t digest=state_digest();
+    boss_balance[0].cookies[1]=77;CHECK(state_digest()!=digest);state_commit(&saved);
+    CHECK(boss_balance[0].cookies[1]==0 && state_digest()==digest);
+    StateIO valid={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&valid,&saved);CHECK(valid.ok);
+    saved.boss_balance[0].recognized=0;StateIO bad={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&bad,&saved);CHECK(!bad.ok);
+#endif
+    /* Original allocation invalidates stale cookies even when an identical
+     * boss record reuses this address; changed source identity does too. */
+    cpu.gpr[4]=actor;CHECK(boss_balance_allocate(&cpu,0x8002BCCCu) && cpu.gpr[2]==actor);
+    CHECK(!boss_balance[0].cookies[0] && !boss_balance[0].recognized);
+    BossBalanceState *state=boss_balance_actor(actor);CHECK(state);state->cookies[0]=44;
+    psx_mod_write_word(actor+0x10,0x800F7E50u);CHECK(boss_balance_actor(actor)==state && !state->cookies[0]);
+    private_draw=1;cpu.gpr[4]=actor;CHECK(!enemy_hit(&cpu,0x80031474u));private_draw=0;
+    boss_scan_probe=0;memset(boss_balance,0,sizeof boss_balance);
+}
 static void native_optional_private_boss_cooldowns(void) {
     CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
     boss_balance_enabled=boss_balance_independent=boss_scan_probe=1;
@@ -2815,5 +2873,5 @@ int main(void){
     native_scene_after_nonpaired_enrollment();
     native_checkpoint_preserves_completed_voluntary_absence();
     native_refight_return_preserves_living_personal_resources();
-    native_optional_boss_damage_budget();native_optional_boss_shared_cooldown();native_optional_private_boss_cooldowns();
+    native_optional_boss_damage_budget();native_optional_boss_shared_cooldown();native_default_private_boss_cookies();native_optional_private_boss_cooldowns();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

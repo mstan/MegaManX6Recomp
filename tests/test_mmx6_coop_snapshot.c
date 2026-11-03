@@ -649,6 +649,25 @@ static void refight_return_snapshot(void) {
     CHECK(!refight_return_checkpoint);
     state_commit(&prior);free(empty);free(pending);free(bad);
 }
+static void default_boss_cookie_snapshot(void) {
+    HostState prior;state_capture(&prior);unsigned old_enabled=boss_balance_enabled,old_independent=boss_balance_independent;
+    boss_balance_enabled=boss_balance_independent=0;memset(boss_balance,0,sizeof boss_balance);
+    boss_balance[0]=(BossBalanceState){.origin=0x800F7E48u,.kind=56,.recognized=1,.cookies={42,43}};
+    uint32_t length=snapshot_bytes(),digest=state_digest();uint8_t *wire=malloc(length);
+    CHECK(wire && snapshot_write(wire,length));
+    boss_balance[0].cookies[0]=44;CHECK(state_digest()!=digest);
+    CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+    CHECK(boss_balance[0].cookies[0]==42 && boss_balance[0].cookies[1]==43 && state_digest()==digest);
+    /* Default cookie ownership cannot smuggle optional scaling/cooldowns or
+     * refer to an unrecognized target. Current-build state remains checked. */
+    HostState bad;state_capture(&bad);bad.boss_balance[0].recognized=0;
+    StateIO invalid={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
+    state_capture(&bad);bad.boss_balance[0].clocks[0]=1;
+    invalid=(StateIO){STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
+    state_capture(&bad);bad.boss_balance[0].remainder=1;
+    invalid=(StateIO){STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
+    boss_balance_enabled=old_enabled;boss_balance_independent=old_independent;state_commit(&prior);free(wire);
+}
 static void boss_balance_snapshot(void) {
     HostState prior;state_capture(&prior);
     boss_balance_enabled=1;memset(boss_balance,0,sizeof boss_balance);
@@ -881,7 +900,7 @@ static void optional_radio_scene_keeps_living_pair(void) {
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();default_boss_cookie_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);

@@ -241,10 +241,11 @@ static void state_core(StateIO *io,HostState *s) {
         if((b->vulnerable_table && (b->vulnerable_table<0x80010000u || b->vulnerable_table>=0x80200000u || (b->vulnerable_table&1u) || b->vulnerable_table==0x8007433Cu)) ||
            (b->timer_offset && (b->timer_offset<0x60 || b->timer_offset+(b->timer_half?2u:1u)>BOSS_BALANCE_STRIDE)) ||
            (!b->timer_offset && b->timer_half) ||
-           ((!b->recognized || !boss_balance_independent) && (b->vulnerable_table || b->clocks[0] || b->clocks[1] || b->cookies[0] || b->cookies[1] || b->timer_offset || b->hit_owner || b->hit_melee)))io->ok=0;
+           ((!b->recognized || !boss_balance_independent) && (b->vulnerable_table || b->clocks[0] || b->clocks[1] || b->timer_offset || b->hit_owner || b->hit_melee)) ||
+           (!b->recognized && (b->cookies[0] || b->cookies[1])))io->ok=0;
         if((b->origin && !state_actor(b->origin)) ||
            (!b->kind && (b->origin || b->remainder || b->recognized)) ||
-           (!boss_balance_enabled && (b->origin || b->kind || b->remainder || b->recognized)))io->ok=0;
+           (!boss_balance_enabled && b->remainder))io->ok=0;
     }
     FIELD(boss_balance_pending_actor,4,UINT32_MAX);
     if(s->boss_balance_pending_actor &&
