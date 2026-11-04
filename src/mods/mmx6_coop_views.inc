@@ -19,6 +19,20 @@ static uint8_t view_quake_input[0x54];
 static uint32_t view_quake_frame;
 static unsigned view_quake_valid;
 static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=view_quake_valid=0; }
+static int independent_intro_background(void) {
+    return private_draw && psx_mod_read_byte(PLAY+12)==0 && psx_mod_read_byte(PLAY+13)==0;
+}
+static void independent_background_begin(CPUState *cpu,uint32_t address) {
+    (void)address;
+    if(!independent_intro_background())return;
+    mmx6_adaptive_background_begin(cpu->gpr[4]);
+    gpu_ws_bg2d_begin_view_layer(cpu->gpr[4],psx_mod_read_word(SCRATCH+0x108),6u);
+}
+static void independent_background_end(CPUState *cpu,uint32_t address) {
+    (void)address;
+    if(independent_intro_background())
+        mmx6_private_background_end(cpu->gpr[4],psx_mod_read_word(SCRATCH+0x108));
+}
 
 /* The canonical native camera advances the shared quake before world drawing.
  * Give the other native camera that same input, rather than a second tick of
@@ -303,6 +317,7 @@ static void independent_activate(void) {
         own_view=!strcmp(option,"independent");
     }
     independent_views=local_split || own_view;
+    if(independent_views && !mmx6_adaptive_background_activate())failed=1;
     private_draw=private_seat=view_valid=view_pending=view_call=view_menu_history=0;
     view_frame=view_buffer=0;memset(view_cameras,0,sizeof view_cameras);
     view_quake_valid=view_quake_frame=0;memset(view_quake_input,0,sizeof view_quake_input);
@@ -322,5 +337,7 @@ static void independent_invalidate(void) {}
 static void independent_menu_begin(void) {}
 static void independent_world_begin(void) {}
 static void independent_camera_begin(CPUState *cpu,uint32_t address) { (void)cpu;(void)address; }
+static void independent_background_begin(CPUState *cpu,uint32_t address) { (void)cpu;(void)address; }
+static void independent_background_end(CPUState *cpu,uint32_t address) { (void)cpu;(void)address; }
 static void independent_activate(void) { independent_views=local_split=private_draw=private_seat=0; }
 #endif

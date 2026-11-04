@@ -304,6 +304,7 @@ static void mmx6_widescreen_activate(void) {
 }
 
 PSX_MOD_CONSTRUCTOR(mmx6_register_widescreen_plugin) {
+    (void)psx_mod_register_session_reset_plugin("mmx6.widescreen",mmx6_adaptive_background_reset);
     (void)psx_mod_register_activation_plugin(
         "mmx6.widescreen", mmx6_widescreen_activate);
 }

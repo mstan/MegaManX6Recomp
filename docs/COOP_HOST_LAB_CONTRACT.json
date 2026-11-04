@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; native Snail support mask and guest Falcon flight jets corrected",
+  "status": "development-candidate-only; private native-aspect intro panes use original region texture banks",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 88,
+  "revision": 89,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v105",
+    "title_compatibility": "mmx6-x-zero-delay-v106",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1083,5 +1083,10 @@
     "behavior": "Original EC0A4..EC0E8 bracket sets this rider body72=8 before collision, then merges its own previous body72 and old/new solid topbit. Canonical body and native single outer callback remain intact.",
     "state": "Existing SolidContact and body bytes; snapshot24 unchanged. No HP/position/result assignment or second AI pass.",
     "qualification": "C155 actual guest landing fell into support0F and HP32->0 while protection active. C156 must establish real stable carry, then native nonlethal hit/retraction and unassisted release/landing LOCALNET."
+  },
+  "title_changes_v157_private_intro_banks": {
+    "scope": "F196 demonstrated distant private-pane intro/factory background corruption; reuse the existing original-region texture banks at native aspect.",
+    "behavior": "Private intro draws emit the ordinary21columns with per-region immutable atlas ownership, while native shared rendering and nonintro native-aspect paths keep their current behavior. No camera/body/world simulation writes or new original hooks.",
+    "validation": "Existing adaptive-background packet tests plus affected co-op tests, then actual native different-region panes and original F196 geometry endpoint LOCAL+NET. Implementation/build alone is not comparison credit."
   }
 }

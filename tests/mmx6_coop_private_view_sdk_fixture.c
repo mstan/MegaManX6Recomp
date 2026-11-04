@@ -44,3 +44,11 @@ int psx_mod_render_local_pair(CPUState *cpu,const PSXModStereoFrame *f,PSXModSte
     if(ok)ok=mmx6_view_sdk.transaction(cpu,fn,user,1);
     mmx6_view_sdk.busy=0;return ok;
 }
+/* The focused co-op fixture does not execute the independent background
+ * emitter; its packet/region contract is exercised by adaptive_background. */
+int mmx6_adaptive_background_activate(void) { return 1; }
+void mmx6_adaptive_background_reset(void) {}
+void mmx6_adaptive_background_begin(unsigned layer) { (void)layer; }
+void mmx6_private_background_end(unsigned layer,uint32_t packet) { (void)layer;(void)packet; }
+int mmx6_adaptive_background_resolve_bank(uint16_t id) { return id==0x5001u || id==0x5002u; }
+void gpu_ws_bg2d_begin_view_layer(unsigned layer,uint32_t packet,unsigned mask) { (void)layer;(void)packet;(void)mask; }

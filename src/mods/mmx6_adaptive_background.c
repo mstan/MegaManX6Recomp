@@ -58,6 +58,9 @@ static int load_background_bank(uint16_t id) {
     weather_bank = psx_mod_define_texture_bank(WEATHER_BANK, 1024u, 512u, gpu_get_vram());
     return weather_bank;
 }
+int mmx6_adaptive_background_resolve_bank(uint16_t id) {
+    return load_background_bank(id);
+}
 
 /* The intro's foreground switches texture ownership inside a shared pillar
  * at x=2048, its near background at x=1088. The native texture-swap flag is
@@ -75,9 +78,16 @@ static int intro_panorama_width(unsigned layer) {
     return layer == 2 ? 640 : 0;
 }
 
-int mmx6_adaptive_background_activate(void) {
-    /* The SDK retires arenas and banks before each title activation. */
+void mmx6_adaptive_background_reset(void) {
+    /* Shared by the two owning plugins. All SDK reset callbacks run before
+     * any activation, even when the new plan omits either feature. */
+    arena=0;
     intro_banks = weather_bank = 0;
+    gpu_ws_bg2d_set_host_arena(0,0);
+}
+int mmx6_adaptive_background_activate(void) {
+    /* Co-op and Custom Renderer share one arena and immutable banks per plan. */
+    if(arena)return 1;
     arena = psx_mod_alloc_gpu_dma_memory(ARENA_BYTES, 32u);
     if (!arena) {
         fprintf(stderr, "MMX6 Custom Renderer: background arena allocation failed\n");
@@ -136,10 +146,16 @@ static int amazon_panorama(unsigned layer, int sx, int sy, int *origin) {
     return 0;
 }
 
-void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
-    WsViewAnchor view;
-    if (!arena || layer >= 3 || !gpu_ws_bg2d_get_view(layer, &view)) return;
-    if (view.left <= 0 && view.right <= 0) return;
+static void background_end(unsigned layer, uint32_t native_packet, int private_intro) {
+    WsViewAnchor view = {0};
+    if (!arena || layer >= 3) return;
+    int intro = psx_mod_read_byte(0x800ccedcu) == 0 && psx_mod_read_byte(0x800cceddu) == 0;
+    /* The primary's native texture swap cannot describe both distant panes.
+     * At native aspect the old widescreen-only return left the other region
+     * sampling unrelated live VRAM. Bank the ordinary21columns as well. */
+    int banked_private = private_intro && intro && psx_mod_texture_banks_supported();
+    if (!gpu_ws_bg2d_get_view(layer, &view) && !banked_private) return;
+    if (view.left <= 0 && view.right <= 0 && !banked_private) return;
     if (psx_mod_read_half(0x80090d6au)) return; /* Native 512px title mode. */
     uint32_t buffer = psx_mod_read_word(0x1f800000u);
     if (buffer > 1) return;
@@ -224,7 +240,6 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
         panorama_origin = start_col * 16;
         panorama_width = 320;
     }
-    int intro = psx_mod_read_byte(0x800ccedcu) == 0 && psx_mod_read_byte(0x800cceddu) == 0;
     int banks = intro && psx_mod_texture_banks_supported() && load_intro_banks(INTRO_BANK);
     int rain_bank = weather && psx_mod_texture_banks_supported() && load_background_bank(WEATHER_BANK);
     /* Replace this layer's current OT lists, including its central 21 columns.
@@ -279,4 +294,10 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
             cursor += 32u;
         }
     }
+}
+void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
+    background_end(layer, native_packet, 0);
+}
+void mmx6_private_background_end(unsigned layer, uint32_t native_packet) {
+    background_end(layer, native_packet, 1);
 }

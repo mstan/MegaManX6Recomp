@@ -9,6 +9,7 @@
 static uint8_t ram[0x200000], extra[ARENA_BYTES];
 static WsViewAnchor test_view;
 static int support_banks;
+static int native_aspect;
 static uint32_t arena_base=0x80800000u;
 static unsigned allocations,arena_bindings,weather_definitions,disc_reads;
 static uint16_t test_vram[1024u*512u];
@@ -45,8 +46,11 @@ void psx_mod_write_word(uint32_t p, uint32_t v) { memcpy(memory(p,4),&v,4); }
 uint32_t psx_mod_alloc_gpu_dma_memory(uint32_t n,uint32_t a) {
     assert(n==sizeof extra && a==32); ++allocations; return arena_base;
 }
-void gpu_ws_bg2d_set_host_arena(uint32_t p,uint32_t n) { assert(p==arena_base && n==sizeof extra); ++arena_bindings; }
-int gpu_ws_bg2d_get_view(unsigned layer,WsViewAnchor *v) { assert(layer<3); *v=test_view; return 320; }
+void gpu_ws_bg2d_set_host_arena(uint32_t p,uint32_t n) {
+    if(!p){assert(!n);return;}
+    assert(p==arena_base && n==sizeof extra); ++arena_bindings;
+}
+int gpu_ws_bg2d_get_view(unsigned layer,WsViewAnchor *v) { assert(layer<3); *v=test_view; return native_aspect?0:320; }
 static void half(uint32_t p,uint16_t v) { memcpy(memory(p,2),&v,2); }
 static void fixture(void) {
     memset(ram,0,sizeof ram); memset(extra,0,sizeof extra);
@@ -222,6 +226,25 @@ int main(void) {
     assert(psx_mod_read_word(0x800b91c0u)==0x03000000u);
     fixture(); test_view=(WsViewAnchor){0}; mmx6_adaptive_background_end(0,0x800b91c0u);
     for(unsigned i=0;i<sizeof extra;++i) assert(!extra[i]);
+    /* Two native-aspect panes on opposite sides of the original texture swap
+     * must sample their own immutable region, with no widescreen reveal. */
+    support_banks=1;intro_banks=1;native_aspect=1;
+    for(unsigned region=0;region<2;++region) {
+        fixture();test_view=(WsViewAnchor){0};
+        half(0x80097202u,(uint16_t)(region?3072:0));
+        mmx6_private_background_end(0,0x800b91c0u);
+        uint32_t p=psx_mod_read_word(0x80090e7cu)&0xffffffu;unsigned count=0;
+        while(p) {
+            assert(psx_mod_read_word(p+28u)==GPU_WS_BG2D_BANK_PACKET_MAGIC);
+            assert(psx_mod_read_word(p+16u)==(uint32_t)(region?FACTORY_BANK:INTRO_BANK)<<16);
+            assert(!psx_mod_read_word(p+20u) && !psx_mod_read_word(p+24u));
+            p=psx_mod_read_word(p)&0xffffffu;assert(++count<=21*16);
+        }
+        assert(count==21*16);
+    }
+    fixture();ram[0xccedc]=1;mmx6_private_background_end(0,0x800b91c0u);
+    for(unsigned i=0;i<sizeof extra;++i)assert(!extra[i]);
+    native_aspect=0;
     /* Weather is a frame atlas: inactive neighboring art must never leak,
      * while an active frame repeats without gaps at extreme aspects. */
     for (unsigned banked=0;banked<2;++banked) for (unsigned active=0;active<2;++active) {
@@ -293,6 +316,7 @@ int main(void) {
      * retained banks. The real draw path must publish into the new arena. */
     unsigned old_allocations=allocations,old_bindings=arena_bindings;
     intro_banks=1; weather_bank=1;
+    mmx6_adaptive_background_reset();
     arena_base=0x80900000u;
     assert(mmx6_adaptive_background_activate());
     assert(allocations==old_allocations+1 && arena_bindings==old_bindings+1);
@@ -313,6 +337,10 @@ int main(void) {
     assert(!load_background_bank(INTRO_BANK));
     assert(disc_reads==reads+1); /* Failed lookup is cached only this session. */
     assert(allocations==old_allocations+1); /* Drawing/resizing does not allocate. */
+    assert(mmx6_adaptive_background_activate());
+    assert(intro_banks==-1 && weather_bank && allocations==old_allocations+1);
+    mmx6_adaptive_background_reset();
+    assert(!arena && !intro_banks && !weather_bank);
     assert(mmx6_adaptive_background_activate());
     assert(!intro_banks && !weather_bank && allocations==old_allocations+2);
     assert(!load_background_bank(INTRO_BANK) && disc_reads==reads+2);

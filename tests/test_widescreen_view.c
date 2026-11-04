@@ -40,6 +40,10 @@ void gpu_ws_set_native_scene_predicate(int (*p)(void)) { native_scene=p; }
 void gpu_ws_tag_screen_mask_quad(uint32_t p) { (void)p; ++mask_tags; }
 static uint32_t scan_directions[2];
 int mmx6_adaptive_background_activate(void) { return background_available; }
+void mmx6_adaptive_background_reset(void) {}
+int psx_mod_register_session_reset_plugin(const char *id,PSXModActivationCallback callback) {
+    assert(!strcmp(id,"mmx6.widescreen") && callback==mmx6_adaptive_background_reset);return 1;
+}
 void mmx6_adaptive_background_begin(unsigned layer) { assert(layer == 2); }
 void mmx6_adaptive_background_end(unsigned layer, uint32_t p) { assert(layer == 2 && p == packet); }
 uint32_t psx_mod_alloc_guest_memory(uint32_t n, uint32_t a) {

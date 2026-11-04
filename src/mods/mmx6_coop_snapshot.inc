@@ -425,7 +425,9 @@ static int snapshot_resolve_texture(uint16_t id) {
         }
         return psx_mod_define_texture_bank(id,16,16,pixels);
     }
-    return 0;
+    /* Original background banks are immutable title resources shared with the
+     * renderer, rather than private sprite caches in this provider's wire. */
+    return mmx6_adaptive_background_resolve_bank(id);
 }
 static void snapshot_resources_restored(void) {
     /* The validation boundary requires current retained/bound immutable banks.

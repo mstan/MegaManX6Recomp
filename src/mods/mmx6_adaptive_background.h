@@ -48,6 +48,11 @@ static inline int mmx6_mirror_tile_x(int x, int width, int *flipped) {
 }
 
 int mmx6_adaptive_background_activate(void);
+void mmx6_adaptive_background_reset(void);
 void mmx6_adaptive_background_begin(unsigned layer);
 void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet);
+/* A 4:3 private intro pane may see a different original texture region from
+ * the authoritative view. Reuse the same banked tile emitter without reveal. */
+void mmx6_private_background_end(unsigned layer, uint32_t native_packet);
+int mmx6_adaptive_background_resolve_bank(uint16_t id);
 #endif

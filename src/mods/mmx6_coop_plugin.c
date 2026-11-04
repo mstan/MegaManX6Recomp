@@ -32,6 +32,7 @@
 #include "mmx6_coop_pixel_codec.h"
 #include "mmx6_coop_effect_diagnostic.h"
 #include "mmx6_coop_box_diagnostic.h"
+#include "mmx6_adaptive_background.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -3424,6 +3425,7 @@ static void activate(void) {
     fprintf(stdout,"mmx6 co-op: development prototype active (OpenGL rendering required)\n");
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
+    (void)psx_mod_register_session_reset_plugin("mmx6.local-coop.prototype",mmx6_adaptive_background_reset);
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
         .compatibility_id = MMX6_HOST_LAB_TITLE_COMPATIBILITY,
@@ -3466,6 +3468,8 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002927C,independent_camera_begin);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800270D0,independent_background_begin);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80026ECC,independent_background_end);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002B3D4,dialogue_palette_load);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003BD24,native_player_init);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8001E1BC,checkpoint_native_entry);

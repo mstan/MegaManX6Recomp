@@ -1050,6 +1050,8 @@ static void inplace_guest_scene_draws_primary_once(void) {
     project(PLAYER,old_player,sizeof old_player);
 }
 int main(void){
+    CHECK(snapshot_resolve_texture(0x5001u) && snapshot_resolve_texture(0x5002u));
+    CHECK(!snapshot_resolve_texture(0x5004u));
     pixel_edges();setup();native_armor_transient_then_snapshot();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     weapon_support_projection_and_reuse();native_snail_guest_support_mask();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();default_boss_cookie_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
