@@ -55,11 +55,21 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
     if(address==0x8002927Cu || address==0x8002935Cu || address==0x800293CCu) {
         if(intro_camera_probe && address==0x8002927Cu) {
             CHECK(private_draw && private_seat==1);
-            CHECK(psx_mod_read_half(VIEW_CAMERA+0x28)==704 && psx_mod_read_half(VIEW_CAMERA+0x2A)==704);
             /* Native camera callee contract: consume the authored request
              * limits and clamp this view, rather than an unused publication. */
-            psx_mod_write_half(VIEW_CAMERA+0x20,704);psx_mod_write_half(VIEW_CAMERA+0x22,704);
-            psx_mod_write_word(VIEW_CAMERA+12,704u<<16);++intro_camera_calls;
+            if(intro_camera_probe==1) {
+                CHECK(psx_mod_read_half(VIEW_CAMERA+0x28)==704 && psx_mod_read_half(VIEW_CAMERA+0x2A)==704);
+                psx_mod_write_half(VIEW_CAMERA+0x20,704);psx_mod_write_half(VIEW_CAMERA+0x22,704);
+                psx_mod_write_word(VIEW_CAMERA+12,704u<<16);
+            } else {
+                CHECK(psx_mod_read_half(VIEW_CAMERA+0x28)==944 && psx_mod_read_half(VIEW_CAMERA+0x2A)==896);
+                /* Exact original2912C BGEZ branch: preserve its signed
+                 * PLAYER.Y-CAMERA.Y-offset result, even far from target896.
+                 * This fixture must not replace the native formula. */
+                int16_t value=(int16_t)(psx_mod_read_half(PLAYER+14)-psx_mod_read_half(VIEW_CAMERA+14)-psx_mod_read_half(VIEW_CAMERA+0x2C));
+                CHECK(value==75);psx_mod_write_half(VIEW_CAMERA+0x22,(uint16_t)value);
+            }
+            ++intro_camera_calls;
         }
         if(quake_probe && address==0x8002927Cu) {
             CHECK(private_draw && private_seat==1);
@@ -527,10 +537,17 @@ static void native_intro_camera_volumes(void) {
         {0x800521A0u,0xA0830047u},{0x800521BCu,0xA4820026u},
         {0x800521D8u,0xA4820024u},{0x800521F4u,0xA482002Au},
         {0x80052210u,0xA4820028u}};
-    static const uint16_t records[]={3616,3647,1040,1135,65535,5120,704,65535,
-                                    4000,4031,752,815,65535,65535,65535,704};
+    static const uint16_t records[]={2272,2303,1040,1135,65535,65535,944,65535,
+                                    2128,2159,1040,1135,1968,65535,65535,65535,
+                                    3616,3647,1040,1135,65535,5120,704,65535,
+                                    4000,4031,752,815,65535,65535,65535,704,
+                                    5200,5231,752,895,5008,65535,256,65535,
+                                    5248,5279,352,479,65535,5424,65535,65535,
+                                    5216,5247,352,479,65535,5120,65535,65535,
+                                    2112,2143,1040,1135,65535,65535,896,65535};
     for(unsigned i=0;i<sizeof code/sizeof code[0];++i)psx_mod_write_word(code[i][0],code[i][1]);
-    for(unsigned i=0;i<sizeof records/sizeof records[0];++i)psx_mod_write_half(0x80079210u+i*2,records[i]);
+    psx_mod_write_word(0x80079D70u,0x800791F0u);
+    for(unsigned i=0;i<sizeof records/sizeof records[0];++i)psx_mod_write_half(0x800791F0u+i*2,records[i]);
     CHECK(independent_intro_camera_source());
     psx_mod_write_byte(PLAY+12,0);psx_mod_write_byte(PLAY+13,0);
     psx_mod_write_word(PLAYER+8,144u<<16);psx_mod_write_word(PLAYER+12,1115u<<16);
@@ -559,12 +576,42 @@ static void native_intro_camera_volumes(void) {
     intro_camera_probe=1;CHECK(independent_present(&cpu,VIEW_DRAW_OT));intro_camera_probe=0;
     CHECK(intro_camera_calls==1 && le32(view_cameras[1]+12)==704u<<16);
     capture(VIEW_CAMERA,actual,sizeof actual);CHECK(!memcmp(actual,canonical,sizeof actual));
+    /* The next real intro row leaves fixed factory704 for dynamic256..704,
+     * and the later boss-approach rows remain authoritative as well. */
+    put32(p2.body+8,5200u<<16);put32(p2.body+12,794u<<16);
+    independent_camera_begin(&cpu,0x8002927Cu);
+    CHECK((intro_camera_requests[2]|intro_camera_requests[3]<<8)==5008);
+    CHECK((intro_camera_requests[6]|intro_camera_requests[7]<<8)==256);
+    CHECK((intro_camera_requests[4]|intro_camera_requests[5]<<8)==704);
+    put32(p2.body+8,5248u<<16);put32(p2.body+12,395u<<16);
+    independent_camera_begin(&cpu,0x8002927Cu);CHECK((intro_camera_requests[0]|intro_camera_requests[1]<<8)==5424);
+    put32(p2.body+8,5216u<<16);independent_camera_begin(&cpu,0x8002927Cu);
+    CHECK((intro_camera_requests[0]|intro_camera_requests[1]<<8)==5120);
+    /* Native CP1 reinitialization resets the prior factory history. Its real
+     * row7 then requests896; current limits still belong to native28EBC. */
+    native_player_init(&cpu,0x8003BD24u);enrolled=1;
+    life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    const uint16_t cp1[]={5120,1968,944,944};
+    for(unsigned i=0;i<4;++i) {
+        psx_mod_write_half(VIEW_CAMERA+0x1C+i*2,cp1[i]);
+        psx_mod_write_half(VIEW_CAMERA+0x24+i*2,cp1[i]);
+    }
+    psx_mod_write_half(VIEW_CAMERA+0x2C,96);psx_mod_write_word(VIEW_CAMERA+12,944u<<16);
+    put32(p2.body+8,2112u<<16);put32(p2.body+12,1115u<<16);
+    independent_camera_begin(&cpu,0x8002927Cu);
+    CHECK((intro_camera_requests[6]|intro_camera_requests[7]<<8)==896);
+    view_pending=view_valid=0;frame_count=2;independent_world_begin();
+    intro_camera_probe=2;CHECK(independent_present(&cpu,VIEW_DRAW_OT));intro_camera_probe=0;
+    CHECK((view_cameras[1][0x22]|view_cameras[1][0x23]<<8)==75);
+    frame_count=3;independent_world_begin();
+    CHECK((view_cameras[1][0x22]|view_cameras[1][0x23]<<8)==75);
+    CHECK((view_cameras[1][0x2A]|view_cameras[1][0x2B]<<8)==896);
     /* Conversely, P1's later native request cannot leak into an outside guest. */
     intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
     put32(p2.body+8,168u<<16);put32(p2.body+12,1114u<<16);
     independent_camera_begin(&cpu,0x8002927Cu);
     psx_mod_write_half(VIEW_CAMERA+0x28,704);psx_mod_write_half(VIEW_CAMERA+0x2A,704);
-    frame_count=2;independent_world_begin();CHECK((view_cameras[1][0x28]|view_cameras[1][0x29]<<8)==944);
+    frame_count=4;independent_world_begin();CHECK((view_cameras[1][0x28]|view_cameras[1][0x29]<<8)==944);
     CHECK((view_cameras[1][0x2A]|view_cameras[1][0x2B]<<8)==944);
     HostState retained;state_capture(&retained);
     native_player_init(&cpu,0x8003BD24u);

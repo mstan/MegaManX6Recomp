@@ -22,7 +22,9 @@ static void independent_invalidate(void) { view_valid=view_pending=view_menu_his
 
 static int independent_intro_camera_source(void) {
     /* SLUS-01395 original5211C inclusive body/record test and request writes.
-     * These are retail records2/3, not the position-only LAB's fixed704Y. */
+     * All eight intro rows include factory entry/exit, the later boss
+     * approach and CP1's dynamic896 request. Keeping only factory rows2/3
+     * would incorrectly pin this view at704 after leaving that region. */
     static const uint32_t code[][2]={
         {0x80052134u,0x3C028009u},{0x80052138u,0x244570A0u},
         {0x80052140u,0x84A4000Au},{0x8005216Cu,0x84A4000Eu},
@@ -31,7 +33,8 @@ static int independent_intro_camera_source(void) {
         {0x80052210u,0xA4820028u}};
     for(unsigned i=0;i<sizeof code/sizeof code[0];++i)
         if(psx_mod_read_word(code[i][0])!=code[i][1])return 0;
-    return checkpoint_hash(0x80079210u,0x80079230u)==0x8694E1B0u;
+    return psx_mod_read_word(0x80079D70u)==0x800791F0u &&
+        checkpoint_hash(0x800791F0u,0x80079270u)==0x1498A845u;
 }
 static void independent_intro_camera_requests(void) {
     if(psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13)) {
@@ -45,7 +48,7 @@ static void independent_intro_camera_requests(void) {
         intro_camera_valid=1;
     }
     int x=(int16_t)(le32(p2.body+8)>>16),y=(int16_t)(le32(p2.body+12)>>16);
-    for(uint32_t record=0x80079210u;record<0x80079230u;record+=16) {
+    for(uint32_t record=0x800791F0u;record<0x80079270u;record+=16) {
         /* 5214C/52160/52178/5218C reject strictly outside both inclusive
          * ranges. FFFF in a request field means leave that limit alone. */
         if(x<(int)psx_mod_read_half(record) || x>(int)psx_mod_read_half(record+2) ||
