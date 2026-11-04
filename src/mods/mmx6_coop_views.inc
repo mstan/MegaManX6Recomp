@@ -19,6 +19,46 @@ static uint8_t view_quake_input[0x54];
 static uint32_t view_quake_frame;
 static unsigned view_quake_valid;
 static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=view_quake_valid=0; }
+
+static int independent_intro_camera_source(void) {
+    /* SLUS-01395 original5211C inclusive body/record test and request writes.
+     * These are retail records2/3, not the position-only LAB's fixed704Y. */
+    static const uint32_t code[][2]={
+        {0x80052134u,0x3C028009u},{0x80052138u,0x244570A0u},
+        {0x80052140u,0x84A4000Au},{0x8005216Cu,0x84A4000Eu},
+        {0x800521A0u,0xA0830047u},{0x800521BCu,0xA4820026u},
+        {0x800521D8u,0xA4820024u},{0x800521F4u,0xA482002Au},
+        {0x80052210u,0xA4820028u}};
+    for(unsigned i=0;i<sizeof code/sizeof code[0];++i)
+        if(psx_mod_read_word(code[i][0])!=code[i][1])return 0;
+    return checkpoint_hash(0x80079210u,0x80079230u)==0x8694E1B0u;
+}
+static void independent_intro_camera_requests(void) {
+    if(psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13)) {
+        intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);return;
+    }
+    if(!independent_intro_camera_source()) {
+        intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);return;
+    }
+    if(!intro_camera_valid) {
+        capture(VIEW_CAMERA+0x24,intro_camera_requests,sizeof intro_camera_requests);
+        intro_camera_valid=1;
+    }
+    int x=(int16_t)(le32(p2.body+8)>>16),y=(int16_t)(le32(p2.body+12)>>16);
+    for(uint32_t record=0x80079210u;record<0x80079230u;record+=16) {
+        /* 5214C/52160/52178/5218C reject strictly outside both inclusive
+         * ranges. FFFF in a request field means leave that limit alone. */
+        if(x<(int)psx_mod_read_half(record) || x>(int)psx_mod_read_half(record+2) ||
+           y<(int)psx_mod_read_half(record+4) || y>(int)psx_mod_read_half(record+6))continue;
+        static const uint8_t offsets[]={2,0,6,4};
+        for(unsigned i=0;i<4;++i) {
+            uint16_t value=psx_mod_read_half(record+8+i*2);
+            if(value==0xFFFFu)continue;
+            unsigned at=offsets[i];intro_camera_requests[at]=(uint8_t)value;
+            intro_camera_requests[at+1]=(uint8_t)(value>>8);
+        }
+    }
+}
 static int independent_intro_background(void) {
     return private_draw && psx_mod_read_byte(PLAY+12)==0 && psx_mod_read_byte(PLAY+13)==0;
 }
@@ -43,6 +83,9 @@ static void independent_camera_begin(CPUState *cpu,uint32_t address) {
     view_quake_valid=0;
     if(!independent_views || !enrolled || failed || inside || zero_world ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1))return;
+    if(!scene_owner && !clear_phase && pause_owner<0 &&
+       life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE)
+        independent_intro_camera_requests();
     capture(VIEW_CAMERA,view_quake_input,sizeof view_quake_input);
     view_quake_frame=frame_count;view_quake_valid=1;
 }
@@ -195,7 +238,8 @@ static void independent_world_begin(void) {
     }
     uint32_t buffer=psx_mod_read_word(0x8009B7A0u);
     if(buffer!=VIEW_BUFFER && buffer!=VIEW_BUFFER+VIEW_STRIDE)return;
-    if(!view_valid || (!menu_history && frame_count!=view_frame+1)) {
+    int fresh=!view_valid || (!menu_history && frame_count!=view_frame+1);
+    if(fresh) {
         capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
         memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
         view_valid=1;
@@ -212,8 +256,18 @@ static void independent_world_begin(void) {
             capture(VIEW_CAMERA+0x54,view_cameras[1]+0x54,0x54);
             continue;
         }
-        uint8_t position[0x14];memcpy(position,view_cameras[1]+layer*0x54+8,sizeof position);
+        uint8_t position[0x14],limits[16];memcpy(position,view_cameras[1]+layer*0x54+8,sizeof position);
+        int intro=layer==0 && intro_camera_valid && !psx_mod_read_byte(PLAY+12) && !psx_mod_read_byte(PLAY+13);
+        if(intro)memcpy(limits,view_cameras[1]+0x1C,sizeof limits);
         capture(VIEW_CAMERA+layer*0x54,view_cameras[1]+layer*0x54,0x54);
+        if(intro) {
+            /* Native2927C consumes requests24..2B and owns the current
+             * limits1C..23. Keep its per-view interpolation history; after
+             * load/invalidation, start at the restored authored limits. */
+            memcpy(view_cameras[1]+0x1C,fresh?intro_camera_requests:limits,8);
+            memcpy(view_cameras[1]+0x24,intro_camera_requests,8);
+            view_cameras[1][0x47]=2;
+        }
         /* Recycle's original 46F10 owns mode9's autonomous Y. Native
          * 297BC updates only X for the viewing hero, so retaining the old
          * guest Y freezes this shared controller in that pane. Publish its

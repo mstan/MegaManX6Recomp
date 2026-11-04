@@ -486,6 +486,7 @@ static void native_health_freeze_camera(void){
     CHECK(!state_track.count && snapshot_ready());
 }
 static void roundtrip_and_malformed(void){
+    intro_camera_valid=1;for(unsigned i=0;i<sizeof intro_camera_requests;++i)intro_camera_requests[i]=(uint8_t)(i+17);
     zero_solid_contacts[111]=(SolidContact){13,255};
     uint8_t expected_giga[ZERO_GIGA_BACKUP_BYTES];
     uint8_t expected_owners[96];
@@ -510,7 +511,7 @@ static void roundtrip_and_malformed(void){
     memcpy(bad,wire,len);bad[16+9*4]^=1;reject_unchanged(bad,len); /* Retained audio header allocation. */
     StateIO resources={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&resources);
     memcpy(bad,wire,len);bad[resources.pos-32]^=1;reject_unchanged(bad,len); /* Immutable asset SHA256. */
-    memcpy(bad,wire,len);bad[resources.pos+sizeof p2]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
+    memcpy(bad,wire,len);bad[resources.pos+sizeof p2+9]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
     HostState core;state_capture(&core);StateIO count={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&count);state_core(&count,&core);
     uint32_t cache=count.pos;memcpy(bad,wire,len);put32(bad+cache,4097);reject_unchanged(bad,len);
     memcpy(bad,wire,len);bad[cache-10-96]=3;reject_unchanged(bad,len); /* Invalid shared effect owner. */
@@ -527,9 +528,11 @@ static void roundtrip_and_malformed(void){
     memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
     memset(shared_effect_owners,0,sizeof shared_effect_owners);
+    intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
     memset(death_effect,0,sizeof death_effect);
     int allocations=allocation_calls;allocation_fail=1;snapshot_read(wire,len);allocation_fail=0;
     CHECK(allocation_calls==allocations && state_digest()==original && p2.body[0x5C]==23);
+    CHECK(intro_camera_valid);for(unsigned i=0;i<sizeof intro_camera_requests;++i)CHECK(intro_camera_requests[i]==i+17);
     CHECK(zero_solid_contacts[111].sides==13 && zero_solid_contacts[111].carried==255);
     CHECK(diagnostic_host_digest()==original_diagnostic);
     CHECK(!memcmp(zero_giga_backup,expected_giga,sizeof expected_giga));

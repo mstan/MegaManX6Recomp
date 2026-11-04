@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; private native-aspect intro panes use original region texture banks",
+  "status": "development-candidate-only; native intro private camera-volume request ownership",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 89,
+  "revision": 90,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v106",
+    "title_compatibility": "mmx6-x-zero-delay-v107",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1093,5 +1093,11 @@
     "scope": "F135 existing refight_wolfang_cp3 alias21 also admits original native card-Load followed by Recycle4/0/CP0, alongside existing loaded-origin aliases6/7. Original12/0/CP3 destination, nonce, source/order/safety/one-shot guards are unchanged.",
     "prerequisite": "Inverse Zero/P1 and FalconX/P2 use the approved native QA card earned-weapon mask with lab_earned_weapons and both HP seeds off. No general equipment-factory roster change, runtime weapon/body/result grant or new setup mechanism.",
     "qualification": "Actual native guest-owned weakness contact during original attached Wolfang phase and finite recovery remain required LOCAL+NET on this candidate. Source/unit admission alone is not comparison credit."
+  },
+  "title_changes_v158_intro_camera_requests": {
+    "scope": "Original intro0/0 camera records2/3 at80079210/80079220; original inclusive body rectangles and FFFF no-write semantics, guarded against native source bytes. Other stage/section cameras keep their original path.",
+    "behavior": "Deterministic original world camera hook admits the actual guest body and retains its eight authored request-limit bytes. Existing private native camera updates consume these requests and retain their own current-limit history. Canonical P1 camera, native actor retirement, shared geometry/events and game clocks are not replayed.",
+    "state": "Nine serialized bytes (valid plus eight request bytes), snapshot25; reset at fresh native player initialization and activation, or on leaving intro. Draw-only position history still invalidates after current-build load.",
+    "qualification": "Unbuilt implementation and meaningful existing camera/snapshot fixture cases; actual different-height native approach, original explosive geometry cleanup and final LOCAL/NET evidence remain required."
   }
 }

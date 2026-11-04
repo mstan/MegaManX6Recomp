@@ -161,6 +161,10 @@ static int unit_choices_call;
 static int target_projection_call;
 /* Elective independent presentation. The canonical world still runs once. */
 static unsigned independent_views, local_split, private_draw, private_seat, view_call;
+/* Intro camera-volume requests belong to the entering hero. Unlike draw
+ * position history, these authored limits survive a current-build load. */
+static uint8_t intro_camera_requests[8];
+static unsigned intro_camera_valid;
 static void independent_invalidate(void);
 static void independent_menu_begin(void);
 static void independent_world_begin(void);
@@ -2221,6 +2225,7 @@ static int retire_quit_stage(CPUState *cpu,uint32_t address) {
 }
 static void native_player_init(CPUState *cpu, uint32_t address) {
     if (inside) return;
+    intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
     int retired=retire_quit_stage(cpu,address);
     /* Frontend initialization (including a new native Load/New Game) retires
      * the runtime-only second bank. Ordinary major9 checkpoint births keep it.
@@ -3298,6 +3303,7 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
 #include "mmx6_coop_views.inc"
 static void activate(void) {
     state_track.count=state_track.error=0;
+    intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
 #ifdef MMX6_COOP_MODERN_STATE
     snapshot_asset_valid=0;
     snapshot_discard_prepared();
