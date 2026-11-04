@@ -1002,11 +1002,13 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
     psx_mod_write_byte(diagnostic+0xBE,(uint8_t)checkpoint_lab_state);
     unsigned origin_stage=psx_mod_read_byte(PLAY+12),origin_section=psx_mod_read_byte(PLAY+13);
     unsigned origin_checkpoint=psx_mod_read_byte(PLAY+0x1D);
-    /* The named Recycle/portal prerequisites may follow an actual native card
-     * Load and mission arrival. Only their fixed destinations gain this origin;
-     * the parent still proves the approved card and acquired body masks. */
+    /* These fixed Recycle/portal/Wolfang prerequisites may follow an actual
+     * native card Load and Recycle mission arrival. In particular the inverse
+     * Wolfang check uses native card-owned weapons, not the canonical-roster
+     * equipment factory. The parent still proves the card and acquired masks. */
     if((origin_stage || origin_section || origin_checkpoint) &&
-       !((checkpoint_lab_option==6 || checkpoint_lab_option==7) && origin_stage==4 && !origin_section && !origin_checkpoint)) {
+       !((checkpoint_lab_option==6 || checkpoint_lab_option==7 || checkpoint_lab_option==21) &&
+         origin_stage==4 && !origin_section && !origin_checkpoint)) {
         checkpoint_status(CHECKPOINT_REJECTED,CHECKPOINT_ORDER);return 0;
     }
     unsigned index=checkpoint_lab_index();
