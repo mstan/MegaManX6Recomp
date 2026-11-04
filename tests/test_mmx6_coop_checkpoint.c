@@ -19,6 +19,7 @@ static unsigned refight_stub,refight_probe_calls,refight_action_calls,refight_re
 static unsigned refight_post_solid,refight_admission_fault;
 static unsigned refusal_logs;
 static char refusal_log[512];
+static unsigned intro_scan_probe,intro_scan_calls,intro_scan_allocations,intro_canonical_cycles;
 static void checkpoint_test_refusal_log(const char *format,...) {
     va_list args;va_start(args,format);
     CHECK(vsnprintf(refusal_log,sizeof refusal_log,format,args)>0);
@@ -26,6 +27,31 @@ static void checkpoint_test_refusal_log(const char *format,...) {
 }
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
     (void)ret;
+    if(intro_scan_probe && target==0x80029D18u) {
+        /* Original canonical scan contract: active-bit81 is checked before
+         * any outside-rectangle latch reset. An inactive initial flags0
+         * placement outside P1's entrance also remains flags0. */
+        CHECK(psx_mod_read_word(0x8007349Cu)==0x800FA214u);
+        uint8_t flags=psx_mod_read_byte(0x800FA394u);
+        CHECK(!flags || (flags&0x81u));++intro_canonical_cycles;return 1;
+    }
+    if(intro_scan_probe && target==0x80029F38u) {
+        /* External ORIGINAL scanner/allocator contract only, not execution
+         * of a native event: honor the actual placement's admitted bit. */
+        CHECK(inside && !private_draw && state_track.count);
+        CHECK(cpu->gpr[4]==4692 && cpu->gpr[5]==5108 && cpu->gpr[6]==656 && cpu->gpr[7]==992);
+        CHECK(psx_mod_read_word(0x8007349Cu)==0x800FA394u && psx_mod_read_byte(0x800FA39Fu)==15);
+        CHECK(!psx_mod_read_word(cpu->gpr[29]+0x10));++intro_scan_calls;
+        if(!(psx_mod_read_byte(0x800FA394u)&1u)) {
+            uint32_t actor=0x8008EF48u;
+            psx_mod_write_byte(0x800FA394u,1);psx_mod_write_byte(0x800FA397u,0x10);
+            psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,0);psx_mod_write_byte(actor+2,3);
+            psx_mod_write_byte(actor+4,1);psx_mod_write_word(actor+0x10,0x800FA394u);
+            psx_mod_write_word(actor+8,4960u<<16);psx_mod_write_word(actor+12,736u<<16);
+            psx_mod_write_byte(actor+0x14,0);++intro_scan_allocations;
+        }
+        return 1;
+    }
     if(scene_fatal_probe && (target==0x8003D308u || target==0x8003D330u)) {
         /* External original-call contract only. Native beam/death outcomes
          * below are explicitly supplied by the test, never the fixture. */
@@ -2049,6 +2075,66 @@ static void agreed_before_explosion_boundary(CPUState *cpu) {
     CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_lab_option);
 }
 #endif
+#if defined(MMX6_COOP_AGREED_CHECKPOINT) && defined(MMX6_COOP_MODERN_STATE)
+static void guest_intro_geometry_admission(CPUState *cpu) {
+    setup_agreed(cpu,0);memcpy(test_ram,before_doors_ram,sizeof test_ram);
+    memset(test_ram+(0x8008EF48u&0x1FFFFFu),0,0x1D40);
+    memset(p2.body,0,sizeof p2.body);p2.body[0]=p2.body[3]=p2.body[4]=1;
+    p2.body[2]=1;p2.body[5]=2;p2.body[0x5C]=32;
+    put32(p2.body+8,4900u<<16);put32(p2.body+12,874u<<16);
+    enrolled=independent_views=1;failed=private_draw=inside=zero_world=scene_owner=clear_phase=0;
+    pause_owner=-1;life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+    psx_mod_write_byte(PLAY+12,0);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);
+    psx_mod_write_word(PLAYER+8,144u<<16);psx_mod_write_word(PLAYER+12,1115u<<16);
+    psx_mod_write_byte(VIEW_CAMERA+4,1);psx_mod_write_byte(VIEW_CAMERA+0x44,1);
+    psx_mod_write_half(VIEW_CAMERA+0x30,160);psx_mod_write_half(VIEW_CAMERA+0x32,160);
+    psx_mod_write_half(VIEW_CAMERA+0x2C,96);intro_camera_valid=1;
+    psx_mod_write_word(VIEW_CAMERA+8,0);psx_mod_write_word(VIEW_CAMERA+12,944u<<16);
+    psx_mod_write_word(VIEW_CAMERA+0x14,0);psx_mod_write_word(VIEW_CAMERA+0x18,944u<<16);
+    const uint16_t limits[]={5120,0,704,704};
+    for(unsigned i=0;i<4;++i){intro_camera_requests[i*2]=(uint8_t)limits[i];intro_camera_requests[i*2+1]=(uint8_t)(limits[i]>>8);}
+    CHECK(intro_geometry_source());uint8_t camera[0x54],primary[0x158];
+    capture(VIEW_CAMERA,camera,sizeof camera);capture(PLAYER,primary,sizeof primary);
+    cpu->gpr[29]=0x801FFF00u;cpu->gpr[6]=0x11223344u;cpu->gpr[7]=0x55667788u;
+    psx_mod_write_word(cpu->gpr[29]+0x10,0xAABBCCDDu);
+    intro_scan_probe=1;intro_scan_calls=intro_scan_allocations=intro_canonical_cycles=0;
+    unsigned list_bytes=0;
+    while(list_bytes<0x210 && psx_mod_read_byte(0x800FA214u+list_bytes+3)!=15)list_bytes+=8;
+    CHECK(list_bytes<0x210);list_bytes+=8; /* Exact original terminal record included. */
+    for(unsigned cycle=0;cycle<2;++cycle) {
+        guest(cpu,0x80029D18u,0,0);
+        uint8_t placements[0x210];capture(0x800FA214u,placements,list_bytes);
+        uint32_t root=psx_mod_read_word(0x8007349Cu),sentinel=psx_mod_read_word(0x800FA39Cu);
+        intro_guest_placement_scan(cpu,0x80029D18u);
+        CHECK(psx_mod_read_word(0x8007349Cu)==root && psx_mod_read_word(0x800FA39Cu)==sentinel);
+        for(unsigned i=0;i<list_bytes;++i) {
+            uint32_t at=0x800FA214u+i;
+            if(at<0x800FA394u || at>=0x800FA39Cu)CHECK(psx_mod_read_byte(at)==placements[i]);
+        }
+    }
+    CHECK(intro_canonical_cycles==2 && intro_scan_calls==2 && intro_scan_allocations==1);
+    CHECK(cpu->gpr[6]==0x11223344u && cpu->gpr[7]==0x55667788u && psx_mod_read_word(cpu->gpr[29]+0x10)==0xAABBCCDDu);
+    CHECK(!inside && !state_track.count && !state_track.error);
+    uint8_t actual[0x158];capture(PLAYER,actual,sizeof actual);CHECK(!memcmp(primary,actual,sizeof primary));
+    capture(VIEW_CAMERA,actual,sizeof camera);CHECK(!memcmp(camera,actual,sizeof camera));
+    cpu->gpr[4]=0x8008EF48u;cpu->gpr[31]=0x800EA3D8u;cpu->gpr[2]=99;
+    CHECK(intro_guest_geometry_lifetime(cpu,0x8002CBFCu) && !cpu->gpr[2]);
+    put32(p2.body+8,500u<<16);cpu->gpr[2]=99;
+    CHECK(!intro_guest_geometry_lifetime(cpu,0x8002CBFCu) && cpu->gpr[2]==99);
+    intro_guest_placement_scan(cpu,0x80029D18u);CHECK(intro_scan_calls==2);
+    put32(p2.body+8,4900u<<16);private_draw=1;
+    intro_guest_placement_scan(cpu,0x80029D18u);CHECK(intro_scan_calls==2);private_draw=0;
+    psx_mod_write_word(0x8008EF48u+0x10,0x800FA384u);
+    CHECK(!intro_guest_geometry_lifetime(cpu,0x8002CBFCu));
+    uint8_t original=psx_mod_read_byte(0x80029D18u);psx_mod_write_byte(0x80029D18u,original^1u);
+    intro_guest_placement_scan(cpu,0x80029D18u);CHECK(intro_scan_calls==2);
+    psx_mod_write_byte(0x80029D18u,original);psx_mod_write_byte(PLAY+12,1);
+    intro_guest_placement_scan(cpu,0x80029D18u);CHECK(intro_scan_calls==2);
+    intro_scan_probe=0;
+}
+#endif
 int main(int argc,char **argv) {
     const char *source=argc==2?argv[1]:getenv("MMX6_CONTENT_EXE");
     if(!source || !*source){puts("SKIP: MMX6_CONTENT_EXE must name the original USA v1.1 EXE");return 77;}
@@ -2142,6 +2228,9 @@ int main(int argc,char **argv) {
     file=fopen(fixture,"rb");CHECK(file);uint8_t header[4];
     CHECK(fread(header,1,4,file)==4 && !memcmp(header,"BCD1",4));
     CHECK(fread(before_doors_ram,1,sizeof before_doors_ram,file)==sizeof before_doors_ram && fgetc(file)==EOF);fclose(file);
+#ifdef MMX6_COOP_MODERN_STATE
+    guest_intro_geometry_admission(&cpu);
+#endif
     fixture=getenv("MMX6_PORTAL_SETUP_RAM");
     if(!fixture || !*fixture){puts("SKIP: MMX6_PORTAL_SETUP_RAM must name external original source materialization");return 77;}
     file=fopen(fixture,"rb");CHECK(file);CHECK(fread(header,1,4,file)==4 && !memcmp(header,"RPS1",4));

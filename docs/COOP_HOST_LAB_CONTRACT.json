@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; native intro private camera-volume request ownership",
+  "status": "development-candidate-only; original intro guest geometry placement and lifetime ownership",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 90,
+  "revision": 91,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v107",
+    "title_compatibility": "mmx6-x-zero-delay-v108",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1099,5 +1099,12 @@
     "behavior": "Deterministic original world camera hook admits the actual guest body and retains its eight authored request-limit bytes. All original later rows remain active: factory exit requests dynamic256..704Y, later boss approach adjusts X, and native CP1 row79260 requests896Y. Existing private native camera updates consume requests and retain their own current-limit history, including the original2912C dynamic formula. Canonical P1 camera, native actor retirement, shared geometry/events and game clocks are not replayed.",
     "state": "Nine serialized bytes (valid plus eight request bytes), snapshot25; reset at fresh native player initialization and activation, or on leaving intro. Draw-only position history still invalidates after current-build load.",
     "qualification": "Unbuilt implementation and meaningful existing camera/snapshot fixture cases, including factory exit and native CP1 request/current-limit separation; actual different-height native approach, original explosive geometry cleanup and final LOCAL/NET evidence remain required."
+  },
+  "title_changes_v159_intro_geometry_placement": {
+    "scope": "Intro0/0, independent living views, original geometry placement800FA394(type0/subtype3 at4960,736) only. Original body-follow320x240 rectangle uses deterministic guest body/authored camera requests, never render history.",
+    "allocation": "Existing29D18 world hook calls original29F38 with the guest rectangle. Tracked temporary stage-list root/next-record sentinel restrict traversal to the same originalFA394 address; both metadata words and caller stack/registers are restored. Native admitted/lifetime flags own construction/deduplication; no actor, timer, HP, map or event result is assigned.",
+    "lifetime": "Only originalEA3D8 caller for the exact liveFA394 actor may retain it when the original2CBFC uint16 rectangle test includes the guest with source radii80/160. Its one original AI/fall/map-change/retirement update remains unchanged; every unrelated actor/caller retains native fallback.",
+    "state": "No additional persistent state beyond C158 snapshot25; existing future-restored STATE frame65 covers root/sentinel/caller words during the native scan. Profile91/title108 bind the new behavior.",
+    "qualification": "Unbuilt source candidate. Existing compiled fixture models canonical-plus-guest scanner cycles, native admitted-bit deduplication, all unrelated placement bytes, metadata/camera/P1 restoration and source/outside/actor guards. Actual native producer allocation/fall/foreground geometry write/cleanup and varying-height LOCAL+NET remain required."
   }
 }
