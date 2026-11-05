@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 93,
+  "revision": 94,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v110",
+    "title_compatibility": "mmx6-x-zero-delay-v111",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1114,5 +1114,25 @@
     "prevention": "Existing contract check compares execution.identity with runtime-generated PSX_EXECUTION_ID before compilation; its own generated contract macro is insufficient.",
     "eligibility": "Existing CPU, compiler, backend, original BIOS, overlay-seal, settings, exact executable/manifest and direct-loopback restrictions unchanged.",
     "qualification": "Prepared metadata binding only; actual exact-candidate native qualification required; no evidence transfer."
+  },
+  "title_changes_v111": {
+    "scope": "Existing alternate_boss_cp1 prerequisite may follow native card Load and Recycle4/0CP0 mission arrival, alongside existing options6/7/21.",
+    "additional_origin": {
+      "option": "alternate_boss_cp1",
+      "stage": 4,
+      "section": 0,
+      "checkpoint": 0
+    },
+    "destination": {
+      "index": 106,
+      "stage": 20,
+      "section": 1,
+      "checkpoint": 1,
+      "record": "80072FF0",
+      "record_hash": "6996FA0A",
+      "nonce": "4C414231"
+    },
+    "preserved": "Existing both-alive/idle/grounded boundary, source/profile checks, original mode8-to-mode9 initializer, card-owned route progress and all other origin rejects. No story, boss, HP or attack result assigned.",
+    "qualification": "Source and existing fixture coverage only; native boss initialization, F117 X/P2 hit/reaction/recovery and independent F87 resources remain unverified."
   }
 }

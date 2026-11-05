@@ -1668,10 +1668,10 @@ static void agreed_northpole_prerequisite(CPUState *cpu) {
 static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
     const char *options[]={"intro_cp2","amazon_cp0","amazon_cp2","intro_before_doors",
         "intro_before_explosion","recycle_cp2","recycle_portal_cp2","recycle_distant_cp2",
-        "recycle_fallen_cp2","recycle_fallen_guest_cp2","secretlab2b_enemy_cp0","refight_wolfang_cp3"};
-    const uint8_t origins[][3]={{4,0,0},{4,0,1},{4,1,0},{4,1,2},{4,2,0},{3,0,0},{0,1,0},{0,0,1},{12,0,3}};
+        "recycle_fallen_cp2","recycle_fallen_guest_cp2","secretlab2b_enemy_cp0","refight_wolfang_cp3","alternate_boss_cp1"};
+    const uint8_t origins[][3]={{4,0,0},{4,0,1},{4,1,0},{4,1,2},{4,2,0},{3,0,0},{0,1,0},{0,0,1},{12,0,3},{1,0,0}};
     for(unsigned option=0;option<sizeof options/sizeof options[0];++option)for(unsigned i=0;i<sizeof origins/sizeof origins[0];++i) {
-        if((option==5 || option==6 || option==11) && i==0)continue; /* Only aliases6/7/21 at Recycle4/0/0. */
+        if((option==5 || option==6 || option==11 || option==12) && i==0)continue; /* Only aliases6/7/9/21 at Recycle4/0/0. */
         setup_agreed(cpu,1);test_lab_option=options[option];checkpoint_reset();
         psx_mod_write_byte(PLAY+12,origins[i][0]);psx_mod_write_byte(PLAY+13,origins[i][1]);
         psx_mod_write_byte(PLAY+0x1D,origins[i][2]);
@@ -1697,6 +1697,46 @@ static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
         mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
         CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+0x1D)==2 &&
             psx_mod_read_word(diagnostic+0xB4)==1 && !guest_calls);
+    }
+    /* Alias9 skips only the failed crusher approach after actual native
+     * Recycle arrival. The original CP1 initializer still selects its boss
+     * from untouched card-owned progress; no armor, HP or weapon grant. */
+    for(int online=0;online<=1;++online)for(unsigned inverse=0;inverse<=1;++inverse) {
+        test_lab_earned_option=test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+        setup_agreed(cpu,online);test_lab_option="alternate_boss_cp1";checkpoint_reset();
+        equipment_probe=equipment_calls=0;
+        psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAY+0x43B,1);
+        psx_mod_write_byte(PLAY+0x38,(uint8_t)inverse);
+        psx_mod_write_byte(PLAYER+2,(uint8_t)inverse);p2.body[2]=(uint8_t)(inverse^1u);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(!checkpoint_earned_weapons_option && !checkpoint_starting_hp_mask());
+        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.index==106 &&
+            checkpoint_pending.nonce==CHECKPOINT_LAB_ALTERNATE_NONCE &&
+            checkpoint_pending.authority==CHECKPOINT_AGREED);
+        before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=20;
+        before_ram[(PLAY+13)&0x1FFFFF]=1;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body) &&
+            !equipment_calls && !guest_calls && psx_mod_read_byte(PLAY+0x43B)==1);
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX &&
+            psx_mod_read_word(diagnostic+0xB8)==0x80072FF0u);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+0x1D)==1 &&
+            psx_mod_read_word(diagnostic+0xB4)==1 && !equipment_calls && !guest_calls &&
+            psx_mod_read_byte(PLAY+0x43B)==1);
+        psx_mod_write_byte(PLAY,10);memcpy(before_ram,test_ram,sizeof test_ram);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed() &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+    }
+    for(unsigned corrupt=0;corrupt<2;++corrupt) {
+        setup_agreed(cpu,1);test_lab_option="alternate_boss_cp1";checkpoint_reset();
+        psx_mod_write_byte(PLAY+12,4);
+        if(corrupt)psx_mod_write_byte(0x80072FF0u,psx_mod_read_byte(0x80072FF0u)^1u);
+        else test_lab_profile.qualification[0]^=1;
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+            !guest_calls && psx_mod_read_byte(diagnostic+0xA9)==(corrupt?CHECKPOINT_SOURCE:CHECKPOINT_FORBIDDEN) &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
     }
     /* Alias21 consumes the same original CP3 transaction after native card
      * Load/mission arrival. Acquired weapons are input prerequisites here;
@@ -1743,19 +1783,26 @@ static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
     }
     /* Loaded origin retains transient safety waits, then consumes the same
      * chord once only when native bodies and callback context settle. */
-    for(unsigned alias=6;alias<=7;++alias)for(unsigned unsafe=0;unsafe<7;++unsafe) {
-        setup_agreed(cpu,1);test_lab_option=alias==6?"recycle_cp2":"recycle_portal_cp2";checkpoint_reset();psx_mod_write_byte(PLAY+12,4);
+    const unsigned loaded_aliases[]={6,7,9};
+    for(unsigned a=0;a<3;++a)for(unsigned unsafe=0;unsafe<12;++unsafe) {
+        unsigned alias=loaded_aliases[a];
+        setup_agreed(cpu,1);test_lab_option=alias==6?"recycle_cp2":alias==7?"recycle_portal_cp2":"alternate_boss_cp1";checkpoint_reset();psx_mod_write_byte(PLAY+12,4);
         if(unsafe==0)pause_owner=0;if(unsafe==1)private_draw=1;if(unsafe==2)zero_projected=1;
         if(unsafe==3)psx_mod_write_byte(PLAYER+5,7);if(unsafe==4)p2.body[0x67]=1;
         if(unsafe==5)state_track.count=1;if(unsafe==6)scene_owner=1;
+        if(unsafe==7)life.status[0]=MMX6_COOP_FALLEN;if(unsafe==8)life.status[1]=MMX6_COOP_FALLEN;
+        if(unsafe==9)p2.body[5]=7;
+        if(unsafe==10)psx_mod_write_byte(PLAYER+0x70,0);if(unsafe==11)p2.body[0x70]=0;
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
         CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED &&
             !checkpoint_pending.phase && !checkpoint_test_taint && !guest_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
         pause_owner=-1;private_draw=zero_projected=scene_owner=0;state_track.count=0;
-        psx_mod_write_byte(PLAYER+5,2);p2.body[0x67]=0;
-        CHECK(checkpoint_lab_boundary(cpu,0) && checkpoint_pending.index==(alias==6?27u:23u) &&
-            checkpoint_pending.nonce==(alias==6?CHECKPOINT_LAB_RECYCLE_NONCE:0x4C525032u));
+        psx_mod_write_byte(PLAYER+5,2);p2.body[5]=2;p2.body[0x67]=0;
+        life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+        psx_mod_write_byte(PLAYER+0x70,8);p2.body[0x70]=8;
+        CHECK(checkpoint_lab_boundary(cpu,0) && checkpoint_pending.index==(alias==6?27u:alias==7?23u:106u) &&
+            checkpoint_pending.nonce==(alias==6?CHECKPOINT_LAB_RECYCLE_NONCE:alias==7?CHECKPOINT_LAB_PORTAL_NONCE:CHECKPOINT_LAB_ALTERNATE_NONCE));
         CHECK(!checkpoint_lab_boundary(cpu,6)); /* Pending and consumed cannot rearm. */
     }
     /* Current profile remains required at both admission and mode9. */

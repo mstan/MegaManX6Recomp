@@ -58,8 +58,21 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],93)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v110')
+        self.assertEqual(record['revision'],94)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v111')
+
+    def test_loaded_recycle_alternate_boss_uses_original_cp1(self):
+        record=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text(encoding='utf8'))
+        change=record['title_changes_v111']
+        self.assertEqual(change['additional_origin'],dict(option='alternate_boss_cp1',stage=4,section=0,checkpoint=0))
+        _, rows, sections = checkpoint.inventory(INVENTORY)
+        target = checkpoint.select(rows, sections, 20, 1, 1)
+        self.assertEqual(rows.index(target),106)
+        self.assertEqual(target['table'],'800732D8')
+        self.assertEqual(target['record'],'80072FF0')
+        self.assertEqual(target['player'],dict(x=3024,y=224))
+        self.assertEqual(change['destination'],dict(index=106,stage=20,section=1,checkpoint=1,
+            record=target['record'],record_hash='6996FA0A',nonce='4C414231'))
 
     def test_recycle_lab_destination_is_existing_original_campaign_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
