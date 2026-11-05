@@ -2353,12 +2353,8 @@ static void controller(CPUState *cpu, uint32_t address) {
          * other shared solids must author the current mask before2F288 can
          * decide whether to snap down onto terrain. Original20CC0 runs last. */
         private_terrain_pending=1;
-        /* Original 80020C40 orders these fixed actor-owned pools after
-         * contact. They read the resident PLAYER and trail parent links;
-         * keep both calls inside the one private projection. The native
-         * survivor/menu world pass already owns them when inside is set. */
-        guest(cpu,0x80020D74,0,0);
-        guest(cpu,0x80020DC8,0,0);
+        /* Actor-owned followers need the terrain-corrected body too. Their
+         * private pass completes with terrain after the shared world pass. */
         leave_zero();
         if (life.status[1]==MMX6_COOP_LEAVING && p2.body[4]==3)
             mmx6_coop_teleport_done(&life);
@@ -2384,18 +2380,22 @@ static void private_terrain_after_world(CPUState *cpu,uint32_t address) {
     private_terrain_pending=0;
     if(!ready || !enrolled || failed || scene_owner || clear_phase ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
-       life.status[1]==MMX6_COOP_ABSENT || life.status[1]==MMX6_COOP_FALLEN ||
        !p2.body[0])return;
-    uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);
-    STATE_BYTES(restore_terrain_body,84,body,sizeof body);
     inside=1;
-    /* 2F288 and its terrain helpers consume the body and shared collision
-     * bank only. Do not swap overlay, attacks, flags, camera or world state. */
-    project(PLAYER,p2.body,sizeof p2.body);
+    /* These original actor-owned pools consume the private overlay, parent
+     * links and corrected PLAYER. Reuse the normal private projection; the
+     * shared world and enemy AI are never called again. Pending proves that
+     * this body's native update ran, including its final retirement frame. */
+    enter_zero();
     guest(cpu,0x8002F288u,PLAYER,0);
-    capture(PLAYER,p2.body,sizeof p2.body);
-    project(PLAYER,body,sizeof body);
-    inside=0;STATE_POP(restore_terrain_body);
+    guest(cpu,0x80020D74u,0,0);
+    guest(cpu,0x80020DC8u,0,0);
+    leave_zero();
+    if(life.status[1]==MMX6_COOP_LEAVING && p2.body[4]==3)
+        mmx6_coop_teleport_done(&life);
+    if(p2.body[4]==2)mmx6_coop_fatal(&life,1);
+    if(life.status[1]==MMX6_COOP_DYING && p2.body[4]==3)life.status[1]=MMX6_COOP_FALLEN;
+    inside=0;
 }
 
 static void private_terrain_session_reset(void) {

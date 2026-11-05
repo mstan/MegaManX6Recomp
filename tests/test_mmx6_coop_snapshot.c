@@ -590,7 +590,8 @@ static void roundtrip_and_malformed(void){
     memcpy(bad,wire,len);bad[16+9*4]^=1;reject_unchanged(bad,len); /* Retained audio header allocation. */
     StateIO resources={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&resources);
     memcpy(bad,wire,len);bad[resources.pos-32]^=1;reject_unchanged(bad,len); /* Immutable asset SHA256. */
-    memcpy(bad,wire,len);bad[resources.pos+sizeof p2+9]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
+    unsigned lifecycle_at=pending_at+2+sizeof intro_camera_requests;
+    memcpy(bad,wire,len);bad[lifecycle_at]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
     HostState core;state_capture(&core);StateIO count={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&count);state_core(&count,&core);
     uint32_t cache=count.pos;memcpy(bad,wire,len);put32(bad+cache,4097);reject_unchanged(bad,len);
     memcpy(bad,wire,len);bad[cache-10-96]=3;reject_unchanged(bad,len); /* Invalid shared effect owner. */

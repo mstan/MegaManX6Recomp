@@ -17,6 +17,7 @@ static uint16_t test_vram[1024*512],bank_first[4096];
 static uint16_t test_zero_ui[1024*512];
 static uint32_t calls[512],drawn[128],tagged[256];
 static unsigned call_count,draw_count,tag_count;
+static uint32_t expected_follower_x;
 static int texture_support=1,marker_override=2,terminal_player,stage_driver;
 static int menu_probe;
 static unsigned menu_vram_probe,gp0_upload_stage,gp0_upload_left,gp0_upload_x,gp0_upload_y,gp0_upload_width,gp0_upload_at;
@@ -660,6 +661,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     projected();
     if(address==0x8003CD44u)return;
     if(address==0x80034DCCu){
+        expected_follower_x=psx_mod_read_word(PLAYER+8)+3*65536;
         psx_mod_write_word(PLAYER+0x18,psx_mod_read_word(PLAYER+8));
         psx_mod_write_word(PLAYER+8,psx_mod_read_word(PLAYER+8)+65536);
         if(marker_override!=2)psx_mod_write_byte(PLAYER+0x8C,(uint8_t)marker_override);
@@ -670,7 +672,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     }else if(address==0x8002F288u){
         CHECK(cpu->gpr[4]==PLAYER);psx_mod_write_word(PLAYER+8,psx_mod_read_word(PLAYER+8)+2*65536);
     }else if(address==0x80020D74u){
-        CHECK(psx_mod_read_word(PLAYER+8)==le32(p2.body+8)+3*65536);native_attached();
+        CHECK(psx_mod_read_word(PLAYER+8)==expected_follower_x);native_attached();
     }else if(address==0x80020DC8u){native_trails();}
     else if(address!=0x80017A04u)CHECK(0);
 }
@@ -696,6 +698,7 @@ static void setup(CPUState *cpu){
     projected_death_probe=0;
     scene_survivor_worlds=scene_native_retries=0;memset(scene_corpse_updates,0,sizeof scene_corpse_updates);
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
+    private_terrain_pending=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=arrival_pair=0;previous_input=p2_edges=0;p2_start_previous=0;
     paired_arrival_fixture_probe=arrival_landed=arrival_births=0;memset(arrival_ticks,0,sizeof arrival_ticks);
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
@@ -731,9 +734,21 @@ static void setup(CPUState *cpu){
     begin_world_draw(cpu,0x80025FB0u);
     boss_balance_independent=0;boss_scan_probe=0;
 }
+/* The real native driver separates input from its post-world terrain and
+ * follower tail. Preserve that boundary in these existing full-frame cases. */
+static void controller_frame(CPUState *cpu,uint32_t address){
+    uint32_t caller=cpu->gpr[31];
+    int canonical=caller==0x80020C70u && !inside && !zero_world;
+    controller(cpu,address);
+    if(canonical){
+        cpu->gpr[31]=0x80020CD0u;
+        private_terrain_after_world(cpu,0x8002927Cu);
+        cpu->gpr[31]=caller;
+    }
+}
 static void controller_pair_and_restoration(void){
     CPUState cpu;setup(&cpu);PlayerContext resident;capture_player(&resident);uint8_t play[0xE0],camera[0x100];capture(PLAY,play,sizeof play);capture(0x800971F8,camera,sizeof camera);
-    marker_override=1;p2.body[0x9C]=1;controller(&cpu,0x8002012C);
+    marker_override=1;p2.body[0x9C]=1;controller_frame(&cpu,0x8002012C);
     const uint32_t expected[]={0x8003CD44u,0x80034DCCu,0x8002012Cu,0x8002F288u,0x80020D74u,0x80020DC8u};
     CHECK(call_count==6 && !memcmp(calls,expected,sizeof expected));
     PlayerContext after;capture_player(&after);CHECK(!memcmp(&after,&resident,sizeof resident));
@@ -953,7 +968,7 @@ static void native_nova_guest_update(void) {
         PlayerContext primary;capture_player(&primary);
         uint8_t play[0xE0],after_play[0xE0];capture(PLAY,play,sizeof play);
         uint32_t zero_x=le32(p2.body+8);
-        nova_probe=1;controller(&cpu,0);nova_probe=0;
+        nova_probe=1;controller_frame(&cpu,0);nova_probe=0;
         CHECK(occurrences(0x8003CD44)==1 && occurrences(0x80034DCC)==1 &&
               occurrences(0x8002012C)==1 && occurrences(0x8002F288)==1 &&
               occurrences(0x80020D74)==1 && occurrences(0x80020DC8)==1);
@@ -964,7 +979,7 @@ static void native_nova_guest_update(void) {
     }
     for(unsigned gate=0;gate<NOVA_BLOCKED_CASES;++gate) {
         CPUState cpu;setup(&cpu);native_nova_body(0);block_native_nova(gate);
-        uint32_t zero_x=le32(p2.body+8);controller(&cpu,0);
+        uint32_t zero_x=le32(p2.body+8);controller_frame(&cpu,0);
         CHECK(!call_count && le32(p2.body+8)==zero_x && !inside && !state_track.count);
     }
     /* Retaining pit checks matters now that the guest can move during Nova. */
@@ -975,12 +990,12 @@ static void native_nova_guest_update(void) {
     CHECK(psx_mod_read_byte(PLAY+0x1C)==1);
 }
 static void lifetime_and_gates(void){
-    CPUState cpu;setup(&cpu);marker_override=1;controller(&cpu,0);marker_override=-1;
-    for(unsigned tick=0;tick<21;++tick)controller(&cpu,0);
+    CPUState cpu;setup(&cpu);marker_override=1;controller_frame(&cpu,0);marker_override=-1;
+    for(unsigned tick=0;tick<21;++tick)controller_frame(&cpu,0);
     for(unsigned i=0;i<3;++i)CHECK(!p2.trails[i*0x60+3] && !p2.trails[i*0x60+4]);
     CHECK(!p2.body[0x8C]);
-    marker_override=1;controller(&cpu,0);CHECK(p2.trails[3]);marker_override=0;controller(&cpu,0);CHECK(!p2.trails[3]);
-    p2.effects[3]=p2.effects[4]=1;p2.effects[0x53]=p2.effects[0x54]=1;p2.body[0x9B]=p2.body[0x9C]=0;controller(&cpu,0);
+    marker_override=1;controller_frame(&cpu,0);CHECK(p2.trails[3]);marker_override=0;controller_frame(&cpu,0);CHECK(!p2.trails[3]);
+    p2.effects[3]=p2.effects[4]=1;p2.effects[0x53]=p2.effects[0x54]=1;p2.body[0x9B]=p2.body[0x9C]=0;controller_frame(&cpu,0);
     CHECK(!p2.effects[3] && !p2.effects[4] && !p2.effects[0x53] && !p2.effects[0x54]);
     for(unsigned gate=0;gate<10;++gate){
         setup(&cpu);if(gate==0)inside=1;else if(gate==1)failed=1;else if(gate==2)scene_owner=1;
@@ -988,13 +1003,13 @@ static void lifetime_and_gates(void){
         else if(gate==5)life.status[1]=MMX6_COOP_ABSENT;else if(gate==6)life.status[1]=MMX6_COOP_FALLEN;
         else if(gate==7)cpu.gpr[31]=0x80021600;else if(gate==8)psx_mod_write_byte(PLAY+1,2);
         else{life.status[1]=MMX6_COOP_JOINING;p2.body[0x46]=1;}
-        controller(&cpu,0);CHECK(!occurrences(0x80020D74) && !occurrences(0x80020DC8));
+        controller_frame(&cpu,0);CHECK(!occurrences(0x80020D74) && !occurrences(0x80020DC8));
     }
     for(unsigned departing=0;departing<2;++departing){
         setup(&cpu);life.status[1]=departing?MMX6_COOP_LEAVING:MMX6_COOP_DYING;
-        terminal_player=1;p2.trails[3]=p2.trails[4]=1;controller(&cpu,0);
+        terminal_player=1;p2.trails[3]=p2.trails[4]=1;controller_frame(&cpu,0);
         CHECK(occurrences(0x80020DC8)==1 && life.status[1]==(departing?MMX6_COOP_ABSENT:MMX6_COOP_FALLEN) && !p2.trails[3]);
-        controller(&cpu,0);CHECK(occurrences(0x80020DC8)==1);
+        controller_frame(&cpu,0);CHECK(occurrences(0x80020DC8)==1);
     }
     setup(&cpu);life.status[0]=MMX6_COOP_FALLEN;psx_mod_write_byte(PLAYER+4,3);stage_driver=1;stage_call=0;marker_override=1;cpu.gpr[4]=PLAY;
     CHECK(stage_tick(&cpu,0x8001E9EC));CHECK(occurrences(0x8001E9EC)==1 && occurrences(0x80020D74)==1 && occurrences(0x80020DC8)==1);
@@ -1004,18 +1019,18 @@ static void menu_freeze_and_select_resume(void){
     CPUState cpu;setup(&cpu);life.status[1]=MMX6_COOP_ABSENT;pad_buttons=0xFFFE;
     life.select_armed=1;PlayerContext before=p2;
     for(unsigned phase=1;phase<=3;++phase){
-        psx_mod_write_byte(PLAY+1,(uint8_t)phase);controller(&cpu,0);
+        psx_mod_write_byte(PLAY+1,(uint8_t)phase);controller_frame(&cpu,0);
         CHECK(!call_count && life.select_previous && !life.rejoin_pending);
     }
     CHECK(!memcmp(&p2,&before,sizeof p2) && !life.select_frames);
-    psx_mod_write_byte(PLAY+1,0);controller(&cpu,0); /* Held UI Select is not a fresh rejoin. */
+    psx_mod_write_byte(PLAY+1,0);controller_frame(&cpu,0); /* Held UI Select is not a fresh rejoin. */
     CHECK(life.status[1]==MMX6_COOP_ABSENT && !life.rejoin_pending && !call_count);
-    pad_buttons=0xFFFF;controller(&cpu,0);CHECK(!life.select_previous && !call_count);
-    life.status[1]=MMX6_COOP_ALIVE;controller(&cpu,0); /* Fixture restores eligibility; no join success is claimed. */
+    pad_buttons=0xFFFF;controller_frame(&cpu,0);CHECK(!life.select_previous && !call_count);
+    life.status[1]=MMX6_COOP_ALIVE;controller_frame(&cpu,0); /* Fixture restores eligibility; no join success is claimed. */
     CHECK(occurrences(0x80034DCC)==1 && occurrences(0x8002012C)==1 && occurrences(0x8002F288)==1);
     CHECK(occurrences(0x80020D74)==1 && occurrences(0x80020DC8)==1);
     setup(&cpu);inside=1;psx_mod_write_byte(PLAY+1,2);pad_buttons=0xFFFE;
-    controller(&cpu,0);CHECK(!call_count && !life.select_previous); /* Native owned-menu context is already inside. */
+    controller_frame(&cpu,0);CHECK(!call_count && !life.select_previous); /* Native owned-menu context is already inside. */
 }
 static void native_menu_campaign_authority(void){
     CPUState cpu;setup(&cpu);stage_call=0;pause_owner=1;zero_menu_loaded=1;menu_probe=1;

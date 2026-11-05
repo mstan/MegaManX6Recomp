@@ -1171,9 +1171,9 @@
     "qualification": "Native LOCAL and matching NET: P2 genuinely dies before P1 defeats original NPC55/sub2, then original death/clear dispatch17->18 and native mode8/9 fresh18/0CP0 roster, visibility, each control and shared lives. Source tests/preset admission alone are not comparison credit."
   },
   "title_changes_v114": {
-    "scope": "Defer the private native terrain pass until the source20CD0 world boundary after shared solid contact, matching original20C40 order.",
+    "scope": "Defer the private native terrain and actor-owned follower passes until the source20CD0 world boundary after shared solid contact, matching original20C40 dependencies.",
     "state": "One-byte actual-update pending flag is consumed once, reset at native checkpoint/reactivation and included in build-specific snapshot26/digest.",
-    "guards": "Existing2927C emitted hook; only original20CD0 caller, no private render/follower, zero_world or duplicate pass. No actor/HP/contact outcome writes.",
+    "guards": "Existing2927C emitted hook; only original20CD0 caller, no private render/follower, zero_world or duplicate pass. Reuse the existing full private actor projection for terrain then its attached effects/trails, including final retirement cleanup; no world/AI replay or authored HP/contact outcome.",
     "qualification": "Prepared source change only. F29 same-candidate LOCAL+NET carry, real jump/reland, genuine wipe/retry and fresh support reboard remain required."
   }
 }
