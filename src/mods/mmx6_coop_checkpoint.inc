@@ -46,6 +46,7 @@ enum { CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE=0x4C524644u }; /* R21: only guest po
 enum { CHECKPOINT_LAB_WOLFANG_NONCE=0x4C574633u }; /* Original12/0 CP3, no position or encounter writes. */
 
 enum { CHECKPOINT_LAB_FORTRESS_CP3_NONCE=0x4C463933u }; /* Original17/0 CP3; F86 defeat/fresh-stage outcomes stay native. */
+enum { CHECKPOINT_LAB_GROUND_NONCE=0x4C475236u }; /* Original12/0 CP6; grant selected equipment after its constructor. */
 
 enum { CHECKPOINT_LAB_REFIGHT_NONCE=0x4C524650u }; /* Original0C/0 CP1, portal approach only. */
 enum { CHECKPOINT_LAB_GATE_ENEMY_NONCE=0x4C474531u }; /* Original SecretLab2B CP0, position-only approach. */
@@ -69,7 +70,7 @@ static unsigned checkpoint_lab_index(void) {
     return (checkpoint_lab_option==1 || checkpoint_lab_option==20)?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
-        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:115;
+        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==20?CHECKPOINT_LAB_SUBTANK_NONCE:checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -88,7 +89,7 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==14?CHECKPOINT_LAB_GATE_ENEMY_NONCE:
         checkpoint_lab_option==15?CHECKPOINT_LAB_REFIGHT_NONCE:
         checkpoint_lab_option==16?CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE:
-        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:0;
+        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -221,6 +222,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"refight_distant_cp1"))checkpoint_lab_option=16;
         else if(!strcmp(option,"refight_wolfang_cp3"))checkpoint_lab_option=21;
         else if(!strcmp(option,"secretlab2a_cp3"))checkpoint_lab_option=22;
+        else if(!strcmp(option,"refight_ground_cp6"))checkpoint_lab_option=23;
         else if(!strcmp(option,"heatnix_cp7"))checkpoint_lab_option=17;
         else if(!strcmp(option,"sigma_cp1"))checkpoint_lab_option=18;
         else if(!strcmp(option,"heatnix_cp0"))checkpoint_lab_option=19;
@@ -276,7 +278,7 @@ static void checkpoint_reset(void) {
        (checkpoint_starting_hp[0] || checkpoint_starting_hp[1] || checkpoint_earned_weapons_option))failed=1;
     /* Refight placement still requires original healthy arrivals. The existing
      * earned factory runs only after source/standing completion, below. */
-    if((checkpoint_lab_option==15 || checkpoint_lab_option==16 || checkpoint_lab_option==21) &&
+    if((checkpoint_lab_option==15 || checkpoint_lab_option==16 || checkpoint_lab_option==21 || checkpoint_lab_option==23) &&
        (checkpoint_starting_hp[0] || checkpoint_starting_hp[1]))failed=1;
 #endif
     if(diagnostic) {

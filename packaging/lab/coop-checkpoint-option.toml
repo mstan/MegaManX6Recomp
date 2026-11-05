@@ -77,6 +77,10 @@ value = "secretlab2a_cp3"
 label = "Original Secret Lab 2 A checkpoint 3"
 
 [[option.choice]]
+value = "refight_ground_cp6"
+label = "Original Ground Scaravich refight checkpoint 6 (prerequisite only)"
+
+[[option.choice]]
 value = "northpole_ice_cp3"
 label = "North Pole original ice shaft (position prerequisite)"
 

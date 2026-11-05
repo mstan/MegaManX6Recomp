@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 97,
+  "revision": 98,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v114",
+    "title_compatibility": "mmx6-x-zero-delay-v115",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1175,5 +1175,32 @@
     "state": "One-byte actual-update pending flag is consumed once, reset at native checkpoint/reactivation and included in build-specific snapshot26/digest.",
     "guards": "Existing2927C emitted hook; only original20CD0 caller, no private render/follower, zero_world or duplicate pass. Reuse the existing full private actor projection for terrain then its attached effects/trails, including final retirement cleanup; no world/AI replay or authored HP/contact outcome.",
     "qualification": "Prepared source change only. F29 same-candidate LOCAL+NET carry, real jump/reland, genuine wipe/retry and fresh support reboard remain required."
+  },
+  "title_changes_v115": {
+    "scope": "F130 prerequisite only: original Ground Scaravich refight CP6; native boss, attack acceptance, duplicate/rearm and results remain unmodified.",
+    "option": {
+      "id": 23,
+      "value": "refight_ground_cp6",
+      "default": "off"
+    },
+    "origin": {
+      "stage": 0,
+      "section": 0,
+      "checkpoint": 0
+    },
+    "destination": {
+      "index": 65,
+      "stage": 12,
+      "section": 0,
+      "checkpoint": 6,
+      "table": "80073220",
+      "record": "80072A2C",
+      "record_hash": "79FB42AF",
+      "nonce": "4C475236"
+    },
+    "equipment": "Reuse the existing optional one-shot earnedall factory only after the target original mode8/9 constructor and safe standing completion. Preserve actual/display/max health, personal supplies, campaign data and source guards. No repeated grant across routes.",
+    "state": "Only an additional immutable option/nonce/catalog binding; existing pending and earned-applied fields, digest and snapshot layout are unchanged. No new field or loaded-card origin exception.",
+    "snapshot_schema": 26,
+    "native_qualification": "Unverified until the built same-candidate LOCAL/NET behavior is exercised."
   }
 }

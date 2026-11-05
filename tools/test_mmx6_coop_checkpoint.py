@@ -58,8 +58,8 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],97)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v114')
+        self.assertEqual(record['revision'],98)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v115')
 
     def test_fortress_cp3_retains_original_checkpoint_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
@@ -68,6 +68,21 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(target['table'], '8007329C')
         self.assertEqual(target['record'], '80072E1C')
         self.assertEqual(target['player'], dict(x=3040, y=224))
+
+    def test_ground_refight_cp6_binds_original_record_and_postconstructor_grant(self):
+        _, rows, sections = checkpoint.inventory(INVENTORY)
+        target = checkpoint.select(rows, sections, 12, 0, 6)
+        self.assertEqual(rows.index(target), 65)
+        self.assertEqual(target['table'], '80073220')
+        self.assertEqual(target['record'], '80072A2C')
+        self.assertEqual(target['player'], dict(x=2672, y=256))
+        record = json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text())
+        change = record['title_changes_v115']
+        self.assertEqual(change['destination'], dict(index=65, stage=12, section=0,
+            checkpoint=6, table='80073220', record='80072A2C', record_hash='79FB42AF', nonce='4C475236'))
+        self.assertEqual(change['option'], dict(id=23, value='refight_ground_cp6', default='off'))
+        self.assertEqual(change['origin'], dict(stage=0, section=0, checkpoint=0))
+        self.assertEqual(change['snapshot_schema'], 26)
 
     def test_loaded_recycle_alternate_boss_uses_original_cp1(self):
         record=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text(encoding='utf8'))
