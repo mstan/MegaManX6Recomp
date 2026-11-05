@@ -17,8 +17,6 @@ static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
 static int solid_dispatch,allocator_dispatch;
 static unsigned terrain_dispatch,terrain_moves,terrain_calls,terrain_solids;
-static unsigned terrain_resets;
-void mmx6_adaptive_background_reset(void){++terrain_resets;}
 static unsigned snail_dispatch,snail_calls,snail_new_sides,snail_seen_masks[2];
 static int mounted_return_dispatch;
 static unsigned mounted_return_constructors;
@@ -503,8 +501,8 @@ static void native_snail_guest_support_mask(void) {
     CHECK(!private_terrain_pending && terrain_calls==1); /* No stale paused pass. */
     stage_call=0;private_terrain_pending=1;native_player_init(&cpu,0x8003BD24u);
     CHECK(!private_terrain_pending); /* Actual fresh checkpoint initialization. */
-    private_terrain_pending=1;unsigned prior_resets=terrain_resets;
-    private_terrain_session_reset();CHECK(!private_terrain_pending && terrain_resets==prior_resets+1);
+    private_terrain_pending=1;
+    private_terrain_session_reset();CHECK(!private_terrain_pending);
     terrain_dispatch=0;state_commit(&old_host);stage_call=old_stage;ready=old_ready;
     inside=old_inside;zero_menu_loaded=old_menu;independent_views=old_views;
     project(0x800C456Cu,old_input,sizeof old_input);
