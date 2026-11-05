@@ -215,9 +215,15 @@ if(BUILD_TESTING)
         add_test(NAME ${_lab_test} COMMAND ${_lab_test})
     endforeach()
     if(Python3_Interpreter_FOUND)
+        set(_mmx6_host_lab_contract_profile_args)
+        if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
+            set(_mmx6_host_lab_contract_profile_args --execution-profile
+                "${CMAKE_CURRENT_BINARY_DIR}/psx_execution/psx-runtime/profile.h")
+        endif()
         add_test(NAME mmx6_host_lab_contract_test
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/mmx6_host_lab_contract.py"
-                --execution-profile "${CMAKE_CURRENT_BINARY_DIR}/psx_execution/psx-runtime/profile.h")
+                ${_mmx6_host_lab_contract_profile_args})
+        unset(_mmx6_host_lab_contract_profile_args)
     endif()
     if(Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.11)
         foreach(_mmx6_python_test test_coop_debug_protocol test_mmx6_coop_reference
