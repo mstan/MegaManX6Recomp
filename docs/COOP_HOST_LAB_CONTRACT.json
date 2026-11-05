@@ -1116,7 +1116,7 @@
     "qualification": "Prepared metadata binding only; actual exact-candidate native qualification required; no evidence transfer."
   },
   "title_changes_v111": {
-    "scope": "Existing alternate_boss_cp1 prerequisite may follow native card Load and Recycle4/0CP0 mission arrival, alongside existing options6/7/21.",
+    "scope": "Existing alternate_boss_cp1 prerequisite may follow native card Load and Recycle4/0CP0 mission arrival, alongside existing options6/7/21. Current-build snapshots also accept producer-valid native actor kind0 bookkeeping.",
     "additional_origin": {
       "option": "alternate_boss_cp1",
       "stage": 4,
@@ -1133,6 +1133,11 @@
       "nonce": "4C414231"
     },
     "preserved": "Existing both-alive/idle/grounded boundary, source/profile checks, original mode8-to-mode9 initializer, card-owned route progress and all other origin rejects. No story, boss, HP or attack result assigned.",
-    "qualification": "Source and existing fixture coverage only; native boss initialization, F117 X/P2 hit/reaction/recovery and independent F87 resources remain unverified."
+    "qualification": "Source and existing fixture coverage only; native boss initialization, F117 X/P2 hit/reaction/recovery and independent F87 resources remain unverified.",
+    "snapshot_validation": {
+      "native_kind_zero": "The intro FA394 geometry actor is type0/sub3. Existing tracker records its valid RAM origin before boss recognition; kind0 is not an empty slot sentinel.",
+      "preserved": "Tracker behavior, wire schema25, origin range/alignment, recognized-cookie, optional scaling and independent cooldown validation remain unchanged.",
+      "regression": "Actual tracker producer reproduces COUNT line269/offset9915 rejection before fix; measure/write/validate/read must roundtrip its kind0 origin. Malformed origin, unrecognized cookies and disabled-scaling remainder remain rejected."
+    }
   }
 }
