@@ -2360,7 +2360,6 @@ static void controller(CPUState *cpu, uint32_t address) {
             mmx6_coop_teleport_done(&life);
         if (p2.body[4]==2) mmx6_coop_fatal(&life,1);
         if (life.status[1]==MMX6_COOP_DYING && p2.body[4]==3) life.status[1]=MMX6_COOP_FALLEN;
-        constrain_player(1);
         project(0x800C456C,saved_input,sizeof saved_input);
         STATE_POP(restore_input);
         if (!stage_call) diagnostics(raw);
@@ -2395,6 +2394,7 @@ static void private_terrain_after_world(CPUState *cpu,uint32_t address) {
         mmx6_coop_teleport_done(&life);
     if(p2.body[4]==2)mmx6_coop_fatal(&life,1);
     if(life.status[1]==MMX6_COOP_DYING && p2.body[4]==3)life.status[1]=MMX6_COOP_FALLEN;
+    constrain_player(1);
     inside=0;
 }
 
