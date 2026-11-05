@@ -3083,6 +3083,59 @@ static int snail_support_mask(const CPUState *cpu,uint32_t actor) {
         psx_mod_read_word(0x800EC0D0u)==0xA2710072u &&
         psx_mod_read_word(0x800EC0E8u)==0xA2620072u;
 }
+/* Original51890 consumes last update's +72 in its phase, then computes the
+ * next contact through31DA8. Keep that complete transaction in the actual X
+ * owner's context: a phase-only projection leaves its producer outside it.
+ * Animation, phase, effects and shared collisions still execute exactly once.
+ * The other hero receives only the original body-contact pass, never the AI. */
+static int capsule_owner_update(CPUState *cpu,uint32_t address) {
+    uint32_t actor=cpu->gpr[4];
+    if(address!=0x80051890u || scene_call || solid_call || private_draw || view_call ||
+       !ready || !enrolled || failed || pause_owner>=0 || clear_phase ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       !both_door_slot(actor) || !(psx_mod_read_byte(actor)&1u) ||
+       psx_mod_read_byte(actor+1)!=26 || psx_mod_read_byte(actor+2)!=4 ||
+       psx_mod_read_word(actor+0x10)!=0x800F2E24u || psx_mod_read_byte(actor+4)!=1 ||
+       private_actor.character!=MMX6_COOP_CHARACTER_X || p2.body[2]!=0 ||
+       life.status[1]!=MMX6_COOP_ALIVE || !p2.body[0] || p2.body[4]!=1 ||
+       !p2.body[0x5C] || p2.body[0x5C]>=128 ||
+       (scene_owner && scene_owner!=2))return 0;
+    unsigned phase=psx_mod_read_byte(actor+5),projected=zero_world!=0;
+    if(phase<6 || phase>10 || (projected?!zero_projected:(inside || zero_projected)) ||
+       (projected?p1.body[2]:psx_mod_read_byte(PLAYER+2))!=1)return 0;
+    SolidContact *contact=solid_contact(actor);
+    if(!contact)return 0;
+    uint32_t context[4]={actor,(uint32_t)inside,(uint32_t)scene_call,(uint32_t)solid_call};
+    STATE_WORDS(restore_capsule,69,context,4);
+    uint8_t ride=psx_mod_read_byte(0x800CD340u);
+    STATE_BYTES(restore_capsule_ride,23,&ride,1);
+    scene_call=solid_call=inside=1;
+    if(!projected)enter_zero();
+    /* The one primary contact below also owns the original ride contact. */
+    psx_mod_write_byte(0x800CD340u,0);
+    uint32_t result=solid_as_zero(cpu,address,actor,contact);
+    STATE_WORDS(restore_capsule_result,44,&result,1);
+    psx_mod_write_byte(0x800CD340u,ride);
+    if(psx_mod_read_byte(PLAYER+0xE2) && psx_mod_read_byte(actor+5)>=7) {
+        scene_begin(1,address);
+        if(scene_owner==2)scene_phase=0; /* Original in-place boarding. */
+    }
+    if(life.status[0]==MMX6_COOP_ALIVE && p1.body[4]==1 &&
+       p1.body[0x5C] && p1.body[0x5C]<128 && !p1.body[0xE5]) {
+        uint8_t owner_body[sizeof p2.body];capture(PLAYER,owner_body,sizeof owner_body);
+        STATE_BYTES(restore_capsule_owner,22,owner_body,sizeof owner_body);
+        project(PLAYER,p1.body,sizeof p1.body);
+        guest(cpu,0x80031DA8u,actor,0);
+        capture(PLAYER,p1.body,sizeof p1.body);
+        project(PLAYER,owner_body,sizeof owner_body);
+        STATE_POP(restore_capsule_owner);
+    }
+    if(!projected)leave_zero_context(1);
+    STATE_POP(restore_capsule_result);
+    inside=(int)context[1];scene_call=(int)context[2];solid_call=(int)context[3];
+    STATE_POP(restore_capsule_ride);STATE_POP(restore_capsule);
+    cpu->gpr[2]=result;return 1;
+}
 static int solid_player_collision(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     SolidContact *contact=solid_contact(actor);
@@ -3418,7 +3471,8 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80050DFC,door_update) ||
         !psx_mod_set_function_replacement(0x80050C88,door_eligibility)) failed=1;
     if (!psx_mod_set_function_replacement(0x80051924,interaction_begin) ||
-        !psx_mod_set_function_replacement(0x80052F64,interaction_begin)) failed=1;
+        !psx_mod_set_function_replacement(0x80052F64,interaction_begin) ||
+        !psx_mod_set_function_replacement(0x80051890,capsule_owner_update)) failed=1;
     if (!psx_mod_set_function_replacement(0x800244C0,draw_coop_hud) ||
         !psx_mod_set_function_replacement(0x80024CC0,hud_icon)) failed=1;
     if (!psx_mod_set_function_replacement(0x8002C530,death_effect_allocate) ||

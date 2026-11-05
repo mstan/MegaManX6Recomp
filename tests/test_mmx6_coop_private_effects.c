@@ -426,6 +426,24 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         CHECK(0);
     }
     if(capsule_native_probe) {
+        if(capsule_native_probe==2) {
+            uint32_t actor=cpu->gpr[4];
+            CHECK(scene_call && solid_call && inside);
+            if(address==0x80051890u) {
+                CHECK(zero_projected && psx_mod_read_byte(PLAYER+2)==0);
+                /* External original outer order: phase consumes previous
+                 * contact, then31DA8 produces the next. No mocked grant
+                 * runs when the owner did not have top contact. */
+                if(psx_mod_read_byte(actor+5)==6 && (psx_mod_read_byte(actor+0x72)&8u)) {
+                    psx_mod_write_byte(PLAYER+0xE2,1);psx_mod_write_byte(actor+5,7);
+                }
+                CHECK(!solid_player_collision(cpu,0x80031DA8u));
+                psx_mod_write_byte(actor+0x72,8);psx_mod_write_byte(actor+0x76,1);
+                psx_mod_write_byte(PLAYER+0x71,8);cpu->gpr[2]=0xCAFE;return;
+            }
+            CHECK(address==0x80031DA8u && psx_mod_read_byte(PLAYER+2)==1);
+            psx_mod_write_byte(actor+0x72,2);psx_mod_write_byte(PLAYER+0x71,2);return;
+        }
         /* External original51924->3D308 request and shared capsule locks. */
         CHECK(address==0x80051924u);
         psx_mod_write_byte(PLAYER+0xD0,20);
@@ -2979,6 +2997,35 @@ static void native_default_private_boss_cookies(void) {
     private_draw=1;cpu.gpr[4]=actor;CHECK(!enemy_hit(&cpu,0x80031474u));private_draw=0;
     boss_scan_probe=0;memset(boss_balance,0,sizeof boss_balance);
 }
+static void native_capsule_owner_contact_transaction(void) {
+    CPUState cpu;setup(&cpu);capsule_native_probe=2;
+    private_actor.character=MMX6_COOP_CHARACTER_X;private_actor.form=0;
+    life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+    psx_mod_write_byte(PLAYER+2,1);psx_mod_write_byte(PLAYER+4,1);
+    psx_mod_write_byte(PLAYER+0x5C,32);psx_mod_write_byte(PLAYER+0xE2,0);psx_mod_write_byte(PLAYER+0xE5,0);
+    p2.body[0]=p2.body[3]=p2.body[4]=1;p2.body[2]=p2.body[0xE2]=p2.body[0xE5]=0;p2.body[0x5C]=32;
+    uint32_t a=0x800C1220u;cpu.gpr[4]=a;
+    psx_mod_write_byte(a,1);psx_mod_write_byte(a+1,26);psx_mod_write_byte(a+2,4);
+    psx_mod_write_byte(a+4,1);psx_mod_write_byte(a+5,6);psx_mod_write_word(a+0x10,0x800F2E24u);
+    SolidContact *c=solid_contact(a);CHECK(c);c->sides=c->carried=0;
+    CHECK(capsule_owner_update(&cpu,0x80051890u) && cpu.gpr[2]==0xCAFE);
+    CHECK(c->sides==8 && c->carried==1 && !p2.body[0xE2] && psx_mod_read_byte(a+5)==6);
+    CHECK(psx_mod_read_byte(a+0x72)==2 && psx_mod_read_byte(PLAYER+0x71)==2 && p2.body[0x71]==8);
+    CHECK(!scene_owner && !inside && !solid_call && !scene_call && !zero_projected && !state_track.count);
+    /* Next original update consumes that same owner's retained contact. */
+    CHECK(capsule_owner_update(&cpu,0x80051890u) && p2.body[0xE2]==1 && psx_mod_read_byte(a+5)==7);
+    CHECK(scene_owner==2 && !scene_phase && !psx_mod_read_byte(PLAYER+0xE2));
+    /* A subsequent owner-world update preserves the same transaction and
+     * leaves its caller's live projection/guards intact. */
+    inside=1;enter_zero();zero_world=1;
+    CHECK(capsule_owner_update(&cpu,0x80051890u) && zero_projected && inside && !solid_call && !scene_call);
+    zero_world=0;leave_zero_context(1);inside=0;
+    CHECK(c->sides==8 && psx_mod_read_byte(a+0x72)==2 && !state_track.count && !state_track.error);
+    scene_owner=0;psx_mod_write_byte(a+5,5);unsigned before=call_count;
+    CHECK(!capsule_owner_update(&cpu,0x80051890u) && call_count==before);
+    capsule_native_probe=0;
+}
 static void native_optional_private_boss_cooldowns(void) {
     CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
     boss_balance_enabled=boss_balance_independent=boss_scan_probe=1;
@@ -3120,7 +3167,7 @@ int main(void){
     native_shared_ride_ownership();native_both_ride_bindings_and_rosters();
     native_shared_clear_admission_and_departure();
     native_sigma_transition_retains_living_pair();
-    native_capsule_keeps_living_passenger();
+    native_capsule_keeps_living_passenger();native_capsule_owner_contact_transaction();
     native_either_both_door_admission();
     native_both_door_ack_motion_and_release();native_hatch_missing_box_clearance();
     native_paired_arrival_barrier();

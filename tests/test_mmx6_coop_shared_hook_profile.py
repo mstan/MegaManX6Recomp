@@ -6,6 +6,32 @@ import tomllib
 import unittest
 
 class SharedEffectEntryProfile(unittest.TestCase):
+    def test_native_capsule_owner_transaction_is_declared(self):
+        root = Path(__file__).resolve().parents[1]
+        source = (root / 'src/mods/mmx6_coop_plugin.c').read_text(encoding='utf-8')
+        self.assertIn('psx_mod_set_function_replacement(0x80051890,capsule_owner_update)', source)
+        for config in ('game.toml', 'packaging/release/game.toml'):
+            with self.subTest(config=config):
+                profile = tomllib.loads((root / config).read_text(encoding='utf-8'))
+                entries = [int(address, 16) for address in
+                           profile['recompiler']['mod_function_entry_funcs']]
+                self.assertEqual(entries.count(0x80051890), 1,
+                                 'capsule phase and next-contact producer need the same native owner hook')
+
+    @unittest.skipUnless(os.environ.get('MMX6_COOP_CAPSULE_GENERATED_UNIT'),
+                         'set MMX6_COOP_CAPSULE_GENERATED_UNIT to regenerated unit containing func_80051890')
+    def test_actual_generated_capsule_owner_entry(self):
+        source = Path(os.environ['MMX6_COOP_CAPSULE_GENERATED_UNIT']).read_text(encoding='utf-8')
+        match = re.search(r'(?ms)^void func_80051890\(CPUState\* cpu\)\n\{(.*?)(?=^void |\Z)', source)
+        self.assertIsNotNone(match, 'actual original capsule update is required')
+        entry = match[1].split('block_80051890:', 1)[0]
+        for hook in ('psx_mod_function_entry', 'psx_mod_try_function_replacement'):
+            self.assertEqual(len(re.findall(
+                rf'if \({hook}\(cpu, 0x80051890u\)\) return;', entry)), 1,
+                'registration alone did not activate the retained C142 capsule fix')
+        prefix = entry.split('if (psx_mod_function_entry', 1)[0]
+        self.assertIn('case 0x800518C8u: goto block_800518C8;', prefix)
+
     def test_both_door_native_predicate_and_default_are_declared(self):
         root = Path(__file__).resolve().parents[1]
         source = (root / 'src/mods/mmx6_coop_plugin.c').read_text(encoding='utf-8')
