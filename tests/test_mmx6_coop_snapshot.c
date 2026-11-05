@@ -60,6 +60,8 @@ int psx_mod_local_view_scope(void){return local_scope;}
 /* The optional-radio seam uses an ordinary local guest Select sample. */
 uint16_t sio_get_pad_buttons_slot(int slot){CHECK(slot==1);return 0xFFFE;}
 int psx_mod_netplay_is_active(void){return 0;}
+int psx_mod_netplay_has_state_digest(void){return 0;}
+int32_t psx_mod_widescreen_x_margin(void){return 0;}
 void psx_mod_counter_add(const char *name,uint32_t count){(void)name;(void)count;CHECK(0);}
 void psx_mod_tag_world_primitive(uint32_t packet,int world){
     /* The external draw seam emits no native packets; never fake their tags. */
