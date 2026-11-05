@@ -20,6 +20,7 @@ static unsigned refight_post_solid,refight_admission_fault;
 static unsigned refusal_logs;
 static char refusal_log[512];
 static unsigned intro_scan_probe,intro_scan_calls,intro_scan_allocations,intro_canonical_cycles;
+static unsigned amazon_scan_probe,amazon_scan_calls,amazon_visibility_calls;
 static void checkpoint_test_refusal_log(const char *format,...) {
     va_list args;va_start(args,format);
     CHECK(vsnprintf(refusal_log,sizeof refusal_log,format,args)>0);
@@ -27,6 +28,20 @@ static void checkpoint_test_refusal_log(const char *format,...) {
 }
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
     (void)ret;
+    if(amazon_scan_probe && target==0x80029F38u) {
+        /* Original scanner boundary only: leave allocation/AI to native QA. */
+        CHECK(inside && !private_draw && state_track.count);
+        CHECK(cpu->gpr[4]==202 && cpu->gpr[5]==618 && cpu->gpr[6]==186 && cpu->gpr[7]==522);
+        CHECK(psx_mod_read_word(0x800734A4u)==0x800F6540u && psx_mod_read_byte(0x800F654Bu)==15);
+        CHECK(!psx_mod_read_word(cpu->gpr[29]+0x10));++amazon_scan_calls;return 1;
+    }
+    if(amazon_scan_probe && target==0x8002CCB0u) {
+        CHECK(inside && cpu->gpr[4]==0x800C1220u && cpu->gpr[5]==32 && cpu->gpr[6]==32);
+        ++amazon_visibility_calls;
+        /* External native view classifier contract, not actor movement. */
+        psx_mod_write_byte(cpu->gpr[4]+3,psx_mod_read_half(VIEW_CAMERA+10)==250);
+        return 1;
+    }
     if(intro_scan_probe && target==0x80029D18u) {
         /* Original canonical scan contract: active-bit81 is checked before
          * any outside-rectangle latch reset. An inactive initial flags0
@@ -2356,6 +2371,50 @@ static void guest_intro_geometry_admission(CPUState *cpu) {
     intro_guest_placement_scan(cpu,0x80029D18u);CHECK(intro_scan_calls==2);
     intro_scan_probe=0;
 }
+static void guest_amazon_support_admission(CPUState *cpu) {
+    setup_agreed(cpu,0);memcpy(test_ram,original_ram,sizeof test_ram);
+    memset(p2.body,0,sizeof p2.body);p2.body[0]=p2.body[4]=1;p2.body[2]=1;p2.body[5]=2;p2.body[0x5C]=32;
+    put32(p2.body+8,410u<<16);put32(p2.body+12,330u<<16);
+    enrolled=ready=independent_views=1;failed=private_draw=inside=zero_world=scene_owner=clear_phase=0;
+    pause_owner=-1;life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);psx_mod_write_byte(PLAY+12,1);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);
+    psx_mod_write_byte(VIEW_CAMERA+4,1);psx_mod_write_byte(VIEW_CAMERA+0x44,1);
+    psx_mod_write_half(VIEW_CAMERA+0x30,160);psx_mod_write_half(VIEW_CAMERA+0x32,160);psx_mod_write_half(VIEW_CAMERA+0x2C,96);
+    const uint16_t limits[]={1200,0,720,208};
+    for(unsigned i=0;i<4;++i)psx_mod_write_half(VIEW_CAMERA+0x1C+i*2,limits[i]);
+    psx_mod_write_word(VIEW_CAMERA+8,0);psx_mod_write_word(VIEW_CAMERA+12,224u<<16);
+    psx_mod_write_word(0x800F6540u,0x00000700u);psx_mod_write_word(0x800F6544u,0x017C0220u);
+    psx_mod_write_word(0x800F6548u,0x00000700u);
+    const uint32_t code[][2]={{0x800EC268u,0x0C00B131u},{0x800EC280u,0xA0A20001u},
+        {0x800EC030u,0x0C00B2FFu},{0x800EC044u,0x24050020u},{0x800EC048u,0x0C00B32Cu},
+        {0x800EC04Cu,0x24060020u},{0x800EC060u,0x24050020u},{0x800EC064u,0x0C00B32Cu}};
+    for(unsigned i=0;i<sizeof code/sizeof code[0];++i)psx_mod_write_word(code[i][0],code[i][1]);
+    CHECK(amazon_support_source());
+    cpu->gpr[29]=0x801FFF00u;cpu->gpr[6]=0x11223344u;cpu->gpr[7]=0x55667788u;
+    psx_mod_write_word(cpu->gpr[29]+0x10,0xAABBCCDDu);
+    uint8_t original[0x54];capture(VIEW_CAMERA,original,sizeof original);
+    amazon_scan_probe=1;amazon_scan_calls=amazon_visibility_calls=0;
+    amazon_guest_placement_scan(cpu,0x80029D18u);
+    CHECK(amazon_scan_calls==1 && psx_mod_read_word(0x800734A4u)==0x800F6368u && psx_mod_read_word(0x800F6548u)==0x00000700u);
+    CHECK(cpu->gpr[6]==0x11223344u && cpu->gpr[7]==0x55667788u && psx_mod_read_word(cpu->gpr[29]+0x10)==0xAABBCCDDu);
+    uint8_t actual[0x54];capture(VIEW_CAMERA,actual,sizeof actual);CHECK(!memcmp(actual,original,sizeof actual));
+    put32(p2.body+8,300u<<16);amazon_guest_placement_scan(cpu,0x80029D18u);CHECK(amazon_scan_calls==1);
+    put32(p2.body+8,410u<<16);private_draw=1;amazon_guest_placement_scan(cpu,0x80029D18u);CHECK(amazon_scan_calls==1);private_draw=0;
+    uint32_t actor=0x800C1220u;psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,1);psx_mod_write_byte(actor+4,1);
+    psx_mod_write_word(actor+0x10,0x800F6540u);psx_mod_write_word(actor+0x30,0x800F73D4u);psx_mod_write_word(actor+0x68,0x800F73ECu);
+    psx_mod_write_word(actor+8,544u<<16);psx_mod_write_word(actor+12,380u<<16);psx_mod_write_byte(actor+0x14,0);
+    cpu->gpr[4]=actor;cpu->gpr[31]=0x800EC038u;cpu->gpr[2]=99;
+    CHECK(guest_geometry_lifetime(cpu,0x8002CBFCu) && !cpu->gpr[2]);
+    put32(p2.body+8,184u<<16);cpu->gpr[2]=99;CHECK(!guest_geometry_lifetime(cpu,0x8002CBFCu) && cpu->gpr[2]==99);
+    put32(p2.body+8,410u<<16);cpu->gpr[31]=0x800EC06Cu;cpu->gpr[5]=cpu->gpr[6]=32;
+    CHECK(amazon_guest_support_visibility(cpu,0x8002CCB0u) && psx_mod_read_byte(actor+3)==1 && amazon_visibility_calls==2);
+    capture(VIEW_CAMERA,actual,sizeof actual);CHECK(!memcmp(actual,original,sizeof actual));
+    CHECK(!inside && !state_track.count && !state_track.error);
+    psx_mod_write_word(actor+0x10,0x800F6548u);CHECK(!amazon_guest_support_visibility(cpu,0x8002CCB0u));
+    psx_mod_write_word(0x800EC268u,0);CHECK(!amazon_support_source());
+    amazon_scan_probe=0;
+}
 #endif
 int main(int argc,char **argv) {
     const char *source=argc==2?argv[1]:getenv("MMX6_CONTENT_EXE");
@@ -2452,6 +2511,7 @@ int main(int argc,char **argv) {
     CHECK(fread(before_doors_ram,1,sizeof before_doors_ram,file)==sizeof before_doors_ram && fgetc(file)==EOF);fclose(file);
 #ifdef MMX6_COOP_MODERN_STATE
     guest_intro_geometry_admission(&cpu);
+    guest_amazon_support_admission(&cpu);
 #endif
     fixture=getenv("MMX6_PORTAL_SETUP_RAM");
     if(!fixture || !*fixture){puts("SKIP: MMX6_PORTAL_SETUP_RAM must name external original source materialization");return 77;}

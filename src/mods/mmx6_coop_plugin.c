@@ -3419,6 +3419,7 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
 #endif
 #include "mmx6_coop_views.inc"
 #include "mmx6_coop_intro_placement.inc"
+#include "mmx6_coop_amazon_placement.inc"
 static void activate(void) {
     state_track.count=state_track.error=0;
     intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
@@ -3512,7 +3513,8 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x800EC8E8,refight_portal_both_admission)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
-    if (!psx_mod_set_function_replacement(0x8002CBFC,intro_guest_geometry_lifetime)) failed=1;
+    if (!psx_mod_set_function_replacement(0x8002CBFC,guest_geometry_lifetime) ||
+        !psx_mod_set_function_replacement(0x8002CCB0,amazon_guest_support_visibility)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
         !psx_mod_set_function_replacement(0x8001E9EC,stage_tick) ||
         !psx_mod_set_function_replacement(0x80020A08,ride_tick) ||
@@ -3600,6 +3602,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002927C,world_camera_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80029D18,intro_guest_placement_scan);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80029D18,amazon_guest_placement_scan);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800270D0,independent_background_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80026ECC,independent_background_end);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002B3D4,shared_palette_load);
