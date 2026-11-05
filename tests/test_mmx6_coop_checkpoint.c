@@ -501,6 +501,66 @@ static void setup_earned(CPUState *cpu,int online) {
     psx_mod_write_byte(PLAY+0x5B,32);psx_mod_write_byte(PLAY+0x5C,32);
     psx_mod_write_word(PLAY+0x74,0x00102030u);psx_mod_write_word(PLAY+0x78,0x00405060u);
 }
+/* F86 reachability only: immutable row93 and original mode8/9 transaction. */
+static void agreed_fortress_cp3_boundary(CPUState *cpu) {
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    test_lab_contact_option=test_lab_fatal_option="off";
+    for(int online=0;online<=1;++online)for(unsigned loaded=0;loaded<=1;++loaded) {
+        setup_earned(cpu,online);test_lab_option="secretlab2a_cp3";
+        test_lab_earned_option="off";checkpoint_reset();equipment_probe=equipment_calls=0;
+        CHECK(!failed && checkpoint_lab_option==22 && checkpoint_lab_index()==93 &&
+            checkpoint_lab_nonce()==0x4C463933u && checkpoint_source(&checkpoint_inventory[93]));
+        psx_mod_write_byte(PLAY+12,(uint8_t)(loaded?4:0));
+        psx_mod_write_byte(PLAY+0x60,0xFF);psx_mod_write_byte(PLAYER+0xC8,3);p2.body[0xC8]=5;
+        psx_mod_write_byte(PLAYER+0xC9,0xFF);p2.body[0xC9]=0xFF;
+        psx_mod_write_half(PLAYER+0xB2,288);p2.body[0xB2]=240;
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.index==93 &&
+            checkpoint_pending.nonce==0x4C463933u && checkpoint_pending.authority==CHECKPOINT_AGREED);
+        before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=17;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body) &&
+            !equipment_calls && !guest_calls && !checkpoint_earned_weapons_applied);
+        CHECK(psx_mod_read_word(diagnostic+0xB8)==0x80072E1Cu &&
+            checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+0x1D)==3 &&
+            psx_mod_read_word(diagnostic+0xB4)==1 && !equipment_calls && !guest_calls);
+        psx_mod_write_byte(PLAY,10);memcpy(before_ram,test_ram,sizeof test_ram);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed() &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+    }
+    for(unsigned bad=0;bad<5;++bad) {
+        setup_earned(cpu,1);test_lab_option="secretlab2a_cp3";test_lab_earned_option="off";
+        checkpoint_reset();equipment_probe=equipment_calls=0;
+        psx_mod_write_byte(PLAY+12,(uint8_t)(bad==2?18:4));
+        if(bad==0)psx_mod_write_byte(PLAY+13,1);
+        if(bad==1)psx_mod_write_byte(PLAY+0x1D,1);
+        if(bad==3)test_lab_profile.qualification[0]^=1;
+        if(bad==4)psx_mod_write_byte(0x80072E1Cu,psx_mod_read_byte(0x80072E1Cu)^1u);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+            !equipment_calls && !guest_calls && !memcmp(before_ram,test_ram,sizeof test_ram) &&
+            !memcmp(&body,&p2,sizeof body));
+        CHECK(psx_mod_read_byte(diagnostic+0xA9)==(bad==3?CHECKPOINT_FORBIDDEN:
+            bad==4?CHECKPOINT_SOURCE:CHECKPOINT_ORDER));
+    }
+    for(unsigned unsafe=0;unsafe<4;++unsafe) {
+        setup_earned(cpu,1);test_lab_option="secretlab2a_cp3";test_lab_earned_option="off";
+        checkpoint_reset();psx_mod_write_byte(PLAY+12,4);
+        if(unsafe==0)pause_owner=0;if(unsafe==1)zero_projected=1;
+        if(unsafe==2)p2.body[5]=7;if(unsafe==3)life.status[1]=MMX6_COOP_FALLEN;
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
+    }
+    setup_earned(cpu,1);test_lab_option="secretlab2a_cp3";test_lab_earned_option="off";checkpoint_reset();
+    checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
+    CHECK(!checkpoint_request(17,0,3,0x4C463932u,CHECKPOINT_AGREED) && !checkpoint_pending.phase &&
+        psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNKNOWN);
+    test_lab_option="off";test_lab_earned_option="off";equipment_probe=0;failed=0;checkpoint_reset();
+}
+
 static void earned_pending(CPUState *cpu,int online,unsigned campaign) {
     setup_earned(cpu,online);psx_mod_write_byte(PLAY+0x60,(uint8_t)campaign);
     CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.phase==1 && psx_mod_read_byte(PLAY)==8);
@@ -2328,7 +2388,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
-    agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
+    agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_fortress_cp3_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }
