@@ -754,22 +754,39 @@ static void agreed_contact_protection(CPUState *cpu) {
     CHECK(!checkpoint_contact_protection_option && !checkpoint_contact_protection_status());
 }
 static void agreed_checkpoint_boundary(CPUState *cpu) {
+    const Mmx6Checkpoint *entry=&checkpoint_inventory[2];
+    CHECK(entry->stage==0 && entry->section==0 && entry->checkpoint==2 && entry->campaign==1 &&
+        entry->table==0x80073134u && entry->record==0x80072150u && entry->hash==0x9CF23C0Au);
     /* Configured destination alone must never race the parent's normal intro
      * P2-walk/P1-jump baseline. Only a fresh accepted native chord arms it. */
     setup_agreed(cpu,1);CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase && !checkpoint_lab_state);
     CHECK(!checkpoint_lab_boundary(cpu,2) && !checkpoint_lab_boundary(cpu,4) && !checkpoint_lab_boundary(cpu,7) && !checkpoint_lab_state);
     checkpoint_lab_option=0;memcpy(before_ram,test_ram,sizeof test_ram);
     CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_lab_state && !memcmp(before_ram,test_ram,sizeof test_ram));
-    for(int online=0;online<=1;++online) {
-        setup_agreed(cpu,online);PlayerContext body=p2;memcpy(before_ram,test_ram,sizeof test_ram);
+    for(int online=0;online<=1;++online)for(unsigned loaded=0;loaded<=1;++loaded) {
+        setup_agreed(cpu,online);
+        if(loaded) {
+            /* Model native card Load: Recycle CP0, Zero/P1 and acquired X/P2.
+             * The checkpoint request must retain both bodies and card fields. */
+            psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAYER+2,1);p2.body[2]=0;
+        }
+        PlayerContext body=p2;memcpy(before_ram,test_ram,sizeof test_ram);
         pause_owner=1;CHECK(!checkpoint_lab_boundary(cpu,6));
         CHECK(checkpoint_lab_state==CHECKPOINT_LAB_ARMED && !checkpoint_pending.phase && !guest_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram));
         CHECK(psx_mod_read_byte(diagnostic+0xBE)==1);
         CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED);
         pause_owner=-1;p2.body[5]=7;CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase);
-        p2.body[5]=2;CHECK(checkpoint_lab_boundary(cpu,0));
-        before_ram[PLAY&0x1FFFFF]=8;
+        p2.body[5]=2;psx_mod_write_byte(PLAYER+0x5C,0);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase);
+        psx_mod_write_byte(PLAYER+0x5C,32);p2.body[0x5C]=0;
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase);
+        p2.body[0x5C]=32;psx_mod_write_byte(PLAYER+0x70,0);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase);
+        psx_mod_write_byte(PLAYER+0x70,8);p2.body[0x70]=0;
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_pending.phase);
+        p2.body[0x70]=8;CHECK(checkpoint_lab_boundary(cpu,0));
+        before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=0;
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof p2) && !guest_calls);
         CHECK(checkpoint_pending.phase==1 && checkpoint_pending.index==2 && checkpoint_pending.authority==CHECKPOINT_AGREED &&
             checkpoint_pending.nonce==CHECKPOINT_LAB_NONCE && checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED);
@@ -786,8 +803,9 @@ static void agreed_checkpoint_boundary(CPUState *cpu) {
     }
     /* Identical selected profile is a prerequisite, never inferred from
      * active netplay, a version string or the compile-time lab flag. */
-    for(unsigned wrong=0;wrong<7;++wrong) {
-        setup_agreed(cpu,1);memcpy(before_ram,test_ram,sizeof test_ram);
+    for(unsigned wrong=0;wrong<7;++wrong)for(unsigned loaded=0;loaded<=1;++loaded) {
+        setup_agreed(cpu,1);if(loaded)psx_mod_write_byte(PLAY+12,4);
+        memcpy(before_ram,test_ram,sizeof test_ram);
         if(wrong==0)test_lab_ready=0;if(wrong==1)test_lab_failed=1;
         if(wrong==2)test_lab_selected=0;if(wrong==3)test_lab_profile.profile[0]^=1;
         if(wrong==4)++test_lab_profile.revision;if(wrong==5)test_lab_profile.flags=0;
@@ -796,9 +814,12 @@ static void agreed_checkpoint_boundary(CPUState *cpu) {
             !memcmp(before_ram,test_ram,sizeof test_ram) && !checkpoint_test_taint);
         CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_REJECTED && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
     }
-    setup_agreed(cpu,1);psx_mod_write_byte(checkpoint_code[0].first,0);
-    CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint);
-    CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+    for(unsigned loaded=0;loaded<=1;++loaded) {
+        setup_agreed(cpu,1);if(loaded)psx_mod_write_byte(PLAY+12,4);
+        psx_mod_write_byte(checkpoint_code[0].first,0);
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase && !checkpoint_test_taint);
+        CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+    }
     setup_agreed(cpu,1);CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);test_lab_ready=0;
     checkpoint_native_entry(cpu,0x8001E1BCu);CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(PLAY+0x1D));
     CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
@@ -1671,7 +1692,7 @@ static void agreed_recycle_loaded_origin_rejections(CPUState *cpu) {
         "recycle_fallen_cp2","recycle_fallen_guest_cp2","secretlab2b_enemy_cp0","refight_wolfang_cp3","alternate_boss_cp1"};
     const uint8_t origins[][3]={{4,0,0},{4,0,1},{4,1,0},{4,1,2},{4,2,0},{3,0,0},{0,1,0},{0,0,1},{12,0,3},{1,0,0}};
     for(unsigned option=0;option<sizeof options/sizeof options[0];++option)for(unsigned i=0;i<sizeof origins/sizeof origins[0];++i) {
-        if((option==5 || option==6 || option==11 || option==12) && i==0)continue; /* Only aliases6/7/9/21 at Recycle4/0/0. */
+        if((option==0 || option==5 || option==6 || option==11 || option==12) && i==0)continue; /* Only aliases1/6/7/9/21 at Recycle4/0/0. */
         setup_agreed(cpu,1);test_lab_option=options[option];checkpoint_reset();
         psx_mod_write_byte(PLAY+12,origins[i][0]);psx_mod_write_byte(PLAY+13,origins[i][1]);
         psx_mod_write_byte(PLAY+0x1D,origins[i][2]);

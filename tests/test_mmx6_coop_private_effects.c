@@ -1570,6 +1570,103 @@ static void deferred_death_effect_retains_zero_source(void){
     CHECK(death_effect_allocate(&cpu,0x8002C530u) && death_effect[0].owner==1);
     death_origin_probe=death_packet_probe=0;
 }
+static void native_shared_boss_palette(void) {
+    const unsigned routes[]={0,1,2,255};
+    for(unsigned r=0;r<sizeof routes/sizeof *routes;++r) {
+        CPUState cpu;setup(&cpu);
+        uint32_t resident=psx_mod_read_word(SCRATCH+0x28),source=0x80160000u;
+        unsigned offset=routes[r]?(routes[r]==1?0x100:0x180):0;
+        uint8_t expected[256],baseline[256],private_before[256],actual[256];
+        memset(baseline,0x4C,sizeof baseline);memset(private_before,0x9D,sizeof private_before);
+        for(unsigned i=0;i<0x280;++i)psx_mod_write_byte(source+i,(uint8_t)(i*13u+r*29u));
+        capture(source+offset,expected,sizeof expected);
+        project(resident+0xB00,baseline,sizeof baseline);
+        project(active_palette+0xB00,private_before,sizeof private_before);
+        psx_mod_write_byte(resident+0xAFF,0xA7);psx_mod_write_byte(resident+0xC00,0xB8);
+        psx_mod_write_word(SCRATCH+0x30,source);psx_mod_write_byte(PLAY+0x43B,(uint8_t)routes[r]);
+        /* The real failure occurs when the guest admits this shared boss
+         * after the primary is fallen, with its private palette projected. */
+        life.status[0]=MMX6_COOP_FALLEN;psx_mod_write_byte(PLAYER+4,3);psx_mod_write_byte(PLAYER+0x5C,0);
+        enter_zero();zero_world=1;
+        cpu.gpr[4]=0x58;cpu.gpr[5]=source+offset;cpu.gpr[6]=8;cpu.gpr[31]=0x80052F4Cu;
+        CPUState before=cpu;
+        shared_palette_load(&cpu,0x8002B3D4u);
+        CHECK(!memcmp(&cpu,&before,sizeof cpu));
+        capture(resident+0xB00,actual,sizeof actual);CHECK(!memcmp(actual,expected,sizeof actual));
+        capture(active_palette+0xB00,actual,sizeof actual);CHECK(!memcmp(actual,private_before,sizeof actual));
+        CHECK(psx_mod_read_byte(resident+0xAFF)==0xA7 && psx_mod_read_byte(resident+0xC00)==0xB8);
+        CHECK(saved_palette_dirty==0x73);
+        /* Native2B3D4 still executes its original private memcpy/dirty
+         * contract; leave_zero must retain publication for the shared upload. */
+        project(active_palette+0xB00,expected,sizeof expected);psx_mod_write_byte(0x800C4560u,1);
+        zero_world=0;leave_zero_context(1);
+        CHECK(psx_mod_read_byte(0x800C4560u)==0x73 && !zero_projected && !state_track.count);
+        enter_zero();
+        for(unsigned bad=0;bad<5;++bad) {
+            project(resident+0xB00,baseline,sizeof baseline);saved_palette_dirty=0x72;
+            cpu=before;
+            if(bad==0)cpu.gpr[31]+=4;
+            if(bad==1)cpu.gpr[4]++;
+            if(bad==2)cpu.gpr[6]--;
+            if(bad==3)cpu.gpr[5]++;
+            if(bad==4){psx_mod_write_word(SCRATCH+0x30,0x801FFF80u);cpu.gpr[5]=0x801FFF80u+offset;}
+            shared_palette_load(&cpu,0x8002B3D4u);
+            capture(resident+0xB00,actual,sizeof actual);CHECK(!memcmp(actual,baseline,sizeof actual));
+            CHECK(saved_palette_dirty==0x72);
+        }
+        leave_zero();
+    }
+}
+static void native_shared_weather_palette(void) {
+    const uint32_t callers[]={0x800ED728u,0x800ED804u,0x800ED8D8u};
+    for(unsigned c=0;c<sizeof callers/sizeof *callers;++c) {
+        CPUState cpu;setup(&cpu);
+        uint32_t resident=psx_mod_read_word(SCRATCH+0x28);
+        uint8_t expected[32],baseline[32],private_before[32],actual[32];
+        memset(baseline,0x4C,sizeof baseline);memset(private_before,0x9D,sizeof private_before);
+        for(unsigned i=0;i<sizeof expected;++i)expected[i]=(uint8_t)(i*13u+c*29u);
+        project(0x800F6BC4u,expected,sizeof expected);
+        project(resident+0xC60,baseline,sizeof baseline);
+        project(active_palette+0xC60,private_before,sizeof private_before);
+        psx_mod_write_byte(resident+0xC5F,0xA7);psx_mod_write_byte(resident+0xC80,0xB8);
+        psx_mod_write_byte(PLAY+12,6);psx_mod_write_byte(PLAY+13,0);
+        life.status[0]=MMX6_COOP_FALLEN;psx_mod_write_byte(PLAYER+4,3);psx_mod_write_byte(PLAYER+0x5C,0);
+        enter_zero();zero_world=1;
+        cpu.gpr[4]=0x63;cpu.gpr[5]=0x800F6BC4u;cpu.gpr[6]=1;cpu.gpr[31]=callers[c];
+        CPUState before=cpu;
+        shared_palette_load(&cpu,0x8002B3D4u);
+        CHECK(!memcmp(&cpu,&before,sizeof cpu));
+        capture(resident+0xC60,actual,sizeof actual);CHECK(!memcmp(actual,expected,sizeof actual));
+        capture(active_palette+0xC60,actual,sizeof actual);CHECK(!memcmp(actual,private_before,sizeof actual));
+        CHECK(psx_mod_read_byte(resident+0xC5F)==0xA7 && psx_mod_read_byte(resident+0xC80)==0xB8);
+        CHECK(saved_palette_dirty==0x73);
+        /* The original loader still performs its private copy and marks
+         * dirty; restoring the resident world must retain publication. */
+        project(active_palette+0xC60,expected,sizeof expected);psx_mod_write_byte(0x800C4560u,1);
+        zero_world=0;leave_zero_context(1);
+        CHECK(psx_mod_read_word(SCRATCH+0x28)==resident && psx_mod_read_byte(0x800C4560u)==0x73);
+        CHECK(!zero_projected && !state_track.count);
+        capture(resident+0xC60,actual,sizeof actual);CHECK(!memcmp(actual,expected,sizeof actual));
+        capture(active_palette+0xC60,actual,sizeof actual);CHECK(!memcmp(actual,expected,sizeof actual));
+        enter_zero();
+        for(unsigned bad=0;bad<6;++bad) {
+            project(resident+0xC60,baseline,sizeof baseline);saved_palette_dirty=0x72;
+            psx_mod_write_byte(PLAY+12,6);psx_mod_write_byte(PLAY+13,0);cpu=before;
+            if(bad==0)psx_mod_write_byte(PLAY+12,5);
+            if(bad==1)psx_mod_write_byte(PLAY+13,1);
+            if(bad==2)cpu.gpr[31]+=4;
+            if(bad==3)cpu.gpr[4]++;
+            if(bad==4)cpu.gpr[5]++;
+            if(bad==5)cpu.gpr[6]++;
+            shared_palette_load(&cpu,0x8002B3D4u);
+            capture(resident+0xC60,actual,sizeof actual);CHECK(!memcmp(actual,baseline,sizeof actual));
+            capture(active_palette+0xC60,actual,sizeof actual);CHECK(!memcmp(actual,expected,sizeof actual));
+            CHECK(psx_mod_read_byte(resident+0xC5F)==0xA7 && psx_mod_read_byte(resident+0xC80)==0xB8);
+            CHECK(saved_palette_dirty==0x72);
+        }
+        leave_zero();
+    }
+}
 static void native_shared_dialogue_palette(void) {
     for(unsigned alternate=0;alternate<2;++alternate) {
         CPUState cpu;setup(&cpu);
@@ -1591,7 +1688,7 @@ static void native_shared_dialogue_palette(void) {
         cpu.gpr[4]=first;cpu.gpr[5]=0x8006E408u;cpu.gpr[6]=2;
         cpu.gpr[31]=alternate?0x800219B0u:0x8002199Cu;
         CPUState before=cpu;
-        dialogue_palette_load(&cpu,0x8002B3D4u);
+        shared_palette_load(&cpu,0x8002B3D4u);
         CHECK(!memcmp(&before,&cpu,sizeof cpu));
         capture(0x800E33D8u,actual,64);CHECK(!memcmp(actual,baseline,64));
         capture(resident+offset,actual,64);CHECK(!memcmp(actual,original,64));
@@ -1602,25 +1699,25 @@ static void native_shared_dialogue_palette(void) {
         cpu.gpr[4]=first+1;cpu.gpr[5]=0x8006E484u;cpu.gpr[6]=1;
         for(unsigned later=0;later<2;++later) {
             cpu.gpr[31]=later?0x800225D8u:(alternate?0x8002289Cu:0x80022884u);
-            dialogue_palette_load(&cpu,0x8002B3D4u);
+            shared_palette_load(&cpu,0x8002B3D4u);
             capture(resident+offset,actual,64);
             CHECK(!memcmp(actual,original,32) && !memcmp(actual+32,speaker,32));
         }
         project(resident+offset,original,64);cpu.gpr[31]=0x80020000u;
-        dialogue_palette_load(&cpu,0x8002B3D4u);
+        shared_palette_load(&cpu,0x8002B3D4u);
         capture(resident+offset,actual,64);CHECK(!memcmp(actual,original,64));
         cpu.gpr[31]=0x800225D8u;cpu.gpr[6]=2;
-        dialogue_palette_load(&cpu,0x8002B3D4u);
+        shared_palette_load(&cpu,0x8002B3D4u);
         capture(resident+offset,actual,64);CHECK(!memcmp(actual,original,64));
         cpu.gpr[4]=first;cpu.gpr[5]=0x800E33D8u;cpu.gpr[6]=2;
         cpu.gpr[31]=alternate?0x800221D4u:0x800221BCu;
-        dialogue_palette_load(&cpu,0x8002B3D4u);
+        shared_palette_load(&cpu,0x8002B3D4u);
         capture(resident+offset,actual,64);CHECK(!memcmp(actual,baseline,64));
         CHECK(psx_mod_read_byte(resident+offset-1)==0xA7 && psx_mod_read_byte(resident+offset+64)==0xB8);
         project(active_palette+offset,baseline,64);leave_zero();
         CHECK(psx_mod_read_byte(0x800C4560u)==0x73 && !zero_projected);
         cpu.gpr[5]=0x8006E408u;cpu.gpr[31]=alternate?0x800219B0u:0x8002199Cu;
-        dialogue_palette_load(&cpu,0x8002B3D4u);
+        shared_palette_load(&cpu,0x8002B3D4u);
         capture(resident+offset,actual,64);CHECK(!memcmp(actual,baseline,64));
     }
 }
@@ -3158,6 +3255,8 @@ int main(void){
     private_native_weapon_atlas_retains_zero_source();
     deferred_death_effect_retains_zero_source();clear_banks();
     native_X_armor_compressed_frame_and_survivor();clear_banks();
+    native_shared_boss_palette();
+    native_shared_weather_palette();
     native_shared_dialogue_palette();
     native_working_palette_class_and_load_events();
     native_working_palette_rectangle();

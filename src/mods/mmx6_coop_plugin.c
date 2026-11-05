@@ -478,10 +478,37 @@ static void leave_zero_context(int shared_world) {
 }
 static void leave_zero(void) { leave_zero_context(0); }
 
-static void dialogue_palette_load(CPUState *cpu,uint32_t address) {
+static void shared_palette_load(CPUState *cpu,uint32_t address) {
     if(address!=0x8002B3D4u || !ready || !enrolled || failed || !zero_projected ||
        psx_mod_read_word(SCRATCH+0x28)!=active_palette ||
        saved_resources[3]<0x80010000u || saved_resources[3]>0x801FC000u)return;
+    /* Original52ED0 selects NPC53/55/63 and loads eight shared boss rows
+     * through52F44. A guest-owned world still displays those rows from the
+     * resident bank. Keep the original copy into the private bank, and
+     * publish only this exact shared span for the native17C40 upload. */
+    uint32_t route=psx_mod_read_byte(PLAY+0x43Bu);
+    uint32_t boss_source=psx_mod_read_word(SCRATCH+0x30);
+    uint32_t boss_offset=route?(route==1?0x100u:0x180u):0;
+    if(cpu->gpr[31]==0x80052F4Cu && cpu->gpr[4]==0x58u && cpu->gpr[6]==8 &&
+       boss_source>=0x80010000u && boss_source<=0x801FFF00u-boss_offset &&
+       cpu->gpr[5]==boss_source+boss_offset) {
+        uint8_t colors[256];
+        capture(cpu->gpr[5],colors,sizeof colors);
+        project(saved_resources[3]+0xB00u,colors,sizeof colors);
+        saved_palette_dirty|=1u;
+        return;
+    }
+    /* Original Turtloid weather fades interpolate this shared row in
+     * ED69C/ED774/ED850 before the native resident palette upload. */
+    if(psx_mod_read_byte(PLAY+12)==6 && !psx_mod_read_byte(PLAY+13) &&
+       (cpu->gpr[31]==0x800ED728u || cpu->gpr[31]==0x800ED804u || cpu->gpr[31]==0x800ED8D8u) &&
+       cpu->gpr[4]==0x63u && cpu->gpr[5]==0x800F6BC4u && cpu->gpr[6]==1) {
+        uint8_t colors[32];
+        capture(cpu->gpr[5],colors,sizeof colors);
+        project(saved_resources[3]+0xC60u,colors,sizeof colors);
+        saved_palette_dirty|=1u;
+        return;
+    }
     unsigned alternate=psx_mod_read_half(0x80090D6Au)!=0;
     uint32_t first=alternate?0x5Eu:0x15u,slot=cpu->gpr[4],source=cpu->gpr[5];
     uint32_t count=cpu->gpr[6],caller=cpu->gpr[31];
@@ -3533,7 +3560,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80029D18,intro_guest_placement_scan);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800270D0,independent_background_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80026ECC,independent_background_end);
-    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002B3D4,dialogue_palette_load);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002B3D4,shared_palette_load);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003BD24,native_player_init);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8001E1BC,checkpoint_native_entry);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003D308,script_begin);

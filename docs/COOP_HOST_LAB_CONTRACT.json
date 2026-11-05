@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 94,
+  "revision": 95,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v111",
+    "title_compatibility": "mmx6-x-zero-delay-v112",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1138,6 +1138,31 @@
       "native_kind_zero": "The intro FA394 geometry actor is type0/sub3. Existing tracker records its valid RAM origin before boss recognition; kind0 is not an empty slot sentinel.",
       "preserved": "Tracker behavior, wire schema25, origin range/alignment, recognized-cookie, optional scaling and independent cooldown validation remain unchanged.",
       "regression": "Actual tracker producer reproduces COUNT line269/offset9915 rejection before fix; measure/write/validate/read must roundtrip its kind0 origin. Malformed origin, unrecognized cookies and disabled-scaling remainder remain rejected."
+    }
+  },
+  "title_changes_v112": {
+    "shared_boss_palette_publication": {
+      "scope": "Original NPC53/55/63 constructor52ED0..52F54 calls native2B3D4 at52F44, return52F4C, row58/count8. Guest-projected shared admission copies only this256-byte span to the resident working bank and retains its native dirty bit for17C40.",
+      "source": "Original route0 uses SCRATCH30, route1 adds100, later routes add180. Preserve original private copy, CPU registers, unrelated palette spans and existing dialogue behavior. No colors, boss state or result are synthesized.",
+      "source_bound_failure": "G:/Temp/Codex/psxrecomp/x6-parity/F203-c141-native-local-1/logs/F203-active-constructor-palette-source-binding.json",
+      "source_bound_failure_sha256": "a5d269ccbd43c85927b8318a099990d9a4259ecc4abaefeeec5e8f0dd31df3a2",
+      "state": "No new persistent state; existing dirty flag/frame restoration and snapshot25 remain.",
+      "qualification": "Source-prepared only. Existing private-effects regression plus actual fixed-candidate F203 LOCAL/NET source=resident=GPU and native controls/sync/cards/exits required; old C141 palette failure is retained."
+    },
+    "intro_CP2_loaded_origin": {
+      "scope": "Existing intro_cp2 option1 additionally admits genuine native cardLoad Recycle4/0/CP0, alongside existing allowed origin aliases; target remains original intro0/0/CP2 index2/table80073134/record80072150/hash9CF23C0A.",
+      "preserved": "Bothalive/idle/grounded, profile/source/chord/one-shot and unrelated-origin guards. Original mode8/9 pipeline; no boss/story/HP/attack/result writes.",
+      "qualification": "Existing checkpoint guard regression and actual inverse Zero/P1 + X/P2 D1000 finalhit/cleanup/nextscreen/ownership LOCAL+NET still required. No additional roster matrix."
+    },
+    "shared_weather_palette_publication": {
+      "scope": "Original Turtloid stage6/section0 weather palette calls only: return800ED728/800ED804/800ED8D8, row63/source800F6BC4/count1. Mirror original32-byte interpolated row into residentS28+C60 and retain dirtybit, leaving original privatecopy and CPU untouched.",
+      "source_BIN9_sha256": "bae0bf7b354ab7274d67d865c5f5b1f740322b5761e3b0df4f94077d6ade12ee",
+      "source_span": "800ED510..800ED92C",
+      "source_span_sha256": "8ff15fc79297f56c48af5309b4112822bee813bbaa01972fba975b8dc8a0c01a",
+      "existing_source_note": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-F120-F175-F194-weather-source-worker-v1.json",
+      "existing_source_note_sha256": "2209635dc380c9f07f424262bc7d5a0db436ed3deb8e6d8b8a26f0a286d83312",
+      "state": "No new state, hooks or snapshot schema. Same native30-update authoredfade and originalupload17C40.",
+      "qualification": "Existing post-FALLEN private-effects regression, then actual correctedcandidate F120 LOCAL/NET fade/source=resident=GPU+controls/sync/cards/exits stillrequired. No old F120 native outcome inferred from source."
     }
   }
 }

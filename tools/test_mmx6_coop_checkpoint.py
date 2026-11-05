@@ -58,8 +58,8 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],94)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v111')
+        self.assertEqual(record['revision'],95)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v112')
 
     def test_loaded_recycle_alternate_boss_uses_original_cp1(self):
         record=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text(encoding='utf8'))
