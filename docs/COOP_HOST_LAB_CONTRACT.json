@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 99,
+  "revision": 100,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v116",
+    "title_compatibility": "mmx6-x-zero-delay-v117",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1222,5 +1222,13 @@
     "preserved": "No assigned actor, pose, position, HP, contact, timer or result; no new option, no generalized stage scan, no native save modification and no draw-cadence simulation dependency. Portable non-modern path retains its prior behavior.",
     "state": "No new persistent fields; existing shared native state, temporary digest restoration frames and build-specific snapshot26 remain. Host profile99/title116 require a fresh exact-candidate agreement; execution identity unchanged.",
     "qualification": "Source-prepared only; same-candidate LOCAL and NET F46 actual guest-only admission/top contact/neutral carry/usable views plus synchronization/cards/owned exits still required. Frozen C166 failure remains retained."
+  },
+  "title_changes_v117": {
+    "scope": "Make the prepared original Amazon F6540 guest scan reachable through one native29D18 plugin entry registration, alongside the preserved Intro scan.",
+    "cause": "SDK mod_packages.cpp rejects a second function entry for the same plugin/address. C167 registered Intro first and Amazon second, silently discarding Amazon; its native LOCAL2 correctly retained no support admission.",
+    "change": "Register one guest_placement_scan dispatcher calling the two source-disjoint existing handlers. No guard widening, native setup/AI/result change or added state.",
+    "regression": "Existing checkpoint fixture exercises both source cases through the dispatcher; source preflight rejects duplicate literal plugin/address registrations, matching the SDK alias-key contract.",
+    "state": "Existing snapshot26 and execution identity unchanged; fresh host profile100/title117 and exact-candidate agreement required.",
+    "qualification": "Prepared only. Frozen C167 LOCAL2 failure remains retained; corrected observer must release Right before admission wait, then actual LOCAL and matching NET must qualify guest-only original admission/contact/carry."
   }
 }

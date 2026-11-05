@@ -2344,7 +2344,7 @@ static void guest_intro_geometry_admission(CPUState *cpu) {
         guest(cpu,0x80029D18u,0,0);
         uint8_t placements[0x210];capture(0x800FA214u,placements,list_bytes);
         uint32_t root=psx_mod_read_word(0x8007349Cu),sentinel=psx_mod_read_word(0x800FA39Cu);
-        intro_guest_placement_scan(cpu,0x80029D18u);
+        guest_placement_scan(cpu,0x80029D18u);
         CHECK(psx_mod_read_word(0x8007349Cu)==root && psx_mod_read_word(0x800FA39Cu)==sentinel);
         for(unsigned i=0;i<list_bytes;++i) {
             uint32_t at=0x800FA214u+i;
@@ -2395,7 +2395,7 @@ static void guest_amazon_support_admission(CPUState *cpu) {
     psx_mod_write_word(cpu->gpr[29]+0x10,0xAABBCCDDu);
     uint8_t original[0x54];capture(VIEW_CAMERA,original,sizeof original);
     amazon_scan_probe=1;amazon_scan_calls=amazon_visibility_calls=0;
-    amazon_guest_placement_scan(cpu,0x80029D18u);
+    guest_placement_scan(cpu,0x80029D18u);
     CHECK(amazon_scan_calls==1 && psx_mod_read_word(0x800734A4u)==0x800F6368u && psx_mod_read_word(0x800F6548u)==0x00000700u);
     CHECK(cpu->gpr[6]==0x11223344u && cpu->gpr[7]==0x55667788u && psx_mod_read_word(cpu->gpr[29]+0x10)==0xAABBCCDDu);
     uint8_t actual[0x54];capture(VIEW_CAMERA,actual,sizeof actual);CHECK(!memcmp(actual,original,sizeof actual));

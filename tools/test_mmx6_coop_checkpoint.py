@@ -4,6 +4,7 @@ import io
 import copy
 import json
 import os
+import re
 from pathlib import Path
 import struct
 import tempfile
@@ -51,6 +52,15 @@ def settled_entry(tick=221):
 
 
 class FrozenInventoryTests(unittest.TestCase):
+    def test_native_entry_registration_has_no_duplicate_plugin_address(self):
+        # Runtime mod_packages.cpp rejects the second callback for a plugin's
+        # native address. A discarded registration cannot qualify its behavior.
+        source=(ROOT/'src/mods/mmx6_coop_plugin.c').read_text()
+        entries=re.findall(r'psx_mod_register_function_entry_plugin\("([^"]+)",\s*(0x[0-9A-Fa-f]+)u?\s*,',source)
+        keys=[(plugin,int(address,16)&0x1fffffff)for plugin,address in entries]
+        self.assertTrue(keys)
+        self.assertEqual(len(keys),len(set(keys)))
+
     def test_loaded_recycle_origin_declares_only_existing_fixed_destination(self):
         record=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text(encoding='utf8'))
         change=record['title_changes_v35']
@@ -58,8 +68,8 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],99)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v116')
+        self.assertEqual(record['revision'],100)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v117')
 
     def test_fortress_cp3_retains_original_checkpoint_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
