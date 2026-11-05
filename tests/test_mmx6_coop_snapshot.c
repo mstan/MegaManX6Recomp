@@ -769,6 +769,38 @@ static void refight_return_snapshot(void) {
     CHECK(!refight_return_checkpoint);
     state_commit(&prior);free(empty);free(pending);free(bad);
 }
+static void native_type_zero_tracking_snapshot(void) {
+    HostState prior;state_capture(&prior);
+    unsigned old_enabled=boss_balance_enabled,old_independent=boss_balance_independent;
+    uint32_t actor=BOSS_BALANCE_POOL,old_target=psx_mod_read_word(PLAY+0x20);
+    uint8_t old_phase=psx_mod_read_byte(PLAY+0x24),old_actor[BOSS_BALANCE_STRIDE];
+    capture(actor,old_actor,sizeof old_actor);
+    boss_balance_enabled=boss_balance_independent=0;memset(boss_balance,0,sizeof boss_balance);
+    /* Actual F196 post-event record: native type0/sub3 geometry, not a boss.
+     * Exercise the real tracker producer rather than hand-authoring its state. */
+    psx_mod_write_byte(actor,65);psx_mod_write_byte(actor+1,0);
+    psx_mod_write_byte(actor+2,3);psx_mod_write_byte(actor+4,1);
+    psx_mod_write_word(actor+0x10,0x800FA394u);psx_mod_write_byte(actor+0x5C,1);
+    psx_mod_write_word(PLAY+0x20,0);psx_mod_write_byte(PLAY+0x24,0);
+    CHECK(!boss_balance_actor(actor));
+    CHECK(!boss_balance[0].kind && boss_balance[0].origin==0x800FA394u &&
+        !boss_balance[0].recognized);
+    uint32_t length=snapshot_bytes(),digest=state_digest();CHECK(length);
+    uint8_t *wire=malloc(length);CHECK(wire && snapshot_write(wire,length));
+    memset(boss_balance,0,sizeof boss_balance);CHECK(state_digest()!=digest);
+    CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+    CHECK(!boss_balance[0].kind && boss_balance[0].origin==0x800FA394u &&
+        !boss_balance[0].recognized && state_digest()==digest);
+    HostState bad;state_capture(&bad);bad.boss_balance[0].origin=0x800FA395u;
+    StateIO invalid={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
+    state_capture(&bad);bad.boss_balance[0].cookies[0]=1;
+    invalid=(StateIO){STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
+    state_capture(&bad);bad.boss_balance[0].remainder=1;
+    invalid=(StateIO){STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
+    boss_balance_enabled=old_enabled;boss_balance_independent=old_independent;
+    state_commit(&prior);project(actor,old_actor,sizeof old_actor);
+    psx_mod_write_word(PLAY+0x20,old_target);psx_mod_write_byte(PLAY+0x24,old_phase);free(wire);
+}
 static void default_boss_cookie_snapshot(void) {
     HostState prior;state_capture(&prior);unsigned old_enabled=boss_balance_enabled,old_independent=boss_balance_independent;
     boss_balance_enabled=boss_balance_independent=0;memset(boss_balance,0,sizeof boss_balance);
@@ -1056,7 +1088,7 @@ int main(void){
     CHECK(snapshot_resolve_texture(0x5001u) && snapshot_resolve_texture(0x5002u));
     CHECK(!snapshot_resolve_texture(0x5004u));
     pixel_edges();setup();native_armor_transient_then_snapshot();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_snail_guest_support_mask();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();default_boss_cookie_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
+    weapon_support_projection_and_reuse();native_snail_guest_support_mask();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();starting_hp_snapshot();shared_clear_snapshot();both_door_snapshot();paired_arrival_snapshot();refight_return_snapshot();native_type_zero_tracking_snapshot();default_boss_cookie_snapshot();boss_balance_snapshot();private_boss_balance_snapshot();
     private_subtank_policy();native_fatal_snapshot();hatch_stagger_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);

@@ -264,8 +264,9 @@ static void state_core(StateIO *io,HostState *s) {
            (!b->timer_offset && b->timer_half) ||
            ((!b->recognized || !boss_balance_independent) && (b->vulnerable_table || b->clocks[0] || b->clocks[1] || b->timer_offset || b->hit_owner || b->hit_melee)) ||
            (!b->recognized && (b->cookies[0] || b->cookies[1])))STATE_INVALID(io);
+        /* Native kind0 includes the intro geometry actor. The tracker records
+         * its origin before boss recognition; kind0 is not an empty slot. */
         if((b->origin && !state_actor(b->origin)) ||
-           (!b->kind && (b->origin || b->remainder || b->recognized)) ||
            (!boss_balance_enabled && b->remainder))STATE_INVALID(io);
     }
     FIELD(boss_balance_pending_actor,4,UINT32_MAX);
