@@ -7,10 +7,22 @@ typedef struct {
     const uint8_t *in;
     uint32_t len,pos,hash;
 } StateIO;
+/* Failure-only attribution for the next real snapshot capture. COUNT is not
+ * the per-frame digest path; preserve every successful byte and callback. */
+static void state_invalid(StateIO *s,unsigned line,const char *kind,
+                          int index,uint32_t value,uint32_t limit) {
+    if(s->ok && s->mode==STATE_COUNT) {
+        fprintf(stderr,"mmx6 snapshot COUNT invalid line=%u offset=%u kind=%s index=%d value=%u limit=%u\n",
+            line,s->pos,kind,index,value,limit);
+        fflush(stderr);
+    }
+    s->ok=0;
+}
+#define STATE_INVALID(s) state_invalid(s,__LINE__,"condition",-1,1,0)
 static void state_bytes(StateIO *s,void *data,uint32_t len) {
     if (!s->ok || len>STATE_MAX_BYTES-s->pos ||
         ((s->mode==STATE_WRITE || s->mode==STATE_READ) && (s->pos>s->len || len>s->len-s->pos))) {
-        s->ok=0;return;
+        state_invalid(s,__LINE__,"byte-span",-1,len,STATE_MAX_BYTES-s->pos);return;
     }
     if (s->mode==STATE_WRITE) memcpy(s->out+s->pos,data,len);
     else if (s->mode==STATE_READ) memcpy(data,s->in+s->pos,len);
@@ -20,17 +32,18 @@ static void state_bytes(StateIO *s,void *data,uint32_t len) {
     }
     s->pos+=len;
 }
-static uint32_t state_integer(StateIO *s,uint32_t value,unsigned width,uint32_t max) {
+static uint32_t state_integer_at(StateIO *s,uint32_t value,unsigned width,uint32_t max,unsigned line) {
     uint8_t bytes[4];put32(bytes,value);
     state_bytes(s,bytes,width);
     if (s->mode==STATE_READ && s->ok) {
         value=0;for(unsigned i=0;i<width;++i)value|=(uint32_t)bytes[i]<<(i*8);
     }
-    if (value>max)s->ok=0;
+    if (value>max)state_invalid(s,line,"integer-range",-1,value,max);
     return value;
 }
+#define state_integer(s,value,width,max) state_integer_at(s,value,width,max,__LINE__)
 static void state_fixed(StateIO *s,uint32_t expected) {
-    if (state_integer(s,expected,4,UINT32_MAX)!=expected)s->ok=0;
+    if (state_integer(s,expected,4,UINT32_MAX)!=expected)STATE_INVALID(s);
 }
 static void snapshot_assets_loaded(const Mmx6AssetView *views,unsigned count) {
     psx_sha256_ctx sha;psx_sha256_init(&sha);
@@ -149,7 +162,7 @@ static void state_core(StateIO *io,HostState *s) {
     FIELD(intro_camera_valid,1,1);
     state_bytes(io,s->intro_camera_requests,sizeof s->intro_camera_requests);
     if(!s->intro_camera_valid)for(unsigned i=0;i<sizeof s->intro_camera_requests;++i)
-        if(s->intro_camera_requests[i])io->ok=0;
+        if(s->intro_camera_requests[i])STATE_INVALID(io);
     FIELD(lifecycle.status[0],1,MMX6_COOP_FALLEN);FIELD(lifecycle.status[1],1,MMX6_COOP_FALLEN);
     FIELD(lifecycle.select_frames,4,90);FIELD(lifecycle.select_armed,1,1);FIELD(lifecycle.select_previous,1,1);
     FIELD(lifecycle.wipe,1,2);FIELD(lifecycle.rejoin_pending,1,1);
@@ -160,16 +173,16 @@ static void state_core(StateIO *io,HostState *s) {
     FIELD(start,1,1);FIELD(menu_loaded,1,1);state_bytes(io,s->portrait,sizeof s->portrait);
     FIELD(enrolled,1,1);FIELD(failed,1,io->mode==STATE_HASH?1:0);
     state_bytes(io,s->subtanks,sizeof s->subtanks);FIELD(subtank_seeded,1,1);
-    FIELD(subtank_found,1,0x30);if(s->subtank_found&~0x30u)io->ok=0;
+    FIELD(subtank_found,1,0x30);if(s->subtank_found&~0x30u)STATE_INVALID(io);
     if((!separate_subtanks && s->subtank_seeded) ||
-       (!s->subtank_seeded && (s->subtanks[0] || s->subtanks[1] || s->subtank_found)))io->ok=0;
+       (!s->subtank_seeded && (s->subtanks[0] || s->subtanks[1] || s->subtank_found)))STATE_INVALID(io);
     state_bytes(io,s->audio_priorities,sizeof s->audio_priorities);
     for(unsigned i=0;i<128;++i) {
         uint32_t actor=state_integer(io,s->pickups[i].actor,4,UINT32_MAX);
         uint32_t seat=state_integer(io,s->pickups[i].actor?s->pickups[i].seat:0,1,1);
-        if(!state_actor(actor) || (!actor && seat))io->ok=0;
+        if(!state_actor(actor) || (!actor && seat))STATE_INVALID(io);
         s->pickups[i].actor=actor;s->pickups[i].seat=(uint8_t)seat;
-        if(actor)for(unsigned j=0;j<i;++j)if(s->pickups[j].actor==actor)io->ok=0;
+        if(actor)for(unsigned j=0;j<i;++j)if(s->pickups[j].actor==actor)STATE_INVALID(io);
     }
     for(unsigned i=0;i<SOLID_CONTACTS;++i) {
         FIELD(contacts[i].sides,1,255);FIELD(contacts[i].carried,1,255);
@@ -182,52 +195,52 @@ static void state_core(StateIO *io,HostState *s) {
         o->y=state_integer(io,valid?o->y:0,4,UINT32_MAX);
         o->assembly=state_integer(io,valid?o->assembly:0,4,UINT32_MAX);
         o->layer=(uint8_t)state_integer(io,valid?o->layer:0,1,255);
-        if(valid && (!o->owner || !state_assembly(o->assembly)))io->ok=0;
+        if(valid && (!o->owner || !state_assembly(o->assembly)))STATE_INVALID(io);
     }
-    if(!s->owner && s->scene_phase)io->ok=0;
+    if(!s->owner && s->scene_phase)STATE_INVALID(io);
     if(s->arrival && (!s->enrolled || s->join || s->owner || s->pause>=0 || s->menu_loaded ||
         s->lifecycle.status[0]!=MMX6_COOP_ALIVE ||
-        s->lifecycle.status[1]!=MMX6_COOP_JOINING))io->ok=0;
+        s->lifecycle.status[1]!=MMX6_COOP_JOINING))STATE_INVALID(io);
     FIELD(door_actor,4,UINT32_MAX);FIELD(door_origin,4,UINT32_MAX);FIELD(door_members,1,3);
     for(unsigned seat=0;seat<2;++seat) {
         for(unsigned side=0;side<2;++side)
             s->door_extents[seat][side]=(int16_t)((int)state_integer(io,(uint32_t)(s->door_extents[seat][side]+383),2,766)-383);
         if(s->door_members&(1u<<seat)) {
-            if(s->door_extents[seat][0]>=s->door_extents[seat][1])io->ok=0;
-        } else if(s->door_extents[seat][0] || s->door_extents[seat][1])io->ok=0;
+            if(s->door_extents[seat][0]>=s->door_extents[seat][1])STATE_INVALID(io);
+        } else if(s->door_extents[seat][0] || s->door_extents[seat][1])STATE_INVALID(io);
     }
     FIELD(refight_return_checkpoint,1,17);
-    if(s->refight_return_checkpoint && s->refight_return_checkpoint<10)io->ok=0;
+    if(s->refight_return_checkpoint && s->refight_return_checkpoint<10)STATE_INVALID(io);
     if(!s->door_actor) {
-        if(s->door_members || s->door_origin)io->ok=0;
+        if(s->door_members || s->door_origin)STATE_INVALID(io);
     } else if(!both_door_slot(s->door_actor) || !s->door_origin ||
               !state_actor(s->door_origin) || (s->door_origin&3) ||
               !both_doors || !s->door_members || !s->owner ||
-              s->scene_phase || !s->enrolled)io->ok=0;
+              s->scene_phase || !s->enrolled)STATE_INVALID(io);
     FIELD(clear_phase,1,CLEAR_VICTORY);FIELD(clear_members,1,3);FIELD(clear_started,1,3);
-    if((s->door_actor && s->clear_phase) || (s->arrival && (s->door_actor || s->clear_phase)))io->ok=0;
-    if(s->clear_phase==CLEAR_ADMITTED && io->mode!=STATE_HASH)io->ok=0;
+    if((s->door_actor && s->clear_phase) || (s->arrival && (s->door_actor || s->clear_phase)))STATE_INVALID(io);
+    if(s->clear_phase==CLEAR_ADMITTED && io->mode!=STATE_HASH)STATE_INVALID(io);
     if(!s->clear_phase) {
-        if(s->clear_members || s->clear_started)io->ok=0;
+        if(s->clear_members || s->clear_started)STATE_INVALID(io);
     } else if(!s->enrolled || s->owner || s->scene_phase || s->clear_members!=3 ||
               (s->clear_started&~s->clear_members) ||
-              (s->clear_phase<CLEAR_VICTORY && s->clear_started))io->ok=0;
+              (s->clear_phase<CLEAR_VICTORY && s->clear_started))STATE_INVALID(io);
     if(s->lifecycle.rejoin_pending &&
         ((s->lifecycle.status[1]!=MMX6_COOP_ABSENT && s->lifecycle.status[1]!=MMX6_COOP_LEAVING) ||
-         !mmx6_coop_living(&s->lifecycle,0) || s->lifecycle.wipe))io->ok=0;
+         !mmx6_coop_living(&s->lifecycle,0) || s->lifecycle.wipe))STATE_INVALID(io);
     FIELD(lab_state,1,CHECKPOINT_LAB_CONSUMED);FIELD(lab_previous,1,1);FIELD(starting_hp_applied,1,1);
-    if(s->starting_hp_applied && (!checkpoint_starting_hp_mask() || s->lab_state!=CHECKPOINT_LAB_CONSUMED))io->ok=0;
-    if(!checkpoint_lab_option && (s->lab_state || s->lab_previous))io->ok=0;
+    if(s->starting_hp_applied && (!checkpoint_starting_hp_mask() || s->lab_state!=CHECKPOINT_LAB_CONSUMED))STATE_INVALID(io);
+    if(!checkpoint_lab_option && (s->lab_state || s->lab_previous))STATE_INVALID(io);
     FIELD(earned_applied,1,1);FIELD(earned_reason,1,CHECKPOINT_PLUGIN_FAILED);
     if((!checkpoint_earned_weapons_option && (s->earned_applied || s->earned_reason)) ||
-       (s->earned_applied && (s->lab_state!=CHECKPOINT_LAB_CONSUMED || s->earned_reason)))io->ok=0;
+       (s->earned_applied && (s->lab_state!=CHECKPOINT_LAB_CONSUMED || s->earned_reason)))STATE_INVALID(io);
     FIELD(hatch_stagger_state,1,1);
     if(s->hatch_stagger_state && (!checkpoint_hatch_stagger_option || checkpoint_lab_option!=4 ||
-       s->lab_state!=CHECKPOINT_LAB_CONSUMED))io->ok=0;
+       s->lab_state!=CHECKPOINT_LAB_CONSUMED))STATE_INVALID(io);
     FIELD(fatal_state,1,CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL);
     if(s->fatal_state>=CHECKPOINT_FATAL_SCENE_LOCKED &&
-       checkpoint_fatal_option!=3 && checkpoint_fatal_option!=4)io->ok=0;
-    if(s->fatal_state && (!checkpoint_fatal_option || s->lab_state!=CHECKPOINT_LAB_CONSUMED))io->ok=0;
+       checkpoint_fatal_option!=3 && checkpoint_fatal_option!=4)STATE_INVALID(io);
+    if(s->fatal_state && (!checkpoint_fatal_option || s->lab_state!=CHECKPOINT_LAB_CONSUMED))STATE_INVALID(io);
     state_bytes(io,s->giga_backup,sizeof s->giga_backup);
     if(private_actor.character==MMX6_COOP_CHARACTER_X)state_bytes(io,s->x_overlay,sizeof s->x_overlay);
     for(unsigned i=0;i<96;++i)s->shared_owners[i]=(uint8_t)state_integer(io,s->shared_owners[i],1,2);
@@ -250,18 +263,18 @@ static void state_core(StateIO *io,HostState *s) {
            (b->timer_offset && (b->timer_offset<0x60 || b->timer_offset+(b->timer_half?2u:1u)>BOSS_BALANCE_STRIDE)) ||
            (!b->timer_offset && b->timer_half) ||
            ((!b->recognized || !boss_balance_independent) && (b->vulnerable_table || b->clocks[0] || b->clocks[1] || b->timer_offset || b->hit_owner || b->hit_melee)) ||
-           (!b->recognized && (b->cookies[0] || b->cookies[1])))io->ok=0;
+           (!b->recognized && (b->cookies[0] || b->cookies[1])))STATE_INVALID(io);
         if((b->origin && !state_actor(b->origin)) ||
            (!b->kind && (b->origin || b->remainder || b->recognized)) ||
-           (!boss_balance_enabled && b->remainder))io->ok=0;
+           (!boss_balance_enabled && b->remainder))STATE_INVALID(io);
     }
     FIELD(boss_balance_pending_actor,4,UINT32_MAX);
     if(s->boss_balance_pending_actor &&
        (!boss_balance_enabled || boss_balance_slot(s->boss_balance_pending_actor)<0 ||
-        !s->boss_balance[boss_balance_slot(s->boss_balance_pending_actor)].recognized))io->ok=0;
+        !s->boss_balance[boss_balance_slot(s->boss_balance_pending_actor)].recognized))STATE_INVALID(io);
     if(io->mode!=STATE_HASH) {
         FIELD(frame_count,4,UINT32_MAX);FIELD(hud_fade,1,128);FIELD(world_packets,4,UINT32_MAX);FIELD(hud_seat,1,1);
-        if(s->world_packets && (s->world_packets<packets || s->world_packets>packets+FRAME_ARENA*2))io->ok=0;
+        if(s->world_packets && (s->world_packets<packets || s->world_packets>packets+FRAME_ARENA*2))STATE_INVALID(io);
     }
 #undef FIELD
 }
@@ -346,7 +359,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    if(checkpoint_lab_option>21)s->ok=0; /* Immutable catalog enum; no new serialized field. */
+    if(checkpoint_lab_option>21)STATE_INVALID(s); /* Immutable catalog enum; no new serialized field. */
     state_fixed(s,0x53503658u);state_fixed(s,25);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
     state_fixed(s,separate_subtanks);state_fixed(s,partner_x_armor);state_fixed(s,private_actor.form);
@@ -356,7 +369,7 @@ static void snapshot_resources(StateIO *s) {
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);
     state_fixed(s,(uint32_t)compressed_size);
     uint8_t identity[32];memcpy(identity,snapshot_asset_sha,32);state_bytes(s,identity,32);
-    if(s->mode==STATE_READ && memcmp(identity,snapshot_asset_sha,32))s->ok=0;
+    if(s->mode==STATE_READ && memcmp(identity,snapshot_asset_sha,32))STATE_INVALID(s);
 }
 static void snapshot_caches(StateIO *s,PreparedState *prepared) {
     uint32_t count=state_integer(s,bank_count,4,4096);
@@ -369,14 +382,17 @@ static void snapshot_caches(StateIO *s,PreparedState *prepared) {
         b.character=(uint8_t)state_integer(s,b.character,1,2);
         state_bytes(s,b.colors,32);b.pixel_bytes=state_integer(s,b.pixel_bytes,4,131073);
         uint32_t pixels=b.tile==UINT16_MAX?65536u:256u;
-        if(b.id!=0x6000u+i || !b.pixel_bytes || b.pixel_bytes>1+pixels*2)s->ok=0;
+        if(b.id!=0x6000u+i || !b.pixel_bytes || b.pixel_bytes>1+pixels*2)
+            state_invalid(s,__LINE__,"sprite-record",(int)i,b.pixel_bytes,1+pixels*2);
         if(s->mode==STATE_READ) {
             if(!s->ok || s->pos>s->len || b.pixel_bytes>s->len-s->pos ||
-                !mmx6_pixels_decode(s->in+s->pos,b.pixel_bytes,pixels,NULL)) {s->ok=0;break;}
+                !mmx6_pixels_decode(s->in+s->pos,b.pixel_bytes,pixels,NULL)) {STATE_INVALID(s);break;}
             b.pixels=malloc(b.pixel_bytes);
-            if(!b.pixels) {s->ok=0;break;}
+            if(!b.pixels) {STATE_INVALID(s);break;}
             prepared->sprites[i]=b;
-        } else if(!mmx6_pixels_decode(b.pixels,b.pixel_bytes,pixels,NULL)) {s->ok=0;break;}
+        } else if(!mmx6_pixels_decode(b.pixels,b.pixel_bytes,pixels,NULL)) {
+            state_invalid(s,__LINE__,"sprite-pixels",(int)i,b.pixel_bytes,pixels);break;
+        }
         state_bytes(s,b.pixels,b.pixel_bytes);
     }
     count=state_integer(s,ui_bank_count,4,4096);
@@ -386,7 +402,8 @@ static void snapshot_caches(StateIO *s,PreparedState *prepared) {
         b.page=(uint16_t)state_integer(s,b.page,2,65535);b.clut=(uint16_t)state_integer(s,b.clut,2,32767);
         b.uv=(uint16_t)state_integer(s,b.uv,2,65535);b.id=(uint16_t)state_integer(s,b.id,2,65535);
         for(unsigned j=0;j<16;++j)b.colors[j]=(uint16_t)state_integer(s,b.colors[j],2,65535);
-        if(b.id!=0x7000u+i || (b.page&0x180u))s->ok=0;
+        if(b.id!=0x7000u+i || (b.page&0x180u))
+            state_invalid(s,__LINE__,"ui-record",(int)i,b.page,b.id);
         if(prepared)prepared->ui[i]=b;
     }
 }
@@ -448,3 +465,6 @@ static void snapshot_resources_restored(void) {
     if(!psx_mod_forget_texture_bank_range(0x6000u,8192))failed=1;
 }
 static const PSXModSnapshotProvider snapshot_provider={1,snapshot_bytes,snapshot_write,snapshot_validate,snapshot_read,snapshot_ready};
+
+#undef state_integer
+#undef STATE_INVALID
