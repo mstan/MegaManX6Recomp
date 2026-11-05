@@ -114,6 +114,8 @@ static unsigned join_phase;
 static unsigned arrival_pair;
 static int32_t join_y;
 static int player_call, stage_call, zero_world, world_render;
+/* Original20CC0 terrain follows the one shared actor pass, not player input. */
+static uint8_t private_terrain_pending;
 static int pause_owner = -1, p2_start_previous;
 static uint32_t world_packets;
 static uint32_t hud_packets;
@@ -2264,6 +2266,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
      * an ordinary door. An ordinary native beam may enroll both arrivals. */
     enrolled=0;
     arrival_pair=0;
+    private_terrain_pending=0;
     scene_owner=scene_phase=0;
     both_door_reset();
     shared_clear_reset();
@@ -2279,6 +2282,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     if (inside || failed) return;
     /* Only the normal gameplay driver's post-player boundary. */
     if (cpu->gpr[31]!=0x80020C70u) return;
+    private_terrain_pending=0;
     if (scene_owner || clear_phase) {
         (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_SCENE)&1,0,0);
         if (!both_door_traversal_active()) return;
@@ -2345,7 +2349,10 @@ static void controller(CPUState *cpu, uint32_t address) {
         guest(cpu,0x8003CD44,0,0);
         guest(cpu,0x80034DCC,0,0);
         guest(cpu,0x8002012C,0,0); /* This player's attack pool, never enemies/world. */
-        guest(cpu,0x8002F288,PLAYER,0); /* Native terrain/platform contact. */
+        /* Native350FC just cleared this body's support mask. Snail and the
+         * other shared solids must author the current mask before2F288 can
+         * decide whether to snap down onto terrain. Original20CC0 runs last. */
+        private_terrain_pending=1;
         /* Original 80020C40 orders these fixed actor-owned pools after
          * contact. They read the resident PLAYER and trail parent links;
          * keep both calls inside the one private projection. The native
@@ -2364,6 +2371,36 @@ static void controller(CPUState *cpu, uint32_t address) {
         STATE_POP(restore_raw);
     }
     inside=0;
+}
+
+/* Original20C40: player/owned attacks, shared actors, terrain20CC0, camera.
+ * 2927C already has an emitted entry hook. Only its canonical20CD0 caller is
+ * this deterministic world boundary; private followers/render calls cannot
+ * consume the pending pass. A survivor world already runs native terrain. */
+static void private_terrain_after_world(CPUState *cpu,uint32_t address) {
+    if(address!=0x8002927Cu || cpu->gpr[31]!=0x80020CD0u || inside ||
+       zero_world || zero_projected || private_draw || view_call ||
+       psx_mod_local_view_scope() || !private_terrain_pending)return;
+    private_terrain_pending=0;
+    if(!ready || !enrolled || failed || scene_owner || clear_phase ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       life.status[1]==MMX6_COOP_ABSENT || life.status[1]==MMX6_COOP_FALLEN ||
+       !p2.body[0])return;
+    uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);
+    STATE_BYTES(restore_terrain_body,84,body,sizeof body);
+    inside=1;
+    /* 2F288 and its terrain helpers consume the body and shared collision
+     * bank only. Do not swap overlay, attacks, flags, camera or world state. */
+    project(PLAYER,p2.body,sizeof p2.body);
+    guest(cpu,0x8002F288u,PLAYER,0);
+    capture(PLAYER,p2.body,sizeof p2.body);
+    project(PLAYER,body,sizeof body);
+    inside=0;STATE_POP(restore_terrain_body);
+}
+
+static void private_terrain_session_reset(void) {
+    private_terrain_pending=0;
+    mmx6_adaptive_background_reset();
 }
 
 static uint16_t retain_sprite_bank(uint32_t source,uint16_t tile,const uint8_t colors[32],
@@ -3414,6 +3451,7 @@ static void activate(void) {
     frame_count=0; previous_input=p2_edges=0;
     mmx6_coop_lifecycle_init(&life); join_phase=arrival_pair=0;join_y=scene_y=0;
     player_call=stage_call=zero_world=world_render=0;
+    private_terrain_pending=0;
     pause_owner=-1; p2_start_previous=0;
     render_x_death=effect_call=shared_fx_call=shared_fx_allocate_call=0; memset(death_effect,0,sizeof death_effect);
     memset(shared_effect_owners,0,sizeof shared_effect_owners);
@@ -3513,8 +3551,12 @@ static void activate(void) {
     independent_activate();
     fprintf(stdout,"mmx6 co-op: development prototype active (OpenGL rendering required)\n");
 }
+static void world_camera_begin(CPUState *cpu,uint32_t address) {
+    private_terrain_after_world(cpu,address);
+    independent_camera_begin(cpu,address);
+}
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
-    (void)psx_mod_register_session_reset_plugin("mmx6.local-coop.prototype",mmx6_adaptive_background_reset);
+    (void)psx_mod_register_session_reset_plugin("mmx6.local-coop.prototype",private_terrain_session_reset);
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
         .compatibility_id = MMX6_HOST_LAB_TITLE_COMPATIBILITY,
@@ -3556,7 +3598,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);
-    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002927C,independent_camera_begin);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002927C,world_camera_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80029D18,intro_guest_placement_scan);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800270D0,independent_background_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80026ECC,independent_background_end);

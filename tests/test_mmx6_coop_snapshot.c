@@ -16,6 +16,9 @@ static int allocation_fail,allocation_calls,local_scope,texture_support=1;
 static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
 static int solid_dispatch,allocator_dispatch;
+static unsigned terrain_dispatch,terrain_moves,terrain_calls,terrain_solids;
+static unsigned terrain_resets;
+void mmx6_adaptive_background_reset(void){++terrain_resets;}
 static unsigned snail_dispatch,snail_calls,snail_new_sides,snail_seen_masks[2];
 static int mounted_return_dispatch;
 static unsigned mounted_return_constructors;
@@ -66,6 +69,7 @@ void psx_mod_tag_world_primitive(uint32_t packet,int world){
 }
 void psx_session_input_taint_add(uint32_t flags){(void)flags;CHECK(0);}
 uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
+    if(terrain_dispatch) {CHECK(consumer==MMX6_INPUT_CONTROLLER_PLAYER && !contaminated);return 0;}
     CHECK(consumer==MMX6_INPUT_INTERACTION && buttons==1 && !contaminated);return buttons;
 }
 int psx_mod_texture_banks_supported(void){return texture_support;}
@@ -141,6 +145,28 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
         CHECK((target==0x80029598u || target==0x80029658u) &&
               psx_mod_read_word(PLAYER+axis)==expected_camera_axis);
         cpu->gpr[2]=77;return;
+    }
+    if(terrain_dispatch) {
+        /* External ORIGINAL contracts only. The real controller, Snail
+         * wrapper and late callback below determine their transaction order.
+         * 350F8/350FC clears support; 2F328..334 skips downward terrain when
+         * current72 has top; 32248..70 marks an already buried hero as0F. */
+        if(target==0x80034DCCu) {
+            CHECK(psx_mod_read_byte(PLAYER+2)==1);++terrain_moves;
+            psx_mod_write_byte(PLAYER+0x71,0);psx_mod_write_byte(PLAYER+0x72,0);
+        } else if(target==0x80031DA8u) {
+            ++terrain_solids;
+            unsigned buried=psx_mod_read_word(PLAYER+12)>360u<<16;
+            psx_mod_write_byte(PLAYER+0x71,(uint8_t)(buried?15:8));
+            psx_mod_write_byte(cpu->gpr[4]+0x72,(uint8_t)(buried?0:8));
+            psx_mod_write_byte(cpu->gpr[4]+0x76,1);
+        } else if(target==0x8002F288u) {
+            CHECK(psx_mod_read_byte(PLAYER+2)==1);++terrain_calls;
+            if(!(psx_mod_read_byte(PLAYER+0x72)&8u))
+                psx_mod_write_word(PLAYER+12,373u<<16); /* Original step-down outcome. */
+        } else CHECK(target==0x8003CD44u || target==0x8002012Cu ||
+                     target==0x80020D74u || target==0x80020DC8u);
+        cpu->gpr[2]=0;return;
     }
     if(snail_dispatch){
         uint32_t actor=cpu->gpr[4];CHECK(target==0x80031DA8u && actor==0x800C1220u);
@@ -433,6 +459,55 @@ static void native_snail_guest_support_mask(void) {
         CHECK(zero_solid_contacts[0].sides==snail_new_sides && zero_solid_contacts[0].carried==1);
         CHECK(cpu.gpr[2]==42 && !solid_call && !inside && !state_track.count && !state_track.error);
     }
+    /* Real controller -> source-qualified Snail wrapper -> post-world
+     * callback. Before this fix the real controller calls terrain with72=0
+     * before the solid producer and the modeled native snap buries the guest. */
+    HostState old_host;state_capture(&old_host);
+    unsigned old_views=independent_views,old_stage=stage_call;
+    int old_ready=ready,old_inside=inside,old_menu=zero_menu_loaded;
+    uint8_t old_input[6];capture(0x800C456Cu,old_input,sizeof old_input);
+    for(unsigned i=0;i<6;++i)psx_mod_write_word(addresses[i],words[i]);
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+    psx_mod_write_byte(PLAY+12,1);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAY+0x0F,0);psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);
+    memset(&p2,0,sizeof p2);p2.body[0]=p2.body[3]=p2.body[4]=1;
+    p2.body[2]=1;p2.body[5]=2;p2.body[0x5C]=32;p2.body[0x72]=8;
+    put32(p2.body+8,495u<<16);put32(p2.body+12,346u<<16);
+    memset(memory(PLAYER),0,sizeof p2.body);psx_mod_write_byte(PLAYER,1);
+    psx_mod_write_byte(PLAYER+3,1);psx_mod_write_byte(PLAYER+4,1);
+    psx_mod_write_byte(PLAYER+5,2);psx_mod_write_byte(PLAYER+0x5C,32);
+    psx_mod_write_byte(PLAYER+0x70,8);psx_mod_write_byte(PLAYER+0x72,8);
+    psx_mod_write_word(PLAYER+8,497u<<16);psx_mod_write_word(PLAYER+12,347u<<16);
+    mmx6_coop_lifecycle_init(&life);scene_owner=scene_phase=clear_phase=arrival_pair=0;
+    ready=enrolled=1;failed=inside=zero_menu_loaded=0;independent_views=1;stage_call=1;
+    zero_solid_contacts[0]=(SolidContact){8,1};private_terrain_pending=0;
+    terrain_dispatch=1;terrain_moves=terrain_calls=terrain_solids=0;
+    cpu.gpr[31]=0x80020C70u;controller(&cpu,0x8002012Cu);
+    CHECK(terrain_moves==1 && !terrain_calls && private_terrain_pending==1);
+    CHECK(!p2.body[0x72] && le32(p2.body+12)==346u<<16);
+    cpu.gpr[4]=cpu.gpr[18]=0x800C1220u;cpu.gpr[19]=PLAYER;cpu.gpr[31]=0x800EC0B8u;
+    CHECK(solid_player_collision(&cpu,0x80031DA8u)==1 && terrain_solids==2);
+    CHECK(p2.body[0x72]==8 && p2.body[0x71]==8);
+    uint8_t primary[sizeof p2.body];capture(PLAYER,primary,sizeof primary);
+    cpu.gpr[31]=0x80020CD0u;private_terrain_after_world(&cpu,0x8002927Cu);
+    CHECK(terrain_calls==1 && !private_terrain_pending && le32(p2.body+12)==346u<<16);
+    CHECK(!memcmp(primary,memory(PLAYER),sizeof primary) && p2.body[0x5C]==32);
+    private_terrain_after_world(&cpu,0x8002927Cu);CHECK(terrain_calls==1);
+    private_terrain_pending=1;
+    cpu.gpr[31]=0x80012128u;private_terrain_after_world(&cpu,0x8002927Cu);
+    CHECK(private_terrain_pending==1 && terrain_calls==1); /* Private follower. */
+    cpu.gpr[31]=0x80020CD0u;private_draw=1;private_terrain_after_world(&cpu,0x8002927Cu);
+    private_draw=0;zero_world=1;private_terrain_after_world(&cpu,0x8002927Cu);zero_world=0;
+    CHECK(private_terrain_pending==1 && terrain_calls==1);
+    psx_mod_write_byte(PLAY+1,2);private_terrain_after_world(&cpu,0x8002927Cu);
+    CHECK(!private_terrain_pending && terrain_calls==1); /* No stale paused pass. */
+    stage_call=0;private_terrain_pending=1;native_player_init(&cpu,0x8003BD24u);
+    CHECK(!private_terrain_pending); /* Actual fresh checkpoint initialization. */
+    private_terrain_pending=1;unsigned prior_resets=terrain_resets;
+    private_terrain_session_reset();CHECK(!private_terrain_pending && terrain_resets==prior_resets+1);
+    terrain_dispatch=0;state_commit(&old_host);stage_call=old_stage;ready=old_ready;
+    inside=old_inside;zero_menu_loaded=old_menu;independent_views=old_views;
+    project(0x800C456Cu,old_input,sizeof old_input);
     for(unsigned i=0;i<6;++i)psx_mod_write_word(addresses[i],old_words[i]);
     project(PLAYER,old_player,sizeof old_player);project(0x800C1220u,old_actor,sizeof old_actor);
     project(PLAY,old_play,sizeof old_play);project(0x800F6540u,old_origin,sizeof old_origin);
@@ -486,6 +561,7 @@ static void native_health_freeze_camera(void){
     CHECK(!state_track.count && snapshot_ready());
 }
 static void roundtrip_and_malformed(void){
+    private_terrain_pending=1;
     intro_camera_valid=1;for(unsigned i=0;i<sizeof intro_camera_requests;++i)intro_camera_requests[i]=(uint8_t)(i+17);
     zero_solid_contacts[111]=(SolidContact){13,255};
     uint8_t expected_giga[ZERO_GIGA_BACKUP_BYTES];
@@ -494,6 +570,9 @@ static void roundtrip_and_malformed(void){
     for(unsigned i=0;i<96;++i)shared_effect_owners[i]=expected_owners[i]=(uint8_t)(i%3);
     uint32_t len=snapshot_bytes();CHECK(len && len<STATE_MAX_BYTES);
     uint8_t *wire=malloc(len+1),*bad=malloc(len+1);CHECK(wire && bad && snapshot_write(wire,len));
+    StateIO pending_count={STATE_COUNT,1,NULL,NULL,0,0,2166136261u};snapshot_resources(&pending_count);
+    unsigned pending_at=pending_count.pos+sizeof p2.body+sizeof p2.shots+sizeof p2.trails+sizeof p2.effects;
+    CHECK(wire[pending_at]==1);memcpy(bad,wire,len);bad[pending_at]=2;reject_unchanged(bad,len);
     both_doors^=1;reject_unchanged(wire,len);both_doors^=1; /* Committed gameplay policy is fixed. */
     /* Locate the unique typed pending origin, then reject foreign owners
      * and a pending origin with no owner before committing any host state. */
@@ -528,11 +607,12 @@ static void roundtrip_and_malformed(void){
     memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
     memset(shared_effect_owners,0,sizeof shared_effect_owners);
+    private_terrain_pending=0;
     intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
     memset(death_effect,0,sizeof death_effect);
     int allocations=allocation_calls;allocation_fail=1;snapshot_read(wire,len);allocation_fail=0;
     CHECK(allocation_calls==allocations && state_digest()==original && p2.body[0x5C]==23);
-    CHECK(intro_camera_valid);for(unsigned i=0;i<sizeof intro_camera_requests;++i)CHECK(intro_camera_requests[i]==i+17);
+    CHECK(private_terrain_pending==1 && intro_camera_valid);for(unsigned i=0;i<sizeof intro_camera_requests;++i)CHECK(intro_camera_requests[i]==i+17);
     CHECK(zero_solid_contacts[111].sides==13 && zero_solid_contacts[111].carried==255);
     CHECK(diagnostic_host_digest()==original_diagnostic);
     CHECK(!memcmp(zero_giga_backup,expected_giga,sizeof expected_giga));
@@ -558,7 +638,7 @@ static void roundtrip_and_malformed(void){
     for(unsigned i=0;i<bank_count;++i){CHECK(installed_resolver((uint16_t)(0x6000+i)));CHECK(texture_hash[i]==saved_hash[i]);}
     for(unsigned i=0;i<ui_bank_count;++i){CHECK(installed_resolver((uint16_t)(0x7000+i)));CHECK(texture_hash[4096+i]==saved_hash[4096+i]);}
     CHECK(!installed_resolver(0x5FFF));CHECK(!installed_resolver(0x8000));
-    free(wire);free(bad);
+    free(wire);free(bad);private_terrain_pending=0;
 }
 static void agreed_latch_snapshot(void) {
     checkpoint_lab_option=23;

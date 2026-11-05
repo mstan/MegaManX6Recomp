@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 25 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 26 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -115,11 +115,13 @@ typedef struct {
     uint32_t subtank_seeded,subtank_found;
     uint8_t intro_camera_requests[8];
     uint32_t intro_camera_valid;
+    uint8_t terrain_pending;
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
     memcpy(s->intro_camera_requests,intro_camera_requests,sizeof intro_camera_requests);
     s->intro_camera_valid=intro_camera_valid;
+    s->terrain_pending=private_terrain_pending;
     memcpy(s->returning,returning_body,sizeof returning_body);
     memcpy(s->scene,scene_body,sizeof scene_body);
     memcpy(s->portrait,saved_portrait_colors,sizeof saved_portrait_colors);
@@ -159,6 +161,7 @@ static void state_player(StateIO *io,PlayerContext *p) {
 static void state_core(StateIO *io,HostState *s) {
 #define FIELD(field,width,max) s->field=state_integer(io,(uint32_t)s->field,width,max)
     state_player(io,&s->player);
+    FIELD(terrain_pending,1,1);
     FIELD(intro_camera_valid,1,1);
     state_bytes(io,s->intro_camera_requests,sizeof s->intro_camera_requests);
     if(!s->intro_camera_valid)for(unsigned i=0;i<sizeof s->intro_camera_requests;++i)
@@ -283,6 +286,7 @@ static void state_commit(const HostState *s) {
     p2=s->player;life=s->lifecycle;
     memcpy(intro_camera_requests,s->intro_camera_requests,sizeof intro_camera_requests);
     intro_camera_valid=s->intro_camera_valid;
+    private_terrain_pending=s->terrain_pending;
     memcpy(returning_body,s->returning,sizeof returning_body);memcpy(scene_body,s->scene,sizeof scene_body);
     memcpy(saved_portrait_colors,s->portrait,sizeof saved_portrait_colors);
     join_phase=s->join;arrival_pair=s->arrival;join_y=(int32_t)s->join_y;scene_owner=s->owner;scene_phase=s->scene_phase;scene_y=(int32_t)s->scene_y;
@@ -361,7 +365,7 @@ static void snapshot_discard_prepared(void) {
 }
 static void snapshot_resources(StateIO *s) {
     if(checkpoint_lab_option>22)STATE_INVALID(s); /* Immutable catalog enum; no new serialized field. */
-    state_fixed(s,0x53503658u);state_fixed(s,25);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,26);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
     state_fixed(s,separate_subtanks);state_fixed(s,partner_x_armor);state_fixed(s,private_actor.form);
     state_fixed(s,checkpoint_fatal_option);state_fixed(s,checkpoint_hatch_stagger_option);
