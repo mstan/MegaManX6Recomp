@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; emitted native capsule owner contact and grant transaction",
+  "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 92,
+  "revision": 93,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -18,7 +18,7 @@
   },
   "execution": {
     "backend": "ENHANCED",
-    "identity": "19a97253abe8b4d82e4af913c7676eb82cfafa89bdbf2674fecc2bc18c5c2a9a",
+    "identity": "012653077abbd16089ad13b58938a92a9410aaf2725f5a6468af0e8d9328e006",
     "cpu_architecture": "x64",
     "required_observed_features": "0x7f",
     "fp_contract": 2,
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v109",
+    "title_compatibility": "mmx6-x-zero-delay-v110",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1106,5 +1106,13 @@
     "lifetime": "Only originalEA3D8 caller for the exact liveFA394 actor may retain it when the original2CBFC uint16 rectangle test includes the guest with source radii80/160. Its one original AI/fall/map-change/retirement update remains unchanged; every unrelated actor/caller retains native fallback.",
     "state": "No additional persistent state beyond C158 snapshot25; existing future-restored STATE frame65 covers root/sentinel/caller words during the native scan. Profile91/title108 bind the new behavior.",
     "qualification": "Unbuilt source candidate. Existing compiled fixture models canonical-plus-guest scanner cycles, native admitted-bit deduplication, all unrelated placement bytes, metadata/camera/P1 restoration and source/outside/actor guards. Actual native producer allocation/fall/foreground geometry write/cleanup and varying-height LOCAL+NET remain required."
+  },
+  "title_changes_v110": {
+    "scope": "Bind strict loopback eligibility to the actual configured SDK execution identity after its snapshot implementation fingerprint changed.",
+    "sdk_source": "0c6860d4de7f744c761e4c0a4fb37e3ecfc243a1",
+    "configured_execution_profile": "psx_execution/psx-runtime/profile.h",
+    "prevention": "Existing contract check compares execution.identity with runtime-generated PSX_EXECUTION_ID before compilation; its own generated contract macro is insufficient.",
+    "eligibility": "Existing CPU, compiler, backend, original BIOS, overlay-seal, settings, exact executable/manifest and direct-loopback restrictions unchanged.",
+    "qualification": "Prepared metadata binding only; actual exact-candidate native qualification required; no evidence transfer."
   }
 }

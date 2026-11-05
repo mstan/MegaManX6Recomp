@@ -3,8 +3,22 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
+
+def validate_execution_profile(path, expected_identity):
+    """Compare the configured runtime, never the contract's generated macro."""
+    identities = re.findall(
+        r'(?m)^#define[ \t]+PSX_EXECUTION_ID[ \t]+"([0-9a-f]{64})"[ \t]*$',
+        Path(path).read_text(encoding="ascii"))
+    if len(identities) != 1:
+        raise ValueError("configured profile must define exactly one PSX_EXECUTION_ID")
+    if identities[0] != expected_identity:
+        raise ValueError("lab contract execution identity differs from configured runtime "
+                         f"PSX_EXECUTION_ID: {expected_identity} != {identities[0]}")
+    return identities[0]
+
 
 def generated_header():
     record = json.loads((ROOT / "docs/COOP_HOST_LAB_CONTRACT.json").read_text(encoding="utf-8"))
@@ -25,7 +39,15 @@ def generated_header():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--execution-profile", type=Path,
+                        help="Actual configure-generated psx_execution/psx-runtime/profile.h")
     args = parser.parse_args()
+    if args.execution_profile is not None:
+        record = json.loads((ROOT / "docs/COOP_HOST_LAB_CONTRACT.json").read_text(encoding="utf-8"))
+        try:
+            validate_execution_profile(args.execution_profile, record["execution"]["identity"])
+        except (OSError, ValueError) as error:
+            parser.error(str(error))
     path = ROOT / "src/mods/mmx6_coop_host_lab_contract.h"
     expected = generated_header()
     if args.write:

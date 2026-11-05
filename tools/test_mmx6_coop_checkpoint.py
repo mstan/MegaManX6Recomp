@@ -13,6 +13,7 @@ from unittest.mock import patch
 
 import coop_debug as debug
 import mmx6_coop_checkpoint as checkpoint
+import mmx6_host_lab_contract as host_contract
 from qualify_mmx6_coop_checkpoint import make_parser, validate_options
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -57,8 +58,8 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],92)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v109')
+        self.assertEqual(record['revision'],93)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v110')
 
     def test_recycle_lab_destination_is_existing_original_campaign_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
@@ -423,6 +424,33 @@ class CheckpointOptions(unittest.TestCase):
                       ("--port", "0"), ("--expected-exe-sha256", "wrong"), ("--disc", "ignored.cue")):
             with self.subTest(flags=flags), contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
                 self.parse(flags)
+
+
+class ConfiguredHostExecutionBinding(unittest.TestCase):
+    def check_header(self, text, identity):
+        with tempfile.TemporaryDirectory() as directory:
+            profile = Path(directory) / "profile.h"
+            profile.write_text(text, encoding="ascii")
+            return host_contract.validate_execution_profile(profile, identity)
+
+    def test_accepts_runtime_macro_and_rejects_stale_contract(self):
+        identity = "c" * 64
+        header = '#pragma once\n#define PSX_EXECUTION_ID "' + identity + '"\n'
+        self.assertEqual(self.check_header(header, identity), identity)
+        with self.assertRaisesRegex(ValueError, "differs from configured runtime"):
+            self.check_header(header, "a" * 64)
+
+    def test_contract_macro_cannot_substitute_for_runtime_header(self):
+        identity = "c" * 64
+        header = '#define MMX6_HOST_LAB_EXECUTION_ID "' + identity + '"\n'
+        with self.assertRaisesRegex(ValueError, "exactly one PSX_EXECUTION_ID"):
+            self.check_header(header, identity)
+
+    def test_rejects_duplicate_runtime_identity(self):
+        identity = "c" * 64
+        definition = '#define PSX_EXECUTION_ID "' + identity + '"\n'
+        with self.assertRaisesRegex(ValueError, "exactly one PSX_EXECUTION_ID"):
+            self.check_header(definition + definition, identity)
 
 
 if __name__ == "__main__":

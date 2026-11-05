@@ -119,6 +119,7 @@ if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
     add_custom_target(mmx6_host_lab_contract_check
         COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/mmx6_host_lab_contract.py"
+            --execution-profile "${CMAKE_CURRENT_BINARY_DIR}/psx_execution/psx-runtime/profile.h"
         VERBATIM)
 endif()
 foreach(_mmx6_host_target psx-runtime psx-runtime-pgxp)
@@ -215,7 +216,8 @@ if(BUILD_TESTING)
     endforeach()
     if(Python3_Interpreter_FOUND)
         add_test(NAME mmx6_host_lab_contract_test
-            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/mmx6_host_lab_contract.py")
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/mmx6_host_lab_contract.py"
+                --execution-profile "${CMAKE_CURRENT_BINARY_DIR}/psx_execution/psx-runtime/profile.h")
     endif()
     if(Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.11)
         foreach(_mmx6_python_test test_coop_debug_protocol test_mmx6_coop_reference
