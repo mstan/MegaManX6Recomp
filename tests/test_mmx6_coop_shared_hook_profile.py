@@ -146,6 +146,18 @@ class SharedEffectEntryProfile(unittest.TestCase):
                 rf'if \({hook}\(cpu, 0x80020A08u\)\) return;', entry)), 1,
                 f'{hook} must precede the native armor body')
 
+    @unittest.skipUnless(os.environ.get('MMX6_COOP_SURFACE_GENERATED_UNIT'),
+                         'set MMX6_COOP_SURFACE_GENERATED_UNIT to actual full_20.c')
+    def test_actual_generated_surface_entry(self):
+        source = Path(os.environ['MMX6_COOP_SURFACE_GENERATED_UNIT']).read_text(encoding='utf-8')
+        match = re.search(r'(?ms)^void func_80049A14\(CPUState\* cpu\)\n\{(.*?)(?=^void |\Z)', source)
+        self.assertIsNotNone(match, 'actual native surface driver is required')
+        entry = match[1].split('block_80049A14:', 1)[0]
+        for hook in ('psx_mod_function_entry', 'psx_mod_try_function_replacement'):
+            self.assertEqual(len(re.findall(
+                rf'if \({hook}\(cpu, 0x80049A14u\)\) return;', entry)), 1)
+        self.assertLess(entry.index('switch (_cont)'), entry.index('psx_mod_function_entry'))
+
     def test_native_callback_replacements_are_emitted(self):
         root = Path(__file__).resolve().parents[1]
         source = (root / 'src/mods/mmx6_coop_plugin.c').read_text(encoding='utf-8')
