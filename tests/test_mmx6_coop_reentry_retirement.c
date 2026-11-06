@@ -70,12 +70,17 @@ int main(void) {
     /* The original P2 Start reaches its native callback and opens both menus. The
      * fixture supplies native phase2, with existing VRAM ownership modeled. */
     menu_probe=1;open_guest_menu=1;zero_menu_loaded=1;pad_buttons=(uint16_t)~8u;
+    unsigned syncs=occurrences(0x80066150u);menu_vram_probe=1;
+    psx_mod_write_half(menu_memory+MENU_BYTES,0x3821);
+    psx_mod_write_half(menu_memory+MENU_PLAYER_BACKUP,0x5142);
     psx_mod_write_half(0x800C4570u,0);
     CHECK(stage_tick(&cpu,0x8001E9ECu));
     CHECK(pause_owner==0 && personal_active && personal_eligible==3 && !zero_menu_loaded);
     CHECK(psx_mod_read_byte(PLAY+1)==2 && !stage_call && !inside);
     CHECK(!state_track.count && !state_track.error && psx_mod_read_byte(diagnostic+0x3C)==2);
-    open_guest_menu=0;
+    CHECK(occurrences(0x80066150u)==syncs+1 && !gp0_upload_stage && !gp0_upload_left);
+    CHECK(test_vram[256*1024+896]==0x3821 && test_vram[320]==0x5142);
+    menu_vram_probe=0;open_guest_menu=0;
 
     /* Native task replacement can retire an ordinary gameplay or scene pass,
      * as well as the primary menu. Keep the same exact fresh root signature. */
