@@ -90,7 +90,7 @@ static unsigned checkpoint_lab_index(void) {
     return (checkpoint_lab_option==1 || checkpoint_lab_option==20)?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
-        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:(checkpoint_lab_option==9 || checkpoint_lab_option==24)?106:(checkpoint_lab_option==11 || checkpoint_lab_option==28)?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:(checkpoint_lab_option==25 || checkpoint_lab_option==27)?98:checkpoint_lab_option==26?38:115;
+        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:(checkpoint_lab_option==9 || checkpoint_lab_option==24 || checkpoint_lab_option==29)?106:(checkpoint_lab_option==11 || checkpoint_lab_option==28)?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:(checkpoint_lab_option==25 || checkpoint_lab_option==27)?98:checkpoint_lab_option==26?38:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==20?CHECKPOINT_LAB_SUBTANK_NONCE:checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -109,7 +109,7 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==14?CHECKPOINT_LAB_GATE_ENEMY_NONCE:
         checkpoint_lab_option==15?CHECKPOINT_LAB_REFIGHT_NONCE:
         checkpoint_lab_option==16?CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE:
-        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:checkpoint_lab_option==25?0x4C474834u:checkpoint_lab_option==26?0x4C4C5331u:checkpoint_lab_option==27?0x4C475234u:checkpoint_lab_option==28?0x4C4E5031u:0;
+        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:checkpoint_lab_option==25?0x4C474834u:checkpoint_lab_option==26?0x4C4C5331u:checkpoint_lab_option==27?0x4C475234u:checkpoint_lab_option==28?0x4C4E5031u:checkpoint_lab_option==29?0x4C4D4131u:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -247,6 +247,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"sigma_cp1"))checkpoint_lab_option=18;
         else if(!strcmp(option,"heatnix_cp0"))checkpoint_lab_option=19;
         else if(!strcmp(option,"turtloid_rain_cp1"))checkpoint_lab_option=8;
+        else if(!strcmp(option,"alternate_mounted_cp1"))checkpoint_lab_option=29;
         else if(!strcmp(option,"alternate_boss_cp1"))checkpoint_lab_option=9;
         else if(!strcmp(option,"alternate_sequence_cp1"))checkpoint_lab_option=24;
         else if(!strcmp(option,"gate_homing_cp4"))checkpoint_lab_option=25;
@@ -299,7 +300,7 @@ static void checkpoint_reset(void) {
     if(checkpoint_fatal_option==5 && (checkpoint_starting_hp[0] || checkpoint_starting_hp[1] ||
        checkpoint_earned_weapons_option))failed=1;
     if(checkpoint_hatch_stagger_option && (checkpoint_starting_hp[0] || checkpoint_starting_hp[1]))failed=1;
-    if(checkpoint_lab_option==28 && (checkpoint_fatal_option || checkpoint_earned_weapons_option ||
+    if((checkpoint_lab_option==28 || checkpoint_lab_option==29) && (checkpoint_fatal_option || checkpoint_earned_weapons_option ||
        checkpoint_starting_hp[0] || checkpoint_starting_hp[1]))failed=1;
     /* Falling readiness deliberately precedes death, while the selected hero
      * is airborne. Do not route this prerequisite through the separate
@@ -843,15 +844,113 @@ static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32
     psx_mod_write_byte(PLAY,8);
     return 1; /* Caller must skip this stale stage's original world pass. */
 }
+/* F148 prior-travel bypass only. The original placement scan and command
+ * restore create the real empty TYPE1; mounting and boss admission stay native. */
+static int checkpoint_mounted_source(void) {
+    return psx_mod_read_word(SCRATCH+0x8C)==0x800F2940u &&
+        psx_mod_read_word(0x800F29B8u)==0x800EBEE8u &&
+        psx_mod_read_word(0x80073540u)==0x800F2498u &&
+        psx_mod_read_word(0x80071384u)==0x800F01A4u &&
+        psx_mod_read_word(0x800F2F34u)==0x800EBF64u &&
+        psx_mod_read_word(0x800F2F38u)==0x800EFC54u &&
+        psx_mod_read_word(0x800F258Cu)==0x01620020u &&
+        psx_mod_read_word(0x800F2F28u)==0x1D0F0300u &&
+        psx_mod_read_word(0x800F2F2Cu)==0x0A0F1600u &&
+        psx_mod_read_word(0x80073468u)==0x800F2374u &&
+        psx_mod_read_byte(0x800F2377u)==0xE1 &&
+        checkpoint_hash(0x8002048Cu,0x800205A0u)==0x603BFB3Eu &&
+        checkpoint_hash(0x80020C40u,0x80020CACu)==0x41943C27u &&
+        checkpoint_hash(0x80029F38u,0x8002A33Cu)==0x72A44816u &&
+        checkpoint_hash(0x80029E7Cu,0x80029F38u)==0x45D4158Du &&
+        checkpoint_hash(0x8002A3ACu,0x8002A3E8u)==0xB452D0A5u &&
+        checkpoint_hash(0x8002C3F8u,0x8002C458u)==0xC20F59A2u &&
+        checkpoint_hash(0x800EBEE8u,0x800EBF64u)==0x2729400Du &&
+        checkpoint_hash(0x800EBF64u,0x800EC0D8u)==0x82EDF421u &&
+        checkpoint_hash(0x8002C9D4u,0x8002CA14u)==0x20B796C3u;
+}
+static uint32_t checkpoint_mounted_command(void) {
+    uint32_t found=0;
+    for(uint32_t a=0x8009B7B0u;a<0x8009C9B0u;a+=0x30u)
+        if((psx_mod_read_byte(a)&1u) && psx_mod_read_word(a+0x10)==0x800F2588u) {
+            if(found || psx_mod_read_byte(a+1)!=30 || psx_mod_read_byte(a+2)!=1)return UINT32_MAX;
+            found=a;
+        }
+    return found;
+}
+static int checkpoint_mounted_unclaimed(void) {
+    return !psx_mod_read_byte(PLAYER+0xD5) && !p2.body[0xD5];
+}
+static void checkpoint_mounted_prerequisite(CPUState *cpu,const Mmx6Checkpoint *entry) {
+    const uint32_t ride=0x800CD340u;
+    if(checkpoint_pending.index!=106 || checkpoint_pending.nonce!=0x4C4D4131u) {checkpoint_cancel(CHECKPOINT_FORBIDDEN);return;}
+    if(!checkpoint_safe_boundary() || !checkpoint_before_doors_idle(0) || !checkpoint_before_doors_idle(1))return;
+    if(psx_mod_read_word(PLAYER+8)!=(3024u<<16) || le32(p2.body+8)!=(3048u<<16) ||
+       psx_mod_read_word(PLAYER+12)!=(395u<<16) || le32(p2.body+12)!=(394u<<16)) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+    if(!checkpoint_source(entry) || !checkpoint_mounted_source()) {checkpoint_cancel(CHECKPOINT_SOURCE);return;}
+    if(!checkpoint_mounted_unclaimed()) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+    uint32_t command=checkpoint_mounted_command(),record=psx_mod_read_word(0x800F2588u);
+    if(command==UINT32_MAX) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+    if(checkpoint_pending.phase==2) {
+        if(psx_mod_read_byte(ride) || command || record!=0x03011E00u) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+        uint32_t stack=cpu->gpr[29];
+        if((stack&3u) || stack<0x80010000u || stack>0x801FFFECu) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+        uint32_t saved[4]={cpu->gpr[6],cpu->gpr[7],stack+0x10u,psx_mod_read_word(stack+0x10u)};
+        STATE_WORDS(restore_mounted_scan,64,saved,4);
+        psx_mod_write_word(saved[2],0);cpu->gpr[6]=353;cpu->gpr[7]=355;
+        guest(cpu,0x80029F38u,31,33);
+        psx_mod_write_word(saved[2],saved[3]);cpu->gpr[6]=saved[0];cpu->gpr[7]=saved[1];
+        STATE_POP(restore_mounted_scan);
+        command=checkpoint_mounted_command();
+        if(!command || command==UINT32_MAX) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+        checkpoint_pending.phase=3;return;
+    }
+    if(checkpoint_pending.phase==3) {
+        /* Ordinary native2048C must dispatch the actual EBEE8 command first.
+         * It retires itself via2C9D4; never construct a vehicle body here. */
+        if(command)return;
+        if(record!=0x03011E81u || (psx_mod_read_word(ride)&0x00FFFFFFu)!=0x00010141u ||
+           psx_mod_read_word(ride+4) || psx_mod_read_word(ride+0x10)!=0x800F2588u ||
+           psx_mod_read_word(ride+8)!=(32u<<16) || psx_mod_read_word(ride+12)!=(354u<<16)) {
+            checkpoint_cancel(CHECKPOINT_UNSAFE);return;
+        }
+        guest(cpu,0x800EBF64u,ride,0); /* Exact native first-state initializer. */
+        if(!(psx_mod_read_byte(ride)&1u) || psx_mod_read_byte(ride+1)!=1 ||
+           psx_mod_read_word(ride+0x10)!=0x800F2588u || psx_mod_read_byte(ride+4)!=1 || psx_mod_read_byte(ride+5) ||
+           psx_mod_read_word(ride+0x68)!=0x800F2F28u || psx_mod_read_byte(ride+0x5C)!=32 ||
+           psx_mod_read_byte(ride+0x97) || !checkpoint_mounted_unclaimed()) {
+            checkpoint_cancel(CHECKPOINT_UNSAFE);return;
+        }
+        /* Native footbox00/03/0F/1D reaches floor416 at centerY384.
+         * Both heroes and their original CP1 camera stay untouched. */
+        for(unsigned off=8;off<=0x18;off+=0x10) {
+            psx_mod_write_word(ride+off,3088u<<16);psx_mod_write_word(ride+off+4,384u<<16);
+        }
+        checkpoint_pending.phase=4;checkpoint_pending.placed_world=psx_mod_read_word(PLAY+0x90);
+        psx_mod_write_byte(diagnostic+0xAD,1);return;
+    }
+    if((uint32_t)(psx_mod_read_word(PLAY+0x90)-checkpoint_pending.placed_world)<2u)return;
+    if(record!=0x03011E81u || command || !(psx_mod_read_byte(ride)&1u) || psx_mod_read_byte(ride+1)!=1 ||
+       !psx_mod_read_byte(ride+0x5C) || psx_mod_read_byte(ride+0x5C)>=128 ||
+       psx_mod_read_byte(ride+4)!=1 || psx_mod_read_byte(ride+5) ||
+       psx_mod_read_byte(ride+0x97) || psx_mod_read_word(ride+0x10)!=0x800F2588u ||
+       psx_mod_read_word(ride+0x68)!=0x800F2F28u ||
+       psx_mod_read_word(ride+8)!=(3088u<<16) || psx_mod_read_word(ride+12)!=(384u<<16) ||
+       !(psx_mod_read_byte(ride+0xA8)&8u))return;
+    psx_mod_write_byte(diagnostic+0xAD,2);checkpoint_complete(cpu);
+}
+
 static int checkpoint_stage_boundary(CPUState *cpu) {
     if(checkpoint_pending.phase) {
         const Mmx6Checkpoint *entry=&checkpoint_inventory[checkpoint_pending.index];
         if(failed || !checkpoint_request_authorized(checkpoint_pending.authority))checkpoint_cancel(failed?CHECKPOINT_PLUGIN_FAILED:CHECKPOINT_FORBIDDEN);
         else if((checkpoint_pending.phase==2 || checkpoint_pending.phase==3 ||
-                (checkpoint_lab_option==28 && (checkpoint_pending.phase==4 || checkpoint_pending.phase==5))) && psx_mod_read_byte(PLAY)==10 &&
+                ((checkpoint_lab_option==28 && (checkpoint_pending.phase==4 || checkpoint_pending.phase==5)) ||
+                 (checkpoint_lab_option==29 && checkpoint_pending.phase==4))) && psx_mod_read_byte(PLAY)==10 &&
                 psx_mod_read_byte(PLAY+12)==entry->stage && psx_mod_read_byte(PLAY+13)==entry->section &&
                 psx_mod_read_byte(PLAY+0x1D)==entry->checkpoint) {
-            if(checkpoint_pending.authority==CHECKPOINT_AGREED &&
+            if(checkpoint_pending.authority==CHECKPOINT_AGREED && checkpoint_lab_option==29) {
+                checkpoint_mounted_prerequisite(cpu,entry);
+            } else if(checkpoint_pending.authority==CHECKPOINT_AGREED &&
                (checkpoint_lab_option==15 || checkpoint_lab_option==16)) {
                 uint32_t meta,desc;
                 if(checkpoint_starting_hp[0] || checkpoint_starting_hp[1])

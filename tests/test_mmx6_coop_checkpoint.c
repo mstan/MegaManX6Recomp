@@ -19,6 +19,8 @@ static unsigned refight_stub,refight_probe_calls,refight_action_calls,refight_re
 static unsigned refight_post_solid,refight_admission_fault;
 static unsigned gate_contact_probe,gate_contact_calls[2],gate_contact_hit;
 static unsigned northpole_pickup_scan_probe,northpole_pickup_scan_calls;
+static unsigned mounted_probe,mounted_scan_calls,mounted_init_calls,mounted_scan_fault;
+static uint8_t mounted_source_bin[40334],mounted_init_seed[0xB0];
 static unsigned refusal_logs;
 static char refusal_log[512];
 static unsigned intro_scan_probe,intro_scan_calls,intro_scan_allocations,intro_canonical_cycles;
@@ -36,6 +38,22 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
         CHECK(cpu->gpr[4]==0x80093C98u && inside);
         ++gate_contact_calls[seat];++guest_calls;
         cpu->gpr[2]=seat==gate_contact_hit;return 1;
+    }
+    if(mounted_probe && target==0x80029F38u) {
+        CHECK(cpu->gpr[4]==31 && cpu->gpr[5]==33 && cpu->gpr[6]==353 && cpu->gpr[7]==355);
+        CHECK(!psx_mod_read_word(cpu->gpr[29]+16));++mounted_scan_calls;++guest_calls;
+        if(!mounted_scan_fault) { /* External native allocation boundary only. */
+            uint32_t a=0x8009B7B0u;psx_mod_write_byte(a,0x41);psx_mod_write_byte(a+1,30);
+            psx_mod_write_byte(a+2,1);psx_mod_write_word(a+0x10,0x800F2588u);
+            psx_mod_write_byte(0x800F2588u,1);
+        }
+        return 1;
+    }
+    if(mounted_probe && target==0x800EBF64u) {
+        CHECK(cpu->gpr[4]==0x800CD340u && !cpu->gpr[5] && checkpoint_pending.phase==3);
+        /* Supplied native constructor result; this is not gameplay emulation. */
+        project(0x800CD340u,mounted_init_seed,sizeof mounted_init_seed);
+        ++mounted_init_calls;++guest_calls;return 1;
     }
     if(northpole_pickup_scan_probe && target==0x80029F38u) {
         /* External original allocation boundary only; the constructor is a
@@ -2170,6 +2188,76 @@ static void setup_northpole_prerequisite_option(CPUState *cpu,int online,int pic
 static void setup_northpole_prerequisite(CPUState *cpu,int online) {
     setup_northpole_prerequisite_option(cpu,online,0);
 }
+static void mounted_cp1_setup(CPUState *cpu,unsigned online) {
+    test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    test_lab_fatal_option=test_lab_earned_option=test_lab_contact_option=test_lab_hatch_stagger_option="off";
+    setup_agreed(cpu,(int)online);test_lab_option="alternate_mounted_cp1";checkpoint_reset();
+    CHECK(checkpoint_lab_option==29 && checkpoint_lab_index()==106 && checkpoint_lab_nonce()==0x4C4D4131u);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    psx_mod_write_byte(PLAY,10);memcpy(test_ram+0xE9860,mounted_source_bin,sizeof mounted_source_bin);
+    /* External original CP1 on-foot arrival, not produced by the fixture. */
+    for(unsigned seat=0;seat<2;++seat) {
+        uint8_t body[0x158]={0};body[0]=body[3]=body[4]=1;body[2]=(uint8_t)seat;body[5]=2;
+        body[0x5C]=body[0x5D]=body[0x5E]=32;body[0x70]=8;put32(body+0x68,0x80073D50u+seat*4u);
+        if(seat)memcpy(p2.body,body,sizeof body);else project(PLAYER,body,sizeof body);
+    }
+    cpu->gpr[29]=0x801FFF00u;cpu->gpr[6]=0x12345678;cpu->gpr[7]=0x87654321;
+    psx_mod_write_word(cpu->gpr[29]+16,0xCAFEBABEu);
+    psx_mod_write_word(SCRATCH+0x8C,0x800F2940u);
+    psx_mod_write_word(PLAYER+8,3024u<<16);psx_mod_write_word(PLAYER+12,395u<<16);
+    put32(p2.body+8,3048u<<16);put32(p2.body+12,394u<<16);
+    CHECK(checkpoint_mounted_source());mounted_probe=1;mounted_scan_calls=mounted_init_calls=mounted_scan_fault=0;
+    memset(mounted_init_seed,0,sizeof mounted_init_seed);mounted_init_seed[0]=0x41;mounted_init_seed[1]=1;
+    mounted_init_seed[3]=mounted_init_seed[4]=1;mounted_init_seed[6]=7;mounted_init_seed[0x5C]=32;
+    put32(mounted_init_seed+0x10,0x800F2588u);put32(mounted_init_seed+0x68,0x800F2F28u);
+    put32(mounted_init_seed+0x20,0x1234);put32(mounted_init_seed+0x24,0x5678); /* Native-result sentinels: fixture must preserve. */
+}
+static void agreed_mounted_prerequisite(CPUState *cpu) {
+    for(unsigned online=0;online<2;++online) {
+        mounted_cp1_setup(cpu,online);uint8_t hero[0x158],camera[0x54];capture(PLAYER,hero,sizeof hero);
+        capture(0x800971F8u,camera,sizeof camera);PlayerContext partner=p2;CPUState registers=*cpu;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && mounted_scan_calls==1 && !mounted_init_calls);
+        CHECK(!memcmp(&registers,cpu,sizeof registers));CHECK(!psx_mod_read_byte(0x800CD340u));
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && mounted_scan_calls==1); /* Wait for actual native callback. */
+        /* External original EBEE8/2C9D4 observation, never fixture-generated. */
+        memset(test_ram+0x9B7B0,0,0x30);psx_mod_write_byte(0x800F2588u,0x81);
+        psx_mod_write_word(0x800CD340u,0x01010141u); /* Restore does not assign old draw byte3. */psx_mod_write_word(0x800CD350u,0x800F2588u);
+        psx_mod_write_word(0x800CD348u,32u<<16);psx_mod_write_word(0x800CD34Cu,354u<<16);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4 && mounted_init_calls==1);
+        uint8_t expected[0xB0];memcpy(expected,mounted_init_seed,sizeof expected);
+        for(unsigned off=8;off<=0x18;off+=0x10) {put32(expected+off,3088u<<16);put32(expected+off+4,384u<<16);}
+        CHECK(!memcmp(test_ram+0xCD340,expected,sizeof expected));
+        CHECK(!memcmp(test_ram+(PLAYER&0x1FFFFF),hero,sizeof hero) && !memcmp(&partner,&p2,sizeof partner));
+        CHECK(!memcmp(test_ram+0x971F8,camera,sizeof camera) && !memcmp(&registers,cpu,sizeof registers));
+        psx_mod_write_word(PLAY+0x90,psx_mod_read_word(PLAY+0x90)+2);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4); /* Never manufacture ground. */
+        psx_mod_write_byte(0x800CD3E8u,8); /* External ordinary native support. */
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && checkpoint_lab_receipt_complete());
+        psx_mod_write_word(0x800CD348u,3100u<<16);CHECK(!checkpoint_stage_boundary(cpu));
+        CHECK(psx_mod_read_word(0x800CD348u)==3100u<<16 && mounted_scan_calls==1 && mounted_init_calls==1);
+        CHECK(!psx_mod_read_byte(PLAYER+0xD5) && !p2.body[0xD5]);
+    }
+    for(unsigned bad=0;bad<10;++bad) {
+        mounted_cp1_setup(cpu,1);
+        if(bad==0)psx_mod_write_byte(0x800EBEE8u,0);if(bad==1)psx_mod_write_byte(0x800F2F28u,1);
+        if(bad==2)psx_mod_write_word(0x800F29B8u,0);if(bad==3)psx_mod_write_byte(0x800CD340u,1);
+        if(bad==4)psx_mod_write_byte(PLAYER+0xD5,255);if(bad==5)psx_mod_write_byte(0x800F2588u,0x81);
+        if(bad==6)cpu->gpr[29]|=1;if(bad==7)mounted_scan_fault=1;if(bad==8)checkpoint_pending.nonce^=1;
+        if(bad==9)psx_mod_write_word(SCRATCH+0x8C,0x800F2944u);
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !mounted_init_calls);
+        CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_FAILED);
+    }
+    mounted_probe=0;
+    for(unsigned bad=0;bad<3;++bad) {
+        test_lab_fatal_option=test_lab_earned_option="off";test_lab_hp_option[0]="off";
+        setup_agreed(cpu,0);test_lab_option="alternate_mounted_cp1";
+        if(bad==0)test_lab_fatal_option="p1";if(bad==1)test_lab_earned_option="all";
+        if(bad==2)test_lab_hp_option[0]="1";checkpoint_reset();CHECK(failed);
+    }
+    test_lab_fatal_option=test_lab_earned_option="off";test_lab_hp_option[0]="off";
+    test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option);
+}
+
 static void agreed_northpole_pickup(CPUState *cpu) {
     for(int online=0;online<=1;++online) {
         setup_agreed(cpu,online);test_lab_option="northpole_pickup_support";checkpoint_reset();
@@ -2975,6 +3063,16 @@ int main(int argc,char **argv) {
     agreed_refight_earned_weapons(&cpu);refight_owner_projection(&cpu);
     recycle_departure_final_order(&cpu);
     agreed_gate_enemy_prerequisite(&cpu);agreed_gate_homing_right_prerequisite(&cpu);
+    /* Existing raw-disc input; read only original BIN28 sectors. */
+    const char *disc=getenv("MMX6_CONTENT_DISC");
+    if(!disc || !*disc){puts("SKIP: MMX6_CONTENT_DISC original raw disc required");return 77;}
+    file=fopen(disc,"rb");CHECK(file);
+    for(unsigned at=0;at<sizeof mounted_source_bin;) {
+        unsigned n=sizeof mounted_source_bin-at;if(n>2048)n=2048;
+        CHECK(!fseek(file,(long)((211185u+591u+at/2048u)*2352u+24u),SEEK_SET));
+        CHECK(fread(mounted_source_bin+at,1,n,file)==n);at+=n;
+    }
+    fclose(file);agreed_mounted_prerequisite(&cpu);
     agreed_northpole_prerequisite(&cpu);agreed_northpole_pickup(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_recycle_boundary(&cpu);agreed_recycle_loaded_origin_rejections(&cpu);

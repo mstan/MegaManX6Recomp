@@ -93,6 +93,10 @@ value = "turtloid_rain_cp1"
 label = "Turtloid original checkpoint 1 rain approach"
 
 [[option.choice]]
+value = "alternate_mounted_cp1"
+label = "Alternate CP1 + original empty Armor (prior travel prerequisite)"
+
+[[option.choice]]
 value = "alternate_boss_cp1"
 label = "Alternate area 20 section 1 checkpoint 1 approach"
 
