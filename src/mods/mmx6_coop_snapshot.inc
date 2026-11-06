@@ -106,6 +106,7 @@ typedef struct {
     BossBalanceState boss_balance[BOSS_BALANCE_SLOTS];
     uint32_t boss_balance_pending_actor;
     uint32_t lab_state,lab_previous,starting_hp_applied,earned_applied,earned_reason,fatal_state;
+    uint32_t sequence_state,sequence_cursor,sequence_release;
     uint32_t clear_phase,clear_members,clear_started;
     uint32_t door_actor,door_origin,door_members;
     uint32_t hatch_stagger_state;
@@ -140,6 +141,8 @@ static void state_capture(HostState *s) {
     s->lab_state=checkpoint_lab_state;s->lab_previous=checkpoint_lab_previous;s->starting_hp_applied=checkpoint_starting_hp_applied;
     s->earned_applied=checkpoint_earned_weapons_applied;s->earned_reason=checkpoint_earned_weapons_reason;
     s->fatal_state=checkpoint_fatal_state;
+    s->sequence_state=checkpoint_sequence_state;s->sequence_cursor=checkpoint_sequence_cursor;
+    s->sequence_release=checkpoint_sequence_release;
     s->hatch_stagger_state=checkpoint_hatch_stagger_state;
     s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
     s->door_actor=both_door_actor;s->door_origin=both_door_origin;s->door_members=both_door_members;
@@ -232,6 +235,11 @@ static void state_core(StateIO *io,HostState *s) {
         ((s->lifecycle.status[1]!=MMX6_COOP_ABSENT && s->lifecycle.status[1]!=MMX6_COOP_LEAVING) ||
          !mmx6_coop_living(&s->lifecycle,0) || s->lifecycle.wipe))STATE_INVALID(io);
     FIELD(lab_state,1,CHECKPOINT_LAB_CONSUMED);FIELD(lab_previous,1,1);FIELD(starting_hp_applied,1,1);
+    FIELD(sequence_state,1,CHECKPOINT_SEQUENCE_USED);FIELD(sequence_cursor,1,23);FIELD(sequence_release,1,1);
+    if((checkpoint_lab_option!=24 && (s->sequence_state || s->sequence_cursor || s->sequence_release)) ||
+       (s->sequence_state && s->lab_state!=CHECKPOINT_LAB_CONSUMED) ||
+       (!s->sequence_state && s->sequence_cursor) ||
+       (s->sequence_release && s->sequence_state!=CHECKPOINT_SEQUENCE_MISSION))STATE_INVALID(io);
     if(s->starting_hp_applied && (!checkpoint_starting_hp_mask() || s->lab_state!=CHECKPOINT_LAB_CONSUMED))STATE_INVALID(io);
     if(!checkpoint_lab_option && (s->lab_state || s->lab_previous))STATE_INVALID(io);
     FIELD(earned_applied,1,1);FIELD(earned_reason,1,CHECKPOINT_PLUGIN_FAILED);
@@ -302,6 +310,8 @@ static void state_commit(const HostState *s) {
     memcpy(boss_balance,s->boss_balance,sizeof boss_balance);
     boss_balance_pending_actor=s->boss_balance_pending_actor;
     checkpoint_lab_state=s->lab_state;checkpoint_lab_previous=s->lab_previous;checkpoint_starting_hp_applied=s->starting_hp_applied;
+    checkpoint_sequence_state=s->sequence_state;checkpoint_sequence_cursor=s->sequence_cursor;
+    checkpoint_sequence_release=s->sequence_release;
     checkpoint_earned_weapons_applied=s->earned_applied;checkpoint_earned_weapons_reason=s->earned_reason;
     checkpoint_fatal_state=s->fatal_state;
     checkpoint_hatch_stagger_state=s->hatch_stagger_state;
@@ -364,8 +374,8 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    if(checkpoint_lab_option>23)STATE_INVALID(s); /* Immutable catalog enum; no new serialized field. */
-    state_fixed(s,0x53503658u);state_fixed(s,26);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    if(checkpoint_lab_option>24)STATE_INVALID(s);
+    state_fixed(s,0x53503658u);state_fixed(s,27);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
     state_fixed(s,separate_subtanks);state_fixed(s,partner_x_armor);state_fixed(s,private_actor.form);
     state_fixed(s,checkpoint_fatal_option);state_fixed(s,checkpoint_hatch_stagger_option);

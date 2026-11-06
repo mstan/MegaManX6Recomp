@@ -3650,6 +3650,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_savestate_plugin("mmx6.local-coop.prototype",snapshot_resources_restored);
 #endif
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x80012C44u,0x8FBF0010u,checkpoint_sequence_input);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800318F4u,0x9102005Cu,boss_balance_damage);
     for(unsigned i=0;i<sizeof boss_cooldown_sites/sizeof boss_cooldown_sites[0];++i)
         psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",boss_cooldown_sites[i].address,

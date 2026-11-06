@@ -53,6 +53,11 @@ enum { CHECKPOINT_LAB_GATE_ENEMY_NONCE=0x4C474531u }; /* Original SecretLab2B CP
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint32_t placed_world; } Mmx6CheckpointPending;
 static Mmx6CheckpointPending checkpoint_pending;
 static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previous;
+/* Option24 only: actual Map -> responsive cursor -> ordinary mission -> one
+ * repeat. These are prerequisite guards, never native progression fields. */
+enum { CHECKPOINT_SEQUENCE_NONE,CHECKPOINT_SEQUENCE_MAP,CHECKPOINT_SEQUENCE_RESPONSIVE,
+    CHECKPOINT_SEQUENCE_MISSION,CHECKPOINT_SEQUENCE_USED };
+static unsigned checkpoint_sequence_state,checkpoint_sequence_cursor,checkpoint_sequence_release;
 static unsigned checkpoint_contact_protection_option;
 enum { CHECKPOINT_FATAL_RELEASE, CHECKPOINT_FATAL_ARMED, CHECKPOINT_FATAL_CONSUMED,
     CHECKPOINT_FATAL_SCENE_LOCKED, CHECKPOINT_FATAL_SCENE_WAIT_DEATH, CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL };
@@ -70,7 +75,7 @@ static unsigned checkpoint_lab_index(void) {
     return (checkpoint_lab_option==1 || checkpoint_lab_option==20)?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
-        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==9?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:115;
+        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:(checkpoint_lab_option==9 || checkpoint_lab_option==24)?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==20?CHECKPOINT_LAB_SUBTANK_NONCE:checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -81,7 +86,7 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==6?CHECKPOINT_LAB_RECYCLE_NONCE:
         checkpoint_lab_option==7?CHECKPOINT_LAB_PORTAL_NONCE:
         checkpoint_lab_option==8?CHECKPOINT_LAB_TURTLOID_NONCE:
-        checkpoint_lab_option==9?CHECKPOINT_LAB_ALTERNATE_NONCE:
+        (checkpoint_lab_option==9 || checkpoint_lab_option==24)?CHECKPOINT_LAB_ALTERNATE_NONCE:
         checkpoint_lab_option==10?CHECKPOINT_LAB_DISTANT_PORTAL_NONCE:
         checkpoint_lab_option==11?CHECKPOINT_LAB_NORTHPOLE_NONCE:
         checkpoint_lab_option==12?CHECKPOINT_LAB_FALLEN_PORTAL_NONCE:
@@ -194,6 +199,7 @@ static unsigned checkpoint_starting_hp_parse(const char *option) {
 static void checkpoint_reset(void) {
     memset(&checkpoint_pending,0,sizeof checkpoint_pending);
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
+    checkpoint_sequence_state=checkpoint_sequence_cursor=checkpoint_sequence_release=0;
     checkpoint_contact_protection_option=0;
     checkpoint_fatal_option=checkpoint_fatal_state=0;
     checkpoint_hatch_stagger_option=checkpoint_hatch_stagger_state=0;
@@ -225,6 +231,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"heatnix_cp0"))checkpoint_lab_option=19;
         else if(!strcmp(option,"turtloid_rain_cp1"))checkpoint_lab_option=8;
         else if(!strcmp(option,"alternate_boss_cp1"))checkpoint_lab_option=9;
+        else if(!strcmp(option,"alternate_sequence_cp1"))checkpoint_lab_option=24;
         else if(strcmp(option,"off"))failed=1;
     }
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_earned_weapons",option,sizeof option)) {
@@ -252,6 +259,7 @@ static void checkpoint_reset(void) {
     if(checkpoint_fatal_option==5 && checkpoint_lab_option!=7)failed=1;
     if(checkpoint_fatal_option==6 && checkpoint_lab_option!=9)failed=1;
     if(checkpoint_fatal_option==7 && checkpoint_lab_option!=7)failed=1;
+    if(checkpoint_lab_option==24 && checkpoint_fatal_option)failed=1;
     if(checkpoint_earned_weapons_option && !checkpoint_lab_option)failed=1;
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {
         if(!strcmp(option,"on"))checkpoint_contact_protection_option=1;
@@ -290,12 +298,15 @@ static void checkpoint_reset(void) {
         psx_mod_write_word(diagnostic+0xA0,CHECKPOINT_CAPABILITY);
     }
 }
+static unsigned checkpoint_lab_generation(void) {
+    return checkpoint_lab_option==24 && checkpoint_sequence_state==CHECKPOINT_SEQUENCE_USED?2u:1u;
+}
 static int checkpoint_lab_receipt_complete(void) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     if(checkpoint_pending.phase || checkpoint_lab_state!=CHECKPOINT_LAB_CONSUMED ||
        !diagnostic || !checkpoint_lab_authorized())return 0;
     const Mmx6Checkpoint *entry=&checkpoint_inventory[checkpoint_lab_index()];
-    return psx_mod_read_word(diagnostic+0xA0)==CHECKPOINT_CAPABILITY && psx_mod_read_word(diagnostic+0xA4)==1 &&
+    return psx_mod_read_word(diagnostic+0xA0)==CHECKPOINT_CAPABILITY && psx_mod_read_word(diagnostic+0xA4)==checkpoint_lab_generation() &&
         psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE && !psx_mod_read_byte(diagnostic+0xA9) &&
         psx_mod_read_byte(diagnostic+0xAA)==entry->stage && psx_mod_read_byte(diagnostic+0xAB)==entry->section &&
         psx_mod_read_byte(diagnostic+0xAC)==entry->checkpoint &&
@@ -305,6 +316,33 @@ static int checkpoint_lab_receipt_complete(void) {
         psx_mod_read_byte(diagnostic+0xBE)==CHECKPOINT_LAB_CONSUMED;
 #else
     return 0;
+#endif
+}
+static void checkpoint_sequence_input(CPUState *cpu,uint32_t address,uint32_t instruction) {
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+    /* Already emitted native post-decoder site, before its saved-RA load.
+     * Observe only; the original instruction and all guest RAM are untouched. */
+    if(!cpu || address!=0x80012C44u || instruction!=0x8FBF0010u ||
+       checkpoint_lab_option!=24 || checkpoint_sequence_state>=CHECKPOINT_SEQUENCE_MISSION ||
+       !ready || !enrolled || failed || inside || stage_call || player_call || ride_call ||
+       view_call || private_draw || zero_world || zero_projected ||
+       !checkpoint_lab_receipt_complete() || (cpu->gpr[29]&3u) ||
+       cpu->gpr[29]<0x80010000u || cpu->gpr[29]>0x801FFFECu)return;
+    uint32_t caller=psx_mod_read_word(cpu->gpr[29]+16u);
+    if(caller!=0x80012220u && caller!=0x8001A834u && caller!=0x8001AB18u)return;
+    if(psx_mod_read_byte(PLAY)==4 && psx_mod_read_byte(PLAY+1)==4 &&
+       !psx_mod_read_byte(PLAY+2) && !psx_mod_read_byte(0x80097424u)) {
+        unsigned cursor=psx_mod_read_byte(PLAY+0x2Au);
+        if(cursor>=24)return;
+        if(!checkpoint_sequence_state) {
+            checkpoint_sequence_state=CHECKPOINT_SEQUENCE_MAP;checkpoint_sequence_cursor=cursor;
+        } else if(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP && cursor!=checkpoint_sequence_cursor)
+            checkpoint_sequence_state=CHECKPOINT_SEQUENCE_RESPONSIVE;
+    } else if(psx_mod_read_byte(PLAY)!=4 && checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP) {
+        checkpoint_sequence_state=checkpoint_sequence_cursor=0;
+    }
+#else
+    (void)cpu;(void)address;(void)instruction;
 #endif
 }
 static int checkpoint_lab_completed(void) {
@@ -331,7 +369,7 @@ static unsigned checkpoint_contact_protection_mask(void) {
     const Mmx6Checkpoint *entry=&checkpoint_inventory[checkpoint_lab_index()];
     if(psx_mod_read_byte(PLAY+12)!=entry->stage || psx_mod_read_byte(PLAY+13)!=entry->section ||
        psx_mod_read_byte(PLAY+0x1D)!=entry->checkpoint ||
-       psx_mod_read_word(diagnostic+0xA0)!=CHECKPOINT_CAPABILITY || psx_mod_read_word(diagnostic+0xA4)!=1 ||
+       psx_mod_read_word(diagnostic+0xA0)!=CHECKPOINT_CAPABILITY || psx_mod_read_word(diagnostic+0xA4)!=checkpoint_lab_generation() ||
        psx_mod_read_byte(diagnostic+0xA8)!=CHECKPOINT_COMPLETE || psx_mod_read_byte(diagnostic+0xA9) ||
        psx_mod_read_byte(diagnostic+0xAA)!=entry->stage || psx_mod_read_byte(diagnostic+0xAB)!=entry->section ||
        psx_mod_read_byte(diagnostic+0xAC)!=entry->checkpoint ||
@@ -958,6 +996,19 @@ static void checkpoint_hatch_stagger_boundary(void) {
 static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     if(checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED) {
+        if(checkpoint_lab_option==24 && checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MISSION) {
+            /* A new ordinary mission was observed at the original mode9
+             * entry. Unsafe/held edges never become deferred requests. */
+            int safe=checkpoint_lab_receipt_complete() && checkpoint_safe_boundary() &&
+                psx_mod_read_byte(PLAY+12)==4 && !psx_mod_read_byte(PLAY+13) && !psx_mod_read_byte(PLAY+0x1D) &&
+                checkpoint_before_doors_idle(0) && checkpoint_before_doors_idle(1);
+            if(!safe || (raw && raw!=6))checkpoint_sequence_release=0;
+            else if(!raw)checkpoint_sequence_release=1;
+            else if(checkpoint_sequence_release) {
+                checkpoint_sequence_release=0;checkpoint_sequence_state=CHECKPOINT_SEQUENCE_USED;
+                return checkpoint_request(20,1,1,CHECKPOINT_LAB_ALTERNATE_NONCE,CHECKPOINT_AGREED);
+            }
+        }
         checkpoint_hatch_stagger_boundary();
         if(!checkpoint_fatal_option || !diagnostic || checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED)return 0;
         int armor_only=checkpoint_fatal_option==7;
@@ -1021,7 +1072,7 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
      * The parent still proves the card and acquired masks. */
     if((origin_stage || origin_section || origin_checkpoint) &&
        !((checkpoint_lab_option==1 || checkpoint_lab_option==6 || checkpoint_lab_option==7 ||
-           checkpoint_lab_option==9 || checkpoint_lab_option==21 || checkpoint_lab_option==22) &&
+           checkpoint_lab_option==9 || checkpoint_lab_option==24 || checkpoint_lab_option==21 || checkpoint_lab_option==22) &&
          origin_stage==4 && !origin_section && !origin_checkpoint)) {
         checkpoint_status(CHECKPOINT_REJECTED,CHECKPOINT_ORDER);return 0;
     }
@@ -1036,6 +1087,15 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #endif
 }
 static void checkpoint_native_entry(CPUState *cpu,uint32_t address) {
+    if(checkpoint_lab_option==24 && checkpoint_sequence_state==CHECKPOINT_SEQUENCE_RESPONSIVE &&
+       !checkpoint_pending.phase && checkpoint_lab_receipt_complete() && cpu &&
+       address==0x8001E1BCu && cpu->gpr[31]==0x8001E720u && cpu->gpr[4]==PLAY &&
+       ready && !failed && !inside && !stage_call && !player_call && !ride_call &&
+       !view_call && !private_draw && !zero_world && !zero_projected && !state_track.count && !state_track.error &&
+       psx_mod_read_byte(PLAY)==9 && psx_mod_read_byte(PLAY+12)==4 &&
+       !psx_mod_read_byte(PLAY+13) && !psx_mod_read_byte(PLAY+0x1D)) {
+        checkpoint_sequence_state=CHECKPOINT_SEQUENCE_MISSION;checkpoint_sequence_release=0;
+    }
     /* Original mode9 entry still has the prior loaded checkpoint CC868.
      * BIN33 FC244..FC2E4 retires the real death child, marks the earned
      * refight and selects oldCP+8. Capture only that living continuation,

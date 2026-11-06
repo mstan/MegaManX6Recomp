@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 102,
+  "revision": 104,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v118",
+    "title_compatibility": "mmx6-x-zero-delay-v119",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1254,5 +1254,26 @@
       "LOCAL and matched same-C170 NET must retain real living pilot/restoration/landing/partner controls, required original-lifetime evidence and resolved core/modCRC/cards/owned exits. Prepared fixture/source/tests are not an F100 pass."
     ],
     "qualification": "UNRUN; full F100 returning-partner and genuinely tight landing remain unverified."
+  },
+  "title_changes_v119": {
+    "scope": "F62 prerequisite only: immutable alternate_sequence_cp1 option24 reuses original option9 index106/record80072FF0/nonce4C414231, with ONE further request after an actual responsive Map and a new ordinary Recycle4/0CP0 mission. Original alternate_boss_cp1 option9 remains one-shot.",
+    "authority": "Same exact agreed LOCAL/NET candidate; already-emitted post-decoder12C44/8FBF0010 observes only native Map4/4/0/fade0 and a real valid cursor change. Original mode9 entry1E1BC must then observe normal4/0CP0 before healthy grounded idle/released-then-fresh guestL3+R3 can request repeat. No generic online mailbox.",
+    "source": {
+      "EXE_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+      "selector": "80052ED0..80053004",
+      "selector_sha256": "42b966f4666dcf048b0eb1a79a7f749243b7ddf610f7dad0f445ff8ab8542b41",
+      "native_selection": "Original52ED0 readsPLAY43B:0 -> NPC53;1 -> NPC55/sub1;>=2 -> NPC63. OriginalBIN16 ED6CC writes1 after ZeroMessage completion; ED5F8 writes2 after later native message completion."
+    },
+    "allowed_write": "Repeat invokes only the existing source-authenticated native checkpoint transaction (mode8/stage20/section1 then original mode9 CP1). No PLAY43B, availability, encounter allocation, HP, action, pose, scene, camera, door, result or native outcome write/call. Native initializer effects remain native.",
+    "one_shot": "Host Map-state/cursor/release latches allow only two total requests; unsafe or held guest chords cannot replay or defer. Receipt generation2 is explicit, initializer count remains1 per request. Existing earned-equipment/starting-HP application latches are not reset or reapplied.",
+    "state": "Three serialized bounded host bytes participate in digest/current-build snapshots; schema27 rejects old snapshots. Base104/portable105/title119 require a new exact artifact agreement; no C168/C169/C170 native credit transfers.",
+    "native_case_plan": [
+      "Fresh same-C171 LOCAL and NET: original NewGame/bootstrap and one initial option24 chord; existing real3152 door/camera/3312 loader must select actual route0 NPC53. Ordinary native fight and full story/NoSave/ZeroMessage must earn PLAY43B1; no progress, HP or result seed.",
+      "At actual Map4/4/0/fade0 retain real cursor response. Enter the ordinary Recycle mission through its native selector/loader and reach real4/0CP0/healthy both-idle. Release guest inputs, then fresh guestL3+R3 requests the same original CP1 approach once more.",
+      "Retain unchanged naturally earnedPLAY43B1 across request/loader; real door/scene/loader must select NPC55/sub1, native intro and living/ordinary controls. This is the second optional-encounter availability endpoint. No literal portal traverse or full HighMax defeat is added as a gate.",
+      "Inventory Dynamo as source-only successor requiring originalHighMax progression writerED5F8 -> route2 -> originalNPC63 selection. Runtime Dynamo admission/defeat/rewards are outside this two-encounter F62 counterpart and unqualified; any actual third admission would need nativeHighMax defeat as prerequisite, not a written progress flag.",
+      "Require same exact candidate LOCAL/NET, actual owned inputs, final resolved core/modCRC, native cards and normal owned exits. Fixture/source/compiled tests alone are not F62 qualification."
+    ],
+    "qualification": "PREPARED_NOT_QUALIFIED; compiled producer/snapshot/host tests and all native C171 execution UNRUN."
   }
 }

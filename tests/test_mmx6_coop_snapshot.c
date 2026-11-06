@@ -330,6 +330,7 @@ static void digest_and_readiness(void){
     PERTURB(zero_giga_backup[7]);
     PERTURB(shared_effect_owners[7]);
     PERTURB(checkpoint_lab_option);PERTURB(checkpoint_lab_state);PERTURB(checkpoint_lab_previous);
+    PERTURB(checkpoint_sequence_state);PERTURB(checkpoint_sequence_cursor);PERTURB(checkpoint_sequence_release);
     PERTURB(checkpoint_contact_protection_option);PERTURB(checkpoint_starting_hp[0]);PERTURB(checkpoint_starting_hp[1]);PERTURB(checkpoint_starting_hp_applied);
     PERTURB(checkpoint_fatal_option);PERTURB(checkpoint_fatal_state);
     PERTURB(checkpoint_hatch_stagger_option);PERTURB(checkpoint_hatch_stagger_state);
@@ -642,11 +643,11 @@ static void roundtrip_and_malformed(void){
     free(wire);free(bad);private_terrain_pending=0;
 }
 static void agreed_latch_snapshot(void) {
-    checkpoint_lab_option=24;
+    checkpoint_lab_option=25;
     uint32_t invalid_length=snapshot_bytes();uint8_t *invalid=malloc(invalid_length);CHECK(invalid);
     CHECK(!snapshot_write(invalid,invalid_length) && !snapshot_validate(invalid,invalid_length));free(invalid);
     checkpoint_lab_option=0;
-    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=23;++option) {
+    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=24;++option) {
         checkpoint_lab_option=option;
         checkpoint_contact_protection_option=protection;
         for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
@@ -656,13 +657,35 @@ static void agreed_latch_snapshot(void) {
             checkpoint_contact_protection_option^=1;CHECK(!snapshot_validate(wire,length));
             checkpoint_contact_protection_option=protection;
             checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));
-            checkpoint_lab_option=option%23+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
+            checkpoint_lab_option=option%24+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
             checkpoint_lab_state=checkpoint_lab_previous=0;
             CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
             CHECK(checkpoint_lab_state==state && checkpoint_lab_previous==1 && state_digest()==digest);
             free(wire);
         }
     }
+    checkpoint_lab_option=24;checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
+    for(unsigned state=0;state<=CHECKPOINT_SEQUENCE_USED;++state) {
+        checkpoint_sequence_state=state;checkpoint_sequence_cursor=state?7:0;
+        checkpoint_sequence_release=state==CHECKPOINT_SEQUENCE_MISSION;
+        uint32_t length=snapshot_bytes(),digest=state_digest();uint8_t *wire=malloc(length);CHECK(wire && snapshot_write(wire,length));
+        checkpoint_sequence_state=checkpoint_sequence_cursor=checkpoint_sequence_release=0;
+        if(state)CHECK(state_digest()!=digest);
+        CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+        CHECK(checkpoint_sequence_state==state && checkpoint_sequence_cursor==(state?7u:0u) &&
+            checkpoint_sequence_release==(state==CHECKPOINT_SEQUENCE_MISSION) && state_digest()==digest);
+        for(unsigned bad=0;bad<5;++bad) {
+            HostState invalid;state_capture(&invalid);
+            if(bad==0)invalid.sequence_state=CHECKPOINT_SEQUENCE_USED+1;
+            if(bad==1)invalid.sequence_cursor=24;
+            if(bad==2){invalid.sequence_state=CHECKPOINT_SEQUENCE_MAP;invalid.sequence_release=1;}
+            if(bad==3){invalid.sequence_state=CHECKPOINT_SEQUENCE_MAP;invalid.lab_state=CHECKPOINT_LAB_ARMED;}
+            if(bad==4){invalid.sequence_state=0;invalid.sequence_cursor=1;}
+            StateIO io={STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&io,&invalid);CHECK(!io.ok);
+        }
+        free(wire);
+    }
+    checkpoint_sequence_state=checkpoint_sequence_cursor=checkpoint_sequence_release=0;
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=checkpoint_contact_protection_option=0;
 }
 static void native_fatal_snapshot(void) {

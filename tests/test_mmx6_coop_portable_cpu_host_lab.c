@@ -19,7 +19,7 @@ int main(void){
     if(MMX6_PORTABLE_CPU_HOST_LAB_EXPECT_OFFER){
         CHECK(cat.count==1&&cat.rules);
         CHECK(!strcmp(cat.rules[0].profile,MMX6_PORTABLE_CPU_HOST_LAB_PROFILE));
-        CHECK(cat.rules[0].revision==103&&cat.rules[0].implementation_count==1);
+        CHECK(cat.rules[0].revision==105&&cat.rules[0].implementation_count==1);
         CHECK(cat.rules[0].flags==(PSX_HOST_PROFILE_PORTABLE|PSX_HOST_PROFILE_DIRECT_LOOPBACK));
         CHECK(cat.rules[0].implementations[0].required_features==0);
         CHECK(cat.rules[0].implementations[0].backend==PSX_HOST_BACKEND_ENHANCED);
@@ -44,7 +44,7 @@ int main(void){
         c=valid();c.cpu.features=0;
         CHECK(mmx6_coop_lab_host_profiles(&c,&cat)&&cat.count==1);
         c=valid();CHECK(mmx6_coop_lab_host_profiles(&c,&cat)&&cat.count==2);
-        CHECK(!strcmp(cat.rules[0].profile,MMX6_HOST_LAB_PROFILE)&&cat.rules[0].revision==102);
+        CHECK(!strcmp(cat.rules[0].profile,MMX6_HOST_LAB_PROFILE)&&cat.rules[0].revision==104);
         CHECK(cat.rules[0].flags==PSX_HOST_PROFILE_DIRECT_LOOPBACK&&cat.rules[0].priority>cat.rules[1].priority);
         PSXHostSelection legacy={0};strcpy(legacy.profile,cat.rules[0].profile);
         legacy.revision=cat.rules[0].revision;legacy.flags=cat.rules[0].flags;
