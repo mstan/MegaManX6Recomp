@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 122,
+  "revision": 124,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v128",
+    "title_compatibility": "mmx6-x-zero-delay-v129",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1421,5 +1421,11 @@
     "homing": "Register the existing four original-word guarded Gate operand sites F3F08/F3F54/F3FB4/F3FC4 in both development and release mod_instruction_sites. Runtime registration already reaches sealed interpreter; compiled overlays require explicit config. Original instructions/load-delay slots/target policy unchanged. Declaration omission does not explain the old sealed-interpreter phase0 observations.",
     "state": "No persistent fields/options/hooks or serializer layout change; snapshot27 remains. Host122/123/title128 and exact source/image agreement required. Existing native instruction callbacks gain matching config declarations.",
     "acceptance": "Fresh full125 SERVER/0fail/0skip +same-source PC3 and supported generatedhook/source checks. Actual same-candidate LOCAL+NET F36 native actors/pickup contact/carry still required. R23 separately requires genuine onlyguesteligible original13 flight/postemission movement/nativecontact; source/config checks alone grant no row credit."
+  },
+  "title_changes_v129": {
+    "scope": "Publish native guest-owned dialogue portrait palettes to the resident shared upload bank.",
+    "behavior": "Existing2B3D4 bridge authenticates original left21CC4/right21E64/refresh22950,slots1E0/1F0,count16 and sourcepalettebank, mirrors512bytes and retains originalprivatecopy.",
+    "state": "No persistent fields or snapshot27 layout change.",
+    "acceptance": "Focused disjoint-bank regressions plus fresh built runtime dialogue and representative smoke qualification required."
   }
 }
