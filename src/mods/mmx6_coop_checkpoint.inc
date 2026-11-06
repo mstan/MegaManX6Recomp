@@ -331,8 +331,9 @@ static void checkpoint_sequence_input(CPUState *cpu,uint32_t address,uint32_t in
     uint32_t caller=psx_mod_read_word(cpu->gpr[29]+16u);
     if(caller!=0x80012220u && caller!=0x8001A834u && caller!=0x8001AB18u)return;
     if(psx_mod_read_byte(PLAY)==4 && psx_mod_read_byte(PLAY+1)==4 &&
-       !psx_mod_read_byte(PLAY+2) && !psx_mod_read_byte(0x80097424u)) {
-        unsigned cursor=psx_mod_read_byte(PLAY+0x2Au);
+       !psx_mod_read_byte(PLAY+2) && psx_mod_read_byte(PLAY+12)==13 && !psx_mod_read_byte(0x80097424u)) {
+        /* Original Map4 EA894 owns PLAY27; PLAY2A is a different UI field. */
+        unsigned cursor=psx_mod_read_byte(PLAY+0x27u);
         if(cursor>=24)return;
         if(!checkpoint_sequence_state) {
             checkpoint_sequence_state=CHECKPOINT_SEQUENCE_MAP;checkpoint_sequence_cursor=cursor;
