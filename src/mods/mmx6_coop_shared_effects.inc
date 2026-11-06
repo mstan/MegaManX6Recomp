@@ -10,6 +10,44 @@ static int shared_effect_slot(uint32_t actor) {
     if(actor<0x80091298u || actor>=0x80093C98u || (actor-0x80091298u)%0x70u)return -1;
     return (int)((actor-0x80091298u)/0x70u);
 }
+/* Native terrain24 emits type3/sub8 steps and sub9 surface splashes through
+ * 3C7D8/3CA70. 49A14 owns their animation, DF release and finite retirement.
+ * Its 49C98/49D60 bounds calls must use the allocating hero's view too; a
+ * distant guest otherwise loses the effect before its first visible sample.
+ * Derive the standard native view from simulation body/limits, not draw caches. */
+static int shared_surface_source(uint32_t actor) {
+    unsigned subtype=psx_mod_read_byte(actor+2);
+    return psx_mod_read_byte(actor+1)==3 && (subtype==8 || subtype==9) &&
+        psx_mod_read_word(actor+0x30)==0x8007789Cu &&
+        psx_mod_read_word(0x80049C98u)==0x0C00B2FFu &&
+        psx_mod_read_word(0x80049CD4u)==0xA24000DFu &&
+        psx_mod_read_word(0x80049D60u)==0x0C00B32Cu;
+}
+static int shared_effect_view_bounds(CPUState *cpu,uint32_t address) {
+    uint32_t actor=cpu->gpr[4];int slot=shared_effect_slot(actor);
+    if(shared_fx_call!=1 || !zero_projected || !independent_views || slot<0 ||
+       shared_effect_owners[slot]!=2 || !psx_mod_read_byte(actor) ||
+       !shared_surface_source(actor) ||
+       !((address==0x8002CBFCu && cpu->gpr[31]==0x80049CA0u) ||
+         (address==0x8002CCB0u && cpu->gpr[31]==0x80049D68u)))return 0;
+    const uint32_t camera=0x800971F8u;
+    if(psx_mod_read_byte(camera+4)!=1 || !psx_mod_read_byte(camera+0x44) ||
+       psx_mod_read_half(camera+0x30)!=160 || psx_mod_read_half(camera+0x32)!=160 ||
+       psx_mod_read_half(camera+0x2C)!=96)return 0;
+    int limits[4];for(unsigned i=0;i<4;++i)limits[i]=(int16_t)psx_mod_read_half(camera+0x1C+i*2);
+    if(limits[0]<limits[1] || limits[2]<limits[3])return 0;
+    int x=(int16_t)psx_mod_read_half(PLAYER+10)-160;
+    int y=(int16_t)psx_mod_read_half(PLAYER+14)-96;
+    if(x<limits[1])x=limits[1];if(x>limits[0])x=limits[0];
+    if(y<limits[3])y=limits[3];if(y>limits[2])y=limits[2];
+    uint32_t saved[3]={psx_mod_read_word(camera+8),psx_mod_read_word(camera+12),(uint32_t)shared_fx_call};
+    STATE_WORDS(restore_surface_view,143,saved,3);
+    shared_fx_call=2; /* The inner replacement falls through to original once. */
+    psx_mod_write_word(camera+8,(uint32_t)x<<16);psx_mod_write_word(camera+12,(uint32_t)y<<16);
+    uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
+    psx_mod_write_word(camera+8,saved[0]);psx_mod_write_word(camera+12,saved[1]);
+    shared_fx_call=(int)saved[2];STATE_POP(restore_surface_view);cpu->gpr[2]=result;return 1;
+}
 static int shared_effect_allocate(CPUState *cpu,uint32_t address) {
     if(shared_fx_allocate_call || !enrolled || failed)return 0;
     shared_fx_allocate_call=1;
@@ -73,6 +111,7 @@ static int shared_effect_callback(CPUState *cpu,uint32_t address) {
      * current body frame and SCRATCH+1C header1C before following the flyer. */
     if(!((address==0x80049100u && type==1) ||
          (address==0x80049478u && type==2) ||
+         (address==0x80049A14u && type==3 && shared_surface_source(actor)) ||
          (address==0x8004AE1Cu && type==17) || (address==0x801EE254u && type==26) ||
          (address==0x8004B3A0u && type==18)))return 0;
     uint32_t table=psx_mod_read_word(SCRATCH+0x88);

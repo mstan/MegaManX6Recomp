@@ -64,6 +64,7 @@ static int amazon_guest_support(uint32_t actor,int *x,int *y) {
         psx_mod_read_word(actor+0x68)==0x800F73ECu && amazon_guest_view(x,y);
 }
 static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {
+    if(shared_effect_view_bounds(cpu,address))return 1;
     if(intro_guest_geometry_lifetime(cpu,address))return 1;
     int x,y;uint32_t actor=cpu->gpr[4];
     if(cpu->gpr[31]!=0x800EC038u || !amazon_guest_support(actor,&x,&y))return 0;
@@ -74,6 +75,7 @@ static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {
     cpu->gpr[2]=0;return 1;
 }
 static int amazon_guest_support_visibility(CPUState *cpu,uint32_t address) {
+    if(shared_effect_view_bounds(cpu,address))return 1;
     int x,y;uint32_t actor=cpu->gpr[4];
     if((cpu->gpr[31]!=0x800EC050u && cpu->gpr[31]!=0x800EC06Cu) ||
        !amazon_guest_support(actor,&x,&y))return 0;
@@ -93,6 +95,6 @@ static int amazon_guest_support_visibility(CPUState *cpu,uint32_t address) {
 }
 #else
 static void amazon_guest_placement_scan(CPUState *cpu,uint32_t address) {(void)cpu;(void)address;}
-static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {return intro_guest_geometry_lifetime(cpu,address);}
-static int amazon_guest_support_visibility(CPUState *cpu,uint32_t address) {(void)cpu;(void)address;return 0;}
+static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {return shared_effect_view_bounds(cpu,address) || intro_guest_geometry_lifetime(cpu,address);}
+static int amazon_guest_support_visibility(CPUState *cpu,uint32_t address) {return shared_effect_view_bounds(cpu,address);}
 #endif

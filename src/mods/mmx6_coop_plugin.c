@@ -3669,6 +3669,7 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x8002C398,shared_effect_allocate) ||
         !psx_mod_set_function_replacement(0x80049100,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x80049478,shared_effect_callback) ||
+        !psx_mod_set_function_replacement(0x80049A14,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x8004AE1C,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x8004B3A0,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x801EE254,shared_effect_callback)) failed=1;

@@ -26,6 +26,7 @@ static uint16_t menu_input[3];
 static unsigned native_budget;
 static unsigned boss_scan_probe,boss_scan_type[2],boss_scan_cookie[2],boss_scan_present[2],boss_scan_calls[2];
 static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_calls;
+static unsigned surface_probe,surface_end,surface_bounds_calls,surface_ticks;
 static unsigned falcon_flight_probe;
 static unsigned muzzle_probe,muzzle_expected_seat,muzzle_calls;
 static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat,ride_primary_character,ride_character;
@@ -591,6 +592,32 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         psx_mod_write_byte(0x800C4560,psx_mod_read_byte(0x800C4560)|1);
         ++working_palette_probe_calls;return;
     }
+    if(surface_probe && (address==0x8002CBFCu || address==0x8002CCB0u)) {
+        /* External original uint16 half-open320x240 bounds contract. */
+        uint32_t a=cpu->gpr[4],rx=cpu->gpr[5],ry=cpu->gpr[6];
+        int dx=(int16_t)(psx_mod_read_half(a+10)-psx_mod_read_half(0x80097202u));
+        int dy=(int16_t)(psx_mod_read_half(a+14)-psx_mod_read_half(0x80097206u));
+        unsigned outside=(uint16_t)(dx+rx)>=320u+rx*2u || (uint16_t)(dy+ry)>=240u+ry*2u;
+        if(address==0x8002CCB0u)psx_mod_write_byte(a+3,(uint8_t)!outside);
+        ++surface_bounds_calls;cpu->gpr[2]=outside;return;
+    }
+    if(surface_probe && address==0x80049A14u) {
+        uint32_t a=cpu->gpr[4];CHECK(shared_fx_call==1 && zero_projected);
+        CHECK(psx_mod_read_byte(PLAYER+2)==1);
+        ++surface_ticks;
+        if(psx_mod_read_byte(a+4)==2){psx_mod_write_byte(a,0);cpu->gpr[2]=0x309;return;}
+        CHECK(psx_mod_read_byte(PLAYER+0xDF)==1);
+        cpu->gpr[31]=0x80049CA0u;cpu->gpr[5]=cpu->gpr[6]=32;
+        CHECK(guest_geometry_lifetime(cpu,0x8002CBFCu));
+        if(cpu->gpr[2]){psx_mod_write_byte(a+4,2);cpu->gpr[2]=0x309;return;}
+        psx_mod_write_byte(a+4,1);
+        /* Original animation command releases only the allocating actor's DF;
+         * its later negative animation-end selects state2, then real free. */
+        if(surface_end){psx_mod_write_byte(PLAYER+0xDF,0);psx_mod_write_byte(a+4,2);}
+        cpu->gpr[31]=0x80049D68u;cpu->gpr[5]=cpu->gpr[6]=32;
+        CHECK(amazon_guest_support_visibility(cpu,0x8002CCB0u));
+        cpu->gpr[2]=0x309;return;
+    }
     if(shared_probe && address==0x8002C398u) {
         memset(memory(0x80091298u),0,0x70);cpu->gpr[2]=0x80091298u;return;
     }
@@ -719,6 +746,7 @@ static void setup(CPUState *cpu){
     memset(clear_poses,0,sizeof clear_poses);memset(clear_outgoing,0,sizeof clear_outgoing);
     clear_air_ticks=clear_air_limit=clear_air_seat=0;
     shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
+    surface_probe=surface_end=surface_bounds_calls=surface_ticks=0;
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=falcon_flight_probe=0;
     muzzle_probe=muzzle_expected_seat=muzzle_calls=0;
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=ride_primary_character=ride_character=0;
@@ -1281,6 +1309,51 @@ static void deferred_shared_effect_owner_context(void) {
     CHECK(shared_probe_calls==3);
     native_player_init(&cpu,0x8003BD24u);
     for(unsigned i=0;i<96;++i)CHECK(!shared_effect_owners[i]);
+}
+static void distant_surface_keeps_original_owner_view_and_retirement(void) {
+    CPUState cpu;setup(&cpu);stage_call=0;shared_probe=surface_probe=1;independent_views=1;
+    const uint32_t actor=0x80091298u,camera=0x800971F8u,table=0x800F5728u;
+    psx_mod_write_word(PLAYER+8,3520u<<16);psx_mod_write_word(PLAYER+12,395u<<16);
+    psx_mod_write_byte(PLAYER+0xDF,0x55);
+    put32(p2.body+8,3908u<<16);put32(p2.body+12,411u<<16);p2.body[0xDF]=1;
+    psx_mod_write_byte(camera+4,1);psx_mod_write_byte(camera+0x44,1);
+    psx_mod_write_word(camera+8,3488u<<16);psx_mod_write_word(camera+12,224u<<16);
+    psx_mod_write_half(camera+0x30,160);psx_mod_write_half(camera+0x32,160);psx_mod_write_half(camera+0x2C,96);
+    psx_mod_write_half(camera+0x1C,7360);psx_mod_write_half(camera+0x1E,3488);
+    psx_mod_write_half(camera+0x20,224);psx_mod_write_half(camera+0x22,224);
+    psx_mod_write_word(0x80049C98u,0x0C00B2FFu);psx_mod_write_word(0x80049CD4u,0xA24000DFu);
+    psx_mod_write_word(0x80049D60u,0x0C00B32Cu);
+    inside=1;enter_zero();CHECK(shared_effect_allocate(&cpu,0x8002C398u));leave_zero_context(1);inside=0;
+    CHECK(shared_effect_owners[0]==2);
+    psx_mod_write_byte(actor,0x41);psx_mod_write_byte(actor+1,3);psx_mod_write_byte(actor+2,9);
+    psx_mod_write_word(actor+0x30,0x8007789Cu);psx_mod_write_word(actor+8,3907u<<16);
+    psx_mod_write_word(actor+12,424u<<16);psx_mod_write_word(SCRATCH+0x88,table);
+    psx_mod_write_word(table+3*4,0x80049A14u);
+    /* The exact same original bounds reject this allocation in P1's view. */
+    cpu.gpr[4]=actor;cpu.gpr[5]=cpu.gpr[6]=32;
+    CHECK(guest(&cpu,0x8002CBFCu,actor,32)==1);
+    PlayerContext primary,after;capture_player(&primary);uint8_t view[0x54];capture(camera,view,sizeof view);
+    cpu.gpr[31]=0x80020438u;CPUState expected=cpu;expected.gpr[2]=0x309;
+    CHECK(shared_effect_callback(&cpu,0x80049A14u));
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && psx_mod_read_byte(actor+4)==1 && psx_mod_read_byte(actor+3)==1);
+    CHECK(p2.body[0xDF]==1 && surface_bounds_calls==3 && surface_ticks==1);
+    capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof primary));
+    CHECK(!memcmp(view,memory(camera),sizeof view) && !zero_projected && !inside && !shared_fx_call);
+    /* Wrong caller, slot, native dispatch and source fail without mutation. */
+    cpu.gpr[31]=0x80020434u;expected=cpu;CHECK(!shared_effect_callback(&cpu,0x80049A14u));CHECK(!memcmp(&cpu,&expected,sizeof cpu));
+    cpu.gpr[31]=0x80020438u;cpu.gpr[4]=actor+1;expected=cpu;
+    CHECK(!shared_effect_callback(&cpu,0x80049A14u));CHECK(!memcmp(&cpu,&expected,sizeof cpu));cpu.gpr[4]=actor;
+    psx_mod_write_word(table+12,0x80010000u);CHECK(!shared_effect_callback(&cpu,0x80049A14u));psx_mod_write_word(table+12,0x80049A14u);
+    psx_mod_write_word(0x80049C98u,0);CHECK(!shared_effect_callback(&cpu,0x80049A14u));psx_mod_write_word(0x80049C98u,0x0C00B2FFu);
+    shared_effect_owners[0]=1;shared_fx_call=1;cpu.gpr[31]=0x80049CA0u;expected=cpu;
+    CHECK(!shared_effect_view_bounds(&cpu,0x8002CBFCu));CHECK(!memcmp(&cpu,&expected,sizeof cpu));
+    shared_fx_call=0;shared_effect_owners[0]=2;cpu.gpr[31]=0x80020438u;
+    surface_end=1;CHECK(shared_effect_callback(&cpu,0x80049A14u));
+    CHECK(psx_mod_read_byte(actor+4)==2 && p2.body[0xDF]==0 && psx_mod_read_byte(PLAYER+0xDF)==0x55);
+    CHECK(shared_effect_callback(&cpu,0x80049A14u));
+    CHECK(!psx_mod_read_byte(actor) && !shared_effect_owners[0] && surface_ticks==3);
+    capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof primary));
+    CHECK(!memcmp(view,memory(camera),sizeof view) && !state_track.count && !state_track.error && !failed);
 }
 static void deferred_falcon_flight_tracks_owner_and_body_pixels(void) {
     CPUState cpu;setup(&cpu);shared_probe=1;
@@ -3487,6 +3560,7 @@ int main(void){
     scene_owner_death_preserves_living_passenger();
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
+    distant_surface_keeps_original_owner_view_and_retirement();
     deferred_falcon_flight_tracks_owner_and_body_pixels();
     deferred_X_muzzle_retains_shot_pool_and_counter();
     deferred_dash_effect_uses_allocating_body();
