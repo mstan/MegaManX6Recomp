@@ -2271,6 +2271,9 @@ static void agreed_inami_surface_alias(CPUState *cpu) {
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext old_partner=p2;CPUState old_cpu=*cpu;
         CHECK(!checkpoint_request(6,0,3,0x4C495732u,CHECKPOINT_AGREED) && !checkpoint_pending.phase &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&old_partner,&p2,sizeof p2) && !memcmp(&old_cpu,cpu,sizeof *cpu));
+        /* Rejected requests consume a diagnostic generation; the valid one-shot
+         * scenario must start fresh rather than weaken its generation1 guard. */
+        setup_agreed(cpu,online);test_lab_option="inami_surface_cp3";checkpoint_reset();
         CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.phase==1 && checkpoint_pending.index==34);
         mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
         CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+12)==6 && !psx_mod_read_byte(PLAY+13) &&
