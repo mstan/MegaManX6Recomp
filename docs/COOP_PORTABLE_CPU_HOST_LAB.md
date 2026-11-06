@@ -53,3 +53,5 @@ required; snapshot27 layout and prior OFF/ON semantics are unchanged.
 C176 uses base114, portable115 and title124 for the immutable North Pole pickup/support prerequisite28. The original scanner and ordinary native constructor create the source pickup; a single position/history prerequisite leaves first contact and later carry to native behavior. No native qualification is implied. Snapshot27 layout and all existing host guards remain.
 
 C177 uses base116, portable117 and title125. It corrects the measured primary-pickup dispatch guard, adds original mounted-boss CP1 prerequisite29 and the original Inami CP3 entry30. Original constructors and gameplay supply all measured outcomes. Snapshot27 layout and existing host/CPU/source gates are preserved; fresh native qualification is required.
+
+C178 uses base118, portable119 and title126 for native pickup preinit ordering and intact claimed vehicle transport during paired scene withdrawal. Original damage/retirement and native reboarding remain active. Snapshot27 layout is unchanged; source tests and build do not establish F36/F148 runtime qualification.

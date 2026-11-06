@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 116,
+  "revision": 118,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v125",
+    "title_compatibility": "mmx6-x-zero-delay-v126",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1398,5 +1398,12 @@
     },
     "layout": "Snapshot27 unchanged; pending stages remain snapshot-unready and digest-tracked.",
     "defaults": "All new choices LAB/defaultOFF; all existing native host/source/CPU/FP/artifact/recording gates retained."
+  },
+  "title_changes_v126": {
+    "scope": "F36 native pickup preinit ordering and F148 intact claimed vehicle paired-scene transport.",
+    "pickup": "Original scanner allocation is posed once before ordinary offscreen constructor/update; phase5 waits initialized resources and preserves all subsequent native pickup physics. Heroes only are placed at native support top; native contact/carry outcomes remain unassigned.",
+    "ride": "Authenticated healthy intact still-claimed vehicle is deferred only while its co-op passenger is withdrawn. At incoming phase3, same vehicle current/oldXY is placed using authentic owner/ride footboxes and native30234 full-foot clearance/support. Original3A268 reboarding, ordinary wall/camera fatal and unhealthy/fuse/retirement paths remain active.",
+    "state": "No new persistent fields, options, hooks or SDK changes. Existing digest restoration frame116 owns each native destination query; snapshot27 layout unchanged; old states are disposable.",
+    "acceptance": "Fresh same-candidate125 SERVER+3 PC audit gates, then actual LOCAL+NET F36 actors/native pickup contact+carry and F148 actual mounted boss scene release with intact same vehicle/visible partner; meaningful resolved core/modCRC/cards/normalownedexits. Source/fixtures/build alone grant no row credit."
   }
 }
