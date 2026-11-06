@@ -33,7 +33,8 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protec
                                       known_options | {'heatnix_cp0', 'refight_wolfang_cp3', 'secretlab2a_cp3'},
                                       known_options | {'heatnix_cp0', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6'},
                                       known_options | {'heatnix_cp0', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'alternate_sequence_cp1', 'gate_homing_cp4'},
-                                      known_options | {'heatnix_cp0', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1'})
+                                      known_options | {'heatnix_cp0', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1'},
+                                      known_options | {'heatnix_cp0', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1', 'gate_homing_right_cp4'})
             or option == 'off' or option not in actual_options):
         raise ValueError('Staged image lacks the private typed LAB checkpoint catalog')
     protection = [o for o in catalog.get('option', []) if o.get('id') == 'lab_contact_protection']

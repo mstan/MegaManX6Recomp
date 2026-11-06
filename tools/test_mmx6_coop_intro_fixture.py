@@ -252,7 +252,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1'):
+            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1', 'gate_homing_right_cp4'):
                 state.write_text(initial, encoding='utf-8')
                 receipt = pair.select_checkpoint(directory, enabled=True, option=option)
                 self.assertEqual(receipt['option'], option)
@@ -261,6 +261,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='arbitrary_position')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
+
             # Recycle must be present in the exact agreed catalog. An otherwise
             # current old catalog cannot admit a unilateral new destination.
             recycle_choice = '\n[[option.choice]]\nvalue = "recycle_cp2"\nlabel = "Recycle section 1 checkpoint 2 prerequisite"\n'
@@ -280,6 +281,21 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='intro_before_doors')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
+
+    def test_gate_right_ledge_reuses_immutable_original_cp4(self):
+        import mmx6_coop_checkpoint as checkpoint
+        source = Path(__file__).resolve().parents[1]
+        _, rows, sections = checkpoint.inventory(source/'docs/COOP_X6_CONTENT.json')
+        target = checkpoint.select(rows, sections, 18, 0, 4)
+        self.assertEqual(rows.index(target), 98)
+        self.assertEqual(target['table'], '800732AC')
+        self.assertEqual(target['record'], '80072ED0')
+        self.assertEqual(target['player'], dict(x=2992, y=1056))
+        catalog = tomllib.loads((source/'packaging/lab/coop-checkpoint-option.toml').read_text())
+        choice = next(o for o in catalog['option'] if o['id']=='lab_checkpoint')
+        self.assertEqual(choice['default'], 'off')
+        self.assertEqual(sum(c['value']=='gate_homing_cp4' for c in choice['choice']), 1)
+        self.assertEqual(sum(c['value']=='gate_homing_right_cp4' for c in choice['choice']), 1)
 
     def test_partner_x_armor_is_a_default_base_prototype_choice(self):
         source=Path(__file__).resolve().parents[1]

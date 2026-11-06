@@ -1402,6 +1402,59 @@ static void gate_enemy_test_vy(unsigned seat,int32_t vy) {
     if(seat)put32(p2.body+0x24,(uint32_t)vy);
     else psx_mod_write_word(PLAYER+0x24,(uint32_t)vy);
 }
+static void setup_gate_homing_right_prerequisite(CPUState *cpu,int online) {
+    setup_agreed(cpu,online);test_lab_option="gate_homing_right_cp4";checkpoint_reset();
+    CHECK(checkpoint_lab_option==27 && checkpoint_lab_index()==98 && checkpoint_lab_nonce()==0x4C475234u);
+    CHECK(checkpoint_inventory[98].stage==18 && !checkpoint_inventory[98].section && checkpoint_inventory[98].checkpoint==4 &&
+        checkpoint_inventory[98].table==0x800732ACu && checkpoint_inventory[98].record==0x80072ED0u && checkpoint_inventory[98].hash==0xF191CA1Eu);
+    CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB8)==0x80072ED0u);
+    memcpy(test_ram,gate_enemy_source_ram,sizeof test_ram);
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+12,18);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAY+0x1D,4);psx_mod_write_word(PLAY+0x90,10);
+    /* External original arrival observations, not simulated native physics. */
+    portal_test_body(0,2992,1083);portal_test_body(1,3016,1082);
+    psx_mod_write_byte(PLAYER+0x5C,23);p2.body[0x5C]=27; /* Ordinary damage is allowed. */
+}
+static void agreed_gate_homing_right_prerequisite(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_gate_homing_right_prerequisite(cpu,online);
+        p2.body[5]=0;memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==2 && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
+        p2.body[5]=2;partner=p2;
+        put32(partner.body+8,3130u<<16);put32(partner.body+0x18,3130u<<16);
+        put32(partner.body+12,1082u<<16);put32(partner.body+0x1C,1082u<<16);
+        uint32_t meta,desc;CHECK(checkpoint_gate_enemy_assets(&meta,&desc) && checkpoint_gate_homing_ground(meta,desc));
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && psx_mod_read_byte(diagnostic+0xAD)==1);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) &&
+            !memcmp(&registers,cpu,sizeof *cpu) && !guest_calls);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        psx_mod_write_word(PLAY+0x90,12);CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && checkpoint_lab_completed());
+        CHECK(psx_mod_read_byte(diagnostic+0xAD)==2 && psx_mod_read_word(diagnostic+0xA4)==1 &&
+            psx_mod_read_word(diagnostic+0xB4)==1 && psx_mod_read_word(diagnostic+0xB0)==0x4C475234u &&
+            psx_mod_read_byte(PLAYER+0x5C)==23 && p2.body[0x5C]==27);
+        put32(p2.body+8,3144u<<16);partner=p2;
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && !checkpoint_stage_boundary(cpu) &&
+            !memcmp(&partner,&p2,sizeof p2)); /* Never place again after native movement/retry. */
+        const uint32_t corrupt[]={0x80097438u,0x80100000u,0x80120000u,0x80073D54u};
+        for(unsigned bad=0;bad<sizeof corrupt/sizeof corrupt[0];++bad) {
+            setup_gate_homing_right_prerequisite(cpu,online);psx_mod_write_byte(corrupt[bad],psx_mod_read_byte(corrupt[bad])^1u);
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;registers=*cpu;
+            CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+                !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu) && !guest_calls);
+        }
+        for(unsigned bad=0;bad<2;++bad) {
+            setup_agreed(cpu,online);test_lab_option="gate_homing_right_cp4";checkpoint_reset();
+            if(bad)psx_mod_write_byte(PLAY+12,4);else checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;registers=*cpu;
+            CHECK(!(bad?checkpoint_lab_boundary(cpu,6):checkpoint_request(18,0,4,0x4C474834u,CHECKPOINT_AGREED)));
+            CHECK(psx_mod_read_byte(diagnostic+0xA9)==(bad?CHECKPOINT_ORDER:CHECKPOINT_UNKNOWN) && !checkpoint_pending.phase &&
+                !checkpoint_test_taint && !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
+        }
+    }
+    test_lab_option="off";checkpoint_reset();
+}
 static void setup_gate_enemy_prerequisite(CPUState *cpu,int online) {
     setup_agreed(cpu,online);test_lab_option="secretlab2b_enemy_cp0";checkpoint_reset();
     CHECK(checkpoint_lab_option==14 && checkpoint_lab_index()==94 && checkpoint_lab_nonce()==0x4C474531u);
@@ -2776,7 +2829,7 @@ int main(int argc,char **argv) {
     agreed_refight_prerequisite(&cpu);agreed_refight_distant_prerequisite(&cpu);
     agreed_refight_earned_weapons(&cpu);refight_owner_projection(&cpu);
     recycle_departure_final_order(&cpu);
-    agreed_gate_enemy_prerequisite(&cpu);
+    agreed_gate_enemy_prerequisite(&cpu);agreed_gate_homing_right_prerequisite(&cpu);
     agreed_northpole_prerequisite(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_recycle_boundary(&cpu);agreed_recycle_loaded_origin_rejections(&cpu);
