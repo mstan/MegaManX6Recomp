@@ -37,7 +37,7 @@ void psx_mod_tag_hud_primitive(uint32_t packet,int anchor){CHECK(anchor==-1 && t
 static void sprite(int x,int y){
     uint32_t at=psx_mod_read_word(SCRATCH+0x108),mode=psx_mod_read_word(SCRATCH+0x10C);
     psx_mod_write_word(at,0x03000000u|((mode+8)&0xFFFFFF));psx_mod_write_word(at+4,0x7C808080);
-    psx_mod_write_half(at+8,(uint16_t)x);psx_mod_write_half(at+10,(uint16_t)y);psx_mod_write_word(at+12,0x78000000);
+    psx_mod_write_half(at+8,(uint16_t)x);psx_mod_write_half(at+10,(uint16_t)y);psx_mod_write_word(at+12,0x78410000);
     psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFF));psx_mod_write_word(mode+4,0xE1000000);
     psx_mod_write_word(SCRATCH+0x108,at+16);psx_mod_write_word(SCRATCH+0x10C,mode+8);
 }
@@ -67,9 +67,10 @@ static void setup(CPUState *cpu,const char *layout){
     memset(ram,0,sizeof ram);memset(extra,0,sizeof extra);memset(cpu,0,sizeof *cpu);memset(&p2,0,sizeof p2);
     memset(ui_banks,0,sizeof ui_banks);ui_bank_count=definitions=call_count=tag_count=option_reads=0;
     memset(vram,0,sizeof vram);for(unsigned i=0;i<1024*512;++i)ui_pixels[i]=0x1111;
-    vram[480*1024+1]=0x1234;zero_ui_pixels=ui_pixels;selected_layout=layout;
+    vram[481*1024+16+1]=0x5678;zero_ui_pixels=ui_pixels;selected_layout=layout;
+    active_palette=0x9F120000;psx_mod_write_half(active_palette+0x220+2,0x1234);
     mmx6_coop_lifecycle_init(&life);state_track.count=state_track.error=0;
-    enrolled=1;failed=inside=zero_world=hud_call=hud_seat=0;p2_hud_fade=128;
+    enrolled=1;failed=inside=zero_world=hud_call=hud_seat=private_draw=private_seat=0;p2_hud_fade=128;
     hud_packets=0x9F000000;assembly=0x9F100000;menu_assembly=0x9F110000;menu_memory=0x9F200000;
     p2.body[0]=p2.body[2]=p2.body[3]=p2.body[4]=1;p2.body[5]=2;p2.body[0x5C]=11;p2.body[0x93]=2;p2.body[0xAC]=7;
     psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+0x1F,1);
@@ -122,8 +123,16 @@ int main(void){
     CHECK(draw_coop_hud(&cpu,0x800244C0) && call_count==1 && !p2_hud_fade && !option_reads);
     setup(&cpu,"side_by_side");psx_mod_write_byte(PLAY+0x1F,0);CHECK(draw_coop_hud(&cpu,0x800244C0) && call_count==1 && !tag_count);
     setup(&cpu,"stacked");CHECK(draw_coop_hud(&cpu,0x800244C0));
-    call_count=tag_count=0;vram[480*1024+1]=0x4321;CHECK(draw_coop_hud(&cpu,0x800244C0));
+    call_count=tag_count=0;psx_mod_write_half(active_palette+0x220+2,0x4321);CHECK(draw_coop_hud(&cpu,0x800244C0));
     CHECK(definitions==2 && retained_color==0x4321); /* Actual CLUT change receives a fresh immutable bank. */
+    /* A private guest pane never invokes the full P1/boss/shared HUD and
+     * ignores the shared stacked/side-by-side offset. Fallen HP stays owned. */
+    setup(&cpu,"stacked");private_draw=private_seat=1;life.status[1]=MMX6_COOP_FALLEN;
+    CHECK(draw_coop_hud(&cpu,0x800244C0) && call_count==2 && calls[0]==0x80024F90 && calls[1]==0x800249D4);
+    CHECK(!option_reads && (int16_t)psx_mod_read_half(hud_packets+0x3000+8)==18 &&
+        (int16_t)psx_mod_read_half(hud_packets+0x3000+10)==16 && retained_color==0x1234);
+    setup(&cpu,"stacked");private_draw=1;private_seat=0;
+    CHECK(!draw_coop_hud(&cpu,0x800244C0) && !call_count);
     setup(&cpu,"side_by_side");psx_mod_write_word(SCRATCH+0x108,hud_packets+1);
     psx_mod_write_word(SCRATCH+0x10C,hud_packets+0x1000);psx_mod_write_word(SCRATCH+0x110,hud_packets+0x2000);
     hud_zero_packets(hud_packets);CHECK(failed && !option_reads && !tag_count && !definitions);

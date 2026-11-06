@@ -233,8 +233,10 @@ static void independent_world_begin(void) {
     if(!enrolled || failed || inside || zero_world || (scene_owner && !door_views) || clear_phase || pause_owner>=0 ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
        (psx_mod_read_byte(PLAY+0x10) && !door_views) || (coop_world_hold() && !door_views) ||
-       life.status[0]!=MMX6_COOP_ALIVE ||
-       (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING)) {
+       (life.status[0]!=MMX6_COOP_ALIVE &&
+        (!view_valid || (life.status[0]!=MMX6_COOP_DYING && life.status[0]!=MMX6_COOP_FALLEN))) ||
+       (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING &&
+        (!view_valid || (life.status[1]!=MMX6_COOP_DYING && life.status[1]!=MMX6_COOP_FALLEN)))) {
         if(!menu_history || (pause_owner<0 && psx_mod_read_byte(PLAY+1)!=2))
             independent_invalidate();
         return;
@@ -288,14 +290,17 @@ static void independent_world_begin(void) {
         }
         memcpy(view_cameras[1]+layer*0x54+8,position,sizeof position);
     }
-    capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
+    /* A fallen hero retains its last view and own HUD while the survivor
+     * continues. Never aim a camera at its retiring/death body. */
+    if(life.status[0]==MMX6_COOP_ALIVE)
+        capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
     for(unsigned i=0;i<32;++i)view_ot[i]=psx_mod_read_word(buffer+0x70+i*4);
     view_frame=frame_count;view_buffer=buffer;view_pending=1;
 }
 static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     (void)user;(void)unused;
     project(VIEW_CAMERA,view_cameras[private_seat],sizeof view_cameras[0]);
-    if(private_seat) {
+    if(private_seat && (life.status[1]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_JOINING)) {
         if(!independent_quake_input())return 0;
         uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);
         project(PLAYER,p2.body,sizeof p2.body);

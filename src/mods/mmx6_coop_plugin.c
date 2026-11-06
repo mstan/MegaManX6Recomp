@@ -3405,10 +3405,18 @@ static uint16_t hud_tile_bank(uint16_t page, uint16_t clut, uint16_t uv) {
     for (unsigned i=0;i<16;++i) {
         if (cy>=496 && cy<512 && cx>=256 && cx+16<=320)
             colors[i]=psx_mod_read_half(menu_memory+0x10000+((cy-496)*64+cx-256+i)*2);
-        /* HUD frames use the game's shared UI palette, not the character's
-         * raw palette archive. Use the same current CLUT as the native HUD,
-         * including native fades; weapon icons use Zero's menu CLUT above. */
-        else colors[i]=gpu_get_vram()[cy*1024+cx+i];
+        else {
+            /* Native17C40 uploads the working palette at (0,480,256,32).
+             * HUD icons (80071DCC, CLUT7841) belong to the viewed hero,
+             * just like its actor/effect banks: resident VRAM belongs to P1.
+             * Read the authentic counterpart working palette, not a recolor.
+             * Original Intro DAT1/2 CLUT7841 SHA256 prefixes: X f0beef68,
+             * Zero 05bd50d3 (the native rows differ before any host drawing). */
+            size_t offset;
+            if(working_palette_clut_offset(clut,&offset))
+                colors[i]=psx_mod_read_half(active_palette+(uint32_t)offset+i*2u);
+            else colors[i]=gpu_get_vram()[cy*1024+cx+i];
+        }
     }
     for (unsigned i=0;i<ui_bank_count;++i)
         if (ui_banks[i].page==page && ui_banks[i].clut==clut && ui_banks[i].uv==uv &&
@@ -3531,11 +3539,11 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
         pools[3]=arena;STATE_WORDS(restore_pools,26,pools,4);
         for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,arena+i*0x1000);
         hud_seat=1;
-        if(private_draw)guest(cpu,address,0,0);
-        else {
-            guest(cpu,0x80024F90,PLAYER,0);
-            guest(cpu,private_actor.character==MMX6_COOP_CHARACTER_ZERO?0x800249D4u:0x800246B4u,PLAYER,0);
-        }
+        /* The original full HUD also draws boss/shared icons. Draw only
+         * this hero's native health/weapon at its original local anchors;
+         * P1 owns the shared path, in both stacked and independent modes. */
+        guest(cpu,0x80024F90,PLAYER,0);
+        guest(cpu,private_actor.character==MMX6_COOP_CHARACTER_ZERO?0x800249D4u:0x800246B4u,PLAYER,0);
         hud_seat=0;
         hud_zero_packets(arena);
         for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,pools[i]);
