@@ -1,3 +1,21 @@
+# v1.3.5-alpha-playtest
+
+This playtest package includes cumulative co-op corrections for native doors,
+dialogue, mounts, hazards and visual effects. It also corrects shared palette
+publication for dialogue portraits loaded by the guest player.
+
+- Adaptive widescreen is enabled for fresh installations. Saved display choices
+  are retained.
+- Developer checkpoint, damage-protection and test controls are excluded.
+- CD Speed and host-paced Fast Loading remain excluded.
+- Native memory-card saves and player settings are not bundled or replaced.
+
+Co-op remains experimental. Broader campaign and remote netplay coverage is
+still in progress; this package is intended for additional gameplay testing.
+Both netplay peers must use this exact build.
+
+---
+
 # v1.3.2-alpha
 
 The host can now select **Lobby → Mods → Seamless Loading** for both netplay
@@ -16,8 +34,7 @@ before starting the session.
   audio buffer target correction. The release config enables loading negotiation
   and the package parity check now guards that setting.
 
-The X + Zero co-op mod remains **Experimental 0.0.1**. Basic netplay has owner
-playtest coverage. The negotiated loading selection has focused runtime checks
+The X + Zero co-op mod remains **Experimental 0.0.1**. Basic netplay has limited runtime coverage. The negotiated loading selection has focused runtime checks
 and a production build; accelerated netplay loads have not had an additional
 playtest campaign. Existing campaign/Internet/rematch limitations remain.
 **v1.2.0 remains the stable release.**
@@ -34,7 +51,7 @@ leaving and rejoining. Both modern and legacy LAN clients are covered.
 Includes all v1.3.0-alpha features and the current master baseline with
 Seamless Loading. The X + Zero co-op mod remains Experimental 0.0.1.
 
-The owner confirmed basic two-player netplay gameplay in v1.3.0-alpha.
+Basic two-player netplay received limited runtime validation in v1.3.0-alpha.
 Separate-machine Internet, rematch, and full-campaign reliability remain
 outside the completed automated checks. v1.2.0 remains the stable release.
 
@@ -76,7 +93,7 @@ save storage. This package contains no game disc, retail BIOS, or player saves.
 
 ## Validation and limitations
 
-Local co-op has owner playtest coverage. Two private peers on one Windows PC
+Local co-op has limited runtime validation. Two peers on one Windows PC
 passed transported P1/P2 movement, P2 leave/rejoin health retention, enhanced
 16:9 scenery/enemy visibility, and both native HUDs. All 373 shared checksum
 checkpoints matched in the refreshed development build. This does not establish
