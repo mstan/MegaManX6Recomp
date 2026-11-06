@@ -37,11 +37,13 @@ Mmx6CoopRosterReason mmx6_coop_roster_resolve(const Mmx6CoopRosterNative *native
     if (native->body_character!=native->campaign_character ||
         native->body_form!=native->campaign_form)
         return MMX6_COOP_ROSTER_NATIVE_IDENTITY_MISMATCH;
-    if (native->flags & MMX6_COOP_NATIVE_BLACK_ZERO)
-        return MMX6_COOP_ROSTER_BLACK_ZERO_UNSUPPORTED;
     out->seat[0]=forms[native->body_form];
     out->seat[1]=forms[native->body_character==MMX6_COOP_CHARACTER_ZERO ?
                        MMX6_COOP_FORM_X : MMX6_COOP_FORM_ZERO];
+    if(native->flags&MMX6_COOP_NATIVE_BLACK_ZERO) {
+        Mmx6CoopRosterActor *zero=&out->seat[native->body_character==MMX6_COOP_CHARACTER_ZERO?0:1];
+        zero->portrait_index=6;zero->portrait_graphics=175;zero->portrait_palette=176;
+    }
     out->resolved=1;
     return MMX6_COOP_ROSTER_OK;
 }
@@ -50,14 +52,15 @@ Mmx6CoopRosterReason mmx6_coop_roster_resolve_partner(const Mmx6CoopRosterNative
     unsigned requested_x_form,uint8_t parts,Mmx6CoopRoster *out) {
     Mmx6CoopRosterReason reason=mmx6_coop_roster_resolve(native,out);
     if(reason!=MMX6_COOP_ROSTER_OK)return reason;
-    if(requested_x_form>MMX6_COOP_FORM_BLADE) {
+    if(requested_x_form>MMX6_COOP_FORM_ULTIMATE) {
         memset(out,0,sizeof *out);return MMX6_COOP_ROSTER_INVALID_FORM;
     }
     if(native->body_character==MMX6_COOP_CHARACTER_ZERO) {
         unsigned form=MMX6_COOP_FORM_X;
         if((requested_x_form==MMX6_COOP_FORM_FALCON && (native->flags&1u)) ||
            (requested_x_form==MMX6_COOP_FORM_SHADOW && (native->flags&2u) && (parts&0xF0u)==0xF0u) ||
-           (requested_x_form==MMX6_COOP_FORM_BLADE && (native->flags&4u) && (parts&0x0Fu)==0x0Fu))form=requested_x_form;
+           (requested_x_form==MMX6_COOP_FORM_BLADE && (native->flags&4u) && (parts&0x0Fu)==0x0Fu) ||
+           (requested_x_form==MMX6_COOP_FORM_ULTIMATE && (native->flags&8u)))form=requested_x_form;
         out->seat[1]=forms[form];
     }
     return MMX6_COOP_ROSTER_OK;
@@ -78,12 +81,16 @@ Mmx6CoopRosterReason mmx6_coop_roster_validate(const Mmx6CoopRoster *roster) {
         const Mmx6CoopRosterActor *actor=&roster->seat[seat];
         Mmx6CoopRosterReason reason=identity(actor->character,actor->form);
         if (reason!=MMX6_COOP_ROSTER_OK) return reason;
-        if (!same_resources(actor,&forms[actor->form]))
+        Mmx6CoopRosterActor expected=forms[actor->form];
+        if(actor->form==5 && actor->portrait_index==6) {
+            expected.portrait_index=6;expected.portrait_graphics=175;expected.portrait_palette=176;
+        }
+        if (!same_resources(actor,&expected))
             return MMX6_COOP_ROSTER_RESOURCE_MISMATCH;
     }
     if (roster->seat[1].character!=(roster->seat[0].character ^ 1u) ||
         (roster->seat[0].character==MMX6_COOP_CHARACTER_ZERO ?
-         roster->seat[1].form>MMX6_COOP_FORM_BLADE : roster->seat[1].form!=MMX6_COOP_FORM_ZERO))
+         roster->seat[1].form>MMX6_COOP_FORM_ULTIMATE : roster->seat[1].form!=MMX6_COOP_FORM_ZERO))
         return MMX6_COOP_ROSTER_COUNTERPART_MISMATCH;
     return MMX6_COOP_ROSTER_OK;
 }

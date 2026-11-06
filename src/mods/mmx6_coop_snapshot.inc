@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 28 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 29 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -80,7 +80,7 @@ static int snapshot_ready(void) {
         scene_call,zero_projected,unit_choices_call,target_projection_call,shared_fx_call,shared_fx_allocate_call,boss_balance_allocate_call,state_track.count,state_track.error,
         checkpoint_pending.phase,checkpoint_pending.index,checkpoint_pending.nonce,checkpoint_pending.authority,checkpoint_pending.placed_world,
         jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,jump_audio_faulted,
-        personal_pass,personal_rendering,
+        personal_pass,personal_rendering,character_select_call,
         jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_stop_mask};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)if(guards[i])return 0;
     for(unsigned i=0;i<8;++i)if(jump_audio_registers[i])return 0;
@@ -120,9 +120,11 @@ typedef struct {
     uint8_t terrain_pending;
     PersonalMenu menus[2];
     uint32_t menus_active,menus_initialized,menus_eligible,menu_previous[2];
+    CharacterSelection characters;
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
+    s->characters=character_selection;
     memcpy(s->intro_camera_requests,intro_camera_requests,sizeof intro_camera_requests);
     s->intro_camera_valid=intro_camera_valid;
     s->terrain_pending=private_terrain_pending;
@@ -169,6 +171,12 @@ static void state_player(StateIO *io,PlayerContext *p) {
 }
 static void state_core(StateIO *io,HostState *s) {
 #define FIELD(field,width,max) s->field=state_integer(io,(uint32_t)s->field,width,max)
+    FIELD(characters.count,1,7);FIELD(characters.seat,1,1);
+    FIELD(characters.active,1,1);FIELD(characters.valid,1,1);FIELD(characters.black,1,1);
+    for(unsigned i=0;i<7;++i)FIELD(characters.roster[i],1,5);
+    for(unsigned seat=0;seat<2;++seat) {
+        FIELD(characters.forms[seat],1,5);FIELD(characters.previous[seat],2,65535);
+    }
     state_player(io,&s->player);
     FIELD(terrain_pending,1,1);
     FIELD(menus_active,1,1);FIELD(menus_initialized,1,1);FIELD(menus_eligible,1,3);
@@ -311,6 +319,7 @@ static void state_core(StateIO *io,HostState *s) {
 #undef FIELD
 }
 static void state_commit(const HostState *s) {
+    character_selection=s->characters;
     p2=s->player;life=s->lifecycle;
     memcpy(intro_camera_requests,s->intro_camera_requests,sizeof intro_camera_requests);
     intro_camera_valid=s->intro_camera_valid;
@@ -358,7 +367,7 @@ static uint32_t state_digest(void) {
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
-        personal_pass,personal_seat,personal_rendering,
+        personal_pass,personal_seat,personal_rendering,character_select_call,
         effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,scene_call,zero_projected,unit_choices_call,target_projection_call,shared_fx_call,shared_fx_allocate_call,boss_balance_allocate_call,
         state_track.count,state_track.error,(unsigned)ready,checkpoint_pending.phase,
         checkpoint_pending.index,checkpoint_pending.nonce,checkpoint_pending.authority,checkpoint_pending.placed_world,jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,
@@ -400,7 +409,7 @@ static void snapshot_discard_prepared(void) {
 }
 static void snapshot_resources(StateIO *s) {
     if(checkpoint_lab_option>31)STATE_INVALID(s);
-    state_fixed(s,0x53503658u);state_fixed(s,28);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,29);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
     state_fixed(s,separate_subtanks);state_fixed(s,partner_x_armor);state_fixed(s,private_actor.form);
     state_fixed(s,checkpoint_fatal_option);state_fixed(s,checkpoint_hatch_stagger_option);

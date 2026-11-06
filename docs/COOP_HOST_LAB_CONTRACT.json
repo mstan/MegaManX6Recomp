@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 126,
+  "revision": 127,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v130",
+    "title_compatibility": "mmx6-x-zero-delay-v131",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1437,5 +1437,14 @@
     "state": "Snapshot28 adds authoritative per-seat menu contexts/input history; older execution snapshots are disposable.",
     "sdk_source": "2abe297c5edd5be51ab0afa3841510b019b72d53; release-tool firmware applicability only, runtime/recompiler/bios sources unchanged from0c686.",
     "acceptance": "Source implementations only until combined compiled and current-build runtime qualification; no transferred native evidence."
+  },
+  "title_changes_v131": {
+    "behavior": [
+      "One combined world-draw filter retains independent-view initialization and personal-menu suppression.",
+      "Native BIN16 character selector runs for P1, then opposite-family P2; ordinary Zero remains available regardless of native unlock.",
+      "Unlocked X armor forms and native Black Zero appearance use original resources and register inputs; persistent unlocks remain unchanged."
+    ],
+    "snapshot_schema": 29,
+    "native_review": "required; source checks do not qualify gameplay"
   }
 }

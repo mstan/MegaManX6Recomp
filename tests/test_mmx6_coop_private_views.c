@@ -14,6 +14,7 @@ static unsigned view_native_calls,view_gpu_words,view_callback_calls,view_refuse
 static int view_native(CPUState *,uint32_t,uint32_t);
 static int view_gpu(uint32_t,unsigned);
 static unsigned arrival_probe,arrival_camera_calls;
+static unsigned character_probe,character_calls;
 static int32_t arrival_target;
 static uint8_t arrival_body[0x158];
 static unsigned weather_probe,weather_world_updates,weather_draws;
@@ -53,6 +54,19 @@ static void disturb_host(void) {
 }
 static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
     (void)ret;++view_native_calls;
+    if(address==CHARACTER_UPDATE && character_probe) {
+        ++character_calls;
+        unsigned phase=psx_mod_read_byte(PLAY+2);
+        uint16_t edge=psx_mod_read_half(CHARACTER_PAD+4);
+        if(phase==4)psx_mod_write_byte(PLAY+2,5);
+        if(phase==5 && (edge&0x840u)) {
+            unsigned form=psx_mod_read_byte(CHARACTER_LIST+psx_mod_read_byte(PLAY+0x30));
+            psx_mod_write_byte(PLAY+0x5E,(uint8_t)form);
+            psx_mod_write_byte(PLAY+0x38,form==5);
+            psx_mod_write_byte(PLAY+2,7);
+        } else if(phase==5 && (edge&0x10u))psx_mod_write_byte(PLAY+2,9);
+        return 1;
+    }
     if(address==VIEW_DRAW_OT) { cpu->gpr[2]=0xC0DE;return 1; }
     if(address==0x80066150u)return 1;
     if(address==0x8006663Cu && personal_view_probe) {
@@ -506,7 +520,8 @@ static void native_initial_mode9_arrival_view(int online,int split) {
     view_pending=view_valid=0;frame_count=1;
     static uint8_t saved_ram[sizeof ram];memcpy(saved_ram,ram,sizeof ram);
     CPUState expected=cpu;uint32_t digest=state_digest();
-    independent_world_begin();CHECK(view_pending && view_valid && !view_native_calls);
+    CHECK(!world_draw_filter(&cpu,0x80025FB0u));
+    CHECK(view_pending && view_valid && !view_native_calls);
     CHECK(!memcmp(&cpu,&expected,sizeof cpu) && !memcmp(saved_ram,ram,sizeof ram) && state_digest()==digest);
     CHECK(life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_JOINING && arrival_pair==1);
     arrival_probe=1;PrivateViewContext context;memset(&context,0,sizeof context);private_context_save(&context);
@@ -807,7 +822,57 @@ static void native_intro_camera_volumes(void) {
     psx_mod_write_byte(PLAY+12,1);independent_camera_begin(&cpu,0x8002927Cu);
     CHECK(!intro_camera_valid);for(unsigned i=0;i<sizeof intro_camera_requests;++i)CHECK(!intro_camera_requests[i]);
 }
+static void native_sequential_character_selection(void) {
+    for(unsigned first_zero=0;first_zero<2;++first_zero)for(unsigned black=0;black<2;++black) {
+        CPUState cpu;setup(&cpu);cpu.gpr[4]=PLAY;
+        memset(&character_selection,0,sizeof character_selection);character_select_call=0;
+        psx_mod_write_word(CHARACTER_UPDATE,0x27BDFFE8u);
+        psx_mod_write_word(CHARACTER_UPDATE+0xC,0x80820002u);
+        psx_mod_write_word(CHARACTER_UPDATE+0x10,0x24630F40u);
+        const uint8_t native[]={0,1,5,2,3,4};
+        project(CHARACTER_LIST,native,sizeof native);psx_mod_write_byte(CHARACTER_COUNT,6);
+        psx_mod_write_byte(PLAY+0x5F,0x3F);psx_mod_write_byte(PLAY+0x69,255);
+        psx_mod_write_byte(PLAY+0x38,0);psx_mod_write_byte(PLAY+0x5E,0);
+        partner_x_armor=0;pad_buttons=0xFFFF;psx_mod_write_half(CHARACTER_PAD,0);
+        character_native_roster();CHECK(character_selection.count==7);
+        character_probe=1;psx_mod_write_byte(PLAY+2,4);
+        CHECK(character_select(&cpu,CHARACTER_UPDATE));
+        CHECK(psx_mod_read_byte(PLAY+2)==5 && !character_selection.seat);
+        psx_mod_write_byte(PLAY+0x30,first_zero?(uint8_t)(2+black):0);
+        psx_mod_write_half(CHARACTER_PAD,0x40);
+        pad_buttons=(uint16_t)~0x4000u; /* P2 holds confirm during P1's turn. */
+        CHECK(character_select(&cpu,CHARACTER_UPDATE));
+        CHECK(character_selection.seat==1 && psx_mod_read_byte(PLAY+2)==5 && !character_selection.valid);
+        CHECK(psx_mod_read_byte(CHARACTER_COUNT)==(first_zero?5:2));
+        for(unsigned i=0;i<psx_mod_read_byte(CHARACTER_COUNT);++i)
+            CHECK((psx_mod_read_byte(CHARACTER_LIST+i)==5)!=first_zero);
+        psx_mod_write_half(CHARACTER_PAD,0);
+        CHECK(character_select(&cpu,CHARACTER_UPDATE)); /* A held P2 button is consumed. */
+        CHECK(!character_selection.valid && psx_mod_read_byte(PLAY+2)==5);
+        pad_buttons=0xFFFF;CHECK(character_select(&cpu,CHARACTER_UPDATE));
+        psx_mod_write_byte(PLAY+0x30,first_zero?4:(uint8_t)black);
+        pad_buttons=(uint16_t)~0x4000u;CHECK(character_select(&cpu,CHARACTER_UPDATE));
+        CHECK(character_selection.valid && !character_selection.active && psx_mod_read_byte(PLAY+2)==7);
+        CHECK(character_selection.forms[0]==(first_zero?5:0) && character_selection.forms[1]==(first_zero?4:5));
+        CHECK(character_selection.black==black && selected_zero_black()==black);
+        CHECK(psx_mod_read_byte(PLAY+0x38)==first_zero && psx_mod_read_byte(PLAY+0x5E)==(first_zero?5:0));
+        CHECK(psx_mod_read_byte(PLAY+0x5F)==0x3F && psx_mod_read_byte(CHARACTER_COUNT)==7);
+        CHECK(character_select(&cpu,CHARACTER_UPDATE));CHECK(psx_mod_read_byte(CHARACTER_COUNT)==7);
+        HostState retained;state_capture(&retained);memset(&character_selection,0,sizeof character_selection);
+        state_commit(&retained);CHECK(character_selection.valid && character_selection.black==black);
+        psx_mod_write_word(0x80022910u,0x30420020u);cpu.gpr[2]=0x3F;
+        character_zero_variant(&cpu,0x80022910u);CHECK((cpu.gpr[2]&0x20u)==black*0x20u);
+        CHECK(psx_mod_read_byte(PLAY+0x5F)==0x3F);
+    }
+    /* A new campaign without Zero unlocked still offers ordinary Zero. */
+    memset(&character_selection,0,sizeof character_selection);
+    psx_mod_write_byte(PLAY+0x5F,0);psx_mod_write_byte(CHARACTER_LIST,0);psx_mod_write_byte(CHARACTER_COUNT,1);
+    character_native_roster();CHECK(character_selection.count==2 && character_selection.roster[1]==5);
+    CHECK(psx_mod_read_byte(PLAY+0x5F)==0);
+    character_probe=0;memset(&character_selection,0,sizeof character_selection);pad_buttons=0xFFFF;
+}
 int main(void) {
+    native_sequential_character_selection();
     defaults_and_scope();
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
     native_camera_context();

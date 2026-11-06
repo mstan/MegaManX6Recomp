@@ -301,6 +301,7 @@ static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1)
 #include "mmx6_coop_jump_audio.inc"
 #include "mmx6_coop_intro_target.inc"
 #include "mmx6_coop_weather.inc"
+#include "mmx6_coop_character_select.inc"
 
 static int unit_choices(CPUState *cpu, uint32_t address) {
     /* ROCK_X6.BIN member 16 shares its load address with stage overlays.
@@ -312,7 +313,8 @@ static int unit_choices(CPUState *cpu, uint32_t address) {
     unit_choices_call=1;
     cpu->gpr[2]=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
     unit_choices_call=0;
-    /* Keep the original unlocked list and its original order/confirmation. */
+    character_selection.active=character_selection.seat=0;
+    character_native_roster();
     return 1;
 }
 
@@ -346,7 +348,8 @@ static int ui_upload(const Mmx6AssetView *asset) {
 static int fixed_roster(Mmx6CoopRoster *roster) {
     Mmx6CoopRosterNative native={psx_mod_read_byte(PLAYER+2),psx_mod_read_byte(PLAYER+0xE7),
         psx_mod_read_byte(PLAY+0x38),psx_mod_read_byte(PLAY+0x5E),psx_mod_read_byte(PLAY+0x5F)};
-    Mmx6CoopRosterReason identity=mmx6_coop_roster_resolve_partner(&native,partner_x_armor,psx_mod_read_byte(PLAY+0x69),roster);
+    native.flags=(uint8_t)((native.flags&~0x20u)|(selected_zero_black()?0x20u:0));
+    Mmx6CoopRosterReason identity=mmx6_coop_roster_resolve_partner(&native,selected_partner_x(),psx_mod_read_byte(PLAY+0x69),roster);
     if (identity!=MMX6_COOP_ROSTER_OK) {
         fprintf(stderr,"mmx6 co-op: native roster refused (%s)\n",mmx6_coop_roster_reason(identity));
         return 0;
@@ -364,8 +367,7 @@ static int load_assets(const Mmx6CoopRoster *roster) {
     Mmx6CoopResourceViews v;
     /* Bind resources to the validated native counterpart, never its seat number. */
     if (mmx6_coop_resources_fixed_runtime_admit(roster)!=MMX6_COOP_RESOURCES_OK) return 0;
-    if(ready && private_actor.character==roster->seat[1].character &&
-       private_actor.form==roster->seat[1].form)return 1;
+    if(ready && !memcmp(&private_actor,&roster->seat[1],sizeof private_actor))return 1;
     if(ready) {
         /* A native stage/character handoff has retired the previous actor.
          * Keep SDK allocations, replace only owned immutable payloads. */
@@ -2166,7 +2168,8 @@ static int paired_arrival(CPUState *cpu) {
         Mmx6CoopRoster roster;
         Mmx6CoopRosterNative native={psx_mod_read_byte(PLAYER+2),psx_mod_read_byte(PLAY+0x5E),
             psx_mod_read_byte(PLAY+0x38),psx_mod_read_byte(PLAY+0x5E),psx_mod_read_byte(PLAY+0x5F)};
-        if (mmx6_coop_roster_resolve_partner(&native,partner_x_armor,psx_mod_read_byte(PLAY+0x69),&roster)!=MMX6_COOP_ROSTER_OK ||
+        native.flags=(uint8_t)((native.flags&~0x20u)|(selected_zero_black()?0x20u:0));
+        if (mmx6_coop_roster_resolve_partner(&native,selected_partner_x(),psx_mod_read_byte(PLAY+0x69),&roster)!=MMX6_COOP_ROSTER_OK ||
             mmx6_coop_resources_fixed_runtime_admit(&roster)!=MMX6_COOP_RESOURCES_OK) return 0;
         inside=1;
         ready=load_assets(&roster);
@@ -2934,6 +2937,12 @@ static void begin_world_draw(CPUState *cpu,uint32_t address) {
     giga_packet_trace("world-begin",0);
     (void)cpu;(void)address;
 }
+static int world_draw_filter(CPUState *cpu,uint32_t address) {
+    /* Entries and filters share one SDK hook slot. Keep native frame/pane
+     * preparation and P2's menu-only suppression in this single callback. */
+    if(personal_shared_effect(cpu,address))return 1;
+    begin_world_draw(cpu,address);return 0;
+}
 static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int armor) {
     uint32_t base=psx_mod_read_word(SCRATCH+0x100);
     uint32_t mode=psx_mod_read_word(SCRATCH+0x104);
@@ -3681,6 +3690,7 @@ static void activate(void) {
         else if(strcmp(armor,"base"))failed=1;
     }
     unit_choices_call=target_projection_call=0;
+    memset(&character_selection,0,sizeof character_selection);character_select_call=0;
     zero_menu_loaded=0;
     private_actor=default_private_actor;
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
@@ -3700,6 +3710,7 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x8002BCCC,boss_balance_allocate)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
+    if (!psx_mod_set_function_replacement(CHARACTER_UPDATE,character_select)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EB14C,intro_near_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x800ED150,northpole_ice_admission) ||
         !psx_mod_set_function_replacement(0x800EBF18,northpole_ice_live)) failed=1;
@@ -3756,7 +3767,7 @@ static void world_camera_begin(CPUState *cpu,uint32_t address) {
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const uint32_t personal_shared[]={0x800139A0u,0x800139F4u,
-        0x8001750Cu,0x80025FB0u,0x80020C40u};
+        0x8001750Cu,0x80020C40u};
     for(unsigned i=0;i<sizeof personal_shared/sizeof personal_shared[0];++i)
         psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",personal_shared[i],personal_shared_effect);
     psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",0x80026028u,personal_draw_filter);
@@ -3795,6 +3806,11 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
 #endif
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800318F4u,0x9102005Cu,boss_balance_damage);
+    static const uint32_t zero_variant_sites[]={0x80021BDCu,0x80022910u,0x80030E80u,
+        0x80031154u,0x80031264u,0x800317A4u,0x80035C60u,0x80039748u,
+        0x8003C644u,0x8003EB6Cu,0x801ED574u,0x801ED5D8u};
+    for(unsigned i=0;i<sizeof zero_variant_sites/sizeof zero_variant_sites[0];++i)
+        psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",zero_variant_sites[i],0x30420020u,character_zero_variant);
     for(unsigned i=0;i<sizeof boss_cooldown_sites/sizeof boss_cooldown_sites[0];++i)
         psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",boss_cooldown_sites[i].address,
             boss_cooldown_sites[i].words[6],boss_balance_shared_cooldown);
@@ -3806,7 +3822,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800F3FC4u,0x0064182Au,gate_homing_target);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
-    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);
+    psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",0x80025FB0,world_draw_filter);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002927C,world_camera_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80029D18,guest_placement_scan);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800270D0,independent_background_begin);

@@ -54,9 +54,9 @@ typedef enum {
 } Mmx6CoopRosterReason;
 
 /* Native X/form0..4 -> private Zero5; native Zero5 -> private base X0.
- * Every accepted roster includes Zero. PLAY+5F bit20 would select the native
- * Black Zero variant when that actor is projected, so both directions refuse
- * it until its resource/behavior closure is implemented. Other availability
+ * Every accepted roster includes Zero. Effective bit20 selects the native
+ * Black Zero portrait; runtime register hooks select its original behavior
+ * without editing persistent unlocks. Other availability
  * bits do not gate this resolver: original campaign selection owns them, and
  * the existing early-game private Zero policy does not require its unlock.
  * On any failure a non-NULL out is cleared, including stale prior success. */

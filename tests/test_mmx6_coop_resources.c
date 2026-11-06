@@ -35,7 +35,7 @@ static void archives(size_t zero_palette) {
     put32(bin,2);put32(bin+4,44588);put32(bin+4096,0x3C);
     put32(bin+8,24);put32(bin+12,22964);put32(bin+24*2048,0x3D);
     add_bundle(85,zero_palette);for(record=86;record<=89;++record)add_bundle(record,2688);
-    for(record=163;record<=174;++record) {
+    for(record=163;record<=176;++record) {
         size_t size=(record&1)?8192:512;
         descriptor(record,end,size);memset(dat+end,(int)record,size);end+=rounded(size);
     }
@@ -160,7 +160,15 @@ static void inverse_failures(void) {
         CHECK(v.portrait.data[0]==167+form*2 && v.portrait_colors.data[0]==168+form*2);
     }
     bad=zero;bad.seat[1]=roster(4).seat[0];
-    CHECK(mmx6_coop_resources_fixed_runtime_admit(&bad)==MMX6_COOP_RESOURCES_INVALID_ROSTER);
+    CHECK(mmx6_coop_resources_fixed_runtime_admit(&bad)==MMX6_COOP_RESOURCES_OK);
+    CHECK(mmx6_coop_resource_prepare(&bad,1,bin,BIN_SIZE,dat,DAT_SIZE,ARENA,&v)==MMX6_COOP_RESOURCES_OK);
+    CHECK(v.portrait.data[0]==167 && v.portrait_colors.data[0]==168);
+    {
+        Mmx6CoopRosterNative native={0,0,0,0,0x20};Mmx6CoopRoster black;
+        CHECK(mmx6_coop_roster_resolve(&native,&black)==MMX6_COOP_ROSTER_OK);
+        CHECK(mmx6_coop_resource_prepare(&black,1,bin,BIN_SIZE,dat,DAT_SIZE,ARENA,&v)==MMX6_COOP_RESOURCES_OK);
+        CHECK(v.portrait.data[0]==175 && v.portrait_colors.data[0]==176);
+    }
     bad=zero;bad.seat[1].portrait_palette=166;
     CHECK(mmx6_coop_resources_fixed_runtime_admit(&bad)==MMX6_COOP_RESOURCES_INVALID_ROSTER);
     plan_failure(&zero,1,BIN_SIZE,DAT_SIZE,315027,MMX6_COOP_RESOURCES_ALLOCATION_BOUND);

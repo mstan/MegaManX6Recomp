@@ -67,8 +67,16 @@ class FrozenInventoryTests(unittest.TestCase):
         # Runtime mod_packages.cpp rejects the second callback for a plugin's
         # native address. A discarded registration cannot qualify its behavior.
         source=(ROOT/'src/mods/mmx6_coop_plugin.c').read_text()
-        entries=re.findall(r'psx_mod_register_function_entry_plugin\("([^"]+)",\s*(0x[0-9A-Fa-f]+)u?\s*,',source)
-        keys=[(plugin,int(address,16)&0x1fffffff)for plugin,address in entries]
+        # Entries and filters share the same SDK registration table. Expand
+        # the literal address array used by the personal-effect filters too.
+        arrays={name:[int(a,16)for a in re.findall(r'0x[0-9A-Fa-f]+',body)]
+                for name,body in re.findall(r'static const uint32_t\s+(\w+)\[\]\s*=\s*\{([^}]+)\};',source)}
+        entries=re.findall(r'psx_mod_register_function_(?:entry|filter)_plugin\(\s*"([^"]+)",\s*(0x[0-9A-Fa-f]+u?|\w+\[\w+\])\s*,',source)
+        self.assertEqual(len(entries),len(re.findall(r'psx_mod_register_function_(?:entry|filter)_plugin\(',source)))
+        keys=[]
+        for plugin,address in entries:
+            addresses=arrays[address.split('[')[0]] if '[' in address else [int(address.rstrip('uU'),16)]
+            keys.extend((plugin,a&0x1fffffff)for a in addresses)
         self.assertTrue(keys)
         self.assertEqual(len(keys),len(set(keys)))
 
@@ -81,6 +89,29 @@ class FrozenInventoryTests(unittest.TestCase):
             self.assertFalse(required-set(entries),name)
             for address in required:self.assertEqual(entries.count(address),1,name)
 
+    @unittest.skipUnless(os.environ.get('MMX6_CONTENT_DISC') and os.environ.get('MMX6_CONTENT_EXE'),'Pinned original sources not supplied')
+    def test_character_selector_and_variant_sites_match_original(self):
+        from tweaks_native_psxmod import RawMode2Image
+        with RawMode2Image(Path(os.environ['MMX6_CONTENT_DISC'])) as disc:
+            root=disc.entries['ROCK_X6.BIN'].lba*2048;header=disc.read_user(root,4096)
+            members={}
+            for member in (1,16):
+                sector,size=struct.unpack_from('<II',header,member*8)
+                members[member]=disc.read_user(root+sector*2048,size)
+        native=members[16]
+        for address,word in ((0x800ECE48,0x27BDFFE8),(0x800ECE54,0x80820002),(0x800ECE58,0x24630F40)):
+            self.assertEqual(struct.unpack_from('<I',native,address-0x800E9860)[0],word)
+        exe=checkpoint.content.Executable(Path(os.environ['MMX6_CONTENT_EXE']).read_bytes())
+        sites={0x80021BDC,0x80022910,0x80030E80,0x80031154,0x80031264,0x800317A4,
+               0x80035C60,0x80039748,0x8003C644,0x8003EB6C,0x801ED574,0x801ED5D8}
+        for address in sites:
+            word=exe.word(address) if address<0x801EA000 else struct.unpack_from('<I',members[1],address-0x801EA000)[0]
+            self.assertEqual(word,0x30420020)
+        for name in ('game.toml','packaging/release/game.toml'):
+            config=tomllib.loads((ROOT/name).read_text(encoding='utf8'))['recompiler']
+            self.assertIn('0x800ECE48',config['mod_function_entry_funcs'])
+            self.assertFalse(sites-{int(x,16)for x in config['mod_instruction_sites']})
+
     def test_loaded_recycle_origin_declares_only_existing_fixed_destination(self):
         record=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text(encoding='utf8'))
         change=record['title_changes_v35']
@@ -88,8 +119,8 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],126)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v130')
+        self.assertEqual(record['revision'],127)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v131')
 
     def test_fortress_cp3_retains_original_checkpoint_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)

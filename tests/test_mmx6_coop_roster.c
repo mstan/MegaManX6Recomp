@@ -58,18 +58,19 @@ static void native_resolution(void) {
     for (form=0;form<6;++form) for (flags=0;flags<256;++flags) {
         Mmx6CoopRosterNative n=native(form,flags),before=n;
         Mmx6CoopRoster roster;
-        if (flags & 0x20u) {
-            /* P1 or projected P2 is Zero: shared bit selects unsupported art.
-             * Do not clear it, even when no Zero availability bit is set. */
-            refusal(n,MMX6_COOP_ROSTER_BLACK_ZERO_UNSUPPORTED);
-            continue;
-        }
         CHECK(mmx6_coop_roster_resolve(&n,&roster)==MMX6_COOP_ROSTER_OK);
         CHECK(!memcmp(&n,&before,sizeof n));
         CHECK(roster.resolved==1);
         CHECK(mmx6_coop_roster_validate(&roster)==MMX6_COOP_ROSTER_OK);
-        actor_matches(&roster.seat[0],form);
-        actor_matches(&roster.seat[1],form==5?0:5);
+        if(flags&0x20u) {
+            unsigned zero=form==5?0:1;
+            CHECK(roster.seat[zero].form==5 && roster.seat[zero].portrait_index==6);
+            CHECK(roster.seat[zero].portrait_graphics==175 && roster.seat[zero].portrait_palette==176);
+            actor_matches(&roster.seat[zero^1u],form==5?0:form);
+        } else {
+            actor_matches(&roster.seat[0],form);
+            actor_matches(&roster.seat[1],form==5?0:5);
+        }
     }
     /* Two independently valid native identities must agree exactly. X form
      * differences are not silently normalized or copied into the counterpart. */
@@ -159,18 +160,18 @@ static void canonical_validation(void) {
     }
     {
         Mmx6CoopRoster roster=resolved(5),ultimate=resolved(4);
-        roster.seat[1]=ultimate.seat[0]; /* Native resources, unsupported partner choice. */
-        CHECK(mmx6_coop_roster_validate(&roster)==MMX6_COOP_ROSTER_COUNTERPART_MISMATCH);
+        roster.seat[1]=ultimate.seat[0];
+        CHECK(mmx6_coop_roster_validate(&roster)==MMX6_COOP_ROSTER_OK);
         roster=resolved(0);roster.seat[1]=roster.seat[0];
         CHECK(mmx6_coop_roster_validate(&roster)==MMX6_COOP_ROSTER_COUNTERPART_MISMATCH);
     }
 }
 
 static void earned_partner_armors(void) {
-    for(unsigned choice=0;choice<=3;++choice)for(unsigned flags=0;flags<8;++flags)for(unsigned parts=0;parts<256;++parts) {
+    for(unsigned choice=0;choice<=4;++choice)for(unsigned flags=0;flags<16;++flags)for(unsigned parts=0;parts<256;++parts) {
         Mmx6CoopRosterNative n=native(5,flags),before=n;Mmx6CoopRoster r;
         unsigned expected=((choice==1 && (flags&1)) || (choice==2 && (flags&2) && (parts&0xF0)==0xF0) ||
-            (choice==3 && (flags&4) && (parts&15)==15))?choice:0;
+            (choice==3 && (flags&4) && (parts&15)==15) || (choice==4 && (flags&8)))?choice:0;
         CHECK(mmx6_coop_roster_resolve_partner(&n,choice,(uint8_t)parts,&r)==MMX6_COOP_ROSTER_OK);
         CHECK(!memcmp(&n,&before,sizeof n) && mmx6_coop_roster_validate(&r)==MMX6_COOP_ROSTER_OK);
         actor_matches(&r.seat[0],5);actor_matches(&r.seat[1],expected);
@@ -181,7 +182,7 @@ static void earned_partner_armors(void) {
         actor_matches(&r.seat[0],form);actor_matches(&r.seat[1],5);
     }
     Mmx6CoopRosterNative n=native(5,7);Mmx6CoopRoster r,empty={0};
-    CHECK(mmx6_coop_roster_resolve_partner(&n,4,255,&r)==MMX6_COOP_ROSTER_INVALID_FORM && !memcmp(&r,&empty,sizeof r));
+    CHECK(mmx6_coop_roster_resolve_partner(&n,5,255,&r)==MMX6_COOP_ROSTER_INVALID_FORM && !memcmp(&r,&empty,sizeof r));
 }
 int main(void) {
     unsigned reason;
