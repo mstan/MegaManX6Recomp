@@ -194,7 +194,12 @@ static void checkpoint_northpole_pickup(CPUState *cpu,const Mmx6Checkpoint *entr
     int x=(int16_t)psx_mod_read_half(child+10),top=(int16_t)psx_mod_read_half(child+14)-24;
     for(int px=x-29;px<=x+27;++px)for(int py=top-48;py<top;++py)
         if(checkpoint_northpole_tile(meta,desc,(unsigned)px,(unsigned)py)) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
-    /* Declared approach only: ordinary gravity supplies first top contact.
+    /* Native +68 boxes use signed center offsets and half extents:
+     * 73D50=00/02/0B/13 ->X bottomY+21; 73D54=00/03/0B/13 ->Zero+22;
+     * 787F0=00/00/0A/0A ->item+10; child00/00/18/18 ->topY-24.
+     * These poses have zero foot gap. 32208/323D4 must still perform native
+     * overlap/snap before2E1A0/2E664 can establish top8. Phase6 falls at2px
+     * per update; ordinary accelerating fall may catch it, never setupVY.
      * Keep nativeHP/air/ground/velocity, supportbits98/9C and every phase. */
     for(unsigned offset=8;offset<=0x18;offset+=0x10) {
         psx_mod_write_word(PLAYER+offset,(uint32_t)(x-17)<<16);

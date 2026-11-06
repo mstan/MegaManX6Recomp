@@ -319,7 +319,7 @@ static void digest_and_readiness(void){
     uint32_t h=state_digest();++frame_count;p2_hud_fade=17;CHECK(state_digest()==h);
     psx_mod_write_byte(diagnostic+0x50,8);CHECK(!snapshot_ready() && !snapshot_bytes());
     psx_mod_write_byte(diagnostic+0x50,0);CHECK(snapshot_ready());
-    for(unsigned phase=1;phase<=3;++phase){
+    for(unsigned phase=1;phase<=5;++phase){
         checkpoint_pending=(Mmx6CheckpointPending){phase,1,1234};
         CHECK(!snapshot_ready() && !snapshot_bytes() && state_digest()!=h);
         memset(&checkpoint_pending,0,sizeof checkpoint_pending);
