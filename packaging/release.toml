@@ -13,29 +13,6 @@ cmake_args = ["-DPSX_RECOMP_UI=ON", "-DPSX_ENABLE_VULKAN=OFF",
               "-DMMX6_ENABLE_PORTABLE_CPU_HOST_LAB=OFF",
               "-DBUILD_TESTING=ON"]
 
-# Existing offline SERVER inputs; the packager owns compiler/channel/debug flags.
-windows_cmake_args = [
-  "-DPSXRECOMP_V4_ROOT=G:/Temp/Codex/psxrecomp/x6-parity/server-c169-build-inputs/sdk",
-  "-DRECOMP_NET_ROOT=G:/Temp/Codex/psxrecomp/x6-parity/server-c169-build-inputs/net",
-  "-DRECOMP_RBENGINE_ROOT=G:/Temp/Codex/psxrecomp/x6-parity/server-c169-build-inputs/rb",
-  "-DRECOMP_UI_ROOT=G:/Temp/Codex/psxrecomp/x6-parity/server-c169-build-inputs/ui",
-  "-DPSX_THIRD_PARTY_DIR=G:/Temp/Codex/psxrecomp/x6-parity/server-c169-build-inputs/sdk/third_party",
-  "-DPSX_DEPS_OFFLINE=OFF",
-  "-DFETCHCONTENT_FULLY_DISCONNECTED=ON",
-  "-DFETCHCONTENT_SOURCE_DIR_LIBJUICE=G:/Temp/Codex/psxrecomp/x6-parity/server-c169-build-inputs/deps/libjuice-src",
-  "-DFETCHCONTENT_SOURCE_DIR_PSX_LIBCHDR=G:/Temp/Codex/psxrecomp/x6-parity/server-c169-build-inputs/deps/psx_libchdr-src",
-  "-DFETCHCONTENT_SOURCE_DIR_PSX_LIBWEBP=G:/Temp/Codex/psxrecomp/x6-parity/server-c169-build-inputs/deps/psx_libwebp-src",
-  "-DSDL3_DIR=G:/Temp/Codex/psxrecomp/x6-parity/toolchains/cmake-clang-v1/deps/lib/cmake/SDL3",
-  "-DZLIB_ROOT=G:/Temp/Codex/psxrecomp/x6-parity/toolchains/cmake-clang-v1/deps",
-  "-DCMAKE_RC_COMPILER=G:/Temp/Codex/psxrecomp/x6-parity/toolchains/cmake-clang-v1/bin/windres.exe",
-  "-DCMAKE_C_COMPILER_LAUNCHER=",
-  "-DCMAKE_CXX_COMPILER_LAUNCHER=",
-  "-DPython3_EXECUTABLE=C:/Python311/python.exe",
-  "-DPSX_PYTHON=C:/Python311/python.exe",
-  "-DPSX_SETUP_WIZARD=OFF",
-  "-DPSX_STATIC_RUNTIME=ON"
-]
-
 [aot]
 mode = "cache"
 profile = "aot/overlays.json"
