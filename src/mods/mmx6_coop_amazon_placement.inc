@@ -2,6 +2,38 @@
  * canonical camera can remain at the entrance while the guest approaches.
  * Reuse the native allocator and bounds helpers; never run its AI twice. */
 #ifdef MMX6_COOP_MODERN_STATE
+static int private_zero_saber_visibility(CPUState *cpu,uint32_t address) {
+    uint32_t actor=cpu->gpr[4];
+    /* Original BIN1 Zero801ED6F0 follows its owning PLAYER, then D910
+     * tests visibility with authored128/128. The private player pass still
+     * has the canonical camera; a distant native saber otherwise loses3
+     * before the existing retained-body-frame draw can append its pixels. */
+    if(address!=0x8002CCB0u || cpu->gpr[31]!=0x801ED918u || view_call ||
+       !independent_views || !ready || !enrolled || failed || !zero_projected || private_draw ||
+       private_actor.character!=MMX6_COOP_CHARACTER_ZERO || psx_mod_read_byte(PLAYER+2)!=1 ||
+       life.status[1]!=MMX6_COOP_ALIVE || psx_mod_read_byte(PLAYER+4)!=1 ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       actor<0x800950A0u || actor>=0x800964A0u || (actor-0x800950A0u)%0xA0u ||
+       !(psx_mod_read_byte(actor)&1u) || psx_mod_read_byte(actor+1)<24 || psx_mod_read_byte(actor+1)>42 ||
+       psx_mod_read_word(actor+0x38) ||
+       psx_mod_read_word(actor+0x3C)!=psx_mod_read_word(PLAYER+0x3C) ||
+       psx_mod_read_half(actor+0x40)!=psx_mod_read_half(PLAYER+0x40) ||
+       psx_mod_read_word(0x801ED704u)!=0xACC20008u || psx_mod_read_word(0x801ED710u)!=0xACC3000Cu ||
+       psx_mod_read_word(0x801ED90Cu)!=0x24050080u || psx_mod_read_word(0x801ED910u)!=0x0C00B32Cu ||
+       psx_mod_read_word(0x801ED914u)!=0x24060080u)return 0;
+    int limits[4];for(unsigned i=0;i<4;++i)limits[i]=(int16_t)psx_mod_read_half(VIEW_CAMERA+0x1C+i*2);
+    if(limits[0]<limits[1] || limits[2]<limits[3])return 0;
+    int x=(int16_t)psx_mod_read_half(PLAYER+10)-160,y=(int16_t)psx_mod_read_half(PLAYER+14)-96;
+    if(x<limits[1])x=limits[1];if(x>limits[0])x=limits[0];
+    if(y<limits[3])y=limits[3];if(y>limits[2])y=limits[2];
+    uint32_t saved[4]={psx_mod_read_word(VIEW_CAMERA+8),psx_mod_read_word(VIEW_CAMERA+12),view_call,cpu->gpr[6]};
+    STATE_WORDS(restore_saber_view,144,saved,4);
+    view_call=1;psx_mod_write_word(VIEW_CAMERA+8,(uint32_t)x<<16);psx_mod_write_word(VIEW_CAMERA+12,(uint32_t)y<<16);
+    /* The inner original entry applies any widescreen margin once. */
+    cpu->gpr[6]=128;uint32_t result=guest(cpu,address,actor,128);
+    psx_mod_write_word(VIEW_CAMERA+8,saved[0]);psx_mod_write_word(VIEW_CAMERA+12,saved[1]);
+    view_call=saved[2];cpu->gpr[6]=saved[3];cpu->gpr[2]=result;STATE_POP(restore_saber_view);return 1;
+}
 static int amazon_support_source(void) {
     uint32_t placement=psx_mod_read_word(0x800F6540u);
     return (placement&0x00FFFFFEu)==0x00000700u &&
@@ -76,6 +108,7 @@ static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {
 }
 static int amazon_guest_support_visibility(CPUState *cpu,uint32_t address) {
     if(shared_effect_view_bounds(cpu,address))return 1;
+    if(private_zero_saber_visibility(cpu,address))return 1;
     int x,y;uint32_t actor=cpu->gpr[4];
     if((cpu->gpr[31]!=0x800EC050u && cpu->gpr[31]!=0x800EC06Cu) ||
        !amazon_guest_support(actor,&x,&y))return 0;

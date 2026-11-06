@@ -1310,6 +1310,43 @@ static void deferred_shared_effect_owner_context(void) {
     native_player_init(&cpu,0x8003BD24u);
     for(unsigned i=0;i<96;++i)CHECK(!shared_effect_owners[i]);
 }
+static void distant_zero_saber_uses_native_owner_visibility(void) {
+    CPUState cpu;setup(&cpu);surface_probe=1;independent_views=1;
+    const uint32_t actor=0x800950A0u,camera=0x800971F8u;
+    put32(p2.body+8,4100u<<16);put32(p2.body+12,411u<<16);
+    psx_mod_write_word(camera+8,3488u<<16);psx_mod_write_word(camera+12,224u<<16);
+    psx_mod_write_half(camera+0x1C,7360);psx_mod_write_half(camera+0x1E,3488);
+    psx_mod_write_half(camera+0x20,224);psx_mod_write_half(camera+0x22,224);
+    p2.shots[0]=0x21;p2.shots[1]=24;p2.shots[4]=1;
+    put32(p2.shots+8,4100u<<16);put32(p2.shots+12,411u<<16);
+    put32(p2.shots+0x3C,le32(p2.body+0x3C));p2.shots[0x41]=p2.body[0x41];
+    put32(zero_overlay+0x3704,0xACC20008u);put32(zero_overlay+0x3710,0xACC3000Cu);
+    put32(zero_overlay+0x390C,0x24050080u);put32(zero_overlay+0x3910,0x0C00B32Cu);
+    put32(zero_overlay+0x3914,0x24060080u);
+    inside=1;enter_zero();cpu.gpr[4]=actor;cpu.gpr[5]=cpu.gpr[6]=128;cpu.gpr[31]=0x801ED918u;
+    CHECK(guest(&cpu,0x8002CCB0u,actor,128)==1 && !psx_mod_read_byte(actor+3));
+    uint8_t before_actor[0xA0],expected_actor[0xA0],before_camera[0x54];
+    capture(actor,before_actor,sizeof before_actor);memcpy(expected_actor,before_actor,sizeof expected_actor);expected_actor[3]=1;
+    capture(camera,before_camera,sizeof before_camera);CPUState expected=cpu;expected.gpr[2]=0;
+    CHECK(amazon_guest_support_visibility(&cpu,0x8002CCB0u));
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && !memcmp(expected_actor,memory(actor),sizeof expected_actor));
+    CHECK(!memcmp(before_camera,memory(camera),sizeof before_camera) && !view_call && !state_track.count);
+    for(unsigned bad=0;bad<7;++bad) {
+        cpu=expected;cpu.gpr[31]=0x801ED918u;cpu.gpr[4]=actor;
+        psx_mod_write_byte(actor+1,24);psx_mod_write_word(actor+0x38,0);psx_mod_write_word(actor+0x3C,le32(p2.body+0x3C));
+        psx_mod_write_word(0x801ED910u,0x0C00B32Cu);zero_projected=1;view_call=0;
+        if(bad==0)cpu.gpr[31]+=4;
+        if(bad==1)cpu.gpr[4]++;
+        if(bad==2)psx_mod_write_byte(actor+1,23);
+        if(bad==3)psx_mod_write_word(actor+0x38,assets);
+        if(bad==4)psx_mod_write_word(actor+0x3C,0x80040000u);
+        if(bad==5)psx_mod_write_word(0x801ED910u,0);
+        if(bad==6)zero_projected=0;
+        expected=cpu;CHECK(!amazon_guest_support_visibility(&cpu,0x8002CCB0u));CHECK(!memcmp(&cpu,&expected,sizeof cpu));
+        CHECK(!memcmp(before_camera,memory(camera),sizeof before_camera));
+    }
+    zero_projected=1;leave_zero();inside=0;
+}
 static void distant_surface_keeps_original_owner_view_and_retirement(void) {
     CPUState cpu;setup(&cpu);stage_call=0;shared_probe=surface_probe=1;independent_views=1;
     const uint32_t actor=0x80091298u,camera=0x800971F8u,table=0x800F5728u;
@@ -3645,6 +3682,7 @@ int main(void){
     private_native_weapon_atlas_retains_zero_source();
     deferred_death_effect_retains_zero_source();clear_banks();
     native_X_armor_compressed_frame_and_survivor();clear_banks();
+    distant_zero_saber_uses_native_owner_visibility();
     native_shared_boss_palette();
     native_shared_weather_palette();
     native_shared_portrait_palette();
