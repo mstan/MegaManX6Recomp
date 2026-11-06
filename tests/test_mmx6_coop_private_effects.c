@@ -3279,16 +3279,37 @@ static void gate_target_setup(CPUState *cpu,uint32_t address) {
     cpu->gpr[17]=child;cpu->pc=address;
     cpu->gpr[2]=address==0x800F3F54u?0x80090000u:PLAYER;cpu->gpr[3]=2000;cpu->gpr[4]=2000;cpu->gpr[5]=1000;
 }
+static unsigned gate_target_ordinal;
+static int gate_target_bad=-1;
 static void gate_target_check(CPUState *cpu,uint32_t address,int changed,unsigned reg,int value) {
     memcpy(gate_target_before,ram,sizeof ram);PlayerContext partner=p2;CPUState expected=*cpu;
     unsigned calls_before=call_count;
     if(changed)expected.gpr[reg]=(uint32_t)(int32_t)value;
+    unsigned ordinal=++gate_target_ordinal;
     PSXModFunctionEntryCallback callback=gate_homing_target;callback(cpu,address);
+    if(memcmp(&expected,cpu,sizeof *cpu)) {
+        fprintf(stderr,"Gate operand mismatch call=%u bad=%d site=%08X changed=%d expectedreg=%u value=%08X CPUbytes=%u\n",
+            ordinal,gate_target_bad,address,changed,reg,(uint32_t)(int32_t)value,(unsigned)sizeof *cpu);
+        fprintf(stderr,"eligible=%d/%d ready=%u enrolled=%u failed=%u inside=%d zero=%d/%d private=%d scene=%u/%u pause=%d mode=%u/%u stage=%u/%u child=%08X parent=%08X boss=%08X\n",
+            intro_target_eligible(0),intro_target_eligible(1),ready,enrolled,failed,inside,zero_world,zero_projected,private_draw,scene_owner,scene_phase,pause_owner,
+            psx_mod_read_byte(PLAY),psx_mod_read_byte(PLAY+1),psx_mod_read_byte(PLAY+12),psx_mod_read_byte(PLAY+13),cpu->gpr[17],psx_mod_read_word(cpu->gpr[17]+0x7C),psx_mod_read_word(PLAY+0x20));
+        for(unsigned i=0;i<32;++i) {
+            if(expected.gpr[i]!=cpu->gpr[i])fprintf(stderr,"gpr[%u] expected=%08X actual=%08X\n",i,expected.gpr[i],cpu->gpr[i]);
+            if(expected.gte_data[i]!=cpu->gte_data[i])fprintf(stderr,"gte_data[%u] expected=%08X actual=%08X\n",i,expected.gte_data[i],cpu->gte_data[i]);
+            if(expected.gte_ctrl[i]!=cpu->gte_ctrl[i])fprintf(stderr,"gte_ctrl[%u] expected=%08X actual=%08X\n",i,expected.gte_ctrl[i],cpu->gte_ctrl[i]);
+        }
+        if(expected.pc!=cpu->pc)fprintf(stderr,"pc expected=%08X actual=%08X\n",expected.pc,cpu->pc);
+        if(expected.hi!=cpu->hi)fprintf(stderr,"hi expected=%08X actual=%08X\n",expected.hi,cpu->hi);
+        if(expected.lo!=cpu->lo)fprintf(stderr,"lo expected=%08X actual=%08X\n",expected.lo,cpu->lo);
+        const uint8_t *before=(const uint8_t*)&expected,*after=(const uint8_t*)cpu;
+        for(unsigned i=0;i<sizeof *cpu;++i)if(before[i]!=after[i])fprintf(stderr,"CPUbyte[%u] expected=%02X actual=%02X\n",i,before[i],after[i]);
+    }
     CHECK(!memcmp(&expected,cpu,sizeof *cpu));
     CHECK(!memcmp(gate_target_before,ram,sizeof ram) && !memcmp(&partner,&p2,sizeof p2));
     CHECK(call_count==calls_before && !state_track.count && !state_track.error);
 }
 static void native_gate_continuous_target_operands(void) {
+    gate_target_ordinal=0;gate_target_bad=-1;
     CPUState cpu;const uint32_t sites[]={0x800F3F08u,0x800F3F54u,0x800F3FB4u,0x800F3FC4u};
     const unsigned regs[]={3,5,4,3};
     for(unsigned i=0;i<4;++i) {
@@ -3305,6 +3326,7 @@ static void native_gate_continuous_target_operands(void) {
     psx_mod_write_byte(0x80093CF4u,0);cpu.gpr[5]=1000;
     gate_target_check(&cpu,0x800F3F54u,1,5,-250);
     for(unsigned bad=0;bad<26;++bad) {
+        gate_target_bad=(int)bad;
         gate_target_setup(&cpu,0x800F3F54u);uint32_t child=cpu.gpr[17],address=0x800F3F54u;
         if(bad==0)ready=0;if(bad==1)enrolled=0;if(bad==2)inside=1;if(bad==3)zero_world=1;
         if(bad==4)zero_projected=1;if(bad==5)private_draw=1;if(bad==6)scene_owner=1;
@@ -3324,8 +3346,10 @@ static void native_gate_continuous_target_operands(void) {
         if(bad==25) {psx_mod_write_word(PLAYER+8,3180u<<16);psx_mod_write_word(PLAYER+12,1020u<<16);} /* Equal distance: P1. */
         gate_target_check(&cpu,address,0,0,0);
     }
+    gate_target_bad=-2;
     gate_target_setup(&cpu,0x800F3FC4u);cpu.gpr[2]=PLAYER+4;
     gate_target_check(&cpu,0x800F3FC4u,0,0,0);
+    gate_target_bad=-3;
     gate_target_setup(&cpu,0x800F3FB4u);psx_mod_write_byte(cpu.gpr[17]+6,1);
     gate_target_check(&cpu,0x800F3FB4u,0,0,0);
 }
