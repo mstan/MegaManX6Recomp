@@ -32,6 +32,7 @@
 #include "mmx6_coop_pixel_codec.h"
 #include "mmx6_coop_effect_diagnostic.h"
 #include "mmx6_coop_box_diagnostic.h"
+#include "mmx6_coop_hit_diagnostic.h"
 #include "mmx6_adaptive_background.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -234,6 +235,29 @@ static void code_bank(const uint8_t *p) {
             psx_mod_write_code_word(OVERLAY+i,v);
     }
 }
+static Mmx6HitDiagnostic hit_diagnostic[2][MMX6_HIT_DIAG_SLOTS];
+static void native_hit_return_diagnostic(const CPUState *cpu,uint32_t address,uint32_t boss,uint32_t result) {
+#ifndef PSX_NO_DEBUG_TOOLS
+    /*31530 preserves the inner315CC result in A1;31538/3C returns outer0
+     * for126. That branch preserves A3=shot and A0=its nonzero64 token.
+     * No-overlap2D868 leaves A3=shot+82, not an aligned original slot;
+     * empty/early scans retain A0=actor. Observe BEFORE guest restores GPRs. */
+    if(!cpu || address!=0x80031474u || result || cpu->gpr[5]!=126 ||
+       boss<0x8008EF48u || boss>=0x80090C88u || (boss-0x8008EF48u)%0x9Cu)return;
+    uint32_t shot=cpu->gpr[7],token=cpu->gpr[4];
+    if(shot<0x800950A0u || shot>=0x800964A0u || (shot-0x800950A0u)%0xA0u ||
+       !token || token>255 || psx_mod_read_byte(shot+0x64)!=token)return;
+    if(!psx_mod_read_byte(shot) || !psx_mod_read_byte(boss))return;
+    Mmx6HitDiagnostic *record=&hit_diagnostic[!!zero_projected][(shot-0x800950A0u)/0xA0u];
+    if(record->count!=65535)++record->count;
+    record->boss_slot=(uint8_t)((boss-0x8008EF48u)/0x9Cu);
+    record->hp=psx_mod_read_byte(boss+0x5C);record->frame=psx_mod_read_word(PLAY+0x90);
+    for(unsigned i=0;i<3;++i)record->header[i]=psx_mod_read_byte(shot+i);
+    record->token=(uint8_t)token;record->parent=psx_mod_read_word(shot+0x7C);
+#else
+    (void)cpu;(void)address;(void)boss;(void)result;
+#endif
+}
 static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1) {
     /* Preserve the caller's architectural registers, not elapsed guest time.
      * Dispatch handles nested calls, interrupts and compiled/interpreted code. */
@@ -251,6 +275,7 @@ static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1)
     cpu->pc=0; cpu->gpr[4]=a0; cpu->gpr[5]=a1;
     psx_dispatch_call(cpu,address,saved[31]);
     uint32_t result=cpu->gpr[2];
+    native_hit_return_diagnostic(cpu,address,a0,result);
     memcpy(cpu->gpr,saved,32*4);
     memcpy(cpu->gte_data,saved+32,32*4);
     memcpy(cpu->gte_ctrl,saved+64,32*4);
@@ -1061,6 +1086,26 @@ static void diagnostics(uint16_t input) {
     project(diagnostic+MMX6_FX_DIAG_TRAILS,p2.trails,sizeof p2.trails);
     project(diagnostic+MMX6_FX_DIAG_ATTACHED,p2.effects,sizeof p2.effects);
     diagnostic_p2_boxes();
+    psx_mod_write_word(diagnostic+MMX6_HIT_DIAG_HEADER,MMX6_HIT_DIAG_MAGIC);
+    psx_mod_write_word(diagnostic+MMX6_HIT_DIAG_HEADER+4,MMX6_HIT_DIAG_SCHEMA);
+    psx_mod_write_half(diagnostic+MMX6_HIT_DIAG_HEADER+8,MMX6_HIT_DIAG_STRIDE);
+    psx_mod_write_byte(diagnostic+MMX6_HIT_DIAG_HEADER+10,MMX6_HIT_DIAG_SLOTS);
+#ifdef PSX_NO_DEBUG_TOOLS
+    psx_mod_write_byte(diagnostic+MMX6_HIT_DIAG_HEADER+11,0);
+#else
+    psx_mod_write_byte(diagnostic+MMX6_HIT_DIAG_HEADER+11,2); /* active seats */
+#endif
+    psx_mod_write_word(diagnostic+MMX6_HIT_DIAG_HEADER+12,psx_mod_read_word(PLAY+0x90));
+    for(unsigned i=0;i<2*MMX6_HIT_DIAG_SLOTS;++i) {
+        const Mmx6HitDiagnostic *r=&hit_diagnostic[i/MMX6_HIT_DIAG_SLOTS][i%MMX6_HIT_DIAG_SLOTS];
+        uint8_t wire[MMX6_HIT_DIAG_STRIDE];
+        wire[0]=(uint8_t)r->count;wire[1]=(uint8_t)(r->count>>8);
+        wire[2]=r->boss_slot;wire[3]=r->hp;put32(wire+4,r->frame);
+        memcpy(wire+8,r->header,3);wire[11]=r->token;put32(wire+12,r->parent);
+        uint32_t at=i<MMX6_HIT_DIAG_FIRST_COUNT?MMX6_HIT_DIAG_RECORDS+i*16u:
+            MMX6_HIT_DIAG_REST+(i-MMX6_HIT_DIAG_FIRST_COUNT)*16u;
+        project(diagnostic+at,wire,sizeof wire);
+    }
     psx_mod_write_word(diagnostic+0x88,frame_count*2u);
 }
 static int diagnostic_mutation_allowed(void) {
@@ -3442,6 +3487,7 @@ static void activate(void) {
     memset(banks,0,sizeof banks);bank_count=0;
     memset(ui_banks,0,sizeof ui_banks);ui_bank_count=0;
     assets=assembly=palette_source=active_palette=packets=diagnostic=0;
+    memset(hit_diagnostic,0,sizeof hit_diagnostic);
     menu_memory=menu_assembly=hud_packets=world_packets=0;
     memset(&p1,0,sizeof p1);memset(&p2,0,sizeof p2);
     memset(saved_overlay,0,sizeof saved_overlay);memset(zero_overlay,0,sizeof zero_overlay);

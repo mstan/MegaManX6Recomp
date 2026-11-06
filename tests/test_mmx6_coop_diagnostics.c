@@ -17,6 +17,8 @@ int psx_mod_netplay_has_state_digest(void) { return test_digest_registered; }
 static unsigned rejected,guest_calls,effect_writes;
 static unsigned observed_reads,observed_consumer,sio_reads;
 static unsigned box_writes;
+static unsigned hit_watch,hit_reads,hit_guest_mock;
+static uint32_t hit_shot=0x80095280u,hit_boss=0x8008EF48u;
 static int test_replay_supply;
 static uint16_t observed_buttons;
 static int observed_contaminated;
@@ -32,7 +34,16 @@ static uint8_t *memory(uint32_t address) {
     if (address>=0x9F080000u && address<0x9F082000u) return test_diagnostic+address-0x9F080000u;
     return test_ram+(address&0x1FFFFFu);
 }
-uint8_t psx_mod_read_byte(uint32_t address) { return *memory(address); }
+uint8_t psx_mod_read_byte(uint32_t address) {
+    if(hit_watch) {
+        CHECK((address>=hit_shot&&address<hit_shot+3) || address==hit_shot+0x64 ||
+            (address>=hit_shot+0x7C&&address<hit_shot+0x80) ||
+            address==hit_boss || address==hit_boss+0x5C ||
+            (address>=PLAY+0x90&&address<PLAY+0x94));
+        ++hit_reads;
+    }
+    return *memory(address);
+}
 uint16_t psx_mod_read_half(uint32_t address) { return (uint16_t)(psx_mod_read_byte(address)|(psx_mod_read_byte(address+1)<<8)); }
 uint32_t psx_mod_read_word(uint32_t address) { return (uint32_t)psx_mod_read_half(address)|((uint32_t)psx_mod_read_half(address+2)<<16); }
 void psx_mod_write_byte(uint32_t address,uint8_t value) {
@@ -51,10 +62,71 @@ int psx_mod_netplay_is_active(void) { return test_online; }
 void psx_mod_counter_add(const char *name,uint32_t count) { CHECK(strstr(name,"rejected"));rejected+=count; }
 uint16_t sio_get_pad_buttons_slot(int slot) { CHECK(slot==1);++sio_reads;return 0xFFDF; }
 void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret) {
+    if(hit_guest_mock) {
+        CHECK(target==0x80031474u);(void)ret;
+        cpu->gpr[2]=0;cpu->gpr[5]=126;cpu->gpr[7]=hit_shot;cpu->gpr[4]=7;
+        return;
+    }
 #ifdef MMX6_TEST_GUEST_DISPATCH
     if(MMX6_TEST_GUEST_DISPATCH(cpu,target,ret))return;
 #endif
     (void)cpu;(void)target;(void)ret;++guest_calls;
+}
+
+static void actual_hit_return_breadcrumb(void) {
+    CPUState cpu;memset(&cpu,0,sizeof cpu);
+    memset(hit_diagnostic,0,sizeof hit_diagnostic);
+    psx_mod_write_byte(hit_shot,1);psx_mod_write_byte(hit_shot+1,1);psx_mod_write_byte(hit_shot+2,3);
+    psx_mod_write_byte(hit_shot+0x64,7);psx_mod_write_word(hit_shot+0x7C,0x800950A0u);
+    psx_mod_write_byte(hit_boss,1);psx_mod_write_byte(hit_boss+0x5C,35);
+    psx_mod_write_word(PLAY+0x90,123456u);
+    cpu.gpr[5]=126;cpu.gpr[7]=hit_shot;cpu.gpr[4]=7;
+    hit_watch=1;hit_reads=0;
+    native_hit_return_diagnostic(&cpu,0x800315CCu,hit_boss,0);CHECK(!hit_reads);
+    native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,127);CHECK(!hit_reads);
+    cpu.gpr[5]=127;native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);CHECK(!hit_reads);
+    cpu.gpr[5]=126;cpu.gpr[7]=hit_shot+0x82;
+    native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);CHECK(!hit_reads); /* no-overlap A3 */
+    cpu.gpr[7]=0x800964A0u;native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);CHECK(!hit_reads);
+    cpu.gpr[7]=0x8009509Fu;native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);CHECK(!hit_reads);
+    cpu.gpr[7]=hit_shot;cpu.gpr[4]=0;
+    native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);CHECK(!hit_reads); /* empty/early scan */
+    cpu.gpr[4]=256;native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);CHECK(!hit_reads);
+    cpu.gpr[4]=7;native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss+1,0);CHECK(!hit_reads);
+    cpu.gpr[4]=8;native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);
+#ifndef PSX_NO_DEBUG_TOOLS
+    CHECK(hit_reads==1); /* bounded token read, wrong token cannot count */
+#else
+    CHECK(!hit_reads);
+#endif
+    hit_watch=0;cpu.gpr[4]=7;
+    psx_mod_write_byte(hit_shot,0);native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);
+    CHECK(!hit_diagnostic[0][3].count);psx_mod_write_byte(hit_shot,1);
+    psx_mod_write_byte(hit_boss,0);native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);
+    CHECK(!hit_diagnostic[0][3].count);psx_mod_write_byte(hit_boss,1);
+    uint32_t digest_before=diagnostic_host_digest();
+    CPUState before=cpu;hit_guest_mock=1;zero_projected=0;
+    CHECK(guest(&cpu,0x80031474u,hit_boss,0)==0);
+    CHECK(!memcmp(&before,&cpu,sizeof cpu)); /* result/control/register preservation */
+    zero_projected=1;CHECK(guest(&cpu,0x80031474u,hit_boss,0)==0);zero_projected=0;hit_guest_mock=0;
+    CHECK(diagnostic_host_digest()==digest_before);
+    Mmx6HitDiagnostic *a=&hit_diagnostic[0][3],*z=&hit_diagnostic[1][3];
+#ifndef PSX_NO_DEBUG_TOOLS
+    CHECK(a->count==1&&z->count==1&&a->frame==123456u&&z->frame==123456u);
+    CHECK(a->boss_slot==0&&a->hp==35&&a->header[0]==1&&a->header[1]==1&&a->header[2]==3);
+    CHECK(a->token==7&&a->parent==0x800950A0u&&!hit_diagnostic[0][2].count);
+    a->count=65535;native_hit_return_diagnostic(&cpu,0x80031474u,hit_boss,0);CHECK(a->count==65535);
+#else
+    CHECK(!a->count&&!z->count);
+#endif
+    diagnostics(0);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_HIT_DIAG_HEADER)==MMX6_HIT_DIAG_MAGIC);
+    CHECK(psx_mod_read_half(diagnostic+MMX6_HIT_DIAG_HEADER+8)==16);
+    CHECK(psx_mod_read_byte(diagnostic+MMX6_HIT_DIAG_HEADER+10)==32);
+    CHECK(psx_mod_read_half(diagnostic+MMX6_HIT_DIAG_RECORDS+3*16)==a->count);
+    CHECK(psx_mod_read_half(diagnostic+MMX6_HIT_DIAG_REST+(32+3-8)*16)==z->count);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_HIT_DIAG_RECORDS+3*16+4)==a->frame);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_HIT_DIAG_RECORDS+3*16+12)==a->parent);
 }
 
 static void queue(unsigned command) {
@@ -206,7 +278,7 @@ int main(void) {
     CHECK(!memcmp(memory(OVERLAY+OVERLAY_SIZE-4),"\xAA\xBB\xCC\xDD",4));
     CHECK(!memcmp(zero_overlay+OVERLAY_SIZE-4,"\x11\x22\x33\x44",4));
     CHECK(!memcmp(memory(0x80073D54),"\x55\x66\x77\x88",4));
-    for(unsigned i=0x1958;i<MMX6_FX_DIAG_HEADER;++i)CHECK(test_diagnostic[i]==0xA5);
+    for(unsigned i=MMX6_HIT_DIAG_FIRST_END;i<MMX6_FX_DIAG_HEADER;++i)CHECK(test_diagnostic[i]==0xA5);
     /* The declared energy publication occupies exactly six tail bytes.
      * A projected private actor must still report the saved native supply. */
     {
@@ -225,7 +297,7 @@ int main(void) {
             CHECK(!memcmp(memory(PLAY+0x63),native,2) && !memcmp(saved_play+0x63,saved,2));
             CHECK(!memcmp(zero_subtanks,private,2) && !memcmp(&published,&p2,sizeof p2));
             CHECK(separate_subtanks==1 && subtank_seeded==1 && zero_projected==projected);
-            for(unsigned i=MMX6_BOX_DIAG_END;i<0x1FF0;++i)CHECK(test_diagnostic[i]==0xA5);
+            for(unsigned i=MMX6_HIT_DIAG_END;i<0x1FF0;++i)CHECK(test_diagnostic[i]==0xA5);
             for(unsigned i=0x1FF6;i<0x2000;++i)CHECK(test_diagnostic[i]==0xA5);
         }
         memcpy(memory(PLAY+0x63),old_native,2);memcpy(saved_play+0x63,old_saved,2);
@@ -265,5 +337,6 @@ int main(void) {
     diagnostic_test_taint=0;queue(9);diagnostic_setup(&cpu);CHECK(!diagnostic_test_taint);
 #endif
     protection_boundary();
+    actual_hit_return_breadcrumb();
     puts("co-op debug isolation and diagnostic publication PASS");return 0;
 }
