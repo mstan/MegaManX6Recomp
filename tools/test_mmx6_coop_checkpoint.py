@@ -72,6 +72,15 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertTrue(keys)
         self.assertEqual(len(keys),len(set(keys)))
 
+    def test_personal_pause_filters_are_emitted_for_development_and_release(self):
+        required={0x800139A0,0x800139F4,0x8001750C,0x80020C40,
+                  0x80025FB0,0x80026028,0x80034CD0}
+        for name in ('game.toml','packaging/release/game.toml'):
+            config=tomllib.loads((ROOT/name).read_text(encoding='utf8'))
+            entries=[int(x,16) for x in config['recompiler']['mod_function_entry_funcs']]
+            self.assertFalse(required-set(entries),name)
+            for address in required:self.assertEqual(entries.count(address),1,name)
+
     def test_loaded_recycle_origin_declares_only_existing_fixed_destination(self):
         record=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text(encoding='utf8'))
         change=record['title_changes_v35']
@@ -79,8 +88,8 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],124)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v129')
+        self.assertEqual(record['revision'],126)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v130')
 
     def test_fortress_cp3_retains_original_checkpoint_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)

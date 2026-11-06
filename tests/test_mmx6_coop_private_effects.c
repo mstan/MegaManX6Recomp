@@ -20,6 +20,8 @@ static unsigned call_count,draw_count,tag_count;
 static uint32_t expected_follower_x;
 static int texture_support=1,marker_override=2,terminal_player,stage_driver;
 static int menu_probe;
+static unsigned personal_probe,personal_commits[2],personal_worlds,personal_fades,personal_world_draws;
+static unsigned menu_view_uploads;
 static unsigned menu_vram_probe,gp0_upload_stage,gp0_upload_left,gp0_upload_x,gp0_upload_y,gp0_upload_width,gp0_upload_at;
 static uint16_t original_menu_vram[1024*512];
 static uint16_t menu_input[3];
@@ -97,6 +99,11 @@ int psx_mod_widescreen_x_margin(void){return 0;}
 void psx_mod_counter_add(const char *name,uint32_t count){(void)name;(void)count;}
 int psx_mod_read_disc_file(const char *name,void *data,uint32_t size,uint32_t *out){(void)name;(void)data;(void)size;(void)out;CHECK(0);return 0;}
 const uint16_t *gpu_get_vram(void){return test_vram;}
+void gr_vram_transfer_in(int x,int y,int w,int h,const uint16_t *pixels) {
+    CHECK(pixels && x>=0 && y>=0 && w>0 && h>0 && x+w<=1024 && y+h<=512);
+    for(int row=0;row<h;++row)memcpy(test_vram+(y+row)*1024+x,pixels+row*w,(size_t)w*sizeof *pixels);
+    ++menu_view_uploads;
+}
 void gpu_write_gp0(uint32_t value){
 #ifdef MMX6_TEST_PRIVATE_VIEW_GPU
     if(MMX6_TEST_PRIVATE_VIEW_GPU(value,0))return;
@@ -258,6 +265,61 @@ static uint32_t original_door_predicate(uint32_t actor) {
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
+    if(personal_probe) {
+        unsigned seat=!!zero_projected;
+        CHECK(personal_pass && personal_seat==seat);
+        if(address==0x8003CD44u) {
+            for(unsigned i=0;i<3;++i)psx_mod_write_half(PLAYER+0x7C+i*2,psx_mod_read_half(PERSONAL_PAD+i*2));
+            return;
+        }
+        if(address==0x80032DF0u) {
+            CHECK(!psx_mod_read_byte(0x80097424u));
+            psx_mod_write_byte(PERSONAL_MENU+5,2);
+            psx_mod_write_byte(PERSONAL_MENU+0x14,(uint8_t)(seat+1));
+            psx_mod_write_byte(PERSONAL_WEAPON,psx_mod_read_byte(PLAYER+0x93));return;
+        }
+        if(address==0x80034830u) {
+            unsigned state=psx_mod_read_byte(PERSONAL_MENU+4),sub=psx_mod_read_byte(PERSONAL_MENU+5);
+            uint16_t edge=psx_mod_read_half(PERSONAL_PAD+4);
+            if(!state) {
+                if(!sub)guest(cpu,0x80032DF0u,PERSONAL_MENU,0);
+                else {CHECK(sub==2);psx_mod_write_byte(PERSONAL_MENU+4,1);psx_mod_write_byte(PERSONAL_MENU+5,0);}
+            } else if(state==1) {
+                if(edge&0x2000)psx_mod_write_byte(PERSONAL_MENU+0x14,psx_mod_read_byte(PERSONAL_MENU+0x14)+1);
+                if(edge&0x0100)psx_mod_write_byte(PERSONAL_MENU+5,6);
+                if(edge&0x40) {
+                    if(sub==1)psx_mod_write_byte(PERSONAL_MENU+5,3);
+                    else if(sub==2) {
+                        unsigned cursor=psx_mod_read_byte(PERSONAL_MENU+0x14);
+                        if(cursor==13 || cursor==16) {
+                            psx_mod_write_byte(PERSONAL_MENU+4,2);psx_mod_write_byte(PERSONAL_MENU+5,0);
+                            if(cursor==16)psx_mod_write_byte(PERSONAL_MENU+0x38,1);
+                        } else psx_mod_write_byte(PERSONAL_MENU+5,(uint8_t)(cursor==14?5:7));
+                    }
+                    else psx_mod_write_byte(PLAYER+0x93,psx_mod_read_byte(PERSONAL_MENU+0x14));
+                }
+            } else {
+                CHECK(state==2);
+                if(sub==2 && !personal_dead_commit(cpu,0x80034CD0u)) {
+                    ++personal_commits[seat];
+                    if(!personal_shared_effect(cpu,0x80020C40u))++personal_worlds;
+                    if(!personal_shared_effect(cpu,0x800139A0u))++personal_fades;
+                }
+                if(sub<3)psx_mod_write_byte(PERSONAL_MENU+5,(uint8_t)(sub+1));
+                else {
+                    /* Original346EC tail347FC tests+38, then3480C draws
+                     * the shared world through25FB0, never through22928. */
+                    if(!psx_mod_read_word(PERSONAL_MENU+0x38) &&
+                       !personal_shared_effect(cpu,0x80025FB0u))++personal_world_draws;
+                    psx_mod_write_byte(PERSONAL_MENU+4,0);psx_mod_write_byte(PERSONAL_MENU+5,0);psx_mod_write_byte(PLAY+1,0);
+                }
+            }
+            return;
+        }
+        if(address==0x80020C40u){++personal_worlds;return;}
+        if(address==0x800139A0u){++personal_fades;return;}
+        CHECK(0);
+    }
     if(projected_death_probe && address==0x80034DCCu) {
         CHECK(zero_world && zero_projected && player_call);
         for(unsigned i=0x12;i<=0x1C;++i)psx_mod_write_byte(PLAY+i,1);
@@ -739,6 +801,9 @@ static void setup(CPUState *cpu){
     clear_banks();memset(ram,0,sizeof ram);memset(extra,0,sizeof extra);memset(&p2,0,sizeof p2);memset(cpu,0,sizeof *cpu);
     memset(test_vram,0,sizeof test_vram);memset(bank_first,0,sizeof bank_first);memset(zero_overlay,0x44,sizeof zero_overlay);
     mmx6_coop_lifecycle_init(&life);state_track.count=state_track.error=0;
+    personal_reset();personal_probe=personal_worlds=personal_fades=personal_world_draws=0;
+    menu_view_uploads=0;
+    memset(personal_commits,0,sizeof personal_commits);
     boss_balance_enabled=boss_balance_allocate_call=boss_balance_pending_actor=0;memset(boss_balance,0,sizeof boss_balance);
     inside=failed=player_call=zero_world=world_render=scene_owner=scene_phase=zero_projected=0;
     shared_clear_reset();clear_probe=clear_worlds=clear_zero_worlds=clear_fades=0;
@@ -1845,6 +1910,13 @@ static void native_shared_portrait_palette(void) {
         cpu.gpr[4]=cases[c].slot;cpu.gpr[5]=source+cases[c].palette*0x200u;
         cpu.gpr[6]=16;cpu.gpr[31]=cases[c].caller;
         CPUState before=cpu;
+        personal_pass=personal_seat=1;
+        shared_palette_load(&cpu,0x8002B3D4u);
+        CHECK(!memcmp(&cpu,&before,sizeof cpu));
+        capture(resident,actual,sizeof actual);CHECK(!memcmp(actual,baseline,sizeof actual));
+        capture(active_palette,actual,sizeof actual);CHECK(!memcmp(actual,private_before,sizeof actual));
+        CHECK(saved_palette_dirty==0x72);
+        personal_pass=personal_seat=0;
         shared_palette_load(&cpu,0x8002B3D4u);
         CHECK(!memcmp(&cpu,&before,sizeof cpu));
         capture(resident,actual,sizeof actual);CHECK(!memcmp(actual,expected,sizeof actual));
@@ -3663,7 +3735,76 @@ static void native_gate_continuous_target_operands(void) {
     gate_target_setup(&cpu,0x800F3FB4u);psx_mod_write_byte(cpu.gpr[17]+6,1);
     gate_target_check(&cpu,0x800F3FB4u,0,0,0);
 }
+static void personal_fixture(CPUState *cpu) {
+    setup(cpu);personal_probe=1;
+    life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAY+1,2);personal_begin(0);
+    personal_tick(cpu,0);CHECK(personal_initialized);
+    personal_tick(cpu,0);
+    CHECK(personal_menu[0].native[4]==1 && personal_menu[1].native[4]==1);
+    CHECK(personal_menu[0].native[0x14]==1 && personal_menu[1].native[0x14]==2);
+    CHECK(!zero_projected && !personal_pass && !state_track.count);
+}
+static void native_personal_pause_menus(void) {
+    CPUState cpu;personal_fixture(&cpu);
+    psx_mod_write_half(PERSONAL_PAD,0x2000);personal_tick(&cpu,0);
+    CHECK(personal_menu[0].native[0x14]==2 && personal_menu[1].native[0x14]==2);
+    personal_tick(&cpu,0);CHECK(personal_menu[0].native[0x14]==2);
+    psx_mod_write_half(PERSONAL_PAD,0);personal_tick(&cpu,0x20);
+    CHECK(personal_menu[0].native[0x14]==2 && personal_menu[1].native[0x14]==3);
+    personal_tick(&cpu,0);personal_tick(&cpu,0x4000);
+    CHECK(p2.body[0x93]==3 && psx_mod_read_byte(PLAYER+0x93)==0xB3);
+    CHECK(psx_mod_read_word(SCRATCH+0xA8)==0x80030600u);
+    /* P2 cannot enter shared Quit/Options/Escape, but X6 Parts is personal. */
+    personal_tick(&cpu,0);personal_tick(&cpu,1);CHECK(!personal_modal());
+    for(unsigned i=0;i<3;++i) {
+        personal_menu[1].native[5]=2;personal_menu[1].native[0x14]=(uint8_t)(13+i);
+        personal_tick(&cpu,0);personal_tick(&cpu,0x4000);
+        CHECK(p2.body[0x93]==3 && personal_menu[1].native[5]==(i==2?7:2));
+    }
+    personal_menu[1].native[5]=2;personal_menu[1].native[0x14]=16;
+    personal_tick(&cpu,0);personal_tick(&cpu,0x4000);
+    CHECK(p2.body[0x93]==3 && personal_menu[1].native[4]==1 && !personal_menu[1].native[0x38]);
+    /* Simultaneous confirmations consume one shared W-tank at a time. */
+    personal_fixture(&cpu);
+    for(unsigned seat=0;seat<2;++seat) {
+        personal_menu[seat].native[5]=1;personal_menu[seat].native[0x14]=12;
+    }
+    psx_mod_write_half(PERSONAL_PAD,0x40);personal_tick(&cpu,0x4000);
+    CHECK(personal_busy(0) && !personal_busy(1));
+    psx_mod_write_half(PERSONAL_PAD,0);personal_tick(&cpu,8);
+    CHECK(personal_menu[0].native[4]==1 && personal_menu[1].native[4]==1);
+    personal_menu[0].native[5]=0;personal_tick(&cpu,8);
+    CHECK(personal_menu[0].native[4]==1); /* Held blocked Start is consumed. */
+    personal_tick(&cpu,0);personal_tick(&cpu,8);
+    CHECK(personal_menu[0].native[4]==2 && personal_menu[1].native[4]==2);
+    personal_tick(&cpu,0);personal_tick(&cpu,0);
+    CHECK(personal_commits[0]==1 && personal_commits[1]==1);
+    CHECK(personal_worlds==1 && personal_fades==1 && personal_resuming_world());
+    personal_tick(&cpu,0);CHECK(!personal_active && !psx_mod_read_byte(PLAY+1) && personal_world_draws==1);
+    /* A corpse never installs animation/equipment; the living menu still exits. */
+    personal_fixture(&cpu);personal_eligible=2;
+    life.status[0]=MMX6_COOP_FALLEN;
+    personal_tick(&cpu,8);personal_tick(&cpu,0);personal_tick(&cpu,0);
+    CHECK(!personal_commits[0] && personal_commits[1]==1 && personal_worlds==1 && personal_fades==1);
+    personal_fixture(&cpu);
+    personal_pass=personal_seat=1;
+    CHECK(!personal_shared_effect(&cpu,0x80022928u));
+    CHECK(personal_shared_effect(&cpu,0x80025FB0u));
+    personal_seat=0;CHECK(!personal_shared_effect(&cpu,0x80025FB0u));
+    personal_pass=0;
+    psx_mod_write_half(PERSONAL_PAD,0x0100);personal_tick(&cpu,0);
+    CHECK(personal_modal() && !personal_menus_active());
+#ifdef MMX6_COOP_MODERN_STATE
+    HostState saved;state_capture(&saved);uint32_t digest=state_digest();
+    personal_menu[1].native[0x14]^=1;CHECK(state_digest()!=digest);
+    personal_previous[1]^=0x40;state_commit(&saved);
+    CHECK(state_digest()==digest && personal_menu[1].native[0x14]==saved.menus[1].native[0x14]);
+#endif
+    personal_probe=0;personal_reset();
+}
 int main(void){
+    native_personal_pause_menus();
     opposite_resource_identity_projection();CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_gate_continuous_target_operands();
     native_guest_weather_window();

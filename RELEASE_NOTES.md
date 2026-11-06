@@ -4,6 +4,10 @@ This playtest package includes cumulative co-op corrections for native doors,
 dialogue, mounts, hazards and visual effects. It also corrects shared palette
 publication for dialogue portraits loaded by the guest player.
 
+- Independent views use each character's native HUD and palette, including
+  survivor states. Native Zero saber visibility follows its owning view.
+- Both players have independent native pause menus and equipment selection;
+  private cameras remain stable through the shared resume fade.
 - Adaptive widescreen is enabled for fresh installations. Saved display choices
   are retained.
 - Developer checkpoint, damage-protection and test controls are excluded.

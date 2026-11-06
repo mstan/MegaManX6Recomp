@@ -22,6 +22,9 @@ static unsigned scenery_probe,scenery_draws[2];
 static uint32_t scenery_y;
 static unsigned quake_probe,quake_camera_calls,quake_draws[2];
 static unsigned intro_camera_probe,intro_camera_calls;
+static unsigned personal_view_probe,personal_view_draws[2],personal_view_clears[2],personal_view_cameras;
+static unsigned personal_fade_at[2];
+static uint32_t personal_fade_words[2][4],personal_resident_menu,personal_resident_palette;
 static uint8_t quake_before[0x54],quake_after[0x54];
 static const uint8_t quake_fields[]={0x36,0x37,0x3A,0x3B,0x3C,0x3D,0x3E,0x3F,0x45,0x46};
 #define MMX6_TEST_NETPLAY_ACTIVE mmx6_view_sdk.online
@@ -52,7 +55,33 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
     (void)ret;++view_native_calls;
     if(address==VIEW_DRAW_OT) { cpu->gpr[2]=0xC0DE;return 1; }
     if(address==0x80066150u)return 1;
+    if(address==0x8006663Cu && personal_view_probe) {
+        CHECK(private_draw && cpu->gpr[4]==view_buffer+0x70u && cpu->gpr[5]==32);
+        /* Original ClearOTagR: first terminator, then31 backward links. */
+        for(unsigned i=0;i<32;++i)psx_mod_write_word(cpu->gpr[4]+i*4u,
+            i?(cpu->gpr[4]+(i-1u)*4u)&0xFFFFFFu:0xFFFFFFu);
+        ++personal_view_clears[private_seat];return 1;
+    }
+    if(address==0x80026028u && personal_view_probe) {
+        CHECK(private_draw && personal_pass && personal_rendering && personal_seat==private_seat);
+        CHECK(cpu->gpr[4]==PERSONAL_MENU && psx_mod_read_byte(PLAYER+2)==private_seat);
+        CHECK(!memcmp(memory(PERSONAL_MENU),personal_menu[private_seat].native,0x3C));
+        CHECK(psx_mod_read_byte(PERSONAL_WEAPON)==personal_menu[private_seat].original_weapon);
+        CHECK(psx_mod_read_word(SCRATCH+0x3C)==(private_seat?menu_assembly:personal_resident_menu));
+        CHECK(psx_mod_read_word(SCRATCH+0x28)==(private_seat?active_palette:personal_resident_palette));
+        CHECK(psx_mod_read_word(view_buffer+0x70u)==0xFFFFFFu);
+        CHECK(psx_mod_read_word(view_buffer+0xECu)==((view_buffer+0xE8u)&0xFFFFFFu));
+        /* Real native draw consumes its own font/menu atlas and working
+         * palette. This unit observes the modeled transfer, not GL pixels. */
+        CHECK(test_vram[256u*1024u+896u]==(uint16_t)(0x1100u+private_seat*0x100u));
+        CHECK(test_vram[256u*1024u+960u]==(uint16_t)(0x1101u+private_seat*0x100u));
+        CHECK(test_vram[480u*1024u]==psx_mod_read_half(psx_mod_read_word(SCRATCH+0x28)));
+        psx_mod_write_word(0x800C1200u,0xA0B00000u+private_seat);
+        cpu->gpr[8]=0xDEAD0000u+private_seat;
+        ++personal_view_draws[private_seat];return 1;
+    }
     if(address==0x8002927Cu || address==0x8002935Cu || address==0x800293CCu) {
+        if(personal_view_probe)++personal_view_cameras;
         CHECK(life.status[private_seat]==MMX6_COOP_ALIVE || life.status[private_seat]==MMX6_COOP_JOINING);
         if(intro_camera_probe && address==0x8002927Cu) {
             CHECK(private_draw && private_seat==1);
@@ -119,17 +148,29 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
 static int view_gpu(uint32_t value,unsigned source) {
     if(!private_draw)return 0;
     if(source)CHECK(!value);else ++view_gpu_words;
+    if(!source && personal_view_probe) {
+        unsigned *at=&personal_fade_at[private_seat];
+        if(*at || (value>>24)==0xE1u) {
+            CHECK(*at<4);personal_fade_words[private_seat][(*at)++]=value;
+        }
+    }
     return 1;
 }
 static int model_transaction(CPUState *cpu,PSXModRenderPassFn callback,void *user,uint32_t eye) {
     /* Only this unit model restores its guest RAM/CPU. Real SDK restoration
      * and publication require separate runtime tests. */
     static uint8_t guest_ram[sizeof ram];CPUState saved=*cpu;
+    static uint16_t guest_vram[1024*512];
     memcpy(guest_ram,ram,sizeof ram);
+    /* Explicit unit checkpoint only. This does not exercise the renderer's
+     * real GL upload journal or prove its physical GPU restoration. */
+    if(personal_view_probe)memcpy(guest_vram,test_vram,sizeof test_vram);
     int ok;
     if(view_abort) { disturb_host();inside=1;state_track.count=2;state_track.error=1;ok=0; }
     else ok=callback(cpu,user,eye);
-    memcpy(ram,guest_ram,sizeof ram);*cpu=saved;return ok;
+    memcpy(ram,guest_ram,sizeof ram);
+    if(personal_view_probe)memcpy(test_vram,guest_vram,sizeof test_vram);
+    *cpu=saved;return ok;
 }
 static void prepare_view(CPUState *cpu,int online,int split) {
     setup(cpu);mmx6_view_sdk_reset();mmx6_view_sdk.online=online;
@@ -139,6 +180,9 @@ static void prepare_view(CPUState *cpu,int online,int split) {
     scenery_probe=scenery_draws[0]=scenery_draws[1]=0;
     quake_probe=quake_camera_calls=quake_draws[0]=quake_draws[1]=0;
     intro_camera_probe=intro_camera_calls=intro_camera_valid=0;
+    personal_view_probe=personal_view_cameras=0;
+    memset(personal_view_draws,0,sizeof personal_view_draws);memset(personal_view_clears,0,sizeof personal_view_clears);
+    memset(personal_fade_at,0,sizeof personal_fade_at);memset(personal_fade_words,0,sizeof personal_fade_words);
     memset(intro_camera_requests,0,sizeof intro_camera_requests);
     view_quake_valid=0;
     inside=player_call=stage_call=zero_world=world_render=hud_call=ride_call=pickup_call=solid_call=0;
@@ -299,7 +343,7 @@ static void admitted_door_views(int online,int split) {
         case 9:psx_mod_write_byte(PLAYER+0xD4,0);p2.body[0xD4]=0;break;
         case 10:life.status[0]=MMX6_COOP_DYING;break;
         case 11:life.status[1]=MMX6_COOP_JOINING;break;
-        case 12:pause_owner=0;break;
+        case 12:pause_owner=0;psx_mod_write_byte(PLAY+1,1);break;
         case 13:scene_owner=0;break; /* A world hold without an authenticated door refuses. */
         case 14:psx_mod_write_byte(PLAY+1,2);break;
         case 15:clear_phase=1;break;
@@ -365,11 +409,137 @@ static void arrival_refusals(void) {
     }
     for(unsigned gate=0;gate<5;++gate) {
         CPUState cpu;prepare_view(&cpu,0,1);life.status[1]=MMX6_COOP_JOINING;
-        if(gate==0)scene_owner=1;else if(gate==1)pause_owner=0;
+        if(gate==0)scene_owner=1;else if(gate==1){pause_owner=0;psx_mod_write_byte(PLAY+1,1);}
         else if(gate==2)psx_mod_write_byte(PLAY+0x1C,1);
         else if(gate==3)psx_mod_write_byte(PLAY+1,2);else life.status[0]=MMX6_COOP_LEAVING;
         independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
     }
+}
+static void native_personal_menu_presentation(int online,int split) {
+    CPUState cpu;prepare_view(&cpu,online,split);personal_view_probe=1;
+    personal_active=personal_initialized=1;personal_eligible=3;pause_owner=0;
+    personal_seat=1; /* The previous simulation pass may have been P2. */
+    psx_mod_write_byte(PLAY+1,2);view_pending=0; /* No world render was queued. */
+    personal_resident_menu=psx_mod_read_word(SCRATCH+0x3C);
+    personal_resident_palette=psx_mod_read_word(SCRATCH+0x28);
+    for(unsigned seat=0;seat<2;++seat) {
+        memset(personal_menu[seat].native,(int)(0x20u+seat),sizeof personal_menu[seat].native);
+        personal_menu[seat].native[4]=1;personal_menu[seat].native[5]=1;
+        personal_menu[seat].native[0x14]=(uint8_t)(2+seat);
+        personal_menu[seat].original_weapon=(uint8_t)(4+seat);
+        for(unsigned i=0;i<sizeof personal_regions/sizeof *personal_regions;++i) {
+            const PersonalMenuRegion *r=&personal_regions[i];
+            uint32_t base=menu_memory+(seat?0:MENU_BYTES)+r->offset;
+            for(unsigned n=0;n<r->w*r->h;++n)
+                psx_mod_write_half(base+n*2u,(uint16_t)(0x1100u+seat*0x100u+i));
+        }
+        uint32_t palette=seat?active_palette:personal_resident_palette;
+        for(unsigned n=0;n<0x2000;++n)psx_mod_write_half(palette+n*2u,(uint16_t)(0x2100u+seat*0x100u+n));
+    }
+    personal_write(0);memset(test_vram,0x5A,sizeof test_vram);
+    psx_mod_write_byte(0x80097424u,1);psx_mod_write_byte(0x800C483Cu,0x47);
+    psx_mod_write_word(0x800CF96Cu,0xE1000045u);psx_mod_write_word(0x800C8860u,0x81);
+    mmx6_view_sdk.local_port=1;
+    PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+    static uint8_t saved_ram[sizeof ram],saved_extra[sizeof extra];
+    static uint16_t saved_vram[1024*512];
+    memcpy(saved_ram,ram,sizeof ram);memcpy(saved_extra,extra,sizeof extra);memcpy(saved_vram,test_vram,sizeof test_vram);
+    CPUState expected=cpu;expected.gpr[2]=0xC0DE;
+    uint32_t digest=state_digest();unsigned uploads=menu_view_uploads;
+    CHECK(independent_present(&cpu,VIEW_DRAW_OT));
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && state_digest()==digest);context_equal(&before);
+    CHECK(!memcmp(saved_ram,ram,sizeof ram) && !memcmp(saved_extra,extra,sizeof extra));
+    CHECK(!memcmp(saved_vram,test_vram,sizeof test_vram)); /* Modeled checkpoint only. */
+    CHECK(!view_pending && !view_call && !personal_pass && !personal_rendering && !zero_projected);
+    unsigned panes=(!online || split)?2u:1u;
+    CHECK(menu_view_uploads-uploads==panes*9u && !personal_view_cameras && !view_callback_calls);
+    CHECK((panes==2?mmx6_view_sdk.pair_calls:mmx6_view_sdk.view_calls)==1);
+    for(unsigned seat=0;seat<2;++seat) {
+        unsigned drawn=panes==2 || seat==1;
+        CHECK(personal_view_draws[seat]==drawn && personal_view_clears[seat]==drawn);
+        CHECK(personal_fade_at[seat]==drawn*4u);
+        if(drawn) {
+            CHECK(personal_fade_words[seat][0]==0xE1000045u);
+            CHECK(personal_fade_words[seat][1]==0x62474747u && personal_fade_words[seat][2]==0);
+            CHECK(personal_fade_words[seat][3]==(320u|(240u<<16)));
+        }
+    }
+}
+static void native_personal_resume_camera_history(int online,int split) {
+    CPUState cpu;prepare_view(&cpu,online,split);personal_view_probe=1;
+    memset(view_cameras[1],0x53,sizeof view_cameras[1]);
+    memset(memory(VIEW_CAMERA),0x27,sizeof view_cameras[0]);
+    uint8_t positions[3][0x14];
+    for(unsigned layer=0;layer<3;++layer)memcpy(positions[layer],view_cameras[1]+layer*0x54+8,0x14);
+    frame_count=11;view_frame=10;pause_owner=0;independent_menu_begin();CHECK(view_menu_history);
+    personal_active=personal_initialized=1;personal_eligible=3;
+    personal_menu[0].native[4]=personal_menu[1].native[4]=2;
+    personal_menu[0].native[5]=personal_menu[1].native[5]=3;
+    psx_mod_write_byte(PLAY+1,2);inside=personal_pass=1;personal_seat=0;
+    mmx6_view_sdk.local_port=1;
+    for(unsigned first_world=0;first_world<2;++first_world) {
+        if(first_world) {
+            personal_reset();psx_mod_write_byte(PLAY+1,0);++frame_count;
+            CHECK(pause_owner==0); /* Native opener flag has not cleared yet. */
+        }
+        uint32_t digest=state_digest();CPUState original=cpu;
+        independent_world_begin();CHECK(view_pending && view_valid && !view_menu_history);
+        CHECK(!memcmp(&cpu,&original,sizeof cpu) && state_digest()==digest);
+        for(unsigned layer=0;layer<3;++layer)
+            CHECK(!memcmp(positions[layer],view_cameras[1]+layer*0x54+8,0x14));
+        inside=personal_pass=0;
+        PrivateViewContext context;memset(&context,0,sizeof context);private_context_save(&context);
+        digest=state_digest();original=cpu;original.gpr[2]=0xC0DE;
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&context);
+        CHECK(!memcmp(&cpu,&original,sizeof cpu) && state_digest()==digest && !personal_view_cameras);
+        for(unsigned layer=0;layer<3;++layer)
+            CHECK(!memcmp(positions[layer],view_cameras[1]+layer*0x54+8,0x14));
+    }
+    CHECK(personal_view_clears[1]==1 && personal_view_draws[0]==0 && personal_view_draws[1]==0);
+}
+static void native_initial_mode9_arrival_view(int online,int split) {
+    CPUState cpu;prepare_view(&cpu,online,split);mmx6_view_sdk.local_port=1;
+    arrival_pair=1;life.status[1]=MMX6_COOP_JOINING;join_phase=0;
+    psx_mod_write_byte(PLAY,9);psx_mod_write_byte(PLAY+1,0);psx_mod_write_byte(PLAY+0x10,1);
+    p2.body[5]=0;put32(p2.body+12,(uint32_t)(-40*65536));put32(p2.body+0x1C,(uint32_t)(-40*65536));
+    arrival_target=join_y=1000*65536;memcpy(arrival_body,p2.body,sizeof arrival_body);
+    view_pending=view_valid=0;frame_count=1;
+    static uint8_t saved_ram[sizeof ram];memcpy(saved_ram,ram,sizeof ram);
+    CPUState expected=cpu;uint32_t digest=state_digest();
+    independent_world_begin();CHECK(view_pending && view_valid && !view_native_calls);
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && !memcmp(saved_ram,ram,sizeof ram) && state_digest()==digest);
+    CHECK(life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_JOINING && arrival_pair==1);
+    arrival_probe=1;PrivateViewContext context;memset(&context,0,sizeof context);private_context_save(&context);
+    expected.gpr[2]=0xC0DE;
+    CHECK(independent_present(&cpu,VIEW_DRAW_OT) && arrival_camera_calls==3);context_equal(&context);
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && state_digest()==digest);
+    CHECK(!memcmp(saved_ram,ram,sizeof ram) && !memcmp(arrival_body,p2.body,sizeof arrival_body));
+}
+static void native_surviving_guest_world_view(int online,int split) {
+    const Mmx6CoopStatus dead[]={MMX6_COOP_DYING,MMX6_COOP_FALLEN};
+    for(unsigned i=0;i<sizeof dead/sizeof *dead;++i) {
+        CPUState cpu;prepare_view(&cpu,online,split);mmx6_view_sdk.local_port=1;
+        life.status[0]=dead[i];life.status[1]=MMX6_COOP_ALIVE;
+        memset(view_cameras[0],0x1C,sizeof view_cameras[0]);view_cameras[0][0x34]=0;
+        uint8_t retained[sizeof view_cameras[0]];memcpy(retained,view_cameras[0],sizeof retained);
+        memset(memory(VIEW_CAMERA),0x6D,sizeof view_cameras[0]);psx_mod_write_byte(VIEW_CAMERA+0x34,0);
+        frame_count=11;view_frame=0;view_pending=0;inside=zero_world=zero_projected=1;
+        static uint8_t saved_ram[sizeof ram];memcpy(saved_ram,ram,sizeof ram);
+        CPUState original=cpu;uint32_t digest=state_digest();
+        independent_world_begin();CHECK(view_pending && view_valid && !view_native_calls);
+        CHECK(!memcmp(retained,view_cameras[0],sizeof retained));
+        CHECK(!memcmp(saved_ram,ram,sizeof ram) && !memcmp(&original,&cpu,sizeof cpu) && state_digest()==digest);
+        CHECK(inside && zero_world && zero_projected); /* Draw-only recording within the survivor's one pass. */
+        inside=zero_world=zero_projected=0;
+        PrivateViewContext context;memset(&context,0,sizeof context);private_context_save(&context);
+        digest=state_digest();original.gpr[2]=0xC0DE;
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&context);
+        CHECK(!memcmp(retained,view_cameras[0],sizeof retained) && !memcmp(&original,&cpu,sizeof cpu));
+        CHECK(!memcmp(saved_ram,ram,sizeof ram) && state_digest()==digest && !failed);
+    }
+    /* A normal two-living-body projected/nested world remains forbidden. */
+    CPUState cpu;prepare_view(&cpu,online,split);inside=zero_world=zero_projected=1;
+    independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
 }
 static void native_menu_camera_history(int online,int split) {
     for(int owner=0;owner<2;++owner)for(unsigned boundary=0;boundary<8;++boundary) {
@@ -645,6 +815,11 @@ int main(void) {
     reentry();native_arrival(0,1);native_arrival(1,0);arrival_refusals();
     admitted_door_views(0,1);admitted_door_views(1,0);admitted_door_views(1,1);
     native_nova_views(0,1);native_nova_views(1,0);
+    native_personal_menu_presentation(0,0);native_personal_menu_presentation(0,1);
+    native_personal_menu_presentation(1,0);native_personal_menu_presentation(1,1);
+    native_personal_resume_camera_history(0,1);native_personal_resume_camera_history(1,0);
+    native_initial_mode9_arrival_view(0,1);native_initial_mode9_arrival_view(1,0);
+    native_surviving_guest_world_view(0,1);native_surviving_guest_world_view(1,0);
     native_menu_camera_history(0,1);native_menu_camera_history(1,0);
     native_shared_weather_frames(0,1);native_shared_weather_frames(1,0);
     native_shared_scenery_y(0,1);native_shared_scenery_y(1,0);native_shared_scenery_y(1,1);

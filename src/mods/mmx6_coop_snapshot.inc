@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 26 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 28 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -80,6 +80,7 @@ static int snapshot_ready(void) {
         scene_call,zero_projected,unit_choices_call,target_projection_call,shared_fx_call,shared_fx_allocate_call,boss_balance_allocate_call,state_track.count,state_track.error,
         checkpoint_pending.phase,checkpoint_pending.index,checkpoint_pending.nonce,checkpoint_pending.authority,checkpoint_pending.placed_world,
         jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,jump_audio_faulted,
+        personal_pass,personal_rendering,
         jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_stop_mask};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)if(guards[i])return 0;
     for(unsigned i=0;i<8;++i)if(jump_audio_registers[i])return 0;
@@ -117,12 +118,17 @@ typedef struct {
     uint8_t intro_camera_requests[8];
     uint32_t intro_camera_valid;
     uint8_t terrain_pending;
+    PersonalMenu menus[2];
+    uint32_t menus_active,menus_initialized,menus_eligible,menu_previous[2];
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
     memcpy(s->intro_camera_requests,intro_camera_requests,sizeof intro_camera_requests);
     s->intro_camera_valid=intro_camera_valid;
     s->terrain_pending=private_terrain_pending;
+    memcpy(s->menus,personal_menu,sizeof personal_menu);
+    s->menus_active=personal_active;s->menus_initialized=personal_initialized;s->menus_eligible=personal_eligible;
+    for(unsigned seat=0;seat<2;++seat)s->menu_previous[seat]=personal_previous[seat];
     memcpy(s->returning,returning_body,sizeof returning_body);
     memcpy(s->scene,scene_body,sizeof scene_body);
     memcpy(s->portrait,saved_portrait_colors,sizeof saved_portrait_colors);
@@ -165,6 +171,19 @@ static void state_core(StateIO *io,HostState *s) {
 #define FIELD(field,width,max) s->field=state_integer(io,(uint32_t)s->field,width,max)
     state_player(io,&s->player);
     FIELD(terrain_pending,1,1);
+    FIELD(menus_active,1,1);FIELD(menus_initialized,1,1);FIELD(menus_eligible,1,3);
+    for(unsigned seat=0;seat<2;++seat) {
+        state_bytes(io,s->menus[seat].native,sizeof s->menus[seat].native);
+        state_bytes(io,&s->menus[seat].original_weapon,1);
+        FIELD(menu_previous[seat],2,65535);
+        if(s->menus[seat].native[4]>2 || s->menus[seat].native[5]>8)STATE_INVALID(io);
+        if(!s->menus_active) {
+            for(unsigned i=0;i<sizeof s->menus[seat].native;++i)
+                if(s->menus[seat].native[i])STATE_INVALID(io);
+            if(s->menus[seat].original_weapon || s->menu_previous[seat])STATE_INVALID(io);
+        }
+    }
+    if(!s->menus_active && (s->menus_initialized || s->menus_eligible))STATE_INVALID(io);
     FIELD(intro_camera_valid,1,1);
     state_bytes(io,s->intro_camera_requests,sizeof s->intro_camera_requests);
     if(!s->intro_camera_valid)for(unsigned i=0;i<sizeof s->intro_camera_requests;++i)
@@ -178,6 +197,7 @@ static void state_core(StateIO *io,HostState *s) {
     uint32_t menu=state_integer(io,(uint32_t)(s->pause+1),1,2);s->pause=(int)menu-1;
     FIELD(start,1,1);FIELD(menu_loaded,1,1);state_bytes(io,s->portrait,sizeof s->portrait);
     FIELD(enrolled,1,1);FIELD(failed,1,io->mode==STATE_HASH?1:0);
+    if(s->menus_active && !s->enrolled)STATE_INVALID(io);
     state_bytes(io,s->subtanks,sizeof s->subtanks);FIELD(subtank_seeded,1,1);
     FIELD(subtank_found,1,0x30);if(s->subtank_found&~0x30u)STATE_INVALID(io);
     if((!separate_subtanks && s->subtank_seeded) ||
@@ -295,6 +315,10 @@ static void state_commit(const HostState *s) {
     memcpy(intro_camera_requests,s->intro_camera_requests,sizeof intro_camera_requests);
     intro_camera_valid=s->intro_camera_valid;
     private_terrain_pending=s->terrain_pending;
+    memcpy(personal_menu,s->menus,sizeof personal_menu);
+    personal_active=s->menus_active;personal_initialized=s->menus_initialized;personal_eligible=s->menus_eligible;
+    for(unsigned seat=0;seat<2;++seat)personal_previous[seat]=(uint16_t)s->menu_previous[seat];
+    personal_pass=personal_seat=personal_rendering=0;
     memcpy(returning_body,s->returning,sizeof returning_body);memcpy(scene_body,s->scene,sizeof scene_body);
     memcpy(saved_portrait_colors,s->portrait,sizeof saved_portrait_colors);
     join_phase=s->join;arrival_pair=s->arrival;join_y=(int32_t)s->join_y;scene_owner=s->owner;scene_phase=s->scene_phase;scene_y=(int32_t)s->scene_y;
@@ -334,6 +358,7 @@ static uint32_t state_digest(void) {
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
+        personal_pass,personal_seat,personal_rendering,
         effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,scene_call,zero_projected,unit_choices_call,target_projection_call,shared_fx_call,shared_fx_allocate_call,boss_balance_allocate_call,
         state_track.count,state_track.error,(unsigned)ready,checkpoint_pending.phase,
         checkpoint_pending.index,checkpoint_pending.nonce,checkpoint_pending.authority,checkpoint_pending.placed_world,jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,
@@ -375,7 +400,7 @@ static void snapshot_discard_prepared(void) {
 }
 static void snapshot_resources(StateIO *s) {
     if(checkpoint_lab_option>31)STATE_INVALID(s);
-    state_fixed(s,0x53503658u);state_fixed(s,27);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,28);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
     state_fixed(s,separate_subtanks);state_fixed(s,partner_x_armor);state_fixed(s,private_actor.form);
     state_fixed(s,checkpoint_fatal_option);state_fixed(s,checkpoint_hatch_stagger_option);

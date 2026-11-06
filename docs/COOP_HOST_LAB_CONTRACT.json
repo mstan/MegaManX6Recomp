@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 124,
+  "revision": 126,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v129",
+    "title_compatibility": "mmx6-x-zero-delay-v130",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1427,5 +1427,15 @@
     "behavior": "Existing2B3D4 bridge authenticates original left21CC4/right21E64/refresh22950,slots1E0/1F0,count16 and sourcepalettebank, mirrors512bytes and retains originalprivatecopy.",
     "state": "No persistent fields or snapshot27 layout change.",
     "acceptance": "Focused disjoint-bank regressions plus fresh built runtime dialogue and representative smoke qualification required."
+  },
+  "title_changes_v130": {
+    "scope": "Independent native HUD, own-menu pause/equipment, resume camera history and private Zero saber visibility.",
+    "hud": "Each private pane draws its own original meters and counterpart working palette, retaining a fallen player view.",
+    "pause": "Original native3C menu state and saved weapon per seat; both menus open from either living Start, native equipment/tank semantics, P1 shared modals and one shared fade/world.",
+    "presentation": "Journalled own-menu font/portrait/working palettes, original ClearOT and displayed fade shade, retained per-seat camera through native exit and first resumed frame.",
+    "saber": "Original801ED918 visibility check uses the projected owner authored view; original bounds and resources unchanged.",
+    "state": "Snapshot28 adds authoritative per-seat menu contexts/input history; older execution snapshots are disposable.",
+    "sdk_source": "2abe297c5edd5be51ab0afa3841510b019b72d53; release-tool firmware applicability only, runtime/recompiler/bios sources unchanged from0c686.",
+    "acceptance": "Source implementations only until combined compiled and current-build runtime qualification; no transferred native evidence."
   }
 }

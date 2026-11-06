@@ -2,6 +2,7 @@
  * image are never replaced by a peer's presentation transaction. */
 #ifdef MMX6_COOP_MODERN_STATE
 #include "psx_netplay.h"
+#include "gpu_render.h"
 #if defined(__has_include)
 #if __has_include("debug_native_entry_context.h")
 #include "debug_native_entry_context.h"
@@ -19,6 +20,61 @@ static uint8_t view_quake_input[0x54];
 static uint32_t view_quake_frame;
 static unsigned view_quake_valid;
 static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=view_quake_valid=0; }
+
+/* Native PL00/font rectangles, as used by menu_vram. Capture the resident
+ * character once before the other native initializer; every own-menu upload
+ * below is journalled by the private render transaction. */
+typedef struct { unsigned x,y,w,h,offset; } PersonalMenuRegion;
+static const PersonalMenuRegion personal_regions[]={
+    {896,256,64,256,0}, {960,256,64,256,0x8000},
+    {256,496,64,16,0x10000}, {384,0,64,16,MENU_PORTRAIT},
+    {448,0,64,16,MENU_PORTRAIT+0x800},
+    {512,0,64,16,MENU_PORTRAIT+0x1000},
+    {576,0,64,16,MENU_PORTRAIT+0x1800},
+    {0,510,256,1,MENU_PORTRAIT_COLORS}
+};
+static void personal_menu_prepare_assets(CPUState *cpu) {
+    if(!menu_memory || zero_projected)return;
+    guest(cpu,0x80066150u,0,0);
+    const uint16_t *vram=gpu_get_vram();
+    for(unsigned i=0;i<sizeof personal_regions/sizeof *personal_regions;++i) {
+        const PersonalMenuRegion *r=&personal_regions[i];
+        uint32_t dst=menu_memory+MENU_BYTES+r->offset;
+        for(unsigned y=0;y<r->h;++y)for(unsigned x=0;x<r->w;++x)
+            psx_mod_write_half(dst+2u*(y*r->w+x),vram[(r->y+y)*1024u+r->x+x]);
+    }
+}
+static void personal_menu_assets(CPUState *cpu,unsigned seat) {
+    (void)cpu;
+    if(!private_draw || seat>1 || !menu_memory)return;
+    uint16_t pixels[64*256];
+    for(unsigned i=0;i<sizeof personal_regions/sizeof *personal_regions;++i) {
+        const PersonalMenuRegion *r=&personal_regions[i];
+        uint32_t source=menu_memory+(seat?0:MENU_BYTES)+r->offset;
+        for(unsigned n=0;n<r->w*r->h;++n)pixels[n]=psx_mod_read_half(source+n*2u);
+        gr_vram_transfer_in((int)r->x,(int)r->y,(int)r->w,(int)r->h,pixels);
+    }
+    /* Native menu updates select colors in the currently projected working
+     * bank. Include cursor, font and portrait rows; a resident GPU CLUT is not
+     * the other character's palette. */
+    uint32_t source=psx_mod_read_word(SCRATCH+0x28);
+    for(unsigned n=0;n<256u*32u;++n)pixels[n]=psx_mod_read_half(source+n*2u);
+    gr_vram_transfer_in(0,480,256,32,pixels);
+}
+static void private_menu_fade(uint32_t buffer) {
+    unsigned shade=personal_menu_fade(buffer);
+    if(!shade)return;
+    unsigned parity=buffer==VIEW_BUFFER+VIEW_STRIDE;
+    /* Original135C0/135C4 and13640 publish this exact subtractive draw mode. */
+    uint32_t mode=psx_mod_read_word(0x800CF96Cu+parity*8u);
+    if((mode>>24)!=0xE1u)mode=0xE1000045u;
+    gpu_set_gp0_source(0);gpu_write_gp0(mode);
+    gpu_write_gp0(0x62000000u|shade|(shade<<8)|(shade<<16));
+    gpu_write_gp0(0);
+    gpu_write_gp0(psx_mod_read_half(buffer+0x18u)|
+                  (uint32_t)psx_mod_read_half(buffer+0x1Au)<<16);
+}
+
 
 static int independent_intro_camera_source(void) {
     /* SLUS-01395 original5211C inclusive body/record test and request writes.
@@ -143,8 +199,12 @@ static int private_view_entry_context(uint32_t function,PSXDebugNativeContextWor
  * Preserve the guest camera's history, never a stale rendered image. A scene,
  * life, room/checkpoint or load boundary still discards that history. */
 static int independent_menu_context(void) {
-    return enrolled && !failed && !scene_owner && psx_mod_read_byte(PLAY)==10 &&
-        life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE;
+    if(!enrolled || failed || scene_owner || psx_mod_read_byte(PLAY)!=10)return 0;
+    for(unsigned seat=0;seat<2;++seat)
+        if(life.status[seat]!=MMX6_COOP_ALIVE &&
+           (!view_valid || (life.status[seat]!=MMX6_COOP_DYING &&
+                            life.status[seat]!=MMX6_COOP_FALLEN)))return 0;
+    return life.status[0]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_ALIVE;
 }
 static void independent_menu_begin(void) {
     if(private_draw || !independent_views || !view_valid || view_menu_history ||
@@ -168,7 +228,8 @@ typedef struct {
     int inside,player_call,stage_call,zero_world,world_render,hud_call,
         render_x_death,effect_call,shared_fx_call,shared_fx_allocate_call,
         pickup_call,solid_call,solid_allocate_call,ride_call,
-        scene_call,zero_projected,unit_choices_call,target_projection_call;
+        scene_call,zero_projected,unit_choices_call,target_projection_call,
+        personal_pass,personal_seat,personal_rendering;
     unsigned track_count,track_error;
 } PrivateViewContext;
 
@@ -184,6 +245,7 @@ static void private_context_save(PrivateViewContext *s) {
     SAVE_VIEW_FLAG(shared_fx_allocate_call);SAVE_VIEW_FLAG(pickup_call);SAVE_VIEW_FLAG(solid_call);
     SAVE_VIEW_FLAG(solid_allocate_call);SAVE_VIEW_FLAG(ride_call);SAVE_VIEW_FLAG(scene_call);
     SAVE_VIEW_FLAG(zero_projected);SAVE_VIEW_FLAG(unit_choices_call);SAVE_VIEW_FLAG(target_projection_call);
+    SAVE_VIEW_FLAG(personal_pass);SAVE_VIEW_FLAG(personal_seat);SAVE_VIEW_FLAG(personal_rendering);
 #undef SAVE_VIEW_FLAG
     s->track_count=state_track.count;s->track_error=state_track.error;
 }
@@ -199,6 +261,7 @@ static void private_context_restore(const PrivateViewContext *s) {
     RESTORE_VIEW_FLAG(shared_fx_allocate_call);RESTORE_VIEW_FLAG(pickup_call);RESTORE_VIEW_FLAG(solid_call);
     RESTORE_VIEW_FLAG(solid_allocate_call);RESTORE_VIEW_FLAG(ride_call);RESTORE_VIEW_FLAG(scene_call);
     RESTORE_VIEW_FLAG(zero_projected);RESTORE_VIEW_FLAG(unit_choices_call);RESTORE_VIEW_FLAG(target_projection_call);
+    RESTORE_VIEW_FLAG(personal_pass);RESTORE_VIEW_FLAG(personal_seat);RESTORE_VIEW_FLAG(personal_rendering);
 #undef RESTORE_VIEW_FLAG
     state_track.count=s->track_count;state_track.error=s->track_error;
 }
@@ -223,16 +286,31 @@ static int independent_heatnix_scenery(void) {
         psx_mod_read_word(actor+0x10)==0x800F36C8u;
 }
 static void independent_world_begin(void) {
-    if(private_draw || !independent_views)return;
+    if(private_draw || !independent_views || (personal_pass && personal_seat))return;
     view_pending=0;
+    int returning=personal_resuming_world();
+    int initial=arrival_pair && !zero_projected && life.status[0]==MMX6_COOP_ALIVE &&
+        life.status[1]==MMX6_COOP_JOINING && !psx_mod_read_byte(PLAY+1) &&
+        (psx_mod_read_byte(PLAY)==9 || psx_mod_read_byte(PLAY)==10);
+    /* The living guest can host the one native world after P1 falls. Record
+     * that world's authored metadata/empty OT before drawing; the dead P1
+     * camera remains retained and the common presenter runs after projection. */
+    int guest_host=inside && zero_world && !personal_pass &&
+        (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
+        life.status[1]==MMX6_COOP_ALIVE && psx_mod_read_byte(PLAY)==10 &&
+        !psx_mod_read_byte(PLAY+1);
     int menu_history=view_menu_history && independent_menu_context() &&
         psx_mod_read_byte(PLAY+12)==view_menu_stage &&
         psx_mod_read_byte(PLAY+13)==view_menu_section &&
         psx_mod_read_byte(PLAY+0x1D)==view_menu_checkpoint;
     int door_views=independent_door_context();
-    if(!enrolled || failed || inside || zero_world || (scene_owner && !door_views) || clear_phase || pause_owner>=0 ||
-       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
-       (psx_mod_read_byte(PLAY+0x10) && !door_views) || (coop_world_hold() && !door_views) ||
+    if(!enrolled || failed || (inside && !(returning && personal_pass && !personal_seat) && !initial && !guest_host) ||
+       (zero_world && !guest_host) || (scene_owner && !door_views) || clear_phase ||
+       (pause_owner>=0 && psx_mod_read_byte(PLAY+1) && !returning) ||
+       (psx_mod_read_byte(PLAY)!=10 && !initial) ||
+       (psx_mod_read_byte(PLAY+1) && !returning) ||
+       (psx_mod_read_byte(PLAY+0x10) && !door_views && !initial) ||
+       (coop_world_hold() && !door_views && !returning && !initial) ||
        (life.status[0]!=MMX6_COOP_ALIVE &&
         (!view_valid || (life.status[0]!=MMX6_COOP_DYING && life.status[0]!=MMX6_COOP_FALLEN))) ||
        (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING &&
@@ -245,8 +323,10 @@ static void independent_world_begin(void) {
     if(buffer!=VIEW_BUFFER && buffer!=VIEW_BUFFER+VIEW_STRIDE)return;
     int fresh=!view_valid || (!menu_history && frame_count!=view_frame+1);
     if(fresh) {
-        capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
-        memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
+        if(!view_valid || life.status[0]==MMX6_COOP_ALIVE)
+            capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
+        if(!view_valid || life.status[1]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_JOINING)
+            memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
         view_valid=1;
     }
     view_menu_history=0;
@@ -299,8 +379,10 @@ static void independent_world_begin(void) {
 }
 static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     (void)user;(void)unused;
-    project(VIEW_CAMERA,view_cameras[private_seat],sizeof view_cameras[0]);
-    if(private_seat && (life.status[1]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_JOINING)) {
+    int menu=personal_menus_active(),returning=personal_resuming_world();
+    if(!menu)project(VIEW_CAMERA,view_cameras[private_seat],sizeof view_cameras[0]);
+    if(!menu && !returning && pause_owner<0 && private_seat &&
+       (life.status[1]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_JOINING)) {
         if(!independent_quake_input())return 0;
         uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);
         project(PLAYER,p2.body,sizeof p2.body);
@@ -317,7 +399,9 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
         capture(VIEW_CAMERA,view_cameras[1],sizeof view_cameras[1]);
         project(PLAYER,body,sizeof body);
     }
-    for(unsigned i=0;i<32;++i)psx_mod_write_word(view_buffer+0x70+i*4,view_ot[i]);
+    if(menu || returning)
+        guest(cpu,0x8006663Cu,view_buffer+0x70u,32); /* Original12150 ClearOTagR. */
+    else for(unsigned i=0;i<32;++i)psx_mod_write_word(view_buffer+0x70+i*4,view_ot[i]);
     /* The retail ring currently belongs to the canonical camera. Rebuild it
      * from this pane's authored map before native streaming/packet emission. */
     for(unsigned layer=0;layer<3;++layer)psx_mod_write_byte(VIEW_CAMERA+layer*0x54+0x4C,1);
@@ -326,9 +410,12 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
         (uint32_t)psx_mod_read_byte(view_buffer+0x2E)<<8|(uint32_t)psx_mod_read_byte(view_buffer+0x2F)<<16);
     gpu_write_gp0(psx_mod_read_half(view_buffer+0x14)|(uint32_t)psx_mod_read_half(view_buffer+0x16)<<16);
     gpu_write_gp0(psx_mod_read_half(view_buffer+0x18)|(uint32_t)psx_mod_read_half(view_buffer+0x1A)<<16);
-    guest(cpu,0x80025FB0,0,0);
+    if(menu) {
+        if(!personal_menu_draw(cpu,private_seat))return 0;
+    } else guest(cpu,0x80025FB0,0,0);
     if(failed || inside || world_render || hud_call || state_track.count || state_track.error)return 0;
     guest(cpu,VIEW_DRAW_OT,view_buffer+0xEC,0);guest(cpu,0x80066150,0,0);
+    private_menu_fade(view_buffer);
     return !failed;
 }
 static int private_draw_pair(CPUState *cpu,void *user,uint32_t seat) {
@@ -339,10 +426,15 @@ static int private_draw_pair(CPUState *cpu,void *user,uint32_t seat) {
     return ok;
 }
 static int independent_present(CPUState *cpu,uint32_t address) {
-    if(!view_pending || view_call || private_draw || inside || zero_world || failed ||
-       state_track.count || state_track.error ||
-       cpu->gpr[31]!=0x80012128u || cpu->gpr[4]!=view_buffer+0xEC ||
-       psx_mod_read_word(0x8009B7A0u)!=view_buffer)return 0;
+    if(view_call || private_draw || inside || zero_world || failed ||
+       state_track.count || state_track.error || cpu->gpr[31]!=0x80012128u)return 0;
+    int menu=personal_menus_active();
+    uint32_t buffer=psx_mod_read_word(0x8009B7A0u);
+    if((buffer!=VIEW_BUFFER && buffer!=VIEW_BUFFER+VIEW_STRIDE) || cpu->gpr[4]!=buffer+0xEC)return 0;
+    if(!local_split && !psx_mod_netplay_is_active())
+        (void)psx_mod_set_local_pair_presentation(menu);
+    if(menu) { view_pending=1;view_buffer=buffer; }
+    if(!view_pending || view_buffer!=buffer)return 0;
     view_call=1;view_pending=0;
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
     guest(cpu,0x80066150,0,0);
@@ -352,7 +444,7 @@ static int independent_present(CPUState *cpu,uint32_t address) {
     uint8_t previous_camera[sizeof view_cameras[1]];memcpy(previous_camera,view_cameras[1],sizeof previous_camera);
     unsigned door_phase=independent_door_context()?psx_mod_read_byte(both_door_actor+5):0;
     uint32_t before=state_digest();int committed;
-    if(local_split) {
+    if(local_split || (menu && !psx_mod_netplay_is_active())) {
         PSXModStereoFrame pair={sizeof pair,1,rect.x,rect.y,rect.w,rect.h};
         committed=psx_mod_render_local_pair(cpu,&pair,private_draw_pair,NULL);
     } else {
@@ -396,6 +488,8 @@ static void independent_activate(void) {
 #else
 /* Older SDKs retain the working shared renderer. */
 static void independent_invalidate(void) {}
+static void personal_menu_prepare_assets(CPUState *cpu) { (void)cpu; }
+static void personal_menu_assets(CPUState *cpu,unsigned seat) { (void)cpu;(void)seat; }
 static void independent_menu_begin(void) {}
 static void independent_world_begin(void) {}
 static void independent_camera_begin(CPUState *cpu,uint32_t address) { (void)cpu;(void)address; }

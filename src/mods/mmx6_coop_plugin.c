@@ -118,6 +118,20 @@ static int player_call, stage_call, zero_world, world_render;
 /* Original20CC0 terrain follows the one shared actor pass, not player input. */
 static uint8_t private_terrain_pending;
 static int pause_owner = -1, p2_start_previous;
+/* Native MENU is a complete 3C-byte context, including the Parts/exit work
+ * words at +30/+34/+38. Original weapon belongs to that menu's actor. */
+typedef struct { uint8_t native[0x3C],original_weapon; } PersonalMenu;
+static PersonalMenu personal_menu[2];
+static unsigned personal_active,personal_initialized,personal_eligible;
+static uint16_t personal_previous[2];
+static unsigned personal_pass,personal_seat,personal_rendering;
+static void personal_reset(void);
+static int personal_menus_active(void);
+static int personal_resuming_world(void);
+static unsigned personal_menu_fade(uint32_t buffer);
+static int personal_menu_draw(CPUState *cpu,unsigned seat);
+static void personal_menu_assets(CPUState *cpu,unsigned seat);
+static void personal_menu_prepare_assets(CPUState *cpu);
 static uint32_t world_packets;
 static uint32_t hud_packets;
 static int hud_call, hud_seat;
@@ -551,6 +565,11 @@ static void shared_palette_load(CPUState *cpu,uint32_t address) {
          (caller==0x80022950u && (slot==0x1E0u || slot==0x1F0u) &&
           source>=portrait && source<=portrait+0x600u && !((source-portrait)&0x1FFu)));
     if(portrait_load) {
+        /* Pause22928 selects this actor's own portrait from SCRATCH+A8.
+         * Its native private copy must run without publishing into P1's
+         * resident dialogue rows. Shared Gate/dialogue callers retain the
+         * exact source/span admission above outside a personal menu pass. */
+        if(personal_pass)return;
         uint8_t colors[512];
         capture(source,colors,sizeof colors);
         project(saved_resources[3]+slot*32u,colors,sizeof colors);
@@ -981,6 +1000,12 @@ static uint32_t diagnostic_host_digest(void) {
     HASH_BYTES(&p2,sizeof p2);
     HASH_BYTES(returning_body,sizeof returning_body);
     HASH_BYTES(scene_body,sizeof scene_body);
+    for(unsigned seat=0;seat<2;++seat) {
+        HASH_BYTES(personal_menu[seat].native,sizeof personal_menu[seat].native);
+        HASH_BYTES(&personal_menu[seat].original_weapon,1);
+        uint8_t old[2]={(uint8_t)personal_previous[seat],(uint8_t)(personal_previous[seat]>>8)};
+        HASH_BYTES(old,sizeof old);
+    }
     /* Serialize integer fields explicitly; never hash structure padding. */
     const uint32_t fields[]={
         (uint32_t)life.status[0],(uint32_t)life.status[1],life.select_frames,
@@ -989,6 +1014,7 @@ static uint32_t diagnostic_host_digest(void) {
         private_actor.character,private_actor.form,private_actor.bin_member,private_actor.bin_type,
         private_actor.dat_member,private_actor.portrait_index,private_actor.portrait_graphics,private_actor.portrait_palette,
         (uint32_t)pause_owner,(uint32_t)p2_start_previous,
+        personal_active,personal_initialized,personal_eligible,
         scene_owner,scene_phase,(uint32_t)scene_y,both_door_actor,both_door_origin,both_door_members,
         (uint32_t)ready,(uint32_t)enrolled,(uint32_t)failed,
         checkpoint_fatal_option,checkpoint_fatal_state
@@ -2090,6 +2116,7 @@ static void menu_vram(CPUState *cpu, int zero) {
     zero_menu_loaded=zero;
     STATE_POP(restore_owner);
 }
+#include "mmx6_coop_personal_pause.inc"
 static int arrival_source(void) {
     return psx_mod_read_word(0x80073ACCu)==0x80035144u &&
         psx_mod_read_word(0x8003D850u)==0x27BDFFE8u &&
@@ -2272,6 +2299,18 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
         life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);
     stage_context[3]=(uint32_t)survivor;STATE_UPDATE(restore_stage,stage_context);
+    if(personal_active && phase==2) {
+        /* Shared Options/Quit executes the original world-dispatch frame.
+         * Keep its strict ChangeThread/fresh-init retirement ABI intact. */
+        if(personal_modal()) personal_modal_prepare(cpu,raw);
+        else {
+            stage_call=inside=1;
+            uint32_t result=personal_tick(cpu,raw);
+            stage_call=inside=0;
+            diagnostics((uint16_t)((raw<<8)|(raw>>8)));
+            cpu->gpr[2]=result;STATE_POP(restore_stage);return 1;
+        }
+    }
     /* A dead Zero no longer hosts the world after the shared script releases.
      * Finish his original body-only death once; controller intentionally
      * withholds its ordinary private player update while a scene is active. */
@@ -2301,6 +2340,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         shared_clear_tick(cpu,0);
         diagnostics((uint16_t)((raw<<8)|(raw>>8)));
         if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=arrival_pair=0;
+        personal_after_stage(cpu,phase,raw);
         cpu->gpr[2]=result;
         stage_call=0;
         STATE_POP(restore_stage);
@@ -2352,6 +2392,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     diagnostics(raw);
     if (zero_menu_loaded && psx_mod_read_byte(PLAY+1)!=2) menu_vram(cpu,0);
     if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=arrival_pair=0;
+    personal_after_stage(cpu,phase,(uint16_t)((raw<<8)|(raw>>8)));
     cpu->gpr[2]=result;
     stage_call=inside=0;
     STATE_POP(restore_stage);
@@ -2394,6 +2435,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
     if (inside) return;
     intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
     int retired=retire_quit_stage(cpu,address);
+    personal_reset();
     /* Frontend initialization (including a new native Load/New Game) retires
      * the runtime-only second bank. Ordinary major9 checkpoint births keep it.
      * Seeding is delayed until the loaded campaign actually enters co-op. */
@@ -3599,6 +3641,7 @@ static void activate(void) {
     memset(saved_portrait_colors,0,sizeof saved_portrait_colors);
     subtank_seeded=subtank_found=0;memset(zero_subtanks,0,sizeof zero_subtanks);
     inside=ready=enrolled=failed=0;
+    personal_reset();
     working_palette_assets_ready=0;
     memset(native_working_palettes,0,sizeof native_working_palettes);
     memset(working_palette_lengths,0,sizeof working_palette_lengths);
@@ -3712,6 +3755,12 @@ static void world_camera_begin(CPUState *cpu,uint32_t address) {
     independent_camera_begin(cpu,address);
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
+    static const uint32_t personal_shared[]={0x800139A0u,0x800139F4u,
+        0x8001750Cu,0x80025FB0u,0x80020C40u};
+    for(unsigned i=0;i<sizeof personal_shared/sizeof personal_shared[0];++i)
+        psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",personal_shared[i],personal_shared_effect);
+    psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",0x80026028u,personal_draw_filter);
+    psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",0x80034CD0u,personal_dead_commit);
     (void)psx_mod_register_session_reset_plugin("mmx6.local-coop.prototype",private_terrain_session_reset);
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
