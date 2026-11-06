@@ -341,10 +341,14 @@ if(BUILD_TESTING)
         tests/test_seamless_store.cpp
         src/mods/mmx6_seamless_store.cpp
         "${PSXRECOMP_V4_ROOT}/runtime/src/mod_resident.cpp"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/iso_reader.cpp"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/cue_sheet.cpp"
         "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
     target_include_directories(mmx6_seamless_store_test PRIVATE
         src/mods
-        "${PSXRECOMP_V4_ROOT}/runtime/include")
+        "${PSXRECOMP_V4_ROOT}/runtime/include"
+        "${PSXRECOMP_V4_ROOT}/recompiler/include")
+    target_link_libraries(mmx6_seamless_store_test PRIVATE chdr-static)
     set(MMX6_TEST_DISC "" CACHE FILEPATH "Original SLUS-01395 v1.1 .bin for disc tests")
     if(MMX6_TEST_DISC)
         add_test(NAME mmx6_seamless_store_test
