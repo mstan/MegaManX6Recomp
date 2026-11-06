@@ -12,7 +12,7 @@
 #endif
 #if defined(MMX6_ENABLE_LOOPBACK_HOST_LAB) && MMX6_ENABLE_LOOPBACK_HOST_LAB && !defined(PSX_NO_DEBUG_TOOLS) && defined(MMX6_COOP_CHECKPOINT_TAINT_API) && defined(PSX_MOD_NETPLAY_SETTINGS_LOADING_API) && PSX_MOD_NETPLAY_SETTINGS_LOADING_API >= 1 && defined(PSX_MOD_NETPLAY_HOST_CATALOG_API) && PSX_MOD_NETPLAY_HOST_CATALOG_API >= 2
 #include "psx_netplay.h"
-#include "mmx6_coop_host_lab_contract.h"
+#include "mmx6_coop_host_lab.h"
 #define MMX6_COOP_AGREED_CHECKPOINT 1
 #endif
 enum { CHECKPOINT_CAPABILITY=0x31504B43u, CHECKPOINT_IDLE=0,
@@ -97,12 +97,9 @@ static int checkpoint_lab_authorized(void) {
     if(checkpoint_lab_index()>=115)return 0;
     if(!psx_mod_netplay_is_active())return 1; /* Same lab candidate's LOCAL lane. */
     PSXHostSelection selected;
-    const uint8_t expected[32]=MMX6_HOST_LAB_QUALIFICATION_BYTES;
     return !psx_netplay_host_profile_failed() && psx_netplay_host_profile_ready() &&
         psx_netplay_host_profile_selection(&selected) &&
-        !strcmp(selected.profile,MMX6_HOST_LAB_PROFILE) && selected.revision==MMX6_HOST_LAB_REVISION &&
-        selected.flags==PSX_HOST_PROFILE_DIRECT_LOOPBACK &&
-        !memcmp(selected.qualification,expected,sizeof expected);
+        mmx6_coop_lab_selection_matches(&selected);
 #else
     return 0;
 #endif

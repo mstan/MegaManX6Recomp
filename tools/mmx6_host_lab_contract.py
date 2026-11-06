@@ -36,6 +36,24 @@ def generated_header():
             f'#define MMX6_HOST_LAB_CONTRACT_SHA256 "{digest.hex()}"\n'
             "#define MMX6_HOST_LAB_QUALIFICATION_BYTES {" + ",".join(f"0x{x:02x}" for x in digest) + "}\n#endif\n")
 
+
+def generated_portable_cpu_header():
+    """A separate candidate record leaves the existing 0x7f cell unchanged."""
+    record = json.loads((ROOT / "docs/COOP_PORTABLE_CPU_HOST_LAB_CONTRACT.json").read_text(encoding="utf-8"))
+    base = json.loads((ROOT / "docs/COOP_HOST_LAB_CONTRACT.json").read_text(encoding="utf-8"))
+    def canonical(value):
+        return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii")
+    if record["base_contract_sha256"] != hashlib.sha256(canonical(base)).hexdigest():
+        raise ValueError("portable CPU record must be reviewed against the current unchanged base contract")
+    if record["required_optional_features"] != 0 or record["revision"] != 101:
+        raise ValueError("portable CPU candidate requires no optional ISA and revision101")
+    digest = hashlib.sha256(canonical(record)).digest()
+    return ("/* Generated candidate contract; this is not runtime qualification. */\n"
+            "#ifndef MMX6_COOP_PORTABLE_CPU_HOST_LAB_CONTRACT_H\n#define MMX6_COOP_PORTABLE_CPU_HOST_LAB_CONTRACT_H\n"
+            f'#define MMX6_PORTABLE_CPU_HOST_LAB_PROFILE "{record["profile"]}"\n'
+            f'#define MMX6_PORTABLE_CPU_HOST_LAB_REVISION {record["revision"]}u\n'
+            "#define MMX6_PORTABLE_CPU_HOST_LAB_QUALIFICATION_BYTES {" + ",".join(f"0x{x:02x}" for x in digest) + "}\n#endif\n")
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true")
@@ -54,6 +72,12 @@ def main():
         path.write_text(expected, encoding="ascii", newline="\n")
     elif path.read_text(encoding="ascii") != expected:
         raise SystemExit("lab contract/header mismatch; regenerate and review the semantic change")
+    portable_path = ROOT / "src/mods/mmx6_coop_portable_cpu_host_lab_contract.h"
+    portable_expected = generated_portable_cpu_header()
+    if args.write:
+        portable_path.write_text(portable_expected, encoding="ascii", newline="\n")
+    elif portable_path.read_text(encoding="ascii") != portable_expected:
+        raise SystemExit("portable CPU contract/header mismatch; regenerate and review the semantic change")
     print("lab semantic contract: " + hashlib.sha256(json.dumps(json.loads((ROOT / 'docs/COOP_HOST_LAB_CONTRACT.json').read_text()), sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode('ascii')).hexdigest())
 
 if __name__ == "__main__":

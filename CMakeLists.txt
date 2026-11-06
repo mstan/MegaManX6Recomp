@@ -8,6 +8,20 @@ set(CMAKE_CXX_STANDARD 17)
 option(PSX_NETPLAY "Build the shared two-player netplay stack" ON)
 option(MMX6_ENABLE_LOOPBACK_HOST_LAB
     "Enable unqualified same-machine Clang22 ENHANCED loopback candidate for explicit lab validation" OFF)
+option(MMX6_ENABLE_PORTABLE_CPU_HOST_LAB
+    "Add unqualified Windows x64 portable-CPU ENHANCED loopback cell for explicit validation" OFF)
+if(MMX6_ENABLE_PORTABLE_CPU_HOST_LAB AND NOT MMX6_ENABLE_LOOPBACK_HOST_LAB)
+    message(FATAL_ERROR "Portable CPU candidate requires the existing explicit loopback host lab")
+endif()
+if(MMX6_ENABLE_PORTABLE_CPU_HOST_LAB)
+    foreach(_portable_language C CXX)
+        foreach(_portable_config "" _DEBUG _RELEASE _RELWITHDEBINFO _MINSIZEREL)
+            if("${CMAKE_${_portable_language}_FLAGS${_portable_config}}" MATCHES "(-march=|-mcpu=|-mavx|-msse3|-mssse3|-msse4|-mfma|/arch:|/fp:fast|-ffast-math|-Ofast)")
+                message(FATAL_ERROR "Portable CPU candidate requires generic ISA/canonical FP flags")
+            endif()
+        endforeach()
+    endforeach()
+endif()
 
 set(PSXRECOMP_V4_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/psxrecomp-v4" CACHE PATH
     "Path to psxrecomp-v4")
@@ -127,7 +141,8 @@ foreach(_mmx6_host_target psx-runtime psx-runtime-pgxp)
         # Every activation reacquires title-owned arenas and retained banks.
         set_property(TARGET ${_mmx6_host_target} PROPERTY PSX_MOD_SESSION_RESOURCES ON)
         target_compile_definitions(${_mmx6_host_target} PRIVATE
-            MMX6_ENABLE_LOOPBACK_HOST_LAB=$<BOOL:${MMX6_ENABLE_LOOPBACK_HOST_LAB}>)
+            MMX6_ENABLE_LOOPBACK_HOST_LAB=$<BOOL:${MMX6_ENABLE_LOOPBACK_HOST_LAB}>
+            MMX6_ENABLE_PORTABLE_CPU_HOST_LAB=$<BOOL:${MMX6_ENABLE_PORTABLE_CPU_HOST_LAB}>)
         if(TARGET mmx6_host_lab_contract_check)
             add_dependencies(${_mmx6_host_target} mmx6_host_lab_contract_check)
         endif()
@@ -213,6 +228,28 @@ if(BUILD_TESTING)
         endif()
         target_compile_definitions(${_lab_test} PRIVATE MMX6_HOST_LAB_EXPECT_OFFER=${_lab_expected})
         add_test(NAME ${_lab_test} COMMAND ${_lab_test})
+    endforeach()
+    foreach(_portable_variant enabled disabled wrong-contract pgxp)
+        set(_portable_test mmx6_portable_cpu_host_lab_${_portable_variant}_test)
+        add_executable(${_portable_test} tests/test_mmx6_coop_portable_cpu_host_lab.c ${_lab_sdk_sources})
+        target_include_directories(${_portable_test} PRIVATE tests src/mods "${PSXRECOMP_V4_ROOT}/runtime/include")
+        set(_portable_expected 0)
+        if(_portable_variant STREQUAL "enabled" AND WIN32 AND MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8
+            AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|amd64|x86_64|X86_64)$"
+            AND CMAKE_C_COMPILER_ID STREQUAL "Clang" AND CMAKE_C_COMPILER_VERSION VERSION_EQUAL "22.1.8")
+            set(_portable_expected 1)
+        endif()
+        target_compile_definitions(${_portable_test} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=1
+            MMX6_ENABLE_PORTABLE_CPU_HOST_LAB=$<NOT:$<STREQUAL:${_portable_variant},disabled>>
+            MMX6_HOST_LAB_EXPECT_OFFER=0
+            MMX6_PORTABLE_CPU_HOST_LAB_EXPECT_OFFER=${_portable_expected})
+        if(_portable_variant STREQUAL "wrong-contract")
+            target_compile_definitions(${_portable_test} PRIVATE MMX6_HOST_LAB_TEST_BAD_EXECUTION=1)
+        endif()
+        if(_portable_variant STREQUAL "pgxp")
+            target_compile_definitions(${_portable_test} PRIVATE PSX_PGXP=1)
+        endif()
+        add_test(NAME ${_portable_test} COMMAND ${_portable_test})
     endforeach()
     if(Python3_Interpreter_FOUND)
         set(_mmx6_host_lab_contract_profile_args)

@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "status": "candidate-unqualified; no native qualification from declaration or build",
+  "profile": "mmx6.win64.enhanced.portable",
+  "revision": 101,
+  "base_contract_sha256": "25cc70a8e0304b7e39245f47bf05b83f791ab53cc9d23ea9304ab069b9d0ec0c",
+  "flags": [
+    "PORTABLE",
+    "DIRECT_LOOPBACK"
+  ],
+  "required_optional_features": 0,
+  "scope": "Windows x64 GNU ABI Clang22.1.8 ENHANCED; same-machine numeric 127.0.0.1; identical actual executable SHA",
+  "backend": "ENHANCED",
+  "architecture": "x64",
+  "exact_artifact_gate": "Unchanged SDK artifact equality/content/manifest/profile/selection gates",
+  "common_guards": "Existing canonical FP2/OpenBIOS/image/seal/two-seat/delay/resident/OpenGL/retained banks/aspect0/title/settings guards unchanged",
+  "qualification_required": [
+    "Fresh exact candidate LOCAL and same-image two-process SERVER NET admission before guest cycle0/tick0",
+    "Real reported CPU features preserved; portable101 selected and equal selection SHA on both peers",
+    "Original intro/independent inputs/lifecycle and resolved core+mod CRC; fresh-nonce restart/rematch; normal owned exits/cards",
+    "Meaningful named gameplay checks on new candidate; C168 passes do not transfer"
+  ],
+  "limits": [
+    "No native Windows/Linux cross-artifact support; strict PE/ELF artifact mismatch remains",
+    "No remote LAN/lobby/ICE/relay/rollback/network states/REFERENCE/PGXP or unsupported compiler qualification",
+    "R1 physical distinct pads remains a separate human prerequisite",
+    "Profile100/0x7f rule and original semantic record are unchanged"
+  ]
+}
