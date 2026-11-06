@@ -519,6 +519,40 @@ static void agreed_gate_homing_boundary(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();
 }
+/* Only the authored Laser CP1 entry is requested. Beam admission, geometry,
+ * collision and view isolation remain original native outcomes. */
+static void agreed_laser_boundary(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);test_lab_option="laser_cp1";checkpoint_reset();
+        const Mmx6Checkpoint *entry=&checkpoint_inventory[38];
+        CHECK(checkpoint_lab_option==26 && checkpoint_lab_index()==38 && checkpoint_lab_nonce()==0x4C4C5331u);
+        CHECK(entry->stage==7 && !entry->section && entry->checkpoint==1 && entry->table==0x800731C8u &&
+            entry->record==0x80072660u && entry->hash==0xD9C638CFu);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
+        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.index==38 && checkpoint_pending.nonce==0x4C4C5331u);
+        before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=7;before_ram[(PLAY+13)&0x1FFFFF]=0;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) &&
+            !memcmp(&registers,cpu,sizeof *cpu) && !guest_calls && checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(psx_mod_read_byte(PLAY+12)==7 && !psx_mod_read_byte(PLAY+13) && psx_mod_read_byte(PLAY+0x1D)==1);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+        CHECK(psx_mod_read_word(diagnostic+0xB8)==0x80072660u && psx_mod_read_word(diagnostic+0xA4)==1 &&
+            psx_mod_read_word(diagnostic+0xB4)==1);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && !checkpoint_pending.phase);
+        for(unsigned bad=0;bad<3;++bad) {
+            setup_agreed(cpu,online);test_lab_option="laser_cp1";checkpoint_reset();
+            if(bad==0)psx_mod_write_byte(0x80072660u,psx_mod_read_byte(0x80072660u)^1u);
+            if(bad==1)psx_mod_write_byte(PLAY+12,4); /* This alias admits only original Intro. */
+            if(bad==2)checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;registers=*cpu;
+            CHECK(!(bad==2?checkpoint_request(7,0,0,0x4C4C5331u,CHECKPOINT_AGREED):checkpoint_lab_boundary(cpu,6)));
+            CHECK(psx_mod_read_byte(diagnostic+0xA9)==(bad==0?CHECKPOINT_SOURCE:bad==1?CHECKPOINT_ORDER:CHECKPOINT_UNKNOWN));
+            CHECK(!checkpoint_pending.phase && !checkpoint_test_taint && !guest_calls &&
+                !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
+        }
+    }
+    test_lab_option="off";checkpoint_reset();
+}
 /* Exercise the real SDK callback type even when the plugin constructor is
  * disabled in this unit producer. A third callback argument is an ABI error. */
 static void sequence_input_call(CPUState *cpu,uint32_t address) {
@@ -2751,7 +2785,7 @@ int main(int argc,char **argv) {
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
-    agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);agreed_gate_homing_boundary(&cpu);agreed_alternate_sequence(&cpu);
+    agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);agreed_gate_homing_boundary(&cpu);agreed_laser_boundary(&cpu);agreed_alternate_sequence(&cpu);
     agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_ground_boundary(&cpu);agreed_fortress_cp3_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_mounted_armor_only(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;

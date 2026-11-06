@@ -79,6 +79,15 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(target['record'], '80072E1C')
         self.assertEqual(target['player'], dict(x=3040, y=224))
 
+    def test_laser_cp1_is_original_fixed_entry_without_beam_or_position_seed(self):
+        _, rows, sections = checkpoint.inventory(INVENTORY)
+        target = checkpoint.select(rows, sections, 7, 0, 1)
+        self.assertEqual(rows.index(target), 38)
+        self.assertEqual(target['table'], '800731C8')
+        self.assertEqual(target['record'], '80072660')
+        self.assertEqual(target['player'], dict(x=4216, y=368))
+        self.assertEqual(target['camera'], dict(x=4160, y=256, min_x=4160, max_x=4480, min_y=256, max_y=256))
+
     def test_ground_refight_cp6_binds_original_record_and_postconstructor_grant(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
         target = checkpoint.select(rows, sections, 12, 0, 6)
