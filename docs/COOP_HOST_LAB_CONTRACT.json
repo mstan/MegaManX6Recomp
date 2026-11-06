@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 108,
+  "revision": 110,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v121",
+    "title_compatibility": "mmx6-x-zero-delay-v122",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1307,5 +1307,39 @@
     "state": "Snapshot27 layout and three serialized sequence fields unchanged. New base108/portable109/title121 exact image and profile agreement; all existing CPU/FP/backend/OpenBIOS/content/manifest/actual executable guards retained.",
     "regression": "Existing source/emission test checks one co-op registration and ordered fanout in either constructor order; existing compiled capture/replay fixtures enforce SDK-style per-plugin/address uniqueness, co-op observer exactly once, standalone none and observation before replay input supply. Full C/C++ compilation/native qualification remain required.",
     "acceptance": "Fresh exact C173 LOCAL and NET must earn NPC53 defeat, full natural story/NoSave/ZeroMessage/progress1/responsiveMap/newordinaryRecyclemission, acknowledge second CP1 generation2, reach native NPC55/sub1 intro and separate living controls; final resolved NET CRC/native cards/normalownedexits. Diagnostics and compiled gates grant no native row credit. Existing Gate target fix remains stateless and independently native-unqualified."
+  },
+  "title_changes_v122": {
+    "scope": "R23 measured native Gate approach prerequisite and F182 original Laser Institute CP1 alias only; source-prepared, all new native paths unqualified.",
+    "laser_cp1": {
+      "option": 26,
+      "tuple": [
+        7,
+        0,
+        1
+      ],
+      "index": 38,
+      "table": "800731C8",
+      "record": "80072660",
+      "record_fnv32": "D9C638CF",
+      "nonce": "4C4C5331",
+      "allowed": "Existing source-authenticated original checkpoint initializer only; no beam/HP/encounter/phase/result seed."
+    },
+    "gate_right_cp4": {
+      "option": 27,
+      "tuple": [
+        18,
+        0,
+        4
+      ],
+      "index": 98,
+      "record": "80072ED0",
+      "record_fnv32": "F191CA1E",
+      "nonce": "4C475234",
+      "allowed": "Separate immutable gate_homing_right_cp4 choice preserves original option25. Existing once-only post-arrival phase waits actual normal native feet then writes only P2 position/history to3130/1082 on source-checked original upper ledge; P1 remains original2992/1083. Native updates must establish real standing before completion.",
+      "bypasses": "Pre-Gate corridor travel and gap jump. No HP/lifecycle/action/phase/door/encounter/result write or native outcome call."
+    },
+    "authority": "DefaultOFF development catalog only, fixed choice agreed before boot, same source/CPU/profile/actual artifact/receipt/nonce/once/taint/pending snapshot guards. No generic online mailbox. Actual native Gate homing and laser contact/terrain/private-view checks remain required.",
+    "state": "New base110/portable111/title122, snapshot27 layout unchanged; admitted immutable checkpoint range27 and first unknown28. No native acceptance transfers from C173.",
+    "acceptance": "Full125 SERVER+3 fresh exact-source PC checks before native. Same-candidate LOCAL/NET actual Gate59/26sub13 trajectory/contact for R23; original Laser type0D?0B headcollision/terrain/worldFX and separated private views for F182. Final resolved core/modCRC, native cards and normal owned exits required."
   }
 }

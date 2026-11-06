@@ -2,7 +2,7 @@
 
 Enable `MMX6_ENABLE_LOOPBACK_HOST_LAB=ON` and
 `MMX6_ENABLE_PORTABLE_CPU_HOST_LAB=ON` for an isolated new build. Both remain
-off by default. The new `mmx6.win64.enhanced.portable` revision109 offers the
+off by default. The new `mmx6.win64.enhanced.portable` revision111 offers the
 existing ENHANCED backend with zero optional CPU requirements. It retains
 Windows x64 GNU ABI Clang22.1.8, canonical FP2, linked OpenBIOS, interpreted
 overlays, resident assets, retained OpenGL, title/settings, two-seat delay
@@ -28,7 +28,7 @@ Before qualification, build the existing host-lab tests plus the new
 `mmx6_portable_cpu_host_lab_*` fixtures and all required current checks.
 On the exact new artifact, retain LOCAL and two-process SERVER NET native
 intro/independent inputs/lifecycle and meaningful gameplay, actual reported
-CPU mask, selected109 identity equal on both peers at cycle0/tick0, resolved
+CPU mask, selected111 identity equal on both peers at cycle0/tick0, resolved
 core/mod CRC, fresh-nonce restart/rematch, unchanged cards and normal owned
 exits. C168 mode passes do not transfer. Declaration, generated digest,
 compilation and unit tests are preparation only.
@@ -40,3 +40,7 @@ work in Bead `beads-eio.1.180`; this candidate grants no full R1 completion.
 C173 fixes the duplicate native-input registration with one co-op fanout before
 capture/replay. It uses base108/portable109/title121 and the same snapshot27
 layout and authorization guards; source tests do not grant native qualification.
+
+C174 uses base110/portable111/title122 for original Laser CP1 and the separate
+measured Gate right-ledge prerequisite. Both remain lab-only, defaultOFF and
+native-unqualified; HP, lifecycle, door, beam and result state remain original.
