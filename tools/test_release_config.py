@@ -40,5 +40,29 @@ class ReleaseConfigTests(unittest.TestCase):
         self.assertIn("recompiler.mod_function_entry_funcs", output)
 
 
+
+class PlaytestDefaultsTests(unittest.TestCase):
+    def test_current_version_and_adaptive_fresh_default(self):
+        import tomllib
+        root=Path(__file__).resolve().parents[1]
+        self.assertEqual((root/'packaging/release/VERSION').read_text().strip(),'v1.3.5-alpha')
+        catalog=tomllib.loads((root/'mods/preloaded/packages/mmx6.enhancement.widescreen/1.0.0/manifest.toml').read_text())
+        self.assertTrue(next(x for x in catalog['feature']if x['id']=='widescreen')['default_enabled'])
+        self.assertEqual(next(x for x in catalog['option']if x['id']=='aspect')['default'],'adaptive')
+
+    def test_normal_release_has_no_lab_catalog_or_loading_packages(self):
+        import tomllib
+        root=Path(__file__).resolve().parents[1]
+        config=tomllib.loads((root/'packaging/release.toml').read_text())
+        self.assertIn('-DMMX6_ENABLE_LOOPBACK_HOST_LAB=OFF',config['build']['cmake_args'])
+        self.assertIn('-DMMX6_ENABLE_PORTABLE_CPU_HOST_LAB=OFF',config['build']['cmake_args'])
+        self.assertIn('-DBUILD_TESTING=ON',config['build']['cmake_args'])
+        self.assertNotIn('lab_', (root/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text())
+        cmake=(root/'CMakeLists.txt').read_text()
+        allow=cmake[cmake.index('set(MMX6_BUILTIN_MOD_ALLOWLIST'):cmake.index('set(MMX6_BUILTIN_MOD_ALLOWLIST')+500]if 'set(MMX6_BUILTIN_MOD_ALLOWLIST'in cmake else cmake
+        self.assertNotIn('psx.enhancement.cd-speed',allow)
+        self.assertNotIn('psx.enhancement.fast-loading',allow)
+
+
 if __name__ == "__main__":
     unittest.main()
