@@ -909,12 +909,14 @@ static void checkpoint_mounted_prerequisite(CPUState *cpu,const Mmx6Checkpoint *
         /* Ordinary native2048C must dispatch the actual EBEE8 command first.
          * It retires itself via2C9D4; never construct a vehicle body here. */
         if(command)return;
-        if(record!=0x03011E81u || (psx_mod_read_word(ride)&0x00FFFFFFu)!=0x00010141u ||
-           psx_mod_read_word(ride+4) || psx_mod_read_word(ride+0x10)!=0x800F2588u ||
-           psx_mod_read_word(ride+8)!=(32u<<16) || psx_mod_read_word(ride+12)!=(354u<<16)) {
-            checkpoint_cancel(CHECKPOINT_UNSAFE);return;
+        if(record!=0x03011E81u || !(psx_mod_read_byte(ride)&1u) || psx_mod_read_byte(ride+1)!=1 ||
+           psx_mod_read_word(ride+0x10)!=0x800F2588u) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+        if(!psx_mod_read_byte(ride+4)) {
+            if((psx_mod_read_word(ride)&0x00FFFFFFu)!=0x00010141u || psx_mod_read_word(ride+4) ||
+               psx_mod_read_word(ride+8)!=(32u<<16) || psx_mod_read_word(ride+12)!=(354u<<16))
+                checkpoint_cancel(CHECKPOINT_UNSAFE);
+            return; /* Ordinary20A08/F01A4 performs EBF64 in its own native pass. */
         }
-        guest(cpu,0x800EBF64u,ride,0); /* Exact native first-state initializer. */
         if(!(psx_mod_read_byte(ride)&1u) || psx_mod_read_byte(ride+1)!=1 ||
            psx_mod_read_word(ride+0x10)!=0x800F2588u || psx_mod_read_byte(ride+4)!=1 || psx_mod_read_byte(ride+5) ||
            psx_mod_read_word(ride+0x68)!=0x800F2F28u || psx_mod_read_byte(ride+0x5C)!=32 ||

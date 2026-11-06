@@ -2223,7 +2223,12 @@ static void agreed_mounted_prerequisite(CPUState *cpu) {
         memset(test_ram+0x9B7B0,0,0x30);psx_mod_write_byte(0x800F2588u,0x81);
         psx_mod_write_word(0x800CD340u,0x01010141u); /* Restore does not assign old draw byte3. */psx_mod_write_word(0x800CD350u,0x800F2588u);
         psx_mod_write_word(0x800CD348u,32u<<16);psx_mod_write_word(0x800CD34Cu,354u<<16);
-        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4 && mounted_init_calls==1);
+        memcpy(before_ram,test_ram,sizeof test_ram);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3 && !mounted_init_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&registers,cpu,sizeof registers));
+        /* Separate ordinary F01A4/EBF64 result, never called by the fixture. */
+        project(0x800CD340u,mounted_init_seed,sizeof mounted_init_seed);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4 && !mounted_init_calls);
         uint8_t expected[0xB0];memcpy(expected,mounted_init_seed,sizeof expected);
         for(unsigned off=8;off<=0x18;off+=0x10) {put32(expected+off,3088u<<16);put32(expected+off+4,384u<<16);}
         CHECK(!memcmp(test_ram+0xCD340,expected,sizeof expected));
@@ -2234,7 +2239,7 @@ static void agreed_mounted_prerequisite(CPUState *cpu) {
         psx_mod_write_byte(0x800CD3E8u,8); /* External ordinary native support. */
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && checkpoint_lab_receipt_complete());
         psx_mod_write_word(0x800CD348u,3100u<<16);CHECK(!checkpoint_stage_boundary(cpu));
-        CHECK(psx_mod_read_word(0x800CD348u)==3100u<<16 && mounted_scan_calls==1 && mounted_init_calls==1);
+        CHECK(psx_mod_read_word(0x800CD348u)==3100u<<16 && mounted_scan_calls==1 && !mounted_init_calls);
         CHECK(!psx_mod_read_byte(PLAYER+0xD5) && !p2.body[0xD5]);
     }
     for(unsigned bad=0;bad<10;++bad) {
