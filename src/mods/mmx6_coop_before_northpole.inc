@@ -126,13 +126,16 @@ static int checkpoint_northpole_ready(void) {
  * conditions. No allocator/constructor or physics is reproduced here. */
 static int checkpoint_northpole_pickup_source(void) {
     uint32_t table=psx_mod_read_word(SCRATCH+0x80u);
-    return table==0x800F6654u &&
-        psx_mod_read_word(table+47u*4u)==0x8004D77Cu &&
+    return table==0x800F61E4u &&
+        psx_mod_read_word(table+47u*4u)==0x8004E5D8u &&
         (psx_mod_read_word(0x800F6104u)&0xFFFFFFFEu)==0x00012F00u &&
         psx_mod_read_word(0x800F6108u)==0x02A01430u &&
         checkpoint_hash(0x80029F38u,0x8002A258u)==0xE979ACE4u &&
         checkpoint_hash(0x8002BBF4u,0x8002BCCCu)==0x30908E4Eu &&
-        checkpoint_hash(0x8004D77Cu,0x8004DA7Cu)==0x1523A40Du &&
+        psx_mod_read_word(0x8007347Cu)==0x8002BBF4u &&
+        checkpoint_hash(0x8004E5D8u,0x8004E654u)==0x11E34A25u &&
+        checkpoint_hash(0x800788F8u,0x80078908u)==0x859AE2AAu &&
+        checkpoint_hash(0x8004D7B8u,0x8004DA7Cu)==0xE85A179Fu &&
         psx_mod_read_word(0x800F6BD8u+6u*4u)==0x800EC628u &&
         psx_mod_read_word(0x800EC63Cu)==0x0C00B4ACu;
 }
@@ -174,7 +177,7 @@ static void checkpoint_northpole_pickup(CPUState *cpu,const Mmx6Checkpoint *entr
         if(!child)return;
         /* Exact original scanner ABI, including fifth argument0. Its native
          * allocator creates2F/1 from sourceF6104; next ordinary world update
-         * invokes4D77C/4D7B8 under the original assembly context. */
+         * invokes4E5D8/4D7B8 under the original assembly context. */
         if(item) {checkpoint_pending.placed_world=child;checkpoint_pending.phase=5;return;}
         uint32_t stack=cpu->gpr[29];
         if((stack&3u) || stack<0x80010000u || stack>0x801FFFECu) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}

@@ -2273,8 +2273,10 @@ static void agreed_northpole_pickup(CPUState *cpu) {
         psx_mod_write_word(parent+8,4992u<<16);psx_mod_write_word(parent+12,1376u<<16);
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4);
         cpu->gpr[29]=0x80018000u; /* External original caller stack. */
-        psx_mod_write_word(SCRATCH+0x80,0x800F6654u);CHECK(checkpoint_northpole_pickup_source());
-        const uint32_t corrupt[]={0x800F6105u,0x800F6108u,0x800F6710u,0x80029F38u,0x8002BBF4u,0x8004D77Cu,0x800EC63Cu};
+        psx_mod_write_word(SCRATCH+0x80,0x800F61E4u);CHECK(checkpoint_northpole_pickup_source());
+        psx_mod_write_word(SCRATCH+0x80,0x800F6654u);CHECK(!checkpoint_northpole_pickup_source());
+        psx_mod_write_word(SCRATCH+0x80,0x800F61E4u);
+        const uint32_t corrupt[]={0x800F6105u,0x800F6108u,0x800F62A0u,0x80029F38u,0x8002BBF4u,0x8007347Cu,0x8004E5D8u,0x800788F8u,0x8004D7B8u,0x800EC63Cu};
         for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
             uint8_t old=psx_mod_read_byte(corrupt[i]);psx_mod_write_byte(corrupt[i],old^1u);
             CHECK(!checkpoint_northpole_pickup_source());psx_mod_write_byte(corrupt[i],old);
