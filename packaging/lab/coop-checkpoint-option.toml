@@ -85,6 +85,10 @@ value = "northpole_ice_cp3"
 label = "North Pole original ice shaft (position prerequisite)"
 
 [[option.choice]]
+value = "northpole_pickup_support"
+label = "North Pole native pickup and two-hero support approach (LAB)"
+
+[[option.choice]]
 value = "turtloid_rain_cp1"
 label = "Turtloid original checkpoint 1 rain approach"
 

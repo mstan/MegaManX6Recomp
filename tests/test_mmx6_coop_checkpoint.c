@@ -18,6 +18,7 @@ static unsigned scene_fatal_probe,scene_lock_calls,scene_release_calls;
 static unsigned refight_stub,refight_probe_calls,refight_action_calls,refight_refuse;
 static unsigned refight_post_solid,refight_admission_fault;
 static unsigned gate_contact_probe,gate_contact_calls[2],gate_contact_hit;
+static unsigned northpole_pickup_scan_probe,northpole_pickup_scan_calls;
 static unsigned refusal_logs;
 static char refusal_log[512];
 static unsigned intro_scan_probe,intro_scan_calls,intro_scan_allocations,intro_canonical_cycles;
@@ -35,6 +36,15 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
         CHECK(cpu->gpr[4]==0x80093C98u && inside);
         ++gate_contact_calls[seat];++guest_calls;
         cpu->gpr[2]=seat==gate_contact_hit;return 1;
+    }
+    if(northpole_pickup_scan_probe && target==0x80029F38u) {
+        /* External original allocation boundary only; the constructor is a
+         * separate later native observation, never supplied by this scan. */
+        CHECK(cpu->gpr[4]==5167 && cpu->gpr[5]==5170 && cpu->gpr[6]==671 && cpu->gpr[7]==674);
+        CHECK(!psx_mod_read_word(cpu->gpr[29]+0x10));
+        uint32_t a=0x8008EF48u;psx_mod_write_byte(a,1);psx_mod_write_byte(a+1,47);
+        psx_mod_write_byte(a+2,1);psx_mod_write_byte(a+4,0);psx_mod_write_word(a+0x10,0x800F6104u);
+        ++northpole_pickup_scan_calls;++guest_calls;return 1;
     }
     if(amazon_scan_probe && target==0x80029F38u) {
         /* Original scanner boundary only: leave allocation/AI to native QA. */
@@ -2142,9 +2152,9 @@ static void agreed_fallen_portal_prerequisite(CPUState *cpu) {
     test_lab_hp_option[0]=test_lab_hp_option[1]="off";test_lab_earned_option="off";
     test_lab_option="off";checkpoint_reset();
 }
-static void setup_northpole_prerequisite(CPUState *cpu,int online) {
-    setup_agreed(cpu,online);test_lab_option="northpole_ice_cp3";checkpoint_reset();
-    CHECK(checkpoint_lab_option==11 && checkpoint_lab_index()==10 && checkpoint_lab_nonce()==0x4C4E4933u);
+static void setup_northpole_prerequisite_option(CPUState *cpu,int online,int pickup) {
+    setup_agreed(cpu,online);test_lab_option=pickup?"northpole_pickup_support":"northpole_ice_cp3";checkpoint_reset();
+    CHECK(checkpoint_lab_option==(pickup?28u:11u) && checkpoint_lab_index()==10 && checkpoint_lab_nonce()==(pickup?0x4C4E5031u:0x4C4E4933u));
     CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB8)==0x80072270u);
     memcpy(test_ram,northpole_source_ram,sizeof test_ram);
@@ -2156,6 +2166,76 @@ static void setup_northpole_prerequisite(CPUState *cpu,int online) {
     for(unsigned i=0;i<8;++i)psx_mod_write_half(0x800971F8u+0x1C+i*2,bounds[i]);
     uint32_t meta,desc;CHECK(checkpoint_northpole_source());
     CHECK(checkpoint_northpole_assets(&meta,&desc) && checkpoint_northpole_ground(meta,desc));
+}
+static void setup_northpole_prerequisite(CPUState *cpu,int online) {
+    setup_northpole_prerequisite_option(cpu,online,0);
+}
+static void agreed_northpole_pickup(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);test_lab_option="northpole_pickup_support";checkpoint_reset();
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext old_partner=p2;CPUState old_cpu=*cpu;
+        CHECK(!checkpoint_request(2,0,3,0x4C4E4933u,CHECKPOINT_AGREED) && !checkpoint_pending.phase &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&old_partner,&p2,sizeof p2) && !memcmp(&old_cpu,cpu,sizeof *cpu));
+        setup_northpole_prerequisite_option(cpu,online,1);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        portal_test_body(0,5016,1595);portal_test_body(1,5120,1594);psx_mod_write_word(PLAY+0x90,12);
+        uint32_t parent=0x800C1220u,child=parent+0xA4u,item=0x8008EF48u;
+        psx_mod_write_byte(parent,0x41);psx_mod_write_byte(parent+1,7);psx_mod_write_byte(parent+2,0);
+        psx_mod_write_byte(parent+4,1);psx_mod_write_byte(parent+6,8);psx_mod_write_word(parent+0x10,0x800F60D4u);
+        psx_mod_write_word(parent+8,4992u<<16);psx_mod_write_word(parent+12,1376u<<16);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4);
+        cpu->gpr[29]=0x80018000u; /* External original caller stack. */
+        psx_mod_write_word(SCRATCH+0x80,0x800F6654u);CHECK(checkpoint_northpole_pickup_source());
+        const uint32_t corrupt[]={0x800F6105u,0x800F6108u,0x800F6710u,0x80029F38u,0x8002BBF4u,0x8004D77Cu,0x800EC63Cu};
+        for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
+            uint8_t old=psx_mod_read_byte(corrupt[i]);psx_mod_write_byte(corrupt[i],old^1u);
+            CHECK(!checkpoint_northpole_pickup_source());psx_mod_write_byte(corrupt[i],old);
+        }
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4 && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) && !memcmp(&registers,cpu,sizeof registers));
+        /* Supplied ordinary admission/native child observation, not a spawn or
+         * movement model. Only an actual original phase6 child is eligible. */
+        psx_mod_write_byte(parent+6,9);psx_mod_write_byte(child,0x51);psx_mod_write_byte(child+1,7);
+        psx_mod_write_byte(child+2,12);psx_mod_write_byte(child+4,1);psx_mod_write_byte(child+6,6);
+        psx_mod_write_word(child+0x7C,parent);psx_mod_write_word(child+0x68,child+0x80);
+        psx_mod_write_word(child+0x80,0x18180000u);psx_mod_write_word(child+8,5112u<<16);psx_mod_write_word(child+12,1456u<<16);
+        CHECK(checkpoint_northpole_pickup_child(child));
+        psx_mod_write_byte(child+6,3);CHECK(!checkpoint_northpole_pickup_child(child));psx_mod_write_byte(child+6,6);
+        psx_mod_write_word(item,0);psx_mod_write_word(item+0x10,0);
+        northpole_pickup_scan_probe=1;northpole_pickup_scan_calls=0;
+        registers=*cpu;CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==5 && northpole_pickup_scan_calls==1);
+        CHECK(!memcmp(&registers,cpu,sizeof registers));northpole_pickup_scan_probe=0;
+        memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==5 &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
+        /* Native constructor result is supplied separately. The prerequisite
+         * does not manufacture its box, resources, health or motion. */
+        psx_mod_write_byte(item+4,1);psx_mod_write_word(item+0x30,0x800787C0u);psx_mod_write_word(item+0x68,0x800787F0u);
+        psx_mod_write_word(child+0x98,0x25000000u);psx_mod_write_word(child+0x9C,0x86000000u);
+        memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;registers=*cpu;
+        const unsigned pos[]={8,12,0x18,0x1C};
+        for(unsigned i=0;i<4;++i) {
+            uint32_t p1=(i&1u?1411u:5095u)<<16,it=(i&1u?1422u:5129u)<<16;
+            put32(before_ram+((PLAYER+pos[i])&0x1FFFFFu),p1);
+            put32(before_ram+((item+pos[i])&0x1FFFFFu),it);
+            put32(partner.body+pos[i],(i&1u?1410u:5103u)<<16);
+        }
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && checkpoint_lab_completed() &&
+            psx_mod_read_byte(diagnostic+0xAD)==3 && northpole_pickup_scan_calls==1);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) && !memcmp(&registers,cpu,sizeof registers));
+        psx_mod_write_word(item+8,5000u<<16);CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+        CHECK(psx_mod_read_word(item+8)==5000u<<16 && northpole_pickup_scan_calls==1);
+    }
+    for(unsigned prerequisite=0;prerequisite<4;++prerequisite) {
+        setup_agreed(cpu,1);test_lab_option="northpole_pickup_support";
+        test_lab_fatal_option=prerequisite==0?"p1":"off";
+        test_lab_earned_option=prerequisite==1?"all":"off";
+        test_lab_hp_option[0]=prerequisite==2?"10":"off";test_lab_hp_option[1]=prerequisite==3?"12":"off";
+        checkpoint_reset();CHECK(failed && !checkpoint_pending.phase);
+        test_lab_fatal_option="off";test_lab_earned_option="off";test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    }
+    test_lab_option="off";checkpoint_reset();
 }
 static void agreed_northpole_prerequisite(CPUState *cpu) {
     for(int online=0;online<=1;++online) {
@@ -2895,7 +2975,7 @@ int main(int argc,char **argv) {
     agreed_refight_earned_weapons(&cpu);refight_owner_projection(&cpu);
     recycle_departure_final_order(&cpu);
     agreed_gate_enemy_prerequisite(&cpu);agreed_gate_homing_right_prerequisite(&cpu);
-    agreed_northpole_prerequisite(&cpu);
+    agreed_northpole_prerequisite(&cpu);agreed_northpole_pickup(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_recycle_boundary(&cpu);agreed_recycle_loaded_origin_rejections(&cpu);
     agreed_portal_prerequisite(&cpu);agreed_portal_native_heights(&cpu);

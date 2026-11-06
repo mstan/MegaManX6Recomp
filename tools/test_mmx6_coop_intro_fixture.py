@@ -252,7 +252,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1', 'gate_homing_right_cp4'):
+            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1', 'gate_homing_right_cp4', 'northpole_pickup_support'):
                 state.write_text(initial, encoding='utf-8')
                 receipt = pair.select_checkpoint(directory, enabled=True, option=option)
                 self.assertEqual(receipt['option'], option)
@@ -296,6 +296,19 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         self.assertEqual(choice['default'], 'off')
         self.assertEqual(sum(c['value']=='gate_homing_cp4' for c in choice['choice']), 1)
         self.assertEqual(sum(c['value']=='gate_homing_right_cp4' for c in choice['choice']), 1)
+
+    def test_northpole_pickup_reuses_original_cp3_and_native_item_record(self):
+        import mmx6_coop_checkpoint as checkpoint
+        source=Path(__file__).resolve().parents[1]
+        inventory, rows, sections=checkpoint.inventory(source/'docs/COOP_X6_CONTENT.json')
+        self.assertEqual(rows.index(checkpoint.select(rows,sections,2,0,3)),10)
+        area=next(x for x in inventory['placement_sections'] if (x['stage'],x['section'])==(2,0))
+        item=next(x for x in area['placements'] if x['address']=='800F6104')
+        self.assertEqual((item['object_id'],item['subtype'],item['category'],item['x'],item['y']), (47,1,0,5168,672))
+        catalog=tomllib.loads((source/'packaging/lab/coop-checkpoint-option.toml').read_text())
+        option=next(x for x in catalog['option'] if x['id']=='lab_checkpoint')
+        self.assertEqual(option['default'],'off')
+        self.assertEqual(sum(x['value']=='northpole_pickup_support' for x in option['choice']),1)
 
     def test_partner_x_armor_is_a_default_base_prototype_choice(self):
         source=Path(__file__).resolve().parents[1]
