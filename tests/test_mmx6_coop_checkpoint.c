@@ -500,6 +500,12 @@ static void agreed_alternate_boundary(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();
 }
+/* Exercise the real SDK callback type even when the plugin constructor is
+ * disabled in this unit producer. A third callback argument is an ABI error. */
+static void sequence_input_call(CPUState *cpu,uint32_t address) {
+    PSXModFunctionEntryCallback callback=checkpoint_sequence_input;
+    callback(cpu,address);
+}
 static void sequence_first_complete(CPUState *cpu,int online) {
     test_lab_hp_option[0]=test_lab_hp_option[1]="off";
     test_lab_earned_option=test_lab_fatal_option=test_lab_contact_option="off";
@@ -508,6 +514,7 @@ static void sequence_first_complete(CPUState *cpu,int online) {
     CHECK(checkpoint_lab_boundary(cpu,6));mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
     psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_receipt_complete());
     cpu->gpr[29]=0x801FFF00u;psx_mod_write_word(cpu->gpr[29]+16,0x80012220u);
+    CHECK(psx_mod_read_word(0x80012C44u)==0x8FBF0010u); /* Pinned original EXE. */
     /* External native story/Map observations, not fixture-produced outcomes. */
     psx_mod_write_byte(PLAY+0x43B,1);psx_mod_write_byte(PLAY+0x5F,17);
     psx_mod_write_byte(PLAY,4);psx_mod_write_byte(PLAY+1,4);psx_mod_write_byte(PLAY+2,0);
@@ -516,14 +523,14 @@ static void sequence_first_complete(CPUState *cpu,int online) {
 }
 static void sequence_responsive_map(CPUState *cpu) {
     memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
-    checkpoint_sequence_input(cpu,0x80012C44u,0x8FBF0010u);
+    sequence_input_call(cpu,0x80012C44u);
     CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP);
     CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
-    checkpoint_sequence_input(cpu,0x80012C44u,0x8FBF0010u);CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP);
-    psx_mod_write_byte(PLAY+0x2A,7);checkpoint_sequence_input(cpu,0x80012C44u,0x8FBF0010u);
+    sequence_input_call(cpu,0x80012C44u);CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP);
+    psx_mod_write_byte(PLAY+0x2A,7);sequence_input_call(cpu,0x80012C44u);
     CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP && !checkpoint_sequence_cursor);
     /* Retained native Map4 response was PLAY27 0->1; +2A alone cannot qualify. */
-    psx_mod_write_byte(PLAY+0x27,1);checkpoint_sequence_input(cpu,0x80012C44u,0x8FBF0010u);
+    psx_mod_write_byte(PLAY+0x27,1);sequence_input_call(cpu,0x80012C44u);
     CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_RESPONSIVE);
 }
 static void sequence_ordinary_mission(CPUState *cpu) {
@@ -555,8 +562,8 @@ static void agreed_alternate_sequence(CPUState *cpu) {
         for(unsigned edge=0;edge<4;++edge)CHECK(!checkpoint_lab_boundary(cpu,edge&1?6:0));
         /* Even another actual Map/mission cannot grant a third request. */
         psx_mod_write_byte(PLAY,4);psx_mod_write_byte(PLAY+1,4);psx_mod_write_byte(PLAY+12,13);psx_mod_write_byte(PLAY+0x27,0);
-        checkpoint_sequence_input(cpu,0x80012C44u,0x8FBF0010u);psx_mod_write_byte(PLAY+0x27,1);
-        checkpoint_sequence_input(cpu,0x80012C44u,0x8FBF0010u);
+        sequence_input_call(cpu,0x80012C44u);psx_mod_write_byte(PLAY+0x27,1);
+        sequence_input_call(cpu,0x80012C44u);
         psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAY+13,0);mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
         psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
         CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_USED && psx_mod_read_word(diagnostic+0xA4)==2);
@@ -569,10 +576,11 @@ static void agreed_alternate_sequence(CPUState *cpu) {
         if(bad==6)inside=1;if(bad==7)zero_projected=1;if(bad==8)test_lab_ready=0;
         if(bad==9)test_lab_selected=0;if(bad==10)test_lab_profile.qualification[0]^=1;
         if(bad==11)psx_mod_write_word(diagnostic+0xA4,2);
+        if(bad==13)psx_mod_write_word(0x80012C44u,0); /* Actual RAM word guard. */
         if(bad==14)cpu->gpr[29]=0x80200000u;
         if(bad==15)psx_mod_write_byte(PLAY+12,20);
         memcpy(before_ram,test_ram,sizeof test_ram);CPUState registers=*cpu;PlayerContext partner=p2;
-        checkpoint_sequence_input(cpu,bad==12?0x80012C40u:0x80012C44u,bad==13?0u:0x8FBF0010u);
+        sequence_input_call(cpu,bad==12?0x80012C40u:0x80012C44u);
         CHECK(!checkpoint_sequence_state && !checkpoint_sequence_release);
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
     }

@@ -318,11 +318,13 @@ static int checkpoint_lab_receipt_complete(void) {
     return 0;
 #endif
 }
-static void checkpoint_sequence_input(CPUState *cpu,uint32_t address,uint32_t instruction) {
+static void checkpoint_sequence_input(CPUState *cpu,uint32_t address) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     /* Already emitted native post-decoder site, before its saved-RA load.
      * Observe only; the original instruction and all guest RAM are untouched. */
-    if(!cpu || address!=0x80012C44u || instruction!=0x8FBF0010u ||
+    /* SDK instruction callbacks receive (cpu,address); expected_word is a
+     * registration guard, not a callback argument. Authenticate RAM as well. */
+    if(!cpu || address!=0x80012C44u || psx_mod_read_word(address)!=0x8FBF0010u ||
        checkpoint_lab_option!=24 || checkpoint_sequence_state>=CHECKPOINT_SEQUENCE_MISSION ||
        !ready || !enrolled || failed || inside || stage_call || player_call || ride_call ||
        view_call || private_draw || zero_world || zero_projected ||
@@ -343,7 +345,7 @@ static void checkpoint_sequence_input(CPUState *cpu,uint32_t address,uint32_t in
         checkpoint_sequence_state=checkpoint_sequence_cursor=0;
     }
 #else
-    (void)cpu;(void)address;(void)instruction;
+    (void)cpu;(void)address;
 #endif
 }
 static int checkpoint_lab_completed(void) {
