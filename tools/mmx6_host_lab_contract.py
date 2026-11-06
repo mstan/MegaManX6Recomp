@@ -45,8 +45,8 @@ def generated_portable_cpu_header():
         return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii")
     if record["base_contract_sha256"] != hashlib.sha256(canonical(base)).hexdigest():
         raise ValueError("portable CPU record must be reviewed against the current unchanged base contract")
-    if record["required_optional_features"] != 0 or record["revision"] != 113:
-        raise ValueError("portable CPU candidate requires no optional ISA and revision113")
+    if record["required_optional_features"] != 0 or record["revision"] != 115:
+        raise ValueError("portable CPU candidate requires no optional ISA and revision115")
     digest = hashlib.sha256(canonical(record)).digest()
     return ("/* Generated candidate contract; this is not runtime qualification. */\n"
             "#ifndef MMX6_COOP_PORTABLE_CPU_HOST_LAB_CONTRACT_H\n#define MMX6_COOP_PORTABLE_CPU_HOST_LAB_CONTRACT_H\n"

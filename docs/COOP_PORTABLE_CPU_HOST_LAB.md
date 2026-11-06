@@ -49,3 +49,5 @@ C175 uses base112/portable113/title123 for the immutable option27-only Gate
 homing-contact prerequisite. Unrelated contacts are protected; the actual
 source-validated sub13 retains original contact. Native qualification remains
 required; snapshot27 layout and prior OFF/ON semantics are unchanged.
+
+C176 uses base114, portable115 and title124 for the immutable North Pole pickup/support prerequisite28. The original scanner and ordinary native constructor create the source pickup; a single position/history prerequisite leaves first contact and later carry to native behavior. No native qualification is implied. Snapshot27 layout and all existing host guards remain.

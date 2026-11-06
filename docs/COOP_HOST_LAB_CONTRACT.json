@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 112,
+  "revision": 114,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v123",
+    "title_compatibility": "mmx6-x-zero-delay-v124",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1350,5 +1350,17 @@
     "state": "Existing immutable contact-choice scalar remains in fixed snapshot identity; no authoritative state or wire-layout addition. Base112/portable113/title123 requires new exact artifact agreement. Snapshot27 layout unchanged; old save compatibility not required.",
     "preserved": "Original source guards factored verbatim into one stateless helper, no relaxation. No new SDK dependency, hooks, source files or native calls; default production/labOFF remains unchanged.",
     "acceptance": "Fresh125SERVER+3exact-sourcePC checks, then same-candidate LOCAL+NET genuine native Gate59?26/sub1?sub13 producer, eligible guest postemission movement/trajectory and originalcontact. Final resolved core/modCRC/cards/normalownedexits required. Source/fixtures alone grant no R23 row credit."
+  },
+  "c176_northpole_pickup_support": {
+    "option": 28,
+    "value": "northpole_pickup_support",
+    "checkpoint_index": 10,
+    "record": "80072270",
+    "nonce": "4C4E5031",
+    "source_pickup": "800F6104 2F/sub1, original scanner29F38 then ordinary4D77C/4D7B8 initialization",
+    "support": "original NorthPole producerF60D4, actual live7/sub12 phase6",
+    "prerequisite": "One source-authenticated position/history placement after native pickup and falling support initialization; original contact and later carry remain unassigned.",
+    "guards": "Default off, LAB agreed only, old choices unchanged, no fatal/earned/HP seeds; no new layout/hooks/native motion or result writes.",
+    "native_qualification": "Required on this exact fresh candidate; none from declarations or unit tests."
   }
 }
