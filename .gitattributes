@@ -1,2 +1,6 @@
 # Native mod patches are byte-exact payloads; never translate line endings.
 *.bin binary
+
+# These frozen records are validated by their committed byte identity.
+/docs/COOP_X6_CONTENT.json -text
+/docs/COOP_X4_REFERENCE.md -text

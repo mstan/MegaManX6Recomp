@@ -15,6 +15,10 @@ static int reentry_dispatch(struct CPUState *,uint32_t,uint32_t);
 static int reentry_dispatch(CPUState *cpu,uint32_t address,uint32_t ret) {
     (void)cpu;(void)ret;
     if(address==0x8001E9ECu && escape_stage)longjmp(retired_stack,1);
+    if(address==0x80066150u && open_guest_menu) {
+        CHECK(stage_call && inside && !zero_projected && !personal_pass);
+        return 1; /* Native DrawSync before restoring the canonical menu bank. */
+    }
     if(address==0x8001E9ECu && open_guest_menu)psx_mod_write_byte(PLAY+1,2);
     return 0;
 }
@@ -63,12 +67,13 @@ int main(void) {
     cpu.gpr[31]=0x8001E720u;menu_probe=2;
     CHECK(stage_tick(&cpu,0x8001E9ECu));
     CHECK(frame_count>tick && !stage_call && !state_track.count && !state_track.error);
-    /* The original P2 Start now reaches the actual owned-menu callback. The
+    /* The original P2 Start reaches its native callback and opens both menus. The
      * fixture supplies native phase2, with existing VRAM ownership modeled. */
     menu_probe=1;open_guest_menu=1;zero_menu_loaded=1;pad_buttons=(uint16_t)~8u;
     psx_mod_write_half(0x800C4570u,0);
     CHECK(stage_tick(&cpu,0x8001E9ECu));
-    CHECK(pause_owner==1 && psx_mod_read_byte(PLAY+1)==2 && !stage_call && !inside);
+    CHECK(pause_owner==0 && personal_active && personal_eligible==3 && !zero_menu_loaded);
+    CHECK(psx_mod_read_byte(PLAY+1)==2 && !stage_call && !inside);
     CHECK(!state_track.count && !state_track.error && psx_mod_read_byte(diagnostic+0x3C)==2);
     open_guest_menu=0;
 

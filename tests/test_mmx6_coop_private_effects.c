@@ -266,6 +266,7 @@ static uint32_t original_door_predicate(uint32_t actor) {
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
     if(personal_probe) {
+        if(address==0x80066150u){CHECK(!personal_pass && !zero_projected);return;}
         unsigned seat=!!zero_projected;
         CHECK(personal_pass && personal_seat==seat);
         if(address==0x8003CD44u) {
