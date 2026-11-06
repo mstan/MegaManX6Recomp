@@ -643,7 +643,7 @@ static void roundtrip_and_malformed(void){
     free(wire);free(bad);private_terrain_pending=0;
 }
 static void agreed_latch_snapshot(void) {
-    checkpoint_lab_option=25;
+    checkpoint_lab_option=26; /* First unknown value after the fixed Gate CP4 prerequisite. */
     uint32_t invalid_length=snapshot_bytes();uint8_t *invalid=malloc(invalid_length);CHECK(invalid);
     CHECK(!snapshot_write(invalid,invalid_length) && !snapshot_validate(invalid,invalid_length));free(invalid);
     checkpoint_lab_option=0;
