@@ -536,9 +536,29 @@ static void shared_palette_load(CPUState *cpu,uint32_t address) {
         saved_palette_dirty|=1u;
         return;
     }
-    unsigned alternate=psx_mod_read_half(0x80090D6Au)!=0;
-    uint32_t first=alternate?0x5Eu:0x15u,slot=cpu->gpr[4],source=cpu->gpr[5];
+    uint32_t slot=cpu->gpr[4],source=cpu->gpr[5];
     uint32_t count=cpu->gpr[6],caller=cpu->gpr[31];
+    uint32_t portrait=psx_mod_read_word(SCRATCH+0xA8u);
+    unsigned selection=psx_mod_read_half(0x800E33C6u);
+    /* Native21CBC/21E5C install the selected left/right portrait colors.
+     * CLUT7F80/7FC0 use distinct resident rows510/511; publishing only the
+     * font rows leaves the guest-loaded right portrait with stage colors.
+     * Native22928 refreshes either side from the same four-palette bank.
+     * Keep the original private copy; bridge only its exact shared span. */
+    int portrait_load=count==16 && portrait>=0x80010000u && portrait<=0x801FF800u &&
+        ((caller==0x80021CC4u && slot==0x1E0u && source==portrait+(selection&3u)*0x200u) ||
+         (caller==0x80021E64u && slot==0x1F0u && source==portrait+((selection>>4)&3u)*0x200u) ||
+         (caller==0x80022950u && (slot==0x1E0u || slot==0x1F0u) &&
+          source>=portrait && source<=portrait+0x600u && !((source-portrait)&0x1FFu)));
+    if(portrait_load) {
+        uint8_t colors[512];
+        capture(source,colors,sizeof colors);
+        project(saved_resources[3]+slot*32u,colors,sizeof colors);
+        saved_palette_dirty|=1u;
+        return;
+    }
+    unsigned alternate=psx_mod_read_half(0x80090D6Au)!=0;
+    uint32_t first=alternate?0x5Eu:0x15u;
     int opening=slot==first && count==2 && source==0x8006E408u &&
         caller==(alternate?0x800219B0u:0x8002199Cu);
     int speaker=slot==first+1 && count==1 && source>=0x8006E484u &&

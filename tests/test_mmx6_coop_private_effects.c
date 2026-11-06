@@ -1786,6 +1786,70 @@ static void native_shared_weather_palette(void) {
         leave_zero();
     }
 }
+static void native_shared_portrait_palette(void) {
+    static const struct { uint32_t caller,slot; unsigned palette; } cases[]={
+        {0x80021CC4u,0x1E0u,0}, {0x80021E64u,0x1F0u,2},
+        {0x80022950u,0x1E0u,3}, {0x80022950u,0x1F0u,1}
+    };
+    for(unsigned c=0;c<sizeof cases/sizeof *cases;++c) {
+        CPUState cpu;setup(&cpu);
+        uint32_t resident=psx_mod_read_word(SCRATCH+0x28),source=0x80160000u;
+        unsigned offset=cases[c].slot*32u;
+        uint8_t baseline[0x4000],private_before[0x4000],expected[0x4000],actual[0x4000];
+        memset(baseline,0x4C,sizeof baseline);memset(private_before,0x9D,sizeof private_before);
+        for(unsigned i=0;i<0x800;++i)psx_mod_write_byte(source+i,(uint8_t)(i*13u+(i>>9)*29u));
+        memcpy(expected,baseline,sizeof expected);
+        capture(source+cases[c].palette*0x200u,expected+offset,512);
+        project(resident,baseline,sizeof baseline);project(active_palette,private_before,sizeof private_before);
+        psx_mod_write_byte(resident-1,0xA7);psx_mod_write_byte(resident+0x4000,0xB8);
+        psx_mod_write_word(SCRATCH+0xA8,source);
+        psx_mod_write_half(0x800E33C6u,(uint16_t)(cases[c].palette*0x11u));
+        enter_zero();zero_world=1;
+        cpu.gpr[4]=cases[c].slot;cpu.gpr[5]=source+cases[c].palette*0x200u;
+        cpu.gpr[6]=16;cpu.gpr[31]=cases[c].caller;
+        CPUState before=cpu;
+        shared_palette_load(&cpu,0x8002B3D4u);
+        CHECK(!memcmp(&cpu,&before,sizeof cpu));
+        capture(resident,actual,sizeof actual);CHECK(!memcmp(actual,expected,sizeof actual));
+        capture(active_palette,actual,sizeof actual);CHECK(!memcmp(actual,private_before,sizeof actual));
+        CHECK(saved_palette_dirty==0x73 && psx_mod_read_byte(resident-1)==0xA7 &&
+            psx_mod_read_byte(resident+0x4000)==0xB8);
+        /* Native2B3D4 still copies exactly once into the projected bank;
+         * restoration must leave the correct resident row for17C40. The
+         * untouched half proves left510/right511 do not share ownership. */
+        project(active_palette+offset,expected+offset,512);psx_mod_write_byte(0x800C4560u,1);
+        zero_world=0;leave_zero_context(1);
+        CHECK(!zero_projected && !state_track.count && psx_mod_read_word(SCRATCH+0x28)==resident);
+        CHECK(psx_mod_read_byte(0x800C4560u)==0x73);
+        capture(resident,actual,sizeof actual);CHECK(!memcmp(actual,expected,sizeof actual));
+        memcpy(private_before+offset,expected+offset,512);
+        capture(active_palette,actual,sizeof actual);CHECK(!memcmp(actual,private_before,sizeof actual));
+        enter_zero();
+        for(unsigned bad=0;bad<8;++bad) {
+            project(resident,baseline,sizeof baseline);saved_palette_dirty=0x72;cpu=before;
+            psx_mod_write_word(SCRATCH+0xA8,source);
+            psx_mod_write_half(0x800E33C6u,(uint16_t)(cases[c].palette*0x11u));
+            uint32_t address=0x8002B3D4u;
+            if(bad==0)cpu.gpr[31]+=4;
+            if(bad==1)cpu.gpr[4]++;
+            if(bad==2)cpu.gpr[6]--;
+            if(bad==3)cpu.gpr[5]++;
+            if(bad==4)cpu.gpr[5]=source+0x800u;
+            if(bad==5)psx_mod_write_word(SCRATCH+0xA8,source+1);
+            if(bad==6)psx_mod_write_word(SCRATCH+0xA8,0x801FFA00u);
+            if(bad==7)address+=4;
+            CPUState denied=cpu;
+            shared_palette_load(&cpu,address);
+            CHECK(!memcmp(&cpu,&denied,sizeof cpu));
+            capture(resident,actual,sizeof actual);CHECK(!memcmp(actual,baseline,sizeof actual));
+            CHECK(saved_palette_dirty==0x72);
+        }
+        leave_zero();
+        project(resident,baseline,sizeof baseline);cpu=before;
+        shared_palette_load(&cpu,0x8002B3D4u); /* Resident calls remain native. */
+        capture(resident,actual,sizeof actual);CHECK(!memcmp(actual,baseline,sizeof actual));
+    }
+}
 static void native_shared_dialogue_palette(void) {
     for(unsigned alternate=0;alternate<2;++alternate) {
         CPUState cpu;setup(&cpu);
@@ -3583,6 +3647,7 @@ int main(void){
     native_X_armor_compressed_frame_and_survivor();clear_banks();
     native_shared_boss_palette();
     native_shared_weather_palette();
+    native_shared_portrait_palette();
     native_shared_dialogue_palette();
     native_working_palette_class_and_load_events();
     native_working_palette_rectangle();
