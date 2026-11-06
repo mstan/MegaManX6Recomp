@@ -38,10 +38,14 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION, contact_protec
             or option == 'off' or option not in actual_options):
         raise ValueError('Staged image lacks the private typed LAB checkpoint catalog')
     protection = [o for o in catalog.get('option', []) if o.get('id') == 'lab_contact_protection']
+    protection_choices = [c['value'] for c in protection[0].get('choice', [])] if len(protection) == 1 else []
+    protection_values = set(protection_choices)
     if (len(protection) != 1 or protection[0].get('default') != 'off'
             or protection[0].get('feature') != 'prototype' or protection[0].get('type') != 'choice'
-            or {c['value'] for c in protection[0].get('choice', [])} != {'off', 'on'}
-            or contact_protection not in ('off', 'on')):
+            or protection_values not in ({'off', 'on'}, {'off', 'on', 'gate_homing_only'})
+            or len(protection_choices) != len(protection_values)
+            or contact_protection not in protection_values
+            or (contact_protection == 'gate_homing_only' and option != 'gate_homing_right_cp4')):
         raise ValueError('Staged image lacks the private typed LAB contact-protection catalog')
     if (not isinstance(starting_hp, (tuple, list)) or len(starting_hp) != 2
             or any(type(v) is not str or v not in {'off', *(str(hp) for hp in range(1, 33))} for v in starting_hp)):

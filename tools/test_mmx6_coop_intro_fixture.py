@@ -340,6 +340,37 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
                 self.assertEqual(parsed['feature'][0]['values']['lab_checkpoint'], 'recycle_cp2')
                 self.assertEqual(state.read_text(encoding='utf-8').count('lab_checkpoint ='), 1)
                 self.assertEqual(state.read_text(encoding='utf-8').count('lab_contact_protection ='), 1)
+            marker = '\n[[option.choice]]\nvalue = "gate_homing_only"'
+            begin = catalog.index(marker)
+            end = catalog.index('\n[[option]]', begin)
+            legacy_catalog = catalog[:begin]+catalog[end:]
+            # Both historical choices still work with their exact old catalog.
+            manifest.write_text(legacy_catalog, encoding='utf-8')
+            for selected in ('off', 'on'):
+                state.write_text(initial, encoding='utf-8')
+                receipt = pair.select_checkpoint(directory, enabled=True, option='recycle_cp2', contact_protection=selected)
+                self.assertEqual(receipt['contact_protection'], selected)
+            manifest.write_text(catalog, encoding='utf-8'); state.write_text(initial, encoding='utf-8')
+            receipt = pair.select_checkpoint(directory, enabled=True, option='gate_homing_right_cp4', contact_protection='gate_homing_only')
+            self.assertEqual(receipt['contact_protection'], 'gate_homing_only')
+            values = tomllib.loads(state.read_text(encoding='utf-8'))['feature'][0]['values']
+            self.assertEqual((values['lab_checkpoint'], values['lab_contact_protection']),
+                             ('gate_homing_right_cp4', 'gate_homing_only'))
+            extra_choice = '\n[[option.choice]]\nvalue = "unknown_protection"\n'
+            partial_catalog = catalog.replace('value = "on"\nlabel = "Protected prerequisite"',
+                                              'value = "gate_homing_only"\nlabel = "Invalid duplicate"', 1)
+            cases = ((catalog, 'recycle_cp2', 'gate_homing_only'),
+                     (catalog, 'gate_homing_cp4', 'gate_homing_only'),
+                     (legacy_catalog, 'gate_homing_right_cp4', 'gate_homing_only'),
+                     (catalog[:end]+extra_choice+catalog[end:], 'recycle_cp2', 'off'),
+                     (partial_catalog, 'gate_homing_right_cp4', 'gate_homing_only'))
+            for invalid_catalog, checkpoint, selected in cases:
+                with self.subTest(checkpoint=checkpoint, selected=selected, catalog=invalid_catalog[-70:]):
+                    manifest.write_text(invalid_catalog, encoding='utf-8'); state.write_text(initial, encoding='utf-8')
+                    with self.assertRaises(ValueError):
+                        pair.select_checkpoint(directory, enabled=True, option=checkpoint, contact_protection=selected)
+                    self.assertEqual(state.read_text(encoding='utf-8'), initial)
+            manifest.write_text(catalog, encoding='utf-8')
             state.write_text(initial, encoding='utf-8')
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, contact_protection='arbitrary')
