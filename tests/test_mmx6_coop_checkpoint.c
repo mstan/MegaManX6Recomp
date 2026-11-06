@@ -60,8 +60,11 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
          * separate later native observation, never supplied by this scan. */
         CHECK(cpu->gpr[4]==5167 && cpu->gpr[5]==5170 && cpu->gpr[6]==671 && cpu->gpr[7]==674);
         CHECK(!psx_mod_read_word(cpu->gpr[29]+0x10));
-        uint32_t a=0x8008EF48u;psx_mod_write_byte(a,1);psx_mod_write_byte(a+1,47);
-        psx_mod_write_byte(a+2,1);psx_mod_write_byte(a+4,0);psx_mod_write_word(a+0x10,0x800F6104u);
+        uint32_t a=0x8008EF48u;memset(test_ram+(a&0x1FFFFFu),0,0x9C);
+        psx_mod_write_byte(a,0x41);psx_mod_write_byte(a+1,47);
+        psx_mod_write_byte(a+2,1);psx_mod_write_word(a+0x10,0x800F6104u);
+        psx_mod_write_word(a+8,5168u<<16);psx_mod_write_word(a+12,672u<<16);
+        psx_mod_write_byte(0x800F6104u,psx_mod_read_byte(0x800F6104u)|1u);
         ++northpole_pickup_scan_calls;++guest_calls;return 1;
     }
     if(amazon_scan_probe && target==0x80029F38u) {
@@ -2319,21 +2322,37 @@ static void agreed_northpole_pickup(CPUState *cpu) {
         psx_mod_write_byte(child+6,3);CHECK(!checkpoint_northpole_pickup_child(child));psx_mod_write_byte(child+6,6);
         psx_mod_write_word(item,0);psx_mod_write_word(item+0x10,0);
         northpole_pickup_scan_probe=1;northpole_pickup_scan_calls=0;
-        registers=*cpu;CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==5 && northpole_pickup_scan_calls==1);
-        CHECK(!memcmp(&registers,cpu,sizeof registers));northpole_pickup_scan_probe=0;
+        /* Expected external allocation starts at the original5168/672;
+         * fixture changes only its four authorized pose/history words. */
+        memcpy(before_ram,test_ram,sizeof test_ram);memset(before_ram+(item&0x1FFFFFu),0,0x9C);
+        put32(before_ram+(item&0x1FFFFFu),0x00012F41u);
+        put32(before_ram+((item+0x10)&0x1FFFFFu),0x800F6104u);before_ram[0xF6104]|=1u;
+        for(unsigned off=8;off<=0x18;off+=0x10) {
+            put32(before_ram+((item+off)&0x1FFFFFu),5129u<<16);
+            put32(before_ram+((item+off+4)&0x1FFFFFu),1422u<<16);
+        }
+        partner=p2;registers=*cpu;
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==5 && northpole_pickup_scan_calls==1);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) && !memcmp(&registers,cpu,sizeof registers));
+        CHECK(!psx_mod_read_byte(item+4) && !psx_mod_read_word(item+0x30) && !psx_mod_read_word(item+0x68));
+        northpole_pickup_scan_probe=0;
         memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==5 &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));
         /* Native constructor result is supplied separately. The prerequisite
          * does not manufacture its box, resources, health or motion. */
         psx_mod_write_byte(item+4,1);psx_mod_write_word(item+0x30,0x800787C0u);psx_mod_write_word(item+0x68,0x800787F0u);
+        /* Separate native physics result, including different old/currentXY.
+         * Completing the heroes' prerequisite must not reset any of it. */
+        psx_mod_write_word(item+8,(5129u<<16)+0x1234u);psx_mod_write_word(item+12,(1423u<<16)+0x5678u);
+        psx_mod_write_word(item+0x18,5129u<<16);psx_mod_write_word(item+0x1C,1422u<<16);
+        psx_mod_write_word(item+0x24,0xFFFF0000u);psx_mod_write_word(item+0x2C,0x8000u);
         psx_mod_write_word(child+0x98,0x25000000u);psx_mod_write_word(child+0x9C,0x86000000u);
         memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;registers=*cpu;
         const unsigned pos[]={8,12,0x18,0x1C};
         for(unsigned i=0;i<4;++i) {
-            uint32_t p1=(i&1u?1411u:5095u)<<16,it=(i&1u?1422u:5129u)<<16;
+            uint32_t p1=(i&1u?1411u:5095u)<<16;
             put32(before_ram+((PLAYER+pos[i])&0x1FFFFFu),p1);
-            put32(before_ram+((item+pos[i])&0x1FFFFFu),it);
             put32(partner.body+pos[i],(i&1u?1410u:5103u)<<16);
         }
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && checkpoint_lab_completed() &&

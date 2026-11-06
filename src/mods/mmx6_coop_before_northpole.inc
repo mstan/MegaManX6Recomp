@@ -178,13 +178,32 @@ static void checkpoint_northpole_pickup(CPUState *cpu,const Mmx6Checkpoint *entr
         /* Exact original scanner ABI, including fifth argument0. Its native
          * allocator creates2F/1 from sourceF6104; next ordinary world update
          * invokes4E5D8/4D7B8 under the original assembly context. */
-        if(item) {checkpoint_pending.placed_world=child;checkpoint_pending.phase=5;return;}
-        uint32_t stack=cpu->gpr[29];
-        if((stack&3u) || stack<0x80010000u || stack>0x801FFFECu) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
-        uint32_t old=psx_mod_read_word(stack+0x10u),a2=cpu->gpr[6],a3=cpu->gpr[7];
-        psx_mod_write_word(stack+0x10u,0);cpu->gpr[6]=671;cpu->gpr[7]=674;
-        guest(cpu,0x80029F38u,5167,5170);
-        psx_mod_write_word(stack+0x10u,old);cpu->gpr[6]=a2;cpu->gpr[7]=a3;
+        int x=(int16_t)psx_mod_read_half(child+10),top=(int16_t)psx_mod_read_half(child+14)-24;
+        for(int px=x-29;px<=x+27;++px)for(int py=top-48;py<top;++py)
+            if(checkpoint_northpole_tile(meta,desc,(unsigned)px,(unsigned)py)) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+        if(!item) {
+            uint32_t stack=cpu->gpr[29];
+            if((stack&3u) || stack<0x80010000u || stack>0x801FFFECu) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+            uint32_t old=psx_mod_read_word(stack+0x10u),a2=cpu->gpr[6],a3=cpu->gpr[7];
+            psx_mod_write_word(stack+0x10u,0);cpu->gpr[6]=671;cpu->gpr[7]=674;
+            guest(cpu,0x80029F38u,5167,5170);
+            psx_mod_write_word(stack+0x10u,old);cpu->gpr[6]=a2;cpu->gpr[7]=a3;
+            item=checkpoint_northpole_pickup_actor();
+        }
+        if(!item || item==UINT32_MAX) {checkpoint_cancel(CHECKPOINT_UNSAFE);return;}
+        if(psx_mod_read_byte(item+1)!=47 || psx_mod_read_byte(item+2)!=1 ||
+           psx_mod_read_byte(item+4)>1 || (psx_mod_read_byte(item+4)==1 &&
+           (psx_mod_read_word(item+0x30)!=0x800787C0u || psx_mod_read_word(item+0x68)!=0x800787F0u))) {
+            checkpoint_cancel(CHECKPOINT_SOURCE);return;
+        }
+        /* Original4DBF4/2CAB4 unloads source5168/672 outside the CP3 camera.
+         * Pose this real allocation once before ordinary4E5D8/4D7B8; those
+         * native functions alone supply state/resources/physics. Phase5 never
+         * overwrites the item's subsequent native position or history. */
+        for(unsigned offset=8;offset<=0x18;offset+=0x10) {
+            psx_mod_write_word(item+offset,(uint32_t)(x+17)<<16);
+            psx_mod_write_word(item+offset+4,(uint32_t)(top-10)<<16);
+        }
         checkpoint_pending.placed_world=child;checkpoint_pending.phase=5;
         return;
     }
@@ -208,8 +227,6 @@ static void checkpoint_northpole_pickup(CPUState *cpu,const Mmx6Checkpoint *entr
         psx_mod_write_word(PLAYER+offset,(uint32_t)(x-17)<<16);
         psx_mod_write_word(PLAYER+offset+4,(uint32_t)(top-21)<<16);
         put32(p2.body+offset,(uint32_t)(x-9)<<16);put32(p2.body+offset+4,(uint32_t)(top-22)<<16);
-        psx_mod_write_word(item+offset,(uint32_t)(x+17)<<16);
-        psx_mod_write_word(item+offset+4,(uint32_t)(top-10)<<16);
     }
 #ifdef MMX6_COOP_MODERN_STATE
     independent_invalidate();
