@@ -55,3 +55,5 @@ C176 uses base114, portable115 and title124 for the immutable North Pole pickup/
 C177 uses base116, portable117 and title125. It corrects the measured primary-pickup dispatch guard, adds original mounted-boss CP1 prerequisite29 and the original Inami CP3 entry30. Original constructors and gameplay supply all measured outcomes. Snapshot27 layout and existing host/CPU/source gates are preserved; fresh native qualification is required.
 
 C178 uses base118, portable119 and title126 for native pickup preinit ordering and intact claimed vehicle transport during paired scene withdrawal. Original damage/retirement and native reboarding remain active. Snapshot27 layout is unchanged; source tests and build do not establish F36/F148 runtime qualification.
+
+C178 also routes native surface effects3/sub8/9 through existing allocating-hero ownership. Exact native lifetime/visibility calls use the simulation-derived owning view and restore the canonical camera. Original animation, DF release and retirement remain native; genuine distant entry is unqualified until measured.
