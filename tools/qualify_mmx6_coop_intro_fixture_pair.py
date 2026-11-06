@@ -273,7 +273,7 @@ def select_midboss(directory, *, enabled, selector=select_checkpoint):
     return selected
 
 _FATAL_CHOICES = {'off', 'p1', 'p2', 'scene_before_release', 'scene_during_arrival'}
-_FATAL_CATALOGS = (_FATAL_CHOICES, _FATAL_CHOICES | {'capsule_owner_p1'}, _FATAL_CHOICES | {'capsule_owner_p1','boss_admission_p1'})
+_FATAL_CATALOGS = (_FATAL_CHOICES, _FATAL_CHOICES | {'capsule_owner_p1'}, _FATAL_CHOICES | {'capsule_owner_p1','boss_admission_p1'}, _FATAL_CHOICES | {'capsule_owner_p1','boss_admission_p1','armor_p1'})
 
 def select_door_policy(directory, *, enabled, scenario, fallen_seat=1, selector=select_checkpoint):
     if scenario not in ('either', 'living', 'absent', 'fallen'):

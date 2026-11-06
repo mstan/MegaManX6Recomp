@@ -2,8 +2,8 @@
   "schema": 1,
   "status": "candidate-unqualified; no native qualification from declaration or build",
   "profile": "mmx6.win64.enhanced.portable",
-  "revision": 101,
-  "base_contract_sha256": "25cc70a8e0304b7e39245f47bf05b83f791ab53cc9d23ea9304ab069b9d0ec0c",
+  "revision": 103,
+  "base_contract_sha256": "de7611e9aa7223dd9cb0a95f2c9f94848b52d6c0c38b3127022313d12d857449",
   "flags": [
     "PORTABLE",
     "DIRECT_LOOPBACK"
@@ -24,6 +24,6 @@
     "No native Windows/Linux cross-artifact support; strict PE/ELF artifact mismatch remains",
     "No remote LAN/lobby/ICE/relay/rollback/network states/REFERENCE/PGXP or unsupported compiler qualification",
     "R1 physical distinct pads remains a separate human prerequisite",
-    "Profile100/0x7f rule and original semantic record are unchanged"
+    "C169 profile100/portable101 records remain historical; C170 base102/portable103/title118 bind the new immutable Armor-only fixture and require fresh qualification."
   ]
 }

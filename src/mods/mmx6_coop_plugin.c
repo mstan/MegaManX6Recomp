@@ -1262,7 +1262,7 @@ static int ride_tick(CPUState *cpu,uint32_t address) {
  * receipt may precede the real portal; this exact original mounted20/1
  * context permits native EFCCC/EFCD0's HP-only rider/armor request. */
 static int checkpoint_mounted_fatal_ready(unsigned seat) {
-    if(seat>1 || checkpoint_fatal_option!=seat+1 || checkpoint_lab_option!=7 ||
+    if(seat>1 || (checkpoint_fatal_option!=seat+1 && !(seat==0 && checkpoint_fatal_option==7)) || checkpoint_lab_option!=7 ||
        !checkpoint_lab_receipt_complete() || !checkpoint_safe_boundary() ||
        scene_call || clear_phase || life.wipe || join_phase || arrival_pair || both_door_actor ||
        psx_mod_read_byte(PLAY+12)!=20 || psx_mod_read_byte(PLAY+13)!=1 ||
@@ -1274,6 +1274,13 @@ static int checkpoint_mounted_fatal_ready(unsigned seat) {
        psx_mod_read_word(0x800EFCC8u)!=0x2402FF80u ||
        psx_mod_read_word(0x800EFCCCu)!=0xA102005Cu ||
        psx_mod_read_word(0x800EFCD0u)!=0xA202005Cu)return 0;
+    /* BIN28 EFD80/EFDC8 owns Armor80's fuse/HP32; F00CC/F00DC later
+     * releases D5 and the native foot box without writing pilot health. */
+    if(checkpoint_fatal_option==7 &&
+       (psx_mod_read_word(0x800EFD80u)!=0x8203005Cu ||
+        psx_mod_read_word(0x800EFDC8u)!=0xA202005Cu ||
+        psx_mod_read_word(0x800F00CCu)!=0xA08000D5u ||
+        psx_mod_read_word(0x800F00DCu)!=0x0C00F32Fu))return 0;
     uint8_t pilot[0x158],partner[0x158];ride_body(seat,pilot);ride_body(seat^1u,partner);
     return pilot[0] && pilot[3] && pilot[4]==1 && pilot[5]==0x12 && pilot[0xD5]==255 &&
         pilot[0x5C] && pilot[0x5C]<128 && !partner[0xD5];

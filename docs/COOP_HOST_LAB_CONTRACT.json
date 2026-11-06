@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 100,
+  "revision": 102,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v117",
+    "title_compatibility": "mmx6-x-zero-delay-v118",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1230,5 +1230,29 @@
     "regression": "Existing checkpoint fixture exercises both source cases through the dispatcher; source preflight rejects duplicate literal plugin/address registrations, matching the SDK alias-key contract.",
     "state": "Existing snapshot26 and execution identity unchanged; fresh host profile100/title117 and exact-candidate agreement required.",
     "qualification": "Prepared only. Frozen C167 LOCAL2 failure remains retained; corrected observer must release Right before admission wait, then actual LOCAL and matching NET must qualify guest-only original admission/contact/carry."
+  },
+  "title_changes_v118": {
+    "scope": "F100 lab prerequisite only: immutable lab_fatal=armor_p1 value7 on original recycle_portal_cp2 option7. Fresh released/armed guestL3+R3 requests only TYPE1 Armor5C=80 while healthy native P1 owns it and P2 is idle. Existing fatal1..6 meanings remain unchanged.",
+    "guards": "Existing exact agreed receipt/profile, source TYPE1/owner/ground/healthy pilot+partner, no scene/join/arrival/pause; additional original EFD80/EFDC8/F00CC/F00DC words bind the Armor-only native path. Unsafe/held edges do not replay.",
+    "source": {
+      "BIN28_sha256": "7f49ac29077a76c6dc0aaafc474ad4d4eece65402282549de2f1ff2b5d748aef",
+      "armor_health": "800EFD80..800EFEFC",
+      "armor_health_sha256": "bda8b0805c3586a8f0c4e7f5e26d78572a21253f1bdf09dcad71123162118cf4",
+      "native_eject": "800F00B8..800F00E4",
+      "native_eject_sha256": "0de32a99e618dd2951ef6ae4f2c7bb242cfb4a4ab03c3a4018f19372cd9aaf43",
+      "pilot_D5_exit": "80037BC4..80037C3C",
+      "pilot_D5_exit_sha256": "87327027aa6a4db1dcee15f68ef84f0adbb9046badc257151df2c3b318ff42e8"
+    },
+    "allowed_write": "Only RIDE5C=80 plus existing diagnostic receipt/taint. No pilot HP, D5, flags97, fuse, action, pose, position, scene, landing or result assignment/native outcome call.",
+    "state": "Additional immutable value in existing field; digest/snapshot identity already binds this choice; snapshot26 layout unchanged. New base102/portable103/title118 and exact artifact agreement; no prior runtime credit.",
+    "native_case_plan": [
+      "Use existing native authored-card Load/Recycle4/0CP0 and original P1 Armor/guest Alia scene route; qualify actual mounted passenger return/ordinary controls with both living, not a dead rejoin constructor. Preserve initial constructor/scene/return timing and note this is a preceding component.",
+      "Only ordinary voluntary dismount as a disclosed travel prerequisite then existing option7/chord/actual portal20_1; actual original TYPE1 mount for P1. Existing source setup is authentic CP2 plus portal approach, not a native outcome write.",
+      "Use native entrance Armor32/352 and original floor/adjacent step. Ordinary Left may approach the actual authored left face; require measured current terrain/wall/ceiling and full-body fit to establish tight geometry, not coordinates or registration alone. No blind crusher/full-stage gate.",
+      "At actual healthy native10_0/scene0/P2idle/P1action18,D5FF/TYPE1owner0/97bit40/A8ground8, release+fresh guestchord6 requests only Armor80 once. Keep P1 and P2 HP, native fuse and world updates observed continuously until actual D5zero/full native footbox/air exit/terrain landing/own controls. No Up+Cross at this measured ejection.",
+      "Native safe_join_landing defers new voluntary return once Armor97 has80 pending. Do not claim a simultaneous returning partner from this prerequisite. Retained mounted Alia-return component precedes ejection; actual nearby return/ejection timing and tight geometry remain qualification decisions, with no dead-rejoin substitution.",
+      "LOCAL and matched same-C170 NET must retain real living pilot/restoration/landing/partner controls, required original-lifetime evidence and resolved core/modCRC/cards/owned exits. Prepared fixture/source/tests are not an F100 pass."
+    ],
+    "qualification": "UNRUN; full F100 returning-partner and genuinely tight landing remain unverified."
   }
 }

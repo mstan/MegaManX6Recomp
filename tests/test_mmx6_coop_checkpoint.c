@@ -218,7 +218,7 @@ static void setup_agreed(CPUState *cpu,int online) {
     /* Individual tests select their actual Recycle/first-hatch options after
      * this shared CP2 factory. Do not apply fixture-specific choices here. */
     const char *fatal=test_lab_fatal_option;
-    if(!strcmp(fatal,"capsule_owner_p1") || !strcmp(fatal,"boss_admission_p1"))test_lab_fatal_option="off";
+    if(!strcmp(fatal,"capsule_owner_p1") || !strcmp(fatal,"boss_admission_p1") || !strcmp(fatal,"armor_p1"))test_lab_fatal_option="off";
     const char *stagger=test_lab_hatch_stagger_option;test_lab_hatch_stagger_option="off";
     test_lab_option="intro_cp2";setup_checkpoint(cpu,0,0,2);test_online=online;
     test_lab_fatal_option=fatal;test_lab_hatch_stagger_option=stagger;
@@ -1417,10 +1417,11 @@ static void agreed_portal_native_heights(CPUState *cpu) {
     test_lab_option="off";checkpoint_reset();
 }
 static void mounted_fatal_ready(CPUState *cpu,int online,unsigned seat,unsigned inverse) {
+    int armor_only=!strcmp(test_lab_fatal_option,"armor_p1");
     clear_phase=clear_members=clear_started=join_phase=arrival_pair=scene_call=ride_call=view_call=private_draw=0;
     both_door_reset();test_lab_hatch_stagger_option="off";
     test_lab_hp_option[0]=test_lab_hp_option[1]="off";
-    test_lab_earned_option=test_lab_contact_option="off";test_lab_fatal_option=seat?"p2":"p1";
+    test_lab_earned_option=test_lab_contact_option="off";test_lab_fatal_option=armor_only?"armor_p1":seat?"p2":"p1";
     setup_portal_prerequisite(cpu,online,0);
     CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
     portal_test_native_ready();CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
@@ -1445,7 +1446,9 @@ static void mounted_fatal_ready(CPUState *cpu,int online,unsigned seat,unsigned 
         {0x800EC834u,0x24020001u},{0x800EC838u,0xA22200D5u},
         {0x800F2F28u,0x1D0F0300u},{0x800F2F2Cu,0x0A0F1600u},
         {0x800F2588u,0x03011E81u},{0x800F258Cu,0x01620020u},
-        {0x800EFCC8u,0x2402FF80u},{0x800EFCCCu,0xA102005Cu},{0x800EFCD0u,0xA202005Cu}
+        {0x800EFCC8u,0x2402FF80u},{0x800EFCCCu,0xA102005Cu},{0x800EFCD0u,0xA202005Cu},
+        {0x800EFD80u,0x8203005Cu},{0x800EFDC8u,0xA202005Cu},
+        {0x800F00CCu,0xA08000D5u},{0x800F00DCu,0x0C00F32Fu}
     };
     for(unsigned i=0;i<sizeof words/sizeof words[0];++i)psx_mod_write_word(words[i][0],words[i][1]);
     CHECK(checkpoint_lab_receipt_complete() && !checkpoint_lab_completed());
@@ -1516,6 +1519,56 @@ static void agreed_mounted_native_fatal(CPUState *cpu) {
         CHECK(p2.body[0x5C]==0x80 && psx_mod_read_byte(RIDE+0x5C)==0x80);
     }
     test_lab_fatal_option=test_lab_option="off";checkpoint_reset();
+}
+static void agreed_mounted_armor_only(CPUState *cpu) {
+    for(int online=0;online<=1;++online)for(unsigned inverse=0;inverse<2;++inverse) {
+        test_lab_fatal_option="armor_p1";mounted_fatal_ready(cpu,online,0,inverse);
+        CHECK(checkpoint_fatal_option==7 && !checkpoint_mounted_fatal_ready(1));
+        CHECK(!checkpoint_lab_boundary(cpu,6) && !checkpoint_fatal_state);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && checkpoint_fatal_state==CHECKPOINT_FATAL_ARMED);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;Mmx6CoopLifecycle living=life;
+        CPUState registers=*cpu;uint8_t receipt[sizeof test_diagnostic];memcpy(receipt,test_diagnostic,sizeof receipt);
+        before_ram[(RIDE+0x5C)&0x1FFFFF]=0x80;receipt[0xC8]=(uint8_t)(7|(CHECKPOINT_FATAL_CONSUMED<<3));
+        unsigned calls=guest_calls;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2));
+        CHECK(!memcmp(&living,&life,sizeof life) && !memcmp(&registers,cpu,sizeof *cpu));
+        CHECK(!memcmp(receipt,test_diagnostic,sizeof receipt) && guest_calls==calls);
+        CHECK(checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        CHECK(psx_mod_read_byte(PLAYER+0x5C)==32 && p2.body[0x5C]==32);
+        CHECK(psx_mod_read_byte(PLAYER+0xD5)==255 && psx_mod_read_byte(PLAYER+5)==18);
+        psx_mod_write_byte(RIDE+0x5C,9);
+        for(unsigned edge=0;edge<4;++edge)CHECK(!checkpoint_lab_boundary(cpu,edge&1?6:0));
+        CHECK(psx_mod_read_byte(RIDE+0x5C)==9 && psx_mod_read_byte(PLAYER+0x5C)==32);
+    }
+    for(unsigned bad=0;bad<24;++bad) {
+        test_lab_fatal_option="armor_p1";mounted_fatal_ready(cpu,1,0,0);
+        CHECK(!checkpoint_lab_boundary(cpu,0));
+        if(bad==0)checkpoint_lab_option=9;
+        if(bad==1){psx_mod_write_byte(PLAYER+0xD5,0);p2.body[0xD5]=255;}
+        if(bad==2)psx_mod_write_byte(RIDE+0x5C,0);if(bad==3)psx_mod_write_byte(RIDE+0x5C,128);
+        if(bad==4)psx_mod_write_byte(PLAYER+0x5C,0);if(bad==5)psx_mod_write_byte(PLAYER+0x5C,128);
+        if(bad==6)psx_mod_write_byte(PLAYER+4,2);if(bad==7)psx_mod_write_byte(PLAYER+5,2);
+        if(bad==8)psx_mod_write_byte(PLAYER+0xD5,1);if(bad==9)p2.body[5]=3;
+        if(bad==10)scene_owner=1;if(bad==11)join_phase=1;if(bad==12)life.status[1]=MMX6_COOP_JOINING;
+        if(bad==13)arrival_pair=1;if(bad==14)psx_mod_write_word(0x800F00CCu,0);
+        if(bad==15)test_lab_selected=0;if(bad==16)test_lab_profile.flags^=PSX_HOST_PROFILE_PORTABLE;
+        if(bad==17)test_lab_profile.qualification[0]^=1;if(bad==18)psx_mod_write_byte(diagnostic+0xAD,1);
+        if(bad==19)pause_owner=0;if(bad==20)psx_mod_write_byte(RIDE+0x97,0xC0);
+        if(bad==21)psx_mod_write_byte(RIDE+0xA8,0);if(bad==22)psx_mod_write_byte(PLAY+13,0);
+        if(bad==23)++test_lab_profile.revision;
+        CHECK(!checkpoint_mounted_fatal_ready(0));
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;Mmx6CoopLifecycle living=life;CPUState registers=*cpu;
+        unsigned calls=guest_calls;
+        CHECK(!checkpoint_lab_boundary(cpu,6) && checkpoint_fatal_state==CHECKPOINT_FATAL_RELEASE);
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2));
+        CHECK(!memcmp(&living,&life,sizeof life) && !memcmp(&registers,cpu,sizeof *cpu) && guest_calls==calls);
+        CHECK(!checkpoint_lab_boundary(cpu,6)); /* Rejected held edge cannot fire later. */
+        /* The next factory restores transient refusal fields, not an outcome. */
+        pause_owner=-1;scene_owner=join_phase=arrival_pair=0;test_lab_ready=test_lab_selected=1;test_lab_failed=0;
+    }
+    test_lab_fatal_option="armor_p1";test_lab_option="intro_cp2";checkpoint_reset();CHECK(failed);
+    test_lab_fatal_option=test_lab_option="off";failed=0;checkpoint_reset();
 }
 static void capsule_fatal_ready(CPUState *cpu,int online) {
     clear_phase=clear_members=clear_started=join_phase=arrival_pair=scene_call=0;both_door_reset();
@@ -2542,7 +2595,7 @@ int main(int argc,char **argv) {
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);
-    agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_ground_boundary(&cpu);agreed_fortress_cp3_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
+    agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_ground_boundary(&cpu);agreed_fortress_cp3_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_mounted_armor_only(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }

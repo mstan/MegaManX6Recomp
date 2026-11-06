@@ -238,6 +238,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"scene_during_arrival"))checkpoint_fatal_option=4;
         else if(!strcmp(option,"capsule_owner_p1"))checkpoint_fatal_option=5;
         else if(!strcmp(option,"boss_admission_p1"))checkpoint_fatal_option=6;
+        else if(!strcmp(option,"armor_p1"))checkpoint_fatal_option=7;
         else if(strcmp(option,"off"))failed=1;
     }
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_hatch_stagger",option,sizeof option)) {
@@ -250,6 +251,7 @@ static void checkpoint_reset(void) {
     if((checkpoint_fatal_option==3 || checkpoint_fatal_option==4) && checkpoint_lab_option!=1)failed=1;
     if(checkpoint_fatal_option==5 && checkpoint_lab_option!=7)failed=1;
     if(checkpoint_fatal_option==6 && checkpoint_lab_option!=9)failed=1;
+    if(checkpoint_fatal_option==7 && checkpoint_lab_option!=7)failed=1;
     if(checkpoint_earned_weapons_option && !checkpoint_lab_option)failed=1;
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {
         if(!strcmp(option,"on"))checkpoint_contact_protection_option=1;
@@ -958,7 +960,9 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
     if(checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED) {
         checkpoint_hatch_stagger_boundary();
         if(!checkpoint_fatal_option || !diagnostic || checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED)return 0;
-        int mounted=checkpoint_fatal_option<=2 && checkpoint_mounted_fatal_ready(checkpoint_fatal_option-1);
+        int armor_only=checkpoint_fatal_option==7;
+        int mounted=(checkpoint_fatal_option<=2 || armor_only) &&
+            checkpoint_mounted_fatal_ready(armor_only?0:checkpoint_fatal_option-1);
         if((checkpoint_fatal_option==3 || checkpoint_fatal_option==4) && checkpoint_fatal_state>=CHECKPOINT_FATAL_SCENE_LOCKED) {
             checkpoint_scene_fatal_boundary(cpu);
         } else if(!checkpoint_lab_completed() && !mounted)checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE;
@@ -967,6 +971,7 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
             checkpoint_fatal_state=CHECKPOINT_FATAL_RELEASE; /* Unsafe edges never fire later while held. */
             if(checkpoint_fatal_option==6?checkpoint_boss_admission_fatal_ready():
                checkpoint_fatal_option==5?checkpoint_capsule_fatal_ready():
+               armor_only?mounted:
                (mounted || (checkpoint_safe_boundary() && !clear_phase && !join_phase && !arrival_pair &&
                 checkpoint_fatal_idle(0) && checkpoint_fatal_idle(1)))) {
                 psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
@@ -974,8 +979,13 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
                     checkpoint_scene_call(cpu,0x8003D308u);
                     checkpoint_fatal_state=CHECKPOINT_FATAL_SCENE_LOCKED;
                 } else {
-                    if(checkpoint_fatal_option==1 || checkpoint_fatal_option==5 || checkpoint_fatal_option==6)psx_mod_write_byte(PLAYER+0x5C,0x80);
-                    else p2.body[0x5C]=0x80;
+                    /* New7 requests only original TYPE1 Armor health. Its
+                     * native fuse, D5 release, foot box and landing remain
+                     * outcomes; old1..6 fatal meanings are unchanged. */
+                    if(!armor_only) {
+                        if(checkpoint_fatal_option==1 || checkpoint_fatal_option==5 || checkpoint_fatal_option==6)psx_mod_write_byte(PLAYER+0x5C,0x80);
+                        else p2.body[0x5C]=0x80;
+                    }
                     if(mounted)psx_mod_write_byte(RIDE+0x5C,0x80);
                     checkpoint_fatal_state=CHECKPOINT_FATAL_CONSUMED;
                 }

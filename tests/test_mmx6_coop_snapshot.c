@@ -695,11 +695,12 @@ static void native_fatal_snapshot(void) {
         StateIO io={STATE_COUNT,1,NULL,NULL,0,0,0};state_core(&io,&invalid);CHECK(!io.ok);
         free(wire);
     }
-    checkpoint_lab_option=7;checkpoint_fatal_option=5;
-    for(unsigned state=0;state<=CHECKPOINT_FATAL_CONSUMED;++state) {
+    checkpoint_lab_option=7;
+    for(unsigned option=5;option<=7;option+=2)for(unsigned state=0;state<=CHECKPOINT_FATAL_CONSUMED;++state) {
+        checkpoint_fatal_option=option;
         checkpoint_fatal_state=state;
         uint32_t n=snapshot_bytes(),hash=state_digest();uint8_t *wire=malloc(n);CHECK(wire && snapshot_write(wire,n));
-        checkpoint_fatal_option=1;CHECK(!snapshot_validate(wire,n));checkpoint_fatal_option=5;
+        checkpoint_fatal_option=1;CHECK(!snapshot_validate(wire,n));checkpoint_fatal_option=option;
         checkpoint_fatal_state=state^1;CHECK(state_digest()!=hash && snapshot_validate(wire,n));snapshot_read(wire,n);
         CHECK(checkpoint_fatal_state==state && state_digest()==hash);
         HostState invalid;state_capture(&invalid);invalid.fatal_state=CHECKPOINT_FATAL_SCENE_LOCKED;
