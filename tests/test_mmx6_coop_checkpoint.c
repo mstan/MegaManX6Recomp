@@ -65,6 +65,8 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
         psx_mod_write_byte(a+2,1);psx_mod_write_word(a+0x10,0x800F6104u);
         psx_mod_write_word(a+8,5168u<<16);psx_mod_write_word(a+12,672u<<16);
         psx_mod_write_byte(0x800F6104u,psx_mod_read_byte(0x800F6104u)|1u);
+        /* Supplied original scanner lifecycle, not constructor output. */
+        psx_mod_write_byte(0x800F6107u,(psx_mod_read_byte(0x800F6107u)&15u)|0x10u);
         ++northpole_pickup_scan_calls;++guest_calls;return 1;
     }
     if(amazon_scan_probe && target==0x80029F38u) {
@@ -2354,11 +2356,19 @@ static void agreed_northpole_pickup(CPUState *cpu) {
         psx_mod_write_word(SCRATCH+0x80,0x800F61E4u);CHECK(checkpoint_northpole_pickup_source());
         psx_mod_write_word(SCRATCH+0x80,0x800F6654u);CHECK(!checkpoint_northpole_pickup_source());
         psx_mod_write_word(SCRATCH+0x80,0x800F61E4u);
-        const uint32_t corrupt[]={0x800F6105u,0x800F6108u,0x800F62A0u,0x80029F38u,0x8002BBF4u,0x8007347Cu,0x8004E5D8u,0x800788F8u,0x8004D7B8u,0x800EC63Cu};
+        const uint32_t corrupt[]={0x800F6105u,0x800F6106u,0x800F6107u,0x800F6108u,0x800F62A0u,0x80029F38u,0x8002A2F4u,0x8002BBF4u,0x8007347Cu,0x8004E5D8u,0x800788F8u,0x8004D7B8u,0x800EC63Cu};
         for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
             uint8_t old=psx_mod_read_byte(corrupt[i]);psx_mod_write_byte(corrupt[i],old^1u);
             CHECK(!checkpoint_northpole_pickup_source());psx_mod_write_byte(corrupt[i],old);
         }
+        /* Lifecycle bits are not admissible before the authorized scan. */
+        for(unsigned flags=0x10u;flags<=0x20u;flags+=0x10u) {
+            psx_mod_write_byte(0x800F6107u,(uint8_t)flags);
+            memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext unchanged=p2;CPUState registers=*cpu;
+            CHECK(!checkpoint_northpole_pickup_source() && !memcmp(before_ram,test_ram,sizeof test_ram) &&
+                !memcmp(&unchanged,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
+        }
+        psx_mod_write_byte(0x800F6107u,0);
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4 && !guest_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) && !memcmp(&registers,cpu,sizeof registers));
@@ -2397,6 +2407,7 @@ static void agreed_northpole_pickup(CPUState *cpu) {
         memcpy(before_ram,test_ram,sizeof test_ram);memset(before_ram+(item&0x1FFFFFu),0,0x9C);
         put32(before_ram+(item&0x1FFFFFu),0x00012F41u);
         put32(before_ram+((item+0x10)&0x1FFFFFu),0x800F6104u);before_ram[0xF6104]|=1u;
+        before_ram[0xF6107]=(before_ram[0xF6107]&15u)|0x10u;
         for(unsigned off=8;off<=0x18;off+=0x10) {
             put32(before_ram+((item+off)&0x1FFFFFu),5081u<<16);
             put32(before_ram+((item+off+4)&0x1FFFFFu),1422u<<16);
@@ -2406,6 +2417,16 @@ static void agreed_northpole_pickup(CPUState *cpu) {
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) && !memcmp(&registers,cpu,sizeof registers));
         CHECK(!psx_mod_read_byte(item+4) && !psx_mod_read_word(item+0x30) && !psx_mod_read_word(item+0x68));
         northpole_pickup_scan_probe=0;
+        CHECK(psx_mod_read_byte(0x800F6107u)==0x10u && checkpoint_northpole_pickup_source());
+        /* The next original scanner lifecycle update10->20 is also genuine.
+         * Type/subtype/categorylowF/position remain immutable in phase5. */
+        psx_mod_write_byte(0x800F6107u,0x20u);CHECK(checkpoint_northpole_pickup_source());
+        const uint32_t record_fields[]={0x800F6104u,0x800F6105u,0x800F6106u,0x800F6107u,0x800F6108u};
+        for(unsigned i=0;i<sizeof record_fields/sizeof record_fields[0];++i) {
+            uint8_t value=psx_mod_read_byte(record_fields[i]);
+            psx_mod_write_byte(record_fields[i],value^(i?1u:2u));
+            CHECK(!checkpoint_northpole_pickup_source());psx_mod_write_byte(record_fields[i],value);
+        }
         memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==5 &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner));

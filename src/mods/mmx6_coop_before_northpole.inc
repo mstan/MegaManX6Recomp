@@ -178,11 +178,19 @@ static int checkpoint_northpole_ready(void) {
  * conditions. No allocator/constructor or physics is reproduced here. */
 static int checkpoint_northpole_pickup_source(void) {
     uint32_t table=psx_mod_read_word(SCRATCH+0x80u);
+    /* Source byte3 low nibble is the immutable category. Its high nibble is
+     * original scanner lifecycle: 2A268..2A2F4 advances10/30/50 outside the
+     * scan rectangle (the store at2A2F4), not a4D7B8 constructor write.
+     * Only phase5, after our authorized real allocation/once-pose, may ignore
+     * those bits; pre-allocation phase4 must still authenticate pristine data. */
+    uint32_t record_mask=checkpoint_lab_option==28 && checkpoint_pending.phase==5?
+        0x0FFFFFFEu:0xFFFFFFFEu;
     return table==0x800F61E4u &&
         psx_mod_read_word(table+47u*4u)==0x8004E5D8u &&
-        (psx_mod_read_word(0x800F6104u)&0xFFFFFFFEu)==0x00012F00u &&
+        (psx_mod_read_word(0x800F6104u)&record_mask)==0x00012F00u &&
         psx_mod_read_word(0x800F6108u)==0x02A01430u &&
         checkpoint_hash(0x80029F38u,0x8002A258u)==0xE979ACE4u &&
+        checkpoint_hash(0x8002A268u,0x8002A2F8u)==0x67C8C783u &&
         checkpoint_hash(0x8002BBF4u,0x8002BCCCu)==0x30908E4Eu &&
         psx_mod_read_word(0x8007347Cu)==0x8002BBF4u &&
         checkpoint_hash(0x8004E5D8u,0x8004E654u)==0x11E34A25u &&
