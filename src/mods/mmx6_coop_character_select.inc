@@ -123,5 +123,7 @@ static void character_zero_variant(CPUState *cpu,uint32_t address) {
     /* Runs before the original ANDI. Change its register input only; the
      * persistent unlock byte and native capsule availability stay intact. */
     if(failed || psx_mod_read_word(address)!=0x30420020u)return;
+    if(address>=OVERLAY && (psx_mod_read_word(OVERLAY)!=0x3Du ||
+       psx_mod_read_word(address-8)!=0x9062005Fu))return;
     cpu->gpr[2]=(cpu->gpr[2]&~0x20u)|(selected_zero_black()?0x20u:0);
 }

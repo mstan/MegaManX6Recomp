@@ -862,6 +862,11 @@ static void native_sequential_character_selection(void) {
         state_commit(&retained);CHECK(character_selection.valid && character_selection.black==black);
         psx_mod_write_word(0x80022910u,0x30420020u);cpu.gpr[2]=0x3F;
         character_zero_variant(&cpu,0x80022910u);CHECK((cpu.gpr[2]&0x20u)==black*0x20u);
+        psx_mod_write_word(0x801ED574u,0x30420020u);psx_mod_write_word(0x801ED56Cu,0x9062005Fu);
+        psx_mod_write_word(OVERLAY,0x3Cu);cpu.gpr[2]=black?0:0x20;
+        uint32_t x_value=cpu.gpr[2];character_zero_variant(&cpu,0x801ED574u);CHECK(cpu.gpr[2]==x_value);
+        psx_mod_write_word(OVERLAY,0x3Du);character_zero_variant(&cpu,0x801ED574u);
+        CHECK((cpu.gpr[2]&0x20u)==black*0x20u);
         CHECK(psx_mod_read_byte(PLAY+0x5F)==0x3F);
     }
     /* A new campaign without Zero unlocked still offers ordinary Zero. */
@@ -869,6 +874,28 @@ static void native_sequential_character_selection(void) {
     psx_mod_write_byte(PLAY+0x5F,0);psx_mod_write_byte(CHARACTER_LIST,0);psx_mod_write_byte(CHARACTER_COUNT,1);
     character_native_roster();CHECK(character_selection.count==2 && character_selection.roster[1]==5);
     CHECK(psx_mod_read_byte(PLAY+0x5F)==0);
+    {
+        CPUState cpu;setup(&cpu);cpu.gpr[4]=PLAY;
+        memset(&character_selection,0,sizeof character_selection);
+        psx_mod_write_word(CHARACTER_UPDATE,0x27BDFFE8u);
+        psx_mod_write_word(CHARACTER_UPDATE+0xC,0x80820002u);
+        psx_mod_write_word(CHARACTER_UPDATE+0x10,0x24630F40u);
+        psx_mod_write_byte(PLAY+0x5F,0);psx_mod_write_byte(PLAY+0x5E,0);
+        psx_mod_write_byte(CHARACTER_LIST,0);psx_mod_write_byte(CHARACTER_COUNT,1);
+        character_native_roster();psx_mod_write_byte(PLAY+2,4);
+        psx_mod_write_half(CHARACTER_PAD,0);pad_buttons=0xFFFF;
+        CHECK(character_select(&cpu,CHARACTER_UPDATE));
+        psx_mod_write_half(CHARACTER_PAD,0x40);CHECK(character_select(&cpu,CHARACTER_UPDATE));
+        CHECK(character_selection.seat==1);
+        psx_mod_write_half(CHARACTER_PAD,0);pad_buttons=(uint16_t)~0x1000u;
+        CHECK(character_select(&cpu,CHARACTER_UPDATE));
+        CHECK(!character_selection.seat && character_selection.active && psx_mod_read_byte(PLAY+2)==5);
+        CHECK(psx_mod_read_byte(CHARACTER_COUNT)==2 && !character_selection.valid);
+        psx_mod_write_half(CHARACTER_PAD,0x10);pad_buttons=0xFFFF;
+        CHECK(character_select(&cpu,CHARACTER_UPDATE));
+        CHECK(!character_selection.active && psx_mod_read_byte(PLAY+2)==9 && !character_selection.valid);
+        CHECK(psx_mod_read_byte(PLAY+0x5F)==0);
+    }
     character_probe=0;memset(&character_selection,0,sizeof character_selection);pad_buttons=0xFFFF;
 }
 int main(void) {
