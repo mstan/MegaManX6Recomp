@@ -90,7 +90,7 @@ static unsigned checkpoint_lab_index(void) {
     return (checkpoint_lab_option==1 || checkpoint_lab_option==20)?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
-        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:(checkpoint_lab_option==9 || checkpoint_lab_option==24 || checkpoint_lab_option==29)?106:(checkpoint_lab_option==11 || checkpoint_lab_option==28)?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:(checkpoint_lab_option==25 || checkpoint_lab_option==27)?98:checkpoint_lab_option==26?38:115;
+        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==30?34:(checkpoint_lab_option==9 || checkpoint_lab_option==24 || checkpoint_lab_option==29)?106:(checkpoint_lab_option==11 || checkpoint_lab_option==28)?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:(checkpoint_lab_option==25 || checkpoint_lab_option==27)?98:checkpoint_lab_option==26?38:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==20?CHECKPOINT_LAB_SUBTANK_NONCE:checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -109,7 +109,7 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==14?CHECKPOINT_LAB_GATE_ENEMY_NONCE:
         checkpoint_lab_option==15?CHECKPOINT_LAB_REFIGHT_NONCE:
         checkpoint_lab_option==16?CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE:
-        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:checkpoint_lab_option==25?0x4C474834u:checkpoint_lab_option==26?0x4C4C5331u:checkpoint_lab_option==27?0x4C475234u:checkpoint_lab_option==28?0x4C4E5031u:checkpoint_lab_option==29?0x4C4D4131u:0;
+        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:checkpoint_lab_option==25?0x4C474834u:checkpoint_lab_option==26?0x4C4C5331u:checkpoint_lab_option==27?0x4C475234u:checkpoint_lab_option==28?0x4C4E5031u:checkpoint_lab_option==29?0x4C4D4131u:checkpoint_lab_option==30?0x4C495733u:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -247,6 +247,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"sigma_cp1"))checkpoint_lab_option=18;
         else if(!strcmp(option,"heatnix_cp0"))checkpoint_lab_option=19;
         else if(!strcmp(option,"turtloid_rain_cp1"))checkpoint_lab_option=8;
+        else if(!strcmp(option,"inami_surface_cp3"))checkpoint_lab_option=30;
         else if(!strcmp(option,"alternate_mounted_cp1"))checkpoint_lab_option=29;
         else if(!strcmp(option,"alternate_boss_cp1"))checkpoint_lab_option=9;
         else if(!strcmp(option,"alternate_sequence_cp1"))checkpoint_lab_option=24;

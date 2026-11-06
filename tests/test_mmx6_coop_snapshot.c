@@ -643,11 +643,11 @@ static void roundtrip_and_malformed(void){
     free(wire);free(bad);private_terrain_pending=0;
 }
 static void agreed_latch_snapshot(void) {
-    checkpoint_lab_option=30; /* First unknown after mounted CP1 prerequisite. */
+    checkpoint_lab_option=31; /* First unknown after original Inami CP3 alias. */
     uint32_t invalid_length=snapshot_bytes();uint8_t *invalid=malloc(invalid_length);CHECK(invalid);
     CHECK(!snapshot_write(invalid,invalid_length) && !snapshot_validate(invalid,invalid_length));free(invalid);
     checkpoint_lab_option=0;
-    for(unsigned protection=0;protection<=2;++protection)for(unsigned option=1;option<=29;++option) {
+    for(unsigned protection=0;protection<=2;++protection)for(unsigned option=1;option<=30;++option) {
         if(protection==2 && option!=27)continue;
         checkpoint_lab_option=option;
         checkpoint_contact_protection_option=protection;

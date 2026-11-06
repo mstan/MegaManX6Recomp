@@ -252,11 +252,22 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1', 'gate_homing_right_cp4', 'northpole_pickup_support', 'alternate_mounted_cp1'):
+            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1', 'gate_homing_right_cp4', 'northpole_pickup_support', 'alternate_mounted_cp1', 'inami_surface_cp3'):
                 state.write_text(initial, encoding='utf-8')
                 receipt = pair.select_checkpoint(directory, enabled=True, option=option)
                 self.assertEqual(receipt['option'], option)
                 self.assertIn('lab_checkpoint = "'+option+'"', state.read_text(encoding='utf-8'))
+            # Preserve supported prior typed catalogs while extending this one.
+            for removed,option in [(('inami_surface_cp3',),'alternate_mounted_cp1'),
+                                   (('inami_surface_cp3','alternate_mounted_cp1'),'northpole_pickup_support')]:
+                legacy=catalog
+                for value in removed:
+                    start=legacy.index('\n[[option.choice]]\nvalue = "'+value+'"')
+                    end=legacy.index('\n[[',start+2)
+                    legacy=legacy[:start]+legacy[end:]
+                manifest.write_text(legacy,encoding='utf-8');state.write_text(initial,encoding='utf-8')
+                self.assertEqual(pair.select_checkpoint(directory,enabled=True,option=option)['option'],option)
+            manifest.write_text(catalog,encoding='utf-8')
             state.write_text(initial, encoding='utf-8')
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='arbitrary_position')
@@ -296,6 +307,19 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
         self.assertEqual(choice['default'], 'off')
         self.assertEqual(sum(c['value']=='gate_homing_cp4' for c in choice['choice']), 1)
         self.assertEqual(sum(c['value']=='gate_homing_right_cp4' for c in choice['choice']), 1)
+
+    def test_inami_surface_alias_is_the_original_cp3(self):
+        import mmx6_coop_checkpoint as checkpoint
+        source=Path(__file__).resolve().parents[1]
+        _,rows,sections=checkpoint.inventory(source/'docs/COOP_X6_CONTENT.json')
+        target=checkpoint.select(rows,sections,6,0,3)
+        self.assertEqual(rows.index(target),34)
+        self.assertEqual((target['table'],target['record'],target['player']),('800731B0','800725D0',dict(x=3520,y=224)))
+        catalog=tomllib.loads((source/'packaging/lab/coop-checkpoint-option.toml').read_text())
+        option=next(o for o in catalog['option']if o['id']=='lab_checkpoint')
+        self.assertEqual(option['default'],'off')
+        self.assertEqual(sum(c['value']=='inami_surface_cp3'for c in option['choice']),1)
+        self.assertEqual(sum(c['value']=='turtloid_rain_cp1'for c in option['choice']),1)
 
     def test_mounted_cp1_uses_original_checkpoint_vehicle_and_boss_boundary(self):
         import mmx6_coop_checkpoint as checkpoint

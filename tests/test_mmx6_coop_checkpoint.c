@@ -2258,6 +2258,23 @@ static void agreed_mounted_prerequisite(CPUState *cpu) {
     test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option);
 }
 
+static void agreed_inami_surface_alias(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);test_lab_option="inami_surface_cp3";checkpoint_reset();
+        CHECK(checkpoint_lab_option==30 && checkpoint_lab_index()==34 && checkpoint_lab_nonce()==0x4C495733u);
+        CHECK(checkpoint_inventory[34].record==0x800725D0u && checkpoint_hash(0x800725D0u,0x800725F4u)==0x38A62A8Au);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext old_partner=p2;CPUState old_cpu=*cpu;
+        CHECK(!checkpoint_request(6,0,3,0x4C495732u,CHECKPOINT_AGREED) && !checkpoint_pending.phase &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&old_partner,&p2,sizeof p2) && !memcmp(&old_cpu,cpu,sizeof *cpu));
+        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.phase==1 && checkpoint_pending.index==34);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+12)==6 && !psx_mod_read_byte(PLAY+13) &&
+            psx_mod_read_byte(PLAY+0x1D)==3 && psx_mod_read_word(diagnostic+0xB4)==1);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed() && !checkpoint_pending.phase);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+    }
+    test_lab_option="off";checkpoint_reset();
+}
 static void agreed_northpole_pickup(CPUState *cpu) {
     for(int online=0;online<=1;++online) {
         setup_agreed(cpu,online);test_lab_option="northpole_pickup_support";checkpoint_reset();
@@ -3075,7 +3092,7 @@ int main(int argc,char **argv) {
         CHECK(fread(mounted_source_bin+at,1,n,file)==n);at+=n;
     }
     fclose(file);agreed_mounted_prerequisite(&cpu);
-    agreed_northpole_prerequisite(&cpu);agreed_northpole_pickup(&cpu);
+    agreed_northpole_prerequisite(&cpu);agreed_northpole_pickup(&cpu);agreed_inami_surface_alias(&cpu);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
     agreed_recycle_boundary(&cpu);agreed_recycle_loaded_origin_rejections(&cpu);
     agreed_portal_prerequisite(&cpu);agreed_portal_native_heights(&cpu);
