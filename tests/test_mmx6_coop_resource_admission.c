@@ -43,8 +43,7 @@ int main(void) {
         refused_enrollment(cached,0,1,0,0,1); /* Init/parts not yet consistent. */
         refused_enrollment(cached,0,5,0,5,0); /* Impossible native form pair. */
         refused_enrollment(cached,2,0,0,0,0); /* Invalid native character. */
-        refused_enrollment(cached,0,0,0,0,0x3F); /* P2 would select BlackZero. */
-        refused_enrollment(cached,1,5,1,5,0x30); /* Native BlackZero/P1. */
+        refused_enrollment(cached,1,6,1,6,0x30); /* Black appearance is native5, never form6. */
     }
     for(form=0;form<5;++form) {
         CPUState cpu;Mmx6CoopRoster r;setup(&cpu);
@@ -52,6 +51,20 @@ int main(void) {
         CHECK(fixed_roster(&r));
         CHECK(r.seat[0].form==form && r.seat[1].form==5);
         CHECK(!failed && !call_count && psx_mod_read_byte(PLAY+0x5F)==0x1F);
+    }
+    for(unsigned primary_zero=0;primary_zero<2;++primary_zero) {
+        CPUState cpu;Mmx6CoopRoster r;setup(&cpu);
+        native_identity(primary_zero,primary_zero?5:0,primary_zero,primary_zero?5:0,0x30);
+        uint32_t ram_before=admission_fingerprint(ram,sizeof ram),extra_before=admission_fingerprint(extra,sizeof extra);
+        CHECK(fixed_roster(&r) && mmx6_coop_roster_validate(&r)==MMX6_COOP_ROSTER_OK);
+        const Mmx6CoopRosterActor *zero=&r.seat[primary_zero?0:1];
+        CHECK(zero->form==5 && zero->portrait_index==6 && zero->portrait_graphics==175 && zero->portrait_palette==176);
+        CHECK(!failed && !call_count && psx_mod_read_byte(PLAY+0x5F)==0x30);
+        /* A matching native form does not authorize reusing a different
+         * appearance's cached portrait/resources underneath a living actor. */
+        CHECK(!load_assets(&r));
+        CHECK(ram_before==admission_fingerprint(ram,sizeof ram) && extra_before==admission_fingerprint(extra,sizeof extra));
+        private_actor=r.seat[1];CHECK(load_assets(&r));CHECK(!failed && !call_count);
     }
     {
         CPUState cpu;Mmx6CoopRoster r;PlayerContext before;

@@ -115,7 +115,7 @@ class EarnedWeapons(unittest.TestCase):
         self.assertIn('checkpoint_earned_weapons_option && !checkpoint_lab_option',CHECKPOINT)
         for s in('s->earned_applied=checkpoint_earned_weapons_applied','FIELD(earned_applied,1,1)',
                   'checkpoint_earned_weapons_applied=s->earned_applied','state_fixed(s,checkpoint_earned_weapons_option)',
-                  'state_fixed(s,28)'):
+                  'state_fixed(s,29)'):
             self.assertIn(s,SNAPSHOT)
         digest=function(SNAPSHOT,'state_digest')
         resources=digest.split('const uint32_t resources[]={',1)[1].split('};',1)[0]
