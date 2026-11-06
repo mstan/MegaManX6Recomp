@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 import struct
 import tempfile
+import tomllib
 import unittest
 from unittest.mock import Mock
 
@@ -323,6 +324,11 @@ class OriginalGateTargetSourceTests(unittest.TestCase):
         hooks=re.findall(r'psx_mod_register_instruction_plugin\("mmx6.local-coop.prototype",(0x[0-9A-F]+)u,(0x[0-9A-F]+)u,gate_homing_target\)',plugin)
         self.assertEqual([int(a,16)for a,_ in hooks],[0x800F3F08,0x800F3F54,0x800F3FB4,0x800F3FC4])
         for address,instruction in hooks:self.assertEqual(int(instruction,16),word(int(address,16)))
+        # Compiled overlays read these declarations; runtime registration alone
+        # covers the sealed interpreter but cannot emit native interceptions.
+        for config in ('game.toml', 'packaging/release/game.toml'):
+            declared = tomllib.loads((root/config).read_text())['recompiler']['mod_instruction_sites']
+            self.assertFalse({int(a,16) for a,_ in hooks} - {int(a,16) for a in declared}, config)
         # The target LH must retire before its operand hook: PSX loads have
         # one instruction of delay. Negative-X SLT is the original jump delay.
         self.assertEqual([word(a)for a in (0x800F3F4C,0x800F3F50,0x800F3F54)],
