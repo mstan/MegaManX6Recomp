@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 106,
+  "revision": 108,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v120",
+    "title_compatibility": "mmx6-x-zero-delay-v121",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1298,5 +1298,14 @@
     "F62_attribution": "Unused existing diagnostic receipt C9=authoritative sequence-state mirror, CA=last transition site(1 postdecoder Map,2 mode9 entry,3 repeat chord), CB=grouped refusal mask(1 state/site/word,2 receipt/profile/ready,4 recursion/projection,8 caller/CPU/stack,16 native namespace,32 stage/state-track or unsafe/idle,64 held/release). Diagnostic-only site/mask are excluded from digest/snapshot/admission; no original authorization gate is relaxed. Existing three authoritative sequence bytes remain schema27.",
     "identity": "New base106/portable107/title120. Exact actual image/profile/CPU/FP/OpenBIOS/content/manifest equality and all existing portability guards unchanged. Snapshot27 layout unchanged; immutable option25 admitted and bound by existing fixed-choice validation.",
     "acceptance": "Fresh same-candidate LOCAL and NET natural Gate emitter/sub13, guest target eligible/primary ineligible or source-policy excluded, post-emission guest vertical movement with actual steering response and original contact. Required final resolved core/modCRC/native cards/owned exits. F62 attribution resolves the known second-request nonadmission; no F62 fix/pass is claimed from diagnostics or prior different image."
+  },
+  "title_changes_v121": {
+    "scope": "Fix F62 agreed alternate sequence observer registration; no checkpoint authorization, native progression, combat, input capture/replay or source guard is relaxed.",
+    "cause": "SDK0c686 runtime/src/mod_packages.cpp accepts one instruction callback per plugin/address. Diagnostics and co-op independently registered mmx6.local-coop.prototype/80012C44/8FBF0010; one callback was discarded. Actual C172 LOCAL diagnostic retained natural firstKO/Map/newmission but no input-site observation and mode9 refused sequence state0.",
+    "change": "Diagnostics is the single registration owner. Its co-op-only callback invokes the exported C mmx6_coop_checkpoint_native_input bridge, then the existing native input capture/replay callback. Standalone mmx6.diagnostics retains its original callback, so co-op observation runs once regardless constructor order and precedes replay supply.",
+    "preserved": "Original12C44 word/SP/saved-caller/qualified receipt/profile/context/nativeMap4 cursor-response/newmission1E1BC guards, safe released/fresh-chord transaction and two-total-request bound. No new hook, SDK patch, native RAM/result write or authoritative state field. Existing C9/CA/CB diagnostics remain non-authoritative.",
+    "state": "Snapshot27 layout and three serialized sequence fields unchanged. New base108/portable109/title121 exact image and profile agreement; all existing CPU/FP/backend/OpenBIOS/content/manifest/actual executable guards retained.",
+    "regression": "Existing source/emission test checks one co-op registration and ordered fanout in either constructor order; existing compiled capture/replay fixtures enforce SDK-style per-plugin/address uniqueness, co-op observer exactly once, standalone none and observation before replay input supply. Full C/C++ compilation/native qualification remain required.",
+    "acceptance": "Fresh exact C173 LOCAL and NET must earn NPC53 defeat, full natural story/NoSave/ZeroMessage/progress1/responsiveMap/newordinaryRecyclemission, acknowledge second CP1 generation2, reach native NPC55/sub1 intro and separate living controls; final resolved NET CRC/native cards/normalownedexits. Diagnostics and compiled gates grant no native row credit. Existing Gate target fix remains stateless and independently native-unqualified."
   }
 }
