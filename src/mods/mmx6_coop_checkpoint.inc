@@ -62,6 +62,11 @@ static unsigned checkpoint_sequence_state,checkpoint_sequence_cursor,checkpoint_
  * These bytes are diagnostics only: neither digest nor admission reads them. */
 static unsigned checkpoint_sequence_diag_site,checkpoint_sequence_diag_mask;
 static void checkpoint_sequence_note(unsigned site,unsigned mask) {
+    /* The decoder also runs on ordinary mission frames. Keep a refused
+     * mode9 entry until a real Map transition/reset or a later entry/chord,
+     * rather than replacing its cause with routine non-Map namespace16. */
+    if(site==1 && checkpoint_sequence_diag_site==2 && checkpoint_sequence_diag_mask &&
+       psx_mod_read_byte(PLAY)!=4)return;
     checkpoint_sequence_diag_site=site;checkpoint_sequence_diag_mask=mask;
     if(!diagnostic || checkpoint_lab_option!=24)return;
     psx_mod_write_byte(diagnostic+0xC9,(uint8_t)checkpoint_sequence_state);

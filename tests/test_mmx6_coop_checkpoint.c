@@ -649,6 +649,11 @@ static void agreed_alternate_sequence(CPUState *cpu) {
         checkpoint_native_entry(cpu,bad==7?0x8001E1B8u:0x8001E1BCu);
         CHECK(checkpoint_sequence_state!=CHECKPOINT_SEQUENCE_MISSION && !checkpoint_sequence_release);
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
+        unsigned refusal=psx_mod_read_byte(diagnostic+0xCB);
+        CHECK(psx_mod_read_byte(diagnostic+0xCA)==2 && refusal);
+        psx_mod_write_byte(PLAY,10);
+        sequence_input_call(cpu,0x80012C44u); /* Routine mission input cannot hide the mode9 failure. */
+        CHECK(psx_mod_read_byte(diagnostic+0xCA)==2 && psx_mod_read_byte(diagnostic+0xCB)==refusal);
     }
     test_lab_option="off";checkpoint_reset();
 }
