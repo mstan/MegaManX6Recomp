@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 import struct
 import tempfile
+import tomllib
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
@@ -52,6 +53,15 @@ def settled_entry(tick=221):
 
 
 class FrozenInventoryTests(unittest.TestCase):
+    def test_gate_contact_mode_is_an_immutable_default_off_choice(self):
+        catalog=tomllib.loads((ROOT/'packaging/lab/coop-checkpoint-option.toml').read_text())
+        option=next(x for x in catalog['option'] if x['id']=='lab_contact_protection')
+        self.assertEqual(option['default'],'off')
+        self.assertEqual([x['value'] for x in option['choice']],['off','on','gate_homing_only'])
+        # Reuse the existing serialized fixed setting; no added snapshot layout.
+        source=(ROOT/'src/mods/mmx6_coop_snapshot.inc').read_text()
+        self.assertIn('state_fixed(s,checkpoint_contact_protection_option)',source)
+
     def test_native_entry_registration_has_no_duplicate_plugin_address(self):
         # Runtime mod_packages.cpp rejects the second callback for a plugin's
         # native address. A discarded registration cannot qualify its behavior.

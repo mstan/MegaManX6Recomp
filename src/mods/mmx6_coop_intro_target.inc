@@ -128,6 +128,27 @@ static int gate_homing_secondary(uint32_t actor) {
     return actor>=0x80093C98u && actor<0x80095098u &&
         !((actor-0x80093C98u)%0xA0u);
 }
+static int gate_homing_source(uint32_t child) {
+    uint32_t parent=psx_mod_read_word(child+0x7Cu),boss=psx_mod_read_word(PLAY+0x20u);
+    /* No parent HP/active/phase gate: native flight outlives its emitting
+     * orb's active state and never dereferences it again after initialization. */
+    if(!gate_homing_secondary(parent) || parent==child ||
+       psx_mod_read_byte(parent+1)!=26 || psx_mod_read_byte(parent+2)!=1 ||
+       boss<0x8008EF48u || boss>=0x80090C88u || (boss-0x8008EF48u)%0x9Cu ||
+       !(psx_mod_read_byte(boss)&1u) || psx_mod_read_byte(boss+1)!=59 ||
+       psx_mod_read_byte(boss+4)!=1 || psx_mod_read_word(0x800F7800u)!=boss ||
+       psx_mod_read_word(SCRATCH+0x80u)!=0x800F5F88u ||
+       psx_mod_read_word(SCRATCH+0x84u)!=0x800F60BCu ||
+       psx_mod_read_word(0x800F6074u)!=0x800F49F0u ||
+       psx_mod_read_word(0x800F6124u)!=0x800F0A24u ||
+       psx_mod_read_word(0x800F772Cu)!=0x800F3BFCu ||
+       psx_mod_read_word(0x800F7730u)!=0x800F3D74u)return 0;
+    for(unsigned i=0;i<sizeof gate_homing_target_words/sizeof gate_homing_target_words[0];++i)
+        if(psx_mod_read_word(0x800F3EFCu+i*4u)!=gate_homing_target_words[i])return 0;
+    for(unsigned i=0;i<sizeof gate_homing_producer_words/sizeof gate_homing_producer_words[0];++i)
+        if(psx_mod_read_word(0x800F1944u+i*4u)!=gate_homing_producer_words[i])return 0;
+    return 1;
+}
 static void gate_homing_target(CPUState *cpu,uint32_t address) {
     unsigned reg;
     if(!cpu)return;
@@ -146,24 +167,7 @@ static void gate_homing_target(CPUState *cpu,uint32_t address) {
        psx_mod_read_byte(child+1)!=26 || psx_mod_read_byte(child+2)!=13 ||
        psx_mod_read_byte(child+4)!=1 ||
        psx_mod_read_byte(child+5)!=(address==0x800F3F08u?0:1))return;
-    uint32_t parent=psx_mod_read_word(child+0x7Cu),boss=psx_mod_read_word(PLAY+0x20u);
-    /* No parent HP/active/phase gate: native flight outlives its emitting
-     * orb's active state and never dereferences it again after initialization. */
-    if(!gate_homing_secondary(parent) || parent==child ||
-       psx_mod_read_byte(parent+1)!=26 || psx_mod_read_byte(parent+2)!=1 ||
-       boss<0x8008EF48u || boss>=0x80090C88u || (boss-0x8008EF48u)%0x9Cu ||
-       !(psx_mod_read_byte(boss)&1u) || psx_mod_read_byte(boss+1)!=59 ||
-       psx_mod_read_byte(boss+4)!=1 || psx_mod_read_word(0x800F7800u)!=boss ||
-       psx_mod_read_word(SCRATCH+0x80u)!=0x800F5F88u ||
-       psx_mod_read_word(SCRATCH+0x84u)!=0x800F60BCu ||
-       psx_mod_read_word(0x800F6074u)!=0x800F49F0u ||
-       psx_mod_read_word(0x800F6124u)!=0x800F0A24u ||
-       psx_mod_read_word(0x800F772Cu)!=0x800F3BFCu ||
-       psx_mod_read_word(0x800F7730u)!=0x800F3D74u)return;
-    for(unsigned i=0;i<sizeof gate_homing_target_words/sizeof gate_homing_target_words[0];++i)
-        if(psx_mod_read_word(0x800F3EFCu+i*4u)!=gate_homing_target_words[i])return;
-    for(unsigned i=0;i<sizeof gate_homing_producer_words/sizeof gate_homing_producer_words[0];++i)
-        if(psx_mod_read_word(0x800F1944u+i*4u)!=gate_homing_producer_words[i])return;
+    if(!gate_homing_source(child))return;
     if(address==0x800F3F54u && cpu->gpr[2]!=0x80090000u)return;
     if((address==0x800F3FB4u || address==0x800F3FC4u) &&
        (cpu->gpr[2]!=PLAYER || psx_mod_read_byte(child+6)))return;

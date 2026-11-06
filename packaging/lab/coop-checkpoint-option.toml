@@ -124,7 +124,7 @@ label = "Original Sigma first-fight CP1 (prerequisite only)"
 feature = "prototype"
 id = "lab_contact_protection"
 label = "Lab enemy-contact protection"
-description = "Protected comparison prerequisite only. After the agreed checkpoint fixture completes, bypass native enemy/projectile contact damage and knockback in that checkpoint context. Terrain, falls and player attacks stay native. This tainted bypass cannot qualify player contact damage. Both peers must agree before launch."
+description = "Protected comparison prerequisite only. After the agreed checkpoint fixture completes, bypass native enemy/projectile contact damage and knockback in that checkpoint context. Terrain, falls and player attacks stay native. The Gate right-ledge-only choice exempts only the source-validated native homing child from protection; its contact remains native. Other protected contact cannot qualify damage. Both peers must agree before launch."
 group = "Lab validation"
 type = "choice"
 default = "off"
@@ -136,6 +136,10 @@ label = "Off"
 [[option.choice]]
 value = "on"
 label = "Protected prerequisite"
+
+[[option.choice]]
+value = "gate_homing_only"
+label = "Gate right-ledge: protect unrelated contact; native homing contact"
 
 [[option]]
 feature = "prototype"

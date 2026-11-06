@@ -17,6 +17,7 @@ static unsigned before_doors_probe,equipment_probe,equipment_calls;
 static unsigned scene_fatal_probe,scene_lock_calls,scene_release_calls;
 static unsigned refight_stub,refight_probe_calls,refight_action_calls,refight_refuse;
 static unsigned refight_post_solid,refight_admission_fault;
+static unsigned gate_contact_probe,gate_contact_calls[2],gate_contact_hit;
 static unsigned refusal_logs;
 static char refusal_log[512];
 static unsigned intro_scan_probe,intro_scan_calls,intro_scan_allocations,intro_canonical_cycles;
@@ -28,6 +29,13 @@ static void checkpoint_test_refusal_log(const char *format,...) {
 }
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
     (void)ret;
+    if(gate_contact_probe && target==0x80030ECCu) {
+        /* External native-call boundary only: do not model contact damage. */
+        unsigned seat=psx_mod_read_byte(PLAYER+2);CHECK(seat<2);
+        CHECK(cpu->gpr[4]==0x80093C98u && inside);
+        ++gate_contact_calls[seat];++guest_calls;
+        cpu->gpr[2]=seat==gate_contact_hit;return 1;
+    }
     if(amazon_scan_probe && target==0x80029F38u) {
         /* Original scanner boundary only: leave allocation/AI to native QA. */
         CHECK(inside && !private_draw && state_track.count);
@@ -1403,7 +1411,9 @@ static void gate_enemy_test_vy(unsigned seat,int32_t vy) {
     else psx_mod_write_word(PLAYER+0x24,(uint32_t)vy);
 }
 static void setup_gate_homing_right_prerequisite(CPUState *cpu,int online) {
-    setup_agreed(cpu,online);test_lab_option="gate_homing_right_cp4";checkpoint_reset();
+    const char *protection=test_lab_contact_option;test_lab_contact_option="off";
+    setup_agreed(cpu,online);test_lab_contact_option=protection;
+    test_lab_option="gate_homing_right_cp4";checkpoint_reset();
     CHECK(checkpoint_lab_option==27 && checkpoint_lab_index()==98 && checkpoint_lab_nonce()==0x4C475234u);
     CHECK(checkpoint_inventory[98].stage==18 && !checkpoint_inventory[98].section && checkpoint_inventory[98].checkpoint==4 &&
         checkpoint_inventory[98].table==0x800732ACu && checkpoint_inventory[98].record==0x80072ED0u && checkpoint_inventory[98].hash==0xF191CA1Eu);
@@ -1454,6 +1464,61 @@ static void agreed_gate_homing_right_prerequisite(CPUState *cpu) {
         }
     }
     test_lab_option="off";checkpoint_reset();
+}
+static void gate_contact_actor(void) {
+    const uint32_t child=0x80093C98u,parent=child+0xA0u,boss=0x8008EF48u;
+    psx_mod_write_byte(child,1);psx_mod_write_byte(child+1,26);psx_mod_write_byte(child+2,13);
+    psx_mod_write_byte(child+4,1);psx_mod_write_byte(child+5,1);
+    psx_mod_write_word(child+0x7C,parent);psx_mod_write_word(child+0x50,0x800F76C0u);
+    psx_mod_write_byte(child+0x60,4);psx_mod_write_byte(child+0x62,0);
+    /* Parent may already be inactive: native flight outlives its producer. */
+    psx_mod_write_byte(parent+1,26);psx_mod_write_byte(parent+2,1);
+    psx_mod_write_byte(boss,1);psx_mod_write_byte(boss+1,59);psx_mod_write_byte(boss+4,1);
+    psx_mod_write_word(PLAY+0x20,boss);psx_mod_write_word(0x800F7800u,boss);
+    psx_mod_write_word(SCRATCH+0x80,0x800F5F88u);psx_mod_write_word(SCRATCH+0x84,0x800F60BCu);
+}
+static void agreed_gate_contact_protection(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        test_lab_contact_option="gate_homing_only";
+        setup_gate_homing_right_prerequisite(cpu,online);
+        CHECK(!failed && checkpoint_contact_protection_option==2);
+        CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+        psx_mod_write_word(PLAY+0x90,12);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+        CHECK(checkpoint_contact_protection_mask()==3);
+        gate_contact_actor();CHECK(gate_homing_source(0x80093C98u));
+        cpu->gpr[4]=0x80093C98u;
+        CHECK(!checkpoint_contact_protected(cpu->gpr[4]));
+        /* Native P1 accepted once, or P1 miss then native P2 once. No AI replay. */
+        for(unsigned seat=0;seat<2;++seat) {
+            gate_contact_probe=1;gate_contact_hit=seat;gate_contact_calls[0]=gate_contact_calls[1]=0;
+            unsigned calls=guest_calls;memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;
+            CPUState expected=*cpu;expected.gpr[2]=1;
+            CHECK(player_contact(cpu,0x80030ECCu) && cpu->gpr[2]==1);
+            CHECK(gate_contact_calls[0]==1 && gate_contact_calls[1]==seat && guest_calls==calls+1+seat);
+            CHECK(!memcmp(cpu,&expected,sizeof expected) && !memcmp(before_ram,test_ram,sizeof test_ram) &&
+                  !memcmp(&partner,&p2,sizeof partner));
+            gate_contact_probe=0;
+        }
+        /* Each invalid identity/source remains protected, with no native call. */
+        const uint32_t corrupt[]={0x80093C99u,0x80093C9Au,0x80093CE8u,0x80093CF8u,
+            0x80093CFAu,0x80093D3Au,0x8008EF49u,0x800F7800u,SCRATCH+0x80u,
+            0x800F1944u,0x800F3EFCu,0x800F3DC0u,0x800F3DD0u,0x800F76C0u};
+        for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
+            uint8_t old=psx_mod_read_byte(corrupt[i]);psx_mod_write_byte(corrupt[i],old^1u);
+            CHECK(checkpoint_contact_protected(cpu->gpr[4])==3);protected_contact_unchanged(cpu,0);
+            psx_mod_write_byte(corrupt[i],old);
+        }
+        psx_mod_write_byte(0x80093C9Au,2); /* Unrelated orb, even on the same source boss. */
+        CHECK(checkpoint_contact_protected(cpu->gpr[4])==3);protected_contact_unchanged(cpu,0);
+        checkpoint_contact_protection_option=1;gate_contact_actor();
+        CHECK(checkpoint_contact_protected(cpu->gpr[4])==3);protected_contact_unchanged(cpu,0);
+        checkpoint_contact_protection_option=0;CHECK(!checkpoint_contact_protected(cpu->gpr[4]));
+        test_lab_contact_option="off";
+        setup_agreed(cpu,online);test_lab_contact_option="gate_homing_only";checkpoint_reset();
+        CHECK(failed && checkpoint_lab_option==1); /* This value cannot authorize any other checkpoint. */
+        test_lab_contact_option="off";
+    }
+    setup_agreed(cpu,1);
 }
 static void setup_gate_enemy_prerequisite(CPUState *cpu,int online) {
     setup_agreed(cpu,online);test_lab_option="secretlab2b_enemy_cp0";checkpoint_reset();
@@ -2837,7 +2902,7 @@ int main(int argc,char **argv) {
     agreed_fallen_portal_prerequisite(&cpu);
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
-    agreed_contact_protection(&cpu);
+    agreed_contact_protection(&cpu);agreed_gate_contact_protection(&cpu);
     agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);agreed_gate_homing_boundary(&cpu);agreed_laser_boundary(&cpu);agreed_alternate_sequence(&cpu);
     agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_ground_boundary(&cpu);agreed_fortress_cp3_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_mounted_armor_only(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif

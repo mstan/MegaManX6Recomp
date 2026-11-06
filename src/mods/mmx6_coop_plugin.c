@@ -3119,7 +3119,7 @@ static int player_contact(CPUState *cpu, uint32_t address) {
     /* A negotiated, tainted prerequisite may bypass enemy contact only.
      * Run before the ordinary co-op retry guard: P1 still needs protection
      * while P2 is absent, and a real projected P2 callback may be nested. */
-    unsigned protected=checkpoint_contact_protection_mask();
+    unsigned protected=checkpoint_contact_protected(cpu->gpr[4]);
     unsigned resident=psx_mod_read_byte(PLAYER+2);
     if(address==0x80030ECCu && resident<2 && (protected&(1u<<resident))) {
         cpu->gpr[2]=0;return 1; /* Exact native no-contact result; no body write. */

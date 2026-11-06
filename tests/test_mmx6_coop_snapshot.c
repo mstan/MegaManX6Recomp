@@ -647,7 +647,8 @@ static void agreed_latch_snapshot(void) {
     uint32_t invalid_length=snapshot_bytes();uint8_t *invalid=malloc(invalid_length);CHECK(invalid);
     CHECK(!snapshot_write(invalid,invalid_length) && !snapshot_validate(invalid,invalid_length));free(invalid);
     checkpoint_lab_option=0;
-    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=27;++option) {
+    for(unsigned protection=0;protection<=2;++protection)for(unsigned option=1;option<=27;++option) {
+        if(protection==2 && option!=27)continue;
         checkpoint_lab_option=option;
         checkpoint_contact_protection_option=protection;
         for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {

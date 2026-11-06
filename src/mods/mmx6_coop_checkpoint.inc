@@ -282,8 +282,10 @@ static void checkpoint_reset(void) {
     if(checkpoint_earned_weapons_option && !checkpoint_lab_option)failed=1;
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {
         if(!strcmp(option,"on"))checkpoint_contact_protection_option=1;
+        else if(!strcmp(option,"gate_homing_only"))checkpoint_contact_protection_option=2;
         else if(strcmp(option,"off"))failed=1;
     }
+    if(checkpoint_contact_protection_option==2 && checkpoint_lab_option!=27)failed=1;
     const char *hp_options[]={"lab_starting_hp_p1","lab_starting_hp_p2"};
     for(unsigned seat=0;seat<2;++seat)
         if(psx_mod_option_value("mmx6.local-coop","prototype",hp_options[seat],option,sizeof option)) {
@@ -417,6 +419,25 @@ static unsigned checkpoint_contact_protection_mask(void) {
 #else
     return 0;
 #endif
+}
+/* Fixed Gate27 prerequisite: the one authenticated homing child retains the
+ * complete original contact call. Every other enemy remains protected. */
+static unsigned checkpoint_contact_protected(uint32_t actor) {
+    unsigned mask=checkpoint_contact_protection_mask();
+    if(!mask || checkpoint_contact_protection_option!=2)return mask;
+    if(checkpoint_lab_option!=27 || !gate_homing_secondary(actor) ||
+       !(psx_mod_read_byte(actor)&1u) || psx_mod_read_byte(actor+1)!=26 ||
+       psx_mod_read_byte(actor+2)!=13 || psx_mod_read_byte(actor+4)!=1 ||
+       psx_mod_read_byte(actor+5)!=1 || psx_mod_read_word(actor+0x50)!=0x800F76C0u ||
+       psx_mod_read_byte(actor+0x60)!=4 || psx_mod_read_byte(actor+0x62) ||
+       psx_mod_read_word(0x800F76C0u)!=0x1212FAFAu ||
+       psx_mod_read_word(0x800F76C4u)!=0x1212FAFAu ||
+       psx_mod_read_word(0x800F3D48u)!=0xAE20002Cu ||
+       psx_mod_read_word(0x800F3D4Cu)!=0xA2220060u ||
+       psx_mod_read_word(0x800F3DC0u)!=0x0C00C51Du ||
+       psx_mod_read_word(0x800F3DD0u)!=0x0C00C3B3u ||
+       !gate_homing_source(actor))return mask;
+    return 0;
 }
 static unsigned checkpoint_contact_protection_status(void) {
     unsigned mask=checkpoint_contact_protection_mask();
