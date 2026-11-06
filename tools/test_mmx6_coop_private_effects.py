@@ -1,6 +1,8 @@
 """Parser/reducer fixtures only: no running-game or ledger qualification."""
 from dataclasses import replace
 import hashlib
+import os
+import re
 from pathlib import Path
 import struct
 import tempfile
@@ -285,6 +287,48 @@ class MenuAndRenderReducerTests(unittest.TestCase):
             for bad in ({}, dict(review, retained_colors="pending"), dict(review, capture_sha256="0"*64),
                         dict(review, owner="X/P2"), dict(review, cluts=[0x7800]*3), dict(review, limits=["no native reference"])):
                 self.assertFalse(reduce_effect_render_review(visible, capture, bad)["explicit_native_artwork_review"])
+
+
+class OriginalGateTargetSourceTests(unittest.TestCase):
+    @unittest.skipUnless(os.environ.get("MMX6_CONTENT_EXE") and os.environ.get("MMX6_CONTENT_DISC"),
+                         "Pinned original EXE/disc not supplied")
+    def test_gate_live_target_and_producer_words_match_original_member24(self):
+        import inventory_mmx6_coop_content as content
+        root=Path(__file__).resolve().parents[1]
+        image=Path(os.environ["MMX6_CONTENT_EXE"]).read_bytes()
+        self.assertEqual(content.sha256(image),content.EXE_SHA256)
+        exe=content.Executable(image)
+        disc=content.RawDisc(Path(os.environ["MMX6_CONTENT_DISC"]))
+        try:archive=disc.extent(211185,1665024)
+        finally:disc.stream.close()
+        self.assertEqual(content.sha256(archive),content.BIN_SHA256)
+        member=content.archive_members(archive)[24]
+        self.assertEqual(member['sha256'],'cde2ea7634a20b92c710384c00483586fd1e2c0b641da4b9e12515fb78d86fe2')
+        payload=archive[member['sector']*2048:][:member['size']]
+        self.assertEqual(struct.unpack_from('<H',image,exe.offset(0x8006DB78+36*2,2))[0],24)
+        self.assertEqual(exe.word(0x8006DC6C+36*4),0x800F5F88)
+        self.assertEqual(exe.word(0x8006DD24+36*4),0x800F60BC)
+        word=lambda address:struct.unpack_from('<I',payload,address-content.OVERLAY_BASE)[0]
+        for address,value in [(0x800F6074,0x800F49F0),(0x800F6124,0x800F0A24),
+                              (0x800F772C,0x800F3BFC),(0x800F7730,0x800F3D74)]:
+            self.assertEqual(word(address),value)
+        source=(root/'src/mods/mmx6_coop_intro_target.inc').read_text()
+        for name,start,end in [('gate_homing_target_words',0x800F3EFC,0x800F4024),
+                               ('gate_homing_producer_words',0x800F1944,0x800F1970)]:
+            body=re.search(r'static const uint32_t '+name+r'\[\]=\{(.*?)\};',source,re.S)
+            self.assertIsNotNone(body)
+            expected=[int(x,16)for x in re.findall(r'0x([0-9A-F]+)u',body.group(1))]
+            self.assertEqual(expected,[word(address)for address in range(start,end,4)])
+        plugin=(root/'src/mods/mmx6_coop_plugin.c').read_text()
+        hooks=re.findall(r'psx_mod_register_instruction_plugin\("mmx6.local-coop.prototype",(0x[0-9A-F]+)u,(0x[0-9A-F]+)u,gate_homing_target\)',plugin)
+        self.assertEqual([int(a,16)for a,_ in hooks],[0x800F3F08,0x800F3F54,0x800F3FB4,0x800F3FC4])
+        for address,instruction in hooks:self.assertEqual(int(instruction,16),word(int(address,16)))
+        # The target LH must retire before its operand hook: PSX loads have
+        # one instruction of delay. Negative-X SLT is the original jump delay.
+        self.assertEqual([word(a)for a in (0x800F3F4C,0x800F3F50,0x800F3F54)],
+                         [0x8465000E,0x9623000E,0x00C5202A])
+        self.assertEqual([word(a)for a in (0x800F3FAC,0x800F3FB0,0x800F3FB4)],
+                         [0x8444000A,0x0803CFF2,0x0064182A])
 
 
 if __name__ == "__main__":

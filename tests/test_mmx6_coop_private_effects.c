@@ -3253,8 +3253,82 @@ static void opposite_resource_identity_projection(void) {
     enter_zero();CHECK(psx_mod_read_byte(PLAY+0x5E)==2);leave_zero(); /* Next original reinit admission. */
     partner_x_armor=0;
 }
+/* R23 actual operand callback fixture. Native producer/words are checked
+ * independently against original BIN24 by the existing Python source test. */
+static uint8_t gate_target_before[sizeof ram];
+static void gate_target_setup(CPUState *cpu,uint32_t address) {
+    setup(cpu);private_draw=target_projection_call=0;
+    const uint32_t boss=0x8008EF48u,parent=0x80093C98u,child=parent+0xA0u;
+    psx_mod_write_byte(PLAY+12,18);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_word(PLAY+0x20,boss);psx_mod_write_word(0x800F7800u,boss);
+    psx_mod_write_word(SCRATCH+0x80u,0x800F5F88u);psx_mod_write_word(SCRATCH+0x84u,0x800F60BCu);
+    psx_mod_write_word(0x800F6074u,0x800F49F0u);psx_mod_write_word(0x800F6124u,0x800F0A24u);
+    psx_mod_write_word(0x800F772Cu,0x800F3BFCu);psx_mod_write_word(0x800F7730u,0x800F3D74u);
+    for(unsigned i=0;i<sizeof gate_homing_target_words/sizeof gate_homing_target_words[0];++i)
+        psx_mod_write_word(0x800F3EFCu+4u*i,gate_homing_target_words[i]);
+    for(unsigned i=0;i<sizeof gate_homing_producer_words/sizeof gate_homing_producer_words[0];++i)
+        psx_mod_write_word(0x800F1944u+4u*i,gate_homing_producer_words[i]);
+    psx_mod_write_byte(boss,0x41);psx_mod_write_byte(boss+1,59);psx_mod_write_byte(boss+4,1);
+    psx_mod_write_byte(parent,0x41);psx_mod_write_byte(parent+1,26);psx_mod_write_byte(parent+2,1);
+    psx_mod_write_byte(child,0x41);psx_mod_write_byte(child+1,26);psx_mod_write_byte(child+2,13);psx_mod_write_byte(child+4,1);
+    psx_mod_write_byte(child+5,address==0x800F3F08u?0:1);psx_mod_write_word(child+0x7C,parent);
+    psx_mod_write_word(child+8,3200u<<16);psx_mod_write_word(child+12,1000u<<16);
+    psx_mod_write_word(PLAYER+8,2000u<<16);psx_mod_write_word(PLAYER+12,1000u<<16);
+    psx_mod_write_byte(PLAYER+0x7A,0);psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD4,0);
+    put32(p2.body+8,3220u<<16);put32(p2.body+12,1020u<<16);
+    cpu->gpr[17]=child;cpu->pc=address;
+    cpu->gpr[2]=address==0x800F3F54u?0x80090000u:PLAYER;cpu->gpr[3]=2000;cpu->gpr[4]=2000;cpu->gpr[5]=1000;
+}
+static void gate_target_check(CPUState *cpu,uint32_t address,int changed,unsigned reg,int value) {
+    memcpy(gate_target_before,ram,sizeof ram);PlayerContext partner=p2;CPUState expected=*cpu;
+    unsigned calls_before=call_count;
+    if(changed)expected.gpr[reg]=(uint32_t)(int32_t)value;
+    PSXModFunctionEntryCallback callback=gate_homing_target;callback(cpu,address);
+    CHECK(!memcmp(&expected,cpu,sizeof *cpu));
+    CHECK(!memcmp(gate_target_before,ram,sizeof ram) && !memcmp(&partner,&p2,sizeof p2));
+    CHECK(call_count==calls_before && !state_track.count && !state_track.error);
+}
+static void native_gate_continuous_target_operands(void) {
+    CPUState cpu;const uint32_t sites[]={0x800F3F08u,0x800F3F54u,0x800F3FB4u,0x800F3FC4u};
+    const unsigned regs[]={3,5,4,3};
+    for(unsigned i=0;i<4;++i) {
+        gate_target_setup(&cpu,sites[i]);gate_target_check(&cpu,sites[i],1,regs[i],i==1?1020:3220);
+    }
+    gate_target_setup(&cpu,0x800F3F54u);
+    gate_target_check(&cpu,0x800F3F54u,1,5,1020);
+    /* Target moves after emission: next native read receives its new signedY,
+     * not the launch coordinate. Native +/-1 motion itself stays original. */
+    put32(p2.body+12,(uint32_t)(-250*65536));cpu.gpr[5]=1000;
+    gate_target_check(&cpu,0x800F3F54u,1,5,-250);
+    /* Native flight need not keep its parent active/healthy or in phase1. */
+    psx_mod_write_byte(0x80093C98u,0);psx_mod_write_byte(0x80093C9Cu,2);
+    psx_mod_write_byte(0x80093CF4u,0);cpu.gpr[5]=1000;
+    gate_target_check(&cpu,0x800F3F54u,1,5,-250);
+    for(unsigned bad=0;bad<26;++bad) {
+        gate_target_setup(&cpu,0x800F3F54u);uint32_t child=cpu.gpr[17],address=0x800F3F54u;
+        if(bad==0)ready=0;if(bad==1)enrolled=0;if(bad==2)inside=1;if(bad==3)zero_world=1;
+        if(bad==4)zero_projected=1;if(bad==5)private_draw=1;if(bad==6)scene_owner=1;
+        if(bad==7)pause_owner=0;if(bad==8)psx_mod_write_byte(PLAY+12,17);
+        if(bad==9)psx_mod_write_byte(PLAY+13,1);if(bad==10)life.status[1]=MMX6_COOP_ABSENT;
+        if(bad==11)p2.body[0xD4]=1;if(bad==12)p2.body[0x5C]=0;
+        if(bad==13)cpu.gpr[17]=child+1;if(bad==14)psx_mod_write_byte(child+2,12);
+        if(bad==15)psx_mod_write_word(child+0x7C,child);if(bad==16)psx_mod_write_byte(0x80093C9Au,2);
+        if(bad==17)psx_mod_write_byte(0x8008EF49u,55);if(bad==18)psx_mod_write_word(0x800F7800u,0);
+        if(bad==19)psx_mod_write_word(0x800F3F4Cu,0);if(bad==20)psx_mod_write_word(0x800F1944u,0);
+        if(bad==21)cpu.gpr[2]=PLAYER+4;if(bad==22)psx_mod_write_word(SCRATCH+0x84u,0);
+        if(bad==23)address=0x800F3F54u;
+        if(bad==24)psx_mod_write_word(PLAYER+8,3201u<<16); /* Nearby P1 retains priority. */
+        if(bad==25) {psx_mod_write_word(PLAYER+8,3180u<<16);psx_mod_write_word(PLAYER+12,1020u<<16);} /* Equal distance: P1. */
+        gate_target_check(&cpu,address,0,0,0);
+    }
+    gate_target_setup(&cpu,0x800F3FC4u);cpu.gpr[2]=PLAYER+4;
+    gate_target_check(&cpu,0x800F3FC4u,0,0,0);
+    gate_target_setup(&cpu,0x800F3FB4u);psx_mod_write_byte(cpu.gpr[17]+6,1);
+    gate_target_check(&cpu,0x800F3FB4u,0,0,0);
+}
 int main(void){
     opposite_resource_identity_projection();CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
+    native_gate_continuous_target_operands();
     native_guest_weather_window();
     scene_owner_death_preserves_living_passenger();
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();

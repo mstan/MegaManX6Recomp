@@ -92,3 +92,87 @@ static void sigma_special_target(CPUState *cpu,uint32_t address) {
     cpu->gpr[6]=(uint32_t)(int32_t)gx;
     psx_mod_counter_add("mmx6.coop.sigma-special-guest-target",1);
 }
+
+/* R23: original Gate (NPC59, SecretLab2B18/0), not High Max/NPC55.
+ * BIN24 cde2ea7634a20b92c710384c00483586fd1e2c0b641da4b9e12515fb78d86fe2.
+ * Native26/sub1 emits26/sub13 atF1944..196C. Sub13 initF3BFC copies
+ * parent+7C; F3D74 flight continuously seeks PLAYER.Y by1px, checks live X,
+ * then reverses its original VX after30ticks beyond the target. Retain all
+ * original movement, timers, contact30ECC, attack31474 and retirement.
+ * These two-argument instruction callbacks replace only a target operand;
+ * Hooks are after the MIPS load-delay slot: Y before3F54 SLT, negative-X
+ * before3FB4 SLT in the original jump delay. No pending target load can
+ * overwrite the replacement. No PLAYER projection spans contact/shared AI.
+ */
+static const uint32_t gate_homing_target_words[]={
+    0xAE230054u,0x848370AAu,0x00000000u,0x0043102Au,0x10400005u,0x24020040u,
+    0x34038000u,0xA2220015u,0x0803CFCCu,0xAE230020u,0x24028000u,0xA2200015u,
+    0xAE220020u,0x92220005u,0xA2200006u,0x24420001u,0x0803D009u,0xA2220005u,
+    0x244370A0u,0x8626000Eu,0x8465000Eu,0x9623000Eu,0x00C5202Au,0x10800003u,
+    0x00403821u,0x0803CFDDu,0x24620001u,0x00A6102Au,0x10400002u,0x2462FFFFu,
+    0xA622000Eu,0x82230006u,0x92250006u,0x10600005u,0x24020001u,0x10620014u,
+    0x2403001Eu,0x0803D009u,0x00000000u,0x8E220020u,0x00000000u,0x04410005u,
+    0x24E270A0u,0x8623000Au,0x8444000Au,0x0803CFF2u,0x0064182Au,0x8624000Au,
+    0x8443000Au,0x00000000u,0x0064182Au,0x10600016u,0x24A20001u,0xAE20008Cu,
+    0x0803D009u,0xA2220006u,0x8E22008Cu,0x00000000u,0x24420001u,0x1443000Eu,
+    0xAE22008Cu,0x92220015u,0x00000000u,0x10400003u,0x24020040u,0x0803D003u,
+    0xA2200015u,0xA2220015u,0x8E220020u,0x92230006u,0x00021023u,0x2463FFFFu,
+    0xAE220020u,0xA2230006u,
+};
+static const uint32_t gate_homing_producer_words[]={
+    0x0C00B116u,0x00000000u,0x00402821u,0x10A00007u,0x2403001Au,0x92220000u,
+    0x2404000Du,0xA0A30001u,0xA0A40002u,0xACB1007Cu,0xA0A20000u,
+};
+
+static int gate_homing_secondary(uint32_t actor) {
+    return actor>=0x80093C98u && actor<0x80095098u &&
+        !((actor-0x80093C98u)%0xA0u);
+}
+static void gate_homing_target(CPUState *cpu,uint32_t address) {
+    unsigned reg;
+    if(!cpu)return;
+    if(address==0x800F3F08u || address==0x800F3FC4u)reg=3;
+    else if(address==0x800F3F54u)reg=5;
+    else if(address==0x800F3FB4u)reg=4;
+    else return;
+    if(target_projection_call || !ready || !enrolled || failed || inside ||
+       zero_world || zero_projected || private_draw || scene_owner || scene_phase ||
+       pause_owner>=0 || psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       psx_mod_read_byte(PLAY+12)!=18 || psx_mod_read_byte(PLAY+13) ||
+       psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
+       !intro_target_eligible(1))return;
+    uint32_t child=cpu->gpr[17];
+    if(!gate_homing_secondary(child) || !(psx_mod_read_byte(child)&1u) ||
+       psx_mod_read_byte(child+1)!=26 || psx_mod_read_byte(child+2)!=13 ||
+       psx_mod_read_byte(child+4)!=1 ||
+       psx_mod_read_byte(child+5)!=(address==0x800F3F08u?0:1))return;
+    uint32_t parent=psx_mod_read_word(child+0x7Cu),boss=psx_mod_read_word(PLAY+0x20u);
+    /* No parent HP/active/phase gate: native flight outlives its emitting
+     * orb's active state and never dereferences it again after initialization. */
+    if(!gate_homing_secondary(parent) || parent==child ||
+       psx_mod_read_byte(parent+1)!=26 || psx_mod_read_byte(parent+2)!=1 ||
+       boss<0x8008EF48u || boss>=0x80090C88u || (boss-0x8008EF48u)%0x9Cu ||
+       !(psx_mod_read_byte(boss)&1u) || psx_mod_read_byte(boss+1)!=59 ||
+       psx_mod_read_byte(boss+4)!=1 || psx_mod_read_word(0x800F7800u)!=boss ||
+       psx_mod_read_word(SCRATCH+0x80u)!=0x800F5F88u ||
+       psx_mod_read_word(SCRATCH+0x84u)!=0x800F60BCu ||
+       psx_mod_read_word(0x800F6074u)!=0x800F49F0u ||
+       psx_mod_read_word(0x800F6124u)!=0x800F0A24u ||
+       psx_mod_read_word(0x800F772Cu)!=0x800F3BFCu ||
+       psx_mod_read_word(0x800F7730u)!=0x800F3D74u)return;
+    for(unsigned i=0;i<sizeof gate_homing_target_words/sizeof gate_homing_target_words[0];++i)
+        if(psx_mod_read_word(0x800F3EFCu+i*4u)!=gate_homing_target_words[i])return;
+    for(unsigned i=0;i<sizeof gate_homing_producer_words/sizeof gate_homing_producer_words[0];++i)
+        if(psx_mod_read_word(0x800F1944u+i*4u)!=gate_homing_producer_words[i])return;
+    if(address==0x800F3F54u && cpu->gpr[2]!=0x80090000u)return;
+    if((address==0x800F3FB4u || address==0x800F3FC4u) &&
+       (cpu->gpr[2]!=PLAYER || psx_mod_read_byte(child+6)))return;
+    int x=(int16_t)psx_mod_read_half(child+10),y=(int16_t)psx_mod_read_half(child+14);
+    int gx=(int16_t)(le32(p2.body+8)>>16),gy=(int16_t)(le32(p2.body+12)>>16);
+    if(intro_target_eligible(0)) {
+        int px=(int16_t)psx_mod_read_half(PLAYER+10),py=(int16_t)psx_mod_read_half(PLAYER+14);
+        int64_t dx=px-x,dy=py-y,dgx=gx-x,dgy=gy-y;
+        if(dx*dx+dy*dy<=dgx*dgx+dgy*dgy)return; /* P1 wins native-priority ties. */
+    }
+    cpu->gpr[reg]=(uint32_t)(int32_t)(address==0x800F3F54u?gy:gx);
+}

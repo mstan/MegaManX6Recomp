@@ -3657,6 +3657,10 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
             boss_cooldown_sites[i].words[6],boss_balance_shared_cooldown);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800EB310u,0x84830000u,weather_window_target);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800EF510u,0x0C0196DDu,sigma_special_target);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800F3F08u,0x0043102Au,gate_homing_target);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800F3F54u,0x00C5202Au,gate_homing_target);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800F3FB4u,0x0064182Au,gate_homing_target);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800F3FC4u,0x0064182Au,gate_homing_target);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);
