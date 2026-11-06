@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 110,
+  "revision": 112,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v122",
+    "title_compatibility": "mmx6-x-zero-delay-v123",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1341,5 +1341,14 @@
     "authority": "DefaultOFF development catalog only, fixed choice agreed before boot, same source/CPU/profile/actual artifact/receipt/nonce/once/taint/pending snapshot guards. No generic online mailbox. Actual native Gate homing and laser contact/terrain/private-view checks remain required.",
     "state": "New base110/portable111/title122, snapshot27 layout unchanged; admitted immutable checkpoint range27 and first unknown28. No native acceptance transfers from C173.",
     "acceptance": "Full125 SERVER+3 fresh exact-source PC checks before native. Same-candidate LOCAL/NET actual Gate59/26sub13 trajectory/contact for R23; original Laser type0D?0B headcollision/terrain/worldFX and separated private views for F182. Final resolved core/modCRC, native cards and normal owned exits required."
+  },
+  "title_changes_v123": {
+    "scope": "R23 agreed fixture protects unrelated contacts while retaining the complete source-validated original Gate26/sub13 homing contact. No gameplay qualification from source or compiled tests.",
+    "option": "New immutable defaultOFF lab_contact_protection=gate_homing_only (fixedvalue2) is valid ONLY with existing gate_homing_right_cp4 option27. Existing off/on semantics unchanged.",
+    "behavior": "Existing qualified checkpoint/profile/source/receipt/stage/taint/context guard derives protection. Source-validated original26/sub13 flight with original parent26/sub1/liveNPC59/module/tables/target+producer words/attackF76C0/full18x18/damage4/effect0 invokes unchanged original30ECC and ordinary co-op P1-first/P2-on-miss routing. Other contacts retain native no-contact0. No HP, phase, timer, NPC, velocity, contact-result or outcome assignment; no live option switch.",
+    "cause": "C174 two actual ordinary-control attempts reached native Gate intro and real standing, but unrelated attacks knocked P2 into the pit before the homing producer. This fixture removes that unrelated survival obstacle while leaving the measured attack damaging.",
+    "state": "Existing immutable contact-choice scalar remains in fixed snapshot identity; no authoritative state or wire-layout addition. Base112/portable113/title123 requires new exact artifact agreement. Snapshot27 layout unchanged; old save compatibility not required.",
+    "preserved": "Original source guards factored verbatim into one stateless helper, no relaxation. No new SDK dependency, hooks, source files or native calls; default production/labOFF remains unchanged.",
+    "acceptance": "Fresh125SERVER+3exact-sourcePC checks, then same-candidate LOCAL+NET genuine native Gate59?26/sub1?sub13 producer, eligible guest postemission movement/trajectory and originalcontact. Final resolved core/modCRC/cards/normalownedexits required. Source/fixtures alone grant no R23 row credit."
   }
 }
