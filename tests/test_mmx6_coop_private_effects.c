@@ -3316,7 +3316,10 @@ static void native_gate_continuous_target_operands(void) {
         if(bad==17)psx_mod_write_byte(0x8008EF49u,55);if(bad==18)psx_mod_write_word(0x800F7800u,0);
         if(bad==19)psx_mod_write_word(0x800F3F4Cu,0);if(bad==20)psx_mod_write_word(0x800F1944u,0);
         if(bad==21)cpu.gpr[2]=PLAYER+4;if(bad==22)psx_mod_write_word(SCRATCH+0x84u,0);
-        if(bad==23)address=0x800F3F54u;
+        if(bad==23) { /* Next native BEQ is not one of the four operand hooks. */
+            address=0x800F3F58u;
+            for(unsigned i=0;i<4;++i)CHECK(address!=sites[i]);
+        }
         if(bad==24)psx_mod_write_word(PLAYER+8,3201u<<16); /* Nearby P1 retains priority. */
         if(bad==25) {psx_mod_write_word(PLAYER+8,3180u<<16);psx_mod_write_word(PLAYER+12,1020u<<16);} /* Equal distance: P1. */
         gate_target_check(&cpu,address,0,0,0);
