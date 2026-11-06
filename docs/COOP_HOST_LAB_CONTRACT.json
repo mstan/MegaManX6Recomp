@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 114,
+  "revision": 116,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v124",
+    "title_compatibility": "mmx6-x-zero-delay-v125",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1357,10 +1357,46 @@
     "checkpoint_index": 10,
     "record": "80072270",
     "nonce": "4C4E5031",
-    "source_pickup": "800F6104 2F/sub1, original scanner29F38 then ordinary4D77C/4D7B8 initialization",
+    "source_pickup": "Historical C176 intended original F6104 pickup but wrongly guarded alternate tableF6654/4D77C; native source refusal is retained. Correct primary chain is bound by C177 below.",
     "support": "original NorthPole producerF60D4, actual live7/sub12 phase6",
     "prerequisite": "One source-authenticated position/history placement after native pickup and falling support initialization; original contact and later carry remain unassigned.",
     "guards": "Default off, LAB agreed only, old choices unchanged, no fatal/earned/HP seeds; no new layout/hooks/native motion or result writes.",
-    "native_qualification": "Required on this exact fresh candidate; none from declarations or unit tests."
+    "native_qualification": "Historical C176128-check build refused at native phase4 before contact; no gameplay pass."
+  },
+  "c177_native_prerequisites": {
+    "northpole_pickup_guard_fix": {
+      "option": 28,
+      "actual_primary_table": "SCRATCH+80 =800F61E4; type2F callback8004E5D8",
+      "native_constructor": "state table800788F8 ->8004D7B8; original resources787C0/787F0",
+      "source": "Measured C176 LOCAL2 pointer mismatch plus original scanner/dispatcher/wrapper/state-table source proof; no weakened source/once/contact contract."
+    },
+    "mounted_boss_cp1": {
+      "option": 29,
+      "value": "alternate_mounted_cp1",
+      "index": 106,
+      "record": "80072FF0",
+      "nonce": "4C4D4131",
+      "native_factory": "OriginalF2588 category3 command through29F38/2048C/EBEE8/2C9D4, then ordinary20A08/F01A4/EBF64 empty TYPE1 initialization.",
+      "pose": "Only initialized empty Armor current/old XY3088/384; heroes/camera/ownership/HP/ground/velocity/phase/results untouched.",
+      "outcome": "Actual normal mounting, original boss door/intro/release and visible partner remain native and unqualified."
+    },
+    "inami_surface_cp3": {
+      "option": 30,
+      "value": "inami_surface_cp3",
+      "index": 34,
+      "tuple": [
+        6,
+        0,
+        3
+      ],
+      "table": "800731B0",
+      "record": "800725D0",
+      "record_fnv1a32": "38A62A8A",
+      "nonce": "4C495733",
+      "bypass": "Original checkpoint travel only; no additional pose/physics/outcome write.",
+      "outcome": "Material, native surface crossing/effects and safe exit/reentry require actual observation; none granted by source."
+    },
+    "layout": "Snapshot27 unchanged; pending stages remain snapshot-unready and digest-tracked.",
+    "defaults": "All new choices LAB/defaultOFF; all existing native host/source/CPU/FP/artifact/recording gates retained."
   }
 }
