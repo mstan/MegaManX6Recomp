@@ -500,6 +500,25 @@ static void agreed_alternate_boundary(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();
 }
+/* The original CP4 is a reachability prerequisite only. No boss/child,
+ * progress, HP, action, world collision or successful contact is seeded. */
+static void agreed_gate_homing_boundary(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);test_lab_option="gate_homing_cp4";checkpoint_reset();
+        CHECK(checkpoint_lab_option==25 && checkpoint_lab_index()==98 && checkpoint_lab_nonce()==0x4C474834u);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
+        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.index==98 && checkpoint_pending.nonce==0x4C474834u);
+        before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=18;before_ram[(PLAY+13)&0x1FFFFF]=0;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu) && !guest_calls);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(psx_mod_read_byte(PLAY+12)==18 && !psx_mod_read_byte(PLAY+13) && psx_mod_read_byte(PLAY+0x1D)==4);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+        CHECK(psx_mod_read_word(diagnostic+0xB8)==0x80072ED0u && psx_mod_read_word(diagnostic+0xA4)==1);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
+        CHECK(!checkpoint_sequence_state && !checkpoint_sequence_cursor && !checkpoint_sequence_release);
+    }
+    test_lab_option="off";checkpoint_reset();
+}
 /* Exercise the real SDK callback type even when the plugin constructor is
  * disabled in this unit producer. A third callback argument is an ABI error. */
 static void sequence_input_call(CPUState *cpu,uint32_t address) {
@@ -525,7 +544,11 @@ static void sequence_responsive_map(CPUState *cpu) {
     memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
     sequence_input_call(cpu,0x80012C44u);
     CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP);
+    CHECK(psx_mod_read_byte(diagnostic+0xC9)==CHECKPOINT_SEQUENCE_MAP &&
+        psx_mod_read_byte(diagnostic+0xCA)==1 && !psx_mod_read_byte(diagnostic+0xCB));
     CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
+    /* Diagnostic edits cannot grant, deny or advance the actual sequence. */
+    psx_mod_write_byte(diagnostic+0xC9,255);psx_mod_write_byte(diagnostic+0xCA,255);psx_mod_write_byte(diagnostic+0xCB,255);
     sequence_input_call(cpu,0x80012C44u);CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP);
     psx_mod_write_byte(PLAY+0x2A,7);sequence_input_call(cpu,0x80012C44u);
     CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP && !checkpoint_sequence_cursor);
@@ -538,6 +561,8 @@ static void sequence_responsive_map(CPUState *cpu) {
 static void sequence_ordinary_mission(CPUState *cpu) {
     psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAY+13,0);mode9(cpu);
     checkpoint_native_entry(cpu,0x8001E1BCu);CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MISSION);
+    CHECK(psx_mod_read_byte(diagnostic+0xC9)==CHECKPOINT_SEQUENCE_MISSION &&
+        psx_mod_read_byte(diagnostic+0xCA)==2 && !psx_mod_read_byte(diagnostic+0xCB));
     psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
     /* External ordinary native body initialization after the new mission. */
     for(unsigned seat=0;seat<2;++seat) {
@@ -598,6 +623,7 @@ static void agreed_alternate_sequence(CPUState *cpu) {
         memcpy(before_ram,test_ram,sizeof test_ram);CPUState registers=*cpu;PlayerContext partner=p2;
         sequence_input_call(cpu,bad==12?0x80012C40u:0x80012C44u);
         CHECK(!checkpoint_sequence_state && !checkpoint_sequence_release);
+        CHECK(psx_mod_read_byte(diagnostic+0xCA)==1 && psx_mod_read_byte(diagnostic+0xCB));
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
     }
     for(unsigned bad=0;bad<10;++bad) {
@@ -2720,7 +2746,7 @@ int main(int argc,char **argv) {
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);
-    agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);agreed_alternate_sequence(&cpu);
+    agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);agreed_gate_homing_boundary(&cpu);agreed_alternate_sequence(&cpu);
     agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_ground_boundary(&cpu);agreed_fortress_cp3_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_mounted_armor_only(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;

@@ -68,8 +68,8 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
             record='800724D4',nonce='4C435232'))
         self.assertEqual(change['snapshot_schema'],12)
-        self.assertEqual(record['revision'],104)
-        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v119')
+        self.assertEqual(record['revision'],106)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v120')
 
     def test_fortress_cp3_retains_original_checkpoint_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)

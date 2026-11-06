@@ -374,7 +374,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    if(checkpoint_lab_option>24)STATE_INVALID(s);
+    if(checkpoint_lab_option>25)STATE_INVALID(s);
     state_fixed(s,0x53503658u);state_fixed(s,27);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     state_fixed(s,checkpoint_contact_protection_option);state_fixed(s,checkpoint_starting_hp[0]);state_fixed(s,checkpoint_starting_hp[1]);state_fixed(s,checkpoint_earned_weapons_option);state_fixed(s,both_doors);state_fixed(s,boss_balance_enabled);state_fixed(s,boss_balance_independent);
     state_fixed(s,separate_subtanks);state_fixed(s,partner_x_armor);state_fixed(s,private_actor.form);

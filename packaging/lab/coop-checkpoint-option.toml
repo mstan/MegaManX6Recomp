@@ -93,6 +93,10 @@ value = "alternate_boss_cp1"
 label = "Alternate area 20 section 1 checkpoint 1 approach"
 
 [[option.choice]]
+value = "gate_homing_cp4"
+label = "Gate original checkpoint 4; prior traversal and door bypassed"
+
+[[option.choice]]
 value = "alternate_sequence_cp1"
 label = "Alternate CP1; one repeat after responsive Map and new Recycle mission"
 

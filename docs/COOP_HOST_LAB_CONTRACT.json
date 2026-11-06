@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 104,
+  "revision": 106,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v119",
+    "title_compatibility": "mmx6-x-zero-delay-v120",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1276,5 +1276,27 @@
       "Require same exact candidate LOCAL/NET, actual owned inputs, final resolved core/modCRC, native cards and normal owned exits. Fixture/source/compiled tests alone are not F62 qualification."
     ],
     "qualification": "PREPARED_NOT_QUALIFIED; compiled producer/snapshot/host tests and all native C171 execution UNRUN."
+  },
+  "title_changes_v120": {
+    "scope": "R23 Gate59 continuous homing target operand correction, source-pinned immutable Gate CP4 option25, and read-only F62 option24 transition attribution. All native execution remains UNQUALIFIED.",
+    "homing": "Original BIN24 cde2ea7634a20b92c710384c00483586fd1e2c0b641da4b9e12515fb78d86fe2, stage18/0/NPC59, secondary26/sub13 with original26/sub1 parent. Four source-word guarded register operand sites 800F3F08/800F3F54/800F3FB4/800F3FC4 select the existing nearest living/available hero with primary ties. PSX load delays commit before target replacement. Native signed1pxY tracking, X crossing/reversal30ticks, contact30ECC, timers, movement, allocations and RAM remain original.",
+    "checkpoint": {
+      "option": "gate_homing_cp4",
+      "value": 25,
+      "index": 98,
+      "tuple": [
+        18,
+        0,
+        4
+      ],
+      "table": "800732AC",
+      "record": "80072ED0",
+      "record_fnv32": "F191CA1E",
+      "nonce": "4C474834",
+      "bypass": "Original CP4 initialization only; prior traversal/door bypassed. No NPC/child/phase/HP/position/history/encounter/contact/result seed or native outcome call. Ordinary approach must still produce real59/emitter/sub13 before trajectory/contact can qualify."
+    },
+    "F62_attribution": "Unused existing diagnostic receipt C9=authoritative sequence-state mirror, CA=last transition site(1 postdecoder Map,2 mode9 entry,3 repeat chord), CB=grouped refusal mask(1 state/site/word,2 receipt/profile/ready,4 recursion/projection,8 caller/CPU/stack,16 native namespace,32 stage/state-track or unsafe/idle,64 held/release). Diagnostic-only site/mask are excluded from digest/snapshot/admission; no original authorization gate is relaxed. Existing three authoritative sequence bytes remain schema27.",
+    "identity": "New base106/portable107/title120. Exact actual image/profile/CPU/FP/OpenBIOS/content/manifest equality and all existing portability guards unchanged. Snapshot27 layout unchanged; immutable option25 admitted and bound by existing fixed-choice validation.",
+    "acceptance": "Fresh same-candidate LOCAL and NET natural Gate emitter/sub13, guest target eligible/primary ineligible or source-policy excluded, post-emission guest vertical movement with actual steering response and original contact. Required final resolved core/modCRC/native cards/owned exits. F62 attribution resolves the known second-request nonadmission; no F62 fix/pass is claimed from diagnostics or prior different image."
   }
 }

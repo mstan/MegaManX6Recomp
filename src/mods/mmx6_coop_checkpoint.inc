@@ -58,6 +58,16 @@ static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previo
 enum { CHECKPOINT_SEQUENCE_NONE,CHECKPOINT_SEQUENCE_MAP,CHECKPOINT_SEQUENCE_RESPONSIVE,
     CHECKPOINT_SEQUENCE_MISSION,CHECKPOINT_SEQUENCE_USED };
 static unsigned checkpoint_sequence_state,checkpoint_sequence_cursor,checkpoint_sequence_release;
+/* Read-only attribution for the option24 transition that refused a request.
+ * These bytes are diagnostics only: neither digest nor admission reads them. */
+static unsigned checkpoint_sequence_diag_site,checkpoint_sequence_diag_mask;
+static void checkpoint_sequence_note(unsigned site,unsigned mask) {
+    checkpoint_sequence_diag_site=site;checkpoint_sequence_diag_mask=mask;
+    if(!diagnostic || checkpoint_lab_option!=24)return;
+    psx_mod_write_byte(diagnostic+0xC9,(uint8_t)checkpoint_sequence_state);
+    psx_mod_write_byte(diagnostic+0xCA,(uint8_t)site);
+    psx_mod_write_byte(diagnostic+0xCB,(uint8_t)mask);
+}
 static unsigned checkpoint_contact_protection_option;
 enum { CHECKPOINT_FATAL_RELEASE, CHECKPOINT_FATAL_ARMED, CHECKPOINT_FATAL_CONSUMED,
     CHECKPOINT_FATAL_SCENE_LOCKED, CHECKPOINT_FATAL_SCENE_WAIT_DEATH, CHECKPOINT_FATAL_SCENE_WAIT_ARRIVAL };
@@ -75,7 +85,7 @@ static unsigned checkpoint_lab_index(void) {
     return (checkpoint_lab_option==1 || checkpoint_lab_option==20)?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
-        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:(checkpoint_lab_option==9 || checkpoint_lab_option==24)?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:115;
+        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:(checkpoint_lab_option==9 || checkpoint_lab_option==24)?106:checkpoint_lab_option==11?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:checkpoint_lab_option==25?98:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==20?CHECKPOINT_LAB_SUBTANK_NONCE:checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -94,7 +104,7 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==14?CHECKPOINT_LAB_GATE_ENEMY_NONCE:
         checkpoint_lab_option==15?CHECKPOINT_LAB_REFIGHT_NONCE:
         checkpoint_lab_option==16?CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE:
-        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:0;
+        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:checkpoint_lab_option==25?0x4C474834u:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -200,6 +210,7 @@ static void checkpoint_reset(void) {
     memset(&checkpoint_pending,0,sizeof checkpoint_pending);
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
     checkpoint_sequence_state=checkpoint_sequence_cursor=checkpoint_sequence_release=0;
+    checkpoint_sequence_diag_site=checkpoint_sequence_diag_mask=0;
     checkpoint_contact_protection_option=0;
     checkpoint_fatal_option=checkpoint_fatal_state=0;
     checkpoint_hatch_stagger_option=checkpoint_hatch_stagger_state=0;
@@ -232,6 +243,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"turtloid_rain_cp1"))checkpoint_lab_option=8;
         else if(!strcmp(option,"alternate_boss_cp1"))checkpoint_lab_option=9;
         else if(!strcmp(option,"alternate_sequence_cp1"))checkpoint_lab_option=24;
+        else if(!strcmp(option,"gate_homing_cp4"))checkpoint_lab_option=25;
         else if(strcmp(option,"off"))failed=1;
     }
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_earned_weapons",option,sizeof option)) {
@@ -324,28 +336,31 @@ static void checkpoint_sequence_input(CPUState *cpu,uint32_t address) {
      * Observe only; the original instruction and all guest RAM are untouched. */
     /* SDK instruction callbacks receive (cpu,address); expected_word is a
      * registration guard, not a callback argument. Authenticate RAM as well. */
-    if(!cpu || address!=0x80012C44u || psx_mod_read_word(address)!=0x8FBF0010u ||
-       checkpoint_lab_option!=24 || checkpoint_sequence_state>=CHECKPOINT_SEQUENCE_MISSION ||
-       !ready || failed || inside || stage_call || player_call || ride_call ||
-       view_call || private_draw || zero_world || zero_projected ||
-       !checkpoint_lab_receipt_complete() || (cpu->gpr[29]&3u) ||
-       cpu->gpr[29]<0x80010000u || cpu->gpr[29]>0x801FFFECu)return;
+    if(checkpoint_lab_option!=24 || checkpoint_sequence_state>=CHECKPOINT_SEQUENCE_MISSION)return;
+    unsigned mask=0;
+    if(!cpu || address!=0x80012C44u || psx_mod_read_word(address)!=0x8FBF0010u)mask|=1;
+    if(!ready || failed || !checkpoint_lab_receipt_complete())mask|=2;
+    if(inside || stage_call || player_call || ride_call || view_call || private_draw || zero_world || zero_projected)mask|=4;
+    if(!cpu || (cpu->gpr[29]&3u) || cpu->gpr[29]<0x80010000u || cpu->gpr[29]>0x801FFFECu)mask|=8;
+    if(mask) {checkpoint_sequence_note(1,mask);return;}
     /* Native stage_tick withdraws enrolled actors outside mode10; Map itself
      * needs only this prior qualified receipt, not active world bodies. */
     uint32_t caller=psx_mod_read_word(cpu->gpr[29]+16u);
-    if(caller!=0x80012220u && caller!=0x8001A834u && caller!=0x8001AB18u)return;
+    if(caller!=0x80012220u && caller!=0x8001A834u && caller!=0x8001AB18u) {checkpoint_sequence_note(1,8);return;}
     if(psx_mod_read_byte(PLAY)==4 && psx_mod_read_byte(PLAY+1)==4 &&
        !psx_mod_read_byte(PLAY+2) && psx_mod_read_byte(PLAY+12)==13 && !psx_mod_read_byte(0x80097424u)) {
         /* Original Map4 EA894 owns PLAY27; PLAY2A is a different UI field. */
         unsigned cursor=psx_mod_read_byte(PLAY+0x27u);
-        if(cursor>=24)return;
+        if(cursor>=24) {checkpoint_sequence_note(1,16);return;}
         if(!checkpoint_sequence_state) {
             checkpoint_sequence_state=CHECKPOINT_SEQUENCE_MAP;checkpoint_sequence_cursor=cursor;
         } else if(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP && cursor!=checkpoint_sequence_cursor)
             checkpoint_sequence_state=CHECKPOINT_SEQUENCE_RESPONSIVE;
+        checkpoint_sequence_note(1,0);
     } else if(psx_mod_read_byte(PLAY)!=4 && checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP) {
         checkpoint_sequence_state=checkpoint_sequence_cursor=0;
-    }
+        checkpoint_sequence_note(1,16);
+    } else checkpoint_sequence_note(1,16);
 #else
     (void)cpu;(void)address;
 #endif
@@ -1001,18 +1016,24 @@ static void checkpoint_hatch_stagger_boundary(void) {
 static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     if(checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED) {
+        if(checkpoint_lab_option==24)
+            checkpoint_sequence_note(checkpoint_sequence_diag_site,checkpoint_sequence_diag_mask);
         if(checkpoint_lab_option==24 && checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MISSION) {
             /* A new ordinary mission was observed at the original mode9
              * entry. Unsafe/held edges never become deferred requests. */
             int safe=checkpoint_lab_receipt_complete() && checkpoint_safe_boundary() &&
                 psx_mod_read_byte(PLAY+12)==4 && !psx_mod_read_byte(PLAY+13) && !psx_mod_read_byte(PLAY+0x1D) &&
                 checkpoint_before_doors_idle(0) && checkpoint_before_doors_idle(1);
-            if(!safe || (raw && raw!=6))checkpoint_sequence_release=0;
+            if(!safe || (raw && raw!=6)) {
+                checkpoint_sequence_release=0;
+                if(raw)checkpoint_sequence_note(3,safe?64:32);
+            }
             else if(!raw)checkpoint_sequence_release=1;
             else if(checkpoint_sequence_release) {
                 checkpoint_sequence_release=0;checkpoint_sequence_state=CHECKPOINT_SEQUENCE_USED;
+                checkpoint_sequence_note(3,0);
                 return checkpoint_request(20,1,1,CHECKPOINT_LAB_ALTERNATE_NONCE,CHECKPOINT_AGREED);
-            }
+            } else checkpoint_sequence_note(3,64);
         }
         checkpoint_hatch_stagger_boundary();
         if(!checkpoint_fatal_option || !diagnostic || checkpoint_fatal_state==CHECKPOINT_FATAL_CONSUMED)return 0;
@@ -1092,14 +1113,17 @@ static int checkpoint_lab_boundary(CPUState *cpu,uint16_t raw) {
 #endif
 }
 static void checkpoint_native_entry(CPUState *cpu,uint32_t address) {
-    if(checkpoint_lab_option==24 && checkpoint_sequence_state==CHECKPOINT_SEQUENCE_RESPONSIVE &&
-       !checkpoint_pending.phase && checkpoint_lab_receipt_complete() && cpu &&
-       address==0x8001E1BCu && cpu->gpr[31]==0x8001E720u && cpu->gpr[4]==PLAY &&
-       ready && !failed && !inside && !stage_call && !player_call && !ride_call &&
-       !view_call && !private_draw && !zero_world && !zero_projected && !state_track.count && !state_track.error &&
-       psx_mod_read_byte(PLAY)==9 && psx_mod_read_byte(PLAY+12)==4 &&
-       !psx_mod_read_byte(PLAY+13) && !psx_mod_read_byte(PLAY+0x1D)) {
-        checkpoint_sequence_state=CHECKPOINT_SEQUENCE_MISSION;checkpoint_sequence_release=0;
+    if(checkpoint_lab_option==24 && !checkpoint_pending.phase) {
+        unsigned mask=0;
+        if(checkpoint_sequence_state!=CHECKPOINT_SEQUENCE_RESPONSIVE)mask|=1;
+        if(!ready || failed || !checkpoint_lab_receipt_complete())mask|=2;
+        if(inside || player_call || ride_call || view_call || private_draw || zero_world || zero_projected)mask|=4;
+        if(!cpu || address!=0x8001E1BCu || cpu->gpr[31]!=0x8001E720u || cpu->gpr[4]!=PLAY)mask|=8;
+        if(psx_mod_read_byte(PLAY)!=9 || psx_mod_read_byte(PLAY+12)!=4 ||
+           psx_mod_read_byte(PLAY+13) || psx_mod_read_byte(PLAY+0x1D))mask|=16;
+        if(stage_call || state_track.count || state_track.error)mask|=32;
+        if(!mask) {checkpoint_sequence_state=CHECKPOINT_SEQUENCE_MISSION;checkpoint_sequence_release=0;}
+        checkpoint_sequence_note(2,mask);
     }
     /* Original mode9 entry still has the prior loaded checkpoint CC868.
      * BIN33 FC244..FC2E4 retires the real death child, marks the earned

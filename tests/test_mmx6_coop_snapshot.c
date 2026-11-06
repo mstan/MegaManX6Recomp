@@ -647,7 +647,7 @@ static void agreed_latch_snapshot(void) {
     uint32_t invalid_length=snapshot_bytes();uint8_t *invalid=malloc(invalid_length);CHECK(invalid);
     CHECK(!snapshot_write(invalid,invalid_length) && !snapshot_validate(invalid,invalid_length));free(invalid);
     checkpoint_lab_option=0;
-    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=24;++option) {
+    for(unsigned protection=0;protection<=1;++protection)for(unsigned option=1;option<=25;++option) {
         checkpoint_lab_option=option;
         checkpoint_contact_protection_option=protection;
         for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
@@ -657,7 +657,7 @@ static void agreed_latch_snapshot(void) {
             checkpoint_contact_protection_option^=1;CHECK(!snapshot_validate(wire,length));
             checkpoint_contact_protection_option=protection;
             checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));
-            checkpoint_lab_option=option%24+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
+            checkpoint_lab_option=option%25+1;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
             checkpoint_lab_state=checkpoint_lab_previous=0;
             CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
             CHECK(checkpoint_lab_state==state && checkpoint_lab_previous==1 && state_digest()==digest);
