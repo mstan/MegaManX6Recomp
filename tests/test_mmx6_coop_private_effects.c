@@ -3273,18 +3273,27 @@ static void gate_target_setup(CPUState *cpu,uint32_t address) {
     psx_mod_write_byte(child,0x41);psx_mod_write_byte(child+1,26);psx_mod_write_byte(child+2,13);psx_mod_write_byte(child+4,1);
     psx_mod_write_byte(child+5,address==0x800F3F08u?0:1);psx_mod_write_word(child+0x7C,parent);
     psx_mod_write_word(child+8,3200u<<16);psx_mod_write_word(child+12,1000u<<16);
-    psx_mod_write_word(PLAYER+8,2000u<<16);psx_mod_write_word(PLAYER+12,1000u<<16);
+    psx_mod_write_word(PLAYER+8,1000u<<16);psx_mod_write_word(PLAYER+12,1000u<<16);
     psx_mod_write_byte(PLAYER+0x7A,0);psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD4,0);
+    /* P1 remains farther even after the signedY positive moves P2 to-250:
+     * 2200^2 > 20^2+1250^2. Both heroes stay eligible. */
     put32(p2.body+8,3220u<<16);put32(p2.body+12,1020u<<16);
     cpu->gpr[17]=child;cpu->pc=address;
-    cpu->gpr[2]=address==0x800F3F54u?0x80090000u:PLAYER;cpu->gpr[3]=2000;cpu->gpr[4]=2000;cpu->gpr[5]=1000;
+    cpu->gpr[2]=address==0x800F3F54u?0x80090000u:PLAYER;cpu->gpr[3]=1000;cpu->gpr[4]=1000;cpu->gpr[5]=1000;
 }
 static unsigned gate_target_ordinal;
 static int gate_target_bad=-1;
 static void gate_target_check(CPUState *cpu,uint32_t address,int changed,unsigned reg,int value) {
     memcpy(gate_target_before,ram,sizeof ram);PlayerContext partner=p2;CPUState expected=*cpu;
     unsigned calls_before=call_count;
-    if(changed)expected.gpr[reg]=(uint32_t)(int32_t)value;
+    if(changed) {
+        CHECK(intro_target_eligible(0) && intro_target_eligible(1));
+        int x=(int16_t)psx_mod_read_half(cpu->gpr[17]+10),y=(int16_t)psx_mod_read_half(cpu->gpr[17]+14);
+        int64_t px=(int16_t)psx_mod_read_half(PLAYER+10),py=(int16_t)psx_mod_read_half(PLAYER+14);
+        int64_t gx=(int16_t)(le32(p2.body+8)>>16),gy=(int16_t)(le32(p2.body+12)>>16);
+        CHECK((gx-x)*(gx-x)+(gy-y)*(gy-y)<(px-x)*(px-x)+(py-y)*(py-y));
+        expected.gpr[reg]=(uint32_t)(int32_t)value;
+    }
     unsigned ordinal=++gate_target_ordinal;
     PSXModFunctionEntryCallback callback=gate_homing_target;callback(cpu,address);
     if(memcmp(&expected,cpu,sizeof *cpu)) {
