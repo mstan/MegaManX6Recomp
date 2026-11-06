@@ -59,3 +59,5 @@ C178 uses base118, portable119 and title126 for native pickup preinit ordering a
 C178 also routes native surface effects3/sub8/9 through existing allocating-hero ownership. Exact native lifetime/visibility calls use the simulation-derived owning view and restore the canonical camera. Original animation, DF release and retirement remain native; genuine distant entry is unqualified until measured.
 
 C181 uses base120, portable121 and title127 for source-authenticated native ice deposits during pickup setup, beam ownership of incoming rider pose, and the original Laser saved-history prerequisite31. Snapshot27 and generated36 are unchanged. These paths remain native-unqualified until measured.
+
+C182 uses base122, portable123 and title128 for native scanner lifecycle flags after pickup allocation and matching compiled-overlay declarations for the four existing Gate homing operand hooks. No serializer/layout changes. Source/config checks are not native qualification.
