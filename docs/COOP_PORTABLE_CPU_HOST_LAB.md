@@ -57,3 +57,5 @@ C177 uses base116, portable117 and title125. It corrects the measured primary-pi
 C178 uses base118, portable119 and title126 for native pickup preinit ordering and intact claimed vehicle transport during paired scene withdrawal. Original damage/retirement and native reboarding remain active. Snapshot27 layout is unchanged; source tests and build do not establish F36/F148 runtime qualification.
 
 C178 also routes native surface effects3/sub8/9 through existing allocating-hero ownership. Exact native lifetime/visibility calls use the simulation-derived owning view and restore the canonical camera. Original animation, DF release and retirement remain native; genuine distant entry is unqualified until measured.
+
+C181 uses base120, portable121 and title127 for source-authenticated native ice deposits during pickup setup, beam ownership of incoming rider pose, and the original Laser saved-history prerequisite31. Snapshot27 and generated36 are unchanged. These paths remain native-unqualified until measured.
