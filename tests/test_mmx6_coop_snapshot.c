@@ -562,6 +562,8 @@ static void native_health_freeze_camera(void){
     CHECK(!state_track.count && snapshot_ready());
 }
 static void roundtrip_and_malformed(void){
+    character_selection=(CharacterSelection){.roster={0,5},.count=2,.seat=1,.valid=1,
+        .forms={0,5},.previous={0x40,0x2000}};
     private_terrain_pending=1;
     intro_camera_valid=1;for(unsigned i=0;i<sizeof intro_camera_requests;++i)intro_camera_requests[i]=(uint8_t)(i+17);
     zero_solid_contacts[111]=(SolidContact){13,255};
@@ -595,6 +597,8 @@ static void roundtrip_and_malformed(void){
     memcpy(bad,wire,len);bad[lifecycle_at]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
     HostState core;state_capture(&core);StateIO count={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&count);state_core(&count,&core);
     uint32_t cache=count.pos;memcpy(bad,wire,len);put32(bad+cache,4097);reject_unchanged(bad,len);
+    memcpy(bad,wire,len);bad[cache-18]=8;reject_unchanged(bad,len); /* Invalid selector count. */
+    memcpy(bad,wire,len);bad[cache-18+5]=6;reject_unchanged(bad,len); /* Native form IDs end at5. */
     memcpy(bad,wire,len);bad[cache-10-96]=3;reject_unchanged(bad,len); /* Invalid shared effect owner. */
     memcpy(bad,wire,len);bad[cache+4+45]=2;reject_unchanged(bad,len); /* Invalid retained-pixel encoding. */
     allocation_fail=1;reject_unchanged(wire,len);allocation_fail=0;
@@ -609,11 +613,13 @@ static void roundtrip_and_malformed(void){
     memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
     memset(shared_effect_owners,0,sizeof shared_effect_owners);
+    memset(&character_selection,0,sizeof character_selection);
     private_terrain_pending=0;
     intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
     memset(death_effect,0,sizeof death_effect);
     int allocations=allocation_calls;allocation_fail=1;snapshot_read(wire,len);allocation_fail=0;
     CHECK(allocation_calls==allocations && state_digest()==original && p2.body[0x5C]==23);
+    CHECK(character_selection.valid && character_selection.forms[1]==5 && character_selection.previous[1]==0x2000);
     CHECK(private_terrain_pending==1 && intro_camera_valid);for(unsigned i=0;i<sizeof intro_camera_requests;++i)CHECK(intro_camera_requests[i]==i+17);
     CHECK(zero_solid_contacts[111].sides==13 && zero_solid_contacts[111].carried==255);
     CHECK(diagnostic_host_digest()==original_diagnostic);

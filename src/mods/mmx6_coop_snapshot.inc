@@ -171,12 +171,6 @@ static void state_player(StateIO *io,PlayerContext *p) {
 }
 static void state_core(StateIO *io,HostState *s) {
 #define FIELD(field,width,max) s->field=state_integer(io,(uint32_t)s->field,width,max)
-    FIELD(characters.count,1,7);FIELD(characters.seat,1,1);
-    FIELD(characters.active,1,1);FIELD(characters.valid,1,1);FIELD(characters.black,1,1);
-    for(unsigned i=0;i<7;++i)FIELD(characters.roster[i],1,5);
-    for(unsigned seat=0;seat<2;++seat) {
-        FIELD(characters.forms[seat],1,5);FIELD(characters.previous[seat],2,65535);
-    }
     state_player(io,&s->player);
     FIELD(terrain_pending,1,1);
     FIELD(menus_active,1,1);FIELD(menus_initialized,1,1);FIELD(menus_eligible,1,3);
@@ -316,6 +310,15 @@ static void state_core(StateIO *io,HostState *s) {
         FIELD(frame_count,4,UINT32_MAX);FIELD(hud_fade,1,128);FIELD(world_packets,4,UINT32_MAX);FIELD(hud_seat,1,1);
         if(s->world_packets && (s->world_packets<packets || s->world_packets>packets+FRAME_ARENA*2))STATE_INVALID(io);
     }
+    FIELD(characters.count,1,7);FIELD(characters.seat,1,1);
+    FIELD(characters.active,1,1);FIELD(characters.valid,1,1);FIELD(characters.black,1,1);
+    for(unsigned i=0;i<7;++i)FIELD(characters.roster[i],1,5);
+    for(unsigned seat=0;seat<2;++seat) {
+        FIELD(characters.forms[seat],1,5);FIELD(characters.previous[seat],2,65535);
+    }
+    if((s->characters.active && !s->characters.count) ||
+       (s->characters.valid && (s->characters.count<2 ||
+        (s->characters.forms[0]==5)==(s->characters.forms[1]==5))))STATE_INVALID(io);
 #undef FIELD
 }
 static void state_commit(const HostState *s) {
