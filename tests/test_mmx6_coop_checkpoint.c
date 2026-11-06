@@ -530,8 +530,10 @@ static void sequence_responsive_map(CPUState *cpu) {
     psx_mod_write_byte(PLAY+0x2A,7);sequence_input_call(cpu,0x80012C44u);
     CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_MAP && !checkpoint_sequence_cursor);
     /* Retained native Map4 response was PLAY27 0->1; +2A alone cannot qualify. */
-    psx_mod_write_byte(PLAY+0x27,1);sequence_input_call(cpu,0x80012C44u);
+    psx_mod_write_byte(PLAY+0x27,1);memcpy(before_ram,test_ram,sizeof test_ram);
+    sequence_input_call(cpu,0x80012C44u);
     CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_RESPONSIVE);
+    CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
 }
 static void sequence_ordinary_mission(CPUState *cpu) {
     psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAY+13,0);mode9(cpu);
@@ -568,7 +570,17 @@ static void agreed_alternate_sequence(CPUState *cpu) {
         psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6));
         CHECK(checkpoint_sequence_state==CHECKPOINT_SEQUENCE_USED && psx_mod_read_word(diagnostic+0xA4)==2);
     }
-    for(unsigned bad=0;bad<16;++bad) {
+    for(int online=0;online<=1;++online) {
+        sequence_first_complete(cpu,online);
+        /* Actual native Map withdrawal: neither body's enrolled/draw/state nor
+         * the last diagnostic publication is authority for a world actor. */
+        enrolled=arrival_pair=0;scene_owner=1;scene_phase=3;
+        psx_mod_write_byte(PLAYER+3,0);psx_mod_write_byte(PLAYER+4,3);
+        p2.body[3]=0;p2.body[4]=3;
+        sequence_responsive_map(cpu);
+        CHECK(!enrolled && !arrival_pair && scene_owner==1 && scene_phase==3);
+    }
+    for(unsigned bad=0;bad<18;++bad) {
         sequence_first_complete(cpu,1);
         if(bad==0)psx_mod_write_byte(PLAY+1,3);if(bad==1)psx_mod_write_byte(PLAY+2,1);
         if(bad==2)psx_mod_write_byte(0x80097424u,1);if(bad==3)psx_mod_write_byte(PLAY+0x27,24);
@@ -579,6 +591,10 @@ static void agreed_alternate_sequence(CPUState *cpu) {
         if(bad==13)psx_mod_write_word(0x80012C44u,0); /* Actual RAM word guard. */
         if(bad==14)cpu->gpr[29]=0x80200000u;
         if(bad==15)psx_mod_write_byte(PLAY+12,20);
+        if(bad==16) { /* A fresh app/Map without prior receipt still has no authority. */
+            enrolled=0;checkpoint_reset();memset(test_diagnostic,0,sizeof test_diagnostic);
+        }
+        if(bad==17)ready=0;
         memcpy(before_ram,test_ram,sizeof test_ram);CPUState registers=*cpu;PlayerContext partner=p2;
         sequence_input_call(cpu,bad==12?0x80012C40u:0x80012C44u);
         CHECK(!checkpoint_sequence_state && !checkpoint_sequence_release);

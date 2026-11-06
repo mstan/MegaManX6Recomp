@@ -326,10 +326,12 @@ static void checkpoint_sequence_input(CPUState *cpu,uint32_t address) {
      * registration guard, not a callback argument. Authenticate RAM as well. */
     if(!cpu || address!=0x80012C44u || psx_mod_read_word(address)!=0x8FBF0010u ||
        checkpoint_lab_option!=24 || checkpoint_sequence_state>=CHECKPOINT_SEQUENCE_MISSION ||
-       !ready || !enrolled || failed || inside || stage_call || player_call || ride_call ||
+       !ready || failed || inside || stage_call || player_call || ride_call ||
        view_call || private_draw || zero_world || zero_projected ||
        !checkpoint_lab_receipt_complete() || (cpu->gpr[29]&3u) ||
        cpu->gpr[29]<0x80010000u || cpu->gpr[29]>0x801FFFECu)return;
+    /* Native stage_tick withdraws enrolled actors outside mode10; Map itself
+     * needs only this prior qualified receipt, not active world bodies. */
     uint32_t caller=psx_mod_read_word(cpu->gpr[29]+16u);
     if(caller!=0x80012220u && caller!=0x8001A834u && caller!=0x8001AB18u)return;
     if(psx_mod_read_byte(PLAY)==4 && psx_mod_read_byte(PLAY+1)==4 &&
