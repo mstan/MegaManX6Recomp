@@ -2312,12 +2312,32 @@ static void agreed_northpole_pickup(CPUState *cpu) {
         memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext partner=p2;CPUState registers=*cpu;
         CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==4 && !guest_calls &&
             !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof partner) && !memcmp(&registers,cpu,sizeof registers));
+        /* Original col5 can deposit before an eligible col1..4 child exists.
+         * Recognition must remain read-only, reject partial/foreign changes,
+         * and be unavailable during original stage admission or old option11. */
+        uint32_t meta,desc;CHECK(checkpoint_northpole_assets(&meta,&desc));
+        for(unsigned row=0;row<4;++row)for(unsigned dx=0;dx<3;++dx)
+            psx_mod_write_half(meta+checkpoint_northpole_meta_at(5232u+16u*dx,1552u+16u*row),
+                (uint16_t)(0x4A78u+3u*row+dx));
+        memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;registers=*cpu;
+        CHECK(checkpoint_northpole_assets(&meta,&desc) && !memcmp(before_ram,test_ram,sizeof test_ram) &&
+            !memcmp(&partner,&p2,sizeof partner) && !memcmp(&registers,cpu,sizeof registers));
+        checkpoint_pending.phase=3;CHECK(!checkpoint_northpole_assets(&meta,&desc));checkpoint_pending.phase=4;
+        checkpoint_lab_option=11;CHECK(!checkpoint_northpole_assets(&meta,&desc));checkpoint_lab_option=28;
+        unsigned patch_at=checkpoint_northpole_meta_at(5232,1568);
+        psx_mod_write_half(meta+patch_at,0);CHECK(!checkpoint_northpole_assets(&meta,&desc));
+        psx_mod_write_half(meta+patch_at,0x4A7B);
+        uint8_t bank_byte=psx_mod_read_byte(meta+17);psx_mod_write_byte(meta+17,bank_byte^1u);
+        CHECK(!checkpoint_northpole_assets(&meta,&desc));psx_mod_write_byte(meta+17,bank_byte);
+        uint8_t source_byte=psx_mod_read_byte(0x800EC5FCu);psx_mod_write_byte(0x800EC5FCu,source_byte^1u);
+        CHECK(!checkpoint_northpole_assets(&meta,&desc));psx_mod_write_byte(0x800EC5FCu,source_byte);
+        CHECK(checkpoint_northpole_assets(&meta,&desc));
         /* Supplied ordinary admission/native child observation, not a spawn or
          * movement model. Only an actual original phase6 child is eligible. */
         psx_mod_write_byte(parent+6,9);psx_mod_write_byte(child,0x51);psx_mod_write_byte(child+1,7);
         psx_mod_write_byte(child+2,12);psx_mod_write_byte(child+4,1);psx_mod_write_byte(child+6,6);
         psx_mod_write_word(child+0x7C,parent);psx_mod_write_word(child+0x68,child+0x80);
-        psx_mod_write_word(child+0x80,0x18180000u);psx_mod_write_word(child+8,5112u<<16);psx_mod_write_word(child+12,1456u<<16);
+        psx_mod_write_word(child+0x80,0x18180000u);psx_mod_write_word(child+8,5064u<<16);psx_mod_write_word(child+12,1456u<<16);
         CHECK(checkpoint_northpole_pickup_child(child));
         psx_mod_write_byte(child+6,3);CHECK(!checkpoint_northpole_pickup_child(child));psx_mod_write_byte(child+6,6);
         psx_mod_write_word(item,0);psx_mod_write_word(item+0x10,0);
@@ -2328,7 +2348,7 @@ static void agreed_northpole_pickup(CPUState *cpu) {
         put32(before_ram+(item&0x1FFFFFu),0x00012F41u);
         put32(before_ram+((item+0x10)&0x1FFFFFu),0x800F6104u);before_ram[0xF6104]|=1u;
         for(unsigned off=8;off<=0x18;off+=0x10) {
-            put32(before_ram+((item+off)&0x1FFFFFu),5129u<<16);
+            put32(before_ram+((item+off)&0x1FFFFFu),5081u<<16);
             put32(before_ram+((item+off+4)&0x1FFFFFu),1422u<<16);
         }
         partner=p2;registers=*cpu;
@@ -2344,16 +2364,16 @@ static void agreed_northpole_pickup(CPUState *cpu) {
         psx_mod_write_byte(item+4,1);psx_mod_write_word(item+0x30,0x800787C0u);psx_mod_write_word(item+0x68,0x800787F0u);
         /* Separate native physics result, including different old/currentXY.
          * Completing the heroes' prerequisite must not reset any of it. */
-        psx_mod_write_word(item+8,(5129u<<16)+0x1234u);psx_mod_write_word(item+12,(1423u<<16)+0x5678u);
-        psx_mod_write_word(item+0x18,5129u<<16);psx_mod_write_word(item+0x1C,1422u<<16);
+        psx_mod_write_word(item+8,(5081u<<16)+0x1234u);psx_mod_write_word(item+12,(1423u<<16)+0x5678u);
+        psx_mod_write_word(item+0x18,5081u<<16);psx_mod_write_word(item+0x1C,1422u<<16);
         psx_mod_write_word(item+0x24,0xFFFF0000u);psx_mod_write_word(item+0x2C,0x8000u);
         psx_mod_write_word(child+0x98,0x25000000u);psx_mod_write_word(child+0x9C,0x86000000u);
         memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;registers=*cpu;
         const unsigned pos[]={8,12,0x18,0x1C};
         for(unsigned i=0;i<4;++i) {
-            uint32_t p1=(i&1u?1411u:5095u)<<16;
+            uint32_t p1=(i&1u?1411u:5047u)<<16;
             put32(before_ram+((PLAYER+pos[i])&0x1FFFFFu),p1);
-            put32(partner.body+pos[i],(i&1u?1410u:5103u)<<16);
+            put32(partner.body+pos[i],(i&1u?1410u:5055u)<<16);
         }
         CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && checkpoint_lab_completed() &&
             psx_mod_read_byte(diagnostic+0xAD)==3 && northpole_pickup_scan_calls==1);

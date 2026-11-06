@@ -13,13 +13,65 @@ static int checkpoint_northpole_source(void) {
         checkpoint_hash(0x80027BA0u,0x80027C98u)==0xD5E21EAAu &&
         checkpoint_hash(0x800F6DF4u,0x800F6DFCu)==0xCB9E2AB8u;
 }
+/* Original EC7DC emits six columns at5016+48*column, at most three
+ * children per column. EC628 lands each centered at1592-48*stack;
+ * EC5E8..EC600 copies F6C00's3x4 tiles through27BA0 before retirement.
+ * Validate complete authored stacks, then hash their pristine zero cells.
+ * This is recognition only: no collision or native actor state is written. */
+static unsigned checkpoint_northpole_meta_at(unsigned x,unsigned y) {
+    unsigned cell=psx_mod_read_byte(0x80097438u+(y>>8)*27u+(x>>8));
+    return cell*512u+((y>>4)&15u)*32u+((x>>4)&15u)*2u;
+}
+static uint32_t checkpoint_northpole_native_patch_hash(uint32_t meta) {
+    if(checkpoint_hash(0x800EC4DCu,0x800EC628u)!=0xE1AAA7EEu ||
+       checkpoint_hash(0x800EC7DCu,0x800ECBE4u)!=0xCDD8A0A9u ||
+       checkpoint_hash(0x800F6C00u,0x800F6C08u)!=0xB20EDE9Du)return 0;
+    uint8_t native_cells[103424u/16u]={0};
+    for(unsigned col=0;col<6;++col) {
+        unsigned height=0;
+        for(unsigned level=0;level<3;++level) {
+            unsigned at=checkpoint_northpole_meta_at(4992u+48u*col,1568u-48u*level);
+            if(at+2u>103424u)return 0;
+            if(psx_mod_read_half(meta+at)) {
+                if(height!=level)return 0;
+                ++height;
+            }
+        }
+        for(unsigned row=0;row<10;++row)for(unsigned dx=0;dx<3;++dx) {
+            unsigned y=1456u+16u*row;
+            unsigned at=checkpoint_northpole_meta_at(4992u+48u*col+16u*dx,y);
+            if(at+2u>103424u)return 0;
+            unsigned expected=0;
+            if(height && y>=1600u-48u*height) {
+                unsigned source_row=row%3u;
+                if(!source_row && y!=1600u-48u*height)source_row=3;
+                expected=0x4A78u+3u*source_row+dx;
+            }
+            if(psx_mod_read_half(meta+at)!=expected)return 0;
+            if(expected)native_cells[at>>4]|=(uint8_t)(1u<<((at>>1)&7u));
+        }
+    }
+    uint32_t hash=2166136261u;
+    for(unsigned at=0;at<103424u;at+=2) {
+        uint16_t word=(native_cells[at>>4]&(1u<<((at>>1)&7u)))?0:psx_mod_read_half(meta+at);
+        hash=(hash^(word&255u))*16777619u;
+        hash=(hash^(word>>8))*16777619u;
+    }
+    return hash;
+}
 static int checkpoint_northpole_assets(uint32_t *meta,uint32_t *desc) {
     *meta=psx_mod_read_word(SCRATCH+8);*desc=psx_mod_read_word(SCRATCH+12);
     uint32_t hash=0;
     if(*meta>=0x80010000u && *meta<=0x80200000u-103424u)hash=checkpoint_hash(*meta,*meta+103424u);
+    /* Phase4 is reachable only after pristine original admission. Native ice
+     * can already deposit before the first eligible col1..4 child appears. */
+    if(checkpoint_lab_option==28 && checkpoint_pending.phase>=4 &&
+       hash && hash!=0x142A1278u && hash!=0x65F367C2u &&
+       checkpoint_hash(0x80097438u,0x80097438u+567u)==0x63300EA4u)
+        hash=checkpoint_northpole_native_patch_hash(*meta);
     /* Original F04B0..F04FC closes three tiles behind the CP3 approach when
-     * canonical X>=4833,Y>=1217. The full bank must be exactly original or
-     * exactly that source-table copy; partial/other collision edits fail. */
+     * canonical X>=4833,Y>=1217. After recognizing native deposits above,
+     * the full bank must be original or exactly this source-table copy. */
     unsigned native_closure=(checkpoint_pending.phase==3 ||
         (checkpoint_lab_option==28 && checkpoint_pending.phase>=4)) &&
         (int16_t)psx_mod_read_half(PLAYER+10)>=4833 &&
