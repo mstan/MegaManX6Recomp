@@ -1,5 +1,5 @@
 """Bounded source/typed-policy checks; actual-plugin C fixture is separate."""
-import hashlib, json, os, struct, subprocess, tomllib, unittest
+import hashlib, json, os, re, struct, tomllib, unittest
 from pathlib import Path
 import mmx6_host_lab_contract
 
@@ -41,11 +41,50 @@ class EarnedWeapons(unittest.TestCase):
         self.assertNotIn(0x5C,stores);self.assertNotIn(0x93,stores)
 
     def test_offline_command9_policy_is_exactly_preserved(self):
-        before=subprocess.check_output(['git','-C',str(ROOT),'show','f461288646db296a7eccdf59f68f5f7bc5a42ba1:src/mods/mmx6_coop_plugin.c'],text=True)
-        actual=function(PLUGIN,'diagnostic_inventory_setup')
-        actual=actual.replace('!checkpoint_equipment_source()','checkpoint_hash(0x8003D718u,0x8003D7ACu)!=0xe818bdd7u')
-        actual=actual.replace('    checkpoint_equipment_native(cpu,mask);','    psx_mod_write_byte(PLAY+0x60,(uint8_t)mask);\n    guest(cpu,0x8003D718,PLAYER,0);\n    enter_zero();\n    guest(cpu,0x8003D718,PLAYER,0);\n    leave_zero();')
-        self.assertEqual(actual,function(before,'diagnostic_inventory_setup'))
+        # Pin the denial/commit policy itself, independent of a historical
+        # Git object that is not part of a staged source checkout.
+        def policy(text):
+            return re.sub(r'\s+','',re.sub(r'/\*.*?\*/','',text,flags=re.S))
+        self.assertEqual(policy(function(PLUGIN,'diagnostic_mutation_allowed')),policy('''
+            static int diagnostic_mutation_allowed(void) {
+            #ifdef PSX_NO_DEBUG_TOOLS
+                return 0;
+            #else
+                return !psx_mod_netplay_is_active();
+            #endif
+            }
+        '''))
+        self.assertEqual(policy(function(PLUGIN,'diagnostic_inventory_setup')),policy('''
+            static void diagnostic_inventory_setup(CPUState *cpu) {
+                if (psx_mod_read_byte(diagnostic+0x50)!=9) return;
+                unsigned mask=psx_mod_read_byte(diagnostic+0x51);
+                if (!diagnostic_mutation_allowed() || !mask || scene_owner || zero_projected ||
+                    psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+                    psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13) ||
+                    psx_mod_read_byte(PLAY+0x38) || psx_mod_read_byte(PLAY+0x5E)!=1 ||
+                    life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
+                    psx_mod_read_byte(PLAYER+2) || p2.body[2]!=1 ||
+                    psx_mod_read_byte(PLAYER+0xE7)!=1 || p2.body[0xE7]!=5 ||
+                    psx_mod_read_byte(PLAYER+4)!=1 || p2.body[4]!=1 ||
+                    psx_mod_read_byte(PLAYER+5)!=2 || p2.body[5]!=2 ||
+                    !checkpoint_equipment_source()) {
+                    psx_mod_write_byte(diagnostic+0x50,0);
+                    psx_mod_counter_add("mmx6.coop.debug-inventory-rejected",1);
+                    return;
+                }
+            #ifdef MMX6_COOP_INPUT_TAINT_API
+                psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
+            #endif
+                checkpoint_equipment_native(cpu,mask);
+                psx_mod_write_byte(diagnostic+0x50,0);
+                psx_mod_counter_add("mmx6.coop.debug-inventory-grant",1);
+            }
+        '''))
+        self.assertEqual(policy(function(CHECKPOINT,'checkpoint_equipment_source')),policy('''
+            static int checkpoint_equipment_source(void) {
+                return checkpoint_hash(0x8003D718u,0x8003D7ACu)==0xE818BDD7u;
+            }
+        '''))
 
     def test_grant_follows_original_healthy_completion_only(self):
         arm=function(CHECKPOINT,'checkpoint_lab_boundary');body=function(CHECKPOINT,'checkpoint_complete')
@@ -84,10 +123,15 @@ class EarnedWeapons(unittest.TestCase):
 
     def test_current_profile_and_old_title_refusal(self):
         contract=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text())
-        self.assertEqual(contract['revision'],97)
-        self.assertEqual(contract['session']['title_compatibility'],'mmx6-x-zero-delay-v114')
-        self.assertEqual((ROOT/'src/mods/mmx6_coop_host_lab_contract.h').read_text(),mmx6_host_lab_contract.generated_header())
+        header=(ROOT/'src/mods/mmx6_coop_host_lab_contract.h').read_text()
+        self.assertEqual(header,mmx6_host_lab_contract.generated_header())
+        self.assertIn(f"#define MMX6_HOST_LAB_REVISION {contract['revision']}u",header)
+        title=contract['session']['title_compatibility']
+        self.assertIn(f'#define MMX6_HOST_LAB_TITLE_COMPATIBILITY "{title}"',header)
         test=(ROOT/'tests/test_mmx6_coop_host_lab.c').read_text()
+        self.assertIn(f'.compatibility_id="{title}"',test)
+        self.assertIn(f"CHECK(cat.rules->revision=={contract['revision']}&&cat.rules->implementation_count==1)",test)
+        self.assertNotEqual(title,'mmx6-x-zero-delay-v37')
         self.assertIn('title.compatibility_id="mmx6-x-zero-delay-v37";CHECK(!lab_title_eligible(&title))',test)
         self.assertIn('MMX6_STARTUP_BUILD_ID=\\"mmx6-x-zero-delay-v67\\"',(ROOT/'CMakeLists.txt').read_text(encoding='utf-8'))
 

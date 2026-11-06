@@ -1,6 +1,7 @@
 #include "mod_packages.h"
 #include "test_workspace.h"
 
+#include <algorithm>
 #include <filesystem>
 #include <iostream>
 #include <set>
@@ -121,8 +122,13 @@ int main(int argc, char** argv) {
             return fail("co-op must ship as experimental 0.0.1");
         }
         if (id == "mmx6.local-coop") {
-            if (package->options.size() != 1) return fail("co-op must expose its HUD layout");
-            const auto& option = package->options.front();
+            const auto is_hud_layout = [](const auto& option) {
+                return option.feature_id == "prototype" && option.id == "hud_layout";
+            };
+            if (std::count_if(package->options.begin(), package->options.end(), is_hud_layout) != 1) {
+                return fail("co-op must expose exactly one HUD layout option");
+            }
+            const auto& option = *std::find_if(package->options.begin(), package->options.end(), is_hud_layout);
             if (option.feature_id != "prototype" || option.id != "hud_layout" ||
                 option.type != PSXRecompV4::ModOptionType::Choice ||
                 option.default_value != "stacked" || option.choices.size() != 2 ||

@@ -29,6 +29,26 @@ def check(source: str) -> dict:
     if len(hooks) != 1 or len(re.findall(r"psx_mod_instruction\s*\(", block)) != 1:
         raise ValueError("exact native input instruction hook missing/duplicated/malformed")
     load = re.search(r"cpu->gpr\[31\]\s*=\s*psx_cyc_load_word\(cpu,\s*cpu->gpr\[29\]\s*\+\s*16,", block)
+    if len(re.findall(r"cpu->gpr\[31\]\s*=\s*psx_cyc_load_word\s*\(", block)) != 1:
+        raise ValueError("exactly one original saved-RA load required")
+    if load and re.search(r"psx_mod_memory_address\s*\(", block):
+        raise ValueError("saved-RA load must consume the memory-address hook result")
+    if load is None:
+        # Current emission routes the same saved-RA address through the
+        # instruction's memory-address hook. Verify its exact source address,
+        # word and ordering rather than accepting an arbitrary temporary.
+        address = re.search(
+            r"uint32_t\s+_mod_ea\s*=\s*psx_mod_memory_address\(\s*cpu\s*,\s*"
+            r"0x80012C44u?\s*,\s*0x8FBF0010u?\s*,\s*\(uint32_t\)\s*"
+            r"\(cpu->gpr\[29\]\s*\+\s*16\)\s*\)\s*;", block)
+        load = re.search(r"cpu->gpr\[31\]\s*=\s*psx_cyc_load_word\(cpu,\s*_mod_ea\s*,", block)
+        if (not address or not load or
+                len(re.findall(r"psx_mod_memory_address\s*\(", block)) != 1 or
+                not hooks[0].end() <= address.start() < address.end() <= load.start()):
+            raise ValueError("saved-RA memory hook must preserve its original address and ordering")
+        if not re.fullmatch(r"\s*(?:\{\s*uint32_t\s+_pgxa\s*=\s*_mod_ea\s*;\s*)?",
+                            block[address.end():load.start()]):
+            raise ValueError("saved-RA address must reach the load without intervening changes")
     if not load or hooks[0].end() > load.start():
         raise ValueError("observer must precede original saved-RA load")
     if "/* 0x80012C44: 0x8FBF0010 */" not in block[load.start():]:

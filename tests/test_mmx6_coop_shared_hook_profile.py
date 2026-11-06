@@ -73,7 +73,15 @@ class SharedEffectEntryProfile(unittest.TestCase):
     def test_native_quake_input_entry_is_declared(self):
         root = Path(__file__).resolve().parents[1]
         source = (root / 'src/mods/mmx6_coop_plugin.c').read_text(encoding='utf-8')
-        self.assertIn('0x8002927C,independent_camera_begin', source)
+        callbacks = re.findall(
+            r'psx_mod_register_function_entry_plugin\("mmx6\.local-coop\.prototype",0x8002927C,(\w+)\)', source)
+        self.assertEqual(callbacks, ['world_camera_begin'],
+                         'one camera entry must finalize terrain before the independent camera input')
+        wrapper = re.search(
+            r'static void world_camera_begin\(CPUState \*cpu,uint32_t address\)\s*\{([^{}]*)\}', source)
+        self.assertIsNotNone(wrapper)
+        self.assertEqual(re.sub(r'\s+', '', wrapper[1]),
+                         'private_terrain_after_world(cpu,address);independent_camera_begin(cpu,address);')
         for config in ('game.toml', 'packaging/release/game.toml'):
             with self.subTest(config=config):
                 profile = tomllib.loads((root / config).read_text(encoding='utf-8'))
