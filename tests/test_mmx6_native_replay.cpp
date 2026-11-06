@@ -11,6 +11,9 @@
 static PSXSessionDiagnosticsStartFn start_fn;
 static PSXSessionDiagnosticsEndFn stop_fn;
 static PSXModFunctionEntryCallback native_fn;
+static PSXModFunctionEntryCallback standalone_native_fn;
+static unsigned sequence_calls;
+static uint16_t sequence_buttons;
 static std::thread::id owner;
 static uint8_t ram[0x200000];
 static uint64_t cycle=10;
@@ -38,8 +41,12 @@ extern "C" void psx_fatal_halt(const char *why){owned();assert(why&&*why&&!callb
     assert(ends==1);std::fprintf(stderr,"expected terminal replay failure: %s\n",why);std::exit(42);}
 extern "C" void psx_crash_trace_set_exit_origin(const char *why){owned();assert(!std::strcmp(why,"mmx6_native_consumption_replay_end"));
     assert(ends==1&&!callbacks.load()&&!active_replay.load()&&!current_replay);}
-extern "C" int psx_mod_register_instruction_plugin(const char*,uint32_t address,uint32_t instruction,PSXModFunctionEntryCallback callback){
-    assert(address==0x80012C44&&instruction==0x8FBF0010);native_fn=callback;return 1;}
+extern "C" int psx_mod_register_instruction_plugin(const char *id,uint32_t address,uint32_t instruction,PSXModFunctionEntryCallback callback){
+    assert(address==0x80012C44&&instruction==0x8FBF0010);
+    auto& slot=!std::strcmp(id,"mmx6.local-coop.prototype")?native_fn:standalone_native_fn;
+    assert(!std::strcmp(id,"mmx6.local-coop.prototype")||!std::strcmp(id,"mmx6.diagnostics"));
+    if(slot)return 0; // Actual SDK refuses a second hook for this plugin/address.
+    slot=callback;return 1;}
 extern "C" int mod_runtime_diagnostics_plugin_active(const char*){owned();return selected;}
 extern "C" uint64_t psx_get_cycle_count(){owned();return cycle;}
 extern "C" uint32_t psx_netplay_sim_tick(){owned();assert(false);return 0;}
@@ -51,6 +58,9 @@ extern "C" int memcard_debug_info(int slot,const char **path,uint8_t*,int*,int*)
 extern "C" uint16_t psx_mod_read_half(uint32_t address){owned();const auto p=address&0x1FFFFFu;assert(p<sizeof ram-1);
     return uint16_t(ram[p]|uint16_t(ram[p+1])<<8);}
 extern "C" uint32_t psx_mod_read_word(uint32_t address){return psx_mod_read_half(address)|uint32_t(psx_mod_read_half(address+2))<<16;}
+extern "C" void mmx6_coop_checkpoint_native_input(CPUState*,uint32_t address){
+    owned();assert(address==0x80012C44);++sequence_calls;
+    sequence_buttons=psx_mod_read_half(0x800C456C);}
 static void half(uint32_t address,uint16_t value){ram[address&0x1FFFFFu]=uint8_t(value);ram[(address+1)&0x1FFFFFu]=uint8_t(value>>8);}
 static void word(uint32_t address,uint32_t value){for(unsigned i=0;i<4;++i)ram[(address+i)&0x1FFFFFu]=uint8_t(value>>(8*i));}
 extern "C" void psx_mod_write_half(uint32_t address,uint16_t value){owned();assert(address==0x800C456C||address==0x800C456E||
@@ -100,7 +110,10 @@ int main(int argc,char **argv){
     if(scenario=="image")s.image_sha256[0]='3';
     if(scenario=="online")s.netplay=1;
     env("MMX6_INPUT_REPLAY",(profile/"replay/inputs.jsonl").string());env("MMX6_INPUT_REPLAY_PROFILE",profile.string());
-    mmx6_register_diagnostics();assert(start_fn&&stop_fn&&native_fn);start_fn(&s);
+    mmx6_register_diagnostics();assert(start_fn&&stop_fn&&native_fn&&standalone_native_fn&&native_fn!=standalone_native_fn);
+    CPUState probe{};standalone_native_fn(&probe,0x80012C44);assert(!sequence_calls);
+    native_fn(&probe,0x80012C44);assert(sequence_calls==1);sequence_calls=0;
+    start_fn(&s);
     if(!refusal.empty()){
         assert(!current_replay&&!active_replay.load()&&!writes&&!callbacks.load());
         artifact(profile/"refused.txt",refusal);std::cout<<"startup refused: "<<refusal<<"\n";return 17;}
@@ -116,7 +129,9 @@ int main(int argc,char **argv){
                 if(scenario=="caller")word(cpu.gpr[29]+16,0x8001AB18);
                 if(scenario=="frame")word(0x80097420,event.frame+1);
                 if(scenario=="previous")half(0x800C456E,1);}
+            const unsigned before_sequence=sequence_calls;
             native_fn(&cpu,0x80012C44);assert(!std::memcmp(&cpu,&snapshot,sizeof cpu));assert(writes==original_writes+6);
+            assert(sequence_calls==before_sequence+1&&sequence_buttons==0xFFFF); // Observer precedes replay supply.
             assert(psx_mod_read_half(0x800C456C)==0x800&&psx_mod_read_half(0x800C456E)==event.pads[0][1]);
             assert(psx_mod_read_half(0x800C4758)==event.pads[1][0]&&psx_mod_read_half(0x800C475A)==event.pads[1][1]);
         }else{

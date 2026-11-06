@@ -22,6 +22,8 @@
 static PSXSessionDiagnosticsStartFn start_fn;
 static PSXSessionDiagnosticsEndFn stop_fn;
 static PSXModFunctionEntryCallback native_fn;
+static PSXModFunctionEntryCallback standalone_native_fn;
+static unsigned sequence_calls;
 static unsigned registrations,card_exports,runtime_reads,card_presence_reads;
 static bool plugin_selected=true;
 static uint64_t test_cycles=10;
@@ -37,8 +39,13 @@ extern "C" void psx_session_diagnostics_end(int){assert(false);}
 extern "C" void psx_fatal_halt(const char*){assert(false);std::abort();}
 extern "C" void psx_crash_trace_set_exit_origin(const char*){assert(false);}
 extern "C" int psx_mod_register_instruction_plugin(const char *id,uint32_t address,uint32_t word,PSXModFunctionEntryCallback f){
-    assert(!std::strcmp(id,registrations?"mmx6.local-coop.prototype":"mmx6.diagnostics"));
-    assert(address==0x80012C44&&word==0x8FBF0010);native_fn=f;++registrations;return 1;}
+    assert(address==0x80012C44&&word==0x8FBF0010);
+    auto& slot=!std::strcmp(id,"mmx6.local-coop.prototype")?native_fn:standalone_native_fn;
+    assert(!std::strcmp(id,"mmx6.local-coop.prototype")||!std::strcmp(id,"mmx6.diagnostics"));
+    if(slot)return 0; // Same per-plugin/address uniqueness as the actual SDK.
+    slot=f;++registrations;return 1;}
+extern "C" void mmx6_coop_checkpoint_native_input(CPUState*,uint32_t address){
+    owned();assert(address==0x80012C44);++sequence_calls;}
 extern "C" int mod_runtime_diagnostics_plugin_active(const char *id){owned();assert(id&&*id);return plugin_selected;}
 extern "C" uint64_t psx_get_cycle_count(){owned();return test_cycles;}
 extern "C" uint32_t psx_netplay_sim_tick(){owned();return test_tick;}
@@ -152,7 +159,9 @@ static void flush_error(const std::filesystem::path& root){
 }
 int main(int argc,char **argv){
     assert(argc>=2);owner=std::this_thread::get_id();codec_negatives();mmx6_register_diagnostics();
-    assert(start_fn&&stop_fn&&native_fn&&registrations==2);
+    assert(start_fn&&stop_fn&&native_fn&&standalone_native_fn&&native_fn!=standalone_native_fn&&registrations==2);
+    CPUState probe{};standalone_native_fn(&probe,0x80012C44);assert(!sequence_calls);
+    native_fn(&probe,0x80012C44);assert(sequence_calls==1);sequence_calls=0;
     std::string settings="{\"actual\":\"settings\"}\n",content="{\"actual\":\"content\"}\n",implementation="{\"actual\":\"implementation\"}\n";
     PSXSessionDiagnosticsStart s{};s.schema=1;s.session_epoch=1;s.envelope_complete=1;s.output_root=argv[1];
     std::strcpy(s.image_sha256,std::string(64,'1').c_str());std::strcpy(s.manifest_sha256,std::string(64,'2').c_str());
@@ -168,7 +177,7 @@ int main(int argc,char **argv){
     CPUState cpu{};cpu.gpr[29]=0x801FFF00;cpu.gpr[31]=0x80012C44;word(cpu.gpr[29]+16,0x80012220);
     word(0x80097420,20);const CPUState before=cpu;
     const std::vector<uint8_t> ram_before(test_ram,test_ram+sizeof test_ram);
-    native_fn(&cpu,0x80012C44);assert(!std::memcmp(&cpu,&before,sizeof cpu));
+    native_fn(&cpu,0x80012C44);assert(sequence_calls==1&&!std::memcmp(&cpu,&before,sizeof cpu));
     for(unsigned tag=0;tag<6;++tag){++test_cycles;mmx6_diagnostics_p2(tag,8,0);}
     assert(!std::memcmp(test_ram,ram_before.data(),sizeof test_ram));
     ++test_cycles;word(cpu.gpr[29]+16,0x8001A834);half(0x800C456C,0x800);half(0x800C4570,0x800);

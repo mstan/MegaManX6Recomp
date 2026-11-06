@@ -370,6 +370,11 @@ static void checkpoint_sequence_input(CPUState *cpu,uint32_t address) {
     (void)cpu;(void)address;
 #endif
 }
+/* Diagnostics owns this plugin/address registration. Keep its input capture
+ * and this guarded sequence observation behind that one native callback. */
+void mmx6_coop_checkpoint_native_input(CPUState *cpu,uint32_t address) {
+    checkpoint_sequence_input(cpu,address);
+}
 static int checkpoint_lab_completed(void) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
     if(!checkpoint_lab_receipt_complete())return 0;

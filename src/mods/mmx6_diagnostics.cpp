@@ -26,6 +26,8 @@
 #include <mutex>
 #include <thread>
 
+extern "C" void mmx6_coop_checkpoint_native_input(CPUState *cpu,uint32_t address);
+
 namespace {
 using namespace Mmx6Capture;
 enum Failure { None,QueueFull,EventLimit,InvalidNative,BeforeNative,Unilateral,StartFailed,WorkerFailed,StateReplaced };
@@ -293,6 +295,10 @@ void native(CPUState *cpu,uint32_t address){
         else if(scope.capture)scope.capture->native(cpu,address);}
     if(result.control!=ReplayControl::Continue)finish_replay(result);
 }
+void coop_native(CPUState *cpu,uint32_t address){
+    mmx6_coop_checkpoint_native_input(cpu,address);
+    native(cpu,address);
+}
 }
 extern "C" uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
     ReplayResult result;result.buttons=buttons;{Callback scope;
@@ -304,8 +310,8 @@ extern "C" uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int c
 PSX_MOD_CONSTRUCTOR(mmx6_register_diagnostics){
     if(std::getenv("MMX6_INPUT_REPLAY"))psx_game_register_guarded_session_diagnostics(begin,end);
     else psx_game_register_session_diagnostics(begin,end);
-    for(const char *id:{"mmx6.diagnostics","mmx6.local-coop.prototype"})
-        psx_mod_register_instruction_plugin(id,0x80012C44u,0x8FBF0010u,native);
+    psx_mod_register_instruction_plugin("mmx6.diagnostics",0x80012C44u,0x8FBF0010u,native);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x80012C44u,0x8FBF0010u,coop_native);
 }
 #else
 /* Legacy SDK helper fixtures remain linkable; no capture is advertised. */

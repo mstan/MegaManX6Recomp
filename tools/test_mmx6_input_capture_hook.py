@@ -1,6 +1,7 @@
 """Pure malformed-emission negatives; synthetic C, no regeneration claim."""
 import unittest
-from check_mmx6_input_capture_hook import check
+from pathlib import Path
+from check_mmx6_input_capture_hook import check, check_registration
 
 HOOK = "psx_mod_instruction(cpu, 0x80012C44u, 0x8FBF0010u);\n"
 LOAD = "cpu->gpr[31] = psx_cyc_load_word(cpu, cpu->gpr[29] + 16, 31, 0x20000000u);\n/* 0x80012C44: 0x8FBF0010 */\n"
@@ -10,6 +11,22 @@ def fixture(body):
     return "void func_80012A34(CPUState* cpu)\n{\nblock_80012C44:\n" + body + "}\nvoid func_80012C54(CPUState* cpu){}\n"
 
 class HookTests(unittest.TestCase):
+    def test_actual_single_owner_fanout_is_independent_of_constructor_order(self):
+        root = Path(__file__).resolve().parents[1] / "src/mods"
+        diagnostics = (root / "mmx6_diagnostics.cpp").read_text()
+        coop = (root / "mmx6_coop_plugin.c").read_text()
+        for order in ((diagnostics, coop), (coop, diagnostics)):
+            self.assertEqual(check_registration(*order)["co_op"], "coop_native")
+        duplicate = 'psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x80012C44u,0x8FBF0010u,checkpoint_sequence_input);'
+        for order in ((diagnostics, coop + duplicate), (coop + duplicate, diagnostics)):
+            with self.assertRaises(ValueError):
+                check_registration(*order)
+        for changed in (diagnostics.replace('mmx6_coop_checkpoint_native_input(cpu,address);', ''),
+                        diagnostics.replace('mmx6_coop_checkpoint_native_input(cpu,address);\n    native(cpu,address);',
+                                            'native(cpu,address);\n    mmx6_coop_checkpoint_native_input(cpu,address);')):
+            with self.assertRaises(ValueError):
+                check_registration(changed, coop)
+
     def test_exact_hook_precedes_native_instruction(self):
         self.assertEqual(check(fixture(HOOK + LOAD))["site"], "80012C44")
 

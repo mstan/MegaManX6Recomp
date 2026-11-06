@@ -11,6 +11,25 @@ from pathlib import Path
 import re
 
 
+def check_registration(*sources: str) -> dict:
+    """The SDK accepts one hook per plugin/address, independent of TU order."""
+    hooks = []
+    for source in sources:
+        hooks.extend(re.findall(
+            r'psx_mod_register_instruction_plugin\(\s*("[^"]+"|\w+)\s*,\s*'
+            r'0x80012C44u?\s*,\s*0x8FBF0010u?\s*,\s*(\w+)\s*\)', source))
+    expected = [('"mmx6.diagnostics"', 'native'),
+                ('"mmx6.local-coop.prototype"', 'coop_native')]
+    if sorted(hooks) != sorted(expected):
+        raise ValueError("native input requires one standalone and one co-op owner; duplicate registration is refused")
+    fanouts = [body for source in sources for body in re.findall(
+        r'void\s+coop_native\s*\(CPUState\s*\*\s*cpu,\s*uint32_t\s+address\)\s*\{([^{}]*)\}', source)]
+    if len(fanouts) != 1 or not re.fullmatch(
+            r'\s*mmx6_coop_checkpoint_native_input\(cpu,address\);\s*native\(cpu,address\);\s*', fanouts[0]):
+        raise ValueError("co-op owner must observe the guarded sequence once before existing native capture/replay")
+    return {"site": "80012C44", "standalone": "native", "co_op": "coop_native"}
+
+
 def check(source: str) -> dict:
     definitions = list(re.finditer(r"(?m)^void\s+func_80012A34\s*\(CPUState\s*\*\s*cpu\)\s*\{", source))
     if len(definitions) != 1:
