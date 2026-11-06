@@ -199,6 +199,7 @@ Copy-Item $DevExe (Join-Path $Stage "MegaManX6Recomp.exe")
 } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $Stage 'BUILD_PROVENANCE.json')
 Copy-Item (Join-Path $Root "README.md") $Stage
 Copy-Item (Join-Path $Root "LICENSE") $Stage
+Copy-Item (Join-Path $Root "PERMISSIONS.md") $Stage
 New-Item -ItemType Directory -Force (Join-Path $Stage "docs") | Out-Null
 Copy-Item (Join-Path $Root "docs/AOT_OVERLAYS.md") (Join-Path $Stage "docs")
 # Stage the mod catalog from the BUILD OUTPUT, not from mods/preloaded. The
@@ -395,7 +396,7 @@ if (Test-Path $ZipPath) {
 $Licenses = Join-Path $Stage 'licenses'
 New-Item -ItemType Directory -Path $Licenses -Force | Out-Null
 Copy-Item -Path (Join-Path $FrameworkRoot 'runtime/licenses/*') -Destination $Licenses -Force
-foreach ($notice in @('LICENSE', 'THIRD_PARTY_ATTRIBUTION.md')) {
+foreach ($notice in @('LICENSE', 'PERMISSIONS.md', 'THIRD_PARTY_ATTRIBUTION.md')) {
     $source = Join-Path $FrameworkRoot $notice
     if (Test-Path -LiteralPath $source) {
         Copy-Item -LiteralPath $source -Destination (Join-Path $Licenses "psxrecomp-$notice") -Force
