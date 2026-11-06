@@ -113,6 +113,10 @@ value = "laser_cp1"
 label = "Laser Institute original checkpoint 1 (prerequisite only)"
 
 [[option.choice]]
+value = "laser_nightmare_blocks_cp1"
+label = "Laser CP1 + prior Museum effect history (LAB prerequisite only)"
+
+[[option.choice]]
 value = "gate_homing_right_cp4"
 label = "Gate original checkpoint 4 + P2 right ledge (position prerequisite)"
 

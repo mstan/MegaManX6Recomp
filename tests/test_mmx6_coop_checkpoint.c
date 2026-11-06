@@ -592,6 +592,56 @@ static void agreed_laser_boundary(CPUState *cpu) {
     }
     test_lab_option="off";checkpoint_reset();
 }
+static void laser_history_setup(CPUState *cpu,int online) {
+    test_lab_fatal_option=test_lab_earned_option="off";test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    setup_agreed(cpu,online);test_lab_option="laser_nightmare_blocks_cp1";checkpoint_reset();
+    CHECK(checkpoint_lab_option==31 && checkpoint_lab_index()==38 && checkpoint_lab_nonce()==0x4C4E4235u);
+    for(unsigned i=0;i<16;++i)psx_mod_write_byte(PLAY+0x168u+i,(uint8_t)(0x20u+i));
+    psx_mod_write_byte(PLAY+0x43A,0x71);
+}
+static void agreed_laser_saved_history(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        laser_history_setup(cpu,online);memcpy(before_ram,test_ram,sizeof test_ram);
+        PlayerContext partner=p2;CPUState registers=*cpu;
+        CHECK(checkpoint_lab_boundary(cpu,6) && checkpoint_pending.phase==1 && checkpoint_pending.index==38);
+        before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=7;before_ram[(PLAY+13)&0x1FFFFF]=0;
+        before_ram[(PLAY+0x16F)&0x1FFFFF]=5;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) &&
+            !memcmp(&registers,cpu,sizeof *cpu) && !guest_calls && checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        CHECK(psx_mod_read_byte(PLAY+0x43A)==0x71); /* The fixture cannot activate the effect. */
+        /* External original1E9C0..1E9D0, before original mode9 hook1E1BC.
+         * This models ONLY native copy; actual gameplay qualification remains. */
+        psx_mod_write_byte(PLAY+0x43A,psx_mod_read_byte(PLAY+0x168u+psx_mod_read_byte(PLAY+12)));
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+0x1D)==1 &&
+            psx_mod_read_byte(PLAY+0x16F)==5 && psx_mod_read_byte(PLAY+0x43A)==5);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_lab_completed());
+        psx_mod_write_byte(PLAY+0x16F,6);
+        CHECK(!checkpoint_lab_boundary(cpu,0) && !checkpoint_lab_boundary(cpu,6) && psx_mod_read_byte(PLAY+0x16F)==6);
+        for(unsigned bad=0;bad<4;++bad) {
+            laser_history_setup(cpu,online);
+            if(bad==0)checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
+            if(bad==1)psx_mod_write_byte(0x8001E9D0u,psx_mod_read_byte(0x8001E9D0u)^1u);
+            if(bad==2)psx_mod_write_byte(PLAY+12,4);
+            if(bad==3)psx_mod_write_byte(0x80072660u,psx_mod_read_byte(0x80072660u)^1u);
+            memcpy(before_ram,test_ram,sizeof test_ram);partner=p2;registers=*cpu;
+            CHECK(!(bad==0?checkpoint_request(7,0,1,0x4C4E4234u,CHECKPOINT_AGREED):checkpoint_lab_boundary(cpu,6)));
+            CHECK(!checkpoint_pending.phase && !guest_calls && !checkpoint_test_taint &&
+                !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&partner,&p2,sizeof p2) && !memcmp(&registers,cpu,sizeof *cpu));
+        }
+        /* Existing option26 must neither select history nor activate it. */
+        laser_history_setup(cpu,online);test_lab_option="laser_cp1";checkpoint_reset();
+        CHECK(checkpoint_lab_boundary(cpu,6) && psx_mod_read_byte(PLAY+0x16F)==0x27 && psx_mod_read_byte(PLAY+0x43A)==0x71);
+    }
+    for(unsigned bad=0;bad<4;++bad) {
+        laser_history_setup(cpu,0);
+        if(bad==0)test_lab_fatal_option="p1";if(bad==1)test_lab_earned_option="all";
+        if(bad==2)test_lab_hp_option[0]="1";if(bad==3)test_lab_hp_option[1]="1";
+        checkpoint_reset();CHECK(failed && !checkpoint_pending.phase);
+        test_lab_fatal_option=test_lab_earned_option="off";test_lab_hp_option[0]=test_lab_hp_option[1]="off";
+    }
+    test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option);
+}
 /* Exercise the real SDK callback type even when the plugin constructor is
  * disabled in this unit producer. A third callback argument is an ABI error. */
 static void sequence_input_call(CPUState *cpu,uint32_t address) {
@@ -3147,7 +3197,7 @@ int main(int argc,char **argv) {
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);agreed_gate_contact_protection(&cpu);
-    agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);agreed_gate_homing_boundary(&cpu);agreed_laser_boundary(&cpu);agreed_alternate_sequence(&cpu);
+    agreed_starting_hp(&cpu);agreed_subtank_prerequisite(&cpu);agreed_turtloid_boundary(&cpu);agreed_heatnix_boundary(&cpu);agreed_magma_start_boundary(&cpu);agreed_sigma_boundary(&cpu);agreed_alternate_boundary(&cpu);agreed_gate_homing_boundary(&cpu);agreed_laser_boundary(&cpu);agreed_laser_saved_history(&cpu);agreed_alternate_sequence(&cpu);
     agreed_earned_weapons(&cpu);agreed_wolfang_boundary(&cpu);agreed_ground_boundary(&cpu);agreed_fortress_cp3_boundary(&cpu);agreed_native_fatal(&cpu);agreed_mounted_native_fatal(&cpu);agreed_mounted_armor_only(&cpu);agreed_scene_fatal(&cpu);agreed_capsule_fatal(&cpu);agreed_boss_admission_fatal(&cpu);agreed_hatch_stagger(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;

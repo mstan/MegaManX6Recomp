@@ -90,7 +90,7 @@ static unsigned checkpoint_lab_index(void) {
     return (checkpoint_lab_option==1 || checkpoint_lab_option==20)?2:checkpoint_lab_option==2?3:
         checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
         checkpoint_lab_option==6?27:(checkpoint_lab_option==7 || checkpoint_lab_option==10 ||
-        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==30?34:(checkpoint_lab_option==9 || checkpoint_lab_option==24 || checkpoint_lab_option==29)?106:(checkpoint_lab_option==11 || checkpoint_lab_option==28)?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:(checkpoint_lab_option==25 || checkpoint_lab_option==27)?98:checkpoint_lab_option==26?38:115;
+        checkpoint_lab_option==12 || checkpoint_lab_option==13)?23:checkpoint_lab_option==8?32:checkpoint_lab_option==30?34:(checkpoint_lab_option==9 || checkpoint_lab_option==24 || checkpoint_lab_option==29)?106:(checkpoint_lab_option==11 || checkpoint_lab_option==28)?10:checkpoint_lab_option==14?94:(checkpoint_lab_option==15 || checkpoint_lab_option==16)?60:checkpoint_lab_option==17?20:checkpoint_lab_option==18?78:checkpoint_lab_option==19?13:checkpoint_lab_option==21?62:checkpoint_lab_option==22?93:checkpoint_lab_option==23?65:(checkpoint_lab_option==25 || checkpoint_lab_option==27)?98:(checkpoint_lab_option==26 || checkpoint_lab_option==31)?38:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==20?CHECKPOINT_LAB_SUBTANK_NONCE:checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
@@ -109,7 +109,7 @@ static uint32_t checkpoint_lab_nonce(void) {
         checkpoint_lab_option==14?CHECKPOINT_LAB_GATE_ENEMY_NONCE:
         checkpoint_lab_option==15?CHECKPOINT_LAB_REFIGHT_NONCE:
         checkpoint_lab_option==16?CHECKPOINT_LAB_REFIGHT_DISTANT_NONCE:
-        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:checkpoint_lab_option==25?0x4C474834u:checkpoint_lab_option==26?0x4C4C5331u:checkpoint_lab_option==27?0x4C475234u:checkpoint_lab_option==28?0x4C4E5031u:checkpoint_lab_option==29?0x4C4D4131u:checkpoint_lab_option==30?0x4C495733u:0;
+        checkpoint_lab_option==17?CHECKPOINT_LAB_HEATNIX_NONCE:checkpoint_lab_option==18?CHECKPOINT_LAB_SIGMA_NONCE:checkpoint_lab_option==19?CHECKPOINT_LAB_MAGMA_START_NONCE:checkpoint_lab_option==21?CHECKPOINT_LAB_WOLFANG_NONCE:checkpoint_lab_option==22?CHECKPOINT_LAB_FORTRESS_CP3_NONCE:checkpoint_lab_option==23?CHECKPOINT_LAB_GROUND_NONCE:checkpoint_lab_option==25?0x4C474834u:checkpoint_lab_option==26?0x4C4C5331u:checkpoint_lab_option==27?0x4C475234u:checkpoint_lab_option==28?0x4C4E5031u:checkpoint_lab_option==29?0x4C4D4131u:checkpoint_lab_option==30?0x4C495733u:checkpoint_lab_option==31?0x4C4E4235u:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -253,6 +253,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"alternate_sequence_cp1"))checkpoint_lab_option=24;
         else if(!strcmp(option,"gate_homing_cp4"))checkpoint_lab_option=25;
         else if(!strcmp(option,"laser_cp1"))checkpoint_lab_option=26;
+        else if(!strcmp(option,"laser_nightmare_blocks_cp1"))checkpoint_lab_option=31;
         else if(!strcmp(option,"gate_homing_right_cp4"))checkpoint_lab_option=27;
         else if(strcmp(option,"off"))failed=1;
     }
@@ -301,7 +302,7 @@ static void checkpoint_reset(void) {
     if(checkpoint_fatal_option==5 && (checkpoint_starting_hp[0] || checkpoint_starting_hp[1] ||
        checkpoint_earned_weapons_option))failed=1;
     if(checkpoint_hatch_stagger_option && (checkpoint_starting_hp[0] || checkpoint_starting_hp[1]))failed=1;
-    if((checkpoint_lab_option==28 || checkpoint_lab_option==29) && (checkpoint_fatal_option || checkpoint_earned_weapons_option ||
+    if((checkpoint_lab_option==28 || checkpoint_lab_option==29 || checkpoint_lab_option==31) && (checkpoint_fatal_option || checkpoint_earned_weapons_option ||
        checkpoint_starting_hp[0] || checkpoint_starting_hp[1]))failed=1;
     /* Falling readiness deliberately precedes death, while the selected hero
      * is airborne. Do not route this prerequisite through the separate
@@ -802,6 +803,8 @@ static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32
     else if(!checkpoint_safe_boundary())reason=CHECKPOINT_UNSAFE;
     else if(authority==CHECKPOINT_AGREED &&
         (index!=checkpoint_lab_index() || nonce!=checkpoint_lab_nonce()))reason=CHECKPOINT_UNKNOWN;
+    else if(authority==CHECKPOINT_AGREED && checkpoint_lab_option==31 &&
+        (psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13) || psx_mod_read_byte(PLAY+0x1D)))reason=CHECKPOINT_ORDER;
     else if(!checkpoint_source(entry))reason=CHECKPOINT_SOURCE;
     else if(authority==CHECKPOINT_AGREED && checkpoint_lab_option==20 && !separate_subtanks)
         reason=CHECKPOINT_FORBIDDEN;
@@ -829,6 +832,14 @@ static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32
 #ifdef MMX6_COOP_CHECKPOINT_TAINT_API
     psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
 #endif
+    if(authority==CHECKPOINT_AGREED && checkpoint_lab_option==31) {
+        /* Prior Museum visit ONLY. Original BIN16 c9211aee... Map writer
+         * EB288..EB2C0 uses F0F14 row5={4,7,7}: saved effect[7]=5.
+         * checkpoint_source authenticates original1E914..1E9EC: mode8
+         * copies saved16F to active43A BEFORE the mode9 hook1E1BC.
+         * Never seed the active selection, solids, HP, terrain or results. */
+        psx_mod_write_byte(PLAY+0x16F,5);
+    }
     if(authority==CHECKPOINT_AGREED && checkpoint_lab_option==20) {
         /* Fixed, declared prerequisite before the ORIGINAL 8->9 initializer.
          * Its completion/retention and both native heals remain unmodified.

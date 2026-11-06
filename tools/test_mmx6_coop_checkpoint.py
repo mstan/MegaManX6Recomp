@@ -1,6 +1,7 @@
 """Inventory/source guards and transaction failures; never native game proof."""
 import contextlib
 import io
+import hashlib
 import copy
 import json
 import os
@@ -97,6 +98,37 @@ class FrozenInventoryTests(unittest.TestCase):
         self.assertEqual(target['record'], '80072660')
         self.assertEqual(target['player'], dict(x=4216, y=368))
         self.assertEqual(target['camera'], dict(x=4160, y=256, min_x=4160, max_x=4480, min_y=256, max_y=256))
+
+    def test_laser_nightmare_history_is_typed_default_off_and_seeded_before_native_mode8(self):
+        catalog=tomllib.loads((ROOT/'packaging/lab/coop-checkpoint-option.toml').read_text())
+        option=next(x for x in catalog['option']if x['id']=='lab_checkpoint')
+        self.assertEqual(option['default'],'off')
+        self.assertEqual(sum(x['value']=='laser_nightmare_blocks_cp1'for x in option['choice']),1)
+        source=(ROOT/'src/mods/mmx6_coop_checkpoint.inc').read_text()
+        request=source[source.index('static int checkpoint_request('):source.index('/* F148 prior-travel bypass')]
+        self.assertLess(request.index('if(reason)'),request.index('psx_mod_write_byte(PLAY+0x16F,5)'))
+        self.assertLess(request.index('psx_mod_write_byte(PLAY+0x16F,5)'),request.index('psx_mod_write_byte(PLAY,8)'))
+        self.assertNotIn('psx_mod_write_byte(PLAY+0x43A',source)
+
+    @unittest.skipUnless(os.environ.get('MMX6_CONTENT_EXE'),'Pinned original source not supplied')
+    def test_original_museum_writer_and_laser_solid_factory_authenticate_history_origin(self):
+        from inventory_mmx6_coop_content import RawDisc,placement_list
+        path=Path(os.environ.get('MMX6_TERRAIN_DISC',Path(os.environ['MMX6_CONTENT_EXE']).parent/'Mega Man X6 (USA) (v1.1).bin'))
+        disc=RawDisc(path)
+        try:
+            # Exact two original archive members only; no content inventory.
+            map_source=disc.extent(211185+381,33946)
+            laser=disc.extent(211185+261,79784)
+        finally:disc.stream.close()
+        self.assertEqual(hashlib.sha256(map_source).hexdigest(),'c9211aee86c5e7377b7716bd698102da1aed8c57a128e90507259cf9f6093ecf')
+        self.assertEqual(hashlib.sha256(map_source[0xEB1FC-0xE9860:0xEB2C4-0xE9860]).hexdigest(),'aff50ff61cc89b1476d3a6467196e12c4ec0b8e6a5538dea67a6cbfa1b28142d')
+        self.assertEqual(list(map_source[0xF0F14-0xE9860+12:0xF0F14-0xE9860+15]),[4,7,7])
+        self.assertEqual(hashlib.sha256(laser).hexdigest(),'464efae3ab2dde56733a1bd67152ffaabbb8a71ecfeb5ab0f9bb47c6708d496d')
+        records=placement_list(laser,0x800FAEE0,0x800E9860)
+        self.assertTrue(all(any((r['address'],r['category'],r['object_id'],r['subtype'],r['x'],r['y'])==target for r in records)
+            for target in [('800FAFF8',4,15,3,4472,328),('800FB000',4,15,3,4472,376)]))
+        self.assertEqual(struct.unpack_from('<I',laser,0xFB798-0xE9860+15*4)[0],0x800F3B98)
+        self.assertEqual(struct.unpack_from('<I',laser,0xFC6B8-0xE9860)[0],0x800F2734)
 
     def test_ground_refight_cp6_binds_original_record_and_postconstructor_grant(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)

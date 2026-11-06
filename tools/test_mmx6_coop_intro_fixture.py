@@ -252,14 +252,15 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1', 'gate_homing_right_cp4', 'northpole_pickup_support', 'alternate_mounted_cp1', 'inami_surface_cp3'):
+            for option in ('intro_subtank_cp2', 'intro_before_doors', 'intro_before_explosion', 'recycle_cp2', 'recycle_portal_cp2', 'recycle_distant_cp2', 'recycle_fallen_cp2', 'recycle_fallen_guest_cp2', 'secretlab2b_enemy_cp0', 'refight_portal_cp1', 'refight_distant_cp1', 'refight_wolfang_cp3', 'secretlab2a_cp3', 'refight_ground_cp6', 'heatnix_cp7', 'heatnix_cp0', 'sigma_cp1', 'northpole_ice_cp3', 'turtloid_rain_cp1', 'alternate_boss_cp1', 'alternate_sequence_cp1', 'gate_homing_cp4', 'laser_cp1', 'gate_homing_right_cp4', 'northpole_pickup_support', 'alternate_mounted_cp1', 'inami_surface_cp3', 'laser_nightmare_blocks_cp1'):
                 state.write_text(initial, encoding='utf-8')
                 receipt = pair.select_checkpoint(directory, enabled=True, option=option)
                 self.assertEqual(receipt['option'], option)
                 self.assertIn('lab_checkpoint = "'+option+'"', state.read_text(encoding='utf-8'))
             # Preserve supported prior typed catalogs while extending this one.
-            for removed,option in [(('inami_surface_cp3',),'alternate_mounted_cp1'),
-                                   (('inami_surface_cp3','alternate_mounted_cp1'),'northpole_pickup_support')]:
+            for removed,option in [(('laser_nightmare_blocks_cp1',),'inami_surface_cp3'),
+                                   (('laser_nightmare_blocks_cp1','inami_surface_cp3'),'alternate_mounted_cp1'),
+                                   (('laser_nightmare_blocks_cp1','inami_surface_cp3','alternate_mounted_cp1'),'northpole_pickup_support')]:
                 legacy=catalog
                 for value in removed:
                     start=legacy.index('\n[[option.choice]]\nvalue = "'+value+'"')
@@ -267,6 +268,8 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
                     legacy=legacy[:start]+legacy[end:]
                 manifest.write_text(legacy,encoding='utf-8');state.write_text(initial,encoding='utf-8')
                 self.assertEqual(pair.select_checkpoint(directory,enabled=True,option=option)['option'],option)
+                state.write_text(initial,encoding='utf-8')
+                with self.assertRaises(ValueError):pair.select_checkpoint(directory,enabled=True,option='laser_nightmare_blocks_cp1')
             manifest.write_text(catalog,encoding='utf-8')
             state.write_text(initial, encoding='utf-8')
             with self.assertRaises(ValueError):
