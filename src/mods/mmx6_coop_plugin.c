@@ -1188,6 +1188,63 @@ static int ride_grounded(unsigned kind) {
     return ((kind==RIDE_ALTERNATE?psx_mod_read_byte(RIDE+0xA8):
         (psx_mod_read_byte(RIDE+0x70)|psx_mod_read_byte(RIDE+0x71)))&8u)!=0;
 }
+/* A paired outgoing beam withdraws its actor from the shared world. Its
+ * intact claimed vehicle belongs to that same passenger, not to the other
+ * actor's advancing scene camera. Damage/fuse/retirement still run natively. */
+static int ride_scene_withdrawn(unsigned owner) {
+    uint8_t body[0x158];
+    if(owner>1 || scene_phase<2 || scene_phase>5 || !scene_passenger(owner) ||
+       life.status[owner]!=MMX6_COOP_ALIVE || !ride_source() || ride_owner()!=owner ||
+       !(psx_mod_read_byte(RIDE)&1u) || psx_mod_read_byte(RIDE+4)!=1 ||
+       !psx_mod_read_byte(RIDE+0x5C) || psx_mod_read_byte(RIDE+0x5C)>=128 ||
+       (psx_mod_read_byte(RIDE+0x97)&0xC0u)!=0x40u ||
+       psx_mod_read_byte(RIDE+0x91) || psx_mod_read_byte(RIDE+0x92) ||
+       psx_mod_read_half(RIDE+0xA4) || scene_body[4]!=1 || scene_body[5]!=0x12 ||
+       (scene_body[0xD5]!=1 && scene_body[0xD5]!=255) ||
+       !scene_body[0x5C] || scene_body[0x5C]>=128)return 0;
+    ride_body(owner,body);
+    return body[2]==scene_body[2] && body[0x5C] && body[0x5C]<128;
+}
+static int ride_scene_place(CPUState *cpu,unsigned passenger,const uint8_t *owner) {
+    if(!ride_scene_withdrawn(passenger))return 1; /* Ordinary on-foot scene. */
+    uint32_t a=le32(owner+0x68),b=psx_mod_read_word(RIDE+0x68);
+    if(owner[4]!=1 || !owner[0x5C] || owner[0x5C]>=128 || owner[0x67] || !(owner[0x70]&8u) ||
+       owner[0x14]!=psx_mod_read_byte(RIDE+0x14) ||
+       a<0x80010000u || a>0x801FFFFCu || b<0x80010000u || b>0x801FFFFCu)return 0;
+    int32_t dy=(int8_t)psx_mod_read_byte(b+1),hw=psx_mod_read_byte(b+2),hh=psx_mod_read_byte(b+3);
+    int32_t dx=(int8_t)psx_mod_read_byte(b),x=(int32_t)le32(owner+8);
+    int64_t y=(int64_t)(int32_t)le32(owner+12)+
+        ((int8_t)psx_mod_read_byte(a+1)+psx_mod_read_byte(a+3)-dy-hh)*65536;
+    if(hw<=0 || hw>64 || hh<=0 || hh>64 || y<0 || y>INT32_MAX)return 0;
+    int32_t left=(x>>16)+dx-hw,right=(x>>16)+dx+hw,top=((int32_t)y>>16)+dy-hh;
+    int32_t floor=((int32_t)y>>16)+dy+hh;
+    if(left<0 || right>32767 || top<0 || floor>32767)return 0;
+    /* Original30234(actor, integerX, integerY) reads the actor's own layer.
+     * Check every intersected16px tile: full native vehicle clearance and
+     * flat native support, never assign a ground bit. The grounded owner
+     * may later be hurt/airborne; placement happens once at incoming phase3. */
+    uint32_t q[10]={cpu->gpr[6],(uint32_t)x,(uint32_t)y,(uint32_t)left,(uint32_t)right,
+        (uint32_t)top,(uint32_t)floor,(uint32_t)left,(uint32_t)top,1};
+    STATE_WORDS(restore_ride_destination,116,q,10);
+    for(;;) {
+        cpu->gpr[6]=q[8];
+        STATE_UPDATE(restore_ride_destination,q);
+        uint32_t code=guest(cpu,0x80030234u,RIDE,q[7]);
+        if(q[8]==q[6] ? (code!=0x38u && code!=0x3Bu) : code!=0) {q[9]=0;break;}
+        if(q[8]!=q[6]) {
+            uint32_t next=(q[8]|15u)+1u;
+            q[8]=next<q[6]?next:q[6];continue;
+        }
+        if(q[7]==q[4])break;
+        uint32_t next=(q[7]|15u)+1u;
+        q[7]=next<q[4]?next:q[4];q[8]=q[5];
+    }
+    cpu->gpr[6]=q[0];
+    if(q[9])for(unsigned off=8;off<=0x18;off+=0x10) {
+        psx_mod_write_word(RIDE+off,q[1]);psx_mod_write_word(RIDE+off+4,q[2]);
+    }
+    unsigned placed=q[9];STATE_POP(restore_ride_destination);return placed;
+}
 /* Native boarding replaces the pilot foot box/contact with action18/D5.
  * A deliberate partner return may use that one grounded, intact owner as its
  * anchor; airborne/unclaimed/retired armor still defers the queued request. */
@@ -1229,6 +1286,7 @@ static int ride_tick(CPUState *cpu,uint32_t address) {
     ride_call=1;
     unsigned owner=ride_owner();
     if(owner==RIDE_INVALID){failed=1;ride_call=0;return 0;}
+    if(ride_scene_withdrawn(owner)) {ride_call=0;cpu->gpr[2]=0;return 1;}
     if(owner==RIDE_NONE && !(psx_mod_read_byte(RIDE+0x97)&0x40u) &&
        psx_mod_read_byte(RIDE+4)==1 && !psx_mod_read_byte(RIDE+5)) {
         /* Preserve native primary priority if both eligible boxes overlap. */
@@ -1756,6 +1814,11 @@ static void scene_tick(CPUState *cpu) {
     STATE_BYTES(restore_owner,9,owner,sizeof owner);
     uint32_t scene_context[5]={seat,passenger,(uint32_t)locked,(uint32_t)landing,(uint32_t)prior_inside};
     STATE_WORDS(restore_context,28,scene_context,5);
+    if(scene_phase==3 && !ride_scene_place(cpu,passenger,owner)) {
+        project(PLAY,play,sizeof play);project(0x800971F8,camera,sizeof camera);
+        STATE_POP(restore_context);STATE_POP(restore_owner);STATE_POP(restore_camera);STATE_POP(restore_play);
+        inside=prior_inside;scene_call=0;return;
+    }
     if (passenger) enter_zero();
     if (scene_phase==1 && passenger && arrival_pair && life.status[1]==MMX6_COOP_JOINING) {
         /* A native boss can claim X immediately after his checkpoint beam,

@@ -29,6 +29,7 @@ static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_
 static unsigned falcon_flight_probe;
 static unsigned muzzle_probe,muzzle_expected_seat,muzzle_calls;
 static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat,ride_primary_character,ride_character;
+static unsigned ride_camera_fatal,ride_query_calls,ride_query_bad,ride_reboards;
 static unsigned door_native_probe,door_ticks,door_draws,door_subtype_allowed;
 static unsigned icon_packet_probe,dash_packet_probe,armor_packet_probe,falcon_packet_probe;
 static unsigned render_replacement_probe;
@@ -378,6 +379,21 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
               address==0x80020D74u || address==0x80020DC8u);
         return;
     }
+    if(ride_probe && address==0x80030234u) {
+        CHECK(cpu->gpr[4]==RIDE);++ride_query_calls;
+        unsigned x=cpu->gpr[5],y=cpu->gpr[6];
+        unsigned tracked=0;
+        for(unsigned i=0;i<state_track.count;++i)if(state_track.frame[i].tag==116) {
+            const Mmx6StateFrame *frame=&state_track.frame[i];uint32_t q[10];
+            CHECK(frame->words && frame->bytes==sizeof q);memcpy(q,frame->saved,sizeof q);
+            CHECK(q[7]==x && q[8]==y);tracked=1;
+        }
+        CHECK(tracked); /* Future-restored query progress is digest/snapshot-owned. */
+        cpu->gpr[2]=y>=416?0x38u:0;
+        if(ride_query_bad==1 && y<416)cpu->gpr[2]=0x38;
+        if(ride_query_bad==2 && y==416 && x>=3232)cpu->gpr[2]=0;
+        return;
+    }
     if(scene_transport_probe) {
         /* Bounded original beam/cancellation contracts; these do not rebuild
          * or repair fixed actor metadata on the plugin's behalf. */
@@ -423,6 +439,13 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         }
         if(address==0x8003CCBCu) {
             psx_mod_write_word(PLAYER+0x68,passenger?0x80073D54u:0x80073D50u);return;
+        }
+        if(address==0x8003A268u && ride_probe) {
+            CHECK(psx_mod_read_byte(PLAYER+0xD5)==1 && psx_mod_read_byte(RIDE)&1u);
+            CHECK(psx_mod_read_word(PLAYER+8)==psx_mod_read_word(RIDE+8) &&
+                psx_mod_read_word(PLAYER+12)==psx_mod_read_word(RIDE+12));
+            ++ride_reboards;psx_mod_write_byte(PLAYER+5,0x12);psx_mod_write_byte(PLAYER+0xD5,255);
+            psx_mod_write_byte(PLAYER+0x67,1);psx_mod_write_word(PLAYER+0x68,0);return;
         }
         CHECK(0);
     }
@@ -517,6 +540,13 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
             /* External native boarding/dismount contract, not game evidence.
              * The plugin must select context; only this model sets D5/pose. */
             ++ride_ticks;ride_seat=seat;ride_character=character;
+            if(ride_camera_fatal && psx_mod_read_byte(PLAYER+0xD5) &&
+               (psx_mod_read_byte(RIDE+0xA8)&1u) &&
+               (int16_t)psx_mod_read_half(RIDE+10)-(int16_t)psx_mod_read_half(0x80097202u)<32) {
+                /* Original BIN28 EFCCC/EFCD0/EFD68, not a plugin repair. */
+                psx_mod_write_byte(PLAYER+0x5C,128);psx_mod_write_byte(RIDE+0x5C,128);
+                psx_mod_write_byte(RIDE,0);cpu->gpr[2]=77;return;
+            }
             if(!(psx_mod_read_byte(RIDE+0x97)&0x40)) {
                 if(ride_overlap&(1u<<seat)) {
                     psx_mod_write_byte(PLAYER+0xD5,1);
@@ -692,6 +722,7 @@ static void setup(CPUState *cpu){
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=falcon_flight_probe=0;
     muzzle_probe=muzzle_expected_seat=muzzle_calls=0;
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=ride_primary_character=ride_character=0;
+    ride_camera_fatal=ride_query_calls=ride_query_bad=ride_reboards=0;
     door_native_probe=door_ticks=door_draws=both_doors=scene_call=0;both_door_reset();door_subtype_allowed=1;
     icon_packet_probe=dash_packet_probe=armor_packet_probe=falcon_packet_probe=render_replacement_probe=0;
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=voluntary_transport_probe=capsule_native_probe=0;memset(death_effect,0,sizeof death_effect);
@@ -2176,6 +2207,93 @@ static void native_both_ride_bindings_and_rosters(void) {
     ride_binding_setup(&cpu,RIDE_ALTERNATE,0);psx_mod_write_byte(RIDE+1,0);
     CHECK(!ride_tick(&cpu,0x80020A08u) && !call_count);ride_probe=0;
 }
+static void withdrawn_ride_setup(CPUState *cpu,unsigned passenger) {
+    ride_binding_setup(cpu,RIDE_ALTERNATE,0);
+    uint8_t rider[0x158],owner[0x158];
+    ride_body(passenger,rider);ride_body(passenger^1u,owner);
+    rider[4]=rider[3]=1;rider[5]=0x12;rider[0xD5]=255;rider[0x67]=1;
+    put32(rider+0x68,0);put32(rider+8,3121u<<16);put32(rider+12,384u<<16);
+    memcpy(scene_body,rider,sizeof rider);
+    rider[4]=3;rider[3]=0;rider[5]=0;put32(rider+12,152u<<16);
+    owner[4]=owner[3]=1;owner[5]=2;owner[0xD5]=owner[0x67]=0;owner[0x70]=8;
+    owner[0xD0]=owner[0xD4]=owner[0x7A]=0;owner[0x14]=rider[0x14]=0;
+    put32(owner+8,(3232u<<16)+0x6800u);put32(owner+12,(passenger?395u:394u)<<16);
+    put32(owner+0x68,passenger?0x80073D50u:0x80073D54u);
+    psx_mod_write_word(0x80073D50u,0x130B0200u);psx_mod_write_word(0x80073D54u,0x130B0300u);
+    if(passenger) {memcpy(p2.body,rider,sizeof rider);project(PLAYER,owner,sizeof owner);}
+    else {project(PLAYER,rider,sizeof rider);memcpy(p2.body,owner,sizeof owner);}
+    for(unsigned off=8;off<=0x18;off+=0x10) {
+        psx_mod_write_word(RIDE+off,3121u<<16);psx_mod_write_word(RIDE+off+4,384u<<16);
+    }
+    psx_mod_write_byte(RIDE+0x97,0x40);psx_mod_write_byte(RIDE+0xA8,9);
+    psx_mod_write_byte(RIDE+0x14,0);psx_mod_write_half(RIDE+0xA4,0);
+    psx_mod_write_half(0x80097202u,3168);psx_mod_write_half(0x80097206u,232);
+    scene_owner=(passenger^1u)+1;scene_phase=3;stage_call=0;
+    CHECK(ride_owner()==passenger && ride_scene_withdrawn(passenger));
+}
+static void native_withdrawn_vehicle_scene_transport(void) {
+    CPUState cpu;
+    for(unsigned passenger=0;passenger<2;++passenger) {
+        withdrawn_ride_setup(&cpu,passenger);ride_camera_fatal=1;
+        uint8_t before[0xB0],after[0xB0];capture(RIDE,before,sizeof before);
+        PlayerContext primary,partner=p2;capture_player(&primary);
+        CHECK(ride_tick(&cpu,0x80020A08u) && !ride_ticks && !ride_call && !state_track.count);
+        capture(RIDE,after,sizeof after);CHECK(!memcmp(before,after,sizeof before));
+        PlayerContext unchanged;capture_player(&unchanged);CHECK(!memcmp(&primary,&unchanged,sizeof primary) && !memcmp(&partner,&p2,sizeof p2));
+        /* Real incoming placement uses the grounded owner's full footbox,
+         * not the withdrawn mounted body's zero box or camera position. */
+        scene_transport_probe=passenger+1;cpu.gpr[6]=0xA2A2A2A2u;
+        scene_tick(&cpu);CHECK(scene_phase==4 && ride_query_calls && cpu.gpr[6]==0xA2A2A2A2u);
+        for(unsigned off=8;off<=0x18;off+=0x10) {
+            put32(before+off,(3232u<<16)+0x6800u);put32(before+off+4,384u<<16);
+        }
+        capture(RIDE,after,sizeof after);CHECK(!memcmp(before,after,sizeof before));
+        /* Hurt/airborne owner AFTER the grounded placement cannot move or
+         * strand the retained vehicle; the already-earned beam finishes. */
+        if(passenger) {psx_mod_write_byte(PLAYER+5,17);psx_mod_write_byte(PLAYER+0x67,1);psx_mod_write_byte(PLAYER+0x70,0);psx_mod_write_byte(PLAYER+0x5C,12);}
+        else {p2.body[5]=17;p2.body[0x67]=1;p2.body[0x70]=0;p2.body[0x5C]=12;}
+        for(unsigned n=0;n<40 && scene_owner;++n)scene_tick(&cpu);
+        CHECK(!scene_owner && !scene_phase && ride_reboards==1 && !failed && !state_track.count && !state_track.error);
+        uint8_t rider[0x158];ride_body(passenger,rider);
+        CHECK(rider[4]==1 && rider[5]==0x12 && rider[0xD5]==255 && rider[0x5C]==32 && !le32(rider+0x68));
+        CHECK(le32(rider+8)==psx_mod_read_word(RIDE+8) && le32(rider+12)==psx_mod_read_word(RIDE+12));
+        capture(RIDE,after,sizeof after);CHECK(!memcmp(before,after,sizeof before));
+        scene_transport_probe=0;
+        CHECK(ride_tick(&cpu,0x80020A08u) && ride_ticks==1 && psx_mod_read_byte(RIDE)==0x41 && psx_mod_read_byte(RIDE+0x5C)==32);
+        /* Outside co-op withdrawal the same original wall/camera fatal
+         * policy must execute, including its native HP/retirement result. */
+        withdrawn_ride_setup(&cpu,passenger);scene_owner=scene_phase=0;ride_camera_fatal=1;
+        if(passenger) {p2.body[4]=p2.body[3]=1;p2.body[5]=0x12;put32(p2.body+12,384u<<16);}
+        else {psx_mod_write_byte(PLAYER+4,1);psx_mod_write_byte(PLAYER+3,1);psx_mod_write_byte(PLAYER+5,0x12);psx_mod_write_word(PLAYER+12,384u<<16);}
+        CHECK(ride_tick(&cpu,0x80020A08u) && ride_ticks==1 && !psx_mod_read_byte(RIDE) && psx_mod_read_byte(RIDE+0x5C)==128);
+    }
+    for(unsigned bad=0;bad<6;++bad) {
+        withdrawn_ride_setup(&cpu,0);
+        if(bad==0)psx_mod_write_byte(RIDE+0x5C,0);
+        if(bad==1)psx_mod_write_byte(RIDE+0x5C,128);
+        if(bad==2)psx_mod_write_byte(RIDE+0x97,0xC0);
+        if(bad==3)psx_mod_write_byte(RIDE+0x91,1);
+        if(bad==4)psx_mod_write_byte(RIDE+0x92,1);
+        if(bad==5)psx_mod_write_half(RIDE+0xA4,0x400);
+        CHECK(!ride_scene_withdrawn(0));
+        CHECK(ride_tick(&cpu,0x80020A08u) && ride_ticks==1); /* Native unhealthy/fuse path never intercepted. */
+    }
+    for(unsigned bad=0;bad<4;++bad) {
+        withdrawn_ride_setup(&cpu,0);uint8_t before[0xB0],after[0xB0];capture(RIDE,before,sizeof before);
+        scene_transport_probe=1;
+        if(bad==0)p2.body[0x67]=1; /* Wait for actual landing, never invent it. */
+        if(bad==1)put32(p2.body+0x68,0);
+        if(bad==2)ride_query_bad=1; /* Vehicle head clearance blocked. */
+        if(bad==3)ride_query_bad=2; /* Owner foot fits but wider vehicle lacks support. */
+        scene_tick(&cpu);capture(RIDE,after,sizeof after);
+        CHECK(scene_phase==3 && !memcmp(before,after,sizeof before) && !ride_reboards && !state_track.count && !state_track.error);
+    }
+    withdrawn_ride_setup(&cpu,0);scene_body[5]=2;scene_body[0xD5]=0;
+    uint8_t owner[0x158],before[0xB0],after[0xB0];memcpy(owner,p2.body,sizeof owner);capture(RIDE,before,sizeof before);
+    CHECK(!ride_scene_withdrawn(0) && ride_scene_place(&cpu,0,owner));
+    capture(RIDE,after,sizeof after);CHECK(!memcmp(before,after,sizeof before) && !ride_query_calls);
+    ride_probe=scene_transport_probe=0;
+}
 static void shared_clear_setup(CPUState *cpu) {
     setup(cpu);stage_call=0;
     PlayerContext primary=p2;primary.body[2]=0;primary.body[0xE7]=1;
@@ -3388,7 +3506,7 @@ int main(void){
     yammar_native_upload_coordinates();
     ray_native_upload_coordinates();
     shadow_native_upload_coordinates();
-    native_shared_ride_ownership();native_both_ride_bindings_and_rosters();
+    native_shared_ride_ownership();native_both_ride_bindings_and_rosters();native_withdrawn_vehicle_scene_transport();
     native_shared_clear_admission_and_departure();
     native_sigma_transition_retains_living_pair();
     native_capsule_keeps_living_passenger();native_capsule_owner_contact_transaction();
