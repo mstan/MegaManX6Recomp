@@ -2325,7 +2325,16 @@ static void native_withdrawn_vehicle_scene_transport(void) {
          * strand the retained vehicle; the already-earned beam finishes. */
         if(passenger) {psx_mod_write_byte(PLAYER+5,17);psx_mod_write_byte(PLAYER+0x67,1);psx_mod_write_byte(PLAYER+0x70,0);psx_mod_write_byte(PLAYER+0x5C,12);}
         else {p2.body[5]=17;p2.body[0x67]=1;p2.body[0x70]=0;p2.body[0x5C]=12;}
-        for(unsigned n=0;n<40 && scene_owner;++n)scene_tick(&cpu);
+        for(unsigned n=0;n<40 && scene_owner;++n) {
+            /* Real shared-solid follow runs between beam updates in the
+             * opposite actor's native world. Action18 alone cannot authorize
+             * it: resetting incomingY to384 repeatedly stalls at392<394. */
+            uint8_t beam_before[0x158],beam_after[0x158];ride_body(passenger,beam_before);
+            if(!passenger) {enter_zero();zero_world=inside=1;ride_sync_rider();zero_world=0;leave_zero_context(1);inside=0;}
+            else ride_sync_rider();
+            ride_body(passenger,beam_after);CHECK(!memcmp(beam_before,beam_after,sizeof beam_before));
+            scene_tick(&cpu);
+        }
         CHECK(!scene_owner && !scene_phase && ride_reboards==1 && !failed && !state_track.count && !state_track.error);
         uint8_t rider[0x158];ride_body(passenger,rider);
         CHECK(rider[4]==1 && rider[5]==0x12 && rider[0xD5]==255 && rider[0x5C]==32 && !le32(rider+0x68));

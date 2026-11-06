@@ -1346,7 +1346,10 @@ static int checkpoint_mounted_fatal_ready(unsigned seat) {
 static void ride_sync_rider(void) {
     if(!ride_source() || !(psx_mod_read_byte(RIDE+0x97)&0x40u))return;
     unsigned owner=ride_owner();
-    if(owner>1 || owner==(unsigned)!!zero_projected)return;
+    /* Incoming native beams retain action18 until their final constructor.
+     * Their passenger body belongs to scene_tick meanwhile: copying vehicle
+     * Y here resets each eight-pixel descent and prevents native reboarding. */
+    if(owner>1 || owner==(unsigned)!!zero_projected || scene_passenger(owner))return;
     uint8_t *body=owner?p2.body:p1.body;
     /* Literal 31F04..31F28 copyout after shared vehicle collision. The
      * second body-only solid pass deliberately never resolves armor twice. */
