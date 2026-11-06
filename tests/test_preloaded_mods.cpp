@@ -27,7 +27,8 @@ void no_op_plugin() {}
 bool default_enabled(const std::string& package, const std::string& feature) {
     return (package == "mmx6.enhancement.seamless-loading" &&
             feature == "seamless-loading") ||
-           (package == "mmx6.diagnostics" && feature == "input-recording");
+           (package == "mmx6.diagnostics" && feature == "input-recording") ||
+           (package == "mmx6.enhancement.widescreen" && feature == "widescreen");
 }
 
 bool plugin_only_plan(const PSXRecompV4::ModResolution& plan,
@@ -222,7 +223,7 @@ int main(int argc, char** argv) {
                 return fail(id + "/" + feature.id +
                             " exposes permission-gated collaborator content");
             }
-            /* Standard loading and input diagnostics are the only defaults. */
+            /* Loading, input diagnostics and Adaptive Widescreen are the defaults. */
             const bool enabled = default_enabled(id, feature.id);
             if (feature.default_enabled != enabled) {
                 return fail(id + "/" + feature.id +
@@ -272,6 +273,10 @@ int main(int argc, char** argv) {
         return fail("could not register test plugin mmx6.diagnostics");
     }
 
+    if (!PSXRecompV4::mod_register_activation_plugin("mmx6.widescreen", no_op_plugin)) {
+        return fail("could not register test plugin mmx6.widescreen");
+    }
+
     const PSXRecompV4::ModResolution plan =
         manager.resolve(kGameId, "", kStockDiscSha256);
     if (!plan.ok) {
@@ -282,19 +287,31 @@ int main(int argc, char** argv) {
         }
         return fail("default catalog resolution failed: " + detail);
     }
-    if (!plugin_only_plan(plan, {"mmx6.seamless", "mmx6.diagnostics"})) {
-        return fail("default catalog must activate only Seamless Loading and diagnostics");
+    if (!plugin_only_plan(plan, {"mmx6.seamless", "mmx6.diagnostics", "mmx6.widescreen"})) {
+        return fail("default catalog must activate only Seamless Loading, diagnostics and Widescreen");
     }
     for (const auto& plugin : plan.plugins) {
         const bool diagnostics = plugin.id == "mmx6.diagnostics";
+        const bool widescreen = plugin.id == "mmx6.widescreen";
         if (plugin.package_id != (diagnostics ? "mmx6.diagnostics" :
+                                  widescreen ? "mmx6.enhancement.widescreen" :
                                   "mmx6.enhancement.seamless-loading") ||
-            plugin.feature_id != (diagnostics ? "input-recording" : "seamless-loading")) {
+            plugin.feature_id != (diagnostics ? "input-recording" :
+                                  widescreen ? "widescreen" : "seamless-loading")) {
             return fail("default plugin must retain its owning package and feature");
         }
     }
     if (manager.feature_option_value(plan, "mmx6.local-coop", "prototype", "hud_layout") != "stacked") {
         return fail("default co-op HUD selection must remain stacked while co-op is disabled");
+    }
+    // Isolate the original loading/diagnostics opt-out checks after proving
+    // the new real default; unrelated assertions below remain unchanged.
+    if (!manager.set_feature_enabled("mmx6.enhancement.widescreen", "widescreen", false, &error)) {
+        return fail(error);
+    }
+    if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256),
+                          {"mmx6.seamless", "mmx6.diagnostics"})) {
+        return fail("Widescreen opt-out must retain loading and diagnostics");
     }
     if (!manager.set_feature_enabled("mmx6.enhancement.seamless-loading",
                                      "seamless-loading", false, &error)) {
@@ -383,6 +400,6 @@ int main(int argc, char** argv) {
 
     std::cout << "preloaded mods: " << manager.packages().size()
               << " packages, " << feature_count
-              << " features, loading and diagnostics default-on with independent opt-outs; both HUD layouts\n";
+              << " features, loading, diagnostics and Widescreen default-on with independent opt-outs; both HUD layouts\n";
     return 0;
 }

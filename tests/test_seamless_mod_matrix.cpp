@@ -154,12 +154,17 @@ int main(int argc, char **argv) {
     /* Verify the real defaults before isolating the single-feature matrix.
      * The observer implementation is deliberately not linked into this fixture. */
     if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256),
-                          {"mmx6.seamless", "mmx6.diagnostics"}))
-        return fail("default catalog must resolve loading plus diagnostics only");
+                          {"mmx6.seamless", "mmx6.diagnostics", "mmx6.widescreen"}))
+        return fail("default catalog must resolve loading, diagnostics and Widescreen only");
     if (!manager.set_feature_enabled("mmx6.diagnostics", "input-recording", false, &error))
         return fail(error);
+    if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256),
+                          {"mmx6.seamless", "mmx6.widescreen"}))
+        return fail("diagnostics opt-out must preserve loading and Widescreen");
+    if (!manager.set_feature_enabled("mmx6.enhancement.widescreen", "widescreen", false, &error))
+        return fail(error);
     if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256), {"mmx6.seamless"}))
-        return fail("diagnostics opt-out must preserve the loader-only matrix baseline");
+        return fail("Widescreen opt-out must preserve the loader-only matrix baseline");
 
     /* Every feature alone, with Seamless Loading enabled. Diagnostics is also
      * classified as its own row, rather than contaminating every other row. */
