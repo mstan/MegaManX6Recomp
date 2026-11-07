@@ -102,11 +102,15 @@ class FrozenInventoryTests(unittest.TestCase):
         for address,word in ((0x800ECE48,0x27BDFFE8),(0x800ECE54,0x80820002),(0x800ECE58,0x24630F40)):
             self.assertEqual(struct.unpack_from('<I',native,address-0x800E9860)[0],word)
         exe=checkpoint.content.Executable(Path(os.environ['MMX6_CONTENT_EXE']).read_bytes())
-        sites={0x80021B88,0x80021B98,0x80021BDC,0x80022910,0x80030E80,0x80031154,0x80031264,0x800317A4,
+        sites={0x80021BDC,0x80022910,0x80030E80,0x80031154,0x80031264,0x800317A4,
                0x80035C60,0x80039748,0x8003C644,0x8003EB6C,0x801ED574,0x801ED5D8}
         for address in sites:
             word=exe.word(address) if address<0x801EA000 else struct.unpack_from('<I',members[1],address-0x801EA000)[0]
             self.assertEqual(word,0x30420020)
+        portrait_sites={0x80021B88:0x14400012,0x80021B98:0x14600003}
+        for address,word in portrait_sites.items():
+            self.assertEqual(exe.word(address),word)
+        sites.update(portrait_sites)
         for name in ('game.toml','packaging/release/game.toml'):
             config=tomllib.loads((ROOT/name).read_text(encoding='utf8'))['recompiler']
             self.assertIn('0x800ECE48',config['mod_function_entry_funcs'])
