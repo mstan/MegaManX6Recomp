@@ -1284,6 +1284,38 @@ static void draw_order_retained_packets_and_survivor(void){
     setup(&cpu);psx_mod_write_word(SCRATCH+0x124,1001);render(&cpu,0);CHECK(!failed && !draw_count); /* Native budget exhaustion remains a no-output return. */
     setup(&cpu);psx_mod_write_word(SCRATCH+0x124,0x80000000u);render(&cpu,0);CHECK(failed && !draw_count); /* Negative budget would bypass native's signed comparison. */
 }
+static void hidden_primary_keeps_visible_secondary_draw(void){
+    CPUState cpu;setup(&cpu);scene_owner=2;scene_phase=3;
+    psx_mod_write_byte(PLAYER+3,0);cpu.gpr[4]=0x800C4578u;
+    PlayerContext primary,secondary=p2;capture_player(&primary);
+    begin_world_draw(&cpu,0x80025FB0u);
+    CHECK(draw_count==1 && drawn[0]==PLAYER && bank_count==1);
+    CHECK(world_packets==packets+40 && cpu.gpr[4]==0x800C4578u);
+    PlayerContext after;capture_player(&after);
+    CHECK(!memcmp(&primary,&after,sizeof after) && !memcmp(&secondary,&p2,sizeof p2));
+    CHECK(!inside && !world_render && !state_track.count && !state_track.error && !failed);
+    setup(&cpu);psx_mod_write_byte(PLAYER+3,0);p2.body[3]=0;
+    begin_world_draw(&cpu,0x80025FB0u);CHECK(!draw_count);
+    setup(&cpu);begin_world_draw(&cpu,0x80025FB0u);CHECK(!draw_count);
+    render(&cpu,0x800232D4u);CHECK(draw_count==1); /* Existing visible-primary single append. */
+}
+static void primary_frames_keep_their_own_palette_and_pixels(void){
+    CPUState cpu;setup(&cpu);PlayerContext primary;capture_player(&primary);
+    put32(primary.body+0x38,0x80040000u);put32(primary.body+0x3C,0x80041000u);
+    primary.body[0x16]=4;primary.body[0x40]=0;primary.body[0x41]=5;
+    primary.body[0x42]=0;primary.body[0x43]=0x78;primary.body[0x47]=0;
+    for(unsigned i=0;i<compressed_size;++i)psx_mod_write_byte(0x80040000u+i,zero_compressed[i]);
+    uint32_t palette=psx_mod_read_word(SCRATCH+0x28);
+    for(unsigned i=0;i<16;++i)psx_mod_write_half(palette+i*2u,(uint16_t)(0x5A00u+i));
+    project_player(&primary);cpu.gpr[4]=PLAYER;world_packets=packets;
+    CHECK(render_survivor(&cpu,0x800232D4u) && !failed && bank_count==1);
+    CHECK(bank_first[0]==0x5A01 && banks[0].character==2 && !render_x_death);
+    psx_mod_write_half(palette+2,0x6B02);
+    CHECK(render_survivor(&cpu,0x800232D4u) && !failed && bank_count==2);
+    CHECK(bank_first[1]==0x6B02 && psx_mod_read_half(active_palette+2)==0x0101);
+    PlayerContext after;capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof after));
+    CHECK(!world_render && !state_track.count && !state_track.error);
+}
 static void borrowed_menu_retains_primary_pools(void){
     CPUState cpu;setup(&cpu);PlayerContext primary;capture_player(&primary);
     memset(primary.shots,0,sizeof primary.shots);memset(primary.trails,0,sizeof primary.trails);memset(primary.effects,0,sizeof primary.effects);
@@ -3895,6 +3927,7 @@ static void native_personal_pause_menus(void) {
     personal_probe=0;personal_reset();
 }
 int main(void){
+    hidden_primary_keeps_visible_secondary_draw();primary_frames_keep_their_own_palette_and_pixels();
     native_personal_pause_menus();
     opposite_resource_identity_projection();CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_gate_continuous_target_operands();

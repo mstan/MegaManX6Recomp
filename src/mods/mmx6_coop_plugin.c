@@ -2757,7 +2757,9 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     }
     unsigned upload_height=((tiles+15u)/16u)*16u;
     if (upload_y>256u-upload_height) return 0;
-    capture((render_x_death?saved_resources[3]:active_palette)+(uint32_t)palette_offset,colors,sizeof colors);
+    uint32_t colors_base=render_x_death?
+        (zero_projected?saved_resources[3]:psx_mod_read_word(SCRATCH+0x28)):active_palette;
+    capture(colors_base+(uint32_t)palette_offset,colors,sizeof colors);
     /* Zero's archive is immutable; native upload origins can differ by
      * table. Resident X death additionally uses replaceable native RAM. */
     /* Different tables can reference the same compressed source with
@@ -2968,14 +2970,24 @@ static void giga_packet_trace(const char *phase,uint32_t actor) {
 static void giga_packet_trace(const char *phase,uint32_t actor) { (void)phase;(void)actor; }
 #endif
 
+static void render(CPUState *cpu,uint32_t address);
 static void begin_world_draw(CPUState *cpu,uint32_t address) {
     /* Native80025FB0 precedes background and sprite/HUD emission, including
      * the first arrival draw before stage_tick. Both private bodies and
      * deferred shared effects append once in this original render order. */
     independent_world_begin();
     if(enrolled && !failed)world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
+    /* Native22960 skips232D4 when the primary body is hidden. The second
+     * body must still enter this world's ordering table during that interval,
+     * including the withdrawn primary in a guest-owned dialogue. Ordinary
+     * visible-primary frames retain their existing single append at232D4. */
+    if(!inside && !zero_world && !zero_projected && !world_render &&
+       !personal_pass && !psx_mod_read_byte(PLAYER+3)) {
+        uint32_t a0=cpu->gpr[4];cpu->gpr[4]=PLAYER;
+        render(cpu,0x800232D4u);cpu->gpr[4]=a0;
+    }
     giga_packet_trace("world-begin",0);
-    (void)cpu;(void)address;
+    (void)address;
 }
 static int world_draw_filter(CPUState *cpu,uint32_t address) {
     /* Entries and filters share one SDK hook slot. Keep native frame/pane
@@ -3166,7 +3178,11 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
     int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_common_effect(actor)||private_falcon_flight_effect(actor);
-    if (!zero_world && !retained) return 0;
+    /* Native player uploads share a VRAM sheet. A private animation update
+     * can replace that sheet before the primary incoming/outgoing beam draws.
+     * Retain the primary's own decoded frame and working palette as well. */
+    int primary=!zero_world && actor==PLAYER && psx_mod_read_byte(PLAYER+3);
+    if (!zero_world && !retained && !primary) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
     int attached=!psx_mod_read_byte(PLAYER+2) && actor>=0x800911A8 && actor<0x80091298 &&
@@ -3179,7 +3195,9 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t render_context[4]={original,original_mode,actor,arena};STATE_WORDS(restore_packet,18,render_context,4);
     psx_mod_write_word(SCRATCH+0x100,world_packets);
     psx_mod_write_word(SCRATCH+0x104,arena+PLAYER_MODE_OFFSET+(world_packets-arena)/5);
+    if(primary)render_x_death=1;
     render_actor(cpu,actor,arena);
+    if(primary)render_x_death=0;
     /* A guest-owned pause or in-place dialogue draws the native world with
      * its owner projected at PLAYER. Retain the living primary in that same
      * draw instead of hiding it until gameplay resumes. Native menu-only
