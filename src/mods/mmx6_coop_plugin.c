@@ -3659,6 +3659,25 @@ static void hud_zero_packets(uint32_t arena) {
         psx_mod_tag_hud_primitive(at,-1);
     }
 }
+static void draw_private_boss_hud(CPUState *cpu) {
+    /* Original244C0's shared tail (2459C..24698), using its native helpers.
+     * Keep both the global HUD gate and boss gate, level digits, meter and
+     * boss badge. None of these packets borrow the private hero UI atlas. */
+    if(!psx_mod_read_byte(PLAY+0x1F) || !psx_mod_read_byte(PLAY+0x24))return;
+    unsigned level=psx_mod_read_byte(PLAY+0x8F)+1u,tens=level/10u;
+    guest(cpu,0x80024CC0u,14,(tens+59u)&255u);
+    guest(cpu,0x80024CC0u,15,(level-tens*10u+59u)&255u);
+    guest(cpu,0x80024F90u,psx_mod_read_word(PLAY+0x20),1);
+    int icon=((int8_t)psx_mod_read_byte(PLAY+0x8C)-32)/2;
+    unsigned kind=psx_mod_read_byte(PLAY+0x25);
+    if(!kind) {
+        icon+=163;if(icon>=212)icon=211;
+        guest(cpu,0x80024CC0u,7,(unsigned)icon&255u);
+    } else if(kind==1) {
+        if(icon>=49)icon=48;
+        guest(cpu,0x80024CC0u,16,(unsigned)icon&255u);
+    } else guest(cpu,0x80024CC0u,17,162);
+}
 static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     if (hud_call || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A) return 0;
     /* A private pane contains its own native meters. P1 follows the original
@@ -3682,8 +3701,11 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
         psx_mod_write_word(SCRATCH+0x1C,saved_resources[1]);
         psx_mod_write_word(SCRATCH+0x3C,saved_resources[5]);
     }
-    /* P1 and the boss HUD execute their original draw path exactly once. */
+    /* The shared view draws P1 and the boss through the full native path.
+     * A private guest pane omits P1's personal HUD but still needs the native
+     * boss meter, with the same enable flag and actor as 244C0's boss tail. */
     uint32_t result=private_draw?0:guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    if(private_draw)draw_private_boss_hud(cpu);
     STATE_WORDS(restore_result,45,&result,1);
     if (zero_world) capture(PLAYER,p1.body,sizeof p1.body);
     else capture(PLAYER,current,sizeof current);
@@ -3698,9 +3720,8 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
         pools[3]=arena;STATE_WORDS(restore_pools,26,pools,4);
         for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,arena+i*0x1000);
         hud_seat=1;
-        /* The original full HUD also draws boss/shared icons. Draw only
-         * this hero's native health/weapon at its original local anchors;
-         * P1 owns the shared path, in both stacked and independent modes. */
+        /* The boss stays in its native shared atlas above. Only this hero's
+         * health/weapon packets borrow the private UI texture bank. */
         guest(cpu,0x80024F90,PLAYER,0);
         guest(cpu,private_actor.character==MMX6_COOP_CHARACTER_ZERO?0x800249D4u:0x800246B4u,PLAYER,0);
         hud_seat=0;

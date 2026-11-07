@@ -52,6 +52,20 @@ static void bar(int x,int y,int amount){
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<8 && hud_call && state_track.count);calls[call_count++]=address;
+    if(address==0x80024F90u && cpu->gpr[4]==0x8008EF48u){
+        CHECK(private_draw && private_seat && !hud_seat && cpu->gpr[5]==1);
+        CHECK(psx_mod_read_byte(PLAYER+2)==0 && psx_mod_read_byte(PLAYER+0x5C)==23);
+        CHECK(psx_mod_read_word(SCRATCH+0x1C)==0x80030000 && psx_mod_read_word(SCRATCH+0x3C)==0x80030100);
+        bar(284,80,17);return; /* Native24F90 emits bars, not icons. */
+    }
+    if(address==0x80024CC0u){
+        unsigned index=call_count-1,kind=psx_mod_read_byte(PLAY+0x25);
+        CHECK(private_draw && private_seat && !hud_seat && psx_mod_read_byte(PLAYER+2)==0);
+        CHECK((index==0 && cpu->gpr[4]==14 && cpu->gpr[5]==59) ||
+              (index==1 && cpu->gpr[4]==15 && cpu->gpr[5]==60) ||
+              (index==3 && cpu->gpr[4]==(kind==0?7u:kind==1?16u:17u) && cpu->gpr[5]==(kind==0?163u:kind==1?0u:162u)));
+        sprite(280+(int)(index==1)*16,16);return;
+    }
     if(address==0x800244C0u){
         CHECK(!hud_seat && psx_mod_read_byte(PLAYER+2)==0 && psx_mod_read_byte(PLAYER+0x5C)==23);
         CHECK(psx_mod_read_word(SCRATCH+0x1C)==0x80030000 && psx_mod_read_word(SCRATCH+0x3C)==0x80030100);
@@ -125,12 +139,39 @@ int main(void){
     setup(&cpu,"stacked");CHECK(draw_coop_hud(&cpu,0x800244C0));
     call_count=tag_count=0;psx_mod_write_half(active_palette+0x220+2,0x4321);CHECK(draw_coop_hud(&cpu,0x800244C0));
     CHECK(definitions==2 && retained_color==0x4321); /* Actual CLUT change receives a fresh immutable bank. */
-    /* A private guest pane never invokes the full P1/boss/shared HUD and
+    /* A private guest pane never invokes the full P1/shared HUD and
      * ignores the shared stacked/side-by-side offset. Fallen HP stays owned. */
     setup(&cpu,"stacked");private_draw=private_seat=1;life.status[1]=MMX6_COOP_FALLEN;
     CHECK(draw_coop_hud(&cpu,0x800244C0) && call_count==2 && calls[0]==0x80024F90 && calls[1]==0x800249D4);
     CHECK(!option_reads && (int16_t)psx_mod_read_half(hud_packets+0x3000+8)==18 &&
         (int16_t)psx_mod_read_half(hud_packets+0x3000+10)==16 && retained_color==0x1234);
+    /* Boss packets retain their native atlas and right-hand position in a
+     * guest pane. Hero conversion must neither overwrite nor translate them,
+     * including a projected Zero world and all three native badge branches. */
+    for(unsigned kind=0;kind<3;++kind){
+        unsigned projected=kind==1;
+        setup(&cpu,"side_by_side");private_draw=private_seat=1;
+        psx_mod_write_byte(PLAY+0x24,1);psx_mod_write_word(PLAY+0x20,0x8008EF48u);
+        psx_mod_write_byte(PLAY+0x25,(uint8_t)kind);psx_mod_write_byte(PLAY+0x8C,32);
+        if(projected){
+            capture(PLAYER,p1.body,sizeof p1.body);project(PLAYER,p2.body,sizeof p2.body);zero_world=1;
+            saved_resources[1]=0x80030000;saved_resources[5]=0x80030100;
+            psx_mod_write_word(SCRATCH+0x1C,assembly);psx_mod_write_word(SCRATCH+0x3C,menu_assembly);
+        }
+        uint8_t resident[sizeof p2.body];capture(PLAYER,resident,sizeof resident);
+        CHECK(draw_coop_hud(&cpu,0x800244C0));
+        CHECK(call_count==6 && calls[0]==0x80024CC0u && calls[1]==0x80024CC0u && calls[2]==0x80024F90u && calls[3]==0x80024CC0u && calls[4]==0x80024F90u && calls[5]==0x800249D4u);
+        CHECK(!memcmp(resident,mem(PLAYER),sizeof resident) && !hud_call && !hud_seat && !failed);
+        CHECK(!state_track.count && !state_track.error && !option_reads);
+        CHECK(psx_mod_read_word(SCRATCH+0x108)==0x80040030u && psx_mod_read_word(SCRATCH+0x10C)==0x80041018u && psx_mod_read_word(SCRATCH+0x110)==0x80042024u);
+        CHECK(psx_mod_read_word(0x80040004u)==0x7C808080u && psx_mod_read_word(0x8004000Cu)==0x78410000u);
+        CHECK(psx_mod_read_half(0x80040008u)==280 && psx_mod_read_half(0x8004000Au)==16);
+        CHECK(psx_mod_read_half(0x80042008u)==284 && psx_mod_read_half(0x8004200Au)==63 && psx_mod_read_word(0x80042004u)==0x38604020u);
+        CHECK(definitions==1 && tag_count==6);
+    }
+    setup(&cpu,"stacked");private_draw=private_seat=1;
+    psx_mod_write_byte(PLAY+0x24,1);psx_mod_write_word(PLAY+0x20,0x8008EF48u);psx_mod_write_byte(PLAY+0x1F,0);
+    CHECK(draw_coop_hud(&cpu,0x800244C0) && !call_count && !definitions && !tag_count);
     setup(&cpu,"stacked");private_draw=1;private_seat=0;
     CHECK(!draw_coop_hud(&cpu,0x800244C0) && !call_count);
     setup(&cpu,"side_by_side");psx_mod_write_word(SCRATCH+0x108,hud_packets+1);
