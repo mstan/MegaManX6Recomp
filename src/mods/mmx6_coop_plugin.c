@@ -2812,15 +2812,15 @@ static int zero_icon_effect(uint32_t actor) {
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
 static int zero_native_weapon_effect(uint32_t actor) {
-    /* Original DAT85 assembly words30h/34h/38h select native saber wave58,
-     * ceiling ice33 and rising flame34. They have no compressed frame table: their original
+    /* Original DAT85 assembly words34h/38h select native ceiling ice33 and
+     * rising flame34. They have no compressed frame table: their original
      * page/UVs address Zero's uploaded atlas, which shares VRAM with X.
      * Admit only an actual private native shot and its exact source assembly. */
     if(render_x_death || !assembly || actor<0x800950A0u || actor>=0x800964A0u ||
        (actor-0x800950A0u)%0xA0u || psx_mod_read_byte(PLAYER+2)!=1 ||
        !(psx_mod_read_byte(actor)&1) || psx_mod_read_word(actor+0x38))return 0;
     unsigned kind=psx_mod_read_byte(actor+1);
-    unsigned header=kind==33?0x34u:kind==34?0x38u:kind==58?0x30u:0;
+    unsigned header=kind==33?0x34u:kind==34?0x38u:0;
     if(!header)return 0;
     uint32_t offset=psx_mod_read_word(assembly+header);
     return offset && offset<ASSET_SPACE &&
