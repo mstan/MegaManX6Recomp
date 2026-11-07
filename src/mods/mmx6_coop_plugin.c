@@ -1803,6 +1803,26 @@ static int scene_owner_fatal(void) {
         mmx6_coop_living(&life,owner^1u) && scene_body[4]==1 &&
         scene_body[0x5C] && scene_body[0x5C]<128 && hp && hp<128;
 }
+static void scene_primary_sprite_upload(CPUState *cpu) {
+    uint32_t graphics=psx_mod_read_word(PLAYER+0x38);
+    if(psx_mod_read_byte(PLAYER+2) || !psx_mod_read_byte(PLAYER+3) ||
+       psx_mod_read_byte(PLAYER+4)!=1 || graphics<0x80010000u || graphics>=0x80200000u)return;
+    /* Body-only scene animation skips native20CF8..20D04. Drain existing
+     * uploads before reusing their shared decode buffers, then service that
+     * missing native player upload while the primary context is resident.
+     * A private world can own the singleton sheet even when X's frame cache
+     * matches; invalidate only this borrowed primary residency. */
+    uint32_t a2=cpu->gpr[6];STATE_WORDS(restore_upload_argument,38,&a2,1);
+    guest(cpu,0x80017A88u,0,0);guest(cpu,0x80066150u,0,0);guest(cpu,0x80017A48u,0,0);
+    psx_mod_write_byte(PLAYER+0x48,(uint8_t)(psx_mod_read_byte(PLAYER+0x47)^0x80u));
+    cpu->gpr[6]=0;
+    guest(cpu,0x80017B04u,PLAYER,320);
+    /* The records contain deferred source pointers. Finish and retire them
+     * before another projection can replace those bytes; preserve unrelated
+     * queued work by submitting it above, never by discarding the queue. */
+    guest(cpu,0x80017A88u,0,0);guest(cpu,0x80066150u,0,0);guest(cpu,0x80017A48u,0,0);
+    cpu->gpr[6]=a2;STATE_POP(restore_upload_argument);
+}
 static void scene_tick(CPUState *cpu) {
     if (!scene_owner || !enrolled) return;
     if(both_door_actor && !both_door_source_valid()) {
@@ -1967,6 +1987,7 @@ static void scene_tick(CPUState *cpu) {
             life.select_frames=0;
         }
     }
+    if(!passenger)scene_primary_sprite_upload(cpu);
     if (passenger) leave_zero();
     project(PLAY,play,sizeof play);
     project(0x800971F8,camera,sizeof camera);
