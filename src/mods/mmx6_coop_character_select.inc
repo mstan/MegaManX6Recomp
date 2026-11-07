@@ -119,6 +119,21 @@ static int character_select(CPUState *cpu,uint32_t address) {
     }
     cpu->gpr[2]=result;return 1;
 }
+static void shared_portrait_character(CPUState *cpu,uint32_t address) {
+    /* Native21AF0's -1 portrait-table entry selects the campaign hero.
+     * A P2-owned shared dialogue runs inside the projected stage update,
+     * but its resident portrait atlas still belongs to the original hero.
+     * Keep its matching animation/face geometry. Personal menus select their
+     * own actor normally. Change registers only, never shared PLAY fields. */
+    if(failed || !enrolled || !zero_projected || !zero_world || personal_pass ||
+       private_draw || saved_play[0x38]>1)return;
+    if(address==0x80021B88u && psx_mod_read_word(address)==0x14400012u &&
+       psx_mod_read_word(address-8)==0x80A20038u)
+        cpu->gpr[2]=saved_play[0x38];
+    else if(address==0x80021B98u && psx_mod_read_word(address)==0x14600003u &&
+            psx_mod_read_word(address-8)==0x90A3005Eu)
+        cpu->gpr[3]=saved_play[0x5E];
+}
 static void character_zero_variant(CPUState *cpu,uint32_t address) {
     /* Runs before the original ANDI. Change its register input only; the
      * persistent unlock byte and native capsule availability stay intact. */

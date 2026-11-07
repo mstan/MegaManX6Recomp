@@ -1916,6 +1916,39 @@ static void native_shared_weather_palette(void) {
         leave_zero();
     }
 }
+static void native_shared_portrait_character(void) {
+    /* Native21AF0 falls back to the campaign identity when the authored
+     * portrait table says -1. A projected Zero must not select Zero's mouth
+     * geometry against the resident Falcon-X portrait pixels. */
+    for(unsigned character=0;character<2;++character)for(unsigned form=0;form<6;++form) {
+        CPUState cpu;setup(&cpu);private_draw=0;enrolled=zero_projected=zero_world=1;
+        saved_play[0x38]=(uint8_t)character;saved_play[0x5E]=(uint8_t)form;
+        psx_mod_write_byte(PLAY+0x38,(uint8_t)!character);psx_mod_write_byte(PLAY+0x5E,5);
+        psx_mod_write_word(0x80021B80u,0x80A20038u);psx_mod_write_word(0x80021B88u,0x14400012u);
+        psx_mod_write_word(0x80021B90u,0x90A3005Eu);psx_mod_write_word(0x80021B98u,0x14600003u);
+        cpu.gpr[2]=!character;cpu.gpr[3]=5;CPUState expected=cpu;
+        expected.gpr[2]=character;expected.gpr[3]=form;
+        shared_portrait_character(&cpu,0x80021B88u);shared_portrait_character(&cpu,0x80021B98u);
+        CHECK(!memcmp(&cpu,&expected,sizeof cpu));
+        CHECK(psx_mod_read_byte(PLAY+0x38)==!character && psx_mod_read_byte(PLAY+0x5E)==5);
+        CHECK(!state_track.count && !state_track.error);
+    }
+    for(unsigned refused=0;refused<8;++refused) {
+        CPUState cpu;setup(&cpu);private_draw=0;enrolled=zero_projected=zero_world=1;
+        saved_play[0x38]=0;saved_play[0x5E]=1;cpu.gpr[2]=1;cpu.gpr[3]=5;
+        psx_mod_write_word(0x80021B80u,0x80A20038u);psx_mod_write_word(0x80021B88u,0x14400012u);
+        psx_mod_write_word(0x80021B90u,0x90A3005Eu);psx_mod_write_word(0x80021B98u,0x14600003u);
+        if(refused==0)enrolled=0;else if(refused==1)zero_projected=0;
+        else if(refused==2)zero_world=0;else if(refused==3)personal_pass=1;
+        else if(refused==4)private_draw=1;else if(refused==5)failed=1;
+        else if(refused==6)saved_play[0x38]=2;
+        else {psx_mod_write_word(0x80021B80u,0);psx_mod_write_word(0x80021B90u,0);}
+        CPUState expected=cpu;
+        shared_portrait_character(&cpu,0x80021B88u);shared_portrait_character(&cpu,0x80021B98u);
+        CHECK(!memcmp(&cpu,&expected,sizeof cpu));
+    }
+    private_draw=0;
+}
 static void native_shared_portrait_palette(void) {
     static const struct { uint32_t caller,slot; unsigned palette; } cases[]={
         {0x80021CC4u,0x1E0u,0}, {0x80021E64u,0x1F0u,2},
@@ -3885,7 +3918,7 @@ int main(void){
     distant_zero_saber_uses_native_owner_visibility();
     native_shared_boss_palette();
     native_shared_weather_palette();
-    native_shared_portrait_palette();
+    native_shared_portrait_character();native_shared_portrait_palette();
     native_shared_dialogue_palette();
     native_working_palette_class_and_load_events();
     native_working_palette_rectangle();

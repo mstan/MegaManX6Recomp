@@ -3846,6 +3846,8 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
 #endif
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800318F4u,0x9102005Cu,boss_balance_damage);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x80021B88u,0x14400012u,shared_portrait_character);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x80021B98u,0x14600003u,shared_portrait_character);
     static const uint32_t zero_variant_sites[]={0x80021BDCu,0x80022910u,0x80030E80u,
         0x80031154u,0x80031264u,0x800317A4u,0x80035C60u,0x80039748u,
         0x8003C644u,0x8003EB6Cu,0x801ED574u,0x801ED5D8u};
