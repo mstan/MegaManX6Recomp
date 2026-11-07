@@ -252,6 +252,7 @@ static void pixel_edges(void){
     CHECK(!mmx6_pixels_decode(encoded,513,255,NULL));free(pixels);
 }
 static void retain_native_x_pixels(void){
+    int projected_before=zero_projected;zero_projected=1; /* Retained primary inside the guest world. */
     const uint32_t table=0x80020000,source=table+0x20;render_x_death=1;saved_resources[3]=0x80030000;
     for(unsigned i=0;i<16;++i)psx_mod_write_half(saved_resources[3]+i*2,(uint16_t)(i*0x3D));
     psx_mod_write_word(table,0x100020); /* One original 16x16 packed tile. */
@@ -266,7 +267,7 @@ static void retain_native_x_pixels(void){
     CHECK(sprite_bank(table,0,0x7800,UINT16_MAX)==second && bank_count==count);
     bank_count=4096; /* A full cache must still reuse its existing pixels. */
     CHECK(sprite_bank(table,0,0x7800,UINT16_MAX)==second && bank_count==4096);bank_count=count;
-    render_x_death=0;
+    render_x_death=0;zero_projected=projected_before;
     uint8_t colors[32]={0};uint16_t tile[256];for(unsigned i=0;i<256;++i)tile[i]=(uint16_t)(i+4);
     CHECK(retain_sprite_bank(0x80040000,0,colors,tile));
     for(unsigned i=0;i<16;++i)vram[480*1024+i]=(uint16_t)(i+1);
