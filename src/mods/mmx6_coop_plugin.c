@@ -3197,11 +3197,14 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     if(primary)render_x_death=1;
     render_actor(cpu,actor,arena);
     if(primary)render_x_death=0;
-    /* A guest-owned pause or in-place dialogue draws the native world with
+    /* Only a projected guest world needs the retained primary appended.
+     * A canonical private view has already drawn that primary above; using
+     * its retained cache again can overlay a different animation pose.
+     * A guest-owned pause or in-place dialogue draws the native world with
      * its owner projected at PLAYER. Retain the living primary in that same
      * draw instead of hiding it until gameplay resumes. Native menu-only
      * pages do not call this path. */
-    if (actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0) ||
+    if (zero_world && actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0) ||
         living_primary_frozen_draw()) && p1.body[3]) {
         PlayerContext zero_player;
         capture_player(&zero_player);

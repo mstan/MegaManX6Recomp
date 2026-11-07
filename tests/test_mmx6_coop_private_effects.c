@@ -1309,7 +1309,9 @@ static void primary_frames_keep_their_own_palette_and_pixels(void){
     uint32_t palette=psx_mod_read_word(SCRATCH+0x28);
     for(unsigned i=0;i<16;++i)psx_mod_write_half(palette+i*2u,(uint16_t)(0x5A00u+i));
     project_player(&primary);cpu.gpr[4]=PLAYER;world_packets=packets;
+    p1=primary;p1.body[8]^=0x40;scene_owner=2;scene_phase=2; /* Different retained pose/position. */
     CHECK(render_survivor(&cpu,0x800232D4u) && !failed && bank_count==1);
+    CHECK(draw_count==1); /* The canonical primary must not also draw its retained copy. */
     CHECK(bank_first[0]==0x5A01 && banks[0].character==2 && !render_x_death);
     psx_mod_write_half(palette+2,0x6B02);
     CHECK(render_survivor(&cpu,0x800232D4u) && !failed && bank_count==2);
