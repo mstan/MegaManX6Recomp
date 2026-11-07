@@ -380,7 +380,8 @@ static void admitted_door_views(int online,int split) {
     }
 }
 static void native_scene_keeps_private_panes(int online,int split) {
-    for(unsigned owner=1;owner<=2;++owner)for(unsigned phase=0;phase<4;++phase) {
+    for(unsigned owner=1;owner<=2;++owner)for(unsigned phase=0;phase<4;++phase)
+    for(unsigned projected=0;projected<=(owner==2);++projected) {
         CPUState cpu;prepare_view(&cpu,online,split);mmx6_view_sdk.local_port=1;
         scene_owner=owner;scene_phase=phase;both_door_actor=0;
         psx_mod_write_byte(PLAY+0x10,1);psx_mod_write_byte(PLAY+0x1C,1);
@@ -388,10 +389,15 @@ static void native_scene_keeps_private_panes(int online,int split) {
         psx_mod_write_word(VIEW_CAMERA+12,560u<<16);
         put32(view_cameras[1]+8,100u<<16);put32(view_cameras[1]+12,200u<<16);
         frame_count=1;view_frame=0;view_valid=1;view_pending=0;
+        /* P2-owned native scenes actually draw while its stage/world call
+         * is projected; a resident-only fixture misses the shared-HUD fallback. */
+        inside=zero_world=zero_projected=(int)projected;
         CHECK(independent_scene_context());independent_world_begin();
         CHECK(view_valid && view_pending);
         CHECK(le32(view_cameras[0]+8)==700u<<16);
         CHECK(le32(view_cameras[1]+8)==(phase?700u:100u)<<16);
+        /* Presentation belongs to the common call after that stage returns. */
+        inside=zero_world=zero_projected=0;
         PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
         CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
         CHECK(!private_draw && scene_owner==owner && scene_phase==phase);

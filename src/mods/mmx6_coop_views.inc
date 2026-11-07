@@ -317,8 +317,13 @@ static void independent_world_begin(void) {
      * that camera in both panes while each pane retains its own native HUD.
      * The simulation still owns all withdrawal and scene/hold decisions. */
     int scene_views=independent_scene_context();
-    if(!enrolled || failed || (inside && !(returning && personal_pass && !personal_seat) && !initial && !guest_host) ||
-       (zero_world && !guest_host) || (scene_owner && !door_views && !scene_views) || clear_phase ||
+    /* A P2-owned script draws its one native world inside Zero's projected
+     * stage call. Queue that authored world now; the common presenter runs
+     * after projection restores, with each pane's own HUD. Rejecting it here
+     * exposes the canonical stacked HUD during warning/dialogue frames. */
+    int scene_host=scene_views && scene_owner==2 && inside && zero_world && !personal_pass;
+    if(!enrolled || failed || (inside && !(returning && personal_pass && !personal_seat) && !initial && !guest_host && !scene_host) ||
+       (zero_world && !guest_host && !scene_host) || (scene_owner && !door_views && !scene_views) || clear_phase ||
        (pause_owner>=0 && psx_mod_read_byte(PLAY+1) && !returning) ||
        (psx_mod_read_byte(PLAY)!=10 && !initial) ||
        (psx_mod_read_byte(PLAY+1) && !returning) ||
