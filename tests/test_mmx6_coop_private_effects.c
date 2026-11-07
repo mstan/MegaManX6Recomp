@@ -207,7 +207,9 @@ static void native_draw(uint32_t actor){
     } else if(dash_packet_probe && actor==0x80091298u) {
         /* Original Zero follow frame43: common tile0 at page5/UV0,B0,
          * packed flags4 select C3 from the actor's base C2 palette. */
-        q[1]=0x7D000000u;q[3]=0x7803B000u;
+        /* Original common frame127's first shape01 B6 F3 E0, with
+         * native icon layout2, selects page10/UV60,D0 and CLUT7802. */
+        q[1]=0x7D000000u;q[3]=dash_packet_probe==2?0x7802D060u:0x7803B000u;
         memset(q+4,0,6*sizeof *q);
     } else if(death_packet_probe && actor==0x800CD410u) {
         /* Original unflipped FX11 frame113 uses page27/UV E0,F0 and CLUT7802.
@@ -232,7 +234,7 @@ static void native_draw(uint32_t actor){
     }
     for(unsigned i=0;i<10;++i)psx_mod_write_word(at+i*4,q[i]);
     psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFFu));
-    psx_mod_write_word(mode+4,(armor_packet_probe || falcon_packet_probe)?0xE1000025u:dash_packet_probe && actor==0x80091298u?0xE1000025u:
+    psx_mod_write_word(mode+4,(armor_packet_probe || falcon_packet_probe)?0xE1000025u:dash_packet_probe && actor==0x80091298u?(dash_packet_probe==2?0xE100002Au:0xE1000025u):
         death_packet_probe && actor==0x800CD410u?0xE1000027u:zero_ui_effect(actor)?0xE100003Eu:
         icon_packet_probe==2 && actor>=0x800950A0u && actor<0x800964A0u?0xE100002Eu:0xE1000040u);
     unsigned priority=psx_mod_read_byte(actor+0x16);
@@ -1666,19 +1668,44 @@ static void deferred_dash_effect_retains_zero_atlas(void) {
     shared_effect_owners[0]=1;CHECK(!render_survivor(&cpu,0x800232D4u));
     shared_effect_owners[0]=2;psx_mod_write_word(actor+0x3C,assembly);
     CHECK(!render_survivor(&cpu,0x800232D4u));
-    psx_mod_write_word(actor+0x3C,assembly+0xCC);psx_mod_write_byte(actor+1,3);
+    psx_mod_write_word(actor+0x3C,assembly+0xCC);psx_mod_write_byte(actor+1,4);
+    CHECK(!render_survivor(&cpu,0x800232D4u));
+}
+static void deferred_option_burst_retains_zero_atlas(void) {
+    CPUState cpu;setup(&cpu);const uint32_t actor=0x80091298u;
+    PlayerContext primary,after;capture_player(&primary);
+    psx_mod_write_word(assembly+4,0xCC);
+    psx_mod_write_byte(actor,0x21);psx_mod_write_byte(actor+1,3);
+    psx_mod_write_byte(actor+2,12);psx_mod_write_byte(actor+3,1);
+    psx_mod_write_word(actor+0x3C,assembly+0xCC);psx_mod_write_half(actor+0x42,0x7802);
+    shared_effect_owners[0]=2;cpu.gpr[4]=actor;dash_packet_probe=2;
+    memset(test_vram,0xBB,sizeof test_vram);
+    for(unsigned y=208;y<224;++y)for(unsigned x=664;x<668;++x)
+        test_zero_ui[y*1024+x]=0x1111;
+    psx_mod_write_half(active_palette+2*32+2,0x4321);
+    CHECK(render_survivor(&cpu,0x800232D4u));
+    CHECK(!failed && draw_count==1 && drawn[0]==actor && bank_count==1);
+    CHECK(bank_first[0]==0x4321 && banks[0].tile==0xD060);
+    uint16_t pixels[256];CHECK(mmx6_pixels_decode(banks[0].pixels,banks[0].pixel_bytes,256,pixels));
+    for(unsigned i=0;i<256;++i)CHECK(pixels[i]==0x4321);
+    capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof primary));
+    CHECK(world_packets==packets+40 && !world_render && !state_track.count);
+    shared_effect_owners[0]=1;CHECK(!render_survivor(&cpu,0x800232D4u));
+    shared_effect_owners[0]=2;psx_mod_write_word(actor+0x3C,assembly);
     CHECK(!render_survivor(&cpu,0x800232D4u));
 }
 static void private_native_weapon_atlas_retains_zero_source(void){
-    for(unsigned kind=33;kind<=34;++kind){
+    const unsigned kinds[]={33,34,58};
+    for(unsigned k=0;k<sizeof kinds/sizeof *kinds;++k){
+        unsigned kind=kinds[k];
         CPUState cpu;setup(&cpu);const uint32_t actor=0x800950A0u;
         PlayerContext resident,after;capture_player(&resident);
-        /* Original DAT85 assembly headers34h/38h select these uncompressed
-         * ceiling-ice/rising-flame frames. The native packet has no compressed
+        /* Original DAT85 assembly headers30h/34h/38h select uncompressed
+         * saber-wave/ceiling-ice/rising-flame frames. The native packet has no compressed
          * table; its page0 must retain Zero's pixels instead of X's VRAM. */
-        unsigned header=kind==33?0x34u:0x38u;
-        uint16_t clut=kind==33?0x7843u:0x7804u;
-        unsigned palette_at=kind==33?0x260u:0x80u;
+        unsigned header=kind==33?0x34u:kind==34?0x38u:0x30u;
+        uint16_t clut=kind==33?0x7843u:kind==34?0x7804u:0x7802u;
+        unsigned palette_at=kind==33?0x260u:kind==34?0x80u:0x40u;
         uint16_t expected=kind==33?0x4321u:0x1234u;
         unsigned index=kind==33?1u:2u;
         psx_mod_write_word(assembly+header,0xCC);
@@ -3820,6 +3847,7 @@ int main(void){
     arrival_draw_precedes_stage_callback();clear_banks();
     deferred_icon_effect_retains_zero_source();clear_banks();
     deferred_dash_effect_retains_zero_atlas();clear_banks();
+    deferred_option_burst_retains_zero_atlas();clear_banks();
     private_giga_shots_retain_zero_source();
     private_native_weapon_atlas_retains_zero_source();
     deferred_death_effect_retains_zero_source();clear_banks();

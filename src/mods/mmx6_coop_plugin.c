@@ -2812,27 +2812,28 @@ static int zero_icon_effect(uint32_t actor) {
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
 static int zero_native_weapon_effect(uint32_t actor) {
-    /* Original DAT85 assembly words34h/38h select native ceiling ice33 and
-     * rising flame34. They have no compressed frame table: their original
+    /* Original DAT85 assembly words30h/34h/38h select native saber wave58,
+     * ceiling ice33 and rising flame34. They have no compressed frame table: their original
      * page/UVs address Zero's uploaded atlas, which shares VRAM with X.
      * Admit only an actual private native shot and its exact source assembly. */
     if(render_x_death || !assembly || actor<0x800950A0u || actor>=0x800964A0u ||
        (actor-0x800950A0u)%0xA0u || psx_mod_read_byte(PLAYER+2)!=1 ||
        !(psx_mod_read_byte(actor)&1) || psx_mod_read_word(actor+0x38))return 0;
     unsigned kind=psx_mod_read_byte(actor+1);
-    unsigned header=kind==33?0x34u:kind==34?0x38u:0;
+    unsigned header=kind==33?0x34u:kind==34?0x38u:kind==58?0x30u:0;
     if(!header)return 0;
     uint32_t offset=psx_mod_read_word(assembly+header);
     return offset && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
-static int zero_dash_effect(uint32_t actor) {
+static int zero_common_effect(uint32_t actor) {
     int slot=shared_effect_slot(actor);
-    /* Original80049100 resolves assembly word4. Its Zero shapes and C3
-     * palette differ from the shared X atlas even after owner projection. */
+    /* Original49100 dash and49A14 common effects resolve assembly word4.
+     * In particular type3/sub12 option-shot bursts use Zero's common atlas.
+     * Retain the allocating actor's authored pixels and actual native CLUT. */
     uint32_t offset=assembly?psx_mod_read_word(assembly+4):ASSET_SPACE;
     return slot>=0 && shared_effect_owners[slot]==2 && psx_mod_read_byte(actor) &&
-        psx_mod_read_byte(actor+1)==1 && offset<ASSET_SPACE &&
+        (psx_mod_read_byte(actor+1)==1 || psx_mod_read_byte(actor+1)==3) && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
 static int private_falcon_flight_effect(uint32_t actor) {
@@ -3022,7 +3023,7 @@ static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int 
     }
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
-    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
+    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_common_effect(actor);
     if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
         giga_packet_trace("native-only",actor);return;
     }
@@ -3156,7 +3157,7 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
-    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor)||private_falcon_flight_effect(actor);
+    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_common_effect(actor)||private_falcon_flight_effect(actor);
     if (!zero_world && !retained) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);

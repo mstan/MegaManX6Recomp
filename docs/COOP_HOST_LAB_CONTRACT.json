@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 129,
+  "revision": 131,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v132",
+    "title_compatibility": "mmx6-x-zero-delay-v133",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1455,5 +1455,13 @@
     "snapshot_schema": 29,
     "native_local_validation": "Separated native Rekkoha spawns its beam sequence, completes eleven firing increments and returns idle and jump control.",
     "netplay_qualification": "Not transferred from earlier candidates."
+  },
+  "title_changes_v133": {
+    "behavior": [
+      "Native Zero saber wave58 uses its authored uncompressed weapon atlas.",
+      "Owned native common type3 effects, including option-shot bursts, retain the allocating character common atlas and native palette."
+    ],
+    "snapshot_schema": 29,
+    "native_review": "Pending current candidate native rendering validation; no qualification transferred."
   }
 }
