@@ -1670,17 +1670,19 @@ static void deferred_dash_effect_retains_zero_atlas(void) {
     CHECK(!render_survivor(&cpu,0x800232D4u));
 }
 static void private_native_weapon_atlas_retains_zero_source(void){
-    for(unsigned kind=33;kind<=34;++kind){
+    const unsigned kinds[]={33,34,58};
+    for(unsigned n=0;n<sizeof kinds/sizeof *kinds;++n){
+        unsigned kind=kinds[n];
         CPUState cpu;setup(&cpu);const uint32_t actor=0x800950A0u;
         PlayerContext resident,after;capture_player(&resident);
-        /* Original DAT85 assembly headers34h/38h select these uncompressed
-         * ceiling-ice/rising-flame frames. The native packet has no compressed
+        /* Original DAT85 assembly headers30h/34h/38h select these uncompressed
+         * saber-wave/ceiling-ice/rising-flame frames. The native packet has no compressed
          * table; its page0 must retain Zero's pixels instead of X's VRAM. */
-        unsigned header=kind==33?0x34u:0x38u;
-        uint16_t clut=kind==33?0x7843u:0x7804u;
-        unsigned palette_at=kind==33?0x260u:0x80u;
-        uint16_t expected=kind==33?0x4321u:0x1234u;
-        unsigned index=kind==33?1u:2u;
+        unsigned header=kind==33?0x34u:kind==34?0x38u:0x30u;
+        uint16_t clut=kind==33?0x7843u:kind==34?0x7804u:0x7802u;
+        unsigned palette_at=kind==33?0x260u:kind==34?0x80u:0x40u;
+        uint16_t expected=kind==33?0x4321u:kind==34?0x1234u:0x2468u;
+        unsigned index=kind==33?1u:kind==34?2u:3u;
         psx_mod_write_word(assembly+header,0xCC);
         memset(p2.shots,0,sizeof p2.shots);
         p2.shots[0]=0x21;p2.shots[1]=(uint8_t)kind;p2.shots[3]=1;

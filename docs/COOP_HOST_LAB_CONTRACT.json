@@ -1450,7 +1450,8 @@
   "title_changes_v132": {
     "behavior": [
       "The living private Zero attack pool uses its authored owner camera bounds during native simulation, then restores the shared camera.",
-      "Original beam44 initialization and PLAYER+7 firing progress remain native; shared enemies and clocks still update once."
+      "Original beam44 initialization and PLAYER+7 firing progress remain native; shared enemies and clocks still update once.",
+      "Native Zero shot58 resolves DAT85 assembly header30h against the owning Zero atlas and working palette, including the retained survivor draw."
     ],
     "snapshot_schema": 29,
     "native_local_validation": "Separated native Rekkoha spawns its beam sequence, completes eleven firing increments and returns idle and jump control.",
