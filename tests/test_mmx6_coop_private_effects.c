@@ -36,6 +36,7 @@ static unsigned ride_camera_fatal,ride_query_calls,ride_query_bad,ride_reboards;
 static unsigned door_native_probe,door_ticks,door_draws,door_subtype_allowed;
 static unsigned icon_packet_probe,dash_packet_probe,armor_packet_probe,falcon_packet_probe;
 static unsigned render_replacement_probe;
+static unsigned primary_overlay_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
 static unsigned scene_transport_probe,capsule_native_probe;
@@ -193,6 +194,21 @@ static void native_draw(uint32_t actor){
     CHECK(at>=arena && at+40<=arena+40000 && mode==arena+MODES_AT+(at-arena)/5);
     uint32_t q[10]={0x09000000u|((mode+8)&0xFFFFFFu),0x2C808080u,0x0014000Au,0,0x0014001Au,0x00000010u,0x0024000Au,0x00001000u,0x0024001Au,0x00001010u};
     q[3]=(uint32_t)psx_mod_read_half(actor+0x42)<<16;
+    if(primary_overlay_probe && actor==PLAYER && !psx_mod_read_byte(actor+2)) {
+        /* Original232D4 dereferences the actor's assembly table in guest
+         * RAM before producing packets. These beam addresses alias the
+         * private executable window; host pixel retention happens later. */
+        uint32_t table=psx_mod_read_word(actor+0x3C);
+        unsigned frame=psx_mod_read_byte(actor+0x47);
+        CHECK(table==0x801F40ECu && psx_mod_read_half(table+frame*4)==1);
+        uint32_t shape=table+psx_mod_read_half(table+frame*4+2)*4u;
+        int x=(int8_t)psx_mod_read_byte(shape+2),y=(int8_t)psx_mod_read_byte(shape+3);
+        CHECK(x==7 && y==9);
+        q[2]=(uint16_t)(10+x)|((uint32_t)(uint16_t)(20+y)<<16);
+        q[4]=(uint16_t)(26+x)|((uint32_t)(uint16_t)(20+y)<<16);
+        q[6]=(uint16_t)(10+x)|((uint32_t)(uint16_t)(36+y)<<16);
+        q[8]=(uint16_t)(26+x)|((uint32_t)(uint16_t)(36+y)<<16);
+    }
     if(falcon_packet_probe && actor==0x80091298u) {
         /* Original DAT87 header1C flight frame0 selects jet tile8 at page5
          * with fixed7802, independently of the retention admission guard. */
@@ -821,6 +837,7 @@ static void setup(CPUState *cpu){
     ride_camera_fatal=ride_query_calls=ride_query_bad=ride_reboards=0;
     door_native_probe=door_ticks=door_draws=both_doors=scene_call=0;both_door_reset();door_subtype_allowed=1;
     icon_packet_probe=dash_packet_probe=armor_packet_probe=falcon_packet_probe=render_replacement_probe=0;
+    primary_overlay_probe=0;
     death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=voluntary_transport_probe=capsule_native_probe=0;memset(death_effect,0,sizeof death_effect);
     projected_death_probe=0;
     scene_survivor_worlds=scene_native_retries=0;memset(scene_corpse_updates,0,sizeof scene_corpse_updates);
@@ -1318,6 +1335,45 @@ static void primary_frames_keep_their_own_palette_and_pixels(void){
     CHECK(bank_first[1]==0x6B02 && psx_mod_read_half(active_palette+2)==0x0101);
     PlayerContext after;capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof after));
     CHECK(!world_render && !state_track.count && !state_track.error);
+}
+static void native_primary_overlay_sources_during_private_draw(void){
+    for(unsigned outgoing=0;outgoing<2;++outgoing) {
+        CPUState cpu;setup(&cpu);PlayerContext primary;capture_player(&primary);
+        memset(primary.shots,0,sizeof primary.shots);
+        memset(primary.trails,0,sizeof primary.trails);
+        memset(primary.effects,0,sizeof primary.effects);
+        /* Exact address relationship retained from native beam bodies:
+         * both tables live inside the window replaced by enter_zero. */
+        put32(primary.body+0x38,0x801F4AD4u);
+        put32(primary.body+0x3C,0x801F40ECu);
+        primary.body[5]=(uint8_t)outgoing;primary.body[0x47]=0;
+        primary.body[0x16]=4;primary.body[0x42]=0;primary.body[0x43]=0x78;
+        for(unsigned i=0;i<compressed_size;++i)
+            psx_mod_write_byte(0x801F4AD4u+i,zero_compressed[i]);
+        psx_mod_write_word(0x801F40ECu,0x00010001u);
+        psx_mod_write_word(0x801F40F0u,0x09070000u);
+        uint32_t palette=psx_mod_read_word(SCRATCH+0x28);
+        for(unsigned i=0;i<16;++i)psx_mod_write_half(palette+i*2u,(uint16_t)(0x5A00u+i));
+        project_player(&primary);enter_zero();inside=zero_world=1;
+        if(outgoing)pause_owner=1;else {scene_owner=2;scene_phase=2;}
+        /* Preserve live private writes too, rather than restoring the stale
+         * immutable Zero overlay or its previous callback's Giga backup. */
+        psx_mod_write_byte(OVERLAY+ZERO_GIGA_BACKUP_OFFSET+5,0xA7);
+        uint8_t private_before[OVERLAY_SIZE];capture(OVERLAY,private_before,sizeof private_before);
+        PlayerContext private_player;capture_player(&private_player);
+        CHECK(psx_mod_read_word(0x801F40ECu)!=0x00010001u);
+        primary_overlay_probe=1;cpu.gpr[4]=PLAYER;world_packets=packets;
+        CHECK(render_survivor(&cpu,0x800232D4u) && !failed && draw_count==2 && bank_count==2);
+        CHECK(bank_first[1]==0x5A01 && banks[1].character==2);
+        CHECK(psx_mod_read_word(packets+40+8)==0x001D0011u);
+        PlayerContext after;capture_player(&after);
+        CHECK(!memcmp(&private_player,&after,sizeof after));
+        CHECK(!memcmp(private_before,memory(OVERLAY),sizeof private_before));
+        CHECK(le32(saved_overlay+0xAAD4)==0x00100020u);
+        CHECK(!render_x_death && !world_render && !state_track.count && !state_track.error);
+        primary_overlay_probe=0;zero_world=inside=0;leave_zero();
+        CHECK(psx_mod_read_word(0x801F40ECu)==0x00010001u);
+    }
 }
 static void borrowed_menu_retains_primary_pools(void){
     CPUState cpu;setup(&cpu);PlayerContext primary;capture_player(&primary);
@@ -3931,6 +3987,7 @@ static void native_personal_pause_menus(void) {
 }
 int main(void){
     hidden_primary_keeps_visible_secondary_draw();primary_frames_keep_their_own_palette_and_pixels();
+    native_primary_overlay_sources_during_private_draw();
     native_personal_pause_menus();
     opposite_resource_identity_projection();CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     native_gate_continuous_target_operands();

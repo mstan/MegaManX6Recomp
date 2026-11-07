@@ -3209,6 +3209,25 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
         PlayerContext zero_player;
         capture_player(&zero_player);
         STATE_BYTES(restore_player,19,&zero_player,sizeof zero_player);
+        /* X's native beam assembly and compression tables can occupy the
+         * same 801EA000..801F5000 window as the projected player overlay.
+         * Restoring only his body leaves 232D4 reading Zero's geometry and
+         * sprite_bank decoding Zero's bytes through X's saved pointers.
+         * Borrow the primary window for the whole draw, then restore the
+         * exact live private bytes (including in-flight writable Giga data).
+         * Keep each future-restored slice in the existing callback digest. */
+        uint8_t private_overlay[OVERLAY_SIZE];
+        unsigned restore_overlay[(OVERLAY_SIZE+MMX6_STATE_FRAME_BYTES-1)/MMX6_STATE_FRAME_BYTES];
+        unsigned restore_overlay_count=0;
+        if(zero_projected) {
+            capture(OVERLAY,private_overlay,sizeof private_overlay);
+            for(unsigned offset=0;offset<OVERLAY_SIZE;offset+=MMX6_STATE_FRAME_BYTES) {
+                unsigned bytes=OVERLAY_SIZE-offset;
+                if(bytes>MMX6_STATE_FRAME_BYTES)bytes=MMX6_STATE_FRAME_BYTES;
+                restore_overlay[restore_overlay_count++]=mmx6_state_push(19,private_overlay+offset,bytes,0);
+            }
+            code_bank(saved_overlay);
+        }
         project_player(&p1);
         render_x_death=1;
         render_actor(cpu,PLAYER,arena);
@@ -3231,6 +3250,8 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
             }
         }
         render_x_death=0;
+        if(restore_overlay_count)code_bank(private_overlay);
+        while(restore_overlay_count)STATE_POP(restore_overlay[--restore_overlay_count]);
         project_player(&zero_player);
         STATE_POP(restore_player);
     }
