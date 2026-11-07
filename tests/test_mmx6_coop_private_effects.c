@@ -208,6 +208,10 @@ static void native_draw(uint32_t actor){
         q[4]=(uint16_t)(26+x)|((uint32_t)(uint16_t)(20+y)<<16);
         q[6]=(uint16_t)(10+x)|((uint32_t)(uint16_t)(36+y)<<16);
         q[8]=(uint16_t)(26+x)|((uint32_t)(uint16_t)(36+y)<<16);
+        /* A native transport packet can sample another resident page. It
+         * must not become a host-bank body frame merely because actor+38
+         * remains populated with the player's ordinary graphics table. */
+        q[5]=0x00270010u;
     }
     if(falcon_packet_probe && actor==0x80091298u) {
         /* Original DAT87 header1C flight frame0 selects jet tile8 at page5
@@ -1368,9 +1372,12 @@ static void native_primary_overlay_sources_during_private_draw(void){
         PlayerContext private_player;capture_player(&private_player);
         CHECK(psx_mod_read_word(0x801F40ECu)!=0x00010001u);
         primary_overlay_probe=1;cpu.gpr[4]=PLAYER;world_packets=packets;
-        CHECK(render_survivor(&cpu,0x800232D4u) && !failed && draw_count==2 && bank_count==2);
-        CHECK(bank_first[1]==0x5A01 && banks[1].character==2);
+        CHECK(render_survivor(&cpu,0x800232D4u) && !failed && draw_count==2 && bank_count==1);
+        CHECK(banks[0].character==private_actor.character && tag_count==2);
+        CHECK(psx_mod_read_word(packets+40+4)==0x2C808080u);
         CHECK(psx_mod_read_word(packets+40+8)==0x001D0011u);
+        CHECK(psx_mod_read_word(packets+40+12)==0x78000000u);
+        CHECK(psx_mod_read_word(packets+40+20)==0x00270010u);
         PlayerContext after;capture_player(&after);
         CHECK(!memcmp(&private_player,&after,sizeof after));
         CHECK(!memcmp(private_before,memory(OVERLAY),sizeof private_before));

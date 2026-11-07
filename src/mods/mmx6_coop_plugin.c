@@ -3020,6 +3020,13 @@ static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int 
         psx_mod_read_word(SCRATCH+0x124)<(end-arena)/40) {
         failed=1; return;
     }
+    /* A retained primary still owns native texture residency. Its transport
+     * geometry can select a resident page independently of actor+38's body
+     * compression table. Keep the original packets, UVs and CLUTs just as in
+     * the canonical primary draw; private bodies/effects use host banks.
+     * The caller restores the primary geometry window, and menu_vram keeps
+     * the native primary sheet across borrowed private menu uploads. */
+    if(render_x_death)return;
     uint32_t table=psx_mod_read_word(actor+0x38);
     unsigned frame=psx_mod_read_byte(actor+0x47);
     /* Native saber actors share the player's uploaded frame, with their own
