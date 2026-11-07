@@ -277,6 +277,15 @@ static int independent_door_context(void) {
     unsigned phase=psx_mod_read_byte(both_door_actor+5);
     return phase>=1 && phase<=3;
 }
+static int independent_scene_context(void) {
+    if(!scene_owner || scene_owner>2 || both_door_actor)return 0;
+    /* Use serialized scene/body state, including after current-build load.
+     * Diagnostic event history must never authorize presentation. */
+    if(scene_phase || scene_shared_locked())return 1;
+    return scene_owner==2?(p2.body[0xD0] || p2.body[0xD4] || p2.body[0x7A]):
+        (psx_mod_read_byte(PLAYER+0xD0) || psx_mod_read_byte(PLAYER+0xD4) ||
+         psx_mod_read_byte(PLAYER+0x7A));
+}
 static int independent_heatnix_scenery(void) {
     if(psx_mod_read_byte(PLAY+12)!=3 || psx_mod_read_byte(PLAY+13))return 0;
     uint32_t actor=psx_mod_read_word(PLAY+0x20);
@@ -304,13 +313,17 @@ static void independent_world_begin(void) {
         psx_mod_read_byte(PLAY+13)==view_menu_section &&
         psx_mod_read_byte(PLAY+0x1D)==view_menu_checkpoint;
     int door_views=independent_door_context();
+    /* A shared story camera does not merge the heroes' HUD ownership. Draw
+     * that camera in both panes while each pane retains its own native HUD.
+     * The simulation still owns all withdrawal and scene/hold decisions. */
+    int scene_views=independent_scene_context();
     if(!enrolled || failed || (inside && !(returning && personal_pass && !personal_seat) && !initial && !guest_host) ||
-       (zero_world && !guest_host) || (scene_owner && !door_views) || clear_phase ||
+       (zero_world && !guest_host) || (scene_owner && !door_views && !scene_views) || clear_phase ||
        (pause_owner>=0 && psx_mod_read_byte(PLAY+1) && !returning) ||
        (psx_mod_read_byte(PLAY)!=10 && !initial) ||
        (psx_mod_read_byte(PLAY+1) && !returning) ||
-       (psx_mod_read_byte(PLAY+0x10) && !door_views && !initial) ||
-       (coop_world_hold() && !door_views && !returning && !initial) ||
+       (psx_mod_read_byte(PLAY+0x10) && !door_views && !scene_views && !initial) ||
+       (coop_world_hold() && !door_views && !scene_views && !returning && !initial) ||
        (life.status[0]!=MMX6_COOP_ALIVE &&
         (!view_valid || (life.status[0]!=MMX6_COOP_DYING && life.status[0]!=MMX6_COOP_FALLEN))) ||
        (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING &&
@@ -321,6 +334,14 @@ static void independent_world_begin(void) {
     }
     uint32_t buffer=psx_mod_read_word(0x8009B7A0u);
     if(buffer!=VIEW_BUFFER && buffer!=VIEW_BUFFER+VIEW_STRIDE)return;
+    if(scene_views && scene_phase) {
+        capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
+        memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
+        view_valid=1;view_menu_history=0;
+        for(unsigned i=0;i<32;++i)view_ot[i]=psx_mod_read_word(buffer+0x70+i*4);
+        view_frame=frame_count;view_buffer=buffer;view_pending=1;
+        return;
+    }
     int fresh=!view_valid || (!menu_history && frame_count!=view_frame+1);
     if(fresh) {
         if(!view_valid || life.status[0]==MMX6_COOP_ALIVE)
@@ -382,6 +403,7 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     int menu=personal_menus_active(),returning=personal_resuming_world();
     if(!menu)project(VIEW_CAMERA,view_cameras[private_seat],sizeof view_cameras[0]);
     if(!menu && !returning && pause_owner<0 && private_seat &&
+       (!scene_owner || !scene_phase || independent_door_context()) &&
        (life.status[1]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_JOINING)) {
         if(!independent_quake_input())return 0;
         uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);

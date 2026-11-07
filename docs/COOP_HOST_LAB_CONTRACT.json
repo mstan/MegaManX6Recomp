@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; configured runtime execution identity binding",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 131,
+  "revision": 133,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v133",
+    "title_compatibility": "mmx6-x-zero-delay-v134",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -1463,5 +1463,13 @@
     ],
     "snapshot_schema": 29,
     "native_review": "Pending current candidate native rendering validation; no qualification transferred."
+  },
+  "title_changes_v134": {
+    "behavior": [
+      "Original Turtloid recovery hold stays in place without withdrawing the other living player.",
+      "Independent panes keep their own native health meters through in-place holds and shared story scenes."
+    ],
+    "snapshot_schema": 29,
+    "native_review": "Required on this candidate; source and compiled checks do not qualify gameplay."
   }
 }

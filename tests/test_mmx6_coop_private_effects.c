@@ -2691,6 +2691,36 @@ static void native_sigma_transition_retains_living_pair(void) {
         CHECK(!memcmp(&p2,&saved_guest,sizeof p2) && !state_track.count);
     }
 }
+static void native_recovery_stays_in_place(void) {
+    for(unsigned seat=0;seat<2;++seat)for(unsigned negative=0;negative<6;++negative) {
+        CPUState cpu;setup(&cpu);scene_owner=scene_phase=clear_phase=0;
+        zero_projected=(int)seat;cpu.gpr[4]=20;cpu.gpr[31]=0x800EE604u;
+        psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+12,6);
+        psx_mod_write_word(0x800EE5E4u,0x24040014u);
+        psx_mod_write_word(0x800EE5FCu,0x0C00F4C2u);
+        psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD4,0);
+        psx_mod_write_byte(PLAYER+0x7A,0);
+        if(negative==1)cpu.gpr[31]-=4;
+        if(negative==2)cpu.gpr[4]=19;
+        if(negative==3)psx_mod_write_byte(PLAY+12,7);
+        if(negative==4)psx_mod_write_byte(PLAY+13,1);
+        if(negative==5)psx_mod_write_word(0x800EE5FCu,0);
+        PlayerContext partner=p2;CPUState before=cpu;
+        script_begin(&cpu,0x8003D308u);
+        CHECK(scene_owner==seat+1 && scene_phase==(negative?1u:0u));
+        CHECK(!memcmp(&cpu,&before,sizeof cpu) && !memcmp(&p2,&partner,sizeof p2));
+        CHECK(!call_count && !clear_phase && !state_track.count);
+        if(!negative) {
+            /* Native hold/release remain authoritative; no passenger update. */
+            psx_mod_write_byte(PLAY+0x1C,1);scene_tick(&cpu);
+            CHECK(scene_owner==seat+1 && !scene_phase && !call_count);
+            psx_mod_write_byte(PLAY+0x1C,0);scene_tick(&cpu);
+            CHECK(!scene_owner && !scene_phase && !call_count);
+            CHECK(!memcmp(&p2,&partner,sizeof p2));
+        }
+        zero_projected=0;
+    }
+}
 static void native_shared_clear_admission_and_departure(void) {
     CPUState cpu;
     for(unsigned negative=0;negative<10;++negative) {
@@ -3865,6 +3895,7 @@ int main(void){
     native_shared_ride_ownership();native_both_ride_bindings_and_rosters();native_withdrawn_vehicle_scene_transport();
     native_shared_clear_admission_and_departure();
     native_sigma_transition_retains_living_pair();
+    native_recovery_stays_in_place();
     native_capsule_keeps_living_passenger();native_capsule_owner_contact_transaction();
     native_either_both_door_admission();
     native_both_door_ack_motion_and_release();native_hatch_missing_box_clearance();

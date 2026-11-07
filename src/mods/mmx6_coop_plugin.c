@@ -1502,7 +1502,15 @@ static int sigma_transition_in_place(const CPUState *cpu,uint32_t address) {
 static void script_begin(CPUState *cpu, uint32_t address) {
     if(shared_clear_admit(cpu,address))return;
     if (!scene_call && !failed) {
-        const int in_place=sigma_transition_in_place(cpu,address);
+        /* Turtloid's recovery station requests the ordinary standing hold,
+         * then releases it at EE648/EE6F8. It never transports its visitor.
+         * Keep the original heal/hold, without withdrawing the partner. */
+        const int recovery=!scene_owner && address==0x8003D308u && cpu->gpr[4]==20 &&
+            cpu->gpr[31]==0x800EE604u && psx_mod_read_byte(PLAY+12)==6 &&
+            !psx_mod_read_byte(PLAY+13) &&
+            psx_mod_read_word(0x800EE5E4u)==0x24040014u &&
+            psx_mod_read_word(0x800EE5FCu)==0x0C00F4C2u;
+        const int in_place=recovery || sigma_transition_in_place(cpu,address);
         scene_begin(zero_projected?1:0,address);
         if(in_place)scene_phase=0;
     }

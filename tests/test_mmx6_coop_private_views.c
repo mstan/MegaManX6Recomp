@@ -197,6 +197,9 @@ static int model_transaction(CPUState *cpu,PSXModRenderPassFn callback,void *use
 }
 static void prepare_view(CPUState *cpu,int online,int split) {
     setup(cpu);mmx6_view_sdk_reset();mmx6_view_sdk.online=online;
+    /* The patterned resource fixture is an idle player, not a script hold. */
+    psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD4,0);
+    psx_mod_write_byte(PLAYER+0x7A,0);
     view_native_calls=view_gpu_words=view_callback_calls=view_refuse=view_abort=0;
     arrival_probe=arrival_camera_calls=0;
     weather_probe=weather_world_updates=weather_draws=0;
@@ -376,6 +379,30 @@ static void admitted_door_views(int online,int split) {
         independent_world_begin();CHECK(!view_valid && !view_pending && !view_native_calls);
     }
 }
+static void native_scene_keeps_private_panes(int online,int split) {
+    for(unsigned owner=1;owner<=2;++owner)for(unsigned phase=0;phase<4;++phase) {
+        CPUState cpu;prepare_view(&cpu,online,split);mmx6_view_sdk.local_port=1;
+        scene_owner=owner;scene_phase=phase;both_door_actor=0;
+        psx_mod_write_byte(PLAY+0x10,1);psx_mod_write_byte(PLAY+0x1C,1);
+        psx_mod_write_word(VIEW_CAMERA+8,700u<<16);
+        psx_mod_write_word(VIEW_CAMERA+12,560u<<16);
+        put32(view_cameras[1]+8,100u<<16);put32(view_cameras[1]+12,200u<<16);
+        frame_count=1;view_frame=0;view_valid=1;view_pending=0;
+        CHECK(independent_scene_context());independent_world_begin();
+        CHECK(view_valid && view_pending);
+        CHECK(le32(view_cameras[0]+8)==700u<<16);
+        CHECK(le32(view_cameras[1]+8)==(phase?700u:100u)<<16);
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
+        CHECK(!private_draw && scene_owner==owner && scene_phase==phase);
+        CHECK(view_callback_calls==(split?2u:1u) && !state_track.count && !failed);
+    }
+    CPUState cpu;prepare_view(&cpu,online,split);scene_owner=1;scene_phase=0;
+    psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD4,0);
+    psx_mod_write_byte(PLAYER+0x7A,0);
+    CHECK(!independent_scene_context());independent_world_begin();
+    CHECK(!view_pending && !view_valid); /* Unattributed holds stay refused. */
+}
 static void native_arrival(int online,int split) {
     CPUState cpu;prepare_view(&cpu,online,split);
     mmx6_view_sdk.local_port=1;
@@ -407,6 +434,12 @@ static void native_nova_views(int online,int split) {
     }
     for(unsigned gate=0;gate<NOVA_BLOCKED_CASES;++gate) {
         CPUState cpu;prepare_view(&cpu,online,split);native_nova_body(0);block_native_nova(gate);
+        if(gate==10) {
+            /* A real scene retains its panes under the scene contract,
+             * independently of the narrower Nova-only admission. */
+            CHECK(!primary_nova_active());independent_world_begin();
+            CHECK(view_pending && view_valid);continue;
+        }
         independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
     }
 }
@@ -432,7 +465,11 @@ static void arrival_refusals(void) {
     }
     for(unsigned gate=0;gate<5;++gate) {
         CPUState cpu;prepare_view(&cpu,0,1);life.status[1]=MMX6_COOP_JOINING;
-        if(gate==0)scene_owner=1;else if(gate==1){pause_owner=0;psx_mod_write_byte(PLAY+1,1);}
+        if(gate==0) {
+            scene_owner=1; /* No native script or body hold authorizes it. */
+            psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD4,0);
+            psx_mod_write_byte(PLAYER+0x7A,0);
+        } else if(gate==1){pause_owner=0;psx_mod_write_byte(PLAY+1,1);}
         else if(gate==2)psx_mod_write_byte(PLAY+0x1C,1);
         else if(gate==3)psx_mod_write_byte(PLAY+1,2);else life.status[0]=MMX6_COOP_LEAVING;
         independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
@@ -936,6 +973,7 @@ int main(void) {
 #endif
     reentry();native_arrival(0,1);native_arrival(1,0);arrival_refusals();
     admitted_door_views(0,1);admitted_door_views(1,0);admitted_door_views(1,1);
+    native_scene_keeps_private_panes(0,1);native_scene_keeps_private_panes(1,0);
     native_nova_views(0,1);native_nova_views(1,0);
     native_personal_menu_presentation(0,0);native_personal_menu_presentation(0,1);
     native_personal_menu_presentation(1,0);native_personal_menu_presentation(1,1);
