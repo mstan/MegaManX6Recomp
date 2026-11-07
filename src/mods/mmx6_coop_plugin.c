@@ -3177,11 +3177,12 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
     int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_common_effect(actor)||private_falcon_flight_effect(actor);
-    /* Native player uploads share a VRAM sheet. A private animation update
-     * can replace that sheet before the primary incoming/outgoing beam draws.
-     * Retain the primary's own decoded frame and working palette as well. */
-    int primary=!zero_world && actor==PLAYER && psx_mod_read_byte(PLAYER+3);
-    if (!zero_world && !retained && !primary) return 0;
+    /* The canonical player already has native17B04's upload and native
+     * geometry/texture-page selection. In particular a transport pose must
+     * not be reinterpreted as a decoded body sheet. Ordinary private body
+     * draws do not queue17B04; the borrowed menu separately restores this
+     * native sheet. Keep retained conversion for the private world/effects. */
+    if (!zero_world && !retained) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
     int attached=!psx_mod_read_byte(PLAYER+2) && actor>=0x800911A8 && actor<0x80091298 &&
@@ -3194,9 +3195,7 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t render_context[4]={original,original_mode,actor,arena};STATE_WORDS(restore_packet,18,render_context,4);
     psx_mod_write_word(SCRATCH+0x100,world_packets);
     psx_mod_write_word(SCRATCH+0x104,arena+PLAYER_MODE_OFFSET+(world_packets-arena)/5);
-    if(primary)render_x_death=1;
     render_actor(cpu,actor,arena);
-    if(primary)render_x_death=0;
     /* Only a projected guest world needs the retained primary appended.
      * A canonical private view has already drawn that primary above; using
      * its retained cache again can overlay a different animation pose.

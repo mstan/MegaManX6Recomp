@@ -1317,7 +1317,7 @@ static void hidden_primary_keeps_visible_secondary_draw(void){
     setup(&cpu);begin_world_draw(&cpu,0x80025FB0u);render_hidden_primary_partner(&cpu,0x80022E44u);CHECK(!draw_count);
     render(&cpu,0x800232D4u);CHECK(draw_count==1); /* Existing visible-primary single append. */
 }
-static void primary_frames_keep_their_own_palette_and_pixels(void){
+static void canonical_primary_uses_native_packets(void){
     CPUState cpu;setup(&cpu);PlayerContext primary;capture_player(&primary);
     put32(primary.body+0x38,0x80040000u);put32(primary.body+0x3C,0x80041000u);
     primary.body[0x16]=4;primary.body[0x40]=0;primary.body[0x41]=5;
@@ -1327,12 +1327,17 @@ static void primary_frames_keep_their_own_palette_and_pixels(void){
     for(unsigned i=0;i<16;++i)psx_mod_write_half(palette+i*2u,(uint16_t)(0x5A00u+i));
     project_player(&primary);cpu.gpr[4]=PLAYER;world_packets=packets;
     p1=primary;p1.body[8]^=0x40;scene_owner=2;scene_phase=2; /* Different retained pose/position. */
-    CHECK(render_survivor(&cpu,0x800232D4u) && !failed && bank_count==1);
-    CHECK(draw_count==1); /* The canonical primary must not also draw its retained copy. */
-    CHECK(bank_first[0]==0x5A01 && banks[0].character==2 && !render_x_death);
-    psx_mod_write_half(palette+2,0x6B02);
-    CHECK(render_survivor(&cpu,0x800232D4u) && !failed && bank_count==2);
-    CHECK(bank_first[1]==0x6B02 && psx_mod_read_half(active_palette+2)==0x0101);
+    CHECK(!render_survivor(&cpu,0x800232D4u) && !failed && !bank_count && !draw_count);
+    /* Native232D4 owns the canonical packet, including its own UV/page and
+     * CLUT. Declining replacement must not convert it through actor+38. */
+    psx_mod_write_word(SCRATCH+0x100,packets);
+    psx_mod_write_word(SCRATCH+0x104,packets+MODES_AT);
+    native_draw(PLAYER);
+    CHECK(draw_count==1 && !bank_count && !render_x_death);
+    CHECK(psx_mod_read_word(packets+4)==0x2C808080u);
+    CHECK(psx_mod_read_word(packets+12)==0x78000000u);
+    CHECK(psx_mod_read_word(packets+MODES_AT+4)==0xE1000040u);
+    CHECK(psx_mod_read_half(active_palette+2)==0x0101);
     PlayerContext after;capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof after));
     CHECK(!world_render && !state_track.count && !state_track.error);
 }
@@ -3986,7 +3991,7 @@ static void native_personal_pause_menus(void) {
     personal_probe=0;personal_reset();
 }
 int main(void){
-    hidden_primary_keeps_visible_secondary_draw();primary_frames_keep_their_own_palette_and_pixels();
+    hidden_primary_keeps_visible_secondary_draw();canonical_primary_uses_native_packets();
     native_primary_overlay_sources_during_private_draw();
     native_personal_pause_menus();
     opposite_resource_identity_projection();CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
