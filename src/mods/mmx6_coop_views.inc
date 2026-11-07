@@ -492,10 +492,13 @@ static int independent_present(CPUState *cpu,uint32_t address) {
 static void independent_activate(void) {
     char option[24];int online=psx_mod_netplay_is_active();
     local_split=!online && psx_mod_current_option_value("local_cameras",option,sizeof option) && !strcmp(option,"split");
-    int own_view=0;
+    /* Every online peer presents its own HUD in a private render transaction.
+     * Older stored shared-view choices must not expose the canonical stacked
+     * HUD. A selected online split still gives each pane its own meters. */
+    int own_view=online;
     if(online && psx_mod_current_option_value("cameras",option,sizeof option)) {
         local_split=!strcmp(option,"split");
-        own_view=!strcmp(option,"independent");
+        own_view=!local_split;
     }
     independent_views=local_split || own_view;
     if(independent_views && !mmx6_adaptive_background_activate())failed=1;

@@ -259,7 +259,12 @@ static void defaults_and_scope(void) {
     mmx6_view_sdk.cameras="split";independent_activate();
     CHECK(independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.netplay_allowed);
     mmx6_view_sdk_reset();mmx6_view_sdk.online=1;independent_activate();
-    CHECK(!independent_views && !local_split && !mmx6_view_sdk.pair_enabled && !mmx6_view_sdk.netplay_allowed);
+    CHECK(independent_views && !local_split && !mmx6_view_sdk.pair_enabled && !mmx6_view_sdk.netplay_allowed);
+    /* A legacy shared choice and missing option both retain an own-HUD view;
+     * offline shared camera preferences remain covered above. */
+    mmx6_view_sdk.cameras="option-not-readable-in-this-sdk";
+    CHECK(!psx_mod_current_option_value("cameras",value,sizeof value));independent_activate();
+    CHECK(independent_views && !local_split && !mmx6_view_sdk.pair_enabled);
 }
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
 static void native_camera_context(void) {
