@@ -4,8 +4,11 @@
 #if defined(PSX_MOD_NETPLAY_HOST_CATALOG_API) && PSX_MOD_NETPLAY_HOST_CATALOG_API >= 2
 #include "mmx6_coop_host_lab_contract.h"
 #include "mmx6_coop_portable_cpu_host_lab_contract.h"
+#include "mmx6_coop_release_host_profile.h"
 #include <string.h>
 int mmx6_coop_lab_host_profiles(const PSXModNetplayHostStartup *,PSXHostProfileCatalog *);
+int mmx6_coop_release_host_profiles(const PSXModNetplayHostStartup *,PSXHostProfileCatalog *);
+int mmx6_coop_host_profiles(const PSXModNetplayHostStartup *,PSXHostProfileCatalog *);
 /* The agreed lab fixture accepts only the exact settled cell identities.
  * A portable CPU candidate never bypasses the SDK's actual-artifact gate. */
 static inline int mmx6_coop_lab_selection_matches(const PSXHostSelection *selected){

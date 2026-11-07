@@ -1,4 +1,4 @@
-/* Development-only candidate. See COOP_HOST_LAB_CONTRACT; no broad policy. */
+/* Separate normal-release and development-only host policies. */
 #include "mmx6_coop_host_lab.h"
 #if defined(PSX_MOD_NETPLAY_HOST_CATALOG_API) && PSX_MOD_NETPLAY_HOST_CATALOG_API >= 2
 #include "execution_profile.h"
@@ -29,8 +29,8 @@ static int lab_sha256(const char *text){
         nonzero|=c!='0';}
     return nonzero!=0;
 }
-static int lab_context_common(const PSXModNetplayHostStartup *c,const char *execution){
-    if(!c||!execution||strcmp(execution,MMX6_HOST_LAB_EXECUTION_ID))return 0;
+static int host_context_common(const PSXModNetplayHostStartup *c){
+    if(!c)return 0;
     unsigned image_nonzero=0;
     if(!c->actual_executable_sha256)return 0;
     for(unsigned i=0;i<32;++i)image_nonzero|=c->actual_executable_sha256[i];
@@ -38,13 +38,18 @@ static int lab_context_common(const PSXModNetplayHostStartup *c,const char *exec
     int players=c->player_count?c->player_count:c->slot_count;
     uint32_t mask=c->occupied_mask?c->occupied_mask:3u;
     return image_nonzero&&c->cpu.architecture==PSX_HOST_ARCH_X64&&c->cpu.features_known==1&&
+        !(c->cpu.features&~(uint64_t)0x7fu)&&
         c->compiled_backends==PSX_HOST_BACKEND_ENHANCED&&c->available_backends==PSX_HOST_BACKEND_ENHANCED&&
         c->fp_contract==2&&c->interpreted_overlays_sealed==1&&c->builtin_linked_bios==1&&
         c->builtin_bios_image_id&&!strcmp(c->builtin_bios_image_id,MMX6_HOST_LAB_BIOS_ID)&&
         c->builtin_bios_image_wordsum==MMX6_HOST_LAB_BIOS_WORDSUM&&
-        c->direct_loopback_scope==1&&c->slot_count==2&&players==2&&mask==3&&c->rollback==0&&
+        c->slot_count==2&&players==2&&mask==3&&c->rollback==0&&
         c->loading_enabled==1&&c->renderer==1&&c->retained_texture_banks==1&&c->aspect_index==0&&
         c->declared_build_manifest_schema==1&&lab_sha256(c->declared_build_manifest_sha256);
+}
+static int lab_context_common(const PSXModNetplayHostStartup *c,const char *execution){
+    return execution&&!strcmp(execution,MMX6_HOST_LAB_EXECUTION_ID)&&
+        host_context_common(c)&&c->direct_loopback_scope==1;
 }
 static int lab_context_eligible(const PSXModNetplayHostStartup *c,const char *execution){
     return lab_context_common(c,execution)&&c->cpu.features==MMX6_HOST_LAB_FEATURES;
@@ -91,5 +96,35 @@ int mmx6_coop_lab_host_profiles(const PSXModNetplayHostStartup *context,PSXHostP
         offered[count++]=portable_cpu_rule;
     if(!count)return 0;
     out->rules=offered;out->count=count;return 1;
+}
+int mmx6_coop_release_host_profiles(const PSXModNetplayHostStartup *context,PSXHostProfileCatalog *out){
+    if(!out)return 0;
+    out->rules=NULL;out->count=0;
+#ifdef PSX_NO_DEBUG_TOOLS
+    /* A normal catalog is not checkpoint authority. LAB builds retain their
+     * old loopback-only identities; neither can offer this release policy.
+     * Normal route admission still uses the SDK's actual artifact and full
+     * content/selected-profile agreement before the first guest instruction.
+     * The policy declaration is not evidence of native LAN qualification. */
+    if(MMX6_ENABLE_LOOPBACK_HOST_LAB||MMX6_ENABLE_PORTABLE_CPU_HOST_LAB||
+       !MMX6_HOST_LAB_COMPILER||!MMX6_HOST_LAB_VARIANT||!PSX_EXECUTION_ENHANCED||
+       strcmp(PSX_EXECUTION_ID,MMX6_RELEASE_HOST_EXECUTION_ID)||
+       !host_context_common(context)||
+       (context->direct_loopback_scope!=0&&context->direct_loopback_scope!=1)||
+       !lab_title_eligible(psx_mod_netplay_profile()))return 0;
+    static const PSXHostProfileRule rule={
+        .profile=MMX6_RELEASE_HOST_PROFILE,.revision=MMX6_RELEASE_HOST_REVISION,.priority=1,
+        .flags=PSX_HOST_PROFILE_PORTABLE,.implementation_count=1,
+        .qualification=MMX6_RELEASE_HOST_QUALIFICATION_BYTES,
+        .implementations={{PSX_HOST_BACKEND_ENHANCED,1u<<PSX_HOST_ARCH_X64,0}}
+    };
+    out->rules=&rule;out->count=1;return 1;
+#else
+    (void)context;return 0;
+#endif
+}
+int mmx6_coop_host_profiles(const PSXModNetplayHostStartup *context,PSXHostProfileCatalog *out){
+    if(MMX6_ENABLE_LOOPBACK_HOST_LAB)return mmx6_coop_lab_host_profiles(context,out);
+    return mmx6_coop_release_host_profiles(context,out);
 }
 #endif

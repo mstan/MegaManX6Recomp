@@ -3853,7 +3853,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
         .loading_feature_id = "seamless-loading",
         .loading_plugin_id = "mmx6.seamless",
 #if defined(PSX_MOD_NETPLAY_HOST_CATALOG_API) && PSX_MOD_NETPLAY_HOST_CATALOG_API >= 2
-        .host_profiles = mmx6_coop_lab_host_profiles
+        .host_profiles = mmx6_coop_host_profiles
 #endif
     };
     psx_mod_register_netplay_profile(&netplay_profile);
