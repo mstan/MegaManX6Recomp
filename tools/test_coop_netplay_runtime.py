@@ -119,10 +119,10 @@ def main():
                 ws = request(peer, 'gpu_state')['ws']
                 assert ws['view_anchor'] and ws['bg2d_generations'] > 0, ws
                 pixels = Image.open(path).convert('RGB')
-                for x in (23, 49):
+                for top in (24, 128):
                     greens = sum(g > r+32 and g > b+32 for r, g, b in
-                                 (pixels.getpixel((x, y)) for y in range(24, 100)))
-                    assert greens >= 8, ('native player HUD missing or misplaced', peer, x, greens)
+                                 (pixels.getpixel((23, y)) for y in range(top, top+76)))
+                    assert greens >= 8, ('stacked native player HUD missing or misplaced', peer, top, greens)
                 camera = struct.unpack('<h', read(peer, 0x80097202, 2))[0]
                 actors = read(peer, 0x8008EF48, 0x1D40)
                 revealed = []
