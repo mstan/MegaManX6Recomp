@@ -10,6 +10,7 @@
 #endif
 #include "cpu_state.h"
 #include "mmx6_coop_private_view_sdk_fixture.h"
+static unsigned attack_camera_probe,attack_camera_calls;
 static unsigned view_native_calls,view_gpu_words,view_callback_calls,view_refuse,view_abort;
 static int view_native(CPUState *,uint32_t,uint32_t);
 static int view_gpu(uint32_t,unsigned);
@@ -54,6 +55,14 @@ static void disturb_host(void) {
 }
 static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
     (void)ret;++view_native_calls;
+    if(address==0x8002012Cu && attack_camera_probe) {
+        ++attack_camera_calls;
+        int dx=(int16_t)(psx_mod_read_half(PLAYER+10)-psx_mod_read_half(VIEW_CAMERA+10));
+        /* Original801EE010..58 rejects before advancing PLAYER+7. */
+        if((uint16_t)(dx+16)<353u)psx_mod_write_byte(PLAYER+7,(uint8_t)(psx_mod_read_byte(PLAYER+7)+1));
+        CHECK(psx_mod_read_half(VIEW_CAMERA+14)==538);
+        return 1;
+    }
     if(address==CHARACTER_UPDATE && character_probe) {
         ++character_calls;
         unsigned phase=psx_mod_read_byte(PLAY+2);
@@ -898,7 +907,28 @@ static void native_sequential_character_selection(void) {
     }
     character_probe=0;memset(&character_selection,0,sizeof character_selection);pad_buttons=0xFFFF;
 }
+static void private_beam_pool_uses_own_simulation_camera(void) {
+    CPUState cpu;setup(&cpu);
+    independent_views=1;zero_projected=1;
+    project_player(&p2);psx_mod_write_byte(PLAYER+2,1);psx_mod_write_byte(PLAYER+4,1);
+    psx_mod_write_byte(PLAYER+0x14,0);psx_mod_write_byte(PLAYER+7,0);
+    psx_mod_write_word(PLAYER+8,344u<<16);psx_mod_write_word(PLAYER+12,634u<<16);
+    psx_mod_write_byte(VIEW_CAMERA+4,1);
+    psx_mod_write_half(VIEW_CAMERA+0x30,160);psx_mod_write_half(VIEW_CAMERA+0x32,160);psx_mod_write_half(VIEW_CAMERA+0x2C,96);
+    psx_mod_write_half(VIEW_CAMERA+0x1C,4096);psx_mod_write_half(VIEW_CAMERA+0x1E,0);
+    psx_mod_write_half(VIEW_CAMERA+0x20,4096);psx_mod_write_half(VIEW_CAMERA+0x22,0);
+    psx_mod_write_word(VIEW_CAMERA+8,0);psx_mod_write_word(VIEW_CAMERA+12,538u<<16);
+    uint8_t camera[0xFC];capture(VIEW_CAMERA,camera,sizeof camera);
+    attack_camera_probe=1;attack_camera_calls=0;private_attack_tick(&cpu);
+    CHECK(attack_camera_calls==1 && psx_mod_read_byte(PLAYER+7)==1);
+    CHECK(!memcmp(camera,memory(VIEW_CAMERA),sizeof camera) && !state_track.count);
+    independent_views=0;psx_mod_write_byte(PLAYER+7,0);private_attack_tick(&cpu);
+    CHECK(attack_camera_calls==2 && !psx_mod_read_byte(PLAYER+7));
+    CHECK(!memcmp(camera,memory(VIEW_CAMERA),sizeof camera) && !state_track.count);
+    attack_camera_probe=zero_projected=0;
+}
 int main(void) {
+    private_beam_pool_uses_own_simulation_camera();
     native_sequential_character_selection();
     defaults_and_scope();
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT

@@ -2460,6 +2460,37 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
     pause_owner=-1; p2_start_previous=0;
     ride_call=0;
 }
+/* Native Zero beam44 (801EDFC8) tests its spawn X against the owning
+ * camera before incrementing PLAYER+7. Using P1's camera retires every
+ * initial beam of a distant P2 and leaves Rekkoha in phase4 indefinitely.
+ * Keep the private attack pool's simulation bounds with its living owner;
+ * the shared camera and world still advance only in the original pass. */
+static void private_attack_tick(CPUState *cpu) {
+    unsigned layer=psx_mod_read_byte(PLAYER+0x14);
+    uint32_t camera=0x800971F8u+layer*0x54u;
+    if(!independent_views || !zero_projected ||
+       private_actor.character!=MMX6_COOP_CHARACTER_ZERO ||
+       psx_mod_read_byte(PLAYER+2)!=1 || psx_mod_read_byte(PLAYER+4)!=1 ||
+       layer>=3 || psx_mod_read_byte(camera+4)!=1 ||
+       psx_mod_read_half(camera+0x30)!=160 || psx_mod_read_half(camera+0x32)!=160 ||
+       psx_mod_read_half(camera+0x2C)!=96) {
+        guest(cpu,0x8002012Cu,0,0);return;
+    }
+    int limits[4];for(unsigned i=0;i<4;++i)limits[i]=(int16_t)psx_mod_read_half(camera+0x1C+i*2);
+    if(limits[0]<limits[1] || limits[2]<limits[3]) {
+        guest(cpu,0x8002012Cu,0,0);return;
+    }
+    int x=(int16_t)psx_mod_read_half(PLAYER+10)-160;
+    int y=(int16_t)psx_mod_read_half(PLAYER+14)-96;
+    if(x<limits[1])x=limits[1];if(x>limits[0])x=limits[0];
+    if(y<limits[3])y=limits[3];if(y>limits[2])y=limits[2];
+    uint32_t saved[3]={camera,psx_mod_read_word(camera+8),psx_mod_read_word(camera+12)};
+    STATE_WORDS(restore_attack_camera,145,saved,3);
+    psx_mod_write_word(camera+8,(uint32_t)x<<16);psx_mod_write_word(camera+12,(uint32_t)y<<16);
+    guest(cpu,0x8002012Cu,0,0);
+    psx_mod_write_word(saved[0]+8,saved[1]);psx_mod_write_word(saved[0]+12,saved[2]);
+    STATE_POP(restore_attack_camera);
+}
 static void controller(CPUState *cpu, uint32_t address) {
     (void)address;
     if (inside || failed) return;
@@ -2531,7 +2562,7 @@ static void controller(CPUState *cpu, uint32_t address) {
         previous_input=raw;
         guest(cpu,0x8003CD44,0,0);
         guest(cpu,0x80034DCC,0,0);
-        guest(cpu,0x8002012C,0,0); /* This player's attack pool, never enemies/world. */
+        private_attack_tick(cpu); /* This player's attack pool, never enemies/world. */
         /* Native350FC just cleared this body's support mask. Snail and the
          * other shared solids must author the current mask before2F288 can
          * decide whether to snap down onto terrain. Original20CC0 runs last. */
