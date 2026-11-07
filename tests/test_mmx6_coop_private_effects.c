@@ -1288,15 +1288,16 @@ static void hidden_primary_keeps_visible_secondary_draw(void){
     CPUState cpu;setup(&cpu);scene_owner=2;scene_phase=3;
     psx_mod_write_byte(PLAYER+3,0);cpu.gpr[4]=0x800C4578u;
     PlayerContext primary,secondary=p2;capture_player(&primary);
-    begin_world_draw(&cpu,0x80025FB0u);
+    begin_world_draw(&cpu,0x80025FB0u);CHECK(!draw_count); /* Native list reset still follows. */
+    render_hidden_primary_partner(&cpu,0x80022E44u);
     CHECK(draw_count==1 && drawn[0]==PLAYER && bank_count==1);
     CHECK(world_packets==packets+40 && cpu.gpr[4]==0x800C4578u);
     PlayerContext after;capture_player(&after);
     CHECK(!memcmp(&primary,&after,sizeof after) && !memcmp(&secondary,&p2,sizeof p2));
     CHECK(!inside && !world_render && !state_track.count && !state_track.error && !failed);
     setup(&cpu);psx_mod_write_byte(PLAYER+3,0);p2.body[3]=0;
-    begin_world_draw(&cpu,0x80025FB0u);CHECK(!draw_count);
-    setup(&cpu);begin_world_draw(&cpu,0x80025FB0u);CHECK(!draw_count);
+    begin_world_draw(&cpu,0x80025FB0u);render_hidden_primary_partner(&cpu,0x80022E44u);CHECK(!draw_count);
+    setup(&cpu);begin_world_draw(&cpu,0x80025FB0u);render_hidden_primary_partner(&cpu,0x80022E44u);CHECK(!draw_count);
     render(&cpu,0x800232D4u);CHECK(draw_count==1); /* Existing visible-primary single append. */
 }
 static void primary_frames_keep_their_own_palette_and_pixels(void){

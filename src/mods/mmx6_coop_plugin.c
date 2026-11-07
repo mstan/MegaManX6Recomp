@@ -2970,24 +2970,14 @@ static void giga_packet_trace(const char *phase,uint32_t actor) {
 static void giga_packet_trace(const char *phase,uint32_t actor) { (void)phase;(void)actor; }
 #endif
 
-static void render(CPUState *cpu,uint32_t address);
 static void begin_world_draw(CPUState *cpu,uint32_t address) {
     /* Native80025FB0 precedes background and sprite/HUD emission, including
      * the first arrival draw before stage_tick. Both private bodies and
      * deferred shared effects append once in this original render order. */
     independent_world_begin();
     if(enrolled && !failed)world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
-    /* Native22960 skips232D4 when the primary body is hidden. The second
-     * body must still enter this world's ordering table during that interval,
-     * including the withdrawn primary in a guest-owned dialogue. Ordinary
-     * visible-primary frames retain their existing single append at232D4. */
-    if(!inside && !zero_world && !zero_projected && !world_render &&
-       !personal_pass && !psx_mod_read_byte(PLAYER+3)) {
-        uint32_t a0=cpu->gpr[4];cpu->gpr[4]=PLAYER;
-        render(cpu,0x800232D4u);cpu->gpr[4]=a0;
-    }
     giga_packet_trace("world-begin",0);
-    (void)address;
+    (void)cpu;(void)address;
 }
 static int world_draw_filter(CPUState *cpu,uint32_t address) {
     /* Entries and filters share one SDK hook slot. Keep native frame/pane
@@ -3165,6 +3155,15 @@ static void render(CPUState *cpu, uint32_t address) {
     psx_mod_write_word(diagnostic+28,bank_count);
     psx_mod_write_word(diagnostic+32,(end-base)/40);
     inside=world_render=0;
+}
+static void render_hidden_primary_partner(CPUState *cpu,uint32_t address) {
+    /* Native22960 resets its actor lists before conditionally drawing PLAYER.
+     * Append the other body immediately before22E44 merges those lists into
+     * the world OT. A hidden primary never calls232D4's ordinary append hook. */
+    if(address!=0x80022E44u || inside || zero_world || zero_projected ||
+       world_render || personal_pass || psx_mod_read_byte(PLAYER+3))return;
+    uint32_t a0=cpu->gpr[4];cpu->gpr[4]=PLAYER;
+    render(cpu,0x800232D4u);cpu->gpr[4]=a0;
 }
 static int living_primary_frozen_draw(void) {
     /* A guest-owned in-place dialogue and a guest-owned pause both keep
@@ -3882,6 +3881,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800F3FC4u,0x0064182Au,gate_homing_target);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80022E44u,render_hidden_primary_partner);
     psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",0x80025FB0,world_draw_filter);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002927C,world_camera_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80029D18,guest_placement_scan);
