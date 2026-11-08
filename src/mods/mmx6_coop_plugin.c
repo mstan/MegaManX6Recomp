@@ -3776,6 +3776,7 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
 /* The SDK permits one entry hook per plugin/address. Dispatch both
  * source-disjoint placements from that one registered native boundary. */
 static void guest_placement_scan(CPUState *cpu,uint32_t address) {
+    intro_guest_streaming_scan(cpu);
     intro_guest_placement_scan(cpu,address);
     amazon_guest_placement_scan(cpu,address);
 }

@@ -97,6 +97,7 @@ static int amazon_guest_support(uint32_t actor,int *x,int *y) {
 }
 static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {
     if(shared_effect_view_bounds(cpu,address))return 1;
+    if(intro_guest_streaming_lifetime(cpu))return 1;
     if(intro_guest_geometry_lifetime(cpu,address))return 1;
     int x,y;uint32_t actor=cpu->gpr[4];
     if(cpu->gpr[31]!=0x800EC038u || !amazon_guest_support(actor,&x,&y))return 0;
@@ -108,6 +109,7 @@ static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {
 }
 static int amazon_guest_support_visibility(CPUState *cpu,uint32_t address) {
     if(shared_effect_view_bounds(cpu,address))return 1;
+    if(intro_guest_streaming_visibility(cpu))return 1;
     if(private_zero_saber_visibility(cpu,address))return 1;
     int x,y;uint32_t actor=cpu->gpr[4];
     if((cpu->gpr[31]!=0x800EC050u && cpu->gpr[31]!=0x800EC06Cu) ||

@@ -24,6 +24,7 @@ static uint8_t mounted_source_bin[40334],mounted_init_seed[0xB0];
 static unsigned refusal_logs;
 static char refusal_log[512];
 static unsigned intro_scan_probe,intro_scan_calls,intro_scan_allocations,intro_canonical_cycles;
+static unsigned intro_stream_probe,intro_stream_allocations;
 static unsigned amazon_scan_probe,amazon_scan_calls,amazon_visibility_calls;
 static void checkpoint_test_refusal_log(const char *format,...) {
     va_list args;va_start(args,format);
@@ -83,6 +84,23 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
         psx_mod_write_byte(cpu->gpr[4]+3,psx_mod_read_half(VIEW_CAMERA+10)==250);
         return 1;
     }
+#ifdef MMX6_COOP_MODERN_STATE
+    if(intro_stream_probe && target==0x80029F38u) {
+        uint32_t record=psx_mod_read_word(0x8007349Cu),actor=0x8008EF48u;
+        CHECK(inside && !private_draw && state_track.count);
+        CHECK(record>=0x800FA214u && record<intro_placement_end() && !(psx_mod_read_byte(record)&0x81u));
+        CHECK(psx_mod_read_byte(record+11)==15 && !psx_mod_read_word(cpu->gpr[29]+0x10));
+        int x=(int16_t)psx_mod_read_half(record+4),y=(int16_t)psx_mod_read_half(record+6);
+        CHECK((int32_t)cpu->gpr[4]<x && x<(int32_t)cpu->gpr[5] &&
+              (int32_t)cpu->gpr[6]<y && y<(int32_t)cpu->gpr[7]);
+        CHECK(!psx_mod_read_byte(actor));
+        psx_mod_write_byte(actor,0x41);psx_mod_write_byte(actor+1,psx_mod_read_byte(record+1));
+        psx_mod_write_byte(actor+2,psx_mod_read_byte(record+2));
+        psx_mod_write_word(actor+8,(uint32_t)x<<16);psx_mod_write_word(actor+12,(uint32_t)y<<16);
+        psx_mod_write_word(actor+0x10,record);psx_mod_write_byte(record,psx_mod_read_byte(record)|1u);
+        ++intro_stream_allocations;return 1;
+    }
+#endif
     if(intro_scan_probe && target==0x80029D18u) {
         /* Original canonical scan contract: active-bit81 is checked before
          * any outside-rectangle latch reset. An inactive initial flags0
@@ -3011,7 +3029,7 @@ static void guest_intro_geometry_admission(CPUState *cpu) {
         guest(cpu,0x80029D18u,0,0);
         uint8_t placements[0x210];capture(0x800FA214u,placements,list_bytes);
         uint32_t root=psx_mod_read_word(0x8007349Cu),sentinel=psx_mod_read_word(0x800FA39Cu);
-        guest_placement_scan(cpu,0x80029D18u);
+        intro_guest_placement_scan(cpu,0x80029D18u);
         CHECK(psx_mod_read_word(0x8007349Cu)==root && psx_mod_read_word(0x800FA39Cu)==sentinel);
         for(unsigned i=0;i<list_bytes;++i) {
             uint32_t at=0x800FA214u+i;
@@ -3037,6 +3055,50 @@ static void guest_intro_geometry_admission(CPUState *cpu) {
     psx_mod_write_byte(0x80029D18u,original);psx_mod_write_byte(PLAY+12,1);
     intro_guest_placement_scan(cpu,0x80029D18u);CHECK(intro_scan_calls==2);
     intro_scan_probe=0;
+}
+static void guest_intro_enemy_admission(CPUState *cpu) {
+    setup_agreed(cpu,0);memcpy(test_ram,before_doors_ram,sizeof test_ram);
+    memset(test_ram+(0x8008EF48u&0x1FFFFFu),0,0x1D40);
+    memset(p2.body,0,sizeof p2.body);p2.body[0]=p2.body[3]=p2.body[4]=1;
+    p2.body[2]=1;p2.body[5]=2;p2.body[0x5C]=32;
+    put32(p2.body+8,568u<<16);put32(p2.body+12,1115u<<16);
+    enrolled=independent_views=1;failed=private_draw=inside=zero_world=scene_owner=clear_phase=0;
+    pause_owner=-1;life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+    psx_mod_write_byte(PLAY+12,0);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);
+    psx_mod_write_word(PLAYER+8,144u<<16);psx_mod_write_word(PLAYER+12,1115u<<16);
+    psx_mod_write_byte(VIEW_CAMERA+4,1);psx_mod_write_byte(VIEW_CAMERA+0x44,1);
+    psx_mod_write_half(VIEW_CAMERA+0x30,160);psx_mod_write_half(VIEW_CAMERA+0x32,160);
+    psx_mod_write_half(VIEW_CAMERA+0x2C,96);intro_camera_valid=1;
+    const uint16_t limits[]={5120,0,944,944};
+    for(unsigned i=0;i<4;++i){intro_camera_requests[i*2]=(uint8_t)limits[i];intro_camera_requests[i*2+1]=(uint8_t)(limits[i]>>8);}
+    uint32_t end=intro_placement_end(),record=0;CHECK(end);
+    for(uint32_t at=0x800FA214u;at<end;at+=8u) {
+        psx_mod_write_byte(at,1); /* Other original placements already admitted. */
+        if(psx_mod_read_byte(at+1)==1 && psx_mod_read_half(at+4)==416)record=at;
+    }
+    CHECK(record);psx_mod_write_byte(record,0);CHECK(intro_geometry_source());
+    uint32_t root=psx_mod_read_word(0x8007349Cu),next=psx_mod_read_word(record+8);
+    uint8_t primary[0x158],camera[0xFC];capture(PLAYER,primary,sizeof primary);capture(VIEW_CAMERA,camera,sizeof camera);
+    cpu->gpr[29]=0x801FFF00u;cpu->gpr[6]=0x11223344;cpu->gpr[7]=0x55667788;
+    psx_mod_write_word(cpu->gpr[29]+0x10,0xAABBCCDD);
+    intro_stream_probe=1;intro_stream_allocations=0;
+    guest_placement_scan(cpu,0x80029D18u);guest_placement_scan(cpu,0x80029D18u);
+    intro_stream_probe=0;CHECK(intro_stream_allocations==1);
+    CHECK(psx_mod_read_word(0x8007349Cu)==root && psx_mod_read_word(record+8)==next);
+    CHECK(cpu->gpr[6]==0x11223344 && cpu->gpr[7]==0x55667788 && psx_mod_read_word(cpu->gpr[29]+0x10)==0xAABBCCDD);
+    uint8_t actual[0x158];capture(PLAYER,actual,sizeof primary);CHECK(!memcmp(actual,primary,sizeof primary));
+    capture(VIEW_CAMERA,actual,sizeof camera);CHECK(!memcmp(actual,camera,sizeof camera));
+    CHECK(!inside && !state_track.count && !state_track.error);
+    cpu->gpr[4]=0x8008EF48u;cpu->gpr[5]=80;cpu->gpr[6]=160;cpu->gpr[2]=99;
+    CHECK(intro_guest_streaming_lifetime(cpu) && !cpu->gpr[2]);
+    psx_mod_write_word(0x8009B79Cu,320);cpu->gpr[2]=99;
+    CHECK(intro_guest_streaming_visibility(cpu) && psx_mod_read_byte(0x8008EF4Bu)==1 && cpu->gpr[2]==99);
+    put32(p2.body+8,4900u<<16);cpu->gpr[2]=99;
+    CHECK(!intro_guest_streaming_lifetime(cpu) && cpu->gpr[2]==99);
+    psx_mod_write_byte(0x8008EF4Bu,0);
+    CHECK(!intro_guest_streaming_visibility(cpu) && !psx_mod_read_byte(0x8008EF4Bu) && cpu->gpr[2]==99);
 }
 static void guest_amazon_support_admission(CPUState *cpu) {
     setup_agreed(cpu,0);memcpy(test_ram,original_ram,sizeof test_ram);
@@ -3178,6 +3240,7 @@ int main(int argc,char **argv) {
     CHECK(fread(before_doors_ram,1,sizeof before_doors_ram,file)==sizeof before_doors_ram && fgetc(file)==EOF);fclose(file);
 #ifdef MMX6_COOP_MODERN_STATE
     guest_intro_geometry_admission(&cpu);
+    guest_intro_enemy_admission(&cpu);
     guest_amazon_support_admission(&cpu);
 #endif
     fixture=getenv("MMX6_PORTAL_SETUP_RAM");
