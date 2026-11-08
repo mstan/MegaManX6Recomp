@@ -16,6 +16,7 @@ static uint32_t view_frame, view_buffer, view_ot[32];
 static unsigned view_valid, view_pending;
 static unsigned view_menu_history;
 static uint8_t view_menu_stage,view_menu_section,view_menu_checkpoint;
+static int independent_pause_fading(void);
 static uint8_t view_quake_input[0x54];
 static uint32_t view_quake_frame;
 static unsigned view_quake_valid;
@@ -62,7 +63,9 @@ static void personal_menu_assets(CPUState *cpu,unsigned seat) {
     gr_vram_transfer_in(0,480,256,32,pixels);
 }
 static void private_menu_fade(uint32_t buffer) {
-    unsigned shade=personal_menu_fade(buffer);
+    unsigned shade=independent_pause_fading()?
+        psx_mod_read_byte(0x800C483Cu+(buffer==VIEW_BUFFER+VIEW_STRIDE)*16u):
+        personal_menu_fade(buffer);
     if(!shade)return;
     unsigned parity=buffer==VIEW_BUFFER+VIEW_STRIDE;
     /* Original135C0/135C4 and13640 publish this exact subtractive draw mode. */
@@ -206,13 +209,27 @@ static int independent_menu_context(void) {
                             life.status[seat]!=MMX6_COOP_FALLEN)))return 0;
     return life.status[0]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_ALIVE;
 }
+static int independent_menu_room(void) {
+    return psx_mod_read_byte(PLAY+12)==view_menu_stage &&
+        psx_mod_read_byte(PLAY+13)==view_menu_section &&
+        psx_mod_read_byte(PLAY+0x1D)==view_menu_checkpoint;
+}
+static int independent_pause_fading(void) {
+    unsigned living=(life.status[0]==MMX6_COOP_ALIVE?1u:0u)|
+        (life.status[1]==MMX6_COOP_ALIVE?2u:0u);
+    int initializing=psx_mod_read_byte(PLAY+1)==2 && personal_active && !personal_initialized &&
+        !personal_menu[0].native[4] && personal_menu[0].native[5]<=1 &&
+        personal_eligible && !(personal_eligible&~living);
+    return view_valid && view_menu_history && independent_menu_room() &&
+        independent_menu_context() && pause_owner>=0 && pause_owner<2 &&
+        ((life.status[pause_owner]==MMX6_COOP_ALIVE && psx_mod_read_byte(PLAY+1)==1) || initializing) &&
+        !clear_phase && !psx_mod_read_byte(PLAY+0x10) && !coop_world_hold();
+}
 static void independent_menu_begin(void) {
     if(private_draw || !independent_views || !view_valid || view_menu_history ||
-       pause_owner<0 || !independent_menu_context() ||
+       pause_owner<0 || pause_owner>1 || !independent_menu_context() ||
+       !independent_menu_room() ||
        (psx_mod_read_byte(PLAY+1)!=0 && psx_mod_read_byte(PLAY+1)!=2))return;
-    view_menu_stage=psx_mod_read_byte(PLAY+12);
-    view_menu_section=psx_mod_read_byte(PLAY+13);
-    view_menu_checkpoint=psx_mod_read_byte(PLAY+0x1D);
     view_menu_history=1;
 }
 
@@ -308,10 +325,9 @@ static void independent_world_begin(void) {
         (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
         life.status[1]==MMX6_COOP_ALIVE && psx_mod_read_byte(PLAY)==10 &&
         !psx_mod_read_byte(PLAY+1);
-    int menu_history=view_menu_history && independent_menu_context() &&
-        psx_mod_read_byte(PLAY+12)==view_menu_stage &&
-        psx_mod_read_byte(PLAY+13)==view_menu_section &&
-        psx_mod_read_byte(PLAY+0x1D)==view_menu_checkpoint;
+    int menu_history=view_menu_history && independent_menu_context() && independent_menu_room();
+    int entering=independent_pause_fading();
+    int pause_host=entering && inside && zero_world && !personal_pass;
     int door_views=independent_door_context();
     /* A shared story camera does not merge the heroes' HUD ownership. Draw
      * that camera in both panes while each pane retains its own native HUD.
@@ -322,11 +338,11 @@ static void independent_world_begin(void) {
      * after projection restores, with each pane's own HUD. Rejecting it here
      * exposes the canonical stacked HUD during warning/dialogue frames. */
     int scene_host=scene_views && scene_owner==2 && inside && zero_world && !personal_pass;
-    if(!enrolled || failed || (inside && !(returning && personal_pass && !personal_seat) && !initial && !guest_host && !scene_host) ||
-       (zero_world && !guest_host && !scene_host) || (scene_owner && !door_views && !scene_views) || clear_phase ||
-       (pause_owner>=0 && psx_mod_read_byte(PLAY+1) && !returning) ||
+    if(!enrolled || failed || (inside && !((returning || entering) && personal_pass && !personal_seat) && !initial && !guest_host && !scene_host && !pause_host) ||
+       (zero_world && !guest_host && !scene_host && !pause_host) || (scene_owner && !door_views && !scene_views) || clear_phase ||
+       (pause_owner>=0 && psx_mod_read_byte(PLAY+1) && !returning && !entering) ||
        (psx_mod_read_byte(PLAY)!=10 && !initial) ||
-       (psx_mod_read_byte(PLAY+1) && !returning) ||
+       (psx_mod_read_byte(PLAY+1) && !returning && !entering) ||
        (psx_mod_read_byte(PLAY+0x10) && !door_views && !scene_views && !initial) ||
        (coop_world_hold() && !door_views && !scene_views && !returning && !initial) ||
        (life.status[0]!=MMX6_COOP_ALIVE &&
@@ -339,6 +355,15 @@ static void independent_world_begin(void) {
     }
     uint32_t buffer=psx_mod_read_word(0x8009B7A0u);
     if(buffer!=VIEW_BUFFER && buffer!=VIEW_BUFFER+VIEW_STRIDE)return;
+    if(entering) {
+        /* This is the current native world, with the last live cameras.
+         * Clear its canonical OT in each transaction and publish the native
+         * fade TILE once after that pane's world/HUD, without ticking it. */
+        view_frame=frame_count;view_buffer=buffer;view_pending=1;return;
+    }
+    view_menu_stage=psx_mod_read_byte(PLAY+12);
+    view_menu_section=psx_mod_read_byte(PLAY+13);
+    view_menu_checkpoint=psx_mod_read_byte(PLAY+0x1D);
     if(scene_views && scene_phase) {
         capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
         memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
@@ -426,7 +451,7 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
         capture(VIEW_CAMERA,view_cameras[1],sizeof view_cameras[1]);
         project(PLAYER,body,sizeof body);
     }
-    if(menu || returning)
+    if(menu || returning || independent_pause_fading())
         guest(cpu,0x8006663Cu,view_buffer+0x70u,32); /* Original12150 ClearOTagR. */
     else for(unsigned i=0;i<32;++i)psx_mod_write_word(view_buffer+0x70+i*4,view_ot[i]);
     /* The retail ring currently belongs to the canonical camera. Rebuild it
