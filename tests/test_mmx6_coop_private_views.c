@@ -253,6 +253,23 @@ static void presentation_restore(int online,int split,unsigned refuse,unsigned a
 static int forbidden_callback(CPUState *cpu,void *user,uint32_t eye) {
     (void)cpu;(void)user;(void)eye;CHECK(0);return 0;
 }
+static void native_stage_layout_before_enrollment(void) {
+    static const uint8_t modes[]={8,9,10,20};
+    for(int online=0;online<2;++online)for(int split=0;split<2;++split)
+        for(unsigned i=0;i<sizeof modes/sizeof *modes;++i) {
+            CPUState cpu;prepare_view(&cpu,online,split);
+            if(split)CHECK(psx_mod_set_local_pair_presentation(1));
+            enrolled=arrival_pair=view_pending=view_valid=0;
+            psx_mod_write_byte(PLAY,modes[i]);
+            CPUState original=cpu;uint32_t digest=state_digest();
+            static uint8_t original_ram[sizeof ram];memcpy(original_ram,ram,sizeof ram);
+            CHECK(!independent_present(&cpu,VIEW_DRAW_OT));
+            CHECK(mmx6_view_sdk.pair_enabled==(!online && split && (modes[i]==9 || modes[i]==10)));
+            CHECK(!view_native_calls && !view_callback_calls && !mmx6_view_sdk.pair_calls);
+            CHECK(!memcmp(&original,&cpu,sizeof cpu) && !memcmp(original_ram,ram,sizeof ram));
+            CHECK(state_digest()==digest && !view_pending && !view_valid && !enrolled && !arrival_pair);
+        }
+}
 static void retained_presentation_lifetime(void) {
     for(unsigned gate=0;gate<6;++gate) {
         CPUState cpu;prepare_view(&cpu,1,1);CHECK(psx_mod_set_local_pair_presentation(1));
@@ -1091,6 +1108,7 @@ int main(void) {
     private_beam_pool_uses_own_simulation_camera();
     native_sequential_character_selection();
     defaults_and_scope();
+    native_stage_layout_before_enrollment();
     retained_presentation_lifetime();
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
     native_camera_context();

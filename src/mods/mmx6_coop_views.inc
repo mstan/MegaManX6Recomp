@@ -489,7 +489,16 @@ static int independent_present(CPUState *cpu,uint32_t address) {
      * including arrival before the ordinary gameplay dispatcher starts. */
     if(failed || (!menu && (!independent_views || !enrolled ||
        (psx_mod_read_byte(PLAY)!=10 && !(view_valid && view_pending && view_buffer==buffer))))) {
-        (void)psx_mod_set_local_pair_presentation(0);view_pending=0;return 0;
+        /* Native stage images can precede partner enrollment and the first
+         * private pair. Keep the selected local layout while the runtime
+         * mirrors that current native viewport into both panes. */
+        unsigned major=psx_mod_read_byte(PLAY);
+        int shared_stage=!failed && independent_views && local_split &&
+            !psx_mod_netplay_is_active() && (major==9 || major==10);
+        /* A new native stage cannot retain an earlier stage's completed pair. */
+        (void)psx_mod_set_local_pair_presentation(0);
+        if(shared_stage)(void)psx_mod_set_local_pair_presentation(1);
+        view_pending=0;return 0;
     }
     if(local_split)(void)psx_mod_set_local_pair_presentation(1);
     else if(!psx_mod_netplay_is_active())
