@@ -3596,9 +3596,9 @@ static uint16_t hud_tile_bank(uint16_t page, uint16_t clut, uint16_t uv) {
 }
 static int hud_icon(CPUState *cpu, uint32_t address) {
     (void)address;
-    /* The life pool is shared. Keep its original P1 display, without a
-     * duplicate beneath Zero's meters. All frames/icons remain native. */
-    if (hud_seat!=1 || (cpu->gpr[4]!=3 && cpu->gpr[4]!=4)) return 0;
+    /* Separate panes each need the shared life count. Suppress its duplicate
+     * only when both heroes' meters occupy the same shared canvas. */
+    if (private_draw || hud_seat!=1 || (cpu->gpr[4]!=3 && cpu->gpr[4]!=4)) return 0;
     cpu->gpr[2]=0;
     return 1;
 }

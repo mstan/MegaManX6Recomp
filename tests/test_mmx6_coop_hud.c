@@ -259,6 +259,12 @@ int main(void){
     hud_zero_packets(hud_packets);CHECK(failed && !option_reads && !tag_count && !definitions);
     for(unsigned gate=0;gate<4;++gate){setup(&cpu,"side_by_side");if(gate==0)hud_call=1;else if(gate==1)enrolled=0;else if(gate==2)failed=1;else psx_mod_write_byte(PLAY,4);
         CHECK(!draw_coop_hud(&cpu,0x800244C0) && !call_count && !option_reads);}
-    setup(&cpu,NULL);for(unsigned icon=0;icon<6;++icon){cpu.gpr[4]=icon;hud_seat=0;CHECK(!hud_icon(&cpu,0));hud_seat=1;CHECK(hud_icon(&cpu,0)==(icon==3 || icon==4));}
+    setup(&cpu,NULL);
+    for(unsigned pane=0;pane<2;++pane)for(unsigned seat=0;seat<2;++seat)for(unsigned icon=0;icon<6;++icon){
+        private_draw=pane;hud_seat=seat;cpu.gpr[4]=icon;cpu.gpr[2]=0x12345678;
+        int suppressed=!pane && seat && (icon==3 || icon==4);
+        CHECK(hud_icon(&cpu,0)==suppressed);
+        CHECK(cpu.gpr[2]==(suppressed?0u:0x12345678u));
+    }
     puts("HUD layout actual-plugin offsets, native packet ownership, anchors and gates PASS");return 0;
 }
