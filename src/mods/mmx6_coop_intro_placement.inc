@@ -40,6 +40,23 @@ static uint32_t intro_placement_end(void) {
         if(psx_mod_read_byte(at+3)==15)return at;
     return 0;
 }
+static int intro_foreground_source(void) {
+    /* Original category5 allocator and type10 phase dispatcher. This
+     * composite is a global-FX object, separate from the NPC pool. Its live
+     * phase F96AC owns visibility48/32; only a section change retires it. */
+    return psx_mod_read_word(0x80073490u)==0x8002C530u &&
+        psx_mod_read_word(SCRATCH+0x90u)==0x800FA814u &&
+        psx_mod_read_word(0x800FA83Cu)==0x800F9570u &&
+        psx_mod_read_word(0x800FBB60u)==0x800F95ACu &&
+        psx_mod_read_word(0x800FBB64u)==0x800F96ACu &&
+        psx_mod_read_word(0x800FBB68u)==0x800F96F8u &&
+        checkpoint_hash(0x800F9570u,0x800F9718u)==0xF79F5D55u;
+}
+static int intro_streaming_record(uint32_t record) {
+    unsigned category=psx_mod_read_byte(record+3)&15u;
+    return category<3u || (category==5u && psx_mod_read_byte(record+1)==10u &&
+        intro_foreground_source());
+}
 static void intro_guest_streaming_scan(CPUState *cpu) {
     int x,y;if(!intro_guest_view(&x,&y))return;
     uint32_t end=intro_placement_end();if(!end)return;
@@ -49,7 +66,7 @@ static void intro_guest_streaming_scan(CPUState *cpu) {
      * 29F38; the special geometry record retains its existing path below. */
     for(uint32_t at=0x800FA214u;at<end;at+=8u) {
         if(at==0x800FA394u || (psx_mod_read_byte(at)&0x81u) ||
-           (psx_mod_read_byte(at+3)&15u)>=3u)continue;
+           !intro_streaming_record(at))continue;
         int px=(int16_t)psx_mod_read_half(at+4),py=(int16_t)psx_mod_read_half(at+6);
         if(px<=x-48 || px>=x+368 || py<=y-48 || py>=y+288)continue;
         uint32_t stack=cpu->gpr[29]+0x10u;
@@ -89,9 +106,20 @@ static int intro_guest_streaming_lifetime(CPUState *cpu) {
        (uint16_t)(dy+ry)>=(uint16_t)(ry*2u+240u))return 0;
     cpu->gpr[2]=0;return 1;
 }
+static int intro_guest_foreground_actor(uint32_t actor,int *x,int *y) {
+    if(actor<0x800CD410u || actor>=0x800CF810u || (actor-0x800CD410u)%0x60u ||
+       !(psx_mod_read_byte(actor)&1u) || psx_mod_read_byte(actor+1)!=10u ||
+       psx_mod_read_byte(actor+4)!=1u || psx_mod_read_byte(actor+0x14) ||
+       !intro_guest_view(x,y) || !intro_foreground_source())return 0;
+    uint32_t record=psx_mod_read_word(actor+0x10),end=intro_placement_end();
+    return end && record>=0x800FA214u && record<end && !((record-0x800FA214u)%8u) &&
+        (psx_mod_read_byte(record+3)&15u)==5u && psx_mod_read_byte(record+1)==10u &&
+        psx_mod_read_byte(record+2)==psx_mod_read_byte(actor+2);
+}
 static int intro_guest_streaming_visibility(CPUState *cpu) {
     int x,y;uint32_t actor=cpu->gpr[4];
-    if(!intro_guest_streaming_actor(actor,&x,&y))return 0;
+    if(!intro_guest_streaming_actor(actor,&x,&y) &&
+       (cpu->gpr[31]!=0x800F96C8u || !intro_guest_foreground_actor(actor,&x,&y)))return 0;
     unsigned rx=cpu->gpr[5],ry=cpu->gpr[6];
     int dx=(int16_t)(psx_mod_read_half(actor+10)-(uint16_t)x);
     int dy=(int16_t)(psx_mod_read_half(actor+14)-(uint16_t)y);

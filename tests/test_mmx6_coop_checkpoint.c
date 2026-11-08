@@ -86,7 +86,8 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
     }
 #ifdef MMX6_COOP_MODERN_STATE
     if(intro_stream_probe && target==0x80029F38u) {
-        uint32_t record=psx_mod_read_word(0x8007349Cu),actor=0x8008EF48u;
+        uint32_t record=psx_mod_read_word(0x8007349Cu);
+        uint32_t actor=(psx_mod_read_byte(record+3)&15u)==5u?0x800CD410u:0x8008EF48u;
         CHECK(inside && !private_draw && state_track.count);
         CHECK(record>=0x800FA214u && record<intro_placement_end() && !(psx_mod_read_byte(record)&0x81u));
         CHECK(psx_mod_read_byte(record+11)==15 && !psx_mod_read_word(cpu->gpr[29]+0x10));
@@ -96,6 +97,7 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
         CHECK(!psx_mod_read_byte(actor));
         psx_mod_write_byte(actor,0x41);psx_mod_write_byte(actor+1,psx_mod_read_byte(record+1));
         psx_mod_write_byte(actor+2,psx_mod_read_byte(record+2));
+        psx_mod_write_byte(actor+4,1);
         psx_mod_write_word(actor+8,(uint32_t)x<<16);psx_mod_write_word(actor+12,(uint32_t)y<<16);
         psx_mod_write_word(actor+0x10,record);psx_mod_write_byte(record,psx_mod_read_byte(record)|1u);
         ++intro_stream_allocations;return 1;
@@ -3100,6 +3102,72 @@ static void guest_intro_enemy_admission(CPUState *cpu) {
     psx_mod_write_byte(0x8008EF4Bu,0);
     CHECK(!intro_guest_streaming_visibility(cpu) && !psx_mod_read_byte(0x8008EF4Bu) && cpu->gpr[2]==99);
 }
+static void guest_intro_foreground_admission(CPUState *cpu) {
+    setup_agreed(cpu,0);memcpy(test_ram,before_doors_ram,sizeof test_ram);
+    memset(test_ram+(0x800CD410u&0x1FFFFFu),0,0x2400);
+    memset(p2.body,0,sizeof p2.body);p2.body[0]=p2.body[3]=p2.body[4]=1;
+    p2.body[2]=1;p2.body[5]=2;p2.body[0x5C]=32;
+    put32(p2.body+8,168u<<16);put32(p2.body+12,1115u<<16);
+    enrolled=independent_views=1;failed=private_draw=inside=zero_world=scene_owner=clear_phase=0;
+    pause_owner=-1;life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+    psx_mod_write_byte(PLAY+12,0);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);
+    psx_mod_write_word(PLAYER+8,455u<<16);psx_mod_write_word(PLAYER+12,1115u<<16);
+    /* BCD1 retains main RAM, not scratchpad. Reproduce original13EF4/13F20's
+     * stage0/section0 callback-table binding from that retained native table. */
+    CHECK(psx_mod_read_word(0x80013F20u)==0xAC230090u);
+    psx_mod_write_word(SCRATCH+0x90u,psx_mod_read_word(0x8006E004u));
+    psx_mod_write_byte(VIEW_CAMERA+4,1);psx_mod_write_byte(VIEW_CAMERA+0x44,1);
+    psx_mod_write_half(VIEW_CAMERA+0x30,160);psx_mod_write_half(VIEW_CAMERA+0x32,160);
+    psx_mod_write_half(VIEW_CAMERA+0x2C,96);intro_camera_valid=1;
+    const uint16_t limits[]={5120,0,944,944};
+    for(unsigned i=0;i<4;++i){intro_camera_requests[i*2]=(uint8_t)limits[i];intro_camera_requests[i*2+1]=(uint8_t)(limits[i]>>8);}
+    CHECK(intro_geometry_source() && intro_foreground_source());
+    uint32_t end=intro_placement_end(),record=0;unsigned foregrounds=0;CHECK(end);
+    for(uint32_t at=0x800FA214u;at<end;at+=8u) {
+        psx_mod_write_byte(at,1);
+        if((psx_mod_read_byte(at+3)&15u)==5u && psx_mod_read_byte(at+1)==10u) {
+            record=at;++foregrounds;
+        }
+    }
+    CHECK(foregrounds==1 && record==0x800FA3C4u);
+    CHECK(psx_mod_read_half(record+4)==40 && psx_mod_read_half(record+6)==1105);
+    psx_mod_write_byte(record,0);
+    uint32_t root=psx_mod_read_word(0x8007349Cu),next=psx_mod_read_word(record+8);
+    uint8_t primary[0x158],camera[0xFC];capture(PLAYER,primary,sizeof primary);capture(VIEW_CAMERA,camera,sizeof camera);
+    cpu->gpr[29]=0x801FFF00u;cpu->gpr[6]=0x11223344u;cpu->gpr[7]=0x55667788u;
+    psx_mod_write_word(cpu->gpr[29]+0x10,0xAABBCCDDu);
+    intro_stream_probe=1;intro_stream_allocations=0;
+    guest_placement_scan(cpu,0x80029D18u);guest_placement_scan(cpu,0x80029D18u);
+    intro_stream_probe=0;CHECK(intro_stream_allocations==1);
+    CHECK(psx_mod_read_word(0x8007349Cu)==root && psx_mod_read_word(record+8)==next);
+    CHECK(cpu->gpr[6]==0x11223344u && cpu->gpr[7]==0x55667788u && psx_mod_read_word(cpu->gpr[29]+0x10)==0xAABBCCDDu);
+    uint8_t actual[0x158];capture(PLAYER,actual,sizeof primary);CHECK(!memcmp(actual,primary,sizeof primary));
+    capture(VIEW_CAMERA,actual,sizeof camera);CHECK(!memcmp(actual,camera,sizeof camera));
+    CHECK(!inside && !state_track.count && !state_track.error);
+    const uint32_t actor=0x800CD410u;
+    cpu->gpr[4]=actor;cpu->gpr[31]=0x800F96C8u;cpu->gpr[5]=48;cpu->gpr[6]=32;cpu->gpr[2]=99;
+    psx_mod_write_word(0x8009B79Cu,320);
+    CHECK(amazon_guest_support_visibility(cpu,0x8002CCB0u) && psx_mod_read_byte(actor+3)==1 && cpu->gpr[2]==99);
+    /* Original type10 has no offscreen lifetime test. Preserve its native
+     * section-change retirement, rather than granting generic immortality. */
+    CHECK(!guest_geometry_lifetime(cpu,0x8002CBFCu) && cpu->gpr[2]==99);
+    put32(p2.body+8,4900u<<16);psx_mod_write_byte(actor+3,0);
+    CHECK(!amazon_guest_support_visibility(cpu,0x8002CCB0u) && !psx_mod_read_byte(actor+3));
+    put32(p2.body+8,168u<<16);cpu->gpr[31]=0;
+    CHECK(!amazon_guest_support_visibility(cpu,0x8002CCB0u));cpu->gpr[31]=0x800F96C8u;
+    psx_mod_write_word(actor+0x10,record+1);CHECK(!amazon_guest_support_visibility(cpu,0x8002CCB0u));
+    psx_mod_write_word(actor+0x10,record);psx_mod_write_byte(actor+1,9);
+    CHECK(!amazon_guest_support_visibility(cpu,0x8002CCB0u));psx_mod_write_byte(actor+1,10);
+    private_draw=1;CHECK(!amazon_guest_support_visibility(cpu,0x8002CCB0u));private_draw=0;
+    uint32_t opcode=psx_mod_read_word(0x800F96C0u);psx_mod_write_word(0x800F96C0u,opcode^1u);
+    CHECK(!amazon_guest_support_visibility(cpu,0x8002CCB0u));
+    psx_mod_write_byte(record,0);intro_stream_probe=1;
+    guest_placement_scan(cpu,0x80029D18u);intro_stream_probe=0;
+    CHECK(intro_stream_allocations==1 && !psx_mod_read_byte(record));
+    psx_mod_write_word(0x800F96C0u,opcode);
+}
 static void guest_amazon_support_admission(CPUState *cpu) {
     setup_agreed(cpu,0);memcpy(test_ram,original_ram,sizeof test_ram);
     memset(p2.body,0,sizeof p2.body);p2.body[0]=p2.body[4]=1;p2.body[2]=1;p2.body[5]=2;p2.body[0x5C]=32;
@@ -3241,6 +3309,7 @@ int main(int argc,char **argv) {
 #ifdef MMX6_COOP_MODERN_STATE
     guest_intro_geometry_admission(&cpu);
     guest_intro_enemy_admission(&cpu);
+    guest_intro_foreground_admission(&cpu);
     guest_amazon_support_admission(&cpu);
 #endif
     fixture=getenv("MMX6_PORTAL_SETUP_RAM");
