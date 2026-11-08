@@ -1,3 +1,20 @@
+# v1.3.6-alpha-playtest
+
+This playtest release improves local co-op presentation and opening-stage
+streaming.
+
+- Both private HUDs show the shared life count.
+- Opening-stage enemies and foreground scenery remain visible to either
+  living player's camera.
+- The selected split layout stays visible during the first stage images,
+  resizing and native retries.
+
+Fresh installations retain adaptive widescreen defaults. Existing settings and
+native memory-card saves are preserved. Co-op remains experimental, and both
+netplay peers must use the same build.
+
+---
+
 # v1.3.5-alpha-playtest
 
 This playtest package includes cumulative co-op corrections for native doors,
