@@ -3659,7 +3659,7 @@ static void hud_zero_packets(uint32_t arena) {
         psx_mod_tag_hud_primitive(at,-1);
     }
 }
-static void draw_private_boss_hud(CPUState *cpu) {
+static void draw_shared_boss_hud(CPUState *cpu) {
     /* Original244C0's shared tail (2459C..24698), using its native helpers.
      * Keep both the global HUD gate and boss gate, level digits, meter and
      * boss badge. None of these packets borrow the private hero UI atlas. */
@@ -3677,6 +3677,17 @@ static void draw_private_boss_hud(CPUState *cpu) {
         if(icon>=49)icon=48;
         guest(cpu,0x80024CC0u,16,(unsigned)icon&255u);
     } else guest(cpu,0x80024CC0u,17,162);
+}
+static void draw_native_personal_hud(CPUState *cpu) {
+    /* Original244F4..24598: preserve native gauge/weapon updates while
+     * retiring only their packet publication from the canonical OT. */
+    if(!psx_mod_read_byte(PLAY+0x1F))return;
+    guest(cpu,0x80024F90u,PLAYER,0);
+    guest(cpu,psx_mod_read_byte(PLAYER+2)?0x800249D4u:0x800246B4u,PLAYER,0);
+    if(psx_mod_read_byte(PLAYER+0x14E))guest(cpu,0x80024CC0u,10,0);
+    int timer=(int16_t)psx_mod_read_half(PLAYER+0x148);
+    if(timer && (timer>=61 || (psx_mod_read_word(0x80097420u)&1u)))
+        guest(cpu,0x80024CC0u,18,(psx_mod_read_byte(PLAYER+0x144)+26u)&255u);
 }
 static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     if (hud_call || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A) return 0;
@@ -3696,16 +3707,30 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     uint32_t saved_pointers[2]={sprites_now,menu_now};
     STATE_BYTES(restore_body,24,current,sizeof current);
     STATE_WORDS(restore_pointers,25,saved_pointers,2);
+    uint32_t ot[33]={0},buffer=psx_mod_read_word(0x8009B7A0u);
+    if(independent_views && !private_draw && (buffer==0x800C4578u || buffer==0x800C4668u)) {
+        ot[0]=buffer+0x70u;
+        for(unsigned i=0;i<32;++i)ot[i+1]=psx_mod_read_word(ot[0]+i*4u);
+    }
+    STATE_WORDS(restore_hud_ot,146,ot,33);
     if (zero_world) {
         project(PLAYER,p1.body,sizeof p1.body);
         psx_mod_write_word(SCRATCH+0x1C,saved_resources[1]);
         psx_mod_write_word(SCRATCH+0x3C,saved_resources[5]);
     }
-    /* The shared view draws P1 and the boss through the full native path.
-     * A private guest pane omits P1's personal HUD but still needs the native
-     * boss meter, with the same enable flag and actor as 244C0's boss tail. */
-    uint32_t result=private_draw?0:guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
-    if(private_draw)draw_private_boss_hud(cpu);
+    /* Gauge interpolation (native actor+E8/5D/5F) must still advance once
+     * canonically. Personal links alone are presentation-owned; selecting
+     * a local port here would change authoritative RAM between NET peers. */
+    uint32_t result=(private_draw || ot[0])?0:guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    if(ot[0]) {
+        draw_native_personal_hud(cpu);
+        for(unsigned i=0;i<32;++i)psx_mod_write_word(ot[0]+i*4u,ot[i+1]);
+    }
+    if(private_draw || ot[0])draw_shared_boss_hud(cpu);
+    if(ot[0]) {
+        for(unsigned i=0;i<32;++i)ot[i+1]=psx_mod_read_word(ot[0]+i*4u);
+        STATE_UPDATE(restore_hud_ot,ot);
+    }
     STATE_WORDS(restore_result,45,&result,1);
     if (zero_world) capture(PLAYER,p1.body,sizeof p1.body);
     else capture(PLAYER,current,sizeof current);
@@ -3734,7 +3759,9 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     project(PLAYER,current,sizeof current);
     psx_mod_write_word(SCRATCH+0x1C,sprites_now);
     psx_mod_write_word(SCRATCH+0x3C,menu_now);
+    if(ot[0])for(unsigned i=0;i<32;++i)psx_mod_write_word(ot[0]+i*4u,ot[i+1]);
     STATE_POP(restore_result);
+    STATE_POP(restore_hud_ot);
     STATE_POP(restore_pointers);STATE_POP(restore_body);
     cpu->gpr[2]=result;
     hud_call=0;

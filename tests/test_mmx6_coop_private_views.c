@@ -253,6 +253,34 @@ static void presentation_restore(int online,int split,unsigned refuse,unsigned a
 static int forbidden_callback(CPUState *cpu,void *user,uint32_t eye) {
     (void)cpu;(void)user;(void)eye;CHECK(0);return 0;
 }
+static void retained_presentation_lifetime(void) {
+    for(unsigned gate=0;gate<6;++gate) {
+        CPUState cpu;prepare_view(&cpu,1,1);CHECK(psx_mod_set_local_pair_presentation(1));
+        view_pending=0;
+        if(gate==0)psx_mod_write_byte(PLAY,20);
+        if(gate==1)enrolled=0;
+        if(gate==2)failed=1;
+        if(gate==3)independent_views=0;
+        if(gate==4) { psx_mod_write_byte(PLAY,20);view_pending=1;view_buffer=VIEW_BUFFER+VIEW_STRIDE; }
+        if(gate==5) {
+            failed=1;personal_active=personal_initialized=1;
+            personal_menu[0].native[4]=personal_menu[0].native[5]=1;
+            CHECK(personal_menus_active());
+        }
+        uint8_t cameras[sizeof view_cameras];memcpy(cameras,view_cameras,sizeof cameras);
+        CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && !mmx6_view_sdk.pair_enabled);
+        CHECK(!view_native_calls && !memcmp(cameras,view_cameras,sizeof cameras));
+        personal_reset();enrolled=independent_views=1;failed=0;psx_mod_write_byte(PLAY,10);
+        view_buffer=VIEW_BUFFER;view_pending=1;
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT) && mmx6_view_sdk.pair_enabled);
+    }
+    for(unsigned phase=0;phase<3;++phase) {
+        CPUState cpu;prepare_view(&cpu,1,1);CHECK(psx_mod_set_local_pair_presentation(1));
+        psx_mod_write_byte(PLAY+1,(uint8_t)phase);view_pending=view_valid=0;
+        life.status[0]=MMX6_COOP_FALLEN;
+        CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && mmx6_view_sdk.pair_enabled);
+    }
+}
 static void defaults_and_scope(void) {
     CPUState cpu;prepare_view(&cpu,0,0);mmx6_view_sdk_reset();
     char value[24];CHECK(psx_mod_current_option_value("cameras",value,sizeof value) && !strcmp(value,"unified"));
@@ -1063,6 +1091,7 @@ int main(void) {
     private_beam_pool_uses_own_simulation_camera();
     native_sequential_character_selection();
     defaults_and_scope();
+    retained_presentation_lifetime();
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
     native_camera_context();
 #endif

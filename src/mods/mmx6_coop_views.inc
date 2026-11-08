@@ -478,12 +478,21 @@ static int private_draw_pair(CPUState *cpu,void *user,uint32_t seat) {
     return ok;
 }
 static int independent_present(CPUState *cpu,uint32_t address) {
-    if(view_call || private_draw || inside || zero_world || failed ||
+    if(view_call || private_draw || inside || zero_world ||
        state_track.count || state_track.error || cpu->gpr[31]!=0x80012128u)return 0;
     int menu=personal_menus_active();
     uint32_t buffer=psx_mod_read_word(0x8009B7A0u);
     if((buffer!=VIEW_BUFFER && buffer!=VIEW_BUFFER+VIEW_STRIDE) || cpu->gpr[4]!=buffer+0xEC)return 0;
-    if(!local_split && !psx_mod_netplay_is_active())
+    /* Retained canvases survive gameplay holds, but cannot cover a later
+     * same-size Game Over or stage selector after world drawing stops.
+     * A producer-admitted current-buffer frame also owns its presentation,
+     * including arrival before the ordinary gameplay dispatcher starts. */
+    if(failed || (!menu && (!independent_views || !enrolled ||
+       (psx_mod_read_byte(PLAY)!=10 && !(view_valid && view_pending && view_buffer==buffer))))) {
+        (void)psx_mod_set_local_pair_presentation(0);view_pending=0;return 0;
+    }
+    if(local_split)(void)psx_mod_set_local_pair_presentation(1);
+    else if(!psx_mod_netplay_is_active())
         (void)psx_mod_set_local_pair_presentation(menu);
     if(menu) { view_pending=1;view_buffer=buffer; }
     if(!view_pending || view_buffer!=buffer)return 0;

@@ -7,11 +7,13 @@
 #undef PSX_MOD_CONSTRUCTOR
 #define PSX_MOD_CONSTRUCTOR(name) static void name(void)
 #include "../src/mods/mmx6_coop_plugin.c"
+#include "mmx6_coop_private_view_sdk_fixture.h"
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"line %d: %s\n",__LINE__,#x);exit(1);}}while(0)
 static uint8_t ram[0x200000],extra[0x300000];
 static uint16_t vram[1024*512],ui_pixels[1024*512],retained_color;
 static uint32_t calls[8],tags[8];
 static unsigned call_count,tag_count,definitions,option_reads;
+static unsigned gauge_probe;
 static const char *selected_layout;
 static uint8_t *mem(uint32_t a){
     if(a>=0x9F000000u && a<0x9F300000u)return extra+a-0x9F000000u;
@@ -40,6 +42,7 @@ static void sprite(int x,int y){
     psx_mod_write_half(at+8,(uint16_t)x);psx_mod_write_half(at+10,(uint16_t)y);psx_mod_write_word(at+12,0x78410000);
     psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFF));psx_mod_write_word(mode+4,0xE1000000);
     psx_mod_write_word(SCRATCH+0x108,at+16);psx_mod_write_word(SCRATCH+0x10C,mode+8);
+    psx_mod_write_word(0x800C45E8u,mode&0xFFFFFFu);
 }
 static void bar(int x,int y,int amount){
     uint32_t at=psx_mod_read_word(SCRATCH+0x110);psx_mod_write_word(at,0x08000000u);
@@ -49,18 +52,23 @@ static void bar(int x,int y,int amount){
         psx_mod_write_half(at+10+i*8,(uint16_t)(y-amount+(i>>1)*amount));
     }
     psx_mod_write_word(SCRATCH+0x110,at+36);
+    psx_mod_write_word(0x800C45ECu,at&0xFFFFFFu);
+}
+static void gauge_tick(uint32_t actor){
+    if(gauge_probe)for(unsigned i=0;i<3;++i){unsigned offset=i==0?0xE8:i==1?0x5D:0x5F;
+        psx_mod_write_byte(actor+offset,(uint8_t)(psx_mod_read_byte(actor+offset)+1));}
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<8 && hud_call && state_track.count);calls[call_count++]=address;
     if(address==0x80024F90u && cpu->gpr[4]==0x8008EF48u){
-        CHECK(private_draw && private_seat && !hud_seat && cpu->gpr[5]==1);
+        CHECK(((private_draw && private_seat) || independent_views) && !hud_seat && cpu->gpr[5]==1);
         CHECK(psx_mod_read_byte(PLAYER+2)==0 && psx_mod_read_byte(PLAYER+0x5C)==23);
         CHECK(psx_mod_read_word(SCRATCH+0x1C)==0x80030000 && psx_mod_read_word(SCRATCH+0x3C)==0x80030100);
-        bar(284,80,17);return; /* Native24F90 emits bars, not icons. */
+        gauge_tick(cpu->gpr[4]);bar(284,80,17);return; /* Native24F90 emits bars, not icons. */
     }
     if(address==0x80024CC0u){
-        unsigned index=call_count-1,kind=psx_mod_read_byte(PLAY+0x25);
-        CHECK(private_draw && private_seat && !hud_seat && psx_mod_read_byte(PLAYER+2)==0);
+        unsigned index=call_count-1-(independent_views && !private_draw?2u:0u),kind=psx_mod_read_byte(PLAY+0x25);
+        CHECK(((private_draw && private_seat) || independent_views) && !hud_seat && psx_mod_read_byte(PLAYER+2)==0);
         CHECK((index==0 && cpu->gpr[4]==14 && cpu->gpr[5]==59) ||
               (index==1 && cpu->gpr[4]==15 && cpu->gpr[5]==60) ||
               (index==3 && cpu->gpr[4]==(kind==0?7u:kind==1?16u:17u) && cpu->gpr[5]==(kind==0?163u:kind==1?0u:162u)));
@@ -69,11 +77,20 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     if(address==0x800244C0u){
         CHECK(!hud_seat && psx_mod_read_byte(PLAYER+2)==0 && psx_mod_read_byte(PLAYER+0x5C)==23);
         CHECK(psx_mod_read_word(SCRATCH+0x1C)==0x80030000 && psx_mod_read_word(SCRATCH+0x3C)==0x80030100);
+        if(psx_mod_read_byte(PLAY+0x1F)) {
+            gauge_tick(PLAYER);
+            if(psx_mod_read_byte(PLAY+0x24))gauge_tick(psx_mod_read_word(PLAY+0x20));
+        }
         cpu->gpr[2]=0x12345678;return; /* Original P1/boss path remains once. */
+    }
+    if(!hud_seat && independent_views && (address==0x80024F90u || address==0x800246B4u)) {
+        CHECK(cpu->gpr[4]==PLAYER && !psx_mod_read_byte(PLAYER+2));
+        if(address==0x80024F90u)gauge_tick(PLAYER);
+        sprite(18,16);bar(22,80,23);return;
     }
     CHECK(hud_seat==1 && psx_mod_read_byte(PLAYER+2)==1);
     CHECK(psx_mod_read_word(SCRATCH+0x1C)==assembly && psx_mod_read_word(SCRATCH+0x3C)==menu_assembly);
-    if(address==0x80024F90u){CHECK(psx_mod_read_byte(PLAYER+0x5C)==11);sprite(18,16);bar(22,80,11);}
+    if(address==0x80024F90u){CHECK(psx_mod_read_byte(PLAYER+0x5C)==11);gauge_tick(PLAYER);sprite(18,16);bar(22,80,11);}
     else if(address==0x800249D4u){CHECK(psx_mod_read_byte(PLAYER+0x93)==2 && psx_mod_read_half(PLAYER+0xAC)==7);sprite(27,34);bar(31,80,7);}
     else CHECK(0);
 }
@@ -85,9 +102,13 @@ static void setup(CPUState *cpu,const char *layout){
     active_palette=0x9F120000;psx_mod_write_half(active_palette+0x220+2,0x1234);
     mmx6_coop_lifecycle_init(&life);state_track.count=state_track.error=0;
     enrolled=1;failed=inside=zero_world=hud_call=hud_seat=private_draw=private_seat=0;p2_hud_fade=128;
+    independent_views=local_split=0;mmx6_view_sdk_reset();
+    gauge_probe=0;
     hud_packets=0x9F000000;assembly=0x9F100000;menu_assembly=0x9F110000;menu_memory=0x9F200000;
     p2.body[0]=p2.body[2]=p2.body[3]=p2.body[4]=1;p2.body[5]=2;p2.body[0x5C]=11;p2.body[0x93]=2;p2.body[0xAC]=7;
     psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+0x1F,1);
+    psx_mod_write_word(0x8009B7A0u,0x800C4578u);
+    for(unsigned i=0;i<32;++i)psx_mod_write_word(0x800C45E8u+i*4u,0xFFFFFFu);
     psx_mod_write_byte(PLAYER,1);psx_mod_write_byte(PLAYER+0x5C,23);
     psx_mod_write_word(SCRATCH+0x1C,0x80030000);psx_mod_write_word(SCRATCH+0x3C,0x80030100);
     for(unsigned i=0;i<3;++i)psx_mod_write_word(SCRATCH+0x108+i*4,0x80040000+i*0x1000);
@@ -116,7 +137,66 @@ static void layout_case(const char *layout,int dx,int dy){
     }
     CHECK(!failed && !hud_call && !hud_seat && !state_track.count && !state_track.error);
 }
+static void canonical_independent_hud(void){
+    static uint8_t peer_ram[sizeof ram],peer_extra[sizeof extra];
+    for(unsigned split=0;split<2;++split)for(unsigned phase=0;phase<6;++phase)for(unsigned projected=0;projected<2;++projected)
+      for(unsigned boss=0;boss<2;++boss)for(int port=0;port<2;++port){
+        CPUState cpu;setup(&cpu,"stacked");independent_views=gauge_probe=1;
+        local_split=split;mmx6_view_sdk.online=!split;mmx6_view_sdk.local_port=port;
+        view_valid=view_pending=0; /* Admission/publication can miss this frame. */
+        psx_mod_write_byte(PLAY+1,(uint8_t)(phase<3?phase:0));
+        if(phase==3)life.status[0]=MMX6_COOP_DYING;
+        if(phase==4)life.status[0]=MMX6_COOP_FALLEN;
+        if(phase==5)life.status[1]=MMX6_COOP_FALLEN;
+        psx_mod_write_byte(PLAY+0x24,(uint8_t)boss);
+        psx_mod_write_word(PLAY+0x20,0x8008EF48u);psx_mod_write_byte(PLAY+0x8C,32);
+        if(projected){
+            capture(PLAYER,p1.body,sizeof p1.body);project(PLAYER,p2.body,sizeof p2.body);zero_world=1;
+            saved_resources[1]=0x80030000;saved_resources[5]=0x80030100;
+            psx_mod_write_word(SCRATCH+0x1C,assembly);psx_mod_write_word(SCRATCH+0x3C,menu_assembly);
+        }
+        uint8_t resident[sizeof p2.body];capture(PLAYER,resident,sizeof resident);PlayerContext partner=p2;
+        CHECK(draw_coop_hud(&cpu,0x800244C0));
+        CHECK(call_count==4u+boss*4u && definitions==1 && tag_count==6 && option_reads==1);
+        CHECK(psx_mod_read_word(0x800C45E8u)==(boss?0x41020u:0xFFFFFFu));
+        CHECK(psx_mod_read_word(0x800C45ECu)==(boss?0x42048u:0xFFFFFFu));
+        for(unsigned i=0;i<3;++i){unsigned at=i==0?0xE8:i==1?0x5D:0x5F;
+            ++resident[at];if(!projected)++partner.body[at];
+            /* An inner Zero-owned HUD call leaves updated Zero resident;
+             * the enclosing projection commits that body to p2 on exit. */
+            CHECK(psx_mod_read_byte(PLAYER+at)==1 && p2.body[at]==(projected?0:1) &&
+                  (!projected || p1.body[at]==1) &&
+                  psx_mod_read_byte(0x8008EF48u+at)==boss);
+        }
+        CHECK(!memcmp(resident,mem(PLAYER),sizeof resident) && !memcmp(&partner,&p2,sizeof p2));
+        CHECK(!hud_call && !hud_seat && !state_track.count && !state_track.error && !failed);
+        CHECK(cpu.gpr[2]==0 && p2_hud_fade==128);
+        if(!port){memcpy(peer_ram,ram,sizeof ram);memcpy(peer_extra,extra,sizeof extra);}
+        else CHECK(!memcmp(peer_ram,ram,sizeof ram) && !memcmp(peer_extra,extra,sizeof extra));
+    }
+}
+static void canonical_gauges_match_legacy(void){
+    uint8_t expected[9];
+    for(unsigned projected=0;projected<2;++projected)for(unsigned separate=0;separate<2;++separate){
+        CPUState cpu;setup(&cpu,"stacked");independent_views=separate;gauge_probe=1;
+        psx_mod_write_byte(PLAY+0x24,1);psx_mod_write_word(PLAY+0x20,0x8008EF48u);psx_mod_write_byte(PLAY+0x8C,32);
+        if(projected){
+            capture(PLAYER,p1.body,sizeof p1.body);project(PLAYER,p2.body,sizeof p2.body);zero_world=1;
+            saved_resources[1]=0x80030000;saved_resources[5]=0x80030100;
+            psx_mod_write_word(SCRATCH+0x1C,assembly);psx_mod_write_word(SCRATCH+0x3C,menu_assembly);
+        }
+        CHECK(draw_coop_hud(&cpu,0x800244C0));
+        for(unsigned actor=0;actor<3;++actor)for(unsigned i=0;i<3;++i){
+            unsigned at=i==0?0xE8:i==1?0x5D:0x5F;
+            uint8_t value=actor==0?(projected?p1.body[at]:psx_mod_read_byte(PLAYER+at)):
+                actor==1?(projected?psx_mod_read_byte(PLAYER+at):p2.body[at]):psx_mod_read_byte(0x8008EF48u+at);
+            if(!separate)expected[actor*3+i]=value;
+            else CHECK(value==expected[actor*3+i] && value==1);
+        }
+    }
+}
 int main(void){
+    canonical_independent_hud();canonical_gauges_match_legacy();
     layout_case(NULL,0,104);layout_case("stacked",0,104);layout_case("side_by_side",56,0);
     layout_case("unknown",0,104);layout_case("SIDE_BY_SIDE",0,104);layout_case("",0,104);
     /* Zero-owned native world/menu: original P1 HUD still runs once using
