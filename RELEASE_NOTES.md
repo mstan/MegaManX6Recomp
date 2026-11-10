@@ -2,6 +2,12 @@
 
 ## v1.3.5-alpha
 
+This Windows preview is for troubleshooting display flicker. It leaves out
+the optional Mega Man X6 Tweaks and Voice Hooks packages, including
+Retranslation and replacement title screens, and their dependent In-Game
+Settings Menu package. v1.3.4-alpha remains available with the previous mod
+catalog. Use a separate folder if you want to keep both builds.
+
 Playtest Diagnostics is available under Mods. Recording and Input Display
 are independent and off by default. Enable Recording to collect inputs and
 display telemetry during an offline reproduction. Press L3 + R3 to mark an

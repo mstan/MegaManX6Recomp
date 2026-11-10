@@ -76,6 +76,17 @@ list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$"
 # neither the launcher nor the release packager's Add-ModCatalog reads.
 # Bead beads-eio.3.101.
 set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
+option(MMX6_DIAGNOSTICS_PREVIEW "Stage the reduced display diagnostics catalog" OFF)
+if(MMX6_DIAGNOSTICS_PREVIEW)
+    # These optional packs contain rebuilt records from original discs.
+    # The in-game Settings Menu package requires the omitted Retranslation.
+    set(_mmx6_diagnostics_catalog "${CMAKE_CURRENT_BINARY_DIR}/diagnostics-catalog")
+    file(COPY "${MMX6_PRELOADED_MODS}/" DESTINATION "${_mmx6_diagnostics_catalog}"
+        PATTERN "mmx6.tweaks.hooks" EXCLUDE
+        PATTERN "mmx6.tweaks.native" EXCLUDE
+        PATTERN "mmx6.tweaks.ingame-options" EXCLUDE)
+    set(MMX6_PRELOADED_MODS "${_mmx6_diagnostics_catalog}")
+endif()
 
 # Seamless Loading replaces the generic CD-speed and host-turbo builtins:
 # neither may change guest CD or audio pacing in this catalog. Restore the
