@@ -104,6 +104,8 @@ psxrecomp_v4_add_runtime_target(psx-runtime
 )
 set(PSX_BUILTIN_MOD_ALLOWLIST "${_mmx6_previous_builtin_allowlist}")
 unset(_mmx6_previous_builtin_allowlist)
+include("${PSXRECOMP_V4_ROOT}/runtime/playtest_diagnostics.cmake")
+psxrecomp_add_playtest_diagnostics(psx-runtime GAME_ID "SLUS-01395" MOD_ID "mmx6.diagnostics")
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
 # PSX_NO_DEBUG_TOOLS + PSX_COSIM. Two of these (one normal, one PSX_FORCE_INTERP=1)

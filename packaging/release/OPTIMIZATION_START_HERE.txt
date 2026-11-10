@@ -6,4 +6,13 @@ features are available in the launcher. Memory cards remain in saves/.
 This archive contains no game disc, retail BIOS, personal settings or saves.
 Read RELEASE_NOTES.md for validation coverage and known limitations.
 
+Fresh display settings use Widescreen > Fit to screen. Existing choices are
+preserved. Turn off Widescreen to test 4:3, or select your original fixed aspect.
+For display troubleshooting, enable Recording in Mods > Playtest Diagnostics,
+start the game and reproduce in the affected windowed or fullscreen mode.
+Press L3 + R3 to mark the moment if you use a controller. Quit normally and
+open the session path in diagnostics-location.txt beside the executable. A
+session contains starting memory cards and settings, so review it before
+sharing. Your disc and BIOS are never copied.
+
 Internal Resolution is enabled at 4x for fresh settings. Choose 1x–32x in Mods; hardware and GPU-memory limits may clamp larger choices. Your saved choices are retained.

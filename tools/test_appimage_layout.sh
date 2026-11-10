@@ -14,7 +14,7 @@ appimage=${1:-}
 [ -x "$appimage" ] || { echo "not executable: $appimage" >&2; exit 1; }
 
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
-expected_version=$(tr -d ' \t\r\n' < "$root/packaging/release/VERSION")
+expected_version=$(tr -d ' \t\r\n' < "$root/VERSION")
 # Per-game identity: ENV_PREFIX names the AppImage's env overrides.
 # shellcheck source=/dev/null
 . "$root/packaging/release/app.conf"

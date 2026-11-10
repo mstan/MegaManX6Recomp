@@ -7,8 +7,8 @@
 
 namespace {
 
-constexpr size_t kExpectedPackages = 17;
-constexpr size_t kExpectedFeatures = 205;
+constexpr size_t kExpectedPackages = 18;
+constexpr size_t kExpectedFeatures = 207;
 constexpr size_t kExpectedTweaksPackages = 13;
 constexpr const char* kGameId = "SLUS-01395";
 constexpr const char* kStockDiscSha256 =
@@ -158,10 +158,11 @@ int main(int argc, char** argv) {
                 return fail(id + "/" + feature.id +
                             " exposes permission-gated collaborator content");
             }
-            /* Seamless Loading is the standard loader; everything else opts in. */
+            /* Seamless Loading and Fit to screen are the fresh defaults. */
             const bool seamless =
-                id == "mmx6.enhancement.seamless-loading" &&
-                feature.id == "seamless-loading";
+                (id == "mmx6.enhancement.seamless-loading" &&
+                 feature.id == "seamless-loading") ||
+                (id == "mmx6.enhancement.widescreen" && feature.id == "widescreen");
             if (feature.default_enabled != seamless) {
                 return fail(id + "/" + feature.id +
                             (seamless ? " must be enabled by default"
@@ -194,8 +195,9 @@ int main(int argc, char** argv) {
         }
         for (const auto& [feature_id, feature] : selection.features) {
             const bool seamless =
-                package_id == "mmx6.enhancement.seamless-loading" &&
-                feature_id == "seamless-loading";
+                (package_id == "mmx6.enhancement.seamless-loading" &&
+                 feature_id == "seamless-loading") ||
+                (package_id == "mmx6.enhancement.widescreen" && feature_id == "widescreen");
             if (feature.enabled != seamless) {
                 return fail(package_id + "/" + feature_id +
                             (seamless ? " resolved disabled in the default state"
@@ -208,6 +210,8 @@ int main(int argc, char** argv) {
         return fail("could not register test plugin mmx6.seamless");
     }
 
+    if (!PSXRecompV4::mod_register_activation_plugin("mmx6.widescreen", no_op_plugin))
+        return fail("could not register test widescreen plugin");
     const PSXRecompV4::ModResolution plan =
         manager.resolve(kGameId, "", kStockDiscSha256);
     if (!plan.ok) {
@@ -219,14 +223,18 @@ int main(int argc, char** argv) {
         return fail("default catalog resolution failed: " + detail);
     }
     if (!plan.writes.empty() || !plan.overlays.empty() ||
-        !plan.derived_discs.empty() || plan.plugins.size() != 1 ||
-        plan.plugins.front().id != "mmx6.seamless") {
-        return fail("default catalog must activate only Seamless Loading");
+        !plan.derived_discs.empty() || plan.plugins.size() != 2 ||
+        manager.feature_option_value(plan, "mmx6.enhancement.widescreen",
+                                     "widescreen", "aspect") != "adaptive") {
+        return fail("default catalog must use Seamless Loading and Fit to screen");
     }
     if (!manager.set_feature_enabled("mmx6.enhancement.seamless-loading",
                                      "seamless-loading", false, &error)) {
         return fail(error);
     }
+    if (!manager.set_feature_enabled("mmx6.enhancement.widescreen",
+                                     "widescreen", false, &error))
+        return fail(error);
     const PSXRecompV4::ModResolution retail_plan =
         manager.resolve(kGameId, "", kStockDiscSha256);
     if (!retail_plan.ok || !retail_plan.writes.empty() ||

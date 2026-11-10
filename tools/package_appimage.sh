@@ -4,7 +4,7 @@
 # Counterpart to tools/package_release.ps1 (Windows). Both packagers read the
 # SAME sources so the two platforms cannot drift:
 #
-#   packaging/release/VERSION      the version string (single source of truth)
+#   VERSION      the version string (single source of truth)
 #   packaging/release/game.toml    the player-facing config
 #   packaging/release/input.ini    the default controller mapping
 #   packaging/release/START_HERE.txt
@@ -77,7 +77,7 @@ fi
 # player config. Keep widescreen codegen and runtime gates identical.
 python3 "$root/tools/check_release_config.py"
 
-[ -n "$version" ] || version=$(tr -d ' \t\r\n' < "$root/packaging/release/VERSION")
+[ -n "$version" ] || version=$(tr -d ' \t\r\n' < "$root/VERSION")
 [ -n "$version" ] || { echo "empty version" >&2; exit 1; }
 
 # Per-game identity (see packaging/release/app.conf). Everything below this
@@ -151,8 +151,8 @@ if [ -z "${SOURCE_DATE_EPOCH:-}" ]; then
     # VERSION file's mtime and say so, rather than silently stamping epoch 0.
     SOURCE_DATE_EPOCH=$(git -C "$root" log -1 --format=%ct 2>/dev/null || true)
     if [ -z "$SOURCE_DATE_EPOCH" ]; then
-        SOURCE_DATE_EPOCH=$(stat -c %Y "$root/packaging/release/VERSION" 2>/dev/null || echo 0)
-        echo "note: git date unavailable here; SOURCE_DATE_EPOCH from packaging/release/VERSION mtime." >&2
+        SOURCE_DATE_EPOCH=$(stat -c %Y "$root/VERSION" 2>/dev/null || echo 0)
+        echo "note: git date unavailable here; SOURCE_DATE_EPOCH from VERSION mtime." >&2
         echo "      Pass SOURCE_DATE_EPOCH explicitly to pin it across machines." >&2
     fi
 fi

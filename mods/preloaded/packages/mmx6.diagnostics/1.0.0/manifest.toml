@@ -1,0 +1,33 @@
+format_version = 5
+id = "mmx6.diagnostics"
+version = "1.0.0"
+name = "Playtest Diagnostics"
+description = "Optional offline input recording, display telemetry and incident screenshots for troubleshooting."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "recording"
+name = "Recording"
+description = "Record inputs and display telemetry. Press both sticks to mark an incident. After quitting, diagnostics-location.txt shows where to find the recording."
+group = "Diagnostics"
+default_enabled = false
+
+[[feature]]
+id = "osd"
+name = "Input Display"
+description = "Show the controllers' current inputs on screen. Does not create a recording."
+group = "Diagnostics"
+default_enabled = false
+
+[[plugin]]
+feature = "recording"
+id = "mmx6.diagnostics"
+
+[[plugin]]
+feature = "osd"
+id = "mmx6.diagnostics.osd"

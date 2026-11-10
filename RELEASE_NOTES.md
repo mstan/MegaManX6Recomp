@@ -1,5 +1,16 @@
 # Mega Man X6 release notes
 
+## v1.3.5-alpha
+
+Playtest Diagnostics is available under Mods. Recording and Input Display
+are independent and off by default. Enable Recording to collect inputs and
+display telemetry during an offline reproduction. Press L3 + R3 to mark an
+incident. Quit normally, then find the session in diagnostics-location.txt.
+The session includes the starting memory cards and settings, but no disc or BIOS.
+
+Fresh settings enable Widescreen with Fit to screen. Existing saved display
+and mod choices are preserved; disable Widescreen to try original 4:3.
+
 ## v1.3.4-alpha — shared optimization release
 
 Fresh settings enable Internal Resolution at 4x. The Mods selector offers 1x through 32x; saved choices are preserved, and GPU texture and memory limits still apply. Disabling the mod selects native resolution.

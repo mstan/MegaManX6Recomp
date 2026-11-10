@@ -15,13 +15,13 @@ disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
 # Settings rows (an aspect selector plus a distinct experimental 21:9 row),
 # which let a player set a wide aspect with no indication that it is a
 # game-specific enhancement rather than a display preference. Both now live
-# here, where the experimental status is stated and the default is off.
+# here, where the experimental status is stated.
 [[feature]]
 id = "widescreen"
 name = "Widescreen"
 description = "Expand the view with adjacent terrain and actors. Experimental: stage and object coverage is still being validated."
 group = "Display"
-default_enabled = false
+default_enabled = true
 
 [[option]]
 feature = "widescreen"
@@ -34,7 +34,7 @@ default = "adaptive"
 
 [[option.choice]]
 value = "adaptive"
-label = "Adaptive"
+label = "Fit to screen"
 
 [[option.choice]]
 value = "16:9"

@@ -83,7 +83,7 @@ if [ ! -f "$data_dir/input.ini" ] && [ -f "$payload/input.ini" ]; then
     chmod u+rw "$data_dir/input.ini"
 fi
 
-# Stamped by package_appimage.sh from packaging/release/VERSION so the layout
+# Stamped by package_appimage.sh from VERSION so the layout
 # marker never drifts from the artifact name.
 printf '%s\n' "@VERSION@" > "$data_dir/.appimage-layout-version"
 
