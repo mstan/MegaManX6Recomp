@@ -115,6 +115,13 @@ psxrecomp_v4_add_runtime_target(psx-runtime
 )
 set(PSX_BUILTIN_MOD_ALLOWLIST "${_mmx6_previous_builtin_allowlist}")
 unset(_mmx6_previous_builtin_allowlist)
+if(PSX_RECOMP_UI)
+    set_property(SOURCE "${RECOMP_UI_ROOT}/src/common/backends/imgui/launcher_imgui.cpp"
+        APPEND PROPERTY COMPILE_DEFINITIONS
+        RECOMP_UI_PINNED_MOD_GROUP="Display"
+        RECOMP_UI_ADVANCED_MOD_PREFIX="mmx6.tweaks."
+        "RECOMP_UI_ADVANCED_MOD_LABEL=\"Show X6 Tweaks\"")
+endif()
 include("${PSXRECOMP_V4_ROOT}/runtime/playtest_diagnostics.cmake")
 psxrecomp_add_playtest_diagnostics(psx-runtime GAME_ID "SLUS-01395" MOD_ID "mmx6.diagnostics")
 
