@@ -3776,13 +3776,13 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
 #endif
 #include "mmx6_coop_views.inc"
 #include "mmx6_coop_intro_placement.inc"
+#include "mmx6_coop_world_placement.inc"
 #include "mmx6_coop_amazon_placement.inc"
 /* The SDK permits one entry hook per plugin/address. Dispatch both
  * source-disjoint placements from that one registered native boundary. */
 static void guest_placement_scan(CPUState *cpu,uint32_t address) {
-    intro_guest_streaming_scan(cpu);
-    intro_guest_placement_scan(cpu,address);
-    amazon_guest_placement_scan(cpu,address);
+    world_guest_placement_scan(cpu);
+    (void)address;
 }
 static void activate(void) {
     state_track.count=state_track.error=0;

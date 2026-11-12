@@ -96,6 +96,7 @@ static int amazon_guest_support(uint32_t actor,int *x,int *y) {
         psx_mod_read_word(actor+0x68)==0x800F73ECu && amazon_guest_view(x,y);
 }
 static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {
+    if(world_guest_bounds(cpu,0))return 1;
     if(shared_effect_view_bounds(cpu,address))return 1;
     if(intro_guest_streaming_lifetime(cpu))return 1;
     if(intro_guest_geometry_lifetime(cpu,address))return 1;
@@ -108,6 +109,7 @@ static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {
     cpu->gpr[2]=0;return 1;
 }
 static int amazon_guest_support_visibility(CPUState *cpu,uint32_t address) {
+    if(world_guest_bounds(cpu,1))return 1;
     if(shared_effect_view_bounds(cpu,address))return 1;
     if(intro_guest_streaming_visibility(cpu))return 1;
     if(private_zero_saber_visibility(cpu,address))return 1;

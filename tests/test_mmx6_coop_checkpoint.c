@@ -25,6 +25,7 @@ static unsigned refusal_logs;
 static char refusal_log[512];
 static unsigned intro_scan_probe,intro_scan_calls,intro_scan_allocations,intro_canonical_cycles;
 static unsigned intro_stream_probe,intro_stream_allocations;
+static unsigned world_scan_probe,world_scan_calls;
 static unsigned amazon_scan_probe,amazon_scan_calls,amazon_visibility_calls;
 static void checkpoint_test_refusal_log(const char *format,...) {
     va_list args;va_start(args,format);
@@ -85,6 +86,17 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
         return 1;
     }
 #ifdef MMX6_COOP_MODERN_STATE
+    if(world_scan_probe && target==0x80029F38u) {
+        uint32_t slot=0x8007349Cu+psx_mod_read_byte(PLAY+12)*8u+psx_mod_read_byte(PLAY+13)*4u;
+        uint32_t record=psx_mod_read_word(slot);
+        CHECK(inside && !private_draw && state_track.count);
+        CHECK(record>=0x800FA214u && record<0x800FA3DCu && !(psx_mod_read_byte(record)&0x81u));
+        CHECK(psx_mod_read_byte(record+11)==15 && !psx_mod_read_word(cpu->gpr[29]+0x10));
+        int x=(int16_t)psx_mod_read_half(record+4),y=(int16_t)psx_mod_read_half(record+6);
+        CHECK((int32_t)cpu->gpr[4]<x && x<(int32_t)cpu->gpr[5] &&
+              (int32_t)cpu->gpr[6]<y && y<(int32_t)cpu->gpr[7]);
+        ++world_scan_calls;return 1;
+    }
     if(intro_stream_probe && target==0x80029F38u) {
         uint32_t record=psx_mod_read_word(0x8007349Cu);
         uint32_t actor=(psx_mod_read_byte(record+3)&15u)==5u?0x800CD410u:0x8008EF48u;
@@ -3058,6 +3070,41 @@ static void guest_intro_geometry_admission(CPUState *cpu) {
     intro_guest_placement_scan(cpu,0x80029D18u);CHECK(intro_scan_calls==2);
     intro_scan_probe=0;
 }
+static void guest_world_placement_admission(CPUState *cpu) {
+    guest_intro_geometry_admission(cpu);
+    ready=1;put32(p2.body+8,2016u<<16);put32(p2.body+12,984u<<16);
+    const uint16_t limits[]={7000,0,1600,0};
+    for(unsigned i=0;i<4;++i)psx_mod_write_half(VIEW_CAMERA+0x1C+i*2,limits[i]);
+    intro_camera_valid=0;
+    uint8_t original[0x1D0];capture(0x800FA214u,original,sizeof original);
+    for(unsigned stage=0;stage<2;++stage)for(unsigned section=0;section<2;++section) {
+        /* Reuse actual intro records to test table indexing, not Yanmark
+         * content or allocation outcomes. Native QA owns those decisions. */
+        psx_mod_write_byte(PLAY+12,stage);psx_mod_write_byte(PLAY+13,section);
+        uint32_t slot=world_placement_root_slot(),old=psx_mod_read_word(slot);
+        psx_mod_write_word(slot,0x800FA214u);
+        world_scan_probe=1;world_scan_calls=0;world_guest_placement_scan(cpu);world_scan_probe=0;
+        CHECK(world_scan_calls>0 && psx_mod_read_word(slot)==0x800FA214u);
+        CHECK(cpu->gpr[6]==0x11223344u && cpu->gpr[7]==0x55667788u &&
+              psx_mod_read_word(cpu->gpr[29]+0x10)==0xAABBCCDDu && !inside && !state_track.count && !state_track.error);
+        uint8_t after[sizeof original];capture(0x800FA214u,after,sizeof after);CHECK(!memcmp(original,after,sizeof original));
+        uint32_t actor=0x800C1220u,record=0x800FA354u;
+        psx_mod_write_byte(actor,0x41);psx_mod_write_byte(actor+1,psx_mod_read_byte(record+1));
+        psx_mod_write_byte(actor+2,psx_mod_read_byte(record+2));psx_mod_write_byte(actor+0x14,0);
+        psx_mod_write_word(actor+0x10,record);psx_mod_write_word(actor+8,2016u<<16);psx_mod_write_word(actor+12,984u<<16);
+        cpu->gpr[4]=actor;cpu->gpr[5]=cpu->gpr[6]=48;cpu->gpr[2]=99;
+        cpu->gpr[31]=0x800EA3D8u;
+        CHECK(world_guest_bounds(cpu,0) && !cpu->gpr[2]);
+        psx_mod_write_word(0x8009B79Cu,320);psx_mod_write_byte(actor+3,0);
+        cpu->gpr[31]=0x800F96C8u;
+        CHECK(world_guest_bounds(cpu,1) && psx_mod_read_byte(actor+3)==1);
+        cpu->gpr[31]=0x800EA3D8u;
+        put32(p2.body+8,500u<<16);cpu->gpr[2]=99;CHECK(!world_guest_bounds(cpu,0) && cpu->gpr[2]==99);
+        put32(p2.body+8,2016u<<16);private_draw=1;CHECK(!world_guest_bounds(cpu,0));private_draw=0;
+        psx_mod_write_byte(actor+2,psx_mod_read_byte(actor+2)^1);CHECK(!world_guest_bounds(cpu,0));
+        psx_mod_write_word(slot,old);cpu->gpr[6]=0x11223344u;
+    }
+}
 static void guest_intro_enemy_admission(CPUState *cpu) {
     setup_agreed(cpu,0);memcpy(test_ram,before_doors_ram,sizeof test_ram);
     memset(test_ram+(0x8008EF48u&0x1FFFFFu),0,0x1D40);
@@ -3183,6 +3230,9 @@ static void guest_amazon_support_admission(CPUState *cpu) {
     psx_mod_write_word(VIEW_CAMERA+8,0);psx_mod_write_word(VIEW_CAMERA+12,224u<<16);
     psx_mod_write_word(0x800F6540u,0x00000700u);psx_mod_write_word(0x800F6544u,0x017C0220u);
     psx_mod_write_word(0x800F6548u,0x00000700u);
+    /* This abbreviated overlay fixture contains two original records. The
+     * whole-list scanner also needs its normal native terminal record. */
+    psx_mod_write_word(0x800F6550u,0x0F000000u);
     const uint32_t code[][2]={{0x800EC268u,0x0C00B131u},{0x800EC280u,0xA0A20001u},
         {0x800EC030u,0x0C00B2FFu},{0x800EC044u,0x24050020u},{0x800EC048u,0x0C00B32Cu},
         {0x800EC04Cu,0x24060020u},{0x800EC060u,0x24050020u},{0x800EC064u,0x0C00B32Cu}};
@@ -3309,6 +3359,7 @@ int main(int argc,char **argv) {
 #ifdef MMX6_COOP_MODERN_STATE
     guest_intro_geometry_admission(&cpu);
     guest_intro_enemy_admission(&cpu);
+    guest_world_placement_admission(&cpu);
     guest_intro_foreground_admission(&cpu);
     guest_amazon_support_admission(&cpu);
 #endif
