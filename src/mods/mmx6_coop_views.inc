@@ -334,6 +334,28 @@ static int independent_giga_context(void) {
         p2.body[0x5C] && p2.body[0x5C]<0x80 && !p2.body[0xCC] &&
         !p2.body[0xD0] && !p2.body[0xD3] && !p2.body[0xD4] && !p2.body[0xD5];
 }
+static int independent_heal_context(void) {
+    /* Original4ED4C enters mode2 healing through4FE58(1), which freezes
+     * PLAY10..17,19. Original4EC30 owns its four-frame/countdown recovery
+     * and4FE58(0). Render that held world with the established cameras;
+     * never clear the original locks or advance healing from a draw pass. */
+    if(!ready || !enrolled || failed || scene_owner || clear_phase || pause_owner>=0 ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+       psx_mod_read_byte(PLAY+0x0F) || psx_mod_read_byte(PLAY+0x1C) ||
+       life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE)return 0;
+    for(unsigned at=0x10;at<=0x17;++at)if(psx_mod_read_byte(PLAY+at)!=1)return 0;
+    if(psx_mod_read_byte(PLAY+0x19)!=1)return 0;
+    for(unsigned i=0;i<128;++i) {
+        uint32_t actor=pickup_owners[i].actor;
+        int pickup=actor>=0x8008EF48u && actor<0x80090C88u && !((actor-0x8008EF48u)%0x9Cu);
+        int reploid=both_door_slot(actor) && psx_mod_read_byte(actor+1)==4;
+        if(pickup_owners[i].seat>1 || (!pickup && !reploid))continue;
+        unsigned timer=psx_mod_read_byte(actor+0x80);
+        if((psx_mod_read_byte(actor)&9u)==9u && psx_mod_read_byte(actor+4)==2 &&
+           !psx_mod_read_byte(actor+6) && psx_mod_read_byte(actor+0x7F) && timer && timer<=4)return 1;
+    }
+    return 0;
+}
 static void independent_world_begin(void) {
     if(private_draw || !independent_views || (personal_pass && personal_seat))return;
     view_pending=0;
@@ -366,7 +388,7 @@ static void independent_world_begin(void) {
        (pause_owner>=0 && psx_mod_read_byte(PLAY+1) && !returning && !entering) ||
        (psx_mod_read_byte(PLAY)!=10 && !initial) ||
        (psx_mod_read_byte(PLAY+1) && !returning && !entering) ||
-       (psx_mod_read_byte(PLAY+0x10) && !door_views && !scene_views && !initial) ||
+       (psx_mod_read_byte(PLAY+0x10) && !independent_heal_context() && !door_views && !scene_views && !initial) ||
        (coop_world_hold() && !independent_giga_context() && !door_views && !scene_views && !returning && !initial) ||
        (life.status[0]!=MMX6_COOP_ALIVE &&
         (!view_valid || (life.status[0]!=MMX6_COOP_DYING && life.status[0]!=MMX6_COOP_FALLEN))) ||

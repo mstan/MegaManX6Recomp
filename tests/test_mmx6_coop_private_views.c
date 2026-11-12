@@ -536,6 +536,38 @@ static void native_giga_views(int online,int split) {
         CHECK(!state_track.count && !state_track.error && !failed);
     }
 }
+static void native_heal_views(int online,int split) {
+    for(unsigned pool=0;pool<2;++pool)for(unsigned owner=0;owner<2;++owner)for(unsigned gate=0;gate<6;++gate) {
+        CPUState cpu;prepare_view(&cpu,online,split);
+        const uint32_t actor=pool?0x800C1220u:0x8008EF48u;
+        psx_mod_write_byte(actor,9);psx_mod_write_byte(actor+4,2);
+        if(pool)psx_mod_write_byte(actor+1,4);
+        psx_mod_write_byte(actor+6,0);psx_mod_write_byte(actor+0x7F,16);
+        psx_mod_write_byte(actor+0x80,4);pickup_owners[0]=(PickupOwner){actor,(uint8_t)owner};
+        for(unsigned at=0x10;at<=0x17;++at)psx_mod_write_byte(PLAY+at,1);
+        psx_mod_write_byte(PLAY+0x19,1);
+        if(gate==1)pickup_owners[0].actor=0;
+        else if(gate==2)psx_mod_write_byte(actor+4,1);
+        else if(gate==3)psx_mod_write_byte(actor+0x80,0);
+        else if(gate==4)psx_mod_write_byte(PLAY+0x19,0);
+        else if(gate==5)pickup_owners[0].actor+=4;
+        view_valid=1;view_frame=0;frame_count=1;
+        psx_mod_write_word(VIEW_CAMERA+8,700u<<16);put32(view_cameras[1]+8,100u<<16);
+        CHECK(independent_heal_context()==!gate);independent_world_begin();
+        if(gate) {CHECK(!view_pending && !view_valid);continue;}
+        CHECK(view_pending && view_valid && le32(view_cameras[1]+8)==100u<<16);
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
+        CHECK(psx_mod_read_byte(actor+0x80)==4 && psx_mod_read_byte(actor+0x7F)==16);
+        for(unsigned at=0x10;at<=0x17;++at)CHECK(psx_mod_read_byte(PLAY+at)==1);
+        CHECK(psx_mod_read_byte(PLAY+0x19)==1);
+        uint32_t guest_camera=le32(view_cameras[1]+8);
+        for(unsigned at=0x10;at<=0x17;++at)psx_mod_write_byte(PLAY+at,0);
+        psx_mod_write_byte(PLAY+0x19,0);psx_mod_write_byte(actor+4,3);
+        frame_count=2;independent_world_begin();CHECK(view_pending && view_valid);
+        CHECK(le32(view_cameras[1]+8)==guest_camera && !independent_heal_context());
+    }
+}
 static void arrival_refusals(void) {
     const Mmx6CoopStatus blocked[]={MMX6_COOP_LEAVING,MMX6_COOP_ABSENT};
     for(unsigned i=0;i<sizeof blocked/sizeof blocked[0];++i) {
@@ -1142,6 +1174,7 @@ int main(void) {
     native_scene_keeps_private_panes(0,1);native_scene_keeps_private_panes(1,0);
     native_nova_views(0,1);native_nova_views(1,0);
     native_giga_views(0,1);native_giga_views(1,0);
+    native_heal_views(0,1);native_heal_views(1,0);
     native_personal_menu_presentation(0,0);native_personal_menu_presentation(0,1);
     native_personal_menu_presentation(1,0);native_personal_menu_presentation(1,1);
     native_entering_pause_views(0,1);native_entering_pause_views(1,0);
