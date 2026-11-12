@@ -3854,11 +3854,45 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
 #include "mmx6_coop_intro_placement.inc"
 #include "mmx6_coop_world_placement.inc"
 #include "mmx6_coop_amazon_placement.inc"
-/* The SDK permits one entry hook per plugin/address. Dispatch both
- * source-disjoint placements from that one registered native boundary. */
-static void guest_placement_scan(CPUState *cpu,uint32_t address) {
+/* One native placement pass, with reset ownership shared by both views. */
+static int guest_placement_scan(CPUState *cpu,uint32_t address) {
     world_guest_placement_scan(cpu);
+#ifdef MMX6_COOP_MODERN_STATE
+    int x,y;
+    if(!world_guest_view(&x,&y) ||
+       psx_mod_read_word(0x8002A2F4u)!=0xA2420003u)return 0;
+    uint32_t slot=world_placement_root_slot(),root=psx_mod_read_word(slot);
+    uint32_t end=world_placement_end(root);if(!end)return 0;
+    unsigned count=(end-root)/8u,protected=0;uint8_t latches[2048]={0};
+    for(unsigned i=0;i<count;++i) {
+        uint32_t at=root+i*8u;unsigned flags=psx_mod_read_byte(at+3),latch=flags&0xF0u;
+        if((psx_mod_read_byte(at)&0x81u) ||
+           (latch!=0x10u && latch!=0x30u && latch!=0x50u))continue;
+        int px=(int16_t)psx_mod_read_half(at+4),py=(int16_t)psx_mod_read_half(at+6);
+        /* Native reset bounds are closed, unlike allocation's open bounds. */
+        if(px<x-48 || px>x+368 || py<y-48 || py>y+288)continue;
+        latches[i]=(uint8_t)flags;++protected;
+    }
+    if(!protected)return 0;
+    STATE_BYTES(restore_latches,149,latches,count);
+    uint32_t context[]={slot,root,count,(uint32_t)inside};
+    STATE_WORDS(restore_context,150,context,4);
+    inside=1;
+    uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    if(psx_mod_read_word(slot)==root)for(unsigned i=0;i<count;++i) {
+        uint32_t at=root+i*8u;
+        /* Undo only the original inactive rearm transition. Never undo a
+         * native allocation, permanent disable, death or placement change. */
+        if(latches[i] && !(psx_mod_read_byte(at)&0x81u) &&
+           psx_mod_read_byte(at+3)==(unsigned)latches[i]+0x10u)
+            psx_mod_write_byte(at+3,latches[i]);
+    }
+    inside=(int)context[3];cpu->gpr[2]=result;
+    STATE_POP(restore_context);STATE_POP(restore_latches);return 1;
+#else
     (void)address;
+    return 0;
+#endif
 }
 static void activate(void) {
     state_track.count=state_track.error=0;
@@ -4064,7 +4098,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80022E44u,render_hidden_primary_partner);
     psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",0x80025FB0,world_draw_filter);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002927C,world_camera_begin);
-    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80029D18,guest_placement_scan);
+    psx_mod_register_function_filter_plugin("mmx6.local-coop.prototype",0x80029D18,guest_placement_scan);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800270D0,independent_background_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80026ECC,independent_background_end);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002B3D4,shared_palette_load);

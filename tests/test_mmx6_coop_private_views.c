@@ -11,6 +11,7 @@
 #include "cpu_state.h"
 #include "mmx6_coop_private_view_sdk_fixture.h"
 static unsigned attack_camera_probe,attack_camera_calls;
+static unsigned rearm_probe,rearm_calls;
 static unsigned view_native_calls,view_gpu_words,view_callback_calls,view_refuse,view_abort;
 static int view_native(CPUState *,uint32_t,uint32_t);
 static int view_gpu(uint32_t,unsigned);
@@ -56,6 +57,18 @@ static void disturb_host(void) {
 }
 static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
     (void)ret;++view_native_calls;
+    if(address==0x80029D18u && rearm_probe) {
+        ++rearm_calls;CHECK(inside && state_track.count>=3 && !state_track.error);
+        for(unsigned i=0;i<5;++i) {
+            uint32_t at=0x800FA214u+i*8u;unsigned flags=psx_mod_read_byte(at+3),latch=flags&0xF0u;
+            if(!(psx_mod_read_byte(at)&0x81u) && (latch==0x10 || latch==0x30 || latch==0x50))
+                psx_mod_write_byte(at+3,(uint8_t)(flags+0x10u));
+        }
+        if(rearm_probe==2)psx_mod_write_byte(0x800FA214u,1); /* native allocation wins */
+        if(rearm_probe==3)psx_mod_write_byte(0x800FA214u,0x80); /* permanent disable wins */
+        if(rearm_probe==4)psx_mod_write_word(0x8007349Cu,0x800FB000u); /* room change wins */
+        cpu->gpr[2]=0x42;return 1;
+    }
     if(address==0x8002012Cu && attack_camera_probe) {
         ++attack_camera_calls;
         int dx=(int16_t)(psx_mod_read_half(PLAYER+10)-psx_mod_read_half(VIEW_CAMERA+10));
@@ -323,6 +336,37 @@ static void defaults_and_scope(void) {
     mmx6_view_sdk.cameras="option-not-readable-in-this-sdk";
     CHECK(!psx_mod_current_option_value("cameras",value,sizeof value));independent_activate();
     CHECK(independent_views && !local_split && !mmx6_view_sdk.pair_enabled);
+}
+static void native_placement_rearm_belongs_to_both_views(void) {
+    for(unsigned variant=1;variant<=4;++variant) {
+        CPUState cpu;prepare_view(&cpu,0,1);rearm_probe=variant;rearm_calls=0;
+        psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+        psx_mod_write_byte(PLAY+12,0);psx_mod_write_byte(PLAY+13,0);
+        psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);
+        p2.body[0]=p2.body[4]=1;p2.body[5]=2;p2.body[0x5C]=32;
+        p2.body[0xCC]=p2.body[0xE0]=0;put32(p2.body+8,2160u<<16);put32(p2.body+12,1114u<<16);
+        psx_mod_write_byte(VIEW_CAMERA+4,1);psx_mod_write_byte(VIEW_CAMERA+0x44,1);
+        psx_mod_write_half(VIEW_CAMERA+0x30,160);psx_mod_write_half(VIEW_CAMERA+0x32,160);
+        psx_mod_write_half(VIEW_CAMERA+0x2C,96);
+        psx_mod_write_half(VIEW_CAMERA+0x1C,3000);psx_mod_write_half(VIEW_CAMERA+0x1E,0);
+        psx_mod_write_half(VIEW_CAMERA+0x20,1500);psx_mod_write_half(VIEW_CAMERA+0x22,0);
+        psx_mod_write_word(0x8007349Cu,0x800FA214u);psx_mod_write_word(0x8002A2F4u,0xA2420003u);
+        const uint8_t flags[]={0x10,0x30,0x50,0x20,0x30};
+        for(unsigned i=0;i<5;++i) {
+            uint32_t at=0x800FA214u+i*8u;
+            psx_mod_write_word(at,(uint32_t)flags[i]<<24|0x100u|(i==2?1u:i==4?0x80u:0u));
+            psx_mod_write_half(at+4,i==1?4000:2160);psx_mod_write_half(at+6,1080);
+        }
+        psx_mod_write_word(0x800FA214u+40u,0x0F000000u);
+        CHECK(guest_placement_scan(&cpu,0x80029D18u));
+        CHECK(rearm_calls==1 && cpu.gpr[2]==0x42 && !inside && !state_track.count && !state_track.error);
+        CHECK(psx_mod_read_byte(0x800FA217u)==(variant==1?0x10:0x20));
+        CHECK(psx_mod_read_byte(0x800FA21Fu)==0x40); /* outside both views rearms */
+        CHECK(psx_mod_read_byte(0x800FA227u)==0x50); /* active stays active */
+        CHECK(psx_mod_read_byte(0x800FA22Fu)==0x20); /* already rearmed stays so */
+        CHECK(psx_mod_read_byte(0x800FA237u)==0x30); /* disabled stays disabled */
+    }
+    rearm_probe=0;
 }
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
 static void native_camera_context(void) {
@@ -1244,7 +1288,7 @@ int main(void) {
     native_shared_weather_frames(0,1);native_shared_weather_frames(1,0);
     native_shared_scenery_y(0,1);native_shared_scenery_y(1,0);native_shared_scenery_y(1,1);
     native_quake_inputs(0,1);native_quake_inputs(1,0);native_quake_inputs(1,1);
-    native_intro_camera_volumes();
+    native_intro_camera_volumes();native_placement_rearm_belongs_to_both_views();
     presentation_restore(0,1,0,0);presentation_restore(0,1,1,0);presentation_restore(0,1,0,1);
     presentation_restore(1,0,0,0);presentation_restore(1,0,1,0);presentation_restore(1,0,0,1);
     presentation_restore(1,1,0,0);presentation_restore(1,1,1,0);presentation_restore(1,1,0,1);
