@@ -295,7 +295,17 @@ static int independent_door_context(void) {
     return phase>=1 && phase<=3;
 }
 static int independent_scene_context(void) {
-    if(!scene_owner || scene_owner>2 || both_door_actor)return 0;
+    if(!scene_owner || scene_owner>2)return 0;
+    if(both_door_actor) {
+        /* A closed/closing door may still own the barrier while the next
+         * native boss/NPC script holds its player. Traversal has finished,
+         * but its registered actor must not suppress that current world.
+         * Pending native door requests and reused slots remain excluded. */
+        unsigned phase=psx_mod_read_byte(both_door_actor+5);
+        if(!both_door_members || !both_door_source_valid() ||
+           psx_mod_read_byte(both_door_actor+4)!=1 || phase<4 || phase>5 ||
+           psx_mod_read_byte(PLAYER+0xD4) || p2.body[0xD4])return 0;
+    }
     /* Use serialized scene/body state, including after current-build load.
      * Diagnostic event history must never authorize presentation. */
     if(scene_phase || scene_shared_locked())return 1;

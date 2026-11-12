@@ -1183,7 +1183,7 @@ static void checkpoint_scene_fatal_boundary(CPUState *cpu) {
  * completed CP1 receipt, then this exact live first hatch/current CP1-or2. */
 static void checkpoint_hatch_stagger_boundary(void) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
-    if(!checkpoint_hatch_stagger_option || checkpoint_hatch_stagger_state || checkpoint_lab_option!=4 ||
+    if(!checkpoint_hatch_stagger_option || !both_doors || checkpoint_hatch_stagger_state || checkpoint_lab_option!=4 ||
        !checkpoint_lab_receipt_complete() || !ready || !enrolled || failed || inside || stage_call ||
        player_call || ride_call || view_call || private_draw || zero_world || zero_projected ||
        state_track.count || state_track.error ||

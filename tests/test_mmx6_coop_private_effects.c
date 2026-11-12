@@ -598,6 +598,18 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         cpu->gpr[2]=1;return;
     }
     if(door_native_probe) {
+        if(address==0x8002DCF4u) {
+            /* Original strict AABB overlap, independent of full door
+             * containment and of the plugin's follower decision. */
+            uint32_t a=cpu->gpr[4],b=cpu->gpr[5];
+            uint32_t ab=psx_mod_read_word(a+0x68),bb=psx_mod_read_word(b+0x68);
+            int ax=(int16_t)(psx_mod_read_half(a+10)+(psx_mod_read_byte(a+0x15)==0x40?-1:1)*(int8_t)psx_mod_read_byte(ab));
+            int bx=(int16_t)(psx_mod_read_half(b+10)+(psx_mod_read_byte(b+0x15)==0x40?-1:1)*(int8_t)psx_mod_read_byte(bb));
+            int ay=(int16_t)(psx_mod_read_half(a+14)+(int8_t)psx_mod_read_byte(ab+1));
+            int by=(int16_t)(psx_mod_read_half(b+14)+(int8_t)psx_mod_read_byte(bb+1));
+            cpu->gpr[2]=abs(ax-bx)<psx_mod_read_byte(ab+2)+psx_mod_read_byte(bb+2) &&
+                abs(ay-by)<psx_mod_read_byte(ab+3)+psx_mod_read_byte(bb+3);return;
+        }
         if(address==0x8002CB50u) {
             CHECK(scene_call && inside==zero_projected && cpu->gpr[4]==0x800C12C4u && cpu->gpr[5]==PLAY && cpu->gpr[6]==PLAYER);
             ++door_draws;cpu->gpr[2]=0xD008;return;
@@ -3039,6 +3051,10 @@ static void check_door_result(CPUState *cpu,unsigned owner,unsigned phase) {
     uint8_t hp=p2.body[0x5C],xhp=psx_mod_read_byte(PLAYER+0x5C);
     CHECK(door_begin(cpu,0x80050250u) && cpu->gpr[2]==0xD007);
     CHECK(door_ticks==1 && door_draws==1 && occurrences(0x80050250u)==1);
+    if(scene_owner!=owner || scene_phase!=phase)
+        fprintf(stderr,"door owner/phase %u/%u expected %u/%u; x=%d/%d y=%d/%d\n",
+            scene_owner,scene_phase,owner,phase,(int32_t)x>>16,(int32_t)zx>>16,
+            (int32_t)y>>16,(int32_t)zy>>16);
     CHECK(scene_owner==owner && scene_phase==phase);
     CHECK(psx_mod_read_word(PLAYER+8)==x && psx_mod_read_word(PLAYER+12)==y &&
         le32(p2.body+8)==zx && le32(p2.body+12)==zy && p2.body[0x5C]==hp &&
@@ -3067,9 +3083,40 @@ static void native_either_both_door_admission(void) {
     }
     /* Default Either admits either real native overlap, with transport. */
     door_setup(&cpu,0,480,400);check_door_result(&cpu,1,1);
-    CHECK(psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4] && occurrences(0x80050C88u)==2);
+    CHECK(psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4] && occurrences(0x80050C88u)==3);
     door_setup(&cpu,0,400,480);check_door_result(&cpu,2,1);
     CHECK(!psx_mod_read_byte(PLAYER+0xD4) && p2.body[0xD4] && occurrences(0x80050C88u)==3);
+    /* Either keeps both native bodies when both already earned admission. */
+    door_setup(&cpu,0,480,480);check_door_result(&cpu,1,0);
+    CHECK(psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 &&
+          both_door_members==3 && both_door_traversal_active());
+    /* Original serial walking can leave P2 two pixels outside the native
+     * admission edge when P1 opens. Its next actual step reaches the door. */
+    door_setup(&cpu,0,480,468);put32(p2.body+0x20,2u<<16);check_door_result(&cpu,1,0);
+    CHECK(psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 && both_door_members==3);
+    door_setup(&cpu,0,480,468);put32(p2.body+0x20,0);check_door_result(&cpu,1,1);
+    CHECK(!p2.body[0xD4]); /* No arbitrary attraction radius for a stationary player. */
+    /* A touching follower may be wall-sliding outside vertical containment.
+     * Either keeps both bodies, while Both still requires both predicates. */
+    for(unsigned owner=0;owner<2;++owner) {
+        door_setup(&cpu,0,480,480);
+        if(owner)psx_mod_write_word(PLAYER+12,1025u<<16);
+        else put32(p2.body+12,1021u<<16);
+        check_door_result(&cpu,owner+1,0);
+        CHECK(psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 && both_door_members==3);
+    }
+    /* Damage, vehicle and disabled followers still use ordinary transport. */
+    for(unsigned gate=0;gate<5;++gate) {
+        door_setup(&cpu,0,480,480);put32(p2.body+12,1021u<<16);
+        switch(gate) {
+        case 0:p2.body[0xA4]=1;break;
+        case 1:p2.body[0x5C]=0x80;break;
+        case 2:p2.body[5]=3;break;
+        case 3:p2.body[0x8E]=1;break;
+        case 4:put32(p2.body+12,1100u<<16);break;
+        }
+        check_door_result(&cpu,1,1);CHECK(!p2.body[0xD4] && !both_door_members);
+    }
     /* Both must veto the native admission for either distant living actor,
      * while still updating/drawing the door exactly once. */
     door_setup(&cpu,1,480,400);check_door_result(&cpu,0,0);
@@ -3132,8 +3179,8 @@ static void native_either_both_door_admission(void) {
 }
 static void native_both_door_ack_motion_and_release(void) {
     CPUState cpu;
-    for(unsigned trailing=0;trailing<2;++trailing) {
-        door_setup(&cpu,1,480,480);check_door_result(&cpu,1,0);
+    for(unsigned both=0;both<2;++both)for(unsigned trailing=0;trailing<2;++trailing) {
+        door_setup(&cpu,both,480,480);check_door_result(&cpu,1,0);
         CHECK(both_door_actor==TEST_DOOR && both_door_members==3);
         psx_mod_write_byte(TEST_DOOR+5,1);
         psx_mod_write_byte(PLAYER+0xD4,0xFF); /* Only primary earned its native acknowledgement. */

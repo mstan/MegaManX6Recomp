@@ -203,10 +203,10 @@ static int both_door_source_valid(void) {
         psx_mod_read_byte(both_door_actor+1)==8 &&
         psx_mod_read_word(both_door_actor+0x10)==both_door_origin;
 }
-/* Both ALIVE actors produce phase0 together only after authenticated Both
- * door admission. Other native scenes use the existing passenger phases. */
+/* Two eligible living actors share native traversal under either door
+ * policy. Other native scenes use the existing passenger phases. */
 static int both_door_traversal_active(void) {
-    return both_doors && both_door_actor && both_door_members && both_door_source_valid() &&
+    return both_door_actor && both_door_members && both_door_source_valid() &&
         scene_owner && !scene_phase && pause_owner<0;
 }
 static void both_door_reset(void) {
@@ -1558,6 +1558,33 @@ static uint32_t door_probe(CPUState *cpu,uint32_t actor,unsigned both) {
     }
     return guest(cpu,0x80050C88u,actor,0);
 }
+static uint32_t door_follower(uint32_t actor) {
+    /* Either's owner must earn the original opening. A living follower
+     * reaching that door can then accept its native request even when a
+     * wall-slide box straddles the opening's vertical containment boundary.
+     * Preserve native disable/damage/vehicle gates; this never opens a door. */
+    uint32_t a=psx_mod_read_word(actor+0x68),p=psx_mod_read_word(PLAYER+0x68);
+    if (!psx_mod_read_byte(PLAYER) || psx_mod_read_byte(PLAYER+0xA4) ||
+        !psx_mod_read_byte(PLAYER+0x5C) || (psx_mod_read_byte(PLAYER+0x5C)&0x80u) ||
+        psx_mod_read_byte(PLAYER+5)==3 ||
+        psx_mod_read_byte(PLAYER+(psx_mod_read_byte(PLAYER+2)?0x8E:0x7A)) ||
+        a<0x80010000u || a>0x801FFFFCu || p<0x80010000u || p>0x801FFFFCu ||
+        (int16_t)psx_mod_read_half(PLAYER+10)>(int16_t)psx_mod_read_half(actor+10)) return 0;
+    /* Use the door predicate's unflipped authored centers. The generic
+     * pickup overlap flips them by facing and excludes a touching edge.
+     * Serial player updates can leave the follower one actual movement
+     * step behind the owner. Admit that step without moving either body;
+     * each still earns its original native acknowledgement and clearance. */
+    int ax=(int16_t)(psx_mod_read_half(actor+10)+(int8_t)psx_mod_read_byte(a));
+    int px=(int16_t)(psx_mod_read_half(PLAYER+10)+(int8_t)psx_mod_read_byte(p));
+    int ay=(int16_t)(psx_mod_read_half(actor+14)+(int8_t)psx_mod_read_byte(a+1));
+    int py=(int16_t)(psx_mod_read_half(PLAYER+14)+(int8_t)psx_mod_read_byte(p+1));
+    int dx=ax-px,dy=ay-py;if(dx<0)dx=-dx;if(dy<0)dy=-dy;
+    int32_t velocity=(int32_t)psx_mod_read_word(PLAYER+0x20);
+    unsigned step=velocity>0 && velocity<=8*65536?(unsigned)(velocity+65535)>>16:0;
+    return (unsigned)dx<=psx_mod_read_byte(a+2)+psx_mod_read_byte(p+2)+step &&
+        dy<=psx_mod_read_byte(a+3)+psx_mod_read_byte(p+3);
+}
 static uint8_t door_body_byte(unsigned seat,unsigned offset) {
     return seat?p2.body[offset]:psx_mod_read_byte(PLAYER+offset);
 }
@@ -1687,7 +1714,7 @@ static int door_begin(CPUState *cpu, uint32_t address) {
     unsigned present=life.status[0]==MMX6_COOP_ALIVE;
     uint32_t hit=present?door_probe(cpu,actor,both_doors):0;
     unsigned all=hit;
-    if ((both_doors || !hit) && life.status[1]==MMX6_COOP_ALIVE) {
+    if (life.status[1]==MMX6_COOP_ALIVE) {
         inside=1;
         enter_zero();
         uint32_t second=door_probe(cpu,actor,both_doors);
@@ -1698,6 +1725,15 @@ static int door_begin(CPUState *cpu, uint32_t address) {
         present=1;hit|=second;
     }
     if (both_doors) hit=present && all;
+    unsigned paired=all;
+    if (!both_doors && hit && !paired &&
+        life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE) {
+        if (!seat) {inside=1;enter_zero();}
+        paired=door_follower(actor);
+        if (!seat) {leave_zero();inside=0;}
+    }
+    /* Bit1 retains nearby followers in the actual native door traversal. */
+    context[4]|=(paired && life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE)?2u:0u;
     /* Probe only the pure native overlap test. Door AI, effects and room
      * changes still execute once, under the touching player's context. */
     context[2]=seat;context[3]=hit;context[5]=1;STATE_UPDATE(restore_door,context);
@@ -1705,20 +1741,20 @@ static int door_begin(CPUState *cpu, uint32_t address) {
     uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
     if (hit && psx_mod_read_byte(PLAYER+0xD4)) {
         scene_begin(seat,address);
-        /* Both bodies already passed the original native eligibility. Keep
-         * the native scene lock, without withdrawing/rejoining a passenger.
+        /* Keep nearby bodies under the native scene lock, without
+         * withdrawing/rejoining a passenger at the opening.
          * Other doors, portals and scripted scenes retain their own policy. */
-        if (both_doors) {
+        if (context[4]) {
             scene_phase=0;
             both_door_actor=actor;
             both_door_origin=psx_mod_read_word(actor+0x10);
             both_door_members=(life.status[0]==MMX6_COOP_ALIVE?1u:0u)|
                 (life.status[1]==MMX6_COOP_ALIVE?2u:0u);
             door_capture_extents();
-            /* Native AI admitted every living original body box, but sets
-         * D4 only on its resident player. Give the other admitted body
-         * that same request1. Each original player earns its own FF ack;
-         * door_update handles later body commands and native movement. */
+            /* Native AI sets D4 only on its resident player. Give the
+             * touching follower that same request1. Each original player
+             * earns its own FF ack; door_update handles later body commands
+             * and native movement. */
             if (life.status[seat^1]==MMX6_COOP_ALIVE) {
                 uint8_t request=psx_mod_read_byte(PLAYER+0xD4);
                 if (seat) p1.body[0xD4]=request;

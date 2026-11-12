@@ -243,7 +243,7 @@ static void state_core(StateIO *io,HostState *s) {
         if(s->door_members || s->door_origin)STATE_INVALID(io);
     } else if(!both_door_slot(s->door_actor) || !s->door_origin ||
               !state_actor(s->door_origin) || (s->door_origin&3) ||
-              !both_doors || !s->door_members || !s->owner ||
+              !s->door_members || !s->owner ||
               s->scene_phase || !s->enrolled)STATE_INVALID(io);
     FIELD(clear_phase,1,CLEAR_VICTORY);FIELD(clear_members,1,3);FIELD(clear_started,1,3);
     if((s->door_actor && s->clear_phase) || (s->arrival && (s->door_actor || s->clear_phase)))STATE_INVALID(io);

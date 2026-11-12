@@ -811,7 +811,8 @@ static void shared_clear_snapshot(void) {
 }
 static void both_door_snapshot(void) {
     HostState prior;state_capture(&prior);unsigned option=both_doors;
-    both_doors=1;scene_owner=1;scene_phase=0;pause_owner=-1;enrolled=1;
+    for(unsigned mode=0;mode<2;++mode) {
+    both_doors=mode;scene_owner=1;scene_phase=0;pause_owner=-1;enrolled=1;
     both_door_actor=0x800C12C4u;both_door_origin=0x800FA2ACu;both_door_members=3;
     both_door_extents[0][0]=-11;both_door_extents[0][1]=11;both_door_extents[1][0]=-12;both_door_extents[1][1]=12;
     uint32_t len=snapshot_bytes();CHECK(len);
@@ -830,7 +831,9 @@ static void both_door_snapshot(void) {
     state_core(&check,&active);CHECK(!check.ok);
     state_capture(&active);active.scene_phase=1;check=(StateIO){STATE_COUNT,1,NULL,NULL,0,0,0};
     state_core(&check,&active);CHECK(!check.ok);
-    both_doors=option;state_commit(&prior);free(wire);
+    free(wire);
+    }
+    both_doors=option;state_commit(&prior);
 }
 static void paired_arrival_snapshot(void) {
     HostState prior;state_capture(&prior);

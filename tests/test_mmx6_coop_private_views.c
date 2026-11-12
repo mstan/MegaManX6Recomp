@@ -408,8 +408,9 @@ static void prepare_door_view(CPUState *cpu,int online,int split,unsigned phase)
     frame_count=1;view_pending=view_valid=0;
 }
 static void admitted_door_views(int online,int split) {
-    for(unsigned phase=1;phase<=3;++phase)for(unsigned owner=1;owner<=2;++owner) {
+    for(unsigned both=0;both<2;++both)for(unsigned phase=1;phase<=3;++phase)for(unsigned owner=1;owner<=2;++owner) {
         CPUState cpu;prepare_door_view(&cpu,online,split,phase);scene_owner=owner;
+        both_doors=both;
         CHECK(independent_door_context());independent_world_begin();CHECK(view_valid && view_pending);
         PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
         CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
@@ -420,7 +421,7 @@ static void admitted_door_views(int online,int split) {
     for(unsigned gate=0;gate<18;++gate) {
         CPUState cpu;prepare_door_view(&cpu,online,split,2);
         switch(gate) {
-        case 0:both_doors=0;break;
+        case 0:both_door_members=0;break;
         case 1:both_door_members=1;break;
         case 2:scene_phase=1;break;
         case 3:psx_mod_write_byte(both_door_actor,0);break;
@@ -440,6 +441,27 @@ static void admitted_door_views(int online,int split) {
         case 17:both_door_actor+=4;break;
         }
         independent_world_begin();CHECK(!view_valid && !view_pending && !view_native_calls);
+    }
+}
+static void native_door_scene_handoff(int online,int split) {
+    for(unsigned both=0;both<2;++both)for(unsigned owner=1;owner<=2;++owner)
+    for(unsigned gate=0;gate<7;++gate) {
+        CPUState cpu;prepare_door_view(&cpu,online,split,4);both_doors=both;scene_owner=owner;
+        psx_mod_write_byte(PLAYER+0xD4,0);p2.body[0xD4]=0;
+        if(owner==1)psx_mod_write_byte(PLAYER+0xD0,20);else p2.body[0xD0]=20;
+        if(gate==1)psx_mod_write_byte(both_door_actor+5,3);
+        else if(gate==2)psx_mod_write_byte(PLAYER+0xD4,1);
+        else if(gate==3)p2.body[0xD4]=1;
+        else if(gate==4)psx_mod_write_word(both_door_actor+0x10,both_door_origin+8);
+        else if(gate==5)both_door_members=0;
+        else if(gate==6)psx_mod_write_byte(both_door_actor+4,2);
+        CHECK(independent_scene_context()==!gate);
+        if(gate)continue;
+        CHECK(!independent_door_context());independent_world_begin();CHECK(view_valid && view_pending);
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
+        CHECK(both_door_members==3 && scene_owner==owner && !scene_phase && !failed);
+        CHECK(psx_mod_read_byte(PLAY+0x10)==1 && psx_mod_read_byte(PLAY+0x1C)==1);
     }
 }
 static void native_scene_keeps_private_panes(int online,int split) {
@@ -1173,6 +1195,7 @@ int main(void) {
     admitted_door_views(0,1);admitted_door_views(1,0);admitted_door_views(1,1);
     native_scene_keeps_private_panes(0,1);native_scene_keeps_private_panes(1,0);
     native_nova_views(0,1);native_nova_views(1,0);
+    native_door_scene_handoff(0,1);native_door_scene_handoff(1,0);
     native_giga_views(0,1);native_giga_views(1,0);
     native_heal_views(0,1);native_heal_views(1,0);
     native_personal_menu_presentation(0,0);native_personal_menu_presentation(0,1);
