@@ -1,3 +1,21 @@
+# v1.3.8-alpha-playtest
+
+This release improves local co-op presentation and native enemy interactions.
+
+- Keep the two-pane layout active through gameplay and shared screens. The
+  shared-camera option displays the same scene in both panes.
+- Continue refreshing both local views while a partner departs and returns.
+- Retain per-player attack tokens for ordinary enemies so one saber swing
+  cannot apply damage repeatedly on successive frames.
+- Preserve defeated enemy placements while either active view owns the area,
+  and allow native respawning after both views leave.
+
+Fresh installations retain adaptive widescreen defaults. Native memory-card
+saves and existing settings are preserved. Co-op remains experimental; both
+netplay peers must use this exact build.
+
+---
+
 # v1.3.7-alpha-playtest
 
 This release improves independent co-op cameras, native scene transitions and

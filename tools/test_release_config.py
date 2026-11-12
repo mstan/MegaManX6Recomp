@@ -45,7 +45,7 @@ class PlaytestDefaultsTests(unittest.TestCase):
     def test_current_version_and_adaptive_fresh_default(self):
         import tomllib
         root=Path(__file__).resolve().parents[1]
-        self.assertEqual((root/'packaging/release/VERSION').read_text(encoding="utf-8").strip(),'v1.3.7-alpha')
+        self.assertEqual((root/'packaging/release/VERSION').read_text(encoding="utf-8").strip(),'v1.3.8-alpha')
         catalog=tomllib.loads((root/'mods/preloaded/packages/mmx6.enhancement.widescreen/1.0.0/manifest.toml').read_text(encoding="utf-8"))
         self.assertTrue(next(x for x in catalog['feature']if x['id']=='widescreen')['default_enabled'])
         self.assertEqual(next(x for x in catalog['option']if x['id']=='aspect')['default'],'adaptive')
