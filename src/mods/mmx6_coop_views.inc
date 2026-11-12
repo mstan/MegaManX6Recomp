@@ -354,9 +354,10 @@ static int independent_giga_context(void) {
         !p2.body[0xD0] && !p2.body[0xD3] && !p2.body[0xD4] && !p2.body[0xD5];
 }
 static int independent_heal_context(void) {
-    /* Original4ED4C enters mode2 healing through4FE58(1), which freezes
-     * PLAY10..17,19. Original4EC30 owns its four-frame/countdown recovery
-     * and4FE58(0). Render that held world with the established cameras;
+    /* Native health drops and reploids both freeze PLAY10..17,19 while
+     * healing, with different actor layouts. Original4DCB8 owns the drop's
+     * two-frame timer84/count83;4EC30 owns the reploid's timer80/count7F.
+     * Render that held world with the established cameras;
      * never clear the original locks or advance healing from a draw pass. */
     if(!ready || !enrolled || failed || scene_owner || clear_phase || pause_owner>=0 ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
@@ -366,12 +367,19 @@ static int independent_heal_context(void) {
     if(psx_mod_read_byte(PLAY+0x19)!=1)return 0;
     for(unsigned i=0;i<128;++i) {
         uint32_t actor=pickup_owners[i].actor;
-        int pickup=actor>=0x8008EF48u && actor<0x80090C88u && !((actor-0x8008EF48u)%0x9Cu);
+        int pickup=actor>=0x8008EF48u && actor<0x80090C88u && !((actor-0x8008EF48u)%0x9Cu) &&
+            psx_mod_read_byte(actor+1)==47;
         int reploid=both_door_slot(actor) && psx_mod_read_byte(actor+1)==4;
         if(pickup_owners[i].seat>1 || (!pickup && !reploid))continue;
-        unsigned timer=psx_mod_read_byte(actor+0x80);
-        if((psx_mod_read_byte(actor)&9u)==9u && psx_mod_read_byte(actor+4)==2 &&
-           !psx_mod_read_byte(actor+6) && psx_mod_read_byte(actor+0x7F) && timer && timer<=4)return 1;
+        unsigned timer=psx_mod_read_byte(actor+(pickup?0x84:0x80));
+        unsigned remaining=psx_mod_read_byte(actor+(pickup?0x83:0x7F));
+        unsigned phase=psx_mod_read_byte(actor+6);
+        if((psx_mod_read_byte(actor)&9u)!=9u || psx_mod_read_byte(actor+4)!=2)continue;
+        if(!phase && remaining && timer && timer<=(pickup?2u:4u))return 1;
+        /* 4DCB8 stores phase1 when full or out of units, then returns.
+         * Its next update releases the native hold through4E78C(0).
+         * Reaching capacity can leave unused units in the item. */
+        if(pickup && phase==1)return 1;
     }
     return 0;
 }
@@ -496,7 +504,7 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     (void)user;(void)unused;
     int menu=personal_menus_active(),returning=personal_resuming_world();
     if(!menu)project(VIEW_CAMERA,view_cameras[private_seat],sizeof view_cameras[0]);
-    if(!menu && !returning && pause_owner<0 && private_seat &&
+    if(!menu && !returning && !independent_heal_context() && pause_owner<0 && private_seat &&
        (!scene_owner || (!scene_phase && !independent_door_story_context()) || independent_door_context()) &&
        (life.status[1]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_JOINING)) {
         if(!independent_quake_input())return 0;

@@ -581,14 +581,15 @@ static void native_heal_views(int online,int split) {
         CPUState cpu;prepare_view(&cpu,online,split);
         const uint32_t actor=pool?0x800C1220u:0x8008EF48u;
         psx_mod_write_byte(actor,9);psx_mod_write_byte(actor+4,2);
-        if(pool)psx_mod_write_byte(actor+1,4);
-        psx_mod_write_byte(actor+6,0);psx_mod_write_byte(actor+0x7F,16);
-        psx_mod_write_byte(actor+0x80,4);pickup_owners[0]=(PickupOwner){actor,(uint8_t)owner};
+        psx_mod_write_byte(actor+1,pool?4:47);
+        unsigned count=pool?0x7F:0x83,timer=pool?0x80:0x84,period=pool?4:2;
+        psx_mod_write_byte(actor+6,0);psx_mod_write_byte(actor+count,16);
+        psx_mod_write_byte(actor+timer,(uint8_t)period);pickup_owners[0]=(PickupOwner){actor,(uint8_t)owner};
         for(unsigned at=0x10;at<=0x17;++at)psx_mod_write_byte(PLAY+at,1);
         psx_mod_write_byte(PLAY+0x19,1);
         if(gate==1)pickup_owners[0].actor=0;
         else if(gate==2)psx_mod_write_byte(actor+4,1);
-        else if(gate==3)psx_mod_write_byte(actor+0x80,0);
+        else if(gate==3)psx_mod_write_byte(actor+timer,0);
         else if(gate==4)psx_mod_write_byte(PLAY+0x19,0);
         else if(gate==5)pickup_owners[0].actor+=4;
         view_valid=1;view_frame=0;frame_count=1;
@@ -598,13 +599,22 @@ static void native_heal_views(int online,int split) {
         CHECK(view_pending && view_valid && le32(view_cameras[1]+8)==100u<<16);
         PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
         CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
-        CHECK(psx_mod_read_byte(actor+0x80)==4 && psx_mod_read_byte(actor+0x7F)==16);
+        CHECK(psx_mod_read_byte(actor+timer)==period && psx_mod_read_byte(actor+count)==16);
         for(unsigned at=0x10;at<=0x17;++at)CHECK(psx_mod_read_byte(PLAY+at)==1);
         CHECK(psx_mod_read_byte(PLAY+0x19)==1);
         uint32_t guest_camera=le32(view_cameras[1]+8);
+        if(!pool)for(unsigned unused=0;unused<=8;unused+=8) {
+            psx_mod_write_byte(actor+count,(uint8_t)unused);psx_mod_write_byte(actor+6,1);
+            ++frame_count;CHECK(independent_heal_context());
+            independent_world_begin();CHECK(view_valid && view_pending);
+            CHECK(le32(view_cameras[1]+8)==guest_camera);
+            PrivateViewContext terminal;memset(&terminal,0,sizeof terminal);private_context_save(&terminal);
+            CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&terminal);
+            CHECK(psx_mod_read_byte(actor+6)==1 && psx_mod_read_byte(PLAY+0x10)==1);
+        }
         for(unsigned at=0x10;at<=0x17;++at)psx_mod_write_byte(PLAY+at,0);
         psx_mod_write_byte(PLAY+0x19,0);psx_mod_write_byte(actor+4,3);
-        frame_count=2;independent_world_begin();CHECK(view_pending && view_valid);
+        ++frame_count;independent_world_begin();CHECK(view_pending && view_valid);
         CHECK(le32(view_cameras[1]+8)==guest_camera && !independent_heal_context());
     }
 }
