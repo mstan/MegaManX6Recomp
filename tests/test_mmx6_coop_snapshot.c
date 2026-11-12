@@ -909,7 +909,15 @@ static void native_type_zero_tracking_snapshot(void) {
         !boss_balance[0].recognized && state_digest()==digest);
     HostState bad;state_capture(&bad);bad.boss_balance[0].origin=0x800FA395u;
     StateIO invalid={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
-    state_capture(&bad);bad.boss_balance[0].cookies[0]=1;
+    /* Ordinary actors now retain per-player attack tokens too. They must
+     * survive a current-build snapshot without enabling boss-only policy. */
+    boss_balance[0].cookies[0]=1;boss_balance[0].cookies[1]=2;
+    digest=state_digest();CHECK(snapshot_write(wire,length));
+    memset(boss_balance,0,sizeof boss_balance);
+    CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+    CHECK(!boss_balance[0].recognized && boss_balance[0].cookies[0]==1 &&
+          boss_balance[0].cookies[1]==2 && state_digest()==digest);
+    state_capture(&bad);bad.boss_balance[0].clocks[0]=1;
     invalid=(StateIO){STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
     state_capture(&bad);bad.boss_balance[0].remainder=1;
     invalid=(StateIO){STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
@@ -926,10 +934,10 @@ static void default_boss_cookie_snapshot(void) {
     boss_balance[0].cookies[0]=44;CHECK(state_digest()!=digest);
     CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
     CHECK(boss_balance[0].cookies[0]==42 && boss_balance[0].cookies[1]==43 && state_digest()==digest);
-    /* Default cookie ownership cannot smuggle optional scaling/cooldowns or
-     * refer to an unrecognized target. Current-build state remains checked. */
+    /* Attack tokens also belong to ordinary targets; optional boss scaling
+     * and cooldowns still require their own qualified policy. */
     HostState bad;state_capture(&bad);bad.boss_balance[0].recognized=0;
-    StateIO invalid={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
+    StateIO invalid={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(invalid.ok);
     state_capture(&bad);bad.boss_balance[0].clocks[0]=1;
     invalid=(StateIO){STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&invalid,&bad);CHECK(!invalid.ok);
     state_capture(&bad);bad.boss_balance[0].remainder=1;
