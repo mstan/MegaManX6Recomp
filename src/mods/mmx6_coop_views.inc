@@ -419,8 +419,11 @@ static void independent_world_begin(void) {
        (coop_world_hold() && !independent_giga_context() && !door_views && !scene_views && !returning && !initial) ||
        (life.status[0]!=MMX6_COOP_ALIVE &&
         (!view_valid || (life.status[0]!=MMX6_COOP_DYING && life.status[0]!=MMX6_COOP_FALLEN))) ||
+       /* Voluntary departure keeps the established guest camera while the
+        * living primary and shared world continue producing current images. */
        (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING &&
-        (!view_valid || (life.status[1]!=MMX6_COOP_DYING && life.status[1]!=MMX6_COOP_FALLEN)))) {
+        (!view_valid || (life.status[1]!=MMX6_COOP_DYING && life.status[1]!=MMX6_COOP_FALLEN &&
+                        life.status[1]!=MMX6_COOP_LEAVING && life.status[1]!=MMX6_COOP_ABSENT)))) {
         if(!menu_history || (pause_owner<0 && psx_mod_read_byte(PLAY+1)!=2))
             independent_invalidate();
         return;

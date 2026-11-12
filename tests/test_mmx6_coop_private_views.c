@@ -622,6 +622,14 @@ static void arrival_refusals(void) {
     const Mmx6CoopStatus blocked[]={MMX6_COOP_LEAVING,MMX6_COOP_ABSENT};
     for(unsigned i=0;i<sizeof blocked/sizeof blocked[0];++i) {
         CPUState cpu;prepare_view(&cpu,0,1);life.status[1]=blocked[i];
+        frame_count=1;view_frame=0;
+        uint8_t retained[sizeof view_cameras[1]];memcpy(retained,view_cameras[1],sizeof retained);
+        independent_world_begin();CHECK(view_pending && view_valid);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT) && !failed);
+        for(unsigned layer=0;layer<3;++layer)
+            CHECK(!memcmp(view_cameras[1]+layer*0x54+8,retained+layer*0x54+8,0x14));
+        /* Absence retains an established camera, never a stale stage's pair. */
+        prepare_view(&cpu,0,1);life.status[1]=blocked[i];view_valid=0;
         independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
     }
     /* Death keeps the already established pane, without running a camera
@@ -871,7 +879,7 @@ static void native_menu_camera_history(int online,int split) {
         if(boundary==7)psx_mod_write_byte(PLAY+0x1C,1);
         psx_mod_write_byte(PLAY+1,0);pause_owner=-1;++frame_count;
         independent_world_begin();
-        if(boundary==4 || boundary==5 || boundary==7) {
+        if(boundary==4 || boundary==7) {
             CHECK(!view_pending && !view_valid && !view_menu_history);continue;
         }
         CHECK(view_pending && view_valid && !view_menu_history);
@@ -880,7 +888,7 @@ static void native_menu_camera_history(int online,int split) {
             CHECK(!memcmp(view_cameras[1]+layer*0x54,actual,8));
             CHECK(!memcmp(view_cameras[1]+layer*0x54+0x1C,actual+0x1C,0x38));
             CHECK(!memcmp(view_cameras[1]+layer*0x54+8,
-                boundary?actual+8:prior+layer*0x54+8,0x14));
+                boundary && boundary!=5?actual+8:prior+layer*0x54+8,0x14));
         }
         PrivateViewContext saved;memset(&saved,0,sizeof saved);private_context_save(&saved);
         CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&saved);
