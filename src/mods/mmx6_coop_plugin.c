@@ -3863,17 +3863,24 @@ static int guest_placement_scan(CPUState *cpu,uint32_t address) {
        psx_mod_read_word(0x8002A2F4u)!=0xA2420003u)return 0;
     uint32_t slot=world_placement_root_slot(),root=psx_mod_read_word(slot);
     uint32_t end=world_placement_end(root);if(!end)return 0;
-    unsigned count=(end-root)/8u,protected=0;uint8_t latches[2048]={0};
+    unsigned count=(end-root)/8u,pending=0;uint8_t latches[2048]={0};
+    int primary_x=(int16_t)psx_mod_read_half(VIEW_CAMERA+10);
+    int primary_y=(int16_t)psx_mod_read_half(VIEW_CAMERA+14);
     for(unsigned i=0;i<count;++i) {
         uint32_t at=root+i*8u;unsigned flags=psx_mod_read_byte(at+3),latch=flags&0xF0u;
         if((psx_mod_read_byte(at)&0x81u) ||
            (latch!=0x10u && latch!=0x30u && latch!=0x50u))continue;
         int px=(int16_t)psx_mod_read_half(at+4),py=(int16_t)psx_mod_read_half(at+6);
         /* Native reset bounds are closed, unlike allocation's open bounds. */
-        if(px<x-48 || px>x+368 || py<y-48 || py>y+288)continue;
-        latches[i]=(uint8_t)flags;++protected;
+        int guest_inside=px>=x-48 && px<=x+368 && py>=y-48 && py<=y+288;
+        int primary_inside=px>=primary_x-48 && px<=primary_x+368 &&
+            py>=primary_y-48 && py<=primary_y+288;
+        if(!guest_inside && primary_inside)continue;
+        /* Bit80 is free for these10/30/50 category headers. It records a
+         * pending outside-both reset, not a guest RAM placement flag. */
+        latches[i]=(uint8_t)(flags|(guest_inside?0u:0x80u));++pending;
     }
-    if(!protected)return 0;
+    if(!pending)return 0;
     STATE_BYTES(restore_latches,149,latches,count);
     uint32_t context[]={slot,root,count,(uint32_t)inside};
     STATE_WORDS(restore_context,150,context,4);
@@ -3883,9 +3890,13 @@ static int guest_placement_scan(CPUState *cpu,uint32_t address) {
         uint32_t at=root+i*8u;
         /* Undo only the original inactive rearm transition. Never undo a
          * native allocation, permanent disable, death or placement change. */
-        if(latches[i] && !(psx_mod_read_byte(at)&0x81u) &&
-           psx_mod_read_byte(at+3)==(unsigned)latches[i]+0x10u)
-            psx_mod_write_byte(at+3,latches[i]);
+        if(!latches[i] || (psx_mod_read_byte(at)&0x81u))continue;
+        unsigned before=latches[i]&0x7Fu,after=psx_mod_read_byte(at+3);
+        if(latches[i]&0x80u) {
+            /* Original29D18 skips scanning when the primary camera stays
+             * still. A departing guest must still earn the same reset. */
+            if(after==before)psx_mod_write_byte(at+3,(uint8_t)(before+0x10u));
+        } else if(after==before+0x10u)psx_mod_write_byte(at+3,(uint8_t)before);
     }
     inside=(int)context[3];cpu->gpr[2]=result;
     STATE_POP(restore_context);STATE_POP(restore_latches);return 1;

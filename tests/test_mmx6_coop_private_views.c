@@ -59,7 +59,7 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
     (void)ret;++view_native_calls;
     if(address==0x80029D18u && rearm_probe) {
         ++rearm_calls;CHECK(inside && state_track.count>=3 && !state_track.error);
-        for(unsigned i=0;i<5;++i) {
+        for(unsigned i=0;i<5 && rearm_probe<5;++i) {
             uint32_t at=0x800FA214u+i*8u;unsigned flags=psx_mod_read_byte(at+3),latch=flags&0xF0u;
             if(!(psx_mod_read_byte(at)&0x81u) && (latch==0x10 || latch==0x30 || latch==0x50))
                 psx_mod_write_byte(at+3,(uint8_t)(flags+0x10u));
@@ -338,13 +338,15 @@ static void defaults_and_scope(void) {
     CHECK(independent_views && !local_split && !mmx6_view_sdk.pair_enabled);
 }
 static void native_placement_rearm_belongs_to_both_views(void) {
-    for(unsigned variant=1;variant<=4;++variant) {
+    for(unsigned variant=1;variant<=6;++variant) {
         CPUState cpu;prepare_view(&cpu,0,1);rearm_probe=variant;rearm_calls=0;
         psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
         psx_mod_write_byte(PLAY+12,0);psx_mod_write_byte(PLAY+13,0);
         psx_mod_write_byte(PLAY+0x10,0);psx_mod_write_byte(PLAY+0x1C,0);
         p2.body[0]=p2.body[4]=1;p2.body[5]=2;p2.body[0x5C]=32;
         p2.body[0xCC]=p2.body[0xE0]=0;put32(p2.body+8,2160u<<16);put32(p2.body+12,1114u<<16);
+        if(variant==6)put32(p2.body+8,144u<<16);
+        psx_mod_write_word(VIEW_CAMERA+8,0);psx_mod_write_word(VIEW_CAMERA+12,896u<<16);
         psx_mod_write_byte(VIEW_CAMERA+4,1);psx_mod_write_byte(VIEW_CAMERA+0x44,1);
         psx_mod_write_half(VIEW_CAMERA+0x30,160);psx_mod_write_half(VIEW_CAMERA+0x32,160);
         psx_mod_write_half(VIEW_CAMERA+0x2C,96);
@@ -360,7 +362,7 @@ static void native_placement_rearm_belongs_to_both_views(void) {
         psx_mod_write_word(0x800FA214u+40u,0x0F000000u);
         CHECK(guest_placement_scan(&cpu,0x80029D18u));
         CHECK(rearm_calls==1 && cpu.gpr[2]==0x42 && !inside && !state_track.count && !state_track.error);
-        CHECK(psx_mod_read_byte(0x800FA217u)==(variant==1?0x10:0x20));
+        CHECK(psx_mod_read_byte(0x800FA217u)==(variant==1 || variant==5?0x10:0x20));
         CHECK(psx_mod_read_byte(0x800FA21Fu)==0x40); /* outside both views rearms */
         CHECK(psx_mod_read_byte(0x800FA227u)==0x50); /* active stays active */
         CHECK(psx_mod_read_byte(0x800FA22Fu)==0x20); /* already rearmed stays so */
