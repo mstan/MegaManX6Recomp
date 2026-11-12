@@ -512,6 +512,30 @@ static void native_nova_views(int online,int split) {
         independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
     }
 }
+static void native_giga_views(int online,int split) {
+    for(unsigned armor=1;armor<=3;++armor) {
+        CPUState cpu;prepare_view(&cpu,online,split);native_nova_body(0);
+        psx_mod_write_byte(PLAYER+0xE7,(uint8_t)armor);
+        psx_mod_write_byte(PLAYER+5,armor==1?0x24:armor==2?0x25:0x4D);
+        psx_mod_write_byte(PLAYER+0xE0,2);
+        view_valid=1;view_frame=0;frame_count=1;
+        psx_mod_write_word(VIEW_CAMERA+8,700u<<16);
+        put32(view_cameras[1]+8,100u<<16);
+        CHECK(independent_giga_context() && coop_world_hold());
+        independent_world_begin();CHECK(view_pending && view_valid);
+        CHECK(le32(view_cameras[1]+8)==100u<<16);
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
+        CHECK(psx_mod_read_byte(PLAY+0x1C)==1 && coop_world_hold());
+        uint32_t guest_camera=le32(view_cameras[1]+8);
+        /* Native recovery releases its own lock. Camera history survives. */
+        psx_mod_write_byte(PLAY+0x1C,0);psx_mod_write_byte(PLAYER+5,2);
+        psx_mod_write_byte(PLAYER+0xE0,0);psx_mod_write_byte(PLAYER+0x7A,0);
+        frame_count=2;independent_world_begin();CHECK(view_pending && view_valid);
+        CHECK(le32(view_cameras[1]+8)==guest_camera && !independent_giga_context());
+        CHECK(!state_track.count && !state_track.error && !failed);
+    }
+}
 static void arrival_refusals(void) {
     const Mmx6CoopStatus blocked[]={MMX6_COOP_LEAVING,MMX6_COOP_ABSENT};
     for(unsigned i=0;i<sizeof blocked/sizeof blocked[0];++i) {
@@ -1117,6 +1141,7 @@ int main(void) {
     admitted_door_views(0,1);admitted_door_views(1,0);admitted_door_views(1,1);
     native_scene_keeps_private_panes(0,1);native_scene_keeps_private_panes(1,0);
     native_nova_views(0,1);native_nova_views(1,0);
+    native_giga_views(0,1);native_giga_views(1,0);
     native_personal_menu_presentation(0,0);native_personal_menu_presentation(0,1);
     native_personal_menu_presentation(1,0);native_personal_menu_presentation(1,1);
     native_entering_pause_views(0,1);native_entering_pause_views(1,0);

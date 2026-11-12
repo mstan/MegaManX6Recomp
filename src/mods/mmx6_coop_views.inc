@@ -311,6 +311,29 @@ static int independent_heatnix_scenery(void) {
         !psx_mod_read_byte(actor+2) && psx_mod_read_byte(actor+4)==1 &&
         psx_mod_read_word(actor+0x10)==0x800F36C8u;
 }
+static int independent_giga_context(void) {
+    /* Original3E344 starts armor Giga actions24/25/4D with E0=2,7A=1
+     * and PLAY+1C=1. That simulation hold still draws the current world.
+     * Keep drawing each native camera instead of discarding its history and
+     * reseeding the guest from P1 when the attack releases the hold. */
+    unsigned armor=psx_mod_read_byte(PLAYER+0xE7);
+    unsigned action=psx_mod_read_byte(PLAYER+5);
+    return ready && enrolled && !failed && !scene_owner && !clear_phase && pause_owner<0 &&
+        life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
+        psx_mod_read_byte(PLAY)==10 && !psx_mod_read_byte(PLAY+1) &&
+        !psx_mod_read_byte(PLAY+0x0F) && !psx_mod_read_byte(PLAY+0x10) &&
+        psx_mod_read_byte(PLAY+0x1C)==1 && !psx_mod_read_byte(0x8008EAFCu) &&
+        (psx_mod_read_byte(PLAYER)&1u) && !psx_mod_read_byte(PLAYER+2) &&
+        psx_mod_read_byte(PLAYER+4)==1 &&
+        ((armor==1 && action==0x24) || (armor==2 && action==0x25) || (armor==3 && action==0x4D)) &&
+        psx_mod_read_byte(PLAYER+0xE0)==2 && psx_mod_read_byte(PLAYER+0x7A)==1 &&
+        psx_mod_read_byte(PLAYER+0x5C) && psx_mod_read_byte(PLAYER+0x5C)<0x80 &&
+        !psx_mod_read_byte(PLAYER+0xCC) && !psx_mod_read_byte(PLAYER+0xD0) &&
+        !psx_mod_read_byte(PLAYER+0xD3) && !psx_mod_read_byte(PLAYER+0xD4) &&
+        !psx_mod_read_byte(PLAYER+0xD5) && (p2.body[0]&1u) && p2.body[4]==1 &&
+        p2.body[0x5C] && p2.body[0x5C]<0x80 && !p2.body[0xCC] &&
+        !p2.body[0xD0] && !p2.body[0xD3] && !p2.body[0xD4] && !p2.body[0xD5];
+}
 static void independent_world_begin(void) {
     if(private_draw || !independent_views || (personal_pass && personal_seat))return;
     view_pending=0;
@@ -344,7 +367,7 @@ static void independent_world_begin(void) {
        (psx_mod_read_byte(PLAY)!=10 && !initial) ||
        (psx_mod_read_byte(PLAY+1) && !returning && !entering) ||
        (psx_mod_read_byte(PLAY+0x10) && !door_views && !scene_views && !initial) ||
-       (coop_world_hold() && !door_views && !scene_views && !returning && !initial) ||
+       (coop_world_hold() && !independent_giga_context() && !door_views && !scene_views && !returning && !initial) ||
        (life.status[0]!=MMX6_COOP_ALIVE &&
         (!view_valid || (life.status[0]!=MMX6_COOP_DYING && life.status[0]!=MMX6_COOP_FALLEN))) ||
        (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING &&
