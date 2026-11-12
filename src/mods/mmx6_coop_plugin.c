@@ -3485,7 +3485,7 @@ static int snail_support_mask(const CPUState *cpu,uint32_t actor) {
         psx_mod_read_word(0x800EC0E8u)==0xA2620072u;
 }
 /* Original51890 consumes last update's +72 in its phase, then computes the
- * next contact through31DA8. Keep that complete transaction in the actual X
+ * next contact through31DA8. Keep that complete transaction in the actual
  * owner's context: a phase-only projection leaves its producer outside it.
  * Animation, phase, effects and shared collisions still execute exactly once.
  * The other hero receives only the original body-contact pass, never the AI. */
@@ -3495,17 +3495,26 @@ static int capsule_owner_update(CPUState *cpu,uint32_t address) {
        !ready || !enrolled || failed || pause_owner>=0 || clear_phase ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
        !both_door_slot(actor) || !(psx_mod_read_byte(actor)&1u) ||
-       psx_mod_read_byte(actor+1)!=26 || psx_mod_read_byte(actor+2)!=4 ||
-       psx_mod_read_word(actor+0x10)!=0x800F2E24u || psx_mod_read_byte(actor+4)!=1 ||
-       private_actor.character!=MMX6_COOP_CHARACTER_X || p2.body[2]!=0 ||
+       psx_mod_read_byte(actor+1)!=26 || psx_mod_read_byte(actor+2)>7 ||
+       psx_mod_read_byte(actor+4)!=1 || p2.body[2]>1 ||
+       private_actor.character!=p2.body[2] ||
        life.status[1]!=MMX6_COOP_ALIVE || !p2.body[0] || p2.body[4]!=1 ||
        !p2.body[0x5C] || p2.body[0x5C]>=128 ||
        (scene_owner && scene_owner!=2))return 0;
     unsigned phase=psx_mod_read_byte(actor+5),projected=zero_world!=0;
-    if(phase<6 || phase>10 || (projected?!zero_projected:(inside || zero_projected)) ||
-       (projected?p1.body[2]:psx_mod_read_byte(PLAYER+2))!=1)return 0;
+    unsigned primary=projected?p1.body[2]:psx_mod_read_byte(PLAYER+2);
+    if(phase<6 || phase>10 || primary>1 || primary==p2.body[2] ||
+       (projected?!zero_projected:(inside || zero_projected)))return 0;
     SolidContact *contact=solid_contact(actor);
     if(!contact)return 0;
+    /* Dialogue may belong to P1 while the next physical boarding belongs
+     * to P2. Select from the previous native top contacts, with P1 priority.
+     * Retain the established X-owner producer pass when P1 is Zero, then
+     * keep subsequent phases with the player who actually began boarding. */
+    if(phase==6) {
+        if((psx_mod_read_byte(actor+0x72)&8u) ||
+           (!(contact->sides&8u) && p2.body[2]!=0))return 0;
+    } else if(scene_owner!=2 && !p2.body[0xE2])return 0;
     uint32_t context[4]={actor,(uint32_t)inside,(uint32_t)scene_call,(uint32_t)solid_call};
     STATE_WORDS(restore_capsule,69,context,4);
     uint8_t ride=psx_mod_read_byte(0x800CD340u);

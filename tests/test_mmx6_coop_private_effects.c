@@ -570,22 +570,28 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         CHECK(0);
     }
     if(capsule_native_probe) {
-        if(capsule_native_probe==2) {
+        if(capsule_native_probe>=2) {
             uint32_t actor=cpu->gpr[4];
             CHECK(scene_call && solid_call && inside);
             if(address==0x80051890u) {
-                CHECK(zero_projected && psx_mod_read_byte(PLAYER+2)==0);
+                CHECK(zero_projected && psx_mod_read_byte(PLAYER+2)==(capsule_native_probe==2?0:1));
                 /* External original outer order: phase consumes previous
                  * contact, then31DA8 produces the next. No mocked grant
                  * runs when the owner did not have top contact. */
                 if(psx_mod_read_byte(actor+5)==6 && (psx_mod_read_byte(actor+0x72)&8u)) {
                     psx_mod_write_byte(PLAYER+0xE2,1);psx_mod_write_byte(actor+5,7);
+                } else if(psx_mod_read_byte(actor+5)==10) {
+                    /* Original51ED4 grants the shared part after native
+                     * boarding, then releases the four capsule locks. */
+                    CHECK(psx_mod_read_byte(PLAYER+0xE2)==3);
+                    psx_mod_write_byte(PLAY+0x69,psx_mod_read_byte(PLAY+0x69)|(1u<<psx_mod_read_byte(actor+2)));
+                    psx_mod_write_byte(PLAYER+0xE2,4);psx_mod_write_byte(actor+5,11);
                 }
                 CHECK(!solid_player_collision(cpu,0x80031DA8u));
                 psx_mod_write_byte(actor+0x72,8);psx_mod_write_byte(actor+0x76,1);
                 psx_mod_write_byte(PLAYER+0x71,8);cpu->gpr[2]=0xCAFE;return;
             }
-            CHECK(address==0x80031DA8u && psx_mod_read_byte(PLAYER+2)==1);
+            CHECK(address==0x80031DA8u && psx_mod_read_byte(PLAYER+2)==(capsule_native_probe==2?1:0));
             psx_mod_write_byte(actor+0x72,2);psx_mod_write_byte(PLAYER+0x71,2);return;
         }
         /* External original51924->3D308 request and shared capsule locks. */
@@ -3820,6 +3826,37 @@ static void native_capsule_owner_contact_transaction(void) {
     CHECK(!capsule_owner_update(&cpu,0x80051890u) && call_count==before);
     capsule_native_probe=0;
 }
+static void native_capsule_guest_zero_boarding(void) {
+    for(unsigned variant=0;variant<8;++variant) {
+        CPUState cpu;setup(&cpu);capsule_native_probe=3;
+        private_actor.character=MMX6_COOP_CHARACTER_ZERO;
+        life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+        psx_mod_write_byte(PLAYER+2,0);psx_mod_write_byte(PLAYER+4,1);
+        psx_mod_write_byte(PLAYER+0x5C,32);psx_mod_write_byte(PLAYER+0xE2,0);psx_mod_write_byte(PLAYER+0xE5,0);
+        p2.body[0]=p2.body[3]=p2.body[4]=1;p2.body[2]=1;p2.body[0xE2]=p2.body[0xE5]=0;p2.body[0x5C]=32;
+        uint32_t actor=0x800C1220u;cpu.gpr[4]=actor;
+        psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,26);psx_mod_write_byte(actor+2,(uint8_t)variant);
+        psx_mod_write_byte(actor+4,1);psx_mod_write_byte(actor+5,6);
+        psx_mod_write_word(actor+0x10,0x800F6000u+variant*8u);
+        SolidContact *contact=solid_contact(actor);CHECK(contact);
+        contact->sides=contact->carried=0;psx_mod_write_byte(actor+0x72,0);
+        CHECK(!capsule_owner_update(&cpu,0x80051890u) && !call_count);
+        contact->sides=8;contact->carried=1;
+        psx_mod_write_byte(actor+0x72,8); /* Primary top contact retains priority. */
+        CHECK(!capsule_owner_update(&cpu,0x80051890u) && !call_count);
+        psx_mod_write_byte(actor+0x72,2); /* P1 is beside the capsule after dialogue. */
+        CHECK(capsule_owner_update(&cpu,0x80051890u) && cpu.gpr[2]==0xCAFE);
+        CHECK(p2.body[0xE2]==1 && psx_mod_read_byte(actor+5)==7 && scene_owner==2 && !scene_phase);
+        CHECK(psx_mod_read_byte(PLAYER+2)==0 && p2.body[2]==1 && !psx_mod_read_byte(PLAYER+0xE2));
+        CHECK(capsule_owner_update(&cpu,0x80051890u));
+        uint8_t earned=psx_mod_read_byte(PLAY+0x69);
+        psx_mod_write_byte(actor+5,10);p2.body[0xE2]=3;
+        CHECK(capsule_owner_update(&cpu,0x80051890u));
+        CHECK(psx_mod_read_byte(PLAY+0x69)==(earned|(1u<<variant)) && p2.body[0xE2]==4);
+        CHECK(!inside && !zero_projected && !scene_call && !solid_call && !state_track.count && !failed);
+    }
+    capsule_native_probe=0;
+}
 static void native_optional_private_boss_cooldowns(void) {
     CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
     boss_balance_enabled=boss_balance_independent=boss_scan_probe=1;
@@ -4150,7 +4187,7 @@ int main(void){
     native_shared_clear_admission_and_departure();
     native_sigma_transition_retains_living_pair();
     native_recovery_stays_in_place();
-    native_capsule_keeps_living_passenger();native_capsule_owner_contact_transaction();
+    native_capsule_keeps_living_passenger();native_capsule_owner_contact_transaction();native_capsule_guest_zero_boarding();
     native_either_both_door_admission();
     native_both_door_ack_motion_and_release();native_hatch_missing_box_clearance();
     native_paired_arrival_barrier();
