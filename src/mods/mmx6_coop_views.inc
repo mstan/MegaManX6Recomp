@@ -294,8 +294,17 @@ static int independent_door_context(void) {
     unsigned phase=psx_mod_read_byte(both_door_actor+5);
     return phase>=1 && phase<=3;
 }
+static int independent_door_story_context(void) {
+    /* Traversal can hand control directly to a native story request. That
+     * request, rather than the completed door's reusable slot, owns the
+     * current scene. Both native door requests must already be released. */
+    return scene_owner && scene_owner<=2 && both_door_actor && both_door_members==3 &&
+        !psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4] &&
+        (scene_owner==2?p2.body[0xD0]:psx_mod_read_byte(PLAYER+0xD0));
+}
 static int independent_scene_context(void) {
     if(!scene_owner || scene_owner>2)return 0;
+    if(independent_door_story_context())return 1;
     if(both_door_actor) {
         /* A closed/closing door may still own the barrier while the next
          * native boss/NPC script holds its player. Traversal has finished,
@@ -419,7 +428,7 @@ static void independent_world_begin(void) {
     view_menu_stage=psx_mod_read_byte(PLAY+12);
     view_menu_section=psx_mod_read_byte(PLAY+13);
     view_menu_checkpoint=psx_mod_read_byte(PLAY+0x1D);
-    if(scene_views && scene_phase) {
+    if(scene_views && (scene_phase || independent_door_story_context())) {
         capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
         memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
         view_valid=1;view_menu_history=0;
@@ -488,7 +497,7 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     int menu=personal_menus_active(),returning=personal_resuming_world();
     if(!menu)project(VIEW_CAMERA,view_cameras[private_seat],sizeof view_cameras[0]);
     if(!menu && !returning && pause_owner<0 && private_seat &&
-       (!scene_owner || !scene_phase || independent_door_context()) &&
+       (!scene_owner || (!scene_phase && !independent_door_story_context()) || independent_door_context()) &&
        (life.status[1]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_JOINING)) {
         if(!independent_quake_input())return 0;
         uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);
@@ -559,6 +568,10 @@ static int independent_present(CPUState *cpu,uint32_t address) {
     else if(!psx_mod_netplay_is_active())
         (void)psx_mod_set_local_pair_presentation(menu);
     if(menu) { view_pending=1;view_buffer=buffer; }
+    /* Some native story frames submit their current OT without entering
+     * the ordinary world producer. Rebuild both current worlds at that same
+     * presentation boundary, leaving native script/simulation holds intact. */
+    else if(!view_pending && independent_door_story_context())independent_world_begin();
     if(!view_pending || view_buffer!=buffer)return 0;
     view_call=1;view_pending=0;
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);

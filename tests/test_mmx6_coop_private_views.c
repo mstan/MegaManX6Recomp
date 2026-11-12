@@ -448,7 +448,8 @@ static void native_door_scene_handoff(int online,int split) {
     for(unsigned gate=0;gate<7;++gate) {
         CPUState cpu;prepare_door_view(&cpu,online,split,4);both_doors=both;scene_owner=owner;
         psx_mod_write_byte(PLAYER+0xD4,0);p2.body[0xD4]=0;
-        if(owner==1)psx_mod_write_byte(PLAYER+0xD0,20);else p2.body[0xD0]=20;
+        /* Closed door by itself still requires its original identity. */
+        if(owner==1)psx_mod_write_byte(PLAYER+0x7A,1);else p2.body[0x7A]=1;
         if(gate==1)psx_mod_write_byte(both_door_actor+5,3);
         else if(gate==2)psx_mod_write_byte(PLAYER+0xD4,1);
         else if(gate==3)p2.body[0xD4]=1;
@@ -461,6 +462,23 @@ static void native_door_scene_handoff(int online,int split) {
         PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
         CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
         CHECK(both_door_members==3 && scene_owner==owner && !scene_phase && !failed);
+        CHECK(psx_mod_read_byte(PLAY+0x10)==1 && psx_mod_read_byte(PLAY+0x1C)==1);
+    }
+    for(unsigned owner=1;owner<=2;++owner) {
+        CPUState cpu;prepare_door_view(&cpu,online,split,4);scene_owner=owner;
+        psx_mod_write_byte(PLAYER+0xD4,0);p2.body[0xD4]=0;
+        if(owner==1)psx_mod_write_byte(PLAYER+0xD0,20);else p2.body[0xD0]=20;
+        /* A current story request survives retirement of the old door slot
+         * and an omitted world producer, without advancing its simulation. */
+        psx_mod_write_byte(both_door_actor,0);
+        psx_mod_write_word(VIEW_CAMERA+8,700u<<16);
+        put32(view_cameras[1]+8,100u<<16);view_pending=0;
+        CHECK(independent_door_story_context());
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
+        CHECK(view_valid && le32(view_cameras[0]+8)==700u<<16 &&
+            le32(view_cameras[1]+8)==700u<<16);
+        CHECK(scene_owner==owner && both_door_members==3 && !scene_phase && frame_count==1);
         CHECK(psx_mod_read_byte(PLAY+0x10)==1 && psx_mod_read_byte(PLAY+0x1C)==1);
     }
 }
