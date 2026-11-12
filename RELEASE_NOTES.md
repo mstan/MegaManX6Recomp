@@ -1,3 +1,23 @@
+# v1.3.7-alpha-playtest
+
+This release improves independent co-op cameras, native scene transitions and
+shared interactions.
+
+- Keep each camera stable throughout item healing, reploid rescues and armor
+  Giga attacks, including native hold and recovery frames.
+- Cull distant player bodies and armor against the current private viewport.
+- Use both living views for original opening-stage and Yammark placements.
+- Keep nearby partners in native door traversal and publish live private views
+  through following dialogue and boss introductions.
+- Let either character board armor capsules after dialogue, and preserve the
+  native checkpoint's authored arrival direction.
+
+Fresh installations retain adaptive widescreen defaults. Native memory-card
+saves and existing settings are preserved. Co-op remains experimental; both
+netplay peers must use this exact build.
+
+---
+
 # v1.3.6-alpha-playtest
 
 This playtest release improves local co-op presentation and opening-stage
