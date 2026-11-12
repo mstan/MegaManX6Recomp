@@ -5,6 +5,8 @@ This release improves local co-op presentation and native enemy interactions.
 - Keep the two-pane layout active through gameplay and shared screens. The
   shared-camera option displays the same scene in both panes.
 - Continue refreshing both local views while a partner departs and returns.
+- Cull distant world actors and effects against each local viewport before
+  submitting their sprites.
 - Retain per-player attack tokens for ordinary enemies so one saber swing
   cannot apply damage repeatedly on successive frames.
 - Preserve defeated enemy placements while either active view owns the area,
