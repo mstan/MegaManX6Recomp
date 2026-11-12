@@ -3744,14 +3744,15 @@ static void native_capsule_keeps_living_passenger(void) {
     }
 }
 static void native_default_private_boss_cookies(void) {
+    for(unsigned ordinary=0;ordinary<2;++ordinary) {
     CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
     boss_scan_probe=1;boss_balance_enabled=boss_balance_independent=0;
     psx_mod_write_byte(PLAYER+0xCC,0);p2.body[0xCC]=0;
     memset(boss_scan_calls,0,sizeof boss_scan_calls);
     boss_scan_present[0]=boss_scan_present[1]=1;
     boss_scan_cookie[0]=boss_scan_cookie[1]=42;boss_scan_type[0]=0;boss_scan_type[1]=44;
-    psx_mod_write_byte(PLAY,10);psx_mod_write_word(PLAY+0x20,actor);psx_mod_write_byte(PLAY+0x24,48);
-    psx_mod_write_byte(actor,65);psx_mod_write_byte(actor+1,56);psx_mod_write_byte(actor+4,1);
+    psx_mod_write_byte(PLAY,10);psx_mod_write_word(PLAY+0x20,ordinary?0:actor);psx_mod_write_byte(PLAY+0x24,ordinary?0:48);
+    psx_mod_write_byte(actor,65);psx_mod_write_byte(actor+1,ordinary?1:56);psx_mod_write_byte(actor+4,1);
     psx_mod_write_byte(actor+0x5C,48);psx_mod_write_word(actor+0x10,0x800F7E48u);
     psx_mod_write_word(actor+0x58,0x8007555Cu);psx_mod_write_byte(actor+0x65,91);
     cpu.gpr[4]=actor;CHECK(enemy_hit(&cpu,0x80031474u) && cpu.gpr[2]==1);
@@ -3786,16 +3787,21 @@ static void native_default_private_boss_cookies(void) {
     boss_balance[0].cookies[1]=77;CHECK(state_digest()!=digest);state_commit(&saved);
     CHECK(boss_balance[0].cookies[1]==0 && state_digest()==digest);
     StateIO valid={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&valid,&saved);CHECK(valid.ok);
-    saved.boss_balance[0].recognized=0;StateIO bad={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&bad,&saved);CHECK(!bad.ok);
+    saved.boss_balance[0].recognized=0;
+    StateIO ordinary_valid={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&ordinary_valid,&saved);CHECK(ordinary_valid.ok);
+    saved.boss_balance[0].clocks[0]=1;StateIO bad={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_core(&bad,&saved);CHECK(!bad.ok);
 #endif
     /* Original allocation invalidates stale cookies even when an identical
      * boss record reuses this address; changed source identity does too. */
     cpu.gpr[4]=actor;CHECK(boss_balance_allocate(&cpu,0x8002BCCCu) && cpu.gpr[2]==actor);
     CHECK(!boss_balance[0].cookies[0] && !boss_balance[0].recognized);
-    BossBalanceState *state=boss_balance_actor(actor);CHECK(state);state->cookies[0]=44;
-    psx_mod_write_word(actor+0x10,0x800F7E50u);CHECK(boss_balance_actor(actor)==state && !state->cookies[0]);
+    BossBalanceState *state=ordinary?enemy_attack_state(actor):boss_balance_actor(actor);CHECK(state);state->cookies[0]=44;
+    psx_mod_write_word(actor+0x10,0x800F7E50u);
+    CHECK((ordinary?enemy_attack_state(actor):boss_balance_actor(actor))==state && !state->cookies[0]);
     private_draw=1;cpu.gpr[4]=actor;CHECK(!enemy_hit(&cpu,0x80031474u));private_draw=0;
+    CHECK(boss_balance[0].recognized==!ordinary);
     boss_scan_probe=0;memset(boss_balance,0,sizeof boss_balance);
+    }
 }
 static void native_capsule_owner_contact_transaction(void) {
     CPUState cpu;setup(&cpu);capsule_native_probe=2;
@@ -3885,7 +3891,20 @@ static void native_private_body_world_visibility(void) {
     psx_mod_write_word(PLAYER+8,4256u<<16);CHECK(private_body_visible(PLAYER));
     psx_mod_write_byte(PLAYER+0x14,0xFF);CHECK(private_body_visible(PLAYER));
     psx_mod_write_byte(PLAYER+0x14,0);private_draw=0;CHECK(private_body_visible(PLAYER));
-    private_draw=1;CHECK(private_body_visible(0x800950A0u));
+    private_draw=1;
+    const uint32_t actors[]={0x8008EF48u,0x800950A0u,0x800911A8u,0x80091298u,
+        0x800972F8u,0x8009B7B0u,0x800C1220u,0x800CD410u};
+    for(unsigned i=0;i<sizeof actors/sizeof actors[0];++i) {
+        uint32_t actor=actors[i];cpu.gpr[4]=actor;
+        psx_mod_write_byte(actor+0x14,0);psx_mod_write_byte(actor+3,1);
+        psx_mod_write_word(actor+8,160u<<16);psx_mod_write_word(actor+12,1120u<<16);
+        CHECK(!private_body_visible(actor));
+        CHECK(render_survivor(&cpu,0x800232D4u));
+        CHECK(!call_count && psx_mod_read_byte(actor+3)==1);
+        psx_mod_write_word(actor+8,2208u<<16);CHECK(private_body_visible(actor));
+        CHECK(!render_survivor(&cpu,0x800232D4u));
+        psx_mod_write_byte(actor+0x14,0xFF);CHECK(private_body_visible(actor));
+    }
     CHECK(!state_track.count && !state_track.error && !failed);
     private_draw=world_render=0;
 }

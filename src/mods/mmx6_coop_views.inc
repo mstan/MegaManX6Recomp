@@ -564,13 +564,10 @@ static int independent_present(CPUState *cpu,uint32_t address) {
      * including arrival before the ordinary gameplay dispatcher starts. */
     if(failed || (!menu && (!independent_views || !enrolled ||
        (psx_mod_read_byte(PLAY)!=10 && !(view_valid && view_pending && view_buffer==buffer))))) {
-        /* Native stage images can precede partner enrollment and the first
-         * private pair. Keep the selected local layout while the runtime
-         * mirrors that current native viewport into both panes. */
-        unsigned major=psx_mod_read_byte(PLAY);
-        int shared_stage=!failed && independent_views && local_split &&
-            !psx_mod_netplay_is_active() && (major==9 || major==10);
-        /* A new native stage cannot retain an earlier stage's completed pair. */
+        /* Menus, loading and shared scenes retain two local panes too.
+         * Invalidate old private images so the runtime duplicates the current
+         * native screen, rather than retaining a previous stage's pair. */
+        int shared_stage=local_split && !psx_mod_netplay_is_active();
         (void)psx_mod_set_local_pair_presentation(0);
         if(shared_stage)(void)psx_mod_set_local_pair_presentation(1);
         view_pending=0;return 0;
@@ -613,7 +610,8 @@ static int independent_present(CPUState *cpu,uint32_t address) {
 }
 static void independent_activate(void) {
     char option[24];int online=psx_mod_netplay_is_active();
-    local_split=!online && psx_mod_current_option_value("local_cameras",option,sizeof option) && !strcmp(option,"split");
+    int separate_local=!online && psx_mod_current_option_value("local_cameras",option,sizeof option) && !strcmp(option,"split");
+    local_split=!online;
     /* Every online peer presents its own HUD in a private render transaction.
      * Older stored shared-view choices must not expose the canonical stacked
      * HUD. A selected online split still gives each pane its own meters. */
@@ -622,7 +620,7 @@ static void independent_activate(void) {
         local_split=!strcmp(option,"split");
         own_view=!local_split;
     }
-    independent_views=local_split || own_view;
+    independent_views=separate_local || (online && (local_split || own_view));
     if(independent_views && !mmx6_adaptive_background_activate())failed=1;
     private_draw=private_seat=view_valid=view_pending=view_call=view_menu_history=0;
     view_frame=view_buffer=0;memset(view_cameras,0,sizeof view_cameras);
@@ -630,7 +628,7 @@ static void independent_activate(void) {
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
     if(independent_views)(void)psx_debug_native_context_register(VIEW_CONTEXT_PROVIDER,private_view_entry_context,NULL);
 #endif
-    if(independent_views)(void)psx_mod_set_fixed_display_aspect(4,3);
+    if(independent_views || local_split)(void)psx_mod_set_fixed_display_aspect(4,3);
     /* The session reset revokes this SDK permission. Request it only for
      * the explicitly selected online pair, before enabling its canvas. */
     if(online && local_split)(void)psx_mod_set_render_pass_netplay(1);

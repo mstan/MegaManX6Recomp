@@ -295,8 +295,7 @@ static void state_core(StateIO *io,HostState *s) {
         if((b->vulnerable_table && (b->vulnerable_table<0x80010000u || b->vulnerable_table>=0x80200000u || (b->vulnerable_table&1u) || b->vulnerable_table==0x8007433Cu)) ||
            (b->timer_offset && (b->timer_offset<0x60 || b->timer_offset+(b->timer_half?2u:1u)>BOSS_BALANCE_STRIDE)) ||
            (!b->timer_offset && b->timer_half) ||
-           ((!b->recognized || !boss_balance_independent) && (b->vulnerable_table || b->clocks[0] || b->clocks[1] || b->timer_offset || b->hit_owner || b->hit_melee)) ||
-           (!b->recognized && (b->cookies[0] || b->cookies[1])))STATE_INVALID(io);
+           ((!b->recognized || !boss_balance_independent) && (b->vulnerable_table || b->clocks[0] || b->clocks[1] || b->timer_offset || b->hit_owner || b->hit_melee)))STATE_INVALID(io);
         /* Native kind0 includes the intro geometry actor. The tracker records
          * its origin before boss recognition; kind0 is not an empty slot. */
         if((b->origin && !state_actor(b->origin)) ||

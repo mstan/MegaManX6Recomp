@@ -264,7 +264,7 @@ static void native_stage_layout_before_enrollment(void) {
             CPUState original=cpu;uint32_t digest=state_digest();
             static uint8_t original_ram[sizeof ram];memcpy(original_ram,ram,sizeof ram);
             CHECK(!independent_present(&cpu,VIEW_DRAW_OT));
-            CHECK(mmx6_view_sdk.pair_enabled==(!online && split && (modes[i]==9 || modes[i]==10)));
+            CHECK(mmx6_view_sdk.pair_enabled==(!online && split));
             CHECK(!view_native_calls && !view_callback_calls && !mmx6_view_sdk.pair_calls);
             CHECK(!memcmp(&original,&cpu,sizeof cpu) && !memcmp(original_ram,ram,sizeof ram));
             CHECK(state_digest()==digest && !view_pending && !view_valid && !enrolled && !arrival_pair);
@@ -303,9 +303,9 @@ static void defaults_and_scope(void) {
     char value[24];CHECK(psx_mod_current_option_value("cameras",value,sizeof value) && !strcmp(value,"unified"));
     CHECK(!psx_mod_current_option_value("unknown",value,sizeof value));
     CHECK(!psx_mod_current_option_value("local_cameras",value,2));
-    independent_activate();CHECK(!independent_views && !local_split && !mmx6_view_sdk.pair_enabled && !mmx6_view_sdk.aspect_calls);
+    independent_activate();CHECK(!independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.aspect_calls==1);
     mmx6_view_sdk.local_cameras="split";independent_activate();
-    CHECK(independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.aspect_calls==1);
+    CHECK(independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.aspect_calls==2);
     PSXModStereoFrame pair={sizeof pair,1,0,0,320,240};PSXModRenderPass rect={sizeof rect,0,0,0,320,240};
     CHECK(!psx_mod_render_local_pair(&cpu,&pair,forbidden_callback,NULL)); /* no modeled backend */
     mmx6_view_sdk.transaction=model_transaction;

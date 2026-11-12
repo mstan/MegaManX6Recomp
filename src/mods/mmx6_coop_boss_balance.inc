@@ -22,8 +22,9 @@ static int boss_balance_slot(uint32_t actor) {
        (actor-BOSS_BALANCE_POOL)%BOSS_BALANCE_STRIDE)return -1;
     return (int)((actor-BOSS_BALANCE_POOL)/BOSS_BALANCE_STRIDE);
 }
-/* The existing31474 replacement runs once per native boss AI update. */
-static BossBalanceState *boss_balance_actor(uint32_t actor) {
+/* All native enemies need separate last-attack tokens. Otherwise the
+ * primary's empty scan rearms a still-overlapping guest saber every tick. */
+static BossBalanceState *enemy_attack_state(uint32_t actor) {
     int slot=boss_balance_slot(actor);
     if(slot<0 || !psx_mod_read_byte(actor) ||
        psx_mod_read_byte(actor+4)!=1 || !(psx_mod_read_byte(actor+0x5C)&127))return NULL;
@@ -32,6 +33,11 @@ static BossBalanceState *boss_balance_actor(uint32_t actor) {
     if(s->kind!=kind || s->origin!=origin) {
         memset(s,0,sizeof *s);s->kind=(uint8_t)kind;s->origin=origin;
     }
+    return s;
+}
+/* Scaling and optional recovery policy remain restricted to native bosses. */
+static BossBalanceState *boss_balance_actor(uint32_t actor) {
+    BossBalanceState *s=enemy_attack_state(actor);if(!s)return NULL;
     if(psx_mod_read_word(PLAY+0x20)==actor && psx_mod_read_byte(PLAY+0x24))s->recognized=1;
     return s->recognized?s:NULL;
 }

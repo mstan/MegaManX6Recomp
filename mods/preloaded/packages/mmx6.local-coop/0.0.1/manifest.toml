@@ -61,14 +61,14 @@ id = "mmx6.local-coop.prototype"
 feature = "prototype"
 id = "local_cameras"
 label = "Local cameras"
-description = "Follow both players together, or give each player a separate 4:3 view in a side-by-side window."
+description = "Local co-op always keeps two panes. Follow each player separately, or duplicate the shared camera in both panes. Shared menus and scenes are duplicated."
 group = "Display"
 type = "choice"
-default = "unified"
+default = "split"
 
 [[option.choice]]
 value = "unified"
-label = "Shared view"
+label = "Shared camera in both panes"
 
 [[option.choice]]
 value = "split"

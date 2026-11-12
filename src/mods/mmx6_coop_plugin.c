@@ -3155,7 +3155,20 @@ static void render_armor(CPUState *cpu,uint32_t arena) {
     if(native_x_armor_draw() && !failed)render_actor_pass(cpu,PLAYER,arena,1);
 }
 static int private_body_visible(uint32_t actor) {
-    if(!private_draw || actor!=PLAYER || !enrolled || failed)return 1;
+    if(!private_draw || !enrolled || failed)return 1;
+    /* The native visibility bit is the union of both living views. Apply
+     * the same pre-conversion world bounds to every world sprite pool;
+     * distant enemies and effects can alias just like a distant body. */
+    int world=actor==PLAYER ||
+        (actor>=0x8008EF48u && actor<0x80090C88u && !((actor-0x8008EF48u)%0x9Cu)) ||
+        (actor>=0x800950A0u && actor<0x800964A0u && !((actor-0x800950A0u)%0xA0u)) ||
+        (actor>=0x800911A8u && actor<0x80091298u && !((actor-0x800911A8u)%0x50u)) ||
+        (actor>=0x80091298u && actor<0x80093C98u && !((actor-0x80091298u)%0x70u)) ||
+        (actor>=0x800972F8u && actor<0x80097418u && !((actor-0x800972F8u)%0x60u)) ||
+        (actor>=0x8009B7B0u && actor<0x8009C9B0u && !((actor-0x8009B7B0u)%0x30u)) ||
+        (actor>=0x800C1220u && actor<0x800C4560u && !((actor-0x800C1220u)%0xA4u)) ||
+        (actor>=0x800CD410u && actor<0x800CF810u && !((actor-0x800CD410u)%0x60u));
+    if(!world)return 1;
     int layer=(int8_t)psx_mod_read_byte(actor+0x14);
     if(layer<0 || layer>=3)return 1;
     uint32_t camera=0x800971F8u+(uint32_t)layer*0x54u;
@@ -3396,7 +3409,9 @@ static int enemy_hit(CPUState *cpu, uint32_t address) {
     if(inside || !enrolled || failed || scene_owner || psx_mod_read_byte(PLAY)!=10)return 0;
     uint32_t enemy=cpu->gpr[4];
     BossBalanceState *balance=boss_balance_actor(enemy);
-    if(life.status[1]!=MMX6_COOP_ALIVE && !balance)return 0;
+    BossBalanceState *attacks=balance?balance:enemy_attack_state(enemy);
+    if(life.status[1]!=MMX6_COOP_ALIVE && !balance && !attacks)return 0;
+    if(life.status[1]!=MMX6_COOP_ALIVE && attacks)attacks->cookies[1]=0;
     boss_balance_pending_actor=0;inside=1;
     if(balance && boss_balance_independent) {
         for(unsigned seat=0;seat<2;++seat)if(balance->clocks[seat])--balance->clocks[seat];
@@ -3405,13 +3420,13 @@ static int enemy_hit(CPUState *cpu, uint32_t address) {
     }
     unsigned resident=(unsigned)!!zero_projected;
     uint32_t result=psx_mod_read_byte(PLAYER+0xCC)?0:
-        boss_balance_scan(cpu,address,enemy,resident,balance);
+        boss_balance_scan(cpu,address,enemy,resident,attacks);
     /* Rejected126/127 contacts are not accepted hits and must not consume a
      * ready partner's separate window. Keep the original P1-first reaction. */
     if(!resident && (!result || (balance && boss_balance_independent && (result==126 || result==127))) &&
        (!balance || boss_balance_pending_actor!=enemy) &&
        life.status[1]==MMX6_COOP_ALIVE && p2.body[0x5C] && !p2.body[0xCC]) {
-        enter_zero();result=boss_balance_scan(cpu,address,enemy,1,balance);leave_zero();
+        enter_zero();result=boss_balance_scan(cpu,address,enemy,1,attacks);leave_zero();
         if(result)psx_mod_write_word(diagnostic+40,psx_mod_read_word(diagnostic+40)+1);
     }
     cpu->gpr[2]=result;inside=0;return 1;
