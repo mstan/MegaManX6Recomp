@@ -3857,6 +3857,38 @@ static void native_capsule_guest_zero_boarding(void) {
     }
     capsule_native_probe=0;
 }
+static void native_private_body_world_visibility(void) {
+    CPUState cpu;setup(&cpu);private_draw=1;world_render=1;cpu.gpr[4]=PLAYER;
+    psx_mod_write_half(0x8009B79Cu,320);
+    psx_mod_write_word(0x800971F8u+8,2048u<<16);
+    psx_mod_write_word(0x800971F8u+12,1024u<<16);
+    psx_mod_write_byte(PLAYER+0x14,0);psx_mod_write_byte(PLAYER+3,1);
+    const int offsets[]={-2048,-1024,2048,4096};
+    for(unsigned i=0;i<sizeof offsets/sizeof offsets[0];++i) {
+        psx_mod_write_word(PLAYER+8,(uint32_t)((2048+offsets[i])*65536));
+        psx_mod_write_word(PLAYER+12,1120u<<16);
+        CHECK(!private_body_visible(PLAYER));
+        CHECK(render_survivor(&cpu,0x800232D4u) && render_armor_survivor(&cpu,0x8002619Cu));
+        CHECK(!call_count && psx_mod_read_byte(PLAYER+3)==1);
+    }
+    const int edges[]={-128,160,447};
+    for(unsigned i=0;i<sizeof edges/sizeof edges[0];++i) {
+        psx_mod_write_word(PLAYER+8,(uint32_t)((2048+edges[i])*65536));
+        CHECK(private_body_visible(PLAYER));
+        CHECK(!render_survivor(&cpu,0x800232D4u) && !render_armor_survivor(&cpu,0x8002619Cu));
+    }
+    psx_mod_write_word(PLAYER+8,2208u<<16);psx_mod_write_word(PLAYER+12,3072u<<16);
+    CHECK(!private_body_visible(PLAYER));
+    psx_mod_write_byte(PLAYER+0x14,1);psx_mod_write_word(0x800971F8u+0x54+8,4096u<<16);
+    psx_mod_write_word(0x800971F8u+0x54+12,2976u<<16);
+    CHECK(!private_body_visible(PLAYER));
+    psx_mod_write_word(PLAYER+8,4256u<<16);CHECK(private_body_visible(PLAYER));
+    psx_mod_write_byte(PLAYER+0x14,0xFF);CHECK(private_body_visible(PLAYER));
+    psx_mod_write_byte(PLAYER+0x14,0);private_draw=0;CHECK(private_body_visible(PLAYER));
+    private_draw=1;CHECK(private_body_visible(0x800950A0u));
+    CHECK(!state_track.count && !state_track.error && !failed);
+    private_draw=world_render=0;
+}
 static void native_optional_private_boss_cooldowns(void) {
     CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
     boss_balance_enabled=boss_balance_independent=boss_scan_probe=1;
@@ -4195,5 +4227,6 @@ int main(void){
     native_scene_after_nonpaired_enrollment();
     native_checkpoint_preserves_completed_voluntary_absence();
     native_refight_return_preserves_living_personal_resources();
+    native_private_body_world_visibility();
     native_optional_boss_damage_budget();native_optional_boss_shared_cooldown();native_default_private_boss_cookies();native_optional_private_boss_cooldowns();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

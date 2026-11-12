@@ -3154,8 +3154,23 @@ static int native_x_armor_draw(void) {
 static void render_armor(CPUState *cpu,uint32_t arena) {
     if(native_x_armor_draw() && !failed)render_actor_pass(cpu,PLAYER,arena,1);
 }
+static int private_body_visible(uint32_t actor) {
+    if(!private_draw || actor!=PLAYER || !enrolled || failed)return 1;
+    int layer=(int8_t)psx_mod_read_byte(actor+0x14);
+    if(layer<0 || layer>=3)return 1;
+    uint32_t camera=0x800971F8u+(uint32_t)layer*0x54u;
+    int x=(int16_t)(psx_mod_read_half(actor+10)-psx_mod_read_half(camera+10));
+    int y=(int16_t)(psx_mod_read_half(actor+14)-psx_mod_read_half(camera+14));
+    /* Each body is visible in its own update camera. That flag cannot
+     * authorize drawing it in the other pane: distant native coordinates
+     * can alias after GPU coordinate conversion. Keep a generous margin
+     * for body/armor geometry; native per-tile clipping still owns edges. */
+    unsigned width=psx_mod_read_half(0x8009B79Cu);
+    return x>=-512 && x<(int)width+512 && y>=-512 && y<240+512;
+}
 static int render_armor_survivor(CPUState *cpu,uint32_t address) {
     (void)address;
+    if(!private_body_visible(cpu->gpr[4]))return 1;
     /* When the guest owns the original world,22960 still invokes its own
      * armor pass. Replace that single call instead of appending it again
      * from the ordinary body replacement. */
@@ -3242,6 +3257,7 @@ static int living_primary_frozen_draw(void) {
 }
 static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
+    if(!private_body_visible(actor))return 1;
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
     int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_native_weapon_effect(actor)||zero_death_effect(actor)||zero_common_effect(actor)||private_falcon_flight_effect(actor);
