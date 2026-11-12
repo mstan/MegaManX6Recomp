@@ -3229,9 +3229,11 @@ static void native_paired_arrival_barrier(void) {
     CPUState cpu;
     for(unsigned first=0;first<2;++first) {
         arrival_setup(&cpu);
+        unsigned facing=first?0x40u:0u;psx_mod_write_byte(PLAYER+0x15,(uint8_t)facing);
         uint32_t x=psx_mod_read_word(PLAYER+8),y=psx_mod_read_word(PLAYER+12);
         uint32_t camera=psx_mod_read_word(0x80097202u),clock=psx_mod_read_word(PLAY+0x90);
         CHECK(paired_arrival(&cpu) && arrival_pair && enrolled && arrival_births==1);
+        CHECK(p2.body[0x15]==facing && psx_mod_read_byte(PLAYER+0x15)==facing);
         CHECK(life.status[1]==MMX6_COOP_JOINING && !join_phase && p2.body[5]==0 && p2.body[0xCE]==3);
         CHECK(psx_mod_read_word(PLAYER+8)==x && psx_mod_read_word(PLAYER+12)==y &&
               le32(p2.body+8)==x+(24u<<16) && le32(p2.body+12)==y);

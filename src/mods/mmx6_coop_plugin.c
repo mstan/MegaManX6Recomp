@@ -743,8 +743,8 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster,int arrival) {
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
     unsigned arrival_delay=psx_mod_read_byte(PLAYER+0xCE);
     uint32_t arrival_box=psx_mod_read_word(PLAYER+0x68);
-    uint32_t origin[5]={x,y,arrival_delay,arrival_box,(unsigned)arrival};
-    STATE_WORDS(restore_origin,33,origin,5);
+    uint32_t origin[6]={x,y,arrival_delay,arrival_box,(unsigned)arrival,psx_mod_read_byte(PLAYER+0x15)};
+    STATE_WORDS(restore_origin,33,origin,6);
     memset(&p2,0,sizeof p2);
     enter_zero();
     psx_mod_write_byte(PLAY+0x1E,0);
@@ -758,6 +758,10 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster,int arrival) {
     guest(cpu,0x8003D718,PLAYER,0); /* Character's own unlocks/parts. */
     guest(cpu,0x8003D630,PLAYER,0);
     guest(cpu,0x8003AD18,PLAYER,0); /* Native idle transition. */
+    /* Native29B8C loads the checkpoint's authored facing before3BD24.
+     * A freshly cleared partner body must inherit that birth field too;
+     * the initializer itself intentionally leaves it unchanged. */
+    psx_mod_write_byte(PLAYER+0x15,(uint8_t)origin[5]);
     leave_zero();
     if (refight_return_checkpoint && psx_mod_read_byte(PLAY+12)==12 &&
         !psx_mod_read_byte(PLAY+13) && psx_mod_read_byte(PLAY+0x1D)==refight_return_checkpoint) {
