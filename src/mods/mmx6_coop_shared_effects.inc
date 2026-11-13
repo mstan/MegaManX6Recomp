@@ -15,13 +15,14 @@ static int shared_effect_slot(uint32_t actor) {
  * Its 49C98/49D60 bounds calls must use the allocating hero's view too; a
  * distant guest otherwise loses the effect before its first visible sample.
  * Derive the standard native view from simulation body/limits, not draw caches. */
-static int shared_surface_source(uint32_t actor) {
-    unsigned subtype=psx_mod_read_byte(actor+2);
-    return psx_mod_read_byte(actor+1)==3 && (subtype==8 || subtype==9) &&
-        psx_mod_read_word(actor+0x30)==0x8007789Cu &&
-        psx_mod_read_word(0x80049C98u)==0x0C00B2FFu &&
+static int shared_common_native(void) {
+    return psx_mod_read_word(0x80049C98u)==0x0C00B2FFu &&
         psx_mod_read_word(0x80049CD4u)==0xA24000DFu &&
         psx_mod_read_word(0x80049D60u)==0x0C00B32Cu;
+}
+static int shared_surface_source(uint32_t actor) {
+    return psx_mod_read_byte(actor+1)==3 &&
+        psx_mod_read_word(actor+0x30)==0x8007789Cu && shared_common_native();
 }
 static int shared_effect_view_bounds(CPUState *cpu,uint32_t address) {
     uint32_t actor=cpu->gpr[4];int slot=shared_effect_slot(actor);
@@ -109,9 +110,13 @@ static int shared_effect_callback(CPUState *cpu,uint32_t address) {
      * A Zero-owned dash must not initialize or chase the stationary primary.
      * Native4B3A0 Falcon flight18 likewise reads canonical PLAYER action23,
      * current body frame and SCRATCH+1C header1C before following the flyer. */
-    if(!((address==0x80049100u && type==1) ||
+    if(!((address==0x80049410u && type==0) ||
+         (address==0x80049100u && type==1) ||
          (address==0x80049478u && type==2) ||
-         (address==0x80049A14u && type==3 && shared_surface_source(actor)) ||
+         /* The first callback installs +30 and the owner's assembly/origin.
+          * Waiting for an initialized surface subtype misses wall/contact
+          * and impact effects, and can initialize them from the other hero. */
+         (address==0x80049A14u && type==3 && shared_common_native()) ||
          (address==0x8004AE1Cu && type==17) || (address==0x801EE254u && type==26) ||
          (address==0x8004B3A0u && type==18)))return 0;
     uint32_t table=psx_mod_read_word(SCRATCH+0x88);

@@ -29,6 +29,7 @@ static unsigned native_budget;
 static unsigned boss_scan_probe,boss_scan_type[2],boss_scan_cookie[2],boss_scan_present[2],boss_scan_calls[2];
 static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_calls;
 static unsigned surface_probe,surface_end,surface_bounds_calls,surface_ticks;
+static unsigned common_owner_probe;
 static unsigned falcon_flight_probe;
 static unsigned muzzle_probe,muzzle_expected_seat,muzzle_calls;
 static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat,ride_primary_character,ride_character;
@@ -737,6 +738,18 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         unsigned outside=(uint16_t)(dx+rx)>=320u+rx*2u || (uint16_t)(dy+ry)>=240u+ry*2u;
         if(address==0x8002CCB0u)psx_mod_write_byte(a+3,(uint8_t)!outside);
         ++surface_bounds_calls;cpu->gpr[2]=outside;return;
+    }
+    if(common_owner_probe && (address==0x80049A14u || address==0x80049410u)) {
+        /* Native common-effect callbacks can resolve the canonical hero and
+         * assembly both at birth and while following an existing contact. */
+        CHECK(shared_fx_call==1 && zero_projected && psx_mod_read_byte(PLAYER+2)==1);
+        CHECK(psx_mod_read_word(SCRATCH+0x1C)==assembly);
+        uint32_t a=cpu->gpr[4];
+        psx_mod_write_word(a+8,psx_mod_read_word(PLAYER+8));
+        psx_mod_write_word(a+12,psx_mod_read_word(PLAYER+12));
+        psx_mod_write_word(a+0x30,0x8007789Cu);
+        psx_mod_write_word(a+0x3C,assembly+psx_mod_read_word(assembly+4));
+        psx_mod_write_byte(a+4,1);cpu->gpr[2]=0x309;return;
     }
     if(surface_probe && address==0x80049A14u) {
         uint32_t a=cpu->gpr[4];CHECK(shared_fx_call==1 && zero_projected);
@@ -1601,6 +1614,31 @@ static void distant_zero_saber_uses_native_owner_visibility(void) {
         CHECK(!memcmp(before_camera,memory(camera),sizeof before_camera));
     }
     zero_projected=1;leave_zero();inside=0;
+}
+static void common_effect_birth_and_follow_keep_owner(void) {
+    const unsigned subtypes[]={0,1,4,12};
+    for(unsigned family=0;family<2;++family)
+    for(unsigned i=0;i<sizeof subtypes/sizeof *subtypes;++i)for(unsigned phase=0;phase<2;++phase) {
+        CPUState cpu;setup(&cpu);stage_call=0;shared_probe=1;
+        const uint32_t actor=0x80091298u,table=0x800F5728u;
+        PlayerContext primary,after;capture_player(&primary);
+        psx_mod_write_word(assembly+4,0x280);
+        inside=1;enter_zero();CHECK(shared_effect_allocate(&cpu,0x8002C398u));leave_zero();inside=0;
+        unsigned type=family?3u:0u;uint32_t callback=family?0x80049A14u:0x80049410u;
+        psx_mod_write_byte(actor,0x21);psx_mod_write_byte(actor+1,(uint8_t)type);
+        psx_mod_write_byte(actor+2,(uint8_t)subtypes[i]);psx_mod_write_byte(actor+4,(uint8_t)phase);
+        /* A fresh allocation has not installed the animation header yet. */
+        if(phase)psx_mod_write_word(actor+0x30,0x8007789Cu);
+        psx_mod_write_word(SCRATCH+0x88,table);psx_mod_write_word(table+type*4u,callback);
+        psx_mod_write_word(0x80049C98u,0x0C00B2FFu);psx_mod_write_word(0x80049CD4u,0xA24000DFu);
+        psx_mod_write_word(0x80049D60u,0x0C00B32Cu);
+        cpu.gpr[4]=actor;cpu.gpr[31]=0x80020438u;common_owner_probe=1;
+        CHECK(shared_effect_callback(&cpu,callback));common_owner_probe=0;
+        CHECK(psx_mod_read_word(actor+8)==le32(p2.body+8) && psx_mod_read_word(actor+12)==le32(p2.body+12));
+        CHECK(psx_mod_read_word(actor+0x3C)==assembly+0x280 && psx_mod_read_byte(actor+4)==1);
+        capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof primary));
+        CHECK(!zero_projected && !inside && !shared_fx_call && !state_track.count && !state_track.error);
+    }
 }
 static void distant_surface_keeps_original_owner_view_and_retirement(void) {
     CPUState cpu;setup(&cpu);stage_call=0;shared_probe=surface_probe=1;independent_views=1;
@@ -4211,6 +4249,7 @@ int main(void){
     scene_owner_death_preserves_living_passenger();
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
+    common_effect_birth_and_follow_keep_owner();
     distant_surface_keeps_original_owner_view_and_retirement();
     deferred_falcon_flight_tracks_owner_and_body_pixels();
     deferred_X_muzzle_retains_shot_pool_and_counter();

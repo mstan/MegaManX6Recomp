@@ -2899,12 +2899,12 @@ static int zero_native_weapon_effect(uint32_t actor) {
 }
 static int zero_common_effect(uint32_t actor) {
     int slot=shared_effect_slot(actor);
-    /* Original49100 dash and49A14 common effects resolve assembly word4.
+    /* Original49410 contacts,49100 dash and49A14 common effects resolve assembly word4.
      * In particular type3/sub12 option-shot bursts use Zero's common atlas.
      * Retain the allocating actor's authored pixels and actual native CLUT. */
     uint32_t offset=assembly?psx_mod_read_word(assembly+4):ASSET_SPACE;
     return slot>=0 && shared_effect_owners[slot]==2 && psx_mod_read_byte(actor) &&
-        (psx_mod_read_byte(actor+1)==1 || psx_mod_read_byte(actor+1)==3) && offset<ASSET_SPACE &&
+        (psx_mod_read_byte(actor+1)<=1 || psx_mod_read_byte(actor+1)==3) && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
 static int private_falcon_flight_effect(uint32_t actor) {
@@ -4034,6 +4034,7 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x8002C530,death_effect_allocate) ||
         !psx_mod_set_function_replacement(0x80047E34,death_effect_init)) failed=1;
     if (!psx_mod_set_function_replacement(0x8002C398,shared_effect_allocate) ||
+        !psx_mod_set_function_replacement(0x80049410,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x80049100,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x80049478,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x80049A14,shared_effect_callback) ||
