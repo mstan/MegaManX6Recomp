@@ -902,6 +902,17 @@ static void native_surviving_guest_world_view(int online,int split) {
     CPUState cpu;prepare_view(&cpu,online,split);inside=zero_world=zero_projected=1;
     independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
 }
+static void native_scene_and_retry_retire_camera_history(int online,int split) {
+    for(unsigned boundary=0;boundary<2;++boundary) {
+        CPUState cpu;prepare_view(&cpu,online,split);
+        view_menu_history=view_quake_valid=intro_camera_valid=1;
+        memset(intro_camera_requests,0x53,sizeof intro_camera_requests);
+        if(boundary)native_player_init(&cpu,0x8003BD24u);
+        else { scene_owner=1;scene_phase=0;scene_tick(&cpu);CHECK(!scene_owner); }
+        CHECK(!view_valid && !view_pending && !view_menu_history && !view_quake_valid && !intro_camera_valid);
+        for(unsigned i=0;i<sizeof intro_camera_requests;++i)CHECK(!intro_camera_requests[i]);
+    }
+}
 static void native_menu_camera_history(int online,int split) {
     for(int owner=0;owner<2;++owner)for(unsigned boundary=0;boundary<8;++boundary) {
         CPUState cpu;prepare_view(&cpu,online,split);
@@ -1286,6 +1297,8 @@ int main(void) {
     native_personal_resume_camera_history(0,1);native_personal_resume_camera_history(1,0);
     native_initial_mode9_arrival_view(0,1);native_initial_mode9_arrival_view(1,0);
     native_surviving_guest_world_view(0,1);native_surviving_guest_world_view(1,0);
+    native_scene_and_retry_retire_camera_history(0,1);
+    native_scene_and_retry_retire_camera_history(1,0);
     native_menu_camera_history(0,1);native_menu_camera_history(1,0);
     native_shared_weather_frames(0,1);native_shared_weather_frames(1,0);
     native_shared_scenery_y(0,1);native_shared_scenery_y(1,0);native_shared_scenery_y(1,1);

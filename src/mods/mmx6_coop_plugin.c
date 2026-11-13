@@ -1448,6 +1448,13 @@ static void arrival_body_tick(CPUState *cpu) {
     guest(cpu,0x80020D74,0,0);
     guest(cpu,0x80020DC8,0,0);
 }
+static void scene_camera_release(void) {
+    /* The shared native camera now owns the destination. The next separate
+     * views must start from its current room/limits, including background
+     * layer origins; pre-scene follow history belongs to the previous view. */
+    independent_invalidate();
+    intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
+}
 static void scene_begin(unsigned seat, uint32_t source) {
     if (scene_owner || clear_phase || !enrolled || life.status[seat]!=MMX6_COOP_ALIVE) return;
     scene_owner=seat+1;
@@ -1905,7 +1912,7 @@ static void scene_tick(CPUState *cpu) {
                (psx_mod_read_byte(PLAYER+0xD0) || psx_mod_read_byte(PLAYER+0xD4) ||
                 psx_mod_read_byte(PLAYER+0x7A)))locked=1;
         }
-        if (!locked) { scene_owner=0;both_door_reset(); }
+        if (!locked) { scene_owner=0;both_door_reset();scene_camera_release(); }
         return;
     }
     if (locked && scene_phase>=4 && !owner_dead) scene_phase=1;
@@ -2024,6 +2031,7 @@ static void scene_tick(CPUState *cpu) {
             (void)ride_resume_passenger(cpu,passenger,scene_body);
             psx_mod_write_byte(PLAYER+0x61,60);
             scene_owner=scene_phase=0;
+            scene_camera_release();
             life.select_frames=0;
         }
     }
@@ -2505,7 +2513,7 @@ static int retire_quit_stage(CPUState *cpu,uint32_t address) {
 }
 static void native_player_init(CPUState *cpu, uint32_t address) {
     if (inside) return;
-    intro_camera_valid=0;memset(intro_camera_requests,0,sizeof intro_camera_requests);
+    scene_camera_release();
     int retired=retire_quit_stage(cpu,address);
     personal_reset();
     /* Frontend initialization (including a new native Load/New Game) retires
