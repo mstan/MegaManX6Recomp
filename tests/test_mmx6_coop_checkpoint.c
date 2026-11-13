@@ -3094,7 +3094,11 @@ static void guest_world_placement_admission(CPUState *cpu) {
         psx_mod_write_word(actor+0x10,record);psx_mod_write_word(actor+8,2016u<<16);psx_mod_write_word(actor+12,984u<<16);
         cpu->gpr[4]=actor;cpu->gpr[5]=cpu->gpr[6]=48;cpu->gpr[2]=99;
         cpu->gpr[31]=0x800EA3D8u;
-        CHECK(world_guest_bounds(cpu,0) && !cpu->gpr[2]);
+        for(unsigned freeze=0;freeze<=4;++freeze) {
+            p2.body[0xCC]=(uint8_t)freeze;cpu->gpr[2]=99;
+            CHECK(world_guest_bounds(cpu,0) && !cpu->gpr[2]);
+        }
+        p2.body[0xCC]=0;
         psx_mod_write_word(0x8009B79Cu,320);psx_mod_write_byte(actor+3,0);
         cpu->gpr[31]=0x800F96C8u;
         CHECK(world_guest_bounds(cpu,1) && psx_mod_read_byte(actor+3)==1);
@@ -3141,7 +3145,11 @@ static void guest_intro_enemy_admission(CPUState *cpu) {
     capture(VIEW_CAMERA,actual,sizeof camera);CHECK(!memcmp(actual,camera,sizeof camera));
     CHECK(!inside && !state_track.count && !state_track.error);
     cpu->gpr[4]=0x8008EF48u;cpu->gpr[5]=80;cpu->gpr[6]=160;cpu->gpr[2]=99;
-    CHECK(intro_guest_streaming_lifetime(cpu) && !cpu->gpr[2]);
+    for(unsigned freeze=0;freeze<=4;++freeze) {
+        p2.body[0xCC]=(uint8_t)freeze;cpu->gpr[2]=99;
+        CHECK(intro_guest_streaming_lifetime(cpu) && !cpu->gpr[2]);
+    }
+    p2.body[0xCC]=0;
     psx_mod_write_word(0x8009B79Cu,320);cpu->gpr[2]=99;
     CHECK(intro_guest_streaming_visibility(cpu) && psx_mod_read_byte(0x8008EF4Bu)==1 && cpu->gpr[2]==99);
     put32(p2.body+8,4900u<<16);cpu->gpr[2]=99;
