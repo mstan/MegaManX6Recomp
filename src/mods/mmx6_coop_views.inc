@@ -21,6 +21,20 @@ static uint8_t view_quake_input[0x54];
 static uint32_t view_quake_frame;
 static unsigned view_quake_valid;
 static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=view_quake_valid=0; }
+static int independent_survivor_shared(void) {
+    return enrolled && local_split && !psx_mod_netplay_is_active() &&
+        ((life.status[0]==MMX6_COOP_FALLEN && life.status[1]==MMX6_COOP_ALIVE) ||
+         (life.status[1]==MMX6_COOP_FALLEN && life.status[0]==MMX6_COOP_ALIVE));
+}
+static void independent_survivor_begin(void) {
+    if(!independent_survivor_shared())return;
+    /* The survivor already owns the one native world and camera. Retire
+     * both cached canvases so that world is duplicated live in both panes,
+     * including native menus. A retired body's view cannot remain current. */
+    independent_invalidate();
+    (void)psx_mod_set_local_pair_presentation(0);
+    (void)psx_mod_set_local_pair_presentation(1);
+}
 
 /* Native PL00/font rectangles, as used by menu_vram. Capture the resident
  * character once before the other native initializer; every own-menu upload
@@ -562,7 +576,7 @@ static int independent_present(CPUState *cpu,uint32_t address) {
      * same-size Game Over or stage selector after world drawing stops.
      * A producer-admitted current-buffer frame also owns its presentation,
      * including arrival before the ordinary gameplay dispatcher starts. */
-    if(failed || (!menu && (!independent_views || !enrolled ||
+    if(independent_survivor_shared() || failed || (!menu && (!independent_views || !enrolled ||
        (psx_mod_read_byte(PLAY)!=10 && !(view_valid && view_pending && view_buffer==buffer))))) {
         /* Menus, loading and shared scenes retain two local panes too.
          * Invalidate old private images so the runtime duplicates the current
@@ -638,6 +652,8 @@ static void independent_activate(void) {
 #else
 /* Older SDKs retain the working shared renderer. */
 static void independent_invalidate(void) {}
+static void independent_survivor_begin(void) {}
+static int independent_survivor_shared(void) { return 0; }
 static void personal_menu_prepare_assets(CPUState *cpu) { (void)cpu; }
 static void personal_menu_assets(CPUState *cpu,unsigned seat) { (void)cpu;(void)seat; }
 static void independent_menu_begin(void) {}

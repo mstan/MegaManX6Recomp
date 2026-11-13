@@ -185,6 +185,8 @@ static unsigned intro_camera_valid;
 static void independent_invalidate(void);
 static void independent_menu_begin(void);
 static void independent_world_begin(void);
+static void independent_survivor_begin(void);
+static int independent_survivor_shared(void);
 #include "mmx6_coop_state_track.h"
 #ifdef MMX6_COOP_MODERN_STATE
 static uint8_t snapshot_asset_sha[32];
@@ -2342,6 +2344,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     if (!enrolled || failed) return 0;
     diagnostic_inventory_setup(cpu);
     diagnostic_setup(cpu);
+    independent_survivor_begin();
     uint16_t raw=p2_input(MMX6_INPUT_STAGE);
     if(checkpoint_lab_boundary(cpu,raw))return 1;
     /* Native 1EAE0 checks the resident body for phase3 before updating it.
@@ -3796,7 +3799,8 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     STATE_BYTES(restore_body,24,current,sizeof current);
     STATE_WORDS(restore_pointers,25,saved_pointers,2);
     uint32_t ot[33]={0},buffer=psx_mod_read_word(0x8009B7A0u);
-    if(independent_views && !private_draw && (buffer==0x800C4578u || buffer==0x800C4668u)) {
+    if(independent_views && !private_draw && !independent_survivor_shared() &&
+       (buffer==0x800C4578u || buffer==0x800C4668u)) {
         ot[0]=buffer+0x70u;
         for(unsigned i=0;i<32;++i)ot[i+1]=psx_mod_read_word(ot[0]+i*4u);
     }

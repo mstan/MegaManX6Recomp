@@ -8,6 +8,7 @@
 #define PSX_MOD_CONSTRUCTOR(name) static void name(void)
 #include "../src/mods/mmx6_coop_plugin.c"
 #include "mmx6_coop_private_view_sdk_fixture.h"
+int psx_mod_netplay_is_active(void){return mmx6_view_sdk.online;}
 #define CHECK(x) do{if(!(x)){fprintf(stderr,"line %d: %s\n",__LINE__,#x);exit(1);}}while(0)
 static uint8_t ram[0x200000],extra[0x300000];
 static uint16_t vram[1024*512],ui_pixels[1024*512],retained_color;
@@ -143,6 +144,7 @@ static void canonical_independent_hud(void){
       for(unsigned boss=0;boss<2;++boss)for(int port=0;port<2;++port){
         CPUState cpu;setup(&cpu,"stacked");independent_views=gauge_probe=1;
         local_split=split;mmx6_view_sdk.online=!split;mmx6_view_sdk.local_port=port;
+        life.status[1]=MMX6_COOP_ALIVE;
         view_valid=view_pending=0; /* Admission/publication can miss this frame. */
         psx_mod_write_byte(PLAY+1,(uint8_t)(phase<3?phase:0));
         if(phase==3)life.status[0]=MMX6_COOP_DYING;
@@ -157,9 +159,16 @@ static void canonical_independent_hud(void){
         }
         uint8_t resident[sizeof p2.body];capture(PLAYER,resident,sizeof resident);PlayerContext partner=p2;
         CHECK(draw_coop_hud(&cpu,0x800244C0));
-        CHECK(call_count==4u+boss*4u && definitions==1 && tag_count==6 && option_reads==1);
-        CHECK(psx_mod_read_word(0x800C45E8u)==(boss?0x41020u:0xFFFFFFu));
-        CHECK(psx_mod_read_word(0x800C45ECu)==(boss?0x42048u:0xFFFFFFu));
+        int shared=split && phase>=4;
+        CHECK(call_count==(shared?3u:4u+boss*4u) && definitions==1 && tag_count==6 && option_reads==1);
+        if(shared) {
+            /* The duplicated native screen must retain visible hero meters. */
+            CHECK(psx_mod_read_word(0x800C45E8u)!=0xFFFFFFu);
+            CHECK(psx_mod_read_word(0x800C45ECu)!=0xFFFFFFu);
+        } else {
+            CHECK(psx_mod_read_word(0x800C45E8u)==(boss?0x41020u:0xFFFFFFu));
+            CHECK(psx_mod_read_word(0x800C45ECu)==(boss?0x42048u:0xFFFFFFu));
+        }
         for(unsigned i=0;i<3;++i){unsigned at=i==0?0xE8:i==1?0x5D:0x5F;
             ++resident[at];if(!projected)++partner.body[at];
             /* An inner Zero-owned HUD call leaves updated Zero resident;
@@ -170,7 +179,7 @@ static void canonical_independent_hud(void){
         }
         CHECK(!memcmp(resident,mem(PLAYER),sizeof resident) && !memcmp(&partner,&p2,sizeof p2));
         CHECK(!hud_call && !hud_seat && !state_track.count && !state_track.error && !failed);
-        CHECK(cpu.gpr[2]==0 && p2_hud_fade==128);
+        CHECK(cpu.gpr[2]==(shared?0x12345678u:0u) && p2_hud_fade==128);
         if(!port){memcpy(peer_ram,ram,sizeof ram);memcpy(peer_extra,extra,sizeof extra);}
         else CHECK(!memcmp(peer_ram,ram,sizeof ram) && !memcmp(peer_extra,extra,sizeof extra));
     }
