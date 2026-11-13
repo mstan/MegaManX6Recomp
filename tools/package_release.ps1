@@ -141,6 +141,7 @@ Invoke-Native {
     & $CMake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release `
         -DPSX_DEBUG_TOOLS=OFF -DPSX_PGXP_VARIANT=OFF -DPSX_SDL_BACKEND=SDL3 `
         -DPSX_STATIC_RUNTIME=ON -DPSX_RECOMP_UI=ON -DPSX_NETPLAY=ON `
+        "-DRECOMP_UI_ROOT=$Root/recomp-ui" `
         -DGAME_GENERATED_DIR=generated "-DPSX_GAME_VERSION=$Version" `
         "-DPSXRECOMP_V4_ROOT=$FrameworkRoot" `
         "-DPSX_THIRD_PARTY_DIR:PATH=$FrameworkRoot/third_party" `
@@ -157,6 +158,7 @@ Invoke-Native {
 $releaseCache = Get-Content -LiteralPath (Join-Path $BuildPath 'CMakeCache.txt') -Raw
 foreach ($entry in @(
     @('PSXRECOMP_V4_ROOT', $FrameworkRoot),
+    @('RECOMP_UI_ROOT', (Join-Path $Root 'recomp-ui')),
     @('PSX_THIRD_PARTY_DIR', (Join-Path $FrameworkRoot 'third_party')),
     @('CMAKE_RUNTIME_OUTPUT_DIRECTORY', $BuildPath),
     @('CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE', $BuildPath)
