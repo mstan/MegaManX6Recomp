@@ -1,3 +1,23 @@
+# v1.3.9-alpha-playtest
+
+This release corrects opening-stage co-op effects, actor visibility and camera
+recovery.
+
+- Keep shared stage actors active for either living view during native hit
+  stops and nonfatal damage.
+- Project Zero's weapon and landing effects at their original world positions,
+  with native enemy hit and destruction feedback.
+- Preserve each character's own HUD while the surviving partner continues.
+- Restore camera history through boss-door scenes and native retries.
+- Include actors that use the early native offscreen classifier in the second
+  living view.
+
+Fresh installations retain adaptive widescreen defaults. Native memory-card
+saves and existing settings are preserved. Co-op remains experimental; both
+netplay peers must use this exact build.
+
+---
+
 # v1.3.8-alpha-playtest
 
 This release improves local co-op presentation and native enemy interactions.
