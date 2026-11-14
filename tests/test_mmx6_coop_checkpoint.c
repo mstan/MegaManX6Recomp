@@ -3099,6 +3099,16 @@ static void guest_world_placement_admission(CPUState *cpu) {
             CHECK(world_guest_bounds(cpu,0) && !cpu->gpr[2]);
         }
         p2.body[0xCC]=0;
+        /* Native nonfatal contact sets HP bit7 before the gauge consumes it.
+         * A hurt pose still owns its world; zero low health remains fatal. */
+        p2.body[5]=17;
+        const uint8_t health[]={1,28,0x81,0x9C,0,0x80};
+        for(unsigned h=0;h<sizeof health;++h) {
+            p2.body[0x5C]=health[h];cpu->gpr[2]=99;
+            int kept=world_guest_bounds(cpu,0);
+            CHECK(kept==(h<4) && cpu->gpr[2]==(h<4?0u:99u));
+        }
+        p2.body[0x5C]=32;p2.body[5]=2;
         psx_mod_write_word(0x8009B79Cu,320);psx_mod_write_byte(actor+3,0);
         cpu->gpr[31]=0x800F96C8u;
         CHECK(world_guest_bounds(cpu,1) && psx_mod_read_byte(actor+3)==1);
@@ -3161,6 +3171,14 @@ static void guest_intro_enemy_admission(CPUState *cpu) {
         CHECK(intro_guest_streaming_lifetime(cpu) && !cpu->gpr[2]);
     }
     p2.body[0xCC]=0;
+    p2.body[5]=17;
+    const uint8_t health[]={28,0x9C,1,0x81,0,0x80};
+    for(unsigned h=0;h<sizeof health;++h) {
+        p2.body[0x5C]=health[h];cpu->gpr[2]=99;
+        int kept=intro_guest_streaming_lifetime(cpu);
+        CHECK(kept==(h<4) && cpu->gpr[2]==(h<4?0u:99u));
+    }
+    p2.body[0x5C]=32;p2.body[5]=2;
     psx_mod_write_word(0x8009B79Cu,320);cpu->gpr[2]=99;
     CHECK(intro_guest_streaming_visibility(cpu) && psx_mod_read_byte(0x8008EF4Bu)==1 && cpu->gpr[2]==99);
     put32(p2.body+8,4900u<<16);cpu->gpr[2]=99;

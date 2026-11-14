@@ -21,7 +21,7 @@ static int intro_guest_view(int *x,int *y) {
        psx_mod_read_byte(PLAY+0x10) || coop_world_hold() ||
        life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
        !(p2.body[0]&1u) || p2.body[4]!=1 || p2.body[5]<2 ||
-       !p2.body[0x5C] || p2.body[0x5C]>=128 || p2.body[0xE0] ||
+       !(p2.body[0x5C]&0x7Fu) || p2.body[0xE0] ||
        psx_mod_read_byte(VIEW_CAMERA+4)!=1 || !psx_mod_read_byte(VIEW_CAMERA+0x44) ||
        psx_mod_read_half(VIEW_CAMERA+0x30)!=160 || psx_mod_read_half(VIEW_CAMERA+0x32)!=160 ||
        psx_mod_read_half(VIEW_CAMERA+0x2C)!=96 || !intro_geometry_source())return 0;

@@ -4,7 +4,9 @@
 #ifdef MMX6_COOP_MODERN_STATE
 /* PLAYER+CC suspends native body/attack updates, not ownership of its view.
  * In particular Zero's air-saber landing freezes for four ticks. Shared
- * actors and inactive placement latches must survive that interval. */
+ * actors and inactive placement latches must survive that interval. Native
+ * HP bit7 likewise marks a pending gauge update after nonfatal damage; only
+ * the low seven health bits determine whether this view still has a hero. */
 static int world_guest_view(int *x,int *y) {
     if(!independent_views || !ready || !enrolled || failed || private_draw || inside || zero_world ||
        scene_owner || clear_phase || pause_owner>=0 || coop_world_hold() ||
@@ -13,7 +15,7 @@ static int world_guest_view(int *x,int *y) {
        psx_mod_read_byte(PLAY+0x10) ||
        life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
        !(p2.body[0]&1u) || p2.body[4]!=1 || p2.body[5]<2 ||
-       !p2.body[0x5C] || p2.body[0x5C]>=128 || p2.body[0xE0] ||
+       !(p2.body[0x5C]&0x7Fu) || p2.body[0xE0] ||
        psx_mod_read_byte(VIEW_CAMERA+4)!=1 || !psx_mod_read_byte(VIEW_CAMERA+0x44) ||
        psx_mod_read_half(VIEW_CAMERA+0x30)!=160 || psx_mod_read_half(VIEW_CAMERA+0x32)!=160 ||
        psx_mod_read_half(VIEW_CAMERA+0x2C)!=96)return 0;
