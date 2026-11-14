@@ -730,14 +730,14 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         psx_mod_write_byte(0x800C4560,psx_mod_read_byte(0x800C4560)|1);
         ++working_palette_probe_calls;return;
     }
-    if(surface_probe && (address==0x8002CBFCu || address==0x8002CCB0u)) {
+    if(surface_probe && (address==0x8002CBFCu || address==0x8002CCB0u || address==0x8002CB50u)) {
         /* External original uint16 half-open320x240 bounds contract. */
-        uint32_t a=cpu->gpr[4],rx=cpu->gpr[5],ry=cpu->gpr[6];
+        uint32_t a=cpu->gpr[4],rx=address==0x8002CB50u?32:cpu->gpr[5],ry=address==0x8002CB50u?32:cpu->gpr[6];
         int dx=(int16_t)(psx_mod_read_half(a+10)-psx_mod_read_half(0x80097202u));
         int dy=(int16_t)(psx_mod_read_half(a+14)-psx_mod_read_half(0x80097206u));
         unsigned outside=(uint16_t)(dx+rx)>=320u+rx*2u || (uint16_t)(dy+ry)>=240u+ry*2u;
-        if(address==0x8002CCB0u)psx_mod_write_byte(a+3,(uint8_t)!outside);
-        ++surface_bounds_calls;cpu->gpr[2]=outside;return;
+        if(address==0x8002CCB0u || address==0x8002CB50u)psx_mod_write_byte(a+3,(uint8_t)!outside);
+        ++surface_bounds_calls;cpu->gpr[2]=address==0x8002CB50u?0xCB50:outside;return;
     }
     if(common_owner_probe && (address==0x80049A14u || address==0x80049410u)) {
         /* Native common-effect callbacks can resolve the canonical hero and
@@ -1675,8 +1675,30 @@ static void distant_surface_keeps_original_owner_view_and_retirement(void) {
     CHECK(!shared_effect_callback(&cpu,0x80049A14u));CHECK(!memcmp(&cpu,&expected,sizeof cpu));cpu.gpr[4]=actor;
     psx_mod_write_word(table+12,0x80010000u);CHECK(!shared_effect_callback(&cpu,0x80049A14u));psx_mod_write_word(table+12,0x80049A14u);
     psx_mod_write_word(0x80049C98u,0);CHECK(!shared_effect_callback(&cpu,0x80049A14u));psx_mod_write_word(0x80049C98u,0x0C00B2FFu);
-    shared_effect_owners[0]=1;shared_fx_call=1;cpu.gpr[31]=0x80049CA0u;expected=cpu;
+    shared_effect_owners[0]=0;shared_fx_call=1;cpu.gpr[31]=0x80049CA0u;expected=cpu;
     CHECK(!shared_effect_view_bounds(&cpu,0x8002CBFCu));CHECK(!memcmp(&cpu,&expected,sizeof cpu));
+    /* A shared NPC explosion is primary-owned but visible only to Zero.
+     * Original bounds must keep it there, and still reject it outside both. */
+    shared_effect_owners[0]=1;life.status[1]=MMX6_COOP_ALIVE;expected.gpr[2]=0;
+    CHECK(shared_effect_view_bounds(&cpu,0x8002CBFCu) && !cpu.gpr[2]);
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && !memcmp(view,memory(camera),sizeof view));
+    psx_mod_write_word(actor+8,7000u<<16);expected.gpr[2]=1;
+    CHECK(shared_effect_view_bounds(&cpu,0x8002CBFCu) && cpu.gpr[2]==1);
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && !memcmp(view,memory(camera),sizeof view));
+    psx_mod_write_word(actor+8,3907u<<16);
+    /* Actual type4 init/update call sites write visibility without returning
+     * a boolean. Preserve that opaque return and use the published flag. */
+    psx_mod_write_byte(actor+1,4);psx_mod_write_word(actor+0x30,0x80077D54u);
+    psx_mod_write_word(table+16,0x8004A154u);
+    psx_mod_write_word(0x8004A238u,0x0C00B2D4u);psx_mod_write_word(0x8004A29Cu,0x0C00B2D4u);
+    shared_fx_call=0;cpu.gpr[31]=0x8004A240u;expected=cpu;expected.gpr[2]=0xCB50;
+    CHECK(shared_effect_view_bounds(&cpu,0x8002CB50u) && psx_mod_read_byte(actor+3)==1);
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && !memcmp(view,memory(camera),sizeof view));
+    psx_mod_write_word(actor+8,7000u<<16);cpu.gpr[31]=0x8004A2A4u;expected=cpu;expected.gpr[2]=0xCB50;
+    CHECK(shared_effect_view_bounds(&cpu,0x8002CB50u) && !psx_mod_read_byte(actor+3));
+    CHECK(!memcmp(&cpu,&expected,sizeof cpu) && !memcmp(view,memory(camera),sizeof view));
+    psx_mod_write_word(actor+8,3907u<<16);psx_mod_write_byte(actor+1,3);
+    psx_mod_write_word(actor+0x30,0x8007789Cu);
     shared_fx_call=0;shared_effect_owners[0]=2;cpu.gpr[31]=0x80020438u;
     surface_end=1;CHECK(shared_effect_callback(&cpu,0x80049A14u));
     CHECK(psx_mod_read_byte(actor+4)==2 && p2.body[0xDF]==0 && psx_mod_read_byte(PLAYER+0xDF)==0x55);

@@ -266,7 +266,15 @@ static int jump_audio_status(CPUState *cpu,uint32_t address) {
 }
 static int jump_audio_sound(CPUState *cpu,uint32_t address) {
     unsigned group=cpu->gpr[4]&127u,record=cpu->gpr[5]&255u;
-    if(jump_audio_call || !jump_audio_projected() || (group!=1 && group!=3) || cpu->gpr[6]!=PLAYER)return 0;
+    uint32_t actor=cpu->gpr[6];
+    /* Native319EC uses the attacking shot as its spatial source at31B88,
+     * including Zero's group1 saber impacts. The projected projectile pool
+     * belongs to this character just as PLAYER does; using the resident
+     * group1 bank here selects the other character's impact sample. */
+    int shot=actor>=0x800950A0u && actor<0x800964A0u &&
+        !((actor-0x800950A0u)%0xA0u) && (psx_mod_read_byte(actor)&1u);
+    if(jump_audio_call || !jump_audio_projected() || (group!=1 && group!=3) ||
+       (actor!=PLAYER && !shot))return 0;
     /* The spatial actor proves body ownership without a jump-only caller
      * whitelist. Preserve the raw group: bit7 selects a native gain path. */
     /* Native channel-disabled semantics are unchanged and issue no KEYON. */

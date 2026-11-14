@@ -26,26 +26,48 @@ static int shared_surface_source(uint32_t actor) {
 }
 static int shared_effect_view_bounds(CPUState *cpu,uint32_t address) {
     uint32_t actor=cpu->gpr[4];int slot=shared_effect_slot(actor);
-    if(shared_fx_call!=1 || !zero_projected || !independent_views || slot<0 ||
-       shared_effect_owners[slot]!=2 || !psx_mod_read_byte(actor) ||
-       !shared_surface_source(actor) ||
+    if(!enrolled || failed || shared_fx_call==2 || !independent_views || slot<0 ||
+       !shared_effect_owners[slot] || !psx_mod_read_byte(actor) ||
+       private_draw)return 0;
+    /* Native type4 explosions use the void visibility writer2CB50, not the
+     * type3 bounds pair. Their position/lifetime already belong to the stage;
+     * only the visibility bit needs the union of living local views. */
+    uint32_t table=psx_mod_read_word(SCRATCH+0x88);
+    int explosion=address==0x8002CB50u && psx_mod_read_byte(actor+1)==4 &&
+        psx_mod_read_word(actor+0x30)==0x80077D54u &&
+        table>=0x80010000u && table<=0x801FFF00u && !(table&3u) &&
+        psx_mod_read_word(table+16)==0x8004A154u &&
+        ((cpu->gpr[31]==0x8004A240u && psx_mod_read_word(0x8004A238u)==0x0C00B2D4u) ||
+         (cpu->gpr[31]==0x8004A2A4u && psx_mod_read_word(0x8004A29Cu)==0x0C00B2D4u));
+    if(!explosion && (shared_fx_call!=1 || !shared_surface_source(actor) ||
        !((address==0x8002CBFCu && cpu->gpr[31]==0x80049CA0u) ||
-         (address==0x8002CCB0u && cpu->gpr[31]==0x80049D68u)))return 0;
+         (address==0x8002CCB0u && cpu->gpr[31]==0x80049D68u))))return 0;
+    unsigned primary=explosion || shared_effect_owners[slot]==1;
+    if(primary && (zero_projected ||
+       (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING)))return 0;
+    if(!primary && !zero_projected)return 0;
     const uint32_t camera=0x800971F8u;
     if(psx_mod_read_byte(camera+4)!=1 || !psx_mod_read_byte(camera+0x44) ||
        psx_mod_read_half(camera+0x30)!=160 || psx_mod_read_half(camera+0x32)!=160 ||
        psx_mod_read_half(camera+0x2C)!=96)return 0;
     int limits[4];for(unsigned i=0;i<4;++i)limits[i]=(int16_t)psx_mod_read_half(camera+0x1C+i*2);
     if(limits[0]<limits[1] || limits[2]<limits[3])return 0;
-    int x=(int16_t)psx_mod_read_half(PLAYER+10)-160;
-    int y=(int16_t)psx_mod_read_half(PLAYER+14)-96;
+    int x=(int16_t)(primary?(le32(p2.body+8)>>16):psx_mod_read_half(PLAYER+10))-160;
+    int y=(int16_t)(primary?(le32(p2.body+12)>>16):psx_mod_read_half(PLAYER+14))-96;
     if(x<limits[1])x=limits[1];if(x>limits[0])x=limits[0];
     if(y<limits[3])y=limits[3];if(y>limits[2])y=limits[2];
     uint32_t saved[3]={psx_mod_read_word(camera+8),psx_mod_read_word(camera+12),(uint32_t)shared_fx_call};
     STATE_WORDS(restore_surface_view,143,saved,3);
     shared_fx_call=2; /* The inner replacement falls through to original once. */
-    psx_mod_write_word(camera+8,(uint32_t)x<<16);psx_mod_write_word(camera+12,(uint32_t)y<<16);
-    uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
+    /* Enemy and scenery callbacks allocate their common explosions in the
+     * primary world even when only the guest can see the source. Keep the
+     * native result if visible there; otherwise try the living guest's view
+     * before the original callback retires the effect. */
+    uint32_t result=primary?guest(cpu,address,actor,cpu->gpr[5]):1;
+    if(explosion?!psx_mod_read_byte(actor+3):result) {
+        psx_mod_write_word(camera+8,(uint32_t)x<<16);psx_mod_write_word(camera+12,(uint32_t)y<<16);
+        result=guest(cpu,address,actor,cpu->gpr[5]);
+    }
     psx_mod_write_word(camera+8,saved[0]);psx_mod_write_word(camera+12,saved[1]);
     shared_fx_call=(int)saved[2];STATE_POP(restore_surface_view);cpu->gpr[2]=result;return 1;
 }

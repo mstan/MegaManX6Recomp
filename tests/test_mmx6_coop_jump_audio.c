@@ -43,6 +43,7 @@ static uint32_t epoch=1,active,stopped;
 static uint32_t private_bank[24];
 static uint64_t private_owner[24];
 static unsigned plays,volumes,registrations,calculations,keyons,status_reads;
+static uint32_t expected_spatial_source=PLAYER;
 static unsigned slot_volumes[24];
 static int bank_conflict,play_failure,wrong_keyon,charged_call,no_keyon,bad_output;
 static int local_scope;
@@ -100,7 +101,7 @@ uint32_t psx_mod_call_guest_uncharged(CPUState *cpu,uint32_t target,uint32_t ret
     (void)ret;CHECK(!budget && jump_audio_call && state_track.count==4 && !snapshot_ready());
     *charged=charged_call;
     if(target==0x80016C48) {
-        ++calculations;unsigned group=a0&127u;CHECK(group==1 || group==3);CHECK(a2==PLAYER);
+        ++calculations;unsigned group=a0&127u;CHECK(group==1 || group==3);CHECK(a2==expected_spatial_source);
         JumpAudioBank *b=&jump_audio_banks[group==3];
         CHECK(psx_mod_read_word(0x80097738+group*4)==b->guest+b->layout.vab);
         CHECK(psx_mod_read_word(0x80097778+group*4)==b->guest+8);
@@ -166,6 +167,7 @@ static void test_record(JumpAudioBank *b,unsigned record,unsigned id,unsigned pr
     r[3]=(uint8_t)(slot|((count-1u)<<5));
 }
 static void setup_audio(void) {
+    expected_spatial_source=PLAYER;
     private_actor=default_private_actor;jump_audio_character=MMX6_COOP_CHARACTER_ZERO;
     memset(test_ram,0,sizeof test_ram);memset(&state_track,0,sizeof state_track);
     failed=jump_audio_faulted=jump_audio_call=jump_audio_keyon_call=jump_audio_stop_call=0;
@@ -233,6 +235,20 @@ static CPUState request(unsigned group,unsigned record) {
     psx_mod_write_word(cpu.gpr[29]+16,0x8003AFCC);return cpu;
 }
 static void transactions(void) {
+    const uint32_t impact_sources[]={0x800950A0u,0x80095AA0u,0x800950A0u+31u*0xA0u};
+    for(unsigned i=0;i<sizeof impact_sources/sizeof *impact_sources;++i) {
+        setup_audio();CPUState cpu=request(1,2);
+        cpu.gpr[6]=expected_spatial_source=impact_sources[i];
+        psx_mod_write_byte(cpu.gpr[6],1);
+        CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && plays==1 && played_bank==30);
+        same_native();
+    }
+    const uint32_t rejected_sources[]={0x800950A1u,0x800964A0u,0x800950A0u};
+    for(unsigned i=0;i<sizeof rejected_sources/sizeof *rejected_sources;++i) {
+        setup_audio();CPUState cpu=request(1,2);cpu.gpr[6]=rejected_sources[i];
+        CHECK(!jump_audio_sound(&cpu,0x80016C48) && !plays && !calculations && !failed);
+        same_native();
+    }
     const unsigned groups[]={1,1,1,1,1,1,1,1,3,3,3},records[]={1,2,3,4,5,6,7,8,2,4,7};
     for(unsigned n=0;n<sizeof records/sizeof records[0];++n) {
         setup_audio();CPUState cpu=request(groups[n],records[n]);CPUState before=cpu;
