@@ -3122,6 +3122,19 @@ static void guest_world_placement_admission(CPUState *cpu) {
         CHECK(!guest_actor_visibility(cpu,0x8002CB50u) && !psx_mod_read_byte(actor+3) && cpu->gpr[2]==99);
         psx_mod_write_word(actor+8,2016u<<16);private_draw=1;
         CHECK(!guest_actor_visibility(cpu,0x8002CB50u));private_draw=0;
+        /* Early fixed64 lifetime must keep the actor alive before drawing.
+         * Preserve its return ABI, visibility flag and half-open margins. */
+        psx_mod_write_word(cpu->gpr[31]-8,0x0C00B2ADu);
+        cpu->gpr[5]=cpu->gpr[6]=0xDEADBEEFu;
+        psx_mod_write_byte(actor+3,0);cpu->gpr[2]=99;
+        CHECK(guest_actor_lifetime(cpu,0x8002CAB4u) && !cpu->gpr[2] && !psx_mod_read_byte(actor+3));
+        psx_mod_write_word(actor+8,(2016u-160u+320u+64u)<<16);cpu->gpr[2]=99;
+        CHECK(!guest_actor_lifetime(cpu,0x8002CAB4u) && cpu->gpr[2]==99);
+        psx_mod_write_word(actor+8,(2016u-160u-64u)<<16);
+        CHECK(guest_actor_lifetime(cpu,0x8002CAB4u) && !cpu->gpr[2]);
+        psx_mod_write_word(actor+8,2016u<<16);private_draw=1;
+        CHECK(!guest_actor_lifetime(cpu,0x8002CAB4u));private_draw=0;
+        cpu->gpr[5]=cpu->gpr[6]=48;
         psx_mod_write_word(cpu->gpr[31]-8,visibility_word);
         cpu->gpr[31]=0x800EA3D8u;
         put32(p2.body+8,500u<<16);cpu->gpr[2]=99;CHECK(!world_guest_bounds(cpu,0) && cpu->gpr[2]==99);

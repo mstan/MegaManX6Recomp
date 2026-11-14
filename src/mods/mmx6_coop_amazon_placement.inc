@@ -139,3 +139,7 @@ static int guest_actor_visibility(CPUState *cpu,uint32_t address) {
     if(world_guest_bounds(cpu,2))return 1;
     return shared_effect_view_bounds(cpu,address);
 }
+static int guest_actor_lifetime(CPUState *cpu,uint32_t address) {
+    (void)address;
+    return world_guest_bounds(cpu,3);
+}

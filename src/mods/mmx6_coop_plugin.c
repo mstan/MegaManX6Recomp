@@ -4059,7 +4059,8 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x800EC8E8,refight_portal_both_admission)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
-    if (!psx_mod_set_function_replacement(0x8002CB50,guest_actor_visibility) ||
+    if (!psx_mod_set_function_replacement(0x8002CAB4,guest_actor_lifetime) ||
+        !psx_mod_set_function_replacement(0x8002CB50,guest_actor_visibility) ||
         !psx_mod_set_function_replacement(0x8002CBFC,guest_geometry_lifetime) ||
         !psx_mod_set_function_replacement(0x8002CCB0,amazon_guest_support_visibility)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
