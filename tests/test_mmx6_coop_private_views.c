@@ -92,12 +92,12 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
     }
     if(address==VIEW_DRAW_OT) { cpu->gpr[2]=0xC0DE;return 1; }
     if(address==0x80066150u)return 1;
-    if(address==0x8006663Cu && personal_view_probe) {
+    if(address==0x8006663Cu) {
         CHECK(private_draw && cpu->gpr[4]==view_buffer+0x70u && cpu->gpr[5]==32);
         /* Original ClearOTagR: first terminator, then31 backward links. */
         for(unsigned i=0;i<32;++i)psx_mod_write_word(cpu->gpr[4]+i*4u,
             i?(cpu->gpr[4]+(i-1u)*4u)&0xFFFFFFu:0xFFFFFFu);
-        ++personal_view_clears[private_seat];return 1;
+        if(personal_view_probe)++personal_view_clears[private_seat];return 1;
     }
     if(address==0x80026028u && personal_view_probe) {
         CHECK(private_draw && personal_pass && personal_rendering && personal_seat==private_seat);
@@ -312,13 +312,23 @@ static void retained_presentation_lifetime(void) {
     }
 }
 static void local_survivor_uses_current_native_screen(void) {
-    for(unsigned seat=0;seat<2;++seat) for(unsigned phase=0;phase<3;++phase) {
+    for(unsigned seat=0;seat<2;++seat) {
         CPUState cpu;prepare_view(&cpu,0,1);
-        life.status[seat]=MMX6_COOP_FALLEN;psx_mod_write_byte(PLAY+1,(uint8_t)phase);
+        life.status[seat]=MMX6_COOP_FALLEN;
         independent_survivor_begin();
-        CHECK(mmx6_view_sdk.pair_enabled && !view_valid && !view_pending);
-        CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && mmx6_view_sdk.pair_enabled);
-        CHECK(!view_native_calls && !mmx6_view_sdk.pair_calls && !mmx6_view_sdk.view_calls);
+        CHECK(mmx6_view_sdk.pair_enabled && view_valid && view_pending);
+        if(!seat) {
+            inside=zero_world=1;
+            CHECK(world_draw_filter(&cpu,0x80025FB0u));
+            CHECK(!view_native_calls); /* No stage draw using Zero's resource projection. */
+            inside=zero_world=0;
+        }
+        independent_world_begin();CHECK(view_pending && view_valid);
+        CHECK(!memcmp(view_cameras[0],memory(VIEW_CAMERA),sizeof view_cameras[0]));
+        CHECK(!memcmp(view_cameras[0],view_cameras[1],sizeof view_cameras[0]));
+        uint32_t digest=state_digest();
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT) && mmx6_view_sdk.pair_enabled);
+        CHECK(mmx6_view_sdk.pair_calls==1 && state_digest()==digest && !failed);
     }
     CPUState cpu;prepare_view(&cpu,0,1);independent_survivor_begin();
     CHECK(view_valid); /* Two living heroes keep their independent views. */
@@ -690,21 +700,19 @@ static void arrival_refusals(void) {
         prepare_view(&cpu,0,1);life.status[1]=blocked[i];view_valid=0;
         independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
     }
-    /* A dying hero keeps its death view. After retirement local play uses
-     * the live shared screen, without updating the retired body's camera. */
+    /* Both local panes use the survivor's current native world, including
+     * after a restore invalidates camera history. Each HUD stays personal. */
     const Mmx6CoopStatus dead[]={MMX6_COOP_DYING,MMX6_COOP_FALLEN};
     for(unsigned seat=0;seat<2;++seat)for(unsigned i=0;i<2;++i) {
         CPUState cpu;prepare_view(&cpu,0,1);life.status[seat]=dead[i];
         mmx6_view_sdk.local_port=seat;frame_count=1;view_frame=0;
-        uint8_t retained[sizeof view_cameras[0]];memcpy(retained,view_cameras[seat],sizeof retained);
+        uint8_t retained[sizeof view_cameras[0]];memcpy(retained,memory(VIEW_CAMERA),sizeof retained);
         independent_world_begin();CHECK(view_pending && view_valid);
-        if(dead[i]==MMX6_COOP_FALLEN)
-            CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && mmx6_view_sdk.pair_enabled && !failed);
-        else CHECK(independent_present(&cpu,VIEW_DRAW_OT) && !failed);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT) && mmx6_view_sdk.pair_enabled && !failed);
         for(unsigned layer=0;layer<3;++layer)
             CHECK(!memcmp(view_cameras[seat]+layer*0x54+8,retained+layer*0x54+8,0x14));
         prepare_view(&cpu,0,1);life.status[seat]=dead[i];view_valid=0;
-        independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
+        independent_world_begin();CHECK(view_pending && view_valid && !view_native_calls);
     }
     for(unsigned gate=0;gate<5;++gate) {
         CPUState cpu;prepare_view(&cpu,0,1);life.status[1]=MMX6_COOP_JOINING;
@@ -799,13 +807,6 @@ static void native_entering_pause_views(int online,int split) {
         inside=zero_world=zero_projected=personal_pass=0;
         PrivateViewContext context;memset(&context,0,sizeof context);private_context_save(&context);
         digest=state_digest();original=cpu;
-        if(!online && init==2) {
-            CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && mmx6_view_sdk.pair_enabled);
-            context_equal(&context);
-            CHECK(state_digest()==digest && !memcmp(&cpu,&original,sizeof cpu));
-            CHECK(!entering_view_draws[0] && !entering_view_draws[1]);
-            continue;
-        }
         digest=state_digest();original.gpr[2]=0xC0DE;
         CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&context);
         CHECK(state_digest()==digest && !memcmp(&cpu,&original,sizeof cpu));
@@ -910,16 +911,11 @@ static void native_surviving_guest_world_view(int online,int split) {
         static uint8_t saved_ram[sizeof ram];memcpy(saved_ram,ram,sizeof ram);
         CPUState original=cpu;uint32_t digest=state_digest();
         independent_world_begin();CHECK(view_pending && view_valid && !view_native_calls);
+        if(!online)memcpy(retained,memory(VIEW_CAMERA),sizeof retained);
         CHECK(!memcmp(retained,view_cameras[0],sizeof retained));
         CHECK(!memcmp(saved_ram,ram,sizeof ram) && !memcmp(&original,&cpu,sizeof cpu) && state_digest()==digest);
         CHECK(inside && zero_world && zero_projected); /* Draw-only recording within the survivor's one pass. */
         inside=zero_world=zero_projected=0;
-        if(!online && dead[i]==MMX6_COOP_FALLEN) {
-            independent_survivor_begin();
-            CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && !failed && mmx6_view_sdk.pair_enabled);
-            CHECK(!memcmp(&cpu,&original,sizeof cpu) && !memcmp(saved_ram,ram,sizeof ram));
-            continue;
-        }
         PrivateViewContext context;memset(&context,0,sizeof context);private_context_save(&context);
         digest=state_digest();original.gpr[2]=0xC0DE;
         CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&context);

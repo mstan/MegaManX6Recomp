@@ -3102,6 +3102,17 @@ static void guest_world_placement_admission(CPUState *cpu) {
         psx_mod_write_word(0x8009B79Cu,320);psx_mod_write_byte(actor+3,0);
         cpu->gpr[31]=0x800F96C8u;
         CHECK(world_guest_bounds(cpu,1) && psx_mod_read_byte(actor+3)==1);
+        uint32_t visibility_word=psx_mod_read_word(cpu->gpr[31]-8);
+        CHECK(!world_guest_bounds(cpu,2)); /* Different native ABI/caller. */
+        psx_mod_write_word(cpu->gpr[31]-8,0x0C00B2D4u);
+        psx_mod_write_byte(actor+3,0);cpu->gpr[2]=99;
+        CHECK(guest_actor_visibility(cpu,0x8002CB50u) && psx_mod_read_byte(actor+3)==1 && cpu->gpr[2]==99);
+        /* Fixed32, despite the unrelated48 values still in A1/A2. */
+        psx_mod_write_word(actor+8,(2016u-160u+320u+32u)<<16);psx_mod_write_byte(actor+3,0);
+        CHECK(!guest_actor_visibility(cpu,0x8002CB50u) && !psx_mod_read_byte(actor+3) && cpu->gpr[2]==99);
+        psx_mod_write_word(actor+8,2016u<<16);private_draw=1;
+        CHECK(!guest_actor_visibility(cpu,0x8002CB50u));private_draw=0;
+        psx_mod_write_word(cpu->gpr[31]-8,visibility_word);
         cpu->gpr[31]=0x800EA3D8u;
         put32(p2.body+8,500u<<16);cpu->gpr[2]=99;CHECK(!world_guest_bounds(cpu,0) && cpu->gpr[2]==99);
         put32(p2.body+8,2016u<<16);private_draw=1;CHECK(!world_guest_bounds(cpu,0));private_draw=0;

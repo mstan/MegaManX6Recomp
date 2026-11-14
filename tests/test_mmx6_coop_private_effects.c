@@ -859,6 +859,13 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         return;
     }
     if(address==0x8001E9ECu){
+        if(stage_driver==2 || stage_driver==3) {
+            CHECK(stage_call && !zero_world && !inside);
+            /* A shared actor's fatal contact runs after the player update. */
+            psx_mod_write_byte(PLAYER+4,stage_driver==3?1:2);
+            psx_mod_write_byte(PLAYER+0x5C,stage_driver==3?0x80:0);
+            psx_mod_write_byte(PLAY+0x1C,1);return;
+        }
         CHECK(stage_driver && zero_world && inside);projected();
         psx_mod_write_word(PLAY+0x90,psx_mod_read_word(PLAY+0x90)+1);
         const uint32_t order[]={0x8003CD44u,0x80034DCCu,0x8002012Cu,0x8002F288u,0x80020D74u,0x80020DC8u};
@@ -1228,6 +1235,18 @@ static void lifetime_and_gates(void){
     setup(&cpu);life.status[0]=MMX6_COOP_FALLEN;psx_mod_write_byte(PLAYER+4,3);stage_driver=1;stage_call=0;marker_override=1;cpu.gpr[4]=PLAY;
     CHECK(stage_tick(&cpu,0x8001E9EC));CHECK(occurrences(0x8001E9EC)==1 && occurrences(0x80020D74)==1 && occurrences(0x80020DC8)==1);
     CHECK(psx_mod_read_word(PLAY+0x90)==1 && !inside && !zero_world && !stage_call && !state_track.count);
+}
+static void native_contact_death_releases_only_new_hold(void) {
+    for(unsigned phase=2;phase<=3;++phase)for(unsigned gate=0;gate<4;++gate) {
+        CPUState cpu;setup(&cpu);stage_driver=(int)phase;stage_call=0;
+        psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAYER+4,1);
+        psx_mod_write_byte(PLAY+0x1C,gate==1);
+        if(gate==2)life.status[1]=MMX6_COOP_DYING;
+        if(gate==3)p2.body[0x5C]=0;
+        CHECK(stage_tick(&cpu,0x8001E9EC));
+        CHECK(psx_mod_read_byte(PLAY+0x1C)==(gate?1:0));
+        CHECK(!inside && !stage_call && !state_track.count && !state_track.error && !failed);
+    }
 }
 static void menu_freeze_and_select_resume(void){
     CPUState cpu;setup(&cpu);life.status[1]=MMX6_COOP_ABSENT;pad_buttons=0xFFFE;
@@ -3806,6 +3825,7 @@ static void native_capsule_keeps_living_passenger(void) {
 static void native_default_private_boss_cookies(void) {
     for(unsigned ordinary=0;ordinary<2;++ordinary) {
     CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
+    p2.shots[0]=1; /* The modeled overlap below has a live native attack. */
     boss_scan_probe=1;boss_balance_enabled=boss_balance_independent=0;
     psx_mod_write_byte(PLAYER+0xCC,0);p2.body[0xCC]=0;
     memset(boss_scan_calls,0,sizeof boss_scan_calls);
@@ -3968,8 +3988,37 @@ static void native_private_body_world_visibility(void) {
     CHECK(!state_track.count && !state_track.error && !failed);
     private_draw=world_render=0;
 }
+static void native_empty_private_attack_pool(void) {
+    for(unsigned gate=0;gate<6;++gate) {
+        CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
+        boss_scan_probe=1;boss_balance_independent=gate==2;
+        boss_scan_present[0]=0;boss_scan_present[1]=1;
+        boss_scan_cookie[1]=43;boss_scan_type[1]=44;
+        memset(boss_scan_calls,0,sizeof boss_scan_calls);
+        psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAYER+0xCC,1);p2.body[0xCC]=0;
+        psx_mod_write_byte(actor,65);psx_mod_write_byte(actor+1,1);psx_mod_write_byte(actor+4,1);
+        psx_mod_write_byte(actor+0x5C,48);psx_mod_write_word(actor+0x58,0x8007555Cu);
+        psx_mod_write_byte(actor+0x65,91);psx_mod_write_half(actor+0x42,0x8123);
+        psx_mod_write_byte(actor+0x7A,gate==1);
+        BossBalanceState *s=enemy_attack_state(actor);CHECK(s);s->cookies[1]=42;
+        if(gate==2) {
+            psx_mod_write_word(PLAY+0x20,actor);psx_mod_write_byte(PLAY+0x24,48);
+            s->clocks[1]=3;
+        }
+        if(gate>=3)p2.shots[(gate==3?0:gate==4?15:31)*0xA0]=1;
+        cpu.gpr[4]=actor;CHECK(enemy_hit(&cpu,0x80031474u));
+        CHECK(!boss_scan_calls[0] && !zero_projected && !inside && !state_track.count && !failed);
+        CHECK(psx_mod_read_byte(actor+0x65)==91);
+        if(gate<3) {
+            CHECK(!cpu.gpr[2] && !boss_scan_calls[1] && psx_mod_read_byte(actor+0x5C)==48);
+            CHECK(s->cookies[1]==(gate==2?42:0));
+            CHECK(psx_mod_read_half(actor+0x42)==(gate?0x8123:0x0123));
+        } else CHECK(cpu.gpr[2]==45 && boss_scan_calls[1]==1 && psx_mod_read_byte(actor+0x5C)==46);
+    }
+}
 static void native_optional_private_boss_cooldowns(void) {
     CPUState cpu;setup(&cpu);const uint32_t actor=BOSS_BALANCE_POOL;
+    p2.shots[0]=1;
     boss_balance_enabled=boss_balance_independent=boss_scan_probe=1;
     psx_mod_write_byte(PLAYER+0xCC,0);p2.body[0xCC]=0;
     memset(boss_scan_calls,0,sizeof boss_scan_calls);
@@ -4308,5 +4357,5 @@ int main(void){
     native_checkpoint_preserves_completed_voluntary_absence();
     native_refight_return_preserves_living_personal_resources();
     native_private_body_world_visibility();
-    native_optional_boss_damage_budget();native_optional_boss_shared_cooldown();native_default_private_boss_cookies();native_optional_private_boss_cooldowns();
+    native_optional_boss_damage_budget();native_optional_boss_shared_cooldown();native_default_private_boss_cookies();native_optional_private_boss_cooldowns();native_empty_private_attack_pool();native_contact_death_releases_only_new_hold();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

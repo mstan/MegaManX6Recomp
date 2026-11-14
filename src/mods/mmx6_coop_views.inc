@@ -23,16 +23,13 @@ static unsigned view_quake_valid;
 static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=view_quake_valid=0; }
 static int independent_survivor_shared(void) {
     return enrolled && local_split && !psx_mod_netplay_is_active() &&
-        ((life.status[0]==MMX6_COOP_FALLEN && life.status[1]==MMX6_COOP_ALIVE) ||
-         (life.status[1]==MMX6_COOP_FALLEN && life.status[0]==MMX6_COOP_ALIVE));
+        (((life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) && life.status[1]==MMX6_COOP_ALIVE) ||
+         ((life.status[1]==MMX6_COOP_DYING || life.status[1]==MMX6_COOP_FALLEN) && life.status[0]==MMX6_COOP_ALIVE));
 }
 static void independent_survivor_begin(void) {
     if(!independent_survivor_shared())return;
-    /* The survivor already owns the one native world and camera. Retire
-     * both cached canvases so that world is duplicated live in both panes,
-     * including native menus. A retired body's view cannot remain current. */
-    independent_invalidate();
-    (void)psx_mod_set_local_pair_presentation(0);
+    /* Both panes keep their own HUD and menu. Their world camera follows
+     * the survivor instead of retaining the fallen body's old map ring. */
     (void)psx_mod_set_local_pair_presentation(1);
 }
 
@@ -431,11 +428,11 @@ static void independent_world_begin(void) {
        (psx_mod_read_byte(PLAY+1) && !returning && !entering) ||
        (psx_mod_read_byte(PLAY+0x10) && !independent_heal_context() && !door_views && !scene_views && !initial) ||
        (coop_world_hold() && !independent_giga_context() && !door_views && !scene_views && !returning && !initial) ||
-       (life.status[0]!=MMX6_COOP_ALIVE &&
+       (life.status[0]!=MMX6_COOP_ALIVE && !independent_survivor_shared() &&
         (!view_valid || (life.status[0]!=MMX6_COOP_DYING && life.status[0]!=MMX6_COOP_FALLEN))) ||
        /* Voluntary departure keeps the established guest camera while the
         * living primary and shared world continue producing current images. */
-       (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING &&
+       (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING && !independent_survivor_shared() &&
         (!view_valid || (life.status[1]!=MMX6_COOP_DYING && life.status[1]!=MMX6_COOP_FALLEN &&
                         life.status[1]!=MMX6_COOP_LEAVING && life.status[1]!=MMX6_COOP_ABSENT)))) {
         if(!menu_history || (pause_owner<0 && psx_mod_read_byte(PLAY+1)!=2))
@@ -453,6 +450,14 @@ static void independent_world_begin(void) {
     view_menu_stage=psx_mod_read_byte(PLAY+12);
     view_menu_section=psx_mod_read_byte(PLAY+13);
     view_menu_checkpoint=psx_mod_read_byte(PLAY+0x1D);
+    if(independent_survivor_shared()) {
+        capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
+        memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
+        view_valid=1;view_menu_history=0;
+        for(unsigned i=0;i<32;++i)view_ot[i]=psx_mod_read_word(buffer+0x70+i*4);
+        view_frame=frame_count;view_buffer=buffer;view_pending=1;
+        return;
+    }
     if(scene_views && (scene_phase || independent_door_story_context())) {
         capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
         memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
@@ -521,7 +526,7 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     (void)user;(void)unused;
     int menu=personal_menus_active(),returning=personal_resuming_world();
     if(!menu)project(VIEW_CAMERA,view_cameras[private_seat],sizeof view_cameras[0]);
-    if(!menu && !returning && !independent_heal_context() && pause_owner<0 && private_seat &&
+    if(!menu && !returning && !independent_survivor_shared() && !independent_heal_context() && pause_owner<0 && private_seat &&
        (!scene_owner || (!scene_phase && !independent_door_story_context()) || independent_door_context()) &&
        (life.status[1]==MMX6_COOP_ALIVE || life.status[1]==MMX6_COOP_JOINING)) {
         if(!independent_quake_input())return 0;
@@ -540,7 +545,7 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
         capture(VIEW_CAMERA,view_cameras[1],sizeof view_cameras[1]);
         project(PLAYER,body,sizeof body);
     }
-    if(menu || returning || independent_pause_fading())
+    if(menu || returning || independent_pause_fading() || independent_survivor_shared())
         guest(cpu,0x8006663Cu,view_buffer+0x70u,32); /* Original12150 ClearOTagR. */
     else for(unsigned i=0;i<32;++i)psx_mod_write_word(view_buffer+0x70+i*4,view_ot[i]);
     /* The retail ring currently belongs to the canonical camera. Rebuild it
@@ -576,7 +581,7 @@ static int independent_present(CPUState *cpu,uint32_t address) {
      * same-size Game Over or stage selector after world drawing stops.
      * A producer-admitted current-buffer frame also owns its presentation,
      * including arrival before the ordinary gameplay dispatcher starts. */
-    if(independent_survivor_shared() || failed || (!menu && (!independent_views || !enrolled ||
+    if(failed || (!menu && (!independent_views || !enrolled ||
        (psx_mod_read_byte(PLAY)!=10 && !(view_valid && view_pending && view_buffer==buffer))))) {
         /* Menus, loading and shared scenes retain two local panes too.
          * Invalidate old private images so the runtime duplicates the current

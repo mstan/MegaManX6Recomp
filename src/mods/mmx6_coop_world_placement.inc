@@ -91,12 +91,14 @@ static int world_guest_bounds(CPUState *cpu,int visibility) {
     int x,y;uint32_t actor=cpu->gpr[4];
     uint32_t caller=cpu->gpr[31];
     if(caller<0x80010008u || caller>=0x80200000u || (caller&3u) ||
-       psx_mod_read_word(caller-8)!=(visibility?0x0C00B32Cu:0x0C00B2FFu))return 0;
+       psx_mod_read_word(caller-8)!=(visibility==2?0x0C00B2D4u:visibility?0x0C00B32Cu:0x0C00B2FFu))return 0;
     if(!world_guest_actor(actor,&x,&y))return 0;
     if(!psx_mod_read_byte(PLAY+12) && !psx_mod_read_byte(PLAY+13) &&
        actor>=0x800CD410u && actor<0x800CF810u && psx_mod_read_byte(actor+1)==10u &&
        (!visibility || caller!=0x800F96C8u || !intro_foreground_source()))return 0;
-    unsigned rx=cpu->gpr[5],ry=cpu->gpr[6];
+    /* The void2CB50 writer has fixed32px margins and no radius arguments.
+     * Preserve its call-site contract rather than interpreting stale A1/A2. */
+    unsigned rx=visibility==2?32u:cpu->gpr[5],ry=visibility==2?32u:cpu->gpr[6];
     int dx=(int16_t)(psx_mod_read_half(actor+10)-(uint16_t)x);
     int dy=(int16_t)(psx_mod_read_half(actor+14)-(uint16_t)y);
     unsigned width=visibility?psx_mod_read_word(0x8009B79Cu):320u;

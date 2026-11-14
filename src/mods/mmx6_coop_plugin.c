@@ -2357,7 +2357,12 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
     unsigned phase=psx_mod_read_byte(PLAY+1);
     p2_start_previous=start;
-    uint32_t stage_context[4]={raw,phase,0,0};
+    /* Before the native call, result word2 records a living primary with
+     * no shared hold. Contact later in that world pass can kill X after
+     * player_tick's freeze restoration has already completed. */
+    uint32_t stage_context[4]={raw,phase,
+        life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
+        psx_mod_read_byte(PLAYER+4)==1 && !psx_mod_read_byte(PLAY+0x1C),0};
     STATE_WORDS(restore_stage,29,stage_context,4);
     /* Menus can bypass controller entirely. Consume their Select samples so
      * a held UI press cannot become a new rejoin edge on gameplay resume. */
@@ -2414,6 +2419,14 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         }
         stage_call=1;
         uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+        /* Only a new fatal contact may retire its single-player death hold.
+         * Preserve pre-existing holds and every actual scene/team wipe. The
+         * survivor's update, views and pause must not inherit X's death lock. */
+        if(stage_context[2] && !scene_owner && !clear_phase &&
+           (psx_mod_read_byte(PLAYER+4)==1 || psx_mod_read_byte(PLAYER+4)==2) &&
+           !(psx_mod_read_byte(PLAYER+0x5C)&0x7Fu) &&
+           life.status[1]==MMX6_COOP_ALIVE && p2.body[4]==1 && (p2.body[0x5C]&0x7Fu) &&
+           psx_mod_read_byte(PLAY+0x1C)==1)psx_mod_write_byte(PLAY+0x1C,0);
         if (restore_arrival_input!=UINT32_MAX) {
             project(0x800C456C,arrival_input,sizeof arrival_input);
             mmx6_state_pop(restore_arrival_input);
@@ -2470,6 +2483,15 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     leave_zero_context(1);
     project(0x800C456C,input,sizeof input);
     STATE_POP(restore_input);
+    /* The survivor updates the shared world once under its own character
+     * context. Draw that world only after restoring the stage's resources;
+     * the private Zero assembly/palette banks cannot supply its background. */
+    if(independent_views && independent_survivor_shared() && !scene_owner && !clear_phase &&
+       psx_mod_read_byte(PLAY)==0x0A && !psx_mod_read_byte(PLAY+1)) {
+        inside=0;
+        guest(cpu,0x80025FB0u,0,0);
+        inside=1;
+    }
     if (!psx_mod_read_byte(PLAY+1)) scene_tick(cpu);
     shared_clear_tick(cpu,1);
     diagnostics(raw);
@@ -3055,6 +3077,9 @@ static int world_draw_filter(CPUState *cpu,uint32_t address) {
     /* Entries and filters share one SDK hook slot. Keep native frame/pane
      * preparation and P2's menu-only suppression in this single callback. */
     if(personal_shared_effect(cpu,address))return 1;
+    if(independent_views && independent_survivor_shared() && inside && zero_world &&
+       !private_draw && !scene_owner && !clear_phase && psx_mod_read_byte(PLAY)==0x0A &&
+       !psx_mod_read_byte(PLAY+1))return 1;
     begin_world_draw(cpu,address);return 0;
 }
 static void render_actor_pass(CPUState *cpu, uint32_t actor, uint32_t arena,int armor) {
@@ -3415,6 +3440,11 @@ static int death_effect_init(CPUState *cpu, uint32_t address) {
     return 1;
 }
 #include "mmx6_coop_boss_balance.inc"
+static int private_attack_pool_empty(void) {
+    for(unsigned i=0;i<sizeof p2.shots;i+=0xA0)
+        if(p2.shots[i])return 0;
+    return 1;
+}
 static int enemy_hit(CPUState *cpu, uint32_t address) {
     if(private_draw || psx_mod_local_view_scope())return 0;
     if(inside || !enrolled || failed || scene_owner || psx_mod_read_byte(PLAY)!=10)return 0;
@@ -3437,7 +3467,22 @@ static int enemy_hit(CPUState *cpu, uint32_t address) {
     if(!resident && (!result || (balance && boss_balance_independent && (result==126 || result==127))) &&
        (!balance || boss_balance_pending_actor!=enemy) &&
        life.status[1]==MMX6_COOP_ALIVE && p2.body[0x5C] && !p2.body[0xCC]) {
-        enter_zero();result=boss_balance_scan(cpu,address,enemy,1,attacks);leave_zero();
+        if(attacks && private_attack_pool_empty()) {
+            /* Original31474's empty32-slot scan only clears this owner's
+             * token and, unless actor7A rejects first, collision flag42. It
+             * cannot call315CC. Avoid projecting the entire player overlay
+             * and pools for every idle enemy, retaining own-cooldown gates. */
+            if(boss_balance_independent && attacks->clocks[1])
+                psx_mod_counter_add("mmx6.coop.boss-own-cooldown-rejected",1);
+            else {
+                attacks->cookies[1]=0;
+                if(!psx_mod_read_byte(enemy+0x7A))
+                    psx_mod_write_half(enemy+0x42,psx_mod_read_half(enemy+0x42)&0x7FFFu);
+            }
+            result=0;
+        } else {
+            enter_zero();result=boss_balance_scan(cpu,address,enemy,1,attacks);leave_zero();
+        }
         if(result)psx_mod_write_word(diagnostic+40,psx_mod_read_word(diagnostic+40)+1);
     }
     cpu->gpr[2]=result;inside=0;return 1;
@@ -3799,7 +3844,7 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     STATE_BYTES(restore_body,24,current,sizeof current);
     STATE_WORDS(restore_pointers,25,saved_pointers,2);
     uint32_t ot[33]={0},buffer=psx_mod_read_word(0x8009B7A0u);
-    if(independent_views && !private_draw && !independent_survivor_shared() &&
+    if(independent_views && !private_draw &&
        (buffer==0x800C4578u || buffer==0x800C4668u)) {
         ot[0]=buffer+0x70u;
         for(unsigned i=0;i<32;++i)ot[i+1]=psx_mod_read_word(ot[0]+i*4u);
@@ -4014,7 +4059,7 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x800EC8E8,refight_portal_both_admission)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
-    if (!psx_mod_set_function_replacement(0x8002CB50,shared_effect_view_bounds) ||
+    if (!psx_mod_set_function_replacement(0x8002CB50,guest_actor_visibility) ||
         !psx_mod_set_function_replacement(0x8002CBFC,guest_geometry_lifetime) ||
         !psx_mod_set_function_replacement(0x8002CCB0,amazon_guest_support_visibility)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||

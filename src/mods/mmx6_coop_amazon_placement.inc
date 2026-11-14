@@ -135,3 +135,7 @@ static void amazon_guest_placement_scan(CPUState *cpu,uint32_t address) {(void)c
 static int guest_geometry_lifetime(CPUState *cpu,uint32_t address) {return shared_effect_view_bounds(cpu,address) || intro_guest_geometry_lifetime(cpu,address);}
 static int amazon_guest_support_visibility(CPUState *cpu,uint32_t address) {return shared_effect_view_bounds(cpu,address);}
 #endif
+static int guest_actor_visibility(CPUState *cpu,uint32_t address) {
+    if(world_guest_bounds(cpu,2))return 1;
+    return shared_effect_view_bounds(cpu,address);
+}
