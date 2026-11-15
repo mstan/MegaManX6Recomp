@@ -1,0 +1,9 @@
+{
+  "revision": "SLUS-01395 v1.1",
+  "symbol": "func_80060ADC",
+  "entry": "0x80060ADC",
+  "end": "0x80060B74",
+  "counter": "0x8007C8E4",
+  "sites": ["0x80060B04", "0x80060B4C"],
+  "callbacks": ["0x80069D2C", "0x80069F54", "0x80069F64"]
+}

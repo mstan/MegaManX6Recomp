@@ -97,6 +97,20 @@ Both netplay peers must use this exact build.
 
 ---
 
+# Mega Man X6 release notes
+
+## v1.3.4-alpha — shared optimization release
+
+Fresh settings enable Internal Resolution at 4x. The Mods selector offers 1x through 32x; saved choices are preserved, and GPU texture and memory limits still apply. Disabling the mod selects native resolution.
+
+This build includes the combined qualified engine optimizations and uses the shared release pipeline with selective runtime PGO. CD Speed and Fast Loading packages are excluded. Existing memory cards remain supported.
+
+Automated gameplay validation for this release batch is limited to Ape Escape and Tomba 2. The other titles use build and package checks followed by owner visual approval; no per-title performance gain is claimed.
+
+# v1.3.3-alpha: audited native execution
+
+Select the audited native SDK frame wait. Move the existing X6 native services onto the modern framework SDK while retaining co-op and Seamless Loading. Regenerate original-disc overlays for ABI 35. Intro gameplay, movement, jump and current-build save/load pass with DualShock input. Three production comparisons observed a median 24.6% reduction in process CPU per frame for the wait package under background load; no full-game or cross-build netplay compatibility is claimed.
+
 # v1.3.2-alpha
 
 The host can now select **Lobby → Mods → Seamless Loading** for both netplay
@@ -133,6 +147,8 @@ Includes all v1.3.0-alpha features and the current master baseline with
 Seamless Loading. The X + Zero co-op mod remains Experimental 0.0.1.
 
 Basic two-player netplay received limited runtime validation in v1.3.0-alpha.
+
+The owner confirmed basic two-player netplay gameplay in v1.3.0-alpha.
 Separate-machine Internet, rematch, and full-campaign reliability remain
 outside the completed automated checks. v1.2.0 remains the stable release.
 
@@ -175,6 +191,8 @@ save storage. This package contains no game disc, retail BIOS, or player saves.
 ## Validation and limitations
 
 Local co-op has limited runtime validation. Two peers on one Windows PC
+
+Local co-op has owner playtest coverage. Two private peers on one Windows PC
 passed transported P1/P2 movement, P2 leave/rejoin health retention, enhanced
 16:9 scenery/enemy visibility, and both native HUDs. All 373 shared checksum
 checkpoints matched in the refreshed development build. This does not establish
