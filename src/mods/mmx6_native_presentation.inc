@@ -314,7 +314,21 @@ void native_reset() {
     native_actor_scope={};native_bg_scope={};native_failure="inactive";
 }
 void native_restore() {native_epoch.fetch_add(1);psx_presentation_gpu_rate_reset();native_open=native_complete=native_armed=false;native_writing.reset();native_coop_clear();native_pending.reset();native_list_scope=false;}
-void native_tick(){if(!g_psx_render_pass_active)++native_ticks;}
+void native_tick(){
+    if(g_psx_render_pass_active)return;
+    ++native_ticks;
+    /* Publish the existing GPU-owner totals on the CPU's existing counter
+     * service. A selected native provider is distinct from a native pair swap. */
+    static uint64_t seen[4]{};
+    const uint64_t totals[]={native_captured.load(),native_ready.load(),native_presented.load(),native_fallbacks.load()};
+    static const char* const names[]={"mmx6.interpolation.captured","mmx6.interpolation.ready",
+        "mmx6.interpolation.selected","mmx6.interpolation.fallback"};
+    for(unsigned i=0;i<4;++i){
+        const uint64_t delta=totals[i]-seen[i];
+        if(delta)psx_mod_counter_add(names[i],uint32_t(std::min(delta,uint64_t(UINT32_MAX))));
+        seen[i]=totals[i];
+    }
+}
 void native_coop_activate();
 void native_activate() {
     native_reset();native_ticks=0;char rate[24]="display";

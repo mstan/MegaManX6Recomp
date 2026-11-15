@@ -21,16 +21,21 @@ int main(){
     PairPrepared pair;
     assert(pair.build({&a0,&a1},{&b0,&b1},{41,42},.5));
     assert(pair.triangles.size()==12 && pair.materials.size()==6);
-    assert(pair.crop[0][0]==0 && pair.crop[1][0]==320 && pair.crop[1][2]==320 && pair.crop[1][3]==240);
+    assert(pair.crop[0][0]==0 && pair.crop[1][0]==0 && pair.crop[1][1]==240 && pair.crop[1][2]==320 && pair.crop[1][3]==240);
     assert(std::fabs(pair.triangles[2].vertices[0].x-12)<.0001);
-    assert(std::fabs(pair.triangles[8].vertices[0].x-424)<.0001);
+    assert(std::fabs(pair.triangles[8].vertices[0].x-104)<.0001);
     assert(pair.materials[1].texture_version==41 && pair.materials[4].texture_version==42);
     assert(pair.materials[0].clip[0]==0 && pair.materials[0].clip[2]==319);
-    assert(pair.materials[4].clip[0]==320 && pair.materials[4].clip[2]==639);
+    assert(pair.materials[4].clip[0]==0 && pair.materials[4].clip[2]==319 && pair.materials[4].clip[1]==240 && pair.materials[4].clip[3]==479);
     assert(pair.materials[2].semi==1 && pair.materials[5].semi==1); // exact current overlay order and blend
     assert(pair.triangles[6].identity>>63); // per-view identities never cross-pair
     assert(!pair.build({&a0,nullptr},{&b0,&b1},{41,42},.5) && pair.triangles.empty());
     assert(!pair.build({&a0,&a1},{&b0,&b1},{41,0},.5) && pair.triangles.empty());
+    // Each immutable wide pane may exceed half the target width; ownership
+    // is vertical, with independently clipped current material inputs.
+    for(auto* f:{&a0,&a1,&b0,&b1})f->target.right=639;
+    assert(pair.build({&a0,&a1},{&b0,&b1},{41,42},.5));
+    assert(pair.crop[0][2]==640 && pair.crop[1][2]==640 && pair.crop[1][1]==240);
     b1.serial=3;
     assert(!pair.build({&a0,&a1},{&b0,&b1},{41,42},.5));
     b1.serial=2;b1.valid=false;

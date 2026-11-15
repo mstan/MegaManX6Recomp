@@ -3834,6 +3834,15 @@ static void draw_native_personal_hud(CPUState *cpu) {
     if(timer && (timer>=61 || (psx_mod_read_word(0x80097420u)&1u)))
         guest(cpu,0x80024CC0u,18,(psx_mod_read_byte(PLAYER+0x144)+26u)&255u);
 }
+static void private_hud_gauge_draw_only(CPUState *cpu,uint32_t address) {
+    (void)address;
+    /* Original SB v0,0xE8(a0) at80025074 advances the retained meter value.
+     * Canonical244C0 already advanced it once. A frozen private HUD emits the
+     * current native meter, without taking a second gauge step for its image.
+     * This affects only the existing reversible private drawing transaction. */
+    if(private_draw)
+        cpu->gpr[2]=psx_mod_read_byte(cpu->gpr[4]+0xE8u);
+}
 static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     if (hud_call || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A) return 0;
     /* A private pane contains its own native meters. P1 follows the original
@@ -4159,6 +4168,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_savestate_plugin("mmx6.local-coop.prototype",snapshot_resources_restored);
 #endif
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
+    psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x80025074u,0xA08200E8u,private_hud_gauge_draw_only);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x800318F4u,0x9102005Cu,boss_balance_damage);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x80021B88u,0x14400012u,shared_portrait_character);
     psx_mod_register_instruction_plugin("mmx6.local-coop.prototype",0x80021B98u,0x14600003u,shared_portrait_character);

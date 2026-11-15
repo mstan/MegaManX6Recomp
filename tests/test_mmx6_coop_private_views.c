@@ -13,6 +13,7 @@
 static unsigned attack_camera_probe,attack_camera_calls;
 static unsigned rearm_probe,rearm_calls;
 static unsigned view_native_calls,view_gpu_words,view_callback_calls,view_refuse,view_abort;
+static unsigned view_hud_calls[2];
 static int view_native(CPUState *,uint32_t,uint32_t);
 static int view_gpu(uint32_t,unsigned);
 static unsigned arrival_probe,arrival_camera_calls;
@@ -90,6 +91,7 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
         } else if(phase==5 && (edge&0x10u))psx_mod_write_byte(PLAY+2,9);
         return 1;
     }
+    if(address==0x800244C0u){CHECK(private_draw);++view_hud_calls[private_seat];return 1;}
     if(address==VIEW_DRAW_OT) { cpu->gpr[2]=0xC0DE;return 1; }
     if(address==0x80066150u)return 1;
     if(address==0x8006663Cu) {
@@ -224,6 +226,7 @@ static void prepare_view(CPUState *cpu,int online,int split) {
     psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD4,0);
     psx_mod_write_byte(PLAYER+0x7A,0);
     view_native_calls=view_gpu_words=view_callback_calls=view_refuse=view_abort=0;
+    view_hud_calls[0]=view_hud_calls[1]=0;
     arrival_probe=arrival_camera_calls=0;
     weather_probe=weather_world_updates=weather_draws=0;
     scenery_probe=scenery_draws[0]=scenery_draws[1]=0;
@@ -262,6 +265,7 @@ static void presentation_restore(int online,int split,unsigned refuse,unsigned a
     CHECK(split?mmx6_view_sdk.pair_calls==1:mmx6_view_sdk.view_calls==1);
     if(!abort)CHECK(view_callback_calls==(split && !refuse?2u:1u));
     CHECK(!mmx6_view_sdk.busy);
+    if(!refuse && !abort)CHECK(view_hud_calls[split?0:(mmx6_view_sdk.local_port==1?1:0)]==1 && (!split || view_hud_calls[1]==1));
 }
 static int forbidden_callback(CPUState *cpu,void *user,uint32_t eye) {
     (void)cpu;(void)user;(void)eye;CHECK(0);return 0;
@@ -338,9 +342,9 @@ static void defaults_and_scope(void) {
     char value[24];CHECK(psx_mod_current_option_value("cameras",value,sizeof value) && !strcmp(value,"unified"));
     CHECK(!psx_mod_current_option_value("unknown",value,sizeof value));
     CHECK(!psx_mod_current_option_value("local_cameras",value,2));
-    independent_activate();CHECK(!independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.aspect_calls==1);
+    independent_activate();CHECK(!independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.aspect_calls==0);
     mmx6_view_sdk.local_cameras="split";independent_activate();
-    CHECK(independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.aspect_calls==2);
+    CHECK(independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.aspect_calls==0);
     PSXModStereoFrame pair={sizeof pair,1,0,0,320,240};PSXModRenderPass rect={sizeof rect,0,0,0,320,240};
     CHECK(!psx_mod_render_local_pair(&cpu,&pair,forbidden_callback,NULL)); /* no modeled backend */
     mmx6_view_sdk.transaction=model_transaction;
@@ -1299,7 +1303,11 @@ static void private_beam_pool_uses_own_simulation_camera(void) {
     CHECK(!memcmp(camera,memory(VIEW_CAMERA),sizeof camera) && !state_track.count);
     attack_camera_probe=zero_projected=0;
 }
-int main(void) {
+int main(int argc,char** argv) {
+    if(argc==2 && !strcmp(argv[1],"wide-hud-only")){
+        defaults_and_scope();presentation_restore(0,1,0,0);presentation_restore(1,0,0,0);
+        clear_banks();puts("PASS co-op preserves active aspect, emits both native HUDs and restores private host/RAM ownership");return 0;
+    }
     local_survivor_uses_current_native_screen();
     private_beam_pool_uses_own_simulation_camera();
     native_sequential_character_selection();

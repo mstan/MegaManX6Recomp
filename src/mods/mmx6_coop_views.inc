@@ -567,7 +567,13 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     gpu_write_gp0(psx_mod_read_half(view_buffer+0x18)|(uint32_t)psx_mod_read_half(view_buffer+0x1A)<<16);
     if(menu) {
         if(!personal_menu_draw(cpu,private_seat))return 0;
-    } else guest(cpu,0x80025FB0,0,0);
+    } else {
+        guest(cpu,0x80025FB0,0,0);
+        /* The world wrapper does not emit HUD packets. Canonical personal
+         * links were retired deliberately; each pane must emit its own HUD
+         * into THIS draw's OT, using the existing native art/bank helpers. */
+        guest(cpu,0x800244C0,0,0);
+    }
     if(failed || inside || world_render || hud_call || state_track.count || state_track.error)return 0;
     guest(cpu,VIEW_DRAW_OT,view_buffer+0xEC,0);guest(cpu,0x80066150,0,0);
     private_menu_fade(view_buffer);
@@ -694,7 +700,8 @@ static void independent_activate(void) {
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
     if(independent_views)(void)psx_debug_native_context_register(VIEW_CONTEXT_PROVIDER,private_view_entry_context,NULL);
 #endif
-    if(independent_views || local_split)(void)psx_mod_set_fixed_display_aspect(4,3);
+    /* Keep the active widescreen plugin's fixed/adaptive choice. The shared
+     * presenter derives one pane's projection from the paired viewport. */
     /* The session reset revokes this SDK permission. Request it only for
      * the explicitly selected online pair, before enabling its canvas. */
     if(online && local_split)(void)psx_mod_set_render_pass_netplay(1);

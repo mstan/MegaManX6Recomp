@@ -53,6 +53,8 @@ void psx_presentation_gpu_rate_reset(void){rate_request={};rate_dispatch=false;}
 int psx_presentation_gpu_rate_request(PsxPresentationRateRequest* out){if(!rate_dispatch)return 0;*out=rate_request;return 1;}
 int psx_mod_gpu_dma_memory_contains(uint32_t,uint32_t){return 0;}
 uint64_t mod_texture_bank_identity(uint16_t id){return id?test_bank_identity:0;}
+static uint64_t selected_receipts;
+void psx_mod_counter_add(const char* name,uint32_t delta){if(!std::strcmp(name,"mmx6.interpolation.selected"))selected_receipts+=delta;}
 void psx_presentation_gpu_acquire(void){}
 uint64_t psx_presentation_gpu_snapshot_local_view(void){assert(g_psx_render_pass_active && local_scope);return ++texture_serial;}
 void gpu_set_view_command_receipt(GpuViewCommandReceipt f,void* user){command_receipt=f;command_user=user;receipt_view=-1;}
@@ -171,7 +173,7 @@ static void command(uint32_t source,const uint32_t* words,unsigned n,const GpuVi
     metadata.piece_count=1;
     command_receipt(command_user,uint32_t(receipt_view),source,words,n,&environment,&metadata);
 }
-static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1) {
+static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=false) {
     split=true;native_begin(&cpu,NativeDraw);assert(!native_open);
     put(0x8009B7A0,FrameBase+bank*FrameStride);const uint32_t buffer=FrameBase+bank*FrameStride;
     put(buffer+0x14,0|(bank*240u<<16));put(buffer+0x18,320|(240u<<16));
@@ -189,6 +191,10 @@ static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1) {
         const uint32_t sprite[]={0x7C808080,xy(seat?x1:x0,20),0x79000000};
         GpuViewCommandMetadata metadata{};metadata.bank=7;metadata.live_clut=uint8_t(seat);
         command(ActorPacket+4,sprite,3,metadata);
+        if(hud){
+            const uint32_t meter[]={0x2800FF00,xy(20,16),xy(26,16),xy(20,bank?76:56),xy(26,bank?76:56)};
+            command(HUDPacket+4,meter,5);
+        }
         const uint32_t fade[]={0x2A000020,0,319,240u<<16,(240u<<16)|319};command(0,fade,5);
         view_observer(view_user,&cpu,MMX6_NATIVE_VIEW_END,seat,1);assert(!native_view);
         g_psx_render_pass_active=local_scope=0;
@@ -213,8 +219,30 @@ static void activation_choices(){
     std::strcpy(selected_rate,"60");receipt_available=false;activation();
     assert(!native_enabled && !provider);receipt_available=true;
 }
+static void wide_coop_hud(){
+    CPUState cpu{};wide_margin=53;test_bank_identity=77;std::strcpy(selected_rate,"60");activation();
+    pair_diag={};pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=70;pair_diag.guest_cycle=1000000;
+    capture_pair(cpu,0,10,100,true);tick_callback();tick_callback();
+    pair_diag.pair_id=71;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    capture_pair(cpu,1,14,108,true);
+    assert(coop_output.version && rendered.size()==16 && rendered_materials.size()==8);
+    near(rendered[2].vertices[0].x,65);near(rendered[10].vertices[0].x,157);
+    near(rendered[4].vertices[0].x,73);near(rendered[4].vertices[0].y,16);
+    near(rendered[12].vertices[0].x,73);near(rendered[12].vertices[0].y,256);
+    near(rendered[4].vertices[2].y,76);near(rendered[12].vertices[2].y,316); // current HP, never interpolated
+    assert(rendered_materials[2].clip[0]==0 && rendered_materials[2].clip[2]==425);
+    assert(rendered_materials[6].clip[1]==240 && rendered_materials[6].clip[3]==479);
+    assert(rendered_materials[3].semi==1 && rendered_materials[7].semi==1); // clear/world/HUD/fade painter order
+    uint64_t version=0;int crop[2][4]{};
+    assert(!pair_provider(pair_user,71,pair_diag.guest_cycle,pair_diag.guest_cycle+g_psx_vblank_cycles,320,240,1,&version,crop));
+    assert(pair_provider(pair_user,71,pair_diag.guest_cycle,pair_diag.guest_cycle+g_psx_vblank_cycles,426,240,1,&version,crop));
+    assert(version==output_serial && crop[0][0]==0 && crop[0][1]==0 && crop[0][2]==426 && crop[1][1]==240 && crop[1][2]==426);
+    const uint64_t selections=selected_receipts;tick_callback();assert(selected_receipts==selections+1);
+    reset_session();wide_margin=0;split=false;
+}
 int main(int argc,char** argv){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==2);
+    if(argc==2 && !std::strcmp(argv[1],"wide-coop-hud-only")){wide_coop_hud();puts("PASS real expanded per-view producer, independent motion, two current HUDs, painter order and owned426x480 pair");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"activation-only")){
         activation_choices();puts("PASS every released rate selector, legacy display alias, unsupported values and unavailable native service");return 0;
     }
@@ -263,7 +291,7 @@ int main(int argc,char** argv){
     pair_diag.pair_id=11;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
     tick_callback();tick_callback();capture_pair(cpu,1,14,108);
     assert(coop_output.version && rendered.size()==12 && rendered_materials.size()==6);
-    near(rendered[2].vertices[0].x,12);near(rendered[8].vertices[0].x,424);
+    near(rendered[2].vertices[0].x,12);near(rendered[8].vertices[0].x,104);near(rendered[8].vertices[0].y,260);
     assert(rendered_materials[1].texture_bank==7 && rendered_materials[1].bank_identity==77);
     assert(!(rendered_materials[1].flags&PSX_PRESENTATION_BANK_LIVE_CLUT));
     assert(rendered_materials[4].flags&PSX_PRESENTATION_BANK_LIVE_CLUT);
@@ -274,7 +302,7 @@ int main(int argc,char** argv){
     assert(!pair_provider(pair_user,11,pair_diag.guest_cycle,midpoint,320,240,0,&output,pair_crop));
     output_ready=false;assert(!pair_provider(pair_user,11,pair_diag.guest_cycle,midpoint,320,240,1,&output,pair_crop));
     output_ready=true;assert(pair_provider(pair_user,11,pair_diag.guest_cycle,midpoint,320,240,1,&output,pair_crop));
-    assert(pair_crop[1][0]==320 && pair_crop[1][1]==0 && output==output_serial);
+    assert(pair_crop[1][0]==0 && pair_crop[1][1]==240 && output==output_serial);
     assert(!pair_provider(pair_user,11,pair_diag.guest_cycle,midpoint,320,240,1,&output,pair_crop));
     view_observer(view_user,nullptr,MMX6_NATIVE_PAIR_CANCEL,0,0);assert(!coop_output.version && !coop_previous);
     reset_session();assert(!command_receipt && !view_observer && !pair_provider && releases==texture_serial);
@@ -306,7 +334,7 @@ int main(int argc,char** argv){
     rate_request.display_start_ns=1000000000;rate_request.deadline_ns=1000000000+period/4;
     rate_request.pair_id=31;rate_request.pair_cycle=pair_diag.guest_cycle;
     psx_presentation_gpu_rate_source_ready();assert(coop_output.version);
-    near(rendered[2].vertices[0].x,11);near(rendered[8].vertices[0].x,422);
+    near(rendered[2].vertices[0].x,11);near(rendered[8].vertices[0].x,102);near(rendered[8].vertices[0].y,260);
     rate_dispatch=true;
     assert(!pair_provider(pair_user,30,pair_diag.guest_cycle,0,320,240,0,&output,pair_crop));
     assert(pair_provider(pair_user,31,pair_diag.guest_cycle,0,320,240,0,&output,pair_crop));

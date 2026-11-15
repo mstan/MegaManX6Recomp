@@ -199,7 +199,19 @@ static void canonical_gauges_match_legacy(void){
         }
     }
 }
+static void private_gauges_draw_without_second_tick(void){
+    CPUState cpu;setup(&cpu,"stacked");
+    for(unsigned seat=0;seat<2;++seat)for(unsigned boss=0;boss<2;++boss){
+        const uint32_t body=boss?0x8008EF48u:PLAYER;
+        psx_mod_write_byte(body+0xE8u,(uint8_t)(11+seat+boss));
+        cpu.gpr[4]=body;cpu.gpr[2]=31;private_seat=seat;private_draw=0;
+        private_hud_gauge_draw_only(&cpu,0x80025074u);CHECK(cpu.gpr[2]==31);
+        private_draw=1;private_hud_gauge_draw_only(&cpu,0x80025074u);
+        CHECK(cpu.gpr[2]==11+seat+boss && psx_mod_read_byte(body+0xE8u)==11+seat+boss);
+    }
+}
 int main(void){
+    private_gauges_draw_without_second_tick();
     canonical_independent_hud();canonical_gauges_match_legacy();
     layout_case(NULL,0,104);layout_case("stacked",0,104);layout_case("side_by_side",56,0);
     layout_case("unknown",0,104);layout_case("SIDE_BY_SIDE",0,104);layout_case("",0,104);
