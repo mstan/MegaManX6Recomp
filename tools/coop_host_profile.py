@@ -140,9 +140,11 @@ def _contains(path: Path, needle: bytes) -> bool:
 
 
 def validate_build_manifest(build: Path, staged_executables: list[Path],
-                            *, evidence_directory: Path | None = None) -> dict:
+                            *, evidence_directory: Path | None = None, target: str = "psx-runtime") -> dict:
     """Validate the actual psx-runtime manifest/header and each staged image."""
-    base = build / "psx_build_manifest/psx-runtime"
+    if target not in ("psx-runtime", "psx-runtime-pgxp"):
+        raise HostProfileError("Unsupported runtime manifest target")
+    base = build / "psx_build_manifest" / target
     candidates = [path for path in [base / "manifest.json", *base.glob("*/manifest.json")]
                   if path.is_file()]
     if len(candidates) != 1:

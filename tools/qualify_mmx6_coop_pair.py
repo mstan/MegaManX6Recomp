@@ -573,7 +573,7 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
         if host_profiles is not None:
             report["host_profile_build_manifest"] = host_profiles.validate_build_manifest(
                 args.build, [Path(peer["directory"])/"mmx6-runtime.exe" for peer in report["peers"]],
-                evidence_directory=output/"logs")
+                evidence_directory=output/"logs", target=args.host_profile_target)
             report["checks"]["declared_build_manifest_bound_to_staged_images"] = True
         if native_quit is not None:
             report["native_quit_same_machine_plan"]=same_machine_plan(report["peers"])
@@ -1126,6 +1126,7 @@ def make_parser():
                         help="Require modern same-simulation-tick core/mod logs below both resolved watermarks; candidate must register complete host digest")
     parser.add_argument("--require-host-profile", action="store_true",
                         help="Require declared build evidence and one identical pre-guest x64 ENHANCED/FP2 host agreement per peer")
+    parser.add_argument("--host-profile-target", choices=("psx-runtime","psx-runtime-pgxp"), default="psx-runtime")
     parser.add_argument("--expected-host-profile",
                         help="Explicit expected settled profile name; required with --require-host-profile")
     parser.add_argument("--expected-host-profile-revision", type=int,

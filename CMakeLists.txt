@@ -6,6 +6,8 @@ find_package(Python3 QUIET COMPONENTS Interpreter)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
 option(PSX_NETPLAY "Build the shared two-player netplay stack" ON)
+option(MMX6_ENABLE_CURRENT_HOST_QUALIFICATION
+    "Enable UNQUALIFIED exact-current-artifact Windows GCC15 pair candidate" OFF)
 option(MMX6_ENABLE_LOOPBACK_HOST_LAB
     "Enable unqualified same-machine Clang22 ENHANCED loopback candidate for explicit lab validation" OFF)
 option(MMX6_ENABLE_PORTABLE_CPU_HOST_LAB
@@ -152,6 +154,7 @@ foreach(_mmx6_host_target psx-runtime psx-runtime-pgxp)
         # Every activation reacquires title-owned arenas and retained banks.
         set_property(TARGET ${_mmx6_host_target} PROPERTY PSX_MOD_SESSION_RESOURCES ON)
         target_compile_definitions(${_mmx6_host_target} PRIVATE
+            MMX6_ENABLE_CURRENT_HOST_QUALIFICATION=$<BOOL:${MMX6_ENABLE_CURRENT_HOST_QUALIFICATION}>
             MMX6_ENABLE_LOOPBACK_HOST_LAB=$<BOOL:${MMX6_ENABLE_LOOPBACK_HOST_LAB}>
             MMX6_ENABLE_PORTABLE_CPU_HOST_LAB=$<BOOL:${MMX6_ENABLE_PORTABLE_CPU_HOST_LAB}>)
         if(TARGET mmx6_host_lab_contract_check)

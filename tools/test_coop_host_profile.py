@@ -148,6 +148,16 @@ class BuildManifestTests(unittest.TestCase):
         self.assertEqual((self.root / "evidence/host-profile-build-manifest.json").read_bytes(),
                          (self.directory / "manifest.json").read_bytes())
 
+    def test_explicit_pgxp_target_preserves_same_manifest_validation(self):
+        target = self.root / "psx_build_manifest/psx-runtime-pgxp"
+        self.directory.parent.rename(target)
+        self.directory = target / self.directory.name
+        self.validate(target="psx-runtime-pgxp")
+        with self.assertRaises(HostProfileError):
+            self.validate()
+        with self.assertRaises(HostProfileError):
+            self.validate(target="../other")
+
     def test_canonical_digest_rejects_changed_input_and_header(self):
         path = self.directory / "manifest.json"
         item = json.loads(path.read_text())

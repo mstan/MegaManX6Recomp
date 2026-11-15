@@ -123,7 +123,58 @@ int mmx6_coop_release_host_profiles(const PSXModNetplayHostStartup *context,PSXH
     (void)context;return 0;
 #endif
 }
+/* Development qualification cell only. This offers no production or
+ * heterogeneous guarantee; old lab/release policy and identities stay intact.
+ * Admission independently binds the actual executable and full prior content.
+ * The qualification digest describes this exact observed context, so another
+ * CPU mask, quality/backend, BIOS or session mode cannot inherit it. */
+#ifndef MMX6_ENABLE_CURRENT_HOST_QUALIFICATION
+#define MMX6_ENABLE_CURRENT_HOST_QUALIFICATION 0
+#endif
+#if MMX6_ENABLE_CURRENT_HOST_QUALIFICATION
+#include "psx_sha256.h"
+#include <stdio.h>
+static int mmx6_current_host_candidate(const PSXModNetplayHostStartup *c,PSXHostProfileCatalog *out){
+    if(!out)return 0;out->rules=NULL;out->count=0;
+#if defined(_WIN32) && defined(_WIN64) && defined(__MINGW64__) && defined(__GNUC__) && __GNUC__ == 15 && !defined(__clang__)
+    if(!c||!c->actual_executable_sha256||!c->declared_build_manifest_sha256||
+       c->declared_build_manifest_schema!=1||!lab_sha256(c->declared_build_manifest_sha256)||
+       c->cpu.architecture!=PSX_HOST_ARCH_X64||!c->cpu.features_known||c->cpu.features!=0x7fu||
+       c->compiled_backends!=PSX_HOST_BACKEND_ENHANCED||c->available_backends!=PSX_HOST_BACKEND_ENHANCED||
+       c->fp_contract!=2||!c->interpreted_overlays_sealed||!c->builtin_linked_bios||
+       !c->builtin_bios_image_id||c->renderer!=1||!c->retained_texture_banks)return 0;
+    const int players=c->player_count?c->player_count:c->slot_count;
+    const uint32_t occupied=c->occupied_mask?c->occupied_mask:3u;
+    if(c->slot_count!=2||players!=2||occupied!=3u)return 0;
+    static PSXHostProfileRule rule;memset(&rule,0,sizeof rule);
+    strcpy(rule.profile,"psx.current-artifact.candidate");rule.revision=1;rule.priority=1;
+    rule.flags=PSX_HOST_PROFILE_PORTABLE|PSX_HOST_PROFILE_OBSERVER;rule.implementation_count=1;
+    rule.implementations[0]=(PSXHostImplementation){PSX_HOST_BACKEND_ENHANCED,1u<<PSX_HOST_ARCH_X64,0};
+    char policy[1024];int n=snprintf(policy,sizeof policy,
+        "UNQUALIFIED-current-artifact-v1;gcc=%u.%u.%u;execution=%s;manifest=%s;cpu=%u/%u/%llx;backend=%u/%u;fp=%u;bios=%s/%08x;seats=%d/%d/%x;rollback=%d;loading=%d;renderer=%d;retained=%d;aspect=%d;pgxp=%d;portable-c-baseline;observer-explicit",
+        __GNUC__,__GNUC_MINOR__,__GNUC_PATCHLEVEL__,PSX_EXECUTION_ID,c->declared_build_manifest_sha256,
+        c->cpu.architecture,c->cpu.features_known,(unsigned long long)c->cpu.features,
+        c->compiled_backends,c->available_backends,c->fp_contract,c->builtin_bios_image_id,
+        c->builtin_bios_image_wordsum,c->slot_count,players,occupied,c->rollback,c->loading_enabled,
+        c->renderer,c->retained_texture_banks,c->aspect_index,
+#if defined(PSX_PGXP) && PSX_PGXP
+        1
+#else
+        0
+#endif
+    );
+    if(n<0||(size_t)n>=sizeof policy)return 0;
+    psx_sha256_ctx sha;psx_sha256_init(&sha);psx_sha256_update(&sha,(const uint8_t*)policy,(size_t)n);
+    psx_sha256_final(&sha,rule.qualification);out->rules=&rule;out->count=1;return 1;
+#else
+    (void)c;return 0;
+#endif
+}
+#endif
 int mmx6_coop_host_profiles(const PSXModNetplayHostStartup *context,PSXHostProfileCatalog *out){
+#if MMX6_ENABLE_CURRENT_HOST_QUALIFICATION
+    return mmx6_current_host_candidate(context,out);
+#endif
     if(MMX6_ENABLE_LOOPBACK_HOST_LAB)return mmx6_coop_lab_host_profiles(context,out);
     return mmx6_coop_release_host_profiles(context,out);
 }
