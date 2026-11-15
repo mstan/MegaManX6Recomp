@@ -126,6 +126,19 @@ void gpu_set_gp0_source(uint32_t address){
     CHECK(menu_vram_probe && !address && !gp0_upload_stage);
 }
 #ifndef MMX6_TEST_SESSION_RESOURCES
+/* This visual fixture owns no private audio assets or voices. Match the
+ * existing session/audio fixtures' idle queries; an attempted bank upload or
+ * voice claim is a fixture error, never simulated successful audio. */
+uint32_t psx_mod_spu_sample_bank_epoch(void){return 1;}
+int spu_get_private_voice_state(unsigned slot,SpuVoiceState *out){
+    CHECK(slot<24 && out);memset(out,0,sizeof *out);return 1;
+}
+int psx_mod_spu_sample_bank(uint32_t bank,const void *data,uint32_t bytes){
+    (void)bank;(void)data;(void)bytes;CHECK(0);return 0;
+}
+int psx_mod_spu_private_voice_claim(uint64_t owner,uint32_t mask){
+    (void)owner;(void)mask;CHECK(0);return 0;
+}
 uint64_t psx_mod_spu_private_voice_owner(unsigned slot){CHECK(slot<24);return 0;}
 int psx_mod_spu_private_voice_volume_owned(uint64_t owner,unsigned slot,uint16_t left,uint16_t right){
     (void)owner;(void)slot;(void)left;(void)right;CHECK(0);return 0;
