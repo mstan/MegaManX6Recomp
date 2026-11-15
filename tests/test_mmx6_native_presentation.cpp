@@ -36,6 +36,7 @@ static bool rate_configured,rate_dispatch;
 static PsxPresentationRateRequest rate_request;
 static double selected_hz;
 static GpuDrawingEnvironment environment;
+static unsigned copy_case;
 static std::vector<PsxPresentationTriangle> rendered;
 static std::vector<PsxPresentationMaterial> rendered_materials;
 extern "C" {
@@ -172,6 +173,7 @@ static void command(uint32_t source,const uint32_t* words,unsigned n,const GpuVi
     d.textured=(op&4)!=0 && op!=2;d.raw=(op&1)!=0;d.texpage=uint16_t(environment.mode&511);
     d.clut_x=uint16_t((words[2]>>16&63)*16);d.clut_y=uint16_t(words[2]>>22&511);
     d.color555=!d.textured;
+    d.flags=(environment.mode>>11)&3u;
     const uint32_t c=words[0]&0xFFFFFFu;
     for(unsigned j=0;j<4;++j){
         d.x[j]=x+((j&1)?w:0)+(op==2?0:environment.area.offset_x)+(d.wide?wide_margin+d.view_shift:0);
@@ -188,6 +190,8 @@ static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=fals
     put(buffer+0x14,0|(bank*240u<<16));put(buffer+0x18,320|(240u<<16));
     for(unsigned seat=0;seat<2;++seat) {
         environment={};environment.mode=0x20;environment.area={0,bank*240u,319,bank*240u+239,0,int(bank*240u)};
+        if(copy_case==2)environment.mode|=1u<<11;
+        if(copy_case==4)environment.mode|=1u<<12;
         g_psx_render_pass_active=local_scope=1;view_observer(view_user,&cpu,MMX6_NATIVE_VIEW_BEGIN,seat,1);
         assert(native_view==seat+1);
         const uint32_t clear[]={0x02000040,bank*240u<<16,320|(240u<<16)};command(0,clear,3);
@@ -205,6 +209,11 @@ static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=fals
         put(0x1F800100,ActorPacket+40);native_actor_end(&cpu,NativeActorEnd);native_end(&cpu,NativeEnd);
         assert(native_complete && native_writing && native_writing->valid);
         cpu.gpr[4]=buffer+0xEC;native_ot(&cpu,NativeOT);
+        if(copy_case){
+            const uint32_t copy[]={0x80000000u,0,copy_case==3?1u:0u,0x00010002u};
+            GpuViewCommandMetadata effect{};effect.invalid=uint8_t(copy_case==5);
+            command_receipt(command_user,uint32_t(receipt_view),0x0007DF88u,copy,4,&environment,&effect);
+        }
         const uint32_t sprite[]={0x7C808080,xy(seat?x1:x0,20),0x79000000};
         GpuViewCommandMetadata metadata{};metadata.bank=7;metadata.live_clut=uint8_t(seat);
         metadata.invalid=uint8_t(invalid_command && !seat);
@@ -229,6 +238,25 @@ static void replaced_actor_pair(){
     capture_pair(cpu,1,14,108,true,true,true);
     assert(native_captured==captured+4 && coop_output.version && rendered.size()==16);
     reset_session();wide_margin=0;split=false;
+}
+static void identity_copy_pair(){
+    CPUState cpu{};wide_margin=53;test_bank_identity=77;std::strcpy(selected_rate,"60");activation();
+    pair_diag={};pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=370;pair_diag.guest_cycle=1000000;
+    const uint64_t captured=native_captured;
+    copy_case=1;capture_pair(cpu,0,10,100,true,true,true);
+    assert(native_captured==captured+2 && coop_previous);
+    tick_callback();tick_callback();++pair_diag.pair_id;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    copy_case=4;capture_pair(cpu,1,14,108,true,true,true);
+    assert(native_captured==captured+4 && coop_output.version && rendered.size()==16);
+    reset_session();
+    for(unsigned refused:{2u,3u,5u}){
+        activation();copy_case=refused;const uint64_t before=native_captured;
+        capture_pair(cpu,0,10,100,true,true,true);
+        assert(native_captured==before && !coop_previous && !coop_output.version);
+        assert(coop_first_refusal && !std::strcmp(coop_first_refusal,"unrepresented native command effect"));
+        reset_session();
+    }
+    copy_case=0;wide_margin=0;split=false;
 }
 static void first_pane_refusal(){
     CPUState cpu{};wide_margin=53;test_bank_identity=77;std::strcpy(selected_rate,"60");activation();
@@ -380,6 +408,7 @@ static void wide_coop_hud(){
 }
 int main(int argc,char** argv){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==3);
+    if(argc==2 && !std::strcmp(argv[1],"identity-copy-only")){identity_copy_pair();puts("PASS identity native copy admits complete wide/HUD pair; force-mask, nonidentity and invalid effects keep fallback");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"first-refusal-only")){first_pane_refusal();puts("PASS first failed pane reason survives later pane and pair commit without admitting partial output");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"replaced-actor-only")){replaced_actor_pair();puts("PASS replaced outer actor observes only real nested native body/return, two immutable wide/HUD panes and prepared pair");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"committed-serial-only")){committed_pair_serial();puts("PASS latest committed pair survives in-flight CPU producer at120/display/60; epoch/pair/deadline/readiness and original timestamp gates retained");return 0;}
