@@ -33,6 +33,7 @@ static PsxPresentationRatePrepare rate_prepare;
 static void* rate_user;
 static bool rate_configured,rate_dispatch;
 static PsxPresentationRateRequest rate_request;
+static double selected_hz;
 static GpuDrawingEnvironment environment;
 static std::vector<PsxPresentationTriangle> rendered;
 static std::vector<PsxPresentationMaterial> rendered_materials;
@@ -42,6 +43,7 @@ uint32_t g_psx_vblank_cycles=564480;
 uint64_t psx_get_cycle_count(void){return fake_cycle;}
 uint64_t rt_now_ns(void){return fake_ns;}
 int psx_presentation_gpu_set_rate(double hz,PsxPresentationRatePrepare f,void* user){
+    if(f)selected_hz=hz;
     rate_configured=f && (hz==0 || hz>60);rate_prepare=rate_configured?f:nullptr;rate_user=user;
     return rate_configured?2:1;
 }
@@ -194,8 +196,28 @@ static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1) {
     view_observer(view_user,&cpu,MMX6_NATIVE_PAIR_PREPARED,0,1);
 }
 static void near(double a,double b){assert(std::fabs(a-b)<.00001);}
-int main(){
+static void activation_choices(){
+    constexpr struct {const char* id;double hz;} choices[]={
+        {"60",60},{"90",90},{"120",120},{"144",144},{"165",165},{"240",240},
+        {"display",0},{"uncapped",0}};
+    for(const auto& choice:choices){
+        std::strcpy(selected_rate,choice.id);selected_hz=-1;activation();
+        assert(native_enabled && receipt && provider && selected_hz==choice.hz);
+        assert(native_rate==(choice.hz==0 || choice.hz>60));
+        reset_session();assert(!receipt && !provider && !native_enabled && !rate_configured);
+    }
+    for(const char* unsupported:{"75","120junk"}){
+        std::strcpy(selected_rate,unsupported);activation();
+        assert(!native_enabled && !receipt && !provider && !rate_configured);
+    }
+    std::strcpy(selected_rate,"60");receipt_available=false;activation();
+    assert(!native_enabled && !provider);receipt_available=true;
+}
+int main(int argc,char** argv){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==2);
+    if(argc==2 && !std::strcmp(argv[1],"activation-only")){
+        activation_choices();puts("PASS every released rate selector, legacy display alias, unsupported values and unavailable native service");return 0;
+    }
     CPUState cpu{};activation();assert(native_enabled && receipt && provider);
     capture(cpu,0,110,20,100);
     assert(render_calls==0);
@@ -290,8 +312,6 @@ int main(){
     assert(pair_provider(pair_user,31,pair_diag.guest_cycle,0,320,240,0,&output,pair_crop));
     rate_dispatch=false;restore_state();assert(!coop_output.version && !coop_older && !rate_request.deadline_ns);
     reset_session();assert(releases==texture_serial);
-    std::strcpy(selected_rate,"display");activation();assert(native_enabled && native_rate);
-    reset_session();
-    std::strcpy(selected_rate,"60");receipt_available=false;activation();assert(!native_enabled && !provider);
+    activation_choices();
     puts("PASS X6 native producer: real immutable scene/draw midpoint, current animation/HUD/order, resource ownership, cuts/identity, one native-timeline midpoint, readiness/restore/unload and honest unsupported/reference fallback; no guest replay or writes");
 }

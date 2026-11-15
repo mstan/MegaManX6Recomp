@@ -319,12 +319,16 @@ void native_coop_activate();
 void native_activate() {
     native_reset();native_ticks=0;char rate[24]="display";
     (void)psx_mod_option_value("mmx6.enhancement.frame-interpolation","frame-interpolation","rate",rate,sizeof rate);
-    if(std::strcmp(rate,"display") && std::strcmp(rate,"60") && std::strcmp(rate,"120")){native_failure="unsupported output cadence";return;}
+    constexpr struct {const char* id;double hz;} choices[]={
+        {"display",0},{"uncapped",0},{"60",60},{"90",90},
+        {"120",120},{"144",144},{"165",165},{"240",240}};
+    double output_hz=-1;
+    for(const auto& choice:choices)if(!std::strcmp(rate,choice.id)){output_hz=choice.hz;break;}
+    if(output_hz<0){native_failure="unsupported output cadence";return;}
     if(!dma_set_native_gpu_receipt_scope(native_receipt,native_receipt_end,nullptr)){native_failure="native immutable-list service unavailable";return;}
     native_enabled=true;psx_presentation_gpu_set_provider(native_present,nullptr);
     native_coop_activate();
-    const int cadence=psx_presentation_gpu_set_rate(!std::strcmp(rate,"display")?0:
-        !std::strcmp(rate,"120")?120:60,native_rate_prepare,nullptr);
+    const int cadence=psx_presentation_gpu_set_rate(output_hz,native_rate_prepare,nullptr);
     native_rate=cadence==2;
     if(!cadence){native_failure="native output cadence unavailable";++native_fallbacks;}
 }
