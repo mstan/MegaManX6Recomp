@@ -395,6 +395,15 @@ if(BUILD_TESTING)
         target_link_libraries(mmx6_native_presentation_test PRIVATE m)
     endif()
     add_test(NAME mmx6_native_presentation_test COMMAND mmx6_native_presentation_test)
+    add_executable(mmx6_native_pair_test tests/test_mmx6_native_pair.cpp
+        "${PSXRECOMP_V4_ROOT}/runtime/src/presentation_scene.c"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/presentation_draw.c")
+    target_include_directories(mmx6_native_pair_test PRIVATE "${PSXRECOMP_V4_ROOT}/runtime/include")
+    if(NOT MSVC)
+        target_link_libraries(mmx6_native_pair_test PRIVATE m)
+    endif()
+    add_test(NAME mmx6_native_pair_test COMMAND mmx6_native_pair_test)
+
 
     # Seamless Loading preparation against an owner-supplied disc image:
     # -DMMX6_TEST_DISC=<path to "Mega Man X6 (USA) (v1.1).bin">.

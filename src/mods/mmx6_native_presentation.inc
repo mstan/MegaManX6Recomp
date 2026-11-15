@@ -2,10 +2,17 @@
 #include "cpu_state.h"
 #include "mod_plugins.h"
 #include "mod_texture_banks.h"
+#include "mod_memory.h"
 #include "psx_cycle_freeze.h"
 #include "gpu_gl_renderer.h"
 #include "gpu_render.h"
 #include "dma.h"
+#include "mmx6_native_view_observer.h"
+#include "mmx6_native_pair.h"
+#include "gpu_view_receipt.h"
+#include "presentation_view.h"
+#include "psx_cycles.h"
+#include "psx_video_timing.h"
 #include <atomic>
 #include <cstring>
 #include <mutex>
@@ -44,6 +51,10 @@ bool native_open=false,native_complete=false,native_armed=false;
 std::unique_ptr<Frame> native_writing;
 std::vector<Range> native_ranges;
 Scope native_actor_scope,native_bg_scope;
+std::vector<Scope> native_actor_stack;
+unsigned native_view=0;
+void native_coop_observe(void*,CPUState*,unsigned,unsigned,int);
+void native_coop_clear();
 std::mutex native_publication;
 std::unique_ptr<Published> native_previous;
 Prepared native_prepared;
@@ -74,7 +85,8 @@ bool native_layer(unsigned layer,Motion& m) {
 void native_finish_scope(Scope& scope,uint32_t end) {
     if(!scope.active)return;
     const uint32_t begin=scope.begin&0x1FFFFFFFu;end&=0x1FFFFFFFu;
-    if(end<begin || end-begin>4096u*0x28u || !native_ram(begin,end-begin)) {
+    if(end<begin || end-begin>4096u*0x28u ||
+       (!native_ram(begin,end-begin) && !(native_view && psx_mod_gpu_dma_memory_contains(begin,end-begin)))) {
         native_reject("producer packet range");return;
     }
     if(end>begin)native_ranges.push_back({begin,end,scope.motion});
@@ -82,14 +94,20 @@ void native_finish_scope(Scope& scope,uint32_t end) {
     scope={};
 }
 void native_actor_begin(CPUState* cpu,uint32_t) {
-    if(g_psx_render_pass_active || psx_mod_local_view_scope() || !native_open || !native_writing)return;
-    if(native_actor_scope.active){native_reject("nested sprite producer");return;}
+    if((!native_view && (g_psx_render_pass_active || psx_mod_local_view_scope())) || !native_open || !native_writing)return;
+    if(native_actor_scope.active) {
+        if(native_actor_stack.size()>=32){native_reject("sprite nesting capacity");return;}
+        native_actor_stack.push_back(native_actor_scope);
+    }
     const uint32_t actor=cpu->gpr[4];
     if(!native_ram(actor,0x50))return;
     const int layer=int8_t(psx_mod_read_byte(actor+0x14));
     Motion m{};
     if(layer>=0 && layer<3 && native_layer(unsigned(layer),m)) {
         m.key=0x100000000ull|(actor&0x1FFFFFFFu);m.world=true;
+        // The projected partner's existing host arena is a distinct authored
+        // producer even when both bodies use the same guest singleton slot.
+        if(native_view && psx_mod_gpu_dma_memory_contains(psx_mod_read_word(0x1F800100u),1))m.key|=1ull<<40;
         m.identity=native_identity(psx_mod_read_word(actor),psx_mod_read_word(actor+0x38),
             psx_mod_read_word(actor+0x3C)^uint32_t(layer));
         m.x=double(int32_t(psx_mod_read_word(actor+8)))/65536.0-m.camera_x;
@@ -98,10 +116,13 @@ void native_actor_begin(CPUState* cpu,uint32_t) {
     native_actor_scope={psx_mod_read_word(0x1F800100u),m,true};
 }
 void native_actor_end(CPUState*,uint32_t) {
-    if(!g_psx_render_pass_active && !psx_mod_local_view_scope() && native_open)native_finish_scope(native_actor_scope,psx_mod_read_word(0x1F800100u));
+    if((native_view || (!g_psx_render_pass_active && !psx_mod_local_view_scope())) && native_open){
+        native_finish_scope(native_actor_scope,psx_mod_read_word(0x1F800100u));
+        if(!native_actor_stack.empty()){native_actor_scope=native_actor_stack.back();native_actor_stack.pop_back();}
+    }
 }
 void native_bg_begin(CPUState* cpu,uint32_t) {
-    if(g_psx_render_pass_active || psx_mod_local_view_scope() || !native_open || !native_writing)return;
+    if((!native_view && (g_psx_render_pass_active || psx_mod_local_view_scope())) || !native_open || !native_writing)return;
     if(native_bg_scope.active){native_reject("nested background producer");return;}
     const unsigned layer=cpu->gpr[4];Motion m{};
     if(!native_layer(layer,m))return;
@@ -112,13 +133,14 @@ void native_bg_begin(CPUState* cpu,uint32_t) {
     native_bg_scope={psx_mod_read_word(0x1F800108u),m,true};
 }
 void native_bg_end(CPUState*,uint32_t) {
-    if(!g_psx_render_pass_active && !psx_mod_local_view_scope() && native_open)native_finish_scope(native_bg_scope,psx_mod_read_word(0x1F800108u));
+    if((native_view || (!g_psx_render_pass_active && !psx_mod_local_view_scope())) && native_open)native_finish_scope(native_bg_scope,psx_mod_read_word(0x1F800108u));
 }
 void native_begin(CPUState*,uint32_t) {
+    if(native_view)return; // scope already owns its clear and environment
     if(g_psx_render_pass_active || psx_mod_local_view_scope())return;
     native_serial.fetch_add(1);
     native_open=native_complete=native_armed=false;
-    native_actor_scope={};native_bg_scope={};native_ranges.clear();native_writing.reset();
+    native_actor_scope={};native_actor_stack.clear();native_bg_scope={};native_ranges.clear();native_writing.reset();
     if(!native_enabled)return;
     if(psx_mod_widescreen_view_x_margin()!=0 || gpu_last_frame_vertical_split_screen()) {
         native_failure="wide or co-op view not yet bound";++native_fallbacks;return;
@@ -130,8 +152,8 @@ void native_begin(CPUState*,uint32_t) {
     native_writing->tick=native_ticks;native_open=true;
 }
 void native_end(CPUState*,uint32_t) {
-    if(g_psx_render_pass_active || psx_mod_local_view_scope() || !native_open)return;
-    if(native_actor_scope.active || native_bg_scope.active){native_reject("unclosed producer");return;}
+    if((!native_view && (g_psx_render_pass_active || psx_mod_local_view_scope())) || !native_open)return;
+    if(native_actor_scope.active || !native_actor_stack.empty() || native_bg_scope.active){native_reject("unclosed producer");return;}
     std::sort(native_ranges.begin(),native_ranges.end(),[](const Range& a,const Range& b){return a.lo<b.lo;});
     for(size_t i=1;i<native_ranges.size();++i)
         if(native_ranges[i-1].hi>native_ranges[i].lo){native_reject("overlapping producers");return;}
@@ -144,7 +166,9 @@ Motion native_packet_motion(uint32_t source) {
     if(end==native_ranges.begin())return {};
     const auto& range=*(end-1);return source<range.hi?range.motion:Motion{};
 }
+void native_coop_ot(CPUState* cpu);
 void native_ot(CPUState* cpu,uint32_t) {
+    if(native_view){native_coop_ot(cpu);return;}
     if(!g_psx_render_pass_active && !psx_mod_local_view_scope() && native_open && native_complete && cpu->gpr[4]==native_buffer+0xECu) {
         native_head=cpu->gpr[4]&0x1FFFFFFFu;native_armed=true;
     }
@@ -192,7 +216,8 @@ void native_receipt_impl(void*,const DMANativeGpuNode* nodes,uint32_t count,
             const int length=gpu_gp0_command_word_count(uint8_t(op));
             if(length<=0 || unsigned(length)>n-at){f.reject("stream command bounds");break;}
             const uint32_t source=node.address+4u+at*4u;
-            if(mod_texture_packet_bank(source,w,unsigned(length))){f.reject("immutable bank not yet bound");break;}
+            const uint16_t bank=mod_texture_packet_bank(source,w,unsigned(length));
+            const size_t first=f.primitives.size();
             int32_t x[4]{},y[4]{};unsigned vertices=0;const int rectangle=(op&0xE0u)==0x60u;
             if(rectangle){
                 if(unsigned(length)>=2){const unsigned size=(op>>3)&3,fixed[4]={0,1,8,16};
@@ -207,7 +232,8 @@ void native_receipt_impl(void*,const DMANativeGpuNode* nodes,uint32_t count,
             }
             const bool ui=vertices && gpu_ws_copy_presented_ui(source,w,unsigned(length),x,y,vertices,rectangle);
             const Motion m=ui?Motion{}:native_packet_motion(node.address+at*4u);
-            f.add(source,w,unsigned(length),m,ui?x:nullptr,ui?y:nullptr);at+=unsigned(length);
+            f.add(source,w,unsigned(length),m,ui?x:nullptr,ui?y:nullptr);
+            f.bank(bank,mod_texture_bank_identity(bank),false,first);at+=unsigned(length);
         }
     }
     native_open=false;
@@ -240,20 +266,27 @@ void native_reset() {
     native_enabled=false;++native_epoch;
     (void)dma_set_native_gpu_receipt(nullptr,nullptr);
     psx_presentation_gpu_set_provider(nullptr,nullptr);
+    psx_presentation_gpu_set_pair_provider(nullptr,nullptr);
+    gpu_set_view_command_receipt(nullptr,nullptr);
+    mmx6_native_coop_set_observer(nullptr,nullptr);
+    native_coop_clear();
     std::unique_ptr<Published> release;
     {std::lock_guard<std::mutex> lock(native_publication);release=std::move(native_previous);native_output={};}
     native_open=native_complete=native_armed=false;native_writing.reset();native_ranges.clear();
     native_actor_scope={};native_bg_scope={};native_failure="inactive";
 }
-void native_restore() {native_epoch.fetch_add(1);native_open=native_complete=native_armed=false;native_writing.reset();}
+void native_restore() {native_epoch.fetch_add(1);native_open=native_complete=native_armed=false;native_writing.reset();native_coop_clear();}
 void native_tick(){if(!g_psx_render_pass_active)++native_ticks;}
+void native_coop_activate();
 void native_activate() {
     native_reset();native_ticks=0;char rate[24]="display";
     (void)psx_mod_option_value("mmx6.enhancement.frame-interpolation","frame-interpolation","rate",rate,sizeof rate);
     if(std::strcmp(rate,"display") && std::strcmp(rate,"60")){native_failure="output cadence not yet bound";return;}
     if(!dma_set_native_gpu_receipt(native_receipt,nullptr)){native_failure="native immutable-list service unavailable";return;}
     native_enabled=true;psx_presentation_gpu_set_provider(native_present,nullptr);
+    native_coop_activate();
 }
+#include "mmx6_native_coop.inc"
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_frame_interpolation_plugin) {
     psx_mod_register_session_reset_plugin(NativePlugin,native_reset);

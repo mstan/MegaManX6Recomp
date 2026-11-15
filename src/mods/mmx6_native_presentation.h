@@ -47,6 +47,17 @@ struct Frame {
     bool reject(const char* reason){valid=false;failure=reason;return false;}
     void anchor(const Motion& m){if(m.key)motions[m.key]=m;}
     static int signed11(uint32_t x){return (int(x&2047)^1024)-1024;}
+    bool bank(uint16_t id,uint64_t identity,bool live_clut,size_t first) {
+        if(!id)return true;
+        if(!identity)return reject("undefined immutable texture bank");
+        for(size_t i=first;i<primitives.size();++i) {
+            auto& material=primitives[i].material;
+            material.texture_bank=id;material.bank_identity=identity;
+            if(live_clut)material.flags|=PSX_PRESENTATION_BANK_LIVE_CLUT;
+            material.filter=0; // retained-bank native renderer uses nearest
+        }
+        return true;
+    }
     uint32_t color(uint32_t value,bool textured)const {
         uint32_t result=0xFF000000u;
         for(unsigned k=0;k<3;++k){

@@ -3,6 +3,7 @@
 #ifdef MMX6_COOP_MODERN_STATE
 #include "psx_netplay.h"
 #include "gpu_render.h"
+#include "local_pair_prepare.h"
 #if defined(__has_include)
 #if __has_include("debug_native_entry_context.h")
 #include "debug_native_entry_context.h"
@@ -20,7 +21,15 @@ static int independent_pause_fading(void);
 static uint8_t view_quake_input[0x54];
 static uint32_t view_quake_frame;
 static unsigned view_quake_valid;
-static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=view_quake_valid=0; }
+static uint64_t native_prepared_lease;
+static unsigned native_prepared_drew;
+static uint32_t native_prepared_frame,native_prepared_buffer;
+static void independent_invalidate(void) {
+    if(native_prepared_lease)psx_mod_cancel_prepared_local_pair(native_prepared_lease);
+    native_prepared_lease=0;native_prepared_drew=0;
+    native_view_note(NULL,MMX6_NATIVE_PAIR_CANCEL,0,0);
+    view_valid=view_pending=view_menu_history=view_quake_valid=0;
+}
 static int independent_survivor_shared(void) {
     return enrolled && local_split && !psx_mod_netplay_is_active() &&
         (((life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) && life.status[1]==MMX6_COOP_ALIVE) ||
@@ -567,9 +576,40 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
 static int private_draw_pair(CPUState *cpu,void *user,uint32_t seat) {
     PrivateViewContext context;private_context_save(&context);
     private_seat=seat;private_draw=1;
+    native_prepared_drew++;
+    native_view_note(cpu,MMX6_NATIVE_VIEW_BEGIN,seat,1);
     int ok=private_draw_image(cpu,user,0);
+    native_view_note(cpu,MMX6_NATIVE_VIEW_END,seat,ok);
     private_context_restore(&context);private_draw=0;
     return ok;
+}
+/* Opt-in producer scheduling: run the SAME two reversible private draws once
+ * before the original VSync wait, park them, then commit at original DrawOTag.
+ * The ordinary path is unchanged without the native presentation observer.
+ * Render-input stability across VBlank must be qualified for this title. */
+static void independent_prepare_present(CPUState *cpu,uint32_t address) {
+    (void)address;
+    if(!native_view_observer || psx_mod_netplay_is_active() || !local_split ||
+       !independent_views || !enrolled || failed || personal_menus_active() ||
+       private_draw || view_call || inside || zero_world || state_track.count || state_track.error ||
+       cpu->gpr[31]!=0x80012104u || cpu->gpr[4] || !view_pending ||
+       native_prepared_lease || native_prepared_drew)return;
+    const uint32_t buffer=psx_mod_read_word(0x8009B7A0u);
+    if(buffer!=view_buffer || (buffer!=VIEW_BUFFER && buffer!=VIEW_BUFFER+VIEW_STRIDE))return;
+    PSXModStereoFrame pair={sizeof pair,1,psx_mod_read_half(buffer+0x14),
+        psx_mod_read_half(buffer+0x16),psx_mod_read_half(buffer+0x18),psx_mod_read_half(buffer+0x1A)};
+    PrivateViewContext context;private_context_save(&context);
+    uint8_t previous_camera[sizeof view_cameras[1]];memcpy(previous_camera,view_cameras[1],sizeof previous_camera);
+    const uint32_t before=state_digest();
+    native_prepared_frame=view_frame;native_prepared_buffer=buffer;view_call=1;
+    native_prepared_lease=psx_mod_prepare_local_pair(cpu,&pair,private_draw_pair,NULL);
+    private_context_restore(&context);private_draw=0;view_call=0;
+    if(native_prepared_lease)native_view_note(cpu,MMX6_NATIVE_PAIR_PREPARED,0,1);
+    if(!native_prepared_lease) {
+        memcpy(view_cameras[1],previous_camera,sizeof previous_camera);
+        native_view_note(NULL,MMX6_NATIVE_PAIR_CANCEL,0,0);
+    }
+    if(state_digest()!=before)psx_mod_counter_add("mmx6.coop.private-state-leak",1);
 }
 static int independent_present(CPUState *cpu,uint32_t address) {
     if(view_call || private_draw || inside || zero_world ||
@@ -611,13 +651,20 @@ static int independent_present(CPUState *cpu,uint32_t address) {
     uint32_t before=state_digest();int committed;
     if(local_split || (menu && !psx_mod_netplay_is_active())) {
         PSXModStereoFrame pair={sizeof pair,1,rect.x,rect.y,rect.w,rect.h};
-        committed=psx_mod_render_local_pair(cpu,&pair,private_draw_pair,NULL);
+        if(native_prepared_lease || native_prepared_drew) {
+            committed=native_prepared_lease && native_prepared_frame==view_frame && native_prepared_buffer==buffer &&
+                psx_mod_commit_prepared_local_pair(native_prepared_lease);
+            if(native_prepared_lease)psx_mod_cancel_prepared_local_pair(native_prepared_lease);
+            native_prepared_lease=0;native_prepared_drew=0;
+            if(!committed)native_view_note(NULL,MMX6_NATIVE_PAIR_CANCEL,0,0);
+        } else committed=psx_mod_render_local_pair(cpu,&pair,private_draw_pair,NULL);
     } else {
         int port=psx_netplay_local_port();private_seat=port==1?1:0;private_draw=1;
         committed=psx_mod_render_local_view(cpu,&rect,private_draw_image,NULL);
     }
     private_context_restore(&context);private_draw=0;
-    if(!committed)memcpy(view_cameras[1],previous_camera,sizeof previous_camera);
+    native_prepared_drew=0;
+    if(!committed) {memcpy(view_cameras[1],previous_camera,sizeof previous_camera);native_view_note(NULL,MMX6_NATIVE_PAIR_CANCEL,0,0);}
     if(state_digest()!=before)psx_mod_counter_add("mmx6.coop.private-state-leak",1);
     psx_mod_counter_add(committed?"mmx6.coop.private-committed":"mmx6.coop.private-refused",1);
     if(committed && door_phase>=1 && door_phase<=3) {
@@ -653,6 +700,7 @@ static void independent_activate(void) {
     if(online && local_split)(void)psx_mod_set_render_pass_netplay(1);
     (void)psx_mod_set_local_pair_presentation((int)local_split);
     if(!psx_mod_set_function_replacement(VIEW_DRAW_OT,independent_present))failed=1;
+
 }
 #else
 /* Older SDKs retain the working shared renderer. */

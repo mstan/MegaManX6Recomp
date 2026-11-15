@@ -4,6 +4,10 @@
 #include "dma.h"
 #include "presentation_gpu.h"
 #include "gpu.h"
+#include "gpu_view_receipt.h"
+#include "presentation_view.h"
+#include "gpu_gl_renderer.h"
+#include "../src/mods/mmx6_native_view_observer.h"
 #include <cassert>
 #include <cstdio>
 #include <cstring>
@@ -15,6 +19,11 @@ struct Instruction {uint32_t pc,word;PSXModFunctionEntryCallback callback;};
 static Instruction instructions[8];static unsigned instruction_count;
 static DMANativeGpuReceipt receipt;static void* receipt_user;
 static PsxPresentationProvider provider;static void* provider_user;
+static GpuViewCommandReceipt command_receipt;static void* command_user;
+static Mmx6NativeViewObserver view_observer;static void* view_user;
+static PsxPresentationPairProvider pair_provider;static void* pair_user;
+static uint32_t receipt_view;static uint64_t test_bank_identity;
+static GLRenderStereoDiag pair_diag;
 static bool receipt_available=true,output_ready=true,split=false,banked=false;
 static int wide_margin,local_scope;
 static char selected_rate[24]="60";
@@ -24,6 +33,19 @@ static std::vector<PsxPresentationTriangle> rendered;
 static std::vector<PsxPresentationMaterial> rendered_materials;
 extern "C" {
 int g_psx_render_pass_active=0;
+uint32_t g_psx_vblank_cycles=564480;
+int psx_mod_gpu_dma_memory_contains(uint32_t,uint32_t){return 0;}
+uint64_t mod_texture_bank_identity(uint16_t id){return id?test_bank_identity:0;}
+void psx_presentation_gpu_acquire(void){}
+uint64_t psx_presentation_gpu_snapshot_local_view(void){assert(g_psx_render_pass_active && local_scope);return ++texture_serial;}
+void gpu_set_view_command_receipt(GpuViewCommandReceipt f,void* user){command_receipt=f;command_user=user;receipt_view=0;}
+int gpu_view_command_receipt_begin(uint32_t view){if(receipt_view || !command_receipt)return 0;receipt_view=view;return 1;}
+int gpu_view_command_receipt_end(void){const int ok=receipt_view!=0;receipt_view=0;return ok;}
+void mmx6_native_coop_set_observer(Mmx6NativeViewObserver f,void* user){view_observer=f;view_user=user;}
+void psx_presentation_gpu_set_pair_provider(PsxPresentationPairProvider f,void* user){pair_provider=f;pair_user=user;}
+int psx_presentation_gpu_prepare_async(PsxPresentationPrepareReady f,void* user){f(user);return 1;}
+void gl_renderer_stereo_diag(GLRenderStereoDiag* out){*out=pair_diag;}
+
 int psx_mod_register_activation_plugin(const char*,PSXModActivationCallback f){activation=f;return 1;}
 int psx_mod_register_session_reset_plugin(const char*,PSXModActivationCallback f){reset_session=f;return 1;}
 int psx_mod_register_savestate_plugin(const char*,PSXModActivationCallback f){restore_state=f;return 1;}
@@ -98,6 +120,33 @@ static void capture(CPUState& cpu,int bank,int actor_x,int actor_y,int camera_x,
     assert(!std::memcmp(scratch_before,test_scratch,sizeof test_scratch));
     std::memset(words,0,sizeof words); // every published byte has independent ownership
 }
+static void command(uint32_t source,const uint32_t* words,unsigned n,const GpuViewCommandMetadata& metadata={}) {
+    assert(command_receipt && receipt_view);command_receipt(command_user,receipt_view,source,words,n,&environment,&metadata);
+}
+static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1) {
+    split=true;native_begin(&cpu,NativeDraw);assert(!native_open);
+    put(0x8009B7A0,FrameBase+bank*FrameStride);const uint32_t buffer=FrameBase+bank*FrameStride;
+    put(buffer+0x14,0|(bank*240u<<16));put(buffer+0x18,320|(240u<<16));
+    for(unsigned seat=0;seat<2;++seat) {
+        environment={};environment.mode=0x20;environment.area={0,bank*240u,319,bank*240u+239,0,int(bank*240u)};
+        g_psx_render_pass_active=local_scope=1;view_observer(view_user,&cpu,MMX6_NATIVE_VIEW_BEGIN,seat,1);
+        assert(native_view==seat+1);
+        const uint32_t clear[]={0x02000040,bank*240u<<16,320|(240u<<16)};command(0,clear,3);
+        put(LayerBase+8,0);put(LayerBase+12,0);*address(LayerBase+3)=1;
+        put(ActorRecord,1);*address(ActorRecord+0x14)=0;put(ActorRecord+8,uint32_t((seat?x1:x0)*65536));
+        put(ActorRecord+12,20u*65536);put(ActorRecord+0x38,0x80060000);put(ActorRecord+0x3C,0x80070000);
+        put(0x1F800100,ActorPacket);cpu.gpr[4]=ActorRecord;native_actor_begin(&cpu,NativeActor);
+        put(0x1F800100,ActorPacket+40);native_actor_end(&cpu,NativeActorEnd);native_end(&cpu,NativeEnd);
+        cpu.gpr[4]=buffer+0xEC;native_ot(&cpu,NativeOT);
+        const uint32_t sprite[]={0x7C808080,xy(seat?x1:x0,20),0x79000000};
+        GpuViewCommandMetadata metadata{};metadata.bank=7;metadata.live_clut=uint8_t(seat);
+        command(ActorPacket+4,sprite,3,metadata);
+        const uint32_t fade[]={0x2A000020,0,319,240u<<16,(240u<<16)|319};command(0,fade,5);
+        view_observer(view_user,&cpu,MMX6_NATIVE_VIEW_END,seat,1);assert(!native_view);
+        g_psx_render_pass_active=local_scope=0;
+    }
+    view_observer(view_user,&cpu,MMX6_NATIVE_PAIR_PREPARED,0,1);
+}
 static void near(double a,double b){assert(std::fabs(a-b)<.00001);}
 int main(){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==2);
@@ -132,6 +181,28 @@ int main(){
     local_scope=1;const auto serial=native_serial.load();native_begin(&cpu,NativeDraw);assert(native_serial==serial);local_scope=0;
     reset_session();assert(!receipt && !provider && !native_enabled);
     assert(releases==texture_serial);
+    activation();test_bank_identity=77;
+    pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=10;pair_diag.guest_cycle=1000000;
+    capture_pair(cpu,0,10,100);assert(!coop_output.version);
+    pair_diag.pair_id=11;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    tick_callback();tick_callback();capture_pair(cpu,1,14,108);
+    assert(coop_output.version && rendered.size()==12 && rendered_materials.size()==6);
+    near(rendered[2].vertices[0].x,12);near(rendered[8].vertices[0].x,424);
+    assert(rendered_materials[1].texture_bank==7 && rendered_materials[1].bank_identity==77);
+    assert(!(rendered_materials[1].flags&PSX_PRESENTATION_BANK_LIVE_CLUT));
+    assert(rendered_materials[4].flags&PSX_PRESENTATION_BANK_LIVE_CLUT);
+    assert(rendered_materials[2].semi==1 && rendered_materials[5].semi==1);
+    uint64_t output=0;int pair_crop[2][4]{};
+    const uint64_t midpoint=pair_diag.guest_cycle+g_psx_vblank_cycles;
+    assert(!pair_provider(pair_user,10,pair_diag.guest_cycle,midpoint,320,240,1,&output,pair_crop));
+    assert(!pair_provider(pair_user,11,pair_diag.guest_cycle,midpoint,320,240,0,&output,pair_crop));
+    output_ready=false;assert(!pair_provider(pair_user,11,pair_diag.guest_cycle,midpoint,320,240,1,&output,pair_crop));
+    output_ready=true;assert(pair_provider(pair_user,11,pair_diag.guest_cycle,midpoint,320,240,1,&output,pair_crop));
+    assert(pair_crop[1][0]==320 && pair_crop[1][1]==0 && output==output_serial);
+    assert(!pair_provider(pair_user,11,pair_diag.guest_cycle,midpoint,320,240,1,&output,pair_crop));
+    view_observer(view_user,nullptr,MMX6_NATIVE_PAIR_CANCEL,0,0);assert(!coop_output.version && !coop_previous);
+    reset_session();assert(!command_receipt && !view_observer && !pair_provider && releases==texture_serial);
+    split=false;
     std::strcpy(selected_rate,"120");activation();assert(!native_enabled && !provider);
     std::strcpy(selected_rate,"60");receipt_available=false;activation();assert(!native_enabled && !provider);
     puts("PASS X6 native producer: real immutable scene/draw midpoint, current animation/HUD/order, resource ownership, cuts/identity, one native-timeline midpoint, readiness/restore/unload and honest unsupported/reference fallback; no guest replay or writes");

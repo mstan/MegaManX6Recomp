@@ -9,6 +9,15 @@
 #include "mmx6_coop_host_lab.h"
 #include "mmx6_coop_host_lab_contract.h"
 #include "mmx6_diagnostics.h"
+#include "mmx6_native_view_observer.h"
+static Mmx6NativeViewObserver native_view_observer;
+static void *native_view_user;
+void mmx6_native_coop_set_observer(Mmx6NativeViewObserver observer,void *user) {
+    native_view_observer=observer;native_view_user=observer?user:0;
+}
+static void native_view_note(CPUState *cpu,unsigned event,unsigned seat,int ok) {
+    if(native_view_observer)native_view_observer(native_view_user,cpu,event,seat,ok);
+}
 #if defined(__has_include)
 #if __has_include("session_input_taint.h")
 #include "session_input_taint.h"
@@ -4108,6 +4117,9 @@ static void world_camera_begin(CPUState *cpu,uint32_t address) {
     independent_camera_begin(cpu,address);
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
+#ifdef MMX6_COOP_MODERN_STATE
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80060964u,independent_prepare_present);
+#endif
     static const uint32_t personal_shared[]={0x800139A0u,0x800139F4u,
         0x8001750Cu,0x80020C40u};
     for(unsigned i=0;i<sizeof personal_shared/sizeof personal_shared[0];++i)
