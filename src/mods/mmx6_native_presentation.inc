@@ -354,7 +354,10 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_frame_interpolation_plugin) {
     psx_mod_register_activation_plugin(NativePlugin,native_activate);
     psx_mod_register_vblank_plugin(NativePlugin,native_tick);
     psx_mod_register_function_entry_plugin(NativePlugin,NativeDraw,native_begin);
-    psx_mod_register_function_entry_plugin(NativePlugin,NativeActor,native_actor_begin);
+    /* Entry hooks run before another plugin can replace the function. Observe
+     * the first REAL instruction instead: a replaced outer call has no native
+     * return, while its nested native draw owns one balanced producer scope. */
+    psx_mod_register_instruction_plugin(NativePlugin,NativeActor,0x27BDFFD0u,native_actor_begin);
     psx_mod_register_function_entry_plugin(NativePlugin,NativeBg,native_bg_begin);
     psx_mod_register_function_entry_plugin(NativePlugin,NativeBgEnd,native_bg_end);
     psx_mod_register_function_entry_plugin(NativePlugin,NativeOT,native_ot);

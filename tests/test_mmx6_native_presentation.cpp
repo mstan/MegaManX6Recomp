@@ -17,6 +17,7 @@ static PSXModActivationCallback activation,reset_session,restore_state;
 static PSXModVBlankCallback tick_callback;
 struct Instruction {uint32_t pc,word;PSXModFunctionEntryCallback callback;};
 static Instruction instructions[8];static unsigned instruction_count;
+static PSXModFunctionEntryCallback actor_entry;
 static DMANativeGpuReceipt receipt;static DMANativeGpuReceiptEnd receipt_end;static void* receipt_user;
 static PsxPresentationProvider provider;static void* provider_user;
 static GpuViewCommandReceipt command_receipt;static void* command_user;
@@ -69,7 +70,10 @@ int psx_mod_register_activation_plugin(const char*,PSXModActivationCallback f){a
 int psx_mod_register_session_reset_plugin(const char*,PSXModActivationCallback f){reset_session=f;return 1;}
 int psx_mod_register_savestate_plugin(const char*,PSXModActivationCallback f){restore_state=f;return 1;}
 int psx_mod_register_vblank_plugin(const char*,PSXModVBlankCallback f){tick_callback=f;return 1;}
-int psx_mod_register_function_entry_plugin(const char*,uint32_t,PSXModFunctionEntryCallback){return 1;}
+int psx_mod_register_function_entry_plugin(const char*,uint32_t pc,PSXModFunctionEntryCallback f){
+    if(pc==0x800232D4u)actor_entry=f;
+    return 1;
+}
 int psx_mod_register_instruction_plugin(const char*,uint32_t pc,uint32_t word,PSXModFunctionEntryCallback f){
     instructions[instruction_count++]={pc,word,f};return 1;
 }
@@ -111,6 +115,11 @@ constexpr uint32_t ActorRecord=0x800970A0,ActorPacket=0x000B0000,HUDPacket=0x000
 static void close_instruction(CPUState& cpu,uint32_t pc){
     for(unsigned i=0;i<instruction_count;++i)if(instructions[i].pc==pc){assert(instructions[i].word==0x03E00008u);instructions[i].callback(&cpu,pc);return;}
     assert(false);
+}
+static void actor_body_instruction(CPUState& cpu){
+    for(unsigned i=0;i<instruction_count;++i)if(instructions[i].pc==NativeActor){
+        assert(instructions[i].word==0x27BDFFD0u);instructions[i].callback(&cpu,NativeActor);return;
+    }
 }
 static void command(uint32_t,const uint32_t*,unsigned,const GpuViewCommandMetadata&);
 static void capture(CPUState& cpu,int bank,int actor_x,int actor_y,int camera_x,unsigned uv=0,uint32_t identity=0x80070000,int view_shift=0){
@@ -173,7 +182,7 @@ static void command(uint32_t source,const uint32_t* words,unsigned n,const GpuVi
     metadata.piece_count=1;
     command_receipt(command_user,uint32_t(receipt_view),source,words,n,&environment,&metadata);
 }
-static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=false,bool commit=true) {
+static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=false,bool commit=true,bool replaced_actor=false) {
     split=true;native_begin(&cpu,NativeDraw);assert(!native_open);
     put(0x8009B7A0,FrameBase+bank*FrameStride);const uint32_t buffer=FrameBase+bank*FrameStride;
     put(buffer+0x14,0|(bank*240u<<16));put(buffer+0x18,320|(240u<<16));
@@ -185,8 +194,16 @@ static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=fals
         put(LayerBase+8,0);put(LayerBase+12,0);*address(LayerBase+3)=1;
         put(ActorRecord,1);*address(ActorRecord+0x14)=0;put(ActorRecord+8,uint32_t((seat?x1:x0)*65536));
         put(ActorRecord+12,20u*65536);put(ActorRecord+0x38,0x80060000);put(ActorRecord+0x3C,0x80070000);
-        put(0x1F800100,ActorPacket);cpu.gpr[4]=ActorRecord;native_actor_begin(&cpu,NativeActor);
+        put(0x1F800100,ActorPacket);cpu.gpr[4]=ActorRecord;
+        if(replaced_actor){
+            // Production ordering: outer entry, co-op replacement, nested
+            // entry + REAL native body/return; the replaced outer has no JR.
+            if(actor_entry)actor_entry(&cpu,NativeActor);
+            if(actor_entry)actor_entry(&cpu,NativeActor);
+            actor_body_instruction(cpu);
+        }else native_actor_begin(&cpu,NativeActor);
         put(0x1F800100,ActorPacket+40);native_actor_end(&cpu,NativeActorEnd);native_end(&cpu,NativeEnd);
+        assert(native_complete && native_writing && native_writing->valid);
         cpu.gpr[4]=buffer+0xEC;native_ot(&cpu,NativeOT);
         const uint32_t sprite[]={0x7C808080,xy(seat?x1:x0,20),0x79000000};
         GpuViewCommandMetadata metadata{};metadata.bank=7;metadata.live_clut=uint8_t(seat);
@@ -200,6 +217,17 @@ static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=fals
         g_psx_render_pass_active=local_scope=0;
     }
     if(commit)view_observer(view_user,&cpu,MMX6_NATIVE_PAIR_COMMITTED,0,1);
+}
+static void replaced_actor_pair(){
+    CPUState cpu{};wide_margin=53;test_bank_identity=77;std::strcpy(selected_rate,"60");activation();
+    pair_diag={};pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=170;pair_diag.guest_cycle=1000000;
+    const uint64_t captured=native_captured;
+    capture_pair(cpu,0,10,100,true,true,true);
+    assert(native_captured==captured+2 && coop_previous && !native_actor_scope.active && native_actor_stack.empty());
+    tick_callback();tick_callback();++pair_diag.pair_id;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    capture_pair(cpu,1,14,108,true,true,true);
+    assert(native_captured==captured+4 && coop_output.version && rendered.size()==16);
+    reset_session();wide_margin=0;split=false;
 }
 static void near(double a,double b){assert(std::fabs(a-b)<.00001);}
 static void activation_choices(){
@@ -321,7 +349,8 @@ static void wide_coop_hud(){
     reset_session();wide_margin=0;split=false;
 }
 int main(int argc,char** argv){
-    assert(activation && reset_session && restore_state && tick_callback && instruction_count==2);
+    assert(activation && reset_session && restore_state && tick_callback && instruction_count==3);
+    if(argc==2 && !std::strcmp(argv[1],"replaced-actor-only")){replaced_actor_pair();puts("PASS replaced outer actor observes only real nested native body/return, two immutable wide/HUD panes and prepared pair");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"committed-serial-only")){committed_pair_serial();puts("PASS latest committed pair survives in-flight CPU producer at120/display/60; epoch/pair/deadline/readiness and original timestamp gates retained");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"wide-coop-hud-only")){wide_coop_hud();postwait_rate_publication();puts("PASS original postwait publication,120/display queued timestamp/readiness, real expanded per-view producer, independent motion, two current HUDs, painter order and owned426x480 pair");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"activation-only")){
