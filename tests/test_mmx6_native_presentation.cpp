@@ -256,6 +256,47 @@ static void postwait_rate_publication(){
     }
     std::strcpy(selected_rate,"60");fake_ns=900000000;
 }
+static void committed_pair_serial(){
+    const uint64_t period=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
+    for(const char* rate:{"120","display","60"}){
+        CPUState cpu{};std::strcpy(selected_rate,rate);activation();test_bank_identity=77;
+        fake_ns=900000000;pair_diag={};pair_diag.valid=1;pair_diag.mode=2;
+        pair_diag.pair_id=100;pair_diag.guest_cycle=1000000;capture_pair(cpu,0,10,100);
+        tick_callback();tick_callback();pair_diag.pair_id=101;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+        fake_ns=1000000000+period/8;capture_pair(cpu,1,14,108);
+        rate_request={};rate_request.display_start_ns=1000000000;
+        rate_request.native_cycle=rate_request.display_start_cycle=pair_diag.guest_cycle;
+        rate_request.deadline_ns=rate_request.display_start_ns+period/4;
+        rate_request.pair_id=101;rate_request.pair_cycle=pair_diag.guest_cycle;
+        if(native_rate)psx_presentation_gpu_rate_source_ready();
+        assert(coop_output.version && coop_previous);
+        const auto committed=coop_previous->view[0]->frame.serial;
+        const auto queued=rate_request;
+        // Actual canonical entry begins the NEXT world. It cannot revoke an
+        // owned pair whose original present/deadline still selects that pair.
+        native_begin(&cpu,NativeDraw);
+        assert(native_serial>committed && coop_previous->view[0]->frame.serial==committed);
+        if(native_rate)psx_presentation_gpu_rate_source_ready();
+        assert(coop_output.version && "committed pair survives next CPU producer");
+        assert(!std::memcmp(&queued,&rate_request,sizeof queued));
+        rate_dispatch=native_rate;uint64_t output=0;int crop[2][4]{};
+        const uint64_t present=pair_diag.guest_cycle+g_psx_vblank_cycles;
+        assert(!pair_provider(pair_user,100,pair_diag.guest_cycle,present,320,240,1,&output,crop));
+        const uint64_t epoch=coop_output.epoch;coop_output.epoch=epoch+1;
+        assert(!pair_provider(pair_user,101,pair_diag.guest_cycle,present,320,240,1,&output,crop));coop_output.epoch=epoch;
+        if(native_rate){
+            --rate_request.deadline_ns;
+            assert(!pair_provider(pair_user,101,pair_diag.guest_cycle,present,320,240,1,&output,crop));++rate_request.deadline_ns;
+        }else assert(!pair_provider(pair_user,101,pair_diag.guest_cycle,coop_output.expires+1,320,240,1,&output,crop));
+        output_ready=false;assert(!pair_provider(pair_user,101,pair_diag.guest_cycle,present,320,240,1,&output,crop));
+        output_ready=true;
+        assert(pair_provider(pair_user,101,pair_diag.guest_cycle,present,320,240,1,&output,crop) && "eligible committed pair selected after next CPU producer");
+        assert(output==output_serial && crop[1][1]==240);
+        assert(!pair_provider(pair_user,101,pair_diag.guest_cycle,present,320,240,1,&output,crop));
+        rate_dispatch=false;reset_session();
+    }
+    std::strcpy(selected_rate,"60");fake_ns=900000000;
+}
 static void wide_coop_hud(){
     CPUState cpu{};wide_margin=53;test_bank_identity=77;std::strcpy(selected_rate,"60");activation();
     pair_diag={};pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=70;pair_diag.guest_cycle=1000000;
@@ -279,6 +320,7 @@ static void wide_coop_hud(){
 }
 int main(int argc,char** argv){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==2);
+    if(argc==2 && !std::strcmp(argv[1],"committed-serial-only")){committed_pair_serial();puts("PASS latest committed pair survives in-flight CPU producer at120/display/60; epoch/pair/deadline/readiness and original timestamp gates retained");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"wide-coop-hud-only")){wide_coop_hud();postwait_rate_publication();puts("PASS original postwait publication,120/display queued timestamp/readiness, real expanded per-view producer, independent motion, two current HUDs, painter order and owned426x480 pair");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"activation-only")){
         activation_choices();puts("PASS every released rate selector, legacy display alias, unsupported values and unavailable native service");return 0;
