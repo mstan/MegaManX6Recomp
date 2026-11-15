@@ -240,6 +240,8 @@ static void first_pane_refusal(){
     assert(!std::strcmp(native_failure.load(),coop_first_refusal) && coop_reported_refusal==coop_first_refusal);
     assert(coop_first_effect.recorded && coop_first_effect.opcode==0x7C && coop_first_effect.source==ActorPacket+4 &&
         coop_first_effect.words==3 && coop_first_effect.invalid==1 && coop_first_effect.pieces==1);
+    assert(coop_first_effect.prefix[0]==0x7C808080u && coop_first_effect.prefix[1]==xy(10,20) &&
+        coop_first_effect.prefix[2]==0x79000000u && coop_first_effect.prefix[3]==0);
     assert(coop_reported_effect.recorded && coop_reported_effect.source==ActorPacket+4);
     reset_session();assert(!coop_first_refusal && !coop_reported_refusal && !coop_first_effect.recorded &&
         !coop_reported_effect.recorded);wide_margin=0;split=false;

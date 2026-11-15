@@ -33,6 +33,7 @@ const char* coop_reported_refusal=nullptr;
 struct CoopRefusedEffect {
     uint32_t opcode=0,source=0,words=0,invalid=0,pieces=0;
     bool recorded=false;
+    uint32_t prefix[4]{};
 } coop_first_effect,coop_reported_effect;
 void native_coop_restore_capture() {
     native_buffer=coop_saved.buffer;native_head=coop_saved.head;
@@ -89,7 +90,10 @@ void native_coop_command(void*,uint32_t view,uint32_t source,const uint32_t* wor
         auto& f=*native_writing;f.environment=*env;
         const unsigned op=words[0]>>24;
         if(metadata->invalid || (op>=0x80 && op<=0xDF)){
-            if(!coop_first_refusal && !coop_first_effect.recorded)coop_first_effect={op,source,count,metadata->invalid,metadata->piece_count,true};
+            if(!coop_first_refusal && !coop_first_effect.recorded){
+                coop_first_effect={op,source,count,metadata->invalid,metadata->piece_count,true};
+                for(unsigned i=0;i<count && i<4;++i)coop_first_effect.prefix[i]=words[i];
+            }
             f.reject("unrepresented native command effect");return;
         }
         const Motion motion=native_packet_motion(source>=4?source-4:source);
@@ -162,8 +166,9 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
                 if(!coop_reported_refusal || std::strcmp(coop_reported_refusal,reason) ||
                    effect.recorded!=coop_reported_effect.recorded ||
                    effect.opcode!=coop_reported_effect.opcode || effect.invalid!=coop_reported_effect.invalid) {
-                    std::fprintf(stderr,"mmx6 native presentation first pane refusal: %s (opcode=%02X source=%08X words=%u invalid=%u pieces=%u)\n",
-                        reason,effect.opcode,effect.source,effect.words,effect.invalid,effect.pieces);
+                    std::fprintf(stderr,"mmx6 native presentation first pane refusal: %s (opcode=%02X source=%08X words=%u invalid=%u pieces=%u prefix=%08X,%08X,%08X,%08X)\n",
+                        reason,effect.opcode,effect.source,effect.words,effect.invalid,effect.pieces,
+                        effect.prefix[0],effect.prefix[1],effect.prefix[2],effect.prefix[3]);
                     coop_reported_refusal=reason;
                     coop_reported_effect=effect;
                 }
