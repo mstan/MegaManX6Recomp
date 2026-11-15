@@ -182,7 +182,7 @@ static void command(uint32_t source,const uint32_t* words,unsigned n,const GpuVi
     metadata.piece_count=1;
     command_receipt(command_user,uint32_t(receipt_view),source,words,n,&environment,&metadata);
 }
-static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=false,bool commit=true,bool replaced_actor=false) {
+static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=false,bool commit=true,bool replaced_actor=false,bool invalid_command=false) {
     split=true;native_begin(&cpu,NativeDraw);assert(!native_open);
     put(0x8009B7A0,FrameBase+bank*FrameStride);const uint32_t buffer=FrameBase+bank*FrameStride;
     put(buffer+0x14,0|(bank*240u<<16));put(buffer+0x18,320|(240u<<16));
@@ -207,6 +207,7 @@ static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=fals
         cpu.gpr[4]=buffer+0xEC;native_ot(&cpu,NativeOT);
         const uint32_t sprite[]={0x7C808080,xy(seat?x1:x0,20),0x79000000};
         GpuViewCommandMetadata metadata{};metadata.bank=7;metadata.live_clut=uint8_t(seat);
+        metadata.invalid=uint8_t(invalid_command && !seat);
         command(ActorPacket+4,sprite,3,metadata);
         if(hud){
             const uint32_t meter[]={0x2800FF00,xy(20,16),xy(26,16),xy(20,bank?76:56),xy(26,bank?76:56)};
@@ -228,6 +229,16 @@ static void replaced_actor_pair(){
     capture_pair(cpu,1,14,108,true,true,true);
     assert(native_captured==captured+4 && coop_output.version && rendered.size()==16);
     reset_session();wide_margin=0;split=false;
+}
+static void first_pane_refusal(){
+    CPUState cpu{};wide_margin=53;test_bank_identity=77;std::strcpy(selected_rate,"60");activation();
+    pair_diag={};pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=270;pair_diag.guest_cycle=1000000;
+    const uint64_t captured=native_captured;
+    capture_pair(cpu,0,10,100,true,true,true,true);
+    assert(native_captured==captured+1 && !coop_previous && !coop_output.version);
+    assert(coop_first_refusal && !std::strcmp(coop_first_refusal,"unrepresented native command effect"));
+    assert(!std::strcmp(native_failure.load(),coop_first_refusal) && coop_reported_refusal==coop_first_refusal);
+    reset_session();assert(!coop_first_refusal && !coop_reported_refusal);wide_margin=0;split=false;
 }
 static void near(double a,double b){assert(std::fabs(a-b)<.00001);}
 static void activation_choices(){
@@ -350,6 +361,7 @@ static void wide_coop_hud(){
 }
 int main(int argc,char** argv){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==3);
+    if(argc==2 && !std::strcmp(argv[1],"first-refusal-only")){first_pane_refusal();puts("PASS first failed pane reason survives later pane and pair commit without admitting partial output");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"replaced-actor-only")){replaced_actor_pair();puts("PASS replaced outer actor observes only real nested native body/return, two immutable wide/HUD panes and prepared pair");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"committed-serial-only")){committed_pair_serial();puts("PASS latest committed pair survives in-flight CPU producer at120/display/60; epoch/pair/deadline/readiness and original timestamp gates retained");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"wide-coop-hud-only")){wide_coop_hud();postwait_rate_publication();puts("PASS original postwait publication,120/display queued timestamp/readiness, real expanded per-view producer, independent motion, two current HUDs, painter order and owned426x480 pair");return 0;}

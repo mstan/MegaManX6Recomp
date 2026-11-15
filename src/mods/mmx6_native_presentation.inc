@@ -15,6 +15,7 @@
 #include "psx_video_timing.h"
 #include "render_thread.h"
 #include <atomic>
+#include <cstdio>
 #include <cstring>
 #include <mutex>
 

@@ -26,6 +26,10 @@ struct CoopOutput {
     int crop[2][4]{};
 } coop_output;
 bool coop_snapshot=false;
+// Preserve the first failed pane through PAIR_COMMITTED. The ordinary fallback
+// total alone cannot distinguish a missing native marker from rejected data.
+const char* coop_first_refusal=nullptr;
+const char* coop_reported_refusal=nullptr;
 void native_coop_restore_capture() {
     native_buffer=coop_saved.buffer;native_head=coop_saved.head;
     native_open=coop_saved.open;native_complete=coop_saved.complete;native_armed=coop_saved.armed;
@@ -38,6 +42,7 @@ void native_coop_clear() {
     (void)gpu_view_command_receipt_end();
     if(native_view)native_coop_restore_capture();
     coop_writing.reset();
+    coop_first_refusal=coop_reported_refusal=nullptr;
     std::unique_ptr<CoopPair> release;
     {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_older.reset();coop_output={};coop_rate_pair=coop_rate_cycle=coop_rate_ready=0;}
 }
@@ -141,14 +146,25 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
                 coop_writing->period_ns=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
                 CoopPair* transfer=coop_writing.release();
                 if(!psx_presentation_gpu_prepare_async(native_coop_ready,transfer))delete transfer;
-            }else{coop_writing.reset();++native_fallbacks;native_failure="incomplete native pane pair";}
+            }else{
+                coop_writing.reset();++native_fallbacks;
+                const char* reason=coop_first_refusal?coop_first_refusal:"native pane observer did not begin";
+                native_failure=reason;
+                if(!coop_reported_refusal || std::strcmp(coop_reported_refusal,reason)) {
+                    std::fprintf(stderr,"mmx6 native presentation first pane refusal: %s\n",reason);
+                    coop_reported_refusal=reason;
+                }
+            }
             return;
         }
         if(event==MMX6_NATIVE_VIEW_BEGIN) {
             if(native_view){native_reject("nested native view");native_coop_restore_capture();return;}
-            if(seat==0)coop_writing=std::make_unique<CoopPair>();
+            if(seat==0){coop_writing=std::make_unique<CoopPair>();coop_first_refusal=nullptr;}
             if(!coop_writing)return;
-            if(!gpu_view_command_receipt_begin(seat+1))return;
+            if(!gpu_view_command_receipt_begin(seat+1)){
+                if(!coop_first_refusal)coop_first_refusal="native command scope unavailable";
+                return;
+            }
             coop_saved.buffer=native_buffer;coop_saved.head=native_head;
             coop_saved.open=native_open;coop_saved.complete=native_complete;coop_saved.armed=native_armed;
             coop_saved.frame=std::move(native_writing);coop_saved.ranges=std::move(native_ranges);
@@ -168,6 +184,16 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
             const bool ok=complete && received && coop_snapshot && native_writing && native_writing->valid &&
                 !native_actor_scope.active && native_actor_stack.empty() && !native_bg_scope.active;
             if(ok){coop_current->frame=std::move(*native_writing);coop_writing->view[seat]=coop_current;++native_captured;}
+            else if(!coop_first_refusal) {
+                coop_first_refusal=!complete?"private drawing incomplete":
+                    !native_writing?native_failure.load():
+                    !native_writing->valid?native_writing->failure:
+                    !received?"native completed-command scope incomplete":
+                    !native_complete?"native producer end not observed":
+                    !coop_snapshot?"native material snapshot not observed":
+                    native_actor_scope.active || !native_actor_stack.empty()?"native actor scope unclosed":
+                    native_bg_scope.active?"native background scope unclosed":"native pane incomplete";
+            }
             native_coop_restore_capture();
 
         }
