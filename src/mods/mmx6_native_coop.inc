@@ -30,6 +30,16 @@ bool coop_snapshot=false;
 // total alone cannot distinguish a missing native marker from rejected data.
 const char* coop_first_refusal=nullptr;
 const char* coop_reported_refusal=nullptr;
+// One retained GPU preparation refusal, distinct from CPU pane capture. Only
+// complete old/new pairs may reach this record; startup is not a failure.
+const char* coop_first_prepare_refusal=nullptr;
+void native_coop_prepare_refuse(const char* reason) {
+    native_failure=reason;
+    if(!coop_first_prepare_refusal){
+        coop_first_prepare_refusal=reason;
+        std::fprintf(stderr,"mmx6 native presentation first pair preparation refusal: %s\n",reason);
+    }
+}
 struct CoopRefusedEffect {
     uint32_t opcode=0,source=0,words=0,invalid=0,pieces=0;
     bool recorded=false;
@@ -49,6 +59,7 @@ void native_coop_clear() {
     if(native_view)native_coop_restore_capture();
     coop_writing.reset();
     coop_first_refusal=coop_reported_refusal=nullptr;
+    coop_first_prepare_refusal=nullptr;
     coop_first_effect=coop_reported_effect={};
     std::unique_ptr<CoopPair> release;
     {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_older.reset();coop_output={};coop_rate_pair=coop_rate_cycle=coop_rate_ready=0;}
@@ -57,25 +68,36 @@ void native_rate_coop_prepare(const PsxPresentationRateRequest& request) {
     std::lock_guard<std::mutex> lock(native_publication);
     coop_output={};
     const auto& old=coop_older;const auto& next=coop_previous;
-    if(!old || !next || request.pair_id!=coop_rate_pair || request.pair_cycle!=coop_rate_cycle ||
-       next->view[0]->frame.epoch!=native_epoch)return;
+    if(!old || !next)return;
+    if(request.pair_id!=coop_rate_pair || request.pair_cycle!=coop_rate_cycle){
+        native_coop_prepare_refuse("native pair request identity");return;
+    }
+    if(next->view[0]->frame.epoch!=native_epoch){native_coop_prepare_refuse("native pair epoch");return;}
     // next is the latest COMMITTED immutable pair. The CPU can already be
     // building a later world while this pair owns the original output grid.
     const uint64_t period=next->period_ns;
-    if(!period || old->period_ns!=period || request.deadline_ns<=request.display_start_ns ||
-       request.deadline_ns>=request.display_start_ns+period)return;
+    if(!period || old->period_ns!=period){native_coop_prepare_refuse("native pair period");return;}
+    if(request.deadline_ns<=request.display_start_ns || request.deadline_ns>=request.display_start_ns+period){
+        native_coop_prepare_refuse("native pair deadline outside source period");return;
+    }
     double alpha=0;
     if(!psx_presentation_phase(request.display_start_ns,request.display_start_ns+period,
-        coop_rate_ready,request.deadline_ns,&alpha) ||
-       !coop_prepared.build({&old->view[0]->frame,&old->view[1]->frame},
+        coop_rate_ready,request.deadline_ns,&alpha)){
+        native_coop_prepare_refuse("native pair phase/source readiness");return;
+    }
+    if(!coop_prepared.build({&old->view[0]->frame,&old->view[1]->frame},
            {&next->view[0]->frame,&next->view[1]->frame},
-           {next->view[0]->texture,next->view[1]->texture},alpha) ||
-       !psx_presentation_gpu_render(coop_prepared.triangles.data(),uint32_t(coop_prepared.triangles.size()),
-           coop_prepared.materials.data(),uint32_t(coop_prepared.materials.size())))return;
+           {next->view[0]->texture,next->view[1]->texture},alpha)){
+        native_coop_prepare_refuse(coop_prepared.failure);return;
+    }
+    if(!psx_presentation_gpu_render(coop_prepared.triangles.data(),uint32_t(coop_prepared.triangles.size()),
+           coop_prepared.materials.data(),uint32_t(coop_prepared.materials.size()))){
+        native_coop_prepare_refuse("native pair binding/private target");return;
+    }
     coop_output.epoch=next->view[0]->frame.epoch;coop_output.serial=next->view[0]->frame.serial;
     coop_output.version=psx_presentation_gpu_output_version();coop_output.pair=request.pair_id;
     coop_output.cycle=request.pair_cycle;coop_output.deadline=request.deadline_ns;
-    std::memcpy(coop_output.crop,coop_prepared.crop,sizeof coop_output.crop);++native_ready;
+    std::memcpy(coop_output.crop,coop_prepared.crop,sizeof coop_output.crop);++native_ready;native_failure="";
 }
 void native_coop_ot(CPUState* cpu) {
     if(!coop_current || coop_snapshot || !native_writing || !native_complete ||

@@ -311,6 +311,7 @@ static void postwait_rate_publication(){
         CPUState cpu{};std::strcpy(selected_rate,rate);activation();test_bank_identity=77;
         fake_ns=900000000;pair_diag={};pair_diag.valid=1;pair_diag.mode=2;
         pair_diag.pair_id=90;pair_diag.guest_cycle=1000000;capture_pair(cpu,0,10,100);
+        assert(!coop_first_prepare_refusal); // no failure record for startup
         tick_callback();
         rate_request={};rate_request.display_start_ns=1000000000;
         rate_request.display_start_cycle=pair_diag.guest_cycle;rate_request.native_cycle=pair_diag.guest_cycle;
@@ -322,6 +323,8 @@ static void postwait_rate_publication(){
         const auto queued=rate_request;
         view_observer(view_user,nullptr,MMX6_NATIVE_PAIR_COMMITTED,0,1);
         assert(coop_rate_pair==91 && coop_rate_ready==fake_ns && !coop_output.version); // stale request never rebound
+        assert(coop_first_prepare_refusal && !std::strcmp(coop_first_prepare_refusal,"native pair request identity"));
+        const char* first_refusal=coop_first_prepare_refusal;
         assert(!std::memcmp(&queued,&rate_request,sizeof queued));
         rate_request.pair_id=91;rate_request.pair_cycle=pair_diag.guest_cycle;
         rate_request.native_cycle=rate_request.display_start_cycle=pair_diag.guest_cycle;
@@ -330,6 +333,7 @@ static void postwait_rate_publication(){
         rate_request.deadline_ns=rate_request.display_start_ns+period/4;
         const auto original=rate_request;fake_ns+=1000000000; // GPU queue delay must not create a new origin
         psx_presentation_gpu_rate_source_ready();assert(coop_output.version);
+        assert(coop_first_prepare_refusal==first_refusal && !std::strcmp(native_failure.load(),""));
         assert(!std::memcmp(&original,&rate_request,sizeof original));
         near(rendered[2].vertices[0].x,11);near(rendered[8].vertices[0].x,102);
         uint64_t version=0;int crop[2][4]{};rate_dispatch=true;output_ready=false;
@@ -338,7 +342,7 @@ static void postwait_rate_publication(){
         assert(version==output_serial && crop[1][1]==240);rate_dispatch=false;
         rate_request.deadline_ns=rate_request.display_start_ns+period;
         psx_presentation_gpu_rate_source_ready();assert(!coop_output.version); // never extrapolate beyond native endpoint
-        reset_session();assert(!coop_previous && !coop_older && !rate_configured);
+        reset_session();assert(!coop_previous && !coop_older && !rate_configured && !coop_first_prepare_refusal);
     }
     std::strcpy(selected_rate,"60");fake_ns=900000000;
 }
