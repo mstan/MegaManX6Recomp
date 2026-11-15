@@ -165,6 +165,10 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
         return 1;
     }
     CHECK(address==0x80025FB0u && private_draw);
+    /* Real25FB0 calls22960, whose22A28 JAL invokes244C0 after resetting
+     * the packet pools and before drawing actors. Keep that native call in
+     * this seam, so an extra post-world HUD call cannot silently pass. */
+    psx_dispatch_call(cpu,0x800244C0u,0x80022A30u);
     if(boundary_probe)CHECK(psx_mod_read_word(0x80097420u)==0x42u);
     if(entering_view_probe) {
         CHECK(!personal_initialized && (psx_mod_read_byte(PLAY+1)==1 ||
@@ -1333,6 +1337,10 @@ static void private_beam_pool_uses_own_simulation_camera(void) {
     attack_camera_probe=zero_projected=0;
 }
 int main(int argc,char** argv) {
+    if(argc==2 && !strcmp(argv[1],"native-hud-once-only")){
+        original_postwait_boundary();presentation_restore(0,1,0,0);presentation_restore(1,0,0,0);
+        clear_banks();puts("PASS each native world emits its own HUD once before actors; no second reuse of linked HUD arena, original postwait order/ownership retained");return 0;
+    }
     if(argc==2 && !strcmp(argv[1],"wide-hud-only")){
         defaults_and_scope();original_postwait_boundary();presentation_restore(0,1,0,0);presentation_restore(1,0,0,0);
         clear_banks();puts("PASS co-op preserves active aspect, emits both native HUDs and restores private host/RAM ownership");return 0;

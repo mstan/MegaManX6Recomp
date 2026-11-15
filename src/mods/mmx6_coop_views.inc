@@ -562,11 +562,11 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     if(menu) {
         if(!personal_menu_draw(cpu,private_seat))return 0;
     } else {
+        /* Original25FB0 ->22960 resets the native packet pools and invokes
+         * 244C0 before its actor draws. That call already emits THIS pane's
+         * HUD through draw_coop_hud. Calling244C0 again would reuse P2's fixed
+         * HUD arena while its packets are linked, creating a cyclic OT. */
         guest(cpu,0x80025FB0,0,0);
-        /* The world wrapper does not emit HUD packets. Canonical personal
-         * links were retired deliberately; each pane must emit its own HUD
-         * into THIS draw's OT, using the existing native art/bank helpers. */
-        guest(cpu,0x800244C0,0,0);
     }
     if(failed || inside || world_render || hud_call || state_track.count || state_track.error)return 0;
     guest(cpu,VIEW_DRAW_OT,view_buffer+0xEC,0);guest(cpu,0x80066150,0,0);
