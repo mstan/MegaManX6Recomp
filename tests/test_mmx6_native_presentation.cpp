@@ -282,6 +282,8 @@ static void committed_pair_serial(){
         rate_dispatch=native_rate;uint64_t output=0;int crop[2][4]{};
         const uint64_t present=pair_diag.guest_cycle+g_psx_vblank_cycles;
         assert(!pair_provider(pair_user,100,pair_diag.guest_cycle,present,320,240,1,&output,crop));
+        const uint64_t serial=coop_output.serial;coop_output.serial=serial+1;
+        assert(!pair_provider(pair_user,101,pair_diag.guest_cycle,present,320,240,1,&output,crop));coop_output.serial=serial;
         const uint64_t epoch=coop_output.epoch;coop_output.epoch=epoch+1;
         assert(!pair_provider(pair_user,101,pair_diag.guest_cycle,present,320,240,1,&output,crop));coop_output.epoch=epoch;
         if(native_rate){

@@ -46,7 +46,9 @@ void native_rate_coop_prepare(const PsxPresentationRateRequest& request) {
     coop_output={};
     const auto& old=coop_older;const auto& next=coop_previous;
     if(!old || !next || request.pair_id!=coop_rate_pair || request.pair_cycle!=coop_rate_cycle ||
-       next->view[0]->frame.epoch!=native_epoch || next->view[0]->frame.serial!=native_serial)return;
+       next->view[0]->frame.epoch!=native_epoch)return;
+    // next is the latest COMMITTED immutable pair. The CPU can already be
+    // building a later world while this pair owns the original output grid.
     const uint64_t period=next->period_ns;
     if(!period || old->period_ns!=period || request.deadline_ns<=request.display_start_ns ||
        request.deadline_ns>=request.display_start_ns+period)return;
@@ -178,7 +180,8 @@ int native_coop_present(void*,uint64_t pair,uint64_t cycle,uint64_t present_cycl
     if(native_rate && !psx_presentation_gpu_rate_request(&request))return 0;
     std::lock_guard<std::mutex> lock(native_publication);
     auto& out=coop_output;
-    if(!out.version || out.epoch!=native_epoch || out.serial!=native_serial || out.pair!=pair ||
+    if(!out.version || out.epoch!=native_epoch || !coop_previous ||
+       out.serial!=coop_previous->view[0]->frame.serial || out.pair!=pair ||
        out.cycle!=cycle || (native_rate?(!request.deadline_ns || request.deadline_ns!=out.deadline):
            (present_cycle<out.not_before || present_cycle>out.expires)) ||
        out.crop[0][2]!=w || out.crop[0][3]!=h || out.crop[1][2]!=w || out.crop[1][3]!=h ||
