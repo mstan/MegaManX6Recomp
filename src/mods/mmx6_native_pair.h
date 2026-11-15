@@ -19,7 +19,7 @@ struct PairPrepared {
            now[0]->serial!=now[1]->serial || now[0]->epoch!=now[1]->epoch ||
            old[0]->serial!=old[1]->serial || old[0]->epoch!=old[1]->epoch ||
            now[0]->tick!=now[1]->tick || old[0]->tick!=old[1]->tick ||
-           now[0]->tick-old[0]->tick!=2){failure="incomplete native pair";return false;}
+           now[0]->tick-old[0]->tick!=1){failure="incomplete native pair";return false;}
         /* Stack the two owned panes vertically: the fixed1024x512 target
          * then retains wide panes instead of limiting each to512 pixels. */
         unsigned y=0,width=0,height=0;

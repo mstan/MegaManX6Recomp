@@ -234,7 +234,7 @@ static void replaced_actor_pair(){
     const uint64_t captured=native_captured;
     capture_pair(cpu,0,10,100,true,true,true);
     assert(native_captured==captured+2 && coop_previous && !native_actor_scope.active && native_actor_stack.empty());
-    tick_callback();tick_callback();++pair_diag.pair_id;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    tick_callback();++pair_diag.pair_id;pair_diag.guest_cycle+=g_psx_vblank_cycles;
     capture_pair(cpu,1,14,108,true,true,true);
     assert(native_captured==captured+4 && coop_output.version && rendered.size()==16);
     reset_session();wide_margin=0;split=false;
@@ -245,7 +245,7 @@ static void identity_copy_pair(){
     const uint64_t captured=native_captured;
     copy_case=1;capture_pair(cpu,0,10,100,true,true,true);
     assert(native_captured==captured+2 && coop_previous);
-    tick_callback();tick_callback();++pair_diag.pair_id;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    tick_callback();++pair_diag.pair_id;pair_diag.guest_cycle+=g_psx_vblank_cycles;
     copy_case=4;capture_pair(cpu,1,14,108,true,true,true);
     assert(native_captured==captured+4 && coop_output.version && rendered.size()==16);
     reset_session();
@@ -306,17 +306,17 @@ static void activation_choices(){
     assert(!native_enabled && !provider);receipt_available=true;
 }
 static void postwait_rate_publication(){
-    const uint64_t period=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
+    const uint64_t period=uint64_t(g_psx_vblank_cycles)*1000000000ull/33868800ull;
     for(const char* rate:{"120","display"}){
         CPUState cpu{};std::strcpy(selected_rate,rate);activation();test_bank_identity=77;
         fake_ns=900000000;pair_diag={};pair_diag.valid=1;pair_diag.mode=2;
         pair_diag.pair_id=90;pair_diag.guest_cycle=1000000;capture_pair(cpu,0,10,100);
-        tick_callback();tick_callback();
+        tick_callback();
         rate_request={};rate_request.display_start_ns=1000000000;
         rate_request.display_start_cycle=pair_diag.guest_cycle;rate_request.native_cycle=pair_diag.guest_cycle;
         rate_request.pair_id=90;rate_request.pair_cycle=pair_diag.guest_cycle;
         rate_request.deadline_ns=rate_request.display_start_ns+period/4;
-        pair_diag.pair_id=91;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+        pair_diag.pair_id=91;pair_diag.guest_cycle+=g_psx_vblank_cycles;
         fake_ns=1000000000+period/8;capture_pair(cpu,1,14,108,false,false);
         assert(coop_previous && coop_rate_pair==90 && !coop_output.version); // views alone cannot publish
         const auto queued=rate_request;
@@ -343,12 +343,12 @@ static void postwait_rate_publication(){
     std::strcpy(selected_rate,"60");fake_ns=900000000;
 }
 static void committed_pair_serial(){
-    const uint64_t period=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
+    const uint64_t period=uint64_t(g_psx_vblank_cycles)*1000000000ull/33868800ull;
     for(const char* rate:{"120","display","60"}){
         CPUState cpu{};std::strcpy(selected_rate,rate);activation();test_bank_identity=77;
         fake_ns=900000000;pair_diag={};pair_diag.valid=1;pair_diag.mode=2;
         pair_diag.pair_id=100;pair_diag.guest_cycle=1000000;capture_pair(cpu,0,10,100);
-        tick_callback();tick_callback();pair_diag.pair_id=101;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+        tick_callback();pair_diag.pair_id=101;pair_diag.guest_cycle+=g_psx_vblank_cycles;
         fake_ns=1000000000+period/8;capture_pair(cpu,1,14,108);
         rate_request={};rate_request.display_start_ns=1000000000;
         rate_request.native_cycle=rate_request.display_start_cycle=pair_diag.guest_cycle;
@@ -388,8 +388,8 @@ static void committed_pair_serial(){
 static void wide_coop_hud(){
     CPUState cpu{};wide_margin=53;test_bank_identity=77;std::strcpy(selected_rate,"60");activation();
     pair_diag={};pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=70;pair_diag.guest_cycle=1000000;
-    capture_pair(cpu,0,10,100,true);tick_callback();tick_callback();
-    pair_diag.pair_id=71;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    capture_pair(cpu,0,10,100,true);tick_callback();
+    pair_diag.pair_id=71;pair_diag.guest_cycle+=g_psx_vblank_cycles;
     capture_pair(cpu,1,14,108,true);
     assert(coop_output.version && rendered.size()==16 && rendered_materials.size()==8);
     near(rendered[2].vertices[0].x,65);near(rendered[10].vertices[0].x,157);
@@ -408,6 +408,17 @@ static void wide_coop_hud(){
 }
 int main(int argc,char** argv){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==3);
+    if(argc==2 && !std::strcmp(argv[1],"native-pair-cadence-only")){
+        replaced_actor_pair();postwait_rate_publication();committed_pair_serial();wide_coop_hud();
+        CPUState cpu{};std::strcpy(selected_rate,"60");activation();
+        pair_diag={};pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=470;pair_diag.guest_cycle=1000000;
+        capture_pair(cpu,0,10,100);tick_callback();tick_callback();
+        ++pair_diag.pair_id;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+        capture_pair(cpu,1,14,108);
+        assert(!coop_output.version && !std::strcmp(coop_prepared.failure,"incomplete native pair"));
+        reset_session();
+        puts("PASS real one-VBlank pair publisher at60/120/display; skipped tick, serial/epoch/pair/deadline/fence refusals and original postwait timestamps retained");return 0;
+    }
     if(argc==2 && !std::strcmp(argv[1],"identity-copy-only")){identity_copy_pair();puts("PASS identity native copy admits complete wide/HUD pair; force-mask, nonidentity and invalid effects keep fallback");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"first-refusal-only")){first_pane_refusal();puts("PASS first failed pane reason survives later pane and pair commit without admitting partial output");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"replaced-actor-only")){replaced_actor_pair();puts("PASS replaced outer actor observes only real nested native body/return, two immutable wide/HUD panes and prepared pair");return 0;}
@@ -458,8 +469,8 @@ int main(int argc,char** argv){
     activation();test_bank_identity=77;
     pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=10;pair_diag.guest_cycle=1000000;
     capture_pair(cpu,0,10,100);assert(!coop_output.version);
-    pair_diag.pair_id=11;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
-    tick_callback();tick_callback();capture_pair(cpu,1,14,108);
+    pair_diag.pair_id=11;pair_diag.guest_cycle+=g_psx_vblank_cycles;
+    tick_callback();capture_pair(cpu,1,14,108);
     assert(coop_output.version && rendered.size()==12 && rendered_materials.size()==6);
     near(rendered[2].vertices[0].x,12);near(rendered[8].vertices[0].x,104);near(rendered[8].vertices[0].y,260);
     assert(rendered_materials[1].texture_bank==7 && rendered_materials[1].bank_identity==77);
@@ -498,10 +509,10 @@ int main(int argc,char** argv){
     psx_presentation_gpu_rate_source_ready();assert(!native_output.version); // late source never shifts timeline
     reset_session();assert(releases==texture_serial && !rate_configured);
     activation();rate_request={};pair_diag.pair_id=30;pair_diag.guest_cycle=1000000;
-    capture_pair(cpu,0,10,100);tick_callback();tick_callback();
-    pair_diag.pair_id=31;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    capture_pair(cpu,0,10,100);tick_callback();
+    pair_diag.pair_id=31;pair_diag.guest_cycle+=g_psx_vblank_cycles;
     capture_pair(cpu,1,14,108);
-    rate_request.display_start_ns=1000000000;rate_request.deadline_ns=1000000000+period/4;
+    rate_request.display_start_ns=1000000000;rate_request.deadline_ns=1000000000+period/8;
     rate_request.pair_id=31;rate_request.pair_cycle=pair_diag.guest_cycle;
     psx_presentation_gpu_rate_source_ready();assert(coop_output.version);
     near(rendered[2].vertices[0].x,11);near(rendered[8].vertices[0].x,102);near(rendered[8].vertices[0].y,260);

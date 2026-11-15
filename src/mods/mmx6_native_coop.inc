@@ -161,7 +161,9 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
         if(!native_enabled || seat>1)return;
         if(event==MMX6_NATIVE_PAIR_COMMITTED) {
             if(coop_writing && coop_writing->view[0] && coop_writing->view[1]) {
-                coop_writing->period_ns=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
+                // The original post-VSync producer publishes BOTH private
+                // panes each real VBlank, with one adjacent immutable serial.
+                coop_writing->period_ns=uint64_t(g_psx_vblank_cycles)*1000000000ull/33868800ull;
                 CoopPair* transfer=coop_writing.release();
                 if(!psx_presentation_gpu_prepare_async(native_coop_ready,transfer))delete transfer;
             }else{

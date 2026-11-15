@@ -17,7 +17,7 @@ static Frame frame(uint64_t serial,uint32_t tick,int x,int y,int bank,unsigned s
 }
 int main(){
     auto a0=frame(1,10,10,20,0,0),a1=frame(1,10,100,30,0,1);
-    auto b0=frame(2,12,14,24,1,0),b1=frame(2,12,108,34,1,1);
+    auto b0=frame(2,11,14,24,1,0),b1=frame(2,11,108,34,1,1);
     PairPrepared pair;
     assert(pair.build({&a0,&a1},{&b0,&b1},{41,42},.5));
     assert(pair.triangles.size()==12 && pair.materials.size()==6);
@@ -31,6 +31,14 @@ int main(){
     assert(pair.triangles[6].identity>>63); // per-view identities never cross-pair
     assert(!pair.build({&a0,nullptr},{&b0,&b1},{41,42},.5) && pair.triangles.empty());
     assert(!pair.build({&a0,&a1},{&b0,&b1},{41,0},.5) && pair.triangles.empty());
+    // Production publishes once per VBlank. Neither a skipped tick nor a
+    // skipped committed serial is an interpolation correspondence.
+    b0.tick=b1.tick=12;
+    assert(!pair.build({&a0,&a1},{&b0,&b1},{41,42},.5));
+    b0.tick=b1.tick=11;b0.serial=b1.serial=3;
+    assert(!pair.build({&a0,&a1},{&b0,&b1},{41,42},.5));
+    b0.serial=b1.serial=2;b1.epoch=10;
+    assert(!pair.build({&a0,&a1},{&b0,&b1},{41,42},.5));b1.epoch=9;
     // Each immutable wide pane may exceed half the target width; ownership
     // is vertical, with independently clipped current material inputs.
     for(auto* f:{&a0,&a1,&b0,&b1})f->target.right=639;
