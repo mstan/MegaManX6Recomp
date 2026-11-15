@@ -6,7 +6,7 @@ struct CoopScene {
     uint64_t texture=0;
     ~CoopScene(){if(texture)psx_presentation_gpu_release(texture);}
 };
-struct CoopPair {std::shared_ptr<CoopScene> view[2];};
+struct CoopPair {std::shared_ptr<CoopScene> view[2];uint64_t period_ns=0;};
 struct SavedCapture {
     uint32_t buffer=0,head=0;
     bool open=false,complete=false,armed=false;
@@ -18,9 +18,11 @@ struct SavedCapture {
 std::shared_ptr<CoopScene> coop_current;
 std::unique_ptr<CoopPair> coop_writing;
 std::unique_ptr<CoopPair> coop_previous;
+std::unique_ptr<CoopPair> coop_older;
+uint64_t coop_rate_pair=0,coop_rate_cycle=0,coop_rate_ready=0;
 PairPrepared coop_prepared;
 struct CoopOutput {
-    uint64_t epoch=0,serial=0,version=0,pair=0,cycle=0,not_before=0,expires=0;
+    uint64_t epoch=0,serial=0,version=0,pair=0,cycle=0,not_before=0,expires=0,deadline=0;
     int crop[2][4]{};
 } coop_output;
 bool coop_snapshot=false;
@@ -37,7 +39,29 @@ void native_coop_clear() {
     if(native_view)native_coop_restore_capture();
     coop_writing.reset();
     std::unique_ptr<CoopPair> release;
-    {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_output={};}
+    {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_older.reset();coop_output={};coop_rate_pair=coop_rate_cycle=coop_rate_ready=0;}
+}
+void native_rate_coop_prepare(const PsxPresentationRateRequest& request) {
+    std::lock_guard<std::mutex> lock(native_publication);
+    coop_output={};
+    const auto& old=coop_older;const auto& next=coop_previous;
+    if(!old || !next || request.pair_id!=coop_rate_pair || request.pair_cycle!=coop_rate_cycle ||
+       next->view[0]->frame.epoch!=native_epoch || next->view[0]->frame.serial!=native_serial)return;
+    const uint64_t period=next->period_ns;
+    if(!period || old->period_ns!=period || request.deadline_ns<=request.display_start_ns ||
+       request.deadline_ns>=request.display_start_ns+period)return;
+    double alpha=0;
+    if(!psx_presentation_phase(request.display_start_ns,request.display_start_ns+period,
+        coop_rate_ready,request.deadline_ns,&alpha) ||
+       !coop_prepared.build({&old->view[0]->frame,&old->view[1]->frame},
+           {&next->view[0]->frame,&next->view[1]->frame},
+           {next->view[0]->texture,next->view[1]->texture},alpha) ||
+       !psx_presentation_gpu_render(coop_prepared.triangles.data(),uint32_t(coop_prepared.triangles.size()),
+           coop_prepared.materials.data(),uint32_t(coop_prepared.materials.size())))return;
+    coop_output.epoch=next->view[0]->frame.epoch;coop_output.serial=next->view[0]->frame.serial;
+    coop_output.version=psx_presentation_gpu_output_version();coop_output.pair=request.pair_id;
+    coop_output.cycle=request.pair_cycle;coop_output.deadline=request.deadline_ns;
+    std::memcpy(coop_output.crop,coop_prepared.crop,sizeof coop_output.crop);++native_ready;
 }
 void native_coop_ot(CPUState* cpu) {
     if(!coop_current || coop_snapshot || !native_writing || !native_complete ||
@@ -75,8 +99,15 @@ void native_coop_ready(void* user) noexcept {
     try {
         if(!native_enabled || !next->view[0] || !next->view[1] ||
            next->view[0]->frame.epoch!=native_epoch || next->view[1]->frame.epoch!=native_epoch)return;
-        std::lock_guard<std::mutex> lock(native_publication);
+        native_rate=psx_presentation_gpu_rate_active()!=0;
+        {std::lock_guard<std::mutex> lock(native_publication);
         coop_output={};
+        if(native_rate) {
+            GLRenderStereoDiag pair{};gl_renderer_stereo_diag(&pair);
+            coop_rate_pair=pair.valid && pair.mode==2?pair.pair_id:0;coop_rate_cycle=pair.guest_cycle;
+            coop_rate_ready=rt_now_ns();coop_older=std::move(coop_previous);
+            coop_previous=std::move(next);
+        }else {
         if(coop_previous && next->view[0]->texture && next->view[1]->texture &&
            coop_prepared.build({&coop_previous->view[0]->frame,&coop_previous->view[1]->frame},
                 {&next->view[0]->frame,&next->view[1]->frame},
@@ -95,6 +126,8 @@ void native_coop_ready(void* user) noexcept {
             }else{++native_fallbacks;native_failure="native pair binding/private target";}
         }else{++native_fallbacks;native_failure=!coop_previous?"first native pane pair":coop_prepared.failure;}
         coop_previous=std::move(next);
+        }}
+        if(native_rate)psx_presentation_gpu_rate_source_ready();
     }catch(...) {std::lock_guard<std::mutex> lock(native_publication);coop_output={};++native_fallbacks;native_failure="native pair allocation";}
 }
 void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int complete) {
@@ -103,6 +136,7 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
         if(!native_enabled || seat>1)return;
         if(event==MMX6_NATIVE_PAIR_PREPARED) {
             if(coop_writing && coop_writing->view[0] && coop_writing->view[1]) {
+                coop_writing->period_ns=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
                 CoopPair* transfer=coop_writing.release();
                 if(!psx_presentation_gpu_prepare_async(native_coop_ready,transfer))delete transfer;
             }else{coop_writing.reset();++native_fallbacks;native_failure="incomplete native pane pair";}
@@ -139,11 +173,14 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
 }
 int native_coop_present(void*,uint64_t pair,uint64_t cycle,uint64_t present_cycle,int w,int h,
     int repeated,uint64_t* version,int crop[2][4]) {
-    if(!native_enabled || !repeated)return 0;
+    if(!native_enabled || (!native_rate && !repeated))return 0;
+    PsxPresentationRateRequest request{};
+    if(native_rate && !psx_presentation_gpu_rate_request(&request))return 0;
     std::lock_guard<std::mutex> lock(native_publication);
     auto& out=coop_output;
     if(!out.version || out.epoch!=native_epoch || out.serial!=native_serial || out.pair!=pair ||
-       out.cycle!=cycle || present_cycle<out.not_before || present_cycle>out.expires ||
+       out.cycle!=cycle || (native_rate?(!request.deadline_ns || request.deadline_ns!=out.deadline):
+           (present_cycle<out.not_before || present_cycle>out.expires)) ||
        out.crop[0][2]!=w || out.crop[0][3]!=h || out.crop[1][2]!=w || out.crop[1][3]!=h ||
        !psx_presentation_gpu_output_ready(out.version))return 0;
     *version=out.version;std::memcpy(crop,out.crop,sizeof out.crop);out.version=0;++native_presented;return 1;

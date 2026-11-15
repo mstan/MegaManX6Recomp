@@ -28,12 +28,27 @@ static bool receipt_available=true,output_ready=true,split=false,banked=false;
 static int wide_margin,local_scope;
 static char selected_rate[24]="60";
 static uint64_t texture_serial,output_serial,releases,render_calls;
+static uint64_t fake_ns=900000000,fake_cycle;
+static PsxPresentationRatePrepare rate_prepare;
+static void* rate_user;
+static bool rate_configured,rate_dispatch;
+static PsxPresentationRateRequest rate_request;
 static GpuDrawingEnvironment environment;
 static std::vector<PsxPresentationTriangle> rendered;
 static std::vector<PsxPresentationMaterial> rendered_materials;
 extern "C" {
 int g_psx_render_pass_active=0;
 uint32_t g_psx_vblank_cycles=564480;
+uint64_t psx_get_cycle_count(void){return fake_cycle;}
+uint64_t rt_now_ns(void){return fake_ns;}
+int psx_presentation_gpu_set_rate(double hz,PsxPresentationRatePrepare f,void* user){
+    rate_configured=f && (hz==0 || hz>60);rate_prepare=rate_configured?f:nullptr;rate_user=user;
+    return rate_configured?2:1;
+}
+int psx_presentation_gpu_rate_active(void){return rate_configured;}
+void psx_presentation_gpu_rate_source_ready(void){if(rate_prepare && rate_request.deadline_ns)rate_prepare(rate_user,&rate_request);}
+void psx_presentation_gpu_rate_reset(void){rate_request={};rate_dispatch=false;}
+int psx_presentation_gpu_rate_request(PsxPresentationRateRequest* out){if(!rate_dispatch)return 0;*out=rate_request;return 1;}
 int psx_mod_gpu_dma_memory_contains(uint32_t,uint32_t){return 0;}
 uint64_t mod_texture_bank_identity(uint16_t id){return id?test_bank_identity:0;}
 void psx_presentation_gpu_acquire(void){}
@@ -242,7 +257,41 @@ int main(){
     view_observer(view_user,nullptr,MMX6_NATIVE_PAIR_CANCEL,0,0);assert(!coop_output.version && !coop_previous);
     reset_session();assert(!command_receipt && !view_observer && !pair_provider && releases==texture_serial);
     split=false;
-    std::strcpy(selected_rate,"120");activation();assert(!native_enabled && !provider);
+    std::strcpy(selected_rate,"120");activation();assert(native_enabled && provider && native_rate);
+    rate_request={};capture(cpu,0,110,20,100);tick_callback();tick_callback();
+    capture(cpu,1,114,22,102,32);
+    const uint64_t period=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
+    rate_request.display_start_ns=1000000000;rate_request.display_start_cycle=1;
+    rate_request.x=rate_request.y=0;rate_request.width=320;rate_request.height=240;
+    for(unsigned quarter:{1u,3u}) {
+        rate_request.deadline_ns=rate_request.display_start_ns+period*quarter/4;
+        psx_presentation_gpu_rate_source_ready();assert(native_output.version);
+        near(rendered[2].vertices[0].x,10+double(quarter)/2);
+        near(rendered[2].vertices[0].uv[0],32); // current animation at every output phase
+        rate_dispatch=true;output_ready=false;assert(!provider(provider_user,0,0,320,240,0,crop));
+        output_ready=true;assert(provider(provider_user,0,0,320,240,0,crop));rate_dispatch=false;
+    }
+    rate_request.deadline_ns=rate_request.display_start_ns+period;
+    psx_presentation_gpu_rate_source_ready();assert(!native_output.version); // native endpoint, never extrapolate
+    rate_request.deadline_ns=rate_request.display_start_ns+period/2;
+    native_previous->ready_ns=rate_request.deadline_ns+1;
+    psx_presentation_gpu_rate_source_ready();assert(!native_output.version); // late source never shifts timeline
+    reset_session();assert(releases==texture_serial && !rate_configured);
+    activation();rate_request={};pair_diag.pair_id=30;pair_diag.guest_cycle=1000000;
+    capture_pair(cpu,0,10,100);tick_callback();tick_callback();
+    pair_diag.pair_id=31;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+    capture_pair(cpu,1,14,108);
+    rate_request.display_start_ns=1000000000;rate_request.deadline_ns=1000000000+period/4;
+    rate_request.pair_id=31;rate_request.pair_cycle=pair_diag.guest_cycle;
+    psx_presentation_gpu_rate_source_ready();assert(coop_output.version);
+    near(rendered[2].vertices[0].x,11);near(rendered[8].vertices[0].x,422);
+    rate_dispatch=true;
+    assert(!pair_provider(pair_user,30,pair_diag.guest_cycle,0,320,240,0,&output,pair_crop));
+    assert(pair_provider(pair_user,31,pair_diag.guest_cycle,0,320,240,0,&output,pair_crop));
+    rate_dispatch=false;restore_state();assert(!coop_output.version && !coop_older && !rate_request.deadline_ns);
+    reset_session();assert(releases==texture_serial);
+    std::strcpy(selected_rate,"display");activation();assert(native_enabled && native_rate);
+    reset_session();
     std::strcpy(selected_rate,"60");receipt_available=false;activation();assert(!native_enabled && !provider);
     puts("PASS X6 native producer: real immutable scene/draw midpoint, current animation/HUD/order, resource ownership, cuts/identity, one native-timeline midpoint, readiness/restore/unload and honest unsupported/reference fallback; no guest replay or writes");
 }
