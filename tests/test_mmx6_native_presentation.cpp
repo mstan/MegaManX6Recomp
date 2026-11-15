@@ -244,7 +244,20 @@ static void first_pane_refusal(){
         coop_first_effect.prefix[2]==0x79000000u && coop_first_effect.prefix[3]==0);
     assert(coop_reported_effect.recorded && coop_reported_effect.source==ActorPacket+4);
     reset_session();assert(!coop_first_refusal && !coop_reported_refusal && !coop_first_effect.recorded &&
-        !coop_reported_effect.recorded);wide_margin=0;split=false;
+        !coop_reported_effect.recorded);
+    activation();g_psx_render_pass_active=local_scope=1;
+    view_observer(view_user,&cpu,MMX6_NATIVE_VIEW_BEGIN,0,1);
+    uint32_t transfer[]={0x80000000u,xy(32,100),xy(64,160),xy(32,16)};
+    GpuViewCommandMetadata metadata{};
+    native_coop_command(nullptr,1,0x000B3004u,transfer,4,&environment,&metadata);
+    std::memset(transfer,0,sizeof transfer); // diagnostic owns its four words
+    view_observer(view_user,&cpu,MMX6_NATIVE_VIEW_END,0,1);
+    g_psx_render_pass_active=local_scope=0;
+    view_observer(view_user,nullptr,MMX6_NATIVE_PAIR_COMMITTED,0,1);
+    assert(coop_first_effect.opcode==0x80 && coop_first_effect.words==4 && !coop_first_effect.invalid);
+    assert(coop_first_effect.prefix[0]==0x80000000u && coop_first_effect.prefix[1]==xy(32,100) &&
+        coop_first_effect.prefix[2]==xy(64,160) && coop_first_effect.prefix[3]==xy(32,16));
+    reset_session();wide_margin=0;split=false;
 }
 static void near(double a,double b){assert(std::fabs(a-b)<.00001);}
 static void activation_choices(){
