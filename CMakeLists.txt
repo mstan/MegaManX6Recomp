@@ -530,6 +530,13 @@ if(BUILD_TESTING)
             target_link_options(${_mmx6_effects_target} PRIVATE /OPT:REF)
         else()
             target_compile_options(${_mmx6_effects_target} PRIVATE -O2 -ffunction-sections -fdata-sections)
+            if(MINGW AND (_mmx6_visual_kind STREQUAL "hud" OR _mmx6_visual_kind STREQUAL "private_views"))
+                # These C fixtures embed the plugin but own only the exercised
+                # call graph. Win64 unwind roots must not retain unrelated
+                # bootstrap functions when a diagnostic is compiled atO0.
+                target_compile_options(${_mmx6_effects_target} PRIVATE
+                    -fno-asynchronous-unwind-tables -fno-unwind-tables)
+            endif()
             if(APPLE)
                 target_link_options(${_mmx6_effects_target} PRIVATE -Wl,-dead_strip)
             else()
