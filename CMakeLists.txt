@@ -377,10 +377,24 @@ if(BUILD_TESTING)
     add_executable(mmx6_frame_interpolation_test
         tests/test_mmx6_frame_interpolation.cpp
         "${PSXRECOMP_V4_ROOT}/runtime/src/render_pass_motion.c")
+    # Keep the released replay implementation's semantic fixture; production
+    # uses the no-replay producer and its independent scene tests below.
+    target_compile_definitions(mmx6_frame_interpolation_test PRIVATE MMX6_LEGACY_FRAME_INTERPOLATION_FIXTURE=1)
     target_include_directories(mmx6_frame_interpolation_test PRIVATE
         "${PSXRECOMP_V4_ROOT}/runtime/include")
     add_test(NAME mmx6_frame_interpolation_test
         COMMAND "$<TARGET_FILE:mmx6_frame_interpolation_test>")
+
+    add_executable(mmx6_native_presentation_test
+        tests/test_mmx6_native_presentation.cpp
+        "${PSXRECOMP_V4_ROOT}/runtime/src/presentation_scene.c"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/presentation_draw.c")
+    target_include_directories(mmx6_native_presentation_test PRIVATE
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    if(NOT MSVC)
+        target_link_libraries(mmx6_native_presentation_test PRIVATE m)
+    endif()
+    add_test(NAME mmx6_native_presentation_test COMMAND mmx6_native_presentation_test)
 
     # Seamless Loading preparation against an owner-supplied disc image:
     # -DMMX6_TEST_DISC=<path to "Mega Man X6 (USA) (v1.1).bin">.

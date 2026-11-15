@@ -1,3 +1,4 @@
+#if defined(MMX6_LEGACY_FRAME_INTERPOLATION_FIXTURE)
 #include "cpu_state.h"
 #include "mod_plugins.h"
 #include "render_pass_motion.h"
@@ -210,3 +211,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_frame_interpolation_plugin) {
     psx_mod_register_instruction_plugin(id,Camera,0x0C009CF9,cameras);
     psx_mod_register_instruction_plugin(id,End,0x03E00008,end);
 }
+
+#else
+#include "mmx6_native_presentation.inc"
+#endif
