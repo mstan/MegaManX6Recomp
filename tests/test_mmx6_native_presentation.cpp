@@ -173,7 +173,7 @@ static void command(uint32_t source,const uint32_t* words,unsigned n,const GpuVi
     metadata.piece_count=1;
     command_receipt(command_user,uint32_t(receipt_view),source,words,n,&environment,&metadata);
 }
-static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=false) {
+static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=false,bool commit=true) {
     split=true;native_begin(&cpu,NativeDraw);assert(!native_open);
     put(0x8009B7A0,FrameBase+bank*FrameStride);const uint32_t buffer=FrameBase+bank*FrameStride;
     put(buffer+0x14,0|(bank*240u<<16));put(buffer+0x18,320|(240u<<16));
@@ -199,7 +199,7 @@ static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1,bool hud=fals
         view_observer(view_user,&cpu,MMX6_NATIVE_VIEW_END,seat,1);assert(!native_view);
         g_psx_render_pass_active=local_scope=0;
     }
-    view_observer(view_user,&cpu,MMX6_NATIVE_PAIR_PREPARED,0,1);
+    if(commit)view_observer(view_user,&cpu,MMX6_NATIVE_PAIR_COMMITTED,0,1);
 }
 static void near(double a,double b){assert(std::fabs(a-b)<.00001);}
 static void activation_choices(){
@@ -218,6 +218,43 @@ static void activation_choices(){
     }
     std::strcpy(selected_rate,"60");receipt_available=false;activation();
     assert(!native_enabled && !provider);receipt_available=true;
+}
+static void postwait_rate_publication(){
+    const uint64_t period=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
+    for(const char* rate:{"120","display"}){
+        CPUState cpu{};std::strcpy(selected_rate,rate);activation();test_bank_identity=77;
+        fake_ns=900000000;pair_diag={};pair_diag.valid=1;pair_diag.mode=2;
+        pair_diag.pair_id=90;pair_diag.guest_cycle=1000000;capture_pair(cpu,0,10,100);
+        tick_callback();tick_callback();
+        rate_request={};rate_request.display_start_ns=1000000000;
+        rate_request.display_start_cycle=pair_diag.guest_cycle;rate_request.native_cycle=pair_diag.guest_cycle;
+        rate_request.pair_id=90;rate_request.pair_cycle=pair_diag.guest_cycle;
+        rate_request.deadline_ns=rate_request.display_start_ns+period/4;
+        pair_diag.pair_id=91;pair_diag.guest_cycle+=2ull*g_psx_vblank_cycles;
+        fake_ns=1000000000+period/8;capture_pair(cpu,1,14,108,false,false);
+        assert(coop_previous && coop_rate_pair==90 && !coop_output.version); // views alone cannot publish
+        const auto queued=rate_request;
+        view_observer(view_user,nullptr,MMX6_NATIVE_PAIR_COMMITTED,0,1);
+        assert(coop_rate_pair==91 && coop_rate_ready==fake_ns && !coop_output.version); // stale request never rebound
+        assert(!std::memcmp(&queued,&rate_request,sizeof queued));
+        rate_request.pair_id=91;rate_request.pair_cycle=pair_diag.guest_cycle;
+        rate_request.native_cycle=rate_request.display_start_cycle=pair_diag.guest_cycle;
+        rate_request.deadline_ns=coop_rate_ready-1;
+        psx_presentation_gpu_rate_source_ready();assert(!coop_output.version); // late source skips its missed slot
+        rate_request.deadline_ns=rate_request.display_start_ns+period/4;
+        const auto original=rate_request;fake_ns+=1000000000; // GPU queue delay must not create a new origin
+        psx_presentation_gpu_rate_source_ready();assert(coop_output.version);
+        assert(!std::memcmp(&original,&rate_request,sizeof original));
+        near(rendered[2].vertices[0].x,11);near(rendered[8].vertices[0].x,102);
+        uint64_t version=0;int crop[2][4]{};rate_dispatch=true;output_ready=false;
+        assert(!pair_provider(pair_user,91,pair_diag.guest_cycle,0,320,240,0,&version,crop));
+        output_ready=true;assert(pair_provider(pair_user,91,pair_diag.guest_cycle,0,320,240,0,&version,crop));
+        assert(version==output_serial && crop[1][1]==240);rate_dispatch=false;
+        rate_request.deadline_ns=rate_request.display_start_ns+period;
+        psx_presentation_gpu_rate_source_ready();assert(!coop_output.version); // never extrapolate beyond native endpoint
+        reset_session();assert(!coop_previous && !coop_older && !rate_configured);
+    }
+    std::strcpy(selected_rate,"60");fake_ns=900000000;
 }
 static void wide_coop_hud(){
     CPUState cpu{};wide_margin=53;test_bank_identity=77;std::strcpy(selected_rate,"60");activation();
@@ -242,7 +279,7 @@ static void wide_coop_hud(){
 }
 int main(int argc,char** argv){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==2);
-    if(argc==2 && !std::strcmp(argv[1],"wide-coop-hud-only")){wide_coop_hud();puts("PASS real expanded per-view producer, independent motion, two current HUDs, painter order and owned426x480 pair");return 0;}
+    if(argc==2 && !std::strcmp(argv[1],"wide-coop-hud-only")){wide_coop_hud();postwait_rate_publication();puts("PASS original postwait publication,120/display queued timestamp/readiness, real expanded per-view producer, independent motion, two current HUDs, painter order and owned426x480 pair");return 0;}
     if(argc==2 && !std::strcmp(argv[1],"activation-only")){
         activation_choices();puts("PASS every released rate selector, legacy display alias, unsupported values and unavailable native service");return 0;
     }

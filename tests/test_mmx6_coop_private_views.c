@@ -14,6 +14,7 @@ static unsigned attack_camera_probe,attack_camera_calls;
 static unsigned rearm_probe,rearm_calls;
 static unsigned view_native_calls,view_gpu_words,view_callback_calls,view_refuse,view_abort;
 static unsigned view_hud_calls[2];
+static unsigned boundary_probe,boundary_count,boundary_order[8];
 static int view_native(CPUState *,uint32_t,uint32_t);
 static int view_gpu(uint32_t,unsigned);
 static unsigned arrival_probe,arrival_camera_calls;
@@ -92,8 +93,8 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
         return 1;
     }
     if(address==0x800244C0u){CHECK(private_draw);++view_hud_calls[private_seat];return 1;}
-    if(address==VIEW_DRAW_OT) { cpu->gpr[2]=0xC0DE;return 1; }
-    if(address==0x80066150u)return 1;
+    if(address==VIEW_DRAW_OT) { if(boundary_probe && !private_draw)boundary_order[boundary_count++]=1;cpu->gpr[2]=0xC0DE;return 1; }
+    if(address==0x80066150u){if(boundary_probe && !private_draw)boundary_order[boundary_count++]=2;return 1;}
     if(address==0x8006663Cu) {
         CHECK(private_draw && cpu->gpr[4]==view_buffer+0x70u && cpu->gpr[5]==32);
         /* Original ClearOTagR: first terminator, then31 backward links. */
@@ -164,6 +165,7 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
         return 1;
     }
     CHECK(address==0x80025FB0u && private_draw);
+    if(boundary_probe)CHECK(psx_mod_read_word(0x80097420u)==0x42u);
     if(entering_view_probe) {
         CHECK(!personal_initialized && (psx_mod_read_byte(PLAY+1)==1 ||
             (psx_mod_read_byte(PLAY+1)==2 && personal_active && !personal_menu[0].native[4] && personal_menu[0].native[5]<=1)));
@@ -266,6 +268,33 @@ static void presentation_restore(int online,int split,unsigned refuse,unsigned a
     if(!abort)CHECK(view_callback_calls==(split && !refuse?2u:1u));
     CHECK(!mmx6_view_sdk.busy);
     if(!refuse && !abort)CHECK(view_hud_calls[split?0:(mmx6_view_sdk.local_port==1?1:0)]==1 && (!split || view_hud_calls[1]==1));
+}
+static void original_boundary_note(void *user,CPUState *cpu,unsigned event,unsigned seat,int complete){
+    (void)user;CHECK(boundary_probe && complete && boundary_count<8);
+    if(event==MMX6_NATIVE_VIEW_BEGIN || event==MMX6_NATIVE_VIEW_END){
+        CHECK(cpu && private_draw && psx_mod_read_word(0x80097420u)==0x42u);
+        boundary_order[boundary_count++]=3+seat*2+(event==MMX6_NATIVE_VIEW_END);
+    }else{
+        CHECK(event==MMX6_NATIVE_PAIR_COMMITTED && !cpu && !private_draw && !mmx6_view_sdk.busy);
+        CHECK(view_hud_calls[0]==1 && view_hud_calls[1]==1 && !state_track.count && !state_track.error);
+        boundary_order[boundary_count++]=7;
+    }
+}
+static void original_postwait_boundary(void){
+    CPUState cpu;prepare_view(&cpu,0,1);boundary_probe=1;boundary_count=0;
+    mmx6_native_coop_set_observer(original_boundary_note,NULL);
+    /* Original60964 returns to12104 before PutDispEnv/PutDrawEnv and the
+     * canonical66744 call returning to12128. This context cannot draw. */
+    cpu.gpr[31]=0x80012104u;cpu.gpr[4]=0;psx_mod_write_word(0x80097420u,0x41u);
+    CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && !boundary_count && !view_callback_calls);
+    psx_mod_write_word(0x80097420u,0x42u); /* a real native HUD blink input after VBlank */
+    cpu.gpr[31]=0x80012128u;cpu.gpr[4]=view_buffer+0xEC;
+    CHECK(independent_present(&cpu,VIEW_DRAW_OT) && cpu.gpr[2]==0xC0DE);
+    CHECK(boundary_count==7 && view_callback_calls==2 && mmx6_view_sdk.pair_calls==1);
+    for(unsigned i=0;i<7;++i)CHECK(boundary_order[i]==i+1);
+    const unsigned draws=view_native_calls;
+    CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && view_native_calls==draws && boundary_count==7);
+    mmx6_native_coop_set_observer(NULL,NULL);boundary_probe=0;
 }
 static int forbidden_callback(CPUState *cpu,void *user,uint32_t eye) {
     (void)cpu;(void)user;(void)eye;CHECK(0);return 0;
@@ -1305,7 +1334,7 @@ static void private_beam_pool_uses_own_simulation_camera(void) {
 }
 int main(int argc,char** argv) {
     if(argc==2 && !strcmp(argv[1],"wide-hud-only")){
-        defaults_and_scope();presentation_restore(0,1,0,0);presentation_restore(1,0,0,0);
+        defaults_and_scope();original_postwait_boundary();presentation_restore(0,1,0,0);presentation_restore(1,0,0,0);
         clear_banks();puts("PASS co-op preserves active aspect, emits both native HUDs and restores private host/RAM ownership");return 0;
     }
     local_survivor_uses_current_native_screen();

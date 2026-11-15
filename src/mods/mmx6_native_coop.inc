@@ -134,7 +134,7 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
     try {
         if(event==MMX6_NATIVE_PAIR_CANCEL){native_coop_clear();return;}
         if(!native_enabled || seat>1)return;
-        if(event==MMX6_NATIVE_PAIR_PREPARED) {
+        if(event==MMX6_NATIVE_PAIR_COMMITTED) {
             if(coop_writing && coop_writing->view[0] && coop_writing->view[1]) {
                 coop_writing->period_ns=uint64_t(g_psx_vblank_cycles)*2ull*1000000000ull/33868800ull;
                 CoopPair* transfer=coop_writing.release();

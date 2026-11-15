@@ -4127,7 +4127,6 @@ static void world_camera_begin(CPUState *cpu,uint32_t address) {
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
 #ifdef MMX6_COOP_MODERN_STATE
-    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80060964u,independent_prepare_present);
 #endif
     static const uint32_t personal_shared[]={0x800139A0u,0x800139F4u,
         0x8001750Cu,0x80020C40u};
