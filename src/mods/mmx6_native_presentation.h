@@ -4,6 +4,7 @@
  * animation/UV/color/primitive shape and only the authored previous rigid pose.
  * This is sprite/camera transport, never image or vertex correspondence. */
 #include "gpu.h"
+#include "gpu_view_receipt.h"
 #include "presentation_scene.h"
 #include "presentation_draw.h"
 #include "presentation_gpu.h"
@@ -36,7 +37,8 @@ struct Frame {
     uint64_t epoch=0, serial=0;
     uint32_t tick=0;
     GpuDrawingEnvironment environment{};
-    GpuDrawArea target{};
+    GpuDrawArea target{},native_target{};
+    bool native_target_set=false,wide=false;
     bool target_set=false,valid=true;
     const char* failure="";
     uint8_t filter=0;
@@ -57,6 +59,46 @@ struct Frame {
             material.filter=0; // retained-bank native renderer uses nearest
         }
         return true;
+    }
+    GpuDrawArea binding()const{return native_target_set?native_target:target;}
+    bool resolved(const GpuViewPrimitive& d,Motion motion,uint16_t bank_id,uint64_t bank_identity,bool live_clut) {
+        if(!valid)return false;
+        if(d.vertices<3 || d.vertices>4 || primitives.size()>=MaxPackets)return reject("native resolved primitive bounds");
+        const GpuDrawArea source=binding();
+        const unsigned width=d.wide?unsigned(d.wide_width):source.right-source.left+1;
+        if(!width || width>1024 || source.bottom<source.top || source.bottom>=512)return reject("native resolved view bounds");
+        if(!target_set) {
+            target=source;target.left=d.wide?0:source.left;target.right=target.left+width-1;
+            target_set=true;wide=d.wide!=0;
+        }else if(wide!=(d.wide!=0) || target.right-target.left+1!=width)return reject("mixed native view formats");
+        Primitive p{};p.identity=uint64_t(primitives.size())+1;
+        if(motion.world){motion.x+=d.view_shift;motion.camera_x-=d.view_shift;}p.motion=motion;
+        auto& m=p.material;m.filter=filter;m.texture_window=d.texture_window;
+        m.texpage=d.texpage;m.clut_x=d.clut_x;m.clut_y=d.clut_y;m.semi=d.semi;
+        m.clip[0]=int16_t(std::max(int(target.left),d.clip[0]));m.clip[1]=int16_t(std::max(int(target.top),d.clip[1]));
+        m.clip[2]=int16_t(std::min(int(target.right),d.clip[2]));m.clip[3]=int16_t(std::min(int(target.bottom),d.clip[3]));
+        if(d.flags&1)m.flags|=PSX_PRESENTATION_MASK_SET;
+        if(d.flags&2)m.flags|=PSX_PRESENTATION_MASK_CHECK;
+        if(d.flags&4)m.flags|=PSX_PRESENTATION_DITHER;
+        if(d.textured){m.flags|=PSX_PRESENTATION_TEXTURED;if(d.raw)m.flags|=PSX_PRESENTATION_RAW_TEXTURE;
+            int lo[2]={d.u[0],d.v[0]},hi[2]={d.u[0],d.v[0]};
+            for(unsigned i=1;i<d.vertices;++i){lo[0]=std::min(lo[0],d.u[i]);lo[1]=std::min(lo[1],d.v[i]);
+                hi[0]=std::max(hi[0],d.u[i]);hi[1]=std::max(hi[1],d.v[i]);}
+            // Every four-vertex native piece is an actual rectangle call.
+            if(d.vertices==4){if(d.u[1]>=d.u[0])--hi[0];else ++lo[0];if(d.v[2]>=d.v[0])--hi[1];else ++lo[1];}
+            for(unsigned k=0;k<2;++k){m.uv_limits[k]=uint16_t(std::clamp(lo[k],0,255));m.uv_limits[k+2]=uint16_t(std::clamp(hi[k],0,255));}
+        }
+        PsxPresentationVertex v[4]{};
+        for(unsigned i=0;i<d.vertices;++i){v[i].position[0]=d.x[i]-motion.x;v[i].position[1]=d.y[i]-motion.y;
+            v[i].position[2]=1;v[i].uv[0]=float(d.u[i]);v[i].uv[1]=float(d.v[i]);
+            if(d.color555){uint32_t c=0xFF000000u;for(unsigned k=0;k<3;++k){const unsigned n=(d.color[i]>>(5*k))&31;
+                    c|=uint32_t(accurate?n*8:unsigned(std::lround(n*255.0/31.0)))<<(8*k);}v[i].rgba=c;}
+            else v[i].rgba=color(d.color[i],d.textured!=0);
+        }
+        const unsigned indices[2][3]={{0,1,2},{1,2,3}};p.count=d.vertices==4?6:3;
+        for(unsigned t=0;t<p.count/3;++t)for(unsigned k=0;k<3;++k)p.vertices[t*3+k]=v[indices[t][k]];
+        const size_t first=primitives.size();anchor(motion);primitives.push_back(p);
+        return bank(bank_id,bank_identity,live_clut,first);
     }
     uint32_t color(uint32_t value,bool textured)const {
         uint32_t result=0xFF000000u;

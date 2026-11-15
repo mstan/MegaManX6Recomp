@@ -56,7 +56,8 @@ unsigned native_view=0;
 void native_coop_observe(void*,CPUState*,unsigned,unsigned,int);
 void native_coop_clear();
 std::mutex native_publication;
-std::unique_ptr<Published> native_previous;
+std::shared_ptr<Published> native_previous,native_pending;
+bool native_list_scope=false;
 Prepared native_prepared;
 Output native_output;
 
@@ -142,14 +143,18 @@ void native_begin(CPUState*,uint32_t) {
     native_open=native_complete=native_armed=false;
     native_actor_scope={};native_actor_stack.clear();native_bg_scope={};native_ranges.clear();native_writing.reset();
     if(!native_enabled)return;
-    if(psx_mod_widescreen_view_x_margin()!=0 || gpu_last_frame_vertical_split_screen()) {
-        native_failure="wide or co-op view not yet bound";++native_fallbacks;return;
+    if(gpu_last_frame_vertical_split_screen()) {
+        native_failure="co-op native view owned separately";++native_fallbacks;return;
     }
     native_buffer=psx_mod_read_word(0x8009B7A0u);
     if(native_buffer!=FrameBase && native_buffer!=FrameBase+FrameStride){native_failure="framebuffer";return;}
     native_writing=std::make_unique<Frame>();
     native_writing->epoch=native_epoch;native_writing->serial=native_serial;
-    native_writing->tick=native_ticks;native_open=true;
+    native_writing->tick=native_ticks;
+    native_writing->native_target={psx_mod_read_half(native_buffer+0x14),psx_mod_read_half(native_buffer+0x16),0,0,0,0};
+    native_writing->native_target.right=native_writing->native_target.left+psx_mod_read_half(native_buffer+0x18)-1;
+    native_writing->native_target.bottom=native_writing->native_target.top+psx_mod_read_half(native_buffer+0x1A)-1;
+    native_writing->native_target_set=true;native_open=true;
 }
 void native_end(CPUState*,uint32_t) {
     if((!native_view && (g_psx_render_pass_active || psx_mod_local_view_scope())) || !native_open)return;
@@ -173,14 +178,14 @@ void native_ot(CPUState* cpu,uint32_t) {
         native_head=cpu->gpr[4]&0x1FFFFFFFu;native_armed=true;
     }
 }
-void native_gpu_ready_impl(void* user,uint64_t version) {
-    std::unique_ptr<Published> next(static_cast<Published*>(user));next->texture=version;
+void native_gpu_ready_impl(std::shared_ptr<Published> next) {
+    const uint64_t version=next->texture;
     if(!version || !native_enabled || next->frame.epoch!=native_epoch)return;
     std::lock_guard<std::mutex> lock(native_publication);
     native_output={};
     if(next->frame.epoch!=native_epoch)return;
     const bool banks=native_previous &&
-        (native_previous->frame.target.left!=next->frame.target.left || native_previous->frame.target.top!=next->frame.target.top) &&
+        (native_previous->frame.binding().left!=next->frame.binding().left || native_previous->frame.binding().top!=next->frame.binding().top) &&
         native_previous->frame.target.right-native_previous->frame.target.left==next->frame.target.right-next->frame.target.left &&
         native_previous->frame.target.bottom-native_previous->frame.target.top==next->frame.target.bottom-next->frame.target.top;
     if(banks && next->frame.tick-native_previous->frame.tick==2 &&
@@ -188,62 +193,52 @@ void native_gpu_ready_impl(void* user,uint64_t version) {
         uint32_t count=0;const auto* triangles=psx_presentation_draw_triangles(native_prepared.draw.get(),&count);
         if(psx_presentation_gpu_render(triangles,count,native_prepared.materials.data(),uint32_t(native_prepared.materials.size()))) {
             native_output={next->frame.epoch,next->frame.serial,psx_presentation_gpu_output_version(),
-                native_previous->frame.target,next->frame.target};
+                native_previous->frame.binding(),next->frame.target};
+            native_output.front.right=native_output.front.left+next->frame.target.right-next->frame.target.left;
             native_failure="";++native_ready;
         }else{native_failure="private GPU target";++native_fallbacks;}
     }else{native_failure=!native_previous?"first scene":!banks?"source display binding":
         next->frame.tick-native_previous->frame.tick!=2?"native cadence not two ticks":native_prepared.failure;++native_fallbacks;}
     native_previous=std::move(next);
 }
-void native_gpu_ready(void* user,uint64_t version) noexcept {
-    try {native_gpu_ready_impl(user,version);}
+void native_gpu_ready(void* user) noexcept {
+    std::unique_ptr<std::shared_ptr<Published>> transfer(static_cast<std::shared_ptr<Published>*>(user));
+    try {native_gpu_ready_impl(*transfer);}
     catch(...) {std::lock_guard<std::mutex> lock(native_publication);native_output={};native_failure="native scene allocation";++native_fallbacks;}
+}
+void native_material_ready(void* user,uint64_t version) noexcept {
+    std::unique_ptr<std::shared_ptr<Published>> transfer(static_cast<std::shared_ptr<Published>*>(user));
+    (*transfer)->texture=version;
 }
 void native_receipt_impl(void*,const DMANativeGpuNode* nodes,uint32_t count,
     const uint32_t* words,uint32_t total,int terminated) {
-    if(!native_open || !native_complete || !native_armed || !native_writing)return;
+    if(native_view || !native_open || !native_complete || !native_armed || !native_writing)return;
     native_armed=false;
     if(!terminated || !count || count>MaxPackets || !words || nodes[0].address!=native_head) {
         native_reject("incomplete native list");return;
     }
-    Frame& f=*native_writing;gpu_get_drawing_environment(&f.environment);
-    f.filter=uint8_t(gr_texture_filter());f.accurate=gl_renderer_accurate_blending()!=0;
-    for(uint32_t i=0;i<count && f.valid;++i) {
-        const auto& node=nodes[i];const unsigned n=node.header>>24;
-        if(node.offset>total || n>total-node.offset){f.reject("receipt bounds");break;}
-        for(unsigned at=0;at<n && f.valid;) {
-            const uint32_t* w=words+node.offset+at;const unsigned op=w[0]>>24;
-            const int length=gpu_gp0_command_word_count(uint8_t(op));
-            if(length<=0 || unsigned(length)>n-at){f.reject("stream command bounds");break;}
-            const uint32_t source=node.address+4u+at*4u;
-            const uint16_t bank=mod_texture_packet_bank(source,w,unsigned(length));
-            const size_t first=f.primitives.size();
-            int32_t x[4]{},y[4]{};unsigned vertices=0;const int rectangle=(op&0xE0u)==0x60u;
-            if(rectangle){
-                if(unsigned(length)>=2){const unsigned size=(op>>3)&3,fixed[4]={0,1,8,16};
-                    const uint32_t wh=size?0:w[(op&4)?3:2];
-                    const unsigned width=size?fixed[size]:wh&1023,height=size?fixed[size]:(wh>>16)&511;
-                    const int xx=Frame::signed11(w[1]),yy=Frame::signed11(w[1]>>16);
-                    for(unsigned j=0;j<4;++j){x[j]=xx+((j&1)?width:0);y[j]=yy+((j&2)?height:0);}vertices=4;}
-            }else if((op&0xE0u)==0x20u){
-                vertices=(op&8)?4:3;const unsigned stride=1+unsigned((op&4)!=0)+unsigned((op&16)!=0);
-                if(vertices*stride+unsigned(!(op&16))!=unsigned(length)){f.reject("polygon bounds");break;}
-                for(unsigned j=0;j<vertices;++j){x[j]=Frame::signed11(w[1+j*stride]);y[j]=Frame::signed11(w[1+j*stride]>>16);}
-            }
-            const bool ui=vertices && gpu_ws_copy_presented_ui(source,w,unsigned(length),x,y,vertices,rectangle);
-            const Motion m=ui?Motion{}:native_packet_motion(node.address+at*4u);
-            f.add(source,w,unsigned(length),m,ui?x:nullptr,ui?y:nullptr);
-            f.bank(bank,mod_texture_bank_identity(bank),false,first);at+=unsigned(length);
-        }
+    (void)total;
+    if(!gpu_view_command_receipt_begin(0)){native_reject("native command scope unavailable");return;}
+    native_list_scope=true;gpu_get_drawing_environment(&native_writing->environment);
+    native_writing->filter=uint8_t(gr_texture_filter());native_writing->accurate=gl_renderer_accurate_blending()!=0;
+    native_pending=std::make_shared<Published>();
+    auto transfer=std::make_unique<std::shared_ptr<Published>>(native_pending);
+    if(psx_presentation_gpu_snapshot_async(native_material_ready,transfer.get()))transfer.release();
+    else native_writing->reject("native GPU material snapshot unavailable");
+}
+void native_receipt_end(void*,int terminated) noexcept {
+    if(!native_list_scope)return;
+    native_list_scope=false;
+    const bool complete=gpu_view_command_receipt_end()!=0;
+    if(!terminated || !complete || !native_writing || !native_writing->valid || !native_pending) {
+        native_pending.reset();native_reject("incomplete native command scene");return;
     }
-    native_open=false;
-    if(!f.valid){native_reject(f.failure);return;}
-    auto next=std::make_unique<Published>();next->frame=std::move(f);native_writing.reset();
-    ++native_captured;
-    Published* transfer=next.release();
-    if(!psx_presentation_gpu_snapshot_async(native_gpu_ready,transfer)){
-        delete transfer;native_failure="native GPU snapshot unavailable";++native_fallbacks;
-    }
+    try {
+        native_pending->frame=std::move(*native_writing);native_writing.reset();native_open=false;++native_captured;
+        auto transfer=std::make_unique<std::shared_ptr<Published>>(std::move(native_pending));
+        if(psx_presentation_gpu_prepare_async(native_gpu_ready,transfer.get()))transfer.release();
+        else{native_failure="native scene preparation unavailable";++native_fallbacks;}
+    }catch(...){native_pending.reset();native_reject("native completion allocation");}
 }
 void native_receipt(void* user,const DMANativeGpuNode* nodes,uint32_t count,
     const uint32_t* words,uint32_t total,int terminated) noexcept {
@@ -270,19 +265,20 @@ void native_reset() {
     gpu_set_view_command_receipt(nullptr,nullptr);
     mmx6_native_coop_set_observer(nullptr,nullptr);
     native_coop_clear();
-    std::unique_ptr<Published> release;
+    native_pending.reset();native_list_scope=false;
+    std::shared_ptr<Published> release;
     {std::lock_guard<std::mutex> lock(native_publication);release=std::move(native_previous);native_output={};}
     native_open=native_complete=native_armed=false;native_writing.reset();native_ranges.clear();
     native_actor_scope={};native_bg_scope={};native_failure="inactive";
 }
-void native_restore() {native_epoch.fetch_add(1);native_open=native_complete=native_armed=false;native_writing.reset();native_coop_clear();}
+void native_restore() {native_epoch.fetch_add(1);native_open=native_complete=native_armed=false;native_writing.reset();native_coop_clear();native_pending.reset();native_list_scope=false;}
 void native_tick(){if(!g_psx_render_pass_active)++native_ticks;}
 void native_coop_activate();
 void native_activate() {
     native_reset();native_ticks=0;char rate[24]="display";
     (void)psx_mod_option_value("mmx6.enhancement.frame-interpolation","frame-interpolation","rate",rate,sizeof rate);
     if(std::strcmp(rate,"display") && std::strcmp(rate,"60")){native_failure="output cadence not yet bound";return;}
-    if(!dma_set_native_gpu_receipt(native_receipt,nullptr)){native_failure="native immutable-list service unavailable";return;}
+    if(!dma_set_native_gpu_receipt_scope(native_receipt,native_receipt_end,nullptr)){native_failure="native immutable-list service unavailable";return;}
     native_enabled=true;psx_presentation_gpu_set_provider(native_present,nullptr);
     native_coop_activate();
 }

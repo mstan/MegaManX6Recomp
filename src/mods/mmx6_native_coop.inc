@@ -49,23 +49,25 @@ void native_coop_ot(CPUState* cpu) {
 void native_coop_command(void*,uint32_t view,uint32_t source,const uint32_t* words,
     uint32_t count,const GpuDrawingEnvironment* env,const GpuViewCommandMetadata* metadata) noexcept {
     try {
-        if(view!=native_view || !native_writing || !words || !count || !native_writing->valid)return;
+        if(view!=native_view || !native_writing || !words || !count || !native_writing->valid || !metadata)return;
         auto& f=*native_writing;f.environment=*env;
-        if(psx_mod_widescreen_view_x_margin()!=0) {f.reject("adaptive view transform not yet bound");return;}
-        const size_t first=f.primitives.size();
+        const unsigned op=words[0]>>24;
+        if(metadata->invalid || (op>=0x80 && op<=0xDF)){f.reject("unrepresented native command effect");return;}
         const Motion motion=native_packet_motion(source>=4?source-4:source);
-        int32_t x[4]{},y[4]{};const int32_t* px=nullptr;const int32_t* py=nullptr;
-        const bool host=metadata && metadata->host_tile;
-        if(host) {
-            const int xx=int16_t(words[1]),yy=Frame::signed11(words[1]>>16);
-            for(unsigned j=0;j<4;++j){x[j]=xx+((j&1)?16:0);y[j]=yy+((j&2)?16:0);}px=x;py=y;
+        for(unsigned i=0;i<metadata->piece_count && f.valid;++i) {
+            const auto& piece=metadata->pieces[i];const auto source_view=f.binding();
+            // A draw into a texture target would change later material inputs;
+            // the one pre-list snapshot cannot represent that new resource.
+            if(op==2 && !piece.wide && (piece.x[0]<source_view.left || piece.x[1]>source_view.right+1 ||
+               piece.y[0]<source_view.top || piece.y[2]>source_view.bottom+1)) {
+                f.reject("interleaved native texture fill");break;
+            }
+            if(op!=2 && (piece.clip[1]<int(source_view.top) || piece.clip[3]>int(source_view.bottom) ||
+               (!piece.wide && (piece.clip[0]<int(source_view.left) || piece.clip[2]>int(source_view.right))))) {
+                f.reject("interleaved native render-to-texture");break;
+            }
+            f.resolved(piece,motion,metadata->bank,mod_texture_bank_identity(metadata->bank),metadata->live_clut!=0);
         }
-        f.add(source,words,count,motion,px,py);
-        if(metadata && metadata->bank)f.bank(metadata->bank,mod_texture_bank_identity(metadata->bank),metadata->live_clut!=0,first);
-        if(metadata && metadata->mirror_x)
-            for(size_t i=first;i<f.primitives.size();++i)
-                for(unsigned j=0;j<f.primitives[i].count;++j)
-                    f.primitives[i].vertices[j].uv[0]=float(2*(words[2]&255u)+14)-f.primitives[i].vertices[j].uv[0];
     }catch(...) {if(native_writing)native_writing->reject("native pane capture allocation");}
 }
 void native_coop_ready(void* user) noexcept {
@@ -121,9 +123,9 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
             native_writing=std::make_unique<Frame>();auto& f=*native_writing;
             f.epoch=native_epoch;f.serial=native_serial;f.tick=native_ticks;
             gpu_get_drawing_environment(&f.environment);f.filter=uint8_t(gr_texture_filter());f.accurate=gl_renderer_accurate_blending()!=0;
-            f.target.left=psx_mod_read_half(native_buffer+0x14);f.target.top=psx_mod_read_half(native_buffer+0x16);
-            f.target.right=f.target.left+psx_mod_read_half(native_buffer+0x18)-1;
-            f.target.bottom=f.target.top+psx_mod_read_half(native_buffer+0x1A)-1;f.target_set=true;
+            f.native_target.left=psx_mod_read_half(native_buffer+0x14);f.native_target.top=psx_mod_read_half(native_buffer+0x16);
+            f.native_target.right=f.native_target.left+psx_mod_read_half(native_buffer+0x18)-1;
+            f.native_target.bottom=f.native_target.top+psx_mod_read_half(native_buffer+0x1A)-1;f.native_target_set=true;
             coop_current=std::make_shared<CoopScene>();coop_snapshot=false;
         }else if(event==MMX6_NATIVE_VIEW_END && native_view==seat+1) {
             const bool received=gpu_view_command_receipt_end()!=0;

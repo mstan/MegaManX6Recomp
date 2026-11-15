@@ -17,12 +17,12 @@ static PSXModActivationCallback activation,reset_session,restore_state;
 static PSXModVBlankCallback tick_callback;
 struct Instruction {uint32_t pc,word;PSXModFunctionEntryCallback callback;};
 static Instruction instructions[8];static unsigned instruction_count;
-static DMANativeGpuReceipt receipt;static void* receipt_user;
+static DMANativeGpuReceipt receipt;static DMANativeGpuReceiptEnd receipt_end;static void* receipt_user;
 static PsxPresentationProvider provider;static void* provider_user;
 static GpuViewCommandReceipt command_receipt;static void* command_user;
 static Mmx6NativeViewObserver view_observer;static void* view_user;
 static PsxPresentationPairProvider pair_provider;static void* pair_user;
-static uint32_t receipt_view;static uint64_t test_bank_identity;
+static int receipt_view=-1;static int placement_shift;static uint64_t test_bank_identity;
 static GLRenderStereoDiag pair_diag;
 static bool receipt_available=true,output_ready=true,split=false,banked=false;
 static int wide_margin,local_scope;
@@ -38,9 +38,9 @@ int psx_mod_gpu_dma_memory_contains(uint32_t,uint32_t){return 0;}
 uint64_t mod_texture_bank_identity(uint16_t id){return id?test_bank_identity:0;}
 void psx_presentation_gpu_acquire(void){}
 uint64_t psx_presentation_gpu_snapshot_local_view(void){assert(g_psx_render_pass_active && local_scope);return ++texture_serial;}
-void gpu_set_view_command_receipt(GpuViewCommandReceipt f,void* user){command_receipt=f;command_user=user;receipt_view=0;}
-int gpu_view_command_receipt_begin(uint32_t view){if(receipt_view || !command_receipt)return 0;receipt_view=view;return 1;}
-int gpu_view_command_receipt_end(void){const int ok=receipt_view!=0;receipt_view=0;return ok;}
+void gpu_set_view_command_receipt(GpuViewCommandReceipt f,void* user){command_receipt=f;command_user=user;receipt_view=-1;}
+int gpu_view_command_receipt_begin(uint32_t view){if(receipt_view>=0 || !command_receipt)return 0;receipt_view=int(view);return 1;}
+int gpu_view_command_receipt_end(void){const int ok=receipt_view>=0;receipt_view=-1;return ok;}
 void mmx6_native_coop_set_observer(Mmx6NativeViewObserver f,void* user){view_observer=f;view_user=user;}
 void psx_presentation_gpu_set_pair_provider(PsxPresentationPairProvider f,void* user){pair_provider=f;pair_user=user;}
 int psx_presentation_gpu_prepare_async(PsxPresentationPrepareReady f,void* user){f(user);return 1;}
@@ -74,7 +74,8 @@ int gpu_gp0_command_word_count(uint8_t op){
 }
 int gpu_ws_copy_presented_ui(uint32_t,const uint32_t*,uint32_t,int32_t[4],int32_t[4],unsigned,int){return 0;}
 uint16_t mod_texture_packet_bank(uint32_t,const uint32_t*,uint32_t){return banked?1:0;}
-int dma_set_native_gpu_receipt(DMANativeGpuReceipt f,void* user){if(!receipt_available)return 0;receipt=f;receipt_user=user;return 1;}
+int dma_set_native_gpu_receipt_scope(DMANativeGpuReceipt f,DMANativeGpuReceiptEnd end,void* user){if(!receipt_available)return 0;receipt=f;receipt_end=f?end:nullptr;receipt_user=user;return 1;}
+int dma_set_native_gpu_receipt(DMANativeGpuReceipt f,void* user){return dma_set_native_gpu_receipt_scope(f,nullptr,user);}
 int psx_presentation_gpu_snapshot_async(PsxPresentationSnapshotReady ready,void* user){ready(user,++texture_serial);return 1;}
 void psx_presentation_gpu_release(uint64_t v){assert(v);++releases;}
 void psx_presentation_gpu_set_provider(PsxPresentationProvider f,void* user){provider=f;provider_user=user;}
@@ -92,9 +93,13 @@ static void close_instruction(CPUState& cpu,uint32_t pc){
     for(unsigned i=0;i<instruction_count;++i)if(instructions[i].pc==pc){assert(instructions[i].word==0x03E00008u);instructions[i].callback(&cpu,pc);return;}
     assert(false);
 }
-static void capture(CPUState& cpu,int bank,int actor_x,int actor_y,int camera_x,unsigned uv=0,uint32_t identity=0x80070000){
+static void command(uint32_t,const uint32_t*,unsigned,const GpuViewCommandMetadata&);
+static void capture(CPUState& cpu,int bank,int actor_x,int actor_y,int camera_x,unsigned uv=0,uint32_t identity=0x80070000,int view_shift=0){
+    placement_shift=view_shift;
     environment={};environment.area={0,uint32_t(bank*240),319,uint32_t(bank*240+239),0,bank*240};
     put(0x8009B7A0,FrameBase+bank*FrameStride);
+    put(FrameBase+bank*FrameStride+0x14,uint32_t(bank*240)<<16);
+    put(FrameBase+bank*FrameStride+0x18,320|(240u<<16));
     put(LayerBase+8,uint32_t(camera_x*65536));put(LayerBase+12,0);
     *address(LayerBase+3)=1;
     put(ActorRecord,1);*address(ActorRecord+0x14)=0;
@@ -114,14 +119,40 @@ static void capture(CPUState& cpu,int bank,int actor_x,int actor_y,int camera_x,
                             {ActorPacket,0x03000000u,3},{HUDPacket,0x03FFFFFFu,6}};
     const CPUState before=cpu;std::vector<uint8_t> ram_before(test_ram,test_ram+sizeof test_ram);
     uint8_t scratch_before[1024];std::memcpy(scratch_before,test_scratch,sizeof test_scratch);
-    assert(receipt);receipt(receipt_user,nodes,4,words,9,1);
+    assert(receipt && receipt_end);receipt(receipt_user,nodes,4,words,9,1);
+    for(unsigned i=1;i<4;++i)command(nodes[i].address+4,words+nodes[i].offset,3,{});
+    receipt_end(receipt_user,1);
     assert(!std::memcmp(&before,&cpu,sizeof cpu));
     assert(!std::memcmp(ram_before.data(),test_ram,sizeof test_ram));
     assert(!std::memcmp(scratch_before,test_scratch,sizeof test_scratch));
     std::memset(words,0,sizeof words); // every published byte has independent ownership
 }
-static void command(uint32_t source,const uint32_t* words,unsigned n,const GpuViewCommandMetadata& metadata={}) {
-    assert(command_receipt && receipt_view);command_receipt(command_user,receipt_view,source,words,n,&environment,&metadata);
+/* Explicit backend seam for this producer test. The actual native placement
+ * implementation is exercised independently by the production GPU fixture. */
+static void command(uint32_t source,const uint32_t* words,unsigned n,const GpuViewCommandMetadata& input={}) {
+    assert(command_receipt && receipt_view>=0);auto metadata=input;
+    if(!metadata.bank)metadata.bank=mod_texture_packet_bank(source,words,n);
+    const unsigned op=words[0]>>24;
+    auto& d=metadata.pieces[0];d.vertices=4;d.semi=(op&2)&&op!=2?int16_t((environment.mode>>5)&3):-1;
+    d.wide=wide_margin>0;d.wide_width=320+2*wide_margin;
+    d.view_shift=d.wide && source!=HUDPacket+4?placement_shift:0;
+    d.clip[0]=d.wide?0:int(environment.area.left);d.clip[2]=d.wide?d.wide_width-1:int(environment.area.right);
+    d.clip[1]=int(environment.area.top);d.clip[3]=int(environment.area.bottom);
+    int x=Frame::signed11(words[1]),y=Frame::signed11(words[1]>>16),w=16,h=16;
+    if(op==2){x=int(words[1]&0x3F0);y=int((words[1]>>16)&511);w=int(words[2]&1023);h=int(words[2]>>16&511);}
+    else if((op&0xE0)==0x20){w=int16_t(words[2])-x;h=int16_t(words[3]>>16)-y;}
+    d.textured=(op&4)!=0 && op!=2;d.raw=(op&1)!=0;d.texpage=uint16_t(environment.mode&511);
+    d.clut_x=uint16_t((words[2]>>16&63)*16);d.clut_y=uint16_t(words[2]>>22&511);
+    d.color555=!d.textured;
+    const uint32_t c=words[0]&0xFFFFFFu;
+    for(unsigned j=0;j<4;++j){
+        d.x[j]=x+((j&1)?w:0)+(op==2?0:environment.area.offset_x)+(d.wide?wide_margin+d.view_shift:0);
+        d.y[j]=y+((j&2)?h:0)+(op==2?0:environment.area.offset_y);
+        d.u[j]=int(words[2]&255)+((j&1)?w:0);d.v[j]=int(words[2]>>8&255)+((j&2)?h:0);
+        d.color[j]=d.color555?((c>>3)&31)|((c>>11&31)<<5)|((c>>19&31)<<10):c;
+    }
+    metadata.piece_count=1;
+    command_receipt(command_user,uint32_t(receipt_view),source,words,n,&environment,&metadata);
 }
 static void capture_pair(CPUState& cpu,unsigned bank,int x0,int x1) {
     split=true;native_begin(&cpu,NativeDraw);assert(!native_open);
@@ -177,7 +208,15 @@ int main(){
     const auto rendered_before=render_calls;
     tick_callback();tick_callback();banked=true;capture(cpu,0,502,26,108);banked=false;
     assert(render_calls==rendered_before && !provider(provider_user,0,240,320,240,1,crop));
-    wide_margin=100;native_begin(&cpu,NativeDraw);assert(!native_open);wide_margin=0;
+    // Adaptive aspect uses the exact current native placements, including the
+    // authored edge-origin change, with centered current UI.
+    reset_session();activation();wide_margin=53;
+    capture(cpu,0,110,20,100);tick_callback();tick_callback();
+    capture(cpu,1,114,22,102,32,0x80070000,7);
+    assert(native_output.version && native_previous->frame.wide);
+    near(rendered[2].vertices[0].x,67.5);near(rendered[4].vertices[0].x,253);
+    assert(provider(provider_user,0,0,426,240,1,crop) && crop[0]==0 && crop[1]==240 && crop[2]==426);
+    reset_session();activation();wide_margin=0;
     local_scope=1;const auto serial=native_serial.load();native_begin(&cpu,NativeDraw);assert(native_serial==serial);local_scope=0;
     reset_session();assert(!receipt && !provider && !native_enabled);
     assert(releases==texture_serial);
