@@ -1,5 +1,6 @@
 #include "mmx6_coop_private_view_sdk_fixture.h"
 #include "psx_netplay.h"
+#include "local_pair_prepare.h"
 #include <string.h>
 Mmx6ViewSdkFixture mmx6_view_sdk;
 void mmx6_view_sdk_reset(void) { memset(&mmx6_view_sdk,0,sizeof mmx6_view_sdk); }
@@ -52,3 +53,12 @@ void mmx6_adaptive_background_begin(unsigned layer) { (void)layer; }
 void mmx6_private_background_end(unsigned layer,uint32_t packet) { (void)layer;(void)packet; }
 int mmx6_adaptive_background_resolve_bank(uint16_t id) { return id==0x5001u || id==0x5002u; }
 void gpu_ws_bg2d_begin_view_layer(unsigned layer,uint32_t packet,unsigned mask) { (void)layer;(void)packet;(void)mask; }
+
+/* This isolated legacy co-op fixture has no parked native GPU image owner.
+ * Refuse the new opt-in operation explicitly. Actual prepare/commit ownership
+ * is exercised by the production render_pass_sandbox and real-GL fixtures. */
+uint64_t psx_mod_prepare_local_pair(CPUState *cpu,const PSXModStereoFrame *frame,PSXModStereoFn draw,void *user) {
+    (void)cpu;(void)frame;(void)draw;(void)user;return 0;
+}
+int psx_mod_commit_prepared_local_pair(uint64_t lease) { (void)lease;return 0; }
+void psx_mod_cancel_prepared_local_pair(uint64_t lease) { (void)lease; }
