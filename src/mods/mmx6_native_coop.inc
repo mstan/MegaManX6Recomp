@@ -89,7 +89,7 @@ void native_coop_command(void*,uint32_t view,uint32_t source,const uint32_t* wor
         auto& f=*native_writing;f.environment=*env;
         const unsigned op=words[0]>>24;
         if(metadata->invalid || (op>=0x80 && op<=0xDF)){
-            if(!coop_first_effect.recorded)coop_first_effect={op,source,count,metadata->invalid,metadata->piece_count,true};
+            if(!coop_first_refusal && !coop_first_effect.recorded)coop_first_effect={op,source,count,metadata->invalid,metadata->piece_count,true};
             f.reject("unrepresented native command effect");return;
         }
         const Motion motion=native_packet_motion(source>=4?source-4:source);
