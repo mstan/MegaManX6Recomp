@@ -11,8 +11,16 @@ function(mmx6_register_build_manifests)
     set(_headers "${CMAKE_SOURCE_DIR}/src" "${CMAKE_SOURCE_DIR}/${GAME_GENERATED_DIR}"
         "${PSXRECOMP_V4_ROOT}/runtime/include")
     set(_inputs "${CMAKE_SOURCE_DIR}/CMakeLists.txt" "${CMAKE_CURRENT_FUNCTION_LIST_FILE}"
-        "${CMAKE_SOURCE_DIR}/tools/mmx6_build_provenance.py"
-        "${PSXRECOMP_V4_ROOT}/third_party/deps.manifest")
+        "${CMAKE_SOURCE_DIR}/tools/mmx6_build_provenance.py")
+    if(EXISTS "${PSXRECOMP_V4_ROOT}/third_party/deps.manifest")
+        list(APPEND _inputs "${PSXRECOMP_V4_ROOT}/third_party/deps.manifest")
+    elseif(EXISTS "${PSXRECOMP_V4_ROOT}/cmake/psx_dependency_archive.cmake")
+        # Source builds declare their dependency pins in these recipes.
+        list(APPEND _inputs "${PSXRECOMP_V4_ROOT}/runtime/runtime.cmake"
+            "${PSXRECOMP_V4_ROOT}/cmake/psx_dependency_archive.cmake")
+    else()
+        message(FATAL_ERROR "SDK dependency declarations are unavailable")
+    endif()
     foreach(_dependency ui net rb)
         if(_dependency STREQUAL "ui")
             set(_path "${RECOMP_UI_ROOT}")
