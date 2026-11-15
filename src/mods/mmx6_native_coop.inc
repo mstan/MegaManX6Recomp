@@ -30,6 +30,10 @@ bool coop_snapshot=false;
 // total alone cannot distinguish a missing native marker from rejected data.
 const char* coop_first_refusal=nullptr;
 const char* coop_reported_refusal=nullptr;
+struct CoopRefusedEffect {
+    uint32_t opcode=0,source=0,words=0,invalid=0,pieces=0;
+    bool recorded=false;
+} coop_first_effect,coop_reported_effect;
 void native_coop_restore_capture() {
     native_buffer=coop_saved.buffer;native_head=coop_saved.head;
     native_open=coop_saved.open;native_complete=coop_saved.complete;native_armed=coop_saved.armed;
@@ -43,6 +47,7 @@ void native_coop_clear() {
     if(native_view)native_coop_restore_capture();
     coop_writing.reset();
     coop_first_refusal=coop_reported_refusal=nullptr;
+    coop_first_effect=coop_reported_effect={};
     std::unique_ptr<CoopPair> release;
     {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_older.reset();coop_output={};coop_rate_pair=coop_rate_cycle=coop_rate_ready=0;}
 }
@@ -83,7 +88,10 @@ void native_coop_command(void*,uint32_t view,uint32_t source,const uint32_t* wor
         if(view!=native_view || !native_writing || !words || !count || !native_writing->valid || !metadata)return;
         auto& f=*native_writing;f.environment=*env;
         const unsigned op=words[0]>>24;
-        if(metadata->invalid || (op>=0x80 && op<=0xDF)){f.reject("unrepresented native command effect");return;}
+        if(metadata->invalid || (op>=0x80 && op<=0xDF)){
+            if(!coop_first_effect.recorded)coop_first_effect={op,source,count,metadata->invalid,metadata->piece_count,true};
+            f.reject("unrepresented native command effect");return;
+        }
         const Motion motion=native_packet_motion(source>=4?source-4:source);
         for(unsigned i=0;i<metadata->piece_count && f.valid;++i) {
             const auto& piece=metadata->pieces[i];const auto source_view=f.binding();
@@ -150,16 +158,21 @@ void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int comple
                 coop_writing.reset();++native_fallbacks;
                 const char* reason=coop_first_refusal?coop_first_refusal:"native pane observer did not begin";
                 native_failure=reason;
-                if(!coop_reported_refusal || std::strcmp(coop_reported_refusal,reason)) {
-                    std::fprintf(stderr,"mmx6 native presentation first pane refusal: %s\n",reason);
+                const auto& effect=coop_first_effect;
+                if(!coop_reported_refusal || std::strcmp(coop_reported_refusal,reason) ||
+                   effect.recorded!=coop_reported_effect.recorded ||
+                   effect.opcode!=coop_reported_effect.opcode || effect.invalid!=coop_reported_effect.invalid) {
+                    std::fprintf(stderr,"mmx6 native presentation first pane refusal: %s (opcode=%02X source=%08X words=%u invalid=%u pieces=%u)\n",
+                        reason,effect.opcode,effect.source,effect.words,effect.invalid,effect.pieces);
                     coop_reported_refusal=reason;
+                    coop_reported_effect=effect;
                 }
             }
             return;
         }
         if(event==MMX6_NATIVE_VIEW_BEGIN) {
             if(native_view){native_reject("nested native view");native_coop_restore_capture();return;}
-            if(seat==0){coop_writing=std::make_unique<CoopPair>();coop_first_refusal=nullptr;}
+            if(seat==0){coop_writing=std::make_unique<CoopPair>();coop_first_refusal=nullptr;coop_first_effect={};}
             if(!coop_writing)return;
             if(!gpu_view_command_receipt_begin(seat+1)){
                 if(!coop_first_refusal)coop_first_refusal="native command scope unavailable";

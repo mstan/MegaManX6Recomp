@@ -238,7 +238,11 @@ static void first_pane_refusal(){
     assert(native_captured==captured+1 && !coop_previous && !coop_output.version);
     assert(coop_first_refusal && !std::strcmp(coop_first_refusal,"unrepresented native command effect"));
     assert(!std::strcmp(native_failure.load(),coop_first_refusal) && coop_reported_refusal==coop_first_refusal);
-    reset_session();assert(!coop_first_refusal && !coop_reported_refusal);wide_margin=0;split=false;
+    assert(coop_first_effect.recorded && coop_first_effect.opcode==0x7C && coop_first_effect.source==ActorPacket+4 &&
+        coop_first_effect.words==3 && coop_first_effect.invalid==1 && coop_first_effect.pieces==1);
+    assert(coop_reported_effect.recorded && coop_reported_effect.source==ActorPacket+4);
+    reset_session();assert(!coop_first_refusal && !coop_reported_refusal && !coop_first_effect.recorded &&
+        !coop_reported_effect.recorded);wide_margin=0;split=false;
 }
 static void near(double a,double b){assert(std::fabs(a-b)<.00001);}
 static void activation_choices(){
