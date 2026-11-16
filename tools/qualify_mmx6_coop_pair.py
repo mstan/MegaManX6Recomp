@@ -288,7 +288,10 @@ def run(args) -> dict:
         modules += (contact, contact.menu, contact.enemy, inventory)
     if any(Path(module.__file__).resolve().parent != tools_root for module in modules):
         raise ValueError("A shared tool resolved outside --tools-root")
-    candidate_sha = preparation.sha256(args.build / "mmx6-runtime.exe")
+    executable_name = ("mmx6-runtime_pgxp.exe" if
+                       getattr(args, "host_profile_target", "psx-runtime") == "psx-runtime-pgxp"
+                       else "mmx6-runtime.exe")
+    candidate_sha = preparation.sha256(args.build / executable_name)
     if getattr(args, "expected_exe_sha256", None) and candidate_sha != args.expected_exe_sha256:
         raise ValueError("Paired executable does not match the explicitly expected SHA256")
     quit_original=native_quit.verify_original(args.original_exe) if native_quit is not None else None
@@ -506,7 +509,7 @@ def run(args) -> dict:
         for seat in range(2):
             directory = output/f"peer-{seat}"
             receipt = preparation.prepare(args.build, staging_source, directory, args.disc,
-                                          automated=True)
+                                          automated=True, executable_name=executable_name)
             # The executable-owned profile supplies co-op. Preserve the normal
             # default-on loader unless the caller explicitly asks to bypass it
             # for diagnosis; such a run cannot qualify default netplay.

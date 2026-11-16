@@ -66,14 +66,17 @@ def source_observation(source: Path, output: Path) -> dict:
 
 
 def prepare(build: Path, source: Path, output: Path, disc: Path,
-            card: Path | None = None, *, automated: bool = False) -> dict:
+            card: Path | None = None, *, automated: bool = False,
+            executable_name: str = "mmx6-runtime.exe") -> dict:
     output = local_output(output)
     if output.exists():
         raise ValueError("Output already exists; choose a fresh candidate directory")
     build, source, disc = build.resolve(), source.resolve(), disc.resolve(strict=True)
-    exe = build / "mmx6-runtime.exe"
+    if executable_name not in ("mmx6-runtime.exe", "mmx6-runtime_pgxp.exe"):
+        raise ValueError("Unsupported runtime executable name")
+    exe = build / executable_name
     if not exe.is_file() or not (build / "bios/openbios.bin").is_file():
-        raise ValueError("Build must contain mmx6-runtime.exe and bios/openbios.bin")
+        raise ValueError(f"Build must contain {executable_name} and bios/openbios.bin")
     if output == build or output.is_relative_to(build) or build.is_relative_to(output):
         raise ValueError("Candidate must be outside the source build")
     config_path = source / "game.toml"
@@ -96,7 +99,7 @@ def prepare(build: Path, source: Path, output: Path, disc: Path,
         if card.stat().st_size != 128 * 1024:
             raise ValueError("Native card must be a raw 128 KiB PlayStation card")
     output.mkdir(parents=True)
-    shutil.copy2(exe, output / exe.name)
+    shutil.copy2(exe, output / "mmx6-runtime.exe")
     for dll in build.glob("*.dll"):
         shutil.copy2(dll, output / dll.name)
     for folder in ("assets", "bios"):

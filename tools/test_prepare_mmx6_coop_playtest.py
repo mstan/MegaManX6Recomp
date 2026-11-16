@@ -58,6 +58,16 @@ class PreparationTests(unittest.TestCase):
         self.assertTrue(all(str(output.resolve()) in environment[name]
                             for name in ("TEMP", "TMP", "APPDATA", "LOCALAPPDATA", "PSX_RESIDENT_CACHE")))
 
+    def test_pgxp_peer_staging_selects_the_exact_image(self):
+        image = self.build / "mmx6-runtime_pgxp.exe"
+        image.write_bytes(b"PGXP fixture, never executed")
+        output = self.root / "candidate"
+        result = prepare(self.build, self.source, output, self.disc,
+                         executable_name=image.name)
+        self.assertEqual((output / "mmx6-runtime.exe").read_bytes(), image.read_bytes())
+        self.assertEqual(result["exe_sha256"], sha256(image))
+        self.assertEqual((self.build / "mmx6-runtime.exe").read_bytes(), b"fixture, never executed")
+
     def test_existing_output_is_never_overwritten(self):
         output = self.root / "candidate"
         output.mkdir()
