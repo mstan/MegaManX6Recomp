@@ -35,7 +35,28 @@ const char* coop_reported_refusal=nullptr;
 const char* coop_first_prepare_refusal=nullptr;
 const char* coop_first_select_refusal=nullptr;
 bool coop_prepared_once=false;
+// One bounded provenance record, protected by native_publication like output.
+// Shared native_failure also describes CPU capture and is NOT a GPU result.
+struct CoopGpuProvenance {
+    const char* prepare="none";
+    const char* clear="none";
+    PsxPresentationRateRequest request{};
+    uint64_t ready=0;
+    CoopOutput prior{};
+    const char* prior_clear="none";
+    uint64_t clear_pair=0,clear_cycle=0,clear_ready=0;
+} coop_gpu_provenance;
+void native_coop_note_clear(const char* origin,const CoopOutput& prior,
+    uint64_t pair,uint64_t cycle,uint64_t ready) {
+    coop_gpu_provenance.clear=origin;
+    // Later empty clears must not hide the last actual output disposition.
+    if(!prior.version)return;
+    coop_gpu_provenance.prior=prior;coop_gpu_provenance.prior_clear=origin;
+    coop_gpu_provenance.clear_pair=pair;coop_gpu_provenance.clear_cycle=cycle;
+    coop_gpu_provenance.clear_ready=ready;
+}
 void native_coop_prepare_refuse(const char* reason) {
+    coop_gpu_provenance.prepare=reason;
     native_failure=reason;
     if(!coop_first_prepare_refusal){
         coop_first_prepare_refusal=reason;
@@ -47,18 +68,26 @@ int native_coop_select_refuse(const char* reason,const CoopOutput& out,
     // Ordinary native boundaries and startup cannot select a scheduled output.
     // Retain only the first refusal AFTER a real private target was prepared.
     if(native_rate && coop_prepared_once) {
-        const char* prepared_reason=native_failure.load();native_failure=reason;
+        const char* status=native_failure.load();native_failure=reason;
         if(!coop_first_select_refusal) {
             coop_first_select_refusal=reason;
-            std::fprintf(stderr,"mmx6 native presentation first pair selection refusal: %s (prepare=%s out=%llu epoch=%llu/%llu serial=%llu/%llu pair=%llu/%llu/%llu cycle=%llu/%llu/%llu deadline=%llu/%llu start=%llu ready=%llu crop=%d,%d;%d,%d requested=%d,%d)\n",
-                reason,prepared_reason,(unsigned long long)out.version,
+            const auto& gpu=coop_gpu_provenance;
+            std::fprintf(stderr,"mmx6 native presentation first pair selection refusal: %s (status=%s out=%llu epoch=%llu/%llu serial=%llu/%llu pair=%llu/%llu/%llu cycle=%llu/%llu/%llu deadline=%llu/%llu start=%llu ready=%llu crop=%d,%d;%d,%d requested=%d,%d gpu_prepare=%s gpu_request=%llu/%llu/%llu/%llu gpu_ready=%llu gpu_clear=%s prior_clear=%s prior=%llu/%llu/%llu/%llu/%llu clear_source=%llu/%llu/%llu)\n",
+                reason,status,(unsigned long long)out.version,
                 (unsigned long long)out.epoch,(unsigned long long)native_epoch.load(),
                 (unsigned long long)out.serial,(unsigned long long)(coop_previous?coop_previous->view[0]->frame.serial:0),
                 (unsigned long long)out.pair,(unsigned long long)pair,(unsigned long long)request.pair_id,
                 (unsigned long long)out.cycle,(unsigned long long)cycle,(unsigned long long)request.pair_cycle,
                 (unsigned long long)out.deadline,(unsigned long long)request.deadline_ns,
                 (unsigned long long)request.display_start_ns,(unsigned long long)coop_rate_ready,
-                out.crop[0][2],out.crop[0][3],out.crop[1][2],out.crop[1][3],w,h);
+                out.crop[0][2],out.crop[0][3],out.crop[1][2],out.crop[1][3],w,h,
+                gpu.prepare,(unsigned long long)gpu.request.pair_id,(unsigned long long)gpu.request.pair_cycle,
+                (unsigned long long)gpu.request.deadline_ns,(unsigned long long)gpu.request.display_start_ns,
+                (unsigned long long)gpu.ready,gpu.clear,gpu.prior_clear,
+                (unsigned long long)gpu.prior.version,(unsigned long long)gpu.prior.pair,
+                (unsigned long long)gpu.prior.cycle,(unsigned long long)gpu.prior.deadline,
+                (unsigned long long)gpu.prior.serial,(unsigned long long)gpu.clear_pair,
+                (unsigned long long)gpu.clear_cycle,(unsigned long long)gpu.clear_ready);
         }
     }
     return 0;
@@ -86,10 +115,13 @@ void native_coop_clear() {
     coop_first_select_refusal=nullptr;
     coop_first_effect=coop_reported_effect={};
     std::unique_ptr<CoopPair> release;
-    {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_older.reset();coop_output={};coop_rate_pair=coop_rate_cycle=coop_rate_ready=0;coop_prepared_once=false;}
+    {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_older.reset();coop_output={};coop_rate_pair=coop_rate_cycle=coop_rate_ready=0;coop_prepared_once=false;coop_gpu_provenance={};}
 }
 void native_rate_coop_prepare(const PsxPresentationRateRequest& request) {
     std::lock_guard<std::mutex> lock(native_publication);
+    coop_gpu_provenance.request=request;coop_gpu_provenance.ready=coop_rate_ready;
+    coop_gpu_provenance.prepare="missing adjacent captured source";
+    native_coop_note_clear("prepare",coop_output,request.pair_id,request.pair_cycle,coop_rate_ready);
     coop_output={};
     const auto& old=coop_older;const auto& next=coop_previous;
     if(!old || !next)return;
@@ -107,7 +139,9 @@ void native_rate_coop_prepare(const PsxPresentationRateRequest& request) {
     double alpha=0;
     if(!psx_presentation_phase(request.display_start_ns,request.display_start_ns+period,
         coop_rate_ready,request.deadline_ns,&alpha)){
-        native_coop_prepare_refuse("native pair phase/source readiness");return;
+        native_coop_prepare_refuse("native pair phase/source readiness");
+        if(coop_rate_ready>request.deadline_ns)coop_gpu_provenance.prepare="source not ready by deadline";
+        return;
     }
     if(!coop_prepared.build({&old->view[0]->frame,&old->view[1]->frame},
            {&next->view[0]->frame,&next->view[1]->frame},
@@ -122,6 +156,7 @@ void native_rate_coop_prepare(const PsxPresentationRateRequest& request) {
     coop_output.version=psx_presentation_gpu_output_version();coop_output.pair=request.pair_id;
     coop_output.cycle=request.pair_cycle;coop_output.deadline=request.deadline_ns;
     if(coop_output.version)coop_prepared_once=true;
+    coop_gpu_provenance.prepare="prepared";
     std::memcpy(coop_output.crop,coop_prepared.crop,sizeof coop_output.crop);++native_ready;native_failure="";
 }
 void native_coop_ot(CPUState* cpu) {
@@ -173,13 +208,16 @@ void native_coop_ready(void* user) noexcept {
            next->view[0]->frame.epoch!=native_epoch || next->view[1]->frame.epoch!=native_epoch)return;
         native_rate=psx_presentation_gpu_rate_active()!=0;
         {std::lock_guard<std::mutex> lock(native_publication);
+        const CoopOutput prior=coop_output;
         coop_output={};
         if(native_rate) {
             GLRenderStereoDiag pair{};gl_renderer_stereo_diag(&pair);
             coop_rate_pair=pair.valid && pair.mode==2?pair.pair_id:0;coop_rate_cycle=pair.guest_cycle;
             coop_rate_ready=rt_now_ns();coop_older=std::move(coop_previous);
+            native_coop_note_clear("captured pair",prior,coop_rate_pair,coop_rate_cycle,coop_rate_ready);
             coop_previous=std::move(next);
         }else {
+        native_coop_note_clear("ordinary captured pair",prior,0,0,0);
         if(coop_previous && next->view[0]->texture && next->view[1]->texture &&
            coop_prepared.build({&coop_previous->view[0]->frame,&coop_previous->view[1]->frame},
                 {&next->view[0]->frame,&next->view[1]->frame},
@@ -200,7 +238,7 @@ void native_coop_ready(void* user) noexcept {
         coop_previous=std::move(next);
         }}
         if(native_rate)psx_presentation_gpu_rate_source_ready();
-    }catch(...) {std::lock_guard<std::mutex> lock(native_publication);coop_output={};++native_fallbacks;native_failure="native pair allocation";}
+    }catch(...) {std::lock_guard<std::mutex> lock(native_publication);native_coop_note_clear("capture allocation",coop_output,coop_rate_pair,coop_rate_cycle,coop_rate_ready);coop_output={};++native_fallbacks;native_failure="native pair allocation";}
 }
 void native_coop_observe(void*,CPUState*,unsigned event,unsigned seat,int complete) {
     try {
@@ -292,6 +330,7 @@ int native_coop_present(void*,uint64_t pair,uint64_t cycle,uint64_t present_cycl
     if(out.crop[0][2]!=w || out.crop[0][3]!=h || out.crop[1][2]!=w || out.crop[1][3]!=h){SELECT_REFUSE("native output crop");}
     if(!psx_presentation_gpu_output_ready(out.version)){SELECT_REFUSE("native output GPU readiness");}
 #undef SELECT_REFUSE
+    native_coop_note_clear("selected",out,request.pair_id,request.pair_cycle,coop_rate_ready);
     *version=out.version;std::memcpy(crop,out.crop,sizeof out.crop);out.version=0;native_failure="";++native_presented;return 1;
 }
 void native_coop_activate() {

@@ -333,6 +333,9 @@ static void postwait_rate_publication(){
         rate_request.native_cycle=rate_request.display_start_cycle=pair_diag.guest_cycle;
         rate_request.deadline_ns=coop_rate_ready-1;
         psx_presentation_gpu_rate_source_ready();assert(!coop_output.version); // late source skips its missed slot
+        assert(!std::strcmp(coop_gpu_provenance.prepare,"source not ready by deadline") &&
+               coop_gpu_provenance.ready==coop_rate_ready &&
+               coop_gpu_provenance.request.deadline_ns==rate_request.deadline_ns);
         rate_request.deadline_ns=rate_request.display_start_ns+period/4;
         const auto original=rate_request;fake_ns+=1000000000; // GPU queue delay must not create a new origin
         psx_presentation_gpu_rate_source_ready();assert(coop_output.version);
@@ -344,6 +347,8 @@ static void postwait_rate_publication(){
         assert(coop_first_select_refusal && !std::strcmp(coop_first_select_refusal,"native output GPU readiness"));
         const char* selection_refusal=coop_first_select_refusal;
         output_ready=true;assert(pair_provider(pair_user,91,pair_diag.guest_cycle,0,320,240,0,&version,crop));
+        assert(!std::strcmp(coop_gpu_provenance.prior_clear,"selected") &&
+               coop_gpu_provenance.prior.version==version);
         assert(coop_first_select_refusal==selection_refusal && coop_first_prepare_refusal==first_refusal &&
                !std::strcmp(native_failure.load(),""));
         assert(!pair_provider(pair_user,91,pair_diag.guest_cycle,0,320,240,0,&version,crop));
@@ -352,8 +357,38 @@ static void postwait_rate_publication(){
         rate_request.deadline_ns=rate_request.display_start_ns+period;
         psx_presentation_gpu_rate_source_ready();assert(!coop_output.version); // never extrapolate beyond native endpoint
         reset_session();assert(!coop_previous && !coop_older && !rate_configured && !coop_first_prepare_refusal &&
-                              !coop_first_select_refusal && !coop_prepared_once);
+                              !coop_first_select_refusal && !coop_prepared_once && !coop_gpu_provenance.prior.version &&
+                              !std::strcmp(coop_gpu_provenance.prepare,"none"));
     }
+    std::strcpy(selected_rate,"60");fake_ns=900000000;
+}
+static void gpu_clear_provenance(){
+    CPUState cpu{};std::strcpy(selected_rate,"120");activation();test_bank_identity=77;
+    const uint64_t start=1000000000,period=uint64_t(g_psx_vblank_cycles)*1000000000ull/33868800ull;
+    fake_ns=900000000;pair_diag={};pair_diag.valid=1;pair_diag.mode=2;
+    pair_diag.pair_id=190;pair_diag.guest_cycle=1000000;capture_pair(cpu,0,10,100);
+    tick_callback();++pair_diag.pair_id;pair_diag.guest_cycle+=g_psx_vblank_cycles;
+    fake_ns=start+period/8;capture_pair(cpu,1,14,108);
+    rate_request={};rate_request.display_start_ns=start;rate_request.deadline_ns=start+period/2;
+    rate_request.native_cycle=rate_request.display_start_cycle=rate_request.pair_cycle=pair_diag.guest_cycle;
+    rate_request.pair_id=pair_diag.pair_id;psx_presentation_gpu_rate_source_ready();
+    assert(coop_output.version && !std::strcmp(coop_gpu_provenance.prepare,"prepared"));
+    const auto prepared=coop_output;
+    // Actual unrelated CPU rejection must not masquerade as GPU preparation.
+    native_reject("producer packet range");
+    assert(!std::strcmp(native_failure.load(),"producer packet range") &&
+           !std::strcmp(coop_gpu_provenance.prepare,"prepared") && coop_output.version==prepared.version);
+    tick_callback();++pair_diag.pair_id;pair_diag.guest_cycle+=g_psx_vblank_cycles;
+    fake_ns=start+period/4;capture_pair(cpu,0,18,116);
+    const auto& p=coop_gpu_provenance;
+    assert(!coop_output.version && !std::strcmp(p.prepare,"native pair request identity"));
+    assert(!std::strcmp(p.clear,"prepare") && !std::strcmp(p.prior_clear,"captured pair"));
+    assert(p.prior.version==prepared.version && p.prior.pair==prepared.pair && p.prior.cycle==prepared.cycle &&
+           p.prior.deadline==prepared.deadline && p.prior.serial==prepared.serial);
+    assert(p.clear_pair==pair_diag.pair_id && p.clear_cycle==pair_diag.guest_cycle &&
+           p.clear_ready==fake_ns && p.clear_ready<p.prior.deadline);
+    // The later empty prepare kept the actual unexpired output's disposition.
+    reset_session();assert(!coop_gpu_provenance.prior.version);
     std::strcpy(selected_rate,"60");fake_ns=900000000;
 }
 static void committed_pair_serial(){
@@ -423,7 +458,7 @@ static void wide_coop_hud(){
 int main(int argc,char** argv){
     assert(activation && reset_session && restore_state && tick_callback && instruction_count==3);
     if(argc==2 && !std::strcmp(argv[1],"native-pair-cadence-only")){
-        replaced_actor_pair();postwait_rate_publication();committed_pair_serial();wide_coop_hud();
+        replaced_actor_pair();postwait_rate_publication();gpu_clear_provenance();committed_pair_serial();wide_coop_hud();
         CPUState cpu{};std::strcpy(selected_rate,"60");activation();
         pair_diag={};pair_diag.valid=1;pair_diag.mode=2;pair_diag.pair_id=470;pair_diag.guest_cycle=1000000;
         capture_pair(cpu,0,10,100);tick_callback();tick_callback();
