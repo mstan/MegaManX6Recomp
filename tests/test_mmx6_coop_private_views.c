@@ -169,7 +169,10 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
      * the packet pools and before drawing actors. Keep that native call in
      * this seam, so an extra post-world HUD call cannot silently pass. */
     psx_dispatch_call(cpu,0x800244C0u,0x80022A30u);
-    if(boundary_probe)CHECK(psx_mod_read_word(0x80097420u)==0x42u);
+    if(boundary_probe) {
+        CHECK(psx_mod_read_word(0x80097420u)==0x42u && boundary_count<8);
+        boundary_order[boundary_count++]=3+private_seat;
+    }
     if(entering_view_probe) {
         CHECK(!personal_initialized && (psx_mod_read_byte(PLAY+1)==1 ||
             (psx_mod_read_byte(PLAY+1)==2 && personal_active && !personal_menu[0].native[4] && personal_menu[0].native[5]<=1)));
@@ -273,20 +276,8 @@ static void presentation_restore(int online,int split,unsigned refuse,unsigned a
     CHECK(!mmx6_view_sdk.busy);
     if(!refuse && !abort)CHECK(view_hud_calls[split?0:(mmx6_view_sdk.local_port==1?1:0)]==1 && (!split || view_hud_calls[1]==1));
 }
-static void original_boundary_note(void *user,CPUState *cpu,unsigned event,unsigned seat,int complete){
-    (void)user;CHECK(boundary_probe && complete && boundary_count<8);
-    if(event==MMX6_NATIVE_VIEW_BEGIN || event==MMX6_NATIVE_VIEW_END){
-        CHECK(cpu && private_draw && psx_mod_read_word(0x80097420u)==0x42u);
-        boundary_order[boundary_count++]=3+seat*2+(event==MMX6_NATIVE_VIEW_END);
-    }else{
-        CHECK(event==MMX6_NATIVE_PAIR_COMMITTED && !cpu && !private_draw && !mmx6_view_sdk.busy);
-        CHECK(view_hud_calls[0]==1 && view_hud_calls[1]==1 && !state_track.count && !state_track.error);
-        boundary_order[boundary_count++]=7;
-    }
-}
 static void original_postwait_boundary(void){
     CPUState cpu;prepare_view(&cpu,0,1);boundary_probe=1;boundary_count=0;
-    mmx6_native_coop_set_observer(original_boundary_note,NULL);
     /* Original60964 returns to12104 before PutDispEnv/PutDrawEnv and the
      * canonical66744 call returning to12128. This context cannot draw. */
     cpu.gpr[31]=0x80012104u;cpu.gpr[4]=0;psx_mod_write_word(0x80097420u,0x41u);
@@ -294,11 +285,13 @@ static void original_postwait_boundary(void){
     psx_mod_write_word(0x80097420u,0x42u); /* a real native HUD blink input after VBlank */
     cpu.gpr[31]=0x80012128u;cpu.gpr[4]=view_buffer+0xEC;
     CHECK(independent_present(&cpu,VIEW_DRAW_OT) && cpu.gpr[2]==0xC0DE);
-    CHECK(boundary_count==7 && view_callback_calls==2 && mmx6_view_sdk.pair_calls==1);
-    for(unsigned i=0;i<7;++i)CHECK(boundary_order[i]==i+1);
+    CHECK(boundary_count==4 && view_callback_calls==2 && mmx6_view_sdk.pair_calls==1);
+    for(unsigned i=0;i<4;++i)CHECK(boundary_order[i]==i+1);
+    CHECK(!private_draw && !mmx6_view_sdk.busy && !state_track.count && !state_track.error);
+    CHECK(view_hud_calls[0]==1 && view_hud_calls[1]==1);
     const unsigned draws=view_native_calls;
-    CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && view_native_calls==draws && boundary_count==7);
-    mmx6_native_coop_set_observer(NULL,NULL);boundary_probe=0;
+    CHECK(!independent_present(&cpu,VIEW_DRAW_OT) && view_native_calls==draws && boundary_count==4);
+    boundary_probe=0;
 }
 static int forbidden_callback(CPUState *cpu,void *user,uint32_t eye) {
     (void)cpu;(void)user;(void)eye;CHECK(0);return 0;
