@@ -10,8 +10,8 @@
 
 namespace {
 
-constexpr size_t kExpectedPackages = 18;
-constexpr size_t kExpectedFeatures = 206;
+constexpr size_t kExpectedPackages = 17;
+constexpr size_t kExpectedFeatures = 205;
 constexpr size_t kExpectedTweaksPackages = 13;
 constexpr const char* kGameId = "SLUS-01395";
 constexpr const char* kStockDiscSha256 =
@@ -356,46 +356,12 @@ int main(int argc, char** argv) {
     }
     if (!manager.set_feature_enabled("mmx6.local-coop", "prototype", false, &error)) return fail(error);
 
-    PSXRecompV4::mod_clear_plugins_for_tests();
-    for (const char* id : {
-             "mmx6.frame-interpolation",
-             "mmx6.framerate.60",
-             "mmx6.framerate.120",
-             "mmx6.framerate.144",
-             "mmx6.framerate.165",
-             "mmx6.framerate.uncapped"}) {
-        if (!PSXRecompV4::mod_register_activation_plugin(id, no_op_plugin)) {
-            return fail(std::string("could not register test plugin ") + id);
-        }
-    }
-    if (!manager.set_feature_enabled(
-            "mmx6.enhancement.frame-interpolation", "frame-interpolation",
-            true, &error)) {
-        return fail(error);
-    }
-    for (const auto& [choice, plugin] :
-         {std::pair{"display", "mmx6.frame-interpolation"},
-          std::pair{"90", "mmx6.frame-interpolation"},
-          std::pair{"240", "mmx6.frame-interpolation"},
-          std::pair{"60", "mmx6.frame-interpolation"},
-          std::pair{"120", "mmx6.frame-interpolation"},
-          std::pair{"144", "mmx6.frame-interpolation"},
-          std::pair{"165", "mmx6.frame-interpolation"},
-          std::pair{"uncapped", "mmx6.frame-interpolation"}}) {
-        if (!manager.set_feature_option(
-                "mmx6.enhancement.frame-interpolation",
-                "frame-interpolation", "rate", choice, &error)) {
-            return fail(error);
-        }
-        const PSXRecompV4::ModResolution frame_plan =
-            manager.resolve(kGameId, "", kStockDiscSha256);
-        if (!frame_plan.ok || !frame_plan.writes.empty() ||
-            !frame_plan.overlays.empty() || !frame_plan.derived_discs.empty() ||
-            frame_plan.plugins.size() != 1 ||
-            frame_plan.plugins.front().id != plugin) {
-            return fail("wrong interpolated frame-rate plan for " +
-                        std::string(choice));
-        }
+    // A saved choice from an older build must not reactivate retired rendering.
+    error.clear();
+    if (manager.selected_package("mmx6.enhancement.frame-interpolation") ||
+        manager.set_feature_enabled("mmx6.enhancement.frame-interpolation",
+                                    "frame-interpolation", true, &error)) {
+        return fail("retired frame interpolation must not be available");
     }
 
     std::cout << "preloaded mods: " << manager.packages().size()

@@ -21,7 +21,6 @@ static uint8_t view_quake_input[0x54];
 static uint32_t view_quake_frame;
 static unsigned view_quake_valid;
 static void independent_invalidate(void) {
-    native_view_note(NULL,MMX6_NATIVE_PAIR_CANCEL,0,0);
     view_valid=view_pending=view_menu_history=view_quake_valid=0;
 }
 static int independent_survivor_shared(void) {
@@ -576,16 +575,13 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
 static int private_draw_pair(CPUState *cpu,void *user,uint32_t seat) {
     PrivateViewContext context;private_context_save(&context);
     private_seat=seat;private_draw=1;
-    native_view_note(cpu,MMX6_NATIVE_VIEW_BEGIN,seat,1);
     int ok=private_draw_image(cpu,user,0);
-    native_view_note(cpu,MMX6_NATIVE_VIEW_END,seat,ok);
     private_context_restore(&context);private_draw=0;
     return ok;
 }
 /* Preserve the released native order: VSync, display/draw environment,
  * canonical DrawOTag/DrawSync, then the existing two reversible own-view draws.
- * Publish their immutable scenes only after that pair has actually committed;
- * no render input is moved across VBlank and no extra guest draw is requested. */
+ * No render input is moved across VBlank and no extra guest draw is requested. */
 static int independent_present(CPUState *cpu,uint32_t address) {
     if(view_call || private_draw || inside || zero_world ||
        state_track.count || state_track.error || cpu->gpr[31]!=0x80012128u)return 0;
@@ -632,9 +628,7 @@ static int independent_present(CPUState *cpu,uint32_t address) {
         committed=psx_mod_render_local_view(cpu,&rect,private_draw_image,NULL);
     }
     private_context_restore(&context);private_draw=0;
-    if(!committed) {memcpy(view_cameras[1],previous_camera,sizeof previous_camera);native_view_note(NULL,MMX6_NATIVE_PAIR_CANCEL,0,0);}
-    else if(local_split || (menu && !psx_mod_netplay_is_active()))
-        native_view_note(NULL,MMX6_NATIVE_PAIR_COMMITTED,0,1);
+    if(!committed)memcpy(view_cameras[1],previous_camera,sizeof previous_camera);
     if(state_digest()!=before)psx_mod_counter_add("mmx6.coop.private-state-leak",1);
     psx_mod_counter_add(committed?"mmx6.coop.private-committed":"mmx6.coop.private-refused",1);
     if(committed && door_phase>=1 && door_phase<=3) {

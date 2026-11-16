@@ -11,19 +11,9 @@ launcher's standard **Experimental** badge. Enable it for local co-op; Netplay
 enables co-op automatically. Campaign coverage and Internet sessions remain
 under playtest. OpenGL is required; rewind and save states are unsupported.
 
-Two enhancement packages own features that used to live in the launcher's generic
-Settings pages:
-
-| Package | Replaces |
-|---|---|
-| `mmx6.enhancement.widescreen` | Settings aspect-ratio row + the separate experimental 21:9 row |
-| `mmx6.enhancement.frame-interpolation` | Settings frame-interpolation row |
-
-`game.toml` sets `[widescreen] offer = false` and
-`[video] offer_frame_interpolation = false` so the launcher omits those rows and
-the runtime ignores any value a previous build persisted into `settings.toml`.
-That keeps exactly one control per feature: a game-specific enhancement is
-presented as an opt-in change to the game, not as a display preference.
+The Widescreen enhancement replaces the generic aspect-ratio setting. The
+retired interpolation control is unavailable; single-player and co-op run at the
+original game frame rate. Existing saved display choices are preserved.
 
 The catalog also contains the latest approved converted runtime package for
 each supported Mega Man X6 Tweaks feature family. Every included Tweaks feature

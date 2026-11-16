@@ -9,15 +9,6 @@
 #include "mmx6_coop_host_lab.h"
 #include "mmx6_coop_host_lab_contract.h"
 #include "mmx6_diagnostics.h"
-#include "mmx6_native_view_observer.h"
-static Mmx6NativeViewObserver native_view_observer;
-static void *native_view_user;
-void mmx6_native_coop_set_observer(Mmx6NativeViewObserver observer,void *user) {
-    native_view_observer=observer;native_view_user=observer?user:0;
-}
-static void native_view_note(CPUState *cpu,unsigned event,unsigned seat,int ok) {
-    if(native_view_observer)native_view_observer(native_view_user,cpu,event,seat,ok);
-}
 #if defined(__has_include)
 #if __has_include("session_input_taint.h")
 #include "session_input_taint.h"

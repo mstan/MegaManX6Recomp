@@ -74,15 +74,13 @@ file(GLOB MMX6_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
 # domains can be developed and reviewed without editing one central registry.
 file(GLOB GAME_MOD_RESOLVER_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
-# Runtime draw hooks and the Seamless Loading resident store are separate from
-# declarative catalog resolvers.
-list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_plugin[.]cpp$")
+# The Seamless Loading resident store is separate from declarative resolvers.
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$")
 
 set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINITIONS
     "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v67\"")
 
-# The game-owned mod catalog (the two presentation enhancements plus the
+# The game-owned mod catalog (widescreen and the
 # acediez Tweaks set). Every feature stays disabled until selected on the
 # launcher's Mods page.
 #
@@ -136,7 +134,6 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     EXTRAS_SOURCES
         ${GAME_GENERATED_EXTRAS}
         ${MMX6_MOD_PLUGIN_SOURCES}
-        "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/mmx6_frame_interpolation_plugin.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/mmx6_seamless_store.cpp"
         ${GAME_MOD_RESOLVER_SOURCES}
 )
@@ -377,37 +374,6 @@ if(BUILD_TESTING)
                 --contract "${CMAKE_CURRENT_SOURCE_DIR}/tests/vwait_contract.json")
         set_tests_properties(mmx6_vwait_contract PROPERTIES SKIP_RETURN_CODE 77 RUN_SERIAL TRUE)
     endif()
-    add_executable(mmx6_frame_interpolation_test
-        tests/test_mmx6_frame_interpolation.cpp
-        "${PSXRECOMP_V4_ROOT}/runtime/src/render_pass_motion.c")
-    # Keep the released replay implementation's semantic fixture; production
-    # uses the no-replay producer and its independent scene tests below.
-    target_compile_definitions(mmx6_frame_interpolation_test PRIVATE MMX6_LEGACY_FRAME_INTERPOLATION_FIXTURE=1)
-    target_include_directories(mmx6_frame_interpolation_test PRIVATE
-        "${PSXRECOMP_V4_ROOT}/runtime/include")
-    add_test(NAME mmx6_frame_interpolation_test
-        COMMAND "$<TARGET_FILE:mmx6_frame_interpolation_test>")
-
-    add_executable(mmx6_native_presentation_test
-        tests/test_mmx6_native_presentation.cpp
-        "${PSXRECOMP_V4_ROOT}/runtime/src/presentation_scene.c"
-        "${PSXRECOMP_V4_ROOT}/runtime/src/presentation_draw.c")
-    target_include_directories(mmx6_native_presentation_test PRIVATE
-        "${PSXRECOMP_V4_ROOT}/runtime/include")
-    if(NOT MSVC)
-        target_link_libraries(mmx6_native_presentation_test PRIVATE m)
-    endif()
-    add_test(NAME mmx6_native_presentation_test COMMAND mmx6_native_presentation_test)
-    add_executable(mmx6_native_pair_test tests/test_mmx6_native_pair.cpp
-        "${PSXRECOMP_V4_ROOT}/runtime/src/presentation_scene.c"
-        "${PSXRECOMP_V4_ROOT}/runtime/src/presentation_draw.c")
-    target_include_directories(mmx6_native_pair_test PRIVATE "${PSXRECOMP_V4_ROOT}/runtime/include")
-    if(NOT MSVC)
-        target_link_libraries(mmx6_native_pair_test PRIVATE m)
-    endif()
-    add_test(NAME mmx6_native_pair_test COMMAND mmx6_native_pair_test)
-
-
     # Seamless Loading preparation against an owner-supplied disc image:
     # -DMMX6_TEST_DISC=<path to "Mega Man X6 (USA) (v1.1).bin">.
     add_executable(mmx6_seamless_store_test
