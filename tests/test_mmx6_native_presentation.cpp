@@ -317,6 +317,9 @@ static void postwait_rate_publication(){
         rate_request.display_start_cycle=pair_diag.guest_cycle;rate_request.native_cycle=pair_diag.guest_cycle;
         rate_request.pair_id=90;rate_request.pair_cycle=pair_diag.guest_cycle;
         rate_request.deadline_ns=rate_request.display_start_ns+period/4;
+        uint64_t startup_version=0;int startup_crop[2][4]{};rate_dispatch=true;
+        assert(!pair_provider(pair_user,90,pair_diag.guest_cycle,0,320,240,0,&startup_version,startup_crop));
+        assert(!coop_first_select_refusal && !coop_prepared_once);rate_dispatch=false;
         pair_diag.pair_id=91;pair_diag.guest_cycle+=g_psx_vblank_cycles;
         fake_ns=1000000000+period/8;capture_pair(cpu,1,14,108,false,false);
         assert(coop_previous && coop_rate_pair==90 && !coop_output.version); // views alone cannot publish
@@ -338,11 +341,18 @@ static void postwait_rate_publication(){
         near(rendered[2].vertices[0].x,11);near(rendered[8].vertices[0].x,102);
         uint64_t version=0;int crop[2][4]{};rate_dispatch=true;output_ready=false;
         assert(!pair_provider(pair_user,91,pair_diag.guest_cycle,0,320,240,0,&version,crop));
+        assert(coop_first_select_refusal && !std::strcmp(coop_first_select_refusal,"native output GPU readiness"));
+        const char* selection_refusal=coop_first_select_refusal;
         output_ready=true;assert(pair_provider(pair_user,91,pair_diag.guest_cycle,0,320,240,0,&version,crop));
+        assert(coop_first_select_refusal==selection_refusal && coop_first_prepare_refusal==first_refusal &&
+               !std::strcmp(native_failure.load(),""));
+        assert(!pair_provider(pair_user,91,pair_diag.guest_cycle,0,320,240,0,&version,crop));
+        assert(coop_first_select_refusal==selection_refusal); // later missing output cannot mask it
         assert(version==output_serial && crop[1][1]==240);rate_dispatch=false;
         rate_request.deadline_ns=rate_request.display_start_ns+period;
         psx_presentation_gpu_rate_source_ready();assert(!coop_output.version); // never extrapolate beyond native endpoint
-        reset_session();assert(!coop_previous && !coop_older && !rate_configured && !coop_first_prepare_refusal);
+        reset_session();assert(!coop_previous && !coop_older && !rate_configured && !coop_first_prepare_refusal &&
+                              !coop_first_select_refusal && !coop_prepared_once);
     }
     std::strcpy(selected_rate,"60");fake_ns=900000000;
 }

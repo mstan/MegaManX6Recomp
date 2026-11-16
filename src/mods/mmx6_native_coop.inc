@@ -33,12 +33,35 @@ const char* coop_reported_refusal=nullptr;
 // One retained GPU preparation refusal, distinct from CPU pane capture. Only
 // complete old/new pairs may reach this record; startup is not a failure.
 const char* coop_first_prepare_refusal=nullptr;
+const char* coop_first_select_refusal=nullptr;
+bool coop_prepared_once=false;
 void native_coop_prepare_refuse(const char* reason) {
     native_failure=reason;
     if(!coop_first_prepare_refusal){
         coop_first_prepare_refusal=reason;
         std::fprintf(stderr,"mmx6 native presentation first pair preparation refusal: %s\n",reason);
     }
+}
+int native_coop_select_refuse(const char* reason,const CoopOutput& out,
+    const PsxPresentationRateRequest& request,uint64_t pair,uint64_t cycle,int w,int h) {
+    // Ordinary native boundaries and startup cannot select a scheduled output.
+    // Retain only the first refusal AFTER a real private target was prepared.
+    if(native_rate && coop_prepared_once) {
+        const char* prepared_reason=native_failure.load();native_failure=reason;
+        if(!coop_first_select_refusal) {
+            coop_first_select_refusal=reason;
+            std::fprintf(stderr,"mmx6 native presentation first pair selection refusal: %s (prepare=%s out=%llu epoch=%llu/%llu serial=%llu/%llu pair=%llu/%llu/%llu cycle=%llu/%llu/%llu deadline=%llu/%llu start=%llu ready=%llu crop=%d,%d;%d,%d requested=%d,%d)\n",
+                reason,prepared_reason,(unsigned long long)out.version,
+                (unsigned long long)out.epoch,(unsigned long long)native_epoch.load(),
+                (unsigned long long)out.serial,(unsigned long long)(coop_previous?coop_previous->view[0]->frame.serial:0),
+                (unsigned long long)out.pair,(unsigned long long)pair,(unsigned long long)request.pair_id,
+                (unsigned long long)out.cycle,(unsigned long long)cycle,(unsigned long long)request.pair_cycle,
+                (unsigned long long)out.deadline,(unsigned long long)request.deadline_ns,
+                (unsigned long long)request.display_start_ns,(unsigned long long)coop_rate_ready,
+                out.crop[0][2],out.crop[0][3],out.crop[1][2],out.crop[1][3],w,h);
+        }
+    }
+    return 0;
 }
 struct CoopRefusedEffect {
     uint32_t opcode=0,source=0,words=0,invalid=0,pieces=0;
@@ -60,9 +83,10 @@ void native_coop_clear() {
     coop_writing.reset();
     coop_first_refusal=coop_reported_refusal=nullptr;
     coop_first_prepare_refusal=nullptr;
+    coop_first_select_refusal=nullptr;
     coop_first_effect=coop_reported_effect={};
     std::unique_ptr<CoopPair> release;
-    {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_older.reset();coop_output={};coop_rate_pair=coop_rate_cycle=coop_rate_ready=0;}
+    {std::lock_guard<std::mutex> lock(native_publication);release=std::move(coop_previous);coop_older.reset();coop_output={};coop_rate_pair=coop_rate_cycle=coop_rate_ready=0;coop_prepared_once=false;}
 }
 void native_rate_coop_prepare(const PsxPresentationRateRequest& request) {
     std::lock_guard<std::mutex> lock(native_publication);
@@ -97,6 +121,7 @@ void native_rate_coop_prepare(const PsxPresentationRateRequest& request) {
     coop_output.epoch=next->view[0]->frame.epoch;coop_output.serial=next->view[0]->frame.serial;
     coop_output.version=psx_presentation_gpu_output_version();coop_output.pair=request.pair_id;
     coop_output.cycle=request.pair_cycle;coop_output.deadline=request.deadline_ns;
+    if(coop_output.version)coop_prepared_once=true;
     std::memcpy(coop_output.crop,coop_prepared.crop,sizeof coop_output.crop);++native_ready;native_failure="";
 }
 void native_coop_ot(CPUState* cpu) {
@@ -255,13 +280,19 @@ int native_coop_present(void*,uint64_t pair,uint64_t cycle,uint64_t present_cycl
     if(native_rate && !psx_presentation_gpu_rate_request(&request))return 0;
     std::lock_guard<std::mutex> lock(native_publication);
     auto& out=coop_output;
-    if(!out.version || out.epoch!=native_epoch || !coop_previous ||
-       out.serial!=coop_previous->view[0]->frame.serial || out.pair!=pair ||
-       out.cycle!=cycle || (native_rate?(!request.deadline_ns || request.deadline_ns!=out.deadline):
-           (present_cycle<out.not_before || present_cycle>out.expires)) ||
-       out.crop[0][2]!=w || out.crop[0][3]!=h || out.crop[1][2]!=w || out.crop[1][3]!=h ||
-       !psx_presentation_gpu_output_ready(out.version))return 0;
-    *version=out.version;std::memcpy(crop,out.crop,sizeof out.crop);out.version=0;++native_presented;return 1;
+#define SELECT_REFUSE(reason) return native_coop_select_refuse(reason,out,request,pair,cycle,w,h)
+    if(!out.version){SELECT_REFUSE("native output unavailable");}
+    if(out.epoch!=native_epoch){SELECT_REFUSE("native output epoch");}
+    if(!coop_previous){SELECT_REFUSE("native committed pair unavailable");}
+    if(out.serial!=coop_previous->view[0]->frame.serial){SELECT_REFUSE("native output serial");}
+    if(out.pair!=pair){SELECT_REFUSE("native output pair");}
+    if(out.cycle!=cycle){SELECT_REFUSE("native output cycle");}
+    if(native_rate?(!request.deadline_ns || request.deadline_ns!=out.deadline):
+        (present_cycle<out.not_before || present_cycle>out.expires)){SELECT_REFUSE("native output deadline");}
+    if(out.crop[0][2]!=w || out.crop[0][3]!=h || out.crop[1][2]!=w || out.crop[1][3]!=h){SELECT_REFUSE("native output crop");}
+    if(!psx_presentation_gpu_output_ready(out.version)){SELECT_REFUSE("native output GPU readiness");}
+#undef SELECT_REFUSE
+    *version=out.version;std::memcpy(crop,out.crop,sizeof out.crop);out.version=0;native_failure="";++native_presented;return 1;
 }
 void native_coop_activate() {
     gpu_set_view_command_receipt(native_coop_command,nullptr);
