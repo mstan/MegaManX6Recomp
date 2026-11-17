@@ -319,12 +319,16 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_diagnostics){
 #include <cstdio>
 #include <cstdlib>
 extern "C" uint16_t mmx6_diagnostics_p2(unsigned,uint16_t buttons,int){return buttons;}
+#ifndef MMX6_GENERIC_DIAGNOSTICS
 static void unavailable(){std::fprintf(stderr,"mmx6 diagnostics: capture unavailable: SDK session diagnostics service required\n");}
+#endif
 PSX_MOD_CONSTRUCTOR(mmx6_register_diagnostics_unavailable){
     if(std::getenv("MMX6_INPUT_REPLAY")){
         std::fprintf(stderr,"mmx6 diagnostics: explicit replay refused: SDK guarded session diagnostics service required\n");
         std::exit(EXIT_FAILURE);
     }
+#ifndef MMX6_GENERIC_DIAGNOSTICS
     psx_mod_register_activation_plugin("mmx6.diagnostics",unavailable);
+#endif
 }
 #endif

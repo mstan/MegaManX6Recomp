@@ -137,6 +137,18 @@ psxrecomp_v4_add_runtime_target(psx-runtime
         "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/mmx6_seamless_store.cpp"
         ${GAME_MOD_RESOLVER_SOURCES}
 )
+# The existing input-recording feature remains functional without the newer
+# title-specific session service. Preserve its package/feature IDs and choices.
+if(NOT EXISTS "${PSXRECOMP_V4_ROOT}/runtime/include/session_diagnostics.h")
+    include("${PSXRECOMP_V4_ROOT}/runtime/playtest_diagnostics.cmake")
+    psxrecomp_add_playtest_diagnostics(psx-runtime
+        GAME_ID SLUS-01395 MOD_ID mmx6.diagnostics NO_OSD)
+    foreach(_diag_target psx-runtime psx-runtime-pgxp)
+        if(TARGET ${_diag_target})
+            target_compile_definitions(${_diag_target} PRIVATE MMX6_GENERIC_DIAGNOSTICS=1)
+        endif()
+    endforeach()
+endif()
 set(PSX_BUILTIN_MOD_ALLOWLIST "${_mmx6_previous_builtin_allowlist}")
 unset(_mmx6_previous_builtin_allowlist)
 if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
