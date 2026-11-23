@@ -151,6 +151,14 @@ if(NOT EXISTS "${PSXRECOMP_V4_ROOT}/runtime/include/session_diagnostics.h")
 endif()
 set(PSX_BUILTIN_MOD_ALLOWLIST "${_mmx6_previous_builtin_allowlist}")
 unset(_mmx6_previous_builtin_allowlist)
+if(PSX_RECOMP_UI)
+    set_property(SOURCE "${RECOMP_UI_ROOT}/src/common/backends/imgui/launcher_imgui.cpp"
+        APPEND PROPERTY COMPILE_DEFINITIONS
+        RECOMP_UI_DISPLAY_WIDESCREEN_PACKAGE="mmx6.enhancement.widescreen"
+        RECOMP_UI_PINNED_MOD_GROUP="Display"
+        RECOMP_UI_ADVANCED_MOD_PREFIX="mmx6.tweaks."
+        "RECOMP_UI_ADVANCED_MOD_LABEL=\"Show X6 Tweaks\"")
+endif()
 if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
     add_custom_target(mmx6_host_lab_contract_check
