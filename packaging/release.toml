@@ -22,6 +22,11 @@ cps = true
 [overlay_toolchain]
 ship = true
 
+[diagnostics]
+game_id = "SLUS-01395"
+package_id = "mmx6.diagnostics"
+replay_helper = true
+
 [payload]
 start_here = "packaging/release/OPTIMIZATION_START_HERE.txt"
 files = ["README.md", "RELEASE_NOTES.md", {from="packaging/release/input.ini", to="input.ini"}]
