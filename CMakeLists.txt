@@ -119,8 +119,9 @@ endif()
 set(_mmx6_previous_builtin_allowlist "${PSX_BUILTIN_MOD_ALLOWLIST}")
 set(PSX_BUILTIN_MOD_ALLOWLIST
     psx.enhancement.8mb-ram
-    psx.enhancement.pgxp
     psx.presentation.bezel)
+# PGXP remains available through the shared Settings provider, including the
+# migration of saved choices from its retired mod package.
 psxrecomp_v4_add_runtime_target(psx-runtime
     NATIVE_IDLE_WAIT_SITES ${MMX6_NATIVE_IDLE_WAIT_SITES}
     GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
