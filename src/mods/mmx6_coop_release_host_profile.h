@@ -5,7 +5,7 @@
 #define MMX6_COOP_RELEASE_HOST_PROFILE_H
 #define MMX6_RELEASE_HOST_PROFILE "mmx6.win64.enhanced.release"
 #define MMX6_RELEASE_HOST_REVISION 2u
-#define MMX6_RELEASE_HOST_EXECUTION_ID "e4f99a226032c59f67faca36bec53cfe102c9d5a495fbfcacc304d3193f03afe"
-#define MMX6_RELEASE_HOST_POLICY "mmx6.win64.enhanced.release/v2;kernel=host-native-v1;abi=win64-mingw-clang22.1.8;execution=e4f99a226032c59f67faca36bec53cfe102c9d5a495fbfcacc304d3193f03afe;cpu=x64-portable-known;fp=2;bios=OPENBIOS:c4daeb88;overlays=interpreted-sealed;manifest=sha256-v1;artifact=exact;seats=2;rollback=off;loading=on;renderer=retained-opengl;aspect=4:3;lab=off;debug=off;route=normal;native-lan-qualification=required"
-#define MMX6_RELEASE_HOST_QUALIFICATION_BYTES {0x3e,0x7d,0xbb,0x6a,0x08,0x13,0x4e,0xd0,0xeb,0x66,0xb9,0x54,0xf1,0x21,0x0c,0x1b,0xb2,0xf2,0x2e,0x6a,0x35,0x3d,0xaf,0x31,0xe9,0x49,0x2f,0x72,0x7c,0x31,0x55,0x19}
+#define MMX6_RELEASE_HOST_EXECUTION_ID "21cc31a9f256438d4117e938071b7e836f70aa6f60c3ed96f053db131100bcaf"
+#define MMX6_RELEASE_HOST_POLICY "mmx6.win64.enhanced.release/v2;kernel=host-native-v1;abi=win64-mingw-clang22.1.8;execution=21cc31a9f256438d4117e938071b7e836f70aa6f60c3ed96f053db131100bcaf;cpu=x64-portable-known;fp=2;bios=OPENBIOS:c4daeb88;overlays=interpreted-sealed;manifest=sha256-v1;artifact=exact;seats=2;rollback=off;loading=on;renderer=retained-opengl;aspect=4:3;lab=off;debug=off;route=normal;native-lan-qualification=required"
+#define MMX6_RELEASE_HOST_QUALIFICATION_BYTES {0x02,0x3b,0xeb,0x7a,0xbf,0xd0,0x99,0x88,0x07,0x77,0x9c,0x2f,0xac,0xf5,0x8e,0xb4,0xdf,0x03,0xf0,0x66,0x6b,0xda,0x67,0xf4,0x4a,0xc8,0xff,0xba,0x39,0xe3,0x94,0xc0}
 #endif
