@@ -1,3 +1,21 @@
+# v1.3.12-alpha
+
+Widescreen is easier to find from Display settings: Open in Mods selects the
+existing Widescreen feature directly. Display appears first in Mods, and the
+optional Show X6 Tweaks control keeps its larger catalog easy to browse.
+Existing mod selections remain saved.
+
+This release uses the shared Windows/Linux packaging flow and the host-native
+BIOS executive. Native event waits preserve interrupt and current-build state
+continuations. Native memory-card progress and player settings remain separate
+from disposable, build-specific save states.
+
+Fresh installations retain adaptive widescreen and enabled diagnostic recording.
+Saved choices take precedence. Co-op remains experimental; network peers must
+use the same exact build and its qualified simulation profile.
+
+---
+
 # v1.3.9-alpha-playtest
 
 This release corrects opening-stage co-op effects, actor visibility and camera

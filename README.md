@@ -56,7 +56,7 @@ Important files:
 - `mods/preloaded/`: built-in mod catalog and attribution/permission ledger.
 - `seeds/`: Ghidra-derived function starts and game-specific seed data.
 - `tools/regen.ps1`: regenerates the recompiled C output.
-- `tools/package_release.ps1`: builds the redistributable release zip.
+- `packaging/release.toml`: title settings for the shared release command.
 - `psxrecomp-v4` Git submodule: the pinned framework revision.
 - `ISSUES.md`: game-specific issue log.
 - `DISC.md`: source-disc identity and verification hashes.
@@ -270,8 +270,15 @@ SDL3 is the default host backend. To build the explicit SDL2 compatibility
 fallback, add `-DPSX_SDL_BACKEND=SDL2` to the configure command above. CMake
 prints the selected backend and never silently changes it.
 
-To build the redistributable Windows release (regens, builds with the launcher,
-bundles assets + cache, and zips it): `pwsh tools/package_release.ps1`.
+From the title root, build verified Windows and Linux release artifacts with
+`pwsh psxrecomp-v4/tools/package_title_release.ps1 --channel public --platform all --jobs 2`.
+Use `--platform windows` or `--platform linux` for one platform; Windows invokes
+WSL for Linux builds. Native Linux uses `psxrecomp-v4/tools/package_title_release.sh`
+with the same arguments. Use `--channel playtest` for a playtest package.
+The channel is required. Recording starts enabled in both channels, and the
+player's saved choice takes precedence. The shared command owns regeneration,
+builds, staging, archive checks and checksums; title settings live in
+`packaging/release.toml`.
 
 ## Configuration
 
@@ -351,8 +358,9 @@ keep it on your own machine, alongside your disc image.
 
 ## Development Rules
 
-- Use the real recompiled BIOS and real hardware simulation in PSXRecomp.
-- No HLE BIOS shims, no stubs, no fake events, no hand-edited generated files.
+- Use the host-native HLE build path. Keep the separately selected reference
+  implementation available for accuracy work; report missing HLE coverage.
+- Preserve observed game behavior and native saves. Do not hand-edit generated files.
 - Framework changes go in `mstan/psxrecomp`, not here.
 - Game binaries, generated code, memory cards, Ghidra databases, and build
   outputs stay local.

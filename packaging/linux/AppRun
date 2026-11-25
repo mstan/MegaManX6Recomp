@@ -1,6 +1,6 @@
 #!/bin/sh
-# AppImage entry point. Tokens (@NAME@) are stamped by tools/package_appimage.sh
-# from packaging/release/app.conf, so this file is title-neutral.
+# AppImage entry point. Product tokens are stamped by the shared release
+# packager from packaging/release.toml, so this file is title-neutral.
 #
 # psxrecomp anchors settings, assets, saves, cache, and mods to argv[0]. Inside
 # an AppImage that anchor is a read-only squashfs mount, so everything writable

@@ -3,7 +3,7 @@ id = "mmx6.diagnostics"
 version = "1.0.0"
 name = "Input Diagnostics"
 author = "mstan"
-description = "Save input diagnostics to help reproduce issues in supported play sessions. Replay is not implemented."
+description = "Record controller input and runtime diagnostics. Offline recordings can be replayed with the included helper."
 resolver = "declarative"
 save_compatibility = "shared"
 
