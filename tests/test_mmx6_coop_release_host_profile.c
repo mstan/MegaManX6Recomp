@@ -33,7 +33,7 @@ int main(void){
     if(MMX6_RELEASE_HOST_EXPECT_OFFER){
         CHECK(cat.count==1&&cat.rules);
         CHECK(!strcmp(cat.rules->profile,MMX6_RELEASE_HOST_PROFILE));
-        CHECK(cat.rules->revision==1&&cat.rules->flags==PSX_HOST_PROFILE_PORTABLE);
+        CHECK(cat.rules->revision==2&&cat.rules->flags==PSX_HOST_PROFILE_PORTABLE);
         CHECK(cat.rules->implementation_count==1&&!memcmp(cat.rules->qualification,identity,32));
         CHECK(cat.rules->implementations[0].backend==PSX_HOST_BACKEND_ENHANCED);
         CHECK(cat.rules->implementations[0].architectures==(1u<<PSX_HOST_ARCH_X64));
