@@ -12,10 +12,11 @@ This project inherits, in order:
 1. `F:/Projects/recomp-template/PRINCIPLES.md` — system-agnostic recomp/debug
    discipline (ground truth = original EXE + emulator oracle; generated C is
    evidence, not authority; first-divergence; no guessing).
-2. The framework constitution at `psxrecomp-v4/CLAUDE.md` — a junction →
-   `F:/Projects/psxrecomp/psxrecomp`. Read it first: no MIPS interpreter, no
-   HLE BIOS shims, no stubs, recompiled-BIOS-first, fix the
-   framework/runtime/config and **regenerate** — never hand-edit `generated/`.
+2. The shared framework instructions at `psxrecomp-v4/AGENTS.md` and
+   `psxrecomp-v4/docs/HLE_EXECUTION.md`. Use host-native HLE builds and report
+   coverage gaps; retain a separately selected accuracy reference. Fix the
+   framework/runtime/config and **regenerate** when required — never hand-edit
+   `generated/`. Current owner instructions take precedence over older notes.
 
 ## Project rules
 

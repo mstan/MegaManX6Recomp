@@ -6,6 +6,7 @@ display_name = "Mega Man X6"
 exe_name = "MegaManX6Recomp"
 version_file = "packaging/release/VERSION"
 player_game_toml = "packaging/release/game.toml"
+launcher_boxart = "recomp/launcher/boxart.tga"
 
 [build]
 cmake_args = ["-DPSX_RECOMP_UI=ON", "-DPSX_ENABLE_VULKAN=OFF",
@@ -24,3 +25,14 @@ ship = true
 [payload]
 start_here = "packaging/release/OPTIMIZATION_START_HERE.txt"
 files = ["README.md", "RELEASE_NOTES.md", {from="packaging/release/input.ini", to="input.ini"}]
+
+[linux]
+app_run = "packaging/linux/AppRun"
+desktop_file = "packaging/linux/io.github.mstan.MegaManX6Recomp.desktop"
+icon = "recomp/launcher/boxart.tga"
+payload_dir = "megamanx6recomp"
+env_prefix = "MMX6_RECOMP"
+prune_unreferenced_libs = true
+
+[[hooks.prepare]]
+command = ["{python}", "{root}/tools/check_release_config.py"]
