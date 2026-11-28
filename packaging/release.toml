@@ -9,7 +9,7 @@ player_game_toml = "packaging/release/game.toml"
 launcher_boxart = "recomp/launcher/boxart.tga"
 
 [build]
-cmake_args = ["-DPSX_RECOMP_UI=ON", "-DPSX_ENABLE_VULKAN=OFF", "-DPSX_NATIVE_KERNEL=ON",
+cmake_args = ["-DPSX_RECOMP_UI=ON", "-DPSX_ENABLE_VULKAN=OFF", "-DPSX_NATIVE_KERNEL=OFF",
               "-DMMX6_ENABLE_LOOPBACK_HOST_LAB=OFF",
               "-DMMX6_ENABLE_PORTABLE_CPU_HOST_LAB=OFF",
               "-DBUILD_TESTING=ON"]
