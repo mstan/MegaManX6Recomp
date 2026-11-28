@@ -21,8 +21,9 @@ DIAGNOSTIC_SEQUENCE = 0x88
 BODY_BYTES = 0x158
 
 
-class DebugError(RuntimeError):
-    """A transport, framing, schema or runtime command failure."""
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'psxrecomp-v4/tools'))
+from debug_transport import DebugClient as SharedDebugClient, DebugError
 
 
 class UnstableObservation(DebugError):
@@ -60,62 +61,7 @@ def capture_present(client, path: Path, *, timeout: float = 8.0, request=None) -
     raise DebugError("Composed capture acknowledgement never reached completed generation")
 
 
-class DebugClient:
-    def __init__(self, port: int, *, timeout: float = 3.0,
-                 max_response_bytes: int = 1024 * 1024):
-        if isinstance(port, bool) or not isinstance(port, int) or not 1 <= port <= 65535:
-            raise ValueError("Expected a localhost TCP port in 1..65535")
-        if not math.isfinite(timeout) or timeout <= 0:
-            raise ValueError("Expected a positive finite timeout")
-        if not 64 <= max_response_bytes <= 2 * 1024 * 1024:
-            raise ValueError("Response bound must be between 64 bytes and 2 MiB")
-        self.port = port
-        self.timeout = timeout
-        self.max_response_bytes = max_response_bytes
-        self._sequence = 0
-
-    def request(self, command: str, **fields) -> dict:
-        if not isinstance(command, str) or not command or "id" in fields or "cmd" in fields:
-            raise ValueError("Expected a command without reserved id/cmd fields")
-        self._sequence += 1
-        request_id = self._sequence
-        payload = (json.dumps(dict(id=request_id, cmd=command, **fields),
-                              allow_nan=False) + "\n").encode("utf-8")
-        deadline = time.monotonic() + self.timeout
-        try:
-            with socket.create_connection(("127.0.0.1", self.port),
-                                          timeout=self.timeout) as connection:
-                remaining = deadline - time.monotonic()
-                if remaining <= 0:
-                    raise TimeoutError("Connection consumed the request deadline")
-                connection.settimeout(remaining)
-                connection.sendall(payload)
-                data = bytearray()
-                while b"\n" not in data:
-                    remaining = deadline - time.monotonic()
-                    if remaining <= 0:
-                        raise TimeoutError("Response deadline exceeded")
-                    connection.settimeout(remaining)
-                    chunk = connection.recv(min(16384, self.max_response_bytes + 1 - len(data)))
-                    if not chunk:
-                        raise DebugError(f"{command}: peer closed before a complete response")
-                    data.extend(chunk)
-                    if len(data) > self.max_response_bytes:
-                        raise DebugError(f"{command}: response exceeds {self.max_response_bytes} bytes")
-                line, _, trailing = data.partition(b"\n")
-                if trailing.strip():
-                    raise DebugError(f"{command}: extra response data")
-                result = json.loads(line)
-        except (OSError, UnicodeError, ValueError) as error:
-            raise DebugError(f"port {self.port}, {command}: {error}") from error
-        if not isinstance(result, dict) or type(result.get("id")) is not int or result["id"] != request_id:
-            received = result.get("id") if isinstance(result, dict) else None
-            detail = str(result.get("err", result.get("error", "")))[:160] if isinstance(result, dict) else ""
-            raise DebugError(f"{command}: invalid or mismatched response id (expected {request_id}, received {received!r}, runtime error={detail!r})")
-        if result.get("ok") is not True:
-            raise DebugError(f"{command}: runtime rejected command: {str(result)[:240]}")
-        return result
-
+class DebugClient(SharedDebugClient):
     def read(self, address: int, size: int) -> bytes:
         if not isinstance(address, int) or not 0 <= address <= 0xFFFFFFFF:
             raise ValueError("Expected a 32-bit guest address")

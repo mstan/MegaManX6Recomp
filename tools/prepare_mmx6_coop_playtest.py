@@ -51,11 +51,11 @@ def source_observation(source: Path, output: Path) -> dict:
         try:
             command = [git, "--no-optional-locks", "-C", str(root)]
             head = subprocess.run(command + ["rev-parse", "HEAD"], check=True,
-                                  capture_output=True, timeout=20, env=environment).stdout.decode().strip()
+                                  capture_output=True, env=environment).stdout.decode().strip()
             if len(head) != 40 or any(ch not in "0123456789abcdef" for ch in head):
                 raise ValueError("Unexpected Git object identity")
             patch = subprocess.run(command + ["diff", "--binary", "--no-ext-diff", head, "--", *paths],
-                                   check=True, capture_output=True, timeout=20, env=environment).stdout
+                                   check=True, capture_output=True, env=environment).stdout
             patch_path = output / "logs" / f"source-{name}.diff"
             patch_path.write_bytes(patch)
             record.update(available=True, commit=head, tracked_changes=bool(patch),
@@ -152,16 +152,10 @@ enabled = true
     # with the original interpreter fallback rather than a broken relative tool.
     config_text = re.sub(r'(?m)^overlay_autocompile_cmd\s*=.*$', 'overlay_autocompile_cmd = ""', config_text)
     (output / "game.toml").write_text(config_text, encoding="utf-8")
-    env = {
-        "TEMP": str(output / "temp"), "TMP": str(output / "temp"),
-        "LOCALAPPDATA": str(output / "data"), "APPDATA": str(output / "appdata"),
-        "XDG_CACHE_HOME": str(output / "cache"),
-        "PSX_RESIDENT_CACHE": str(output / "resident"),
-        "PSX_OVERLAY_CACHE_DIR": str(output / "cache"),
-        "PSX_OVERLAY_CAPTURE_ROOT": str(output / "cache"),
-        "PSX_OVERLAY_CAPTURES": str(output / "cache/overlay_captures.json"),
-        "PSX_OVERLAY_AUTOCOMPILE_OFF": "1", "PSX_DEV_INPUT": "0",
-    }
+    sys.path.insert(0, str(source / "psxrecomp-v4/tools"))
+    from debug_transport import isolated_environment
+    env = isolated_environment(output)
+    env.update({"PSX_OVERLAY_AUTOCOMPILE_OFF": "1", "PSX_DEV_INPUT": "0"})
     (output / "environment.json").write_text(json.dumps(env, indent=2)+"\n", encoding="utf-8")
     launch_lines = ["$ErrorActionPreference = 'Stop'", "Set-Location -LiteralPath $PSScriptRoot"]
     for key, value in env.items():
